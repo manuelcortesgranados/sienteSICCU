@@ -2831,7 +2831,7 @@ css usuario modificacion
 
 /*Css para el menu superior de proyecto*/
 .ikont-hpg-menu-nuevo-proestructuracion{ 
-    margin-top: -4px;
+    margin-top: -1px;
     margin-left: 62px;
 }
 .ikont-hpg-menu-contenido-nuevo-proestructuracion{
@@ -2844,6 +2844,7 @@ css usuario modificacion
     position: relative;
     top: -32px;
     z-index: 1;
+    border-bottom: solid 1px #f2f2f2;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proestructuracion.scrollactive{
