@@ -33,13 +33,10 @@ a.rf-ds-btn {
 .rf-ds-btn {
     cursor: pointer;
     padding: 2px 10px 3px 10px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: '#{richSkin.tableBorderColor}';
     display: inline-block;
     background-position: top left;
     background-repeat: repeat-x;
-    background-color: '#{richSkin.headerBackgroundColor}';
+    background-color: '#{richSkin.botonBusquedaAvanzadaBackgroud}';
     background-image: "url(#{resource['org.richfaces.images:dsBtnGrad.png']})";
     font-size: '#{richSkin.generalSizeFont}';
     font-family: '#{richSkin.generalFamilyFont}';
@@ -49,11 +46,11 @@ a.rf-ds-btn {
 }
 
 .rf-ds-btn:hover {
-    color: #fff;
+    background-color: '#{richSkin.botonBusquedaAvanzadaBackgroudHover}';
 }
 
 .rf-ds-dis:hover {
-    color: '#{richSkin.generalTextColorDisable}';
+    color: '#{richSkin.botonBusquedaAvanzadaColor}';
     cursor: default;
 }
 
@@ -120,6 +117,6 @@ a.rf-ds-btn {
 }
 
 .rf-ds-dis {
-    color: '#{richSkin.generalTextColorDisable}';
+    color: '#{richSkin.botonBusquedaAvanzadaColor}';
     cursor: default;
 }
