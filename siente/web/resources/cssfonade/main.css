@@ -2641,12 +2641,11 @@ css usuario modificacion
 }
 .tabPanelFiltroZoom{
     width: 263px;
-    position: absolute;
-    top: -114px; 
+    position: relative;
+    top: 3px;
     height: 231px;
-    background: #ffffff
-
-
+    left: 19px;
+    background: #ffffff;
 }
 .panel_filtro_zoom{
     height: 279px;
@@ -2746,7 +2745,7 @@ css usuario modificacion
     font-size: 2.5em; 
     color: #808080; 
     padding: 100px; 
-    top: 61px;
+    /*top: 61px;*/
 }
 .inputlinkhomezoom:link{
     font-size: 0.5em; 
@@ -2770,6 +2769,7 @@ css usuario modificacion
     background-position: bottom;
     width: 920px;
     margin-top: -60px;
+    top:61px;
 }
 .panelzoomhome2{
     alignment-adjust: central
