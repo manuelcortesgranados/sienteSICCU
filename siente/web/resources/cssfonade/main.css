@@ -1735,11 +1735,17 @@ input[type="text"], input[type="password"], select{
     position: absolute;
     z-index: 4;
 }
-.ikont-bt-cerrar-login2{
+.ikont-bt-cerrar-login2:link{
     height:40px;
     font-size: 20px; 
     font-family:Verdana, Arial, Helvetica, sans-serif;
     color:#58595B;
+}
+.ikont-bt-cerrar-login2:hover{
+      color:  #257500 !important;   
+}
+.ikont-bt-cerrar-login2:active{
+      color:  #257500 !important;   
 }
 .ikont-menu-inicio-zoom{
     background-image: url(../imgs/icons_menu_pr.png);
@@ -3267,7 +3273,7 @@ css usuario modificacion
 }
 
 .ikont-btn-cerrar-flecha-session{
-    background-image: url(../imgs/flecha_home1_1.png);
+    background-image: url(../imgs/flecha_home1.png);
     background-repeat: no-repeat;
     width:600px;
     height: 33px;
