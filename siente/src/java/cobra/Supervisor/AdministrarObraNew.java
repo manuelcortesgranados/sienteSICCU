@@ -761,19 +761,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.plazo = plazo;
     }
 
-    public Obra getObra() {
-        //return obra;
+    public Obra getObra() {        
         return getSessionBeanCobra().getCobraService().getObra();
     }
 
-    public void setObra(Obra obra) {
-        //this.obra = obra;
-
-        if (obra == null) {
-            System.out.println("La obra esta Null");
-        } else {
-            System.out.println("La obra NO esta Null");
-        }
+    public void setObra(Obra obra) {       
         getSessionBeanCobra().getCobraService().setObra(obra);
     }
 
@@ -1805,14 +1797,13 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.sede = sede;
     }
 
-    public String mostrarGoogle() {
-        System.out.println("entra al metodo 1");
+    public String mostrarGoogle() {       
 
         sede = false;
         boolruta = false;
         ubicacionmapa = "http://maps.google.com/maps/api/staticmap?center=" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&zoom=10&size=450x200&&markers=color:blue|label:.|" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&sensor=false";
         listalocalidad = getSessionBeanCobra().getCobraService().encontrarLocalidadPorObra(getObra());
-
+        System.out.println("ubicacionmapa = " + ubicacionmapa);
         if (getObra().getSedeeducativa() != null) {
             setSede(true);
         }
