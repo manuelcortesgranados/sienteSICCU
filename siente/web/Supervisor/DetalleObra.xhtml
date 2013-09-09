@@ -130,7 +130,7 @@
                                         <h:outputText styleClass="ikont-hot-zoom-numvobra" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
                                             <f:convertNumber pattern="$###,###" />
                                         </h:outputText>
-                                        <h:panelGrid columns="2">
+                                        <h:panelGrid columns="2" columnClasses=",buttondetallevalor,,buttondetallevalor,,buttondetallevalor">
                                             <h:panelGrid >
                                                 <h:outputLabel styleClass="ikont- hot-textobra9">Valor del proyecto</h:outputLabel>
                                                 <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
@@ -252,7 +252,7 @@
                             </h:panelGrid>
                         </rich:collapsiblePanel>
                         <rich:collapsiblePanel switchType="client" header="Datos relevantes" expanded="true">
-                            <h:panelGrid columns="4">
+                            <h:panelGrid columns="4" class="ikont-hpg-datosrelevantes" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" />
                                     <h:outputLabel>Duración</h:outputLabel>
@@ -300,12 +300,12 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
                                     <h:panelGrid columns="2" >
-                                        <h:outputLabel styleClass="ikont-hol-clspry " value="Sector : " />
-                                        <h:outputText styleClass="ikont-hol-strdescclaseobra" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
-                                        <h:outputLabel styleClass="ikont-hol-tipoPry" value="#{var.tipoProyecto}" />
-                                        <h:outputText styleClass="ikont-hol-tipprynom" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
-                                        <h:outputLabel styleClass="ikont-hol-subtipo " value="Subtipo:"  />
-                                        <h:outputText styleClass="ikont-hol-strdesctipoobra" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                        <h:outputText styleClass="ikont-hol-clspry " value="Sector : " />
+                                        <h:outputLabel styleClass="ikont-hol-strdescclaseobra" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                                        <h:outputText styleClass="ikont-hol-tipoPry" value="#{var.tipoProyecto}" />
+                                        <h:outputLabel styleClass="ikont-hol-tipprynom" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
+                                        <h:outputText styleClass="ikont-hol-subtipo " value="Subtipo:"  />
+                                        <h:outputLabel styleClass="ikont-hol-strdesctipoobra" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </h:panelGrid>

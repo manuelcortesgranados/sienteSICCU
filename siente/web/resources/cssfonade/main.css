@@ -1950,7 +1950,6 @@ input[type="text"], input[type="password"], select{
     top: -48px;
     width: 50px;
     float: left;
-    margin-left: -10px;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
@@ -1972,6 +1971,7 @@ input[type="text"], input[type="password"], select{
 
 .ikont-img-posicion-menu-proyecto.scrollmenudetalle{
     background-size: 0px 0px;
+    width: 65px;
 }
 
 .ikont-posicion-detalle-proyecto{
