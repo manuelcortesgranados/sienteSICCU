@@ -837,7 +837,7 @@
 
                     <rich:collapsiblePanel id="simpleTogglegirodirecto" switchType="ajax" header="#{var.girodirecto}"  
                                            expanded="#{Supervisor$Contrato.boolgiros}"
-                                           rendered="#{Supervisor$Contrato.booltipocontratoconvenio}"
+                                           rendered="#{Supervisor$Contrato.booltipocontratoconvenio}#{!var.aplicafonade}"
                                            toggleListener="#{Supervisor$Contrato.limpiarGirodirecto}">
                         <a4j:ajax event="switch" render="pngirodirecto, notieneop" />
 
