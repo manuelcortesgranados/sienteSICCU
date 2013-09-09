@@ -29,7 +29,7 @@
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
     padding: 4px;
-    text-aling : center;
+    text-align : center;
 }
 
 .rf-dt-nd {
