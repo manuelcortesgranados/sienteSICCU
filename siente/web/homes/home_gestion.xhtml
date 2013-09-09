@@ -63,15 +63,7 @@
     </ui:define>   
     <ui:define name="body">  
         <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;position: absolute;">
-            <table>
-                <tr>
-                    <td>
-                        <blink>
-                            <h:outputText  styleClass="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
-                        </blink>
-                    </td>
-                </tr>
-            </table>
+
             <h:commandLink  immediate="true"  value="X" styleClass="x_bienvenida" onclick="esconderbienvenida();
                 return  false;"/>         
             <div id="ingreso-bienvenida" style="" class="ikont-div-ingreso-bienvenida">
@@ -138,9 +130,12 @@
                                         <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyecto}s encontrados " rendered="#{HomeGestion.filtro.intvista==1}" />
                                         <h:outputText  styleClass="ikont-hot-visualizado"   value=" - Visualizando #{HomeGestion.filtro.factorpagina}" rendered="#{HomeGestion.filtro.intvista==1 and HomeGestion.obrasEncontradas>HomeGestion.filtro.factorpagina}"/>
                                         <h:outputText  styleClass="ikont-hot-filtrointvisita"   value="" rendered="#{HomeGestion.filtro.intvista==1}" />
-                                    </td></tr><tr id="dosdos" style="top: 0px;right: -61px;border: 2px;"><td>
+                                    </td></tr><tr id="dosdos" style="top: 0px;right: -61px;border: 2px;"><td>                                       
                                         <h:panelGroup style="border: 2px; border-color: black;">
                                             <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style=" box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -12px;right: -24px;float: right;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+                                              
+                                                        <h:outputText  styleClass="ikont-hot-mensajes "  style="font-size: 12px;"   rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
+                                                    
                                                 <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                                        jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
