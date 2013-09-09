@@ -1321,6 +1321,7 @@ a.ikont-hcl-modificarusuario:hover {
     position: relative;
     top: 0px;
     z-index:5;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-hpg-menu-nuevo-convenio{
@@ -1376,12 +1377,12 @@ a.ikont-hcl-modificarusuario:hover {
 
 .ikont-hf-nuevocontratoplanoperativo{
     position: relative;
-    top: -25px;
+    top: -30px;
 }
 
 .ikont-hf-nuevodetalleobrazoom{
     position: relative;
-    top: -35px;
+    top: -30px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos{
@@ -1869,6 +1870,7 @@ input[type="text"], input[type="password"], select{
     position: relative;
     top: 0px;
     z-index: 5;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-menu-principal{
@@ -2476,6 +2478,7 @@ css usuario modificacion
     position: relative;
     top: 0px;
     z-index: 1;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-hpg-menu-contenido-administrar-convenio.scrollactive{
@@ -2522,7 +2525,7 @@ css usuario modificacion
 
 .ikont-hf-menusuperior-convenio{
     position: relative;
-    top: -34px;
+    top: -30px;
 }
 
 .ikont-hpg-menu-administrar-convenio{ 
