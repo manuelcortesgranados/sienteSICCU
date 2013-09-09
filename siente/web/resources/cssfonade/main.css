@@ -396,7 +396,7 @@ a.closemodal{
 }
 
 .templatetablamenulateral .rf-p-b {
-    width : 225px;
+    width : 225px
 }
 
 
@@ -1719,7 +1719,7 @@ input[type="text"], input[type="password"], select{
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
-    top:139px; 
+    top: 141px;
 }
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
@@ -1944,10 +1944,13 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text{
     color: #FFF;
     font-family: open;
-    font-size: 0.9em;
+    font-size: 0.8em;
     display: none;
     position: relative;
     top: -48px;
+    width: 50px;
+    float: left;
+    margin-left: -10px;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
@@ -1956,7 +1959,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-img-posicion-menu-proyecto.scrollmenudetalle.ikont-menu-detalle-text{
-    display: block;
+    display: inline-block;
 }
 
 .ikont-img-posicion-menu-proyecto{
@@ -2386,17 +2389,22 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hot-zoom-numvobra{
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 .ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
-    font-size: 1.3em;
+    font-size: 2em;
 }
 
 .ikont-hpg-zoom-detalleobra label{
     font-family: open;
     font-size: 0.8em;
     color: #58595B;
+}
+
+.ikont-hpg-zoom-detalleobra span{
+    font-family: open;
+    font-size: 0.9em;
 }
 
 .ikont-acl-btadjuntarimagen{
@@ -4054,3 +4062,21 @@ a:hover {
     line-height: 95px;
 }
 
+.menuprincipalactive{
+    width: 100%;
+    height: 2500px;
+    background-color: transparent;
+    z-index: 7;
+    position: absolute;
+    top: 0px;
+    left: 258px;
+}
+
+.buttondetallevalor{
+    width: 100px;
+    text-align: center;
+}
+
+.buttondetallevalor input{
+    margin-top: 22px;
+}
