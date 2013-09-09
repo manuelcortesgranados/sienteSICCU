@@ -391,7 +391,7 @@ public class AsociarContratos implements Serializable {
         return false;
     }
 
-    public String desasociarContratoInterventoria(int filaSeleccionada) {
+    public String desasociarContratoInterventoria() {
 
         //AsociarContratos asoc=(AsociarContratos)FacesUtils.getManagedBean("Supervisor$AsociarContratos");        
         //Relacioncontratoobra contselec = asoc.getListacontratosobra().get(filaSeleccionada);
@@ -414,7 +414,7 @@ public class AsociarContratos implements Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
-        FacesUtils.addInfoMessage("Los datos se han guardado");
+       FacesUtils.addInfoMessage("Los datos se han guardado");
         listacontratosobra = new ArrayList<Relacioncontratoobra>();
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));

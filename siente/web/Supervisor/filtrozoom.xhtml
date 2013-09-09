@@ -16,6 +16,18 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
         <link href="#{facesContext.externalContext.requestContextPath}/resources/cssfonade/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript">
+            Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
+                var n = this,
+                        decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+                        decSeparator = decSeparator == undefined ? "." : decSeparator,
+                        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+                        sign = -n > 0 ? "-" : "",
+                        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+                        j = (j = i.length) > 3 ? j % 3 : 0;
+                return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+            };</script>
+
     </h:head>
     <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px;width: 265px;" > 
@@ -41,43 +53,52 @@
                     <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
                     <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
                     <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>                   
+                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
                     <script type="text/javascript">
-                                  $(function() {
-                                      $("#slider-range").slider({
-                                          range: true,
-                                          min: document.getElementById("numo").value,
-                                          max: document.getElementById("valormayor").value,
-                                          values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
-                                          slide: function(event, ui) {
-                                              var numero1 = ui.values[ 0 ];
-                                              var numero2 = ui.values[ 1 ];
-                                              $("#numero1").val(numero1);
-                                              $("#numero2").val(numero2);
-                                              $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
-                                          }
-                                      });
-                                      $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
-                                              " a $ " + $("#slider-range").slider("values", 1));
-                                  });
+            $(function() {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: document.getElementById("valormayor").value,
+                    values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                    slide: function(event, ui) {
+                        var numero1 = ui.values[ 0 ];
+                        var numero2 = ui.values[ 1 ];
+                        //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
+                        $("#numero1").val(numero1);
+                        $("#numero2").val(numero2);
+                        $("#numero3").val(numero1.formatMoney());
+                        $("#numero4").val(numero2.formatMoney());
+                        $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
+                    }
+                });
+                $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
+                        " a $ " + $("#slider-range").slider("values", 1));
+            });
 
                     </script>
 
                     <h:panelGrid>           
-                        <h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>
+                        <!--<h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>-->
+                        <h:panelGrid id="numeros_la" columns="1" style="width:225px!important;">
+                            <rich:column>
+                                <h:inputText value="VALOR $ " styleClass="input_filtro_2" style="font-size: 10px !important;width: 36px!important;font-weight: bold;" disabled="true"/>
+                                <h:inputText id="numero3"  styleClass="input_filtro_2" style="font-size: 8px !important;width: 76px!important;" disabled="true" value="#{HomeGestion.filtro.cuantiaini}"/>
+                                <h:inputText value="a $"  styleClass="input_filtro_2" style="font-size: 12px !important;width: 20px!important;font-weight: bold;" disabled="true"/>
+                                <h:inputText id="numero4"  styleClass="input_filtro_2" style="font-size: 8px !important;width: 77px!important;" disabled="true" value="#{HomeGestion.filtro.cuantiafin}"/>
+                            </rich:column>
+                        </h:panelGrid>
                     </h:panelGrid>
                     <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
                     <br/>
-                    <h:inputHidden id="cero" value="#{HomeGestion.cero}" />
-                    <h:inputHidden id="cien" value="#{HomeGestion.cien}" />
                     <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                     <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
                     <script>
                         $(function() {
                             $("#slider-range-avance").slider({
                                 range: true,
-                                min: document.getElementById("ava1").value,
-                                max: document.getElementById("ava2").value,
+                                min: 0,
+                                max: 100,
                                 values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
                                 slide: function(event, ui) {
                                     var avance1 = ui.values[ 0 ];

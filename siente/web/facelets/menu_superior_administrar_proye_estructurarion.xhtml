@@ -99,22 +99,23 @@
                     });
                 }
             });
-        $('.ikont-hpg-content-menuinicio:first').hover(function() {
+            $('.ikont-hpg-content-menuinicio:first').hover(function() {
+                $('body').append($('<div/>').addClass('menuprincipalactive').hover(function() {
+                    $(this).remove();
+                    $('#menuprincipal').animate({width: '0px'}, function() {
+                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                    });
+                })
+                        )
                 $('#menuprincipal').addClass('hovermenuprincipal');
-                $('#menuprincipal').css({top:'61px',position:'fixed'}).animate({width: '268px'});
-            },
-                    function() {
-//                       $('#menuprincipal').animate({width: '0px'});
-//                        $('#menuprincipal').removeClass('hovermenuprincipal');
-                    });
-            $('#menuprincipal').hover(function() {
-
-            },
-                    function() {
-                        $('#menuprincipal').animate({width: '0px'});
-//                        $('#menuprincipal').removeClass('hovermenuprincipal');
-                        
-                    });
+                $('#menuprincipal').animate({width: '268px'});
+            });
+            $('#menuprincipal').hover(null, function() {
+                $('.menuprincipalactive:first').remove();
+                $('#menuprincipal').animate({width: '0px'}, function() {
+                    $('#menuprincipal').removeClass('hovermenuprincipal');
+                });
+            });
         });
         $j(window).scroll(function() {
             var $jq = jQuery.noConflict();

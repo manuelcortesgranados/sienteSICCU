@@ -7,6 +7,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,8 +15,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,15 +33,14 @@ public class ToolBarSuperior extends ToolBar {
     final Button datosbasicos = new Button("Datos Básicos");
     final Button finalizarbasicos = new Button();
     final Button guardarborrador = new Button();
-    
-    public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio) {
+
+    public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
         planificacion.setEnabled(false);
 
         flujodecaja.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
-                    
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         service.setLog("Problema al transferir el objeto a JSF", null);
@@ -67,8 +69,7 @@ public class ToolBarSuperior extends ToolBar {
         reportes.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-               service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
-                    
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
                         service.setLog("Problema al transferir el objeto a JSF", null);
@@ -96,7 +97,7 @@ public class ToolBarSuperior extends ToolBar {
         datosbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service,depStore), new AsyncCallback<Boolean>() {
                     
                     @Override
                     public void onFailure(Throwable caught) {
@@ -121,32 +122,30 @@ public class ToolBarSuperior extends ToolBar {
 
             }
         });
-        
-        finalizarbasicos.addClickHandler(new ClickHandler() {
 
+        finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-        
-        guardarborrador.addClickHandler(new ClickHandler() {
 
+        guardarborrador.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
         finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");
-        guardarborrador.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-borradorGWT"); 
+        guardarborrador.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-borradorGWT");
         add(datosbasicos);
         add(planificacion);
         add(flujodecaja);
         add(reportes);
         add(finalizarbasicos);
         add(guardarborrador);
-        setStyleName("ikont-po-tb");       
-       
+        setStyleName("ikont-po-tb");
+
     }
 
     public String retornarNuevoContrato() {
@@ -162,5 +161,4 @@ public class ToolBarSuperior extends ToolBar {
     private void addStyleOnOver(Button finalizarbasicos, String ff) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

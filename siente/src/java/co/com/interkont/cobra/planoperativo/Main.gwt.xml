@@ -6,12 +6,11 @@
    
     <inherits name="com.google.gwt.user.User"/>
     
-    <inherits name='com.sencha.gxt.ui.GXT'/>
-    
+    <inherits name='com.sencha.gxt.ui.GXT'/>    
     <inherits name='com.sencha.gxt.chart.Chart' />
     <inherits name='com.sencha.gxt.theme.gray.Gray'/>
     <inherits name='com.gantt.GxtGantt'/>
-    <stylesheet src="reset.css" />   
+  
      
     <inherits name='co.com.interkont.cobra.planoperativo.client.dto'/>   
     <collapse-all-properties/>

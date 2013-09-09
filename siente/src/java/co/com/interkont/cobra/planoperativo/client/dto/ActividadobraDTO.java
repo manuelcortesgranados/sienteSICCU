@@ -50,8 +50,9 @@ public class ActividadobraDTO implements IsSerializable {
     private Double peso;
 //    private int duracion;
     private Integer estado;
-    private Set dependenciasForFkActividadOrigen = new HashSet(0);
-    private Set dependenciasForFkActividadDestino = new HashSet(0);
+
+private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<DependenciaDTO>();
+    private List<DependenciaDTO> dependenciasForFkActividadDestino = new ArrayList<DependenciaDTO>();
     private ContratoDTO contrato;
     private ObraDTO obra;
     private String eliminar="Eliminar";
@@ -129,13 +130,14 @@ public class ActividadobraDTO implements IsSerializable {
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria) {
         this.id = id;
         this.name = name;
-        this.startDateTime = start;
+        
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         DateWrapper dw= new DateWrapper(start).clearTime();
+        this.startDateTime = dw.asDate();
         this.endDateTime= dw.addDays(duration).asDate();
         
     }
@@ -383,35 +385,7 @@ public class ActividadobraDTO implements IsSerializable {
         this.estado = estado;
     }
 
-    /**
-     * @return the dependenciasForFkActividadOrigen
-     */
-    public Set getDependenciasForFkActividadOrigen() {
-        return dependenciasForFkActividadOrigen;
-    }
-
-    /**
-     * @param dependenciasForFkActividadOrigen the
-     * dependenciasForFkActividadOrigen to set
-     */
-    public void setDependenciasForFkActividadOrigen(Set dependenciasForFkActividadOrigen) {
-        this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
-    }
-
-    /**
-     * @return the dependenciasForFkActividadDestino
-     */
-    public Set getDependenciasForFkActividadDestino() {
-        return dependenciasForFkActividadDestino;
-    }
-
-    /**
-     * @param dependenciasForFkActividadDestino the
-     * dependenciasForFkActividadDestino to set
-     */
-    public void setDependenciasForFkActividadDestino(Set dependenciasForFkActividadDestino) {
-        this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
-    }
+   
 
     /**
      * @return the contrato
@@ -461,6 +435,34 @@ public class ActividadobraDTO implements IsSerializable {
      */
     public void setEliminar(String eliminar) {
         this.eliminar = eliminar;
+    }
+
+    /**
+     * @return the dependenciasForFkActividadOrigen
+     */
+    public List<DependenciaDTO> getDependenciasForFkActividadOrigen() {
+        return dependenciasForFkActividadOrigen;
+    }
+
+    /**
+     * @param dependenciasForFkActividadOrigen the dependenciasForFkActividadOrigen to set
+     */
+    public void setDependenciasForFkActividadOrigen(List<DependenciaDTO> dependenciasForFkActividadOrigen) {
+        this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
+    }
+
+    /**
+     * @return the dependenciasForFkActividadDestino
+     */
+    public List<DependenciaDTO> getDependenciasForFkActividadDestino() {
+        return dependenciasForFkActividadDestino;
+    }
+
+    /**
+     * @param dependenciasForFkActividadDestino the dependenciasForFkActividadDestino to set
+     */
+    public void setDependenciasForFkActividadDestino(List<DependenciaDTO> dependenciasForFkActividadDestino) {
+        this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
     }
 
 }
