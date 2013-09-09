@@ -2640,7 +2640,7 @@ css usuario modificacion
     alignment-adjust: central;
 }
 .tabPanelFiltroZoom{
-  width: 263px;
+    width: 263px;
     position: absolute;
     top: -114px; 
     height: 231px;
@@ -2746,6 +2746,7 @@ css usuario modificacion
     font-size: 2.5em; 
     color: #808080; 
     padding: 100px; 
+    top: 61px;
 }
 .inputlinkhomezoom:link{
     font-size: 0.5em; 
