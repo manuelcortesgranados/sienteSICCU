@@ -130,13 +130,14 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria) {
         this.id = id;
         this.name = name;
-        this.startDateTime = start;
+        
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         DateWrapper dw= new DateWrapper(start).clearTime();
+        this.startDateTime = dw.asDate();
         this.endDateTime= dw.addDays(duration).asDate();
         
     }

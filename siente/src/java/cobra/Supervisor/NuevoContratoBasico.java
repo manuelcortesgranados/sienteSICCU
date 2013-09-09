@@ -2350,8 +2350,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
     @Override
-    public void prerender() {  
-        
+    public void prerender() {          
         if (getSessionBeanCobra().isCargarcontrato()) {
 
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
@@ -2397,7 +2396,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             llenarModalidadContratista();
         }
         // } else {
-        setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+        //setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
         listaProyectosConvenio = new ArrayList<Obra>();
         variabletitulo = Propiedad.getValor("primerodatosbasicos");
         llenarEstadoConvenio();
@@ -2546,8 +2545,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipocontratoconsultoria = new SelectItem[liscontrconsul.size()];
         int i = 0;
         for (Tipocontratoconsultoria tconcon : liscontrconsul) {
-            SelectItem opt = new SelectItem(tconcon.getIntidtipocontratoconsultoria(), tconcon.getStrdescripcion());
-            System.out.println("tipo" + tconcon.getStrdescripcion());
+            SelectItem opt = new SelectItem(tconcon.getIntidtipocontratoconsultoria(), tconcon.getStrdescripcion());            
             tipocontratoconsultoria[i++] = opt;
         }
 
@@ -3407,6 +3405,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
 
     public void limpiarContrato() {
+        System.out.println("limpiar contrato = " );
         boolnumencargosoli = false;
         if (getSessionBeanCobra().getCobraService().isAsoContratoCrear()) {
             booltipocontratoconvenio = false;
@@ -3907,8 +3906,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleContrato() {
         //NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         //Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
-        //boolconthijo = false;
-        ///Revisar este método se totea pero no siempre
+        
 
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         cargarContrato(contratotabla);
@@ -3917,17 +3915,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {            
             
-//            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-//            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));            
-//                       
-           contrato.setActividadobras(new LinkedHashSet());
+            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));            
+//            
+           contrato.setActividadobras(new LinkedHashSet<Actividadobra>());
+           contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
            
-//            Actividadobra activiprincipal= getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
-//            if(activiprincipal!=null)
-//            {    
-//             contrato.getActividadobras().add(activiprincipal);
-//            }
-            System.out.println("contratotabla = " + contratotabla.getIntidcontrato());
+            Actividadobra activiprincipal= getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
+            if(activiprincipal!=null)
+            {    
+             contrato.getActividadobras().add(activiprincipal);
+            }
+//            
+           
+            
+            
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
@@ -6695,7 +6697,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
 
-            getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
+            ContratoDTO cont= CasteoGWT.castearContratoToContratoDTO(contrato);
+//            System.out.println("getNombreAbreviado = " + cont.getNombreAbreviado());
+//            System.out.println("getStrnumcontrato = " + cont.getStrnumcontrato());
+//            System.out.println("getTextobjeto = " + cont.getTextobjeto());
+//            System.out.println("getActividadobras = " + cont.getActividadobras().size());
+//            System.out.println("getDatefechaactaini = " + cont.getDatefechaactaini());           
+//            System.out.println("getDatefechaini = " + cont.getDatefechaini());
+//            System.out.println("getDatefechafin = " + cont.getDatefechafin());
+//            System.out.println("getDependenciasGenerales = " + cont.getDependenciasGenerales().size());
+//            System.out.println("getEstadoConvenio = " + cont.getEstadoConvenio());
+//            System.out.println("getFuenterecursosconvenios = " + cont.getFuenterecursosconvenios().size());
+//            System.out.println("getIntduraciondias = " + cont.getIntduraciondias());
+//            System.out.println("getIntidcontrato = " + cont.getIntidcontrato());
+//            System.out.println("getMontos = " + cont.getMontos().size());
+//            System.out.println("getNumvlrcontrato = " + cont.getNumvlrcontrato());
+//            System.out.println("getRelacionobrafuenterecursoscontratos = " + cont.getRelacionobrafuenterecursoscontratos().size());
+//            System.out.println("getTipocontrato = " + cont.getTipocontrato().getStrdesctipocontrato());
+//            System.out.println("getValorDisponible = " + cont.getValorDisponible());
+//            
+//            
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
 
             return "PlanOperativo";
         } catch (ConvenioException e) {
@@ -6725,8 +6747,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
-        contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
-        contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
+        contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());        
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
@@ -6735,8 +6756,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
-                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null));
-
+                Actividadobra activi=CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
+                activi.setContrato(contrato);
+                contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
                 listaProyectosConvenio.clear();
                 extraerProyectosActividad(act);
@@ -6755,7 +6777,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         while (it.hasNext()) {
             ActividadobraDTO actdto = (ActividadobraDTO) it.next();
             if (actdto.getObra() != null) {
-                listaProyectosConvenio.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));
+                listaProyectosConvenio.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato, getSessionBeanCobra().getUsuarioObra().getUsuId()));
             }
             if (actdto.hasChildren()) {
 

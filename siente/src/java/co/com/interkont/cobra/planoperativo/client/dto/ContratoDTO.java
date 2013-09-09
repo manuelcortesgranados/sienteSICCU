@@ -22,8 +22,7 @@ public class ContratoDTO implements IsSerializable {
     private Date datefechafin;
     private Date datefechaactaini;
     private String strnumcontrato;
-    private BigDecimal numvlrcontrato;
-    private Date datefechacreacion;
+    private BigDecimal numvlrcontrato;    
     private String textobjeto;
     private int estadoConvenio;
     private int intduraciondias;
@@ -40,14 +39,13 @@ public class ContratoDTO implements IsSerializable {
     public ContratoDTO() {
     }
 
-    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion, String textobjeto, int estadoConvenio, int intduraciondias, TipocontratoDTO tipocontrato, String strnombrecorto) {
+    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, String textobjeto, int estadoConvenio, int intduraciondias, TipocontratoDTO tipocontrato, String strnombrecorto) {
         this.intidcontrato = intidcontrato;
         this.datefechaini = datefechaini;
         this.datefechafin = datefechafin;
         this.datefechaactaini = datefechaactaini;
         this.strnumcontrato = strnumcontrato;
-        this.numvlrcontrato = numvlrcontrato;
-        this.datefechacreacion = datefechacreacion;
+        this.numvlrcontrato = numvlrcontrato;        
         this.textobjeto = textobjeto;
         this.estadoConvenio = estadoConvenio;
         this.intduraciondias = intduraciondias;
@@ -134,21 +132,7 @@ public class ContratoDTO implements IsSerializable {
      */
     public void setNumvlrcontrato(BigDecimal numvlrcontrato) {
         this.numvlrcontrato = numvlrcontrato;
-    }
-
-    /**
-     * @return the datefechacreacion
-     */
-    public Date getDatefechacreacion() {
-        return datefechacreacion;
-    }
-
-    /**
-     * @param datefechacreacion the datefechacreacion to set
-     */
-    public void setDatefechacreacion(Date datefechacreacion) {
-        this.datefechacreacion = datefechacreacion;
-    }
+    }    
 
     /**
      * @return the fuenterecursosconvenios

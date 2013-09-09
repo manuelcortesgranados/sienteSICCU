@@ -606,6 +606,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     protected AdministrarObraNew getAdministrarObraNew() {
+        System.out.println("que miercoles = ");
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
 
@@ -1718,7 +1719,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtroObrasActionMapaAvanModal() {
-        System.out.println("ingresoo al sistema");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
                 filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -1805,7 +1805,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public String primeroListProyectos() {
         obrasEncontradas = 0;
-        System.out.println("entor 2");
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
