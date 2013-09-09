@@ -618,7 +618,7 @@ public class CasteoGWT {
         }
         dependencia.setTipoDepencia(tipoDependencia);
         dependencia.setActividadobraByFkActividadDestino(castearActividadobraDdoToActividadobra(dependenciaDto.getActividadTo(), convenio, null, null));
-        convenio.getDependenciasGenerales().add(dependencia);
+//        convenio.getDependenciasGenerales().add(dependencia);
         return dependencia;
 
     }
