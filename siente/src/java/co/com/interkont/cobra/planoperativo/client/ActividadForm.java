@@ -133,9 +133,11 @@ public class ActividadForm implements IsWidget, EntryPoint {
     }
 
     private void crearFormulario() {
-
-        getVp().add(new Label("Añadir actividad macro"));
-
+         Label tituloPagina = new Label("Añadir actividad macro");
+         tituloPagina.setStyleName("ikont-po-label");
+         getVp().add(tituloPagina);
+        
+        
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         getVp().add(con);
 
@@ -208,6 +210,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
             //getVp().setWidth("" + COLUMN_FORM_WIDTH);
             getVp().setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             getVp().setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+             getVp().setStyleName("ikont-po-tb");
             crearFormulario();
         }
         return getVp();

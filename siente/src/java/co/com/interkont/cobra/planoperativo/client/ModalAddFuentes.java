@@ -36,6 +36,7 @@ import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BlurEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
@@ -90,12 +91,18 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         vp.setSpacing(10);
         vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
         vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+        vp.setStyleName("ikont-po-tb");
         crearFormulario();
         return vp;
     }
 
     public void crearFormulario() {
-        vp.add(new Label("Fuente Recursos"));
+       
+         Label tituloPagina = new Label("Fuente Recursos");
+         tituloPagina.setStyleName("ikont-po-label");
+         vp.add(tituloPagina);
+        
+      
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         vp.add(con);
 
@@ -106,7 +113,8 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         descripcionTipoRecurso.setEmptyText("descripción aporte");
         descripcionTipoRecurso.setEnabled(false);
 
-        con.add(descripcionTipoRecurso, new AbstractHtmlLayoutContainer.HtmlData(".strdesaporte"));
+         con.add(new FieldLabel(descripcionTipoRecurso, "Descripción aporte") , new AbstractHtmlLayoutContainer.HtmlData(".strdesaporte"));
+        //con.add(descripcionTipoRecurso, new AbstractHtmlLayoutContainer.HtmlData(".strdesaporte"));
 
         llenarFuenteRecursosContrato(entidades);
         lstTerceros = new ComboBox<ObrafuenterecursosconveniosDTO>(entidades, propse.nombreEntidadTipo());
@@ -132,7 +140,8 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
 
             }
         });
-        con.add(lstTerceros, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+        con.add(new FieldLabel(lstTerceros, "Entidad"), new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+       // con.add(lstTerceros, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
 
 
         lstFormaP.setWidth("" + cw);
@@ -149,7 +158,8 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
                 }
             }
         });
-        con.add(lstFormaP, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
+         con.add(new FieldLabel(lstFormaP, "Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
+       // con.add(lstFormaP, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
 
         valorFuenteRecurso = ((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
         valorFuenteRecurso.setEmptyText("Valor");
@@ -167,7 +177,8 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
                 }
             }
         });
-        con.add(valorFuenteRecurso, new AbstractHtmlLayoutContainer.HtmlData(".valorfuente"));
+        con.add(new FieldLabel(valorFuenteRecurso, "Valor") , new AbstractHtmlLayoutContainer.HtmlData(".valorfuente"));
+        //con.add(valorFuenteRecurso, new AbstractHtmlLayoutContainer.HtmlData(".valorfuente"));
         
          this.formaPago=Integer.parseInt(lstFormaP.getValue(0));
 

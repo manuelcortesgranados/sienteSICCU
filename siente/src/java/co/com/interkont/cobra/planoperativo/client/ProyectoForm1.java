@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.data.shared.TreeStore;
+import com.sencha.gxt.widget.core.client.DatePicker;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
@@ -182,7 +183,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             vp = new VerticalPanel();
             vp.setSpacing(10);
             vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+            vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);            
+            vp.setStyleName("ikont-po-tb");
             createColumnForm();
         }
         return vp;
@@ -201,14 +203,16 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tituloPantalla = "Editar Proyecto";
         }
 
-        Label tituloPagina = new Label(tituloPantalla);        
-        tituloPagina.setStyleName(CssRecursos.INSTANCE.commonsCss().estiloLabel());
+        Label tituloPagina = new Label(tituloPantalla);
+        tituloPagina.setStyleName("ikont-po-label");
+        //tituloPagina.setStyleName(CssRecursos.INSTANCE.commonsCss().estiloLabel());
         
 
         vp.add(tituloPagina);
 
 
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
+        con.setStyleName("ikont-po-tb");        
         vp.add(con);
 
         int cw = 238;
@@ -219,12 +223,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getNombrePry().setAutoValidate(true);
         con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
-
+        
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
+        fechaInicio.setStyleName("gwt-DatePicker");
         con.add(new FieldLabel(fechaInicio, "Fecha inicio"), new HtmlData(".fechainicio"));
         // con.add(fechaInicio, new HtmlData(".fechainicio"));
-
+       
 
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");

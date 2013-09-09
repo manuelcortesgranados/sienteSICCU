@@ -33,6 +33,7 @@ import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BlurEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
@@ -103,15 +104,18 @@ public class ModalRubrosProyecto implements IsWidget {
         vp.setSpacing(10);
         vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
         vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+        vp.setStyleName("ikont-po-tb");
         crearModalRoles();
         return vp;
     }
 
     public void crearModalRoles() {
         final String cw = "200";
-        vp.add(new Label("ROLES Y ENTIDADES"));
-
-        HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
+         Label tituloPagina = new Label("ROLES Y ENTIDADES");
+         tituloPagina.setStyleName("ikont-po-label");
+         vp.add(tituloPagina);
+        
+         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         vp.add(con);
 
         llenarComboEntidadesConvenio(entidades);
@@ -127,7 +131,8 @@ public class ModalRubrosProyecto implements IsWidget {
 
             }
         });
-        con.add(lstEntidadesConvenio, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+        con.add( new FieldLabel(lstEntidadesConvenio, "Entidad") , new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+        //con.add(lstEntidadesConvenio, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
 
         montoAportado.setEmptyText("Monto aportado");
         montoAportado.setWidth(cw);
@@ -143,14 +148,15 @@ public class ModalRubrosProyecto implements IsWidget {
                }
             }
         });
-
-        con.add(montoAportado, new AbstractHtmlLayoutContainer.HtmlData(".monto"));
+        con.add(new FieldLabel(montoAportado, "Monto"), new AbstractHtmlLayoutContainer.HtmlData(".monto"));
+        //con.add(montoAportado, new AbstractHtmlLayoutContainer.HtmlData(".monto"));
 
         campoTipoRecurso.setWidth(cw);
         campoTipoRecurso.setEmptyText("Descripcion aporte");
-        con.add(campoTipoRecurso, new AbstractHtmlLayoutContainer.HtmlData(".especie"));
+        con.add(new FieldLabel(campoTipoRecurso, "Descripcion aporte"), new AbstractHtmlLayoutContainer.HtmlData(".especie"));
+       // con.add(campoTipoRecurso, new AbstractHtmlLayoutContainer.HtmlData(".especie"));
 
-        con.add(new Label("Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".tituloformap"));
+       // con.add(new Label("Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".tituloformap"));
         lstTipoAporte.setWidth("" + cw);
         llenarTipoAporte();
         lstTipoAporte.addChangeHandler(new ChangeHandler() {
@@ -168,7 +174,8 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-        con.add(lstTipoAporte, new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
+        con.add(new FieldLabel(lstTipoAporte, "Tipo aporte") , new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
+        //con.add(lstTipoAporte, new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
 
         lstFormaP.setWidth("" + cw);
         llenarFormaPa();
@@ -183,12 +190,14 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-        con.add(lstFormaP, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
+        con.add(new FieldLabel(lstFormaP, "Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
+        //con.add(lstFormaP, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
 
 
         rubro.setEmptyText("Rubro");
         rubro.setWidth(cw);
-        con.add(rubro, new AbstractHtmlLayoutContainer.HtmlData(".rubro"));
+        con.add(new FieldLabel(rubro, "Rubro"), new AbstractHtmlLayoutContainer.HtmlData(".rubro"));
+        //con.add(rubro, new AbstractHtmlLayoutContainer.HtmlData(".rubro"));
 
 
 
@@ -200,7 +209,8 @@ public class ModalRubrosProyecto implements IsWidget {
                 vigencia = Integer.parseInt(lstVigen.getItemText(lstVigen.getSelectedIndex()));
             }
         });
-        con.add(lstVigen, new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
+        con.add(new FieldLabel(lstVigen, "Vigencia"), new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
+        //con.add(lstVigen, new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
 
 
         Button botanAddRubros = new Button("Adicionar", new ClickHandler() {
@@ -398,12 +408,11 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     private native String getTableMarkup() /*-{
-     return ['<table width=100% cellpadding=0 cellspacing=10>',
-     '<tr><td class=entidad></td><td class=rubro></td></tr>',
-     '<tr><td class=vigencia></td></tr>',
-     '<tr><td class=tituloformap></td></tr>',
-     '<tr><td class=tipor></td><td class=formapago></td></tr>',
-     '<tr><td class=monto></td><td class=especie></td></tr>',
+     return ['<table width=100% cellpadding=0 cellspacing=1>',
+     '<tr><td class=entidad ></td><td class=rubro></td></tr>',
+     '<tr><td class=vigencia></td><td class=tipor></td></tr>',
+     '<tr><td class=formapago></td><td class=monto></td></tr>',
+     '<tr><td class=especie></td></tr>',
      '</table>'
      ].join("");
      }-*/;

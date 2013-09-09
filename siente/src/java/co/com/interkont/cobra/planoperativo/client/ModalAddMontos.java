@@ -32,6 +32,7 @@ import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import java.math.BigDecimal;
@@ -87,13 +88,16 @@ public class ModalAddMontos implements IsWidget {
             vp.setSpacing(10);
             vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+            vp.setStyleName("ikont-po-tb");
             crearModalMontos();
         }
         return vp;
     }
 
     public void crearModalMontos() {
-        vp.add(new Label("Rubros"));
+        Label tituloPagina = new Label("Rubros");
+        tituloPagina.setStyleName("ikont-po-label");
+        vp.add(tituloPagina);
 
         String cw = "150";
 
@@ -108,12 +112,15 @@ public class ModalAddMontos implements IsWidget {
                 vigencia = Integer.parseInt(lstVigen.getItemText(lstVigen.getSelectedIndex()));
             }
         });
-        con.add(lstVigen, new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
+        con.add(new FieldLabel(lstVigen, "Vigencia"), new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
+        //con.add(lstVigen, new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
 
         getComboCatRubros().setWidth("" + cw);
         getComboRubros().setWidth("" + cw);
-        con.add(getComboCatRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrocont"));
-        con.add(getComboRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrosub"));
+        con.add(new FieldLabel(getComboCatRubros(), "Rubros")  , new AbstractHtmlLayoutContainer.HtmlData(".rubrocont"));
+        con.add(new FieldLabel(getComboRubros(), "Categorias"), new AbstractHtmlLayoutContainer.HtmlData(".rubrosub"));
+//        con.add(getComboCatRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrocont"));
+//        con.add(getComboRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrosub"));
         this.llenarCategorias();
         getComboCatRubros().setSelectedIndex(0);
         llenarRubroslista("123102");
@@ -136,7 +143,8 @@ public class ModalAddMontos implements IsWidget {
         setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
         getValorRubros().setEmptyText("Valor");
         getValorRubros().setWidth(cw);
-        con.add(getValorRubros(), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
+        con.add(new FieldLabel(getValorRubros(), "Valor"), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
+        //con.add(getValorRubros(), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
 
     }
 

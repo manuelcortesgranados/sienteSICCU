@@ -732,8 +732,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
-        
-    
+
+
 
 
 
@@ -773,23 +773,42 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         return tbar;
     }
-    
+
     private ToolBar createToolBarInferior() {
-        
+
         ToolBar tbarinferior = new ToolBar();
-        
+
         final Button continuar = new Button();
         continuar.setText("Continuar");
         continuar.addClickHandler(new ClickHandler() {
-
             @Override
             public void onClick(ClickEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenioDTO, gantt.getTreeStore(), service), new AsyncCallback<Boolean>() {
+//                    @Override
+//                    public void onFailure(Throwable caught) {
+//                        service.setLog("Problema al transferir el objeto a JSF", null);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Boolean result) {
+//                        service.setNavegacion(2, new AsyncCallback<Boolean>() {
+//                            @Override
+//                            public void onFailure(Throwable caught) {
+//                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                            }
+//
+//                            @Override
+//                            public void onSuccess(Boolean result) {
+//                               Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+//                            }
+//                        });
+//                    }
+//                });
             }
         });
         continuar.setStyleName("ikont-po-img-continuarGWTInferior");
-        
-        final Button finalizar  = new Button();
+
+        final Button finalizar = new Button();
         finalizar.setText("Finalizar");
         finalizar.addClickHandler(new ClickHandler() {
 
@@ -799,14 +818,22 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         finalizar.setStyleName("ikont-po-img-finalizarGWTInferior");
-        
+
         tbarinferior.add(continuar);
         tbarinferior.add(finalizar);
         tbarinferior.setStyleName("ikont-po-tb");
-        
-        return  tbarinferior;
-    }    
-    // Creates the static columns
+
+        return tbarinferior;
+    }
+
+//    public String retornarNuevoContrato() {
+//        return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
+//    }
+//
+//    public String retornarConfiguracionPagina() {
+//        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
+//    }
+//    // Creates the static columns
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ColumnModel<ActividadobraDTO> createStaticColumns() {
