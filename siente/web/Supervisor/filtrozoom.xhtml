@@ -41,12 +41,12 @@
                     <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
                     <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
                     <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>                   
+                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
                     <script type="text/javascript">
                                   $(function() {
                                       $("#slider-range").slider({
                                           range: true,
-                                          min: document.getElementById("numo").value,
+                                          min: 0,
                                           max: document.getElementById("valormayor").value,
                                           values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
                                           slide: function(event, ui) {
@@ -68,16 +68,14 @@
                     </h:panelGrid>
                     <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
                     <br/>
-                    <h:inputHidden id="cero" value="#{HomeGestion.cero}" />
-                    <h:inputHidden id="cien" value="#{HomeGestion.cien}" />
                     <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                     <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
                     <script>
                         $(function() {
                             $("#slider-range-avance").slider({
                                 range: true,
-                                min: document.getElementById("ava1").value,
-                                max: document.getElementById("ava2").value,
+                                min: 0,
+                                max: 100,
                                 values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
                                 slide: function(event, ui) {
                                     var avance1 = ui.values[ 0 ];
