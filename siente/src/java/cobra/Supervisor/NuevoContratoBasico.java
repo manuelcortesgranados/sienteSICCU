@@ -2447,8 +2447,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         try {
 
             List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
-            TerceroOption = new SelectItem[lis.size()];
-            System.out.println("lis.size()" + lis.size());
+            TerceroOption = new SelectItem[lis.size()];            
             int i = 0;
             SelectItem itemTercero = new SelectItem();
             for (Tercero ter : lis) {
@@ -2502,8 +2501,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public boolean comboEntidadesContratoguardar() {
         if (getContrato().getTercero().getStrnombrecompleto() != null) {
-            if (getContrato().getTercero().getStrnombrecompleto().toUpperCase().compareTo("TODOS") == 0) {
-                System.out.println("ingresa a la condicion");
+            if (getContrato().getTercero().getStrnombrecompleto().toUpperCase().compareTo("TODOS") == 0) {                
                 getContrato().getTercero().setIntcodigo(-1);
                 return true;
             }
@@ -4591,14 +4589,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return null;
     }
 
-    /**
-     * Instancia del bean AdministrarObraNew
-     *
-     * @return
-     */
-    protected AdministrarObraNew getAdmin() {
-        return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-    }
+//    /**
+//     * Instancia del bean AdministrarObraNew
+//     *
+//     * @return
+//     */
+//    protected AdministrarObraNew getAdmin() {
+//        return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//    }
 
 //    public String cargarContratista() {
 //        boolcrearcontratista = true;

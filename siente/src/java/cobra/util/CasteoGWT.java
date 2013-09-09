@@ -57,7 +57,7 @@ public class CasteoGWT implements Serializable{
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
         ContratoDTO contratoDTO = new ContratoDTO();
         
-        //contratoDTO.setIntidcontrato( contrato.getIntidcontrato());
+        contratoDTO.setIntidcontrato( contrato.getIntidcontrato());
         contratoDTO.setDatefechaactaini(contrato.getFechaactaini());
         contratoDTO.setDatefechacreacion(contrato.getDatefechacreacion());
         contratoDTO.setDatefechafin(contrato.getDatefechafin());
