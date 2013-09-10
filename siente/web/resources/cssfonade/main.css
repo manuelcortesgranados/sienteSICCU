@@ -1745,6 +1745,9 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login2:hover{
       color:  #257500 !important;   
 }
+.ikont-bt-cerrar-login2:visited{
+      color:  #257500 !important;   
+}
 .ikont-bt-cerrar-login2:active{
       color:  #257500 !important;   
 }
@@ -1778,6 +1781,9 @@ input[type="text"], input[type="password"], select{
 .ikont-label-estructura-menu:hover{
     color:  #257500 !important; 
 }
+.ikont-label-estructura-menu:visited{
+    color:  #257500 !important; 
+}
 .ikont-label-estructura-menu:active{
     color:  #257500 !important; 
 }
@@ -1802,6 +1808,9 @@ input[type="text"], input[type="password"], select{
 .ikont-label-menu-item:active { 
     color:  #257500 !important; 
 }
+.ikont-label-menu-item:visited { 
+    color:  #257500 !important; 
+}
 .ikont-label-menu-buscar-proyecto { 
     font-size: 12px; 
     width: 120px; 
@@ -1819,6 +1828,9 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important; 
 }
 .ikont-label-menu-estr-sub-titulo:active{
+    color:  #257500 !important; 
+}
+.ikont-label-menu-estr-sub-titulo:visited{
     color:  #257500 !important; 
 }
 .ikont-div-menu-zoom-inicio{
@@ -2793,6 +2805,11 @@ css usuario modificacion
     padding: 10px;
 }
 .inputlinkhomezoom:active{
+    font-size: 0.5em;  
+    color:  #257500 !important; 
+    padding: 10px;
+}
+.inputlinkhomezoom:visited{
     font-size: 0.5em;  
     color:  #257500 !important; 
     padding: 10px;
