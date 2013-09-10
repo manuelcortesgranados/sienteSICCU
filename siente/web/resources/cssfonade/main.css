@@ -4107,3 +4107,22 @@ a:hover {
 .ikont-hpg-conectatezoom{
     margin-top: 30px!important;
 }
+
+.ikont-hpg-datoscronograma{
+    font-family: open;
+    color: #58595B;
+    font-size: 1.2em;    
+}
+
+.ikont-hpg-advertencia{
+    font-family: open;
+    color: #58595B;
+    font-size: 1.2em;    
+    width: 90%;
+    margin: 0px auto;
+}
+
+.ikont-hcl-generarcronograma{
+    font-size: 1em!important;       
+    margin-left: 30%;
+}
