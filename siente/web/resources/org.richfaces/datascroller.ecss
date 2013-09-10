@@ -12,7 +12,7 @@ a.rf-ds-nmb-btn {
 }
 
 a.rf-ds-btn {
-    color: '#{richSkin.generalTextColor}';
+    color: '#{richSkin.colorDataScroller}';
 }
 
 .rf-ds-cont {
@@ -74,27 +74,23 @@ a.rf-ds-btn {
     border-color: transparent;
     border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: '#{richSkin.tableBorderColor}';
-    background-color: '#{richSkin.tableBackgroundColor}';
-    background-image: "url(#{resource['org.richfaces.images:dsDigGrad.png']})";
+    border-top-color: '#{richSkin.backGroudDataScroller}';
+    background-color: '#{richSkin.colorDataScrollerDisable}';
     background-position: top left;
     background-repeat: repeat-x;
     display: inline-block;
     font-size: '#{richSkin.generalSizeFont}';
     font-family: '#{richSkin.generalFamilyFont}';
     text-decoration: none;
-    color: '#{richSkin.generalTextColor}';
+    color: '#{richSkin.colorDataScroller}';
     font-weight: normal;
 }
 
 .rf-ds-nmb-btn:hover {
     border-width: 1px;
     border-style: solid;
-    border-color: '#{richSkin.tableBorderColor}';
-    background-position: top left;
-    background-repeat: repeat-x;
-    background-color: '#{richSkin.tableBackgroundColor}';
-    background-image: "url(#{resource['org.richfaces.images:dsBtnGradOver.png']})";
+    border-color: '#{richSkin.backGroudDataScroller}';
+    color: '#{richSkin.colorDataScroller}';
 }
 
 .rf-ds-press {
@@ -112,11 +108,11 @@ a.rf-ds-btn {
     border-color: transparent;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: '#{richSkin.tableBorderColor}';
-    background: none;
+    border-bottom-color: '#{richSkin.backGroudDataScroller}';
+    background: '#{richSkin.colorDataScrollerDisable}';
 }
 
 .rf-ds-dis {
-    color: '#{richSkin.botonBusquedaAvanzadaColor}';
+    color: '#{richSkin.colorDataScrollerDisable}';
     cursor: default;
 }
