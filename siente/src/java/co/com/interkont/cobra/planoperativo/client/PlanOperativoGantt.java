@@ -37,6 +37,10 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
@@ -158,6 +162,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
+    private static final GwtMensajes msgs = GWT.create(GwtMensajes.class);
 //    private static final TaskProps props = GWT.create(TaskProps.class);
 //    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
     //ListStore<ActividadobraDTO> taskStore;
@@ -430,7 +435,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type,fromTask,toTask);
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
             }
         ;
 
@@ -678,26 +683,56 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
 
         FlowLayoutContainer main = new FlowLayoutContainer();
-        main.getElement().setMargins(new Margins(5));
-        HTML text = new HTML("Plan Operativo");
-        main.add(text);
+        main.getElement().setMargins(new Margins(-850, 0, 0, 5));
+        main.setWidth(1000);
         ContentPanel cp = new ContentPanel();
         cp.setHeadingText("Plan Operativo");
         cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-        //cp.setPixelSize(1000, 460);        
-
-        cp.setHeight("460px");
+        cp.setPixelSize(1000, 460);   
         cp.getElement().setMargins(new Margins(5));
+
+        
+        VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
+        vc1.setWidth("500");
+        vc1.setPosition(70, 0);
+       
+
+        Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
+        tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
+        Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
+        subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
+        Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
+        mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
+        Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
+        mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
+
+        vc1.add(tituloPrincipal);
+        vc1.add(subTituloPrincipal);
+        vc1.add(mensajeG1);
+        vc1.add(mensajeG2);
+        
+        HorizontalPanel linea=new HorizontalPanel();
+        linea.addStyleName("ikont-hr-separador-convenio");
 
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
         vc.add(createToolBarInferior());
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
-        // main.setPagePosition(200, 0);
+        //vc.add(menuSuperior());
+        //main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
+        main.setPagePosition(300, 0);
         main.setWidth("100%");
+        menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
+        main.add(menuSupe.asWidget());
+        main.add(vc1);
+        sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
+        main.add(submenu.asWidget());
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
+        //main.add(linea);
         main.add(cp);
+
+
 
         return main;
     }
@@ -811,7 +846,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final Button finalizar = new Button();
         finalizar.setText("Finalizar");
         finalizar.addClickHandler(new ClickHandler() {
-
             @Override
             public void onClick(ClickEvent event) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -822,6 +856,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         tbarinferior.add(continuar);
         tbarinferior.add(finalizar);
         tbarinferior.setStyleName("ikont-po-tb");
+        
+        tbarinferior.setWidth(1000);
 
         return tbarinferior;
     }

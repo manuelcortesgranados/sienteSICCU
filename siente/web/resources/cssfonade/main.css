@@ -1387,6 +1387,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-datosbasicos{
     background-position: -8px -10px;
+    margin: 0px; left: 30% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
@@ -1395,6 +1396,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-documentos{
     background-position: -274px -10px;
+    margin: 0px; left: 60% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
@@ -1411,6 +1413,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-polizas{
     background-position: -192px -10px;
+    margin: 0px; left: 50% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
@@ -1419,6 +1422,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-planoperativo{
     background-position: -107px -10px;
+    margin: 0px; left: 40% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
@@ -1743,13 +1747,10 @@ input[type="text"], input[type="password"], select{
     color:#58595B;
 }
 .ikont-bt-cerrar-login2:hover{
-      color:  #257500 !important;   
-}
-.ikont-bt-cerrar-login2:visited{
-      color:  #257500 !important;   
+    color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:active{
-      color:  #257500 !important;   
+    color:  #257500 !important;   
 }
 .ikont-menu-inicio-zoom{
     background-image: url(../imgs/icons_menu_pr.png);
@@ -1781,9 +1782,6 @@ input[type="text"], input[type="password"], select{
 .ikont-label-estructura-menu:hover{
     color:  #257500 !important; 
 }
-.ikont-label-estructura-menu:visited{
-    color:  #257500 !important; 
-}
 .ikont-label-estructura-menu:active{
     color:  #257500 !important; 
 }
@@ -1808,9 +1806,6 @@ input[type="text"], input[type="password"], select{
 .ikont-label-menu-item:active { 
     color:  #257500 !important; 
 }
-.ikont-label-menu-item:visited { 
-    color:  #257500 !important; 
-}
 .ikont-label-menu-buscar-proyecto { 
     font-size: 12px; 
     width: 120px; 
@@ -1828,9 +1823,6 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important; 
 }
 .ikont-label-menu-estr-sub-titulo:active{
-    color:  #257500 !important; 
-}
-.ikont-label-menu-estr-sub-titulo:visited{
     color:  #257500 !important; 
 }
 .ikont-div-menu-zoom-inicio{
@@ -2805,11 +2797,6 @@ css usuario modificacion
     padding: 10px;
 }
 .inputlinkhomezoom:active{
-    font-size: 0.5em;  
-    color:  #257500 !important; 
-    padding: 10px;
-}
-.inputlinkhomezoom:visited{
     font-size: 0.5em;  
     color:  #257500 !important; 
     padding: 10px;
@@ -4035,7 +4022,7 @@ a:hover {
     color: gray;
     position: absolute;
     top: -17px;
-     right: 68px;
+    right: 68px;
 }
 .ikont-div-bienvenida{
 
@@ -4124,22 +4111,71 @@ a:hover {
 .ikont-hpg-conectatezoom{
     margin-top: 30px!important;
 }
+.ikont-tbar-menu-superior{
+    background-color: white;
 
-.ikont-hpg-datoscronograma{
-    font-family: open;
-    color: #58595B;
-    font-size: 1.2em;    
 }
 
-.ikont-hpg-advertencia{
-    font-family: open;
-    color: #58595B;
-    font-size: 1.2em;    
-    width: 90%;
-    margin: 0px auto;
+.boton-planificacion-gwt{
+    background-color: #1E4C00;
+    margin: 0px; left: 35% !important ; top: 2px;
+
 }
 
-.ikont-hcl-generarcronograma{
-    font-size: 1em!important;       
-    margin-left: 30%;
+.boton-flujocaja-gwt{
+    background-color: #1E4C00;
+    margin: 0px; left: 45% !important ; top: 2px;
+
 }
+
+.boton-reporte-gwt{
+    background-color: #1E4C00;
+    margin: 0px; left: 55% !important ; top: 2px;
+
+}
+
+.ikont-title-1-convenio-gwt{
+    font-size: 22px;
+    color: #008000;
+    font-style: inherit;
+    font-weight: 900;
+    margin: 0px; left: 32% !important ; top: 2px;
+    text-align: center;
+}
+
+.ikont-title2-convenio-gwt{
+    font-size: 19px;
+    color: #008000;
+    margin: 0px; left: 34% !important ; top: 2px;
+    text-align: center;
+}
+
+.ikont-title-3-convenio-gwt{
+    font-size: 15px;
+    margin: 0px; left: 28% !important ; top: 2px;
+    text-align: center;
+}
+
+.ikont-title-3-convenio-gwt2{
+    font-size: 15px;
+    margin: 0px; left: 28% !important ; top: 2px;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.ikont-info-general{
+    margin: 0px; left: 28% !important ; top: 2px;
+}
+
+.ikont-form-gwt-general{
+    left: 70px;      
+}
+
+.templatetablamenulateral-gwt{
+    width: 15%;
+    border-right-style: solid;
+    border-right-color: #CECECE;
+    border-right-width: thin;
+    height: 840px;
+}
+

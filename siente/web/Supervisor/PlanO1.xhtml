@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../facelets/template_po.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:interkont="http://www.interkont.com/jsf">
+
+    <ui:define name="head">  
+      <h:outputStylesheet name="reset.css" library="cssfonade"/>
+        <h:outputStylesheet name="planoperativo.css" library="cssfonade"/>
+       
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">   
+         
+             <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+             <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+       
+        
+    </ui:define>
+
+</ui:composition>
