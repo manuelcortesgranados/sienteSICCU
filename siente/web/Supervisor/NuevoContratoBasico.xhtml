@@ -361,14 +361,11 @@
                                         </rich:calendar>
                                     </h:panelGrid>
                                     <h:outputText  styleClass="ikont-hot-porcanticipo" value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
-                                    <h:panelGrid columns="2">
-                                        <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
-                                                                 rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
-                                                                 minValue="0" maxValue="100" inputSize="10" >
-                                            <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
-                                        </rich:inputNumberSpinner>
-                                        <h:outputText  styleClass="ikont-hot-porcentaje" value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
-                                    </h:panelGrid>
+                                    <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
+                                                             rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
+                                                             minValue="0" maxValue="100" inputSize="10" >
+                                        <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
+                                    </rich:inputNumberSpinner>
                                     <h:outputText  styleClass="ikont-hot-vlranticipo" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                     <h:outputText  styleClass="ikont-hot-vlranti" id = "vlranti" value = "#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                                         <f:convertNumber pattern="$ ###,###,###"/>
