@@ -716,12 +716,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         cp.setWidget(vc);
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-        ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-        vc.add(toolinferior);
-        //vc.add(menuSuperior());
-        //main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
+        
         main.setPagePosition(300, 0);
-        main.setWidth("100%");
         menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
         main.add(menuSupe.asWidget());
         main.add(vc1);
@@ -729,6 +725,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         main.add(submenu.asWidget());
         main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO, depStore));
         main.add(cp);
+        ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+        main.add(toolinferior);
 
 
 
