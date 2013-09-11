@@ -86,8 +86,6 @@ import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import java.util.Iterator;
 
-
-    // Create ToolBar
 /**
  *
  * @author desarrollo9
@@ -209,6 +207,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.resizeHandle = ResizeHandle.BOTH;
         // Enable dependency DnD
         config.dependencyDnDEnabled = true;
+        config.dragCreateEnabled = true;
         // Only EndToStart allowed
         //		config.dependencyDnDTypes = DependencyDnDConstants.ENDtoSTART ;
 
@@ -233,7 +232,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.mouseWheelZoomEnabled = false;
 
-        config.useEndDate = false;
+        config.useEndDate = true;
 
 
 
@@ -565,9 +564,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onTaskResize(TaskResizeEvent<ActividadobraDTO> event) {
                 ActividadobraDTO actiresi = event.getEventModel();
-                Date copiaFecha = CalendarUtil.copyDate(actiresi.getStartDateTime());
-                CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
-                props.endDateTime().setValue(actiresi, copiaFecha);
+                int duracion = CalendarUtil.getDaysBetween(actiresi.getStartDateTime(), actiresi.getEndDateTime());
+                props.duration().setValue(actiresi, duracion);
                 GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
             }
         });
@@ -679,8 +677,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
-        // Set start and end date.
-        //gantt.setStartEnd(dw.addDays(-2).asDate(), dw.addMonths(1).asDate());
         gantt.setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
 
 
@@ -731,14 +727,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         main.add(vc1);
         sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
         main.add(submenu.asWidget());
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
-        //main.add(linea);
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO, depStore));
         main.add(cp);
 
 
 
         return main;
     }
+
+    // Create ToolBar
     private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
 //        ToggleButton permensual = new ToggleButton("Mensual");      
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
@@ -864,7 +861,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void onModuleLoad() {
         service.setLog("Load module", null);
         cargar();
-        //RootPanel.get().add(asWidget());
+
     }
 
     private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {
