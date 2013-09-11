@@ -86,6 +86,8 @@ import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import java.util.Iterator;
 
+
+    // Create ToolBar
 /**
  *
  * @author desarrollo9
@@ -718,7 +720,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         cp.setWidget(vc);
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-        vc.add(createToolBarInferior());
+        ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+        vc.add(toolinferior);
         //vc.add(menuSuperior());
         //main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
         main.setPagePosition(300, 0);
@@ -736,8 +739,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         return main;
     }
-
-    // Create ToolBar
     private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
 //        ToggleButton permensual = new ToggleButton("Mensual");      
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
@@ -809,67 +810,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         return tbar;
     }
 
-    private ToolBar createToolBarInferior() {
-
-        ToolBar tbarinferior = new ToolBar();
-
-        final Button continuar = new Button();
-        continuar.setText("Continuar");
-        continuar.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-//                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenioDTO, gantt.getTreeStore(), service), new AsyncCallback<Boolean>() {
-//                    @Override
-//                    public void onFailure(Throwable caught) {
-//                        service.setLog("Problema al transferir el objeto a JSF", null);
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Boolean result) {
-//                        service.setNavegacion(2, new AsyncCallback<Boolean>() {
-//                            @Override
-//                            public void onFailure(Throwable caught) {
-//                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                            }
-//
-//                            @Override
-//                            public void onSuccess(Boolean result) {
-//                               Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
-//                            }
-//                        });
-//                    }
-//                });
-            }
-        });
-        continuar.setStyleName("ikont-po-img-continuarGWTInferior");
-
-        final Button finalizar = new Button();
-        finalizar.setText("Finalizar");
-        finalizar.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        finalizar.setStyleName("ikont-po-img-finalizarGWTInferior");
-
-        tbarinferior.add(continuar);
-        tbarinferior.add(finalizar);
-        tbarinferior.setStyleName("ikont-po-tb");
-        
-        tbarinferior.setWidth(1000);
-
-        return tbarinferior;
-    }
-
-//    public String retornarNuevoContrato() {
-//        return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
-//    }
-//
-//    public String retornarConfiguracionPagina() {
-//        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
-//    }
-//    // Creates the static columns
+// Creates the static columns
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ColumnModel<ActividadobraDTO> createStaticColumns() {
