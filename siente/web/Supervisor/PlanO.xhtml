@@ -1,24 +1,55 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./../facelets/template_po.xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:interkont="http://www.interkont.com/jsf">
-
-    <ui:define name="head">    
-        <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
-    </ui:define>
-    <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion.xhtml" />
-    </ui:define>
-    <ui:define name="body">   
-        <h:form>              
-             <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+                xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
+        <h:outputStylesheet name="reset.css" library="cssfonade"/>
+        <h:outputStylesheet name="planoperativo.css" library="cssfonade"/>
+    </h:head>
+    <body>
+        <h:form id="form_menu">
+            <ui:include src="/facelets/menu_gestion.xhtml" />
         </h:form>
-        
-    </ui:define>
+        <h:form>
+            <table  align="center" border="0" cellpadding="0" >
+                <tr>
+                    <td valign="top">
+                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
+                            <tr>
+                                <td>
+                                    <h:panelGroup rendered="#{var.permisonuevodiseno}"  id="form_menu_lateral">
+                                        <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+                                    </h:panelGroup>
+                                </td>
+                                <td>
+                                    <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+                                    <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </h:form> 
+        <h:form id="form_footer" style="position: relative;top:230px;">
+            <ui:include src="/facelets/footer.xhtml"/>
+        </h:form>
+
+
+
+
+    </body>
+
 
 </ui:composition>

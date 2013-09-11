@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf">
-    
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
@@ -19,29 +19,55 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
-     <ui:insert name="head"/>
-     <style type="text/css">
+        <ui:insert name="head"/>
+        <style type="text/css">
             body,td,th {
                 margin: 0px;
                 font-family: open;
             }
         </style>
-
-    </h:head>
+        </h:head>
 
     <h:body>
         <h:form id="form_menu">
             <ui:insert name="menu"/>
-        </h:form>
+        </h:form>        
         <table  align="center" border="0" cellpadding="0" >
-            
             <tr >
-              
+                <td valign="top" class="templatetablamenulateral">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
+                        <tr>
+                            <td  >
+                                <h:form id="form_menu_lateral" >
+                                    <ui:insert name="menu_lateral"/>
+                                </h:form>                                    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="templatetablacontent" valign="top">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
+                        <tr>
+                            <td valign="top" height="35">
+                                <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                                    <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
+                                        <tr>
+                                            <td>
+                                                <a4j:outputPanel id="panelBody">
+                                                    <ui:insert name="body"/> 
+                                                </a4j:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:panelGrid>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
                 <td  valign="top">
                     <ui:insert name="body"/>
                 </td>
             </tr>
         </table>
-                      
     </h:body>
 </ui:composition>

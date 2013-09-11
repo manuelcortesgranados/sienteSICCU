@@ -59,4 +59,16 @@ public interface GwtMensajes extends Messages {
 
     @DefaultMessage("* Añadir Proyecto")
     String addPry();
+
+    @DefaultMessage("Nuevo Proyecto")
+    String tituloPlanOperativo();
+
+    @DefaultMessage("2.PLAN OPERATIVO")
+    String subtituloPlanOperativo();
+
+    @DefaultMessage("Planifique en este diagrama de Gannt su convenio añadiendo")
+    String msgGeneralPlanOperativo1();
+    
+    @DefaultMessage("proyecto y contrato a la fase de ejecución")
+    String msgGeneralPlanOperativo2();
 }

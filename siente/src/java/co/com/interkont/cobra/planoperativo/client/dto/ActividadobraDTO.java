@@ -246,8 +246,7 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     public void setDuration(int duration) {
-        this.duration = duration;
-        System.out.println("duration = " + duration);
+        this.duration = duration;        
     }
 
     public int getPercentDone() {
