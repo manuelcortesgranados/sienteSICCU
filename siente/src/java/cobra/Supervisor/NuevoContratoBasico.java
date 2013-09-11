@@ -6716,7 +6716,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            System.out.println("getTipocontrato = " + cont.getTipocontrato().getStrdesctipocontrato());
 //            System.out.println("getValorDisponible = " + cont.getValorDisponible());
 //            
-//            
+            
             getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
 
             return "PlanOperativo";
