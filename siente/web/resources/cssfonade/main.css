@@ -4072,6 +4072,7 @@ a:hover {
     transition: background-color 1s ease-in-out 0s;
     font-family: 'Open Sans';
     line-height: 95px;
+    
 
 }
 .ikont-po-img-finalizarGWTInferior{
@@ -4088,6 +4089,7 @@ a:hover {
     rgin: 0px auto;
     left: 60% !important;
     font-size: 15px!important;
+     margin: 0px; left: 38% !important ; top: 2px;
 }
 .ikont-po-img-finalizarGWTInferior:hover{
     width: 100px;

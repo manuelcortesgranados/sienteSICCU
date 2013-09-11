@@ -1798,12 +1798,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String mostrarGoogle() {       
-
         sede = false;
         boolruta = false;
         ubicacionmapa = "http://maps.google.com/maps/api/staticmap?center=" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&zoom=10&size=450x200&&markers=color:blue|label:.|" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&sensor=false";
         listalocalidad = getSessionBeanCobra().getCobraService().encontrarLocalidadPorObra(getObra());
-        System.out.println("ubicacionmapa = " + ubicacionmapa);
         if (getObra().getSedeeducativa() != null) {
             setSede(true);
         }

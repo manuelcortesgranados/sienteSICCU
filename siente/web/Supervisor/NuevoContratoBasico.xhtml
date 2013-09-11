@@ -361,7 +361,7 @@
                                         </rich:calendar>
                                     </h:panelGrid>
                                     <h:outputText  styleClass="ikont-hot-porcanticipo" value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
-                                    <h:panelGrid columns="2">
+                                    <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                                         <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
                                                                  rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
                                                                  minValue="0" maxValue="100" inputSize="10" >

@@ -149,6 +149,7 @@ public class GanttDatos {
                 Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
                 CalendarUtil.addDaysToDate(copiaFecha, duracion);
                 props.endDateTime().setValue(actividadPadre, copiaFecha);
+                props.duration().setValue(actividadPadre, duracion);
                 modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props);
             }
         } else {

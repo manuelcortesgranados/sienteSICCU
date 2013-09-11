@@ -311,7 +311,7 @@
                             </h:panelGrid>
                         </rich:collapsiblePanel>
 
-                        <rich:collapsiblePanel switchType="client" header="Dónde está ubicado el proyecto" expanded="true">
+                        <rich:collapsiblePanel switchType="ajax" header="Dónde está ubicado el proyecto" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.mostrarGoogle()}">                         
                             <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
                                 <h:panelGrid  columnClasses="textalingright">
                                     <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
