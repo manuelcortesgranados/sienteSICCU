@@ -28,7 +28,7 @@
         <ui:insert name="head"/>
     </h:head>
 
-    <h:body onload="style_background();">
+    <h:body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
         <h:form>
             <h:panelGroup layout="block" styleClass="ikont-hpg-loginheader"  >
                 <h:graphicImage  styleClass="ikont-hgi-iconheaderpng "   url="/resources/imgs/login/icon_header.png"   />

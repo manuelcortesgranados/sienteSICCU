@@ -40,7 +40,7 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 <!--End of Zopim Live Chat Script-->
         </head>
 
-        <body >
+        <body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
             <h:form id="form_menu">
                 <ui:insert name="menu"/>
             </h:form>

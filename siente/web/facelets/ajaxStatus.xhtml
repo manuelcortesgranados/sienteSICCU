@@ -6,7 +6,20 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich">
-    
+    <a4j:status onstart="#{rich:component('ajaxLoadingModalBox')}.show(); return true;"
+                onstop="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;" id="ajaxStatus" />
+    <script type="text/javascript">
+        window.onsubmit = function() {
+        #{rich:component('ajaxLoadingModalBox')}.show();
+            return true;
+        }
+        var bPreguntar = false;
+        window.onbeforeunload = function (){
+            if (!bPreguntar)
+                return #{rich:component('ajaxLoadingModalBox')}.show();
+            return true;
+        }
+    </script>
     <rich:popupPanel id="ajaxLoadingModalBox" resizeable="false" zindex="3000" styleClass="ikont-rpp-modal-box"> 
         <center>
             <h:graphicImage  value="/resources/imgs/Siente_loader2.gif" /></center>

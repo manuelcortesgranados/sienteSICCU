@@ -42,7 +42,7 @@
          
         </head>
 
-        <body>
+        <body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
 
             <table  border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr><h:outputLabel  styleClass="ikont-hol-fechaServer"   value="#{SessionBeanCobra.fechaServer}"/>
