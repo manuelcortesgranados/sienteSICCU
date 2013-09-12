@@ -3722,10 +3722,35 @@ a:hover {
 .ikont-hcl-footer-sellos{
     background-image: url(../imgs/footer/sellos.png);
     background-repeat: no-repeat;
-    width: 262px;
-    height: 92px;
+    width: 95px;
+    height: 85px;
     display: block;
     margin: 10px auto;
+    float: left;
+}
+
+.sello-fonade{
+    background-position: 0px 0px;
+}
+
+.sello-republica{
+    background-position: -95px 0px;
+}
+
+.sello-zoom{
+    background-position: -190px 0px;
+}
+
+.sello-fonade:hover{
+    background-position: 0px -85px;
+}
+
+.sello-republica:hover{
+    background-position: -95px -85px;
+}
+
+.sello-zoom:hover{
+    background-position: -190px -85px;
 }
 
 .ikont-hcl-footer-firma{
