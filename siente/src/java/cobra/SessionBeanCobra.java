@@ -1153,7 +1153,7 @@ public class SessionBeanCobra implements Serializable {
 
     public void limpirarUsuario() {
         getCiudadanoservice().limpiarOpinionCiudadano();
-        getUsuarioObra().setUsuLogin(null);
+        getUsuarioObra().setUsuLogin("");
 
     }
 

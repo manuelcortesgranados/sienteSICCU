@@ -396,7 +396,7 @@ a.closemodal{
 }
 
 .templatetablamenulateral .rf-p-b {
-    width : 225px
+    width : 225px;
 }
 
 
@@ -2761,13 +2761,28 @@ css usuario modificacion
     width: 243px !important;
 }
 .boton1{
-    border-color:#257500 !important;
-    border-width: 1px !important;
-    background-color: white !important;
-    background-image: none !important;
-    color: #257500 !important;
-    font-size: 14px  !important;
+        width: 100px;
+	height: 30px;
+	float: left;
+	text-decoration: none;
+	color: #A7A9AC;
+	font-family: 'Open Sans';
+	background-color: #ffffff; 
+	border: 1px solid #257500;
+	padding-left: 25px;
+	padding-top: 8px;
 }
+.boton1:hover{
+    width: 100px;
+    height: 30px;
+    float: left;
+    text-decoration: none;
+    color: #9CFF00;
+    background-color: #A7A9AC;
+    transition:background-color 1s ease 0s;
+    font-family:'Open Sans';
+}
+
 .input_filtro{
     width: 234px !important;
     height: 27px !important;
