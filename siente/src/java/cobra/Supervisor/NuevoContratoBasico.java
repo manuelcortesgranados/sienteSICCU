@@ -3960,7 +3960,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * contrato hijo.
      */
     public String detalleContrHijo() {
-        Contrato contratoHijo = (Contrato) tablaSubconvenios.getRowData();
+        Contrato contratoHijo = (Contrato) tablacontconvhijo.getRowData();
         cargarContrato(contratoHijo);
 
         return "consultarContrato";

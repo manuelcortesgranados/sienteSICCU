@@ -761,8 +761,7 @@
                             <h:panelGroup id="pgtablaContratoHijo">
                                 <rich:dataTable id="tablacontratohijo" sortMode="single" 
                                                 value="#{Supervisor$Contrato.listaContrConvHijo}" rows="8"
-                                                binding="#{Supervisor$Contrato.tablacontconvhijo}"
-                                                rowKeyVar="filaSeleccionada"
+                                                binding="#{Supervisor$Contrato.tablacontconvhijo}"                                                
                                                 rendered="#{Supervisor$Contrato.listaContrConvHijo.size()>0}"
                                                 var="row">
                                     <rich:column id="id_num">
