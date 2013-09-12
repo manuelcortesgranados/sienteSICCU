@@ -1628,7 +1628,7 @@ input[type="text"], input[type="password"], select{
     left:120px; 
     width:750px;
     position:absolute;
-    top:1px;
+     top:-31px;
     border-spacing: 56px;
 }
 .ikont-outtext-titulo{
@@ -2100,9 +2100,11 @@ input[type="text"], input[type="password"], select{
     color: green;
 }
 .ikont-hr-separador-inicio-registo{
-    background-color: silver;
-    height: 452px;
+    background-color: #C0C0C0;
+    height: 533px;
     width: 1px;
+    position: relative;
+    left: 733px;
 }
 .ikont-hpg-panelmodiinicial{
     left: 312px;
@@ -3322,12 +3324,15 @@ css usuario modificacion
 }
 
 .ikont-btn-cerrar-flecha-session{
-    background-image: url(../imgs/flecha_home1.png);
+    background-image: url(../imgs/flecha_cerrar.png);
     background-repeat: no-repeat;
-    width:600px;
-    height: 33px;
+    width: 25px;
+    height: 60px;
     display: block;
     background-position: 0px 0px;
+    position: relative;
+    left: 722px;
+    background-position: -1px 13px;
 }
 
 .ikont-loader-zoom{

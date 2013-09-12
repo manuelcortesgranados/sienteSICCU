@@ -10,7 +10,7 @@
     >
 
     <div id="ingreso-usuario" class="ikont-div-ingreso-usuario">
-            
+<hr class="ikont-hr-separador-inicio-registo"/>
             <div  class="ikont-cerrar-panel2">
                 <center>
 
@@ -90,7 +90,7 @@
                                     </h:inputText>
                                     <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
                                         <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
-                                    </h:selectOneMenu>
+                                    </h:selectOneMenu> 
 
                                     <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
                                     <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
@@ -134,11 +134,8 @@
             </h:panelGrid>
 
             <div  class="ikont-div-cerrar-panel">
-                <center>
-
                     <h:commandLink styleClass="ikont-btn-cerrar-flecha-session"   onclick="esconderIngresoAnimado();
                             return  false;"/>
-                </center>
             </div>
         </div>
         
@@ -246,7 +243,7 @@
 
                         function mostrarIngresoAnimado() {
                             var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-                            divIngresoUsuario.stop().animate({height: '550px'});
+                            divIngresoUsuario.stop().animate({height: '572px'});
                         }
                         function esconderIngresoAnimado() {
                             var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
