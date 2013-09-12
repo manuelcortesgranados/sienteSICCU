@@ -385,7 +385,8 @@
                                     <h:panelGroup  id="tablaAvancesCualitativos">
                                         <center>
                                             <rich:dataTable sortMode="single"  
-                                                            value ="#{Supervisor$Alimentar.listitemculi}" var="row" rendered="#{not empty Supervisor$Alimentar.listitemculi}" binding="#{Supervisor$Alimentar.tablaEliminarItemCualita}">
+                                                            value ="#{Supervisor$Alimentar.listitemculi}" var="row" rendered="#{not empty Supervisor$Alimentar.listitemculi}" binding="#{Supervisor$Alimentar.tablaEliminarItemCualita}"
+                                                           >
 
                                                 <rich:column id="tc-strAspectoEvualuar" width="600px">
                                                     <f:facet name="header">
@@ -396,16 +397,16 @@
                                                 <rich:column id="tc-strAspectoEvualuar1" width="600px"
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont-hot-logro"   value="#{var.logro}" />
+                                                        <h:outputText  styleClass="ikont-hot-logro"   value="#{var.logro}"  style="text-align: center; margin-top: 25px;" />
                                                     </f:facet>
-                                                    <h:inputTextarea id="otxt-strAspectoEvualuar1" value="#{row.strlogro}" readonly="true" cols="35" rows="3" />
+                                                    <h:outputText id="otxt-strAspectoEvualuar1" value="#{row.strlogro}" style="text-align: center;" />
                                                 </rich:column>
-                                                <rich:column id="tc-strAspectoEvualuar2" width="600px"
+                                                <rich:column id="tc-strAspectoEvualuar2"
                                                              >
                                                     <f:facet name="header">
                                                         <h:outputText  styleClass="ikont-hot-dificultad"   value="#{var.dificultad}" />
                                                     </f:facet>
-                                                    <h:inputTextarea id="otxt-strAspectoEvualuar2" value="#{row.strdificultad}" readonly="true" cols="35" rows="3" />
+                                                    <h:outputText id="otxt-strAspectoEvualuar2" value="#{row.strdificultad}"  style="padding:4px; text-align: center; padding-top: -4px"/>
                                                 </rich:column>
                                                 <rich:column id="tc-streliminarAvance" width="200px"
                                                              >
