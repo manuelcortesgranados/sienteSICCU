@@ -43,10 +43,14 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
+import com.scheduler.client.core.config.SchedulerConfig;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
+import com.scheduler.client.core.timeaxis.preconfig.HourTimeAxisGenerator;
+import com.scheduler.client.core.timeaxis.preconfig.MonthTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.WeekTimeAxisGenerator;
+import com.scheduler.client.core.timeaxis.preconfig.YearTimeAxisGenerator;
 import com.scheduler.client.zone.WeekendZoneGenerator;
 import com.scheduler.client.zone.ZoneGeneratorInt;
 import com.sencha.gxt.core.client.util.DateWrapper;
@@ -58,6 +62,7 @@ import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
+import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
@@ -175,6 +180,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      */
     private DependenciaDTO dependenciaSeleccionada;
     GwtMensajes msj = GWT.create(GwtMensajes.class);
+    GanttConfig config;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -196,9 +202,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
         depStore.addAll(GanttDatos.getDependencia(convenioDTO));
 
-        GanttConfig config = new GanttConfig();
+        config = new GanttConfig();
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
+
         ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
         headers.add(new WeekTimeAxisGenerator("MMM d"));
         headers.add(new DayTimeAxisGenerator("EEE"));
@@ -208,9 +215,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Enable dependency DnD
         config.dependencyDnDEnabled = true;
         config.dragCreateEnabled = true;
-        // Only EndToStart allowed
-        //		config.dependencyDnDTypes = DependencyDnDConstants.ENDtoSTART ;
-
         // Enable task DnD
         config.taskDnDEnabled = true;
         // Define "snap to" resolution
@@ -222,6 +226,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.timeTipEnabled = false;
         // Defines if the timeAxis columns should be autosized to fit.
         config.fitColumns = false;
+
         // Define column width
         config.columnWidth = 60;
         // Enable task contextMenu
@@ -230,12 +235,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = false;
         config.showTaskLabel = true;
-        config.mouseWheelZoomEnabled = false;
-
         config.useEndDate = true;
-
-
-
+        config.clickCreateEnabled = false;
 
 
         /**
@@ -440,8 +441,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         ;
 
-        };      
-       
+        };     
+        
+      
         
        gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
@@ -686,14 +688,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ContentPanel cp = new ContentPanel();
         cp.setHeadingText("Plan Operativo");
         cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-        cp.setPixelSize(1000, 460);   
+        cp.setPixelSize(1000, 460);
         cp.getElement().setMargins(new Margins(5));
 
-        
+
         VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
         vc1.setWidth("500");
         vc1.setPosition(70, 0);
-       
+
 
         Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
         tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
@@ -708,15 +710,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         vc1.add(subTituloPrincipal);
         vc1.add(mensajeG1);
         vc1.add(mensajeG2);
-        
-        HorizontalPanel linea=new HorizontalPanel();
+
+        HorizontalPanel linea = new HorizontalPanel();
         linea.addStyleName("ikont-hr-separador-convenio");
 
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
+        vc.add(createToolBarPeriodo());
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-        
+
         main.setPagePosition(300, 0);
         menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
         main.add(menuSupe.asWidget());
@@ -733,7 +736,128 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         return main;
     }
 
+    private ToolBar createToolBarPeriodo() {
+        ToolBar tbar = new ToolBar();
+//        TextButton hour = new TextButton("Horas");
+//        hour.addSelectHandler(new SelectHandler() {
+//            @Override
+//            public void onSelect(SelectEvent event) {
+//                // Define the timeAxis headers
+//                GanttConfig ganttConfig = gantt.getConfig();
+//                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+//                headers.add(new DayTimeAxisGenerator("EEE, MMM d "));
+//                headers.add(new HourTimeAxisGenerator("HH:mm"));
+//                ganttConfig.timeHeaderConfig = headers;
+//                // Define "snap to" resolution
+//                ganttConfig.timeResolutionUnit = Unit.MINUTE;
+//                ganttConfig.timeResolutionIncrement = 15;
+//                // Define the DateFormat of the tooltips
+//                ganttConfig.tipDateFormat = DateTimeFormat
+//                        .getFormat("HH:mm");
+//                ganttConfig.tipClock = true;
+//                gantt.setConfig(ganttConfig, true);
+//                // Set start and end date.
+//                gantt.setStartEnd(new DateWrapper(root.getStartDateTime()).clearTime().addHours(8), new DateWrapper(root.getEndDateTime()).clearTime().addHours(18));
+//            }
+//        });
+//
+//        tbar.add(hour);
+
+        TextButton days = new TextButton("Dias");
+
+        days.addSelectHandler(new SelectHandler() {
+            @Override
+            public void onSelect(SelectEvent event) {
+               configurarDias();
+            }
+        });
+        tbar.add(days);
+
+
+
+        TextButton weeks = new TextButton("Semanas");
+        weeks.addSelectHandler(new SelectHandler() {
+            @Override
+            public void onSelect(SelectEvent event) {
+                configurarSemanas();
+            }
+        });
+
+        tbar.add(weeks);
+        TextButton months = new TextButton("Meses");
+        months.addSelectHandler(new SelectHandler() {
+            @Override
+            public void onSelect(SelectEvent event) {
+                configurarMeses();
+            }
+        });
+        tbar.add(months);
+
+
+
+        return tbar;
+    }
+
+    public void configurarDias() {
+        for (int i = 0; i <= 1; i++) {
+            GanttConfig ganttConfig = gantt.getConfig();
+            ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+            headers.add(new WeekTimeAxisGenerator("MMM d"));
+            headers.add(new DayTimeAxisGenerator("EEE"));
+            ganttConfig.timeHeaderConfig = headers;
+            // Define "snap to" resolution
+            ganttConfig.timeResolutionUnit = Unit.HOUR;
+            ganttConfig.timeResolutionIncrement = 3;
+            // Define the DateFormat of the tooltips
+            ganttConfig.tipDateFormat = DateTimeFormat
+                    .getFormat("MMM d HH:mm");
+            ganttConfig.tipClock = true;
+            gantt.setConfig(ganttConfig, true);
+        }
+    }
+    
+      public void configurarSemanas() {
+        for (int i = 0; i <= 1; i++) {
+            service.setLog("entre", null);
+                GanttConfig ganttConfig = gantt.getConfig();
+                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+                headers.add(new MonthTimeAxisGenerator("MMMM y"));
+                headers.add(new WeekTimeAxisGenerator("MMM d"));
+                ganttConfig.timeHeaderConfig = headers;
+                // Define "snap to" resolution
+                ganttConfig.timeResolutionUnit = Unit.DAY;
+                ganttConfig.timeResolutionIncrement = 1;
+                // Define the DateFormat of the tooltips
+                ganttConfig.tipDateFormat = DateTimeFormat
+                        .getFormat("y-MM-d");
+                ganttConfig.tipClock = false;
+                gantt.setConfig(ganttConfig, true);
+              
+        }
+    }
+      
+       public void configurarMeses() {
+        for (int i = 0; i <= 1; i++) {
+           
+                GanttConfig ganttConfig = gantt.getConfig();
+                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+                headers.add(new YearTimeAxisGenerator("y"));
+                headers.add(new MonthTimeAxisGenerator("MMM y"));
+                ganttConfig.timeHeaderConfig = headers;
+                
+                // Define "snap to" resolution
+                ganttConfig.timeResolutionUnit = Unit.DAY;
+                ganttConfig.timeResolutionIncrement = 1;
+                // Define the DateFormat of the tooltips
+                ganttConfig.tipDateFormat = DateTimeFormat
+                        .getFormat("y-MM-d");
+                ganttConfig.tipClock = false;
+                gantt.setConfig(ganttConfig, true);
+                
+        }
+    }
     // Create ToolBar
+
     private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
 //        ToggleButton permensual = new ToggleButton("Mensual");      
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
@@ -806,7 +930,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
 // Creates the static columns
-
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ColumnModel<ActividadobraDTO> createStaticColumns() {
         List<ColumnConfig<ActividadobraDTO, ?>> configs = new ArrayList<ColumnConfig<ActividadobraDTO, ?>>();
