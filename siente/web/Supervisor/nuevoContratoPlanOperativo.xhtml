@@ -16,31 +16,14 @@
         </h:panelGroup>
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-        </h:panelGroup>
+        </h:panelGroup> 
     </ui:define>
     <ui:define name="body">
         <script type="text/javascript">
             localStorage.setItem('accionNuevoConvenio', "ikont-acl-datosbasicos img-button-ncpo");
         </script>
         <h:form id="frmpanelgeneral" styleClass="ikont-hf-nuevocontratoplanoperativo">
-            <ui:include src="/facelets/menu_superior_administrar.xhtml"/>
-            <a4j:region id="datosBasicosErrores" >
-                <rich:messages id="messagesPlanOpeGen" globalOnly="true"
-                               styleClass="ikont-rm-messages"   ajaxRendered="true"                               >
-                    <f:facet name="infoMarker">
-                        <h:graphicImage  styleClass="ikont-hgi-msginfopng"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                    </f:facet>
-                    <f:facet name="warnMarker">
-                        <h:graphicImage  styleClass="ikont-hgi-msgwarnpng"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                    </f:facet>
-                    <f:facet name="errorMarker">
-                        <h:graphicImage  styleClass="ikont-hgi-msgerrorpng"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                    </f:facet>
-                    <f:facet name="fatalMarker">
-                        <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                    </f:facet>
-                </rich:messages>
-            </a4j:region>
+            <ui:include src="/facelets/menu_superior_administrar.xhtml"/>           
             <center>
                 <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" rendered="#{Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5 }">
                     <br/>
