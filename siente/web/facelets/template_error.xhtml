@@ -9,83 +9,107 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
     >
+
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>#{var.titulogeneral}</title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
-        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <!--<link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>-->
+            <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+                <link  href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css?#{var.version}" rel="stylesheet" type="text/css"/>-->
+            </h:panelGroup>
             <ui:insert name="head"/>
-        </head>
-       
+        </head>    
         <body>
-            <center>
-                <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
-                    <tr>
-                        <td height="50"/>
-                    </tr>
-                    <tr>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
-                                <tr>
-                                    <td height="50"/>
-                                </tr>
-                                <tr>
-                                    <td><div id="logo"></div><div id="logo_ch"></div></td>
-                                </tr>
-
-                                <tr>
-                                    <td align="center">
-                                         <h:form>
-                                        <table  border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td align="center"  styleClass="colorTexto" >Lo sentimos<br />Estamos en reparación, inténtelo de nuevo.<br />Si lo desea podrá reportar el problema a nuestra <strong ><a styleClass="colorSoporte" href="#{var.linksoporte}">Red de soporte.</a></strong></td>
-                                                <td><div styleClass="regresar">
-                                                       
-                                                        <a4j:commandLink styleClass="ikont-a4jcl-cerrarSession"   
-                                                                         action="cerrarSession"/>                                                       
-                                                        
-                                                    </div></td>
-                                            </tr>
-                                        </table>
-                                     </h:form></td>
-                                </tr>
-                                
-
-                                <h:panelGroup rendered="#{var.logologin}">
+            <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+                <center>
+                    <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td height="50"/>
+                        </tr>
+                        <tr>
+                            <td align="center"></td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
                                     <tr>
-                                    <td styleClass="text02" align="center">
-                                        <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
-                                    </td>
-                                </tr>
-                                </h:panelGroup>
+                                        <td height="50"/>
+                                    </tr>
+                                    <tr>
+                                        <td><div id="logo"></div><div id="logo_ch"></div></td>
+                                    </tr>
 
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td height="40px"></td>
-                    </tr>
-                </table>
-            </center>
+                                    <tr>
+                                        <td align="center">
+                                            <h:form>
+                                                <table  border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center"  styleClass="colorTexto" >Lo sentimos<br />Estamos en reparación, inténtelo de nuevo.<br />Si lo desea podrá reportar el problema a nuestra <strong ><a styleClass="colorSoporte" href="#{var.linksoporte}">Red de soporte.</a></strong></td>
+                                                        <td><div styleClass="regresar">
 
-            <div id="login_image"></div>
-        <h:panelGroup rendered="#{var.logologin}">
-            <div styleClass="social">
-                <a href="#{var.btnfacebook}" styleClass="fb anchorLink" target="_blank"></a>
-                <a href="#{var.btntwitter}" styleClass="tw anchorLink" target="_blank"></a>
-                <a href="#{var.btnyoutube}" styleClass="yt anchorLink" target="_blank"></a>
-            </div>
-        </h:panelGroup>
+                                                                <a4j:commandLink styleClass="ikont-a4jcl-cerrarSession"   
+                                                                                 action="cerrarSession"/>                                                       
+
+                                                            </div></td>
+                                                    </tr>
+                                                </table>
+                                            </h:form></td>
+                                    </tr>
+
+
+                                    <h:panelGroup rendered="#{var.logologin}">
+                                        <tr>
+                                            <td styleClass="text02" align="center">
+                                                <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
+                                            </td>
+                                        </tr>
+                                    </h:panelGroup>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center"></td>
+                        </tr>
+                        <tr>
+                            <td height="40px"></td>
+                        </tr>
+                    </table>
+                </center>
+
+                <div id="login_image"></div>
+                <h:panelGroup rendered="#{var.logologin}">
+                    <div styleClass="social">
+                        <a href="#{var.btnfacebook}" styleClass="fb anchorLink" target="_blank"></a>
+                        <a href="#{var.btntwitter}" styleClass="tw anchorLink" target="_blank"></a>
+                        <a href="#{var.btnyoutube}" styleClass="yt anchorLink" target="_blank"></a>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!--Pagina de Error para Zoom-->
+            <h:panelGroup rendered="#{var.permisonuevodiseno}">
+
+                <div id="contenedor_principal_error">
+                    <div id="contenedor_imagen_error"></div>
+                    <div id="contenedor_imagen_logo"></div>
+                    <div id="contenedor_error_texto">
+                        <h2>WHOOPS!</h2><br/>
+                        <p>Lo sentimos, debe haber algo mal por ac&aacute;<br/>
+                            Estamos trabajando para darte una pronta soluci&oacute;n<br/>
+                            Puedes volver a nuestra <a4j:commandLink styleClass="ikont-a4jcl-cerrarSession"   
+                                                                     value="cerrar"      action="cerrarSession"/>    , o reporta el problema a un experto por medio de nuestra Red de Soporte haciendo <a href="#{var.linksoporte}"> click aqu&iacute; </a></p>
+
+                    </div>
+                </div>
+            </h:panelGroup>
         </body>
     </html>
+
+
+
 </ui:composition>
