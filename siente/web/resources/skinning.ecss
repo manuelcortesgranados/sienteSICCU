@@ -99,7 +99,7 @@ input[type="text"], input[type="password"], select {
         border-width: '#{richSkin.borderWeight}';
         border-style: '#{richSkin.borderStyle}';
         border-radius: '#{richSkin.borderRadius}';
-	font-size: '#{richSkin.generalSizeFont}';
+	font-size: 17px;
 	font-family: '#{richSkin.generalFamilyFont}';
 	color: '#{richSkin.generalTextColor}';
 	background-repeat: repeat-x;

@@ -1628,7 +1628,7 @@ input[type="text"], input[type="password"], select{
     left:120px; 
     width:750px;
     position:absolute;
-    top:1px;
+     top:-31px;
     border-spacing: 56px;
 }
 .ikont-outtext-titulo{
@@ -1723,7 +1723,7 @@ input[type="text"], input[type="password"], select{
     overflow: hidden;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
-    box-shadow: 5px 2px 5px #999;
+    box-shadow: 7px 60px 47px #CCC;
     top: 141px;
 }
 .ikont-bt-cerrar-login1{
@@ -2100,9 +2100,11 @@ input[type="text"], input[type="password"], select{
     color: green;
 }
 .ikont-hr-separador-inicio-registo{
-    background-color: silver;
-    height: 452px;
+    background-color: #C0C0C0;
+    height: 533px;
     width: 1px;
+    position: relative;
+    left: 733px;
 }
 .ikont-hpg-panelmodiinicial{
     left: 312px;
@@ -3322,12 +3324,15 @@ css usuario modificacion
 }
 
 .ikont-btn-cerrar-flecha-session{
-    background-image: url(../imgs/flecha_home1.png);
+    background-image: url(../imgs/flecha_cerrar.png);
     background-repeat: no-repeat;
-    width:600px;
-    height: 33px;
+    width: 25px;
+    height: 60px;
     display: block;
     background-position: 0px 0px;
+    position: relative;
+    left: 722px;
+    background-position: -1px 13px;
 }
 
 .ikont-loader-zoom{
@@ -4052,7 +4057,7 @@ a:hover {
 
 .ikont-div-ingreso-bienvenida{
 
-    width:100%; height:200px;
+    width:100%; height: 160px;
     left: 4px;
     right: 0px;
     overflow: hidden;
@@ -4240,6 +4245,17 @@ a:hover {
     font-size: 1em!important;       
     margin-left: 30%;
 }
+/*Estilo para la pagina de error*/
+*{margin: 0px;}
+#contenedor_principal_error{ width: 800px; height: 500px; margin: 0 auto; margin-top: 50px;}
+#contenedor_imagen_error { width: 800px; height: 300px; background-image: url(../imgs/error.png); }
+#contenedor_imagen_logo { margin: 0 auto; width: 280px; height: 100px; background-image: url(../imgs/error_logo.png); margin-top: -50px;}
+#contenedor_error_texto { width: 600px; margin: 0 auto; text-align: center;}
+#contenedor_error_texto h2 { font-size:26px; color: #666; text-transform: uppercase; font-family: 'Open Sans', sans-serif;}
+#contenedor_error_texto p { font-family: 'Open Sans', sans-serif; font-size: 15px;}
+#contenedor_error_texto p a { text-decoration: none; color:#257500; font-style: italic;}
+#contenedor_error_texto p a:hover { color: #9CFF00;}
+
 
 .ikont-hit-intxtnombrecc{
     text-align: center;

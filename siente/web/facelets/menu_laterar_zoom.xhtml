@@ -10,7 +10,6 @@
     >
 
     <div id="ingreso-usuario" class="ikont-div-ingreso-usuario">
-            
             <div  class="ikont-cerrar-panel2">
                 <center>
 
@@ -18,6 +17,7 @@
                             return  false;"/>
                 </center>
             </div>
+        <hr class="ikont-hr-separador-inicio-registo"/>
             <h:panelGrid  styleClass="ikont-panel-registo-inicio" columns="3" >
                 <h:form styleClass="ikont-panel-sesion" >
                     <h:panelGroup styleClass="ikont-panel-sesion" id="inicio_nuevo">
@@ -90,7 +90,7 @@
                                     </h:inputText>
                                     <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
                                         <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
-                                    </h:selectOneMenu>
+                                    </h:selectOneMenu> 
 
                                     <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
                                     <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
@@ -134,11 +134,8 @@
             </h:panelGrid>
 
             <div  class="ikont-div-cerrar-panel">
-                <center>
-
                     <h:commandLink styleClass="ikont-btn-cerrar-flecha-session"   onclick="esconderIngresoAnimado();
                             return  false;"/>
-                </center>
             </div>
         </div>
         
@@ -246,7 +243,7 @@
 
                         function mostrarIngresoAnimado() {
                             var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-                            divIngresoUsuario.stop().animate({height: '550px'});
+                            divIngresoUsuario.stop().animate({height: '572px'});
                         }
                         function esconderIngresoAnimado() {
                             var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
