@@ -4255,8 +4255,3 @@ a:hover {
 #contenedor_error_texto p { font-family: 'Open Sans', sans-serif; font-size: 15px;}
 #contenedor_error_texto p a { text-decoration: none; color:#257500; font-style: italic;}
 #contenedor_error_texto p a:hover { color: #9CFF00;}
-
-
-.ikont-hit-intxtnombrecc{
-    text-align: center;
-}
