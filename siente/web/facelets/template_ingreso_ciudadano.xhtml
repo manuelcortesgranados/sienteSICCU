@@ -54,22 +54,7 @@
                     <td>
                           <ui:insert name="body"/>   
                         <div >
-                            <rich:messages id="messages" globalOnly="true"
-                                           styleClass="ikont-rm-messages"   ajaxRendered="true"
-                                          >
-                                <f:facet name="infoMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msginfopng"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                </f:facet>
-                                <f:facet name="warnMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgwarnpng"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                </f:facet>
-                                <f:facet name="errorMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerrorpng"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                </f:facet>
-                                <f:facet name="fatalMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                </f:facet>
-                            </rich:messages></div></td>
+                           <rich:notifyMessages stayTime="5000" nonblocking="true" /></div></td>
                 </tr>
                 <tr>
                     <td><div >                            

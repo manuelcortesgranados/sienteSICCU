@@ -501,26 +501,6 @@
                         <a4j:commandButton   value="#{var.volver}"  action="#{Supervisor$ModificarContrato.volver}" rendered="#{Supervisor$ModificarContrato.cual!=1}" render="pgprincipal"/>
                         <a4j:commandButton  value="#{var.siguienteCiu}" action="#{Supervisor$ModificarContrato.siguiente}" rendered="#{Supervisor$ModificarContrato.cual!=3}" render="pgprincipal" />
                         <a4j:commandButton  value="#{var.finalizar}" action="#{Supervisor$ModificarContrato.guardarModificarContrato}" rendered="#{Supervisor$ModificarContrato.cual==3}" render="pgprincipal, layoutdetalleModificar" />
-                        <a4j:outputPanel id="panelErrorModpolizas">
-                            <rich:messages id="messagesModPolizas" globalOnly="true"
-                                           styleClass="ikont-rm-messagesModPolizas"   ajaxRendered="true"
-                                           >
-                                <f:facet name="infoMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msginfo "    url="/resources/imgs/msginfo.png" />
-                                </f:facet>
-                                <f:facet name="warnMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgwarn "    url="/resources/imgs/msgwarn.png" />
-                                </f:facet>
-                                <f:facet name="errorMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerror "    url="/resources/imgs/msgerror.png" />
-                                </f:facet>
-                                <f:facet name="fatalMarker">
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerror"     url="/resources/imgs/msgerror.png" />
-                                </f:facet>
-                            </rich:messages>
-
-                        </a4j:outputPanel>
-
                     </h:panelGroup>
 
                 </rich:collapsiblePanel>

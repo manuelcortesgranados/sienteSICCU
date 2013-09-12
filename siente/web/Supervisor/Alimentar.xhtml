@@ -451,7 +451,6 @@
                             </rich:collapsiblePanel>
                             <center>
                                 <h:panelGrid id="layoutError">
-                                    <rich:messages />
                                     <h:outputText  styleClass="ikont-hot-msjMatrix"    value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
                                     <a4j:commandButton id="BTaceptarMatrix" rendered="#{!Supervisor$Alimentar.validezalimentacion}" render="gpPrincipalAlimentar"
                                                        action="#{Supervisor$Alimentar.cambioMatrix}" value="#{var.aceptar}"                      />

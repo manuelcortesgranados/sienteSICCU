@@ -380,10 +380,19 @@
                 clock.start();
                 var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
                 _porst = _porst.replace(' %', '');
-                _porst = (parseInt(_porst) - 2) * 1.8;
+                if(parseInt(_porst)> 5){
+                    _porst = (parseInt(_porst) - 2) * 1.8;
+                }else{
+                    _porst = parseInt(_porst) * 1.8;
+                }
                 var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
                 _pordb = _pordb.replace(' %', '');
-                _pordb = (parseInt(_pordb) - 2) * 1.8;
+                if(parseInt(_porst)> 5){
+                    _pordb = (parseInt(_pordb) - 2) * 1.8;
+                }else{
+                    _pordb = parseInt(_pordb) * 1.8;
+                }
+                
                 var _linese = document.getElementsByClassName('ikont-hcl-line-semaforo')[0];
                 var _linedb = document.getElementsByClassName('ikont-hcl-line-deberia')[0];
                 _linese.setAttribute("style", "margin-left : " + _porst + "px");

@@ -442,25 +442,7 @@
                                                  action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                                 </h:commandButton>
                             </center>
-                            <a4j:outputPanel id="panelErrorUb">
-                                <rich:messages id="messagesUb" globalOnly="true"
-                                               styleClass="ikont-rm-messagesUb"   ajaxRendered="true"
-                                               >
-                                    <f:facet name="infoMarker">
-                                        <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                    </f:facet>
-                                    <f:facet name="warnMarker">
-                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                    </f:facet>
-                                    <f:facet name="errorMarker">
-                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                    </f:facet>
-                                    <f:facet name="fatalMarker">
-                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                    </f:facet>
-                                </rich:messages>
-
-                            </a4j:outputPanel>
+                            
                         </h:panelGroup>
                         <a4j:jsFunction name="nuevoPunto" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}" render="gpDirMapa,layoutLugar" >
                         </a4j:jsFunction>
