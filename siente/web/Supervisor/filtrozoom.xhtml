@@ -47,8 +47,9 @@
                     </h:selectOneMenu>
 
                     <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
-                        <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
-                            <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
+                        <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
+                            <f:selectItem itemLabel="Fase" itemValue="-1"/>
+                            <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
                         </h:selectOneMenu>
                     </h:panelGroup>
 
@@ -121,8 +122,12 @@
                     <div id="slider-range-avance" style="position: relative !important; top: -16px !important;"></div>
                 </h:panelGrid>
                 <center>
-                    <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
-                                     styleClass="boton1"             />
+
+
+                    <div id="contenedor_botones_formulario_datos_basicos">
+
+                        <h:commandButton class="contenedor_botones_formulario_datos_basicos_continuar" type="text" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" value="#{var.buscar}"/>        
+                    </div>
                 </center>
             </rich:tab>              
             <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
