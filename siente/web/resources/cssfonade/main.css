@@ -2761,19 +2761,20 @@ css usuario modificacion
     width: 243px !important;
 }
 
+
 .boton1{
+    display: block!important;
     width: 100px!important;
     height: 30px!important;
     float: left;
+    color:#257500!important;
     text-decoration: none;
-    color: #9CFF00;
     font-family: 'Open Sans';
     font-size: 15px!important;
-    background-color: #ffffff !important; 
+    background-color: #ffffff!important; 
     border: 1px solid #257500;
     padding-left: 25px!important;
     padding-top: 8px!important;
-    transition:background-color 1s ease 0s ;
     position: relative!important;
     top: 4px!important;
     left: 73px!important
@@ -2783,8 +2784,8 @@ css usuario modificacion
     height: 30px;
     float: left;
     text-decoration: none;
-    color: #9CFF00;
-    background-color: #A7A9AC;
+    color: #9CFF00!important;
+    background-color: #257500!important;
     transition:background-color 1s ease 0s ;
     font-family:'Open Sans';
 }
