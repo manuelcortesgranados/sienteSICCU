@@ -33,7 +33,7 @@
         </h:panelGroup>
 
     </ui:define>
-   <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
         <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="body" >
@@ -108,22 +108,23 @@
 
 
                 <rich:collapsiblePanel  rendered="#{Supervisor$DetalleObra.veralimenta}"  header="#{var.periododecorte}">
-                    <h:panelGrid id="layoutGral"  width="40%" styleClass="ikont-hpg-layoutGral"  >
-                        <h:panelGrid styleClass="ikont-hpg-avancesemaforo"   
-                                     columns="4" columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel"
-                                     rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}">
-                            <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-imagen"    headerClass="font-header-panel">
-                                <h:panelGroup>
-                                    <h:graphicImage  styleClass="ikont-hgi-imagenevolucioobraubicacion"   value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
-                                                     height="120" width="160"
-                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
-                                    <h:graphicImage  styleClass="ikont-hgi-noimagen"   value="#{var.noimagen}" height="120" width="160"
-                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
-                                </h:panelGroup>
-                            </rich:panel>
-                            <rich:panel header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-avancefisico"   headerClass="font-header-panel">
-                                <h:panelGroup>
-                                    <interkont:spacer height="40"/>
+                    <center>
+                        <h:panelGrid id="layoutGral"  width="40%" styleClass="ikont-hpg-layoutGral"  >
+                            <h:panelGrid styleClass="ikont-hpg-avancesemaforo"   
+                                         columns="4" columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel"
+                                         rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}">
+                                <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-imagen"    headerClass="font-header-panel">
+                                    <h:panelGroup>
+                                        <h:graphicImage  styleClass="ikont-hgi-imagenevolucioobraubicacion"   value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
+                                                         height="120" width="160"
+                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
+                                        <h:graphicImage  styleClass="ikont-hgi-noimagen"   value="#{var.noimagen}" height="120" width="160"
+                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
+                                    </h:panelGroup>
+                                </rich:panel>
+                                <rich:panel style="width: 222px;" header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-avancefisico"   headerClass="font-header-panel">
+
+
                                     <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
                                         <h:outputText  styleClass="ikont-hot-houtobraestaen"   value="#{var.houtobraestaen}" />
                                         <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
@@ -134,48 +135,50 @@
                                             <f:convertNumber pattern="###.## %"/>
                                         </h:outputText>
                                     </h:panelGrid>
-                                </h:panelGroup>
-                            </rich:panel>
-                            <rich:panel header="#{var.valoravancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-valoravancefisico"   headerClass="font-header-panel">
-                                <interkont:spacer height="35"/>
-                                <h:panelGroup>
-                                    <h:panelGrid columns="1" columnClasses="tabla-center">
-                                        <h:outputText  styleClass="ikont-hot-numtotalejec"   id="stcantidadejecutada" value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalejec}">
-                                            <f:convertNumber pattern="$ ###,###"/>
-                                        </h:outputText>
-                                        <h:outputText  styleClass="ikont-hot-valorejecutado"   value="#{var.valorejecutado}" />
-                                    </h:panelGrid>
-                                </h:panelGroup>
-                            </rich:panel>
-                            <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-houtsemaforo"   headerClass="font-header-panel">
-                                <h:panelGroup>
-                                    <center>
-                                        <h:graphicImage  styleClass="ikont-hgi-imgSemaObra"   id="imgSemaObra"
-                                                         value="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen}"
-                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
-                                        <h:graphicImage  styleClass="ikont-hgi-noinfo"   value="#{var.noinfo}" height="100px"
-                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
-                                        <h:outputText  styleClass="ikont-hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}"
-                                                       rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"
-                                                       />
-                                    </center>
-                                </h:panelGroup>
-                            </rich:panel>
+
+                                </rich:panel>
+                                <rich:panel  style="width: 152px;" header="#{var.valoravancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-valoravancefisico"   headerClass="font-header-panel">
+                                    <interkont:spacer height="35"/>
+                                    <h:panelGroup>
+                                        <h:panelGrid columns="1" columnClasses="tabla-center">
+                                            <h:outputText  styleClass="ikont-hot-numtotalejec"   id="stcantidadejecutada" value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalejec}">
+                                                <f:convertNumber pattern="$ ###,###"/>
+                                            </h:outputText>
+                                            <h:outputText  styleClass="ikont-hot-valorejecutado"   value="#{var.valorejecutado}" />
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                </rich:panel>
+                                <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-houtsemaforo"   headerClass="font-header-panel">
+                                    <h:panelGroup>
+                                        <center>
+                                            <h:graphicImage  styleClass="ikont-hgi-imgSemaObra"   id="imgSemaObra"
+                                                             value="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen}"
+                                                             rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
+                                            <h:graphicImage  styleClass="ikont-hgi-noinfo"   value="#{var.noinfo}" height="100px"
+                                                             rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
+                                            <h:outputText  styleClass="ikont-hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}"
+                                                           rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"
+                                                           />
+                                        </center>
+                                    </h:panelGroup>
+                                </rich:panel>
+                            </h:panelGrid>
                         </h:panelGrid>
-                    </h:panelGrid>
+                    </center>
                     <interkont:spacer height="30"/>
-                    <h:panelGrid id="imgspanel" width="10%" styleClass="ikont-hpg-imgspanel"  >
-                        <h:panelGrid columns="1" rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}" styleClass="ikont-hpg-alimentacionmostrar"  
-                                     columnClasses="column-grid-panel">
-                            <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" styleClass="ikont-rp-observaciongeneral"   headerClass="font-header-panel">
+                    <center>
+                        <h:panelGrid id="imgspanel" width="10%" styleClass="ikont-hpg-imgspanel"  >
+                            <h:panelGrid width="443" columns="1" rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}" styleClass="ikont-hpg-alimentacionmostrar"  
+                                         columnClasses="column-grid-panel">
+                                <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" styleClass="ikont-rp-observaciongeneral"   headerClass="font-header-panel">
 
-                                <h:inputTextarea value="#{Supervisor$DetalleObra.alimentacionmostrar.textcomentario}" 
-                                                 rows="5" disabled="true"/>
+                                    <h:inputTextarea style="width: 98%!important" value="#{Supervisor$DetalleObra.alimentacionmostrar.textcomentario}" 
+                                                     rows="5" disabled="true"/>
 
-                            </rich:panel>
+                                </rich:panel>
+                            </h:panelGrid>
                         </h:panelGrid>
-                    </h:panelGrid>
-
+                    </center>
 
                     <interkont:spacer height="30" />
                     <center>
