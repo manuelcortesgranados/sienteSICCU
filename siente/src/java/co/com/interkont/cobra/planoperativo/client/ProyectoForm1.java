@@ -20,6 +20,10 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.client.Constants;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Button;
@@ -31,6 +35,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.google.gwt.user.datepicker.client.DateBox;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.DatePicker;
 import com.sencha.gxt.widget.core.client.Window;
@@ -182,7 +187,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             vp = new VerticalPanel();
             vp.setSpacing(10);
             vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);            
+            vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
             vp.setStyleName("ikont-po-tb");
             createColumnForm();
         }
@@ -205,30 +210,30 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         Label tituloPagina = new Label(tituloPantalla);
         tituloPagina.setStyleName("ikont-po-label");
         //tituloPagina.setStyleName(CssRecursos.INSTANCE.commonsCss().estiloLabel());
-        
+
 
         vp.add(tituloPagina);
 
 
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
-        con.setStyleName("ikont-po-tb");        
+        con.setStyleName("ikont-po-tb");
         vp.add(con);
 
         int cw = 238;
 
 
         getNombrePry().setEmptyText("Nombre del proyecto");
-        getNombrePry().setWidth(cw);
+        getNombrePry().setWidth(500);
         getNombrePry().setAutoValidate(true);
         con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
-        
+
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
         fechaInicio.setStyleName("gwt-DatePicker");
         con.add(new FieldLabel(fechaInicio, "Fecha inicio"), new HtmlData(".fechainicio"));
         // con.add(fechaInicio, new HtmlData(".fechainicio"));
-       
+
 
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
@@ -604,12 +609,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (fechaFin.getValue() == null) {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-            
-            
+
+
         } else {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-            
+
             service.setLog("Cree proyecto", null);
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
@@ -648,9 +653,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     private native String getTableMarkup() /*-{
      return ['<table width=100% cellpadding=0 cellspacing=10>',
-     '<tr><td class=fn width=50%></td><td class=fechainicio></td></tr>',
-     '<tr><td class=fechafin></td><td class=pagodirecto></td></tr>',
-     '<tr><td class=otrospagos></td></tr>',
+     '<tr><td class=fn colspan=2></td><td></td></tr>',
+     '<tr><td class=fechainicio></td><td class=fechafin></td></tr>',
+     '<tr><td class=pagodirecto></td><td class=otrospagos></td></tr>',
      '<tr><td class=tblroles colspan=2></td><td></td></tr>',
      '<tr><td class=btnaddmonto></td><tr>',
      '<tr><td class=tblobjge></td><td class=tblmetas></td></tr>',
