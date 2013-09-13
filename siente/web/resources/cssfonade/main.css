@@ -1387,7 +1387,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-datosbasicos{
     background-position: -8px -10px;
-    margin: 0px; left: 30% !important ; top: 2px;
+    left: 30% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
@@ -1396,7 +1396,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-documentos{
     background-position: -274px -10px;
-    margin: 0px; left: 60% !important ; top: 2px;
+    left: 60% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
@@ -1413,7 +1413,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-polizas{
     background-position: -192px -10px;
-    margin: 0px; left: 50% !important ; top: 2px;
+    left: 50% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
@@ -1422,7 +1422,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-planoperativo{
     background-position: -107px -10px;
-    margin: 0px; left: 40% !important ; top: 2px;
+    left: 40% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
