@@ -1628,7 +1628,7 @@ input[type="text"], input[type="password"], select{
     left:120px; 
     width:750px;
     position:absolute;
-     top:-31px;
+    top:-31px;
     border-spacing: 56px;
 }
 .ikont-outtext-titulo{
@@ -1692,7 +1692,7 @@ input[type="text"], input[type="password"], select{
     top : -12px;
     left: -5px;
     width: 100px;
-    height: 120px;
+    height: 93px;
     -moz-border-radius: 10px; 
     -ms-border-radius: 10px; 
     -webkit-border-radius: 10px; 
@@ -1750,7 +1750,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:visited{
-      color:  #257500 !important;   
+    color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:active{
     color:  #257500 !important;   
@@ -4122,7 +4122,7 @@ a:hover {
     transition: background-color 1s ease-in-out 0s;
     font-family: 'Open Sans';
     line-height: 95px;
-    
+
 
 }
 .ikont-po-img-finalizarGWTInferior{
@@ -4139,7 +4139,7 @@ a:hover {
     rgin: 0px auto;
     left: 60% !important;
     font-size: 15px!important;
-     margin: 0px; left: 38% !important ; top: 2px;
+    margin: 0px; left: 38% !important ; top: 2px;
 }
 .ikont-po-img-finalizarGWTInferior:hover{
     width: 100px;
@@ -4316,4 +4316,28 @@ a:hover {
 }
 .GAMULM-BG1C{
     background: transparent!important;
+}
+
+.ikont-enlace-cargar-imagen-registro:link{
+    display: block;
+    height: 18px;
+    text-decoration: none;
+    width: 75px;
+    border: 1px solid #D0D0D0;
+    border-radius: 7px;
+    background-color: #FFF;
+    padding-top: 5px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;
+
+}
+
+.ikont-enlace-cargar-imagen-registro:hover{
+    color:  #257500 !important;   
+}
+.ikont-enlace-cargar-imagen-registro:visited{
+    color:  #257500 !important;   
+}
+.ikont-enlace-cargar-imagen-registro:active{
+    color:  #257500 !important;   
 }
