@@ -14,7 +14,7 @@
                 <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                 <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
                     <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
-                    <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
+                    <h:commandLink styleClass="ikont-hcl-menu-inicio" value="#{var.menuInicio}"   />    
                     <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
                 </h:panelGrid>
             </h:panelGrid>  
@@ -23,7 +23,7 @@
                                type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="Tipificación"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="#{var.tipificacionProyecto}"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
                                type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
@@ -32,25 +32,25 @@
                 <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-dbasicos-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
-                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"   value="Datos basicos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
+                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  style="width: 120px;" value="#{var.datosbasicos}"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
             </h:panelGroup>
             <h:panelGroup layout="block" > 
                 <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-ubicar-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
-                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="Ubicar Proyecto" style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="#{var.ubicarproyecto}" style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
             </h:panelGroup>   
             <h:panelGroup layout="block" > 
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-cronograma-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="Cronograma"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="#{var.cronograma}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
             </h:panelGroup>
             <h:panelGroup layout="block" > 
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-fotos-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>   
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="Subir Fotos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="#{var.subir} #{var.fotos}" style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>   
             </h:panelGroup>
@@ -58,17 +58,17 @@
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-contrato-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="Contrato"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="#{var.contrato}"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
             </h:panelGroup>
             <h:panelGroup layout="block" > 
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-borrador-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="Guardar Borrador" style="width: 120px;"  action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="#{var.guardarbo}" style="width: 120px;"  action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
             </h:panelGroup>
             <h:panelGroup layout="block"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-finalizar-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
-                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="Guardar Proyecto"  style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="#{var.guardar} #{var.proyecto}"  style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
             </h:panelGroup>
         </h:panelGrid>
     </h:panelGroup>
