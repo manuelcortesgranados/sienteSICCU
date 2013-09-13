@@ -1,175 +1,135 @@
-body {
-	background-image: url(../imgs/cobra_login_bg.png);
-	background-repeat: repeat-x;
+#logo {
+    background-image:url(../imgs/Siente_logo2.png);
+    background-repeat:no-repeat;
+    width:350px;
+    height:142px;
+    text-align:right;
+    position:relative;
+    float:right;
 }
-#login_image {
-	background-image: url(../imgs/Siente_login_bg_image.png);
-	width:600px;
-	height:240px;
-	float:right;
-}
-#logo_ch {
-	background-image: url(../imgs/CH_logo.png);
-	background-repeat:no-repeat;
-	width:600px;
-	height:142px;
-	text-align:right;
-	position:relative;
-	/*float:right;*/
-}
-/*#logo {
-	background-image:url(../imgs/Siente_logo2.png);
-	background-repeat:no-repeat;
-	width:350px;
-	height:142px;
-	text-align:right;
-	position:relative;
-	float:right;
-}*/
 
 #sliderpanel_outer {
-	overflow: hidden;
-	width:600px;
-	height: 172px;
-	margin: 0 auto;
-	background: none;
-	display:block;
-	position:relative;
-	padding: 15px 0 0 0;
+    overflow: hidden;
+    width: 713px!important;
+    height: 305px;
+    margin: 0 auto;
+    background: none;
+    display:block;
+    position:relative;
+    padding: 15px 0 0 0;
 }
 /* create custom forward-backward buttons for this container */
 #sliderpanel_outer .sliderpanel_forward,
 #sliderpanel_outer .sliderpanel_back{
-	display:block;
-	position:absolute;
-	cursor:pointer;
-	width:25px;
-	height: 188px;
-	bottom:0px;
-	right: 0px;
-	background:url(../imgs/slideitmoo_forward.png) no-repeat center;
+    display:block;
+    position:absolute;
+    cursor:pointer;
+    width:25px;
+    height: 188px;
+    bottom:0px;
+    right: 0px;
+    background:url(../imgs/slideitmoo_forward.png) no-repeat center;
 }
 #sliderpanel_outer .sliderpanel_back {
-	left:0px;
-	background:url(../imgs/slideitmoo_back.png) no-repeat center;
+    left:0px;
+    background:url(../imgs/slideitmoo_back.png) no-repeat center;
 }
 
-/* the width is set to show the number of thumbnails that will be visible */
 #sliderpanel_inner{
-	position:relative ;
-	overflow:hidden ;
-	width: 600px ; /* set a display width to make the slider look good in case js is disabled */
-	margin:0px auto 0px;
-	padding:10px 0px 10px;
+    position:relative ;
+    overflow:hidden ;
+    width: 713px!important;
+    margin:0px auto 0px;
+    padding:10px 0px 10px;
 }
-/* the thumbnails container; set a width on it so everything will be fine */
 #sliderpanel_items {
-	display:block;
-	position:relative;
-        vertical-align: middle;
+    display:block;
+    position:relative;
+    vertical-align: middle;
 }
-/* single element design */
-#sliderpanel_items div.sliderpanel_element {
-	display:block;
-	position:relative;
-	float:left;
-	margin:0px 0px 0px;
-	width:150px;	
-	text-decoration:none;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:12px;
-	font-style:italic;
-	font-weight:bold;
-        text-align: center;	
-	color: #036;
 
-}
+
 #sliderpanel_items div.textomodulo {	
-        height: 35px;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:13px;
-	font-style:italic;
-	font-weight:bold;
-        text-align: center;
-        text-decoration:none;
+    height: 35px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    font-style:italic;
+    font-weight:bold;
+    text-align: center;
+    text-decoration:none;
 }
 
 #sliderpanel_items a {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-position: 0px 20px;
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-position: 0px 20px;
 }
 #sliderpanel_items a:hover {
-			background-position: 0px -144px;
-	}
+    background-position: 0px -144px;
+}
 /*buttons home*/
 #sliderpanel_items a.obra {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_soliciobra.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
 }
 #sliderpanel_items a.atencion {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_atencion.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
 }
 
 #sliderpanel_items a.gestionar {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_gestionar.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+
 }
 #sliderpanel_items a.financiera {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_financiera.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
 }
 #sliderpanel_items a.auditoria {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_auditoria.png);
+    float: left;
+    height: 163px;
+    width: 290px;/* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
 }
 #sliderpanel_items a.alojamiento {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_inicio_alojamiento.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
 }
 #sliderpanel_items a.indicadores {
-	float: left;
-	height: 163px;
-	width: 150px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/supervision_01.png);
+    float: left;
+    height: 163px;
+    width: 290px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    /*background-image: url(../imgs/supervision_01.png);*/
 }
 
 /*END*/
@@ -177,20 +137,148 @@ body {
 
 
 #sliderpanel_items a img{ border:none; }
-	/* solicitud obra button */
+/* solicitud obra button */
 
 
 a.salir {
-	float:right;
-	height: 40px;
-	width: 130px; /* for validator */
-	display: block;
-	background-repeat: no-repeat;
-	margin-right: 0px;
-	background-image: url(../imgs/bt_salir.png);
-	background-position: 90px 0px;
-	margin: 20px 0px 20px 20px;
+    float:right;
+    height: 40px;
+    width: 130px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_salir.png);
+    background-position: 90px 0px;
+    margin: 20px 0px 20px 20px;
 }
 a.salir:hover {
-	background-position: 0px 0px;
+    background-position: 0px 0px;
+}
+
+#contenedor_total_intro_usuario_registrado {
+    width: 700px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: -10px;
+}	
+
+
+#contenedor_texto   .a {
+    width: 290px;
+    padding-left: 10px;
+
+    height: 170px;
+    padding-top: 130px;
+
+    border: 1px solid #257500; 
+    float: left; 
+    margin-left: 40px;
+
+    border-radius: 50% 50% 50% 50%;
+    text-align: center;
+    color: #257500;
+
+    text-decoration: none;
+    font-family:  'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+#contenedor_texto a.obra:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_soliciobra.png);
+}
+#contenedor_texto a.atencion:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_atencion.png);
+}
+
+#contenedor_texto a.gestionar:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_gestionar.png);
+}
+#contenedor_texto a.financiera:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_financiera.png);
+}
+#contenedor_texto a.auditoria:hover {
+    background-repeat: no-repeat;
+    background-position: 71px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_auditoria.png);
+}
+#contenedor_texto a.alojamiento:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height: 102px;
+    padding-top: 190px;
+    background-image: url(../imgs/bt_inicio_alojamiento.png);
+}
+#contenedor_texto a.indicadores:hover {
+    background-repeat: no-repeat;
+    background-position: 86px 38px;
+    background-color: #257500;
+    transition: 1s all;
+    color: #9CFF00;
+
+    width: 290px;
+    padding-left: 10px;
+
+    height:102px;
+    padding-top: 190px;
+    background-image: url(../imgs/supervision_01.png);
 }
