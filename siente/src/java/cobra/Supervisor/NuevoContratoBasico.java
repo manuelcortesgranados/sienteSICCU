@@ -2354,7 +2354,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
-                panelPantalla = 2;
+                panelPantalla = 3;
                 actualizarPanel();
             } else {
                 panelPantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
@@ -2363,7 +2363,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
-
                 getFlujoCaja().iniciarFlujoCaja();
             }
             getSessionBeanCobra().setCargarcontrato(false);

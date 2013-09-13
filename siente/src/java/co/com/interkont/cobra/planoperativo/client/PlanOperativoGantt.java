@@ -97,6 +97,13 @@ import java.util.Iterator;
  */
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
+    public PlanOperativoGantt() {
+    }
+
+    public PlanOperativoGantt(ContratoDTO convenioDTO) {
+        this.convenioDTO = convenioDTO;
+        this.fullScreen=true;
+    }
     /**
      * Declaración de Objetos propios para manejo del plan operativo
      */
@@ -106,6 +113,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      */
     private ContratoDTO convenioDTO;
     ActividadobraDTO actividadAnterior;
+    boolean fullScreen = Boolean.FALSE;
 
     public ContratoDTO getConvenioDTO() {
         return convenioDTO;
@@ -153,6 +161,20 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 //     private static final int COLUMN_FORM_WIDTH = 680;
 
+    /**
+     * @return the gantt
+     */
+    public Gantt<ActividadobraDTO, DependenciaDTO> getGantt() {
+        return gantt;
+    }
+
+    /**
+     * @param gantt the gantt to set
+     */
+    public void setGantt(Gantt<ActividadobraDTO, DependenciaDTO> gantt) {
+        this.gantt = gantt;
+    }
+
     public interface GanttExampleStyle extends CssResource {
 
         @ClassName("gwt-label")
@@ -165,9 +187,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         GanttExampleStyle css();
     }
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
+    final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
     private static final GwtMensajes msgs = GWT.create(GwtMensajes.class);
+    final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
 //    private static final TaskProps props = GWT.create(TaskProps.class);
 //    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
     //ListStore<ActividadobraDTO> taskStore;
@@ -187,7 +211,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public Widget asWidget() {
         //service.setLog("As widget", null);
 
-        final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
         root = GanttDatos.getTareas(convenioDTO);
 
@@ -199,7 +222,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         }
 
-        final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
         depStore.addAll(GanttDatos.getDependencia(convenioDTO));
 
         config = new GanttConfig();
@@ -282,7 +304,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearProyectoDialog = new Window();
                 crearProyectoDialog.setBlinkModal(true);
                 crearProyectoDialog.setModal(true);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO, props, taskStore);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, getGantt(), crearProyectoDialog, convenioDTO, props, taskStore);
                 crearProyectoDialog.add(proyectoForm1);
                 crearProyectoDialog.show();
             }
@@ -301,7 +323,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, props, taskStore);
+                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, props, taskStore);
                 crearContratoDialog.add(contratoForm);
                 crearContratoDialog.show();
 
@@ -316,7 +338,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
-                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, gantt, editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
+                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
                 editarProyDialog.add(proyectoForm);
                 editarProyDialog.show();
 
@@ -343,7 +365,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
             }
@@ -375,7 +397,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE, 6, taskStore);
+                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, getGantt(), crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE, 6, taskStore);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
             }
@@ -392,7 +414,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF, 4, taskStore);
+                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, getGantt(), crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF, 4, taskStore);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
 
@@ -433,7 +455,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.zoneGenerators = zoneGenerators;
 
         // Create the Gxt Scheduler
-        gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
+        setGantt(new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
@@ -441,11 +463,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         ;
 
-        };     
+        });     
         
       
         
-       gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
+        getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
@@ -554,7 +576,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
          * metodo que se encarga de obtener la dependencia seleccionada cuando
          * se activa el menu contextual
          */
-        gantt.addDependencyContextMenuHandler(new DependencyContextMenuEvent.DependencyContextMenuHandler<DependenciaDTO>() {
+        getGantt().addDependencyContextMenuHandler(new DependencyContextMenuEvent.DependencyContextMenuHandler<DependenciaDTO>() {
             @Override
             public void onDependencyContextMenu(DependencyContextMenuEvent<DependenciaDTO> event) {
                 dependenciaSeleccionada = event.getDependency();
@@ -562,7 +584,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
 
-        gantt.addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
+        getGantt().addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
             @Override
             public void onTaskResize(TaskResizeEvent<ActividadobraDTO> event) {
                 ActividadobraDTO actiresi = event.getEventModel();
@@ -575,7 +597,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
 
         // Editing
-        final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
+        final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
         //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
         editing.addEditor(config.leftColumns.getColumn(1), new DateField());
         editing.addEditor(config.leftColumns.getColumn(2), new DateField());
@@ -617,23 +639,23 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 alerta.show();
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
 
-                                gantt.getGanttPanel().getContainer().refresh();
+                                getGantt().getGanttPanel().getContainer().refresh();
                             } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
-                                props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                                gantt.getGanttPanel().getContainer().refresh();
+                                props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                getGantt().getGanttPanel().getContainer().refresh();
                             }
                         } else {
                             AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
                             alerta.show();
                             props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                            gantt.getGanttPanel().getContainer().refresh();
+                            getGantt().getGanttPanel().getContainer().refresh();
 
                         }
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "El convenio no se puede modificar, por favor dirijase a datos basicos");
                         alerta.show();
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                        gantt.getGanttPanel().getContainer().refresh();
+                        getGantt().getGanttPanel().getContainer().refresh();
 
                     }
                 }
@@ -644,11 +666,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
                         alerta.show();
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                        gantt.getGanttPanel().getContainer().refresh();
+                        getGantt().getGanttPanel().getContainer().refresh();
 
                     } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
-                        props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                        gantt.getGanttPanel().getContainer().refresh();
+                        props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                        getGantt().getGanttPanel().getContainer().refresh();
 
                     }
                 }
@@ -671,79 +693,102 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
 
-        gantt.getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
+        getGantt().getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
             public void onViewReady(ViewReadyEvent event) {
-                ((TreeGrid<ActividadobraDTO>) gantt.getLeftGrid()).expandAll();
+                ((TreeGrid<ActividadobraDTO>) getGantt().getLeftGrid()).expandAll();
             }
         });
 
         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
-        gantt.setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+        getGantt().setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+
+        FlowLayoutContainer main;
+        if (!fullScreen) {
+            main = new FlowLayoutContainer();
+            main.getElement().setMargins(new Margins(-780, 0, 0, 5));
+            main.setWidth(980);
+            ContentPanel cp = new ContentPanel();
+            cp.setHeadingText("Plan Operativo");
+            cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
+            cp.setPixelSize(980, 460);
+            cp.getElement().setMargins(new Margins(5));
 
 
-        FlowLayoutContainer main = new FlowLayoutContainer();
-        main.getElement().setMargins(new Margins(-780, 0, 0, 5));
-        main.setWidth(980);
-        ContentPanel cp = new ContentPanel();
-        cp.setHeadingText("Plan Operativo");
-        cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-        cp.setPixelSize(980, 460);
-        cp.getElement().setMargins(new Margins(5));
+            VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
+            vc1.setWidth("500");
+            vc1.setPosition(70, 0);
 
 
-        VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
-        vc1.setWidth("500");
-        vc1.setPosition(70, 0);
+            Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
+            tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
+            Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
+            subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
+            Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
+            mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
+            Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
+            mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
 
+            vc1.add(tituloPrincipal);
+            vc1.add(subTituloPrincipal);
+            vc1.add(mensajeG1);
+            vc1.add(mensajeG2);
 
-        Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
-        tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
-        Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
-        subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
-        Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
-        mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
-        Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
-        mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
+            HorizontalPanel linea = new HorizontalPanel();
+            linea.addStyleName("ikont-hr-separador-convenio");
 
-        vc1.add(tituloPrincipal);
-        vc1.add(subTituloPrincipal);
-        vc1.add(mensajeG1);
-        vc1.add(mensajeG2);
+            VerticalLayoutContainer vc = new VerticalLayoutContainer();
+            cp.setWidget(vc);
+            vc.add(createToolBarPeriodo());
+            vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
+            vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-        HorizontalPanel linea = new HorizontalPanel();
-        linea.addStyleName("ikont-hr-separador-convenio");
-
-        VerticalLayoutContainer vc = new VerticalLayoutContainer();
-        cp.setWidget(vc);
-        vc.add(createToolBarPeriodo());
-        vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
-        vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-
-        main.setPagePosition(300, 0);
-        menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
-        main.add(menuSupe.asWidget());
-        main.add(vc1);
-        sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
-        main.add(submenu.asWidget());
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO, depStore,this));
-        main.add(cp);
-        ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-        main.add(toolinferior);
-
+            main.setPagePosition(300, 0);
+            menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
+            main.add(menuSupe.asWidget());
+            main.add(vc1);
+            sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
+            main.add(submenu.asWidget());
+            ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
+            main.add(toolBar.asWidget());
+            main.add(cp);
+            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+            main.add(toolinferior);
+        } else {
+            main = new FlowLayoutContainer();
+            main.getElement().setMargins(new Margins(1310, 0, 0, 5));
+            main.setWidth(1000);
+            main.setHeight(500);
+            ContentPanel cp = new ContentPanel();
+            cp.setHeadingText("Plan Operativo screen");
+            cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
+            cp.setPixelSize(1000, 500);
+            cp.getElement().setMargins(new Margins(5));
+            
+            VerticalLayoutContainer vc = new VerticalLayoutContainer();
+            cp.setWidget(vc);
+            vc.add(createToolBarPeriodo());
+            vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
+            vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
+            main.setPagePosition(0, 0);
+            main.add(cp);
+            
+            
+            
+        }
 
 
         return main;
     }
 
-    private ToolBar createToolBarPeriodo() {
+    public ToolBar createToolBarPeriodo() {
         ToolBar tbar = new ToolBar();
         TextButton days = new TextButton("Dias");
 
         days.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
-               configurarDias();
+                configurarDias();
             }
         });
         tbar.add(days);
@@ -773,7 +818,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public void configurarDias() {
         for (int i = 0; i <= 1; i++) {
-            GanttConfig ganttConfig = gantt.getConfig();
+            GanttConfig ganttConfig = getGantt().getConfig();
             ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
             headers.add(new WeekTimeAxisGenerator("MMM d"));
             headers.add(new DayTimeAxisGenerator("EEE"));
@@ -785,53 +830,53 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ganttConfig.tipDateFormat = DateTimeFormat
                     .getFormat("MMM d HH:mm");
             ganttConfig.tipClock = true;
-            gantt.setConfig(ganttConfig, true);
+            getGantt().setConfig(ganttConfig, true);
         }
     }
-    
-      public void configurarSemanas() {
+
+    public void configurarSemanas() {
         for (int i = 0; i <= 1; i++) {
             service.setLog("entre", null);
-                GanttConfig ganttConfig = gantt.getConfig();
-                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-                headers.add(new MonthTimeAxisGenerator("MMMM y"));
-                headers.add(new WeekTimeAxisGenerator("MMM d"));
-                ganttConfig.timeHeaderConfig = headers;
-                // Define "snap to" resolution
-                ganttConfig.timeResolutionUnit = Unit.DAY;
-                ganttConfig.timeResolutionIncrement = 1;
-                // Define the DateFormat of the tooltips
-                ganttConfig.tipDateFormat = DateTimeFormat
-                        .getFormat("y-MM-d");
-                ganttConfig.tipClock = false;
-                gantt.setConfig(ganttConfig, true);
-              
+            GanttConfig ganttConfig = getGantt().getConfig();
+            ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+            headers.add(new MonthTimeAxisGenerator("MMMM y"));
+            headers.add(new WeekTimeAxisGenerator("MMM d"));
+            ganttConfig.timeHeaderConfig = headers;
+            // Define "snap to" resolution
+            ganttConfig.timeResolutionUnit = Unit.DAY;
+            ganttConfig.timeResolutionIncrement = 1;
+            // Define the DateFormat of the tooltips
+            ganttConfig.tipDateFormat = DateTimeFormat
+                    .getFormat("y-MM-d");
+            ganttConfig.tipClock = false;
+            getGantt().setConfig(ganttConfig, true);
+
         }
     }
-      
-       public void configurarMeses() {
+
+    public void configurarMeses() {
         for (int i = 0; i <= 1; i++) {
-           
-                GanttConfig ganttConfig = gantt.getConfig();
-                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-                headers.add(new YearTimeAxisGenerator("y"));
-                headers.add(new MonthTimeAxisGenerator("MMM y"));
-                ganttConfig.timeHeaderConfig = headers;
-                
-                // Define "snap to" resolution
-                ganttConfig.timeResolutionUnit = Unit.DAY;
-                ganttConfig.timeResolutionIncrement = 1;
-                // Define the DateFormat of the tooltips
-                ganttConfig.tipDateFormat = DateTimeFormat
-                        .getFormat("y-MM-d");
-                ganttConfig.tipClock = false;
-                gantt.setConfig(ganttConfig, true);
-                
+
+            GanttConfig ganttConfig = getGantt().getConfig();
+            ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
+            headers.add(new YearTimeAxisGenerator("y"));
+            headers.add(new MonthTimeAxisGenerator("MMM y"));
+            ganttConfig.timeHeaderConfig = headers;
+
+            // Define "snap to" resolution
+            ganttConfig.timeResolutionUnit = Unit.DAY;
+            ganttConfig.timeResolutionIncrement = 1;
+            // Define the DateFormat of the tooltips
+            ganttConfig.tipDateFormat = DateTimeFormat
+                    .getFormat("y-MM-d");
+            ganttConfig.tipClock = false;
+            getGantt().setConfig(ganttConfig, true);
+
         }
     }
     // Create ToolBar
 
-    private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
+    public ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
 //        ToggleButton permensual = new ToggleButton("Mensual");      
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
 //        ToggleButton peranual = new ToggleButton("Anual");      
@@ -846,7 +891,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onSelect(SelectEvent event) {
                 gantt.getConfig().cascadeChanges = cascade.getValue();
-                gantt.reconfigure(false);
+                getGantt().reconfigure(false);
             }
         });
 
@@ -857,7 +902,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onSelect(SelectEvent event) {
                 gantt.getConfig().showCriticalPath = critical.getValue();
-                gantt.reconfigure(true);
+                getGantt().reconfigure(true);
             }
         });
 
