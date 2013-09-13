@@ -15,6 +15,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
@@ -27,24 +29,29 @@ import java.util.List;
  */
 public class ToolBarSuperior extends ToolBar {
 
-    
     final Button finalizarbasicos = new Button();
     final Button guardarborrador = new Button();
 
-    public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
-       
+    public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore, final PlanOperativoGantt planOperativo) {
+
 
         finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
 
         guardarborrador.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                DialogBox fullScreen = new DialogBox();
+                VerticalPanel dialogContents = new VerticalPanel();
+                dialogContents.setSpacing(4);
+                fullScreen.setWidget(dialogContents);
+                dialogContents.add(planOperativo.asWidget());
+                fullScreen.setGlassEnabled(true);
+                fullScreen.setAnimationEnabled(true);
+                fullScreen.show();
             }
         });
         finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");
@@ -52,7 +59,7 @@ public class ToolBarSuperior extends ToolBar {
         add(finalizarbasicos);
         add(guardarborrador);
         setStyleName("ikont-po-tb");
-        setWidth(1000);
+        setWidth(980);
 
     }
 

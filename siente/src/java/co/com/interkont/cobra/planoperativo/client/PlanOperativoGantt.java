@@ -683,12 +683,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
 
         FlowLayoutContainer main = new FlowLayoutContainer();
-        main.getElement().setMargins(new Margins(-850, 0, 0, 5));
-        main.setWidth(1000);
+        main.getElement().setMargins(new Margins(-780, 0, 0, 5));
+        main.setWidth(980);
         ContentPanel cp = new ContentPanel();
         cp.setHeadingText("Plan Operativo");
         cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-        cp.setPixelSize(1000, 460);
+        cp.setPixelSize(980, 460);
         cp.getElement().setMargins(new Margins(5));
 
 
@@ -726,7 +726,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         main.add(vc1);
         sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
         main.add(submenu.asWidget());
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO, depStore));
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO, depStore,this));
         main.add(cp);
         ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
         main.add(toolinferior);
@@ -738,31 +738,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     private ToolBar createToolBarPeriodo() {
         ToolBar tbar = new ToolBar();
-//        TextButton hour = new TextButton("Horas");
-//        hour.addSelectHandler(new SelectHandler() {
-//            @Override
-//            public void onSelect(SelectEvent event) {
-//                // Define the timeAxis headers
-//                GanttConfig ganttConfig = gantt.getConfig();
-//                ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-//                headers.add(new DayTimeAxisGenerator("EEE, MMM d "));
-//                headers.add(new HourTimeAxisGenerator("HH:mm"));
-//                ganttConfig.timeHeaderConfig = headers;
-//                // Define "snap to" resolution
-//                ganttConfig.timeResolutionUnit = Unit.MINUTE;
-//                ganttConfig.timeResolutionIncrement = 15;
-//                // Define the DateFormat of the tooltips
-//                ganttConfig.tipDateFormat = DateTimeFormat
-//                        .getFormat("HH:mm");
-//                ganttConfig.tipClock = true;
-//                gantt.setConfig(ganttConfig, true);
-//                // Set start and end date.
-//                gantt.setStartEnd(new DateWrapper(root.getStartDateTime()).clearTime().addHours(8), new DateWrapper(root.getEndDateTime()).clearTime().addHours(18));
-//            }
-//        });
-//
-//        tbar.add(hour);
-
         TextButton days = new TextButton("Dias");
 
         days.addSelectHandler(new SelectHandler() {
@@ -792,8 +767,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         tbar.add(months);
-
-
 
         return tbar;
     }

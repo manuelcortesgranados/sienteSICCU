@@ -71,7 +71,7 @@ public class ToolBarInferior extends ToolBar {
         add(continuar);
         add(finalizar);
         setStyleName("ikont-po-tb");
-        setWidth(1000);
+        setWidth(980);
 
     }
 
