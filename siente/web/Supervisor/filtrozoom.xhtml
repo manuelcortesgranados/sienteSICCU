@@ -45,83 +45,90 @@
                         <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
                                   render="subtiposProyecto"/>
                     </h:selectOneMenu>
-
+                    
                     <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
+                    <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
+                        <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
+                    </h:selectOneMenu>
+                </h:panelGroup> 
+
+                    <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
                         <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
                             <f:selectItem itemLabel="Fase" itemValue="-1"/>
                             <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
                         </h:selectOneMenu>
                     </h:panelGroup>
+                   
 
-                    <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
-                    <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
-                    <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-                    <script type="text/javascript">
-            $(function() {
-                $("#slider-range").slider({
-                    range: true,
-                    min: 0,
-                    max: document.getElementById("valormayor").value,
-                    values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
-                    slide: function(event, ui) {
-                        var numero1 = ui.values[ 0 ];
-                        var numero2 = ui.values[ 1 ];
-                        //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
-                        $("#numero1").val(numero1);
-                        $("#numero2").val(numero2);
-                        $("#numero3").val(numero1.formatMoney());
-                        $("#numero4").val(numero2.formatMoney());
-                        $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
-                    }
+                        <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
+                        <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
+                        <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                        <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
+                        <script type="text/javascript">
+                $(function() {
+                    $("#slider-range").slider({
+                        range: true,
+                        min: 0,
+                        max: document.getElementById("valormayor").value,
+                        values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                        slide: function(event, ui) {
+                            var numero1 = ui.values[ 0 ];
+                            var numero2 = ui.values[ 1 ];
+                            //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
+                            $("#numero1").val(numero1);
+                            $("#numero2").val(numero2);
+                            $("#numero3").val(numero1.formatMoney());
+                            $("#numero4").val(numero2.formatMoney());
+                            $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
+                        }
+                    });
+                    $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
+                            " a $ " + $("#slider-range").slider("values", 1));
                 });
-                $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
-                        " a $ " + $("#slider-range").slider("values", 1));
-            });
 
-                    </script>
+                        </script>
 
-                    <h:panelGrid>           
-                        <!--<h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>-->
-                        <h:panelGrid id="numeros_la" columns="1" style="width:239px!important;">
-                            <rich:column>
-                                <h:inputText   styleClass="input_filtro_2" value="VALOR $ "  style="font-size: 14px !important;width: 65px!important;position: relative;left: -12px;" disabled="true"/>
-                                <h:inputText    styleClass="input_filtro_2" id="numero3"   style="font-size: 9px !important;width: 76px!important;position: relative!important;left:-20px;" disabled="true" value="#{HomeGestion.filtro.cuantiaini}"/>
-                                <h:inputText   styleClass="input_filtro_2" value="a $"   style="font-size: 13px !important;width: 21px!important;position: relative!important;left: -21px;" disabled="true"/>
-                                <h:inputText   styleClass="input_filtro_2" id="numero4"   style="font-size: 9px !important;width: 72px!important;position: relative!important;left: -16px;" disabled="true" value="#{HomeGestion.filtro.cuantiafin}"/>
-                            </rich:column>
+                        <h:panelGrid>           
+                            <!--<h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>-->
+                            <h:panelGrid id="numeros_la" columns="1" style="width:239px!important;">
+                                <rich:column>
+                                    <h:inputText   styleClass="input_filtro_2" value="VALOR $ "  style="font-size: 14px !important;width: 65px!important;position: relative;left: -12px;" disabled="true"/>
+                                    <h:inputText    styleClass="input_filtro_2" id="numero3"   style="font-size: 9px !important;width: 76px!important;position: relative!important;left:-20px;" disabled="true" value="#{HomeGestion.filtro.cuantiaini}"/>
+                                    <h:inputText   styleClass="input_filtro_2" value="a $"   style="font-size: 13px !important;width: 21px!important;position: relative!important;left: -21px;" disabled="true"/>
+                                    <h:inputText   styleClass="input_filtro_2" id="numero4"   style="font-size: 9px !important;width: 72px!important;position: relative!important;left: -16px;" disabled="true" value="#{HomeGestion.filtro.cuantiafin}"/>
+                                </rich:column>
+                            </h:panelGrid>
                         </h:panelGrid>
-                    </h:panelGrid>
-                    <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
-                    <br/>
-                    <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
-                    <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
-                    <script>
-                        $(function() {
-                            $("#slider-range-avance").slider({
-                                range: true,
-                                min: 0,
-                                max: 100,
-                                values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
-                                slide: function(event, ui) {
-                                    var avance1 = ui.values[ 0 ];
-                                    var avance2 = ui.values[ 1 ];
-                                    $("#ava1").val(avance1);
-                                    $("#ava2").val(avance2);
-                                    $("#avance").val("Avance " + avance1 + "% a " + avance2 + "%");
-                                }
+                        <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
+                        <br/>
+                        <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
+                        <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
+                        <script>
+                            $(function() {
+                                $("#slider-range-avance").slider({
+                                    range: true,
+                                    min: 0,
+                                    max: 100,
+                                    values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
+                                    slide: function(event, ui) {
+                                        var avance1 = ui.values[ 0 ];
+                                        var avance2 = ui.values[ 1 ];
+                                        $("#ava1").val(avance1);
+                                        $("#ava2").val(avance2);
+                                        $("#avance").val("Avance " + avance1 + "% a " + avance2 + "%");
+                                    }
+                                });
+                                $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
+                                        "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
                             });
-                            $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
-                                    "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
-                        });
-                    </script>
+                        </script>
 
-                    <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
+                        <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
 
 
-                    <div id="slider-range-avance" style="position: relative !important; top: -16px !important;"></div>
+                        <div id="slider-range-avance" style="position: relative !important; top: -16px !important;"></div>
                 </h:panelGrid>
-               <center>
+                <center>
                     <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
                                      styleClass="boton1"   style="padding: 1px 22px!important;"          />
                 </center>
@@ -198,10 +205,10 @@
                 </h:panelGrid>
 
                 <center>
-                    
+
                     <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
                                      styleClass="boton1"  style="padding: 1px 22px!important;"            />
-                
+
                 </center>
             </rich:tab>
         </rich:tabPanel>
