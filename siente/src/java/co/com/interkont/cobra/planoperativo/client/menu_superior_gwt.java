@@ -122,7 +122,7 @@ public class menu_superior_gwt implements IsWidget {
             }
         });
         tbarSuperior.add(documentos);
-        tbarSuperior.setStyleName("ikont-tbar-menu-superior");
+        tbarSuperior.setStyleName("ikont-hpg-contentmenu");
         tbarSuperior.setWidth(980);
         return tbarSuperior;
         

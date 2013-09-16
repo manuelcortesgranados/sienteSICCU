@@ -101,6 +101,12 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
         this.endDateTime=fechaFin;
         this.duration=duracion;
     }
+     public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion,String name) {
+        this.startDateTime=fechaInicio;
+        this.endDateTime=fechaFin;
+        this.duration=duracion;
+        this.name=name;
+    }
 //    
 //    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
 //        this.startDateTime=fechaInicio;

@@ -114,6 +114,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 ActividadobraDTO actdto = null;
                 if (par.getIdparametrica() == 3) {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechafin, 1, 0);
+                   
                 } else {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
                 }
@@ -123,10 +124,12 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                         //Coloca 1 dia para Acta de Inicio de convenio
                         if (parhija.getIdparametrica() == 4) {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
+                           
                         } else if (parhija.getIdparametrica() == 7) {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fechafin, 1, 0));
                         } else {
-                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecini, 1, 0));
+                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
+                           
                         }
                     }
                 }

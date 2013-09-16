@@ -41,6 +41,7 @@ public class sub_menu_gwt implements IsWidget {
         this.convenio = convenio;
         this.depStore = depStore;
         planificacion.setEnabled(false);
+       
     }
     
     @Override

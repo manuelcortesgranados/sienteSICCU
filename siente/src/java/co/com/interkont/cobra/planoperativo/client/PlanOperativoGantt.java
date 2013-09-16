@@ -27,6 +27,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.Obrafuenterecursosconveni
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -89,7 +90,9 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -102,7 +105,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public PlanOperativoGantt(ContratoDTO convenioDTO) {
         this.convenioDTO = convenioDTO;
-        this.fullScreen=true;
+        this.fullScreen = true;
     }
     /**
      * Declaración de Objetos propios para manejo del plan operativo
@@ -583,6 +586,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
+        gantt.addBeforeTaskResizeHandler(new BeforeTaskResizeEvent.BeforeTaskResizeHandler<ActividadobraDTO>() {
+
+            @Override
+            public void onBeforeTaskResize(BeforeTaskResizeEvent<ActividadobraDTO> event) {
+                actividadAnterior=new ActividadobraDTO(event.getEventModel().getStartDateTime(),event.getEventModel().getEndDateTime(),event.getEventModel().getDuration(),event.getEventModel().getName());
+                }
+        });
 
         getGantt().addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
             @Override
@@ -633,24 +643,37 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
                     ActividadobraDTO actiPadre = taskStore.getParent(ac);
                     if (actiPadre != null) {
-                        if (ac.getStartDateTime().compareTo(actiPadre.getStartDateTime()) >= 0 && ac.getStartDateTime().compareTo(actiPadre.getEndDateTime()) < 0) {
-                            if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
-                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                            service.setLog("entre aca", null);
+                            if (ac.getStartDateTime().compareTo(actiPadre.getStartDateTime()) >= 0 && ac.getStartDateTime().compareTo(actiPadre.getEndDateTime()) < 0) {
+                                if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
+                                    AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                                    alerta.show();
+                                    props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                                    String mensaje=validacionCorrecta(actiPadre, ac);
+                                    if (!mensaje.equals("continuar")) {
+                                        AlertMessageBox alerta = new AlertMessageBox("Alerta", mensaje);
+                                        alerta.show();
+                                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                        getGantt().getGanttPanel().getContainer().refresh();
+                                    }else{
+                                    props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                    }
+                                }
+                            } else {
+                                service.setLog("entre aca", null);
+                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
                                 alerta.show();
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                getGantt().getGanttPanel().getContainer().refresh();
 
-                                getGantt().getGanttPanel().getContainer().refresh();
-                            } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
-                                props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                                getGantt().getGanttPanel().getContainer().refresh();
                             }
-                        } else {
-                            AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
-                            alerta.show();
-                            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-
-                        }
+                            
+                            
+                      //  }
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "El convenio no se puede modificar, por favor dirijase a datos basicos");
                         alerta.show();
@@ -693,6 +716,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
 
+
+
         getGantt().getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
             public void onViewReady(ViewReadyEvent event) {
@@ -706,18 +731,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         FlowLayoutContainer main;
         if (!fullScreen) {
             main = new FlowLayoutContainer();
-            main.getElement().setMargins(new Margins(-780, 0, 0, 5));
+            //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
             main.setWidth(980);
+            main.setStyleName("main-contenedor-gwt");
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
             cp.setPixelSize(980, 460);
-            cp.getElement().setMargins(new Margins(5));
+            cp.getElement().setMargins(new Margins(0));
 
 
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
-            vc1.setWidth("500");
-            vc1.setPosition(70, 0);
+            vc1.setWidth("400");
+            vc1.setPosition(140, 0);
 
 
             Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
@@ -743,7 +769,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-            main.setPagePosition(300, 0);
+           // main.setPagePosition(300, 0);
             menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
             main.add(menuSupe.asWidget());
             main.add(vc1);
@@ -764,7 +790,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
             cp.setPixelSize(1000, 500);
             cp.getElement().setMargins(new Margins(5));
-            
+
             VerticalLayoutContainer vc = new VerticalLayoutContainer();
             cp.setWidget(vc);
             vc.add(createToolBarPeriodo());
@@ -772,9 +798,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
             main.setPagePosition(0, 0);
             main.add(cp);
-            
-            
-            
+
+
+
         }
 
 
@@ -1080,6 +1106,58 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void cargarDatosEditarContrato() {
         ContratoDTO contrato = tareaSeleccionada.getContrato();
 
+    }
+
+    public String validacionCorrecta(ActividadobraDTO actiPadre, ActividadobraDTO actiModificada) {
+        String msg = "";
+        service.setLog("entre obtener HIjas convenio p", null);
+        Map<Integer, ActividadobraDTO> mapaHijas = obtenerActividadesHijasHojasConvenio(actiPadre);
+         service.setLog("sali obtener HIjas convenio p", null);
+        if (actiModificada.getName().equals("Acta de Inicio del Convenio")) {
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) > 0) {
+                msg += "la fecha del acta de inicio no puede ser superior a la fecha del reglamento del plan operativo";
+            }
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
+                msg += "la fecha del acta de inicio no puede ser superior a la fecha del Aprobación del plan operativo";
+            }
+        } else if (actiModificada.getName().equals("Reglamento de Plan Operativo")) {
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
+                msg += "la fecha del Reglamento del plan operativo no puede ser inferior a la fecha del acta de inicio";
+
+            }
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
+                msg += "la fecha del Reglamento del plan operativo no puede ser superior a la  fecha del Aprobación del plan operativo";
+            }
+        } else if (actiModificada.getName().equals("Aprobación de Plan Operativo")) {
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
+                msg += "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del acta de inicio";
+
+            }
+            if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) < 0) {
+                msg += "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del reglamento del plan operativo";
+            } else {
+                msg = "continuar";
+            }
+        }
+         service.setLog("sali validaciones"+msg, null);
+        return msg;
+
+    }
+
+    public Map<Integer, ActividadobraDTO> obtenerActividadesHijasHojasConvenio(ActividadobraDTO actiPadre) {
+        service.setLog("entre obtener HIjas convenio", null);
+        Map<Integer, ActividadobraDTO> mapaActivi = new HashMap<Integer, ActividadobraDTO>();
+        for (ActividadobraDTO act : actiPadre.getChildren()) {
+            if (act.getName().equals("Acta de Inicio del Convenio")) {
+                mapaActivi.put(1, act);
+            } else if (act.getName().equals("Reglamento de Plan Operativo")) {
+                mapaActivi.put(2, act);
+            } else if (act.getName().equals("Aprobación de Plan Operativo")) {
+                mapaActivi.put(3, act);
+            }
+        }
+        service.setLog("sali obtener HIjas convenio", null);
+        return mapaActivi;
     }
 
     public void reembolsarFuenteRecursos(ActividadobraDTO actividadConvenio) {
