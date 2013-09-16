@@ -3768,15 +3768,15 @@ a:hover {
 }
 
 .sello-fonade:hover{
-    background-position: 0px -85px;
+    background-position: 0px -80px;
 }
 
 .sello-republica:hover{
-    background-position: -95px -85px;
+    background-position: -95px -80px;
 }
 
 .sello-zoom:hover{
-    background-position: -190px -85px;
+    background-position: -190px -80px;
 }
 
 .ikont-hcl-footer-firma{
@@ -4341,4 +4341,18 @@ a:hover {
 }
 .ikont-enlace-cargar-imagen-registro:active{
     color:  #257500 !important;   
+}
+
+.ikont-hol-lblclasificacionProyecto{
+    margin-right: 55px;
+}
+
+.ikont-hol-deptopry{
+    margin-left: 7px;
+    margin-right: 3px;
+}
+
+.ikont-hol-munipry{
+    margin-left: 11px;
+    margin-right: 34px;
 }
