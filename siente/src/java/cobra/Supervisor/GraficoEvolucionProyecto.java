@@ -52,7 +52,7 @@ public abstract class GraficoEvolucionProyecto {
      * gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
      */
     protected void preGraficar() {
-        BigDecimal divisor = new BigDecimal(1000000);
+        BigDecimal divisor = new BigDecimal(1);
         BigDecimal vlrEjecutado;
         BigDecimal acumuladoVlrEjecutado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificado = new BigDecimal(0);
