@@ -2384,7 +2384,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         //***** Se debe prestar atencion a este if, ya que no estaban funcionando el precargue de algunos listados.  *************//
         // if (!Propiedad.getValor("conplanoperativo").equals("true")) {
-        limpiarContrato();
+        //limpiarContrato();
         llenarTipoContratoconsultoria();
         llenarTipoContrato();
 
@@ -3403,8 +3403,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Inicializa variables, objetos y listas
      */
 
-    public void limpiarContrato() {
-        System.out.println("limpiar contrato = ");
+    public void limpiarContrato() {        
         boolnumencargosoli = false;
         if (getSessionBeanCobra().getCobraService().isAsoContratoCrear()) {
             booltipocontratoconvenio = false;
@@ -6751,7 +6750,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         contrato.getActividadobras().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
-            Iterator it = contratodto.getActividadobras().iterator();
+            Iterator it = contratodto.getActividadobras().iterator();            
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
                 Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
@@ -6769,7 +6768,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.getTercero().setStrnombrecompleto("");
     }
 
-    public void extraerProyectosActividad(ActividadobraDTO act) {
+    public void extraerProyectosActividad(ActividadobraDTO act) {       
         Iterator it = act.getChildren().iterator();
 //        List<Obra> lista= new ArrayList<Obra>();
         while (it.hasNext()) {

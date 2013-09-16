@@ -118,10 +118,7 @@
                     </h:panelGrid> 
                     <h:panelGroup><center>
                             <h:graphicImage styleClass="imagen_flecha_home1" value="/resources/imgs/flecha_home1.png"/>
-                        </center></h:panelGroup>          
-                    <br/>
-                    <br/>
-                    <br/>
+                        </center></h:panelGroup>                     
                     <center><a4j:commandLink styleClass="inputlinkhomevermas" id="vermas" value="Ver mas" rendered="false"/></center>
                 </div>
             </center>
@@ -146,7 +143,7 @@
                             </h:panelGroup>
                         </rich:column>
                         <rich:column id="dosdos" rendered="#{HomeGestion.filtro.intvista == 1}" >
-                            <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -212px;right: -123px;float: right;">
+                            <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -212px;right: -165px;float: right;">
                                 <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                        jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
