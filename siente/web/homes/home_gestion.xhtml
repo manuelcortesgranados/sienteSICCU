@@ -132,8 +132,8 @@
                 <div id="contenido_general" style="height: 191px;">
                     <h:panelGrid id="panel_mapa_filtro" style="position: relative;top: 4px;right: -99px;" >
                         <rich:column id="unouno">
-                                <h:panelGroup id="conteo_proyectos" style="position: relative;left: 657px;top: -221px;">
-                                <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
+                            <h:panelGroup id="conteo_proyectos" style="position: relative;left: 657px;top: -221px;">
+                            <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
                                 <h:outputText  styleClass="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
                                 <!--h:outputText  styleClass="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/-->
                                 <h:outputText  styleClass="ikont-hot-convenios"   value="-Convenios " rendered="#{HomeGestion.filtro.tipointervencion==3}"/>
@@ -147,6 +147,7 @@
                         </rich:column>
                         <rich:column id="dosdos" rendered="#{HomeGestion.filtro.intvista == 1}" >
                             <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -212px;right: -123px;float: right;">
+                                <h:outputText styleClass="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}"  style="font-size: 12px;"/>
                                 <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                        jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
