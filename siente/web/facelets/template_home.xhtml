@@ -26,11 +26,11 @@
                         overallContainer: 'sliderpanel_outer',
                         elementScrolled: 'sliderpanel_inner',
                         thumbsContainer: 'sliderpanel_items',		
-                        itemsVisible: 4,
-                        elemsSlide: 3,
-                        duration:300,
+                        itemsVisible: 2,
+                        elemsSlide: 2,
+                        duration:500,
                         itemsSelector: '.sliderpanel_element',
-                        itemWidth: 150,
+                        itemWidth:600,
                         showControls:1});
                 }
 
@@ -61,7 +61,7 @@
             </tr>
         </table>
         <ui:insert name="body"/>
-        <h:panelGroup rendered="#{var.logologin}">
+        <h:panelGroup rendered="#{var.logologin and  !var.permisonuevodiseno}">
             <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
                     <td class="text02" align="center"><img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/Logo_republica.png" width="70" height="70"/></td>

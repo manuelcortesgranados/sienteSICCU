@@ -199,7 +199,7 @@
                                 <h:panelGroup    layout="block" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" >
                                     <h:panelGroup id="paneldeptomuniproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
                                         <h:panelGroup id="gpdeptomuniproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                            <h:panelGrid cellspacing="5" cellpadding="5" columns="4">
+                                            <h:panelGrid cellspacing="5" cellpadding="5" columns="2">
                                                 <interkont:spacer width="385" height="5"/>
                                                 <h:panelGrid styleClass="ikont-hpg-sin4"  />
                                                 <h:outputLabel  styleClass="ikont-hol-deptopry"   id="lbldepartamentoProyecto"  value="#{var.departamentoProyecto}" for="combodepartamentoproyecto">
@@ -213,7 +213,7 @@
                                             </h:panelGrid>
                                         </h:panelGroup>
                                         <a4j:outputPanel id="panelmunipioproyecto" ajaxRendered="true" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                            <h:panelGrid columns="4">
+                                            <h:panelGrid columns="2">
                                                 <h:panelGrid styleClass="ikont-hpg-sin5"/>
                                                 <interkont:spacer width="385" height="15"/>
                                                 <h:outputLabel  styleClass="ikont-hol-munipry"   id="lblmunicipioProyecto"  value="#{var.municipioProyecto}" for="combomunicipioproyecto">
@@ -224,7 +224,7 @@
                                             </h:panelGrid>
                                         </a4j:outputPanel >
                                         <h:panelGroup id="gpregionproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==3}">
-                                            <h:panelGrid columns="4">
+                                            <h:panelGrid columns="2">
                                                 <interkont:spacer width="385" height="5"/>
                                                 <h:panelGrid styleClass="ikont-hpg-sin5"  />
                                                 <h:outputLabel  styleClass="ikont-hol-regpry"   id="lblregionProyecto"  value="#{var.regionProyecto}" for="comboregion">

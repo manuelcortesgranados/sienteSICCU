@@ -408,7 +408,7 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     private native String getTableMarkup() /*-{
-     return ['<table width=100% cellpadding=0 cellspacing=1>',
+     return ['<table width=100% cellpadding=0 cellspacing=15>',
      '<tr><td class=entidad ></td><td class=rubro></td></tr>',
      '<tr><td class=vigencia></td><td class=tipor></td></tr>',
      '<tr><td class=formapago></td><td class=monto></td></tr>',

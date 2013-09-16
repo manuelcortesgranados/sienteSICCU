@@ -31,7 +31,7 @@ public class RecursosConvenio implements Serializable {
 
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente;
-    private List<Fuenterecursosconvenio> lstFuentesRecursos= new ArrayList<Fuenterecursosconvenio>();
+    private List<Fuenterecursosconvenio> lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
     private UIDataTable tableFuente = new UIDataTable();
@@ -51,16 +51,14 @@ public class RecursosConvenio implements Serializable {
         this.lstRoles = lstRoles;
     }
 
-    public RecursosConvenio()
-    {
-        
-    }        
-    
+    public RecursosConvenio() {
+    }
+
     public RecursosConvenio(Contrato contrato, CobraServiceAble cobraService) {
         fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
         sumafuentes = BigDecimal.ZERO;
-        
+
         llenarTipoAporte();
         llenarRoles(cobraService);
     }
@@ -141,25 +139,38 @@ public class RecursosConvenio implements Serializable {
             sumafuentes = BigDecimal.ZERO;
         }
     }
+    //lstFuentesRecursos
 
+    public BigDecimal sumaFuenteRecursos(BigDecimal valorNuevo) {
+        BigDecimal valorSuma = BigDecimal.ZERO;
+        for (Fuenterecursosconvenio f : lstFuentesRecursos) {
+            valorSuma = valorSuma.add(f.getValoraportado());
+        }
+        valorSuma=valorSuma.add(valorNuevo);
+        return valorSuma;
+    }
     /*
      *metodo que se encarga de adicionar una fuente de recurso a la
      * fuente de recursos del convenio.
      *      
      */
+
     public void adicionarFuenteRecursos() {
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());        
-        
+        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
+
         if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                 .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
-            fuenteRecursoConvenio.setTercero(tercero);
-            fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
-            fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
-            calcularCuotaGerencia();
-            lstFuentesRecursos.add(fuenteRecursoConvenio);
-            sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
-            limpiarFuenteRecurso();
+           // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
+
+                fuenteRecursoConvenio.setTercero(tercero);
+                fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
+                fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
+                calcularCuotaGerencia();
+                lstFuentesRecursos.add(fuenteRecursoConvenio);
+                sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
+                limpiarFuenteRecurso();
+            //}
         } else {
             FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
         }
@@ -180,8 +191,8 @@ public class RecursosConvenio implements Serializable {
     public void calcularValorGerencia() {
         SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         ResourceBundle bundle = sbc.getBundle();
-        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");                
-        
+        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
+
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {

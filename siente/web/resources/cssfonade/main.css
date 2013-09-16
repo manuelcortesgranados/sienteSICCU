@@ -1387,7 +1387,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-datosbasicos{
     background-position: -8px -10px;
-    left: 30% !important ; top: 2px;
+    left: 20% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
@@ -1396,7 +1396,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-documentos{
     background-position: -274px -10px;
-    left: 60% !important ; top: 2px;
+    left: 59% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
@@ -1413,7 +1413,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-polizas{
     background-position: -192px -10px;
-    left: 50% !important ; top: 2px;
+    left: 47% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
@@ -1422,7 +1422,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-planoperativo{
     background-position: -107px -10px;
-    left: 40% !important ; top: 2px;
+    left: 34% !important ; top: 2px;
 }
 
 .img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
@@ -1628,7 +1628,7 @@ input[type="text"], input[type="password"], select{
     left:120px; 
     width:750px;
     position:absolute;
-     top:-31px;
+    top:-31px;
     border-spacing: 56px;
 }
 .ikont-outtext-titulo{
@@ -1692,7 +1692,7 @@ input[type="text"], input[type="password"], select{
     top : -12px;
     left: -5px;
     width: 100px;
-    height: 120px;
+    height: 93px;
     -moz-border-radius: 10px; 
     -ms-border-radius: 10px; 
     -webkit-border-radius: 10px; 
@@ -1750,7 +1750,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:visited{
-      color:  #257500 !important;   
+    color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:active{
     color:  #257500 !important;   
@@ -2761,19 +2761,20 @@ css usuario modificacion
     width: 243px !important;
 }
 
+
 .boton1{
+    display: block!important;
     width: 100px!important;
     height: 30px!important;
     float: left;
+    color:#257500!important;
     text-decoration: none;
-    color: #9CFF00;
     font-family: 'Open Sans';
     font-size: 15px!important;
-    background-color: #ffffff !important; 
+    background-color: #ffffff!important; 
     border: 1px solid #257500;
     padding-left: 25px!important;
     padding-top: 8px!important;
-    transition:background-color 1s ease 0s ;
     position: relative!important;
     top: 4px!important;
     left: 73px!important
@@ -2783,8 +2784,8 @@ css usuario modificacion
     height: 30px;
     float: left;
     text-decoration: none;
-    color: #9CFF00;
-    background-color: #A7A9AC;
+    color: #9CFF00!important;
+    background-color: #257500!important;
     transition:background-color 1s ease 0s ;
     font-family:'Open Sans';
 }
@@ -3767,15 +3768,15 @@ a:hover {
 }
 
 .sello-fonade:hover{
-    background-position: 0px -85px;
+    background-position: 0px -80px;
 }
 
 .sello-republica:hover{
-    background-position: -95px -85px;
+    background-position: -95px -80px;
 }
 
 .sello-zoom:hover{
-    background-position: -190px -85px;
+    background-position: -190px -80px;
 }
 
 .ikont-hcl-footer-firma{
@@ -4122,7 +4123,7 @@ a:hover {
     transition: background-color 1s ease-in-out 0s;
     font-family: 'Open Sans';
     line-height: 95px;
-    
+
 
 }
 .ikont-po-img-finalizarGWTInferior{
@@ -4139,7 +4140,7 @@ a:hover {
     rgin: 0px auto;
     left: 60% !important;
     font-size: 15px!important;
-     margin: 0px; left: 38% !important ; top: 2px;
+    margin: 0px; left: 38% !important ; top: 2px;
 }
 .ikont-po-img-finalizarGWTInferior:hover{
     width: 100px;
@@ -4180,9 +4181,9 @@ a:hover {
 .ikont-hpg-conectatezoom{
     margin-top: 30px!important;
 }
-.ikont-tbar-menu-superior{
+/*.ikont-tbar-menu-superior{
     background-color: white;
-}
+}*/
 
 .ikont-hpg-datoscronograma{
     font-family: open;
@@ -4191,21 +4192,76 @@ a:hover {
 }
 
 .boton-planificacion-gwt{
-    background-color: #1E4C00;
-    margin: 0px; left: 35% !important ; top: 2px;
+    background-color: white;
+    margin: 0px; left: 25% !important ; top: 2px;
+    border: 1px solid #585858 !important;
+    color:#585858!important;
+    width: 120px;
+    font-size: 12px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+}
 
+.boton-planificacion-gwt:hover{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
+}
+
+.boton-planificacion-gwt:disabled{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
+}
+
+.boton-flujocaja-gwt:disabled{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
+}
+
+.boton-reporte-gwt:disabled{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
+}
+
+.boton-flujocaja-gwt:hover{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
+}
+
+.boton-reporte-gwt:hover{
+    background-color: #1E4C00;
+    color: #9CFF00 !important;
 }
 
 .boton-flujocaja-gwt{
-    background-color: #1E4C00;
-    margin: 0px; left: 45% !important ; top: 2px;
+    background-color: white;
+    margin: 0px; left: 40% !important ; top: 2px;
+    border: 1px solid #585858 !important;
+    color: #585858 !important;
+    font-size: 12px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    width: 120px;
 
 }
 
 .boton-reporte-gwt{
-    background-color: #1E4C00;
+    background-color: white;
     margin: 0px; left: 55% !important ; top: 2px;
+    border: 1px solid #585858 !important;
+    color: #585858 !important;
+    font-size: 12px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    width: 120px;
 
+}
+
+.main-contenedor-gwt{
+    position: absolute;
+    top: 150px;
+    left: 300px;
+    
+    
 }
 
 .ikont-title-1-convenio-gwt{
@@ -4218,7 +4274,7 @@ a:hover {
 }
 
 .ikont-title2-convenio-gwt{
-    font-size: 19px;
+    font-size: 15px;
     color: #008000;
     margin: 0px; left: 34% !important ; top: 2px;
     text-align: center;
@@ -4316,4 +4372,42 @@ a:hover {
 }
 .GAMULM-BG1C{
     background: transparent!important;
+}
+
+.ikont-enlace-cargar-imagen-registro:link{
+    display: block;
+    height: 18px;
+    text-decoration: none;
+    width: 75px;
+    border: 1px solid #D0D0D0;
+    border-radius: 7px;
+    background-color: #FFF;
+    padding-top: 5px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;
+
+}
+
+.ikont-enlace-cargar-imagen-registro:hover{
+    color:  #257500 !important;   
+}
+.ikont-enlace-cargar-imagen-registro:visited{
+    color:  #257500 !important;   
+}
+.ikont-enlace-cargar-imagen-registro:active{
+    color:  #257500 !important;   
+}
+
+.ikont-hol-lblclasificacionProyecto{
+    margin-right: 55px;
+}
+
+.ikont-hol-deptopry{
+    margin-left: 7px;
+    margin-right: 3px;
+}
+
+.ikont-hol-munipry{
+    margin-left: 11px;
+    margin-right: 34px;
 }

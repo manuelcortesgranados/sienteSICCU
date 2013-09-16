@@ -63,16 +63,7 @@
         </center>
     </ui:define>   
     <ui:define name="body">  
-        <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;position: relative;">
-            <table>
-                <tr>
-                    <td>
-                        <blink>
-                            <h:outputText  styleClass="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
-                        </blink>
-                    </td>
-                </tr>
-            </table>
+        <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;position: relative;">            
             <h:commandLink  immediate="true"  value="X" styleClass="x_bienvenida" onclick="esconderbienvenida();
                 return  false;"/>         
             <div id="ingreso-bienvenida" style="" class="ikont-div-ingreso-bienvenida">
@@ -86,7 +77,7 @@
                 </h:panelGrid>
             </div>
             <center>
-                <div id="ikont-div-bienvenida"  style="position: relative;top: -7px;left: -78px" >
+                <div id="ikont-div-bienvenida"  style="position: relative;top: -7px;left: 15px;" >
                     <h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom}"/>     
                     <h:panelGrid>
                         <rich:column>
@@ -127,10 +118,10 @@
 
             <center>
                 <div id="contenido_general" style="height: 191px;">
-                    <h:panelGrid id="panel_mapa_filtro">
+                    <h:panelGrid id="panel_mapa_filtro" style="position: relative;top: 4px;right: -99px;" >
                         <rich:column id="unouno">
-                                <h:panelGroup id="conteo_proyectos" style="position: relative;left: 657px;top: -221px;">
-                                <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
+                            <h:panelGroup id="conteo_proyectos" style="position: relative;left: 657px;top: -221px;">
+                            <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
                                 <h:outputText  styleClass="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
                                 <!--h:outputText  styleClass="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/-->
                                 <h:outputText  styleClass="ikont-hot-convenios"   value="-Convenios " rendered="#{HomeGestion.filtro.tipointervencion==3}"/>
@@ -320,7 +311,7 @@
         <a4j:region>
             <h:form>
                 <a4j:poll id = "refreshId"  action="#{HomeGestion.llenarTablaNovedades}"  render = "Novedades" interval = "50000" >
-
+                    <a4j:status id="tablanovedadeszoom"/>
                 </a4j:poll>
             </h:form>
         </a4j:region>

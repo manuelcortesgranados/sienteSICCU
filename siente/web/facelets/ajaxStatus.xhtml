@@ -19,6 +19,13 @@
                 return #{rich:component('ajaxLoadingModalBox')}.show();
             return true;
         }
+        
+        function windowdownload(){
+            window.onfocus = function(){
+                #{rich:component('ajaxLoadingModalBox')}.hide(); return false;
+            }
+        }
+        
     </script>
     <rich:popupPanel id="ajaxLoadingModalBox" resizeable="false" zindex="3000" styleClass="ikont-rpp-modal-box"> 
         <center>
