@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
+import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 
 /**
  *
@@ -156,35 +157,42 @@ public class RecursosConvenio implements Serializable {
      */
 
     public String adicionarFuenteRecursos() {
-        NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
-        //Se pone la condicion si la lista tiene alguna entidad
-        if (!lstFuentesRecursos.isEmpty()) {
-            for (Fuenterecursosconvenio f : lstFuentesRecursos) {
-                if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo()) {
-                    FacesUtils.addErrorMessage("La fuente de recurso ya se ha ingresado");
-                    return null;
+        try {
+            NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+            Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
+            //Se pone la condicion si la lista tiene alguna entidad
+            if (!lstFuentesRecursos.isEmpty()) {
+                for (Fuenterecursosconvenio f : lstFuentesRecursos) {
+                    if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo()) {
+                        FacesUtils.addErrorMessage("La fuente de recurso ya se ha ingresado");
+                        return null;
+
+                    }
 
                 }
-
             }
-        }
-        if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
-                .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
-            // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
+//            Validar la suma de las fuentes de recursos al valor estimado del convenio
+//            ValidacionesConvenio.validarSumaFuentesxValorAporte(n.getContrato().getNumvlrcontrato(), fuenteRecursoConvenio.getValoraportado(), sumafuentes);
+            if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
+                    .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
+                // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
 
-            fuenteRecursoConvenio.setTercero(tercero);
-            fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
-            fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
-            calcularCuotaGerencia();
-            lstFuentesRecursos.add(fuenteRecursoConvenio);
-            sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
-            limpiarFuenteRecurso();
-            //}
-        } else {
-            FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
-            return null;
+                fuenteRecursoConvenio.setTercero(tercero);
+                fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
+                fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
+                calcularCuotaGerencia();
+                lstFuentesRecursos.add(fuenteRecursoConvenio);
+                sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
+                limpiarFuenteRecurso();
+                //}
+            } else {
+                FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
+                return null;
+            }
+        } catch (Exception e) {
+            FacesUtils.addErrorMessage(e.getMessage());
         }
+
         return null;
     }
 

@@ -41,15 +41,13 @@
                             </rich:column>
                         </h:panelGrid>
 
-                        <h:panelGrid columns="2" styleClass="panel_val_estimado">
+                        <h:panelGrid columns="2" styleClass="panel_val_estimado" id="ikont-hpg-valorestimado">
                             <rich:column>
                                 <h:outputText value="Valor estimado" styleClass="input_val_estimado label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" style="width: 320px!important;height: 32px!important;">
-                                    <rich:placeholder value="#{var.valorestimado}" />
-                                    <f:validateDoubleRange minimum="0" />
-                                    <f:validateLength maximum="26"/>
+                                <h:inputText id="hit-valorest-convenio" value="$ #{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="width: 320px!important;height: 32px!important;" disabled="true">
+                                    <rich:placeholder value="#{var.valorestimado}" />                                   
                                 </h:inputText>
                                 <rich:message for="hit-valorest-convenio"/>
                             </rich:column>
@@ -243,7 +241,7 @@
                 <h:panelGrid cellspacing="10" cellpadding="10">
                     <a4j:commandButton value="#{var.adicionar}" 
                                        action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos}" 
-                                       render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas, ,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso" 
+                                       render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas, ,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso, ikont-hpg-valorestimado" 
                                        execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso"/>
 
                 </h:panelGrid>        

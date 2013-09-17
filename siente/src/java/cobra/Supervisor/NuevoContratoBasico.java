@@ -6356,6 +6356,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     contrato.setBoolplanoperativo(true);
                     contrato.setEncargofiduciario(null);
                     contrato.setModalidadcontratista(null);
+                    contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
 //                    if (guardarborradorconvenio != true) {
 //                        if (!listadocumentos.isEmpty()) {
 //                            validadcionGuardarContrato();
