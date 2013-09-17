@@ -6,6 +6,7 @@
 package co.com.interkont.cobra.planoperativo.exceptions;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -73,12 +74,12 @@ public class ValidacionesConvenio {
        }    
    }
    
-   
-   
-   
-    
-    
-    
-    
-    
+   public static void validarSumaFuentesxValorAporte(BigDecimal valorcontrato, BigDecimal valoraporte,BigDecimal sumafuentes){
+       BigDecimal totalvalor = new BigDecimal(BigInteger.ZERO);
+       totalvalor = totalvalor.add(valoraporte).add(sumafuentes);  
+       if (totalvalor.compareTo(valorcontrato) > 0){
+           throw new ConvenioException("La suma de las fuentes de recursos superan al valor estimado del convenio");
+       }   
+   }    
+
 }
