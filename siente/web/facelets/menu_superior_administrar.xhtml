@@ -9,7 +9,7 @@
 
     >
     <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
-        <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
+        <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="7"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
             <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
                 <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                 <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
@@ -56,6 +56,18 @@
                     <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
                 </a4j:commandLink>
 
+            </h:panelGroup>
+            <h:panelGroup layout="block">
+                <a4j:commandLink value="#{var.finalizar}" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-finalizar" action="#{Supervisor$Contrato.finalizarGuardado}" render="@form, panelConfirmaguardadoplano"
+                                 oncomplete="#{rich:component('panelConfirmaguardadoplano')}.show(); return false" 
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/> 
+            </h:panelGroup>
+            <h:panelGroup layout="block">
+                <a4j:commandLink value="Guardar borrador" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-guardar" action="#{Supervisor$Contrato.guardarBorradorConvenio}" 
+                                 render="@form"
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    <a4j:param assignTo="#{Supervisor$Contrato.guardarborradorconvenio}" value="false"/>
+                </a4j:commandLink>
             </h:panelGroup>
         </h:panelGrid>
     </h:panelGroup>

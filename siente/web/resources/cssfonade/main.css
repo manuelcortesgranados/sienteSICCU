@@ -1385,6 +1385,20 @@ a.ikont-hcl-modificarusuario:hover {
     top: -30px;
 }
 
+.img-button-ncpo.ikont-acl-menu-buttons-ext-finalizar{
+    top: -32px;
+    border-bottom: 1px solid #9CFF00;
+    width: 60px;
+    height: 17px;
+}
+
+.img-button-ncpo.ikont-acl-menu-buttons-ext-guardar{
+    top: -32px;
+    border-bottom: 1px solid #9CFF00;
+    width: 120px;
+    height: 17px;
+}
+
 .img-button-ncpo.ikont-acl-datosbasicos{
     background-position: -8px -10px;
     left: 20% !important ; top: 2px;
