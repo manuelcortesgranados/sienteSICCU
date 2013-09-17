@@ -60,7 +60,7 @@ public interface GwtMensajes extends Messages {
     @DefaultMessage("* Añadir Proyecto")
     String addPry();
 
-    @DefaultMessage("Nuevo Proyecto")
+    @DefaultMessage("Nuevo Convenio")
     String tituloPlanOperativo();
 
     @DefaultMessage("2.PLAN OPERATIVO")
