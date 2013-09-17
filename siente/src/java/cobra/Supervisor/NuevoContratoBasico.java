@@ -3226,20 +3226,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return No devuelve ningún valor
      */
     public String agregarPoliza() {
-        if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
-            polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
-            polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
-            polizacontrato.setContrato(contrato);
-            polizacontrato.setStrdocpoliza("");
-            listapolizas.add(polizacontrato);
-            listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
-            polizacontrato = new Polizacontrato();
-            polizacontrato.setTipopoliza(new Tipopoliza());
-            polizacontrato.setAseguradora(new Aseguradora());
-            polizacontrato.setContrato(new Contrato());
-        } else {
-            FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
-        }
+            if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
+                    polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
+                    polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
+                    polizacontrato.setContrato(contrato);
+                    polizacontrato.setStrdocpoliza("");
+                    listapolizas.add(polizacontrato);
+                    listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
+                    polizacontrato = new Polizacontrato();
+                    polizacontrato.setTipopoliza(new Tipopoliza());
+                    polizacontrato.setAseguradora(new Aseguradora());
+                    polizacontrato.setContrato(new Contrato());
+                } else {
+                FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
+            }
 
         return null;
     }
@@ -3403,7 +3403,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Inicializa variables, objetos y listas
      */
 
-    public void limpiarContrato() {        
+    public void limpiarContrato() {
         boolnumencargosoli = false;
         if (getSessionBeanCobra().getCobraService().isAsoContratoCrear()) {
             booltipocontratoconvenio = false;
@@ -6025,7 +6025,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6690,6 +6690,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String planOperativo() {
         try {
+            contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
@@ -6751,7 +6752,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         contrato.getActividadobras().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
-            Iterator it = contratodto.getActividadobras().iterator();            
+            Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
                 Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
@@ -6769,7 +6770,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.getTercero().setStrnombrecompleto("");
     }
 
-    public void extraerProyectosActividad(ActividadobraDTO act) {       
+    public void extraerProyectosActividad(ActividadobraDTO act) {
         Iterator it = act.getChildren().iterator();
 //        List<Obra> lista= new ArrayList<Obra>();
         while (it.hasNext()) {
