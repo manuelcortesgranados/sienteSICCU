@@ -47,5 +47,49 @@
             </h:panelGrid>
         </h:panelGroup>
     </h:form>
+    <script type="text/javascript">
 
+        function formatMoney(_element) {
+            var _value = _element.value;
+            var _int = /^(?:\+|-)?\d+$/;
+            var _reg = new RegExp(_int);
+            var _valuetotal = _value.replace(/./g, "");
+           // _valuetotal = _valuetotal.replace(/$/gi, "");
+            //_valuetotal = _valuetotal.replace(/,/gi, "");
+            if (_value) {
+                console.log(_valuetotal);
+                console.log(_element.getAttribute("money"));
+                if (_valuetotal != _element.getAttribute("money")) {
+                    var _caracter = _value.substring((_value.length) - 1);
+                    if (_caracter.match(_reg)) {
+                        var _num = (_element.getAttribute("money")) ? _element.getAttribute("money") : "";
+                        _element.setAttribute("money", _num + "" + _caracter);
+                        var _money = formatNumber(parseInt(_element.getAttribute("money")), "$");
+                        _element.value = _money;
+                    } else {
+                        _element.value = _value.substring(0, (_value.length) - 1)
+                    }
+                }
+            } else {
+                _element.setAttribute("money", "0");
+            }
+        }
+
+        function formatNumber(num, prefix)
+        {
+            num = Math.round(parseFloat(num) * Math.pow(10, 2)) / Math.pow(10, 2)
+            prefix = prefix || '';
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? '.' + splitStr[1] : '.00';
+            splitRight = splitRight + '00';
+            splitRight = splitRight.substr(0, 3);
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + ',' + '$2');
+            }
+            return prefix + splitLeft + splitRight;
+        }
+    </script>
 </ui:composition>
