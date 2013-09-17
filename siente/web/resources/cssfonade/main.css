@@ -2700,6 +2700,7 @@ css usuario modificacion
 }
 .panel_filtro_zoom{
     height: 279px;
+    z-index: 200;
 }
 .rf-tab-cnt{
     border: 1px solid rgb(204, 201, 201) !important;
