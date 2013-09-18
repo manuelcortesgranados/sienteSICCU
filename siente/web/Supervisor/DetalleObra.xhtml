@@ -128,20 +128,27 @@
                                 <h:panelGrid  >
                                     <h:outputLabel styleClass="ikont- hot-textobra9">Valor global del proyecto</h:outputLabel>
                                     <h:panelGrid  styleClass="ikont-hpg-griddetaob4">
-                                        <h:outputText styleClass="ikont-hot-zoom-numvobra" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
+                                        <h:outputText styleClass="ikont-hot-zoom-numvobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra }">
                                             <f:convertNumber pattern="$###,###" />
                                         </h:outputText>
                                         <h:panelGrid columns="2" columnClasses=",buttondetallevalor,,buttondetallevalor,,buttondetallevalor">
                                             <h:panelGrid >
                                                 <h:outputLabel styleClass="ikont- hot-textobra9">Valor del proyecto</h:outputLabel>
-                                                <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$DetalleObra.valorinterventoria + Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                     <f:convertNumber pattern="$###,###" />
                                                 </h:outputText>
                                             </h:panelGrid>
-                                            <h:commandButton id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
-                                                <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                              verticalOffset="5" styleClass="ikont-rtt-tool3">
-                                                </rich:tooltip>
+                                            <h:commandButton  id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
+                                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5" 
+                                                          verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
+                                                <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
+                                                    <h:outputText  value="#{var.houtnrocontrato}"/><br/>
+                                                    <h:outputText value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
+                                                     <h:outputText value="#{var.objetocontrato}: " /><br/>
+                                                    <h:outputText value="#{relacionContrato.contrato.strnombre}" /><br/><br/>
+                                                </a4j:repeat>
+                                                    
+                                            </rich:tooltip>
                                             </h:commandButton>
                                             <h:panelGrid>
                                                 <h:outputLabel styleClass="ikont-hot-textobra9">Valor de la interventoría</h:outputLabel>
@@ -150,12 +157,15 @@
                                                 </h:outputText>
                                             </h:panelGrid>
                                             <h:commandButton  styleClass="ikont- hot-otNumContratos" id="otNumContratos" value="#{var.verinfciu}">
-                                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                              verticalOffset="5" styleClass="ikont-rtt-tool2">
-                                                    <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                        <h:outputText styleClass="ikont- hot-lstcontrobra" value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
-                                                    </a4j:repeat>
-                                                </rich:tooltip>
+                                                  <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                          verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
+                                                <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
+                                                    <h:outputText value="#{var.objetocontrato}: " /><br/>
+                                                    <h:outputText value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
+                                                    <h:outputText  value="#{var.houtnrocontrato}"/><br/>
+                                                    <h:outputText value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/><br/>
+                                                </a4j:repeat>
+                                            </rich:tooltip>
                                             </h:commandButton> 
                                             <h:outputLabel styleClass="ikont-hot-textobra9">Otros contratos asociados</h:outputLabel>
                                             <h:commandButton value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">

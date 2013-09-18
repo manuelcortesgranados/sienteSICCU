@@ -1064,6 +1064,8 @@ public class DetalleObra implements Serializable{
 
     public void iniciardetalle() {
         imagenEvolucion();
+        getAdministrarObraNew().cargarListas();
+        llenarContratosInterventoria();
         getAdministrarObraNew().modificarObjetoObra =false;
         getAdministrarObraNew().btn_habilitarModificarObjeto=true;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());

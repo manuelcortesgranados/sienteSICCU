@@ -163,7 +163,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         for (Barrio documentoobra1 : listaBarrios) {
             System.out.println("documentoobra1 Barrios = " + documentoobra1.getStrnombrebarrio());
         }
-         System.out.println("gfdgfdgdfgfdgd" + listaBarrios);
+        System.out.println("gfdgfdgdfgfdgd" + listaBarrios);
         return listaBarrios;
     }
 
@@ -178,8 +178,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setListaVeredas(List<Vereda> listaVeredas) {
         this.listaVeredas = listaVeredas;
     }
-    
-    
+
     public int getCantidadColumnas() {
 
         if (listaVideoObra.size() < 3) {
@@ -761,11 +760,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.plazo = plazo;
     }
 
-    public Obra getObra() {        
+    public Obra getObra() {
         return getSessionBeanCobra().getCobraService().getObra();
     }
 
-    public void setObra(Obra obra) {       
+    public void setObra(Obra obra) {
         getSessionBeanCobra().getCobraService().setObra(obra);
     }
 
@@ -882,6 +881,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             EncontrarSolicitante();
             iniciarImagenes();
             llenarSelectTipoImagenes();
+
             // mostrarGoogle();
             //obtenerTacometro();
 
@@ -898,6 +898,13 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             }
 
         }
+    }
+
+    public void cargarListas() {
+        llenarContrato();
+        llenarContratoInterventoria();
+        llenarContratoObra();
+
     }
 
     /**
@@ -1339,7 +1346,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         //getSessionBeanCobra().getCobradao().cerrarSession();
         //documentoObraDao.guardarOrActualizar(this.documentoobraEd);
         getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobraEd);
-         this.documentoobraEd = new Documentoobra();
+        this.documentoobraEd = new Documentoobra();
         //cargarObra(obra);
 
         return null;
@@ -1631,16 +1638,16 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         listaDocumentosobra = getSessionBeanCobra().getCobraService().obtenerDocumentosObra(getObra().getIntcodigoobra());
         int i = 0;
         List<Documentoobra> listdoccontrato = new ArrayList<Documentoobra>();
-         List<Documentoobra> listdoccontratointerv = new ArrayList<Documentoobra>();
+        List<Documentoobra> listdoccontratointerv = new ArrayList<Documentoobra>();
         if (listaDocumentosobra == null) {
             listaDocumentosobra = new ArrayList<Documentoobra>();
         }
 
         if (!listaContrato.isEmpty()) {
-            i=0;
+            i = 0;
             while (i < listaContrato.size()) {
                 listdoccontrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContrato.get(i).getContrato());
-                
+
                 if (!listdoccontrato.isEmpty()) {
 
                     listaDocumentosobra.addAll(listdoccontrato);
@@ -1649,12 +1656,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 i++;
             }
         }
-        
+
         if (listaContratoInterventoria != null && !listaContratoInterventoria.isEmpty()) {
-            i=0;
+            i = 0;
             while (i < listaContratoInterventoria.size()) {
                 listdoccontratointerv = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContratoInterventoria.get(i).getContrato());
-                
+
                 if (!listdoccontratointerv.isEmpty()) {
 
                     listaDocumentosobra.addAll(listdoccontratointerv);
@@ -1797,7 +1804,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.sede = sede;
     }
 
-    public String mostrarGoogle() {       
+    public String mostrarGoogle() {
         sede = false;
         boolruta = false;
         ubicacionmapa = "http://maps.google.com/maps/api/staticmap?center=" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&zoom=10&size=450x200&&markers=color:blue|label:.|" + getObra().getFloatlatitud() + "," + getObra().getFloatlongitud() + "&sensor=false";
@@ -2194,11 +2201,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setVereda(Vereda vereda) {
         this.vereda = vereda;
     }
+
     public String llenarLocalidadesBarrioVereda() {
 
         getListaBarrios().addAll(getSessionBeanCobra().getCobraService().obtenerBarriosObra(getObra()));
         getListaVeredas().addAll(getSessionBeanCobra().getCobraService().obtenerVeredasObra(getObra()));
         return null;
     }
-    
 }
