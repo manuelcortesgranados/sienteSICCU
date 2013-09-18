@@ -103,13 +103,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTOProps propes;
     protected TreeStore<ActividadobraDTO> taskStore;
 
-    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
+    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
         this.gantt = gantt;
         this.modalPry = di;
         this.proyectoDTO = actividadobraProyectoEditar.getObra();
         this.actividadObraPadre = actividadObraPadre;
-        this.contratoDto = actividadObraPadre.getContrato();
+        this.contratoDto = convenio;
         this.propes = propes;
         this.idTemp = 0;
         this.idTempObj = 0;

@@ -40,9 +40,10 @@ public class ToolBarSuperior implements IsWidget {
         this.taskStore = taskStore;
         this.convenio = convenio;
         this.depStore = depStore;
-        this.planOperativo = planOperativo;
-        service.setLog("aca estoy", null);
+        
     }
+
+            
 
     @Override
     public Widget asWidget() {
@@ -52,33 +53,14 @@ public class ToolBarSuperior implements IsWidget {
         finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+               PlanOperativoGantt planOperFullScreen=new PlanOperativoGantt(convenio);
                 Window fullScreen = new Window();
-                fullScreen.setBlinkModal(true);
+                //fullScreen.setBlinkModal(true);
                 fullScreen.setModal(true);
-                fullScreen.setWidth(1000);
-                fullScreen.setHeight(550);
-//                FlowLayoutContainer main = new FlowLayoutContainer();
-//                main.getElement().setMargins(new Margins(0, 0, 0, 5));
-//                main.setWidth(1000);
-//                ContentPanel cp = new ContentPanel();
-//                cp.setHeadingText("holaaaa");
-//                cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-//                cp.setPixelSize(1000, 800);
-//                cp.getElement().setMargins(new Margins(5));
-//                service.setLog("entre en 11", null);
-//                VerticalLayoutContainer vc = new VerticalLayoutContainer();
-//                cp.setWidget(vc);
-//                vc.add(planOperativo.createToolBarPeriodo());
-//                vc.add(planOperativo.createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
-//                vc.add(planOperativo.getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-//                main.setPagePosition(0, 0);
-//                main.add(cp); 
-//                service.setLog("entre en 12", null);
-//                planOperativo.main=main;
-//                fullScreen.add(planOperativo);
-//                fullScreen.show();
-//                service.setLog("entre en 1", null);
-                fullScreen.add(planOperativo.asWidget());
+                //fullScreen.setWidth(1000);
+                //fullScreen.setHeight(550);
+                fullScreen.setStyleName("ikont-modal-fullscreen");
+                fullScreen.add(planOperFullScreen.asWidget());
                 fullScreen.show();
             }
         });
@@ -86,16 +68,7 @@ public class ToolBarSuperior implements IsWidget {
         guardarborrador.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-//                service.setLog("entre en 2", null);
-//                DialogBox fullScreen = new DialogBox();
-//                VerticalPanel dialogContents = new VerticalPanel();
-//                dialogContents.setSpacing(4);
-//                fullScreen.setWidget(dialogContents);
-//                dialogContents.add(planOperativo.asWidget());
-//                fullScreen.setGlassEnabled(true);
-//                fullScreen.setAnimationEnabled(true);
-//                fullScreen.show();
-                service.setLog("sali en 2", null);
+              service.setLog("sali en 2", null);
             }
         });
         finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");

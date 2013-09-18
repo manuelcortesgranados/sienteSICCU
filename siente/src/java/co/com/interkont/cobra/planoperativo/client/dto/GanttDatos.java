@@ -59,12 +59,11 @@ public class GanttDatos {
 
         return root;
     }
-    
-     public static ArrayList getDependencia(ContratoDTO convenio) {
-     ArrayList<DependenciaDTO> list=new ArrayList<DependenciaDTO>(convenio.getDependenciasGenerales());
-     return list;
-     }
-    
+
+    public static ArrayList getDependencia(ContratoDTO convenio) {
+        ArrayList<DependenciaDTO> list = new ArrayList<DependenciaDTO>(convenio.getDependenciasGenerales());
+        return list;
+    }
 
     /**
      * Método para leer el taskStore y llevar los datos a convenio plan
@@ -87,7 +86,7 @@ public class GanttDatos {
         convenio.getActividadobras().clear();
         // convenio.setDependenciasGenerales(new LinkedHashSet(0));
         convenio.getActividadobras().add(lista.get(0));
-         for (DependenciaDTO d : lstDependencias) {
+        for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
             dep.setId((String.valueOf(new Date().getTime())));
             dep.setActividadFrom(d.getActividadFrom());
@@ -102,22 +101,22 @@ public class GanttDatos {
                     if (act.getDependenciasForFkActividadOrigen() != null) {
                         act.getDependenciasForFkActividadOrigen().add(dep);
                         encontro = true;
-                      
+
                     }
 
 
                 }
             }
-           
+
         }
-       return convenio;
+        return convenio;
     }
-    
-    public static void limpiarActividadesListaDependencia( List<ActividadobraDTO> lista){
-        for(ActividadobraDTO act:lista){
-         act.getDependenciasForFkActividadOrigen().clear();
+
+    public static void limpiarActividadesListaDependencia(List<ActividadobraDTO> lista) {
+        for (ActividadobraDTO act : lista) {
+            act.getDependenciasForFkActividadOrigen().clear();
         }
-    
+
     }
 
     public static void organizarListaDependencias(List<DependenciaDTO> lstDependencias) {
@@ -143,15 +142,14 @@ public class GanttDatos {
 
     public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
         if (actividadPadre != null) {
-            if (actividadPadre.getTipoActividad() != 1) {
-                List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-                int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
-                Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
-                CalendarUtil.addDaysToDate(copiaFecha, duracion);
-                props.endDateTime().setValue(actividadPadre, copiaFecha);
-                props.duration().setValue(actividadPadre, duracion);
-                modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props);
-            }
+            List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
+            service.setLog("actividad:" + actividadPadre.getName(), null);
+            int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
+            Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
+            CalendarUtil.addDaysToDate(copiaFecha, duracion);
+            props.endDateTime().setValue(actividadPadre, copiaFecha);
+            modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props);
+
         } else {
             service.setLog("entre en gant datos 2 null", null);
         }
@@ -165,7 +163,7 @@ public class GanttDatos {
                 menor = listaHijas.get(i).getStartDateTime();
             }
         }
-
+        service.setLog("menor:" + menor, null);
         return CalendarUtil.copyDate(menor);
     }
 
@@ -176,7 +174,7 @@ public class GanttDatos {
                 mayor = listaHijas.get(i).getEndDateTime();
             }
         }
-
+        service.setLog("mayor:" + mayor, null);
         return CalendarUtil.copyDate(mayor);
     }
 

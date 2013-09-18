@@ -69,11 +69,11 @@ public class ModalRubrosProyecto implements IsWidget {
     protected ObraDTO proyectoDTO;
     protected FuenterecursosconvenioDTO fuenteRecursosConveDTO;
     protected int idTemp;
-   protected int idTempObraRecurso;
+    protected int idTempObraRecurso;
     protected WidgetTablaRubrosPry tblrubros;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
-    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros,int idTempObraRecurso) {
+    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso) {
         entidades = new ListStore<TerceroDTO>(propse.intcodigo());
         lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
         campoTipoRecurso = new TextField();
@@ -87,35 +87,37 @@ public class ModalRubrosProyecto implements IsWidget {
         rubro = new TextField();
         tipoAporte = 0;
         formaPago = 0;
-        
+
 
         this.contratoDto = contratoDto;
         this.proyectoDTO = proyectoDTO;
         this.idTemp = idTemp;
         this.modalActual = modalActual;
         this.tblrubros = tblrubros;
-        this.idTempObraRecurso=idTempObraRecurso;
-
+        this.idTempObraRecurso = idTempObraRecurso;
+       
     }
 
     @Override
     public Widget asWidget() {
-        vp = new VerticalPanel();
+         vp = new VerticalPanel();
         vp.setSpacing(10);
         vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
         vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         vp.setStyleName("ikont-po-tb");
         crearModalRoles();
+       
         return vp;
+
     }
 
     public void crearModalRoles() {
         final String cw = "200";
-         Label tituloPagina = new Label("ROLES Y ENTIDADES");
-         tituloPagina.setStyleName("ikont-po-label");
-         vp.add(tituloPagina);
-        
-         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
+        Label tituloPagina = new Label("ROLES Y ENTIDADES");
+        tituloPagina.setStyleName("ikont-po-label");
+        vp.add(tituloPagina);
+
+        HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         vp.add(con);
 
         llenarComboEntidadesConvenio(entidades);
@@ -131,32 +133,28 @@ public class ModalRubrosProyecto implements IsWidget {
 
             }
         });
-        con.add( new FieldLabel(lstEntidadesConvenio, "Entidad") , new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+        con.add(new FieldLabel(lstEntidadesConvenio, "Entidad"), new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
         //con.add(lstEntidadesConvenio, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
-
         montoAportado.setEmptyText("Monto aportado");
         montoAportado.setWidth(cw);
         montoAportado.addBlurHandler(new BlurEvent.BlurHandler() {
             @Override
             public void onBlur(BlurEvent event) {
-               if(formaPago==1){
-               if(montoAportado.getValue().compareTo(new BigDecimal(100))>0){
-               AlertMessageBox d = new AlertMessageBox("Error", "el porcentaje ingresado no puede superar el 100%");
-               d.show();
-               montoAportado.clear();
-               }
-               }
+                if (formaPago == 1) {
+                    if (montoAportado.getValue().compareTo(new BigDecimal(100)) > 0) {
+                        AlertMessageBox d = new AlertMessageBox("Error", "el porcentaje ingresado no puede superar el 100%");
+                        d.show();
+                        montoAportado.clear();
+                    }
+                }
             }
         });
         con.add(new FieldLabel(montoAportado, "Monto"), new AbstractHtmlLayoutContainer.HtmlData(".monto"));
-        //con.add(montoAportado, new AbstractHtmlLayoutContainer.HtmlData(".monto"));
 
         campoTipoRecurso.setWidth(cw);
         campoTipoRecurso.setEmptyText("Descripcion aporte");
         con.add(new FieldLabel(campoTipoRecurso, "Descripcion aporte"), new AbstractHtmlLayoutContainer.HtmlData(".especie"));
-       // con.add(campoTipoRecurso, new AbstractHtmlLayoutContainer.HtmlData(".especie"));
 
-       // con.add(new Label("Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".tituloformap"));
         lstTipoAporte.setWidth("" + cw);
         llenarTipoAporte();
         lstTipoAporte.addChangeHandler(new ChangeHandler() {
@@ -174,10 +172,9 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-        con.add(new FieldLabel(lstTipoAporte, "Tipo aporte") , new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
+        con.add(new FieldLabel(lstTipoAporte, "Tipo aporte"), new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
         //con.add(lstTipoAporte, new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
-
-        lstFormaP.setWidth("" + cw);
+       lstFormaP.setWidth("" + cw);
         llenarFormaPa();
         lstFormaP.addChangeHandler(new ChangeHandler() {
             @Override
@@ -193,12 +190,10 @@ public class ModalRubrosProyecto implements IsWidget {
         con.add(new FieldLabel(lstFormaP, "Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
         //con.add(lstFormaP, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
 
-
         rubro.setEmptyText("Rubro");
         rubro.setWidth(cw);
         con.add(new FieldLabel(rubro, "Rubro"), new AbstractHtmlLayoutContainer.HtmlData(".rubro"));
         //con.add(rubro, new AbstractHtmlLayoutContainer.HtmlData(".rubro"));
-
 
 
         lstVigen.setWidth(cw);
@@ -212,7 +207,6 @@ public class ModalRubrosProyecto implements IsWidget {
         con.add(new FieldLabel(lstVigen, "Vigencia"), new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
         //con.add(lstVigen, new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
 
-
         Button botanAddRubros = new Button("Adicionar", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -222,9 +216,9 @@ public class ModalRubrosProyecto implements IsWidget {
                     String requeridos = validarRequeridos();
                     if (formaPago == 0) {
                         if (requeridos.equals("")) {
-                            obraFuenteDto = new ObrafuenterecursosconveniosDTO(montoAportado.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, tipoAporte, formaPago,idTempObraRecurso);
+                            obraFuenteDto = new ObrafuenterecursosconveniosDTO(montoAportado.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, tipoAporte, formaPago, idTempObraRecurso);
                             validacionDevuelta = validarMontosAportados(obraFuenteDto);
-                         } else {
+                        } else {
                             validacionDevuelta = requeridos;
                         }
                     } else {
@@ -238,7 +232,7 @@ public class ModalRubrosProyecto implements IsWidget {
                 } else {
                     validacionDevuelta = validarEspecieAportada();
                     if (validacionDevuelta.equals("El monto ha sido guardado")) {
-                        obraFuenteDto = new ObrafuenterecursosconveniosDTO(campoTipoRecurso.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia,idTempObraRecurso);
+                        obraFuenteDto = new ObrafuenterecursosconveniosDTO(campoTipoRecurso.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, idTempObraRecurso);
                         proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
                         idTempObraRecurso++;
                         idTemp++;
@@ -256,7 +250,7 @@ public class ModalRubrosProyecto implements IsWidget {
                 limpiarMontos();
             }
         });
-        
+
         vigencia = Integer.parseInt(lstVigen.getItemText(0));
 
         vp.add(botanAddRubros);
@@ -311,7 +305,7 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-       if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
+        if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
             if (montoAportado.getValue().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValoraportado()) > 0) {
                 return "El monto ingresado supera el valor de la fuente de recursos";
             } else {
@@ -319,8 +313,8 @@ public class ModalRubrosProyecto implements IsWidget {
                     BigDecimal sumaValorAportado = BigDecimal.ZERO;
                     for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
                         ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
-                        if(obrc.getTipoaporte()==0){
-                        sumaValorAportado = sumaValorAportado.add(obrc.getValor());
+                        if (obrc.getTipoaporte() == 0) {
+                            sumaValorAportado = sumaValorAportado.add(obrc.getValor());
                         }
                     }
                     sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());

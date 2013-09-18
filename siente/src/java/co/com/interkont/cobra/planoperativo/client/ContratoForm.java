@@ -339,7 +339,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 if (!editar) {
+                    service.setLog("Entre aca en onclick", null);
                     CrearContrato();
+                    service.setLog("sali aca en onclick", null);
                     if (validaciones()) {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
@@ -452,35 +454,40 @@ public class ContratoForm implements IsWidget, EntryPoint {
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
         if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
-
+            service.setLog("ACTIVIDADDDDDDDDDD" + actiHija.getName(), null);
             int duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
-
+            service.setLog("duracion en editar" + duracion, null);
+            service.setLog("Fecha Ini en editar Inicial" + actiHija.getStartDateTime(), null);
             Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
             CalendarUtil.addDaysToDate(fechaI, duracion);
+            service.setLog("Fecha Ini en editar" + fechaI, null);
 
-            Date asigFin = CalendarUtil.copyDate(fechaI);
-            actiHija.setEndDateTime(asigFin);
+//            Date asigFin = CalendarUtil.copyDate(fechaI);
+//            actiHija.setEndDateTime(asigFin);
 
             ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
+            actiHija.setStartDateTime(fechaI);
             propes.startDateTime().setValue(actiHija, fechaI);
 
 
-            Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+            Date dateFin = CalendarUtil.copyDate(fechaI);
+            service.setLog("Fecha fin en editar antes" + dateFin, null);
             CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
+            actiHija.setEndDateTime(dateFin);
             propes.endDateTime().setValue(actiHija, dateFin);
+            service.setLog("Fecha fin en editar" + dateFin, null);
 
-
-            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
-                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
-                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
-                actiHija.setEndDateTime(copiaFechaI);
-                actiHija.setDuration(duraNueva);
-                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
-                propes.endDateTime().setValue(actiHija, copiaFechaI);
-                propes.duration().setValue(actiHija, duraNueva);
-
-            }
+//            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
+//                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
+//                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+//                actiHija.setEndDateTime(copiaFechaI);
+//                actiHija.setDuration(duraNueva);
+//                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
+//                propes.endDateTime().setValue(actiHija, copiaFechaI);
+//                propes.duration().setValue(actiHija, duraNueva);
+//
+//            }
 
             if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 contrato.setDatefechaactaini(actiHija.getStartDateTime());
@@ -550,7 +557,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
 
         fechaSusError = validarCambiofechaSuscripcionContrato();
-        fechaFinError = validarCambiofechaFinContrato();
+        //fechaFinError = validarCambiofechaFinContrato();
         // fechaActaError = validarCambiofechaActaContrato();
         if (!contrato.getNombreAbreviado().equals(nombreAbre.getText())) {
             contrato.setNombreAbreviado(nombreAbre.getText());
@@ -666,6 +673,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void CrearContrato() {
+        service.setLog("Entre aca en CrearContrato", null);
         contrato.setTextobjeto(getObjetoContrato().getText());
         contrato.setNombreAbreviado(getNombreAbre().getValue());
         contrato.setDatefechaini(getFechaSuscripcionContrato().getValue());
@@ -674,11 +682,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contrato.setTipocontrato(tipocontrato);
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
+        service.setLog("sali aca en CrearContrato", null);
     }
 
     public void crearTareaContrato() {
         actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
-        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), actividadObraPadre.getEndDateTime()), 0, TaskType.PARENT, 3, false, contrato);
+        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1, 0, TaskType.PARENT, 3, false, contrato);
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
@@ -729,6 +738,83 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     }
 
+//    public boolean validaciones() {
+//        service.setLog("validaciones", null);
+//        boolean hayError = false;
+//        msgValidacion = new String();
+//        if (contrato.getDatefechaini() == null) {
+//            hayError = true;
+//            msgValidacion += "*por favor ingrese la fecha de suscripcion" + "<br/>";
+//        } else {
+//
+//            if (contrato.getDatefechaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
+//                hayError = true;
+//                msgValidacion += "*La fecha de inicio no puede ser inferior a la fecha de suscripcion del proyecto" + "<br/>";
+//            }
+//        }
+//        if (contrato.getDatefechaactaini() == null) {
+//            hayError = true;
+//            msgValidacion += "*por favor ingrese la fecha de suscripcion del acta de inicio" + "<br/>";
+//        } else {
+//
+//            if (contrato.getDatefechaactaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
+//                hayError = true;
+//                msgValidacion += "*La fecha de suscripcion del acta no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
+//            }
+//        }
+//        if (contrato.getDatefechafin() == null) {
+//            hayError = true;
+//            msgValidacion += "*por favor ingrese la fecha de finalizacion" + "<br/>";
+//        } else {
+//            if (contrato.getDatefechafin().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
+//                hayError = true;
+//                msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
+//            }
+//        }
+//        if (contrato.getDatefechafin().compareTo(contrato.getDatefechaactaini()) < 0) {
+//            hayError = true;
+//            msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha de inicio del contrato" + "<br/>";
+//
+//        }
+////        if (contrato.getDatefechafin().compareTo(contrato.getDatefechaactaini()) < 0) {
+////            hayError = true;
+////            msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha del acta de inicio del contrato" + "<br/>";
+////
+////        }
+//
+//        if (contrato.getTextobjeto().equals("Objeto")) {
+//            hayError = true;
+//            msgValidacion += "*por favor ingrese el objeto del contrato" + "<br/>";
+//        }
+//
+//        if (nombreAbre.getValue() == null) {
+//            hayError = true;
+//            msgValidacion += "*por favor ingrese nombre abreviado del contrato" + "<br/>";
+//        }
+//
+//        if (contrato.getTipocontrato() == null) {
+//            hayError = true;
+//            msgValidacion += "*por favor seleccione un tipo de contrato" + "<br/>";
+//        }
+//
+//        if (contrato.getMontos().isEmpty()) {
+//            hayError = true;
+//            msgValidacion += "*El contrato debe de tener por lo menos un monto asociado" + "<br/>";
+//        }
+//        if (contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
+//            hayError = true;
+//            msgValidacion += "*El contrato debe de tener por lo menos una fuente de recursos asociado" + "<br/>";
+//        }
+//        if (contrato.getNumvlrcontrato() != null) {
+//            if (contrato.getNumvlrcontrato().compareTo(sumarRubros()) != 0) {
+//                hayError = true;
+//                msgValidacion += "*La suma de los rubros asociados debe ser igual al valor del contrato" + "<br/>";
+//            }
+//        }
+//         service.setLog("validaciones 1", null);
+//        return hayError;
+//
+//    }
     public boolean validaciones() {
         boolean hayError = false;
         msgValidacion = new String();
@@ -752,26 +838,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 msgValidacion += "*La fecha de suscripcion del acta no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
             }
         }
-        if (contrato.getDatefechafin() == null) {
-            hayError = true;
-            msgValidacion += "*por favor ingrese la fecha de finalizacion" + "<br/>";
-        } else {
-            if (contrato.getDatefechafin().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
-                hayError = true;
-                msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
-            }
-        }
-        if (contrato.getDatefechafin().compareTo(contrato.getDatefechaactaini()) < 0) {
-            hayError = true;
-            msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha de inicio del contrato" + "<br/>";
-
-        }
-        if (contrato.getDatefechafin().compareTo(contrato.getDatefechaactaini()) < 0) {
-            hayError = true;
-            msgValidacion += "*La fecha de finalizacion no puede ser inferior a la fecha del acta de inicio del contrato" + "<br/>";
-
-        }
-
         if (contrato.getTextobjeto().equals("Objeto")) {
             hayError = true;
             msgValidacion += "*por favor ingrese el objeto del contrato" + "<br/>";

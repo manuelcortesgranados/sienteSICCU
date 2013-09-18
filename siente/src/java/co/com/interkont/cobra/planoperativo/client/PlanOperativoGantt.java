@@ -99,6 +99,7 @@ import java.util.Map;
  * @author desarrollo9
  */
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
+//px 
 
     public PlanOperativoGantt() {
     }
@@ -260,7 +261,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = false;
         config.showTaskLabel = true;
-        config.useEndDate = true;
+        config.useEndDate = false;
         config.clickCreateEnabled = false;
 
 
@@ -282,6 +283,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             ActividadobraDTO actividadPadreConvenio = taskStore.getParent((taskStore.getParent(tareaSeleccionada)));
                             reembolsarFuenteRecursos(actividadPadreConvenio);
                         }
+                        //convenioDTO.getActividadobras().get
                         taskStore.remove(tareaSeleccionada);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
@@ -341,7 +343,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
-                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
+                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 editarProyDialog.add(proyectoForm);
                 editarProyDialog.show();
 
@@ -589,9 +591,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         gantt.addBeforeTaskResizeHandler(new BeforeTaskResizeEvent.BeforeTaskResizeHandler<ActividadobraDTO>() {
             @Override
             public void onBeforeTaskResize(BeforeTaskResizeEvent<ActividadobraDTO> event) {
-               actividadAnterior = new ActividadobraDTO();
-               actividadAnterior.setStartDateTime(event.getEventModel().getStartDateTime());
-             }
+                actividadAnterior = new ActividadobraDTO();
+                actividadAnterior.setStartDateTime(event.getEventModel().getStartDateTime());
+            }
         });
 
         getGantt().addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
@@ -600,22 +602,25 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 ActividadobraDTO actiresi = event.getEventModel();
                 ActividadobraDTO actiPadre = taskStore.getParent(actiresi);
                 boolean valido = true;
-                if (actiPadre.getName().equals("Planeación del Convenio") && actiresi.getStartDateTime().compareTo(actividadAnterior.getStartDateTime())!=0) {
+                if (actiPadre.getName().equals("Planeación del Convenio") && actiresi.getStartDateTime().compareTo(actividadAnterior.getStartDateTime()) != 0) {
                     String mensaje = validacionCorrecta(actiPadre, actiresi);
-                      if (!mensaje.equals("continuar")) {
+                    if (!mensaje.equals("continuar")) {
                         valido = false;
                         AlertMessageBox alerta = new AlertMessageBox("Alerta", mensaje);
                         alerta.show();
                         props.startDateTime().setValue(actiresi, actividadAnterior.getStartDateTime());
                         getGantt().getGanttPanel().getContainer().refresh();
-                         }
+                    }
                 }
                 if (valido) {
-                    int duracion = CalendarUtil.getDaysBetween(actiresi.getStartDateTime(), actiresi.getEndDateTime());
-                    props.duration().setValue(actiresi, duracion);
+                    Date copiaFecha = CalendarUtil.copyDate(actiresi.getStartDateTime());
+                    CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
+                    props.endDateTime().setValue(actiresi, copiaFecha);
+//                    int duracion = CalendarUtil.getDaysBetween(actiresi.getStartDateTime(), actiresi.getEndDateTime());
+//                    props.duration().setValue(actiresi, duracion);
                     GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
                 }
-         }
+            }
         });
 
 
@@ -716,16 +721,25 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 /*verifico si el dato a modificar es la duracion de la actividad y modifico la fecha fin*/
                 if (event.getEditCell().getCol() == 3) {
-                    if (actividadAnterior.getDuration() < ac.getDuration()) {
-                        Date fechaCopia = CalendarUtil.copyDate(ac.getStartDateTime());
-                        ac.setEndDateTime(fechaCopia);
-                        CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
+                    service.setLog("duracion" + ac.getDuration(), null);
+                    if (ac.getDuration() >= 0) {
+                        if (actividadAnterior.getDuration() < ac.getDuration()) {
+                            Date fechaCopia = CalendarUtil.copyDate(ac.getStartDateTime());
+                            ac.setEndDateTime(fechaCopia);
+                            CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration());
+                        } else {
+                            ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
+                        }
+
+                        GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props);
                     } else {
-                        ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
+                        AlertMessageBox alerta = new AlertMessageBox("Alerta", "Por favor ingrese valores positivos");
+                        alerta.show();
+                        props.duration().setValue(ac, actividadAnterior.getDuration());
+                        getGantt().getGanttPanel().getContainer().refresh();
+
                     }
                 }
-                GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props);
-
             }
         });
 
@@ -799,7 +813,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             main.add(toolinferior);
         } else {
             main = new FlowLayoutContainer();
-            main.getElement().setMargins(new Margins(1310, 0, 0, 5));
+            main.getElement().setMargins(new Margins(136, 0, 0, 5));
             main.setWidth(1000);
             main.setHeight(500);
             ContentPanel cp = new ContentPanel();
@@ -820,6 +834,40 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         }
         return main;
+    }
+
+    public ToolBar crearToolBarImagenes() {
+        ToolBar toolBarSuperior = new ToolBar();
+        Button finalizarbasicos = new Button();
+        Button guardarborrador = new Button();
+        finalizarbasicos.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                PlanOperativoGantt planOperFullScreen = new PlanOperativoGantt(convenioDTO);
+                Window fullScreen = new Window();
+                fullScreen.setBlinkModal(true);
+                fullScreen.setModal(true);
+                fullScreen.setWidth(1000);
+                fullScreen.setHeight(550);
+                fullScreen.add(planOperFullScreen.asWidget());
+                fullScreen.show();
+            }
+        });
+
+        guardarborrador.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                service.setLog("sali en 2", null);
+            }
+        });
+        finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");
+        guardarborrador.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-borradorGWT");
+        toolBarSuperior.add(finalizarbasicos);
+        toolBarSuperior.add(guardarborrador);
+        toolBarSuperior.setStyleName("ikont-po-tb");
+        toolBarSuperior.setWidth(980);
+        return toolBarSuperior;
+
     }
 
     public ToolBar createToolBarPeriodo() {
@@ -1084,15 +1132,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public String validacionCorrecta(ActividadobraDTO actiPadre, ActividadobraDTO actiModificada) {
         String msg = "";
-         Map<Integer, ActividadobraDTO> mapaHijas = obtenerActividadesHijasHojasConvenio(actiPadre);
-         if (actiModificada.getName().equals("Acta de Inicio del Convenio")) {
+        Map<Integer, ActividadobraDTO> mapaHijas = obtenerActividadesHijasHojasConvenio(actiPadre);
+        if (actiModificada.getName().equals("Acta de Inicio del Convenio")) {
             if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) > 0) {
                 msg += "la fecha del acta de inicio no puede ser superior a la fecha del reglamento del plan operativo";
             }
             if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
                 msg += "la fecha del acta de inicio no puede ser superior a la fecha del Aprobación del plan operativo";
             }
-            
+
         } else if (actiModificada.getName().equals("Reglamento de Plan Operativo")) {
             if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
                 msg += "la fecha del Reglamento del plan operativo no puede ser inferior a la fecha del acta de inicio";
