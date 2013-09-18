@@ -9,7 +9,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:interkont="http://www.interkont.com/jsf">
 
-    <rich:popupPanel id="mp_editar_imagenevolucion" moveable="false" width="592" height="430"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp_editar_imagenevolucion" moveable="false" width="330" height="220"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-mpeditarimagenevolucion"   value="#{var.editarimagen}"/>
@@ -50,11 +50,11 @@
                     <interkont:spacer height="80px"/>
                     <h:panelGrid columns="2" width="100%" >
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" styleClass="ikont-acb-mpeditarimagenevolucionaceptar"  
-                                           value="#{var.aceptar}"
+                                           value="#{var.aceptar}" style="position: relative;left: 79px;"
                                            oncomplete="#{rich:component('mp_editar_imagenevolucion')}.hide();"
                                            render="panel_imagenesevolucion" title="#{var.aceptar}"/>
                         <a4j:commandButton onclick="#{rich:component('mp_editar_imagenevolucion')}.hide();
-                                              return false;" styleClass="ikont-acb-mpeditarimagenevolucioncancelar"   value="#{var.cancelar}"/>
+                            return false;" styleClass="ikont-acb-mpeditarimagenevolucioncancelar" style="position: relative;left: 12px;"  value="#{var.cancelar}"/>
 
                     </h:panelGrid>
                 </h:panelGrid>
