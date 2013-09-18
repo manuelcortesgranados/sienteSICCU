@@ -1636,7 +1636,7 @@ input[type="text"], input[type="password"], select{
     right: 0px;
     overflow: hidden;
     top: 139px;
-    z-index: 10;
+    z-index: 120;
 
 }
 .ikont-panel-registo-inicio{

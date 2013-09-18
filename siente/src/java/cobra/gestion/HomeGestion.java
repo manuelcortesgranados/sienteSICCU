@@ -247,7 +247,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private boolean mostrartotalconvenios = false;
     private int panelmostrarvaloreszoom;
     private BigDecimal valortotalproyectoszoom = BigDecimal.ONE;
-    private BigDecimal proyectovalormayor = BigDecimal.ONE;
+    private BigDecimal proyectovalormayor;
     private long numeroproyectoszoom = 0;
     private long numeroconvenioszoom = 0;
     private BigDecimal numo;
@@ -757,6 +757,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtro.setVercodigosedeeducativa(false);
         //filtro.setIntcodigoentidad(0);
         filtro.setCoddanesedeeducativa("");
+        filtro.setCuantiafin(proyectovalormayor);
 
         if (listTercerosUsuario.size() == 1) {
             filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
