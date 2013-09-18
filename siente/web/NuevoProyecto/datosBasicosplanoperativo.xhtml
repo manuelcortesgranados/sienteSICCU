@@ -46,10 +46,8 @@
                                 <h:outputText value="Valor estimado" styleClass="input_val_estimado label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" style="width: 320px!important;height: 32px!important;" onkeyup="formatMoney(this);">
-                                    <rich:placeholder value="#{var.valorestimado}" />
-                                    <f:validateDoubleRange minimum="0" />
-                                    <f:validateLength maximum="26"/>
+                                <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="width: 320px!important;height: 32px!important;" onkeyup="formatMoney(this);" disabled="true">
+                                    <rich:placeholder value="#{var.valorestimado}" />                                  
                                 </h:inputText>
                                 <rich:message for="hit-valorest-convenio"/>
                             </rich:column>

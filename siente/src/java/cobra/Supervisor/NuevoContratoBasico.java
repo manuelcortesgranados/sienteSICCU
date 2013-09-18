@@ -3225,19 +3225,28 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return No devuelve ningún valor
      */
-    public String agregarPoliza() {
+    public String agregarPoliza() {      
             if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
-                    polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
-                    polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
-                    polizacontrato.setContrato(contrato);
-                    polizacontrato.setStrdocpoliza("");
-                    listapolizas.add(polizacontrato);
-                    listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
-                    polizacontrato = new Polizacontrato();
-                    polizacontrato.setTipopoliza(new Tipopoliza());
-                    polizacontrato.setAseguradora(new Aseguradora());
-                    polizacontrato.setContrato(new Contrato());
-                } else {
+                //validacion si es plan operativo que valide las fechas dentro del rango de vida del convenio
+                if (bundle.getString("conplanoperativo").equals("true")) {                    
+                    try {                        
+                        ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    } catch (Exception e) {
+                        FacesUtils.addErrorMessage(e.getMessage());
+                        return null;
+                    }
+                }
+                polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
+                polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
+                polizacontrato.setContrato(contrato);
+                polizacontrato.setStrdocpoliza("");
+                listapolizas.add(polizacontrato);
+                listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
+                polizacontrato = new Polizacontrato();
+                polizacontrato.setTipopoliza(new Tipopoliza());
+                polizacontrato.setAseguradora(new Aseguradora());
+                polizacontrato.setContrato(new Contrato());
+            } else {
                 FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
             }
 

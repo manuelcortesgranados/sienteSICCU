@@ -7,6 +7,7 @@ package co.com.interkont.cobra.planoperativo.exceptions;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -80,6 +81,15 @@ public class ValidacionesConvenio {
        if (totalvalor.compareTo(valorcontrato) > 0){
            throw new ConvenioException("La suma de las fuentes de recursos superan al valor estimado del convenio");
        }   
-   }    
+   }  
+   
+   public static void validarAgregarPolizas (Date fechainicontrato, Date fechafincontrato, Date fechapoliza){
+       Calendar fechatemppoliza = Calendar.getInstance();
+       fechatemppoliza.setTime(fechafincontrato);
+       fechatemppoliza.add(Calendar.DATE, -(30));
+       if (fechapoliza.compareTo(fechainicontrato) < 0 || fechapoliza.compareTo(fechatemppoliza.getTime()) > 0){
+           throw new ConvenioException("La fecha de la poliza debe estar en el rango de las fechas del convenio, teniendo encuenta que las polizas acaban un mes antes de terminacion del convenio");       
+       }      
+   }
 
 }
