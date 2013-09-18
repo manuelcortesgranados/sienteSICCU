@@ -2435,6 +2435,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             SelectItem poli = new SelectItem(polCont.getIntidpolizacontrato(), polCont.getStrdescripcion());
             Poliza[i++] = poli;
         }
+        if (!listaPolizacontratos.isEmpty()){
+             listapolizas = listaPolizacontratos;
+        }
         return null;
     }
     /*
@@ -3933,6 +3936,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
 //             
             recursosconvenio.sumaFuentesRecursos();
+            llenarPolizas();
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
@@ -3954,6 +3958,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
 //            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
+            llenarPolizas();
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
@@ -4013,6 +4018,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
 //            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.sumaFuentesRecursos();
+            llenarPolizas();
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
@@ -4042,6 +4048,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
             recursosconvenio.sumaFuentesRecursos();
+            llenarPolizas();
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
