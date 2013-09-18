@@ -292,4 +292,9 @@ public class RecursosConvenio implements Serializable {
     public void setTableFuente(UIDataTable tableFuente) {
         this.tableFuente = tableFuente;
     }
+    
+    public void sumaFuentesRecursos (){
+     for (Fuenterecursosconvenio f : lstFuentesRecursos)       
+        sumafuentes = sumafuentes.add(f.getValoraportado());
+    }
 }
