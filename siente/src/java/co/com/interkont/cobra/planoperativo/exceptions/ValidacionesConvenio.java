@@ -91,5 +91,11 @@ public class ValidacionesConvenio {
            throw new ConvenioException("La fecha de la poliza debe estar en el rango de las fechas del convenio, teniendo encuenta que las polizas acaban un mes antes de terminacion del convenio");       
        }      
    }
+   
+      public static void validarAgregarPolizasContrato (Date fechainicontrato, Date fechafincontrato, Date fechapoliza){       
+       if (fechapoliza.compareTo(fechainicontrato) < 0 || fechapoliza.compareTo(fechafincontrato) > 0){
+           throw new ConvenioException("La fecha de la poliza debe estar en el rango de las fechas del contrato");       
+       }      
+   }
 
 }

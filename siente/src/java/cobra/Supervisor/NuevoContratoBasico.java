@@ -76,7 +76,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
+import javax.mail.Session;
 import javax.servlet.ServletContext;
+import org.hibernate.context.ThreadLocalSessionContext;
 
 /**
  * <p>
@@ -3183,6 +3185,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String insertarPoliza() {
 
         if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
+            if (bundle.getString("conplanoperativo").equals("true")) {
+                try {
+                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                } catch (Exception e) {
+                    FacesUtils.addErrorMessage(e.getMessage());
+                    return null;
+                }
+            }
             polizacontrato.setContrato(contrato);
             polizacontrato.setStrdocpoliza("");
             polizacontrato.setStrdocpoliza("");
@@ -3207,7 +3217,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String boolPoliza() {
         if (boolcrearpoliza == false) {
-            System.out.println("entro aqui " + boolcrearpoliza);
             insertarPoliza();
             //instanciarPolizar();
 //            polizacontrato = new Polizacontrato();
@@ -3926,7 +3935,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
-//            
+//              
             contrato.setActividadobras(new LinkedHashSet<Actividadobra>());
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
 
@@ -6383,11 +6392,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 //                        }
 //                    }
-                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
+//                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
                     if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
-                        contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
+                        contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                     }
-
+                   
                     getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                     FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
                 } else {
@@ -6847,5 +6856,5 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         return "consultarContratoConvenio";
+    }   
     }
-}
