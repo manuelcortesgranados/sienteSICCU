@@ -12,7 +12,6 @@ import com.google.gwt.cell.client.DateCell;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -22,7 +21,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
-import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
@@ -669,14 +667,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
                     ActividadobraDTO actiPadre = taskStore.getParent(ac);
                     if (actiPadre != null) {
-                        if (ac.getStartDateTime().compareTo(actiPadre.getStartDateTime()) >= 0 && ac.getStartDateTime().compareTo(actiPadre.getEndDateTime()) < 0) {
-                            if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
-                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
-                                alerta.show();
-                                props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-
-                                getGantt().getGanttPanel().getContainer().refresh();
-                            } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+//                        if (ac.getStartDateTime().compareTo(actiPadre.getStartDateTime()) >= 0 && ac.getStartDateTime().compareTo(actiPadre.getEndDateTime()) < 0) {
+//                            if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
+//                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+//                                alerta.show();
+//                                props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+//
+//                                getGantt().getGanttPanel().getContainer().refresh();
+//                            } else 
+                                //if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                                 String mensaje = validacionCorrecta(actiPadre, ac);
                                 if (!mensaje.equals("continuar")) {
                                     AlertMessageBox alerta = new AlertMessageBox("Alerta", mensaje);
@@ -684,17 +683,27 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                     props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                                     getGantt().getGanttPanel().getContainer().refresh();
                                 } else {
-                                    props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                    int duracionModificar=0;
+                                    if(ac.getStartDateTime().compareTo(actividadAnterior.getStartDateTime())>0){
+                                    duracionModificar=CalendarUtil.getDaysBetween(actividadAnterior.getStartDateTime(), ac.getStartDateTime());
+                                    CalendarUtil.addDaysToDate(ac.getEndDateTime(), duracionModificar);
                                     getGantt().getGanttPanel().getContainer().refresh();
+                                    }else if(ac.getEndDateTime().compareTo(actividadAnterior.getStartDateTime())<0){
+                                    duracionModificar=CalendarUtil.getDaysBetween(ac.getStartDateTime(), actividadAnterior.getStartDateTime());
+                                    ac.getEndDateTime().setDate(ac.getStartDateTime().getDate() -duracionModificar);
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                    }
+                                   // props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                    
                                 }
-                            }
-                        } else {
-                            AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
-                            alerta.show();
-                            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-
-                        }
+                            //}
+//                        } else {
+//                            AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
+//                            alerta.show();
+//                            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+//                            getGantt().getGanttPanel().getContainer().refresh();
+//
+//                        }
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "El convenio no se puede modificar, por favor dirijase a datos basicos");
                         alerta.show();
@@ -705,9 +714,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
                 /*verifico si el dato a modificar es a fecha de fin de la actividad*/
                 if (event.getEditCell().getCol() == 2) {
-                    /*se verifia si la fecha fin  es mayor que la fecha de inicio en este caso seria un error*/
+                    /*se verifia si la fecha fin  es menor que la fecha de inicio en este caso seria un error*/
                     if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser menor que la fecha de inicio");
                         alerta.show();
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         getGantt().getGanttPanel().getContainer().refresh();

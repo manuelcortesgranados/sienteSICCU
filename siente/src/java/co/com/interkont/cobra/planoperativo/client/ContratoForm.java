@@ -163,6 +163,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.propes = propes;
         this.taskStore = taskStore;
         CargarFormularioEditar();
+        seEdito(actividadObraEditar);
+    }
+
+    private void seEdito(ActividadobraDTO actiEditar) {
+        actiEditar.setSeEdito(false);
+        for (ActividadobraDTO actiHija : actiEditar.getChildren()) {
+            seEdito(actiHija);
+        }
     }
 
     private void CargarFormularioEditar() {
@@ -454,81 +462,65 @@ public class ContratoForm implements IsWidget, EntryPoint {
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
         if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
-            service.setLog("ACTIVIDADDDDDDDDDD" + actiHija.getName(), null);
-            int duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
-            service.setLog("duracion en editar" + duracion, null);
-            service.setLog("Fecha Ini en editar Inicial" + actiHija.getStartDateTime(), null);
-            Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
-            CalendarUtil.addDaysToDate(fechaI, duracion);
-            service.setLog("Fecha Ini en editar" + fechaI, null);
+            if (!actiHija.isSeEdito()) {
+                int duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
+                CalendarUtil.addDaysToDate(actiHija.getStartDateTime(), duracion);
 
-//            Date asigFin = CalendarUtil.copyDate(fechaI);
-//            actiHija.setEndDateTime(asigFin);
+                Date asigFin = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                actiHija.setEndDateTime(asigFin);
 
-            ActividadobraDTO actObra = taskStore.getParent(actiHija);
-
-            actiHija.setStartDateTime(fechaI);
-            propes.startDateTime().setValue(actiHija, fechaI);
+                ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
 
-            Date dateFin = CalendarUtil.copyDate(fechaI);
-            service.setLog("Fecha fin en editar antes" + dateFin, null);
-            CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
-            actiHija.setEndDateTime(dateFin);
-            propes.endDateTime().setValue(actiHija, dateFin);
-            service.setLog("Fecha fin en editar" + dateFin, null);
+                service.setLog("Actividad fecha fin primera" + actiHija.getEndDateTime(), null);
+                CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
+                service.setLog("Actividad fecha fin segunda" + actiHija.getEndDateTime(), null);
 
-//            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
-//                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
-//                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
-//                actiHija.setEndDateTime(copiaFechaI);
-//                actiHija.setDuration(duraNueva);
-//                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
-//                propes.endDateTime().setValue(actiHija, copiaFechaI);
-//                propes.duration().setValue(actiHija, duraNueva);
-//
-//            }
+                if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+                    contrato.setDatefechaactaini(actiHija.getStartDateTime());
 
-            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
-                contrato.setDatefechaactaini(actiHija.getStartDateTime());
-
+                }
+                actiHija.setSeEdito(true);
             }
         } else {
+            if (!actiHija.isSeEdito()) {
+                int duracion = CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaContrato);
 
-            int duracion = CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaContrato);
+                Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                fechaI.setDate(fechaI.getDate() - duracion);
 
-            Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
-            fechaI.setDate(fechaI.getDate() - duracion);
+                Date asigFin = CalendarUtil.copyDate(fechaI);
+                actiHija.setEndDateTime(asigFin);
 
-            Date asigFin = CalendarUtil.copyDate(fechaI);
-            actiHija.setEndDateTime(asigFin);
+                ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
-            ActividadobraDTO actObra = taskStore.getParent(actiHija);
-
-            propes.startDateTime().setValue(actiHija, fechaI);
+                propes.startDateTime().setValue(actiHija, fechaI);
 
 
-            Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
-            dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
-            propes.endDateTime().setValue(actiHija, dateFin);
+                Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+                dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
+                propes.endDateTime().setValue(actiHija, dateFin);
 
-            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
-                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
-                service.setLog(msgValidacion, null);
-                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
-                actiHija.setEndDateTime(copiaFechaI);
-                actiHija.setDuration(duraNueva);
-                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
-                propes.endDateTime().setValue(actiHija, copiaFechaI);
-                propes.duration().setValue(actiHija, duraNueva);
+                if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
+                    int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
+                    service.setLog(msgValidacion, null);
+                    Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                    actiHija.setEndDateTime(copiaFechaI);
+                    actiHija.setDuration(duraNueva);
+                    CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
+                    propes.endDateTime().setValue(actiHija, copiaFechaI);
+                    propes.duration().setValue(actiHija, duraNueva);
+
+                }
+
+                if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+                    contrato.setDatefechaactaini(actiHija.getStartDateTime());
+
+                }
+                
+                actiHija.setSeEdito(true);
 
             }
-
-            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
-                contrato.setDatefechaactaini(actiHija.getStartDateTime());
-
-            }
-
         }
     }
 
