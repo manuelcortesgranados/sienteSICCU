@@ -2437,8 +2437,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             SelectItem poli = new SelectItem(polCont.getIntidpolizacontrato(), polCont.getStrdescripcion());
             Poliza[i++] = poli;
         }
-        if (!listaPolizacontratos.isEmpty()){
-             listapolizas = listaPolizacontratos;
+        if (!listaPolizacontratos.isEmpty()) {
+            listapolizas = listaPolizacontratos;
         }
         return null;
     }
@@ -3240,9 +3240,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String agregarPoliza() {
         if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
             //validacion si es plan operativo que valide las fechas dentro del rango de vida del convenio
-            if (bundle.getString("conplanoperativo").equals("true")) {
+            if (getContrato().getBooltipocontratoconvenio() == true) {
+                if (bundle.getString("conplanoperativo").equals("true")) {
+                    try {
+                        ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    } catch (Exception e) {
+                        FacesUtils.addErrorMessage(e.getMessage());
+                        return null;
+                    }
+                }
+            }else{
                 try {
-                    ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
                 } catch (Exception e) {
                     FacesUtils.addErrorMessage(e.getMessage());
                     return null;
@@ -6396,7 +6405,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
                         contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                     }
-                   
+
                     getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                     FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
                 } else {
@@ -6856,5 +6865,5 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         return "consultarContratoConvenio";
-    }   
     }
+}
