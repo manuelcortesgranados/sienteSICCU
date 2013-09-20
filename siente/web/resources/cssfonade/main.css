@@ -4427,3 +4427,20 @@ a:hover {
     margin-left: 11px;
     margin-right: 34px;
 }
+
+.ikont-link-downdoc:link {
+     display: block;
+    height: 15px;
+    text-decoration: none;
+    width: 35px;
+    border: 1px solid #D0D0D0;    
+    background-color: #FFF;
+    padding-top: 5px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;  
+    
+}
+
+.ikont-link-downdoc:hover{ 
+   background-color: #1E4C00 !important;
+}
