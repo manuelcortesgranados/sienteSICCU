@@ -40,7 +40,7 @@
             <h:panelGroup id="gpPrincipalAlimentar" rendered="#{Supervisor$Alimentar.vertodoalimentar}">
                 <rich:collapsiblePanel header="#{var.definirperiodoavance}" switchType="ajax" id="gpAlimentarObra"   rendered="#{!Supervisor$Alimentar.editarActividades}">
 
-                    <h:panelGrid id="gpBasicos" columns="2" >
+                    <h:panelGrid cellpadding="20" cellspacing="10" id="gpBasicos" columns="2" >
                         <h:panelGrid columns="2"  columnClasses="panelizquierda verticalalingtop,panelcenter" >
                             <h:panelGroup >
                                 <h:panelGrid id="valores" columns="2" >
@@ -83,7 +83,7 @@
                                 </h:panelGrid>
 
 
-                                <h:panelGrid id="layoutEjecutado" columns="3">
+                                <h:panelGrid cellspacing="10" id="layoutEjecutado" columns="3">
                                     <h:outputText  styleClass="ikont-hot-valorejecu1"    value="#{var.valortotalejecutado}:"/>
                                     <h:panelGroup id="valorEjecutado">
                                         <h:outputText  styleClass="ikont-hot-valorejec2"   id="labelValorEjecutado"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
@@ -118,7 +118,7 @@
                                 <center>
                                     <h:panelGrid id="layoutComentario2" columns="1" columnClasses="panelcenter" rendered="#{var.alimentartext}">
 
-                                        <h:inputTextarea cols="60" id="comentSem2" style=""  rows="8" styleClass="ikont-hita-comentSem2"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
+                                        <h:inputTextarea cols="60" id="comentSem2" style="width: 557px!important;"  rows="8" styleClass="ikont-hita-comentSem2"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
                                         <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
 
                                     </h:panelGrid>
@@ -132,73 +132,75 @@
                     <rich:collapsiblePanel header="#{var.actividadesproyecto}"  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
 
                         <h:panelGroup layout="block" id="layoutTablaMatrix" >
+                            <center>
                             <h:panelGrid columns="2" >
-                                <rich:dataTable  id="datosgeneralesAlimentar" >
+                                    <rich:dataTable  id="datosgeneralesAlimentar" >
 
-                                    <f:facet name="header">
+                                        <f:facet name="header">
+                                            <rich:columnGroup>
+                                                <rich:column    colspan="5">
+
+                                                </rich:column>
+
+                                                <rich:column  breakRowBefore="true" width="160px">
+                                                    <h:outputText  styleClass="ikont-hot-rc1"   value="#{var.valorproyecto}"/>
+                                                </rich:column>
+                                                <rich:column  width="150px">
+                                                    <h:outputText  styleClass="ikont-hot-rc2"   value="#{var.valorejecutadofecha}"/>
+                                                </rich:column>
+                                                <rich:column   width="150px">
+                                                    <h:outputText  styleClass="ikont-hot-rc3"   value="#{var.valorejeesteeporte}"/>
+                                                </rich:column>
+                                                <rich:column   width="150px">
+                                                    <h:outputText  styleClass="ikont-hot-rc4"   value="#{var.valorejecutadoacumulado}"/>
+                                                </rich:column>
+                                                <rich:column   width="150px">
+                                                    <h:outputText  styleClass="ikont-hot-rc5"  value="#{var.porcentajeavanceacum}"/>
+                                                </rich:column>                                                
+
+                                            </rich:columnGroup>
+                                        </f:facet>
                                         <rich:columnGroup>
-                                            <rich:column    colspan="5">
-
-                                            </rich:column>
-
-                                            <rich:column  breakRowBefore="true" width="160px">
-                                                <h:outputText  styleClass="ikont-hot-rc1"   value="#{var.valorproyecto}"/>
-                                            </rich:column>
-                                            <rich:column  width="150px">
-                                                <h:outputText  styleClass="ikont-hot-rc2"   value="#{var.valorejecutadofecha}"/>
-                                            </rich:column>
-                                            <rich:column   width="150px">
-                                                <h:outputText  styleClass="ikont-hot-rc3"   value="#{var.valorejeesteeporte}"/>
-                                            </rich:column>
-                                            <rich:column   width="150px">
-                                                <h:outputText  styleClass="ikont-hot-rc4"   value="#{var.valorejecutadoacumulado}"/>
-                                            </rich:column>
-                                            <rich:column   width="150px">
-                                                <h:outputText  styleClass="ikont-hot-rc5"  value="#{var.porcentajeavanceacum}"/>
-                                            </rich:column>                                                
-
+                                            <rich:column ></rich:column>
                                         </rich:columnGroup>
-                                    </f:facet>
-                                    <rich:columnGroup>
-                                        <rich:column ></rich:column>
-                                    </rich:columnGroup>
-                                    <f:facet name="footer">
-                                        <rich:columnGroup>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-stvaltotal2"   id="stvaltotal2"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-stvaleje2"   id="stvaleje2"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra}">
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-stvalejecreporte2"   id="stvalejecreporte2"   value="#{Supervisor$Alimentar.totales[1]}">
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-stvalejecacum2"   id="stvalejecacum2"  value="#{Supervisor$Alimentar.totales[1]+Supervisor$AdministrarObraNew.obra.numvalejecobra}">
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-stporceporeje2"   id="stporceporeje2"  value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1])/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                    <f:convertNumber pattern="###.## %"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                    </f:facet>
+                                        <f:facet name="footer">
+                                            <rich:columnGroup>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-stvaltotal2"   id="stvaltotal2"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                        <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-stvaleje2"   id="stvaleje2"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                        <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-stvalejecreporte2"   id="stvalejecreporte2"   value="#{Supervisor$Alimentar.totales[1]}">
+                                                        <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-stvalejecacum2"   id="stvalejecacum2"  value="#{Supervisor$Alimentar.totales[1]+Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                        <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-stporceporeje2"   id="stporceporeje2"  value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1])/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                        <f:convertNumber pattern="###.## %"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                            </rich:columnGroup>
+                                        </f:facet>
 
-                                </rich:dataTable>
+                                    </rich:dataTable>
+                         
                                 <h:panelGrid styleClass="ikont-hpg-gridalim1"   cellpadding="0" cellspacing="0" >
                                     <a4j:commandLink styleClass="ikont-acl-calculaMatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
                                                      render="layoutTablaMatrix, layoutComentafactor" />
                                 </h:panelGrid>
                             </h:panelGrid>
-
+                        </center>
 
                             <interkont:spacer height="10" />
                             <center>
@@ -386,7 +388,7 @@
                                         <center>
                                             <rich:dataTable sortMode="single"  
                                                             value ="#{Supervisor$Alimentar.listitemculi}" var="row" rendered="#{not empty Supervisor$Alimentar.listitemculi}" binding="#{Supervisor$Alimentar.tablaEliminarItemCualita}"
-                                                           >
+                                                            >
 
                                                 <rich:column id="tc-strAspectoEvualuar" width="600px">
                                                     <f:facet name="header">
@@ -532,7 +534,7 @@
                 </h:panelGrid>
 
                 <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
-
+                    <center>
                     <h:panelGrid id="layoutImagenDetalle" styleClass="ikont-hpg-imgdeta"   >
                         <h:graphicImage  styleClass="ikont-hgi-imgPeriodo"   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
@@ -540,6 +542,7 @@
                                                    return true;"
                                            styleClass="ikont-acb-adjunimg" />
                     </h:panelGrid>
+                        </center>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel header="#{var.anadirotrosdoc}" switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}"  rendered="#{!Supervisor$Alimentar.editarActividades}">
 
