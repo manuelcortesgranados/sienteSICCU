@@ -114,16 +114,14 @@
                 </div>
             </center>
 
-            <h:form prependId="false" id="hhhh" >
-                <h:panelGrid id="ikont-filtro-solo">
-                    <ui:include src="/Supervisor/filtrozoom.xhtml"/> 
-                </h:panelGrid>
+            <h:form prependId="false">               
+                    <ui:include src="/Supervisor/filtrozoom.xhtml"/>                
             </h:form>
      
 
                 <h:panelGrid id="panel_mapa_filtro" style="position: relative;top: 4px;right: -9px;" >
 
-                    <h:panelGroup id="conteo_proyectos" style="width: 20px!important;position: relative;top: -220px;left: 842px;text-align: right;">
+                    <h:panelGroup id="conteo_proyectos" style="width: 20px!important;position: relative;top: -220px;left: 779px;text-align: right;">
                      <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
                         <h:outputText  styleClass="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
                         <!--h:outputText  styleClass="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/-->
@@ -161,7 +159,7 @@
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
-                    </h:panelGrid>
+                    </h:panelGrid>            
                     <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
 
                         <rich:dataGrid styleClass="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
@@ -177,7 +175,7 @@
                                     <a4j:commandLink id="irDetalle"  onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra>0}">
                                         <h:graphicImage  styleClass="ikont-hgi-strimagneobra" value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
                                     </a4j:commandLink>
-                                </h:panelGrid>
+                </h:panelGrid>
                                 <rich:tooltip followMouse="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"  showDelay="500" styleClass="ikont-rtt-btndetalleproyecto"  >
                                     <h:outputLabel  styleClass="ikont-hol-strnombreobra"   value="#{obras.strnombreobra}"/>
                                 </rich:tooltip>
