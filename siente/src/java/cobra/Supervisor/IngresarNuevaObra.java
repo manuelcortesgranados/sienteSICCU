@@ -1280,9 +1280,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setTableLocalidadbarrio(UIDataTable tableLocalidadbarrio) {
         this.tableLocalidadbarrio = tableLocalidadbarrio;
     }
-    
 
-    
     public UIDataTable getTablaregiones() {
         return tablaregiones;
     }
@@ -1500,7 +1498,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setTablaObrasPadres(UIDataTable tablaObrasPadres) {
         this.tablaObrasPadres = tablaObrasPadres;
     }
-    
+
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -1581,7 +1579,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarBarrios();
         llenarVeredas();
         llenarComunas();
-       llenarCorregimientos();
+        llenarCorregimientos();
     }
 
     /**
@@ -1908,7 +1906,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         address = "Bogotá";
         tiproyectoselec = 0;
         subtiposelec = 0;
-        tiahselect = 0;       
+        tiahselect = 0;
         img = false;
         imgppal = false;
         marli = new ArrayList<Marcador>();
@@ -1928,12 +1926,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
         chequiarFase(0);
-        if(getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")){  
-        tiahselect = 2;    
-        obtenerFaseSeleccionada(1);
+        if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
+            tiahselect = 2;
+            obtenerFaseSeleccionada(1);
         }
-        
-        
+
+
         return "nuevoProyecto";
 
     }
@@ -3813,7 +3811,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String desasociarContrato() {
-         Relacioncontratoobra contselec = (Relacioncontratoobra) tablalistacontratos.getRowData();
+        Relacioncontratoobra contselec = (Relacioncontratoobra) tablalistacontratos.getRowData();
 //        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
 //        Relacioncontratoobra contselec = ign.getListacontratosobra().get(filaSeleccionada);
         listacontratosobra.remove(contselec);
@@ -4078,21 +4076,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             }
             comunas[i++] = item;
         }
-        return  null;
+        return null;
     }
 
     /**
-     * Llenado de selectitem corregimientos.
-     *  public String llenarMunicipio() {
-        queryMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(codDepartamento);
-        Municipio = new SelectItem[queryMunicipios.size()];
-        int i = 0;
-        for (Localidad muni : queryMunicipios) {
-            SelectItem mun = new SelectItem(muni.getStrcodigolocalidad(), muni.getStrmunicipio());
-            Municipio[i++] = mun;
-        }
-        return null;
-    }
+     * Llenado de selectitem corregimientos. public String llenarMunicipio() {
+     * queryMunicipios =
+     * getSessionBeanCobra().getCobraService().encontrarMunicipios(codDepartamento);
+     * Municipio = new SelectItem[queryMunicipios.size()]; int i = 0; for
+     * (Localidad muni : queryMunicipios) { SelectItem mun = new
+     * SelectItem(muni.getStrcodigolocalidad(), muni.getStrmunicipio());
+     * Municipio[i++] = mun; } return null; }
      */
     public String llenarCorregimientos() {
         List<Corregimiento> lista = getSessionBeanCobra().getCobraService().encontrarCorregimientos();
@@ -4107,7 +4101,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             corregimientos[i++] = item;
 
         }
-        return  null;
+        return null;
     }
 
     /**
@@ -4122,7 +4116,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem item = new SelectItem(com.getIntcodigobarrio(), com.getStrnombrebarrio());
             barrios[i++] = item;
         }
-        return  null;
+        return null;
     }
 
     /**
@@ -4136,7 +4130,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem item = new SelectItem(com.getIntcodigovereda(), com.getStrnombrevereda());
             veredas[i++] = item;
         }
-       return  null;
+        return null;
     }
 
     /**
@@ -4646,11 +4640,20 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return Regla de navegacion "datosubicaciondelaObra"
      */
     public String validabasicos() {
-        if (validarPasoDatosBasicos()) {
-            return pasaraUbicacion();
+        if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
+            System.out.println("entre al de fonade = ");
+            if (validarPasoDatosBasicos() && validarFechasProyectoInicio() && validarFechasProyectoFin()) {
+                return pasaraUbicacion();
+            }
         } else {
-            return null;
+            if (validarPasoDatosBasicos()) {
+                return pasaraUbicacion();
+            } else {
+                return null;
+            }
         }
+        return null;
+
     }
 
     /**
@@ -4676,6 +4679,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * contrario True
      */
     public boolean validarPasoDatosBasicos() {
+        System.out.println("entro al validar = ");
         if (obranueva.getStrnombreobra() == null || obranueva.getStrnombreobra().equals("")) {
             FacesUtils.addErrorMessage(bundle.getString("debedarunnombraalaobra"));
             datosbas = false;
@@ -4694,6 +4698,24 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     }
                 }
             }
+        }
+        return true;
+    }
+    
+    public boolean validarFechasProyectoInicio() {
+        if(obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0  ){
+             FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));               
+                datosbas = false;
+                return false;             
+        }
+        return true;
+    }
+    
+     public boolean validarFechasProyectoFin() {
+         if(obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0  ){
+             FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));               
+                datosbas = false;
+                return false;             
         }
         return true;
     }
@@ -4786,7 +4808,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return Retorna Regla de navegacion "datosbasicosnuevoproyecto" de lo
      * contrario null
      */
-    public String pasarDatosBasicos() {      
+    public String pasarDatosBasicos() {
         if (validarTipificacion()) {
             return "datosbasicosnuevoproyecto";
         } else {
@@ -5378,7 +5400,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Elimina un barrio de la lista de barrios
      *
      * @return
-     * 
+     *
      */
     public String eliminarBarrio() {
         listaBarrios.remove((Barrio) tableLocalidadbarrio.getRowData());
@@ -5457,7 +5479,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             verConfirmar = true;
         } else {
             //mensaje no encontro con la direccion suministrada
-            address ="";
+            address = "";
             verConfirmar = false;
         }
     }
