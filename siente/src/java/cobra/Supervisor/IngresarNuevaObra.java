@@ -4641,7 +4641,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String validabasicos() {
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
-            System.out.println("entre al de fonade = ");
             if (validarPasoDatosBasicos() && validarFechasProyectoInicio() && validarFechasProyectoFin()) {
                 return pasaraUbicacion();
             }
@@ -4702,6 +4701,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         return true;
     }
     
+    /**
+     *valida si las fechas de inicio del proyecto esta dentro del rango de convenio
+     * @return Retorna false si las fecha inicial es menor que la fecha inicial del convenio
+     */
     public boolean validarFechasProyectoInicio() {
         if(obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0  ){
              FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));               
@@ -4711,7 +4714,11 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         return true;
     }
     
-     public boolean validarFechasProyectoFin() {
+     /**
+     *valida si las fechas de fin del proyecto esta dentro del rango de convenio
+     * @return Retorna false si las fecha fin es menor que la fecha fin del convenio
+     */ 
+    public boolean validarFechasProyectoFin() {
          if(obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0  ){
              FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));               
                 datosbas = false;
