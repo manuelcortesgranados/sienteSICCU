@@ -2,19 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <script>
-        function contieneError() {
-             return document.getElementById("hayError").value >0;
-       };
-</script>
+            function contieneError() {
+                return document.getElementById("hayError").value > 0;
+            }
+            ;
+        </script>
     </h:head>
-    
+
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
@@ -26,7 +27,8 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
                                      title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                     styleClass="ikont-hcl-subircronograma closemodal"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                     styleClass="ikont-hcl-subircronograma closemodal"   onclick="#{rich:component('mp_subircronograma')}.hide();
+                return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -75,18 +77,18 @@
                                 <a4j:commandButton id="bt_borrarCronogramaSubido" action="#{Supervisor$IngresarNuevaObra.borrarCronograma}" 
                                                    render="infoCrono, uploadCrono, layoutDoc, pasoGenCron,hayError, formCronograma" execute="@form"
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                    >
+                                                   >
                                 </a4j:commandButton>
                                 <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
                                                    value="#{var.validar}" 
-                                                   render="infoCrono,pasoGenCron" execute="@this, infoCrono, layoutDoc"
+                                                   render="infoCrono,pasoGenCron" execute="@this, infoCrono, layoutDoc,forsubircro"
                                                    onclick="#{rich:component('mp_subircronograma')}.hide();"
                                                    >
-                                      </a4j:commandButton>
+                                </a4j:commandButton>
 
                             </center>
 
-                            
+
                         </h:panelGroup>
 
                     </h:panelGrid>
