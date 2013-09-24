@@ -247,7 +247,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
+        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes,contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 

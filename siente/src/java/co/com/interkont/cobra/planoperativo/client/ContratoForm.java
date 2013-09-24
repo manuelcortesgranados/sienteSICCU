@@ -138,7 +138,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public ContratoForm() {
     }
 
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -149,9 +149,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
         idtempRelacionRecursos = 0;
         idtempRubros = 0;
         this.taskStore = taskStore;
+        this.convenioDto=convenio;
     }
 
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
@@ -162,6 +163,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
         this.taskStore = taskStore;
+        this.convenioDto=convenio;
         CargarFormularioEditar();
         seEdito(actividadObraEditar);
     }
@@ -715,7 +717,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), actividadObraContrato);
         actividadObraPadre.addChild(actividadObraContrato);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
+        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes,convenioDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 

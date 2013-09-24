@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.server.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
@@ -20,6 +21,7 @@ import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -68,6 +70,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
                 contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
+                    obtenerDependenciasObligatorias();
             } catch (Exception ex) {
                 Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -93,13 +96,56 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         this.log.info(log);
     }
 
-//    @Override
-//    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
-//        return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
-//    }
+    public void obtenerDependenciasObligatorias() {
+        List<ActividadobraDTO> lstActiObligatorias = new ArrayList<ActividadobraDTO>(contratoDto.getActividadobras());
+        for (ActividadobraDTO actiHija : lstActiObligatorias.get(0).getChildren()) {
+            if (actiHija.getName().equals("Acta de Inicio del Convenio")) {
+                System.out.println("aca" + actiHija.getName());
+                //enlazarDependenciasIniciales("Reglamento de Plan Operativo", lstActiObligatorias.get(0).getChildren(), actiHija);
+            } else if (actiHija.getName().equals("Reglamento de Plan Operativo")) {
+                System.out.println("aca" + actiHija.getName());
+                //enlazarDependenciasIniciales("Aprobación de Plan Operativo", lstActiObligatorias.get(0).getChildren(), actiHija);
+            } else if (actiHija.getName().equals("Planeación del Convenio")) {
+                enlazarDependenciasIniciales(lstActiObligatorias.get(0).getChildren().get(1), actiHija);
+            } else if (actiHija.getName().equals("Ejecución del Convenio")) {
+                enlazarDependenciasIniciales(lstActiObligatorias.get(0).getChildren().get(2), actiHija);
+            }
+        }
+        System.out.println("lstDependencias:" + contratoDto.getDependenciasGenerales().size());
+    }
+
+    public void enlazarDependenciasIniciales(ActividadobraDTO actividadTo, ActividadobraDTO actividadFrom) {
+        if (actividadTo != null) {
+            contratoDto.getDependenciasGenerales().add(crearDependencia(actividadFrom, actividadTo));
+        }
+    }
+
+    public DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
+        DependenciaDTO dep = new DependenciaDTO();
+        dep.setId((String.valueOf(new Date().getTime())));
+        dep.setActividadFrom(actividadFrom);
+        dep.setActividadTo(actividadTo);
+        dep.setFromId(actividadFrom.getName());
+        dep.setToId(actividadTo.getName());
+        dep.setType(GanttConfig.DependencyType.ENDtoSTART);
+        return dep;
+    }
+
+    public ActividadobraDTO buscarActividad(String nombreActividad, List<ActividadobraDTO> lstActividades) {
+        for (ActividadobraDTO act : lstActividades) {
+            if (act.getName().equals(nombreActividad)) {
+                return act;
+            }
+        }
+        return null;
+    }
+
     @Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin) throws Exception {
          
+        Date fechaPlaneacion = new Date();
+        Date fechaEjecucion = new Date();
+
         ActividadobraDTO t = new ActividadobraDTO(contratoDto.getStrnumcontrato(), contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(),
                 0, GanttConfig.TaskType.PARENT, 1, false);
         t.setTipoActividad(1);       
@@ -114,7 +160,19 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 ActividadobraDTO actdto = null;
                 if (par.getIdparametrica() == 3) {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechafin, 1, 0);
+                    actdto.setEsNoEditable(true);
+                } else if (par.getIdparametrica() == 1) {
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
+                    actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
+                   actdto.setEsNoEditable(true);
+                    CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
+                    fechaPlaneacion = CalendarUtil.copyDate(actdto.getEndDateTime());
                    
+                } else if (par.getIdparametrica() == 2) {
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechaPlaneacion, 1, 0);
+                    actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
+                    actdto.setEsNoEditable(true);
+                    CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
                 } else {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
                 }
@@ -123,10 +181,10 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                     if (parhija.getParametricaactividadesobligatorias() != null && parhija.getParametricaactividadesobligatorias().getIdparametrica() == par.getIdparametrica()) {
                         //Coloca 1 dia para Acta de Inicio de convenio
                         if (parhija.getIdparametrica() == 4) {
-                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
+                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaini()), 1, 0));
                            
                         } else if (parhija.getIdparametrica() == 7) {
-                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fechafin, 1, 0));
+                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, contratoDto.getDatefechafin(), 1, 0));
                         } else {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
                            
@@ -187,5 +245,4 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         }
         return lstRubrosDTO;
     }
-
 }

@@ -16,6 +16,7 @@ import com.sencha.gxt.data.shared.TreeStore;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +29,7 @@ import java.util.Set;
 public class GanttDatos {
 
     private static CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    private static Date fechaComparar;
 
     /**
      * Método para construir toda la estructura jerárquica de las tareas del
@@ -84,7 +86,6 @@ public class GanttDatos {
         convenio.setDatefechafin(lista.get(0).endDateTime);
         convenio.setIntduraciondias(lista.get(0).duration);
         convenio.getActividadobras().clear();
-        // convenio.setDependenciasGenerales(new LinkedHashSet(0));
         convenio.getActividadobras().add(lista.get(0));
         for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
@@ -140,20 +141,91 @@ public class GanttDatos {
         }
     }
 
-    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
+    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
         if (actividadPadre != null) {
-            List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-            service.setLog("actividad:" + actividadPadre.getName(), null);
-            int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
-            Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
-            CalendarUtil.addDaysToDate(copiaFecha, duracion);
-            props.endDateTime().setValue(actividadPadre, copiaFecha);
-            modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props);
+            if (actividadPadre.getTipoActividad() != 1) {
+                List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
+                int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
+                Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
+                CalendarUtil.addDaysToDate(copiaFecha, duracion);
+                props.endDateTime().setValue(actividadPadre, copiaFecha);
+                if (actividadPadre.getName().equals("Planeación del Convenio")) {
+                    fechaComparar = actividadPadre.getEndDateTime();
+                    buscarActividad(contrato, 1, taskStore, props);
+                } else if (actividadPadre.getName().equals("Ejecución del Convenio")) {
+                    fechaComparar = actividadPadre.getEndDateTime();
+                    buscarActividad(contrato, 2, taskStore, props);
+                }
 
+                modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
+
+            }
         } else {
-            service.setLog("entre en gant datos 2 null", null);
+            service.setLog("entre en gant datos Con padre convenio", null);
         }
 
+    }
+
+    public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
+        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
+        if (tipo == 1) {
+            service.setLog("En buscar actividad 1:" + lstActividades.get(0).getChildren().get(1).getName(), null);
+            odifi(lstActividades.get(0).getChildren().get(1), taskStore, props, contrato);
+            fechaComparar=lstActividades.get(0).getChildren().get(1).endDateTime;
+            service.setLog("En buscar actividad liquidacion:", null);
+            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props,contrato);
+        } else {
+            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
+        }
+    }
+
+    public static void odifi(ActividadobraDTO act, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
+        m(act, taskStore, props, contrato);
+
+        if (!act.getChildren().isEmpty()) {
+            for (ActividadobraDTO actiHija : act.getChildren()) {
+                odifi(actiHija, taskStore, props, contrato);
+            }
+        }
+    }
+
+    public static void m(ActividadobraDTO actiHija, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
+
+        /*verifico el sentido en que tengo que hacer el movimiento de las
+         * actividades si necesito aumentar la fecha de inicio o disminuirla*/
+          if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
+
+            int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaComparar);
+            Date fecha = CalendarUtil.copyDate(actiHija.getStartDateTime());
+            CalendarUtil.addDaysToDate(fecha, duracion);
+
+            Date asigFin = CalendarUtil.copyDate(fecha);
+            actiHija.setEndDateTime(asigFin);
+
+            CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
+           
+            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+                actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
+
+            }
+            if (actiHija.getName().equals("Suscripcion del contrato")) {
+                actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
+            }
+            if(actiHija.getTipoActividad()==2){
+            actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
+            actiHija.getObra().setFechaFin(actiHija.startDateTime);
+            }else if(actiHija.getTipoActividad()==3){
+            actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
+            }
+            props.startDateTime().setValue(actiHija, fecha);
+    
+            taskStore.update(actiHija);
+
+       }
+    }
+
+    public static void modifi(ActividadobraDTO actiObraInicial, ActividadobraDTO actividadObraFinal, int etapaModificar, TreeStore<ActividadobraDTO> taskStore) {
+        taskStore.getChildren(actiObraInicial);
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
@@ -163,7 +235,6 @@ public class GanttDatos {
                 menor = listaHijas.get(i).getStartDateTime();
             }
         }
-        service.setLog("menor:" + menor, null);
         return CalendarUtil.copyDate(menor);
     }
 
@@ -174,32 +245,30 @@ public class GanttDatos {
                 mayor = listaHijas.get(i).getEndDateTime();
             }
         }
-        service.setLog("mayor:" + mayor, null);
         return CalendarUtil.copyDate(mayor);
     }
 
     public static void enlazarActividadConDependencia(List<DependenciaDTO> lstDependencias, List<ActividadobraDTO> lstActividades) {
-        service.setLog("entre enlazar acti dep", null);
         for (DependenciaDTO dependencia : lstDependencias) {
-            service.setLog("entre enlazar acti dep 1", null);
             buscarActividadDependencia(dependencia.getActividadFrom(), dependencia, lstActividades, 1);
-            //buscarActividadDependencia(dependencia.getActividadTo(), dependencia, lstActividades, 2);
         }
-        service.setLog("sali enlazar acti dep", null);
     }
 
     //busca donde esa dependencia la actividadobra origen y l destino
     //y agregarla a la respectiva lista
     public static void buscarActividadDependencia(ActividadobraDTO actividadObraBuscada, DependenciaDTO dependencia, List<ActividadobraDTO> lstActividades, int lstDependencia) {
-        service.setLog("entre buscarActividadDependencia", null);
         for (ActividadobraDTO act : lstActividades) {
             if (act.getName().equals(actividadObraBuscada.getName())) {
-                service.setLog("entre buscarActividadDependencia 1" + act.getDependenciasForFkActividadOrigen().size(), null);
                 act.getDependenciasForFkActividadOrigen().add(dependencia);
-                service.setLog("entre buscarActividadDependencia 3", null);
 
             }
         }
-        service.setLog("sali buscarActividadDependencia", null);
+
+    }
+    
+     public static ActividadobraDTO obtenerActividadDeRaiz(int i,ContratoDTO contratoDto) {
+        Iterator it = contratoDto.getActividadobras().iterator();
+        ActividadobraDTO actiRaiz = (ActividadobraDTO) it.next();
+        return actiRaiz.getChildren().get(i);
     }
 }
