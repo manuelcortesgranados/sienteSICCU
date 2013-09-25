@@ -39,20 +39,7 @@
                                 </h:inputText>
                                 <rich:message for="hit-nom-convenio"/>
                             </rich:column>
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="2" styleClass="panel_val_estimado" id="ikont-hpg-valorestimado">
-                            <rich:column>
-                                <h:outputText value="Valor estimado" styleClass="input_val_estimado label_texto_convenio"/>
-                            </rich:column>
-                            <rich:column>
-                                <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="width: 320px!important;height: 32px!important;" onkeyup="formatMoney(this);" disabled="true">
-                                    <rich:placeholder value="#{var.valorestimado}" />                                  
-                                </h:inputText>
-                                <rich:message for="hit-valorest-convenio"/>
-                            </rich:column>
-                        </h:panelGrid>
-
+                        </h:panelGrid>                        
                         <h:panelGrid columns="2" styleClass="panel_obj_convenio">
                             <rich:column>
                                 <h:outputText value="Objeto del convenio" styleClass="input_obj_convenio label_texto_convenio"/>
@@ -113,7 +100,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </a4j:region>
-                
+
                 <br/>
                 <br/>
                 <br/>
@@ -237,7 +224,7 @@
                 <br/>
                 <br/>
 
-                
+
                 <h:panelGrid cellspacing="10" cellpadding="10">
                     <a4j:commandButton value="#{var.adicionar}" 
                                        action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos}" 
@@ -332,7 +319,21 @@
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
-                </rich:dataTable>                       
+                </rich:dataTable> 
+                <h:panelGrid columns="2" styleClass="panel_val_estimado" id="ikont-hpg-valorestimado" style="position: relative; left: 1%">                
+                    <rich:column>
+                            <h:outputLabel id="hit-valorest-convenio" value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="font-size: 44px;font-family: 'Open Sans'; color: #257500;" onkeyup="formatMoney(this);" >
+                                <rich:placeholder value="#{var.valorestimado}" />                                  
+                                <f:convertNumber currencySymbol="$ " type="currency" />
+                            </h:outputLabel>
+                            <br/>
+                            <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 4%;" value="Valor total del convenio"/>
+                            <br/>
+                            <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 23%;" value="(Acumulado)"/>
+                            <rich:message for="hit-valorest-convenio"/>
+                        </rich:column>                    
+                </h:panelGrid>
+
                 <br/>            
             </center>
 

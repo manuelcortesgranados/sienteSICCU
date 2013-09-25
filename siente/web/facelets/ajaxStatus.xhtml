@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:a4j="http://richfaces.org/a4j"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -14,18 +14,19 @@
             return true;
         }
         var bPreguntar = false;
-        window.onbeforeunload = function (){
-            if (!bPreguntar)
-                return #{rich:component('ajaxLoadingModalBox')}.show();
-            return true;
-        }
-        
-        function windowdownload(){
-            window.onfocus = function(){
-                #{rich:component('ajaxLoadingModalBox')}.hide(); return false;
+        window.onbeforeunload = function() {
+            if (!bPreguntar){
+                return #{rich:component('ajaxLoadingModalBox')}.show(); 
             }
         }
-        
+
+        function windowdownload() {
+            window.onfocus = function() {
+        #{rich:component('ajaxLoadingModalBox')}.hide();
+                return false;
+            }
+        }
+
     </script>
     <rich:popupPanel id="ajaxLoadingModalBox" resizeable="false" zindex="3000" styleClass="ikont-rpp-modal-box"> 
         <center>
