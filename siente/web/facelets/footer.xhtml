@@ -10,7 +10,7 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    <h:form styleClass="ikont-hp-footer">
+    <h:form styleClass="ikont-hp-footer" prependId="false">
         <h:panelGroup layout="block" styleClass="ikont-hpg-content-footer">
             <h:panelGrid columns="1" styleClass="panelcenter" columnClasses="panelcenter,panelcenter,panelcenter,panelcenter,panelcenter,panelcenter">
                 <h:panelGroup layout="block" styleClass="panelcenter ikont-hpg-conectatezoom" >
@@ -46,36 +46,43 @@
                 </h:panelGroup>
             </h:panelGrid>
         </h:panelGroup>
+        <a4j:jsFunction name="closeaplication" render="body"  execute="@this" immediate="true" oncomplete="location.reload(true);">
+            <a4j:actionListener listener="#{SessionBeanCobra.cerrarSession_action}"/>
+        </a4j:jsFunction>
     </h:form>
+    <ui:include src="/modal/sessionclose.xhtml"/>
+    <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        function formatMoney(_element) {
+        function formatNumber(_element) {
             var _value = _element.value;
-            var _int = /^(?:\+|-)?\d+$/;
+            var _int = /^(\d{1}\.)?(\d+\.?)+(,\d{2})?$/;
             var _reg = new RegExp(_int);
-            var _valuetotal = _value.replace(/./g, "");
-           // _valuetotal = _valuetotal.replace(/$/gi, "");
-            //_valuetotal = _valuetotal.replace(/,/gi, "");
             if (_value) {
-                console.log(_valuetotal);
-                console.log(_element.getAttribute("money"));
-                if (_valuetotal != _element.getAttribute("money")) {
-                    var _caracter = _value.substring((_value.length) - 1);
-                    if (_caracter.match(_reg)) {
-                        var _num = (_element.getAttribute("money")) ? _element.getAttribute("money") : "";
-                        _element.setAttribute("money", _num + "" + _caracter);
-                        var _money = formatNumber(parseInt(_element.getAttribute("money")), "$");
-                        _element.value = _money;
-                    } else {
-                        _element.value = _value.substring(0, (_value.length) - 1)
-                    }
+                if (_value.match(_reg)) {
+                    var _money = formatMoney(_value, "$");
+                    _element.value = _money;
                 }
-            } else {
-                _element.setAttribute("money", "0");
             }
         }
 
-        function formatNumber(num, prefix)
+        function returnNumber(_element) {
+            var _value = _element.value;
+            var _int = /^(?:\+|-)?\d+$/;
+            var _reg = new RegExp(_int);
+            var _decimal = _value.substring((_value.length) - 2);
+            _value = (parseInt(_decimal)) ? _value : _value.substring(0, (_value.length) - 2);
+            if (_value) {
+                var _valuetotal = _value.replace(/\./g, "");
+                _valuetotal = _valuetotal.replace('$', "");
+                _valuetotal = _valuetotal.replace(/\,/g, "");
+                if (_valuetotal.match(_reg)) {
+                    _element.value = _valuetotal;
+                }
+            }
+        }
+
+        function formatMoney(num, prefix)
         {
             num = Math.round(parseFloat(num) * Math.pow(10, 2)) / Math.pow(10, 2)
             prefix = prefix || '';
@@ -91,5 +98,30 @@
             }
             return prefix + splitLeft + splitRight;
         }
+        
+        var $jq = jQuery.noConflict();
+        $jq(document).ready(function() {
+            statesessionaplication();
+            setInterval(function() {
+                statesessionaplication();
+            }, 5000);
+        });
+
+        function statesessionaplication() {
+            if (localStorage.getItem('closeaplicaction') == 'true') {
+                localStorage.setItem('closeaplicaction', new Date().getTime());
+            }
+            var _after = (parseInt(localStorage.getItem('closeaplicaction'))) ? parseInt(localStorage.getItem('closeaplicaction')) : new Date().getTime();
+            var _time = parseInt(new Date().getTime()) - _after;
+            if (parseInt(_time) > 30000) {
+                localStorage.setItem('closeaplicaction', 'true');
+                closeaplication();
+                #{rich:component('sessioncloseaplication')}.show();
+                
+            } else {
+                localStorage.setItem('closeaplicaction', new Date().getTime());
+            }
+        }
+        
     </script>
 </ui:composition>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition   
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+    <rich:popupPanel id="sessioncloseaplication"  resizeable="false"  
+                     >
+        <f:facet name="header" >           
+            <h:outputText styleClass="ikont-hot-confirmarciudadano" value="Sesión cerrada"/>
+        </f:facet>
+        <h:panelGroup layout="block" styleClass="ikont-rp-confirmarciudadano">
+            <h:panelGroup layout="block" styleClass="ikont-rp-pgguardarciudadano"   >
+                <h:outputText value="La sesión se ha cerrado, por salir de la aplicación, por favor ingrese de nuevo."/>
+            </h:panelGroup>
+        </h:panelGroup>
+    </rich:popupPanel>
+</ui:composition>
