@@ -30,6 +30,7 @@ public class ActividadobraDTO implements IsSerializable {
     int percentDone;
     private int tipoActividad;
     private boolean seEdito;
+    private boolean  esNoEditable;
     /**
      * Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre,
      * Milestone=Hito
@@ -485,4 +486,19 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
         this.seEdito = seEdito;
     }
 
+    /**
+     * @return the esNoEditable
+     */
+    public boolean isEsNoEditable() {
+        return esNoEditable;
+    }
+
+    /**
+     * @param esNoEditable the esNoEditable to set
+     */
+    public void setEsNoEditable(boolean esNoEditable) {
+        this.esNoEditable = esNoEditable;
+    }
+
+    
 }

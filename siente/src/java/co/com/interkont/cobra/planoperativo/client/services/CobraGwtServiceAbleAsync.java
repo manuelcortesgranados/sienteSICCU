@@ -37,6 +37,11 @@ public interface CobraGwtServiceAbleAsync {
     void obtenerTiposContrato(AsyncCallback<List> call);
 
     void setNavegacion(int navegacion, AsyncCallback<Boolean> call);
-
+    
     void getNavegacion(AsyncCallback<Integer> call);
+    
+    // metodo para guardar convenio
+    void getGuardarconvenio (AsyncCallback<Integer> call);   
+    
+    void setGuardarconvenio (int guardarconvenio, AsyncCallback<Boolean> call);
 }

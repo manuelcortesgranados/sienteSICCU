@@ -53,6 +53,7 @@ public class ModalRubrosProyecto implements IsWidget {
     protected VerticalPanel vp;
     protected ListBox lstTipoAporte;
     protected ListBox lstFormaP;
+    protected ListBox lstE;
     protected TextField campoTipoRecurso;
     protected TextField rubro;
     protected NumberField<BigDecimal> montoAportado;
@@ -87,7 +88,10 @@ public class ModalRubrosProyecto implements IsWidget {
         rubro = new TextField();
         tipoAporte = 0;
         formaPago = 0;
-
+        lstE=new ListBox(false);
+        Iterator it=contratoDto.getFuenterecursosconvenios().iterator();
+        fuenteRecursosConveDTO=(FuenterecursosconvenioDTO) it.next();
+       
 
         this.contratoDto = contratoDto;
         this.proyectoDTO = proyectoDTO;
@@ -120,20 +124,30 @@ public class ModalRubrosProyecto implements IsWidget {
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         vp.add(con);
 
-        llenarComboEntidadesConvenio(entidades);
-        lstEntidadesConvenio.setEmptyText("Entidad");
-        lstEntidadesConvenio.setWidth(cw);
-        lstEntidadesConvenio.setTypeAhead(true);
-        lstEntidadesConvenio.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
-        lstEntidadesConvenio.addSelectionHandler(new SelectionHandler<TerceroDTO>() {
-            @Override
-            public void onSelection(SelectionEvent<TerceroDTO> event) {
-                terceroDto = event.getSelectedItem();
-                fuenteRecursosConveDTO = buscarFuenteDto(terceroDto.getCampoTemporalFuenteRecursos());
+        llenarComboEntidadesConvenio();
+        lstE.setWidth(cw);
+        lstE.addChangeHandler(new ChangeHandler() {
 
-            }
+            @Override
+            public void onChange(ChangeEvent event) {
+                int posicionFrsele=Integer.parseInt(lstE.getValue(lstE.getSelectedIndex()));
+                List<FuenterecursosconvenioDTO> lstFr=new ArrayList<FuenterecursosconvenioDTO>(contratoDto.getFuenterecursosconvenios());
+                fuenteRecursosConveDTO=lstFr.get(posicionFrsele);
+                }
         });
-        con.add(new FieldLabel(lstEntidadesConvenio, "Entidad"), new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+//        lstEntidadesConvenio.setEmptyText("Entidad");
+//        lstEntidadesConvenio.setWidth(cw);
+//        lstEntidadesConvenio.setTypeAhead(true);
+//        lstEntidadesConvenio.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
+//        lstEntidadesConvenio.addSelectionHandler(new SelectionHandler<TerceroDTO>() {
+//            @Override
+//            public void onSelection(SelectionEvent<TerceroDTO> event) {
+//                terceroDto = event.getSelectedItem();
+//                fuenteRecursosConveDTO = buscarFuenteDto(terceroDto.getCampoTemporalFuenteRecursos());
+//
+//            }
+//        });
+       con.add(new FieldLabel(lstE, "Entidad"), new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
         //con.add(lstEntidadesConvenio, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
         montoAportado.setEmptyText("Monto aportado");
         montoAportado.setWidth(cw);
@@ -346,13 +360,14 @@ public class ModalRubrosProyecto implements IsWidget {
     /*metodo que se encarga de llenar el combo de entidades
      * con las entidades que tiene el convenio en las fuentes de recursos
      */
-    public void llenarComboEntidadesConvenio(final ListStore<TerceroDTO> entidades) {
+    public void llenarComboEntidadesConvenio() {
         int i = 0;
         for (Iterator it = contratoDto.getFuenterecursosconvenios().iterator(); it.hasNext();) {
             FuenterecursosconvenioDTO fuenteRecursosDTO = (FuenterecursosconvenioDTO) it.next();
             TerceroDTO tercero = fuenteRecursosDTO.getTercero();
-            tercero.setCampoTemporalFuenteRecursos(i);
-            entidades.add(tercero);
+            lstE.addItem(tercero.getStrnombrecompleto(), ""+i);
+//            tercero.setCampoTemporalFuenteRecursos(i);
+//            entidades.add(tercero);
             i++;
         }
     }

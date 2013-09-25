@@ -83,9 +83,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected Window modalPry;
     GwtMensajes msj = GWT.create(GwtMensajes.class);
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
-
-    
-   
     /*
      * id temporal de objeto, actividad macro, y obra fuente recurso
      */
@@ -103,7 +100,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTOProps propes;
     protected TreeStore<ActividadobraDTO> taskStore;
 
-    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
+    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
         this.gantt = gantt;
         this.modalPry = di;
@@ -345,7 +342,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         }
                     }
                     if (proyectoDTO.getFechaInicio() != null) {
+                        service.setLog("entre en fecha inicio no null:" + proyectoDTO.getFechaInicio() + "Fecha contrato:" + contratoDto.getDatefechaini(), null);
                         if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
+                            service.setLog("entre en fecha inicio no menor 1", null);
                             varErrorres = true;
                             msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
                         }
@@ -353,12 +352,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         varErrorres = true;
                         msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
                     }
-//                    if (proyectoDTO.getFechaFin() != null) {
-//                        if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
-//                            varErrorres = true;
-//                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
-//                        }
-//                    }
+
+                    if (proyectoDTO.getFechaFin() != null) {
+                        service.setLog("entre en fecha fin no null", null);
+                        if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
+                            varErrorres = true;
+                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
+                        }
+                    }
                     if (txtObjeG.getValue() == null) {
                         varErrorres = true;
                         msgerrores += "*Ingrese  un objetivo general" + "<br/>";
@@ -504,7 +505,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
             ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
 
-            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes);
+            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
 
         } else {
 
@@ -532,7 +533,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
             ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
 
-            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes);
+            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
 
 
         }
@@ -615,20 +616,36 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
 
-            service.setLog("Cree proyecto", null);
+
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
-                    enlazaractividadesHijas(act, tareaNueva);
+                    ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0,contratoDto);
+                    service.setLog("en crear" + actividadDependenciaFrom.getName(), null);
+                    if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
+                        enlazaractividadesHijas(act, tareaNueva);
+                    } else {
+                        AlertMessageBox alerta = new AlertMessageBox("Alerta", "La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
+                        alerta.show();
+                    }
                 }
             }
 
         } else {
-            enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+            ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0,contratoDto);
+            service.setLog("en crear 1" + actividadDependenciaFrom.getName(), null);
+            if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
+                enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+            } else {
+                AlertMessageBox alerta = new AlertMessageBox("Alerta", "La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
+                alerta.show();
+            }
         }
 
     }
+
+    
 
     /*
      *Metodo que se encarga de enlazar la actividad padre con la nueva activida proyecto creada y mostrarla en el panel del GANTT
@@ -637,7 +654,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, taskStore.getChildren(actividadPadre).size(), actividadHija);
         actividadPadre.addChild(actividadHija);
-        GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes);
+        GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
     }
