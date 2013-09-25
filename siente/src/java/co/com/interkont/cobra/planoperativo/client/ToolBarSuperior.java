@@ -11,6 +11,7 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -18,10 +19,10 @@ import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
+import com.google.gwt.user.client.Window;
 
 /**
  *
@@ -40,7 +41,7 @@ public class ToolBarSuperior implements IsWidget {
         this.taskStore = taskStore;
         this.convenio = convenio;
         this.depStore = depStore;
-        
+
     }
 
             
@@ -53,24 +54,59 @@ public class ToolBarSuperior implements IsWidget {
         finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-               PlanOperativoGantt planOperFullScreen=new PlanOperativoGantt(convenio);
-                Window fullScreen = new Window();
-                //fullScreen.setBlinkModal(true);
-                fullScreen.setModal(true);
-                //fullScreen.setWidth(1000);
-                //fullScreen.setHeight(550);
-                fullScreen.setStyleName("ikont-modal-fullscreen");
-                fullScreen.add(planOperFullScreen.asWidget());
-                fullScreen.show();
+                service.setNavegacion(4, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                    
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                    }
+                });
+                service.setGuardarconvenio(2, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+
             }
         });
 
         guardarborrador.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-              service.setLog("sali en 2", null);
+                service.setNavegacion(4, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                    
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                    }
+                });
+                service.setGuardarconvenio(1, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
             }
-        });
+        });        
         finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");
         guardarborrador.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-borradorGWT");
         toolBarSuperior.add(finalizarbasicos);
@@ -78,5 +114,15 @@ public class ToolBarSuperior implements IsWidget {
         toolBarSuperior.setStyleName("ikont-po-tb");
         toolBarSuperior.setWidth(980);
         return toolBarSuperior;
+    }
+    
+     public String retornarNuevoContrato() {
+        
+        return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
+        
+    }
+    
+    public String retornarConfiguracionPagina() {
+        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
     }
 }

@@ -43,6 +43,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private ContratoDTO contratoDto;
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
+    private int guardarconvenio = 0;
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -220,6 +221,16 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     @Override
     public Boolean setNavegacion(int navegacion) {
         this.navegacion = navegacion;
+        return true;
+    }
+     @Override
+    public int getGuardarconvenio() {
+         return guardarconvenio;
+     }
+
+    @Override
+    public Boolean setGuardarconvenio(int guardarconvenio) {
+        this.guardarconvenio = guardarconvenio;
         return true;
     }
 
