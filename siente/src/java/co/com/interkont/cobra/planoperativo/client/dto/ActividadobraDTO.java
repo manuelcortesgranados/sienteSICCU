@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
 import java.util.Date;
@@ -168,8 +169,11 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra = obraDto;
-        DateWrapper dw = new DateWrapper(start).clearTime();
-        this.endDateTime = dw.addDays(duration).asDate();
+        //DateWrapper dw = new DateWrapper(start).clearTime();
+        Date copiaFecha= CalendarUtil.copyDate(start);
+        CalendarUtil.addDaysToDate(copiaFecha, duration);
+        this.endDateTime =copiaFecha; 
+       //         dw.addDays(duration).asDate();
     }
 
     public ActividadobraDTO(String id, String name, Date start, Date fin,

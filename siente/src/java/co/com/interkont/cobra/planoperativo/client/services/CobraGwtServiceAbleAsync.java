@@ -30,18 +30,22 @@ public interface CobraGwtServiceAbleAsync {
     //void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
     void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 
-    void obtenerRubros(String categoria,AsyncCallback<List<RubroDTO>> call);
-    
+    void obtenerRubros(String categoria, AsyncCallback<List<RubroDTO>> call);
+
     void obtenerCategoriasRubros(AsyncCallback<List<RubroDTO>> call);
 
     void obtenerTiposContrato(AsyncCallback<List> call);
 
     void setNavegacion(int navegacion, AsyncCallback<Boolean> call);
-    
+
     void getNavegacion(AsyncCallback<Integer> call);
-    
+
     // metodo para guardar convenio
-    void getGuardarconvenio (AsyncCallback<Integer> call);   
-    
-    void setGuardarconvenio (int guardarconvenio, AsyncCallback<Boolean> call);
+    void getGuardarconvenio(AsyncCallback<Integer> call);
+
+    void setGuardarconvenio(int guardarconvenio, AsyncCallback<Boolean> call);
+
+    void getSeCargoPlanOperativoAntes(AsyncCallback<Boolean> call);
+
+    void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes, AsyncCallback<Void> call);
 }

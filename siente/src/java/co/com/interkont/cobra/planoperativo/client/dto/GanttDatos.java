@@ -64,6 +64,7 @@ public class GanttDatos {
 
     public static ArrayList getDependencia(ContratoDTO convenio) {
         ArrayList<DependenciaDTO> list = new ArrayList<DependenciaDTO>(convenio.getDependenciasGenerales());
+        service.setLog("en getDependencas:"+list.size(), null);
         return list;
     }
 
@@ -78,27 +79,27 @@ public class GanttDatos {
      */
     public static ContratoDTO estructurarDatosConvenio(final ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore, CobraGwtServiceAbleAsync service, ListStore<DependenciaDTO> depStore) {
         //ContratoDTO convenio = contratodto;
-
+       
         List<ActividadobraDTO> lista = taskStore.getAll();
         limpiarActividadesListaDependencia(lista);
         Set<DependenciaDTO> lstDependencias = new HashSet<DependenciaDTO>(depStore.getAll());
+        convenio.setDependenciasGenerales(lstDependencias);
         convenio.setDatefechaini(lista.get(0).getStartDateTime());
+        convenio.setDatefechaactaini(obtenerActividadDeRaiz(0,convenio).getChildren().get(0).getStartDateTime());
         convenio.setDatefechafin(lista.get(0).endDateTime);
         convenio.setIntduraciondias(lista.get(0).duration);
         convenio.getActividadobras().clear();
         convenio.getActividadobras().add(lista.get(0));
         for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
-            dep.setId(""+dep.hashCode());
-            dep.setActividadFrom(d.getActividadFrom());
-            dep.setActividadTo(d.getActividadTo());
+            dep.setId(""+d.getId());
             dep.setFromId(d.fromId);
             dep.setToId(d.toId);
             dep.setType(d.type);
             boolean encontro = false;
             for (int i = 0; i < lista.size() && !encontro; i++) {
                 ActividadobraDTO act = lista.get(i);
-                if (act.getName().equals(d.getFromId())) {
+                if (act.getId().equals(d.getFromId())) {
                     if (act.getDependenciasForFkActividadOrigen() != null) {
                         act.getDependenciasForFkActividadOrigen().add(dep);
                         encontro = true;
@@ -126,8 +127,7 @@ public class GanttDatos {
             DependenciaDTO dep = lstDependencias.get(i);
             masDeone(dep, i, lstDependencias, listaPosEliminar);
         }
-        service.setLog("eliminar lista" + listaPosEliminar.size(), null);
-
+        
     }
 
     public static void masDeone(DependenciaDTO dependencia, int posi, List<DependenciaDTO> lstDependencias, List<Integer> listaPosEliminar) {
@@ -250,15 +250,15 @@ public class GanttDatos {
 
     public static void enlazarActividadConDependencia(List<DependenciaDTO> lstDependencias, List<ActividadobraDTO> lstActividades) {
         for (DependenciaDTO dependencia : lstDependencias) {
-            buscarActividadDependencia(dependencia.getActividadFrom(), dependencia, lstActividades, 1);
+            buscarActividadDependencia(dependencia.getFromId(), dependencia, lstActividades, 1);
         }
     }
 
     //busca donde esa dependencia la actividadobra origen y l destino
     //y agregarla a la respectiva lista
-    public static void buscarActividadDependencia(ActividadobraDTO actividadObraBuscada, DependenciaDTO dependencia, List<ActividadobraDTO> lstActividades, int lstDependencia) {
+    public static void buscarActividadDependencia(String actibuscada, DependenciaDTO dependencia, List<ActividadobraDTO> lstActividades, int lstDependencia) {
         for (ActividadobraDTO act : lstActividades) {
-            if (act.getName().equals(actividadObraBuscada.getName())) {
+            if (act.getId().equals(actibuscada)) {
                 act.getDependenciasForFkActividadOrigen().add(dependencia);
 
             }
@@ -271,4 +271,11 @@ public class GanttDatos {
         ActividadobraDTO actiRaiz = (ActividadobraDTO) it.next();
         return actiRaiz.getChildren().get(i);
     }
+     
+     public static  void modificarFechaInicioConvenio(ContratoDTO convenioDTO,Date fechaInicio,Date fechaFin){
+      Iterator it=convenioDTO.getActividadobras().iterator();
+      ActividadobraDTO ac=(ActividadobraDTO) it.next();
+      ac.setStartDateTime(fechaInicio);
+      ac.setEndDateTime(fechaFin);
+     }
 }

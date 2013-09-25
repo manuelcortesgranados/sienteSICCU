@@ -119,7 +119,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     private ContratoDTO convenioDTO;
     ActividadobraDTO actividadAnterior;
     boolean fullScreen = Boolean.FALSE;
-   
 
     public ContratoDTO getConvenioDTO() {
         return convenioDTO;
@@ -228,8 +227,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         }
 
+        depStore.clear();
         depStore.addAll(GanttDatos.getDependencia(convenioDTO));
-
+        service.setLog("depstores:"+depStore.size(), null);
         config = new GanttConfig();
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
@@ -265,7 +265,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.useEndDate = false;
         config.clickCreateEnabled = false;
-        config.dependencyDnDEnabled = false;
+        config.dependencyDnDEnabled = true;
         config.cascadeChanges = true;
 
 
@@ -468,7 +468,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
+                return new DependenciaDTO(""+this.hashCode(), fromTask.getId(), toTask.getId(), type);
             }
         ;
 
@@ -618,12 +618,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     props.duration().setValue(actiresi, actividadAnterior.getDuration());
                     getGantt().getGanttPanel().getContainer().refresh();
                 }
-                
+
                 if (valido) {
                     Date copiaFecha = CalendarUtil.copyDate(actiresi.getStartDateTime());
                     CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
                     props.endDateTime().setValue(actiresi, copiaFecha);
+                    Date copiaFechaConvenioI = CalendarUtil.copyDate(convenioDTO.getDatefechaini());
+                    Date copiaFechaConvenioF = CalendarUtil.copyDate(convenioDTO.getDatefechafin());
                     GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props, convenioDTO);
+                    convenioDTO.setDatefechaini(copiaFechaConvenioI);
+                    convenioDTO.setDatefechafin(copiaFechaConvenioF);
+                    GanttDatos.modificarFechaInicioConvenio(convenioDTO, copiaFechaConvenioI, copiaFechaConvenioF);
+                    gantt.getGanttPanel().getContainer().refresh();
                 }
             }
         });
@@ -718,7 +724,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                         ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - duracionModificar);
                                         getGantt().getGanttPanel().getContainer().refresh();
                                     }
+                                    Date copiaFechaConvenioI = CalendarUtil.copyDate(convenioDTO.getDatefechaini());
+                                    Date copiaFechaConvenioF = CalendarUtil.copyDate(convenioDTO.getDatefechafin());
                                     GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
+                                    convenioDTO.setDatefechaini(copiaFechaConvenioI);
+                                    convenioDTO.setDatefechafin(copiaFechaConvenioF);
+                                    GanttDatos.modificarFechaInicioConvenio(convenioDTO, copiaFechaConvenioI, copiaFechaConvenioF);
                                     gantt.refresh();
                                 }
                             }
@@ -748,7 +759,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 getGantt().getGanttPanel().getContainer().refresh();
                             } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                                 props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                Date copiaFechaConvenioI = CalendarUtil.copyDate(convenioDTO.getDatefechaini());
+                                Date copiaFechaConvenioF = CalendarUtil.copyDate(convenioDTO.getDatefechafin());
                                 GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
+                                convenioDTO.setDatefechaini(copiaFechaConvenioI);
+                                convenioDTO.setDatefechafin(copiaFechaConvenioF);
+                                GanttDatos.modificarFechaInicioConvenio(convenioDTO, copiaFechaConvenioI, copiaFechaConvenioF);
                                 getGantt().getGanttPanel().getContainer().refresh();
 
                             }
@@ -775,7 +791,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
                             }
                             if (esValido) {
+                                Date copiaFechaConvenioI = CalendarUtil.copyDate(convenioDTO.getDatefechaini());
+                                Date copiaFechaConvenioF = CalendarUtil.copyDate(convenioDTO.getDatefechafin());
                                 GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
+                                convenioDTO.setDatefechaini(copiaFechaConvenioI);
+                                convenioDTO.setDatefechafin(copiaFechaConvenioF);
+                                GanttDatos.modificarFechaInicioConvenio(convenioDTO, copiaFechaConvenioI, copiaFechaConvenioF);
                             }
                         } else {
                             AlertMessageBox alerta = new AlertMessageBox("Alerta", "Por favor ingrese valores positivos");
@@ -1212,12 +1233,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) < 0) {
                     service.setLog("Entre en  31", null);
                     msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del reglamento del plan operativo";
-                }                
+                }
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
                     msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del acta de inicio";
 
                 }
-                service.setLog("msg:"+msg, null);
+                service.setLog("msg:" + msg, null);
             }
         }
         if (i == 2 || i == 0) {
@@ -1229,7 +1250,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (actiModificada.getEndDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
                     msg = "la fecha fin del Reglamento del plan operativo no puede ser superior a la  fecha de inicio de la Aprobación del plan operativo";
                 }
-            } 
+            }
 
         }
         return msg;
