@@ -89,7 +89,7 @@ public class GanttDatos {
         convenio.getActividadobras().add(lista.get(0));
         for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
-            dep.setId((String.valueOf(new Date().getTime())));
+            dep.setId(""+dep.hashCode());
             dep.setActividadFrom(d.getActividadFrom());
             dep.setActividadTo(d.getActividadTo());
             dep.setFromId(d.fromId);

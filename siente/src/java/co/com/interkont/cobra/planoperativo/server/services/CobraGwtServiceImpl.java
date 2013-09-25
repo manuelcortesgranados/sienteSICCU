@@ -123,11 +123,11 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     public DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
         DependenciaDTO dep = new DependenciaDTO();
-        dep.setId((String.valueOf(new Date().getTime())));
+        dep.setId(""+dep.hashCode());
         dep.setActividadFrom(actividadFrom);
         dep.setActividadTo(actividadTo);
-        dep.setFromId(actividadFrom.getName());
-        dep.setToId(actividadTo.getName());
+        dep.setFromId(actividadFrom.getId());
+        dep.setToId(actividadTo.getId());
         dep.setType(GanttConfig.DependencyType.ENDtoSTART);
         return dep;
     }

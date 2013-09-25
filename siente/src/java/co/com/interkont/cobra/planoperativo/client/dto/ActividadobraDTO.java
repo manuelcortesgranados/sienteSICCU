@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import sun.management.VMManagement;
 
 /**
  *
@@ -30,34 +31,27 @@ public class ActividadobraDTO implements IsSerializable {
     int percentDone;
     private int tipoActividad;
     private boolean seEdito;
-    private boolean  esNoEditable;
+    private boolean esNoEditable;
     /**
      * Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre,
      * Milestone=Hito
      */
     TaskType taskType;
     /**
-     *  Variable para establecer la obligatoriedad de la tarea
+     * Variable para establecer la obligatoriedad de la tarea
      */
-    private boolean boolobligatoria=false;
+    private boolean boolobligatoria = false;
     /**
      * Atributos del objeto actividadObraDto
      */
-    
-    
     private long oidactiviobra;
-    //private String strdescactividad;
-//    private Date fechaInicio;
-//    private Date fechaFin;
     private Double peso;
-//    private int duracion;
     private Integer estado;
-
-private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<DependenciaDTO>();
+    private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<DependenciaDTO>();
     private List<DependenciaDTO> dependenciasForFkActividadDestino = new ArrayList<DependenciaDTO>();
     private ContratoDTO contrato;
     private ObraDTO obra;
-    private String eliminar="Eliminar";
+    private String eliminar = "Eliminar";
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public long getOidactiviobra() {
@@ -67,16 +61,14 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     public void setOidactiviobra(long oidactiviobra) {
         this.oidactiviobra = oidactiviobra;
     }
-    
-    
 
-    public ActividadobraDTO(String strdescactividad,int tipoActividad,int id) {
-        this.name=strdescactividad;
-        this.tipoActividad=tipoActividad;
-        this.id=""+id;
-        this.eliminar="Eliminar";
+    public ActividadobraDTO(String strdescactividad, int tipoActividad, int id) {
+        this.name = strdescactividad;
+        this.tipoActividad = tipoActividad;
+        this.id = "" + id;
+        this.eliminar = "Eliminar";
     }
-    
+
 //     public ActividadobraDTO(String strdescactividad,int tipoActividad,Date fechaInicio,Date fechaFin,ObraDTO obra) {
 //        this.strdescactividad=strdescactividad;
 //        this.tipoActividad=tipoActividad;
@@ -84,30 +76,30 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
 //        this.fechaFin=fechaFin;
 //        this.obra=obra;
 //    }
-     
-     public ActividadobraDTO(String id, String name, Date start, int duration,
+    public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType) {
-        this.id = id;
+        this.id =""+this.hashCode();
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
     }
-    
+
     public ActividadobraDTO() {
     }
-    
-    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
-        this.startDateTime=fechaInicio;
-        this.endDateTime=fechaFin;
-        this.duration=duracion;
+
+    public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion) {
+        this.startDateTime = fechaInicio;
+        this.endDateTime = fechaFin;
+        this.duration = duracion;
     }
-     public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion,String name) {
-        this.startDateTime=fechaInicio;
-        this.endDateTime=fechaFin;
-        this.duration=duracion;
-        this.name=name;
+
+    public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion, String name) {
+        this.startDateTime = fechaInicio;
+        this.endDateTime = fechaFin;
+        this.duration = duracion;
+        this.name = name;
     }
 //    
 //    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
@@ -115,7 +107,7 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
 //        this.endDateTime=fechaFin;
 //        this.duration=duracion;
 //    }
-   
+
     public List<ActividadobraDTO> getChildren() {
         return children;
     }
@@ -130,93 +122,85 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     public ActividadobraDTO(String name, Date start, int duration, int percentDone,
-            TaskType taskType,int tipoActividad, boolean boolobligatoria) {
+            TaskType taskType, int tipoActividad, boolean boolobligatoria) {
         this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria);
     }
 
     public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria) {
-        this.id = id;
+        this.id =""+this.hashCode();
         this.name = name;
-        
+
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
-        this.tipoActividad= tipoActividad;
+        this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        DateWrapper dw= new DateWrapper(start).clearTime();
+        DateWrapper dw = new DateWrapper(start).clearTime();
         this.startDateTime = dw.asDate();
-        this.endDateTime= dw.addDays(duration).asDate();
-        
-    }
-    
-    
-    
-     public ActividadobraDTO(String name, Date start, int duration, int percentDone,
-            TaskType taskType,int tipoActividad, boolean boolobligatoria,ObraDTO obra) {
-        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,obra);
-    }
-     
-      public ActividadobraDTO(String name, Date start, Date fin, int percentDone,
-            TaskType taskType,int tipoActividad, boolean boolobligatoria,ObraDTO obra) {
-        this(name, name, start, fin, percentDone, taskType, tipoActividad, boolobligatoria,obra);
-    }
-     
-      public ActividadobraDTO(String name, Date start, int duration, int percentDone,
-            TaskType taskType,int tipoActividad, boolean boolobligatoria,ContratoDTO contrato) {
-        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,contrato);
+        this.endDateTime = dw.addDays(duration).asDate();
+
     }
 
-    
-     public ActividadobraDTO(String id, String name, Date start, int duration,
-            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria,ObraDTO obraDto) {
-        this.id = id;
+    public ActividadobraDTO(String name, Date start, int duration, int percentDone,
+            TaskType taskType, int tipoActividad, boolean boolobligatoria, ObraDTO obra) {
+        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria, obra);
+    }
+
+    public ActividadobraDTO(String name, Date start, Date fin, int percentDone,
+            TaskType taskType, int tipoActividad, boolean boolobligatoria, ObraDTO obra) {
+        this(name, name, start, fin, percentDone, taskType, tipoActividad, boolobligatoria, obra);
+    }
+
+    public ActividadobraDTO(String name, Date start, int duration, int percentDone,
+            TaskType taskType, int tipoActividad, boolean boolobligatoria, ContratoDTO contrato) {
+        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria, contrato);
+    }
+
+    public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria, ObraDTO obraDto) {
+        this.id = "" + this.hashCode();
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
-        this.tipoActividad= tipoActividad;
+        this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        this.obra=obraDto;
-         DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
+        this.obra = obraDto;
+        DateWrapper dw = new DateWrapper(start).clearTime();
+        this.endDateTime = dw.addDays(duration).asDate();
     }
-     
-     public ActividadobraDTO(String id, String name, Date start, Date fin,
-            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria,ObraDTO obraDto) {
-        this.id = id;
+
+    public ActividadobraDTO(String id, String name, Date start, Date fin,
+            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria, ObraDTO obraDto) {
+        this.id = "" + this.hashCode();
         this.name = name;
         this.startDateTime = start;
-        this.endDateTime= fin;
+        this.endDateTime = fin;
         this.duration = calcularDuracion();
         this.percentDone = percentDone;
         this.taskType = taskType;
-        this.tipoActividad= tipoActividad;
+        this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        this.obra=obraDto;
-//         DateWrapper dw= new DateWrapper(start).clearTime();
-//        this.endDateTime= dw.addDays(duration).asDate();
+        this.obra = obraDto;
     }
-     
-       public ActividadobraDTO(String id, String name, Date start, int duration,
-            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria,ContratoDTO contratoDto) {
-        this.id = id;
+
+    public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria, ContratoDTO contratoDto) {
+        this.id =""+this.hashCode();
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
-        this.tipoActividad= tipoActividad;
+        this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        this.contrato=contratoDto;
-         DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
+        this.contrato = contratoDto;
+        DateWrapper dw = new DateWrapper(start).clearTime();
+        this.endDateTime = dw.addDays(duration).asDate();
     }
 
-
-
-   
     public String getId() {
         return id;
     }
@@ -254,7 +238,7 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     public void setDuration(int duration) {
-        this.duration = duration;        
+        this.duration = duration;
     }
 
     public int getPercentDone() {
@@ -281,7 +265,7 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
         return !children.isEmpty();
     }
 
- public int calcularDuracion() {
+    public int calcularDuracion() {
         if (this.getStartDateTime() != null && this.getEndDateTime() != null) {
 
             long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
@@ -291,9 +275,10 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
             } else {
                 return 1;
             }
-        }  
+        }
         return 0;
     }
+
     /**
      * @return the obra
      */
@@ -309,76 +294,6 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     /**
-     * @return the strdescactividad
-     */
-//    public String getStrdescactividad() {
-//        return strdescactividad;
-//    }
-//
-//    /**
-//     * @param strdescactividad the strdescactividad to set
-//     */
-//    public void setStrdescactividad(String strdescactividad) {
-//        this.strdescactividad = strdescactividad;
-//    }
-
-//    /**
-//     * @return the fechaInicio
-//     */
-//    public Date getFechaInicio() {
-//        return fechaInicio;
-//    }
-//
-//    /**
-//     * @param fechaInicio the fechaInicio to set
-//     */
-//    public void setFechaInicio(Date fechaInicio) {
-//        this.fechaInicio = fechaInicio;
-//    }
-//
-//    /**
-//     * @return the fechaFin
-//     */
-//    public Date getFechaFin() {
-//        return fechaFin;
-//    }
-//
-//    /**
-//     * @param fechaFin the fechaFin to set
-//     */
-//    public void setFechaFin(Date fechaFin) {
-//        this.fechaFin = fechaFin;
-//    }
-
-    /**
-     * @return the peso
-     */
-    public Double getPeso() {
-        return peso;
-    }
-
-    /**
-     * @param peso the peso to set
-     */
-    public void setPeso(Double peso) {
-        this.peso = peso;
-    }
-
-//    /**
-//     * @return the duracion
-//     */
-//    public int getDuracion() {
-//        return duracion;
-//    }
-//
-//    /**
-//     * @param duracion the duracion to set
-//     */
-//    public void setDuracion(int duracion) {
-//        this.duracion = duracion;
-//    }
-
-    /**
      * @return the estado
      */
     public Integer getEstado() {
@@ -391,8 +306,6 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
-
-   
 
     /**
      * @return the contrato
@@ -452,7 +365,8 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     /**
-     * @param dependenciasForFkActividadOrigen the dependenciasForFkActividadOrigen to set
+     * @param dependenciasForFkActividadOrigen the
+     * dependenciasForFkActividadOrigen to set
      */
     public void setDependenciasForFkActividadOrigen(List<DependenciaDTO> dependenciasForFkActividadOrigen) {
         this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
@@ -466,7 +380,8 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
     }
 
     /**
-     * @param dependenciasForFkActividadDestino the dependenciasForFkActividadDestino to set
+     * @param dependenciasForFkActividadDestino the
+     * dependenciasForFkActividadDestino to set
      */
     public void setDependenciasForFkActividadDestino(List<DependenciaDTO> dependenciasForFkActividadDestino) {
         this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
@@ -498,7 +413,6 @@ private List<DependenciaDTO> dependenciasForFkActividadOrigen = new ArrayList<De
      */
     public void setEsNoEditable(boolean esNoEditable) {
         this.esNoEditable = esNoEditable;
-    }
 
-    
+    }
 }

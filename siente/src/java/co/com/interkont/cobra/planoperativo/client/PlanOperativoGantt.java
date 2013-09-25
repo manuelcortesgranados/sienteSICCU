@@ -119,6 +119,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     private ContratoDTO convenioDTO;
     ActividadobraDTO actividadAnterior;
     boolean fullScreen = Boolean.FALSE;
+   
 
     public ContratoDTO getConvenioDTO() {
         return convenioDTO;
@@ -596,6 +597,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onBeforeTaskResize(BeforeTaskResizeEvent<ActividadobraDTO> event) {
                 actividadAnterior = new ActividadobraDTO();
                 actividadAnterior.setStartDateTime(event.getEventModel().getStartDateTime());
+                actividadAnterior.setEndDateTime(event.getEventModel().getEndDateTime());
+                actividadAnterior.setDuration(event.getEventModel().getDuration());
             }
         });
 
@@ -606,19 +609,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 ActividadobraDTO actiPadre = taskStore.getParent(actiresi);
                 boolean valido = true;
                 String mensaje = validacionCorrecta(actiPadre, actiresi, 0);
-                service.setLog("en resizable 1" + mensaje, null);
                 if (!mensaje.equals("continuar")) {
                     valido = false;
                     AlertMessageBox alerta = new AlertMessageBox("Alerta", mensaje);
                     alerta.show();
                     props.startDateTime().setValue(actiresi, actividadAnterior.getStartDateTime());
+                    props.endDateTime().setValue(actiresi, actividadAnterior.getEndDateTime());
+                    props.duration().setValue(actiresi, actividadAnterior.getDuration());
                     getGantt().getGanttPanel().getContainer().refresh();
                 }
-                service.setLog("en resizable 2" + valido, null);
+                
                 if (valido) {
                     Date copiaFecha = CalendarUtil.copyDate(actiresi.getStartDateTime());
                     CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
-                    service.setLog("en resizable 3" + copiaFecha, null);
                     props.endDateTime().setValue(actiresi, copiaFecha);
                     GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props, convenioDTO);
                 }
@@ -736,19 +739,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             alerta.show();
                             props.startDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                             getGantt().getGanttPanel().getContainer().refresh();
-                        }else{
-                        /*se verifia si la fecha fin  es menor que la fecha de inicio en este caso seria un error*/
-                        if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
-                            AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser menor que la fecha de inicio");
-                            alerta.show();
-                            props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-                        } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
-                            props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                            GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
-                            getGantt().getGanttPanel().getContainer().refresh();
+                        } else {
+                            /*se verifia si la fecha fin  es menor que la fecha de inicio en este caso seria un error*/
+                            if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
+                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser menor que la fecha de inicio");
+                                alerta.show();
+                                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                                getGantt().getGanttPanel().getContainer().refresh();
+                            } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
+                                props.duration().setValue(ac, getGantt().getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
+                                getGantt().getGanttPanel().getContainer().refresh();
 
-                         }
+                            }
                         }
                     }
 
@@ -1194,27 +1197,27 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) > 0) {
                     msg = "la fecha del acta de inicio no puede ser superior a la fecha del reglamento del plan operativo";
                 }
-                if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
-                    msg = "la fecha del acta de inicio no puede ser superior a la fecha del Aprobación del plan operativo";
+                if (actiModificada.getStartDateTime().compareTo(convenioDTO.getDatefechaini()) < 0) {
+                    msg = "la fecha de inicio del acta de inicio no puede ser inferior a la fecha de inicio del convenio";
                 }
             } else if (actiModificada.getName().equals("Reglamento de Plan Operativo")) {
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
                     msg = "la fecha del Reglamento del plan operativo no puede ser inferior a la fecha del acta de inicio";
-
                 }
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
-                    msg = "la fecha del Reglamento del plan operativo no puede ser superior a la  fecha del Aprobación del plan operativo";
+                    msg = "la fecha del Reglamento del plan operativo no puede ser superior a la  fecha de Aprobación del plan operativo";
                 }
             } else if (actiModificada.getName().equals("Aprobación de Plan Operativo")) {
+                service.setLog("Entre en  3", null);
+                if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) < 0) {
+                    service.setLog("Entre en  31", null);
+                    msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del reglamento del plan operativo";
+                }                
                 if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(1).getStartDateTime()) < 0) {
                     msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del acta de inicio";
 
                 }
-                if (actiModificada.getStartDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) < 0) {
-                    msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del reglamento del plan operativo";
-                } else {
-                    msg = "continuar";
-                }
+                service.setLog("msg:"+msg, null);
             }
         }
         if (i == 2 || i == 0) {
@@ -1222,16 +1225,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (actiModificada.getEndDateTime().compareTo(mapaHijas.get(2).getStartDateTime()) > 0) {
                     msg = "la fecha fin del acta de inicio  no puede ser superior a la fecha de inicio del reglamento del plan operativo";
                 }
-                if (actiModificada.getEndDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
-                    msg = "la fecha fin del acta de inicio no puede ser superior a la fecha de inicio del Aprobación del plan operativo";
-                }
             } else if (actiModificada.getName().equals("Reglamento de Plan Operativo")) {
                 if (actiModificada.getEndDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
                     msg = "la fecha fin del Reglamento del plan operativo no puede ser superior a la  fecha de inicio de la Aprobación del plan operativo";
                 }
-            } else {
-                msg = "continuar";
-            }
+            } 
 
         }
         return msg;
