@@ -31,17 +31,17 @@
 
                                         </h:outputLink>
                                     </h:panelGroup>
-                                   
+
                                     <h:panelGroup  layout="block" styleClass="sliderpanel_element" id="contenedor_total_intro_usuario_registrado" >
 
-                                            <div style=""  id="contenedor_texto">
-                                                <h:outputLink styleClass="#{modulo.strestilo} a"
-                                                      value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
-                                                    <h:outputText   value="#{modulo.strmodNmbre}" />
-                                                </h:outputLink>
-                                            </div>
+                                        <div style=""  id="contenedor_texto">
+                                            <h:outputLink styleClass="#{modulo.strestilo} a"
+                                                          value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
+                                                <h:outputText   value="#{modulo.strmodNmbre}" />
+                                            </h:outputLink>
+                                        </div>
                                     </h:panelGroup>
-                                
+
                                 </a4j:repeat>
                             </a4j:region>
                         </h:panelGroup>
@@ -50,6 +50,24 @@
 
 
             </h:panelGroup>
+
+            <script>
+
+                setInterval(function() {
+                    if (localStorage.getItem('closeaplicaction') == 'true') {
+                        localStorage.setItem('closeaplicaction', new Date().getTime());
+                    }
+                    var _after = (parseInt(localStorage.getItem('closeaplicaction'))) ? parseInt(localStorage.getItem('closeaplicaction')) : new Date().getTime();
+                    var _time = parseInt(new Date().getTime()) - _after;
+                    if (parseInt(_time) > 30000) {
+                        localStorage.setItem('closeaplicaction', 'true');
+                        closeaplication();
+                    } else {
+                        localStorage.setItem('closeaplicaction', new Date().getTime());
+                    }
+                }, 5000);
+
+            </script>
         </h:form>
     </ui:define>
 
