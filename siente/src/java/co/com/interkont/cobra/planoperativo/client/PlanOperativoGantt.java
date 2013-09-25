@@ -286,7 +286,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             ActividadobraDTO actividadPadreConvenio = taskStore.getParent((taskStore.getParent(tareaSeleccionada)));
                             reembolsarFuenteRecursos(actividadPadreConvenio);
                         }
-                        //convenioDTO.getActividadobras().get
+                        ActividadobraDTO actPadre = taskStore.getParent(tareaSeleccionada);
+                        actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
@@ -295,8 +296,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         });
-
-
+        
+        
         /**
          * Personalizando el menú
          */
