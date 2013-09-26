@@ -730,6 +730,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
 
+        service.setLog("EN contrato cantidad"+taskStore.getAll().size(), null);
     }
 
 //    public boolean validaciones() {

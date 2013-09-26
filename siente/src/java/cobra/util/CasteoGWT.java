@@ -182,6 +182,7 @@ public class CasteoGWT implements Serializable {
         }
 
         actdto.getDependenciasForFkActividadOrigen().clear();
+        convenio.getDependenciasGenerales().clear();
         System.out.println("En dependencias de actividad:"+actividadObra.getStrdescactividad() +"lst"+ actividadObra.getDependenciasForFkActividadOrigen().size());
         if(actividadObra.getDependenciasForFkActividadOrigen().size()>0){
         actdto.setDependenciasForFkActividadOrigen(castearSetDependenciaTOaDependenciaDTO(actividadObra.getDependenciasForFkActividadOrigen(), actdto, convenio));
@@ -608,7 +609,7 @@ public class CasteoGWT implements Serializable {
         actividadObra.setBoolaiu(false);
 
         actividadObra.setActividadobra(actividadpadre);
-
+        convenio.getDependenciasGenerales().clear();
         actividadObra.setDependenciasForFkActividadOrigen(castearSetDependenciaDTOaDependencia(actdto.getDependenciasForFkActividadOrigen(), actividadObra, convenio, intusuario));
         System.out.println("casteando actividadObra= " + actividadObra.getStrdescactividad());
         if (actdto.getObra() != null) {

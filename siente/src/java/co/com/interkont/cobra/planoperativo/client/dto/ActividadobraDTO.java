@@ -169,11 +169,9 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra = obraDto;
-        //DateWrapper dw = new DateWrapper(start).clearTime();
         Date copiaFecha= CalendarUtil.copyDate(start);
         CalendarUtil.addDaysToDate(copiaFecha, duration);
         this.endDateTime =copiaFecha; 
-       //         dw.addDays(duration).asDate();
     }
 
     public ActividadobraDTO(String id, String name, Date start, Date fin,
