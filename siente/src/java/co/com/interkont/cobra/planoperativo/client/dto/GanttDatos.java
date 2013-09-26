@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import org.richfaces.model.Arrangeable;
 
 /**
  * Clase para manejar los datos que componen el Gantt del Plan Operativo
@@ -80,7 +81,6 @@ public class GanttDatos {
         //ContratoDTO convenio = contratodto;
        
         List<ActividadobraDTO> lista = taskStore.getAll();
-        service.setLog("en estructurar datos:"+lista.size(), null);
         limpiarActividadesListaDependencia(lista);
         Set<DependenciaDTO> lstDependencias = new HashSet<DependenciaDTO>(depStore.getAll());
         convenio.setDependenciasGenerales(lstDependencias);
@@ -121,25 +121,7 @@ public class GanttDatos {
 
     }
 
-    public static void organizarListaDependencias(List<DependenciaDTO> lstDependencias) {
-        List<Integer> listaPosEliminar = new ArrayList<Integer>();
-        for (int i = 0; i < lstDependencias.size(); i++) {
-            DependenciaDTO dep = lstDependencias.get(i);
-            masDeone(dep, i, lstDependencias, listaPosEliminar);
-        }
-        
-    }
-
-    public static void masDeone(DependenciaDTO dependencia, int posi, List<DependenciaDTO> lstDependencias, List<Integer> listaPosEliminar) {
-        for (int i = 0; i < lstDependencias.size(); i++) {
-            DependenciaDTO dep = lstDependencias.get(i);
-            if (i != posi) {
-                if (dep.getFromId().equals(dependencia.getFromId()) && dep.getToId().equals(dependencia.getToId())) {
-                    listaPosEliminar.get(i);
-                }
-            }
-        }
-    }
+    
 
     public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
         if (actividadPadre != null) {
@@ -193,7 +175,7 @@ public class GanttDatos {
 
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
-          if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
+        if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
 
             int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaComparar);
             Date fecha = CalendarUtil.copyDate(actiHija.getStartDateTime());
@@ -203,7 +185,7 @@ public class GanttDatos {
             actiHija.setEndDateTime(asigFin);
 
             CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
-           
+
             if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
 
@@ -212,16 +194,16 @@ public class GanttDatos {
                 actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
             }
             if(actiHija.getTipoActividad()==2){
-            actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
-            actiHija.getObra().setFechaFin(actiHija.startDateTime);
+                actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
+                actiHija.getObra().setFechaFin(actiHija.startDateTime);
             }else if(actiHija.getTipoActividad()==3){
-            actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
+                actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
             }
             props.startDateTime().setValue(actiHija, fecha);
-    
+
             taskStore.update(actiHija);
 
-       }
+        }
     }
 
     public static void modifi(ActividadobraDTO actiObraInicial, ActividadobraDTO actividadObraFinal, int etapaModificar, TreeStore<ActividadobraDTO> taskStore) {
@@ -265,17 +247,17 @@ public class GanttDatos {
         }
 
     }
-    
-     public static ActividadobraDTO obtenerActividadDeRaiz(int i,ContratoDTO contratoDto) {
+
+    public static ActividadobraDTO obtenerActividadDeRaiz(int i, ContratoDTO contratoDto) {
         Iterator it = contratoDto.getActividadobras().iterator();
         ActividadobraDTO actiRaiz = (ActividadobraDTO) it.next();
         return actiRaiz.getChildren().get(i);
     }
-     
-     public static  void modificarFechaInicioConvenio(ContratoDTO convenioDTO,Date fechaInicio,Date fechaFin){
-      Iterator it=convenioDTO.getActividadobras().iterator();
-      ActividadobraDTO ac=(ActividadobraDTO) it.next();
-      ac.setStartDateTime(fechaInicio);
-      ac.setEndDateTime(fechaFin);
-     }
-}
+
+    public static void modificarFechaInicioConvenio(ContratoDTO convenioDTO, Date fechaInicio, Date fechaFin) {
+        Iterator it = convenioDTO.getActividadobras().iterator();
+        ActividadobraDTO ac = (ActividadobraDTO) it.next();
+        ac.setStartDateTime(fechaInicio);
+        ac.setEndDateTime(fechaFin);
+    }
+        }

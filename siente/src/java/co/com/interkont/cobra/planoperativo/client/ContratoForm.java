@@ -138,7 +138,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public ContratoForm() {
     }
 
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -149,10 +149,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
         idtempRelacionRecursos = 0;
         idtempRubros = 0;
         this.taskStore = taskStore;
-        this.convenioDto=convenio;
+        this.convenioDto = convenio;
     }
 
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,ContratoDTO convenio) {
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
@@ -163,7 +163,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
         this.taskStore = taskStore;
-        this.convenioDto=convenio;
+        this.convenioDto = convenio;
         CargarFormularioEditar();
         seEdito(actividadObraEditar);
     }
@@ -519,7 +519,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     contrato.setDatefechaactaini(actiHija.getStartDateTime());
 
                 }
-                
+
                 actiHija.setSeEdito(true);
 
             }
@@ -667,7 +667,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void CrearContrato() {
-        service.setLog("Entre aca en CrearContrato", null);
         contrato.setTextobjeto(getObjetoContrato().getText());
         contrato.setNombreAbreviado(getNombreAbre().getValue());
         contrato.setDatefechaini(getFechaSuscripcionContrato().getValue());
@@ -676,13 +675,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contrato.setTipocontrato(tipocontrato);
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
-        service.setLog("sali aca en CrearContrato", null);
+       
     }
 
     public void crearTareaContrato() {
         actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1, 0, TaskType.PARENT, 3, false, contrato);
 
+      
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcion);//el pade de esta es actividadObraContrato
@@ -711,26 +711,24 @@ public class ContratoForm implements IsWidget, EntryPoint {
         actividadObraContrato.setChildren(lstHijos);
         precontractual.setChildren(lstHijosPrecontra);
 
+        taskStore.add(actividadObraPadre, actividadObraContrato);
 
+        if (actividadObraContrato.hasChildren()) {
+            processFolder(taskStore, actividadObraContrato);
+        }
+        
+         actividadObraPadre.addChild(actividadObraContrato);
+         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
+       
+    }
 
-
-        /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), actividadObraContrato);
-        actividadObraPadre.addChild(actividadObraContrato);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes,convenioDto);
-        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
-        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraContrato, taskStore.getChildren(actividadObraContrato).size(), lstHijos);
-        actividadObraContrato.getChildren().addAll(lstHijos);
-        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraContrato, true);  //tareaSeleccionada.addChild(tareaNueva);
-
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(precontractual, taskStore.getChildren(precontractual).size(), lstHijosPrecontra);
-        precontractual.getChildren().addAll(lstHijosPrecontra);
-        gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
-        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
-
-        service.setLog("EN contrato cantidad"+taskStore.getAll().size(), null);
+    private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {
+        for (ActividadobraDTO child : folder.getChildren()) {
+            store.add(folder, child);
+            if (child.hasChildren()) {
+                processFolder(store, child);
+            }
+        }
     }
 
 //    public boolean validaciones() {

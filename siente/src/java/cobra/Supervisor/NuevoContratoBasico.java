@@ -2354,15 +2354,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void prerender() {
         System.out.print("IsCargandoContrato:" + getSessionBeanCobra().isCargarcontrato());
         if (getSessionBeanCobra().isCargarcontrato()) {
-            if (panelPantalla == 2) {
-                if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 2) {
-                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-                }
-            } else if(getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
-                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
-                actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-                }
-            }
+            actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+//            if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
+//                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
+//                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+//                }
+//            }
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
                 panelPantalla = 2;
                 actualizarPanel();
@@ -2372,9 +2369,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 actualizarPanel();
                 if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 1) {
                     System.out.println("ingreso al metodo de guardar convenio 1");
+                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.guardarBorradorConvenio();
                 } else if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 2) {
                     System.out.println("ingreso al metodo de guardar convenio 2");
+                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.finalizarGuardado();
                 }
             } else {
@@ -2384,7 +2383,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
-
+//                actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                 getFlujoCaja().iniciarFlujoCaja();
             }
             getSessionBeanCobra().setCargarcontrato(false);
