@@ -33,9 +33,9 @@
                     
                     
              
-                <center>
-                    <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"
-                                       oncomplete="#{rich:component('panelGuardadoAlimentar')}.hide(); return true;"
+               <center>
+                    <h:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"
+                                     onclick="#{rich:component('panelGuardadoAlimentar')}.hide(); return true;"
                                         />
                 </center>
             </h:form>

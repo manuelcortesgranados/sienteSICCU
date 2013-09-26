@@ -36,9 +36,9 @@
                     </h:panelGroup>
                     <h:panelGroup>
                         <interkont:spacer width="120" height="10"/>
-                        <center>
-                            <a4j:commandButton id="BTaceptarEliAvance1" value="Si" styleClass="ikon-acb-btaceptareliavance1"     action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}" oncomplete="#{rich:component('confirmarEliminarAvance')}.hide();"/>
-                            <a4j:commandButton id="BTaceptarEliAvance2" value="NO" styleClass="ikont-acb-btaceptareliavance2"     onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
+                       <center>
+                            <h:commandButton id="BTaceptarEliAvance1" value="Si" styleClass="ikon-acb-btaceptareliavance1"     action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}"  onclick="#{rich:component('confirmarEliminarAvance')}.hide();"/>
+                            <h:commandButton id="BTaceptarEliAvance2" value="NO" styleClass="ikont-acb-btaceptareliavance2"     onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
                         </center>
                     </h:panelGroup>
                 </h:panelGrid>
