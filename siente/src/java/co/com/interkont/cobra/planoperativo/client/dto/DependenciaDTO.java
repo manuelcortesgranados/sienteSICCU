@@ -18,8 +18,6 @@ public class DependenciaDTO implements IsSerializable {
 	String toId;
 	DependencyType type;
 	String css;
-        private ActividadobraDTO actividadTo;
-        private ActividadobraDTO actividadFrom;
         private int idDependencia;
         
         
@@ -28,19 +26,17 @@ public class DependenciaDTO implements IsSerializable {
     }
 
 	
-	public DependenciaDTO(String id, String fromId, String toId, DependencyType type,ActividadobraDTO actividadFrom,ActividadobraDTO actividadTo) {
-		this(id, fromId, toId, type, "",actividadFrom,actividadTo);
+	public DependenciaDTO(String id, String fromId, String toId, DependencyType type) {
+		this(id, fromId, toId, type, "");
         }
 
 	public DependenciaDTO(String id, String fromId, String toId,
-			DependencyType type, String css,ActividadobraDTO actividadFrom,ActividadobraDTO actividadTo) {
+			DependencyType type, String css) {
 		this.id = id;
 		this.fromId = fromId;
 		this.toId = toId;
 		this.type = type;
 		this.css = css;
-                this.actividadFrom=actividadFrom;
-                this.actividadTo=actividadTo;
 	}
 
 	public String getId() {
@@ -163,34 +159,7 @@ public class DependenciaDTO implements IsSerializable {
 //    }
 //        
 
-    /**
-     * @return the actividadTo
-     */
-    public ActividadobraDTO getActividadTo() {
-        return actividadTo;
-    }
-
-    /**
-     * @param actividadTo the actividadTo to set
-     */
-    public void setActividadTo(ActividadobraDTO actividadTo) {
-        this.actividadTo = actividadTo;
-    }
-
-    /**
-     * @return the actividadFrom
-     */
-    public ActividadobraDTO getActividadFrom() {
-        return actividadFrom;
-    }
-
-    /**
-     * @param actividadFrom the actividadFrom to set
-     */
-    public void setActividadFrom(ActividadobraDTO actividadFrom) {
-        this.actividadFrom = actividadFrom;
-    }
-
+    
     /**
      * @return the idDependencia
      */

@@ -44,6 +44,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
     private int guardarconvenio = 0;
+    private boolean seCargoPlanOperativoAntes=false;
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -71,7 +72,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
                 contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
-                    obtenerDependenciasObligatorias();
+                obtenerDependenciasObligatorias();
+                seCargoPlanOperativoAntes=true;
             } catch (Exception ex) {
                 Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -123,11 +125,9 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     public DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
         DependenciaDTO dep = new DependenciaDTO();
-        dep.setId((String.valueOf(new Date().getTime())));
-        dep.setActividadFrom(actividadFrom);
-        dep.setActividadTo(actividadTo);
-        dep.setFromId(actividadFrom.getName());
-        dep.setToId(actividadTo.getName());
+        dep.setId(""+dep.hashCode());
+        dep.setFromId(actividadFrom.getId());
+        dep.setToId(actividadTo.getId());
         dep.setType(GanttConfig.DependencyType.ENDtoSTART);
         return dep;
     }
@@ -256,4 +256,14 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         }
         return lstRubrosDTO;
     }
+
+    @Override
+    public boolean getSeCargoPlanOperativoAntes() {
+        return seCargoPlanOperativoAntes;
+    }
+
+    @Override
+    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes) {
+       this.seCargoPlanOperativoAntes=seCargoPlanOperativoAntes;
+        }
 }

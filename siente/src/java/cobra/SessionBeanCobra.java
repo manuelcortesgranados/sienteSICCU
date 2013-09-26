@@ -1184,4 +1184,6 @@ public class SessionBeanCobra implements Serializable {
         htpSession.invalidate();
 
     }
+
+    
 }
