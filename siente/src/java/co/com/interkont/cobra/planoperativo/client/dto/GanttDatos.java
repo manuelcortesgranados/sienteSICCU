@@ -64,7 +64,6 @@ public class GanttDatos {
 
     public static ArrayList getDependencia(ContratoDTO convenio) {
         ArrayList<DependenciaDTO> list = new ArrayList<DependenciaDTO>(convenio.getDependenciasGenerales());
-        service.setLog("en getDependencas:"+list.size(), null);
         return list;
     }
 
@@ -81,6 +80,7 @@ public class GanttDatos {
         //ContratoDTO convenio = contratodto;
        
         List<ActividadobraDTO> lista = taskStore.getAll();
+        service.setLog("en estructurar datos:"+lista.size(), null);
         limpiarActividadesListaDependencia(lista);
         Set<DependenciaDTO> lstDependencias = new HashSet<DependenciaDTO>(depStore.getAll());
         convenio.setDependenciasGenerales(lstDependencias);

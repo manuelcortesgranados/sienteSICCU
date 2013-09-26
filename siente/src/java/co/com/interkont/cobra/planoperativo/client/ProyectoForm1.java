@@ -151,7 +151,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.fechaFin.setValue(proyectoDTO.getFechaFin());
         this.pagodirecto.setValue(proyectoDTO.getPagodirecto());
         this.otrospagos.setValue(proyectoDTO.getOtrospagos());
-        cargarObjetivoGeneral();
     }
 
     public void cargarObjetivoGeneral() {

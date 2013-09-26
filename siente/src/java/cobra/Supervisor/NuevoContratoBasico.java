@@ -2354,8 +2354,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void prerender() {
         System.out.print("IsCargandoContrato:" + getSessionBeanCobra().isCargarcontrato());
         if (getSessionBeanCobra().isCargarcontrato()) {
-
-            actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+            if (panelPantalla == 2) {
+                if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 2) {
+                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                }
+            } else if(getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
+                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
+                actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                }
+            }
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
                 panelPantalla = 2;
                 actualizarPanel();
@@ -6769,6 +6776,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return "nuevoConvenioPo";
     }
 
+    public void actualizarSoloContratoGWT(ContratoDTO contratodto) {
+        contrato.setDatefechaini(contratodto.getDatefechaini());
+        contrato.setDatefechafin(contratodto.getDatefechafin());
+        contrato.setFechaactaini(contratodto.getDatefechaactaini());
+        contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
+        contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
+        contrato.setTextobjeto(contratodto.getTextobjeto());
+        contrato.setIntduraciondias(contratodto.getIntduraciondias());
+    }
+
     /*
      * metodo que se encarga de actualizar el contrato con los datos provenientes del plan operativo
      * @param ContratoDto Objeto convenio utilizado en GWT.     
@@ -6787,7 +6804,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
+
         contrato.getActividadobras().clear();
+        contrato.getDependenciasGenerales().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
@@ -6799,6 +6818,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 listaProyectosConvenio.clear();
                 extraerProyectosActividad(act);
             }
+
             //System.out.println("lista = " + listaProyectosConvenio.size());
         }
     }
