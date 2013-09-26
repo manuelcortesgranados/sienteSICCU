@@ -129,6 +129,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         dep.setFromId(actividadFrom.getId());
         dep.setToId(actividadTo.getId());
         dep.setType(GanttConfig.DependencyType.ENDtoSTART);
+        dep.setIsobligatoria(true);
         return dep;
     }
 

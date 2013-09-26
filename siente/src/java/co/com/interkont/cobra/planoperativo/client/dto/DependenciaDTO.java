@@ -19,6 +19,7 @@ public class DependenciaDTO implements IsSerializable {
 	DependencyType type;
 	String css;
         private int idDependencia;
+        boolean isobligatoria = false;
         
         
 
@@ -158,6 +159,14 @@ public class DependenciaDTO implements IsSerializable {
 //        this.tipoDepencia = tipoDepencia;
 //    }
 //        
+
+    public boolean isIsobligatoria() {
+        return isobligatoria;
+    }
+
+    public void setIsobligatoria(boolean isobligatoria) {
+        this.isobligatoria = isobligatoria;
+    }
 
     
     /**

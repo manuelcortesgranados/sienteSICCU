@@ -443,12 +443,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         /*Se crea el menu asociado a las dependencias**/
         config.dependencyContextMenu = new Menu();
+        
 
+        final AlertMessageBox d = new AlertMessageBox("Error", "La dependencia no puede ser eliminada");
         MenuItem menuItemEliminarDependencia = new MenuItem("Eliminar dependencia");
         menuItemEliminarDependencia.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                depStore.remove(dependenciaSeleccionada);
+                if (dependenciaSeleccionada.isIsobligatoria() == false) {
+                    depStore.remove(dependenciaSeleccionada);
+                } else {
+                    d.show();
+                }
+
             }
         });
         config.dependencyContextMenu.add(menuItemEliminarDependencia);
