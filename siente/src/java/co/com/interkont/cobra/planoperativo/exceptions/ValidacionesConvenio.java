@@ -84,11 +84,12 @@ public class ValidacionesConvenio {
    }  
    
    public static void validarAgregarPolizas (Date fechainicontrato, Date fechafincontrato, Date fechapoliza){
-       Calendar fechatemppoliza = Calendar.getInstance();
-       fechatemppoliza.setTime(fechafincontrato);
-       fechatemppoliza.add(Calendar.DATE, -(30));
-       if (fechapoliza.compareTo(fechainicontrato) < 0 || fechapoliza.compareTo(fechatemppoliza.getTime()) > 0){
-           throw new ConvenioException("La fecha de la poliza debe estar en el rango de las fechas del convenio, teniendo encuenta que las polizas acaban un mes antes de terminacion del convenio");       
+//       Calendar fechatemppoliza = Calendar.getInstance();
+//       fechatemppoliza.setTime(fechafincontrato);
+//       fechatemppoliza.add(Calendar.DATE, -(30));
+       System.out.println("fecha fin del contrato  "+ fechafincontrato.toString());
+       if (fechapoliza.compareTo(fechafincontrato) <= 0){
+           throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del convenio");       
        }      
    }
    

@@ -133,11 +133,11 @@ public class ActividadForm implements IsWidget, EntryPoint {
     }
 
     private void crearFormulario() {
-         Label tituloPagina = new Label("Añadir actividad macro");
-         tituloPagina.setStyleName("ikont-po-label");
-         getVp().add(tituloPagina);
-        
-        
+        Label tituloPagina = new Label("Añadir actividad macro");
+        tituloPagina.setStyleName("ikont-po-label");
+        getVp().add(tituloPagina);
+
+
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         getVp().add(con);
 
@@ -171,8 +171,15 @@ public class ActividadForm implements IsWidget, EntryPoint {
 
                         if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
                             if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
-                                modalAct.hide();
-                                crearActividad();
+                                if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) >= 0) {
+                                    modalAct.hide();
+                                    crearActividad();
+                                } else {
+                                    d = new AlertMessageBox("Error", "La fecha de finalización no puede ser inferior a "
+                                            + obtenerFecha(getFechainicioActividad().getValue()));
+                                    d.show();
+                                }
+
                             } else {
                                 d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
                                         + obtenerFecha(actividadObraPadre.getEndDateTime()));
@@ -210,7 +217,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
             //getVp().setWidth("" + COLUMN_FORM_WIDTH);
             getVp().setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             getVp().setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-             getVp().setStyleName("ikont-po-tb");
+            getVp().setStyleName("ikont-po-tb");
             crearFormulario();
         }
         return getVp();
@@ -246,8 +253,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
-        actividadObraPadre.addChild(tareaNueva);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes,contratoDto);
+        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 

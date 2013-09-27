@@ -151,7 +151,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.fechaFin.setValue(proyectoDTO.getFechaFin());
         this.pagodirecto.setValue(proyectoDTO.getPagodirecto());
         this.otrospagos.setValue(proyectoDTO.getOtrospagos());
-        cargarObjetivoGeneral();
     }
 
     public void cargarObjetivoGeneral() {
@@ -359,6 +358,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                             varErrorres = true;
                             msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
                         }
+                    }
+                    if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
+                        varErrorres = true;                                                    
+                        msgerrores += "*La de finalizacion del proyecto no puede ser inferior a  " + proyectoDTO.getFechaInicio()+ "<br/>";
                     }
                     if (txtObjeG.getValue() == null) {
                         varErrorres = true;
@@ -621,7 +624,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
-                    ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0,contratoDto);
+                    ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto);
                     service.setLog("en crear" + actividadDependenciaFrom.getName(), null);
                     if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
                         enlazaractividadesHijas(act, tareaNueva);
@@ -633,7 +636,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
 
         } else {
-            ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0,contratoDto);
+            ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto);
             service.setLog("en crear 1" + actividadDependenciaFrom.getName(), null);
             if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
                 enlazaractividadesHijas(actividadObraPadre, tareaNueva);
@@ -644,8 +647,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
 
     }
-
-    
 
     /*
      *Metodo que se encarga de enlazar la actividad padre con la nueva activida proyecto creada y mostrarla en el panel del GANTT
