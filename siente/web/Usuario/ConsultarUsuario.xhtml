@@ -15,7 +15,7 @@
     <ui:define name="head" ></ui:define>
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-consultarusuario"   value="Consultar usuario" />
+        <h:outputText  styleClass="ikont-hot-administrar"   value="Consultar usuario" />
     </ui:define>
 
     <ui:define name="menu">
@@ -51,31 +51,34 @@
                     </tr>
                 </table>
                 <center>
-                    <h:panelGrid id="pnconsultarUsuario"  >
+                    <br/>
+                    <br/>
+                    <h:panelGrid id="pnconsultarUsuario" width="800px"  >
                         <interkont:spacer height="30"  />
                         <rich:dataTable id="tabla-listado-buscarusuario"
                                         rowKeyVar="filaSeleccionada"
                                         value="#{Perfil$Usuario.listausuarios}"
                                         sortMode="single" var="currentRow"  rows="10"
-                                        rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                        rowClasses="cabezo_tabla01, cabezo_tabla02"  styleClass="totalwidth"
+                                        binding="#{Perfil$Usuario.tablabuscarusuarios}">
                             <f:facet name="header">
-                                <rich:columnGroup>
-                                    <rich:column colspan="5">
+                                <rich:columnGroup >
+                                    <rich:column styleClass="ikont-colum-datosbasicos" colspan="5">
                                         <h:outputText  styleClass="ikont-hot-usuariosencontrados"   value="Usuarios encontrados" />
                                     </rich:column>
-                                    <rich:column breakRowBefore="true">
+                                    <rich:column styleClass="ikont-colum-datosbasicos" breakRowBefore="true">
                                         <h:outputText  styleClass="ikont-hot-nombrecompleto"   value="Nombre completo" />
                                     </rich:column>
-                                    <rich:column >
+                                    <rich:column styleClass="ikont-colum-datosbasicos" >
                                         <h:outputText  styleClass="ikont-hot-login"   value="Login" />
                                     </rich:column>
-                                    <rich:column >
+                                    <rich:column styleClass="ikont-colum-datosbasicos">
                                         <h:outputText  styleClass="ikont-hot-cedula"   value="Cédula" />
                                     </rich:column>
-                                    <rich:column >
+                                    <rich:column styleClass="ikont-colum-datosbasicos" >
                                         <h:outputText  styleClass="ikont-hot-perfilusuario"   value="Perfil usuario" />
                                     </rich:column>
-                                    <rich:column >
+                                    <rich:column styleClass="ikont-colum-datosbasicos">
                                         <h:outputText  styleClass="ikont-hot-ver"   value="Ver" />
                                     </rich:column>
                                 </rich:columnGroup>
@@ -85,16 +88,16 @@
                                 <h:outputText  styleClass="ikont-hot-strnombrecompleto"   value="#{currentRow.tercero.strnombrecompleto}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont-hot-usuLogin"   value="#{currentRow.usuLogin}" />
+                                <h:outputText  styleClass="ikont-label-general"   value="#{currentRow.usuLogin}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont-hot-intcedula"   value="#{currentRow.tercero.intcedula}" />
+                                <h:outputText  styleClass="ikont-label-general"   value="#{currentRow.tercero.intcedula}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                <h:outputText  styleClass="ikont-label-general"   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
-                                <h:commandLink   action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
+                                <h:commandLink   action="#{Perfil$Usuario.irperfilUsuario}">
                                     <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
                                 </h:commandLink>
                             </rich:column>
