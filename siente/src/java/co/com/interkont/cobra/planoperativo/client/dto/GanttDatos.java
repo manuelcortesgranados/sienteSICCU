@@ -96,6 +96,8 @@ public class GanttDatos {
             dep.setFromId(d.fromId);
             dep.setToId(d.toId);
             dep.setType(d.type);
+            dep.setActividadFrom(d.getActividadFrom());
+            dep.setActividadTo(d.getActividadTo());
             boolean encontro = false;
             for (int i = 0; i < lista.size() && !encontro; i++) {
                 ActividadobraDTO act = lista.get(i);

@@ -476,7 +476,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(""+this.hashCode(), fromTask.getId(), toTask.getId(), type);
+                return new DependenciaDTO(""+this.hashCode(), fromTask.getId(), toTask.getId(), type,fromTask,toTask);
             }
         ;
 

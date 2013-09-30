@@ -2351,29 +2351,26 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
     @Override
-    public void prerender() {
-        System.out.print("IsCargandoContrato:" + getSessionBeanCobra().isCargarcontrato());
+   public void prerender() {
         if (getSessionBeanCobra().isCargarcontrato()) {
-            actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-//            if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
-//                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
-//                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-//                }
-//            }
+            
+            if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
+                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
+                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                }
+            }
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
-                panelPantalla = 2;
+                panelPantalla = 3;
                 actualizarPanel();
-                planOperativo();
+                // planOperativo();
             } else if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 4) {
                 panelPantalla = 2;
                 actualizarPanel();
                 if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 1) {
-                    System.out.println("ingreso al metodo de guardar convenio 1");
-                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.guardarBorradorConvenio();
                 } else if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 2) {
-                    System.out.println("ingreso al metodo de guardar convenio 2");
-                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.finalizarGuardado();
                 }
             } else {
@@ -2383,15 +2380,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
-//                actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                 getFlujoCaja().iniciarFlujoCaja();
             }
             getSessionBeanCobra().setCargarcontrato(false);
-
         }
-
-
+        
+        
     }
+
 
     /**
      * <p>
@@ -6810,7 +6807,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
-                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
+                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId(),true);
                 activi.setContrato(contrato);
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
@@ -6818,7 +6815,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 extraerProyectosActividad(act);
             }
 
-            //System.out.println("lista = " + listaProyectosConvenio.size());
+            System.out.println("lista dep= " + contrato.getDependenciasGenerales().size());
         }
     }
 
