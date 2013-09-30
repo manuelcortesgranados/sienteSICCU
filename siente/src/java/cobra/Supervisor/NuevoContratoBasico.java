@@ -165,7 +165,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para mostrar Tipo de pólizas de un contrato
      */
-    private SelectItem[] TipoPolizas;
+    private List<Tipopoliza> TipoPolizas;
     /**
      * Variable para mostrar las entidades aseguradoras
      */
@@ -2170,11 +2170,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.Companias = Companias;
     }
 
-    public SelectItem[] getTipoPolizas() {
+    public List<Tipopoliza> getTipoPolizas() {
         return TipoPolizas;
     }
 
-    public void setTipoPolizas(SelectItem[] TipoPolizas) {
+    public void setTipoPolizas(List<Tipopoliza> TipoPolizas) {
         this.TipoPolizas = TipoPolizas;
     }
 
@@ -2589,16 +2589,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listar los tipos de pólizas
      */
     public void llenarTiposPoliza() {
-        List<Tipopoliza> lista = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
-        TipoPolizas = new SelectItem[lista.size()];
-        int i = 0;
-        for (Tipopoliza tipo : lista) {
-            SelectItem tpo = new SelectItem(tipo.getInttipopoliza(), tipo.getStrdesctipopoliza());
-            if (i == 0) {
-                tipointpoli = tipo.getInttipopoliza();
-            }
-            TipoPolizas[i++] = tpo;
-        }
+       TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();         
     }
 
     /**
@@ -3205,6 +3196,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (bundle.getString("conplanoperativo").equals("true")) {
                 try {
                     ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    if (!listaPolizacontratos.isEmpty()) {
+                        for (Polizacontrato p : listaPolizacontratos) {
+                            if (polizacontrato.getTipopoliza().getInttipopoliza() == p.getTipopoliza().getInttipopoliza()) {
+                                FacesUtils.addErrorMessage("El tipo de garantia ya se ha ingresado");
+                                return null;
+                            }
+                        }
+
+                    }
                 } catch (Exception e) {
                     FacesUtils.addErrorMessage(e.getMessage());
                     return null;

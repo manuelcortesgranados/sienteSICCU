@@ -31,7 +31,7 @@
 
                 </h:outputLabel>
                 <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.polizacontrato.tipopoliza.inttipopoliza}"  >
-                    <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>
+                    <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}" var="poliza" itemValue="#{poliza.inttipopoliza}" itemLabel="#{poliza.strdesctipopoliza}"/>
 
                 </h:selectOneMenu>
 
