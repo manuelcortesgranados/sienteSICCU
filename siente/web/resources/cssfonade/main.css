@@ -4483,3 +4483,8 @@ a:hover {
 .ikont-enlace-cargar-imagen-registro:active{
     color:  #257500 !important;   
 }
+.ikont-img-administrar{
+    border:0px;border-style:none;
+    width: 25px;
+    height: 25px;
+}
