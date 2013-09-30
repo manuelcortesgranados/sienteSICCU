@@ -2351,9 +2351,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
     @Override
-   public void prerender() {
+    public void prerender() {
         if (getSessionBeanCobra().isCargarcontrato()) {
-            
+
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
                 if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
                     actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
@@ -2385,10 +2385,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
             getSessionBeanCobra().setCargarcontrato(false);
         }
-        
-        
-    }
 
+    }
 
     /**
      * <p>
@@ -2463,23 +2461,66 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Según el usuario logueado se llenan las entidades o la entidad
      */
 
+    /* public void llenarEntidadesContratantes() {
+     try {
+
+     List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
+     TerceroOption = new SelectItem[lis.size()];
+     int i = 0;
+     SelectItem itemTercero = new SelectItem();
+     for (Tercero ter : lis) {
+
+     // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
+     //                }else{
+     //                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
+     //                }
+     itemTercero = new SelectItem(ter.getStrnombrecompleto());
+     TerceroEntidadLista terce = new TerceroEntidadLista(ter.getIntcodigo(), itemTercero.getValue().toString());
+     temp.add(terce);
+     if (i == 0) {
+     contrato.getTercero().setIntcodigo(ter.getIntcodigo());
+     contrato.getTercero().setStrnombrecompleto(ter.getStrnombrecompleto());
+     }
+
+     TerceroOption[i++] = itemTercero;
+     }
+     } catch (Exception e) {
+     }
+
+     }*/
     public void llenarEntidadesContratantes() {
         try {
 
             List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
-            TerceroOption = new SelectItem[lis.size()];
-            int i = 0;
-            SelectItem itemTercero = new SelectItem();
-            for (Tercero ter : lis) {
+            //TerceroOption = new SelectItem[lis.size()];
 
-                // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
-//                }else{
-//                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
-//                }
+            SelectItem itemTercero = new SelectItem();
+
+            // Esta operación se hace para garantizar que si la lista tiene muchos Items, tenga un espacio mas para el item TODOS. 
+            if (lis.size() == 1) {
+                TerceroOption = new SelectItem[lis.size()];
+            } else {
+                TerceroOption = new SelectItem[(lis.size() + 1)];
+            }
+
+            int i = 0;
+
+            //----------------------
+            //-- Se hace esta codificación para asegurar que el primer item que carga en la vista es con todos los relacionados al usuario. 
+            if (lis.size() > 1) {
+                itemTercero = new SelectItem("TODOS");
+                TerceroOption[i++] = itemTercero;
+                contrato.getTercero().setIntcodigo(-1);
+                contrato.getTercero().setStrnombrecompleto("TODOS");
+            }
+            //----------------------
+
+            for (Tercero ter : lis) {
                 itemTercero = new SelectItem(ter.getStrnombrecompleto());
                 TerceroEntidadLista terce = new TerceroEntidadLista(ter.getIntcodigo(), itemTercero.getValue().toString());
                 temp.add(terce);
-                if (i == 0) {
+
+                if (lis.size() == 1) {
                     contrato.getTercero().setIntcodigo(ter.getIntcodigo());
                     contrato.getTercero().setStrnombrecompleto(ter.getStrnombrecompleto());
                 }
@@ -2589,7 +2630,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listar los tipos de pólizas
      */
     public void llenarTiposPoliza() {
-       TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();         
+        TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
     }
 
     /**
@@ -4725,8 +4766,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String primeroDetcontratoContratista() {
         if (comboEntidadesContratoguardar()) {
-            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
-            totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+            totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
             paginaContratista = 1;
             if (totalfilasContratista <= 5) {
                 totalpaginasContratista = 1;
@@ -4796,8 +4837,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         int num = (paginaContratista) * 5;
 
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
 
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
@@ -4864,8 +4905,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         paginaContratista = paginaContratista - 1;
         int num = (paginaContratista - 1) * 5;
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
         } else {
@@ -4929,8 +4970,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String ultimoDetcontratoContratista() {
         int num = totalfilasContratista % 5;
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilasContratista - num, totalfilasContratista);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilasContratista - num, totalfilasContratista);
 
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
@@ -6079,7 +6120,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6800,14 +6841,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
-
         contrato.getActividadobras().clear();
         contrato.getDependenciasGenerales().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
-                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId(),true);
+                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId(), true);
                 activi.setContrato(contrato);
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad

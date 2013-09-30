@@ -41,7 +41,6 @@ import co.com.interkont.cobra.to.Tiposolicitante;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.DependencyType;
 import com.gantt.client.config.GanttConfig.TaskType;
-import com.interkont.cobra.dto.ConvenioDTO;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import java.io.Serializable;
 import java.math.BigDecimal;
