@@ -329,7 +329,7 @@
                                         </rich:inplaceSelect>
 
                                     </h:panelGrid>
-                                        <h:outputLabel    id="entiodadcontratantevalue" styleClass="ikont-"   rendered="true" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
+                                    <h:outputLabel    id="entiodadcontratantevalue" styleClass="ikont-"   rendered="true" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
 
@@ -966,6 +966,7 @@
                                             value="#{Supervisor$Contrato.listaModificarContrato}"
                                             rendered="#{Supervisor$Contrato.listaModificarContrato.size()>0}"
                                             rowKeyVar="filaSeleccionada"
+                                            binding="#{Supervisor$ModificarContrato.binditablamodi}"
                                             var="modificarcontr">
                                 <rich:column width="120px">
                                     <f:facet name="header">
@@ -1023,13 +1024,13 @@
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   id="documento" value="#{var.documento}" />
+                                        <h:outputText  styleClass="ikont- "   id="documento2" value="#{var.documento}" />
                                     </f:facet>
 
-                                    <a4j:commandLink id="btAdjuntarImagenmodi" 
-                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}"
-                                                     oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
-                                                     render="tabladocumentomodi">
+                                    <a4j:commandLink id="btAdjuntarImagenmodi" >
+                                        <a4j:ajax event="click" listener="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}"
+                                                  onbeforesubmit="#{rich:component('panelModiContratoDoc')}.show();"
+                                                  render="tabladocumentomodi"/>
 
                                         <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
@@ -1064,35 +1065,35 @@
         <h:outputScript name="csspopup.js" library="js" />
         <h:outputScript name="jquery.timers-1.0.0.js" library="js" />
         <script type="text/javascript" language="JavaScript">
-                                                                 window.onload = iniciarFunciones();
+            window.onload = iniciarFunciones();
 
-                                                                 function iniciarFunciones() {
-                                                                     var timefalta = document.getElementById("finfecha").value;
-                                                                     var futuro = new Date(timefalta);
+            function iniciarFunciones() {
+                var timefalta = document.getElementById("finfecha").value;
+                var futuro = new Date(timefalta);
 
-                                                                     setInterval(function() {
-                                                                         var ahora = new Date();
-                                                                         var faltan = futuro - ahora;
+                setInterval(function() {
+                    var ahora = new Date();
+                    var faltan = futuro - ahora;
 
-                                                                         if (faltan > 0) {
-                                                                             var segundos = Math.round(faltan / 1000);
-                                                                             var minutos = Math.floor(segundos / 60);
-                                                                             var segundos_s = segundos % 60;
-                                                                             var horas = Math.floor(minutos / 60);
-                                                                             var minutos_s = minutos % 60;
-                                                                             var dias = Math.floor(horas / 24);
-                                                                             var horas_s = horas % 24;
-                                                                             horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
-                                                                             dias = (!(dias > 9)) ? '0' + dias : dias;
-                                                                             minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
-                                                                             segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
-                                                                             document.getElementById('refreshMeDias').innerHTML = dias;
-                                                                             document.getElementById('refreshMeHoras').innerHTML = horas_s;
-                                                                             document.getElementById('refreshMeMinutos').innerHTML = minutos_s;
-                                                                             document.getElementById('refreshMeSeg').innerHTML = segundos_s;
-                                                                         }
-                                                                     }, 100);
-                                                                 }
+                    if (faltan > 0) {
+                        var segundos = Math.round(faltan / 1000);
+                        var minutos = Math.floor(segundos / 60);
+                        var segundos_s = segundos % 60;
+                        var horas = Math.floor(minutos / 60);
+                        var minutos_s = minutos % 60;
+                        var dias = Math.floor(horas / 24);
+                        var horas_s = horas % 24;
+                        horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
+                        dias = (!(dias > 9)) ? '0' + dias : dias;
+                        minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
+                        segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
+                        document.getElementById('refreshMeDias').innerHTML = dias;
+                        document.getElementById('refreshMeHoras').innerHTML = horas_s;
+                        document.getElementById('refreshMeMinutos').innerHTML = minutos_s;
+                        document.getElementById('refreshMeSeg').innerHTML = segundos_s;
+                    }
+                }, 100);
+            }
         </script>
     </ui:define>
 </ui:composition>
