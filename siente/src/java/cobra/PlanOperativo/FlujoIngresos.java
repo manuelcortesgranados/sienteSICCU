@@ -93,6 +93,10 @@ public class FlujoIngresos implements Serializable{
     public void setTotalIngresosFuente(BigDecimal totalIngresosFuente) {
         this.totalIngresosFuente = totalIngresosFuente;
     }
+    
+    public double getValorAportado() {
+        return fuenteRecursosConvenio.getValoraportado().doubleValue();
+    }
 
     /**
      * Descripción de la fuente de ingreso.

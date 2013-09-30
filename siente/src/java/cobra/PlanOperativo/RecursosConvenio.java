@@ -160,7 +160,7 @@ public class RecursosConvenio implements Serializable {
         try {
             NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
             Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
-            //Se pone la condicion si la lista tiene alguna entidad
+            //Se pone la condicion si la lista tiene alguna entidad y se valida a que no agreguen la misma entidad en un conveio
             if (!lstFuentesRecursos.isEmpty()) {
                 for (Fuenterecursosconvenio f : lstFuentesRecursos) {
                     if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo()) {
@@ -292,9 +292,9 @@ public class RecursosConvenio implements Serializable {
     public void setTableFuente(UIDataTable tableFuente) {
         this.tableFuente = tableFuente;
     }
-    
+
     public void sumaFuentesRecursos (){
      for (Fuenterecursosconvenio f : lstFuentesRecursos)       
-        sumafuentes = sumafuentes.add(f.getValoraportado());
+            sumafuentes = sumafuentes.add(f.getValoraportado());
+        }
     }
-}

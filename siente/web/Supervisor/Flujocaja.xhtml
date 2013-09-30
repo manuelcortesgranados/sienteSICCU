@@ -106,6 +106,15 @@
                     </h:panelGrid>
                 </f:facet>
             </rich:column>
+            <rich:column style="text-align: right; font-weight: bold;" >
+                <f:facet name="header">
+                    <h:outputLabel value="Porcenaje de aporte"/>
+                </f:facet>
+                <h:outputText id="hot-totalingresos1" value="#{fuenteIngresos.valorAportado / PlanOperativo.valorTotalContrato * 100}" rendered="#{fuenteIngresos.ingresoEntidad}" >
+                    <f:convertNumber currencySymbol="% " type="currency"/>
+                </h:outputText>
+                
+            </rich:column>
         </rich:extendedDataTable>
 
         <br />

@@ -213,6 +213,10 @@ public class FlujoCaja implements Serializable {
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
+    
+    public double getValorTotalContrato() {
+        return convenio.getNumvlrcontrato().doubleValue();
+    }
 
     /**
      * Columnas para periodos del flujo de caja.
