@@ -351,17 +351,20 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         varErrorres = true;
                         msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
                     }
-
+              
                     if (proyectoDTO.getFechaFin() != null) {
                         service.setLog("entre en fecha fin no null", null);
                         if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                             varErrorres = true;
                             msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
-                        }
+                        }                      
                     }
-                    if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
-                        varErrorres = true;                                                    
-                        msgerrores += "*La de finalizacion del proyecto no puede ser inferior a  " + proyectoDTO.getFechaInicio()+ "<br/>";
+                    if(proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null){
+                         if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
+                            varErrorres = true;
+                            String df3 = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
+                            msgerrores += "*La de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
+                        }
                     }
                     if (txtObjeG.getValue() == null) {
                         varErrorres = true;
