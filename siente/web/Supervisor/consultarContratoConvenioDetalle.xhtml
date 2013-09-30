@@ -280,18 +280,18 @@
                                             <h:outputLabel  id="txtrecurpropios"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursospropios}">
                                             <f:convertNumber pattern="$ ###,###" /></h:outputLabel>
                                             <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurpropios" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
-                                                <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                                <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
                                             </a4j:commandLink>
                                         </h:panelGroup>
                                         <h:panelGroup  id="txthabilitarModificarecurpropios" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
                                             <h:inputText  required="true" id="habilitarrecurpropios"   value="#{Supervisor$Contrato.contrato.numrecursospropios}"/>
                                             <a4j:commandLink   id="btn_modificarRecurpropios"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
-                                                <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                                <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_guardar.png"/>
                                             </a4j:commandLink> 
                                             <a4j:commandLink   immediate="true" id="bt_cancelarModificarrecurpropios"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
-                                                <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                                <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_eliminar.png"/>
                                             </a4j:commandLink>   
-                                            <rich:message for="habilitarrecurpropios" style="color: red;"/>  
+                                            <rich:message for="habilitarrecurpropios"/>  
                                         </h:panelGroup>
                                     </h:panelGroup>
 
@@ -312,18 +312,18 @@
                                                 <f:convertNumber pattern="$ ###,###" />
                                                 </h:outputLabel>
                                                 <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurch" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
                                                 </a4j:commandLink>
                                             </h:panelGroup>
                                             <h:panelGroup  id="txthabilitarModificarecurch" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
                                                 <h:inputText  required="true" id="habilitarrecurch"   value="#{Supervisor$Contrato.contrato.numrecursosch}"/>
                                                 <a4j:commandLink   id="btn_modificarRecurch"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}"  render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar"  value="/resources/imgs/bt_guardar.png"/>
                                                 </a4j:commandLink> 
                                                 <a4j:commandLink   immediate="true" id="bt_cancelarModificarrecurch"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>   
-                                                <rich:message for="habilitarrecurch" style="color: red;"/>  
+                                                <rich:message for="habilitarrecurch"/>  
                                             </h:panelGroup>
                                         </h:panelGroup>
 
@@ -342,18 +342,18 @@
                                                 <h:outputLabel  id="txtrecurtercero"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursostercero}">
                                                 <f:convertNumber pattern="$ ###,###" /></h:outputLabel>
                                                 <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurtercero" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios">
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
                                                 </a4j:commandLink>
                                             </h:panelGroup>
                                             <h:panelGroup  id="txthabilitarModificarecurtercero" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
                                                 <h:inputText  validatorMessage="No se permite valores menores de 0" required="true" id="habilitarrecurtercero" value="#{Supervisor$Contrato.contrato.numrecursostercero}"/>
                                                 <a4j:commandLink   id="btn_modificarRecurtercero"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_guardar.png"/>
                                                 </a4j:commandLink> 
                                                 <a4j:commandLink   immediate="true" id="bt_cancelarModificarrecurtercero"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
-                                                    <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                                    <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>   
-                                                <rich:message for="habilitarrecurtercero" style="color: red;"/>  
+                                                <rich:message for="habilitarrecurtercero"/>  
                                             </h:panelGroup>
                                         </h:panelGroup>
 
@@ -372,7 +372,7 @@
                                             </a4j:commandLink>
                                         </h:panelGroup>
                                         <h:panelGroup   id="txthabilitarModificarEntidad" rendered="#{Supervisor$Contrato.habilitarBtnGuardarCancelarContrato}" >
-                                            <h:selectOneMenu style="width: 83%;" id="inplaceSelect"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
+                                            <h:selectOneMenu id="inplaceSelect"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
                                                              value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"  >
                                                 <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                             </h:selectOneMenu>
@@ -383,7 +383,7 @@
                                             <a4j:commandLink   immediate="true" id="bt_cancelarModificarEntidad"  action="#{Supervisor$Contrato.cancelarModificacionContrato}" render="form_editarEntidadContrato"  execute="txthabilitarModificarEntidad,txthabilitarEntidades" >
                                                 <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_eliminar.png"/>
                                             </a4j:commandLink>   
-                                            <rich:message for="habilitarEntidad" style="color: red;"/>  
+                                            <rich:message for="habilitarEntidad"/>  
                                         </h:panelGroup>
                                     </h:panelGroup>
                                     <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
