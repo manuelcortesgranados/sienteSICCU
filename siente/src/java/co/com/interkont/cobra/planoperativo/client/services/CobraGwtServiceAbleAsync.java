@@ -48,4 +48,10 @@ public interface CobraGwtServiceAbleAsync {
     void getSeCargoPlanOperativoAntes(AsyncCallback<Boolean> call);
 
     void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes, AsyncCallback<Void> call);
+    
+    void  getListaacteliminar(AsyncCallback<List<ActividadobraDTO>> call);
+    
+    void setListaacteliminar(List<ActividadobraDTO> listaacteliminar, AsyncCallback<Void> call);
+    
+    void adicionarActividadDtoEliminar(ActividadobraDTO actdto, AsyncCallback<Void> call);
 }

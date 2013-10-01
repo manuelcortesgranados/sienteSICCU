@@ -6460,13 +6460,42 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 //                        }
 //                    }
-//                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
+                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
                     if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
                         contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                     }
+                    
+                        getSessionBeanCobra().getCobraService().guardarContrato(contrato);
+                        if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
+                            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+                                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+                            }
+                        }
+                        if (!getContrato().getActividadobras().isEmpty()) {
+                            Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
 
-                    getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                    FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+//                            System.out.println("act = " + act.getOidactiviobra());
+//
+//                            Iterator itact = act.getActividadobras().iterator();
+//                            while (itact.hasNext()) {
+//                                Actividadobra acti = (Actividadobra) itact.next();
+//                                System.out.println("acti = " + acti.getOidactiviobra());
+//                            }
+
+                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
+                            if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
+                                getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
+                                        CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
+                                getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
+
+                            }
+
+                        }
+
+                        FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+                    
+
                 } else {
                     validardatosbasicosplano = 1;
                     FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
