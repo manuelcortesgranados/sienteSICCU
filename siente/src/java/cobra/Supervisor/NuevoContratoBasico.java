@@ -768,6 +768,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private int varibaleTipo = 1;
 
+    private String numcontratotemporal;
+
+    public String getNumcontratotemporal() {
+        return numcontratotemporal;
+    }
+
+    public void setNumcontratotemporal(String numcontratotemporal) {
+        this.numcontratotemporal = numcontratotemporal;
+    }
+    
+    
     public int getVaribaleTipo() {
         return varibaleTipo;
     }
@@ -3502,6 +3513,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         buscarproyecto = "";
         contrato = new Contrato();
+        setNumcontratotemporal("");
         contrato.setTercero(new Tercero());
         contrato.setEncargofiduciario(new Encargofiduciario());
         contrato.getEncargofiduciario().setIntnumencargofiduciario(0);
@@ -4159,6 +4171,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             tipoContCon = "Contrato";
             booltipocontratoconvenio = false;
         }
+        setNumcontratotemporal(cont.getStrnumcontrato());
 
     }
 
@@ -6410,6 +6423,30 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
+        
+       boolean band=true;
+       if(getContrato().getIntidcontrato()==0)
+       {
+           if(getSessionBeanCobra().getCobraService().encontrarContratoPorNumero(getContrato().getStrnumcontrato())!=null)
+           {
+               band =false;
+           }    
+       }
+       else
+       {
+           ///Revisar si cambio el numero de contrato
+           if(getNumcontratotemporal().compareTo(getContrato().getStrnumcontrato())!=0)
+           {
+               if(getSessionBeanCobra().getCobraService().encontrarContratoPorNumero(getContrato().getStrnumcontrato())!=null)
+           {
+               band =false;
+           } 
+           }    
+       }    
+       
+       if(band)
+       {   
+           
         validardatosbasicosplano = 0;
 //      Adicionando una forma de pago por defecto para que no saque error el sistema al intentar validarlo
         contrato.setFormapago(new Formapago(1, null, true));
@@ -6492,7 +6529,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             }
 
                         }
-
+                        setNumcontratotemporal(getContrato().getStrnumcontrato());
                         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
                     
 
@@ -6508,6 +6545,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             validardatosbasicosplano = 3;
             FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
         }
+       }
+       else
+       {
+            validardatosbasicosplano = 1;
+            FacesUtils.addErrorMessage("El número de contrato ingresado ya existe");
+       }    
     }
 
     /*
