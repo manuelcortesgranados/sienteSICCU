@@ -82,11 +82,10 @@
                         <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipoentidad" value="#{var.entidad}: " />
 
                         <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >        
-                            <rich:select onclick="this.value = '';" id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" 
+                            <rich:select id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" 
                                          value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >                           
-                                <f:selectItem itemLabel="TODOS" itemValue="TODOS"/>
                                 <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />   
-                                <a4j:ajax event="change"
+                                <a4j:ajax event="selectitem"
                                           listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                           render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                           execute="@this" >

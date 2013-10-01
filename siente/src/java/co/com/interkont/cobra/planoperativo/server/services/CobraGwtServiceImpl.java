@@ -45,6 +45,18 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private int navegacion = 1;
     private int guardarconvenio = 0;
     private boolean seCargoPlanOperativoAntes=false;
+    private List<ActividadobraDTO> listaacteliminar= new ArrayList<ActividadobraDTO>();
+
+    @Override
+    public List<ActividadobraDTO> getListaacteliminar() {
+        return listaacteliminar;
+    }
+
+    @Override
+    public void setListaacteliminar(List<ActividadobraDTO> listaacteliminar) {
+        this.listaacteliminar = listaacteliminar;
+    }    
+    
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -128,6 +140,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         dep.setId(""+dep.hashCode());
         dep.setFromId(actividadFrom.getId());
         dep.setToId(actividadTo.getId());
+        dep.setActividadFrom(actividadFrom);
+        dep.setActividadTo(actividadTo);
         dep.setType(GanttConfig.DependencyType.ENDtoSTART);
         dep.setIsobligatoria(true);
         return dep;
@@ -267,4 +281,9 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes) {
        this.seCargoPlanOperativoAntes=seCargoPlanOperativoAntes;
         }
+    
+    @Override
+    public void adicionarActividadDtoEliminar(ActividadobraDTO actdto) {
+        getListaacteliminar().add(actdto);
+    }
 }

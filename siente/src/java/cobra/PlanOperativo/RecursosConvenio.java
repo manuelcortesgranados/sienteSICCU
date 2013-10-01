@@ -36,6 +36,18 @@ public class RecursosConvenio implements Serializable {
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
     private UIDataTable tableFuente = new UIDataTable();
+    
+    private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
+
+    public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
+        return lstFuentesRecursosEliminar;
+    }
+
+    public void setLstFuentesRecursosEliminar(List<Fuenterecursosconvenio> lstFuentesRecursosEliminar) {
+        this.lstFuentesRecursosEliminar = lstFuentesRecursosEliminar;
+    }
+    
+    
     /**
      * Lista para el manejo de roles
      *
@@ -134,6 +146,10 @@ public class RecursosConvenio implements Serializable {
      */
     public void eliminarFuenteRecursos() {
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
+        if(f.getIdfuenterecursosconvenio()!=0)
+        {
+            lstFuentesRecursosEliminar.add(f);
+        }    
         lstFuentesRecursos.remove(f);
         sumafuentes = sumafuentes.subtract(f.getValoraportado());
         if (lstFuentesRecursos.isEmpty()) {
@@ -292,9 +308,9 @@ public class RecursosConvenio implements Serializable {
     public void setTableFuente(UIDataTable tableFuente) {
         this.tableFuente = tableFuente;
     }
-
+    
     public void sumaFuentesRecursos (){
      for (Fuenterecursosconvenio f : lstFuentesRecursos)       
-            sumafuentes = sumafuentes.add(f.getValoraportado());
-        }
+        sumafuentes = sumafuentes.add(f.getValoraportado());
     }
+}

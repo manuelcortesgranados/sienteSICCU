@@ -57,8 +57,9 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-ver"   value="#{var.Ver}"/>
                                 </f:facet>
-                                <h:commandButton value="Ver" id="boton" immediate="true"
-                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}" />
+                                <h:commandLink value="Ver" id="boton" immediate="true" styleClass="ikont-link-downdoc ikont-hpg-fcontrato"
+                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}"
+                                                 style="color: #9CFF00; background-color: #257500;"/>
                             </rich:column>
 
 

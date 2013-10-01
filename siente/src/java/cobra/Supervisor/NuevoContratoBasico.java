@@ -165,7 +165,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para mostrar Tipo de pólizas de un contrato
      */
-    private SelectItem[] TipoPolizas;
+    private List<Tipopoliza> TipoPolizas;
     /**
      * Variable para mostrar las entidades aseguradoras
      */
@@ -2170,11 +2170,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.Companias = Companias;
     }
 
-    public SelectItem[] getTipoPolizas() {
+    public List<Tipopoliza> getTipoPolizas() {
         return TipoPolizas;
     }
 
-    public void setTipoPolizas(SelectItem[] TipoPolizas) {
+    public void setTipoPolizas(List<Tipopoliza> TipoPolizas) {
         this.TipoPolizas = TipoPolizas;
     }
 
@@ -2352,28 +2352,25 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     @Override
     public void prerender() {
-        System.out.print("IsCargandoContrato:" + getSessionBeanCobra().isCargarcontrato());
         if (getSessionBeanCobra().isCargarcontrato()) {
-            actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-//            if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
-//                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
-//                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-//                }
-//            }
+
+            if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 1) {
+                if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
+                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                }
+            }
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
-                panelPantalla = 2;
+                panelPantalla = 3;
                 actualizarPanel();
-                planOperativo();
+                // planOperativo();
             } else if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 4) {
                 panelPantalla = 2;
                 actualizarPanel();
                 if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 1) {
-                    System.out.println("ingreso al metodo de guardar convenio 1");
-                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.guardarBorradorConvenio();
                 } else if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 2) {
-                    System.out.println("ingreso al metodo de guardar convenio 2");
-                    actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                    actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                     this.finalizarGuardado();
                 }
             } else {
@@ -2383,13 +2380,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
-//                actualizarSoloContratoGWT(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+                actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                 getFlujoCaja().iniciarFlujoCaja();
             }
             getSessionBeanCobra().setCargarcontrato(false);
-
         }
-
 
     }
 
@@ -2466,23 +2461,66 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Según el usuario logueado se llenan las entidades o la entidad
      */
 
+    /* public void llenarEntidadesContratantes() {
+     try {
+
+     List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
+     TerceroOption = new SelectItem[lis.size()];
+     int i = 0;
+     SelectItem itemTercero = new SelectItem();
+     for (Tercero ter : lis) {
+
+     // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
+     //                }else{
+     //                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
+     //                }
+     itemTercero = new SelectItem(ter.getStrnombrecompleto());
+     TerceroEntidadLista terce = new TerceroEntidadLista(ter.getIntcodigo(), itemTercero.getValue().toString());
+     temp.add(terce);
+     if (i == 0) {
+     contrato.getTercero().setIntcodigo(ter.getIntcodigo());
+     contrato.getTercero().setStrnombrecompleto(ter.getStrnombrecompleto());
+     }
+
+     TerceroOption[i++] = itemTercero;
+     }
+     } catch (Exception e) {
+     }
+
+     }*/
     public void llenarEntidadesContratantes() {
         try {
 
             List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
-            TerceroOption = new SelectItem[lis.size()];
-            int i = 0;
-            SelectItem itemTercero = new SelectItem();
-            for (Tercero ter : lis) {
+            //TerceroOption = new SelectItem[lis.size()];
 
-                // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
-//                }else{
-//                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
-//                }
+            SelectItem itemTercero = new SelectItem();
+
+            // Esta operación se hace para garantizar que si la lista tiene muchos Items, tenga un espacio mas para el item TODOS. 
+            if (lis.size() == 1) {
+                TerceroOption = new SelectItem[lis.size()];
+            } else {
+                TerceroOption = new SelectItem[(lis.size() + 1)];
+            }
+
+            int i = 0;
+
+            //----------------------
+            //-- Se hace esta codificación para asegurar que el primer item que carga en la vista es con todos los relacionados al usuario. 
+            if (lis.size() > 1) {
+                itemTercero = new SelectItem("TODOS");
+                TerceroOption[i++] = itemTercero;
+                contrato.getTercero().setIntcodigo(-1);
+                contrato.getTercero().setStrnombrecompleto("TODOS");
+            }
+            //----------------------
+
+            for (Tercero ter : lis) {
                 itemTercero = new SelectItem(ter.getStrnombrecompleto());
                 TerceroEntidadLista terce = new TerceroEntidadLista(ter.getIntcodigo(), itemTercero.getValue().toString());
                 temp.add(terce);
-                if (i == 0) {
+
+                if (lis.size() == 1) {
                     contrato.getTercero().setIntcodigo(ter.getIntcodigo());
                     contrato.getTercero().setStrnombrecompleto(ter.getStrnombrecompleto());
                 }
@@ -2592,16 +2630,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listar los tipos de pólizas
      */
     public void llenarTiposPoliza() {
-        List<Tipopoliza> lista = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
-        TipoPolizas = new SelectItem[lista.size()];
-        int i = 0;
-        for (Tipopoliza tipo : lista) {
-            SelectItem tpo = new SelectItem(tipo.getInttipopoliza(), tipo.getStrdesctipopoliza());
-            if (i == 0) {
-                tipointpoli = tipo.getInttipopoliza();
-            }
-            TipoPolizas[i++] = tpo;
-        }
+        TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
     }
 
     /**
@@ -3208,6 +3237,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (bundle.getString("conplanoperativo").equals("true")) {
                 try {
                     ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    if (!listaPolizacontratos.isEmpty()) {
+                        for (Polizacontrato p : listaPolizacontratos) {
+                            if (polizacontrato.getTipopoliza().getInttipopoliza() == p.getTipopoliza().getInttipopoliza()) {
+                                FacesUtils.addErrorMessage("El tipo de garantia ya se ha ingresado");
+                                return null;
+                            }
+                        }
+
+                    }
                 } catch (Exception e) {
                     FacesUtils.addErrorMessage(e.getMessage());
                     return null;
@@ -4728,8 +4766,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String primeroDetcontratoContratista() {
         if (comboEntidadesContratoguardar()) {
-            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
-            totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+            totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
             paginaContratista = 1;
             if (totalfilasContratista <= 5) {
                 totalpaginasContratista = 1;
@@ -4799,8 +4837,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         int num = (paginaContratista) * 5;
 
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
 
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
@@ -4867,8 +4905,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         paginaContratista = paginaContratista - 1;
         int num = (paginaContratista - 1) * 5;
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
         } else {
@@ -4932,8 +4970,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String ultimoDetcontratoContratista() {
         int num = totalfilasContratista % 5;
-        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato);
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilasContratista - num, totalfilasContratista);
+        totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilasContratista - num, totalfilasContratista);
 
         if (totalfilasContratista <= 5) {
             totalpaginasContratista = 1;
@@ -6082,7 +6120,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6422,13 +6460,42 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 //                        }
 //                    }
-//                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
+                    contrato.setFuenterecursosconvenios(new LinkedHashSet());
                     if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
                         contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                     }
+                    
+                        getSessionBeanCobra().getCobraService().guardarContrato(contrato);
+                        if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
+                            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+                                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+                            }
+                        }
+                        if (!getContrato().getActividadobras().isEmpty()) {
+                            Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
 
-                    getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                    FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+//                            System.out.println("act = " + act.getOidactiviobra());
+//
+//                            Iterator itact = act.getActividadobras().iterator();
+//                            while (itact.hasNext()) {
+//                                Actividadobra acti = (Actividadobra) itact.next();
+//                                System.out.println("acti = " + acti.getOidactiviobra());
+//                            }
+
+                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
+                            if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
+                                getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
+                                        CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
+                                getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
+
+                            }
+
+                        }
+
+                        FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+                    
+
                 } else {
                     validardatosbasicosplano = 1;
                     FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
@@ -6803,14 +6870,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
-
         contrato.getActividadobras().clear();
         contrato.getDependenciasGenerales().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
-                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
+                Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId(), true);
                 activi.setContrato(contrato);
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
@@ -6818,7 +6884,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 extraerProyectosActividad(act);
             }
 
-            //System.out.println("lista = " + listaProyectosConvenio.size());
+            System.out.println("lista dep= " + contrato.getDependenciasGenerales().size());
         }
     }
 

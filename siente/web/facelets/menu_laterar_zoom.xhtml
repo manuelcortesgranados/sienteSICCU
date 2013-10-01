@@ -225,7 +225,20 @@
                         <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuPreguntasFrecuentes}" immediate="true" action="pregfrecuentes"/>
                     </h:panelGroup>
                 </h:panelGroup>
-
+                <hr class="ikont-hr-separador-menu "  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}"/>
+                <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}"> 
+                    <h:panelGrid columns="2">
+                        <h:commandLink styleClass="ikont-menu-inicio-zoom-administrador " />
+                        <h:outputLabel styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.administrarmodulo}"/>
+                    </h:panelGrid>
+                      <h:panelGroup styleClass="ikont-espacio-sub-menu">
+                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.gestionarUsuario}"   immediate="true" action="#{Perfil$Usuario.iniciarperfilusuario}" rendered="true" />
+                        <br/>
+                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.asociarentidadusuario}"  immediate="true" action="#{Administrador$AdministrarEntidad.asociarEntidad}"/>
+                        <br/>
+                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.crearentidad}" immediate="true" action="#{Administrador$AdministrarEntidad.ingresarEntidad}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
 
             </h:panelGroup>
         </div>

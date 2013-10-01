@@ -290,6 +290,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         ActividadobraDTO actPadre = taskStore.getParent(tareaSeleccionada);
                         actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
+                        service.adicionarActividadDtoEliminar(tareaSeleccionada, null);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
                         d.show();
@@ -476,7 +477,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(""+this.hashCode(), fromTask.getId(), toTask.getId(), type);
+                return new DependenciaDTO(""+this.hashCode(), fromTask.getId(), toTask.getId(), type,fromTask,toTask);
             }
         ;
 

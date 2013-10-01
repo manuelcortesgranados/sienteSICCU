@@ -1765,7 +1765,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important;   
 }
 .ikont-bt-cerrar-login2:visited{
-    color:  #257500 !important;   
+    color: #58595B !important;   
 }
 .ikont-bt-cerrar-login2:active{
     color:  #257500 !important;   
@@ -1801,7 +1801,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important; 
 }
 .ikont-label-estructura-menu:visited{
-    color:  #257500 !important; 
+    color:  #58595B !important; 
 }
 .ikont-label-estructura-menu:active{
     color:  #257500 !important; 
@@ -1828,7 +1828,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important; 
 }
 .ikont-label-menu-item:visited { 
-    color:  #257500 !important; 
+    color:  #58595B !important; 
 }
 .ikont-label-menu-buscar-proyecto { 
     font-size: 12px; 
@@ -1850,7 +1850,7 @@ input[type="text"], input[type="password"], select{
     color:  #257500 !important; 
 }
 .ikont-label-menu-estr-sub-titulo:visited{
-    color:  #257500 !important; 
+    color:  #58595B !important; 
 }
 .ikont-div-menu-zoom-inicio{
     background-position: 0px -52px;
@@ -3132,7 +3132,7 @@ css usuario modificacion
     font-family:Verdana, Geneva, sans-serif;
     font-size:15px;
     font-style:italic;
-    color:#004670;
+    color:#58595B;
     line-height:15px;
 }
 .ikont-hot-datefechaopinion{
@@ -4276,8 +4276,8 @@ a:hover {
     position: absolute;
     top: 150px;
     left: 300px;
-    
-    
+
+
 }
 
 .ikont-title-1-convenio-gwt{
@@ -4429,7 +4429,7 @@ a:hover {
 }
 
 .ikont-link-downdoc:link {
-     display: block;
+    display: block;
     height: 15px;
     text-decoration: none;
     width: 35px;
@@ -4438,9 +4438,53 @@ a:hover {
     padding-top: 5px;
     font-family:Verdana, Arial, Helvetica, sans-serif;
     color:#58595B;  
-    
+
 }
 
 .ikont-link-downdoc:hover{ 
-   background-color: #1E4C00 !important;
+    background-color: #1E4C00 !important;
+}
+.ikont-menu-inicio-zoom-administrador{
+    background-image: url(../imgs/bt_herramientas.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height:30px;
+    display: block;
+}
+
+.ikont-hot-administrar{
+    background-position: 3% 50%;
+    background-repeat:no-repeat;
+    color: #008000;
+    font-size: 20px;
+}
+.ikont-label-general{
+    color: #424040!important;
+}
+.ikont-enlace-boton-administrar:link{
+    display: block;
+    height: 22px;
+    text-decoration: none;
+    width: 128px;
+    border: 1px solid #D0D0D0;
+    border-radius: 7px;
+    background-color: #FFF;
+    padding-top: 5px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;
+}
+
+.ikont-enlace-boton-administrar:hover{
+    color:  #257500 !important;   
+}
+.ikont-enlace-boton-administrar:visited{
+    color:  #58595B !important;   
+}
+.ikont-enlace-cargar-imagen-registro:active{
+    color:  #257500 !important;   
+}
+.ikont-img-administrar{
+    border:0px;border-style:none;
+    width: 25px;
+    height: 25px;
 }
