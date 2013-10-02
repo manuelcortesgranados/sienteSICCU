@@ -4488,3 +4488,56 @@ a:hover {
     width: 25px;
     height: 25px;
 }
+.ikont-hpg-slider-valor{
+    z-index: 100;
+}
+.ikont-hpg-slider-valor1{
+    width: 239px!important;
+    position: relative;
+    top: -6px;
+}
+.ikont-hit-valor{
+    font-size: 15px !important;
+    width: 65px!important;
+    position: relative!important;
+    left: -6px;
+    top: -7px!important;
+}
+.ikont-hit-valor1{
+    font-size: 14px !important;
+    width: 20px!important;
+    position: relative;
+    left: 8px;
+}
+.ikont-hit-valor2{
+    font-size:12px !important;
+    width: 85px!important;
+    position: relative!important;
+    left:2px;
+}
+.ikont-hit-valor3{
+    font-size: 14px !important;
+    width: 25px!important;
+    position: relative!important;
+    left: 5px;
+}
+.ikont-hit-valor4{
+    font-size: 12px !important;
+    width: 84px!important;
+    position: relative!important;
+    left: 5px;
+}
+.ikont-hpg-slider-avance{
+    width:239px!important;
+    position: relative;
+    top: -5px;
+}
+.ikont-hit-avance1{
+    left: 81px;
+    font-size: 14.5px!important;
+}
+.ikont-hit-avance2{
+    position: relative!important;
+    top: -122px!important;
+    font-size: 15px!important;
+}
