@@ -1068,6 +1068,8 @@ public class DetalleObra implements Serializable{
         llenarContratosInterventoria();
         getAdministrarObraNew().modificarObjetoObra =false;
         getAdministrarObraNew().btn_habilitarModificarObjeto=true;
+         habilitarModificarimpacto = true;
+        habilitarGuardarimpacto = false;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
         limpiardetalle();
         if (getSessionBeanCobra().getCobraService().isCiu()) {

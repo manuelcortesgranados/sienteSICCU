@@ -158,6 +158,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
+    /**
+     * Variable para habilitar el boton modificar El impacto
+     */
+    public boolean habilitarModificarimpacto = true;
+    /**
+     * Variable para habilitar El boton Guardar la modificacion del impacto
+     */
+    public boolean habilitarGuardarimpacto = false;
 
     public List<Barrio> getListaBarrios() {
         for (Barrio documentoobra1 : listaBarrios) {
@@ -814,6 +822,22 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     }
 
+    public boolean isHabilitarModificarimpacto() {
+        return habilitarModificarimpacto;
+    }
+
+    public void setHabilitarModificarimpacto(boolean habilitarModificarimpacto) {
+        this.habilitarModificarimpacto = habilitarModificarimpacto;
+    }
+
+    public boolean isHabilitarGuardarimpacto() {
+        return habilitarGuardarimpacto;
+    }
+
+    public void setHabilitarGuardarimpacto(boolean habilitarGuardarimpacto) {
+        this.habilitarGuardarimpacto = habilitarGuardarimpacto;
+    }
+
     public void habilitarBtnCancelar() {
         btn_habilitarModificarObjeto = true;
         modificarObjetoObra = false;
@@ -974,6 +998,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
 
         obtenerTacometro();
+        
     }
 
     public void obtenerTacometro() {
@@ -2207,5 +2232,48 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         getListaBarrios().addAll(getSessionBeanCobra().getCobraService().obtenerBarriosObra(getObra()));
         getListaVeredas().addAll(getSessionBeanCobra().getCobraService().obtenerVeredasObra(getObra()));
         return null;
+    }
+
+    public void modificarImpactoSocialProyecto() {
+        try {
+            if (getObra().getObra() == null) {
+                getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
+                FacesUtils.addInfoMessage("Se actualizo correctamente el  proyecto");
+
+            } else {
+                Obra obra = getSessionBeanCobra().getCobraService().encontrarObraPorId(getObra().getObra().getIntcodigoobra());
+                obra.setNumempdirectos(obra.getNumempdirectos() + getObra().getNumempdirectos());
+                obra.setNumempindirectos(obra.getNumempindirectos() + getObra().getNumempindirectos());
+                obra.setNumhabbeneficiados(obra.getNumhabbeneficiados() + getObra().getNumhabbeneficiados());
+                getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
+                getSessionBeanCobra().getCobraService().guardarObra(obra, null, opcion);
+                FacesUtils.addInfoMessage("Se actualizo correctamente el  proyecto");
+            }
+        } catch (Exception e) {
+            FacesUtils.addErrorMessage("No se pudo actualizar el Proyecto");
+        }
+        habilitarModificarimpacto = true;
+        habilitarGuardarimpacto = false;
+    }
+
+    /**
+     * Metodo Utilizado para habilitar el boton Modificar El Impacto social del
+     * proyecto
+     *
+     * @return void
+     */
+    public void habilitarBotonModificarImpacto() {
+        habilitarModificarimpacto = false;
+        habilitarGuardarimpacto = true;
+    }
+
+   /**
+     * Metodo Utilizado para cancelar  La modificacion del impacto social del proyecto
+     *
+     * @return void
+     */
+    public void cancelarModifcacionModificarImpacto() {
+        habilitarModificarimpacto = true;
+        habilitarGuardarimpacto = false;
     }
 }
