@@ -3325,10 +3325,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return No devuelve ningún valor
      */
-    public String agregarPoliza() {
-        if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
+    public String agregarPoliza() {       
+        if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {            
+            
+            polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
+            polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));            
+            polizacontrato.setContrato(contrato);
+            polizacontrato.setStrdocpoliza("");    
+            System.out.println("bool tipo convenio " + getContrato().getBoolplanoperativo());
             //validacion si es plan operativo que valide las fechas dentro del rango de vida del convenio
-            if (getContrato().getBooltipocontratoconvenio() == true) {
+            if (getContrato().getBooltipocontratoconvenio() == true && getContrato().getBooltipocontratoconvenio() != null) {
                 if (bundle.getString("conplanoperativo").equals("true")) {
                     try {
                         ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
@@ -3345,10 +3351,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     return null;
                 }
             }
-            polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
-            polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
-            polizacontrato.setContrato(contrato);
-            polizacontrato.setStrdocpoliza("");
             listapolizas.add(polizacontrato);
             listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
             polizacontrato = new Polizacontrato();
