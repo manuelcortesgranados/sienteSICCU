@@ -16,7 +16,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrasiente</value>
+            <value>jdbc:postgresql:cobrafonade</value>
         </property>
         <property name="username">
             <value>cobra</value>
@@ -147,7 +147,8 @@
                 <value>co/com/interkont/cobra/to/Sector.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Tiposolicitante.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Zonaespecifica.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value>                
+                <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value> 
+                <value>co/com/interkont/cobra/to/Relacioncontratojsfusuario.hbm.xml</value>               
                 
                 <value>co/com/interkont/cobra/to/Historicoplanificacionpago.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Registrovalidador.hbm.xml</value>
