@@ -31,186 +31,191 @@
             };</script>
 
     </h:head>
-   
-        <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
-            <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px;width: 265px;" > 
-                <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
-                <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
-                    <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
-                                  onclick="this.value = ''"  styleClass="input_filtro" style="font-size: 17px;">
-                        <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
-                    <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
-                        <f:selectItems value="#{HomeGestion.tiposProyectos}"/>
-                        <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
-                                  render="subtiposProyecto"/>
+    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
+        <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px;width: 265px;" > 
+            <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
+            <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
+                <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
+                              onclick="this.value = ''"  styleClass="input_filtro" style="font-size: 17px;">
+                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
+
+                <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
+                    <f:selectItems value="#{HomeGestion.tiposProyectos}"/>
+                    <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
+                              render="subtiposProyecto"/>
+                </h:selectOneMenu>
+
+                <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
+                    <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
+                        <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
+                    </h:selectOneMenu>
+                </h:panelGroup> 
+
+                <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
+                    <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
+                        <f:selectItem itemLabel="Fase" itemValue="-1"/>
+                        <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
+                    </h:selectOneMenu>
+                </h:panelGroup>
+
+
+                <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
+                <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
+                <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
+                <script type="text/javascript">
+
+            $(function() {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 32002183952,
+                    values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                    slide: function(event, ui) {
+                        var numero1 = ui.values[ 0 ];
+                        var numero2 = ui.values[ 1 ];
+                        //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
+                        $("#numero1").val(numero1);
+                        $("#numero2").val(numero2);
+                        $("#numero3").val(numero1.formatMoney());
+                        $("#numero4").val(numero2.formatMoney());
+                        $("#amount").val("$" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
+                    }
+                });
+                $("#amount").val("$ " + $("#slider-range").slider("values", 0) +
+                        " a $ " + $("#slider-range").slider("values", 1));
+            });
+
+                </script>
+
+                <h:panelGrid styleClass="ikont-hpg-slider-valor">           
+                    <h:panelGrid id="numeros_la" columns="1" styleClass="ikont-hpg-slider-valor1">
+                        <h:inputText   styleClass="input_filtro_2 ikont-hit-valor" value="VALOR:" disabled="true"/>
+                        <rich:column>
+                            <h:inputText   styleClass="input_filtro_2 ikont-hit-valor1" value="$ " disabled="true"/>
+                            <h:inputText    styleClass="input_filtro_2 ikont-hit-valor2" id="numero3"  disabled="true" value="#{HomeGestion.filtro.cuantiaini}"/>
+                            <h:inputText   styleClass="input_filtro_2 ikont-hit-valor3" value="a $ "  disabled="true"/>
+                            <h:inputText   styleClass="input_filtro_2 ikont-hit-valor4" id="numero4" disabled="true" value="#{HomeGestion.filtro.cuantiafin}"/>
+                        </rich:column>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <div id="slider-range" style="position: relative !important; top: -31px !important;z-index: 20;" ></div>
+                <br/>
+                <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
+                <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
+
+                <script type="text/javascript">
+                    $(function() {
+                        $("#slider-range-avance").slider({
+                            range: true,
+                            min: 0,
+                            max: 100,
+                            values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
+                            slide: function(event, ui) {
+                                var avance1 = ui.values[ 0 ];
+                                var avance2 = ui.values[ 1 ];
+                                $("#ava1").val(avance1);
+                                $("#ava2").val(avance2);
+                                $("#avance").val(avance1 + "% a " + avance2 + "%");
+                            }
+                        });
+                        $("#avance").val($("#slider-range-avance").slider("values", 0) +
+                                "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
+                    });
+                </script>
+                <h:panelGrid styleClass="ikont-hpg-slider-avance" style="" >
+
+                    <rich:column>
+                        <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1"/> 
+                    </rich:column>
+
+                </h:panelGrid>
+                <div id="slider-range-avance" style="position: relative !important; top: -26px !important;z-index: 20;"></div>
+            </h:panelGrid>
+            <center>
+                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
+                                 styleClass="boton1"   style="padding: 1px 22px!important;z-index: 20;"          />
+            </center>
+            <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2" /> 
+        </rich:tab>              
+        <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
+            <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
+            <h:panelGrid columns="1" styleClass="panel_filtro_zoom "  >
+                <h:panelGroup>
+                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" rendered="false" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">                       
+                        <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
+                        <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
+                        <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
                     </h:selectOneMenu>
 
-                    <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
-                        <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
-                            <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
-                        </h:selectOneMenu>
-                    </h:panelGroup> 
-
-                    <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
-                        <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
-                            <f:selectItem itemLabel="Fase" itemValue="-1"/>
-                            <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
-                        </h:selectOneMenu>
-                    </h:panelGroup>
-
-
-                    <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
-                    <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
-                    <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-                    <script type="text/javascript">
-        
-        $(function() {
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: document.getElementById("valormayor").value,
-                values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
-                slide: function(event, ui) {
-                    var numero1 = ui.values[ 0 ];
-                    var numero2 = ui.values[ 1 ];
-                    //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
-                    $("#numero1").val(numero1);
-                    $("#numero2").val(numero2);
-                    $("#numero3").val(numero1.formatMoney());
-                    $("#numero4").val(numero2.formatMoney());
-                    $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
-                }
-            });
-            $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
-                    " a $ " + $("#slider-range").slider("values", 1));
-        });
-
-                    </script>
-
-                    <h:panelGrid style="z-index: 100;">           
-                        <!--<h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>-->
-                        <h:panelGrid id="numeros_la" columns="1" style="width:239px!important;">
-                            <rich:column>
-                                <h:inputText   styleClass="input_filtro_2" value="VALOR $ "  style="font-size: 14px !important;width: 65px!important;position: relative;left: -12px;" disabled="true"/>
-                                <h:inputText    styleClass="input_filtro_2" id="numero3"   style="font-size: 9px !important;width: 76px!important;position: relative!important;left:-20px;" disabled="true" value="#{HomeGestion.filtro.cuantiaini}"/>
-                                <h:inputText   styleClass="input_filtro_2" value="a $ "   style="font-size: 13px !important;width: 21px!important;position: relative!important;left: -21px;" disabled="true"/>
-                                <h:inputText   styleClass="input_filtro_2" id="numero4"   style="font-size: 9px !important;width: 72px!important;position: relative!important;left: -16px;" disabled="true" value="#{HomeGestion.filtro.cuantiafin}"/>
-                            </rich:column>
+                    <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
+                        <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
+                            <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}"  styleClass="input_filtro_select">
+                                <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
+                                <f:selectItems value="#{HomeGestion.zonaespe}"/>
+                                <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
+                            <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="combos_ubicacion"
+                                              rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
+                                <f:selectItems value="#{HomeGestion.departamentos}"/>
+                                <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
+                                          render="municipios"/>
+                            </h:selectOneMenu>
+                            <div style="width: 20px;height:10px;"></div>
+                            <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="combos_ubicacion"
+                                              rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
+                                <f:selectItems value="#{HomeGestion.municipios}" />
+                            </h:selectOneMenu>
                         </h:panelGrid>
                     </h:panelGrid>
-                    <div id="slider-range" style="position: relative !important; top: -20px !important;z-index: 20;" ></div>
-                    <br/>
-                    <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
-                    <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
-                    <script type="text/javascript">
-                        $(function() {
-                            $("#slider-range-avance").slider({
-                                range: true,
-                                min: 0,
-                                max: 100,
-                                values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
-                                slide: function(event, ui) {
-                                    var avance1 = ui.values[ 0 ];
-                                    var avance2 = ui.values[ 1 ];
-                                    $("#ava1").val(avance1);
-                                    $("#ava2").val(avance2);
-                                    $("#avance").val("Avance " + avance1 + "% a " + avance2 + "%");
-                                }
-                            });
-                            $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
-                                    "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
-                        });
-                    </script>
+                </h:panelGroup>
+            </h:panelGrid>
+            <center>
+                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
+                                 styleClass="boton1"    style="padding: 1px 22px!important;z-index: 100;"          />
+            </center>
+        </rich:tab>
 
-                    <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true" style="z-index: 100;"/> 
+        <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
+            <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
+            <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
 
+                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" style="position: absolute;top: 85px; width: 236px!important;"
+                                   var="cap3" fetchValue="#{cap3.strnombrecompleto}" value="#{HomeGestion.filtro.strcliente}" layout="div">
+                    #{cap3.strnombrecompleto}
+                    <rich:placeholder id="placeHolderCliente" value="Cliente" />
+                </rich:autocomplete>
 
-                    <div id="slider-range-avance" style="position: relative !important; top: -16px !important;z-index: 20;"></div>
-                </h:panelGrid>
-                <center>
-                    <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
-                                     styleClass="boton1"   style="padding: 1px 22px!important;z-index: 20;"          />
-                </center>
-            </rich:tab>              
-            <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
-                <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
-                <h:panelGrid columns="1" styleClass="panel_filtro_zoom"  >
-                    <h:panelGroup>
-                        <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" rendered="false" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">                       
-                            <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
-                            <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
-                            <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
-                        </h:selectOneMenu>
+                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;width: 236px!important;"
+                                   var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
+                    #{cap.strnombre}
+                    <rich:placeholder id="placeHolderContratista" value="Contratista" />
+                </rich:autocomplete>
 
-                        <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
-                            <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
-                                <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}"  styleClass="input_filtro_select">
-                                    <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
-                                    <f:selectItems value="#{HomeGestion.zonaespe}"/>
-                                    <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
-                                </h:selectOneMenu>
-                            </h:panelGrid>
-                            <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
-                                <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="combos_ubicacion"
-                                                  rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
-                                    <f:selectItems value="#{HomeGestion.departamentos}"/>
-                                    <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
-                                              render="municipios"/>
-                                </h:selectOneMenu>
-                                <div style="width: 20px;height:10px;"></div>
-                                <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="combos_ubicacion"
-                                                  rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
-                                    <f:selectItems value="#{HomeGestion.municipios}" />
-                                </h:selectOneMenu>
-                            </h:panelGrid>
-                        </h:panelGrid>
-                    </h:panelGroup>
-                </h:panelGrid>
-                <center>
-                    <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
-                                     styleClass="boton1"    style="padding: 1px 22px!important;z-index: 100;"          />
-                </center>
-            </rich:tab>
+                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;width: 236px!important;"                                  
+                                   var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
+                    #{cap1.strinterventor}
+                    <rich:placeholder  id="placeHolderInterventor" value="Interventor" />
+                </rich:autocomplete>
 
-            <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
-                <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
-                <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
-
-                    <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" style="position: absolute;top: 85px; width: 236px!important;"
-                                       var="cap3" fetchValue="#{cap3.strnombrecompleto}" value="#{HomeGestion.filtro.strcliente}" layout="div">
-                        #{cap3.strnombrecompleto}
-                        <rich:placeholder id="placeHolderCliente" value="Cliente" />
-                    </rich:autocomplete>
-
-                    <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;width: 236px!important;"
-                                       var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
-                        #{cap.strnombre}
-                        <rich:placeholder id="placeHolderContratista" value="Contratista" />
-                    </rich:autocomplete>
-
-                    <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;width: 236px!important;"                                  
-                                       var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
-                        #{cap1.strinterventor}
-                        <rich:placeholder  id="placeHolderInterventor" value="Interventor" />
-                    </rich:autocomplete>
-
-                    <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;width: 236px!important;"
-                                       var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
-                        #{cap2.strnombrecompleto}
-                        <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
-                    </rich:autocomplete>
+                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;width: 236px!important;"
+                                   var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
+                    #{cap2.strnombrecompleto}
+                    <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
+                </rich:autocomplete>
 
 
-                </h:panelGrid>
+            </h:panelGrid>
 
-                <center>
+            <center>
 
-                    <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
-                                     styleClass="boton1"  style="padding: 1px 22px!important;z-index: 100;"            />
+                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
+                                 styleClass="boton1"  style="padding: 1px 22px!important;z-index: 100;"            />
 
-                </center>
-            </rich:tab>
-        </rich:tabPanel>
+            </center>
+        </rich:tab>
+    </rich:tabPanel>
 </ui:composition>
