@@ -39,6 +39,9 @@ public interface CobraGwtServiceAble extends RemoteService{
     public Boolean setGuardarconvenio(int guardarconvenio);
     public boolean getSeCargoPlanOperativoAntes();
     public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes);
+    public List<ActividadobraDTO> getListaacteliminar();
+    public void setListaacteliminar(List<ActividadobraDTO> listaacteliminar);
+    public void adicionarActividadDtoEliminar(ActividadobraDTO actdto);
  
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
 //    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception;
