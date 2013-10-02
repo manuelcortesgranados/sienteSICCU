@@ -429,7 +429,7 @@
 
                             </h:outputLabel>
                             <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
-                                <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>
+                                <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}" var="polizas" itemValue="#{polizas.inttipopoliza}" itemLabel="#{polizas.strdesctipopoliza}"/> 
                             </h:selectOneMenu>
 
                             <h:outputLabel  styleClass="ikont-hol-numpolcont" id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
