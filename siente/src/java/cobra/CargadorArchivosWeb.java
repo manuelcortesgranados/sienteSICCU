@@ -33,7 +33,7 @@ public class CargadorArchivosWeb implements Serializable {
      * Listado de archivos cargados en el servidor
      */
     private ArrayList<ArchivoWeb> archivos = new ArrayList<ArchivoWeb>();
-    public String carguearchivo;
+    public String carguearchivo ="";
 
     public CargadorArchivosWeb() {
     } 
