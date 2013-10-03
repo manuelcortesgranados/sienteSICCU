@@ -7,12 +7,14 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.config.GanttConfig.DependencyType;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
+import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +33,7 @@ public class GanttDatos {
 
     private static CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     private static Date fechaComparar;
+    private static String msg;
 
     /**
      * Método para construir toda la estructura jerárquica de las tareas del
@@ -79,20 +82,20 @@ public class GanttDatos {
      */
     public static ContratoDTO estructurarDatosConvenio(final ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore, CobraGwtServiceAbleAsync service, ListStore<DependenciaDTO> depStore) {
         //ContratoDTO convenio = contratodto;
-       
+
         List<ActividadobraDTO> lista = taskStore.getAll();
         limpiarActividadesListaDependencia(lista);
         Set<DependenciaDTO> lstDependencias = new HashSet<DependenciaDTO>(depStore.getAll());
         convenio.setDependenciasGenerales(lstDependencias);
         convenio.setDatefechaini(lista.get(0).getStartDateTime());
-        convenio.setDatefechaactaini(obtenerActividadDeRaiz(0,convenio).getChildren().get(0).getStartDateTime());
+        convenio.setDatefechaactaini(obtenerActividadDeRaiz(0, convenio).getChildren().get(0).getStartDateTime());
         convenio.setDatefechafin(lista.get(0).endDateTime);
         convenio.setIntduraciondias(lista.get(0).duration);
         convenio.getActividadobras().clear();
         convenio.getActividadobras().add(lista.get(0));
         for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
-            dep.setId(""+d.getId());
+            dep.setId("" + d.getId());
             dep.setFromId(d.fromId);
             dep.setToId(d.toId);
             dep.setType(d.type);
@@ -122,8 +125,6 @@ public class GanttDatos {
         }
 
     }
-
-    
 
     public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
         if (actividadPadre != null) {
@@ -155,9 +156,9 @@ public class GanttDatos {
         if (tipo == 1) {
             service.setLog("En buscar actividad 1:" + lstActividades.get(0).getChildren().get(1).getName(), null);
             odifi(lstActividades.get(0).getChildren().get(1), taskStore, props, contrato);
-            fechaComparar=lstActividades.get(0).getChildren().get(1).endDateTime;
+            fechaComparar = lstActividades.get(0).getChildren().get(1).endDateTime;
             service.setLog("En buscar actividad liquidacion:", null);
-            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props,contrato);
+            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
         } else {
             odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
         }
@@ -195,10 +196,10 @@ public class GanttDatos {
             if (actiHija.getName().equals("Suscripcion del contrato")) {
                 actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
             }
-            if(actiHija.getTipoActividad()==2){
+            if (actiHija.getTipoActividad() == 2) {
                 actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
                 actiHija.getObra().setFechaFin(actiHija.startDateTime);
-            }else if(actiHija.getTipoActividad()==3){
+            } else if (actiHija.getTipoActividad() == 3) {
                 actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
             }
             props.startDateTime().setValue(actiHija, fecha);
@@ -213,6 +214,7 @@ public class GanttDatos {
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
+        if(!listaHijas.isEmpty()){
         Date menor = listaHijas.get(0).getStartDateTime();
         for (int i = 1; i < listaHijas.size(); i++) {
             if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
@@ -220,9 +222,12 @@ public class GanttDatos {
             }
         }
         return CalendarUtil.copyDate(menor);
+        }
+        return null;
     }
 
     public static Date obtenerMayorFechaFin(List<ActividadobraDTO> listaHijas) {
+        if(!listaHijas.isEmpty()){
         Date mayor = listaHijas.get(0).getEndDateTime();
         for (int i = 1; i < listaHijas.size(); i++) {
             if (listaHijas.get(i).getEndDateTime().compareTo(mayor) > 0) {
@@ -230,6 +235,8 @@ public class GanttDatos {
             }
         }
         return CalendarUtil.copyDate(mayor);
+        }
+        return null;
     }
 
     public static void enlazarActividadConDependencia(List<DependenciaDTO> lstDependencias, List<ActividadobraDTO> lstActividades) {
@@ -262,4 +269,138 @@ public class GanttDatos {
         ac.setStartDateTime(fechaInicio);
         ac.setEndDateTime(fechaFin);
     }
+
+    public static DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
+        DependenciaDTO dep = new DependenciaDTO();
+        dep.setId("" + dep.hashCode());
+        dep.setFromId(actividadFrom.getId());
+        dep.setToId(actividadTo.getId());
+        dep.setType(DependencyType.ENDtoSTART);
+        dep.setActividadFrom(actividadFrom);
+        dep.setActividadTo(actividadTo);
+        dep.setIsobligatoria(true);
+        return dep;
+    }
+
+    public static Boolean verificarModificacionFechasContrato(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
+        boolean error = false;
+        msg="";
+       if (taskStore.getParent(actividadSeleccionada).getName().equals("Precontractual")) {
+            ActividadobraDTO actividadPadrePrecontractual = taskStore.getParent(actividadSeleccionada);
+            
+            //porque etapa precontractual inicia con la fecha del contrato
+            //posicion 0
+            if (actividadSeleccionada.getName().equals("Revisión técnica de documentos")) {
+                service.setLog("Revisión técnica de documentos", null);
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(1).getStartDateTime()) > 0) {
+                    service.setLog("Revisión técnica de documentos 1e", null);
+                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la actividad Elaboración de pliegos de condiciones");
+                    error = true;
+                }
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getStartDateTime()) < 0) {
+                    service.setLog("Revisión técnica de documentos 1", null);
+                    setMsg(getMsg() + "La fecha de inicio no puede ser menor que la actividad Precontractual");
+                    error = true;
+                }
+                if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getEndDateTime()) > 0) {
+                    service.setLog("Revisión técnica de documentos 2", null);
+                    setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de fin del contrato");
+                    error = true;
+                }
+                if (actividadSeleccionada.getEndDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(1).getStartDateTime()) > 0) {
+                    service.setLog("Revisión técnica de documentos 2", null);
+                    setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de inicio de Elaboración de pliegos de condiciones");
+                    error = true;
+                }
+               service.setLog("error"+error, null);
+                //posicion 1
+            } else if (actividadSeleccionada.getName().equals("Elaboración de pliegos de condiciones")) {
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(0).getEndDateTime()) < 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser menor que la Revisión técnica de documentos ");
+                    error = true;
+                }
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(2).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la Evaluación de propuestas ");
+                    error = true;
+                }
+                if (actividadSeleccionada.getEndDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(2).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de fin no puede ser mayor que la Evaluación de propuestas");
+                    error = true;
+                }
+                //posicion 2
+            } else if (actividadSeleccionada.getName().equals("Evaluación de propuestas")) {
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(1).getEndDateTime()) < 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser menor que la Elaboración de pliegos de condiciones ");
+                    error = true;
+                }
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(3).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la Elaboración de contratos ");
+                    error = true;
+                }
+                if (actividadSeleccionada.getEndDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(3).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de fin no puede ser mayor que la Elaboración de contratos");
+                    error = true;
+                }
+                //posicion 3
+            } else {
+                if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(2).getEndDateTime()) < 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser menor que la Evaluación de propuestas ");
+                    error = true;
+                }
+                if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getEndDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la fecha fin del contrato");
+                    error = true;
+                }
+
+//                    if (!error) {
+//                        if (aumenta) {
+//                            ActividadobraDTO actividadRaiz = root.getChildren().get(0);
+//                            Date copiaFechaFinLiquidacion = CalendarUtil.copyDate(taskStore.getLastChild(actividadRaiz).getEndDateTime());
+//                            CalendarUtil.addDaysToDate(copiaFechaFinLiquidacion, cantidadModificar);
+//                            if (copiaFechaFinLiquidacion.compareTo(actividadRaiz.getEndDateTime()) > 0) {
+//                                error = true;
+//                            }
+//                        }
+//                    }
+            }
+
+        } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Contractual")) {
+        } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Liquidaciones")) {
+            service.setLog("sali a validar modificacion contrato", null);
+
         }
+        return error;
+    }
+
+    public static boolean validacionParaTodasLasActividades(ActividadobraDTO ac, ContratoDTO convenioDTO) {
+        if (ac.getStartDateTime().compareTo(convenioDTO.getDatefechaini()) < 0) {
+            return false;
+        }
+        if (ac.getEndDateTime().compareTo(convenioDTO.getDatefechafin()) > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static Boolean verificacionModificacionFechaFin(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
+        if (actividadSeleccionada.getTipoActividad() == 2) {
+        } else if (actividadSeleccionada.getTipoActividad() == 3) {
+        }
+        return false;
+
+    }
+
+    /**
+     * @return the msg
+     */
+    public static String getMsg() {
+        return msg;
+    }
+
+    /**
+     * @param aMsg the msg to set
+     */
+    public static void setMsg(String aMsg) {
+        msg = aMsg;
+    }
+}

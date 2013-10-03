@@ -253,6 +253,7 @@ public class ModificarContrato implements Serializable {
             getNuevoContratoBasico().llenarPolizas();
             getNuevoContratoBasico().instanciarPolizar();
             cargadorPoliza = new CargadorArchivosWeb();
+            cargadorPoliza.cargarArchivosweb("poliza");
             return true;
         }
 
@@ -642,7 +643,9 @@ public class ModificarContrato implements Serializable {
         documentootrosi.setStrnombre("Documento otrosi modificación contrato " + getNuevoContratoBasico().getContrato().getIntidcontrato());
 
         cargadorPoliza = new CargadorArchivosWeb();
+        cargadorPoliza.cargarArchivosweb("poliza");
         cargadorOtrosi = new CargadorArchivosWeb();
+        cargadorOtrosi.cargarArchivosweb("otrosi");
         cual = 1;
         fechaMaxima = new Date();
         getNuevoContratoBasico().getListaPolizacontratos().clear();

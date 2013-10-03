@@ -36,7 +36,7 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-      <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
         <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
     </ui:define>
     <ui:define name="body">
@@ -280,7 +280,7 @@
 
                                         </h:outputLabel>
                                         <h:selectOneMenu id="comboTipoPolizaModi" value="#{Supervisor$Contrato.tipointpoli}">
-                                            <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>                                           
+                                           <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}" var="polizas" itemValue="#{polizas.inttipopoliza}" itemLabel="#{polizas.strdesctipopoliza}"/>                                
                                         </h:selectOneMenu>
 
                                         <h:outputLabel  styleClass="ikont-hol-lblnumPolizaContratoModi"    id="lblnumPolizaContratoModi"  value=" #{var.numPolizaContrato}:" for="numPolizaContratoModi">

@@ -140,15 +140,15 @@
                                             </h:panelGrid>
                                             <h:commandButton  id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
                                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5" 
-                                                          verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
-                                                <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                    <h:outputText  value="#{var.houtnrocontrato}"/><br/>
-                                                    <h:outputText value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
-                                                     <h:outputText value="#{var.objetocontrato}: " /><br/>
-                                                    <h:outputText value="#{relacionContrato.contrato.strnombre}" /><br/><br/>
-                                                </a4j:repeat>
-                                                    
-                                            </rich:tooltip>
+                                                              verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
+                                                    <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
+                                                        <h:outputText  value="#{var.houtnrocontrato}"/><br/>
+                                                        <h:outputText value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
+                                                        <h:outputText value="#{var.objetocontrato}: " /><br/>
+                                                        <h:outputText value="#{relacionContrato.contrato.strnombre}" /><br/><br/>
+                                                    </a4j:repeat>
+
+                                                </rich:tooltip>
                                             </h:commandButton>
                                             <h:panelGrid>
                                                 <h:outputLabel styleClass="ikont-hot-textobra9">Valor de la interventoría</h:outputLabel>
@@ -157,15 +157,15 @@
                                                 </h:outputText>
                                             </h:panelGrid>
                                             <h:commandButton  styleClass="ikont- hot-otNumContratos" id="otNumContratos" value="#{var.verinfciu}">
-                                                  <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                          verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
-                                                <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
-                                                    <h:outputText value="#{var.objetocontrato}: " /><br/>
-                                                    <h:outputText value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
-                                                    <h:outputText  value="#{var.houtnrocontrato}"/><br/>
-                                                    <h:outputText value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/><br/>
-                                                </a4j:repeat>
-                                            </rich:tooltip>
+                                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                              verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
+                                                    <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
+                                                        <h:outputText value="#{var.objetocontrato}: " /><br/>
+                                                        <h:outputText value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
+                                                        <h:outputText  value="#{var.houtnrocontrato}"/><br/>
+                                                        <h:outputText value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/><br/>
+                                                    </a4j:repeat>
+                                                </rich:tooltip>
                                             </h:commandButton> 
                                             <h:outputLabel styleClass="ikont-hot-textobra9">Otros contratos asociados</h:outputLabel>
                                             <h:commandButton value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
@@ -302,14 +302,50 @@
                                     </h:panelGrid>
 
                                 </h:panelGrid>    
-                                <h:panelGrid styleClass="ikont-hpg-pg_impactosocial">
-                                    <h:panelGrid columns="2" >
+                                <h:panelGrid id="form_editarImpactosocial" styleClass="ikont-hpg-pg_impactosocial">
+                                    <h:panelGrid  id="habilitarModificacionImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto}" >
                                         <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
                                         <h:outputText styleClass="ikont-hol-numhabbeneficiados" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputText>
                                         <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
                                         <h:outputText styleClass="ikont-hol-numempdirectos" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputText>
                                         <h:outputLabel styleClass="ikont- hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
                                         <h:outputText styleClass="ikont-hol-numempindirectos" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:outputText>
+
+                                        <rich:column  colspan="2">
+                                            <center>
+                                                <h:panelGroup  rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
+                                                    <a4j:commandLink rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" 
+                                                                     action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarImpacto}"
+                                                                     render="form_editarImpactosocial" execute="habilitarModificarImpacto,habilitarModificacionImpacto"
+                                                                     title="#{var.editar}">
+                                                        <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                    </a4j:commandLink>
+                                                </h:panelGroup>
+                                            </center>
+                                        </rich:column>
+                                    </h:panelGrid>
+                                    <h:panelGrid  id="habilitarModificarImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto || !SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}" >
+                                        <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
+                                        <h:inputText id="numpersonasbeneficiadas" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
+                                        <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
+                                        <h:inputText id="numpempleosdirectos" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:inputText>
+                                        <h:outputLabel styleClass="ikont- hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
+                                        <h:inputText id="numpempleosindirectos" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:inputText>
+                                        <rich:column colspan="2" >
+                                            <center>
+                                                <a4j:commandLink 
+                                                    action="#{Supervisor$AdministrarObraNew.modificarImpactoSocialProyecto}"
+                                                    render="form_editarImpactosocial" execute="habilitarModificarImpacto,habilitarModificacionImpacto"
+                                                    title="#{var.editar}">
+                                                    <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                </a4j:commandLink>
+                                                <a4j:commandLink immediate="true"  render="form_editarImpactosocial"
+                                                                 action="#{Supervisor$AdministrarObraNew.cancelarModifcacionModificarImpacto}"
+                                                                 execute="@this, habilitarModificarImpacto,habilitarModificacionImpacto">
+                                                    <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                </a4j:commandLink>  
+                                            </center>
+                                        </rich:column>
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 <h:panelGrid  styleClass="ikont-hgi-imgestobra">

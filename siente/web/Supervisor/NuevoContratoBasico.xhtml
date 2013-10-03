@@ -425,7 +425,7 @@
 
                         <h:panelGrid cellspacing="6" id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
-                            <h:outputLabel  styleClass="ikont-hol-tipopoliza" id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
+                            <h:outputLabel  styleClass="ikont-hol-tipopoliza" id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}bhjj:" for="comboTipoPoliza">
 
                             </h:outputLabel>
                             <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
@@ -451,11 +451,11 @@
                             </h:selectOneMenu>
 
                             <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                                <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas"
+                                <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,pgcontrato"
                                                    styleClass="ikont-acb-addpoliza">
                                     <a4j:ajax event="click" render="gpPolizaSelec,pgpolis" immediate="true"/>
-                                </a4j:commandButton>
-                            </h:panelGrid>
+                                            </a4j:commandButton>
+                           </h:panelGrid>
                         </h:panelGrid>
                         <interkont:spacer height="14"/>
                         <h:panelGrid id="pgpolis">
@@ -586,7 +586,7 @@
                     </h:commandButton>
 
                 </h:panelGrid>              
-                
+
             </rich:panel>         
         </h:form>        
         <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>

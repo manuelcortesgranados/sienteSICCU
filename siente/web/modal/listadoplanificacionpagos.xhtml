@@ -26,24 +26,20 @@
         </f:facet>
         <h:panelGroup layout="block" id="gpListadoPlanificacion">
 
-            <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+            <h:panelGrid cellspacing="7"  id="formaanti" columns="2" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
                 <h:outputLabel  styleClass="ikont-hol-formapago" value="#{var.formadepago}:"/>
-                <interkont:spacer width="20"/>
                 <h:outputLabel  styleClass="ikont-hol-descformapago" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
                 <h:outputLabel  styleClass="ikont-hol-porcentancitipo" value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
-                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
                 <h:outputLabel  styleClass="ikont-hol-porcanticipo" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
                 <h:outputLabel  styleClass="ikont-hol-vlanticipo" value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <h:outputText  styleClass="ikont-hot-vlanticipo" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
 
                 <h:outputLabel  styleClass="ikont-hot-datantipago" value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <h:outputText  styleClass="ikont-hot-datpago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                 </h:outputText>

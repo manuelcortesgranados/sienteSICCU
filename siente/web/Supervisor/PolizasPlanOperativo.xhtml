@@ -14,7 +14,7 @@
 
                     </h:outputLabel>
                     <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
-                        <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>
+                       <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}" var="polizas" itemValue="#{polizas.inttipopoliza}" itemLabel="#{polizas.strdesctipopoliza}"/>                                
                         <a4j:ajax event="valueChange" listener="#{Supervisor$Contrato.probar}" />
                     </h:selectOneMenu>
 
