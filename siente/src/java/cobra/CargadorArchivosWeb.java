@@ -33,10 +33,15 @@ public class CargadorArchivosWeb implements Serializable {
      * Listado de archivos cargados en el servidor
      */
     private ArrayList<ArchivoWeb> archivos = new ArrayList<ArchivoWeb>();
+    public String carguearchivo;
 
     public CargadorArchivosWeb() {
+    } 
+   
+    public void cargarArchivosweb(String cargararchivo){
+    carguearchivo = cargararchivo;
     }
-
+    
     public ArrayList<ArchivoWeb> getArchivos() {
         return archivos;
     }
@@ -81,16 +86,17 @@ public class CargadorArchivosWeb implements Serializable {
      * @param nombreArchivo Nombre del archivo incluida la extensión
      * @return Nombre del archivo normalizado incluida la extensión
      */
-    public static String normalizarNombreArchivo(String nombreArchivo) {
+    public String normalizarNombreArchivo(String nombreArchivo) {
         String temp = Normalizer.normalize(nombreArchivo, Normalizer.Form.NFD);
-        String extension = null;
+        String extension = null;        
+         
         if (temp.lastIndexOf(".") != -1) {
             extension = temp.substring(temp.lastIndexOf("."));
             temp = temp.substring(0, temp.lastIndexOf("."));
         }
         return temp.replaceAll("(%20|\\s|\\-)", "_").replaceAll("[__]+", "_")
                 .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .replaceAll("[^\\w_()]", "")
+                .replaceAll("[^\\w_()]", "").concat(carguearchivo)
                 .concat(extension);
     }
 
@@ -103,7 +109,7 @@ public class CargadorArchivosWeb implements Serializable {
      * mediante el CargadorArchivosWeb
      * @throws Exception
      */
-    public synchronized void listener(FileUploadEvent event) throws Exception {
+    public synchronized void listener(FileUploadEvent event) throws Exception {  
         final UploadedFile item = event.getUploadedFile();
         ArchivoWeb archivoWeb = new ArchivoWeb();
         archivoWeb.setArchivoTmp(ArchivoWebUtil.obtenerFile(item.getName(), item.getInputStream()));
