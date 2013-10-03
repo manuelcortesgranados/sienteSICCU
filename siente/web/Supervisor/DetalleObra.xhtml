@@ -313,7 +313,7 @@
 
                                         <rich:column  colspan="2">
                                             <center>
-                                                <h:panelGroup  rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
+                                                <h:panelGroup  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
                                                     <a4j:commandLink rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" 
                                                                      action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarImpacto}"
                                                                      render="form_editarImpactosocial" execute="habilitarModificarImpacto,habilitarModificacionImpacto"
@@ -324,7 +324,7 @@
                                             </center>
                                         </rich:column>
                                     </h:panelGrid>
-                                    <h:panelGrid  id="habilitarModificarImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto || !SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}" >
+                                    <h:panelGrid  id="habilitarModificarImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" >
                                         <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
                                         <h:inputText id="numpersonasbeneficiadas" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
                                         <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
