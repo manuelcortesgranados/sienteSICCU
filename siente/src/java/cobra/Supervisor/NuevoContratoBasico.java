@@ -2940,11 +2940,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 FacesUtils.addErrorMessage("Debe diligenciar los tres documentos obligatorios que son: 1. Contrato, 2. Certificado de Disponibilidad Presupuestal (CDP), 3. Registro Presupuestal (RP)");
                             } else {
                                 validadcionGuardarContrato();
-                                guardarRelacionContratoJsfUsuario();
                             }
                         } else {
                             validadcionGuardarContrato();
-                            guardarRelacionContratoJsfUsuario();
                         }
 
                         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
@@ -3011,6 +3009,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 
+        guardarRelacionContratoJsfUsuario();
         if (guardarborradorconvenio == true) {
             limpiarContrato();
         }
