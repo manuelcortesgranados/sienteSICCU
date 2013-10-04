@@ -2113,7 +2113,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public Contrato getPrimerContratoObra() {
-        if (listaContratoObra != null) {
+
+        if (!listaContratoObra.isEmpty() ) {
             return listaContratoObra.get(0).getContrato();
         } else {
             return null;
@@ -2121,7 +2122,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public Contrato getPrimerContratoInterventoria() {
-        if (listaContratoInterventoria != null) {
+        if (listaContratoInterventoria.isEmpty()) {
             return listaContratoInterventoria.get(0).getContrato();
         } else {
             return null;

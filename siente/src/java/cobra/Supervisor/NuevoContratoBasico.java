@@ -766,9 +766,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Variable para listar los cotratos segun el tipo
      */
     private int varibaleTipo = 1;
-
+    /*
+     * Variable habilitar la modificacion del tipo de contrato 
+     */
+    public boolean modificartipocontrato = true;
+    /*
+     * Variable deshabilitar la modificacion del tipo de contrato 
+     */
+    public boolean habiitarmodificartipocontrato = false;
     private String numcontratotemporal;
-
     private Relacioncontratojsfusuario relacionContratoJSFUsuario = new Relacioncontratojsfusuario();
 
     public Relacioncontratojsfusuario getRelacionContratoJSFUsuario() {
@@ -2356,6 +2362,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
         this.tablaPolizasbin = tablaPolizasbin;
+    }
+
+    public boolean isModificartipocontrato() {
+        return modificartipocontrato;
+    }
+
+    public void setModificartipocontrato(boolean modificartipocontrato) {
+        this.modificartipocontrato = modificartipocontrato;
+    }
+
+    public boolean isHabiitarmodificartipocontrato() {
+        return habiitarmodificartipocontrato;
+    }
+
+    public void setHabiitarmodificartipocontrato(boolean habiitarmodificartipocontrato) {
+        this.habiitarmodificartipocontrato = habiitarmodificartipocontrato;
     }
 
     /**
@@ -4217,6 +4239,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             tipoContCon = "Contrato";
             booltipocontratoconvenio = false;
         }
+        if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
+            getContrato().getTipocontratoconsultoria().setStrdescripcion("Obra");
+        }
+
         setNumcontratotemporal(cont.getStrnumcontrato());
 
     }
@@ -5074,6 +5100,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.getEstadoConvenio();
         limpiarContrato();
         primeroDetcontrato();
+        modificartipocontrato = true;
+        habiitarmodificartipocontrato = false;
+
         return "consultarContratoConvenio";
     }
 
@@ -6179,7 +6208,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -7047,5 +7076,36 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         return "consultarContratoConvenio";
+    }
+    /*
+     * Metodo para modificar el tipo de contrato 
+     */
+
+    public void modificarTipocontrato() {
+        getContrato().setTipocontratoconsultoria(getSessionBeanCobra().getCobraService().encontrarTipoContratoConsultoriaxId(getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria()));
+        getSessionBeanCobra().getCobraService().guardarContrato(getContrato());
+        FacesUtils.addInfoMessage("Se actualizo correctamente el contrato");
+        if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
+            getContrato().getTipocontratoconsultoria().setStrdescripcion("Obra");
+        }
+        modificartipocontrato = true;
+        habiitarmodificartipocontrato = false;
+
+    }
+    /*
+     * Metodo para Habiltiar la modificacion del tipo contrato
+     */
+
+    public void habilitarModificacionTipoContrato() {
+        modificartipocontrato = false;
+        habiitarmodificartipocontrato = true;
+    }
+    /*
+     * Metodo para Cancelar la modificacion  del tipo contrato
+     */
+
+    public void cancelarModificacionTipoContrato() {
+        modificartipocontrato = true;
+        habiitarmodificartipocontrato = false;
     }
 }
