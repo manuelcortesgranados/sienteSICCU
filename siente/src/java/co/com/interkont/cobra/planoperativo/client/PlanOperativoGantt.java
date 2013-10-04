@@ -784,8 +784,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
             main.add(toolBar.asWidget());
             main.add(cp);
-            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-            main.add(toolinferior);
+//            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+//            main.add(toolinferior);
         } else {
             main = new FlowLayoutContainer();
             main.getElement().setMargins(new Margins(136, 0, 0, 5));
