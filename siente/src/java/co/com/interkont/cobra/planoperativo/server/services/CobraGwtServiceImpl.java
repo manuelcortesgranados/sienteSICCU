@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,9 +45,23 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
     private int guardarconvenio = 0;
-    private boolean seCargoPlanOperativoAntes = false;
+    //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
-
+    private Set dependenciasEliminar= new LinkedHashSet(0);
+     /**
+     * @return the dependenciasEliminar
+     */
+    @Override
+    public Set getDependenciasEliminar() {
+        return dependenciasEliminar;
+    }
+    /**
+     * @param dependenciasEliminar the dependenciasEliminar to set
+     */
+    public void setDependenciasEliminar(Set dependenciasEliminar) {
+        this.dependenciasEliminar = dependenciasEliminar;
+    }
+    
     @Override
     public List<ActividadobraDTO> getListaacteliminar() {
         return listaacteliminar;
@@ -84,7 +99,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 try {
                     contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
                     obtenerDependenciasObligatorias();
-                    seCargoPlanOperativoAntes = true;
+                    //seCargoPlanOperativoAntes = true;
                 } catch (Exception ex) {
                     Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -288,18 +303,23 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return lstRubrosDTO;
     }
 
-    @Override
-    public boolean getSeCargoPlanOperativoAntes() {
-        return seCargoPlanOperativoAntes;
-    }
-
-    @Override
-    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes) {
-        this.seCargoPlanOperativoAntes = seCargoPlanOperativoAntes;
-    }
+//    @Override
+//    public boolean getSeCargoPlanOperativoAntes() {
+//        return seCargoPlanOperativoAntes;
+//    }
+//
+//    @Override
+//    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes) {
+//        this.seCargoPlanOperativoAntes = seCargoPlanOperativoAntes;
+//    }
 
     @Override
     public void adicionarActividadDtoEliminar(ActividadobraDTO actdto) {
         getListaacteliminar().add(actdto);
+    }
+
+    @Override
+    public void adicionarDepenciatoEliminar(DependenciaDTO dep) {
+        getDependenciasEliminar().add(dep);
     }
 }

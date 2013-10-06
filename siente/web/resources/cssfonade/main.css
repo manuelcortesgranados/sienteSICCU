@@ -1373,6 +1373,7 @@ a.ikont-hcl-modificarusuario:hover {
     height: 60px;
     display: block;
     margin-top: -10px;
+    cursor: pointer;
 }
 
 .ikont-hf-nuevocontratoplanoperativo{
