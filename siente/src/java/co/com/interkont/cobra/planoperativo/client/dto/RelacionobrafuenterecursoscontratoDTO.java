@@ -2,6 +2,7 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 // Generated Jul 12, 2013 4:10:17 PM by Hibernate Tools 3.2.1.GA
 
 
+import co.com.interkont.cobra.to.Rubro;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 
@@ -18,10 +19,12 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      private ContratoDTO contrato;
      private ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios;
      private BigDecimal valor;
-     private int tipoaporte;
      private String nombreEntidad;
-     private String nombreTipo;
+      private RubroDTO rubro;
+    private int vigenciafonade;
+    private int vigenciafuente;
      private String eliminar;
+    private String descripcionRubro;
 
     public RelacionobrafuenterecursoscontratoDTO() {
     }	
@@ -38,22 +41,25 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
        this.valor = valor;
     }
     
-     public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor,int tipor,String nombreEntidad,String nombreTipo) {
-       this.tipoaporte=tipor;
+     public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor,String nombreEntidad,RubroDTO rubro,Integer vigenciafonade,Integer vigenciafuente,String descripcionRubro) {
        this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
        this.valor = valor;
        this.idrelacionobracontrato=id;
        this.nombreEntidad=nombreEntidad;
-       this.nombreTipo=nombreTipo;
+       this.rubro=rubro;
+       this.vigenciafonade=vigenciafonade;
+       this.vigenciafuente=vigenciafuente;
+       this.descripcionRubro=descripcionRubro;
        this.eliminar="Eliminar";
     }
      
-      public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios,int tipor,String nombreEntidad,String nombreTipo) {
-       this.tipoaporte=tipor;
+      public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios,String nombreEntidad,RubroDTO rubro,int vigenciafonade,int vigenciafuente) {
        this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
        this.idrelacionobracontrato=id;
-       this.nombreEntidad=nombreEntidad;
-       this.nombreTipo=nombreTipo;
+       this.nombreEntidad=nombreEntidad;       
+       this.rubro=rubro;
+       this.vigenciafonade=vigenciafonade;
+       this.vigenciafuente=vigenciafuente;
        this.eliminar="Eliminar";
     }
    
@@ -116,19 +122,7 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
         this.valor = valor;
     }
 
-    /**
-     * @return the tipoaporte
-     */
-    public int getTipoaporte() {
-        return tipoaporte;
-    }
-
-    /**
-     * @param tipoaporte the tipoaporte to set
-     */
-    public void setTipoaporte(int tipoaporte) {
-        this.tipoaporte = tipoaporte;
-    }
+   
 
     /**
      * @return the nombreEntidad
@@ -144,21 +138,7 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
         this.nombreEntidad = nombreEntidad;
     }
 
-    /**
-     * @return the nombreTipo
-     */
-    public String getNombreTipo() {
-        return nombreTipo;
-    }
-
-    /**
-     * @param nombreTipo the nombreTipo to set
-     */
-    public void setNombreTipo(String nombreTipo) {
-        this.nombreTipo = nombreTipo;
-    }
-
-   
+       
     /**
      * @return the eliminar
      */
@@ -171,6 +151,62 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      */
     public void setEliminar(String eliminar) {
         this.eliminar = eliminar;
+    }
+
+    /**
+     * @return the rubro
+     */
+    public RubroDTO getRubro() {
+        return rubro;
+    }
+
+    /**
+     * @param rubro the rubro to set
+     */
+    public void setRubro(RubroDTO rubro) {
+        this.rubro = rubro;
+    }
+
+    /**
+     * @return the vigenciafonade
+     */
+    public int getVigenciafonade() {
+        return vigenciafonade;
+    }
+
+    /**
+     * @param vigenciafonade the vigenciafonade to set
+     */
+    public void setVigenciafonade(int vigenciafonade) {
+        this.vigenciafonade = vigenciafonade;
+    }
+
+    /**
+     * @return the vigenciafuente
+     */
+    public int getVigenciafuente() {
+        return vigenciafuente;
+    }
+
+    /**
+     * @param vigenciafuente the vigenciafuente to set
+     */
+    public void setVigenciafuente(int vigenciafuente) {
+        this.vigenciafuente = vigenciafuente;
+    }
+
+    /**
+     * @return the descripcionRubro
+     */
+    public String getDescripcionRubro() {
+        return descripcionRubro;
+    }
+
+    /**
+     * @param descripcionRubro the descripcionRubro to set
+     */
+    public void setDescripcionRubro(String descripcionRubro) {
+        this.descripcionRubro = descripcionRubro;
     }
     
     
