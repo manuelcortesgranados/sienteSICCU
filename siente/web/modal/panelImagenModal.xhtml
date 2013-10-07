@@ -14,15 +14,17 @@
                 <h:outputText    value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
+        
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink  id="esconder_modalImagen" styleClass="ikont-a4jcl-escondermodalImagen"   
+                   <a4j:commandLink  id="esconder_modalImagen" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
+        
         <h:panelGroup layout="block" styleClass="ikont-rp-imagen"   >           
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen">

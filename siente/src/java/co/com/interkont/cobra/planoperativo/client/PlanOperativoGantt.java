@@ -291,6 +291,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         ActividadobraDTO actPadre = taskStore.getParent(tareaSeleccionada);
                         actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
+                        service.adicionarActividadDtoEliminar(tareaSeleccionada, null);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
                         d.show();
@@ -455,6 +456,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onSelection(SelectionEvent<Item> event) {
                 if (dependenciaSeleccionada.isIsobligatoria() == false) {
                     depStore.remove(dependenciaSeleccionada);
+                    if (dependenciaSeleccionada.getIdDependencia() != 0) {
+                        getService().adicionarDepenciatoEliminar(dependenciaSeleccionada,null);
+                    }
                 } else {
                     d.show();
                 }
@@ -784,8 +788,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
             main.add(toolBar.asWidget());
             main.add(cp);
-            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-            main.add(toolinferior);
+//            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+//            main.add(toolinferior);
         } else {
             main = new FlowLayoutContainer();
             main.getElement().setMargins(new Margins(136, 0, 0, 5));

@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
+import java.util.Date;
 
 /**
  *
@@ -36,7 +37,6 @@ public class RecursosConvenio implements Serializable {
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
     private UIDataTable tableFuente = new UIDataTable();
-    
     private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
 
     public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
@@ -46,8 +46,6 @@ public class RecursosConvenio implements Serializable {
     public void setLstFuentesRecursosEliminar(List<Fuenterecursosconvenio> lstFuentesRecursosEliminar) {
         this.lstFuentesRecursosEliminar = lstFuentesRecursosEliminar;
     }
-    
-    
     /**
      * Lista para el manejo de roles
      *
@@ -63,6 +61,7 @@ public class RecursosConvenio implements Serializable {
     public void setLstRoles(List<Rolentidad> lstRoles) {
         this.lstRoles = lstRoles;
     }
+    private List<Integer> lstVigencia = new ArrayList<Integer>();
 
     public RecursosConvenio() {
     }
@@ -74,6 +73,7 @@ public class RecursosConvenio implements Serializable {
 
         llenarTipoAporte();
         llenarRoles(cobraService);
+        llenarVigencia();
     }
 
     public void limpiarFuenteRecurso() {
@@ -146,10 +146,9 @@ public class RecursosConvenio implements Serializable {
      */
     public void eliminarFuenteRecursos() {
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
-        if(f.getIdfuenterecursosconvenio()!=0)
-        {
+        if (f.getIdfuenterecursosconvenio() != 0) {
             lstFuentesRecursosEliminar.add(f);
-        }    
+        }
         lstFuentesRecursos.remove(f);
         sumafuentes = sumafuentes.subtract(f.getValoraportado());
         if (lstFuentesRecursos.isEmpty()) {
@@ -163,7 +162,7 @@ public class RecursosConvenio implements Serializable {
         for (Fuenterecursosconvenio f : lstFuentesRecursos) {
             valorSuma = valorSuma.add(f.getValoraportado());
         }
-        valorSuma=valorSuma.add(valorNuevo);
+        valorSuma = valorSuma.add(valorNuevo);
         return valorSuma;
     }
     /*
@@ -179,8 +178,8 @@ public class RecursosConvenio implements Serializable {
             //Se pone la condicion si la lista tiene alguna entidad y se valida a que no agreguen la misma entidad en un conveio
             if (!lstFuentesRecursos.isEmpty()) {
                 for (Fuenterecursosconvenio f : lstFuentesRecursos) {
-                    if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo()) {
-                        FacesUtils.addErrorMessage("La fuente de recurso ya se ha ingresado");
+                  if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo() && fuenteRecursoConvenio.getVigencia().equals(f.getVigencia())) {
+                        FacesUtils.addErrorMessage("La fuente de recurso ya se encuentra con la misma vigencia");
                         return null;
 
                     }
@@ -295,6 +294,21 @@ public class RecursosConvenio implements Serializable {
         return null;
     }
 
+    public void llenarVigencia() {
+        Date fechaActual = new Date();
+        String ano = "" + fechaActual.getYear();
+        String anoActualS = ano.substring(1, 3);
+        String anoActual = "20";
+        ano = anoActual + anoActualS;
+        Integer intAnoActual = Integer.parseInt(ano);
+        lstVigencia.add(intAnoActual);
+        for (int i = 0; i < 13; i++) {
+            intAnoActual++;
+            lstVigencia.add(intAnoActual);
+        }
+        
+    }
+
     /**
      * @return the tableFuente
      */
@@ -308,9 +322,24 @@ public class RecursosConvenio implements Serializable {
     public void setTableFuente(UIDataTable tableFuente) {
         this.tableFuente = tableFuente;
     }
-    
-    public void sumaFuentesRecursos (){
-     for (Fuenterecursosconvenio f : lstFuentesRecursos)       
-        sumafuentes = sumafuentes.add(f.getValoraportado());
+
+    public void sumaFuentesRecursos() {
+        for (Fuenterecursosconvenio f : lstFuentesRecursos) {
+            sumafuentes = sumafuentes.add(f.getValoraportado());
+        }
+    }
+
+    /**
+     * @return the lstVigencia
+     */
+    public List<Integer> getLstVigencia() {
+        return lstVigencia;
+    }
+
+    /**
+     * @param lstVigencia the lstVigencia to set
+     */
+    public void setLstVigencia(List<Integer> lstVigencia) {
+        this.lstVigencia = lstVigencia;
     }
 }

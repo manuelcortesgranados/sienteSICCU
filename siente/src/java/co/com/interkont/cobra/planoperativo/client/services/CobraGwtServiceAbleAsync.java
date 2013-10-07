@@ -6,11 +6,13 @@ package co.com.interkont.cobra.planoperativo.client.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -45,13 +47,19 @@ public interface CobraGwtServiceAbleAsync {
 
     void setGuardarconvenio(int guardarconvenio, AsyncCallback<Boolean> call);
 
-    void getSeCargoPlanOperativoAntes(AsyncCallback<Boolean> call);
-
-    void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes, AsyncCallback<Void> call);
+//    void getSeCargoPlanOperativoAntes(AsyncCallback<Boolean> call);
+//
+//    void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes, AsyncCallback<Void> call);
     
     void  getListaacteliminar(AsyncCallback<List<ActividadobraDTO>> call);
     
     void setListaacteliminar(List<ActividadobraDTO> listaacteliminar, AsyncCallback<Void> call);
     
     void adicionarActividadDtoEliminar(ActividadobraDTO actdto, AsyncCallback<Void> call);
+    
+     void  getDependenciasEliminar(AsyncCallback<Set> call);
+    
+    void setDependenciasEliminar(Set dependenciasEliminar, AsyncCallback<Void> call);
+    
+    void adicionarDepenciatoEliminar(DependenciaDTO dep, AsyncCallback<Void> call);
 }

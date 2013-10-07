@@ -94,10 +94,11 @@ import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page. This class
- * contains component definitions (and initialization code) for all components
- * that you have defined on this page, as well as lifecycle methods and event
- * handlers where you may add behavior to respond to incoming events.</p>
+ * <p>
+ * Page bean that corresponds to a similarly named JSP page. This class contains
+ * component definitions (and initialization code) for all components that you
+ * have defined on this page, as well as lifecycle methods and event handlers
+ * where you may add behavior to respond to incoming events.</p>
  *
  * @version IngresarNuevaObra.java
  * @version Created on 16/11/2008, 04:41:01 PM
@@ -1534,12 +1535,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
             address = placeMarkNew.getAddress();
 
-
         } catch (Exception e) {
             address = "Faltante";
             placeMarkNew.setAddress(address);
         }
-
 
         obranueva.setStrdireccion(address);
         obranueva.setFloatlatitud(new BigDecimal(latNewmanu));
@@ -1628,7 +1627,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -1668,9 +1668,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     FacesUtils.addErrorMessage("No pudo crear carpeta ");
                 }
 
-
                 String cero = nomarch.substring(0, 1);
-
 
                 if (cero.compareTo("0") == 0) {
                     nomarch = getObranueva().getIntcodigoobra() + nomarch.substring(1, nomarch.length());
@@ -1690,7 +1688,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
      * user-specified code inserted here is subject to being replaced.</p>
      */
@@ -1706,7 +1705,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             PeriodoMedida = new SelectItem[periodoList.size()];
             int i = 0;
 
-
             for (Periodomedida perio : periodoList) {
                 SelectItem opt = new SelectItem(perio.getIntidperiomedida(), perio.getStrdescperiomedida());
                 PeriodoMedida[i++] = opt;
@@ -1716,7 +1714,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             if (plazo > 804 && plazo < 3450) {
                 PeriodoMedida = new SelectItem[periodoList.size() - 1];
                 int i = 0;
-
 
                 for (Periodomedida perio : periodoList) {
                     if (perio.getIntidperiomedida() != 1) {
@@ -1834,7 +1831,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //        String cual=getHomeGestion().primeroListProyectos();
 //
 //        return "cancelar";
-
         getSessionBeanCobra().getCobraService().guardarContadorVisitas(obranueva.getIntcodigoobra(), getSessionBeanCobra().getUsuarioObra());
         getAdministrarObraNew().setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(obranueva.getIntcodigoobra()));
         getAdministrarObraNew().setOpcion(0);
@@ -1931,7 +1927,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             obtenerFaseSeleccionada(1);
         }
 
-
         return "nuevoProyecto";
 
     }
@@ -1943,7 +1938,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public void llenarClaseObra(int codfase) {
-
 
         List<Claseobra> lista = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(codfase);
         ClaseObra = new SelectItem[lista.size()];
@@ -2193,7 +2187,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //                        stylex.setLocked(false);
 //                        HSSFCellStyle stylexc = (HSSFCellStyle) wb.createCellStyle();
 //                        stylexc.setLocked(true);
-
                     Cell cell = row.getCell(2);
                     cell.setCellType(Cell.CELL_TYPE_STRING);
                     cell.setCellValue(obranueva.getStrnombreobra());
@@ -2209,7 +2202,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     cell = row.getCell(2);
                     cell.setCellValue(obranueva.getDatefecfinobra());
                     row = sheet.getRow(8);
-
 
 //**lista actividades escabacion...etc
                     //subtiposelec = obranueva.getTipoobra().getInttipoobra();
@@ -2242,9 +2234,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         }
                     }
 
-
                     //-----LISTA UNIDAD DE MEDIDA CRONOGRAMA CON LAS LIB 3.8 14nov2011 ok
-
                     //List<Unidadmedida> listaunidadmedida = getSessionBeanCobra().getCobraService().encontrarUnidadMedidaporSubtipo(subtiposelec);
 //////                    List<Unidadmedida> listaunidadmedida = getSessionBeanCobra().getCobraService().encontrarUnidadMedida();
 //////                    String[] valoreslistaexcel = new String[listaunidadmedida.size()];
@@ -2263,7 +2253,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //////                    dataValidationxx.setErrorStyle(HSSFDataValidation.ErrorStyle.STOP);
 //////                    sheet.addValidationData(dataValidationxx);
 //////
-
                     //Generando Periodos de Medida
                     int indiceperiodo = obranueva.getPeriodomedida().getIntidperiomedida();
 
@@ -2429,7 +2418,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -2980,7 +2970,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         row = sheet.getRow(2);
                         celda = row.getCell(6);
 
-
                         if (celda.getCellType() != 2) {
                             valido = 2;
                             //"Ha sido modificada la formula de valor total";
@@ -3062,7 +3051,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                             int indiceperiodo = obranueva.getPeriodomedida().getIntidperiomedida();
                                             int division = 0;
 
-
                                             switch (indiceperiodo) {
                                                 case 1:
                                                     division = obranueva.getIntplazoobra() / 7;
@@ -3109,8 +3097,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                             } else {
                                                 //verificar la suma de totales
 
-
-
                                                 int filas = 9;
                                                 int u = 1;
                                                 int h = 5;
@@ -3146,7 +3132,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                                     u++;
                                                 }
 
-
                                                 if (suma.compareTo(BigDecimal.valueOf(0)) == 0) {
                                                     //"ERROR LA SUMA DE LOS TOTALES ES O";
                                                     FacesUtils.addErrorMessage(bundle.getString("errorlasumadelostotaleseso"));
@@ -3170,10 +3155,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                                 ///LLenar Matrix con los datos provenientes del excell
                                                 //llenar periodos
 
-
                                                 Calendar fecha = Calendar.getInstance();
                                                 fecha.setTime(obranueva.getDatefeciniobra());
-
 
                                                 h = 5;
                                                 int k = 0;
@@ -3184,7 +3167,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                                     filas = 9;
                                                     row = sheet.getRow(filas);
                                                     //Cell celdatotal = row.getCell(j);
-
 
                                                     //if (celdatotal != null) {
                                                     Periodo pe = new Periodo();
@@ -3252,15 +3234,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                                         act.setBoolimprevisto(true);
                                                     }
 
-
                                                     actividadesobra.add(act);
-
 
                                                     k = 8;
                                                     i = 0;
 
                                                     while (i < division) {
-
 
                                                         celda = row.getCell(k);
                                                         Relacionactividadobraperiodo relacion = new Relacionactividadobraperiodo();
@@ -3305,7 +3284,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                 }
                             } catch (java.lang.IllegalStateException e) {
                                 //"Fórmula con error";
-
 
                                 FacesUtils.addErrorMessage(bundle.getString("formulaconerror"));
                             }
@@ -3515,6 +3493,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             cargarPuntosaobra();
             guardarCronogramaTemporal();
             if (obranueva.getIntcodigoobra() == 0) {
+
+                // Asociar un usuario a la tabla relacionobrajsfusuario.
+                if (getSessionBeanCobra().getUsuarioObra().getTipousuario().getIntcodigotipousuario() == 3) {
+                    getObranueva().setJsfUsuarios(new LinkedHashSet());
+                    getObranueva().getJsfUsuarios().add(getSessionBeanCobra().getUsuarioObra());
+                }
+
                 getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), -1);
             }
             guardarImagenesaobra(RutasWebArchivos.IMGS_OBRA_PROCESO);
@@ -3594,7 +3579,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 //"Debe dar un nombre a la obra";
                 FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
 
-
                 return volverTipificacion();
             }
         } else {
@@ -3666,7 +3650,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -3860,9 +3845,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         for (Tercero ter : listerentidad) {
 
 //              if ((ter.getLocalidadByStrcodigolocalidad().getStrcodigolocalidad().length() > 5)) {
-
             // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
-
 //                }else{
 //                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
 //                }
@@ -3878,7 +3861,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             obranueva.setTercero(listerentidad.get(0));
             setDesdeconvenio(false);
         }
-
 
     }
 
@@ -4362,7 +4344,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage(bundle.getString("debedarunnombre"));
         }
 
-
         return null;
     }
 
@@ -4700,29 +4681,35 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         return true;
     }
-    
+
     /**
-     *valida si las fechas de inicio del proyecto esta dentro del rango de convenio
-     * @return Retorna false si las fecha inicial es menor que la fecha inicial del convenio
+     * valida si las fechas de inicio del proyecto esta dentro del rango de
+     * convenio
+     *
+     * @return Retorna false si las fecha inicial es menor que la fecha inicial
+     * del convenio
      */
     public boolean validarFechasProyectoInicio() {
-        if(obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0  ){
-             FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));               
-                datosbas = false;
-                return false;             
+        if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
+            FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
+            datosbas = false;
+            return false;
         }
         return true;
     }
-    
-     /**
-     *valida si las fechas de fin del proyecto esta dentro del rango de convenio
-     * @return Retorna false si las fecha fin es menor que la fecha fin del convenio
-     */ 
+
+    /**
+     * valida si las fechas de fin del proyecto esta dentro del rango de
+     * convenio
+     *
+     * @return Retorna false si las fecha fin es menor que la fecha fin del
+     * convenio
+     */
     public boolean validarFechasProyectoFin() {
-         if(obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0  ){
-             FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));               
-                datosbas = false;
-                return false;             
+        if (obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0) {
+            FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));
+            datosbas = false;
+            return false;
         }
         return true;
     }
@@ -4768,7 +4755,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -5113,7 +5101,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -5250,7 +5239,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             case 5:
                 regla = "datosAsociarContrato";
                 break;
-
 
         }
         return regla;

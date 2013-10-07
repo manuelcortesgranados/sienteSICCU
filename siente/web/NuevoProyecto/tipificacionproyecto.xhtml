@@ -47,12 +47,12 @@
                                     <h:panelGrid >                                    
                                         <h:panelGroup id="panel-periodo-evento">
                                             <h:panelGrid columns="2" >
-                                                <h:outputText  styleClass="ikont-hot-escogerEvento"    value="#{var.escogerEvento} "/>
-                                                <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" >
+                                                <h:outputText  styleClass="ikont-hot-escogerEvento"    value="#{var.escogerEvento} " rendered="#{!var.permisonuevodiseno}"/>
+                                                <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" rendered="#{!var.permisonuevodiseno}">
                                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
                                                 </h:selectOneMenu>
-                                                <h:outputText  styleClass="ikont-hot-escogerPeriodo"    value="#{var.escogerPeriodo} "/>
-                                                <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" >
+                                                <h:outputText  styleClass="ikont-hot-escogerPeriodo"    value="#{var.escogerPeriodo} " rendered="#{!var.permisonuevodiseno}"/>
+                                                <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" rendered="#{!var.permisonuevodiseno}">
                                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoEventoItem}" />
                                                 </h:selectOneMenu>
                                                 <h:outputText  styleClass="ikont-hot-incluyeSubproyectos"    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>

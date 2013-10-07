@@ -126,6 +126,20 @@
                             <rich:message for="rs-entidad"  />
                         </rich:column>
                     </h:panelGrid>
+                    
+                      <h:panelGroup id="hpg-fuenter-vigencia">
+                        <h:panelGrid columns="2" styleClass="panel_ent_convenio">
+                            <rich:column>
+                                <h:outputText value="Vigencia" styleClass="input_var_convenio label_texto_convenio"/>
+                            </rich:column>
+                            <rich:column>
+                                <rich:select id="rs-vigencia" defaultLabel="Ej:2013" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.vigencia}" required="true" requiredMessage="Ingresar la vigencia"  styleClass="input_num_convenio" >
+                                    <f:selectItems value="#{Supervisor$Contrato.recursosconvenio.lstVigencia}" />
+                                </rich:select>
+                                <rich:message for="rs-vigencia"  />
+                            </rich:column>
+                        </h:panelGrid>
+                    </h:panelGroup>
 
                     <h:panelGroup id="hpg-fuenter-roldesempenado">
                         <h:panelGrid columns="2" styleClass="panel_rol_desem">
@@ -140,7 +154,7 @@
                             </rich:column>
                         </h:panelGrid>
                     </h:panelGroup>
-
+                    
                     <h:panelGrid id="hpg-fuenter-valoraportado" columns="1" cellspacing="5" >
                         <h:panelGrid columns="2" styleClass="panel_val_aportado">
                             <rich:column>
@@ -238,20 +252,23 @@
                                 value="#{Supervisor$Contrato.recursosconvenio.lstFuentesRecursos}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                sortMode="single" rows="5"
+                                sortMode="single" rows="6"
                                 style="text-align:center;"
                                 rowKeyVar="filaSeleccionada"
                                 binding="#{Supervisor$Contrato.recursosconvenio.tableFuente}"
                                 >                                      
                     <f:facet name="header">
                         <rich:columnGroup>
-                            <rich:column colspan="7" id="titulo" styleClass="ikont-colum-superior-fuente-recurso">
+                            <rich:column colspan="8" id="titulo" styleClass="ikont-colum-superior-fuente-recurso">
                                 <h:outputText value="#{var.fuenterecurso} "/>
                             </rich:column>
                             <rich:column width="200px" breakRowBefore="true" styleClass="ikont-colum-superior-fuente-recurso">
                                 <h:outputText value="#{var.entidad}"/>
                             </rich:column>
                             <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
+                                <h:outputText value="#{var.vigencia}"/>
+                            </rich:column>
+                           <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                                 <h:outputText value="#{var.rol}"/>
                             </rich:column>
                             <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
@@ -274,6 +291,9 @@
                     <rich:columnGroup id="cuerpofuente">
                         <rich:column width="200px" breakRowBefore="true">
                             <h:outputText value="#{fuente.tercero.strnombrecompleto}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{fuente.vigencia}"/>
                         </rich:column>
                         <rich:column>
                             <h:outputText value="#{fuente.rolentidad.strnombre}"/>

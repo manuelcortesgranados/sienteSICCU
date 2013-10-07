@@ -6,12 +6,14 @@ package co.com.interkont.cobra.planoperativo.client.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -37,11 +39,14 @@ public interface CobraGwtServiceAble extends RemoteService{
     
     public int getGuardarconvenio ();
     public Boolean setGuardarconvenio(int guardarconvenio);
-    public boolean getSeCargoPlanOperativoAntes();
-    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes);
+//    public boolean getSeCargoPlanOperativoAntes();
+//    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes);
     public List<ActividadobraDTO> getListaacteliminar();
     public void setListaacteliminar(List<ActividadobraDTO> listaacteliminar);
     public void adicionarActividadDtoEliminar(ActividadobraDTO actdto);
+    public Set getDependenciasEliminar();
+    public void setDependenciasEliminar(Set dependenciasEliminar);
+    public void adicionarDepenciatoEliminar(DependenciaDTO dep);
  
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
 //    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception;
