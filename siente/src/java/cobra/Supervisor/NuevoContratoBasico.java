@@ -2400,7 +2400,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 //if (getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
                 actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
                 //}
-                }
+            }
             if (getSessionBeanCobra().getCobraGwtService().getNavegacion() == 3) {
                 panelPantalla = 3;
                 actualizarPanel();
@@ -2739,11 +2739,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     lisplanifiactapar.get(i).setDateusucreacion(new Date());
                                     lisplanifiactapar.get(i).setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                                     lisplanifiactapar.get(i).setContrato(contrato);
-                                    i++;
+                                   i++;
                                 }
-
+                                
+                             
+                         
+                                lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
-                                    lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
                                     if (bundle.getString("fechaformapago").equals("true")) {
                                         FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
                                         return false;
@@ -2943,6 +2945,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         }
                         if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")) {
                             contrato.setModalidadcontratista(null);
+                        }
+                        if (contrato.getTercero().getIntcodigo() == -1) {
+                            FacesUtils.addErrorMessage(bundle.getString("elegirtercero"));
+                            return null;
+                        }
+                        if (!validacionFechasContrato()) {
+                            FacesUtils.addErrorMessage(bundle.getString("fechaactaunica"));
+                            return null;
                         }
                         //contrato.setContrato(null);
 //                        if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
@@ -4092,10 +4102,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
             if (activiprincipal != null) {
                 contrato.getActividadobras().add(activiprincipal);
-           // LLenar dependencias
-            contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
-              
-            
+                // LLenar dependencias
+                contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
+
+
             }
 //             
             recursosconvenio.sumaFuentesRecursos();
@@ -6599,12 +6609,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
                             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
-                            
+
                         }
-                            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
-                                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+                        if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
                             getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
-                            }
+                        }
                         if (!getContrato().getActividadobras().isEmpty()) {
 
                             getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
@@ -6615,15 +6625,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             }
                         }
                         if (!getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().isEmpty()) {
-                            Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();                            
-                            getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(),act));                                                       
-                            getSessionBeanCobra().getCobraService().guardarDependencias(new ArrayList<Dependencia>(getContrato().getDependenciasGenerales()));                            
-                        }                        
-                        if (!getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar().isEmpty()) {                                
-                                getSessionBeanCobra().getCobraService().borrarDependenciasPlanOperativo(
-                                        CasteoGWT.castearSetDependenciasaaeliminar(getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar()));
-                                getSessionBeanCobra().getCobraGwtService().setDependenciasEliminar(new LinkedHashSet());
-                            }
+                            Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
+                            getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
+                            getSessionBeanCobra().getCobraService().guardarDependencias(new ArrayList<Dependencia>(getContrato().getDependenciasGenerales()));
+                        }
+                        if (!getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().borrarDependenciasPlanOperativo(
+                                    CasteoGWT.castearSetDependenciasaaeliminar(getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar()));
+                            getSessionBeanCobra().getCobraGwtService().setDependenciasEliminar(new LinkedHashSet());
+                        }
                         setNumcontratotemporal(getContrato().getStrnumcontrato());
                         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 
@@ -6955,11 +6965,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
 //            System.out.println(getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes());
 //            if (!getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
-                ContratoDTO cont = CasteoGWT.castearContratoToContratoDTO(contrato);
-                getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
+            ContratoDTO cont = CasteoGWT.castearContratoToContratoDTO(contrato);
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
             //} else {
-              //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
-               // getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
+            //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
+            // getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
             //}
 
             return "PlanOperativo";
@@ -6993,7 +7003,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      * @author Carlos Loaiza
      */
-   public void actualizarContratodatosGwt(ContratoDTO contratodto) {
+    public void actualizarContratodatosGwt(ContratoDTO contratodto) {
         /**
          * Datos Generales
          */
@@ -7014,18 +7024,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
                 activi.setContrato(contrato);
                 //Castear dependencias;
-                
+
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
-                getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(),activi));                                                       
+                getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), activi));
                 System.out.println("contrato .dependencias = " + contrato.getDependenciasGenerales().size());
                 listaProyectosConvenio.clear();
                 extraerProyectosActividad(act);
             }
         }
 
-        
-        }
+
+    }
 
     public void limpiarEntidad() {
         contrato.getTercero().setStrnombrecompleto("");
@@ -7122,4 +7132,44 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         modificartipocontrato = true;
         habiitarmodificartipocontrato = false;
     }
+
+    public boolean validacionFechasContrato() {
+        if (contrato.getFormapago().getIntidformapago() != 0) {
+            switch (contrato.getFormapago().getIntidformapago()) {
+
+                case 1:
+                case 2:
+                    int i = 0;
+                    if (contrato.getFormapago().getIntidformapago() == 1) {
+                        if (fechapagoanticipo.compareTo(contrato.getDatefechaini()) < 0) {
+                            return false;
+                        }
+                        if (fechapagoanticipo.compareTo(contrato.getDatefechafin()) > 0) {
+                            return false;
+                        }
+                    }
+                    while (i < lisplanifiactapar.size()) {
+                        if (lisplanifiactapar.get(i).getDatefechapago().compareTo(contrato.getDatefechaini()) < 0) {
+                            return false;
+                        }
+                        if (lisplanifiactapar.get(i).getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
+                            return false;
+                        }
+                        i++;
+                    }
+                    break;
+
+                case 3:
+                    if (planificacionpago.getDatefechapago().compareTo(contrato.getDatefechaini()) < 0) {
+                        return false;
+                    }
+                    if (planificacionpago.getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
+                        return false;
+                    }
+                    break;
+            }
+        }
+        return true;
+    }
+   
 }
