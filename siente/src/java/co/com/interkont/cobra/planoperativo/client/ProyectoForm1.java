@@ -363,7 +363,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                          if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
                             varErrorres = true;
                             String df3 = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
-                            msgerrores += "*La de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
+                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
                         }
                     }
                     if (txtObjeG.getValue() == null) {
