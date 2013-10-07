@@ -31,7 +31,6 @@ import cobra.service.IndicadorServiceAble;
 import cobra.service.ModificarProyectoServiceAble;
 import cobra.service.UsuarioServiceAble;
 import cobra.service.UsuarioServiceImpl;
-
 import financiera.service.FinancieraServiceAble;
 import java.io.File;
 import java.io.Serializable;
@@ -96,19 +95,18 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
-    private boolean logueadodesdemapa = false;
 
     public boolean isLogueadodesdemapa() {
-        JsfUsuario usuario;
-        String usu_login = "ciudadano";
-        usuario = getUsuarioService().encontrarPorNombreusuario(usu_login);
-        getCiudadanoservice().setUsuariomostrar(getUsuarioObra());
-        if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return (
+                    getUsuarioObra() != null &&
+                    getUsuarioObra().getUsuLogin() != null &&
+                    !getUsuarioObra().getUsuLogin().equals("ciudadano") &&
+                    getTipologueo() != null &&
+                    (
+                        getTipologueo().getTipoerror() == 1 || 
+                        getTipologueo().getTipoerror() == 2
+                    )
+                );
     } 
    
     public HomeGestion getHomeGestion (){
@@ -116,11 +114,6 @@ public class SessionBeanCobra implements Serializable {
     
     }
     
-
-    public void setLogueadodesdemapa(boolean logueadodesdemapa) {
-        this.logueadodesdemapa = logueadodesdemapa;
-    }
-
     public boolean isLogueado() {
         return logueado;
     }
