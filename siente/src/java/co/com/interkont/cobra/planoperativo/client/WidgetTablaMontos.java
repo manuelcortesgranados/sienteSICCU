@@ -3,6 +3,7 @@ package co.com.interkont.cobra.planoperativo.client;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
@@ -83,7 +84,7 @@ public class WidgetTablaMontos implements IsWidget {
 
         ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> nameColumn = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.descripcionRubro(), 300, "Rubro");
         nameColumn.setColumnTextStyle(textStyles);
-       
+
 
 
         ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal> valor = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal>(properties.valor(), 100, "Valor");
@@ -94,8 +95,8 @@ public class WidgetTablaMontos implements IsWidget {
 
         ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> entidad = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.nombreEntidad(), 200, "Fuente");
         entidad.setColumnTextStyle(textStyles);
-      
-        
+
+
         ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer> vigenciaFuente = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer>(properties.vigenciafuente(), 100, "Vigencia fuente");
         vigencia.setColumnTextStyle(textStyles);
 

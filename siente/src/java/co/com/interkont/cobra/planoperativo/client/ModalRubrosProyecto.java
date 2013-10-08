@@ -320,10 +320,13 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-           if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible()) > 0) {
-            return "El monto ingresado supera el valor de la fuente de recursos";
+        if (obraFuenteDto.getFuenterecursosconvenio().getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
+            if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible()) > 0) {
+                return "El monto ingresado supera el valor disponible de la fuente de recursos:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible();
+            }
+        } else {
+            return "La Fuente de recursos seleccionada no cuenta con valor disponible";
         }
-
         proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
         idTemp++;
         idTempObraRecurso++;
@@ -337,7 +340,7 @@ public class ModalRubrosProyecto implements IsWidget {
         }
         proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
         service.setLog("valor fuente recursos disponible antes:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
-      }
+    }
 
 
     /*metodo que se encarga de llenar el combo de entidades

@@ -180,10 +180,9 @@ public class ModalAddMontos implements IsWidget {
         Button btnAdicionarRubros = new Button("Adicionar Rubro", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                if (validarObraFuenteConIgualEntidadViencia(entidadSeleccionada, vigencia)) {
+                if (validarObraFuenteConIgualEntidadViencia(entidadSeleccionada, vigenciafuente)) {
                     obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
                     if (obraFrDto != null) {
-                        service.setLog("Valor disponible de obra fuente recursos:" + obraFrDto.getValorDisponible(), null);
                         RelacionobrafuenterecursoscontratoDTO relacionFuenteRecursos = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorRubros.getValue(), entidadSeleccionada, rubro, vigencia, vigenciafuente, rubro.getStrdescripcion());
                         String validacionDevuelta = validarFuenteRecurso(relacionFuenteRecursos);
                         if (!validacionDevuelta.equals("La fuente ha sido guardada")) {
@@ -335,20 +334,23 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
-        if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) > 0) {
-            return "El valor ingresado supera el valor disponible de la fuente de recursos que aporta esta entidad" + "<br/>";
-        } else {
+        if (obraFrDto.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
+            if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) > 0) {
+                return "El valor ingresado supera el valor disponible de la fuente de recursos:" + obraFrDto.getValorDisponible() + "<br/>";
+            } else {
 
-            if (valorContratoO == null) {
-                valorContratoO = BigDecimal.ZERO;
+                if (valorContratoO == null) {
+                    valorContratoO = BigDecimal.ZERO;
+                }
+                valorContratoO = valorContratoO.add(relacionFuente.getValor());
+                valorContrato.setValue(valorContratoO);
+                contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
+                //modificarValorDisponible(relacionFuente);
+                return "La fuente ha sido guardada";
             }
-            valorContratoO = valorContratoO.add(relacionFuente.getValor());
-            valorContrato.setValue(valorContratoO);
-            contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
-            //modificarValorDisponible(relacionFuente);
-            return "La fuente ha sido guardada";
+        } else {
+            return "La Fuente de recursos seleccionada no cuenta con valor disponible";
         }
-
     }
 
     public void modificarValorDisponible(RelacionobrafuenterecursoscontratoDTO relacionFuente) {

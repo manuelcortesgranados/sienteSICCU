@@ -152,7 +152,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
-        service.setLog("en crear contrato valor disponible proyecto" + actividadobrapadre.getObra().getValorDisponible(), null);
+        
     }
 
     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
@@ -365,11 +365,16 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
                     }
                     if (!error) {
-                        actividadObraEditar.setContrato(contrato);
                         modificarValorDisponibleObraFuentesRecursos(numeroRubros);
-                        modalContrato.hide();
-                        gantt.getGanttPanel().getContainer().refresh();
-                        modalContrato.hide();
+                        if (msgValidacion.equals("El contrato debe de tener al menos una fuente de recursos asociada")) {
+                            AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
+                            d.show();
+                        } else {
+                            actividadObraEditar.setContrato(contrato);
+                            modalContrato.hide();
+                            gantt.getGanttPanel().getContainer().refresh();
+                            modalContrato.hide();
+                        }
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
@@ -607,7 +612,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void crearTareaContrato() {
-        actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
+        //actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1, 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
 
@@ -772,6 +777,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void modificarValorDisponibleObraFuentesRecursos(int numValorInicial) {
+        msgValidacion = "";
         service.setLog("entre en  Modificar valor disponible en contrato", null);
         service.setLog("entre en  Modificar valor disponible en contrato 1:" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
         int c = 0;
@@ -796,15 +802,22 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         service.setLog("devolviendo valores", null);
                         ObrafuenterecursosconveniosDTO obraFuenteRecursos = relacionCopia.getObrafuenterecursosconvenios();
                         obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(relacionCopia.getValor()));
+                        obraFuenteRecursos.setEstaEnFuenteRecurso(false);
                     }
                 }
-
+                if (contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
+                    service.setLog("esta limpia", null);
+                    msgValidacion = "El contrato debe de tener al menos una fuente de recursos asociada";
+                    numValorInicial = 0;
+                    relacionFuenteRecursosContratoCopia.clear();
+                }
             }
         } else {
             for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
                 service.setLog("entre en modificar valor disponible crear Contrato", null);
                 RelacionobrafuenterecursoscontratoDTO relacionobrafuenterecursoscontratoDTO = (RelacionobrafuenterecursoscontratoDTO) it.next();
                 relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setValorDisponible(relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionobrafuenterecursoscontratoDTO.getValor()));
+                relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
                 service.setLog("valor disponible despues de substraer:" + relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible(), null);
             }
 

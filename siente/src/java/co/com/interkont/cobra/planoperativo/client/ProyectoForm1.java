@@ -61,6 +61,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private NumberField<BigDecimal> otrospagos;
     private VerticalPanel vp;
     TextArea txtObjeG;
+    String msgerrores = "";
     /*Convenio principal el cual tiene las fuentes de los recursos y 
      * la informacion necesaria
      */
@@ -150,6 +151,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.fechaFin.setValue(proyectoDTO.getFechaFin());
         this.pagodirecto.setValue(proyectoDTO.getPagodirecto());
         this.otrospagos.setValue(proyectoDTO.getOtrospagos());
+        cargarObjetivoGeneral();
     }
 
     public void cargarObjetivoGeneral() {
@@ -157,6 +159,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         boolean encontro = false;
         for (Iterator it = proyectoDTO.getObjetivoses().iterator(); it.hasNext() && !encontro;) {
             ObjetivosDTO obj = (ObjetivosDTO) it.next();
+            service.setLog("objetivos tipo:" + obj.getTipoobjetivo(), null);
             if (obj.getTipoobjetivo() == 1) {
                 txtObjeG.setValue(obj.getDescripcion());
                 encontro = true;
@@ -326,7 +329,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
                     boolean varErrorres = false;
-                    String msgerrores = "";
+
                     if (nombrePry.getValue() == null) {
                         varErrorres = true;
                         msgerrores += "*Por favor ingrese el nombre del proyecto" + "<br/>";
@@ -392,12 +395,17 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
                 } else {
-                    editarProyecto();
-                    actividadobraProyectoEditar.setObra(proyectoDTO);
                     modificarValorDisponibleObraFuentesRecursos(numeroFuentes);
-                    modalPry.hide();
-                    gantt.getGanttPanel().runCascadeChanges();
-                    gantt.getGanttPanel().getContainer().refresh();
+                    if (msgerrores.equals("El proyecto debe de tener al menos una fuente de recursos asociada!")) {
+                        AlertMessageBox d = new AlertMessageBox("Alerta", msgerrores);
+                        d.show();
+                    } else {
+                        editarProyecto();
+                        actividadobraProyectoEditar.setObra(proyectoDTO);
+                        modalPry.hide();
+                        gantt.getGanttPanel().runCascadeChanges();
+                        gantt.getGanttPanel().getContainer().refresh();
+                    }
                 }
             }
         });
@@ -684,6 +692,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      }-*/;
 
     public void modificarValorDisponibleObraFuentesRecursos(int numValorInicial) {
+        msgerrores="";
         service.setLog("entre en  Modificar valor disponible en proyecto", null);
         service.setLog("entre en  Modificar valor disponible en proyecto 1:" + proyectoDTO.getObrafuenterecursosconvenioses().size(), null);
         int c = 0;
@@ -709,8 +718,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().add(relacionCopia.getValor()));
                     }
                 }
-
-            }
+                if(proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()){
+                 service.setLog("no tiene", null);
+                 msgerrores = "El proyecto debe de tener al menos una fuente de recursos asociada!";
+                 numValorInicial=0;
+                 relacionObraFuenteRecursosCopia.clear();
+                }
+             } 
         } else {
             for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
                 service.setLog("entre en modificar valor disponible editar nuevos", null);

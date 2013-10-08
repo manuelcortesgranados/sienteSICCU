@@ -2,6 +2,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
@@ -118,24 +119,16 @@ public class WidgetTablaRubrosPry implements IsWidget {
                 Context c = event.getContext();
                 int row = c.getIndex();
                 if (!editar) {
-                    if (store.get(row).getTipoaporte() == 0) {
-                        obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
-                        obraDto.setValorDisponible(obraDto.getValor());
-                    }
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
-                     if (!store.get(row).isEstaEnFuenteRecurso()) {
-                        if (store.get(row).getTipoaporte() == 0) {
-                            obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
-                            obraDto.setValorDisponible(obraDto.getValor());
-                        }
+                    if (!store.get(row).isEstaEnFuenteRecurso()) {
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                         getStore().remove(store.get(row));
-                    }else{
-                         AlertMessageBox alerta=new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato");
-                         alerta.show();
-                     }
+                    } else {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
+                        alerta.show();
+                    }
 
                 }
             }
@@ -176,7 +169,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     }
 
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
-      service.setLog("entre estaContrato", null);
+        service.setLog("entre estaContrato", null);
         boolean estaRelacionado = false;
         List<ActividadobraDTO> lstHijas = taskStore.getChildren(actividadObraEditar);
         for (ActividadobraDTO act : lstHijas) {
