@@ -27,6 +27,7 @@ import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
@@ -35,12 +36,16 @@ import java.math.BigDecimal;
 public class WidgetTablaMontos implements IsWidget {
 
     protected ContratoDTO contrato;
+    protected  boolean editar;
+    protected NumberField<BigDecimal> valorContrato;
 
     /**
      * @return the store
      */
-    public WidgetTablaMontos(ContratoDTO contrato) {
+    public WidgetTablaMontos(ContratoDTO contrato,boolean editar,NumberField<BigDecimal> valorContrato) {
         this.contrato = contrato;
+        this.editar=editar;
+        this.valorContrato=valorContrato;
     }
 
     public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
@@ -110,8 +115,18 @@ public class WidgetTablaMontos implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
+                if(editar){
+                ObrafuenterecursosconveniosDTO obraFuenteRecursos = store.get(row).getObrafuenterecursosconvenios();
+                obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
+                obraFuenteRecursos.setEstaEnFuenteRecurso(false);
+                }
+                BigDecimal valor=valorContrato.getValue();
+                valor=valor.subtract(store.get(row).getValor());                
+                valorContrato.setValue(valor);
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
+                
+               
             }
         });
         eliminar.setCell(button);

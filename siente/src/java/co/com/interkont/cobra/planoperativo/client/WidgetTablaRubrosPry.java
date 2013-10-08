@@ -120,10 +120,15 @@ public class WidgetTablaRubrosPry implements IsWidget {
                 int row = c.getIndex();
                 if (!editar) {
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                    obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                     getStore().remove(store.get(row));
                 } else {
                     if (!store.get(row).isEstaEnFuenteRecurso()) {
+                        FuenterecursosconvenioDTO fuenteRecursos = store.get(row).getFuenterecursosconvenio();
+                        fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
+                        service.setLog("en eliminar fuente pry:" + fuenteRecursos.getValorDisponible(), null);
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                        obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                         getStore().remove(store.get(row));
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
