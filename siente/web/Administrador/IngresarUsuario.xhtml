@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}" id="prueba_p">
+
+        <ui:composition template="/facelets/template_main.xhtml">
+
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+                    <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{var.permisonuevodiseno}">
+                    <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+                </h:panelGroup>
+            </ui:define>
+
+            <ui:define name="title">
+                <h:outputText  styleClass="ikont-hot-administrar"   value="Ingresar Usuario"></h:outputText>
+            </ui:define>
+            <div id="header_content" >
+                <div class="star">
+                    <h:outputText  styleClass="ikont-hot-ingreentidad"   value="Ingresar Usuario" />
+                </div>
+            </div>
+            <ui:define name="body">
+                <h:form>
+                    <rich:panel>
+                        <a4j:region id="form_">
+
+                            <h:panelGrid id="ingresarciudadanonuevo" columns="2" styleClass="ikont-panel-registro" >
+                                <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  >
+                                    <rich:placeholder value="Nombre" />
+                                </h:inputText>
+                                <h:inputSecret required="true" id="textpassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword"  >
+                                    <rich:placeholder value="Contraseña" />
+                                </h:inputSecret>
+                                <h:inputText required="true"  id="textusuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario"  >
+                                    <rich:placeholder value="Usuario" />
+                                </h:inputText>
+
+                                <h:inputSecret  required="true" id="textrepassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword"  >
+                                    <rich:placeholder value="Confirmar Contraseña" />
+                                </h:inputSecret>
+
+                                <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
+                                    <rich:placeholder value="Em@il" />
+                                </h:inputText>
+                                <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
+                                    <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
+                                </h:selectOneMenu> 
+
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
+                                <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
+                                               value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
+
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
+                                <h:selectOneMenu id="combogeneronuevo" value="genero">
+                                    <f:selectItems value="#{Perfil$Usuario.generosoption}" />
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                            <!--hr class="ikont-hr-separador" /-->
+                            <br/>
+                            
+                                <h:panelGroup styleClass="ikont-hpanel-img-registro">
+                                    <h:panelGroup>
+                                        <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
+
+                                            <h:panelGroup styleClass="ikont-hpg-pgfotografia"   layout="block" id="pgfotografia">
+                                                <h:graphicImage  styleClass="ikont-hgi-pathImaCiu"   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" style="width:100% "  height="100%"/>
+                                            </h:panelGroup>
+
+                                        </h:panelGroup>
+                                        <a4j:commandLink styleClass="ikont-enlace-cargar-imagen-registro"   value="#{var.examinar}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
+                                        </a4j:commandLink> 
+
+                                    </h:panelGroup>
+                                    <br/>
+                                    <h:panelGrid columns="3">
+                                        <a4j:commandButton id="btnGuardarCiudadano"  
+                                                           value="#{var.registrarme}"  
+                                                           action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano"  execute="@form"
+                                                           oncomplete="#{rich:component('confirmarCiudadano')}.show();">
+                                        </a4j:commandButton> 
+                                        <h:outputLabel rendered="false" value="o" />
+                                        <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
+                                         <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" />
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                           
+                        </a4j:region>
+                    </rich:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</ui:composition>

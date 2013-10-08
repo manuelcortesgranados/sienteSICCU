@@ -460,6 +460,12 @@
             <from-outcome>ingresarEntidad</from-outcome>
             <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
         </navigation-case>
+        
+         <navigation-case>
+            <from-outcome>ingresarUsuario</from-outcome>
+            <to-view-id>/Administrador/IngresarUsuario.xhtml</to-view-id>
+        </navigation-case>
+        
         <navigation-case>
             <from-outcome>asociarEntidad</from-outcome>
             <to-view-id>/Administrador/AsociarEntidadUsuario.xhtml</to-view-id>
