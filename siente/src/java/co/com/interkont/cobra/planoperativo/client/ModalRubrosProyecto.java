@@ -17,15 +17,12 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -39,7 +36,6 @@ import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -141,7 +137,7 @@ public class ModalRubrosProyecto implements IsWidget {
         });
 
         con.add(new FieldLabel(lstE, "Entidad"), new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
-        //con.add(lstEntidadesConvenio, new AbstractHtmlLayoutContainer.HtmlData(".entidad"));
+
         montoAportado.setEmptyText("Monto aportado");
         montoAportado.setWidth(cw);
         montoAportado.addBlurHandler(new BlurEvent.BlurHandler() {
@@ -179,7 +175,6 @@ public class ModalRubrosProyecto implements IsWidget {
             }
         });
         con.add(new FieldLabel(lstTipoAporte, "Tipo aporte"), new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
-        //con.add(lstTipoAporte, new AbstractHtmlLayoutContainer.HtmlData(".tipor"));
         lstFormaP.setWidth("" + cw);
         llenarFormaPa();
         lstFormaP.addChangeHandler(new ChangeHandler() {
@@ -215,7 +210,6 @@ public class ModalRubrosProyecto implements IsWidget {
                 String validacionDevuelta = "";
                 if (validarObraFuenteConIgualEntidadViencia(entidadSeleccionada, vigencia)) {
                     fuenteRecursosConveDTO = buscarFuenteRecursosDto(entidadSeleccionada, vigencia);
-                    service.setLog("fuente recursos buscado" + fuenteRecursosConveDTO.getTercero().getStrnombrecompleto(), null);
                     if (fuenteRecursosConveDTO != null) {
                         if (tipoAporte == 0) {
                             String requeridos = validarRequeridos();
@@ -326,31 +320,15 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-        if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
-            if (montoAportado.getValue().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValoraportado()) > 0) {
-                return "El monto ingresado supera el valor de la fuente de recursos";
-            } else {
-                if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
-                    BigDecimal sumaValorAportado = BigDecimal.ZERO;
-                    for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
-                        ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
-                        if (obrc.getTipoaporte() == 0) {
-                            sumaValorAportado = sumaValorAportado.add(obrc.getValor());
-                        }
-                    }
-                    sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());
-                    if (sumaValorAportado.compareTo(contratoDto.getNumvlrcontrato()) > 0) {
-                        return "Monto no registrado, la suma de los montos aportados supera el valor del convenio";
-                    }
-                }
-            }
-            proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
-            idTemp++;
-            idTempObraRecurso++;
-            modificarValorDisponible(obraFuenteDto);
-            return "El monto ha sido guardado";
+           if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible()) > 0) {
+            return "El monto ingresado supera el valor de la fuente de recursos";
         }
-        return "El convenio seleccionado no cuenta con valor disponible";
+
+        proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
+        idTemp++;
+        idTempObraRecurso++;
+        modificarValorDisponible(obraFuenteDto);
+        return "El monto ha sido guardado";
     }
 
     public void modificarValorDisponible(ObrafuenterecursosconveniosDTO obraFuenteDto) {
@@ -358,10 +336,8 @@ public class ModalRubrosProyecto implements IsWidget {
             proyectoDTO.setValor(BigDecimal.ZERO);
         }
         proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
-        obraFuenteDto.getFuenterecursosconvenio().setValorDisponible(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuenteDto.getValor()));
-        contratoDto.setValorDisponible(contratoDto.getValorDisponible().subtract(obraFuenteDto.getValor()));
-
-    }
+        service.setLog("valor fuente recursos disponible antes:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
+      }
 
 
     /*metodo que se encarga de llenar el combo de entidades

@@ -165,7 +165,7 @@ public class ContratoDTO implements IsSerializable {
      * @return the relacionobrafuenterecursoscontratos
      */
     public Set getRelacionobrafuenterecursoscontratos() {
-        return relacionobrafuenterecursoscontratos;
+       return relacionobrafuenterecursoscontratos;
     }
 
     /**

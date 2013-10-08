@@ -48,6 +48,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
     private Set dependenciasEliminar= new LinkedHashSet(0);
+  
      /**
      * @return the dependenciasEliminar
      */
@@ -306,4 +307,5 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void adicionarDepenciatoEliminar(DependenciaDTO dep) {
         getDependenciasEliminar().add(dep);
     }
+
 }

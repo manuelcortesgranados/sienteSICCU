@@ -6,16 +6,13 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.TerceroDTO;
-import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import co.com.interkont.cobra.to.Relacionobrafuenterecursoscontrato;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -23,18 +20,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.interkont.cobra.dto.ActividadObraDTO;
-import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
-import com.sencha.gxt.widget.core.client.box.MessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
@@ -42,7 +34,6 @@ import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -79,10 +70,10 @@ public class ModalAddMontos implements IsWidget {
     protected String entidadSeleccionada;
     protected ObrafuenterecursosconveniosDTO obraFrDto;
     private BigDecimal valorContratoO;
-    
-    public ModalAddMontos(ContratoDTO contrato, BigDecimal valorContratoO, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Window modalActual, int idTemp) {
+
+    public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Window modalActual, int idTemp) {
         lstRubrosDto = new ArrayList<RubroDTO>();
-        
+
         lstE = new ListBox(false);
         lstVigenFuente = new ListBox(false);
         this.contrato = contrato;
@@ -90,8 +81,8 @@ public class ModalAddMontos implements IsWidget {
         this.widTblMontos = widTblMontos;
         this.modalActual = modalActual;
         this.idTemp = idTemp;
-        this.valorContratoO = valorContratoO;
-        
+        this.valorContratoO = valorContrato.getValue();
+        this.valorContrato = valorContrato;
 
         Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator();
         obraFrDto = (ObrafuenterecursosconveniosDTO) it.next();
@@ -138,8 +129,6 @@ public class ModalAddMontos implements IsWidget {
         getComboRubros().setWidth("" + cw);
         con.add(new FieldLabel(getComboCatRubros(), "Rubros"), new AbstractHtmlLayoutContainer.HtmlData(".rubrocont"));
         con.add(new FieldLabel(getComboRubros(), "Categorias"), new AbstractHtmlLayoutContainer.HtmlData(".rubrosub"));
-//        con.add(getComboCatRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrocont"));
-//        con.add(getComboRubros(), new AbstractHtmlLayoutContainer.HtmlData(".rubrosub"));
         this.llenarCategorias();
         getComboCatRubros().setSelectedIndex(0);
         llenarRubroslista("123102");
@@ -191,21 +180,16 @@ public class ModalAddMontos implements IsWidget {
         Button btnAdicionarRubros = new Button("Adicionar Rubro", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                service.setLog("entre en adicionar", null);
                 if (validarObraFuenteConIgualEntidadViencia(entidadSeleccionada, vigencia)) {
-                    service.setLog("entre en validar", null);
                     obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
-                    service.setLog("despues de buscar obraFrDto", null);
                     if (obraFrDto != null) {
-                        service.setLog("diferente de null de buscar obraFrDto", null);
+                        service.setLog("Valor disponible de obra fuente recursos:" + obraFrDto.getValorDisponible(), null);
                         RelacionobrafuenterecursoscontratoDTO relacionFuenteRecursos = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorRubros.getValue(), entidadSeleccionada, rubro, vigencia, vigenciafuente, rubro.getStrdescripcion());
                         String validacionDevuelta = validarFuenteRecurso(relacionFuenteRecursos);
-                        service.setLog("despues de validacionDevuelta", null);
                         if (!validacionDevuelta.equals("La fuente ha sido guardada")) {
                             AlertMessageBox d = new AlertMessageBox("Alerta", validacionDevuelta);
                             d.show();
                         } else {
-                            service.setLog("en else", null);
                             limpiarMontos();
                             widTblMontos.getStore().add(relacionFuenteRecursos);
                             modalActual.hide();
@@ -223,13 +207,10 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public void llenarV() {
-        Date ahora = new Date();
-        int año = 2013;
-
-        lstVigen.addItem("" + año);
-        for (int i = 0; i < 14; i++) {
-            año = año + 1;
-            lstVigen.addItem("" + año);
+        final Integer fechaInicio = 2002;
+        final Integer fechaFinal = 2027;
+        for (int i = fechaInicio; i <= fechaFinal; i++) {
+            lstVigen.addItem("" + i);
         }
     }
 
@@ -290,48 +271,6 @@ public class ModalAddMontos implements IsWidget {
         });
 
     }
-
-//    public String validaRubros(MontoDTO montoDto) {
-//        String msgVal = "";
-//        if (valorContrato.getValue() == null) {
-//            msgVal += "*Ingrese el valor del contrato" + "<br/>";
-//        } else {
-//            if (valorContrato.getValue().compareTo(actividadObraPadre.getObra().getValorDisponible()) <= 0) {
-//                valorAuxiliar = valorContrato.getValue();
-//                if (getValorRubros().getValue() != null) {
-//                    if (getValorRubros().getValue().compareTo(valorContrato.getValue()) <= 0) {
-//                        service.setLog("entreeeee", null);
-//                        if (!contrato.getMontos().isEmpty()) {
-//                            service.setLog("entre 1", null);
-//                            BigDecimal sumMontos = sumarRubros();
-//                            sumMontos = sumMontos.add(montoDto.getValor());
-//                            if (sumMontos.compareTo(valorContrato.getValue()) > 0) {
-//                                msgVal += "*La suma de los rubros asociados superan el valor del contrato" + "<br/>";
-//                            }
-//                        }
-//                    } else {
-//                        msgVal += "*El valor del rubro no puede ser superior al valor del contrato" + "<br/>";
-//                    }
-//                } else {
-//                    msgVal += "*Ingrese el valor del rubro" + "<br/>";
-//                }
-//            } else {
-//                msgVal += "*El valor del contrato es superior al valor disponible del proyecto" + "<br/>";
-//            }
-//        }
-//        if (rubro == null) {
-//            msgVal += "*Seleccione un rubro" + "<br/>";
-//        }
-//        service.setLog("entre 2", null);
-//        if (msgVal.equals("")) {
-//            service.setLog("entre 3", null);
-//            msgVal += "El rubro se registró correctamente";
-//        }
-//
-//        return msgVal;
-//    }
-
- 
 
     public void llenarComboEntidadesConvenio() {
         for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
@@ -396,17 +335,17 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
-        if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) >= 0) {
+        if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) > 0) {
             return "El valor ingresado supera el valor disponible de la fuente de recursos que aporta esta entidad" + "<br/>";
         } else {
-            contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
-            if(valorContratoO==null){
-            valorContratoO=BigDecimal.ZERO;
+
+            if (valorContratoO == null) {
+                valorContratoO = BigDecimal.ZERO;
             }
-            service.setLog("valor del contrato 1:" + valorContratoO, null);
             valorContratoO = valorContratoO.add(relacionFuente.getValor());
-            modificarValorDisponible(relacionFuente);
-            service.setLog("valor del contrato:" + valorContratoO, null);
+            valorContrato.setValue(valorContratoO);
+            contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
+            //modificarValorDisponible(relacionFuente);
             return "La fuente ha sido guardada";
         }
 
@@ -414,6 +353,7 @@ public class ModalAddMontos implements IsWidget {
 
     public void modificarValorDisponible(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
         relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
+        service.setLog("valor disponible despues de substraer:" + relacionFuente.getObrafuenterecursosconvenios().getValorDisponible(), null);
     }
 
     /**

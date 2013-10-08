@@ -1050,6 +1050,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onSuccess(ContratoDTO result) {
                 convenioDTO = result;
+                service.setLog("valor disponible"+convenioDTO.getValorDisponible(), null);
                 if (validandoDatosBasicosConvenio()) {
                     // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
