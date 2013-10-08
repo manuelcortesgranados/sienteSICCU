@@ -164,7 +164,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         grid.getView().setColumnLines(true);
 
         FramedPanel cp = new FramedPanel();
-        cp.setHeadingText("*ANADIR ROLES Y ENTIDADES:");
+        cp.setHeadingText("*FINANCIAMIENTO DEL PROYECTO");
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);

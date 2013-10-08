@@ -11,7 +11,7 @@
     <br/>
             <ui:include src="/facelets/menu_laterar_zoom.xhtml" />
 
-    <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}" >
+    <h:panelGroup rendered="#{SessionBeanCobra.logueadodesdemapa}" >
         <hr  class="ikont-hr-separador-usuario" />
         <h:panelGrid  rendered="true" columns="2"  styleClass="ikont-position-div-perfil-usuario">
             <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto!=null}">

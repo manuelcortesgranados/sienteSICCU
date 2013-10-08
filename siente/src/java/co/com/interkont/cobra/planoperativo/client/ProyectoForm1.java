@@ -8,24 +8,19 @@ import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig;
-import com.google.common.io.Resources;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -35,9 +30,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
-import com.google.gwt.user.datepicker.client.DateBox;
 import com.sencha.gxt.data.shared.TreeStore;
-import com.sencha.gxt.widget.core.client.DatePicker;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
@@ -54,7 +47,9 @@ import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
 
@@ -99,6 +94,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTO actividadobraProyectoEditar;
     protected ActividadobraDTOProps propes;
     protected TreeStore<ActividadobraDTO> taskStore;
+    int numeroFuentes;
+    Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
 
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
@@ -115,6 +112,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.editar = true;
         this.taskStore = taskStore;
         fechaProyecto = CalendarUtil.copyDate(actividadobraProyectoEditar.getStartDateTime());
+        numeroFuentes = proyectoDTO.getObrafuenterecursosconvenioses().size();
+        relacionObraFuenteRecursosCopia = ((Set) ((HashSet) proyectoDTO.getObrafuenterecursosconvenioses()).clone());
         instanciarElementosPantalla();
         cargarFormularioEditar();
     }
@@ -260,6 +259,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros, idobraRecursos);
                 adicionarRubros.add(modalProyecto.asWidget());
                 adicionarRubros.show();
+                service.setLog("valor disponible en convenio:" + contratoDto.getValorDisponible(), null);
             }
         });
         btnAdicionarMonto.setWidth("" + 20);
@@ -351,19 +351,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         varErrorres = true;
                         msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
                     }
-              
+
                     if (proyectoDTO.getFechaFin() != null) {
                         service.setLog("entre en fecha fin no null", null);
                         if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                             varErrorres = true;
                             msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
-                        }                      
+                        }
                     }
-                    if(proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null){
-                         if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
+                    if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
+                        if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
                             varErrorres = true;
                             String df3 = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
-                            msgerrores += "*La de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
+                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
                         }
                     }
                     if (txtObjeG.getValue() == null) {
@@ -382,6 +382,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
 
                     if (!varErrorres) {
+                        modificarValorDisponibleObraFuentesRecursos(0);
                         modalPry.hide();
                         crearActividadPry();
                     } else {
@@ -393,6 +394,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 } else {
                     editarProyecto();
                     actividadobraProyectoEditar.setObra(proyectoDTO);
+                    modificarValorDisponibleObraFuentesRecursos(numeroFuentes);
                     modalPry.hide();
                     gantt.getGanttPanel().runCascadeChanges();
                     gantt.getGanttPanel().getContainer().refresh();
@@ -598,13 +600,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         proyectoDTO.setFechaFin(fechaFin.getValue());
         proyectoDTO.setOtrospagos(otrospagos.getValue());
         proyectoDTO.setPagodirecto(pagodirecto.getValue());
-        if (proyectoDTO.getValor() != null) {
-            if (proyectoDTO.getValorDisponible() == null) {
-                proyectoDTO.setValorDisponible(BigDecimal.ZERO);
 
-            }
-            proyectoDTO.setValorDisponible(proyectoDTO.getValorDisponible().add(proyectoDTO.getValor()));
-        }
     }
 
     /*
@@ -686,6 +682,47 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      '</table>'
      ].join("");
      }-*/;
+
+    public void modificarValorDisponibleObraFuentesRecursos(int numValorInicial) {
+        service.setLog("entre en  Modificar valor disponible en proyecto", null);
+        service.setLog("entre en  Modificar valor disponible en proyecto 1:" + proyectoDTO.getObrafuenterecursosconvenioses().size(), null);
+        int c = 0;
+        if (editar) {
+            service.setLog("entre en  Modificar valor disponible en proyecto copia:" + relacionObraFuenteRecursosCopia.size(), null);
+            if (proyectoDTO.getObrafuenterecursosconvenioses().size() > relacionObraFuenteRecursosCopia.size()) {
+                for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+                    if (c > numValorInicial) {
+                        service.setLog("entre en modificar valor disponible editar nuevos", null);
+                        ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
+                        obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
+                        service.setLog("valor disponible despues de substraer:" + obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible(), null);
+                    }
+                    c++;
+                }
+            } else if (proyectoDTO.getObrafuenterecursosconvenioses().size() < relacionObraFuenteRecursosCopia.size()) {
+                service.setLog("entre cuando elimina en edita ahora" + proyectoDTO.getObrafuenterecursosconvenioses().size(), null);
+                service.setLog("entre cuando elimina en edita montos antes" + relacionObraFuenteRecursosCopia.size(), null);
+                for (ObrafuenterecursosconveniosDTO relacionCopia : relacionObraFuenteRecursosCopia) {
+                    if (!proyectoDTO.getObrafuenterecursosconvenioses().contains(relacionCopia)) {
+                        service.setLog("devolviendo valores:" + relacionCopia.getValor(), null);
+                        FuenterecursosconvenioDTO fuenteRecursos = relacionCopia.getFuenterecursosconvenio();
+                        fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().add(relacionCopia.getValor()));
+                    }
+                }
+
+            }
+        } else {
+            for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+                service.setLog("entre en modificar valor disponible editar nuevos", null);
+                ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
+                obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
+                service.setLog("valor disponible despues de substraer:" + obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible(), null);
+
+            }
+
+        }
+
+    }
 
     /**
      * @return the nombrePry

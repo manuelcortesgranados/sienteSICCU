@@ -680,6 +680,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
                 JsfUsuario usulogin = getSessionBeanCobra().getUsuarioService().encontrarPorNombreusuario(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuLogin());
                 if (utilidad.isEmail(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStremail())) {
                     if (usulogin == null) {
+                        if (!getSessionBeanCobra().getCiudadanoservice().isUsuarioLDAP()) {
                         if (getSessionBeanCobra().getCiudadanoservice().getPassword().length() >= 8 && getSessionBeanCobra().getCiudadanoservice().getRepassword().length() >= 8) {
                             if (getSessionBeanCobra().getCiudadanoservice().getPassword().equals(getSessionBeanCobra().getCiudadanoservice().getRepassword())) {
 
@@ -711,6 +712,9 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
                         } else {
                             getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("lacontrasenadebe"));
                             return false;
+                        }
+                    } else {
+                            return true;
                         }
                     } else {
                         getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("usuariorepetido"));

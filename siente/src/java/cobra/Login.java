@@ -5,16 +5,30 @@
  */
 package cobra;
 
+import co.com.interkont.cobra.to.Comentarioobra;
 import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.JsfUsuario;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import co.com.interkont.cobra.to.JsfUsuarioGrupoId;
+import co.com.interkont.cobra.to.Localidad;
+import co.com.interkont.cobra.to.Tercero;
+import co.com.interkont.cobra.to.Tipoidentificacion;
+import co.com.interkont.cobra.to.Tipoorigen;
+import co.com.interkont.cobra.to.Tiposolicitante;
+import co.com.interkont.cobra.to.Tipotercero;
+import co.com.interkont.cobra.to.Tipousuario;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
+import co.interkont.zoomfonadews.autenticacion.to.Usuario;
+import cobra.Ciudadano.PerfilCiudadano;
 import cobra.Supervisor.FacesUtils;
+import cobra.service.UsuarioServiceImpl;
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
@@ -76,6 +90,7 @@ public class Login implements Serializable {
     }
 
     public String verificarUsuario() {
+        Usuario usuarioExterno = null;
         try {
             getSessionBeanCobra().setMensajelogueo("");
 
@@ -84,6 +99,62 @@ public class Login implements Serializable {
             getSessionBeanCobra().setTipologueo(getSessionBeanCobra().getUsuarioService().
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
+            //Si el sistema está paramatrizado para autenticarse mediante LDAP
+            if (Propiedad.getValor("autenticacionLDAP").equals("true")) {
+                if (getSessionBeanCobra().getTipologueo().getTipoerror() == 0) {
+                    try {
+                        usuarioExterno = getSessionBeanCobra().getUsuarioService().solicitarAccesoLDAP(getSessionBeanCobra().getUsuarioObra().getUsuLogin(), getSessionBeanCobra().getUsuarioObra().getUsuPasswd());
+                    } catch (Exception ex) {
+                        getSessionBeanCobra().getTipologueo().setMensajeerror(Propiedad.getValor("errorConexionAutenticacionLDAP"));
+                        Logger.getLogger(UsuarioServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (usuarioExterno != null && usuarioExterno.getAcceso() == 1) {
+                        getSessionBeanCobra().getCiudadanoservice().setCiudadano(new JsfUsuario());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTercero(new Tercero());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombrecompleto(usuarioExterno.getNombre());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombre(usuarioExterno.getNombre());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStremail(usuarioExterno.getEmail());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrlocalidadnacimiento(new Localidad("169"));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipoidentificacion(new Tipoidentificacion(6, "NIT"));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipotercero(new Tipotercero(1));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipoOrigen(new Tipoorigen(4, "Nacional"));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setIntcedula("faltante");
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setDateusuariocreacion(new Date());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrdireccionprincipal("faltante");
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTiposolicitante(new Tiposolicitante(5));
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setBoolestado(true);
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setBoolobraslocalidad(true);
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrtelefono1("Faltante");
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuLogin(usuarioExterno.getUsuario());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setLdap(true);
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaCrcion(new Date());
+                        Calendar fechaVencimiento = Calendar.getInstance();
+                        fechaVencimiento.add(Calendar.YEAR, 1);
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaVncmnto(fechaVencimiento.getTime());
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(Boolean.FALSE);
+                        getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(1));
+                        getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
+                        getSessionBeanCobra().getCiudadanoservice().guardarCiudadano(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
+                        getSessionBeanCobra().getTipologueo().setTipoerror(1);
+                        Comentarioobra comen = new Comentarioobra();
+                        comen.setDatefecha(new Date());
+                        comen.setJsfUsuario(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
+                        comen.setStrdesccoment(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombrecompleto() + " ya es parte de " + Propiedad.getValor("cobra"));
+                        getSessionBeanCobra().getCiudadanoservice().guardarComentarioObra(comen);
+                        getSessionBeanCobra().getCiudadanoservice().getJsfusuariogrupo().setId(new JsfUsuarioGrupoId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId(), 6, 21));
+                        getSessionBeanCobra().getCiudadanoservice().guardarJsfUsuarioGrupo(getSessionBeanCobra().getCiudadanoservice().getJsfusuariogrupo());
+                        getSessionBeanCobra().getCiudadanoservice().setMensaje(Propiedad.getValor("mensajecorreo"));
+                        getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(true);
+                        try {
+                            EnvioCorreosCobra envio = new EnvioCorreosCobra(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra());
+                            envio.enviarCorreoCiudadano(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
+                        } catch (Exception ex) {
+                            Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
 
             switch (getSessionBeanCobra().getTipologueo().getTipoerror()) {
                 case 0:
@@ -124,8 +195,10 @@ public class Login implements Serializable {
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {
+                        if(!getSessionBeanCobra().getCiudadanoservice().getCiudadano().isLdap()) {
                         getSessionBeanCobra().getUsuarioObra().setUsuEstado(Boolean.TRUE);
                         getSessionBeanCobra().getUsuarioService().guardarOrActualizarUsuario(getSessionBeanCobra().getUsuarioObra());
+                    }
                     }
                     return respuesta;
 

@@ -24,6 +24,7 @@ import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  *
@@ -38,6 +39,8 @@ public class RecursosConvenio implements Serializable {
     private BigDecimal sumafuentes;
     private UIDataTable tableFuente = new UIDataTable();
     private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
+    private SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+    private ResourceBundle bundle = sbc.getBundle();
 
     public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
         return lstFuentesRecursosEliminar;
@@ -178,7 +181,7 @@ public class RecursosConvenio implements Serializable {
             //Se pone la condicion si la lista tiene alguna entidad y se valida a que no agreguen la misma entidad en un conveio
             if (!lstFuentesRecursos.isEmpty()) {
                 for (Fuenterecursosconvenio f : lstFuentesRecursos) {
-                  if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo() && fuenteRecursoConvenio.getVigencia().equals(f.getVigencia())) {
+                    if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo() && fuenteRecursoConvenio.getVigencia().equals(f.getVigencia())) {
                         FacesUtils.addErrorMessage("La fuente de recurso ya se encuentra con la misma vigencia");
                         return null;
 
@@ -224,8 +227,6 @@ public class RecursosConvenio implements Serializable {
     }
 
     public void calcularValorGerencia() {
-        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        ResourceBundle bundle = sbc.getBundle();
         getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
 
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
@@ -295,18 +296,12 @@ public class RecursosConvenio implements Serializable {
     }
 
     public void llenarVigencia() {
-        Date fechaActual = new Date();
-        String ano = "" + fechaActual.getYear();
-        String anoActualS = ano.substring(1, 3);
-        String anoActual = "20";
-        ano = anoActual + anoActualS;
-        Integer intAnoActual = Integer.parseInt(ano);
-        lstVigencia.add(intAnoActual);
-        for (int i = 0; i < 13; i++) {
-            intAnoActual++;
-            lstVigencia.add(intAnoActual);
+        int vigenciaInicio = Integer.parseInt(bundle.getString("inicio_vigencia"));
+        int vigenciaHasta = Integer.parseInt(bundle.getString("fin_vigencia"));
+        for (int i = vigenciaInicio; i <= vigenciaHasta; i++) {
+            lstVigencia.add(i);
         }
-        
+
     }
 
     /**

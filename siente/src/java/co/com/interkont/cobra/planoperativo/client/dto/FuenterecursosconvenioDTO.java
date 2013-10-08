@@ -28,6 +28,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
     private Integer tipoaporte;
     private Set obrafuenterecursosconvenioses = new HashSet(0);
     private BigDecimal valorDisponible;
+    private Integer vigencia;
 
     public FuenterecursosconvenioDTO() {
     }
@@ -213,6 +214,20 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
      */
     public void setValorDisponible(BigDecimal valorDisponible) {
         this.valorDisponible = valorDisponible;
+    }
+
+    /**
+     * @return the vigencia
+     */
+    public Integer getVigencia() {
+        return vigencia;
+    }
+
+    /**
+     * @param vigencia the vigencia to set
+     */
+    public void setVigencia(Integer vigencia) {
+        this.vigencia = vigencia;
     }
     
 }

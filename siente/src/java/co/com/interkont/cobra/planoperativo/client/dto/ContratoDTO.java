@@ -33,8 +33,7 @@ public class ContratoDTO implements IsSerializable {
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
     private Set fuenterecursosconvenios = new HashSet(0);
-    private Set montos = new HashSet(0);
-    private Set dependenciasGenerales = new LinkedHashSet(0);
+     private Set dependenciasGenerales = new LinkedHashSet(0);
 
     public ContratoDTO() {
     }
@@ -166,7 +165,7 @@ public class ContratoDTO implements IsSerializable {
      * @return the relacionobrafuenterecursoscontratos
      */
     public Set getRelacionobrafuenterecursoscontratos() {
-        return relacionobrafuenterecursoscontratos;
+       return relacionobrafuenterecursoscontratos;
     }
 
     /**
@@ -238,20 +237,7 @@ public class ContratoDTO implements IsSerializable {
         this.intduraciondias = intduraciondias;
     }
 
-    /**
-     * @return the montos
-     */
-    public Set getMontos() {
-        return montos;
-    }
-
-    /**
-     * @param montos the montos to set
-     */
-    public void setMontos(Set montos) {
-        this.montos = montos;
-    }
-
+   
     /**
      * @return the nombreAbreviado
      */

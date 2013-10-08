@@ -61,7 +61,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
     private TextField descripcionTipoRecurso;
     //si forma de pago es uno es valor si es dos es porcentaje
     int formaPago;
-    WidgetTablaFuenteR modal;
+    //WidgetTablaFuenteR modal;
     Window modalActual;
     int cont;
     int idTemp;
@@ -76,14 +76,14 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
     ObraRecursosPropertiesContrato propse = GWT.create(ObraRecursosPropertiesContrato.class);
     protected final ListStore<ObrafuenterecursosconveniosDTO> entidades = new ListStore<ObrafuenterecursosconveniosDTO>(propse.idobrafuenterecursos());
 
-    public ModalAddFuentes(ActividadobraDTO actividadObraPadre, ContratoDTO contrato, WidgetTablaFuenteR tabla, Window modalActual, int idTemp) {
-        this.actividadObraPadre = actividadObraPadre;
-        this.contrato = contrato;
-        this.modal = tabla;
-        this.modalActual = modalActual;
-        this.idTemp = idTemp;
-       
-    }
+//    public ModalAddFuentes(ActividadobraDTO actividadObraPadre, ContratoDTO contrato, WidgetTablaFuenteR tabla, Window modalActual, int idTemp) {
+//        this.actividadObraPadre = actividadObraPadre;
+//        this.contrato = contrato;
+//        //this.modal = tabla;
+//        this.modalActual = modalActual;
+//        this.idTemp = idTemp;
+//       
+//    }
 
     @Override
     public Widget asWidget() {
@@ -191,17 +191,17 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
                 if (obraFrDto.getTipoaporte() == 0) {
                     if (formaPago == 2) {
                         BigDecimal valorP = obraFrDto.getValor().multiply(valorFuenteRecurso.getValue()).divide(new BigDecimal(100));
-                        rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorP, formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Porcentaje");
+                       // rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorP, formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Porcentaje");
                         idTemp = idTemp++;
                     } else {
-                        rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorFuenteRecurso.getValue(), formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Valor");
+                        //rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorFuenteRecurso.getValue(), formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Valor");
                         idTemp = idTemp++;
                     }
-                    validacionDevuelta = validarFuenteRecurso(rofr);
+//                    validacionDevuelta = validarFuenteRecurso(rofr);
                 } else {
-                    rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Porcentaje");
-                    contrato.getRelacionobrafuenterecursoscontratos().add(rofr);
-                    modal.getStore().add(rofr);
+                    //rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Porcentaje");
+                    //contrato.getRelacionobrafuenterecursoscontratos().add(rofr);
+                   // modal.getStore().add(rofr);
                     idTemp++;
                     validacionDevuelta="La fuente ha sido guardada";
                 }
@@ -248,7 +248,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
             }
             contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
             modificarValorDisponible(relacionFuente);
-            modal.getStore().add(relacionFuente);
+            //modal.getStore().add(relacionFuente);
             return "La fuente ha sido guardada";
         }
 

@@ -3,6 +3,7 @@ package co.com.interkont.cobra.planoperativo.client;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.math.BigDecimal;
 public class WidgetTablaMontos implements IsWidget {
 
     protected ContratoDTO contrato;
+
     /**
      * @return the store
      */
@@ -40,34 +42,38 @@ public class WidgetTablaMontos implements IsWidget {
         this.contrato = contrato;
     }
 
-    public ListStore<MontoDTO> getStore() {
+    public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
         return store;
     }
 
     /**
      * @param store the store to set
      */
-    public void setStore(ListStore<MontoDTO> store) {
+    public void setStore(ListStore<RelacionobrafuenterecursoscontratoDTO> store) {
         this.store = store;
     }
 
-    interface PlaceProperties extends PropertyAccess<MontoDTO> {
+    interface PlaceProperties extends PropertyAccess<RelacionobrafuenterecursoscontratoDTO> {
 
-        @Path("idmonto")
-        ModelKeyProvider<MontoDTO> key();
+        @Path("idrelacionobracontrato")
+        ModelKeyProvider<RelacionobrafuenterecursoscontratoDTO> key();
 
-        ValueProvider<MontoDTO, Integer> idmonto();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, Integer> idrelacionobracontrato();
 
-        ValueProvider<MontoDTO, BigDecimal> valor();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, BigDecimal> valor();
 
-        ValueProvider<MontoDTO, String> descripcionRubro();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, String> descripcionRubro();
 
-        ValueProvider<MontoDTO, String> eliminar();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, String> nombreEntidad();
 
-        ValueProvider<MontoDTO, Integer> vigencia();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, Integer> vigenciafonade();
+
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, Integer> vigenciafuente();
+
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, String> eliminar();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
-    private ListStore<MontoDTO> store;
+    private ListStore<RelacionobrafuenterecursoscontratoDTO> store;
 
     @Override
     public Widget asWidget() {
@@ -75,18 +81,25 @@ public class WidgetTablaMontos implements IsWidget {
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
 
 
-        ColumnConfig<MontoDTO, String> nameColumn = new ColumnConfig<MontoDTO, String>(properties.descripcionRubro(), 120, "Rubro");
-        nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> nameColumn = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.descripcionRubro(), 300, "Rubro");
         nameColumn.setColumnTextStyle(textStyles);
+       
 
 
-        ColumnConfig<MontoDTO, BigDecimal> valor = new ColumnConfig<MontoDTO, BigDecimal>(properties.valor(), 100, "Valor");
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal> valor = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal>(properties.valor(), 100, "Valor");
         valor.setColumnTextStyle(textStyles);
 
-        ColumnConfig<MontoDTO, Integer> vigencia = new ColumnConfig<MontoDTO, Integer>(properties.vigencia(), 100, "Vigencia");
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer> vigencia = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer>(properties.vigenciafonade(), 100, "Vigencia");
         vigencia.setColumnTextStyle(textStyles);
 
-        ColumnConfig<MontoDTO, String> eliminar = new ColumnConfig<MontoDTO, String>(properties.eliminar(), 100, "Eliminar");
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> entidad = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.nombreEntidad(), 200, "Fuente");
+        entidad.setColumnTextStyle(textStyles);
+      
+        
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer> vigenciaFuente = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer>(properties.vigenciafuente(), 100, "Vigencia fuente");
+        vigencia.setColumnTextStyle(textStyles);
+
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> eliminar = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.eliminar(), 100, "Eliminar");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
 
@@ -96,39 +109,42 @@ public class WidgetTablaMontos implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                contrato.getMontos().remove(store.get(row));
+                contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
             }
         });
         eliminar.setCell(button);
 
-        List<ColumnConfig<MontoDTO, ?>> l = new ArrayList<ColumnConfig<MontoDTO, ?>>();
+        List<ColumnConfig<RelacionobrafuenterecursoscontratoDTO, ?>> l = new ArrayList<ColumnConfig<RelacionobrafuenterecursoscontratoDTO, ?>>();
         l.add(nameColumn);
         l.add(valor);
         l.add(vigencia);
+        l.add(entidad);
+        l.add(vigenciaFuente);
         l.add(eliminar);
 
-        ColumnModel<MontoDTO> cm = new ColumnModel<MontoDTO>(l);
+        ColumnModel<RelacionobrafuenterecursoscontratoDTO> cm = new ColumnModel<RelacionobrafuenterecursoscontratoDTO>(l);
 
-        setStore(new ListStore<MontoDTO>(properties.key()));
+        setStore(new ListStore<RelacionobrafuenterecursoscontratoDTO>(properties.key()));
 
-        List<MontoDTO> plants = new ArrayList<MontoDTO>(contrato.getMontos());
+        List<RelacionobrafuenterecursoscontratoDTO> plants = new ArrayList<RelacionobrafuenterecursoscontratoDTO>(contrato.getRelacionobrafuenterecursoscontratos());
         getStore().addAll(plants);
 
-        final Grid<MontoDTO> grid = new Grid<MontoDTO>(getStore(), cm);
+        final Grid<RelacionobrafuenterecursoscontratoDTO> grid = new Grid<RelacionobrafuenterecursoscontratoDTO>(getStore(), cm);
         grid.setBorders(true);
         grid.getView().setAutoExpandColumn(nameColumn);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText("Por favor ingrese los montos del contrato");
         grid.getView().setColumnLines(true);
 
+        grid.getView().setAutoFill(true);
         FramedPanel cp = new FramedPanel();
         cp.setHeadingText("*Rubros");
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
         cp.setExpanded(true);
-        cp.setPixelSize(500, 150);
+        cp.setPixelSize(600, 150);
         cp.addStyleName("margin-10");
 
         return cp;
