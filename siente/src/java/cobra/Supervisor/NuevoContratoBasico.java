@@ -2674,6 +2674,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void llenarTiposPoliza() {
         TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
     }
+      /**
+     * Método que remueve nticipo cuando hay un error
+     *
+     */
+    public void removerAnticipo() {
+        if (contrato.getFormapago().getIntidformapago() == 1 && !lisplanifiactapar.isEmpty()) {
+            lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+        }
+    }
 
     /**
      * Validación general de toda la forma de pago
@@ -2708,15 +2717,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 while (i < lisplanifiactapar.size()) {
                                     if (lisplanifiactapar.get(i).getDatefechapago() == null) {
                                         if (bundle.getString("fechaformapago").equals("false")) {
+                                            removerAnticipo();
                                             lisplanifiactapar.get(i).setDatefechapago(new Date());
                                         } else {
-                                            lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                            removerAnticipo();
                                             FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
                                             return false;
                                         }
                                     }
                                     if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
-                                        lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                        removerAnticipo();
                                         FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                         return false;
                                     } else {
@@ -2744,8 +2754,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 
                              
                          
-                                lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
+                                    removerAnticipo();
                                     if (bundle.getString("fechaformapago").equals("true")) {
                                         FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
                                         return false;
@@ -2756,13 +2767,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                             } else {
                                 if (bundle.getString("fechaformapago").equals("true")) {
+                                    removerAnticipo();
                                     FacesUtils.addErrorMessage("Debe distribuir los pagos en al menos un acta parcial.");
                                     return false;
                                 }
                             }
                         }
                     } else {
-
+                        removerAnticipo();
                         FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del anticipo.");
                         return false;
 
@@ -2897,6 +2909,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         return null;
                     }
                     if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) <= 0) {
+                        removerAnticipo();
                         FacesUtils.addErrorMessage("Debe distribuir los recursos económicos del contrato adecuadamente.");
                         return null;
                     }
@@ -2907,14 +2920,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     contrpadre.setNumvlrsumahijos(contrpadre.getNumvlrsumahijos().add(contrato.getNumvlrcontrato()));
                                     contrato.setContrato(contrpadre);
                                 } else {
+                                    removerAnticipo();
                                     FacesUtils.addErrorMessage("El valor del " + tipoContCon + " supera el valor del " + tipoContCon + " superior");
                                     return null;
                                 }
                             } else {
+                                removerAnticipo();
                                 FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + tipoContCon + " superior");
                                 return null;
                             }
                         } else {
+                            removerAnticipo();
                             FacesUtils.addErrorMessage("Debe seleccionar el contrato o convenio padre al que pertenece el contrato a guardar.");
                             return null;
                         }
@@ -2947,6 +2963,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             contrato.setModalidadcontratista(null);
                         }
                         if (contrato.getTercero().getIntcodigo() == -1) {
+                            removerAnticipo();
                             FacesUtils.addErrorMessage(bundle.getString("elegirtercero"));
                             return null;
                         }
@@ -2974,14 +2991,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         if (contra.equals("true")) {
                             boolean valdocumento = validarDocumentosContralorias();
                             if (valdocumento == false) {
+                                removerAnticipo();
                                 FacesUtils.addErrorMessage("Debe diligenciar los tres documentos obligatorios que son: 1. Contrato, 2. Certificado de Disponibilidad Presupuestal (CDP), 3. Registro Presupuestal (RP)");
                             } else {
                                 validadcionGuardarContrato();
-                                guardarRelacionContratoJsfUsuario();
+                                //guardarRelacionContratoJsfUsuario();
                             }
                         } else {
                             validadcionGuardarContrato();
-                            guardarRelacionContratoJsfUsuario();
+                            //guardarRelacionContratoJsfUsuario();
                         }
 
                         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
@@ -2989,12 +3007,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         limpiarContrato();
                     }
                 } else {
+                    removerAnticipo();
                     FacesUtils.addErrorMessage("La Fecha de Fin Debe ser mayor o igual a la fecha de inicio");
                 }
             } else {
+                removerAnticipo();
                 FacesUtils.addErrorMessage("Debe diligenciar una entidad contratante válida.");
             }
         } else {
+            removerAnticipo();
             validardatosbasicosplano = 1;
             FacesUtils.addErrorMessage(bundle.getString("numerocontratoyaexiste"));
         }
