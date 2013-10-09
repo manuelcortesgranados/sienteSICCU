@@ -5010,6 +5010,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         validacion.setDatosbasicos(true);
                     }
                 }
+                if (validarFechasProyectoInicio() && validarFechasProyectoFin()) {
+                    validacion.setDatosbasicos(true);
+                    
+                }else{
+                    validacion.setDatosbasicos(false);
+                }
             } else {
                 validacion.setDatosbasicos(false);
             }
@@ -5478,4 +5484,4 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             verConfirmar = false;
         }
     }
-}
+        }

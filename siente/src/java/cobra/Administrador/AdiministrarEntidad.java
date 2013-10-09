@@ -214,6 +214,13 @@ public class AdiministrarEntidad implements Serializable {
         iniciarCombos();
         return "ingresarEntidad";
     }
+    
+    public String ingresarUsuario() {
+        return "ingresarUsuario";
+    }
+    public String saliringresarUsuario() {
+        return "gestion";
+    }
 
     public String asociarEntidad() {
         iniciarCombosAsociarEntidad();

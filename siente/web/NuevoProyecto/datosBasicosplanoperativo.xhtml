@@ -126,8 +126,8 @@
                             <rich:message for="rs-entidad"  />
                         </rich:column>
                     </h:panelGrid>
-                    
-                      <h:panelGroup id="hpg-fuenter-vigencia">
+
+                    <h:panelGroup id="hpg-fuenter-vigencia">
                         <h:panelGrid columns="2" styleClass="panel_ent_convenio">
                             <rich:column>
                                 <h:outputText value="Vigencia" styleClass="input_var_convenio label_texto_convenio"/>
@@ -154,7 +154,7 @@
                             </rich:column>
                         </h:panelGrid>
                     </h:panelGroup>
-                    
+
                     <h:panelGrid id="hpg-fuenter-valoraportado" columns="1" cellspacing="5" >
                         <h:panelGrid columns="2" styleClass="panel_val_aportado">
                             <rich:column>
@@ -268,7 +268,7 @@
                             <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                                 <h:outputText value="#{var.vigencia}"/>
                             </rich:column>
-                           <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
+                            <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                                 <h:outputText value="#{var.rol}"/>
                             </rich:column>
                             <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
@@ -326,8 +326,23 @@
                     </rich:columnGroup>
                     <f:facet name="footer">
                         <rich:columnGroup id="headerFuente">
-                            <rich:column colspan="4">
+                            <rich:column colspan="3">
                                 <h:outputText value="Total:"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{Supervisor$Contrato.recursosconvenio.reservaIva}">
+                                    <f:convertNumber currencySymbol="$" type="currency" />
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{Supervisor$Contrato.recursosconvenio.otrasReservas}">
+                                    <f:convertNumber currencySymbol="$" type="currency" />
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{Supervisor$Contrato.recursosconvenio.cuotaGerencia}">
+                                    <f:convertNumber currencySymbol="$" type="currency" />
+                                </h:outputText>
                             </rich:column>
                             <rich:column colspan="2">
                                 <h:outputText value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}">
@@ -342,16 +357,16 @@
                 </rich:dataTable> 
                 <h:panelGrid columns="2" styleClass="panel_val_estimado" id="ikont-hpg-valorestimado" style="position: relative; left: 1%">                
                     <rich:column>
-                            <h:outputLabel id="hit-valorest-convenio" value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="font-size: 44px;font-family: 'Open Sans'; color: #257500;" onkeyup="formatMoney(this);" >
-                                <rich:placeholder value="#{var.valorestimado}" />                                  
-                                <f:convertNumber currencySymbol="$ " type="currency" />
-                            </h:outputLabel>
-                            <br/>
-                            <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 4%;" value="Valor total del convenio"/>
-                            <br/>
-                            <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 23%;" value="(Acumulado)"/>
-                            <rich:message for="hit-valorest-convenio"/>
-                        </rich:column>                    
+                        <h:outputLabel id="hit-valorest-convenio" value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}" style="font-size: 44px;font-family: 'Open Sans'; color: #257500;" onkeyup="formatMoney(this);" >
+                            <rich:placeholder value="#{var.valorestimado}" />                                  
+                            <f:convertNumber currencySymbol="$ " type="currency" />
+                        </h:outputLabel>
+                        <br/>
+                        <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 4%;" value="Valor total del convenio"/>
+                        <br/>
+                        <h:outputLabel style=" font-size: 18px;font-family: 'Open Sans'; color: #257500; margin-top: -50px; margin-bottom: 45px; position: relative; left: 23%;" value="(Acumulado)"/>
+                        <rich:message for="hit-valorest-convenio"/>
+                    </rich:column>                    
                 </h:panelGrid>
 
                 <br/>            

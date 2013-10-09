@@ -2954,6 +2954,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             FacesUtils.addErrorMessage(bundle.getString("fechaactaunica"));
                             return null;
                         }
+                          if (!validacionFechasContratoActasyAnticipo()) {
+                            FacesUtils.addErrorMessage(bundle.getString("fechaanticipo"));
+                            return null;
+                        }
                         //contrato.setContrato(null);
 //                        if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
 //                            contrato.setEncargofiduciario(null);
@@ -7134,7 +7138,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         modificartipocontrato = true;
         habiitarmodificartipocontrato = false;
     }
-
+    /*
+     * Metodo que valida las fechas registradas en el contrato las cuales debe estar dentro del rando de contrato
+     */
     public boolean validacionFechasContrato() {
         if (contrato.getFormapago().getIntidformapago() != 0) {
             switch (contrato.getFormapago().getIntidformapago()) {
@@ -7173,5 +7179,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return true;
     }
+    /*
+     * Metodo que valida las fechas tanto del anticipo como las de las actas; donde las dechas de las actas deben ser superior 
+     * que la del anticipo
+     */
+
+    public boolean validacionFechasContratoActasyAnticipo() {
+        if (contrato.getFormapago().getIntidformapago() != 0) {
+            int i = 0;
+            switch (contrato.getFormapago().getIntidformapago()) {
+                case 1:
+                    while (i < lisplanifiactapar.size()) {
+                        if (fechapagoanticipo.compareTo(lisplanifiactapar.get(i).getDatefechapago()) > 0) {
+                            return false;
+                        }
+                        i++;
+                    }
+            }
+        }
+        return true;
+    }
+    
+    
    
 }

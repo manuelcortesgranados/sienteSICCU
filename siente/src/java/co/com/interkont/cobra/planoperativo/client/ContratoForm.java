@@ -134,7 +134,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     Date fechaContrato;
     TreeStore<ActividadobraDTO> taskStore;
     int numeroRubros;
-     Set<RelacionobrafuenterecursoscontratoDTO> relacionFuenteRecursosContratoCopia;
+    Set<RelacionobrafuenterecursoscontratoDTO> relacionFuenteRecursosContratoCopia;
 
     public ContratoForm() {
     }
@@ -152,7 +152,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
-        service.setLog("en crear contrato valor disponible proyecto" + actividadobrapadre.getObra().getValorDisponible(), null);
+
     }
 
     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
@@ -293,7 +293,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblFechaFin = new Label("Fecha finalización:");
         con.add(lblFechaFin, new HtmlData(".tfechafin"));
         con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
-        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato);
+        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato,editar,valorContrato);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
 
@@ -305,7 +305,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 Window adicionarMontos = new Window();
                 adicionarMontos.setBlinkModal(true);
                 adicionarMontos.setModal(true);
-                ModalAddMontos modalMontos = new ModalAddMontos(contrato, valorContrato, actividadObraPadre, tblMontos, adicionarMontos, idtempRubros);
+                ModalAddMontos modalMontos = new ModalAddMontos(contrato, valorContrato, actividadObraPadre, tblMontos, adicionarMontos, idtempRubros, editar);
                 adicionarMontos.add(modalMontos);
                 adicionarMontos.show();
 
@@ -343,9 +343,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
                     } else {
+                        modificacionValorDisponibleCreando();
                         modalContrato.hide();
                         crearTareaContrato();
-                        modificarValorDisponibleObraFuentesRecursos(0);
                         gantt.getGanttPanel().runCascadeChanges();
                     }
                 } else {
@@ -364,12 +364,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         msgValidacion += "*La fecha de finalización no puede ser menor que la fecha de inicio y la fecha de acta de inicio" + "<br/>";
 
                     }
+                    if (contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
+                        error = true;
+                        msgValidacion += "El contrato debe de tener al meno una fuente de recursos asociada!" + "<br/>";
+                    }
                     if (!error) {
+
                         actividadObraEditar.setContrato(contrato);
-                        modificarValorDisponibleObraFuentesRecursos(numeroRubros);
                         modalContrato.hide();
                         gantt.getGanttPanel().getContainer().refresh();
                         modalContrato.hide();
+
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
@@ -607,7 +612,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void crearTareaContrato() {
-        actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
+        //actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1, 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
 
@@ -771,45 +776,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
         return esMenor;
     }
 
-    public void modificarValorDisponibleObraFuentesRecursos(int numValorInicial) {
-        service.setLog("entre en  Modificar valor disponible en contrato", null);
-        service.setLog("entre en  Modificar valor disponible en contrato 1:" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
-        int c = 0;
-        if (editar) {
-            service.setLog("entre en  Modificar valor disponible en contrato copia:" + relacionFuenteRecursosContratoCopia.size(), null);
-            if (contrato.getRelacionobrafuenterecursoscontratos().size() > relacionFuenteRecursosContratoCopia.size()) {
-                for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
-                    if (c > numValorInicial) {
-                        service.setLog("entre en modificar valor disponible editar", null);
-                        RelacionobrafuenterecursoscontratoDTO relacionobrafuenterecursoscontratoDTO = (RelacionobrafuenterecursoscontratoDTO) it.next();
-                        relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setValorDisponible(relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionobrafuenterecursoscontratoDTO.getValor()));
-                        //actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(relacionobrafuenterecursoscontratoDTO.getValor()));
-                        service.setLog("valor disponible despues de substraer:" + relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible(), null);
-                    }
-                    c++;
-                }
-            } else if (contrato.getRelacionobrafuenterecursoscontratos().size() < relacionFuenteRecursosContratoCopia.size()) {
-                service.setLog("entre cuando elimina en edita montos ahora" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
-                service.setLog("entre cuando elimina en edita montos antes" + relacionFuenteRecursosContratoCopia.size(), null);
-                for (RelacionobrafuenterecursoscontratoDTO relacionCopia : relacionFuenteRecursosContratoCopia) {
-                    if (!contrato.getRelacionobrafuenterecursoscontratos().contains(relacionCopia)) {
-                        service.setLog("devolviendo valores", null);
-                        ObrafuenterecursosconveniosDTO obraFuenteRecursos = relacionCopia.getObrafuenterecursosconvenios();
-                        obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(relacionCopia.getValor()));
-                    }
-                }
 
-            }
-        } else {
-            for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
-                service.setLog("entre en modificar valor disponible crear Contrato", null);
-                RelacionobrafuenterecursoscontratoDTO relacionobrafuenterecursoscontratoDTO = (RelacionobrafuenterecursoscontratoDTO) it.next();
-                relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setValorDisponible(relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionobrafuenterecursoscontratoDTO.getValor()));
-                service.setLog("valor disponible despues de substraer:" + relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible(), null);
-            }
-
+    public void modificacionValorDisponibleCreando() {
+        for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
+            service.setLog("entre en modificar valor disponible crear Contrato", null);
+            RelacionobrafuenterecursoscontratoDTO relacionobrafuenterecursoscontratoDTO = (RelacionobrafuenterecursoscontratoDTO) it.next();
+            relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setValorDisponible(relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionobrafuenterecursoscontratoDTO.getValor()));
+            relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
+            service.setLog("valor disponible despues de substraer:" + relacionobrafuenterecursoscontratoDTO.getObrafuenterecursosconvenios().getValorDisponible(), null);
         }
-
     }
 
     // </editor-fold>

@@ -72,8 +72,9 @@ public class ModalRubrosProyecto implements IsWidget {
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     protected HashMap<String, List<Integer>> mapaRelacionEntidadVigencias;
     protected String entidadSeleccionada;
+    protected boolean editar;
 
-    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso) {
+    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso,boolean editar) {
         entidades = new ListStore<TerceroDTO>(propse.intcodigo());
         lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
         campoTipoRecurso = new TextField();
@@ -98,6 +99,7 @@ public class ModalRubrosProyecto implements IsWidget {
         this.modalActual = modalActual;
         this.tblrubros = tblrubros;
         this.idTempObraRecurso = idTempObraRecurso;
+        this.editar=editar;
 
         mapaRelacionEntidadVigencias = new HashMap<String, List<Integer>>();
 
@@ -320,10 +322,13 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-           if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible()) > 0) {
-            return "El monto ingresado supera el valor de la fuente de recursos";
+        if (obraFuenteDto.getFuenterecursosconvenio().getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
+            if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible()) > 0) {
+                return "El monto ingresado supera el valor disponible de la fuente de recursos:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible();
+            }
+        } else {
+            return "La Fuente de recursos seleccionada no cuenta con valor disponible";
         }
-
         proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
         idTemp++;
         idTempObraRecurso++;
@@ -335,9 +340,13 @@ public class ModalRubrosProyecto implements IsWidget {
         if (proyectoDTO.getValor() == null) {
             proyectoDTO.setValor(BigDecimal.ZERO);
         }
-        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
+        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));  
+        if(editar){
+        FuenterecursosconvenioDTO fuenteRecursos = obraFuenteDto.getFuenterecursosconvenio();
+        fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().subtract(obraFuenteDto.getValor()));
         service.setLog("valor fuente recursos disponible antes:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
-      }
+        }
+    }
 
 
     /*metodo que se encarga de llenar el combo de entidades
