@@ -911,6 +911,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Obra> listaProyectosConvenio;
     private int reportoption;
     private int subpantalla;
+    private boolean puedeEditarValorFuentes = true;
     /**
      * variable para saber si el convenio tiene todas las validaciones ok
      */
@@ -6983,9 +6984,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String planOperativo() {
         try {
+            validarPuedeEditarValorFuente();
             contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
-            String valorContrato= ""+contrato.getNumvlrcontrato();
-            contrato.setValorDisponible(new BigDecimal(valorContrato));
+            //String valorContrato= ""+contrato.getNumvlrcontrato();
+            //contrato.setValorDisponible(new BigDecimal(valorContrato));
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
@@ -7221,6 +7223,72 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return true;
     }
     
+    /*
+     * Metodo que se encarga de validar si el valor del contrato y valor de cuota de gerencia tienen un valor 
+     * para activar el campo valor del monto de la fuente de recursos.
+     * 
+     *
+     */
+    public void validarPuedeEditarValorFuente() {
+        if (recursosconvenio.getLstFuentesRecursos().isEmpty()) {
+            boolean boolActivarValor = false;
+            if (contrato.getAuxiliarValorContrato() != null) {
+                if (contrato.getAuxiliarValorContrato().compareTo(BigDecimal.ZERO) == 0) {
+                    contrato.setAuxiliarValorContrato(null);
+                    puedeEditarValorFuentes = true;
+                    boolActivarValor = true;
+                    FacesUtils.addErrorMessage("Ingrese el valor global del convenio");
+                } else {
+                    String valorContrato = "" + contrato.getAuxiliarValorContrato();
+                    contrato.setNumvlrcontrato(new BigDecimal(valorContrato));
+                    contrato.setValorDisponible(new BigDecimal(valorContrato));
+                }
+            } else {
+                boolActivarValor = true;
+                FacesUtils.addErrorMessage("Ingrese el valor global del convenio");
+            }
+            if (contrato.getAuxiliarValorGerencia() != null) {
+                if (contrato.getAuxiliarValorGerencia().compareTo(BigDecimal.ZERO) == 0) {
+                    contrato.setAuxiliarValorGerencia(null);
+                    puedeEditarValorFuentes = true;
+                    boolActivarValor = true;
+                    FacesUtils.addErrorMessage("Ingrese el valor global de la cuota de gerencia");
+                } else {
+                    String valorGerencia = "" + contrato.getAuxiliarValorGerencia();
+                    contrato.setNumValorCuotaGerencia(new BigDecimal(valorGerencia));
+                    contrato.setValorDisponibleCuotaGerencia(new BigDecimal(valorGerencia));
+                }
+            } else {
+                boolActivarValor = true;
+                FacesUtils.addErrorMessage("Ingrese el valor global de la cuota de gerencia");
+            }
+            puedeEditarValorFuentes = boolActivarValor;
+        } else {
+            if (contrato.getAuxiliarValorContrato().compareTo(contrato.getNumvlrcontrato()) != 0) {
+                String copiaValorContrato = "" + contrato.getNumvlrcontrato();
+                contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
+                FacesUtils.addErrorMessage("No es podible modificar el valor Global del convenio,porque ya posee fuente de recursos!");
+            }
+            if (contrato.getAuxiliarValorGerencia().compareTo(contrato.getNumValorCuotaGerencia()) != 0) {
+                String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
+                contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
+                FacesUtils.addErrorMessage("No es podible modificar el valor Global de la cuota de gerencia,porque ya posee fuente de recursos!");
+            }
+        }
+    }
     
    
+    /**
+     * @return the puedeEditarValorFuentes
+     */
+    public boolean isPuedeEditarValorFuentes() {
+        return puedeEditarValorFuentes;
+    }
+
+    /**
+     * @param puedeEditarValorFuentes the puedeEditarValorFuentes to set
+     */
+    public void setPuedeEditarValorFuentes(boolean puedeEditarValorFuentes) {
+        this.puedeEditarValorFuentes = puedeEditarValorFuentes;
+    }
 }
