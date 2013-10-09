@@ -37,6 +37,9 @@ public class RecursosConvenio implements Serializable {
     private List<Fuenterecursosconvenio> lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
+    private BigDecimal reservaIva;
+    private BigDecimal otrasReservas;
+    private BigDecimal cuotaGerencia;
     private UIDataTable tableFuente = new UIDataTable();
     private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
     private SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
@@ -73,7 +76,9 @@ public class RecursosConvenio implements Serializable {
         fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
         sumafuentes = BigDecimal.ZERO;
-
+        reservaIva = BigDecimal.ZERO;
+        otrasReservas = BigDecimal.ZERO;
+        cuotaGerencia = BigDecimal.ZERO;
         llenarTipoAporte();
         llenarRoles(cobraService);
         llenarVigencia();
@@ -154,8 +159,15 @@ public class RecursosConvenio implements Serializable {
         }
         lstFuentesRecursos.remove(f);
         sumafuentes = sumafuentes.subtract(f.getValoraportado());
+        reservaIva = reservaIva.subtract(f.getReservaiva());
+        otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
+        cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
+        
         if (lstFuentesRecursos.isEmpty()) {
             sumafuentes = BigDecimal.ZERO;
+            reservaIva = BigDecimal.ZERO;
+            otrasReservas = BigDecimal.ZERO;
+            cuotaGerencia = BigDecimal.ZERO;
         }
     }
     //lstFuentesRecursos
@@ -201,6 +213,9 @@ public class RecursosConvenio implements Serializable {
                 calcularCuotaGerencia();
                 lstFuentesRecursos.add(fuenteRecursoConvenio);
                 sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
+                reservaIva=reservaIva.add(fuenteRecursoConvenio.getReservaiva());
+                otrasReservas=otrasReservas.add(fuenteRecursoConvenio.getOtrasreservas());
+                cuotaGerencia=cuotaGerencia.add(fuenteRecursoConvenio.getValorcuotagerencia());
                 limpiarFuenteRecurso();
                 //}
             } else {
@@ -336,5 +351,47 @@ public class RecursosConvenio implements Serializable {
      */
     public void setLstVigencia(List<Integer> lstVigencia) {
         this.lstVigencia = lstVigencia;
+    }
+
+    /**
+     * @return the reservaIva
+     */
+    public BigDecimal getReservaIva() {
+        return reservaIva;
+    }
+
+    /**
+     * @param reservaIva the reservaIva to set
+     */
+    public void setReservaIva(BigDecimal reservaIva) {
+        this.reservaIva = reservaIva;
+    }
+
+    /**
+     * @return the otrasReservas
+     */
+    public BigDecimal getOtrasReservas() {
+        return otrasReservas;
+    }
+
+    /**
+     * @param otrasReservas the otrasReservas to set
+     */
+    public void setOtrasReservas(BigDecimal otrasReservas) {
+        this.otrasReservas = otrasReservas;
+    }
+
+    /**
+     * @return the cuotaGerencia
+     */
+    public BigDecimal getCuotaGerencia() {
+        return cuotaGerencia;
+    }
+
+    /**
+     * @param cuotaGerencia the cuotaGerencia to set
+     */
+    public void setCuotaGerencia(BigDecimal cuotaGerencia) {
+        this.cuotaGerencia = cuotaGerencia;
     }
 }
