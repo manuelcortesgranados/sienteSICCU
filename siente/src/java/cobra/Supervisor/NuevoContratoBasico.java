@@ -6643,13 +6643,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         }
                         if (!getContrato().getActividadobras().isEmpty()) {
 
-                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
-                            if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));                            
+                        }
+                        if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
                                 getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
                                         CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
                                 getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
                             }
-                        }
                         if (!getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().isEmpty()) {
                             Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
                             getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
