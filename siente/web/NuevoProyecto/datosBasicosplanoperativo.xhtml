@@ -39,7 +39,43 @@
                                 </h:inputText>
                                 <rich:message for="hit-nom-convenio"/>
                             </rich:column>
-                        </h:panelGrid>                        
+                        </h:panelGrid>    
+
+                        <h:panelGrid columns="1" cellspacing="5" >
+                            <h:panelGrid columns="2" styleClass="ikont-valor-global-convenio" id="hpg-valor-global-convenio">
+                                <rich:column>
+                                    <h:outputText value="Valor global del convenio" styleClass="hot_n_convenio label_texto_convenio"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:inputText id="hit-valorglobal-convenio" value="#{Supervisor$Contrato.contrato.auxiliarValorContrato}"  style="width: 321px!important;" >
+                                        <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
+                                        <f:validateDoubleRange minimum="0"/>
+                                        <f:validateLength maximum="26" minimum="1"/>
+                                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.validarPuedeEditarValorFuente}" render="hpg-fuenter-valoraportado,hpg-fuenter-cuotag,hpg-valor-global-convenio,hpg-msg-val" execute="@this"></a4j:ajax>
+                                    </h:inputText>
+                                    <rich:message for="hit-valorglobal-convenio"  />
+                                </rich:column>
+                            </h:panelGrid>
+                        </h:panelGrid> 
+
+                        <h:panelGrid columns="1" cellspacing="10" >
+                            <h:panelGrid columns="2" styleClass="ikont-valor-global-gerencia" id="hpg-valor-global-gerencia">
+                                <rich:column>
+                                    <h:outputText value="Valor global de cuota de gerencia" styleClass="hot_n_convenio label_texto_convenio"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:inputText id="hit-valorglobal-gerencia" value="#{Supervisor$Contrato.contrato.auxiliarValorGerencia}"  style="width: 321px!important;" >
+                                        <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
+                                        <f:validateDoubleRange minimum="0"/>
+                                        <f:validateLength maximum="26" minimum="1"/>
+                                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.validarPuedeEditarValorFuente}" render="hpg-fuenter-valoraportado,hpg-fuenter-cuotag,hpg-valor-global-gerencia,hpg-msg-val" execute="@this"></a4j:ajax>
+                                    </h:inputText>
+                                    <rich:message for="hit-valorglobal-gerencia"  />
+                                </rich:column>
+                            </h:panelGrid>
+                        </h:panelGrid> 
+
+
                         <h:panelGrid columns="2" styleClass="panel_obj_convenio">
                             <rich:column>
                                 <h:outputText value="Objeto del convenio" styleClass="input_obj_convenio label_texto_convenio"/>
@@ -112,7 +148,13 @@
                         <center><h:outputLabel id="hol-fuenterecsubtitulo2" value="#{var.subfuenterecursos2}" style="position: relative;top: -7px;right: -15px;"/></center>
                     </h:panelGrid>
                 </center>
-
+                <center>
+                <h:panelGrid id="hpg-msg-val" columns="1" styleClass="panel_ent_convenio">
+                    <rich:column>
+                      <center> <h:outputLabel id="hot-msg-monto-fuente" value="Ingrese primero el valor global del convenio y el de la cuota de gerencia!" rendered="#{Supervisor$Contrato.puedeEditarValorFuentes}" style="color:red;"/></center>
+                    </rich:column>
+                </h:panelGrid>
+                    </center>
                 <br/>
                 <h:panelGrid columns="1" cellpadding="5" cellspacing="10" id="hpg-fuenter-conv">
                     <h:panelGrid columns="2" styleClass="panel_ent_convenio">
@@ -161,14 +203,14 @@
                                 <h:outputText value="Valor aporte al convenio" styleClass="input_var_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" style="width: 321px!important;" >
+                                <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" style="width: 321px!important;" readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
                                     <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                                     <f:validateDoubleRange minimum="0"/>
                                     <f:validateLength maximum="26" minimum="1"/>
                                     <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
                                 </h:inputText>
                                 <rich:message for="hit-valoraportado-convenio"  />
-                            </rich:column>
+                            </rich:column>                          
                         </h:panelGrid>
                     </h:panelGrid> 
                 </h:panelGrid> 
@@ -187,7 +229,7 @@
                             <rich:message for="rs-tipoaporte"  />
                         </rich:column>
                         <rich:column>
-                            <h:inputText id="hit-cuotagerencia-convenio"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valorcuotagerencia}" required="true" style="width: 222px;position: relative;left: 11px;" >
+                            <h:inputText id="hit-cuotagerencia-convenio"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valorcuotagerencia}" required="true" style="width: 222px;position: relative;left: 11px;" readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
                                 <rich:placeholder value="#{var.cuotagerencia}" />
                                 <f:validateDoubleRange  minimum="0"  />                            
                                 <f:validateLength maximum="26" minimum="1" />
@@ -243,7 +285,7 @@
                     <a4j:commandButton value="#{var.adicionar}" 
                                        action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos}" 
                                        render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas, ,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso, ikont-hpg-valorestimado" 
-                                       execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso"/>
+                                       execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso,hit-valorglobal-convenio,hit-valorglobal-gerencia"/>
 
                 </h:panelGrid>        
                 <!--/rich:collapsiblePanel-->
@@ -344,7 +386,7 @@
                                     <f:convertNumber currencySymbol="$" type="currency" />
                                 </h:outputText>
                             </rich:column>
-                            <rich:column colspan="2">
+                            <rich:column>
                                 <h:outputText value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}">
                                     <f:convertNumber currencySymbol="$" type="currency" />
                                 </h:outputText>

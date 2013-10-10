@@ -4547,3 +4547,13 @@ a:hover {
     width: 78px!important;
     height: 22px!important;
 }
+
+.ikont-valor-global-convenio{
+    position: relative;
+    right: -33px;
+}
+
+.ikont-valor-global-gerencia{
+position: relative;
+right: 30px;
+}

@@ -911,6 +911,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Obra> listaProyectosConvenio;
     private int reportoption;
     private int subpantalla;
+    private boolean puedeEditarValorFuentes = true;
     /**
      * variable para saber si el convenio tiene todas las validaciones ok
      */
@@ -2674,6 +2675,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void llenarTiposPoliza() {
         TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
     }
+      /**
+     * Método que remueve nticipo cuando hay un error
+     *
+     */
+    public void removerAnticipo() {
+        if (contrato.getFormapago().getIntidformapago() == 1 && !lisplanifiactapar.isEmpty()) {
+            lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+        }
+    }
 
     /**
      * Validación general de toda la forma de pago
@@ -2708,15 +2718,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 while (i < lisplanifiactapar.size()) {
                                     if (lisplanifiactapar.get(i).getDatefechapago() == null) {
                                         if (bundle.getString("fechaformapago").equals("false")) {
+                                            removerAnticipo();
                                             lisplanifiactapar.get(i).setDatefechapago(new Date());
                                         } else {
-                                            lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                            removerAnticipo();
                                             FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
                                             return false;
                                         }
                                     }
                                     if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
-                                        lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                        removerAnticipo();
                                         FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                         return false;
                                     } else {
@@ -2744,8 +2755,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 
                              
                          
-                                lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
+                                    removerAnticipo();
                                     if (bundle.getString("fechaformapago").equals("true")) {
                                         FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
                                         return false;
@@ -2756,13 +2768,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                             } else {
                                 if (bundle.getString("fechaformapago").equals("true")) {
+                                    removerAnticipo();
                                     FacesUtils.addErrorMessage("Debe distribuir los pagos en al menos un acta parcial.");
                                     return false;
                                 }
                             }
                         }
                     } else {
-
+                        removerAnticipo();
                         FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del anticipo.");
                         return false;
 
@@ -2897,6 +2910,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         return null;
                     }
                     if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) <= 0) {
+                        removerAnticipo();
                         FacesUtils.addErrorMessage("Debe distribuir los recursos económicos del contrato adecuadamente.");
                         return null;
                     }
@@ -2907,14 +2921,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     contrpadre.setNumvlrsumahijos(contrpadre.getNumvlrsumahijos().add(contrato.getNumvlrcontrato()));
                                     contrato.setContrato(contrpadre);
                                 } else {
+                                    removerAnticipo();
                                     FacesUtils.addErrorMessage("El valor del " + tipoContCon + " supera el valor del " + tipoContCon + " superior");
                                     return null;
                                 }
                             } else {
+                                removerAnticipo();
                                 FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + tipoContCon + " superior");
                                 return null;
                             }
                         } else {
+                            removerAnticipo();
                             FacesUtils.addErrorMessage("Debe seleccionar el contrato o convenio padre al que pertenece el contrato a guardar.");
                             return null;
                         }
@@ -2947,6 +2964,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             contrato.setModalidadcontratista(null);
                         }
                         if (contrato.getTercero().getIntcodigo() == -1) {
+                            removerAnticipo();
                             FacesUtils.addErrorMessage(bundle.getString("elegirtercero"));
                             return null;
                         }
@@ -2974,14 +2992,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         if (contra.equals("true")) {
                             boolean valdocumento = validarDocumentosContralorias();
                             if (valdocumento == false) {
+                                removerAnticipo();
                                 FacesUtils.addErrorMessage("Debe diligenciar los tres documentos obligatorios que son: 1. Contrato, 2. Certificado de Disponibilidad Presupuestal (CDP), 3. Registro Presupuestal (RP)");
                             } else {
                                 validadcionGuardarContrato();
-                                guardarRelacionContratoJsfUsuario();
+                                //guardarRelacionContratoJsfUsuario();
                             }
                         } else {
                             validadcionGuardarContrato();
-                            guardarRelacionContratoJsfUsuario();
+                            //guardarRelacionContratoJsfUsuario();
                         }
 
                         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
@@ -2989,12 +3008,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         limpiarContrato();
                     }
                 } else {
+                    removerAnticipo();
                     FacesUtils.addErrorMessage("La Fecha de Fin Debe ser mayor o igual a la fecha de inicio");
                 }
             } else {
+                removerAnticipo();
                 FacesUtils.addErrorMessage("Debe diligenciar una entidad contratante válida.");
             }
         } else {
+            removerAnticipo();
             validardatosbasicosplano = 1;
             FacesUtils.addErrorMessage(bundle.getString("numerocontratoyaexiste"));
         }
@@ -6621,13 +6643,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         }
                         if (!getContrato().getActividadobras().isEmpty()) {
 
-                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
-                            if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
+                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));                            
+                        }
+                        if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
                                 getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
                                         CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
                                 getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
                             }
-                        }
                         if (!getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().isEmpty()) {
                             Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
                             getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
@@ -6962,9 +6984,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String planOperativo() {
         try {
+            validarPuedeEditarValorFuente();
             contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
-            String valorContrato= ""+contrato.getNumvlrcontrato();
-            contrato.setValorDisponible(new BigDecimal(valorContrato));
+            //String valorContrato= ""+contrato.getNumvlrcontrato();
+            //contrato.setValorDisponible(new BigDecimal(valorContrato));
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
@@ -7200,6 +7223,72 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return true;
     }
     
+    /*
+     * Metodo que se encarga de validar si el valor del contrato y valor de cuota de gerencia tienen un valor 
+     * para activar el campo valor del monto de la fuente de recursos.
+     * 
+     *
+     */
+    public void validarPuedeEditarValorFuente() {
+        if (recursosconvenio.getLstFuentesRecursos().isEmpty()) {
+            boolean boolActivarValor = false;
+            if (contrato.getAuxiliarValorContrato() != null) {
+                if (contrato.getAuxiliarValorContrato().compareTo(BigDecimal.ZERO) == 0) {
+                    contrato.setAuxiliarValorContrato(null);
+                    puedeEditarValorFuentes = true;
+                    boolActivarValor = true;
+                    FacesUtils.addErrorMessage("Ingrese el valor global del convenio");
+                } else {
+                    String valorContrato = "" + contrato.getAuxiliarValorContrato();
+                    contrato.setNumvlrcontrato(new BigDecimal(valorContrato));
+                    contrato.setValorDisponible(new BigDecimal(valorContrato));
+                }
+            } else {
+                boolActivarValor = true;
+                FacesUtils.addErrorMessage("Ingrese el valor global del convenio");
+            }
+            if (contrato.getAuxiliarValorGerencia() != null) {
+                if (contrato.getAuxiliarValorGerencia().compareTo(BigDecimal.ZERO) == 0) {
+                    contrato.setAuxiliarValorGerencia(null);
+                    puedeEditarValorFuentes = true;
+                    boolActivarValor = true;
+                    FacesUtils.addErrorMessage("Ingrese el valor global de la cuota de gerencia");
+                } else {
+                    String valorGerencia = "" + contrato.getAuxiliarValorGerencia();
+                    contrato.setNumValorCuotaGerencia(new BigDecimal(valorGerencia));
+                    contrato.setValorDisponibleCuotaGerencia(new BigDecimal(valorGerencia));
+                }
+            } else {
+                boolActivarValor = true;
+                FacesUtils.addErrorMessage("Ingrese el valor global de la cuota de gerencia");
+            }
+            puedeEditarValorFuentes = boolActivarValor;
+        } else {
+            if (contrato.getAuxiliarValorContrato().compareTo(contrato.getNumvlrcontrato()) != 0) {
+                String copiaValorContrato = "" + contrato.getNumvlrcontrato();
+                contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
+                FacesUtils.addErrorMessage("No es podible modificar el valor Global del convenio,porque ya posee fuente de recursos!");
+            }
+            if (contrato.getAuxiliarValorGerencia().compareTo(contrato.getNumValorCuotaGerencia()) != 0) {
+                String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
+                contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
+                FacesUtils.addErrorMessage("No es podible modificar el valor Global de la cuota de gerencia,porque ya posee fuente de recursos!");
+            }
+        }
+    }
     
    
+    /**
+     * @return the puedeEditarValorFuentes
+     */
+    public boolean isPuedeEditarValorFuentes() {
+        return puedeEditarValorFuentes;
+    }
+
+    /**
+     * @param puedeEditarValorFuentes the puedeEditarValorFuentes to set
+     */
+    public void setPuedeEditarValorFuentes(boolean puedeEditarValorFuentes) {
+        this.puedeEditarValorFuentes = puedeEditarValorFuentes;
+    }
 }

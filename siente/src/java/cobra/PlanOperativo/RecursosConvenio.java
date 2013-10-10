@@ -153,16 +153,19 @@ public class RecursosConvenio implements Serializable {
      *      
      */
     public void eliminarFuenteRecursos() {
+        NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
         if (f.getIdfuenterecursosconvenio() != 0) {
             lstFuentesRecursosEliminar.add(f);
         }
         lstFuentesRecursos.remove(f);
+        n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
+        n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
         sumafuentes = sumafuentes.subtract(f.getValoraportado());
         reservaIva = reservaIva.subtract(f.getReservaiva());
         otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
         cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
-        
+
         if (lstFuentesRecursos.isEmpty()) {
             sumafuentes = BigDecimal.ZERO;
             reservaIva = BigDecimal.ZERO;
@@ -189,6 +192,7 @@ public class RecursosConvenio implements Serializable {
     public String adicionarFuenteRecursos() {
         try {
             NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+            n.validarPuedeEditarValorFuente();
             Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
             //Se pone la condicion si la lista tiene alguna entidad y se valida a que no agreguen la misma entidad en un conveio
             if (!lstFuentesRecursos.isEmpty()) {
@@ -201,6 +205,16 @@ public class RecursosConvenio implements Serializable {
 
                 }
             }
+
+            if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getValorDisponible()) > 0) {
+                FacesUtils.addErrorMessage("El valor aportado de la fuente es superior al valor disponible del convenio:" + n.getContrato().getValorDisponible());
+                return null;
+            }
+
+            if (fuenteRecursoConvenio.getValorcuotagerencia().compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) >0) {
+                FacesUtils.addErrorMessage("El valor de la cuota de gerencia es superior al valor disponible de la cuota de gerencia:" + n.getContrato().getValorDisponibleCuotaGerencia());
+                return null;
+            }
 //            Validar la suma de las fuentes de recursos al valor estimado del convenio
 //            ValidacionesConvenio.validarSumaFuentesxValorAporte(n.getContrato().getNumvlrcontrato(), fuenteRecursoConvenio.getValoraportado(), sumafuentes);
             if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
@@ -212,10 +226,12 @@ public class RecursosConvenio implements Serializable {
                 fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
                 calcularCuotaGerencia();
                 lstFuentesRecursos.add(fuenteRecursoConvenio);
+                n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().subtract(fuenteRecursoConvenio.getValoraportado()));
+                n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().subtract(fuenteRecursoConvenio.getValorcuotagerencia()));
                 sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
-                reservaIva=reservaIva.add(fuenteRecursoConvenio.getReservaiva());
-                otrasReservas=otrasReservas.add(fuenteRecursoConvenio.getOtrasreservas());
-                cuotaGerencia=cuotaGerencia.add(fuenteRecursoConvenio.getValorcuotagerencia());
+                reservaIva = reservaIva.add(fuenteRecursoConvenio.getReservaiva());
+                otrasReservas = otrasReservas.add(fuenteRecursoConvenio.getOtrasreservas());
+                cuotaGerencia = cuotaGerencia.add(fuenteRecursoConvenio.getValorcuotagerencia());
                 limpiarFuenteRecurso();
                 //}
             } else {

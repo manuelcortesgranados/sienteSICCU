@@ -10,6 +10,7 @@ import co.com.interkont.cobra.to.EstadoCivil;
 import co.com.interkont.cobra.to.Genero;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Localidad;
+import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoidentificacion;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipotercero;
@@ -18,13 +19,21 @@ import cobra.Supervisor.FacesUtils;
 import cobra.Utilidades;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javax.faces.component.UIData;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
-
+import co.com.interkont.cobra.to.Grupo;
+import cobra.Ciudadano.PerfilCiudadano;
+import co.com.interkont.cobra.to.Modulo;
 /**
  *
  * @author David Andres Betancourth Botero
@@ -53,7 +62,7 @@ public class Usuario implements Serializable {
      */
     private SelectItem[] localidadusuario;
     /**
-    /**
+     * /**
      * Variable para mostrar un selectitem con los municipios
      */
     private SelectItem[] municipiosusuariooption;
@@ -127,6 +136,42 @@ public class Usuario implements Serializable {
      * Variable para almacenar el objeto ResourceBundle
      */
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
+    /**
+     * Variable para guardar la lista de las entidades Contratantes
+     */
+    private List<Tercero> listaentidades = new ArrayList<Tercero>();
+    /**
+     * Variable Utilizada para almacenar el selectBooleanCheckbox
+     */
+    private boolean seleccionEntidad;
+    /**
+     * Lista utilizada para mostrar las entidades seleccionadas
+     */
+    private Map<Tercero, Boolean> listaentidadbooleana = new HashMap<Tercero, Boolean>();
+    /**
+     * Tabla utilizada para mostrar la lista de las entidades
+     */
+    private UIDataTable datatablelistaentidades;
+    /**
+     * Tabla utilizada para mostrar las entidades seleccionadas
+     */
+    private UIDataTable datatablelistaentidadseleccionada;
+    /**
+     * Lista para almacenar las entidades seleccionadas
+     */
+    private ArrayList<Tercero> listaentidad = new ArrayList<Tercero>();
+    /**
+     * Variable para inhabilitar la tabla datatablelistaentidades
+     */
+    private boolean inhabilitarseleccionentidades = true;
+     /**
+     * Variable para mostrar un selectitem con los Grupo
+     */
+    private SelectItem[] gruposoption;
+     /**
+     * Variable para mostrar el id del grupo
+     */
+     private int intidgrupo=0;
 
     /**
      * Inicio de los Get y Set de las variables anteriores
@@ -274,13 +319,15 @@ public class Usuario implements Serializable {
     public void setDeptosusuariooption(SelectItem[] deptosusuariooption) {
         this.deptosusuariooption = deptosusuariooption;
     }
- public SelectItem[] getLocalidadusuario() {
+
+    public SelectItem[] getLocalidadusuario() {
         return localidadusuario;
     }
 
     public void setLocalidadusuario(SelectItem[] localidadusuario) {
         this.localidadusuario = localidadusuario;
     }
+
     public SelectItem[] getEstadocivilsoption() {
         return estadocivilsoption;
     }
@@ -353,6 +400,79 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
+    public List<Tercero> getListaentidades() {
+        return listaentidades;
+    }
+
+    public void setListaentidades(List<Tercero> listaentidades) {
+        this.listaentidades = listaentidades;
+    }
+
+    public boolean isSeleccionEntidad() {
+        return seleccionEntidad;
+    }
+
+    public void setSeleccionEntidad(boolean seleccionEntidad) {
+        this.seleccionEntidad = seleccionEntidad;
+    }
+
+    public Map<Tercero, Boolean> getListaentidadbooleana() {
+        return listaentidadbooleana;
+    }
+
+    public void setListaentidadbooleana(Map<Tercero, Boolean> listaentidadbooleana) {
+        this.listaentidadbooleana = listaentidadbooleana;
+    }
+
+    public UIDataTable getDatatablelistaentidades() {
+        return datatablelistaentidades;
+    }
+
+    public void setDatatablelistaentidades(UIDataTable datatablelistaentidades) {
+        this.datatablelistaentidades = datatablelistaentidades;
+    }
+
+    public UIDataTable getDatatablelistaentidadseleccionada() {
+        return datatablelistaentidadseleccionada;
+    }
+
+    public void setDatatablelistaentidadseleccionada(UIDataTable datatablelistaentidadseleccionada) {
+        this.datatablelistaentidadseleccionada = datatablelistaentidadseleccionada;
+    }
+
+    public ArrayList<Tercero> getListaentidad() {
+        return listaentidad;
+    }
+
+    public void setListaentidad(ArrayList<Tercero> listaentidad) {
+        this.listaentidad = listaentidad;
+    }
+
+    public boolean isInhabilitarseleccionentidades() {
+        return inhabilitarseleccionentidades;
+    }
+
+    public void setInhabilitarseleccionentidades(boolean inhabilitarseleccionentidades) {
+        this.inhabilitarseleccionentidades = inhabilitarseleccionentidades;
+    }
+
+    public SelectItem[] getGruposoption() {
+        return gruposoption;
+    }
+
+    public void setGruposoption(SelectItem[] gruposoption) {
+        this.gruposoption = gruposoption;
+    }
+
+    public int getIntidgrupo() {
+        return intidgrupo;
+    }
+
+    public void setIntidgrupo(int intidgrupo) {
+        this.intidgrupo = intidgrupo;
+    }
+    
+
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -364,8 +484,9 @@ public class Usuario implements Serializable {
         llenarGeneros();
         llenarEstadoCivil();
         llenarTiposIdentificacion();
-         llenarlocalidadusuario();
-
+        llenarlocalidadusuario();
+        cargarEntidades();
+        llenarGrupos();
     }
 
     public String initusu() {
@@ -432,24 +553,30 @@ public class Usuario implements Serializable {
         }
         return null;
     }
-    
+
     /**
-     * Este metodo es utilizado para buscar el usuario por (nombre,usuario,cedula)
+     * Este metodo es utilizado para buscar el usuario por
+     * (nombre,usuario,cedula)
+     *
      * @return Retorna los usuario encontrados con estos criterios
      */
     public void buscarUsuarioporCriterios() {
         listausuarios = new ArrayList<JsfUsuario>();
-        listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);        
+        listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
     }
+
     /**
-     * Este metodo es utilizado mostrar el Perfil del usuario con la informacion 
+     * Este metodo es utilizado mostrar el Perfil del usuario con la informacion
+     *
      * @return Retorna la pagina gestionusuario
-     */ 
+     */
     public String iniciarperfilusuario() {
         return "gestionusuario";
     }
+
     /**
      * Este metodo es utilizado para cargar toda la informacion del usuario.
+     *
      * @return Retorna La informacion del usuario.
      */
     public String irperfilUsuario() {
@@ -518,7 +645,8 @@ public class Usuario implements Serializable {
 //
 //    }
     /**
-     * Este metodo es utilizado para cargar el selectitem tipo de Origen 
+     * Este metodo es utilizado para cargar el selectitem tipo de Origen
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarTipoorigenUsuario() {
@@ -531,8 +659,11 @@ public class Usuario implements Serializable {
         }
         return null;
     }
+
     /**
-     * Este metodo es utilizado para cargar el selectitem de los departamentos del usuario 
+     * Este metodo es utilizado para cargar el selectitem de los departamentos
+     * del usuario
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarDeptosUsuario() {
@@ -546,10 +677,10 @@ public class Usuario implements Serializable {
             deptosusuariooption[i++] = dep;
         }
     }
-     
-     public void llenarlocalidadusuario() {
+
+    public void llenarlocalidadusuario() {
         List<Localidad> listaDeptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
-       localidadusuario = new SelectItem[listaDeptos.size()];
+        localidadusuario = new SelectItem[listaDeptos.size()];
 
         int i = 0;
 
@@ -558,8 +689,10 @@ public class Usuario implements Serializable {
             localidadusuario[i++] = dep;
         }
     }
+
     /**
-     * Este metodo es utilizado obtener los  municipios pertenecientes al depto
+     * Este metodo es utilizado obtener los municipios pertenecientes al depto
+     *
      * @param coddepto: codigo de la Localidad
      * @param todos : boolean de si tiene todos los departamentos
      * @return Retorna la lista de los municipios.
@@ -583,8 +716,11 @@ public class Usuario implements Serializable {
         }
         return sel;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios pertenecientes al depto
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios
+     * pertenecientes al depto
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosUsuario() {
@@ -598,8 +734,11 @@ public class Usuario implements Serializable {
         usuariomod.getTercero().getLocalidadByStrcodigolocalidad().setStrcodigolocalidad("169");
         return null;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios de expedición
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios de
+     * expedición
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosExpedicion() {
@@ -607,8 +746,11 @@ public class Usuario implements Serializable {
         //usuariomod.getTercero().getLocalidadByStrlocalidadexpdocumento().setStrcodigolocalidad(municipiosexpdocumentooption[0].getValue().toString());        
         return null;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios de nacimiento
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios de
+     * nacimiento
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosNacimiento() {
@@ -617,8 +759,10 @@ public class Usuario implements Serializable {
         // usuariomod.getTercero().getLocalidadByStrlocalidadnacimiento().setStrcodigolocalidad(municipiosnacimientooption[0].getValue().toString());      
         return null;
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem del Tipo tercero
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarTipoTercero() {
@@ -632,8 +776,10 @@ public class Usuario implements Serializable {
         }
 
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem de los cargos
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarCargos() {
@@ -646,8 +792,10 @@ public class Usuario implements Serializable {
             cargosoption[i++] = c;
         }
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem de Genero
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarGeneros() {
@@ -660,8 +808,10 @@ public class Usuario implements Serializable {
             generosoption[i++] = genItem;
         }
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem del Estado Civil
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarEstadoCivil() {
@@ -674,8 +824,11 @@ public class Usuario implements Serializable {
             estadocivilsoption[i++] = estCiv;
         }
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los Tipos de Identificación
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los Tipos de
+     * Identificación
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarTiposIdentificacion() {
@@ -688,19 +841,23 @@ public class Usuario implements Serializable {
             tipoidentificacionsoption[i++] = estCiv;
         }
     }
-     /**
-     * Este metodo es utilizado habilitar los botones de Guardar y Cancelar
-     * y deshabilitar el boton de Modificar
+
+    /**
+     * Este metodo es utilizado habilitar los botones de Guardar y Cancelar y
+     * deshabilitar el boton de Modificar
+     *
      * @return No retorna ningun Valor.
      */
     public void habilitarModificarUsuario() {
         modificarUsuario = false;
         habilitarBotonGuardar = true;
         deshabilitarBotonModificar = false;
-            }
-     /**
-     * Este metodo es utilizado habilitar el boton de Modificar
-     * y deshabilitar los botones de Guardar y Cancelar
+    }
+
+    /**
+     * Este metodo es utilizado habilitar el boton de Modificar y deshabilitar
+     * los botones de Guardar y Cancelar
+     *
      * @return Retorna el listado de los usuarios.
      */
     public String btnCancelar() {
@@ -709,8 +866,10 @@ public class Usuario implements Serializable {
         deshabilitarBotonModificar = true;
         return "gestionusuario";
     }
-     /**
+
+    /**
      * Método utilizado Guardar la Modificacion del usuario.
+     *
      * @return No devuelve ningun valor
      */
     public String guardarModificacion() {
@@ -727,8 +886,10 @@ public class Usuario implements Serializable {
         }
         return null;
     }
+
     /**
      * Método utilizado para Validar el correo del usuario
+     *
      * @return retorna si el correo es valido o invalido
      */
     public boolean validarInformacion() {
@@ -739,6 +900,93 @@ public class Usuario implements Serializable {
         } else {
             FacesUtils.addErrorMessage(bundle.getString("correoinvalido"));
             return false;
+        }
+    }
+
+    /**
+     * Método utilizado para Cargar las entidades correspondientes al tipo 2
+     * (Entidades Nacionales)
+     *
+     * @return no retorna Nada
+     */
+    public void cargarEntidades() {
+        listaentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
+    }
+
+    /**
+     * Metodo para limpiar La seleccion de la entidad
+     *
+     * @return null
+     */
+    public void limpiarSeleccionEntidad() {
+        seleccionEntidad = false;
+        listaentidadbooleana.clear();
+//         inhabilitarseleccionentidades = false;
+    }
+
+    /**
+     * Metodo Utilizado para seleccionar todo el selectBooleanCheckbox
+     *
+     * @return null
+     * @param event
+     */
+    public void seleccionarTodo(ValueChangeEvent event) {
+        seleccionEntidad = ((Boolean) event.getNewValue()).booleanValue();
+        if (!seleccionEntidad) {
+            limpiarSeleccionEntidad();
+        }
+    }
+
+    /**
+     * Metodo Utilizado para guardar en la lista una sola entidad seleccionada
+     * en selectBooleanCheckbox
+     *
+     * @param event
+     * @return null
+     */
+    public void seleccionarUnaEntidad(ValueChangeEvent event) {
+//        entidad = new ArrayList<Tercero>();
+        System.out.println("ingresa aqui con " + datatablelistaentidades.getRowData());
+        seleccionEntidad = false;
+        listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue());
+        System.out.println("Booleano de tercero " + listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue()));
+    }
+
+    /**
+     * Metodo Utilizado para Listar las entidades seleccionadas
+     *
+     * @return Lista tipo Tercero
+     */
+    public List<Tercero> listarEntidadesSeleccionadas() {
+        if (isSeleccionEntidad()) {
+            return getListaentidades();
+        }
+        List<Tercero> result = new ArrayList<Tercero>();
+        Iterator<?> iterator = listaentidadbooleana.keySet().iterator();
+        listaentidad = new ArrayList<Tercero>();
+        while (iterator.hasNext()) {
+
+            Tercero key = (Tercero) iterator.next();
+            if (listaentidadbooleana.get(key)) {
+                result.add(key);
+                System.out.println("listado de entidades seleccionadas" + result.add(key));
+                System.out.println("Listado  " + key.getStrnombrecompleto());
+
+                listaentidad.add(key);
+            }
+        }
+//        inhabilitarseleccionentidades = false;
+        return result;
+
+    }
+    public void llenarGrupos() {
+        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGruposFonade();
+
+        gruposoption = new SelectItem[listaGrupo.size()];
+        int i = 0;
+        for (Grupo gene : listaGrupo) {
+            SelectItem genItem = new SelectItem(gene.getGruGid(), gene.getGruNombre());
+            gruposoption[i++] = genItem;
         }
     }
 }
