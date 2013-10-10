@@ -67,6 +67,23 @@
                                 <h:selectOneMenu id="combogeneronuevo" value="genero">
                                     <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                                 </h:selectOneMenu>
+
+
+
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Grupo"/>
+                                <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}">
+                                    <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
+                                    <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" execute="@this"
+                                              render="combogeneronuevo2"/>
+                                </h:selectOneMenu>
+
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Modulo"/>
+                                <h:selectOneMenu id="combogeneronuevo2" value="#{Ciudadano$PerfilCiudadano.intidmodulo}"  >
+                                    <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
+                                </h:selectOneMenu>
+
+                                
+                                
                             </h:panelGrid>
                             <!--hr class="ikont-hr-separador" /-->
                             <br/>
@@ -150,10 +167,10 @@
                                     <rich:column>
                                         <f:facet name="header">
                                             <h:outputText value="Checkbox"/>
-<!--                                            <h:selectBooleanCheckbox  value="# {Perfil$Usuario.seleccionEntidad}" 
-                                                                      immediate="true" valueChangeListener="# {Perfil$Usuario.seleccionarTodo}">
-                                                <f:ajax event="click"  render="@form"/>
-                                            </h:selectBooleanCheckbox>-->
+                                            <!--                                            <h:selectBooleanCheckbox  value="# {Perfil$Usuario.seleccionEntidad}" 
+                                                                                                                  immediate="true" valueChangeListener="# {Perfil$Usuario.seleccionarTodo}">
+                                                                                            <f:ajax event="click"  render="@form"/>
+                                                                                        </h:selectBooleanCheckbox>-->
                                         </f:facet>
                                         <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
                                                                  immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">

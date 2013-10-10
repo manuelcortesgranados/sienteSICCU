@@ -31,7 +31,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
-
+import co.com.interkont.cobra.to.Grupo;
+import cobra.Ciudadano.PerfilCiudadano;
+import co.com.interkont.cobra.to.Modulo;
 /**
  *
  * @author David Andres Betancourth Botero
@@ -162,6 +164,14 @@ public class Usuario implements Serializable {
      * Variable para inhabilitar la tabla datatablelistaentidades
      */
     private boolean inhabilitarseleccionentidades = true;
+     /**
+     * Variable para mostrar un selectitem con los Grupo
+     */
+    private SelectItem[] gruposoption;
+     /**
+     * Variable para mostrar el id del grupo
+     */
+     private int intidgrupo=0;
 
     /**
      * Inicio de los Get y Set de las variables anteriores
@@ -446,6 +456,23 @@ public class Usuario implements Serializable {
         this.inhabilitarseleccionentidades = inhabilitarseleccionentidades;
     }
 
+    public SelectItem[] getGruposoption() {
+        return gruposoption;
+    }
+
+    public void setGruposoption(SelectItem[] gruposoption) {
+        this.gruposoption = gruposoption;
+    }
+
+    public int getIntidgrupo() {
+        return intidgrupo;
+    }
+
+    public void setIntidgrupo(int intidgrupo) {
+        this.intidgrupo = intidgrupo;
+    }
+    
+
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -459,7 +486,7 @@ public class Usuario implements Serializable {
         llenarTiposIdentificacion();
         llenarlocalidadusuario();
         cargarEntidades();
-
+        llenarGrupos();
     }
 
     public String initusu() {
@@ -951,5 +978,15 @@ public class Usuario implements Serializable {
 //        inhabilitarseleccionentidades = false;
         return result;
 
+    }
+    public void llenarGrupos() {
+        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGruposFonade();
+
+        gruposoption = new SelectItem[listaGrupo.size()];
+        int i = 0;
+        for (Grupo gene : listaGrupo) {
+            SelectItem genItem = new SelectItem(gene.getGruGid(), gene.getGruNombre());
+            gruposoption[i++] = genItem;
+        }
     }
 }
