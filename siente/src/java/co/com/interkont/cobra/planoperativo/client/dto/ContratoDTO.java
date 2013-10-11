@@ -33,7 +33,11 @@ public class ContratoDTO implements IsSerializable {
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
     private Set fuenterecursosconvenios = new HashSet(0);
-     private Set dependenciasGenerales = new LinkedHashSet(0);
+    private Set dependenciasGenerales = new LinkedHashSet(0);
+    private Date datefechacreacion;
+    private Date datefechamodificacion;
+    private int usucreacion;
+    private int usumodificacion;
 
     public ContratoDTO() {
     }
@@ -279,4 +283,38 @@ public class ContratoDTO implements IsSerializable {
     public void setDependenciasGenerales(Set dependenciasGenerales) {
         this.dependenciasGenerales = dependenciasGenerales;
     }
+
+    public Date getDatefechacreacion() {
+        return datefechacreacion;
+    }
+
+    public void setDatefechacreacion(Date datefechacreacion) {
+        this.datefechacreacion = datefechacreacion;
+    }
+
+    public Date getDatefechamodificacion() {
+        return datefechamodificacion;
+    }
+
+    public void setDatefechamodificacion(Date datefechamodificacion) {
+        this.datefechamodificacion = datefechamodificacion;
+    }
+
+    public int getUsucreacion() {
+        return usucreacion;
+    }
+
+    public void setUsucreacion(int usucreacion) {
+        this.usucreacion = usucreacion;
+    }
+
+    public int getUsumodificacion() {
+        return usumodificacion;
+    }
+
+    public void setUsumodificacion(int usumodificacion) {
+        this.usumodificacion = usumodificacion;
+    }
+    
+    
 }

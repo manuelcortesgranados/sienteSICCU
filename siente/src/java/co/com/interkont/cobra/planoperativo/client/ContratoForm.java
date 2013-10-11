@@ -647,6 +647,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //CalendarUtil.addDaysToDate(copiFechaEvaPropuestas, 1);
 
         ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", copiFechaEvaPropuestas, 1, 0, TaskType.LEAF, 4, true);
+        
         lstHijosPrecontra.add(elaContrato);
 
         Date copiaFechaUltimoHijo = CalendarUtil.copyDate(elaContrato.getEndDateTime());
