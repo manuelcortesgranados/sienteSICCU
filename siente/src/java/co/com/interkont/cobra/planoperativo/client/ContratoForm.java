@@ -135,11 +135,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
     TreeStore<ActividadobraDTO> taskStore;
     int numeroRubros;
     Set<RelacionobrafuenterecursoscontratoDTO> relacionFuenteRecursosContratoCopia;
+    int numeracionActividad;
 
     public ContratoForm() {
     }
 
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio,int numeracionActividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -152,6 +153,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
+        this.numeracionActividad=numeracionActividad;
 
     }
 
@@ -615,39 +617,54 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1, 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
+        actividadObraContrato.setNumeracion(numeracionActividad);
+        numeracionActividad++;
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        hitoFechaSuscripcion.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijos.add(hitoFechaSuscripcion);//el pade de esta es actividadObraContrato
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijos.add(hitoFechaSuscripcionActa);
 
 
         ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);
         precontractual.setEsNoEditable(true);
+        precontractual.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijos.add(precontractual);
 
         List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.LEAF, 4, true);
+        revTecnica.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijosPrecontra.add(revTecnica);
 
         Date copiFechaRevTecnica = CalendarUtil.copyDate(revTecnica.getEndDateTime());
         //CalendarUtil.addDaysToDate(copiFechaRevTecnica, 1);
 
         ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", copiFechaRevTecnica, 1, 0, TaskType.LEAF, 4, true);
+        elaboPliegos.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijosPrecontra.add(elaboPliegos);
 
         Date copiFechaElaboPliegos = CalendarUtil.copyDate(elaboPliegos.getEndDateTime());
         // CalendarUtil.addDaysToDate(copiFechaElaboPliegos, 1);
 
         ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", copiFechaElaboPliegos, 1, 0, TaskType.LEAF, 4, true);
+        evaPropuestas.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijosPrecontra.add(evaPropuestas);
 
         Date copiFechaEvaPropuestas = CalendarUtil.copyDate(evaPropuestas.getEndDateTime());
         //CalendarUtil.addDaysToDate(copiFechaEvaPropuestas, 1);
 
         ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", copiFechaEvaPropuestas, 1, 0, TaskType.LEAF, 4, true);
-        
+        elaContrato.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijosPrecontra.add(elaContrato);
 
         Date copiaFechaUltimoHijo = CalendarUtil.copyDate(elaContrato.getEndDateTime());
@@ -659,6 +676,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaCopiaPrecontractual, 1, 0, TaskType.PARENT, 5, true);
         contractua.setEsNoEditable(true);
+        contractua.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijos.add(contractua);
 
         Date fechaCopiaContractual = CalendarUtil.copyDate(contractua.getEndDateTime());
@@ -666,6 +685,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
         Liquidaciones.setEsNoEditable(true);
+        Liquidaciones.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         lstHijos.add(Liquidaciones);
 
         Date fechaCopiaLiquidacion = CalendarUtil.copyDate(Liquidaciones.getEndDateTime());

@@ -4112,6 +4112,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         cargarContrato(contratotabla);
+        if(contratotabla.getNumvlrcontrato()!=null && contratotabla.getNumValorCuotaGerencia()!=null){
+        puedeEditarValorFuentes=false;
+        }else{
+        puedeEditarValorFuentes=true;
+        }
 //        setContrato(contratotabla);
 //        finentrega = contratotabla.getDatefechafin().toString();
 
@@ -4130,7 +4135,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
 
             }
-//             
+            String copiaValorContrato=""+contrato.getNumvlrcontrato();
+            String copiaValorGerencia=""+contrato.getNumValorCuotaGerencia();
+            contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
+            contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
             recursosconvenio.sumaFuentesRecursos();
             llenarPolizas();
             return "nuevoConvenioPo";
@@ -6984,9 +6992,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String planOperativo() {
         try {
             validarPuedeEditarValorFuente();
-            contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
-            //String valorContrato= ""+contrato.getNumvlrcontrato();
-            //contrato.setValorDisponible(new BigDecimal(valorContrato));
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
@@ -7040,8 +7045,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
+        contrato.setAuxiliarValorContrato(contratodto.getAuxiliarValorContrato());
+        contrato.setValorDisponible(contratodto.getValorDisponible());
+        contrato.setNumValorCuotaGerencia(contratodto.getNumValorCuotaGerencia());
+        contrato.setAuxiliarValorGerencia(contratodto.getAuxiliarValorGerencia());
+        contrato.setValorDisponibleCuotaGerencia(contratodto.getValorDisponibleCuotaGerencia());
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
+
+        if(contrato.getNumvlrcontrato()!=null && contrato.getNumValorCuotaGerencia()!=null){
+        puedeEditarValorFuentes=false;
+        }else{
+        puedeEditarValorFuentes=true;
+        }
 
         contrato.getActividadobras().clear();
         contrato.getDependenciasGenerales().clear();

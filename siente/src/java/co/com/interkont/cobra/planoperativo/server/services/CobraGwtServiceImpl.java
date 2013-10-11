@@ -171,15 +171,17 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return null;
     }
 
-    @Override
+@Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin) throws Exception {
-
+        int numeracion = 1;
         Date fechaPlaneacion = new Date();
 
         ActividadobraDTO t = new ActividadobraDTO(contratoDto.getStrnumcontrato(), contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(),
                 0, GanttConfig.TaskType.PARENT, 1, false);
         t.setTipoActividad(1);
         t.setEsNoEditable(true);
+        t.setNumeracion(numeracion);
+        numeracion++;
 
 
         List<Parametricaactividadesobligatorias> listapar = cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica");
@@ -192,34 +194,50 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 if (par.getIdparametrica() == 3) {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechafin, 1, 0);
                     actdto.setEsNoEditable(true);
+                    actdto.setNumeracion(numeracion);
+                    numeracion++;
                 } else if (par.getIdparametrica() == 1) {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
                     actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
                     actdto.setEsNoEditable(true);
+                    actdto.setNumeracion(numeracion);
+                    numeracion++;
                     CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
                     fechaPlaneacion = CalendarUtil.copyDate(actdto.getEndDateTime());
-                   
+
 
                 } else if (par.getIdparametrica() == 2) {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechaPlaneacion, 1, 0);
                     actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
                     actdto.setEsNoEditable(true);
+                    actdto.setNumeracion(numeracion);
+                    numeracion++;
                     CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
                 } else {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
+                    actdto.setNumeracion(numeracion);
+                    numeracion++;
                 }
                 for (Parametricaactividadesobligatorias parhija : listapar) {
 
                     if (parhija.getParametricaactividadesobligatorias() != null && parhija.getParametricaactividadesobligatorias().getIdparametrica() == par.getIdparametrica()) {
                         //Coloca 1 dia para Acta de Inicio de convenio
                         if (parhija.getIdparametrica() == 4) {
-                           actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0));
-                           
+                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
+                            actiHija.setNumeracion(numeracion);
+                            numeracion++;
+                            actdto.addChild(actiHija);
                         } else if (parhija.getIdparametrica() == 7) {
-                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, contratoDto.getDatefechafin(), 1, 0));
+                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, contratoDto.getDatefechafin(), 1, 0);
+                            actiHija.setNumeracion(numeracion);
+                            numeracion++;
+                            actdto.addChild(actiHija);
                         } else {
-                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
-                         }
+                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0);
+                            actiHija.setNumeracion(numeracion);
+                            numeracion++;
+                            actdto.addChild(actiHija);
+                        }
                     }
                 }
                 listaactobligatorias.add(actdto);

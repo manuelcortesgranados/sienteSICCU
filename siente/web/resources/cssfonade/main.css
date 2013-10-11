@@ -4554,6 +4554,12 @@ a:hover {
 }
 
 .ikont-valor-global-gerencia{
-position: relative;
-right: 30px;
+    position: relative;
+    right: 30px;
+}
+
+.ikont-lbl-msg-validacion{
+    position: relative;
+    right: 100px;
+    color:red;
 }

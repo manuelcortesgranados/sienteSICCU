@@ -82,8 +82,8 @@
                                     <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
                                 </h:selectOneMenu>
 
-                                
-                                
+
+
                             </h:panelGrid>
                             <!--hr class="ikont-hr-separador" /-->
                             <br/>
@@ -118,17 +118,12 @@
                     </rich:panel>
                 </h:form>
                 <h:form>
-                    <rich:collapsiblePanel header="Asociar Entidades"   expanded="true" switchType="ajax" id="asociarentidad">
-                        <center>
-                            <h:panelGrid>
-                                <rich:column colspan="1">
-                                    <center>
-                                        <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
-                                    </center>
-                                </rich:column>
+                    <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"   expanded="true" switchType="ajax" id="asociarentidad">
 
-                                <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" binding="#{Perfil$Usuario.datatablelistaentidades}"
-                                                rows="10" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
+                        <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
+                            <h:panelGroup>
+                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;width: 90%;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
+                                                rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
                                     <rich:column>
                                         <f:facet name="header">
                                             <h:selectBooleanCheckbox  value="#{Perfil$Usuario.seleccionEntidad}" 
@@ -145,48 +140,67 @@
 
                                     <rich:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Nit Entidad"/>
+                                            <h:outputText value="#{var.codigo} #{var.entidad}"/>
                                         </f:facet>
                                         <h:outputText value="#{varentidad.intcedula}"/>
                                     </rich:column>
                                     <rich:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Nombre Entidad"/>
+                                            <h:outputText value="#{var.nombreentidad}"/>
                                         </f:facet>
                                         <h:outputText value="#{varentidad.strnombrecompleto}"/>
                                     </rich:column>
                                 </rich:dataTable>
+                                <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
+                                <h:outputText value="No se encontro Entidades en la busqueda"/>
+                                </h:panelGroup>
+                                <center>
+                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
+                                </center>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <center>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="Listar"/>
+                                    <br/>
+                                    <br/>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="Cancelar"/>
+                                </center>
+                            </h:panelGroup>
+                            <h:panelGrid id="idbuscarentidad" style="position: relative;">
+                                <center>
+                                    <h:panelGrid columns="2">
+                                        <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
+                                        <interkont:spacer/>
+                                        <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
+                                                     onblur="clearText(this);"  onclick="this.value = '';" />
+                                        <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
+                                                            actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
+                                    </h:panelGrid>
+                                </center>
+                                <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}">
+                                    <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
+                                                    rows="5" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
+                                        <rich:column>
+                                            <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
+                                                                     immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
+                                                <f:ajax event="click" render="@form"/>
 
-
-                                <a4j:commandButton immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="Listar"/>
-                                <a4j:commandButton immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="Cancelar"/>
-
-                                <br/>
-                                <rich:dataTable  rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}"
-                                                 rows="10" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Checkbox"/>
-                                            <!--                                            <h:selectBooleanCheckbox  value="# {Perfil$Usuario.seleccionEntidad}" 
-                                                                                                                  immediate="true" valueChangeListener="# {Perfil$Usuario.seleccionarTodo}">
-                                                                                            <f:ajax event="click"  render="@form"/>
-                                                                                        </h:selectBooleanCheckbox>-->
-                                        </f:facet>
-                                        <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
-                                                                 immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
-                                            <f:ajax event="click" render="@form"/>
-
-                                        </h:selectBooleanCheckbox>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Nombre Entidad"/>
-                                        </f:facet>
-                                        <h:outputText value="#{varentidad.strnombrecompleto}"/>
-                                    </rich:column>
-                                </rich:dataTable>
+                                            </h:selectBooleanCheckbox>
+                                        </rich:column>
+                                        <rich:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.nombreentidad}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{varentidad.strnombrecompleto}"/>
+                                        </rich:column>
+                                    </rich:dataTable>
+                                    <center>
+                                        <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()>4}" for="repeatentidadseleciconadas" maxPages="5" />
+                                    </center>
+                                </h:panelGroup>
                             </h:panelGrid>
-                        </center>
+                        </h:panelGrid>
+
                     </rich:collapsiblePanel>
                 </h:form> 
             </ui:define>

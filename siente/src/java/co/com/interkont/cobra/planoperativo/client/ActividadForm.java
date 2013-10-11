@@ -62,6 +62,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
     TreeStore<ActividadobraDTO> taskStore;
+    int numeracionActividad;
 
     public VerticalPanel getVp() {
         return vp;
@@ -119,7 +120,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore) {
+    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore,int numeracionActividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -128,6 +129,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
         this.taskStore = taskStore;
+        this.numeracionActividad=numeracionActividad;
     }
 
     private void crearFormulario() {
@@ -248,6 +250,8 @@ public class ActividadForm implements IsWidget, EntryPoint {
     public void crearActividad() {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
+        tareaNueva.setNumeracion(numeracionActividad);
+        numeracionActividad++;
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
