@@ -2675,7 +2675,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void llenarTiposPoliza() {
         TipoPolizas = getSessionBeanCobra().getCobraService().encontrarTiposPoliza();
     }
-      /**
+
+    /**
      * Método que remueve nticipo cuando hay un error
      *
      */
@@ -2750,12 +2751,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     lisplanifiactapar.get(i).setDateusucreacion(new Date());
                                     lisplanifiactapar.get(i).setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                                     lisplanifiactapar.get(i).setContrato(contrato);
-                                   i++;
+                                    i++;
                                 }
-                                
-                             
-                         
-                                
+
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
                                     removerAnticipo();
                                     if (bundle.getString("fechaformapago").equals("true")) {
@@ -2972,7 +2970,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             FacesUtils.addErrorMessage(bundle.getString("fechaactaunica"));
                             return null;
                         }
-                          if (!validacionFechasContratoActasyAnticipo()) {
+                        if (!validacionFechasContratoActasyAnticipo()) {
                             FacesUtils.addErrorMessage(bundle.getString("fechaanticipo"));
                             return null;
                         }
@@ -4130,7 +4128,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.getActividadobras().add(activiprincipal);
                 // LLenar dependencias
                 contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
-
 
             }
 //             
@@ -6251,7 +6248,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6643,17 +6640,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         }
                         if (!getContrato().getActividadobras().isEmpty()) {
 
-                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));                            
+                            getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
                         }
                         if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
-                                getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
-                                        CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
-                                getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
+                            getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
+                                    CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
+                            getSessionBeanCobra().getCobraGwtService().setListaacteliminar(new ArrayList<ActividadobraDTO>());
+                        }
+                        if (getSessionBeanCobra().getCobraGwtService().getContratoDto() != null) {
+                            if (!getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().isEmpty()) {
+                                Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
+                                getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
+                                getSessionBeanCobra().getCobraService().guardarDependencias(new ArrayList<Dependencia>(getContrato().getDependenciasGenerales()));
                             }
-                        if (!getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().isEmpty()) {
-                            Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
-                            getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
-                            getSessionBeanCobra().getCobraService().guardarDependencias(new ArrayList<Dependencia>(getContrato().getDependenciasGenerales()));
                         }
                         if (!getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar().isEmpty()) {
                             getSessionBeanCobra().getCobraService().borrarDependenciasPlanOperativo(
@@ -7063,7 +7062,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 
-
     }
 
     public void limpiarEntidad() {
@@ -7164,6 +7162,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /*
      * Metodo que valida las fechas registradas en el contrato las cuales debe estar dentro del rando de contrato
      */
+
     public boolean validacionFechasContrato() {
         if (contrato.getFormapago().getIntidformapago() != 0) {
             switch (contrato.getFormapago().getIntidformapago()) {
@@ -7222,7 +7221,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return true;
     }
-    
+
     /*
      * Metodo que se encarga de validar si el valor del contrato y valor de cuota de gerencia tienen un valor 
      * para activar el campo valor del monto de la fuente de recursos.
@@ -7276,8 +7275,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
     }
-    
-   
+
     /**
      * @return the puedeEditarValorFuentes
      */

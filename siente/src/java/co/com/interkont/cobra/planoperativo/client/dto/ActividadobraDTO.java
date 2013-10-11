@@ -88,6 +88,7 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public ActividadobraDTO() {
+        this.id =""+this.hashCode();
     }
 
     public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion) {

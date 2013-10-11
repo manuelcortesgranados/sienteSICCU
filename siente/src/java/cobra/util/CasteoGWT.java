@@ -108,10 +108,12 @@ public class CasteoGWT implements Serializable {
                     ActividadobraDTO actividaorigen;
                     System.out.println("dpori = " + dpori.getActividadobraByFkActividadOrigen().getOidactiviobra());
                     System.out.println("dependend = " + dpori.getActividadobraByFkActividadOrigen().getStrdescactividad());
+                    
                     if (dpori.getActividadobraByFkActividadOrigen().getOidactiviobra() != 0) {
                         actividaorigen = encontrarActividaObraDtoPorIdGwt(dpori.getActividadobraByFkActividadOrigen().getOidactiviobra(), actraiz);
 
                     } else {
+                        System.out.println("gwtidbuscar = " + dpori.getActividadobraByFkActividadOrigen().getIdgwt());
                         actividaorigen = encontrarActividaObraDtoPorIdGwt(dpori.getActividadobraByFkActividadOrigen().getIdgwt(), actraiz);
                     }
                     depdto.setActividadFrom(actividaorigen);
@@ -219,14 +221,37 @@ public class CasteoGWT implements Serializable {
      **/
     public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio, ObraDTO obra, boolean castearDependencias) {
 
-        ActividadobraDTO actdto = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), 0,
-                tipoTask(actividadObra.getTipotareagantt()), actividadObra.getTipotareagantt(), actividadObra.getBoolobligatoria());
-
-        actdto.setOidactiviobra(actividadObra.getOidactiviobra());
+        ActividadobraDTO actdto = new ActividadobraDTO();
+        
+        actdto.setBoolobligatoria(actividadObra.getBoolobligatoria());
+       actdto.setDuration(actividadObra.getDuracion());
+       actdto.setEliminar("Eliminar");
+        DateWrapper dw = new DateWrapper(actividadObra.getFechaFin()).clearTime();
+       actdto.setEndDateTime(dw.asDate());
+       dw = new DateWrapper(actividadObra.getFechaInicio()).clearTime();
+       actdto.setStartDateTime(dw.asDate());
+       actdto.setName(actividadObra.getStrdescactividad());
+       actdto.setEstado(actividadObra.getEstado()); 
+       if(actividadObra.getIdgwt()!= null && actividadObra.getIdgwt().compareTo("")!=0)
+       {    
+       actdto.setId(actividadObra.getIdgwt());
+       }
+       actdto.setName(actividadObra.getStrdescactividad());
+       actdto.setOidactiviobra(actividadObra.getOidactiviobra());
+      actdto.setPercentDone(0);
+      actdto.setTaskType(tipoTask(actividadObra.getTipotareagantt()));
+      actdto.setTipoActividad(actividadObra.getTipotareagantt());
+       
+        actdto.setOidactiviobra(actividadObra.getOidactiviobra());              
 
         if (actividadObra.getObra() != null) {
             actdto.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
         }
+        else if(actividadObra.getContrato() != null)
+        {
+            actdto.setContrato(castearContratoToContratoTO(actividadObra.getContrato(), convenio));
+        }    
+            
 
         Iterator it = actividadObra.getActividadobras().iterator();
         while (it.hasNext()) {
@@ -412,7 +437,10 @@ public class CasteoGWT implements Serializable {
                 contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(), contrato.getIntduraciondias(),
                 castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()), contrato.getStrnombre());
 
-        contratodto.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
+//        if(contrato.getRelacionobrafuenterecursoscontratos()!=null && !contrato.getRelacionobrafuenterecursoscontratos().isEmpty())
+//        {
+//            contratodto.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
+//        }
         return contratodto;
     }
 
@@ -637,6 +665,8 @@ public class CasteoGWT implements Serializable {
      **/
     public static Actividadobra castearActividadobraDdoToActividadobra(ActividadobraDTO actdto, final Contrato convenio, Actividadobra actividadpadre, Obra obra, int intusuario) {
         Actividadobra actividadObra = new Actividadobra();
+        System.out.println("de gwt a jsf actividadObra = " + actdto.getName());
+        System.out.println("id gwt = " + actdto.getId());
         actividadObra.setIdgwt(actdto.getId());
         actividadObra.setOidactiviobra(actdto.getOidactiviobra());
         actividadObra.setStrdescactividad(actdto.getName());
@@ -650,14 +680,7 @@ public class CasteoGWT implements Serializable {
         actividadObra.setBoolaiu(false);
 
         actividadObra.setActividadobra(actividadpadre);
-//        if (castearDependencias) {
-//            actividadObra.setDependenciasForFkActividadOrigen(castearSetDependenciaDTOaDependencia(actdto.getDependenciasForFkActividadOrigen(), actividadObra, convenio, intusuario));
-//        }
-//        if (castearDependencias) {
-//            actividadObra.setDependenciasForFkActividadDestino(castearSetDependenciaDTOaDependencia(actdto.getDependenciasForFkActividadDestino(), actividadObra, convenio, intusuario));
-//        }
 
-        // System.out.println("casteando actividadObra= " + actividadObra.getStrdescactividad());
         if (actdto.getObra() != null) {
             //System.out.println("actividadObra entro a castear obra= " + actividadObra.getStrdescactividad());
             actividadObra.setObra(castearObraDdtToObra(actdto.getObra(), convenio, intusuario));
