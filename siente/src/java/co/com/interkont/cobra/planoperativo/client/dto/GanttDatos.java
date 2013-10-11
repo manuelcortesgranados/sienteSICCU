@@ -214,27 +214,27 @@ public class GanttDatos {
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
-        if(!listaHijas.isEmpty()){
-        Date menor = listaHijas.get(0).getStartDateTime();
-        for (int i = 1; i < listaHijas.size(); i++) {
-            if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
-                menor = listaHijas.get(i).getStartDateTime();
+        if (!listaHijas.isEmpty()) {
+            Date menor = listaHijas.get(0).getStartDateTime();
+            for (int i = 1; i < listaHijas.size(); i++) {
+                if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
+                    menor = listaHijas.get(i).getStartDateTime();
+                }
             }
-        }
-        return CalendarUtil.copyDate(menor);
+            return CalendarUtil.copyDate(menor);
         }
         return null;
     }
 
     public static Date obtenerMayorFechaFin(List<ActividadobraDTO> listaHijas) {
-        if(!listaHijas.isEmpty()){
-        Date mayor = listaHijas.get(0).getEndDateTime();
-        for (int i = 1; i < listaHijas.size(); i++) {
-            if (listaHijas.get(i).getEndDateTime().compareTo(mayor) > 0) {
-                mayor = listaHijas.get(i).getEndDateTime();
+        if (!listaHijas.isEmpty()) {
+            Date mayor = listaHijas.get(0).getEndDateTime();
+            for (int i = 1; i < listaHijas.size(); i++) {
+                if (listaHijas.get(i).getEndDateTime().compareTo(mayor) > 0) {
+                    mayor = listaHijas.get(i).getEndDateTime();
+                }
             }
-        }
-        return CalendarUtil.copyDate(mayor);
+            return CalendarUtil.copyDate(mayor);
         }
         return null;
     }
@@ -284,10 +284,10 @@ public class GanttDatos {
 
     public static Boolean verificarModificacionFechasContrato(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
         boolean error = false;
-        msg="";
-       if (taskStore.getParent(actividadSeleccionada).getName().equals("Precontractual")) {
+        msg = "";
+        if (taskStore.getParent(actividadSeleccionada).getName().equals("Precontractual")) {
             ActividadobraDTO actividadPadrePrecontractual = taskStore.getParent(actividadSeleccionada);
-            
+
             //porque etapa precontractual inicia con la fecha del contrato
             //posicion 0
             if (actividadSeleccionada.getName().equals("Revisión técnica de documentos")) {
@@ -312,7 +312,7 @@ public class GanttDatos {
                     setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de inicio de Elaboración de pliegos de condiciones");
                     error = true;
                 }
-               service.setLog("error"+error, null);
+                service.setLog("error" + error, null);
                 //posicion 1
             } else if (actividadSeleccionada.getName().equals("Elaboración de pliegos de condiciones")) {
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(0).getEndDateTime()) < 0) {

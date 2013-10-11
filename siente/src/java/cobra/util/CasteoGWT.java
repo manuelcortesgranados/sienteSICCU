@@ -79,6 +79,11 @@ public class CasteoGWT implements Serializable {
         contratoDTO.setIntduraciondias(contrato.getIntduraciondias());
         contratoDTO.setNombreAbreviado(contrato.getStrnombre());
         contratoDTO.setNumvlrcontrato(contrato.getNumvlrcontrato());
+        contratoDTO.setAuxiliarValorContrato(contrato.getAuxiliarValorContrato());
+        contratoDTO.setValorDisponible(contrato.getValorDisponible());
+        contratoDTO.setNumValorCuotaGerencia(contrato.getNumValorCuotaGerencia());
+        contratoDTO.setAuxiliarValorGerencia(contrato.getAuxiliarValorGerencia());
+        contratoDTO.setValorDisponibleCuotaGerencia(contrato.getValorDisponibleCuotaGerencia());
         contratoDTO.setStrnumcontrato(contrato.getStrnumcontrato());
         contratoDTO.setTextobjeto(contrato.getTextobjeto());
         contratoDTO.setTipocontrato(castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));

@@ -38,6 +38,10 @@ public class ContratoDTO implements IsSerializable {
     private Date datefechamodificacion;
     private int usucreacion;
     private int usumodificacion;
+       private BigDecimal numValorCuotaGerencia;
+    private BigDecimal valorDisponibleCuotaGerencia;
+    private BigDecimal auxiliarValorContrato;
+    private BigDecimal auxiliarValorGerencia;
 
     public ContratoDTO() {
     }
@@ -314,6 +318,62 @@ public class ContratoDTO implements IsSerializable {
 
     public void setUsumodificacion(int usumodificacion) {
         this.usumodificacion = usumodificacion;
+    }
+
+    /**
+     * @return the numValorCuotaGerencia
+     */
+    public BigDecimal getNumValorCuotaGerencia() {
+        return numValorCuotaGerencia;
+    }
+
+    /**
+     * @param numValorCuotaGerencia the numValorCuotaGerencia to set
+     */
+    public void setNumValorCuotaGerencia(BigDecimal numValorCuotaGerencia) {
+        this.numValorCuotaGerencia = numValorCuotaGerencia;
+    }
+
+    /**
+     * @return the valorDisponibleCuotaGerencia
+     */
+    public BigDecimal getValorDisponibleCuotaGerencia() {
+        return valorDisponibleCuotaGerencia;
+    }
+
+    /**
+     * @param valorDisponibleCuotaGerencia the valorDisponibleCuotaGerencia to set
+     */
+    public void setValorDisponibleCuotaGerencia(BigDecimal valorDisponibleCuotaGerencia) {
+        this.valorDisponibleCuotaGerencia = valorDisponibleCuotaGerencia;
+    }
+
+    /**
+     * @return the auxiliarValorContrato
+     */
+    public BigDecimal getAuxiliarValorContrato() {
+        return auxiliarValorContrato;
+    }
+
+    /**
+     * @param auxiliarValorContrato the auxiliarValorContrato to set
+     */
+    public void setAuxiliarValorContrato(BigDecimal auxiliarValorContrato) {
+        this.auxiliarValorContrato = auxiliarValorContrato;
+    }
+
+    /**
+     * @return the auxiliarValorGerencia
+     */
+    public BigDecimal getAuxiliarValorGerencia() {
+        return auxiliarValorGerencia;
+    }
+
+    /**
+     * @param auxiliarValorGerencia the auxiliarValorGerencia to set
+     */
+    public void setAuxiliarValorGerencia(BigDecimal auxiliarValorGerencia) {
+        this.auxiliarValorGerencia = auxiliarValorGerencia;
     }
     
     
