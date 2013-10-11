@@ -25,12 +25,9 @@ import co.com.interkont.cobra.planoperativo.client.dto.Obrafuenterecursosconveni
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import com.gantt.client.core.DependecyManager;
-import com.gantt.client.core.GanttUtil;
 import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
-import com.google.gwt.editor.client.Editor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -40,27 +37,20 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
-import com.scheduler.client.core.config.SchedulerConfig;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
-import com.scheduler.client.core.timeaxis.preconfig.HourTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.MonthTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.WeekTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.YearTimeAxisGenerator;
 import com.scheduler.client.zone.WeekendZoneGenerator;
 import com.scheduler.client.zone.ZoneGeneratorInt;
-import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.data.shared.ModelKeyProvider;
-import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
@@ -81,7 +71,6 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
-import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.SpinnerField;
 import com.sencha.gxt.widget.core.client.form.TextField;
@@ -180,6 +169,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public Gantt<ActividadobraDTO, DependenciaDTO> getGantt() {
         return gantt;
     }
+    
+     
+    
 
     /**
      * @param gantt the gantt to set
@@ -753,18 +745,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         if (!fullScreen) {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
-            main.setWidth(980);
+            main.setWidth(1200);
             main.setStyleName("main-contenedor-gwt");
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-            cp.setPixelSize(980, 460);
+            cp.setPixelSize(1350, 600);
             cp.getElement().setMargins(new Margins(0));
             
             
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
             vc1.setWidth("400");
-            vc1.setPosition(140, 0);
+            vc1.setPosition(400, 0);
             
             
             Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());

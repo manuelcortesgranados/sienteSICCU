@@ -118,7 +118,7 @@ public class sub_menu_gwt implements IsWidget {
         tbarSuperior.add(planificacion);
         tbarSuperior.add(flujodecaja);
         tbarSuperior.add(reportes);
-        tbarSuperior.setStyleName("ikont-tbar-menu-superior");
+        tbarSuperior.setStyleName("ikont-tbar-menu-inferior-gwt");
         tbarSuperior.setWidth(980);
         return tbarSuperior;
         
