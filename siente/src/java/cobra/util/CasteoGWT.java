@@ -20,6 +20,8 @@ import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Claseobra;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Dependencia;
+import co.com.interkont.cobra.to.Estadoconvenio;
+import co.com.interkont.cobra.to.Formapago;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Lugarobra;
@@ -66,7 +68,7 @@ public class CasteoGWT implements Serializable {
      * @param contrato Contrato el cual va a castear.
      * @author Dgarcia
      **/
-    public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
+    public static ContratoDTO castearConvenioToConvenioDTO(Contrato contrato) {
         ContratoDTO contratoDTO = new ContratoDTO();
 
         contratoDTO.setIntidcontrato(contrato.getIntidcontrato());
@@ -96,13 +98,16 @@ public class CasteoGWT implements Serializable {
 
             //System.out.print("En dependencias casteo A DTO:" + contratoDTO.getDependenciasGenerales().size());
             contratoDTO.setDependenciasGenerales(new LinkedHashSet<DependenciaDTO>());
+            System.out.println("valor casteo deo = " +contrato.getDependenciasGenerales().size());
             if (!contrato.getDependenciasGenerales().isEmpty()) {
                 Iterator itdep = contrato.getDependenciasGenerales().iterator();
 
                 while (itdep.hasNext()) {
                     Dependencia dpori = (Dependencia) itdep.next();
                     DependenciaDTO depdto = new DependenciaDTO();
-                    ActividadobraDTO actividaorigen = new ActividadobraDTO();
+                    ActividadobraDTO actividaorigen;
+                    System.out.println("dpori = " + dpori.getActividadobraByFkActividadOrigen().getOidactiviobra());
+                    System.out.println("dependend = " + dpori.getActividadobraByFkActividadOrigen().getStrdescactividad());
                     if (dpori.getActividadobraByFkActividadOrigen().getOidactiviobra() != 0) {
                         actividaorigen = encontrarActividaObraDtoPorIdGwt(dpori.getActividadobraByFkActividadOrigen().getOidactiviobra(), actraiz);
 
@@ -110,8 +115,12 @@ public class CasteoGWT implements Serializable {
                         actividaorigen = encontrarActividaObraDtoPorIdGwt(dpori.getActividadobraByFkActividadOrigen().getIdgwt(), actraiz);
                     }
                     depdto.setActividadFrom(actividaorigen);
-
-                    ActividadobraDTO actividadhacia = new ActividadobraDTO();
+                    if(actividaorigen==null)
+                    {
+                        System.out.println("actividaorigen = null ");
+                    }    
+                    
+                    ActividadobraDTO actividadhacia;
                     if (dpori.getActividadobraByFkActividadDestino().getOidactiviobra() != 0) {
                         actividadhacia = encontrarActividaObraDtoPorIdGwt(dpori.getActividadobraByFkActividadDestino().getOidactiviobra(), actraiz);
 
@@ -130,8 +139,7 @@ public class CasteoGWT implements Serializable {
                         tipoDependencia = DependencyType.STARTtoSTART;
                     }
                     depdto.setType(tipoDependencia);
-                    depdto.setId("" + depdto.hashCode());
-
+                    depdto.setId("" + depdto.hashCode());                     
                     depdto.setFromId(actividaorigen.getId());
                     depdto.setToId(actividadhacia.getId());
                     depdto.setIdDependencia(dpori.getIdDependencia());                    
@@ -220,14 +228,6 @@ public class CasteoGWT implements Serializable {
             actdto.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
         }
 
-        if (castearDependencias) {
-            actdto.getDependenciasForFkActividadOrigen().clear();
-            convenio.getDependenciasGenerales().clear();
-            System.out.println("En dependencias de actividad:" + actividadObra.getStrdescactividad() + "lst" + actividadObra.getDependenciasForFkActividadOrigen().size());
-            if (actividadObra.getDependenciasForFkActividadOrigen().size() > 0) {
-                actdto.setDependenciasForFkActividadOrigen(castearSetDependenciaTOaDependenciaDTO(actividadObra.getDependenciasForFkActividadOrigen(), actdto, convenio));
-            }
-        }
         Iterator it = actividadObra.getActividadobras().iterator();
         while (it.hasNext()) {
             Actividadobra acti = (Actividadobra) it.next();
@@ -972,7 +972,39 @@ public class CasteoGWT implements Serializable {
      * @author Dgarcia
      **/
     public static Contrato castearContratoDTOToContrato(ContratoDTO contratoDto, Contrato convenio, int intusuario) {
-        Contrato contrato = new Contrato(contratoDto.getIntidcontrato(), contratoDto.getTextobjeto(), contratoDto.getNumvlrcontrato());
+        Contrato contrato = new Contrato();
+        contrato.setAuxiliarValorContrato(BigDecimal.ZERO);
+        contrato.setAuxiliarValorGerencia(BigDecimal.ZERO);
+        contrato.setBoolplanoperativo(Boolean.TRUE);
+        contrato.setBooltipocontratoconvenio(Boolean.FALSE);
+        contrato.setContratista(null);
+        contrato.setContrato(null);
+        contrato.setDatefechacreacion(contratoDto.getDatefechacreacion());
+        contrato.setDatefechafin(contratoDto.getDatefechafin());
+        contrato.setDatefechaini(contratoDto.getDatefechaini());
+        contrato.setDatefechamodificacion(contratoDto.getDatefechamodificacion());
+        contrato.setEstadoconvenio(new Estadoconvenio(2));
+        contrato.setFechaactaini(contratoDto.getDatefechaactaini());
+        contrato.setFormapago(new Formapago());
+        contrato.getFormapago().setIntidformapago(1);
+        contrato.setIntcantproyectos(0);
+        contrato.setIntduraciondias(contratoDto.getIntduraciondias());
+        contrato.setIntidcontrato(contratoDto.getIntidcontrato());
+        contrato.setJsfUsuarioByIntusucreacion(new JsfUsuario());
+        contrato.getJsfUsuarioByIntusucreacion().setUsuId(contratoDto.getUsucreacion());
+        contrato.setJsfUsuarioByIntusumodificacion(new JsfUsuario());
+        contrato.getJsfUsuarioByIntusumodificacion().setUsuId(contratoDto.getUsumodificacion());
+        contrato.setNumValorCuotaGerencia(BigDecimal.ZERO);
+        contrato.setNumrecursosch(BigDecimal.ZERO);
+        contrato.setNumrecursospropios(BigDecimal.ZERO);
+        contrato.setNumvlrcontrato(contratoDto.getNumvlrcontrato());
+        contrato.setNumvlrsumahijos(BigDecimal.ZERO);
+        contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
+        contrato.setStrnombre(contratoDto.getNombreAbreviado());
+        contrato.setStrnombrecorto(contratoDto.getNombreAbreviado());
+        contrato.setStrnumcontrato(contratoDto.getStrnumcontrato());
+        contrato.setTextobjeto(contratoDto.getTextobjeto());
+        
         contrato.setTipocontrato(castearTipoContratoDTOToTipoContratoD(contratoDto.getTipocontrato()));
         contrato.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontrato(contrato.getRelacionobrafuenterecursoscontratos(), convenio, intusuario));
         return contrato;

@@ -6994,7 +6994,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
 //            System.out.println(getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes());
 //            if (!getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
-            ContratoDTO cont = CasteoGWT.castearContratoToContratoDTO(contrato);
+            ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
             getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
             //} else {
             //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);

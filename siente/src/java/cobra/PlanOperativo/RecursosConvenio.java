@@ -220,7 +220,7 @@ public class RecursosConvenio implements Serializable {
             if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                     .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
                 // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
-
+                fuenteRecursoConvenio.setContrato(n.getContrato());
                 fuenteRecursoConvenio.setTercero(tercero);
                 fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
                 fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());

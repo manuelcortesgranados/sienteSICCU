@@ -130,10 +130,10 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         List<ActividadobraDTO> lstActiObligatorias = new ArrayList<ActividadobraDTO>(contratoDto.getActividadobras());
         for (ActividadobraDTO actiHija : lstActiObligatorias.get(0).getChildren()) {
             if (actiHija.getName().equals("Acta de Inicio del Convenio")) {
-                System.out.println("aca" + actiHija.getName());
+                //System.out.println("aca" + actiHija.getName());
                 //enlazarDependenciasIniciales("Reglamento de Plan Operativo", lstActiObligatorias.get(0).getChildren(), actiHija);
             } else if (actiHija.getName().equals("Reglamento de Plan Operativo")) {
-                System.out.println("aca" + actiHija.getName());
+                //System.out.println("aca" + actiHija.getName());
                 //enlazarDependenciasIniciales("Aprobación de Plan Operativo", lstActiObligatorias.get(0).getChildren(), actiHija);
             } else if (actiHija.getName().equals("Planeación del Convenio")) {
                 enlazarDependenciasIniciales(lstActiObligatorias.get(0).getChildren().get(1), actiHija);
@@ -141,7 +141,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 enlazarDependenciasIniciales(lstActiObligatorias.get(0).getChildren().get(2), actiHija);
             }
         }
-        System.out.println("lstDependencias:" + contratoDto.getDependenciasGenerales().size());
+       // System.out.println("lstDependencias:" + contratoDto.getDependenciasGenerales().size());
     }
 
     public void enlazarDependenciasIniciales(ActividadobraDTO actividadTo, ActividadobraDTO actividadFrom) {
