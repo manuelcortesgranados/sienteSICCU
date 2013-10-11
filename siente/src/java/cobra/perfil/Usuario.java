@@ -177,6 +177,10 @@ public class Usuario implements Serializable {
      * Variable Utilizada para guardar la entidad a buscar
      */
     public String strbuscarentidad = "";
+    /**
+     * Variable para determinar si se encontro algo en la busqueda
+     */
+    public boolean strnoencontrabusqueda = true;
 
     /**
      * Inicio de los Get y Set de las variables anteriores
@@ -483,6 +487,14 @@ public class Usuario implements Serializable {
 
     public void setStrbuscarentidad(String strbuscarentidad) {
         this.strbuscarentidad = strbuscarentidad;
+    }
+
+    public boolean isStrnoencontrabusqueda() {
+        return strnoencontrabusqueda;
+    }
+
+    public void setStrnoencontrabusqueda(boolean strnoencontrabusqueda) {
+        this.strnoencontrabusqueda = strnoencontrabusqueda;
     }
 
     /**
@@ -934,6 +946,7 @@ public class Usuario implements Serializable {
         cargarEntidades();
         seleccionEntidad = false;
         listaentidadbooleana.clear();
+        listaentidad.clear();
         inhabilitarseleccionentidades = false;
     }
 
@@ -982,6 +995,9 @@ public class Usuario implements Serializable {
             }
         }
         inhabilitarseleccionentidades = true;
+        if (listaentidad.size() < 1) {
+            FacesUtils.addErrorMessage("Debe seleccionar una entidad");
+        }
         return result;
 
     }
@@ -993,18 +1009,18 @@ public class Usuario implements Serializable {
      *
      */
     public void buscarEntidad() {
-        listaentidades.clear();
-       // listaentidadbooleana.clear();
+//        listaentidades.clear();
+//        listaentidadbooleana.clear();
+//        listaentidad.clear();
         listaentidades = getSessionBeanCobra().getCobraService().buscarEntidadxNombre(getStrbuscarentidad());
-        if(listaentidades.size()>0){
-         inhabilitarseleccionentidades = true;
-         strnoencontrabusqueda=true;
-         
-        }
-        else{
-          inhabilitarseleccionentidades = false;
-         strnoencontrabusqueda=false;
-          FacesUtils.addErrorMessage("No se encontro entidad en la busqueda");
+        if (listaentidades.size() > 0) {
+            inhabilitarseleccionentidades = true;
+            strnoencontrabusqueda = true;
+
+        } else {
+            inhabilitarseleccionentidades = false;
+            strnoencontrabusqueda = false;
+            FacesUtils.addErrorMessage("No se encontro entidad en la busqueda");
         }
     }
 
@@ -1018,18 +1034,4 @@ public class Usuario implements Serializable {
             gruposoption[i++] = genItem;
         }
     }
-    
-    public boolean strnoencontrabusqueda=true;
-
-    public boolean isStrnoencontrabusqueda() {
-        return strnoencontrabusqueda;
-    }
-
-    public void setStrnoencontrabusqueda(boolean strnoencontrabusqueda) {
-        this.strnoencontrabusqueda = strnoencontrabusqueda;
-    }
-    
-     
-    
-    
 }
