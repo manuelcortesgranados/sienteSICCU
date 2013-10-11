@@ -34,6 +34,7 @@ import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.to.Grupo;
 import cobra.Ciudadano.PerfilCiudadano;
 import co.com.interkont.cobra.to.Modulo;
+
 /**
  *
  * @author David Andres Betancourth Botero
@@ -164,14 +165,18 @@ public class Usuario implements Serializable {
      * Variable para inhabilitar la tabla datatablelistaentidades
      */
     private boolean inhabilitarseleccionentidades = true;
-     /**
+    /**
      * Variable para mostrar un selectitem con los Grupo
      */
     private SelectItem[] gruposoption;
-     /**
+    /**
      * Variable para mostrar el id del grupo
      */
-     private int intidgrupo=0;
+    private int intidgrupo = 0;
+    /**
+     * Variable Utilizada para guardar la entidad a buscar
+     */
+    public String strbuscarentidad = "";
 
     /**
      * Inicio de los Get y Set de las variables anteriores
@@ -471,7 +476,14 @@ public class Usuario implements Serializable {
     public void setIntidgrupo(int intidgrupo) {
         this.intidgrupo = intidgrupo;
     }
-    
+
+    public String getStrbuscarentidad() {
+        return strbuscarentidad;
+    }
+
+    public void setStrbuscarentidad(String strbuscarentidad) {
+        this.strbuscarentidad = strbuscarentidad;
+    }
 
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
@@ -919,9 +931,10 @@ public class Usuario implements Serializable {
      * @return null
      */
     public void limpiarSeleccionEntidad() {
+        cargarEntidades();
         seleccionEntidad = false;
         listaentidadbooleana.clear();
-//         inhabilitarseleccionentidades = false;
+        inhabilitarseleccionentidades = false;
     }
 
     /**
@@ -945,11 +958,7 @@ public class Usuario implements Serializable {
      * @return null
      */
     public void seleccionarUnaEntidad(ValueChangeEvent event) {
-//        entidad = new ArrayList<Tercero>();
-        System.out.println("ingresa aqui con " + datatablelistaentidades.getRowData());
-        seleccionEntidad = false;
         listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue());
-        System.out.println("Booleano de tercero " + listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue()));
     }
 
     /**
@@ -969,16 +978,36 @@ public class Usuario implements Serializable {
             Tercero key = (Tercero) iterator.next();
             if (listaentidadbooleana.get(key)) {
                 result.add(key);
-                System.out.println("listado de entidades seleccionadas" + result.add(key));
-                System.out.println("Listado  " + key.getStrnombrecompleto());
-
                 listaentidad.add(key);
             }
         }
-//        inhabilitarseleccionentidades = false;
+        inhabilitarseleccionentidades = true;
         return result;
 
     }
+
+    /**
+     * Metodo Utilizado para Buscar la entidad y lista las entidades encontradas
+     *
+     * @param String getStrbuscarentidad
+     *
+     */
+    public void buscarEntidad() {
+        listaentidades.clear();
+       // listaentidadbooleana.clear();
+        listaentidades = getSessionBeanCobra().getCobraService().buscarEntidadxNombre(getStrbuscarentidad());
+        if(listaentidades.size()>0){
+         inhabilitarseleccionentidades = true;
+         strnoencontrabusqueda=true;
+         
+        }
+        else{
+          inhabilitarseleccionentidades = false;
+         strnoencontrabusqueda=false;
+          FacesUtils.addErrorMessage("No se encontro entidad en la busqueda");
+        }
+    }
+
     public void llenarGrupos() {
         List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGruposFonade();
 
@@ -989,4 +1018,18 @@ public class Usuario implements Serializable {
             gruposoption[i++] = genItem;
         }
     }
+    
+    public boolean strnoencontrabusqueda=true;
+
+    public boolean isStrnoencontrabusqueda() {
+        return strnoencontrabusqueda;
+    }
+
+    public void setStrnoencontrabusqueda(boolean strnoencontrabusqueda) {
+        this.strnoencontrabusqueda = strnoencontrabusqueda;
+    }
+    
+     
+    
+    
 }
