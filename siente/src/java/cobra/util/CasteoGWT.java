@@ -35,6 +35,7 @@ import co.com.interkont.cobra.to.Relacionobrafuenterecursoscontrato;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
+import co.com.interkont.cobra.to.Tipocontratoconsultoria;
 import co.com.interkont.cobra.to.Tipocosto;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.to.Tipoobra;
@@ -161,27 +162,27 @@ public class CasteoGWT implements Serializable {
         return contratoDTO;
     }
 
-    public static ContratoDTO castearContratoSencillo(ContratoDTO contratoDTO, Contrato contrato) {
-
-        contratoDTO.setDatefechafin(contrato.getDatefechafin());
-        contratoDTO.setEstadoConvenio(contrato.getEstadoconvenio().getIdestadoconvenio());
-        contratoDTO.setIntduraciondias(contrato.getIntduraciondias());
-        contratoDTO.setNombreAbreviado(contrato.getStrnombre());
-        contratoDTO.setNumvlrcontrato(contrato.getNumvlrcontrato());
-        contratoDTO.setStrnumcontrato(contrato.getStrnumcontrato());
-        contratoDTO.setTextobjeto(contrato.getTextobjeto());
-        contratoDTO.setTipocontrato(castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
-        contratoDTO.setValorDisponible(contrato.getValorDisponible());
-
-        if (!contrato.getFuenterecursosconvenios().isEmpty()) {
-            contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
-        }
-        Iterator it = contratoDTO.getActividadobras().iterator();
-        ActividadobraDTO ac = (ActividadobraDTO) it.next();
-        ac.setEndDateTime(contratoDTO.getDatefechafin());
-        ac.setDuration(contrato.getIntduraciondias());
-        return contratoDTO;
-    }
+//    public static ContratoDTO castearContratoSencillo(ContratoDTO contratoDTO, Contrato contrato) {
+//
+//        contratoDTO.setDatefechafin(contrato.getDatefechafin());
+//        contratoDTO.setEstadoConvenio(contrato.getEstadoconvenio().getIdestadoconvenio());
+//        contratoDTO.setIntduraciondias(contrato.getIntduraciondias());
+//        contratoDTO.setNombreAbreviado(contrato.getStrnombre());
+//        contratoDTO.setNumvlrcontrato(contrato.getNumvlrcontrato());
+//        contratoDTO.setStrnumcontrato(contrato.getStrnumcontrato());
+//        contratoDTO.setTextobjeto(contrato.getTextobjeto());
+//        contratoDTO.setTipocontrato(castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
+//        contratoDTO.setValorDisponible(contrato.getValorDisponible());
+//
+//        if (!contrato.getFuenterecursosconvenios().isEmpty()) {
+//            contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
+//        }
+//        Iterator it = contratoDTO.getActividadobras().iterator();
+//        ActividadobraDTO ac = (ActividadobraDTO) it.next();
+//        ac.setEndDateTime(contratoDTO.getDatefechafin());
+//        ac.setDuration(contrato.getIntduraciondias());
+//        return contratoDTO;
+//    }
 
     /**
      * **********************************************************
@@ -441,6 +442,7 @@ public class CasteoGWT implements Serializable {
                 contrato.getFechaactaini(), contrato.getStrnumcontrato(), contrato.getNumvlrcontrato(),
                 contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(), contrato.getIntduraciondias(),
                 castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()), contrato.getStrnombre());
+        
 
 //        if(contrato.getRelacionobrafuenterecursoscontratos()!=null && !contrato.getRelacionobrafuenterecursoscontratos().isEmpty())
 //        {
@@ -1007,7 +1009,14 @@ public class CasteoGWT implements Serializable {
         contrato.setBooltipocontratoconvenio(Boolean.FALSE);
         contrato.setContratista(null);
         contrato.setContrato(null);
+        if(contrato.getIntidcontrato()!=0)
+        {    
         contrato.setDatefechacreacion(contratoDto.getDatefechacreacion());
+        }
+        else
+        {
+             contrato.setDatefechacreacion(new Date());
+        }    
         contrato.setDatefechafin(contratoDto.getDatefechafin());
         contrato.setDatefechaini(contratoDto.getDatefechaini());
         contrato.setDatefechamodificacion(contratoDto.getDatefechamodificacion());
@@ -1019,9 +1028,9 @@ public class CasteoGWT implements Serializable {
         contrato.setIntduraciondias(contratoDto.getIntduraciondias());
         contrato.setIntidcontrato(contratoDto.getIntidcontrato());
         contrato.setJsfUsuarioByIntusucreacion(new JsfUsuario());
-        contrato.getJsfUsuarioByIntusucreacion().setUsuId(contratoDto.getUsucreacion());
+        contrato.getJsfUsuarioByIntusucreacion().setUsuId(intusuario);
         contrato.setJsfUsuarioByIntusumodificacion(new JsfUsuario());
-        contrato.getJsfUsuarioByIntusumodificacion().setUsuId(contratoDto.getUsumodificacion());
+        contrato.getJsfUsuarioByIntusumodificacion().setUsuId(intusuario);
         contrato.setNumValorCuotaGerencia(BigDecimal.ZERO);
         contrato.setNumrecursosch(BigDecimal.ZERO);
         contrato.setNumrecursospropios(BigDecimal.ZERO);
@@ -1029,10 +1038,12 @@ public class CasteoGWT implements Serializable {
         contrato.setNumvlrsumahijos(BigDecimal.ZERO);
         contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
         contrato.setStrnombre(contratoDto.getNombreAbreviado());
-        contrato.setStrnombrecorto(contratoDto.getNombreAbreviado());
-        contrato.setStrnumcontrato(contratoDto.getStrnumcontrato());
+        contrato.setStrnombrecorto(contratoDto.getNombreAbreviado());        
         contrato.setTextobjeto(contratoDto.getTextobjeto());
-        
+        contrato.setBooleantienehijos(Boolean.TRUE);
+        contrato.setTipoestadobra(new Tipoestadobra(1));
+        contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
+        contrato.setPeriodoevento(new Periodoevento(1));
         contrato.setTipocontrato(castearTipoContratoDTOToTipoContratoD(contratoDto.getTipocontrato()));
         contrato.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontrato(contrato.getRelacionobrafuenterecursoscontratos(), convenio, intusuario));
         return contrato;
