@@ -3,8 +3,6 @@ package cobra.PlanOperativo;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
-import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
-import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
@@ -23,7 +21,7 @@ import java.util.List;
  *
  * @author Yeison Osorio
  */
-public class FlujoEgresos implements Serializable{
+public class FlujoEgresos implements Serializable {
 
     Obra proyecto;
     Itemflujocaja itemFlujoEgresos;
@@ -290,5 +288,25 @@ public class FlujoEgresos implements Serializable{
         }
 
         this.totalEgresosFuente = BigDecimal.valueOf(totalEgresos);
+    }
+
+    /**
+     * Refrescar los periodos del convenio. Refresca los periodos del convenio
+     * relacionados con la planificación de egresos de acuerdo con tipo.
+     *
+     * @param periodosConvenio Lista de periodos generados y/o guardados.
+     */
+    public void refrescarPeriodos(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
+        int iterador = 0;
+
+        while (iterador < periodosConvenio.size()) {
+            if (isEgresoProyecto()) {
+                planMovimientosProyecto.get(iterador).setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
+            } else {
+                planMovimientosEgresosConvenio.get(iterador).setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
+            }
+
+            iterador++;
+        }
     }
 }
