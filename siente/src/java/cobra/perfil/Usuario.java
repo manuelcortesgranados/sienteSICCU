@@ -948,6 +948,7 @@ public class Usuario implements Serializable {
         listaentidadbooleana.clear();
         listaentidad.clear();
         inhabilitarseleccionentidades = false;
+        strbuscarentidad = "";
     }
 
     /**
@@ -958,8 +959,10 @@ public class Usuario implements Serializable {
      */
     public void seleccionarTodo(ValueChangeEvent event) {
         seleccionEntidad = ((Boolean) event.getNewValue()).booleanValue();
+        System.out.println("((Boolean) event.getNewValue()).booleanValue() = " + ((Boolean) event.getNewValue()).booleanValue());
         if (!seleccionEntidad) {
             limpiarSeleccionEntidad();
+            System.out.println("event = " + event);
         }
     }
 
@@ -972,6 +975,7 @@ public class Usuario implements Serializable {
      */
     public void seleccionarUnaEntidad(ValueChangeEvent event) {
         listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue());
+        
     }
 
     /**

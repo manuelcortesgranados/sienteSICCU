@@ -122,7 +122,15 @@
 
                         <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
                             <h:panelGroup>
-                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;width: 90%;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
+                                    <interkont:spacer/>
+                                    <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
+                                                 onblur="clearText(this);"  onclick="this.value = '';" />
+                                    <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
+                                                        actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
+                                </h:panelGrid>
+                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
                                                 rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
                                     <rich:column>
                                         <f:facet name="header">
@@ -152,31 +160,19 @@
                                     </rich:column>
                                 </rich:dataTable>
                                 <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
-                                <h:outputText value="No se encontro Entidades en la busqueda"/>
+                                    <h:outputText value="No se encontro Entidades en la busqueda"/>
                                 </h:panelGroup>
-                                <center>
-                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
-                                </center>
+                                <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
                             </h:panelGroup>
-                            <h:panelGroup>
+                            <rich:column>
                                 <center>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="Listar"/>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="#{var.listar} #{var.entidad} #{var.seleccion}"/>
                                     <br/>
                                     <br/>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="Cancelar"/>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="#{var.cancelar}"/>
                                 </center>
-                            </h:panelGroup>
-                            <h:panelGrid id="idbuscarentidad" style="position: relative;">
-                                <center>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
-                                        <interkont:spacer/>
-                                        <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
-                                                     onblur="clearText(this);"  onclick="this.value = '';" />
-                                        <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
-                                                            actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
-                                    </h:panelGrid>
-                                </center>
+                            </rich:column>
+                            <h:panelGrid id="idbuscarentidad">
                                 <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}">
                                     <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
                                                     rows="5" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
@@ -184,7 +180,6 @@
                                             <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
                                                                      immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
                                                 <f:ajax event="click" render="@form"/>
-
                                             </h:selectBooleanCheckbox>
                                         </rich:column>
                                         <rich:column>
@@ -194,9 +189,7 @@
                                             <h:outputText value="#{varentidad.strnombrecompleto}"/>
                                         </rich:column>
                                     </rich:dataTable>
-                                    <center>
-                                        <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()>4}" for="repeatentidadseleciconadas" maxPages="5" />
-                                    </center>
+                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()> 4}" for="repeatentidadseleciconadas" maxPages="5" />
                                 </h:panelGroup>
                             </h:panelGrid>
                         </h:panelGrid>
