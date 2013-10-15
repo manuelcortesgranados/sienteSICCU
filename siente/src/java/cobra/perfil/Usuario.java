@@ -1000,7 +1000,7 @@ public class Usuario implements Serializable {
         }
         inhabilitarseleccionentidades = true;
         if (listaentidad.size() < 1) {
-            FacesUtils.addErrorMessage("Debe seleccionar una entidad");
+            FacesUtils.addErrorMessage(bundle.getString("debeeligirunentidad"));
         }
         return result;
 
@@ -1024,7 +1024,7 @@ public class Usuario implements Serializable {
         } else {
             inhabilitarseleccionentidades = false;
             strnoencontrabusqueda = false;
-            FacesUtils.addErrorMessage("No se encontro entidad en la busqueda");
+            FacesUtils.addErrorMessage(bundle.getString("noseencontrolaentidad"));
         }
     }
 

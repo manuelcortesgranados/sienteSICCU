@@ -160,7 +160,7 @@
                                     </rich:column>
                                 </rich:dataTable>
                                 <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
-                                    <h:outputText value="No se encontro Entidades en la busqueda"/>
+                                    <h:outputText value="#{var.noseencontrolaentidad}"/>
                                 </h:panelGroup>
                                 <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
                             </h:panelGroup>
