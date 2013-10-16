@@ -56,14 +56,16 @@
                     </f:facet>
 
                     <h:inputText value="${fuenteIngresos.planMovimientosConvenioEntidad[columna].valor}" 
-                                 rendered="#{fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
+                                 rendered="#{fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;">
                         <f:validateDoubleRange minimum="0" />
-
+                        
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="${fuenteIngresos.planMovimientosIngresosConvenio[columna].valor}"
-                                 rendered="#{!fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
+                                 rendered="#{!fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;">
                         <f:validateDoubleRange minimum="0" />
 
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
@@ -110,8 +112,8 @@
                 <f:facet name="header">
                     <h:outputLabel value="Porcenaje de aporte"/>
                 </f:facet>
-                <h:outputText id="hot-totalingresos1" value="#{fuenteIngresos.valorAportado / PlanOperativo.valorTotalContrato * 100}" rendered="#{fuenteIngresos.ingresoEntidad}" >
-                    <f:convertNumber currencySymbol="% " type="currency"/>
+                <h:outputText id="hot-totalingresos1" value="#{fuenteIngresos.valorAportado / PlanOperativo.valorTotalContrato}" rendered="#{fuenteIngresos.ingresoEntidad}" >
+                    <f:convertNumber type="percent" maxFractionDigits="2" minFractionDigits="2" locale="es-CO" />
                 </h:outputText>
                 
             </rich:column>
@@ -141,8 +143,8 @@
                 </f:facet>
 
                 <h:inputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
-                             rendered="#{fuenteEgresos.egresoProyecto}"
-                             style="text-align: right; width: 100%;">
+                             rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;"
+                             onkeypress="return event.keyCode !== 13;">
                     <f:validateDoubleRange minimum="0" />
                 </h:inputText>
             </rich:column>
@@ -174,7 +176,8 @@
                     </f:facet>                   
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
+                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;">
                         <f:validateDoubleRange minimum="0" />
 
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
@@ -182,7 +185,8 @@
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
                                  rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}"
-                                 style="text-align: right; width: 100%;">
+                                 style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;">
                         <f:validateDoubleRange minimum="0" />
 
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />

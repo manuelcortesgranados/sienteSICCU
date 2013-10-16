@@ -34,6 +34,8 @@ import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.to.Grupo;
 import cobra.Ciudadano.PerfilCiudadano;
 import co.com.interkont.cobra.to.Modulo;
+import co.com.interkont.cobra.to.Tipousuario;
+
 /**
  *
  * @author David Andres Betancourth Botero
@@ -164,16 +166,29 @@ public class Usuario implements Serializable {
      * Variable para inhabilitar la tabla datatablelistaentidades
      */
     private boolean inhabilitarseleccionentidades = true;
-     /**
+    /**
      * Variable para mostrar un selectitem con los Grupo
      */
     private SelectItem[] gruposoption;
-     /**
+    /**
      * Variable para mostrar el id del grupo
      */
-     private int intidgrupo=0;
+    private int intidgrupo = 0;
+    /**
+     * Variable Utilizada para guardar la entidad a buscar
+     */
+    public String strbuscarentidad = "";
+    /**
+     * Variable para determinar si se encontro algo en la busqueda
+     */
+    public boolean strnoencontrabusqueda = true;
+    /**
+     * Variable para mostrar un selectitem con lis tipos de usuario
+     */
+    private SelectItem[] tipousuariooption;
 
     /**
+     * /**
      * Inicio de los Get y Set de las variables anteriores
      */
     public Utilidades getUtilidad() {
@@ -471,7 +486,30 @@ public class Usuario implements Serializable {
     public void setIntidgrupo(int intidgrupo) {
         this.intidgrupo = intidgrupo;
     }
-    
+
+    public String getStrbuscarentidad() {
+        return strbuscarentidad;
+    }
+
+    public void setStrbuscarentidad(String strbuscarentidad) {
+        this.strbuscarentidad = strbuscarentidad;
+    }
+
+    public boolean isStrnoencontrabusqueda() {
+        return strnoencontrabusqueda;
+    }
+
+    public void setStrnoencontrabusqueda(boolean strnoencontrabusqueda) {
+        this.strnoencontrabusqueda = strnoencontrabusqueda;
+    }
+
+    public SelectItem[] getTipousuariooption() {
+        return tipousuariooption;
+    }
+
+    public void setTipousuariooption(SelectItem[] tipousuariooption) {
+        this.tipousuariooption = tipousuariooption;
+    }
 
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
@@ -487,6 +525,7 @@ public class Usuario implements Serializable {
         llenarlocalidadusuario();
         cargarEntidades();
         llenarGrupos();
+        llenarTipoUsuario();
     }
 
     public String initusu() {
@@ -919,9 +958,12 @@ public class Usuario implements Serializable {
      * @return null
      */
     public void limpiarSeleccionEntidad() {
+        cargarEntidades();
         seleccionEntidad = false;
         listaentidadbooleana.clear();
-//         inhabilitarseleccionentidades = false;
+        listaentidad.clear();
+        inhabilitarseleccionentidades = false;
+        strbuscarentidad = "";
     }
 
     /**
@@ -932,8 +974,10 @@ public class Usuario implements Serializable {
      */
     public void seleccionarTodo(ValueChangeEvent event) {
         seleccionEntidad = ((Boolean) event.getNewValue()).booleanValue();
+        System.out.println("((Boolean) event.getNewValue()).booleanValue() = " + ((Boolean) event.getNewValue()).booleanValue());
         if (!seleccionEntidad) {
             limpiarSeleccionEntidad();
+            System.out.println("event = " + event);
         }
     }
 
@@ -945,11 +989,8 @@ public class Usuario implements Serializable {
      * @return null
      */
     public void seleccionarUnaEntidad(ValueChangeEvent event) {
-//        entidad = new ArrayList<Tercero>();
-        System.out.println("ingresa aqui con " + datatablelistaentidades.getRowData());
-        seleccionEntidad = false;
         listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue());
-        System.out.println("Booleano de tercero " + listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue()));
+
     }
 
     /**
@@ -969,24 +1010,57 @@ public class Usuario implements Serializable {
             Tercero key = (Tercero) iterator.next();
             if (listaentidadbooleana.get(key)) {
                 result.add(key);
-                System.out.println("listado de entidades seleccionadas" + result.add(key));
-                System.out.println("Listado  " + key.getStrnombrecompleto());
-
                 listaentidad.add(key);
             }
         }
-//        inhabilitarseleccionentidades = false;
+        inhabilitarseleccionentidades = true;
+        if (listaentidad.size() < 1) {
+            FacesUtils.addErrorMessage(bundle.getString("debeeligirunentidad"));
+        }
         return result;
 
     }
+
+    /**
+     * Metodo Utilizado para Buscar la entidad y lista las entidades encontradas
+     *
+     * @param String getStrbuscarentidad
+     *
+     */
+    public void buscarEntidad() {
+//        listaentidades.clear();
+//        listaentidadbooleana.clear();
+//        listaentidad.clear();
+        listaentidades = getSessionBeanCobra().getCobraService().buscarEntidadxNombre(getStrbuscarentidad());
+        if (listaentidades.size() > 0) {
+            inhabilitarseleccionentidades = true;
+            strnoencontrabusqueda = true;
+
+        } else {
+            inhabilitarseleccionentidades = false;
+            strnoencontrabusqueda = false;
+            FacesUtils.addErrorMessage(bundle.getString("noseencontrolaentidad"));
+        }
+    }
+
     public void llenarGrupos() {
-        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGruposFonade();
+        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGrupos();
 
         gruposoption = new SelectItem[listaGrupo.size()];
         int i = 0;
         for (Grupo gene : listaGrupo) {
             SelectItem genItem = new SelectItem(gene.getGruGid(), gene.getGruNombre());
             gruposoption[i++] = genItem;
+        }
+    }
+     public void llenarTipoUsuario() {
+        List<Tipousuario> listaGrupo = getSessionBeanCobra().getCobraService().encontrarTipousuario();
+
+        tipousuariooption = new SelectItem[listaGrupo.size()];
+        int i = 0;
+        for (Tipousuario gene : listaGrupo) {
+            SelectItem genItem = new SelectItem(gene.getIntcodigotipousuario(), gene.getStrtipousuario());
+            tipousuariooption[i++] = genItem;
         }
     }
 }

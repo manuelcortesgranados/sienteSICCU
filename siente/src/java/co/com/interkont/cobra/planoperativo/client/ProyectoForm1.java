@@ -95,8 +95,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTO actividadobraProyectoEditar;
     protected ActividadobraDTOProps propes;
     protected TreeStore<ActividadobraDTO> taskStore;
-    int numeroFuentes;
-    Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
+    protected  int numeroFuentes;
+    protected Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
+    
+    protected int numeracionActividad;
 
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
@@ -129,7 +131,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
     }
 
-    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
+    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,int numeracionActividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         this.modalPry = di;
@@ -142,6 +144,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
         this.propes = propes;
         this.taskStore = taskStore;
+        this.numeracionActividad=numeracionActividad;
         instanciarElementosPantalla();
     }
 
@@ -619,11 +622,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (fechaFin.getValue() == null) {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-
+            tareaNueva.setNumeracion(numeracionActividad);
+            numeracionActividad++;
 
         } else {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+             tareaNueva.setNumeracion(numeracionActividad);
+             numeracionActividad++;
 
 
         }

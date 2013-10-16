@@ -33,6 +33,8 @@ public class ActividadobraDTO implements IsSerializable {
     private int tipoActividad;
     private boolean seEdito;
     private boolean esNoEditable;
+    private int numeracion;
+    private String predecesor;
     /**
      * Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre,
      * Milestone=Hito
@@ -88,6 +90,7 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public ActividadobraDTO() {
+        this.id =""+this.hashCode();
     }
 
     public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion) {
@@ -131,7 +134,6 @@ public class ActividadobraDTO implements IsSerializable {
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria) {
         this.id =""+this.hashCode();
         this.name = name;
-
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
@@ -416,5 +418,33 @@ public class ActividadobraDTO implements IsSerializable {
     public void setEsNoEditable(boolean esNoEditable) {
         this.esNoEditable = esNoEditable;
 
+    }
+
+    /**
+     * @return the numeracion
+     */
+    public int getNumeracion() {
+        return numeracion;
+    }
+
+    /**
+     * @param numeracion the numeracion to set
+     */
+    public void setNumeracion(int numeracion) {
+        this.numeracion = numeracion;
+    }
+
+    /**
+     * @return the predecesor
+     */
+    public String getPredecesor() {
+        return predecesor;
+    }
+
+    /**
+     * @param predecesor the predecesor to set
+     */
+    public void setPredecesor(String predecesor) {
+        this.predecesor = predecesor;
     }
 }

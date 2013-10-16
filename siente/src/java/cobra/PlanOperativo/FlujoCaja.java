@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import org.richfaces.component.UIExtendedDataTable;
 
 /**
  * Flujo de caja del plan operativo.
@@ -57,6 +58,8 @@ public class FlujoCaja implements Serializable {
     double totalEgresos;
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
     NuevoContratoBasico nuevoContratoBasico;
+    UIExtendedDataTable tablaFuentesIngresos;
+    int columnaEvento;
 
     public Contrato getConvenio() {
         return convenio;
@@ -202,6 +205,22 @@ public class FlujoCaja implements Serializable {
         this.totalEgresos = totalEgresos;
     }
 
+    public UIExtendedDataTable getTablaFuentesIngresos() {
+        return tablaFuentesIngresos;
+    }
+
+    public void setTablaFuentesIngresos(UIExtendedDataTable tablaFuentesIngresos) {
+        this.tablaFuentesIngresos = tablaFuentesIngresos;
+    }
+
+    public int getColumnaEvento() {
+        return columnaEvento;
+    }
+
+    public void setColumnaEvento(int columnaEvento) {
+        this.columnaEvento = columnaEvento;
+    }
+
     public ResourceBundle getBundle() {
         return bundle;
     }
@@ -213,7 +232,7 @@ public class FlujoCaja implements Serializable {
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
-    
+
     public double getValorTotalContrato() {
         return convenio.getNumvlrcontrato().doubleValue();
     }
@@ -593,6 +612,8 @@ public class FlujoCaja implements Serializable {
 
         if (validarFlujoCaja()) {
             for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
+                flujoIngresosGuardar.refrescarPeriodos(periodosConvenio);
+
                 if (flujoIngresosGuardar.ingresoEntidad) {
                     getSessionBeanCobra().getCobraService().guardarFlujoIngresosConvenioEntidad(flujoIngresosGuardar.planMovimientosConvenioEntidad);
 
@@ -609,6 +630,8 @@ public class FlujoCaja implements Serializable {
             }
 
             for (FlujoEgresos flujoEgresosGuardar : flujoEgresos) {
+                flujoEgresosGuardar.refrescarPeriodos(periodosConvenio);
+
                 if (flujoEgresosGuardar.egresoProyecto) {
                     getSessionBeanCobra().getCobraService().guardarFlujoEgresosProyecto(flujoEgresosGuardar.planMovimientosProyecto);
 
@@ -709,6 +732,21 @@ public class FlujoCaja implements Serializable {
         }
     }
 
+    /**
+     * Definir periodo del flujo de caja. El método recibe un periodo genérico y
+     * una fecha de inicio de periodo a aplicar. Si la fecha de inicio
+     * referenciada es menor a la fecha de inicio del convenio, define la fecha
+     * de inicio del periodo como la fecha de inicio del convenio. Si la fecha
+     * de finalización del convenio es menor al último día del mes de la fecha
+     * referenciada, define como la fecha de finalización del periodo la fecha
+     * de finalización del contrato. Al final etiqueta el periodo de acuerdo con
+     * el mes al que pertenece.
+     *
+     * @param periodoConvenio Periodo convenio a definir.
+     * @param fechaPeriodos Fecha de inicio para aplicar al periodo.
+     *
+     * @return Periodo definido.
+     */
     private Relacioncontratoperiodoflujocaja definirPeriodoConvenio(Relacioncontratoperiodoflujocaja periodoConvenio, Calendar fechaPeriodos) {
         if (fechaPeriodos.compareTo(fechaInicioConvenio) <= 0) {
             periodoConvenio.getPeriodoflujocaja().setFechainicio(convenio.getDatefechaini());
