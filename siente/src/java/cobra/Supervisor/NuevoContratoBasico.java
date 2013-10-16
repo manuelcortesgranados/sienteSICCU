@@ -5385,7 +5385,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String llenarContrConvHijo() {
         boolconthijo = true;
-        listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijos(getContrato(), false);
+        listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijos(getContrato(), false,getSessionBeanCobra().getUsuarioObra());
 
         return null;
     }
@@ -5397,7 +5397,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String llenarSubconvenios() {
 
-        listaSubconvenios = getSessionBeanCobra().getCobraService().encontrarContratosHijos(getContrato(), true);
+        listaSubconvenios = getSessionBeanCobra().getCobraService().encontrarContratosHijos(getContrato(), true,getSessionBeanCobra().getUsuarioObra());
 
         return null;
     }
