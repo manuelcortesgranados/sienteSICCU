@@ -2392,7 +2392,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
     // </editor-fold>
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
-
+ 
     @Override
     public void prerender() {
         if (getSessionBeanCobra().isCargarcontrato()) {
@@ -6740,7 +6740,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *      
      */
     public void llenarEntidades() {
-        lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
+        lstentidades =getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
 //        setEntidades(new SelectItem[lstentidades.size()]);
 //        int i = 0;
 //        for (Tercero tercero : lstentidades) {
