@@ -71,6 +71,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -4120,11 +4121,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
 
             Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
+            asignarNumeracionActividadesConsultadas(activiprincipal, 1);
             if (activiprincipal != null) {
                 contrato.getActividadobras().add(activiprincipal);
                 // LLenar dependencias
                 contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
-
+                asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
             }
             String copiaValorContrato = "" + contrato.getNumvlrcontrato();
             String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
@@ -7305,5 +7307,35 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setPuedeEditarValorFuentes(boolean puedeEditarValorFuentes) {
         this.puedeEditarValorFuentes = puedeEditarValorFuentes;
+    }
+
+    /*
+     *metodo que se encarga de asignar la numeracion a las actividades
+     *cuando el convenio se consulta.
+     * 
+     */
+    public void asignarNumeracionActividadesConsultadas(Actividadobra actividaObraPrincipal, int numeracion) {
+        actividaObraPrincipal.setNumeracion(numeracion);
+        if (!actividaObraPrincipal.getActividadobras().isEmpty()) {
+            for (Iterator it = actividaObraPrincipal.getActividadobras().iterator(); it.hasNext();) {
+                Actividadobra actividadHija = (Actividadobra) it.next();
+                asignarNumeracionActividadesConsultadas(actividadHija, numeracion++);
+}
+        }
+    }
+
+    public void asignarPredecesorActividadesConsultadas(Set dependenciasGenerales) {
+        for (Iterator it = dependenciasGenerales.iterator(); it.hasNext();) {
+            Dependencia dependencia = (Dependencia) it.next();
+            System.out.println("dependencia predecesor = " + dependencia.getActividadobraByFkActividadDestino().getPredecesor());
+            System.out.println("dependencia predecesor numeracion = " + dependencia.getActividadobraByFkActividadDestino().getNumeracion());
+            if (dependencia.getActividadobraByFkActividadDestino().getLstPredecesores().isEmpty()) {
+                dependencia.getActividadobraByFkActividadOrigen().setPredecesor("" + dependencia.getActividadobraByFkActividadDestino().getNumeracion());
+                dependencia.getActividadobraByFkActividadOrigen().getLstPredecesores().add(dependencia.getActividadobraByFkActividadDestino().getNumeracion());
+            } else {
+                dependencia.getActividadobraByFkActividadOrigen().setPredecesor(dependencia.getActividadobraByFkActividadOrigen().getPredecesor() + "," + dependencia.getActividadobraByFkActividadDestino().getNumeracion());
+                dependencia.getActividadobraByFkActividadOrigen().getLstPredecesores().add(dependencia.getActividadobraByFkActividadDestino().getNumeracion());
+            }
+        }
     }
 }

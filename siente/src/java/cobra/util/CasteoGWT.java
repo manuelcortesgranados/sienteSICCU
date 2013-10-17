@@ -247,7 +247,9 @@ public class CasteoGWT implements Serializable {
       actdto.setPercentDone(0);
       actdto.setTaskType(tipoTask(actividadObra.getTipotareagantt()));
       actdto.setTipoActividad(actividadObra.getTipotareagantt());
-       
+        actdto.setPredecesor(actividadObra.getPredecesor());
+        actdto.setNumeracion(actividadObra.getNumeracion());
+        actdto.setLstPredecesores(obtenerListaPredecesores(actdto.getPredecesor()));
         actdto.setOidactiviobra(actividadObra.getOidactiviobra());              
 
         if (actividadObra.getObra() != null) {
@@ -684,6 +686,9 @@ public class CasteoGWT implements Serializable {
         actividadObra.setTipotareagantt(actdto.getTipoActividad());
         actividadObra.setNumvalorplanifao(BigDecimal.ZERO);
         actividadObra.setFloatcantplanifao(0.0);
+        actividadObra.setPredecesor(actdto.getPredecesor());
+        actividadObra.setNumeracion(actdto.getNumeracion());
+        actividadObra.setLstPredecesores(obtenerListaPredecesores(actividadObra.getPredecesor()));
         actividadObra.setBoolaiu(false);
 
         actividadObra.setActividadobra(actividadpadre);
@@ -1294,6 +1299,20 @@ public class CasteoGWT implements Serializable {
             lstdependencia.add(dep);
         }
         return lstdependencia;
+    }
+    
+     public static Set<Integer> obtenerListaPredecesores(String predecesores) {
+        Set<Integer> lstPredecesores = new HashSet<Integer>();
+        if (predecesores != null) {
+            if (!predecesores.isEmpty()) {
+                String[] temp = predecesores.split(",");
+                for (int i = 0; i < temp.length; i++) {
+                    lstPredecesores.add(Integer.parseInt(temp[i]));
+                }
+            }
+        }
+        return lstPredecesores;
+        
     }
 
 }

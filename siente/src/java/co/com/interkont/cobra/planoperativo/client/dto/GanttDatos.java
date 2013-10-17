@@ -8,21 +8,22 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.config.GanttConfig.DependencyType;
-import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
-import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
-import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import org.richfaces.model.Arrangeable;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Clase para manejar los datos que componen el Gantt del Plan Operativo
@@ -388,6 +389,80 @@ public class GanttDatos {
         }
         return false;
 
+    }
+
+    public static Boolean validacionCadenaPredecesoras(String cadena) {
+        RegExp pat = RegExp.compile("^[\\d+]$|(([\\d]+)([,])?(([\\d]+)$))");
+        if (pat.test(cadena)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static List<Integer> eliminarPredecesor(ActividadobraDTO acti, String predecesorAnterior, ActividadobraDTO actividadAnterior) {
+        service.setLog("en eliminar predecesores" + predecesorAnterior, null);
+        List<Integer> lstPredecesoresEliminados = null;
+        if (predecesorAnterior != null) {
+            if (!predecesorAnterior.isEmpty()) {
+                service.setLog("en eliminar predecesores anteriores:" + predecesorAnterior, null);
+                lstPredecesoresEliminados = new ArrayList<Integer>();
+                String[] tempNuevo = acti.getPredecesor().split(",");
+                String[] tempAnterior = predecesorAnterior.split(",");
+                for (int i = 0; i < tempAnterior.length; i++) {
+                    if (!contienePredecesor(tempNuevo, tempAnterior[i], acti)) {
+                        lstPredecesoresEliminados.add(Integer.parseInt(tempAnterior[i]));
+                        acti.getLstPredecesores().remove(Integer.parseInt(tempAnterior[i]));
+                        actividadAnterior.setPredecesor(actividadAnterior.getPredecesor().replace("" + tempAnterior[i], ""));
+                    }
+                }
+            }
+        }
+        service.setLog("lsta predecesores" + acti.getLstPredecesores().size(), null);
+        return lstPredecesoresEliminados;
+    }
+
+    public static boolean contienePredecesor(String[] tempNuevo, String predecesor, ActividadobraDTO acti) {
+        boolean estaPredecesor = false;
+        for (int i = 0; i < tempNuevo.length; i++) {
+            if (tempNuevo[i].equals(predecesor)) {
+                estaPredecesor = true;
+            }
+        }
+        return estaPredecesor;
+    }
+
+    public static Map<Boolean, Set<Integer>> separarPredecesores(ActividadobraDTO acti) {
+        Map<Boolean, Set<Integer>> mapaPredecesores = new HashMap<Boolean, Set<Integer>>();
+        String[] temp;
+        temp = acti.getPredecesor().split(",");
+        Set<Integer> lstTemporalPredecesores = new HashSet<Integer>();
+        boolean boolEstaPredecesor = false;
+        for (int i = 0; i < temp.length; i++) {
+            Integer predecesor = Integer.parseInt(temp[i]);
+            if (!acti.getLstPredecesores().contains(predecesor)) {
+                lstTemporalPredecesores.add(predecesor);
+            } else {
+                if (cantidadVecesPredecesor(temp, predecesor) > 1) {
+                    boolEstaPredecesor = true;
+                }
+            }
+        }
+
+        if (!boolEstaPredecesor) {
+            acti.getLstPredecesores().addAll(lstTemporalPredecesores);
+        }
+        mapaPredecesores.put(boolEstaPredecesor, lstTemporalPredecesores);
+        return mapaPredecesores;
+    }
+
+    public static int cantidadVecesPredecesor(String[] temp, int predecesor) {
+        int contador = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (Integer.parseInt(temp[i]) == predecesor) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
     /**

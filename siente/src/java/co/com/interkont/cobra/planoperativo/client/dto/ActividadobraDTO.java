@@ -35,6 +35,7 @@ public class ActividadobraDTO implements IsSerializable {
     private boolean esNoEditable;
     private int numeracion;
     private String predecesor;
+    private Set<Integer> lstPredecesores = new HashSet<Integer>();
     /**
      * Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre,
      * Milestone=Hito
@@ -81,7 +82,7 @@ public class ActividadobraDTO implements IsSerializable {
 //    }
     public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType) {
-        this.id =""+this.hashCode();
+        this.id = "" + this.hashCode();
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
@@ -90,13 +91,19 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public ActividadobraDTO() {
-        this.id =""+this.hashCode();
+        this.id = "" + this.hashCode();
     }
+    
+      public ActividadobraDTO(String predecesor) {
+       this.predecesor=predecesor;
+    }
+    
 
-    public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion) {
+    public ActividadobraDTO(Date fechaInicio, Date fechaFin, String predecesor, int duracion) {
         this.startDateTime = fechaInicio;
         this.endDateTime = fechaFin;
         this.duration = duracion;
+        this.predecesor = predecesor;
     }
 
     public ActividadobraDTO(Date fechaInicio, Date fechaFin, int duracion, String name) {
@@ -132,7 +139,7 @@ public class ActividadobraDTO implements IsSerializable {
 
     public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria) {
-        this.id =""+this.hashCode();
+        this.id = "" + this.hashCode();
         this.name = name;
         this.duration = duration;
         this.percentDone = percentDone;
@@ -171,9 +178,9 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra = obraDto;
-        Date copiaFecha= CalendarUtil.copyDate(start);
+        Date copiaFecha = CalendarUtil.copyDate(start);
         CalendarUtil.addDaysToDate(copiaFecha, duration);
-        this.endDateTime =copiaFecha; 
+        this.endDateTime = copiaFecha;
     }
 
     public ActividadobraDTO(String id, String name, Date start, Date fin,
@@ -192,7 +199,7 @@ public class ActividadobraDTO implements IsSerializable {
 
     public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria, ContratoDTO contratoDto) {
-        this.id =""+this.hashCode();
+        this.id = "" + this.hashCode();
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
@@ -446,5 +453,19 @@ public class ActividadobraDTO implements IsSerializable {
      */
     public void setPredecesor(String predecesor) {
         this.predecesor = predecesor;
+    }
+
+    /**
+     * @return the lstPredecesores
+     */
+    public Set<Integer> getLstPredecesores() {
+        return lstPredecesores;
+    }
+
+    /**
+     * @param lstPredecesores the lstPredecesores to set
+     */
+    public void setLstPredecesores(Set<Integer> lstPredecesores) {
+        this.lstPredecesores = lstPredecesores;
     }
 }
