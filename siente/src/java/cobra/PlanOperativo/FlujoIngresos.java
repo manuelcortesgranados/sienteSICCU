@@ -3,7 +3,6 @@ package cobra.PlanOperativo;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
-import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
@@ -23,7 +22,7 @@ import java.util.List;
  *
  * @author Yeison Osorio
  */
-public class FlujoIngresos implements Serializable{
+public class FlujoIngresos implements Serializable {
 
     Fuenterecursosconvenio fuenteRecursosConvenio;
     Tercero entidadAportante;
@@ -93,7 +92,7 @@ public class FlujoIngresos implements Serializable{
     public void setTotalIngresosFuente(BigDecimal totalIngresosFuente) {
         this.totalIngresosFuente = totalIngresosFuente;
     }
-    
+
     public double getValorAportado() {
         return fuenteRecursosConvenio.getValoraportado().doubleValue();
     }
@@ -279,5 +278,25 @@ public class FlujoIngresos implements Serializable{
         }
 
         this.totalIngresosFuente = BigDecimal.valueOf(totalIngresos);
+    }
+
+    /**
+     * Refrescar los periodos del convenio. Refresca los periodos del convenio
+     * relacionados con la planificación de intresos de acuerdo con tipo.
+     *
+     * @param periodosConvenio Periodos generados y/o guardados.
+     */
+    public void refrescarPeriodos(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
+        int iterador = 0;
+
+        while (iterador < periodosConvenio.size()) {
+            if (isIngresoEntidad()) {
+                planMovimientosConvenioEntidad.get(iterador).setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
+            } else {
+                planMovimientosIngresosConvenio.get(iterador).setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
+            }
+
+            iterador++;
+        }
     }
 }

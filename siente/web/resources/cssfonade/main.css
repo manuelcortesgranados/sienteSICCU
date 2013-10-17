@@ -4577,3 +4577,18 @@ a:hover {
     right: 100px;
     color:red;
 }
+.ikont-hpg-pgfotografia-ingreso-usu-admin{
+    position: relative;
+    left: 500px;
+    top: 10px;
+    width: 90px;
+    height: 90px;
+    -ms-border-radius: 90px; 
+    border-radius: 90px; 
+    background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
+    background-size : cover;
+    -webkit-background-size : cover;
+    -o-background-size : cover;
+    -moz-background-size : cover;
+    -ms-background-size : cover;
+}

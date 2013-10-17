@@ -34,6 +34,7 @@ import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.to.Grupo;
 import cobra.Ciudadano.PerfilCiudadano;
 import co.com.interkont.cobra.to.Modulo;
+import co.com.interkont.cobra.to.Tipousuario;
 
 /**
  *
@@ -181,8 +182,13 @@ public class Usuario implements Serializable {
      * Variable para determinar si se encontro algo en la busqueda
      */
     public boolean strnoencontrabusqueda = true;
+    /**
+     * Variable para mostrar un selectitem con lis tipos de usuario
+     */
+    private SelectItem[] tipousuariooption;
 
     /**
+     * /**
      * Inicio de los Get y Set de las variables anteriores
      */
     public Utilidades getUtilidad() {
@@ -497,6 +503,14 @@ public class Usuario implements Serializable {
         this.strnoencontrabusqueda = strnoencontrabusqueda;
     }
 
+    public SelectItem[] getTipousuariooption() {
+        return tipousuariooption;
+    }
+
+    public void setTipousuariooption(SelectItem[] tipousuariooption) {
+        this.tipousuariooption = tipousuariooption;
+    }
+
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -511,6 +525,7 @@ public class Usuario implements Serializable {
         llenarlocalidadusuario();
         cargarEntidades();
         llenarGrupos();
+        llenarTipoUsuario();
     }
 
     public String initusu() {
@@ -948,6 +963,7 @@ public class Usuario implements Serializable {
         listaentidadbooleana.clear();
         listaentidad.clear();
         inhabilitarseleccionentidades = false;
+        strbuscarentidad = "";
     }
 
     /**
@@ -958,8 +974,10 @@ public class Usuario implements Serializable {
      */
     public void seleccionarTodo(ValueChangeEvent event) {
         seleccionEntidad = ((Boolean) event.getNewValue()).booleanValue();
+        System.out.println("((Boolean) event.getNewValue()).booleanValue() = " + ((Boolean) event.getNewValue()).booleanValue());
         if (!seleccionEntidad) {
             limpiarSeleccionEntidad();
+            System.out.println("event = " + event);
         }
     }
 
@@ -972,6 +990,7 @@ public class Usuario implements Serializable {
      */
     public void seleccionarUnaEntidad(ValueChangeEvent event) {
         listaentidadbooleana.put((Tercero) datatablelistaentidades.getRowData(), (Boolean) event.getNewValue());
+
     }
 
     /**
@@ -996,7 +1015,7 @@ public class Usuario implements Serializable {
         }
         inhabilitarseleccionentidades = true;
         if (listaentidad.size() < 1) {
-            FacesUtils.addErrorMessage("Debe seleccionar una entidad");
+            FacesUtils.addErrorMessage(bundle.getString("debeeligirunentidad"));
         }
         return result;
 
@@ -1020,18 +1039,28 @@ public class Usuario implements Serializable {
         } else {
             inhabilitarseleccionentidades = false;
             strnoencontrabusqueda = false;
-            FacesUtils.addErrorMessage("No se encontro entidad en la busqueda");
+            FacesUtils.addErrorMessage(bundle.getString("noseencontrolaentidad"));
         }
     }
 
     public void llenarGrupos() {
-        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGruposFonade();
+        List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGrupos();
 
         gruposoption = new SelectItem[listaGrupo.size()];
         int i = 0;
         for (Grupo gene : listaGrupo) {
             SelectItem genItem = new SelectItem(gene.getGruGid(), gene.getGruNombre());
             gruposoption[i++] = genItem;
+        }
+    }
+     public void llenarTipoUsuario() {
+        List<Tipousuario> listaGrupo = getSessionBeanCobra().getCobraService().encontrarTipousuario();
+
+        tipousuariooption = new SelectItem[listaGrupo.size()];
+        int i = 0;
+        for (Tipousuario gene : listaGrupo) {
+            SelectItem genItem = new SelectItem(gene.getIntcodigotipousuario(), gene.getStrtipousuario());
+            tipousuariooption[i++] = genItem;
         }
     }
 }

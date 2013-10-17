@@ -215,6 +215,11 @@ public class RecursosConvenio implements Serializable {
                 FacesUtils.addErrorMessage("El valor de la cuota de gerencia es superior al valor disponible de la cuota de gerencia:" + n.getContrato().getValorDisponibleCuotaGerencia());
                 return null;
             }
+//                       
+//            if(n.getContrato().getAuxiliarValorGerencia().compareTo(fuenteRecursoConvenio.getValoraportado())<0){
+//                    FacesUtils.addErrorMessage("El valor de la cuota de gerencia es superior al valor disponible de la cuota de gerencia:" + n.getContrato().getAuxiliarValorGerencia());
+//                return null;
+//            }
 //            Validar la suma de las fuentes de recursos al valor estimado del convenio
 //            ValidacionesConvenio.validarSumaFuentesxValorAporte(n.getContrato().getNumvlrcontrato(), fuenteRecursoConvenio.getValoraportado(), sumafuentes);
             if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())

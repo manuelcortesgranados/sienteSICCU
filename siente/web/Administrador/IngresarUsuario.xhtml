@@ -74,55 +74,87 @@
                                 <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}">
                                     <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
                                     <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" execute="@this"
-                                              render="combogeneronuevo2"/>
+                                              render="tableasociarentidad"/>
                                 </h:selectOneMenu>
 
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Modulo"/>
-                                <h:selectOneMenu id="combogeneronuevo2" value="#{Ciudadano$PerfilCiudadano.intidmodulo}"  >
-                                    <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
-                                </h:selectOneMenu>
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Seleccione modulos"/>
 
+                                <h:panelGrid>
+                                    <rich:dataTable rendered="#{Ciudadano$PerfilCiudadano.inhabilitarseleccionmodulo}" binding="#{Ciudadano$PerfilCiudadano.datatablelistamodulos}"
+                                                    rows="10" var="varentidad"  value="#{Ciudadano$PerfilCiudadano.listaModulo}" id="tableasociarentidad">
+                                        <rich:column> 
+                                            <h:selectBooleanCheckbox value="#{Ciudadano$PerfilCiudadano.listamodulobooleana[varentidad]}"
+                                                                     immediate="true" valueChangeListener="#{Ciudadano$PerfilCiudadano.seleccionarUnModulo}">
+                                                <f:ajax event="click" render="@form"/>
 
-
-                            </h:panelGrid>
-                            <!--hr class="ikont-hr-separador" /-->
-                            <br/>
-
-                            <h:panelGroup styleClass="ikont-hpanel-img-registro">
-                                <h:panelGroup>
-                                    <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
-
-                                        <h:panelGroup styleClass="ikont-hpg-pgfotografia"   layout="block" id="pgfotografia">
-                                            <h:graphicImage  styleClass="ikont-hgi-pathImaCiu"   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" style="width:100% "  height="100%"/>
-                                        </h:panelGroup>
-
-                                    </h:panelGroup>
-                                    <a4j:commandLink styleClass="ikont-enlace-cargar-imagen-registro"   value="#{var.examinar}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
-                                    </a4j:commandLink> 
-
-                                </h:panelGroup>
-                                <br/>
-                                <h:panelGrid columns="3">
-                                    <a4j:commandButton id="btnGuardarCiudadano"  
-                                                       value="#{var.registrarme}"  
-                                                       action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano"  execute="@form"
-                                                       oncomplete="#{rich:component('confirmarCiudadano')}.show();">
-                                    </a4j:commandButton> 
-                                    <h:outputLabel rendered="false" value="o" />
-                                    <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
-                                    <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" />
+                                            </h:selectBooleanCheckbox>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{varentidad.strmodNmbre}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{varentidad.intmodulo}"/>
+                                        </rich:column>
+                                    </rich:dataTable>
+                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Tipo Usuario" style="position: relative;left: -211px;top:30px;"/>
                                 </h:panelGrid>
-                            </h:panelGroup>
 
-                        </a4j:region>
-                    </rich:panel>
-                </h:form>
-                <h:form>
+                            </h:panelGrid> 
+                            <!--<a4j:commandButton immediate="true" actionListener="{Ciudadano$PerfilCiudadano.listarEntidadesSeleccionadas}" value="Listar"/>-->
+
+                            <h:panelGroup id="ikont-panel-tipoUsuario">
+
+                                <h:selectOneMenu id="combocargartipousuario" value="#{Ciudadano$PerfilCiudadano.intidtipousuario}" style="position: relative;left: 225px;top: 4px;">
+                                    <f:selectItems value="#{Perfil$Usuario.tipousuariooption}" />
+                                    <a4j:ajax event="valueChange" execute="@this" render="ikont-panel-localidad,ikont-panel-tipoUsuario,ikont-panel-entidad" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
+                                </h:selectOneMenu>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <h:panelGroup id="ikont-panel-localidad"  rendered="#{Ciudadano$PerfilCiudadano.intidtipousuario==2}">
+                                    <rich:collapsiblePanel header="Seleccione la localidad"   expanded="true" switchType="ajax" id="asociarentidad">
+                                        <h:outputLabel  styleClass="ikont-outtext-subtitulo"   id="lblclasificacionProyecto"  value="Tipo origen" for="comboclasificacionproyecto" style="position: relative;left: -270px;top: -5px;"/>
+                                        <h:selectOneMenu id="comboclasificacionproyecto" value="#{Ciudadano$PerfilCiudadano.intorigen}" disabled="#{Supervisor$IngresarNuevaObra.tipoOrigenSoloLectura}" style="top: 29px;position: relative;left: 145px;">  
+                                            <f:selectItem itemLabel="Nacional" itemValue="1" />
+                                            <f:selectItem itemLabel="Departamental" itemValue="2" />
+                                            <a4j:ajax event="valueChange" execute="@this,combodepartamentoproyecto"  render="panelLocalidadProyecto,combodepartamentoproyecto" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
+                                        </h:selectOneMenu>
+
+
+
+                                        <h:panelGroup layout="block" id="panelLocalidadProyecto"  >
+                                            <h:panelGroup    layout="block" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" >
+                                                <h:panelGroup id="paneldeptomuniproyecto" rendered="#{Ciudadano$PerfilCiudadano.intorigen!=1}">
+                                                    <h:panelGroup id="gpdeptomuniproyecto" rendered="#{Ciudadano$PerfilCiudadano.intorigen ==2}">
+                                                        <h:panelGrid cellspacing="5" cellpadding="5" columns="2" style="position: relative;left: -2px;top: 23px;">
+                                                            <h:selectOneMenu id="combodepartamentoproyecto" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Ciudadano$PerfilCiudadano.codDepartamento}" style="position: relative;top: 11px;left: 213px;">
+                                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.departamento}" />
+                                                                <a4j:ajax execute="@this, combodepartamentoproyecto" event="valueChange" listener="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
+                                                                          render="panelmunipioproyecto" />
+                                                            </h:selectOneMenu>
+                                                        </h:panelGrid>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </rich:collapsiblePanel>
+                                </h:panelGroup>
+
+                                <h:panelGroup id="ikont-panel-entidad" rendered="#{Ciudadano$PerfilCiudadano.intidtipousuario==4}">
+                                    <h:form>
                     <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"   expanded="true" switchType="ajax" id="asociarentidad">
 
                         <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
                             <h:panelGroup>
-                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;width: 90%;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
+                                    <interkont:spacer/>
+                                    <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
+                                                 onblur="clearText(this);"  onclick="this.value = '';" />
+                                    <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
+                                                        actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
+                                </h:panelGrid>
+                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
                                                 rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
                                     <rich:column>
                                         <f:facet name="header">
@@ -152,31 +184,19 @@
                                     </rich:column>
                                 </rich:dataTable>
                                 <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
-                                <h:outputText value="No se encontro Entidades en la busqueda"/>
+                                    <h:outputText value="#{var.noseencontrolaentidad}"/>
                                 </h:panelGroup>
-                                <center>
-                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
-                                </center>
+                                <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
                             </h:panelGroup>
-                            <h:panelGroup>
+                            <rich:column>
                                 <center>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="Listar"/>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="#{var.listar} #{var.entidad} #{var.seleccion}"/>
                                     <br/>
                                     <br/>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="Cancelar"/>
+                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="#{var.cancelar}"/>
                                 </center>
-                            </h:panelGroup>
-                            <h:panelGrid id="idbuscarentidad" style="position: relative;">
-                                <center>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
-                                        <interkont:spacer/>
-                                        <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
-                                                     onblur="clearText(this);"  onclick="this.value = '';" />
-                                        <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
-                                                            actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
-                                    </h:panelGrid>
-                                </center>
+                            </rich:column>
+                            <h:panelGrid id="idbuscarentidad">
                                 <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}">
                                     <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
                                                     rows="5" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
@@ -184,7 +204,6 @@
                                             <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
                                                                      immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
                                                 <f:ajax event="click" render="@form"/>
-
                                             </h:selectBooleanCheckbox>
                                         </rich:column>
                                         <rich:column>
@@ -194,15 +213,54 @@
                                             <h:outputText value="#{varentidad.strnombrecompleto}"/>
                                         </rich:column>
                                     </rich:dataTable>
-                                    <center>
-                                        <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()>4}" for="repeatentidadseleciconadas" maxPages="5" />
-                                    </center>
+                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()> 4}" for="repeatentidadseleciconadas" maxPages="5" />
                                 </h:panelGroup>
                             </h:panelGrid>
                         </h:panelGrid>
 
                     </rich:collapsiblePanel>
                 </h:form> 
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+
+                            <!--hr class="ikont-hr-separador" /-->
+                            <br/>
+                            <h:panelGroup id="ikont-panel-img-usuAdmin" style="position: relative;top: 28px;">
+                                <h:panelGroup>
+                                    <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
+
+                                        <h:panelGroup styleClass="ikont-hpg-pgfotografia-ingreso-usu-admin"   layout="block" id="pgfotografia">
+                                            <h:graphicImage  styleClass="ikont-hgi-pathImaCiu"   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" style="width:100% "  height="100%"/>
+                                        </h:panelGroup>
+
+                                    </h:panelGroup>
+                                    <a4j:commandLink styleClass="ikont-enlace-cargar-imagen-registro"   value="#{var.examinar}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this" 
+                                                     style="position: relative;top: 10px;left: 504px;text-align: center;">   
+                                    </a4j:commandLink> 
+
+                                </h:panelGroup>
+                                <br/>
+                                <h:panelGrid columns="3">
+                                    <a4j:commandButton id="btnGuardarCiudadano"  
+                                                       value="#{var.guardar}"  
+                                                       action="#{Ciudadano$PerfilCiudadano.MostrarMensajeNuevoUsuario}" render="pgguardarCiudadano"  execute="@form"
+                                                       oncomplete="#{rich:component('confirmarCiudadano')}.show();"
+                                                       style="position: relative;left: 480px;top: 25px;">
+                                    </a4j:commandButton> 
+                                    <h:outputLabel rendered="false" value="o" />
+                                    <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
+                                    <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" 
+                                                     style="position: relative;left: 484px;top: 25px;"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
+                        </a4j:region>
+                    </rich:panel>
+                </h:form>
+
+
+
+
             </ui:define>
         </ui:composition>
     </f:view>

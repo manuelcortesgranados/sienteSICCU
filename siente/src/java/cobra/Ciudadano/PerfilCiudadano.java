@@ -50,16 +50,21 @@ import java.text.NumberFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import org.richfaces.component.UIDataTable;
 import org.richfaces.component.UIRepeat;
 
 /**
@@ -124,6 +129,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     private String obraAsiVa = new String();
     private String obraDeberiaIr = new String();
     private boolean cambioFotoCiudadano;
+    private String CodDepartamento;
 
     public boolean isCambioFotoCiudadano() {
         return cambioFotoCiudadano;
@@ -157,6 +163,8 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
      */
     private int intidgrupo = 0;
     private int intidmodulo = 0;
+    private int intidtipousuario=0;
+    private int intorigen=0;
     List<Modulo> listaModulo = new ArrayList<Modulo>();
     /**
      * Variable para mostrar un selectitem con los Modulos
@@ -435,7 +443,30 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     public void setListaModulo(List<Modulo> listaModulo) {
         this.listaModulo = listaModulo;
     }
-    
+
+    public int getIntidtipousuario() {
+        return intidtipousuario;
+    }
+
+    public void setIntidtipousuario(int intidtipousuario) {
+        this.intidtipousuario = intidtipousuario;
+    }
+
+    public int getIntorigen() {
+        return intorigen;
+    }
+
+    public void setIntorigen(int intorigen) {
+        this.intorigen = intorigen;
+    }
+
+    public String getCodDepartamento() {
+        return CodDepartamento;
+    }
+
+    public void setCodDepartamento(String CodDepartamento) {
+        this.CodDepartamento = CodDepartamento;
+    }
 
     /**
      * Constructor del perfilCiudadano el cual invoca los métodos necesarios
@@ -686,11 +717,19 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     }
 
     public String MostrarMensaje() {
-        System.out.println("grupo " + intidgrupo);
-        System.out.println("modulo " + intidmodulo);
         getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(false);
         guardarCiudadano();
 
+        return null;
+    }
+    public String MostrarMensajeNuevoUsuario() { 
+         if(intorigen==1){
+            CodDepartamento="169";
+            System.out.println("codigo departamentp" + CodDepartamento);
+        }
+        getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(false);
+        guardarUsuario();
+        System.out.println("El usuario ha Sido ingresado");
         return null;
     }
 
@@ -1528,5 +1567,97 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
             SelectItem genItem = new SelectItem(gene.getIntmodulo(), gene.getStrmodNmbre());
             modulosoption[i++] = genItem;
         }
+    }
+    
+   /**
+     * Variable Utilizada para almacenar el selectBooleanCheckbox
+     */
+    private boolean seleccionModulo;
+
+/**
+     * Lista utilizada para mostrar las entidades seleccionadas
+     */
+    private Map<Modulo, Boolean> listamodulobooleana = new HashMap<Modulo, Boolean>();
+        /**
+     * Tabla utilizada para mostrar la lista de los modulos
+     */
+    private UIDataTable datatablelistamodulos;
+        /**
+     * Variable para inhabilitar la tabla datatablelistamodulos
+     */
+    private boolean inhabilitarseleccionmodulo = true;
+
+    public boolean isSeleccionModulo() {
+        return seleccionModulo;
+    }
+
+    public void setSeleccionModulo(boolean seleccionModulo) {
+        this.seleccionModulo = seleccionModulo;
+    }
+
+    public Map<Modulo, Boolean> getListamodulobooleana() {
+        return listamodulobooleana;
+    }
+
+    public void setListamodulobooleana(Map<Modulo, Boolean> listamodulobooleana) {
+        this.listamodulobooleana = listamodulobooleana;
+    }
+
+    public UIDataTable getDatatablelistamodulos() {
+        return datatablelistamodulos;
+    }
+
+    public void setDatatablelistamodulos(UIDataTable datatablelistamodulos) {
+        this.datatablelistamodulos = datatablelistamodulos;
+    }
+
+    public boolean isInhabilitarseleccionmodulo() {
+        return inhabilitarseleccionmodulo;
+    }
+
+    public void setInhabilitarseleccionmodulo(boolean inhabilitarseleccionmodulo) {
+        this.inhabilitarseleccionmodulo = inhabilitarseleccionmodulo;
+    }
+    public void seleccionarTodo(ValueChangeEvent event) {
+        seleccionModulo = ((Boolean) event.getNewValue()).booleanValue();
+        if (!seleccionModulo) {
+            limpiarSeleccionModulo();
+        }
+    }
+    public void limpiarSeleccionModulo() {
+        seleccionModulo = false;
+        listamodulobooleana.clear();
+//         inhabilitarseleccionentidades = false;
+    }
+     public void seleccionarUnModulo(ValueChangeEvent event) {
+//        entidad = new ArrayList<Tercero>();
+        System.out.println("ingresa aqui con " + datatablelistamodulos.getRowData());
+        seleccionModulo = false;
+        listamodulobooleana.put((Modulo) datatablelistamodulos.getRowData(), (Boolean) event.getNewValue());
+        System.out.println("Booleano de tercero " + listamodulobooleana.put((Modulo) datatablelistamodulos.getRowData(), (Boolean) event.getNewValue())+ "Esto" +datatablelistamodulos);
+        
+     }
+
+     public List<Modulo> listarEntidadesSeleccionadas() {
+        if (isSeleccionModulo()) {
+            return getListaModulo();
+        }
+        List<Modulo> result = new ArrayList<Modulo>();
+        Iterator<?> iterator = listamodulobooleana.keySet().iterator();
+        listaModulo = new ArrayList<Modulo>();
+        while (iterator.hasNext()) {
+
+            Modulo key = (Modulo) iterator.next();
+            if (listamodulobooleana.get(key)) {
+                result.add(key);
+                System.out.println("listado de entidades seleccionadas" + result.add(key));
+                System.out.println("Listado  " + key.getIntmodulo());
+
+                listaModulo.add(key);
+            }
+        }
+//        inhabilitarseleccionentidades = false;
+        return result;
+
     }
 }

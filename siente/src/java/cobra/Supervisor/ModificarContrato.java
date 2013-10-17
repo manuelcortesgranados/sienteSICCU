@@ -406,9 +406,9 @@ public class ModificarContrato implements Serializable {
         contratoModificado.setNumvlrcontrato(contratoModificado.getNumrecursosch().add(contratoModificado.getNumrecursospropios()).add(contratoModificado.getNumrecursostercero()));
         List<Planificacionpago> lstPlanificacion = getSessionBeanCobra().getCobraService().encontrarPlanificacionpagoxContrato(contratoModificado);
         if (getNuevoContratoBasico().validarDiligenciamientoFormadePago()) {
-            getSessionBeanCobra().getCobraService().guardarContrato(contratoModificado);
+            getSessionBeanCobra().getCobraService().guardarContrato(contratoModificado,getSessionBeanCobra().getUsuarioObra());
             if (getNuevoContratoBasico().getContrato().getContrato() != null) {
-                getSessionBeanCobra().getCobraService().guardarContrato(contratoModificado.getContrato());
+                getSessionBeanCobra().getCobraService().guardarContrato(contratoModificado.getContrato(),getSessionBeanCobra().getUsuarioObra());
             }
             getSessionBeanCobra().getCobraService().borrarPlanificacionPagos(lstPlanificacion);
             getSessionBeanCobra().getCobraService().guardarListaPlanificaciones(getNuevoContratoBasico().getLisplanifiactapar());
@@ -708,7 +708,7 @@ public class ModificarContrato implements Serializable {
                 //Verificar si tiene contrato padre
                 if (getNuevoContratoBasico().getContrato().getContrato() != null) {
                     //guardar el contrato padre con la modificacion en valor suma hijos
-                    getSessionBeanCobra().getCobraService().guardarContrato(getNuevoContratoBasico().getContrato().getContrato());
+                    getSessionBeanCobra().getCobraService().guardarContrato(getNuevoContratoBasico().getContrato().getContrato(),getSessionBeanCobra().getUsuarioObra());
                 }
 
 

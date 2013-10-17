@@ -43,7 +43,7 @@ public class ContratoDTO implements IsSerializable {
     private BigDecimal auxiliarValorContrato;
     private BigDecimal auxiliarValorGerencia;
 
-    public ContratoDTO() {
+    public ContratoDTO() {       
     }
 
     public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, String textobjeto, int estadoConvenio, int intduraciondias, TipocontratoDTO tipocontrato, String strnombrecorto) {
@@ -57,7 +57,7 @@ public class ContratoDTO implements IsSerializable {
         this.estadoConvenio = estadoConvenio;
         this.intduraciondias = intduraciondias;
         this.tipocontrato = tipocontrato;
-        this.nombreAbreviado = strnombrecorto;
+        this.nombreAbreviado = strnombrecorto;        
     }
 
 //    
