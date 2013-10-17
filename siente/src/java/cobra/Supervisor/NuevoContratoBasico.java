@@ -5141,7 +5141,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
-        filtrocontrato.getEstadoConvenio();
+        filtrocontrato.getEstadoConvenio();        
         limpiarContrato();
         primeroDetcontrato();
         primeroDetcontratoContratista(); // ojo porque anteriormente no se llamaba desde aca.    
@@ -7100,6 +7100,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String listarPorTipoContrato() {
         switch (filtrocontrato.getTipocontrato()) {
+            case 0:
+                iniciarDetaContrato();
+                break;
             case 1:
                 tipoContCon = "Obra";
                 iniciarDetaContrato();
