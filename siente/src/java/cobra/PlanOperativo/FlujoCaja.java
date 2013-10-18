@@ -610,7 +610,7 @@ public class FlujoCaja implements Serializable {
     public void guardarFlujoCaja() {
         guardarPeriodosConvenio();
 
-        if (validarFlujoCaja()) {
+        //if (validarFlujoCaja()) {
             for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
                 flujoIngresosGuardar.refrescarPeriodos(periodosConvenio);
 
@@ -646,7 +646,7 @@ public class FlujoCaja implements Serializable {
                     }
                 }
             }
-        }
+        //}
     }
 
     /**
