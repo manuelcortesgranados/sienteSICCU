@@ -178,7 +178,6 @@ public class CasteoGWT implements Serializable {
 //        ac.setDuration(contrato.getIntduraciondias());
 //        return contratoDTO;
 //    }
-
     /**
      * **********************************************************
      * public static ActividadobraDTO
@@ -422,7 +421,7 @@ public class CasteoGWT implements Serializable {
         obraFuenteRecurso.setValorDisponible(obrafuenterecursoobra.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursoobra.getVigencia());
         obraFuenteRecurso.setNombreEntidad(obrafuenterecursoobra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto());
-        obraFuenteRecurso.setIdgwt(obrafuenterecursoobra.getIdgwt());
+        obraFuenteRecurso.setEstaEnFuenteRecurso(obrafuenterecursoobra.isEstaenfuenterecurso());
         //obraFuenteRecurso.setN
         return obraFuenteRecurso;
     }
@@ -588,6 +587,7 @@ public class CasteoGWT implements Serializable {
         fuenteRecursoDto.setValoraportado(fuenteRecurso.getValoraportado());
         fuenteRecursoDto.setValorcuotagerencia(fuenteRecurso.getValorcuotagerencia());
         fuenteRecursoDto.setVigencia(fuenteRecurso.getVigencia());
+        fuenteRecursoDto.setEstaEnFuenteRecurso(fuenteRecurso.isEstaEnFuenteRecurso());
 
         return fuenteRecursoDto;
     }
@@ -634,8 +634,6 @@ public class CasteoGWT implements Serializable {
 //        
 //        return fuenteRecurso;
 //    }
-
-    
     /*
      * metodo que se encarga de convertir una lista de FuenterecursosconvenioDTO a Fuenterecursosconvenio
      * @param Set<FuenterecursosconvenioDTO> fuentesRecursosConvenioDto las que se van a castear.
@@ -840,8 +838,6 @@ public class CasteoGWT implements Serializable {
 
     }
 
-
-    
     public static List<DependenciaDTO> castearSetDependenciaTOaDependenciaDTO(Set<Dependencia> SetDependencias, ActividadobraDTO acti, ContratoDTO convenio) {
         List<DependenciaDTO> setDependencias = new ArrayList<DependenciaDTO>(SetDependencias.size());
         for (Dependencia dep : SetDependencias) {
@@ -941,7 +937,7 @@ public class CasteoGWT implements Serializable {
         obraFuenteRecurso.setValor(obrafuenterecursosDto.getValor());
         obraFuenteRecurso.setValorDisponible(obrafuenterecursosDto.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursosDto.getVigencia());
-        obraFuenteRecurso.setIdgwt(obrafuenterecursosDto.getIdgwt());
+        obraFuenteRecurso.setEstaenfuenterecurso(obrafuenterecursosDto.isEstaEnFuenteRecurso());
 
         return obraFuenteRecurso;
     }
@@ -1286,10 +1282,11 @@ public class CasteoGWT implements Serializable {
             {
                 //Actualiza el valor disponible de la fuente de recursos
                 fuente.setValorDisponible(valordisponibleactua);
+                fuente.setEstaEnFuenteRecurso(true);
+                System.out.println("fuente en ultimo metodo = " + fuente.isEstaEnFuenteRecurso());
                  return fuente;
             }
         }
         return null;
     }
-    
                 }

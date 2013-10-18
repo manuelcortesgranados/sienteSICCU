@@ -227,6 +227,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 processFolder(taskStore, base);
             }
         }
+  
 
         numeracionActividades = (taskStore.getAllItemsCount()) + 1;
         service.setLog("En numeracionActi actua" + numeracionActividades, null);
