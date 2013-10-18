@@ -25,9 +25,54 @@ public class EstiloGrafico {
     private boolean verCursor;
     private boolean ocultarEjeY;
     private boolean animado;
+    private boolean rotate;
+    private boolean degradadohorizontal = false;
+    private boolean avancefisico = false;
     private String tamanoTexto;
     private String tipoTexto;
     private String tipoPila;
+    private String gridalpha = "0.15";
+    private String colorlineasplano = "#AA975E";
+
+    public boolean isAvancefisico() {
+        return avancefisico;
+    }
+
+    public void setAvancefisico(boolean avancefisico) {
+        this.avancefisico = avancefisico;
+    }
+
+    public String getColorlineasplano() {
+        return colorlineasplano;
+    }
+
+    public void setColorlineasplano(String colorlineasplano) {
+        this.colorlineasplano = colorlineasplano;
+    }
+
+    public boolean isDegradadohorizontal() {
+        return degradadohorizontal;
+    }
+
+    public void setDegradadohorizontal(boolean degradadohorizontal) {
+        this.degradadohorizontal = degradadohorizontal;
+    }
+    
+    public String getGridalpha() {
+        return gridalpha;
+    }
+
+    public void setGridalpha(String gridalpha) {
+        this.gridalpha = gridalpha;
+    }
+    
+    public boolean isRotate() {
+        return rotate;
+    }
+
+    public void setRotate(boolean rotate) {
+        this.rotate = rotate;
+    }
 
     public boolean isAnimado() {
         return animado;

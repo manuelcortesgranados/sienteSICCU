@@ -58,18 +58,26 @@ public class GraficoAvanceFisico implements Serializable{
         grafico.setTipoGrafico(GraficoSeries.TIPO_COLUMNAS);
         grafico.setValorYMaximo("100");
         grafico.getEstilo().setPorcentaje(true);
+        grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setTresD(false);
         grafico.getEstilo().setOcultarEjeY(true);
-        grafico.getEstilo().setColorTexto("#707070");
-        grafico.getEstilo().setTamanoTexto("9");
-        grafico.getEstilo().setTipoPila("regular");
+        grafico.getEstilo().setAvancefisico(true);
+        grafico.getEstilo().setColorTexto("#000");
+        grafico.getEstilo().setTipoTexto("open");        
+        grafico.getEstilo().setTamanoTexto("0.8em");
+        grafico.getEstilo().setTipoPila("none");
+        grafico.getEstilo().setRotate(true);
+        grafico.getEstilo().setGridalpha("0");
+        grafico.getEstilo().setColorlineasplano("transparent");
+        grafico.getEstilo().setDegradadohorizontal(true);
+        
 
         ConjuntoDatosGrafico conjuntoDatosAvanceFisico = new ConjuntoDatosGrafico();
         conjuntoDatosAvanceFisico.setCodigo("avancefisico");
         EstiloGrafico estiloAvance = new EstiloGrafico();
-        estiloAvance.setColorSerie("#272564");
-        estiloAvance.setColorSerie2("#3ba7e5");
-        estiloAvance.setColorTexto("#FFFFFF");
+        estiloAvance.setColorSerie("#257500");
+        estiloAvance.setColorSerie2("#9CFF00");
+        estiloAvance.setColorTexto("#000");
         estiloAvance.setPorcentaje(true);
         conjuntoDatosAvanceFisico.setEstilo(estiloAvance);
 

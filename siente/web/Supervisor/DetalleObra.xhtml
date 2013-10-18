@@ -75,7 +75,7 @@
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
             </h:form>
 
-            <h:panelGroup rendered="#{var.nuevomapa}" styleClass="ikont-hpg-zoom-detalleobra">
+            <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">
                 <h:form prependId="false">
                     <h:inputHidden id="estaen-zoom" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}" />
                 </h:form>
@@ -102,7 +102,11 @@
                             <h:panelGrid columns="3">
                                 <h:outputLabel>Tiempo para la entrega</h:outputLabel>
                                 <h:outputLabel>Estado</h:outputLabel>
-                                <h:outputLabel>Debería ir en</h:outputLabel>
+                                <h:outputLabel styleClass="ikont-hot-titulodeberiair">Debería ir en
+                                    <h:outputText styleClass="ikont-hcl-deberiair ikont-hot-deberia" value="#{Supervisor$DetalleObra.obraMapa.deberiaestar/100}">
+                                        <f:convertNumber pattern="###.## %" />
+                                    </h:outputText>
+                                </h:outputLabel>
                                 <div class="your-clock"></div>
                                 <h:panelGrid  >
                                     <h:outputText styleClass="ikont-hcl-#{Supervisor$DetalleObra.semaforo} ikont-hot-semaforo dtsemafomoro" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
@@ -111,15 +115,11 @@
                                     <h:commandLink styleClass="ikont-hcl- lineavance" />
                                     <h:commandLink id="line-semaforo" styleClass="ikont-hcl-line-semaforo puntoavance" />
                                 </h:panelGrid>
-                                <h:panelGrid  >
-                                    <h:outputText styleClass="ikont-hcl-deberiair ikont-hot-deberia" value="#{Supervisor$DetalleObra.obraMapa.deberiaestar/100}">
-                                        <f:convertNumber pattern="###.## %" />
-                                    </h:outputText>
-                                    <h:panelGroup layout="block" styleClass="ikont-hpg-deberia_ir">
-                                        <h:commandLink styleClass="ikont-hcl- lineavance" />
-                                        <h:commandLink id="line-deberia" styleClass="ikont-hcl-line-deberia puntoavance" />
-                                    </h:panelGroup>
-                                </h:panelGrid>
+                                <h:panelGroup layout="block" >
+                                    <div id="graficoAvanceFisico" style="width: 350px; height: 100px; margin-top: -44px;">
+                                    </div>
+                                    <h:outputText  styleClass="ikont- hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
+                                </h:panelGroup>
 
                             </h:panelGrid>
                         </rich:collapsiblePanel>
@@ -176,12 +176,12 @@
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
-                                <h:panelGrid columns="2">
+                                <h:panelGrid columns="1">
                                     <h:panelGroup layout="block" styleClass="content-info-contrato">
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-contrante img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-contrataneciu" value="#{var.contrataneciu}"></h:outputText><br/>
+                                                <h:outputText styleClass="ikont- hot-contrataneciu" value="#{var.contrataneciu}: "></h:outputText>
                                                 <h:outputText styleClass="ikont- hot-supervisorciu" value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}"></h:outputText>
                                             </h:panelGroup>
 
@@ -191,7 +191,7 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-nocontrato img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-supervisorciu" value="#{var.supervisorciu}" ></h:outputText><br/>
+                                                <h:outputText styleClass="ikont- hot-supervisorciu" value="#{var.supervisorciu}: " ></h:outputText>
                                                 <h:outputText styleClass="ikont- hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
                                             </h:panelGroup>
                                         </h:panelGrid>
@@ -201,7 +201,7 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}:"></h:outputText><br/>
+                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText><br/>
                                                 <h:outputText styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
                                             </h:panelGroup>
                                         </h:panelGrid>
@@ -210,7 +210,7 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-contraticiu" value="#{var.contratistaciu}" /><br/>
+                                                <h:outputText styleClass="ikont- hot-contraticiu" value="#{var.contratistaciu}: " />
                                                 <h:outputText styleClass="ikont- hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
                                                 <h:outputText styleClass="ikont- hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
                                                     <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
@@ -434,18 +434,10 @@
                 } else {
                     _porst = parseInt(_porst) * 1.8;
                 }
-                var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
-                _pordb = _pordb.replace(' %', '');
-                if (parseInt(_porst) > 5) {
-                    _pordb = (parseInt(_pordb) - 2) * 1.8;
-                } else {
-                    _pordb = parseInt(_pordb) * 1.8;
-                }
 
                 var _linese = document.getElementsByClassName('ikont-hcl-line-semaforo')[0];
-                var _linedb = document.getElementsByClassName('ikont-hcl-line-deberia')[0];
                 _linese.setAttribute("style", "margin-left : " + _porst + "px");
-                _linedb.setAttribute("style", "margin-left : " + _pordb + "px");
+
 
             });
 
