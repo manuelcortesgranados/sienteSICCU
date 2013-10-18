@@ -1637,11 +1637,22 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
             modulosoption[i++] = genItem;
         }
     }
-     public void listarGrupoModulo() {
+    
+        public String listarGrupoModulo() {       
         jsfusuariogrupo = new JsfUsuarioGrupo();
         jsfusuariogrupo.setJsfUsuario(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
         jsfusuariogrupo.setModulo(getSessionBeanCobra().getCobraService().obtenerModulo(intidmodulo));
         jsfusuariogrupo.setGrupo(getSessionBeanCobra().getCobraService().obtenergrupo(intidgrupo));
+        if (!listausuGrupos.isEmpty()) {
+            for (JsfUsuarioGrupo g : listausuGrupos) {
+                if (jsfusuariogrupo.getGrupo().getGruGid() == g.getGrupo().getGruGid()) {                   
+                    FacesUtils.addErrorMessage("El grupo ya se ha seleccionado");
+                    return null;
+                }
+            }
+        }
+        System.out.println("usario grupos = " + listausuGrupos.size());
         listausuGrupos.add(jsfusuariogrupo);
+        return null;
     }
 }
