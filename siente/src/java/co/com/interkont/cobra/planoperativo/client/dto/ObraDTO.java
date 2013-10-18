@@ -23,7 +23,7 @@ public class ObraDTO implements IsSerializable {
     private Date fechaInicio;
     private Date fechaFin;
     private Set objetivoses = new LinkedHashSet(0);
-    private Set obrafuenterecursosconvenioses = new LinkedHashSet(0);
+    private Set<ObrafuenterecursosconveniosDTO> obrafuenterecursosconvenioses = new LinkedHashSet(0);
     private Set actividadobras = new LinkedHashSet(0);
     private BigDecimal valorDisponible;
     private BigDecimal valor;
@@ -73,14 +73,14 @@ public class ObraDTO implements IsSerializable {
     /**
      * @return the obrafuenterecursosconvenioses
      */
-    public Set getObrafuenterecursosconvenioses() {
+    public Set<ObrafuenterecursosconveniosDTO> getObrafuenterecursosconvenioses() {
         return obrafuenterecursosconvenioses;
     }
 
     /**
      * @param obrafuenterecursosconvenioses the obrafuenterecursosconvenioses to set
      */
-    public void setObrafuenterecursosconvenioses(Set obrafuenterecursosconvenioses) {
+    public void setObrafuenterecursosconvenioses(Set<ObrafuenterecursosconveniosDTO> obrafuenterecursosconvenioses) {
         this.obrafuenterecursosconvenioses = obrafuenterecursosconvenioses;
     }
 

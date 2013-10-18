@@ -7079,9 +7079,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
+                //CasteoGWT.setActividadRaiz(act);
                 Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
                 activi.setContrato(contrato);
                 //Castear dependencias;
+                
 
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
@@ -7329,15 +7331,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      */
     public void asignarNumeracionActividadesConsultadas(Actividadobra actividaObraPrincipal, int numeracion) {
-        actividaObraPrincipal.setNumeracion(numeracion);
+              actividaObraPrincipal.setNumeracion(numeracion);
         if (!actividaObraPrincipal.getActividadobras().isEmpty()) {
             for (Iterator it = actividaObraPrincipal.getActividadobras().iterator(); it.hasNext();) {
                 Actividadobra actividadHija = (Actividadobra) it.next();
                 asignarNumeracionActividadesConsultadas(actividadHija, numeracion++);
 }
         }
-    }
-
+        }
+         
     public void asignarPredecesorActividadesConsultadas(Set dependenciasGenerales) {
         for (Iterator it = dependenciasGenerales.iterator(); it.hasNext();) {
             Dependencia dependencia = (Dependencia) it.next();
