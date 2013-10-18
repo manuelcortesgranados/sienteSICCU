@@ -422,7 +422,8 @@ public class FlujoCaja implements Serializable {
         for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosConvenio()) {
             FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
 
-
+            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
+            
             if (planifmovimientoconvenioproyecto.isEmpty()) {
                 itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio, periodosConvenio);
                 itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
@@ -610,7 +611,7 @@ public class FlujoCaja implements Serializable {
     public void guardarFlujoCaja() {
         guardarPeriodosConvenio();
 
-        if (validarFlujoCaja()) {
+        //if (validarFlujoCaja()) {
             for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
                 flujoIngresosGuardar.refrescarPeriodos(periodosConvenio);
 
@@ -646,7 +647,7 @@ public class FlujoCaja implements Serializable {
                     }
                 }
             }
-        }
+        //}
     }
 
     /**
