@@ -422,6 +422,7 @@ public class CasteoGWT implements Serializable {
         obraFuenteRecurso.setValorDisponible(obrafuenterecursoobra.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursoobra.getVigencia());
         obraFuenteRecurso.setNombreEntidad(obrafuenterecursoobra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto());
+        obraFuenteRecurso.setIdgwt(obrafuenterecursoobra.getIdgwt());
         //obraFuenteRecurso.setN
         return obraFuenteRecurso;
     }
@@ -940,6 +941,7 @@ public class CasteoGWT implements Serializable {
         obraFuenteRecurso.setValor(obrafuenterecursosDto.getValor());
         obraFuenteRecurso.setValorDisponible(obrafuenterecursosDto.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursosDto.getVigencia());
+        obraFuenteRecurso.setIdgwt(obrafuenterecursosDto.getIdgwt());
 
         return obraFuenteRecurso;
     }
@@ -1288,6 +1290,6 @@ public class CasteoGWT implements Serializable {
             }
         }
         return null;
-    }       
-
-}
+    }
+    
+                }

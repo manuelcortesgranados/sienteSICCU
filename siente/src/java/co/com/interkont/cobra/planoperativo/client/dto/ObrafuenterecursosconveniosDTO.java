@@ -30,6 +30,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private String descripcionaporte="";
     private String nombreEntidadTipo;
     private boolean estaEnFuenteRecurso;
+    private int idgwt= hashCode();
 
     public ObrafuenterecursosconveniosDTO() {
     }
@@ -363,4 +364,13 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     public void setEstaEnFuenteRecurso(boolean estaEnFuenteRecurso) {
         this.estaEnFuenteRecurso = estaEnFuenteRecurso;
     }
+
+    public int getIdgwt() {
+        return idgwt;
+    }
+
+    public void setIdgwt(int idgwt) {
+        this.idgwt = idgwt;
+    }
+    
 }
