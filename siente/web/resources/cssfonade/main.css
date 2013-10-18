@@ -2251,11 +2251,14 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hcl-deberiair{
     font-family: open;
-    font-size: 2.8em;
+    font-size: 1em;
     text-decoration: none;
-    color: #58595B;
-    position: relative;
-    top: -2px;
+    color: #000;
+}
+
+#graficoAvanceFisico > div {
+    width: 100%;
+    height: 100%;
 }
 
 .ikont-hcl-deberiair:hover{
@@ -2386,11 +2389,10 @@ input[type="text"], input[type="password"], select{
 }
 
 .content-info-contrato{
-    width: 250px;
-    height: 100px;
+    width: 450px;
+    height: 50px;
     overflow: hidden;
-    border: solid 1px #58595B;
-    border-radius: 2px;
+    border-bottom: dashed 1px #58595B;
     margin: 0px 5px 4px;
 }
 
@@ -4577,4 +4579,12 @@ a:hover {
     -o-background-size : cover;
     -moz-background-size : cover;
     -ms-background-size : cover;
+}
+
+#gpPrincipalInfCiudad-zoom .rf-cp-lbl{
+    color: black;
+}
+
+.ikont-hot-titulodeberiair{
+    margin-left: 14px;
 }
