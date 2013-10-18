@@ -9,8 +9,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
-import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
@@ -20,20 +18,15 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
-import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
@@ -47,14 +40,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
-import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
-import com.sencha.gxt.widget.core.client.event.BlurEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberField;
@@ -624,11 +615,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
-        lstHijos.add(hitoFechaSuscripcion);//el pade de esta es actividadObraContrato
+        lstHijos.add(hitoFechaSuscripcion);
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijos.add(hitoFechaSuscripcionActa);
+        
+        Date fechaInicioPrecontractual=CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
+        fechaInicioPrecontractual=new Date(fechaInicioPrecontractual.getDate()-1);
 
 
         ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);

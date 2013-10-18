@@ -57,6 +57,8 @@
                                 </h:inputText>
                                 <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
                                     <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
+                                     <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarTiposGrupo}" execute="@this"
+                                                      render="combocargargrupos"/>
                                 </h:selectOneMenu> 
 
                                 <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
@@ -68,38 +70,7 @@
                                     <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                                 </h:selectOneMenu>
 
-
-
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Grupo"/>
-                                <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}">
-                                    <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
-                                    <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" execute="@this"
-                                              render="tableasociarentidad"/>
-                                </h:selectOneMenu>
-
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Seleccione modulos"/>
-
-                                <h:panelGrid>
-                                    <rich:dataTable rendered="#{Ciudadano$PerfilCiudadano.inhabilitarseleccionmodulo}" binding="#{Ciudadano$PerfilCiudadano.datatablelistamodulos}"
-                                                    rows="10" var="varentidad"  value="#{Ciudadano$PerfilCiudadano.listaModulo}" id="tableasociarentidad">
-                                        <rich:column> 
-                                            <h:selectBooleanCheckbox value="#{Ciudadano$PerfilCiudadano.listamodulobooleana[varentidad]}"
-                                                                     immediate="true" valueChangeListener="#{Ciudadano$PerfilCiudadano.seleccionarUnModulo}">
-                                                <f:ajax event="click" render="@form"/>
-
-                                            </h:selectBooleanCheckbox>
-                                        </rich:column>
-                                        <rich:column>
-                                            <h:outputText value="#{varentidad.strmodNmbre}"/>
-                                        </rich:column>
-                                        <rich:column>
-                                            <h:outputText value="#{varentidad.intmodulo}"/>
-                                        </rich:column>
-                                    </rich:dataTable>
-                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Tipo Usuario" style="position: relative;left: -211px;top:30px;"/>
                                 </h:panelGrid>
-
-                            </h:panelGrid> 
                             <!--<a4j:commandButton immediate="true" actionListener="{Ciudadano$PerfilCiudadano.listarEntidadesSeleccionadas}" value="Listar"/>-->
 
                             <h:panelGroup id="ikont-panel-tipoUsuario">
@@ -142,7 +113,7 @@
 
                                 <h:panelGroup id="ikont-panel-entidad" rendered="#{Ciudadano$PerfilCiudadano.intidtipousuario==4}">
                                     <h:form>
-                    <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"   expanded="true" switchType="ajax" id="asociarentidad">
+                                        <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"    switchType="ajax" id="asociarentidad">
 
                         <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
                             <h:panelGroup>
@@ -223,10 +194,55 @@
                                 </h:panelGroup>
 
                             </h:panelGroup>
+                            <rich:collapsiblePanel header="Configurar Usuario"  switchType="ajax" id="configurarusuario">
+                                <h:panelGrid id="ikont-panel-selects-conusu">
+                                    <rich:column >
+                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Grupo"/>
+                                        <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
+                                            <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
+                                            <a4j:ajax event="valueChange" execute="combocargarModulos" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" 
+                                                      render="combocargarModulos,configurarusuario"/>
+                                        </h:selectOneMenu>
+                                        <br/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Seleccione modulo" />
+                                        <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
+                                            <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
+                                            <a4j:ajax execute="idconfiguracionusuario" event="valueChange" render="idconfiguracionusuario"  />
+                                        </h:selectOneMenu>
+                                    </rich:column>
 
+                                    <h:panelGrid>
+                                        <a4j:commandButton value="#{var.adicionar}" id="agregar_modgru"  execute="configurarusuario" render="configurarusuario"  actionListener="#{Ciudadano$PerfilCiudadano.listarGrupoModulo}" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+
+                                <rich:dataTable id="idconfiguracionusuario"
+                                                rows="2"  
+                                                value="#{Ciudadano$PerfilCiudadano.listausuGrupos}"
+                                                var="registro" rowKeyVar="filaSeleccionada"
+                                                binding="#{Ciudadano$PerfilCiudadano.tablagrupomodulo}"
+                                                >
+                                    <rich:column id="tc-strTipoPoliza" width="100px">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-hot-policont" value="Grupo" />
+                                        </f:facet>
+                                        <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.grupo.gruNombre}"/>
+                                    </rich:column>
+                                    <rich:column id="tc-strnumPolizaContrato" 
+                                                 >
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-hot-numpolizacont" value="Modulo" />
+                                        </f:facet>
+                                        <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.modulo.strmodNmbre}"/>
+                                    </rich:column>
+                                </rich:dataTable>
+
+                            </rich:collapsiblePanel>
                             <!--hr class="ikont-hr-separador" /-->
                             <br/>
-                            <h:panelGroup id="ikont-panel-img-usuAdmin" style="position: relative;top: 28px;">
+                            <h:panelGroup id="ikont-panel-img-usuAdmin" style="position: relative;top: 74px;">
                                 <h:panelGroup>
                                     <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
 
@@ -236,7 +252,7 @@
 
                                     </h:panelGroup>
                                     <a4j:commandLink styleClass="ikont-enlace-cargar-imagen-registro"   value="#{var.examinar}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this" 
-                                                     style="position: relative;top: 10px;left: 504px;text-align: center;">   
+                                                     >   
                                     </a4j:commandLink> 
 
                                 </h:panelGroup>
@@ -244,14 +260,14 @@
                                 <h:panelGrid columns="3">
                                     <a4j:commandButton id="btnGuardarCiudadano"  
                                                        value="#{var.guardar}"  
-                                                       action="#{Ciudadano$PerfilCiudadano.MostrarMensajeNuevoUsuario}" render="pgguardarCiudadano"  execute="@form"
+                                                       action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano"  execute="@form"
                                                        oncomplete="#{rich:component('confirmarCiudadano')}.show();"
-                                                       style="position: relative;left: 480px;top: 25px;">
+                                                       >
                                     </a4j:commandButton> 
                                     <h:outputLabel rendered="false" value="o" />
                                     <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
                                     <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" 
-                                                     style="position: relative;left: 484px;top: 25px;"/>
+                                                     />
                                 </h:panelGrid>
                             </h:panelGroup>
                         </a4j:region>
