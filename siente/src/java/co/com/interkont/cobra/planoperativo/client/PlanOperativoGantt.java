@@ -778,18 +778,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         if (!fullScreen) {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
-            main.setWidth(1200);
+            main.setWidth(980);
             main.setStyleName("main-contenedor-gwt");
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-            cp.setPixelSize(1350, 600);
+            cp.setPixelSize(980, 460);
             cp.getElement().setMargins(new Margins(0));
 
 
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
             vc1.setWidth("400");
-            vc1.setPosition(400, 0);
+            vc1.setPosition(140, 0);
 
 
             Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
