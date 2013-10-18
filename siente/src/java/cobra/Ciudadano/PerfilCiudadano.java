@@ -710,8 +710,8 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
             comen.setDatefecha(new Date());
             comen.setJsfUsuario(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
             comen.setStrdesccoment(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombrecompleto() + " ya es parte de " + bundle.getString("cobra"));
-            getSessionBeanCobra().getCiudadanoservice().getCiudadano().setJsfUsuarioGrupos(new LinkedHashSet(listausuGrupos));
-            getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
+           // getSessionBeanCobra().getCiudadanoservice().getCiudadano().setJsfUsuarioGrupos(new LinkedHashSet(listausuGrupos));
+            //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
 
             getSessionBeanCobra().getCiudadanoservice().guardarComentarioObra(comen);
             getSessionBeanCobra().getCiudadanoservice().getJsfusuariogrupo().setId(new JsfUsuarioGrupoId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId(), 6, 21));
