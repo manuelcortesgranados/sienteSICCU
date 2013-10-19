@@ -1304,7 +1304,7 @@ public class CasteoGWT implements Serializable {
         return null;
     }
 
-    public static ObrafuenterecursosconveniosDTO extraerProyectosconfuenteRecursoDto(ActividadobraDTO act, int idgwt) {
+    public static ObrafuenterecursosconveniosDTO extraerObraFuenteRecursosDto(ActividadobraDTO act, int idgwt) {
         Iterator it = act.getChildren().iterator();
         while (it.hasNext()) {
             ActividadobraDTO actdto = (ActividadobraDTO) it.next();
@@ -1316,11 +1316,30 @@ public class CasteoGWT implements Serializable {
                 }
                 if (actdto.hasChildren()) {
 
-                    extraerProyectosconfuenteRecursoDto(actdto, idgwt);
+                    extraerObraFuenteRecursosDto(actdto, idgwt);
                 }
             }
         }
         return null;
     }
 
+    public static Obrafuenterecursosconvenios extraerObraFuenteRecursos(Actividadobra act, int idgwt) {
+        Iterator it = act.getActividadobras().iterator();
+        while (it.hasNext()) {
+            Actividadobra activi = (Actividadobra) it.next();
+            if (activi.getObra() != null) {
+                for (Obrafuenterecursosconvenios obrafuenterecursos : activi.getObra().getObrafuenterecursosconvenioses()) {
+                    if (obrafuenterecursos.getIdgwt() == idgwt) {
+                        return obrafuenterecursos;
+                    }
+                }
+                if (!activi.getActividadobras().isEmpty()) {
+
+                    extraerObraFuenteRecursos(activi, idgwt);
+                }
+            }
+        }
+        return null;
+    }
+    
 }
