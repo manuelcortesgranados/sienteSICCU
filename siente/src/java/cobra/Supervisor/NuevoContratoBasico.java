@@ -4122,8 +4122,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
 
             Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
+           if(activiprincipal!=null){
             cargarActividadesConsultadas(activiprincipal);
             asignarNumeracionActividadesConsultadas(lstTodasActividades);
+           }
             if (activiprincipal != null) {
                 contrato.getActividadobras().add(activiprincipal);
                 // LLenar dependencias
@@ -6636,9 +6638,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                    }                        
 
                         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
-
                             if (!contrato.getFuenterecursosconvenios().isEmpty()) {
-                                recursosconvenio.setLstFuentesRecursos(new ArrayList<Fuenterecursosconvenio>(contrato.getFuenterecursosconvenios()));
+                               // recursosconvenio.setLstFuentesRecursos(new ArrayList<Fuenterecursosconvenio>(contrato.getFuenterecursosconvenios()));
+                        contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                             } else {
                                 contrato.setFuenterecursosconvenios(new LinkedHashSet(recursosconvenio.getLstFuentesRecursos()));
                             }
@@ -7066,6 +7068,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setValorDisponibleCuotaGerencia(contratodto.getValorDisponibleCuotaGerencia());
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
+        CasteoGWT.modificarEstaFuenteRecurso(contrato.getFuenterecursosconvenios());
 
         if (contrato.getNumvlrcontrato() != null && contrato.getNumValorCuotaGerencia() != null) {
             puedeEditarValorFuentes = false;
@@ -7092,11 +7095,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 
+        for(Iterator it=contrato.getFuenterecursosconvenios().iterator();it.hasNext();){
+            Fuenterecursosconvenio f=(Fuenterecursosconvenio) it.next();
+            System.out.println("despues de castoe = " + f.getTercero().getStrnombrecompleto()+"estado:"+f.isEstaEnFuenteRecurso());
+    }
     }
 
     public void limpiarEntidad() {
         contrato.getTercero().setStrnombrecompleto("");
     }
+   
 
     public void extraerProyectosActividad(ActividadobraDTO act) {
         Iterator it = act.getChildren().iterator();

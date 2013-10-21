@@ -22,10 +22,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
-import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
-import java.util.Date;
-import java.util.Properties;
-
 /**
  *
  * @author Carlos Loaiza
@@ -155,6 +151,7 @@ public class RecursosConvenio implements Serializable {
     public void eliminarFuenteRecursos() {
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
+        if (!f.isEstaEnFuenteRecurso()) {
         if (f.getIdfuenterecursosconvenio() != 0) {
             lstFuentesRecursosEliminar.add(f);
         }
@@ -172,6 +169,10 @@ public class RecursosConvenio implements Serializable {
             otrasReservas = BigDecimal.ZERO;
             cuotaGerencia = BigDecimal.ZERO;
         }
+        } else {
+             FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
+        
+    }
     }
     //lstFuentesRecursos
 
@@ -198,7 +199,7 @@ public class RecursosConvenio implements Serializable {
             if (!lstFuentesRecursos.isEmpty()) {
                 for (Fuenterecursosconvenio f : lstFuentesRecursos) {
                     if (fuenteRecursoConvenio.getTercero().getIntcodigo() == f.getTercero().getIntcodigo() && fuenteRecursoConvenio.getVigencia().equals(f.getVigencia())) {
-                        FacesUtils.addErrorMessage("La fuente de recurso ya se encuentra con la misma vigencia");
+                        FacesUtils.addErrorMessage(bundle.getString("msgerrorfuenteconigualvigencia"));
                         return null;
 
                     }
@@ -207,12 +208,12 @@ public class RecursosConvenio implements Serializable {
             }
 
             if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getValorDisponible()) > 0) {
-                FacesUtils.addErrorMessage("El valor aportado de la fuente es superior al valor disponible del convenio:" + n.getContrato().getValorDisponible());
+                FacesUtils.addErrorMessage(bundle.getString("msgerrorvaloraportadomayor") + n.getContrato().getValorDisponible());
                 return null;
             }
 
-            if (fuenteRecursoConvenio.getValorcuotagerencia().compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) >0) {
-                FacesUtils.addErrorMessage("El valor de la cuota de gerencia es superior al valor disponible de la cuota de gerencia:" + n.getContrato().getValorDisponibleCuotaGerencia());
+            if (fuenteRecursoConvenio.getValorcuotagerencia().compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) > 0) {
+                FacesUtils.addErrorMessage(bundle.getString("msgerrorsuperiorcuotagerencia") + n.getContrato().getValorDisponibleCuotaGerencia());
                 return null;
             }
 //                       
@@ -240,7 +241,7 @@ public class RecursosConvenio implements Serializable {
                 limpiarFuenteRecurso();
                 //}
             } else {
-                FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
+                FacesUtils.addErrorMessage(bundle.getString("msgerrorsumacuotaivamayor"));
                 return null;
             }
         } catch (Exception e) {

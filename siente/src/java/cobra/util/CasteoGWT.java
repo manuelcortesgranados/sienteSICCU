@@ -1283,10 +1283,16 @@ public class CasteoGWT implements Serializable {
                 //Actualiza el valor disponible de la fuente de recursos
                 fuente.setValorDisponible(valordisponibleactua);
                 fuente.setEstaEnFuenteRecurso(true);
-                System.out.println("fuente en ultimo metodo = " + fuente.isEstaEnFuenteRecurso());
                  return fuente;
             }
         }
         return null;
     }
+    
+    
+    public static void modificarEstaFuenteRecurso(Set<Fuenterecursosconvenio> setFuentes){
+       for(Fuenterecursosconvenio fuente:setFuentes){
+           fuente.setEstaEnFuenteRecurso(false);
                     }
+    }
+                }
