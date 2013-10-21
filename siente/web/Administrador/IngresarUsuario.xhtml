@@ -129,10 +129,7 @@
                                                 rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
                                     <rich:column>
                                         <f:facet name="header">
-                                            <h:selectBooleanCheckbox  value="#{Perfil$Usuario.seleccionEntidad}" 
-                                                                      immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarTodo}">
-                                                <f:ajax event="click"  render="@form"/>
-                                            </h:selectBooleanCheckbox>
+                                            <h:outputLabel value="#{var.seleccionar}"/>
                                         </f:facet>
                                         <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
                                                                  immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
@@ -218,11 +215,12 @@
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <rich:dataTable id="idconfiguracionusuario"
-                                                rows="2"  
+                                <rich:dataTable style="width: 41%;" id="idconfiguracionusuario"
+                                                rows="6"  
                                                 value="#{Ciudadano$PerfilCiudadano.listausuGrupos}"
                                                 var="registro" rowKeyVar="filaSeleccionada"
                                                 binding="#{Ciudadano$PerfilCiudadano.tablagrupomodulo}"
+                                                
                                                 >
                                     <rich:column id="tc-strTipoPoliza" width="100px">
                                         <f:facet name="header">
@@ -240,23 +238,7 @@
                                 </rich:dataTable>
 
                             </rich:collapsiblePanel>
-                            <!--hr class="ikont-hr-separador" /-->
                             <br/>
-                            <h:panelGroup id="ikont-panel-img-usuAdmin" style="position: relative;top: 74px;">
-                                <h:panelGroup>
-                                    <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
-
-                                        <h:panelGroup styleClass="ikont-hpg-pgfotografia-ingreso-usu-admin"   layout="block" id="pgfotografia">
-                                            <h:graphicImage  styleClass="ikont-hgi-pathImaCiu"   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" style="width:100% "  height="100%"/>
-                                        </h:panelGroup>
-
-                                    </h:panelGroup>
-                                    <a4j:commandLink styleClass="ikont-enlace-cargar-imagen-registro"   value="#{var.examinar}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this" 
-                                                     >   
-                                    </a4j:commandLink> 
-
-                                </h:panelGroup>
-                                <br/>
                                 <h:panelGrid columns="3">
                                     <a4j:commandButton id="btnGuardarCiudadano"  
                                                        value="#{var.guardar}"  
@@ -269,7 +251,6 @@
                                     <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" 
                                                      />
                                 </h:panelGrid>
-                            </h:panelGroup>
                         </a4j:region>
                     </rich:panel>
                 </h:form>
