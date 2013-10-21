@@ -64,12 +64,15 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -6570,6 +6573,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void guardarBorradorConvenio() {
 
+        Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
+        if (!mapaValidacionFechasPO.isEmpty()) {
+            validarModificacionFechasPO(mapaValidacionFechasPO);
+
+        } else {
         boolean band = true;
         if (getContrato().getIntidcontrato() == 0) {
             if (getSessionBeanCobra().getCobraService().encontrarContratoPorNumero(getContrato().getStrnumcontrato()) != null) {
@@ -6702,6 +6710,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage("El número del convenio ya existe.");
         }
     }
+    }
 
     /*
      *metodo que se encarga de guardar el convenio
@@ -6709,6 +6718,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      */
     public void finalizarGuardado() {
+        Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
+        if (!mapaValidacionFechasPO.isEmpty()) {
+            validarModificacionFechasPO(mapaValidacionFechasPO);
+
+        } else {
         guardadoconexito = 0;
         tipomensajeerror = 0;
         totalfuenteconvenio = new BigDecimal(BigInteger.ZERO);
@@ -6740,6 +6754,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             guardadoconexito = 0;
             tipomensajeerror = 1;
             FacesUtils.addErrorMessage("numfuenterecurso");
+        }
         }
 
     }
@@ -7008,12 +7023,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String planOperativo() {
         try {
             validarPuedeEditarValorFuente();
+            Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
+            if (!mapaValidacionFechasPO.isEmpty()) {
+                validarModificacionFechasPO(mapaValidacionFechasPO);
+                return null;
+            } else {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
-//            System.out.println(getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes());
-//            if (!getSessionBeanCobra().getCobraGwtService().getSeCargoPlanOperativoAntes()) {
             ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
             getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
             //} else {
@@ -7022,6 +7040,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //}
 
             return "PlanOperativo";
+            }
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
         }
@@ -7376,5 +7395,64 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 f.setEstaEnFuenteRecurso(true);
             }
         }
+    }
+
+    public Map<Integer, String> validarFechasConvenioEnRangoPO(Contrato contrato) {
+        Map<Integer, String> mapaValidacionRangoPo = new HashMap<Integer, String>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (!contrato.getActividadobras().isEmpty()) {
+            Iterator it = contrato.getActividadobras().iterator();
+            Actividadobra actiRaiz = (Actividadobra) it.next();
+            Date menorFechaInicio = obtenerMenorFechaInicio(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
+            Date mayorFechaFin = obtenerMayorFechaFin(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
+            if (contrato.getDatefechaini().compareTo(menorFechaInicio) > 0) {
+                mapaValidacionRangoPo.put(1, "La fecha de inicio no puede ser superior a " + sdf.format(menorFechaInicio));
+}
+            if (contrato.getDatefechafin().compareTo(mayorFechaFin) < 0) {
+                mapaValidacionRangoPo.put(2, "La fecha de fin no puede ser inferior a " + sdf.format(mayorFechaFin));
+            }
+        }
+
+        return mapaValidacionRangoPo;
+    }
+
+    public static Date obtenerMenorFechaInicio(List<Actividadobra> listaHijas) {
+        if (!listaHijas.isEmpty()) {
+            Date menor = listaHijas.get(0).getFechaInicio();
+            for (int i = 1; i < listaHijas.size(); i++) {
+                if (listaHijas.get(i).getFechaInicio().compareTo(menor) < 0) {
+                    menor = listaHijas.get(i).getFechaInicio();
+                }
+            }
+            return menor;
+        }
+        return null;
+    }
+
+    public static Date obtenerMayorFechaFin(List<Actividadobra> listaHijas) {
+        if (!listaHijas.isEmpty()) {
+            Date mayor = listaHijas.get(0).getFechaFin();
+            for (int i = 1; i < listaHijas.size(); i++) {
+                if (listaHijas.get(i).getFechaFin().compareTo(mayor) > 0) {
+                    mayor = listaHijas.get(i).getFechaFin();
+                }
+            }
+            return mayor;
+        }
+        return null;
+    }
+
+    public void validarModificacionFechasPO(Map<Integer, String> mapaValidacionFechasPO) {
+
+        String msgError = "";
+        if (mapaValidacionFechasPO.get(1) != null) {
+            msgError = msgError + mapaValidacionFechasPO.get(1) + ",";
+        }
+        if (mapaValidacionFechasPO.get(2) != null) {
+            msgError = msgError + mapaValidacionFechasPO.get(2);
+        }
+        FacesUtils.addErrorMessage(msgError);
+
+
     }
 }
