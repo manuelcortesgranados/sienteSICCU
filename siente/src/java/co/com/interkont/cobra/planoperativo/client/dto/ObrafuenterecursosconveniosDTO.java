@@ -30,34 +30,34 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private String descripcionaporte="";
     private String nombreEntidadTipo;
     private boolean estaEnFuenteRecurso;
-    private int idgwt= hashCode();
+    private int idgwt;
 
     public ObrafuenterecursosconveniosDTO() {
     }
+//
+//    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
+//        this.idobrafuenterecursos = idobrafuenterecursos;
+//        this.obra = obra;
+//        this.tipoaporte = tipoaporte;
+//        this.vigencia = vigencia;
+//        this.valor = valor;
+//    }
 
-    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
-        this.idobrafuenterecursos = idobrafuenterecursos;
-        this.obra = obra;
-        this.tipoaporte = tipoaporte;
-        this.vigencia = vigencia;
-        this.valor = valor;
-    }
-
-    public ObrafuenterecursosconveniosDTO(int tipoaporte, BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id) {
-        this.tipoaporte = tipoaporte;
-        this.valor = valor;
-        this.fuenterecursosconvenio = fuente;
-        this.rubro = rubro;
-        this.valorDisponible = valor;
-        this.idobrafuenterecursos = id;
-        if (tipoaporte == 1) {
-            descripcionaporte = "Dinero";
-        } else {
-            descripcionaporte = "Especie";
-        }
-        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
-        this.eliminar = "Eliminar";
-    }
+//    public ObrafuenterecursosconveniosDTO(int tipoaporte, BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id) {
+//        this.tipoaporte = tipoaporte;
+//        this.valor = valor;
+//        this.fuenterecursosconvenio = fuente;
+//        this.rubro = rubro;
+//        this.valorDisponible = valor;
+//        this.idobrafuenterecursos = id;
+//        if (tipoaporte == 1) {
+//            descripcionaporte = "Dinero";
+//        } else {
+//            descripcionaporte = "Especie";
+//        }
+//        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
+//        this.eliminar = "Eliminar";
+//    }
 
     public ObrafuenterecursosconveniosDTO(BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia, int tipoAporte, int formaPago,int idTemp) {
         this.idobrafuenterecursos=idTemp;
@@ -77,6 +77,8 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         }
         nombreEntidad = fuente.getTercero().getStrnombrecompleto();        
         this.eliminar = "Eliminar";
+        this.idgwt= hashCode();
+        
     }
 
     public ObrafuenterecursosconveniosDTO(BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia, BigDecimal porcentaje, int tipoAporte, int formaPago) {
@@ -98,6 +100,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         this.nombreEntidadTipo = nombreEntidad + "-" + descripcionaporte;
         this.eliminar = "Eliminar";
         this.porcentaje = porcentaje;
+        this.idgwt= hashCode();
     }
 
     public ObrafuenterecursosconveniosDTO(String descripcionAporte, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia,int idTemp) {
@@ -112,19 +115,20 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         this.eliminar = "Eliminar";
         this.idobrafuenterecursos=idTemp;
         this.nombreEntidadTipo = nombreEntidad + "-" + descripcionaporte;
+        this.idgwt= hashCode();
     }
 
-    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, String rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
-        this.idobrafuenterecursos = idobrafuenterecursos;
-        this.obra = obra;
-        this.fuenterecursosconvenio = fuenterecursosconvenio;
-        this.rubro = rubro;
-        this.tipoaporte = tipoaporte;
-        this.vigencia = vigencia;
-        this.valor = valor;
-        this.descripcionaporte = descripcionaporte;
-
-    }
+//    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, String rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
+//        this.idobrafuenterecursos = idobrafuenterecursos;
+//        this.obra = obra;
+//        this.fuenterecursosconvenio = fuenterecursosconvenio;
+//        this.rubro = rubro;
+//        this.tipoaporte = tipoaporte;
+//        this.vigencia = vigencia;
+//        this.valor = valor;
+//        this.descripcionaporte = descripcionaporte;
+//
+//    }
 
     /**
      * @return the idobrafuenterecursos

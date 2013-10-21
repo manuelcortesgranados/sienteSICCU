@@ -7082,7 +7082,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 Actividadobra activi = CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null, null, getSessionBeanCobra().getUsuarioObra().getUsuId());
                 activi.setContrato(contrato);
                 //Castear dependencias;
-
+                
                 contrato.getActividadobras().add(activi);
                 //Extrae los proyectos de la actividad
                 getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), activi));
@@ -7345,8 +7345,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             acti.setNumeracion(numeracion);
             numeracion++;
         }
-    }
-
+        }
+         
     public void asignarPredecesorActividadesConsultadas(Set dependenciasGenerales) {
         for (Iterator it = dependenciasGenerales.iterator(); it.hasNext();) {
             Dependencia dependencia = (Dependencia) it.next();
