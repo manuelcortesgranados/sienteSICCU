@@ -5623,8 +5623,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String primeroObra() {
         System.out.println("Debug - primero obra...");
         //if (aplicafiltroobra) {
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
 //        } else {
 //            listaObraContrato = getSessionBeanCobra().getCobraService().obtenerObraxContratos(getContrato().getIntidcontrato(), 0, 5);
 //            totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato());
@@ -5659,8 +5659,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String siguienteObra() {
         int num = (pagina) * 5;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -5692,8 +5692,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         pagina = pagina - 1;
         int num = (pagina - 1) * 5;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -5723,8 +5723,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String ultimoObra() {
         int num = totalfilas % 5;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
