@@ -55,26 +55,23 @@
                                 <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
                                     <rich:placeholder value="Em@il" />
                                 </h:inputText>
-                                <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
+                                <h:selectOneMenu id="combodepartamentoCiudadanuevo" rendered="false" value="2"  >
                                     <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
-                                     <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarTiposGrupo}" execute="@this"
-                                                      render="combocargargrupos"/>
+                                    <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarTiposGrupo}" execute="@this"
+                                              render="combocargargrupos"/>
                                 </h:selectOneMenu> 
 
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
-                                <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}" rendered="false"/>
+                                <rich:calendar rendered="false" id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
                                                value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
 
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
-                                <h:selectOneMenu id="combogeneronuevo" value="genero">
+                                <h:outputLabel rendered="false" styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
+                                <h:selectOneMenu rendered="false" id="combogeneronuevo" value="genero">
                                     <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                                 </h:selectOneMenu>
 
-                                </h:panelGrid>
-                            <!--<a4j:commandButton immediate="true" actionListener="{Ciudadano$PerfilCiudadano.listarEntidadesSeleccionadas}" value="Listar"/>-->
-
+                            </h:panelGrid>
                             <h:panelGroup id="ikont-panel-tipoUsuario">
-
                                 <h:selectOneMenu id="combocargartipousuario" value="#{Ciudadano$PerfilCiudadano.intidtipousuario}" style="position: relative;left: 225px;top: 4px;">
                                     <f:selectItems value="#{Perfil$Usuario.tipousuariooption}" />
                                     <a4j:ajax event="valueChange" execute="@this" render="ikont-panel-localidad,ikont-panel-tipoUsuario,ikont-panel-entidad" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
@@ -115,147 +112,147 @@
                                     <h:form>
                                         <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"    switchType="ajax" id="asociarentidad">
 
-                        <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
-                            <h:panelGroup>
-                                <h:panelGrid columns="2">
-                                    <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
-                                    <interkont:spacer/>
-                                    <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
-                                                 onblur="clearText(this);"  onclick="this.value = '';" />
-                                    <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
-                                                        actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
-                                </h:panelGrid>
-                                <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
-                                                rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputLabel value="#{var.seleccionar}"/>
-                                        </f:facet>
-                                        <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
-                                                                 immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
-                                            <f:ajax event="click" render="@form"/>
+                                            <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
+                                                <h:panelGroup>
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
+                                                        <interkont:spacer/>
+                                                        <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
+                                                                     onblur="clearText(this);"  onclick="this.value = '';" />
+                                                        <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
+                                                                            actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
+                                                    </h:panelGrid>
+                                                    <rich:dataTable rendered="#{Perfil$Usuario.strnoencontrabusqueda}" style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistaentidades}"
+                                                                    rows="8" var="varentidad"  value="#{Perfil$Usuario.listaentidades}" id="tableasociarentidad">
+                                                        <rich:column>
+                                                            <f:facet name="header">
+                                                                <h:outputLabel value="#{var.seleccionar}"/>
+                                                            </f:facet>
+                                                            <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
+                                                                                     immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
+                                                                <f:ajax event="click" render="@form"/>
 
-                                        </h:selectBooleanCheckbox>
-                                    </rich:column>
+                                                            </h:selectBooleanCheckbox>
+                                                        </rich:column>
 
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{var.codigo} #{var.entidad}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{varentidad.intcedula}"/>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{var.nombreentidad}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{varentidad.strnombrecompleto}"/>
-                                    </rich:column>
-                                </rich:dataTable>
-                                <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
-                                    <h:outputText value="#{var.noseencontrolaentidad}"/>
+                                                        <rich:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="#{var.codigo} #{var.entidad}"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{varentidad.intcedula}"/>
+                                                        </rich:column>
+                                                        <rich:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="#{var.nombreentidad}"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{varentidad.strnombrecompleto}"/>
+                                                        </rich:column>
+                                                    </rich:dataTable>
+                                                    <h:panelGroup rendered="#{!Perfil$Usuario.strnoencontrabusqueda}">
+                                                        <h:outputText value="#{var.noseencontrolaentidad}"/>
+                                                    </h:panelGroup>
+                                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
+                                                </h:panelGroup>
+                                                <rich:column>
+                                                    <center>
+                                                        <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="#{var.listar} #{var.entidad} #{var.seleccion}"/>
+                                                        <br/>
+                                                        <br/>
+                                                        <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="#{var.cancelar}"/>
+                                                    </center>
+                                                </rich:column>
+                                                <h:panelGrid id="idbuscarentidad">
+                                                    <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}">
+                                                        <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
+                                                                        rows="5" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
+                                                            <rich:column>
+                                                                <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
+                                                                                         immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
+                                                                    <f:ajax event="click" render="@form"/>
+                                                                </h:selectBooleanCheckbox>
+                                                            </rich:column>
+                                                            <rich:column>
+                                                                <f:facet name="header">
+                                                                    <h:outputText value="#{var.nombreentidad}"/>
+                                                                </f:facet>
+                                                                <h:outputText value="#{varentidad.strnombrecompleto}"/>
+                                                            </rich:column>
+                                                        </rich:dataTable>
+                                                        <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()> 4}" for="repeatentidadseleciconadas" maxPages="5" />
+                                                    </h:panelGroup>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+
+                                        </rich:collapsiblePanel>
+                                    </h:form> 
                                 </h:panelGroup>
-                                <rich:dataScroller rendered="#{Perfil$Usuario.listaentidades.size()>10}" for="tableasociarentidad" maxPages="5" />
+
                             </h:panelGroup>
-                            <rich:column>
-                                <center>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.listaentidadbooleana.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.listarEntidadesSeleccionadas}" value="#{var.listar} #{var.entidad} #{var.seleccion}"/>
-                                    <br/>
-                                    <br/>
-                                    <a4j:commandButton rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}" immediate="true" execute="repeatentidadseleciconadas" render="repeatentidadseleciconadas,asociarentidad" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="#{var.cancelar}"/>
-                                </center>
-                            </rich:column>
-                            <h:panelGrid id="idbuscarentidad">
-                                <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionentidades and Perfil$Usuario.listaentidad.size()>0}">
-                                    <rich:dataTable rendered="#{Perfil$Usuario.inhabilitarseleccionentidades}" style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
-                                                    rows="5" var="varentidad"  value="#{Perfil$Usuario.listaentidad}" id="repeatentidadseleciconadas">
-                                        <rich:column>
-                                            <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaentidadbooleana[varentidad]}"
-                                                                     immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnaEntidad}">
-                                                <f:ajax event="click" render="@form"/>
-                                            </h:selectBooleanCheckbox>
-                                        </rich:column>
-                                        <rich:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="#{var.nombreentidad}"/>
-                                            </f:facet>
-                                            <h:outputText value="#{varentidad.strnombrecompleto}"/>
-                                        </rich:column>
-                                    </rich:dataTable>
-                                    <rich:dataScroller rendered="#{Perfil$Usuario.listaentidad.size()> 4}" for="repeatentidadseleciconadas" maxPages="5" />
-                                </h:panelGroup>
-                            </h:panelGrid>
-                        </h:panelGrid>
-
-                    </rich:collapsiblePanel>
-                </h:form> 
-                                </h:panelGroup>
-
-                            </h:panelGroup>
-                            <rich:collapsiblePanel header="Configurar Usuario"  switchType="ajax" id="configurarusuario">
-                                <h:panelGrid id="ikont-panel-selects-conusu">
-                                    <rich:column >
-                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Grupo"/>
-                                        <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
-                                            <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
-                                            <a4j:ajax event="valueChange" execute="combocargarModulos" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" 
-                                                      render="combocargarModulos,configurarusuario"/>
-                                        </h:selectOneMenu>
-                                        <br/>
-                                    </rich:column>
-                                    <rich:column>
-                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="Seleccione modulo" />
-                                        <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
-                                            <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
-                                            <a4j:ajax execute="idconfiguracionusuario" event="valueChange" render="idconfiguracionusuario"  />
-                                        </h:selectOneMenu>
-                                    </rich:column>
-
+                            <rich:collapsiblePanel header="#{var.configurarusuario}"  id="configurarusuario">
+                                <h:panelGrid   cellspacing="10" id="ikont-panel-selects-conusu">
+                                    <h:panelGrid columns="2">
+                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.grupo}"/>
+                                    <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
+                                        <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
+                                        <a4j:ajax event="valueChange" execute="combocargarModulos,selectmodulo" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" 
+                                                  render="combocargarModulos,configurarusuario"/>
+                                    </h:selectOneMenu>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" id="selectmodulo" rendered="#{Ciudadano$PerfilCiudadano.habilitartablalistarusuario}">
+                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.seleccionmodulo}" />
+                                    <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
+                                        <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
+                                        <a4j:ajax execute="idconfiguracionusuario" event="valueChange" render="idconfiguracionusuario"  />
+                                    </h:selectOneMenu>
                                     <h:panelGrid>
-                                        <a4j:commandButton value="#{var.adicionar}" id="agregar_modgru"  execute="configurarusuario" render="configurarusuario"  actionListener="#{Ciudadano$PerfilCiudadano.listarGrupoModulo}" />
+                                        <a4j:commandButton   value="#{var.adicionar}" id="agregar_modgru"  execute="configurarusuario,idconfiguracionusuario" render="configurarusuario"  actionListener="#{Ciudadano$PerfilCiudadano.listarGrupoModulo}" />
+                                    </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <rich:dataTable style="width: 41%;" id="idconfiguracionusuario"
-                                                rows="6"  
+                                <rich:dataTable rendered="#{Ciudadano$PerfilCiudadano.listausuGrupos.size()>0}" id="idconfiguracionusuario"
+                                                rows="10"  
                                                 value="#{Ciudadano$PerfilCiudadano.listausuGrupos}"
                                                 var="registro" rowKeyVar="filaSeleccionada"
                                                 binding="#{Ciudadano$PerfilCiudadano.tablagrupomodulo}"
-                                                
+                                                style="width: 36%!important;"
                                                 >
-                                    <rich:column id="tc-strTipoPoliza" width="100px">
+                                    <rich:column>
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-policont" value="Grupo" />
+                                            <h:outputText   value="#{var.grupo}" />
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.grupo.gruNombre}"/>
+                                        <h:outputText value="#{registro.grupo.gruNombre}"/>
                                     </rich:column>
-                                    <rich:column id="tc-strnumPolizaContrato" 
-                                                 >
+                                    <rich:column>
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-numpolizacont" value="Modulo" />
+                                            <h:outputText value="#{var.modulo}" />
                                         </f:facet>
                                         <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.modulo.strmodNmbre}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText   value="#{var.eliminar}" />
+                                        </f:facet>
+                                        <a4j:commandLink execute="idconfiguracionusuario,configurarusuario" render="idconfiguracionusuario,configurarusuario" value="#{var.eliminar}" action="#{Ciudadano$PerfilCiudadano.eliminarGrupoModulo}"/>
                                     </rich:column>
                                 </rich:dataTable>
 
                             </rich:collapsiblePanel>
-                            <br/>
-                                <h:panelGrid columns="3">
+                            <center>
+                                <h:panelGrid columns="2">
                                     <a4j:commandButton id="btnGuardarCiudadano"  
                                                        value="#{var.guardar}"  
                                                        action="#{Ciudadano$PerfilCiudadano.MostrarMensajeNuevoUsuario}" render="pgguardarCiudadano"  execute="@form"
                                                        oncomplete="#{rich:component('confirmarCiudadano')}.show();"
                                                        >
                                     </a4j:commandButton> 
-                                    <h:outputLabel rendered="false" value="o" />
-                                    <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
-                                    <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.saliringresarUsuario}" immediate="true" 
+                                    <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Ciudadano$PerfilCiudadano.saliringresarUsuario}" immediate="true" 
                                                      />
                                 </h:panelGrid>
+                            </center>
                         </a4j:region>
                     </rich:panel>
                 </h:form>
-
-
 
 
             </ui:define>
