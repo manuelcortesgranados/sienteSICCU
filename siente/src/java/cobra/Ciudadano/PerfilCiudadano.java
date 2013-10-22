@@ -228,6 +228,11 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
      * Variable utilizada para habiliar la seleccion del Modulo
      */
     private boolean habilitarTablaRegistro = false;
+    /**
+     * Variable Utilizada para habilitar el envio del correo
+     */
+    private boolean habilitarEnvioCorreo=true;
+    
 
     public String getOpinion() {
         return opinion;
@@ -573,6 +578,16 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         this.habilitarTablaRegistro = habilitarTablaRegistro;
     }
 
+    public boolean isHabilitarEnvioCorreo() {
+        return habilitarEnvioCorreo;
+    }
+
+    public void setHabilitarEnvioCorreo(boolean habilitarEnvioCorreo) {
+        this.habilitarEnvioCorreo = habilitarEnvioCorreo;
+    }
+    
+    
+
     /**
      * Constructor del perfilCiudadano el cual invoca los métodos necesarios
      * para cargar combos
@@ -791,17 +806,17 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
                 getSessionBeanCobra().getCiudadanoservice().guardarCiudadano(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
                 String rutaFoto = null;
-                try {
-                    rutaFoto = ArchivoWebUtil.copiarArchivo(
-                            RutasWebArchivos.TMP + nomImagen,
-                            MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, "" + getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId()),
-                            true,
-                            false);
-                } catch (FileNotFoundException ex) {
-                    //  Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ArchivoExistenteException ex) {
-                    //  Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    rutaFoto = ArchivoWebUtil.copiarArchivo(
+//                            RutasWebArchivos.TMP + nomImagen,
+//                            MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, "" + getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId()),
+//                            true,
+//                            false);
+//                } catch (FileNotFoundException ex) {
+//                    //  Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (ArchivoExistenteException ex) {
+//                    //  Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrfoto(rutaFoto);
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
                 Comentarioobra comen = new Comentarioobra();
@@ -813,17 +828,20 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                     jsfusuarioId.getId().setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId());
                 }
                 getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
+                getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajecorreo"));
                 getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(true);
-                limpiarCiudadano();
-                getUsuario().limpiarSeleccionEntidad();
                 try {
-                    //Se deshabilito ya que en el momento envio el correo de confirmacion no tiene ninguno asociado
-                  //  enviarCorreoConfirmar();
+                    if(habilitarEnvioCorreo){
+                         getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajecorreo"));
+                    enviarCorreoConfirmar();
+                    }
+                    else{
+                     getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajedecreacion"));
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                limpiarCiudadano();
-                getUsuario().limpiarSeleccionEntidad();
+
             }
         } else {
             FacesUtils.addErrorMessage(bundle.getString("debeselecionarlaconfiguracion"));
