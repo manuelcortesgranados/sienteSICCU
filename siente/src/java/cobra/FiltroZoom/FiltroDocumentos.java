@@ -78,8 +78,7 @@ public class FiltroDocumentos implements Filter {
 
     @Override
     public void destroy() {
-
         config = null;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

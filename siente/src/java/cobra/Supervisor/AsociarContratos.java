@@ -207,8 +207,8 @@ public class AsociarContratos implements Serializable {
 
     public String primeroContratos() {
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), 0, 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), 0, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -232,8 +232,8 @@ public class AsociarContratos implements Serializable {
 
         int num = (pagina) * 5;
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -259,8 +259,8 @@ public class AsociarContratos implements Serializable {
         pagina = pagina - 1;
         int num = (pagina - 1) * 5;
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -284,8 +284,8 @@ public class AsociarContratos implements Serializable {
 
         int num = totalfilas % 5;
 
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato);
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;

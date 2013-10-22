@@ -1028,9 +1028,6 @@ public class Usuario implements Serializable {
      *
      */
     public void buscarEntidad() {
-//        listaentidades.clear();
-//        listaentidadbooleana.clear();
-//        listaentidad.clear();
         listaentidades = getSessionBeanCobra().getCobraService().buscarEntidadxNombre(getStrbuscarentidad());
         if (listaentidades.size() > 0) {
             inhabilitarseleccionentidades = true;
@@ -1042,7 +1039,10 @@ public class Usuario implements Serializable {
             FacesUtils.addErrorMessage(bundle.getString("noseencontrolaentidad"));
         }
     }
-
+    /**
+     * Metodo Utilizado para Carhar en un Selectitem la lista de los grupos
+     * @return No retorna ningun valor
+     */
     public void llenarGrupos() {
         List<Grupo> listaGrupo = getSessionBeanCobra().getCobraService().encontrarGrupos();
 
@@ -1053,6 +1053,10 @@ public class Usuario implements Serializable {
             gruposoption[i++] = genItem;
         }
     }
+    /**
+     * Metodo utilizado para cargar en un Selectitem el tipo de usuario
+     * @return No retorna ningun valor
+     */
      public void llenarTipoUsuario() {
         List<Tipousuario> listaGrupo = getSessionBeanCobra().getCobraService().encontrarTipousuario();
 

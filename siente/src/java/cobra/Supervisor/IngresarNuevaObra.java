@@ -4832,8 +4832,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String primeroContratos() {
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), 0, 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), 0, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -4859,8 +4859,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String siguienteContratos() {
         int num = (pagina) * 5;
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4887,8 +4887,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public String anterioresContratos() {
         pagina = pagina - 1;
         int num = (pagina - 1) * 5;
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato);
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato);
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4913,8 +4913,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String ultimoContratos() {
         int num = totalfilas % 5;
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato);
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato);
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
