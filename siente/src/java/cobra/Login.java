@@ -100,7 +100,7 @@ public class Login implements Serializable {
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
             //Si el sistema está paramatrizado para autenticarse mediante LDAP
-            if (Propiedad.getValor("autenticacionLDAP").equals("true")) {
+            if (Propiedad.getValor("autenticacionLDAP").equals("true") && !getSessionBeanCobra().getTipologueo().isUsuarioEncontrado()) {
                 if (getSessionBeanCobra().getTipologueo().getTipoerror() == 0) {
                     try {
                         usuarioExterno = getSessionBeanCobra().getUsuarioService().solicitarAccesoLDAP(getSessionBeanCobra().getUsuarioObra().getUsuLogin(), getSessionBeanCobra().getUsuarioObra().getUsuPasswd());
