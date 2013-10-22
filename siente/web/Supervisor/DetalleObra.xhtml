@@ -182,7 +182,7 @@
                                             <h:commandLink styleClass="ikont-hcl-zoom-contrante img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-contrataneciu" value="#{var.contrataneciu}: "></h:outputText>
-                                                <h:outputText styleClass="ikont- hot-supervisorciu" value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}"></h:outputText>
+                                                <h:outputLabel styleClass="ikont- hot-supervisorciu" value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}"></h:outputLabel>
                                             </h:panelGroup>
 
                                         </h:panelGrid>
@@ -192,7 +192,7 @@
                                             <h:commandLink styleClass="ikont-hcl-zoom-nocontrato img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-supervisorciu" value="#{var.supervisorciu}: " ></h:outputText>
-                                                <h:outputText styleClass="ikont- hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
+                                                <h:outputLabel styleClass="ikont- hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputLabel>
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -201,8 +201,8 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText><br/>
-                                                <h:outputText styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
+                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -211,15 +211,15 @@
                                             <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-contraticiu" value="#{var.contratistaciu}: " />
-                                                <h:outputText styleClass="ikont- hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
-                                                <h:outputText styleClass="ikont- hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
+                                                <h:outputLabel styleClass="ikont- hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
+                                                <h:outputLabel styleClass="ikont- hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
                                                     <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5" styleClass="ikont-rtt-tool">
                                                         <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
                                                             <h:outputText styleClass="ikont- hot-nbre1" value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
                                                         </a4j:repeat>
                                                     </rich:tooltip>
-                                                </h:outputText>
+                                                </h:outputLabel>
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -242,7 +242,7 @@
                                         <h:panelGrid styleClass="ikont-hpg-griddetaob2" columnClasses="panelcenter">
                                             <a4j:commandLink onclick=" #{rich:component('modalImagenvermas')}.show();
                 return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  >
-                                                <h:graphicImage styleClass="ikont-hgi-imganterior " width="169" height="130" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
+                                                <h:graphicImage styleClass="ikont-hgi-imganterior " width="169" height="150" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
                                             </a4j:commandLink>
                                             <h:outputText styleClass="ikont- hot-antes" value="Antes"></h:outputText>
                                         </h:panelGrid>
@@ -250,7 +250,7 @@
                                         <h:panelGrid styleClass="ikont-hpg-griddetaob3" columnClasses="panelcenter">
                                             <a4j:commandLink onclick=" #{rich:component('modalImagenvermas')}.show();
                 return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  >
-                                                <h:graphicImage  styleClass="ikont-hgi-imgactual" width="169" height="130" value="#{Supervisor$DetalleObra.strimagenActual}" />
+                                                <h:graphicImage  styleClass="ikont-hgi-imgactual" width="169" height="150" value="#{Supervisor$DetalleObra.strimagenActual}" />
                                             </a4j:commandLink>
 
                                             <h:outputText styleClass="ikont- hot-ahora" value="Ahora" ></h:outputText>
@@ -262,7 +262,7 @@
                                     <h:panelGroup layout="block" styleClass="panelcenter">
                                         <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
                                         <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
-                                        <div id="graficoEvolucionProyecto" style="width: 550px; height: 300px; text-align: left; ">
+                                        <div id="graficoEvolucionProyecto" style="width: 550px; height: 200px; text-align: left;">
                                         </div>
                                     </h:panelGroup>
                                 </h:panelGrid>

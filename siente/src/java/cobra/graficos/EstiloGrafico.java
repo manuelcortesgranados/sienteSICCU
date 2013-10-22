@@ -28,11 +28,65 @@ public class EstiloGrafico {
     private boolean rotate;
     private boolean degradadohorizontal = false;
     private boolean avancefisico = false;
+    private boolean evolucionproyectociudadano = false;
+    private boolean uselinealegenda = false;
+    private boolean zoomcursor = true;
     private String tamanoTexto;
     private String tipoTexto;
     private String tipoPila;
     private String gridalpha = "0.15";
     private String colorlineasplano = "#AA975E";
+    private String numcolumnaslegenda = "1";
+    private String colortextocursor = "";
+    private String colorfondoocursor = "";
+
+    public boolean isEvolucionproyectociudadano() {
+        return evolucionproyectociudadano;
+    }
+
+    public void setEvolucionproyectociudadano(boolean evolucionproyectociudadano) {
+        this.evolucionproyectociudadano = evolucionproyectociudadano;
+    }
+
+    public boolean isZoomcursor() {
+        return zoomcursor;
+    }
+
+    public void setZoomcursor(boolean zoomcursor) {
+        this.zoomcursor = zoomcursor;
+    }
+
+    public String getColortextocursor() {
+        return colortextocursor;
+    }
+
+    public void setColortextocursor(String colortextocursor) {
+        this.colortextocursor = colortextocursor;
+    }
+
+    public String getColorfondoocursor() {
+        return colorfondoocursor;
+    }
+
+    public void setColorfondoocursor(String colorfondoocursor) {
+        this.colorfondoocursor = colorfondoocursor;
+    }
+
+    public boolean isUselinealegenda() {
+        return uselinealegenda;
+    }
+
+    public void setUselinealegenda(boolean uselinealegenda) {
+        this.uselinealegenda = uselinealegenda;
+    }
+
+    public String getNumcolumnaslegenda() {
+        return numcolumnaslegenda;
+    }
+
+    public void setNumcolumnaslegenda(String numcolumnaslegenda) {
+        this.numcolumnaslegenda = numcolumnaslegenda;
+    }
 
     public boolean isAvancefisico() {
         return avancefisico;

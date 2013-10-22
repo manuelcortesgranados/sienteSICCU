@@ -112,11 +112,15 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
             script.append("categoryAxis.gridAlpha = 0;\n");
             script.append("categoryAxis.axisAlpha = 0;\n");
         }
-        script.append("categoryAxis.dashLength = 2  ;\n");
-        script.append("categoryAxis.axisColor = '");
-        script.append(estilo.getColorlineasplano());
-        script.append("';\n");
-        script.append("\n\n");
+        if (estilo.isEvolucionproyectociudadano()) {
+            script.append("categoryAxis.gridPosition = 'start';\n\n");
+        } else {
+            script.append("categoryAxis.dashLength = 2  ;\n");
+            script.append("categoryAxis.axisColor = '");
+            script.append(estilo.getColorlineasplano());
+            script.append("';\n");
+            script.append("\n\n");
+        }
 
         // value
         script.append("var valueAxis = new AmCharts.ValueAxis();\n");
@@ -134,14 +138,19 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         if (valorYMaximo != null) {
             if (!estilo.isAvancefisico()) {
                 script.append("valueAxis.maximum = '").append(valorYMaximo).append("';\n");
-            }else{
+            } else {
                 script.append("valueAxis.minimum = 0;\n");
             }
         }
-
-        script.append("valueAxis.dashLength = 2;\n");
-        script.append("valueAxis.axisThickness = 2;\n");
-        script.append("valueAxis.gridAlpha = ").append(estilo.getGridalpha()).append(" \n");
+        if (estilo.isEvolucionproyectociudadano()) {
+            script.append("valueAxis.dashLength = 5;\n");
+            script.append("valueAxis.integersOnly = true;\n");
+            script.append("valueAxis.gridCount = 10;\n");
+        } else {
+            script.append("valueAxis.dashLength = 2;\n");
+            script.append("valueAxis.axisThickness = 2;\n");
+            script.append("valueAxis.gridAlpha = ").append(estilo.getGridalpha()).append(" \n");
+        }
         if (estilo.isOcultarEjeY()) {
             script.append("valueAxis.labelsEnabled = false;\n");
             script.append("valueAxis.axisAlpha = 0;\n");
@@ -194,7 +203,7 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
                 }
             }
 
-            if (conjuntoDatosGrafico.getEstilo().getColorSerie() != null) {
+            if ((conjuntoDatosGrafico.getEstilo().getColorSerie() != null)&& (!estilo.isEvolucionproyectociudadano())) {
                 if (conjuntoDatosGrafico.getEstilo().getColorSerie2() == null) {
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                     script.append(".fillColors = ['");
@@ -213,12 +222,12 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
                 script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                 script.append(".gradientOrientation = 'horizontal';\n");
             }
-            
+
             if (estilo.isAvancefisico()) {
                 script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                 script.append(".labelPosition = 'bottom';\n");
             }
-            
+
             if (estilo.isPorcentaje()) {
                 if (estilo.isAvancefisico()) {
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
@@ -243,6 +252,11 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
                     script.append("]]%'").append(";\n");
                 }
             }
+            if (estilo.isEvolucionproyectociudadano()) {
+                script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                script.append(".bulletBorderColor = '");
+                script.append(conjuntoDatosGrafico.getEstilo().getColorSerie()).append("';\n");
+            }
 
             script.append("graph").append(conjuntoDatosGrafico.getCodigo());
             script.append(".valueField = 'valor");
@@ -258,6 +272,15 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         if (estilo.isVerCursor()) {
             script.append("var chartCursor = new AmCharts.ChartCursor();\n");
             script.append("chartCursor.cursorPosition = 'mouse';\n");
+            script.append("chartCursor.zoomable=");
+            script.append(estilo.isZoomcursor());
+            script.append(";\n");
+            script.append("chartCursor.color='");
+            script.append(estilo.getColortextocursor());
+            script.append("';\n");
+            script.append("chartCursor.cursorColor='");
+            script.append(estilo.getColorfondoocursor());
+            script.append("';\n");
             script.append(nombreDiv).append(".addChartCursor(chartCursor);");
             script.append("\n\n");
         }
@@ -271,10 +294,13 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
 
         // LEGEND
         if (estilo.isVerLeyenda()) {
-            script.append("var legend = new AmCharts.AmLegend();\n"
-                    + "legend.markerLabelGap=40,"
-                    + "legend.maxColumns=1;");
-            script.append(nombreDiv).append(".addLegend(legend);\n");
+            script.append("var legend = new AmCharts.AmLegend();\n");
+//            script.append("legend.useGraphSettings = ");
+//            script.append(estilo.isUselinealegenda());
+//            script.append(";\n");
+            script.append("legend.markerLabelGap=30;\n");
+            script.append("legend.top=-5;\n");
+            script.append(nombreDiv).append(".addLegend(legend);\n\n");
         }
         // WRITE
         script.append(nombreDiv).append(".write('").append(nombreDiv).append("');\n");
