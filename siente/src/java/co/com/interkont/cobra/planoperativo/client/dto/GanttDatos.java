@@ -292,28 +292,23 @@ public class GanttDatos {
             //porque etapa precontractual inicia con la fecha del contrato
             //posicion 0
             if (actividadSeleccionada.getName().equals("Revisión técnica de documentos")) {
-                service.setLog("Revisión técnica de documentos", null);
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(1).getStartDateTime()) > 0) {
-                    service.setLog("Revisión técnica de documentos 1e", null);
                     setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la actividad Elaboración de pliegos de condiciones");
                     error = true;
                 }
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getStartDateTime()) < 0) {
-                    service.setLog("Revisión técnica de documentos 1", null);
                     setMsg(getMsg() + "La fecha de inicio no puede ser menor que la actividad Precontractual");
                     error = true;
                 }
                 if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getEndDateTime()) > 0) {
-                    service.setLog("Revisión técnica de documentos 2", null);
                     setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de fin del contrato");
                     error = true;
                 }
                 if (actividadSeleccionada.getEndDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(1).getStartDateTime()) > 0) {
-                    service.setLog("Revisión técnica de documentos 2", null);
                     setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de inicio de Elaboración de pliegos de condiciones");
                     error = true;
                 }
-                service.setLog("error" + error, null);
+                
                 //posicion 1
             } else if (actividadSeleccionada.getName().equals("Elaboración de pliegos de condiciones")) {
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(0).getEndDateTime()) < 0) {
@@ -353,19 +348,39 @@ public class GanttDatos {
                     error = true;
                 }
 
-//                    if (!error) {
-//                        if (aumenta) {
-//                            ActividadobraDTO actividadRaiz = root.getChildren().get(0);
-//                            Date copiaFechaFinLiquidacion = CalendarUtil.copyDate(taskStore.getLastChild(actividadRaiz).getEndDateTime());
-//                            CalendarUtil.addDaysToDate(copiaFechaFinLiquidacion, cantidadModificar);
-//                            if (copiaFechaFinLiquidacion.compareTo(actividadRaiz.getEndDateTime()) > 0) {
-//                                error = true;
-//                            }
-//                        }
-//                    }
             }
 
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Contractual")) {
+
+            if (actividadSeleccionada.getTipoActividad() == 6) {
+                service.setLog("enter 6", null);
+                if (actividadSeleccionada.getName().equals("Suscripcion del contrato")) {
+                    if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
+                        error = true;
+                        setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta");
+
+                    } else {
+                        ActividadobraDTO actiP=taskStore.getParent(actividadSeleccionada);
+                        if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()) < 0) {
+                            error = true;
+                            setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser menor que fecha fin de etapa precontractual");
+
+                        }
+                    }
+                    if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
+                        error = true;
+                        setMsg(getMsg() + "La fecha fin de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta de inicio");
+                    }
+
+                } else if (actividadSeleccionada.getName().equals("Suscripcion acta de inicio")) {
+                    if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()) < 0) {
+                        error = true;
+                        setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser menor que la fecha de fin de la Suscripcion del contrato");
+
+                    }
+                }
+
+            }
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Liquidaciones")) {
             service.setLog("sali a validar modificacion contrato", null);
 

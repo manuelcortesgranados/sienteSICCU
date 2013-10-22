@@ -60,7 +60,6 @@ import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
-import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BeforeStartEditEvent;
 import com.sencha.gxt.widget.core.client.event.CancelEditEvent;
@@ -197,7 +196,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
     private static final GwtMensajes msgs = GWT.create(GwtMensajes.class);
     final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
-    
 //    private static final TaskProps props = GWT.create(TaskProps.class);
 //    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
     //ListStore<ActividadobraDTO> taskStore;
@@ -227,7 +225,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 processFolder(taskStore, base);
             }
         }
-  
+
 
         numeracionActividades = (taskStore.getAllItemsCount()) + 1;
         service.setLog("En numeracionActi actua" + numeracionActividades, null);
@@ -487,7 +485,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                  actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
+                actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
                 if (toTask.getPredecesor() != null) {
                     if (!toTask.getPredecesor().isEmpty()) {
                         toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
@@ -498,11 +496,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     toTask.setPredecesor("" + fromTask.getNumeracion());
                 }
 
-                DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask,type);
+                DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
                 getGantt().getGanttPanel().getContainer().reconfigure(true);
                 getGantt().getGanttPanel().getContainer().refresh();
-                
-               // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
+
+                // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
 
                 return dependencia;
             }
@@ -1277,8 +1275,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         }
     }
-    
-    
 
     public void modificarEnEditarFechaInicio(ActividadobraDTO ac) {
         int duracionModificar = 0;
@@ -1354,7 +1350,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     }
                     if (taskStore.getParent(taskStore.getParent(ac)) != null) {
                         if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                            service.setLog("estoy en un contrato", null);
                             if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
                                 modificarEnEditarFechaInicio(ac);
                             } else {
@@ -1365,7 +1360,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             }
                         }
                     } else if (taskStore.getParent(ac).getTipoActividad() == 3) {
-                        service.setLog("entre en contrato 2", null);
                         if (ac.getStartDateTime().compareTo(taskStore.getParent(ac).getEndDateTime()) < 0) {
                             hayError = true;
                             alertaMensajes("La fecha inicio de la actividad no puede ser mayor que la fecha inicio del contrato");
@@ -1376,36 +1370,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         } else if (ac.getTipoActividad() == 6) {
-            if (taskStore.getParent(ac).getTipoActividad() == 3) {
-                if (ac.getName().equals("Suscripcion del contrato")) {
-                    service.setLog("entre en contrato 2 suscripcion del contrato", null);
-                    if (ac.getStartDateTime().compareTo(taskStore.getParent(ac).getChildren().get(1).getStartDateTime()) > 0) {
-                        hayError = true;
-                        service.setLog("entre en contrato 2 suscripcion del contrato error", null);
-                        alertaMensajes("La fecha inicio de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta");
-                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                        getGantt().getGanttPanel().getContainer().refresh();
-                    } else if (ac.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(0, convenioDTO).getEndDateTime()) > 0) {
-                        hayError = true;
-                        service.setLog("entre en contrato 3 suscripcion del contrato error", null);
-                        alertaMensajes("La fecha inicio de la Suscripcion del contrato no puede ser menor que fecha fin de la planeacion del convenio");
-                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                        getGantt().getGanttPanel().getContainer().refresh();
-
-                    } else {
-                        service.setLog("entre en contrato 2 suscripcion del contrato bo", null);
+            if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
                         modificarEnEditarFechaInicio(ac);
-                        ac.getContrato().setDatefechaini(ac.getStartDateTime());
-                    }
-                } else if (ac.getName().equals("Suscripcion acta de inicio")) {
-                    if (ac.getStartDateTime().compareTo(taskStore.getParent(ac).getChildren().get(0).getEndDateTime()) < 0) {
+                    } else {
                         hayError = true;
-                        alertaMensajes("La fecha inicio de la Suscripcion del acta no puede ser menor que la fecha de fin de la Suscripcion del contrato");
+                        alertaMensajes(GanttDatos.getMsg());
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         getGantt().getGanttPanel().getContainer().refresh();
-                    } else {
-                        modificarEnEditarFechaInicio(ac);
-                        ac.getContrato().setDatefechaactaini(ac.getStartDateTime());
                     }
                 } else {
                     modificarEnEditarFechaInicio(ac);
@@ -1501,18 +1474,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         } else if (ac.getTipoActividad() == 6) {
-            if (taskStore.getParent(ac).getTipoActividad() == 3) {
-                if (ac.getName().equals("Suscripcion del contrato")) {
-                    if (ac.getEndDateTime().compareTo(taskStore.getParent(ac).getChildren().get(1).getStartDateTime()) > 0) {
+            if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                      if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
+                        modificarEnEditarFechaFin(ac);
+                    } else {
                         hayError = true;
-                        alertaMensajes("La fecha fin de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta de inicio");
+                        alertaMensajes(GanttDatos.getMsg());
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         getGantt().getGanttPanel().getContainer().refresh();
-                    } else {
-                        modificarEnEditarFechaFin(ac);
                     }
-                } else if (ac.getName().equals("Suscripcion acta de inicio")) {
-                    modificarEnEditarFechaFin(ac);
                 } else {
                     modificarEnEditarFechaFin(ac);
                 }
@@ -1562,7 +1533,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
     }
 
-    public DependenciaDTO crearDependencia(int numeracionPredecesor, ActividadobraDTO actividadTo,int tipoCreacion,GanttConfig.DependencyType type) {
+    public DependenciaDTO crearDependencia(int numeracionPredecesor, ActividadobraDTO actividadTo, int tipoCreacion, GanttConfig.DependencyType type) {
         ActividadobraDTO actividadFrom = buscarActividadObraPredecesora(numeracionPredecesor);
         DependenciaDTO dep = new DependenciaDTO();
         if (actividadFrom != null) {
@@ -1570,17 +1541,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             dep.setId("" + dep.hashCode());
             dep.setFromId(actividadFrom.getId());
             dep.setToId(actividadTo.getId());
-            if(type==null){
-            dep.setType(GanttConfig.DependencyType.ENDtoSTART);
-            }else{
-            dep.setType(type);
+            if (type == null) {
+                dep.setType(GanttConfig.DependencyType.ENDtoSTART);
+            } else {
+                dep.setType(type);
             }
             dep.setActividadFrom(actividadFrom);
             dep.setActividadTo(actividadTo);
             dep.setIsobligatoria(false);
-            if(tipoCreacion==0){
-            gantt.getGanttPanel().getContainer().getDependencyStore().add(dep);
-            gantt.getGanttPanel().getContainer().refresh();
+            if (tipoCreacion == 0) {
+                gantt.getGanttPanel().getContainer().getDependencyStore().add(dep);
+                gantt.getGanttPanel().getContainer().refresh();
             }
         }
         return dep;
@@ -1656,7 +1627,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     for (int in : map) {
                         if (ac.getNumeracion() != in) {
                             if (verificarNumeracionActividad(in)) {
-                                crearDependencia(in, ac,0,null);
+                                crearDependencia(in, ac, 0, null);
                             } else {
                                 alertaMensajes("El numero de la actividad no se encuentra");
                                 props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
@@ -1683,7 +1654,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
     }
 
-    public DependenciaDTO modificarPredecesoresActividadDesdePanel(ActividadobraDTO ac,GanttConfig.DependencyType type) {
+    public DependenciaDTO modificarPredecesoresActividadDesdePanel(ActividadobraDTO ac, GanttConfig.DependencyType type) {
         if (GanttDatos.validacionCadenaPredecesoras(ac.getPredecesor())) {
             if (!actividadAnterior.getPredecesor().equals(ac.getPredecesor())) {
                 eliminarPredecesorasActividad(ac);
@@ -1693,7 +1664,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     for (int in : map) {
                         if (ac.getNumeracion() != in) {
                             if (verificarNumeracionActividad(in)) {
-                                return crearDependencia(in, ac,1,type);
+                                return crearDependencia(in, ac, 1, type);
                             } else {
                                 alertaMensajes("El numero de la actividad no se encuentra");
                                 props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
@@ -1773,10 +1744,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         }
-    
+
     }
-    
-    
-    
-    
 }
