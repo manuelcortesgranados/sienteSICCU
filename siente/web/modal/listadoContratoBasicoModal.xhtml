@@ -27,7 +27,7 @@
         <h:panelGroup layout="block" id="gpTotalCont" >
             <center>
                 <h:form>
-                    <h:panelGrid columns="2" >
+                    <h:panelGrid columns="2" styleClass="ikont-panel-listadoconvenio-buscar" >
                         <h:outputText  styleClass="ikont-hot-consultarnombrecontrato" value="#{var.consultar} #{var.nombre} #{var.contrato}"  rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                         <h:outputText  styleClass="ikont-hot-consultarnombreconvenio" value="#{var.consultar} #{var.nombre} #{var.convenio}"  rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                         <h:panelGroup>
@@ -38,7 +38,7 @@
                 </h:form>
             </center>
 
-                <h:panelGrid >
+            <h:panelGrid styleClass="ikont-panel-listadoconvenio-consultar" >
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
                         <a4j:ajax event="click" render="tabla-listado-contratospa" execute="@this">
