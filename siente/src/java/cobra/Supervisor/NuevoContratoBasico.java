@@ -6598,7 +6598,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 estadoConvenioOption[i++] = itEstado;
             }
         } else {
-            filtrocontrato.setEstadoConvenio(1);
+            filtrocontrato.setEstadoConvenio(2);
         }
 
     }
