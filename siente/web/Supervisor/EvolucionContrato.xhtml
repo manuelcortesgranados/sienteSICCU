@@ -49,18 +49,18 @@
         </h:form>
 
 
-        <h:panelGrid id="planificacion_movimientos" columns="2" >
+        <h:panelGrid style="width: 100%;" id="planificacion_movimientos" columns="2" >
 
 
             <h:panelGroup layout="block" id="gpListadoPlanificacion">
 
-                <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                <h:panelGrid style="width: 91%" id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
                     <h:outputLabel  styleClass="ikont-hol-formadepago"   value="#{var.formadepago}:"/>
                     <interkont:spacer width="20"/>
                     <h:outputLabel  styleClass="ikont-hol-strdescformapago"    value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                    <h:outputLabel  styleClass="ikont-hol-porcentajeanticipopago"   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                    <h:outputLabel  styleClass="ikont-hol-porcentajeanticipopago"   value="#{var.porcentaje}#{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
                     <h:outputLabel  styleClass="ikont-hol-porcenanticipo"  value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
@@ -79,7 +79,7 @@
                 </h:panelGrid>
 
                 <h:form>
-                    <h:panelGrid  rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                    <h:panelGrid style="width: 100%;"  rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
                         <interkont:spacer height="5" />
                         <rich:dataTable id="tablaPlanificacion"
                                         rows="5"
@@ -128,7 +128,7 @@
             <h:panelGroup layout="block" id="gpListadoMovimientos">
 
                 <h:form>
-                    <h:panelGrid  >
+                    <h:panelGrid  style="width: 83%" >
                         <interkont:spacer height="5" />
                         <rich:dataTable id="tablaMovimientos"
                                         var ="movimiento"
