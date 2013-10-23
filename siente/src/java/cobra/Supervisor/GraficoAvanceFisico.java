@@ -75,8 +75,8 @@ public class GraficoAvanceFisico implements Serializable{
         ConjuntoDatosGrafico conjuntoDatosAvanceFisico = new ConjuntoDatosGrafico();
         conjuntoDatosAvanceFisico.setCodigo("avancefisico");
         EstiloGrafico estiloAvance = new EstiloGrafico();
-        estiloAvance.setColorSerie("#257500");
-        estiloAvance.setColorSerie2("#9CFF00");
+        estiloAvance.setColorSerie(Propiedad.getValor("graevuproyecolor1"));
+        estiloAvance.setColorSerie2(Propiedad.getValor("graevuproyecolor2"));
         estiloAvance.setColorTexto("#000");
         estiloAvance.setPorcentaje(true);
         conjuntoDatosAvanceFisico.setEstilo(estiloAvance);

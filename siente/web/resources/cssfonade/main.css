@@ -561,6 +561,7 @@ a.butonreport.zoom-excel {
 
 a.butonreport.zoom-excel:hover {
     background-position: -90px -75px;
+    transition: .5s all;
 }
 
 a.butonreport.zoom-word {
@@ -569,6 +570,7 @@ a.butonreport.zoom-word {
 
 a.butonreport.zoom-word:hover{
     background-position: -180px -75px;
+    transition: .5s all;
 }
 
 a.butonreport.zoom-pdf {
@@ -577,6 +579,7 @@ a.butonreport.zoom-pdf {
 
 a.butonreport.zoom-pdf:hover {
     background-position: 0px -75px;
+    transition: .5s all;
 }
 
 a.butonreport.zoom-mpp {
@@ -585,6 +588,7 @@ a.butonreport.zoom-mpp {
 
 a.butonreport.zoom-mpp:hover {
     background-position: -270px -75px;
+    transition: .5s all;
 }
 
 #ikont-div-reportes ul li a {
@@ -1358,7 +1362,7 @@ a.ikont-hcl-modificarusuario:hover {
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #257500;
+    background-color: rgba(37, 117, 0, 0.8);
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -1967,7 +1971,7 @@ input[type="text"], input[type="password"], select{
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #257500;
+    background-color: rgba(37, 117, 0, 0.8);
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -2202,15 +2206,12 @@ input[type="text"], input[type="password"], select{
 .dtsemafomoro{
     background-image: url("../imgs/proyecto/semaforo.png");
     background-repeat: no-repeat;
-    width: 185px;
+    width: 210px;
     height: 60px;
     display: block !important;
-    margin-top: 0px;
-    color: #FFF;
-    font-family: open;
-    font-size: 1em;
-    line-height: 55px;
-    letter-spacing: 0px;
+    margin-top: -35px;
+    margin-left: -10px;
+
 }
 
 .dtsemafomoro.ikont-hcl-VERDE{
@@ -2392,40 +2393,48 @@ input[type="text"], input[type="password"], select{
 
 .content-info-contrato{
     width: 450px;
-    height: 50px;
+    height: 60px;
     overflow: hidden;
     border-bottom: dashed 1px #58595B;
     margin: 0px 5px 4px;
 }
 
-.content-info-contrato span{
+.content-info-contrato span {
     font-family: open;
     font-size: 0.8em;
     color: #58595B;
 }
 
 .ikont-hcl-zoom-contrante{
+    background-image: url("../imgs/icn_1.png");
+    background-repeat: no-repeat;
+    display: block !important;
     width: 38px;
-    height: 37px;
-    background-position: 0px 0px;
+    height: 38px;
 }
 
 .ikont-hcl-zoom-supervosor{
+    background-image: url("../imgs/icn_2.png");
+    background-repeat: no-repeat;
+    display: block !important;
     width: 38px;
     height: 37px;
-    background-position: -38px 0px;
 }
 
 .ikont-hcl-zoom-nocontrato{
+    background-image: url("../imgs/icn_3.png");
+    background-repeat: no-repeat;
+    display: block !important;
     width: 38px;
     height: 37px;
-    background-position: -74px 0px;
 }
 
 .ikont-hcl-zoom-contratista{
+    background-image: url("../imgs/icn_4.png");
+    background-repeat: no-repeat;
+    display: block !important;
     width: 39px;
     height: 37px;
-    background-position: -113px 0px;
 }
 
 .ikont-hot-zoom-numvobra{
@@ -2524,7 +2533,7 @@ css usuario modificacion
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #257500;
+    background-color: rgba(37, 117, 0, 0.8);
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -2917,7 +2926,7 @@ css usuario modificacion
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #257500;
+    background-color: rgba(37, 117, 0, 0.8);
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -4640,4 +4649,81 @@ a:hover {
     overflow-y:auto;
     overflow-x:hidden;
 }
+
+
+.ikont-hpg-valoresproyecto{
+    width: 400px;
+}
+
+.ikont-hol-detalle-proyecto{
+    color : #58595B;
+    font-family: 'open';
+    font-size: 1em;
+}
+.ikont-hot-detalle-proyecto{
+    color : #000;
+    font-family: 'open';
+    font-size: 0.8em;
+}
+
+.ikont-hcb-ver_objeto{
+    border: 1px #999 solid;
+    border-radius: 5px;
+    width: 110px;
+    font-size: 0.8em;
+    font-family: 'open';
+    margin-top: 10px;
+    padding: 0px 10px;
+    color: #999;
+}
+
+.ikont-hcb-ver_objeto:hover{
+    background-color: #257500;
+    transition: .5s all ease-out;
+    color: #9CFF00;
+}
+
+.ikont-hcb-seguirspry{
+    height: 25px;
+    width: 148px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #257500;
+    font-size: 12px;
+    background-image: url(../imgs/ojo_cerrado.png);
+    display: block;
+    line-height: 80px;
+}
+
+.ikont-hcb-seguirspry:hover{
+    background-image: url(../imgs/ojo_abierto.png);
+    transition: 1s all;
+    height: 25px;
+    width: 148px;
+    color: #257500;
+}
+
+.ikont-hcb-sinseguirpry{
+    height: 25px;
+    width: 148px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #257500;
+    font-size: 12px;
+    background-image: url(../imgs/ojo_abierto.png);
+    display: block;
+    line-height: 80px;
+}
+
+.ikont-hcb-sinseguirpry:hover{
+    background-image: url(../imgs/ojo_cerrado.png);
+    transition: 1s all;
+    height: 25px;
+    width: 148px;
+    color: #257500;
+}
+
+
 
