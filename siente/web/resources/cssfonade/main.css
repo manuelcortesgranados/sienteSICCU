@@ -2191,10 +2191,12 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hot-zoom-numvobra{
     font-size: 2.3em;
+    color: #7E7E7E;
 }
 
 .ikont-hot-soliobra, .ikont-hot-numvaltotobra{
     font-size: 1.3em;
+    color: #7E7E7E;
 }
 
 .dtsemafomoro{
@@ -2432,6 +2434,7 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
     font-size: 2em;
+    color: #7E7E7E;
 }
 
 .ikont-hpg-datosrelevantes label{
