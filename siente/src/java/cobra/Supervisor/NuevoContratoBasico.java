@@ -6589,12 +6589,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void llenarEstadoConvenio() {
-        listEstadoConvenio = getSessionBeanCobra().getCobraService().encontrarEstadoConvenio();
-        estadoConvenioOption = new SelectItem[listEstadoConvenio.size()];
-        int i = 0;
-        for (Estadoconvenio estado : listEstadoConvenio) {
-            SelectItem itEstado = new SelectItem(estado.getIdestadoconvenio(), estado.getStrestadoconv());
-            estadoConvenioOption[i++] = itEstado;
+        if(Propiedad.getValor("conplanoperativo").equals("true")) {
+            listEstadoConvenio = getSessionBeanCobra().getCobraService().encontrarEstadoConvenio();
+            estadoConvenioOption = new SelectItem[listEstadoConvenio.size()];
+            int i = 0;
+            for (Estadoconvenio estado : listEstadoConvenio) {
+                SelectItem itEstado = new SelectItem(estado.getIdestadoconvenio(), estado.getStrestadoconv());
+                estadoConvenioOption[i++] = itEstado;
+            }
+        } else {
+            filtrocontrato.setEstadoConvenio(1);
         }
 
     }
