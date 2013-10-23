@@ -199,9 +199,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
     private static final GwtMensajes msgs = GWT.create(GwtMensajes.class);
     final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
-//    private static final TaskProps props = GWT.create(TaskProps.class);
-//    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
-    //ListStore<ActividadobraDTO> taskStore;
     /**
      * Almacena la tarea que ha sido seleccionada en el gantt
      */
@@ -288,8 +285,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     if (!tareaSeleccionada.isBoolobligatoria()) {
                         eliminarDepStore();
                         if (tareaSeleccionada.getTipoActividad() == 2) {
-                            ActividadobraDTO actividadPadreConvenio = taskStore.getParent((taskStore.getParent(tareaSeleccionada)));
-                            reembolsarFuenteRecursos(actividadPadreConvenio);
+                            ObraDTO obraEliminar = tareaSeleccionada.getObra();
+                            reembolsarFuenteRecursos(obraEliminar);
                         }
                         if (tareaSeleccionada.getTipoActividad() == 3) {
                             ContratoDTO contratoActual = tareaSeleccionada.getContrato();
@@ -1240,26 +1237,37 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         return mapaActivi;
     }
 
-    public void reembolsarFuenteRecursos(ActividadobraDTO actividadConvenio) {
-        for (Iterator it = tareaSeleccionada.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
-            ObrafuenterecursosconveniosDTO obfrc = (ObrafuenterecursosconveniosDTO) it.next();
-            if (obfrc.getTipoaporte() == 1) {
-                FuenterecursosconvenioDTO fuenteModificada = encontrarFuenteRecurso(obfrc.getFuenterecursosconvenio());
-                fuenteModificada.setValorDisponible(fuenteModificada.getValorDisponible().add(obfrc.getValor()));
+    /*
+     * metodo que se encarga de reembolsar el valor de las fuentes de recursos asociadas 
+     * al proyecto a las respectivas fuente de recursos de la convenio.
+     *
+     */
+    public void reembolsarFuenteRecursos(ObraDTO obraEliminar) {
+        for (ObrafuenterecursosconveniosDTO fuenteRecursosObraEliminar : obraEliminar.getObrafuenterecursosconvenioses()) {
+            String nomEntidad = fuenteRecursosObraEliminar.getNombreEntidad();
+            int vigencia = fuenteRecursosObraEliminar.getVigencia();
+            FuenterecursosconvenioDTO fuenteRecursoPadre = encontrarFuenteRecurso(vigencia, nomEntidad);
+            if (fuenteRecursoPadre != null) {
+                fuenteRecursoPadre.setValorDisponible(fuenteRecursoPadre.getValorDisponible().add(fuenteRecursosObraEliminar.getValor()));
             }
         }
     }
 
-    public FuenterecursosconvenioDTO encontrarFuenteRecurso(FuenterecursosconvenioDTO fuente) {
+    public FuenterecursosconvenioDTO encontrarFuenteRecurso(int vigencia, String entidad) {
         for (Iterator it = convenioDTO.getFuenterecursosconvenios().iterator(); it.hasNext();) {
             FuenterecursosconvenioDTO fuenteE = (FuenterecursosconvenioDTO) it.next();
-            if (fuenteE.equals(fuente)) {
+            if (fuenteE.getVigencia() == vigencia && fuenteE.getTercero().getStrnombrecompleto().equals(entidad)) {
                 return fuenteE;
             }
         }
         return null;
     }
 
+    /*
+     * metodo que se encarga de reembolsar el valor de las fuentes de recursos asociadas 
+     * al contrato a las respectivas fuente de recursos de la obra padre
+     *
+     */
     public void reembosarValorDisponibleAObra(ContratoDTO contratoAEliminar, ObraDTO obraPadre, ActividadobraDTO actividadPadreProyecto, String nombreActividadSeleccionada) {
         if (contratoAEliminar.getRelacionobrafuenterecursoscontratos() != null) {
             for (Iterator it = contratoAEliminar.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
@@ -1284,9 +1292,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
     }
 
+    /*
+     * metodo que se encarga de validar  si en otro contrato se encuentra
+     * asociada la misma fuente de recursos de la obra
+     *
+     */
     public boolean validarEstaFuenteObraEnContratos(ActividadobraDTO actividadObra, int vigencia, String nombreEntidad, String nombreContratoEliminar) {
         boolean estaAsociado = false;
-         if (!actividadObra.getChildren().isEmpty()) {
+        if (!actividadObra.getChildren().isEmpty()) {
             List<ContratoDTO> lstContratosHijos = new ArrayList<ContratoDTO>();
             for (ActividadobraDTO actiHija : actividadObra.getChildren()) {
                 if (actiHija.getTipoActividad() == 3) {
@@ -1310,10 +1323,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     }
 
+    /*
+     * metodo que se encarga de buscar la ObrafuenterecursosconveniosDTO asociada 
+     * a una fuente recurso del contrato que se desea eliminar.
+     *
+     */
     public ObrafuenterecursosconveniosDTO buscarRecursoDeObra(int vigencia, String nombreEntidad, Set lstFuenteRecursosObra) {
         for (Iterator it = lstFuenteRecursosObra.iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO fuenteRecursoObra = (ObrafuenterecursosconveniosDTO) it.next();
-           if (fuenteRecursoObra.getVigencia() == vigencia && fuenteRecursoObra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad)) {
+            if (fuenteRecursoObra.getVigencia() == vigencia && fuenteRecursoObra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad)) {
                 return fuenteRecursoObra;
             }
         }
@@ -1822,6 +1840,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     }
 
+    /*metodo que se encarga de carga todaas las actividades relacionadas
+     * con la actividad seleccionada*
+     */
     public void listaHijasDeActividadEliminada(ActividadobraDTO actividadSeleccionada, List<ActividadobraDTO> lstActividades) {
         lstActividades.add(actividadSeleccionada);
 
@@ -1832,6 +1853,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
     }
 
+    /*metodo que se encarga de verificar cuales de las actividades a eliminar 
+     * estan asociadas con dependencias para proceder a eliminarlas.
+     */
     public List<DependenciaDTO> eliminarDependenciasActividadEliminar(List<ActividadobraDTO> lstActividades) {
         List<DependenciaDTO> lstDepenEliminar = new ArrayList<DependenciaDTO>();
         for (DependenciaDTO dep : depStore.getAll()) {
@@ -1848,6 +1872,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     }
 
+    /*metodo que se encarga de eliminar las dependencias
+     * de las actividades a eliminar del depstore.
+     */
     public void eliminarDepStore() {
         List<ActividadobraDTO> lstActividadesEliminar = new ArrayList<ActividadobraDTO>();
         listaHijasDeActividadEliminada(tareaSeleccionada, lstActividadesEliminar);
