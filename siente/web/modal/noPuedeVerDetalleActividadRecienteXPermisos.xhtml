@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="NoPuedeVerDetalleActividadReciente" autosized="true" width="400" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-nopuedeverdetalleactividadreciente"   value="#{var.atencion}" />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder_ConfirmarMovil" styleClass="ikont-acl-esconderNoPuedeVerDetalleActividadReciente closemodal"  
+                                      title="#{var.cerrar}" onclick="#{rich:component('NoPuedeVerDetalleActividadReciente')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block">
+            <h:form>
+                <h:panelGrid columns="1" id="layoutMovil">
+                    <h:panelGrid >
+                        <h:outputText  styleClass="ikont-hot-layoutmovil"   value="No tiene los permisos requeridos para visualizar este proyecto. "  />
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+
+                        <a4j:commandButton value="#{var.aceptar}"
+                                           onclick="#{rich:component('NoPuedeVerDetalleActividadReciente')}.hide();
+                                              return false;"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+    </rich:popupPanel>
+</ui:composition>

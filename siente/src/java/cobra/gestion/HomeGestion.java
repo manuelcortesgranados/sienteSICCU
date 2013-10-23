@@ -17,6 +17,7 @@ import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Lugarobra;
 import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.Novedad;
+import co.com.interkont.cobra.to.NovedadFiltrada;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Opinionciudadano;
 import co.com.interkont.cobra.to.Region;
@@ -239,6 +240,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private int inttipoorigen = 0;
     public boolean onNovedades = false;
     private List<Novedad> listaNovedades = new ArrayList<Novedad>();
+    private List<NovedadFiltrada> listaNovedadesFiltradas = new ArrayList<NovedadFiltrada>();
     private String datosmapa = "";
     private String scriptmapa = "";
     private String mensaje = "";
@@ -729,6 +731,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setGerentes(List<Tercero> gerentes) {
         this.gerentes = gerentes;
     }
+    
+    public List<NovedadFiltrada> getListaNovedadesFiltradas() {
+        return listaNovedadesFiltradas;
+    }
+
+    public void setListaNovedadesFiltradas(List<NovedadFiltrada> listaNovedadesFiltradas) {
+        this.listaNovedadesFiltradas = listaNovedadesFiltradas;
+    }
 
     public void iniciarfiltro() {
 
@@ -804,6 +814,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
+        
+        filtro.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador());
+        
 //        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
 //            iniciarSlider();
 //        }
@@ -2055,8 +2068,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         } else {
             cantidad = 5 - listComentarioObra.size();
         }
-        listaNovedades = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuario(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo(), cantidad);
-        if (listaNovedades.isEmpty()) {
+        listaNovedadesFiltradas = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuarioFiltrada(getSessionBeanCobra().getUsuarioObra(), cantidad, filtro.isEsadministrador());
+        if (listaNovedadesFiltradas.isEmpty()) {
 
             if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
                 int totalnov = getSessionBeanCobra().getCobraService().NumtotalNovedades();
@@ -2067,13 +2080,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
 
         //Castea Novedades y Comentario a tipo Actividad Reciente
-        for (Novedad nov : listaNovedades) {
+        for (NovedadFiltrada nov : listaNovedadesFiltradas) {
             ActividadReciente act = new ActividadReciente();
             act.setCodObra(nov.getObra().getIntcodigoobra());
             act.setNombreobra(nov.getObra().getStrnombrecrot());
             act.setStrNovedad_comentario(nov.getTiponovedad().getStrtiponovedad());
             act.setStrrutaimg(nov.getTiponovedad().getStrimgnovedad());
             act.setIntestadoobra(nov.getObra().getTipoestadobra().getIntestadoobra());
+            act.setPuedeVerDetalleObraActividadReciente(nov.isPuedeVerDetalleObraActividadReciente());
             act.setTextoinicial(getSessionBeanCobra().getBundle().getString("proyectonovedades"));
             act.setTextofinal(act.getStrNovedad_comentario());
             listarecientes.add(act);
