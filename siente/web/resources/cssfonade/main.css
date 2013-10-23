@@ -2191,10 +2191,12 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hot-zoom-numvobra{
     font-size: 2.3em;
+    color: #7E7E7E;
 }
 
 .ikont-hot-soliobra, .ikont-hot-numvaltotobra{
     font-size: 1.3em;
+    color: #7E7E7E;
 }
 
 .dtsemafomoro{
@@ -2432,6 +2434,7 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
     font-size: 2em;
+    color: #7E7E7E;
 }
 
 .ikont-hpg-datosrelevantes label{
@@ -4588,3 +4591,53 @@ a:hover {
 .ikont-hot-titulodeberiair{
     margin-left: 14px;
 }
+
+.ikont-panel-listadoconvenio-buscar{
+    margin: -8px 0px!important;
+}
+.ikont-panel-listadoconvenio-consultar{
+    margin: -3px 0px!important;
+}
+
+/*Estilo para El Filtro*/
+.ikont-filtro-slider-range{
+    position: relative !important;
+    top: -31px !important;
+    z-index: 20;
+}
+.ikont-filtro-slider-range-avance{
+    position: relative !important; 
+    top: -26px !important;
+    z-index: 20;
+}
+.ikont-filtro-filtrar_btn{
+    padding: 1px 22px!important;
+    z-index: 20;
+}
+.ikont-filtro-filtrar-autocomplete-cliente{
+    position: absolute;
+    top: 85px;
+    width: 236px!important;
+}
+.ikont-filtro-filtrar-autocomplete-contratista{
+    position: absolute;
+    top: 132px;
+    width: 236px!important;
+}
+.ikont-filtro-filtrar-autocomplete-interventor{
+    position: absolute;
+    top: 182px;
+    width: 236px!important;
+}
+.ikont-filtro-filtrar-autocomplete-gerente{
+    position: absolute;
+    top: 234px;
+    width: 236px!important;
+}
+
+.ikont-listado-contratoconvenio{
+    height:500px; 
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+

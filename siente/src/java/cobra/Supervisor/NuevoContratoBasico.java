@@ -2789,8 +2789,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 }
 
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
-                                    removerAnticipo();
+                                   removerAnticipo();
                                     if (bundle.getString("fechaformapago").equals("true")) {
+                                        removerAnticipo();
                                         FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
                                         return false;
                                     }
@@ -3001,10 +3002,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             return null;
                         }
                         if (!validacionFechasContrato()) {
+                            removerAnticipo();
                             FacesUtils.addErrorMessage(bundle.getString("fechaactaunica"));
                             return null;
                         }
-                        if (!validacionFechasContratoActasyAnticipo()) {
+                        if (!validacionFechasContratoActasyAnticipo()) {   
+                             removerAnticipo();
                             FacesUtils.addErrorMessage(bundle.getString("fechaanticipo"));
                             return null;
                         }
@@ -7294,6 +7297,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 case 1:
                     while (i < lisplanifiactapar.size()) {
                         if (fechapagoanticipo.compareTo(lisplanifiactapar.get(i).getDatefechapago()) > 0) {
+                             removerAnticipo();
                             return false;
                         }
                         i++;

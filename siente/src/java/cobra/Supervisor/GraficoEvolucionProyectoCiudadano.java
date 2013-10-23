@@ -68,8 +68,8 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
         grafico.getEstilo().setUselinealegenda(true);
         grafico.getEstilo().setNumcolumnaslegenda("2");
         grafico.getEstilo().setZoomcursor(true);
-        grafico.getEstilo().setColortextocursor("#9CFF00");
-        grafico.getEstilo().setColorfondoocursor("#257500");
+        grafico.getEstilo().setColortextocursor(Propiedad.getValor("graevuproyetextocursor"));
+        grafico.getEstilo().setColorfondoocursor(Propiedad.getValor("graevuproyecolorcursor"));
         grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setEvolucionproyectociudadano(true);
         
@@ -158,12 +158,12 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
         ConjuntoDatosGrafico conjuntoDatosPlanActual = new ConjuntoDatosGrafico();
         conjuntoDatosPlanActual.setCodigo("planactual");
         conjuntoDatosPlanActual.setEtiqueta(Propiedad.getValor("graevuproyplani"));
-        conjuntoDatosPlanActual.getEstilo().setColorSerie("#257500");
+        conjuntoDatosPlanActual.getEstilo().setColorSerie(Propiedad.getValor("graevuproyecolor1"));
 
         ConjuntoDatosGrafico conjuntoDatosEjecucionActual = new ConjuntoDatosGrafico();
         conjuntoDatosEjecucionActual.setCodigo("ejeactual");
         conjuntoDatosEjecucionActual.setEtiqueta(Propiedad.getValor("graevuproyejec"));
-        conjuntoDatosEjecucionActual.getEstilo().setColorSerie("#9CFF00");
+        conjuntoDatosEjecucionActual.getEstilo().setColorSerie(Propiedad.getValor("graevuproyecolor2"));
         
         boolean esPrimerPeriodo = true;
         for (Periodo periodoObra : periodosActuales) {

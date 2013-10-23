@@ -33,11 +33,11 @@
     </h:head>
 
     <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
-        <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px;width: 265px;" > 
+        <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos"  > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
-                              onclick="this.value = ''"  styleClass="input_filtro" style="font-size: 17px;">
+                              onclick="this.value = ''"  styleClass="input_filtro">
                     <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
                 <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
@@ -100,7 +100,7 @@
                         </rich:column>
                     </h:panelGrid>
                 </h:panelGrid>
-                <div id="slider-range" style="position: relative !important; top: -31px !important;z-index: 20;" ></div>
+                <div id="slider-range" class="ikont-filtro-slider-range" ></div>
                 <br/>
                 <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                 <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
@@ -124,18 +124,18 @@
                                 "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
                     });
                 </script>
-                <h:panelGrid styleClass="ikont-hpg-slider-avance" style="" >
+                <h:panelGrid styleClass="ikont-hpg-slider-avance">
 
                     <rich:column>
                         <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1"/> 
                     </rich:column>
 
                 </h:panelGrid>
-                <div id="slider-range-avance" style="position: relative !important; top: -26px !important;z-index: 20;"></div>
+                <div id="slider-range-avance" class="ikont-filtro-slider-range-avance"></div>
             </h:panelGrid>
             <center>
                 <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
-                                 styleClass="boton1"   style="padding: 1px 22px!important;z-index: 20;"          />
+                                 styleClass="boton1 ikont-filtro-filtrar_btn"    />
             </center>
             <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2" /> 
         </rich:tab>              
@@ -175,7 +175,7 @@
             </h:panelGrid>
             <center>
                 <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
-                                 styleClass="boton1"    style="padding: 1px 22px!important;z-index: 100;"          />
+                                 styleClass="boton1 ikont-filtro-filtrar_btn"        />
             </center>
         </rich:tab>
 
@@ -183,28 +183,28 @@
             <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
 
-                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" style="position: absolute;top: 85px; width: 236px!important;"
+                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" styleClass="ikont-filtro-filtrar-autocomplete-cliente"
                                    var="cap3" fetchValue="#{cap3.strnombrecompleto}" value="#{HomeGestion.filtro.strcliente}" layout="div">
                     #{cap3.strnombrecompleto}
                     <rich:placeholder id="placeHolderCliente" value="Cliente" />
                 </rich:autocomplete>
 
-                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;width: 236px!important;"
+                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" styleClass="ikont-filtro-filtrar-autocomplete-contratista"
                                    var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
                     #{cap.strnombre}
-                    <rich:placeholder id="placeHolderContratista" value="Contratista" />
+                    <rich:placeholder id="placeHolderContratista" value="#{var.contratista}" />
                 </rich:autocomplete>
 
-                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;width: 236px!important;"                                  
+                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" styleClass="ikont-filtro-filtrar-autocomplete-interventor"                              
                                    var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
                     #{cap1.strinterventor}
-                    <rich:placeholder  id="placeHolderInterventor" value="Interventor" />
+                    <rich:placeholder  id="placeHolderInterventor" value="#{var.interventorObra}" />
                 </rich:autocomplete>
 
-                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;width: 236px!important;"
+                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" styleClass="ikont-filtro-filtrar-autocomplete-gerente"
                                    var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
                     #{cap2.strnombrecompleto}
-                    <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
+                    <rich:placeholder id="placeHolderGerente" value="#{var.gerenteconvenio}" />
                 </rich:autocomplete>
 
 
@@ -213,7 +213,7 @@
             <center>
 
                 <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
-                                 styleClass="boton1"  style="padding: 1px 22px!important;z-index: 100;"            />
+                                 styleClass="boton1 ikont-filtro-filtrar_btn"  />
 
             </center>
         </rich:tab>
