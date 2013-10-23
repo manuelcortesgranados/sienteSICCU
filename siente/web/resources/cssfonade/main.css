@@ -4601,77 +4601,52 @@ a:hover {
     margin-left: 14px;
 }
 
-.ikont-hpg-valoresproyecto{
-    width: 400px;
+.ikont-panel-listadoconvenio-buscar{
+    margin: -8px 0px!important;
+}
+.ikont-panel-listadoconvenio-consultar{
+    margin: -3px 0px!important;
 }
 
-.ikont-hol-detalle-proyecto{
-    color : #58595B;
-    font-family: 'open';
-    font-size: 1em;
+/*Estilo para El Filtro*/
+.ikont-filtro-slider-range{
+    position: relative !important;
+    top: -31px !important;
+    z-index: 20;
 }
-.ikont-hot-detalle-proyecto{
-    color : #000;
-    font-family: 'open';
-    font-size: 0.8em;
+.ikont-filtro-slider-range-avance{
+    position: relative !important; 
+    top: -26px !important;
+    z-index: 20;
 }
-
-.ikont-hcb-ver_objeto{
-    border: 1px #999 solid;
-    border-radius: 5px;
-    width: 110px;
-    font-size: 0.8em;
-    font-family: 'open';
-    margin-top: 10px;
-    padding: 0px 10px;
-    color: #999;
+.ikont-filtro-filtrar_btn{
+    padding: 1px 22px!important;
+    z-index: 20;
 }
-
-.ikont-hcb-ver_objeto:hover{
-    background-color: #257500;
-    transition: .5s all ease-out;
-    color: #9CFF00;
+.ikont-filtro-filtrar-autocomplete-cliente{
+    position: absolute;
+    top: 85px;
+    width: 236px!important;
 }
-
-.ikont-hcb-seguirspry{
-    height: 25px;
-    width: 148px;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: #257500;
-    font-size: 12px;
-    background-image: url(../imgs/ojo_cerrado.png);
-    display: block;
-    line-height: 80px;
+.ikont-filtro-filtrar-autocomplete-contratista{
+    position: absolute;
+    top: 132px;
+    width: 236px!important;
+}
+.ikont-filtro-filtrar-autocomplete-interventor{
+    position: absolute;
+    top: 182px;
+    width: 236px!important;
+}
+.ikont-filtro-filtrar-autocomplete-gerente{
+    position: absolute;
+    top: 234px;
+    width: 236px!important;
 }
 
-.ikont-hcb-seguirspry:hover{
-    background-image: url(../imgs/ojo_abierto.png);
-    transition: 1s all;
-    height: 25px;
-    width: 148px;
-    color: #257500;
-}
-
-.ikont-hcb-sinseguirpry{
-    height: 25px;
-    width: 148px;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: #257500;
-    font-size: 12px;
-    background-image: url(../imgs/ojo_abierto.png);
-    display: block;
-    line-height: 80px;
-}
-
-.ikont-hcb-sinseguirpry:hover{
-    background-image: url(../imgs/ojo_cerrado.png);
-    transition: 1s all;
-    height: 25px;
-    width: 148px;
-    color: #257500;
+.ikont-listado-contratoconvenio{
+    height:500px; 
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 

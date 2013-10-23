@@ -781,7 +781,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public boolean habiitarmodificartipocontrato = false;
     private String numcontratotemporal;
     private Relacioncontratojsfusuario relacionContratoJSFUsuario = new Relacioncontratojsfusuario();
+    /**
+     * Indica que el bean ha sido invocado desde la funcionalidad de nuevo
+     * convenio
+     */
+    private boolean enNuevoConvenio;
 
+    public boolean isEnNuevoConvenio() {
+        return enNuevoConvenio;
+    }
+
+    public void setEnNuevoConvenio(boolean enNuevoConvenio) {
+        this.enNuevoConvenio = enNuevoConvenio;
+    }
+    
     public Relacioncontratojsfusuario getRelacionContratoJSFUsuario() {
         return relacionContratoJSFUsuario;
     }
@@ -2557,10 +2570,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //----------------------
             //-- Se hace esta codificación para asegurar que el primer item que carga en la vista es con todos los relacionados al usuario. 
             if (lis.size() > 1) {
-                itemTercero = new SelectItem("TODOS");
+                String primeraOpcion;
+                if(isEnNuevoConvenio()) {
+                    primeraOpcion = "Seleccione una Entidad";
+                } else {
+                    primeraOpcion = "Todos";
+                }
+                itemTercero = new SelectItem(primeraOpcion);
                 TerceroOption[i++] = itemTercero;
                 contrato.getTercero().setIntcodigo(-1);
-                contrato.getTercero().setStrnombrecompleto("TODOS");
+                contrato.getTercero().setStrnombrecompleto(primeraOpcion);
             }
             //----------------------
 
@@ -3266,6 +3285,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void iniciarConvenio(ActionEvent event) {//se invoca desde menu_lateral_gestion
 //       Iniciar los metodos para llenar la tabla de flujo caja si este tiene plan operativo
+        enNuevoConvenio = true;
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
         boolcontrconsultoria = false;
@@ -5170,6 +5190,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return la pagina detalleconvenio adecuada a este
      */
     public String iniciarDetaConvenio() {
+        enNuevoConvenio = false;
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
