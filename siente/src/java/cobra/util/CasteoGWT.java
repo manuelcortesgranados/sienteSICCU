@@ -491,7 +491,8 @@ public class CasteoGWT implements Serializable {
         relaFuenteObraContratoDto.setDescripcionRubro(relacionobrafrecucontrato.getRubro().getStrdescripcion());
         relaFuenteObraContratoDto.setEliminar("Eliminar");
         relaFuenteObraContratoDto.setIdrelacionobracontrato(relacionobrafrecucontrato.getIdrelacionobracontrato());
-        //relaFuenteObraContratoDto.setNombreEntidad(relacionobrafrecucontrato.getObrafuenterecursosconvenios().getFuenterecursosconvenio().getTercero().getStrnombre());
+        relaFuenteObraContratoDto.setNombreEntidad(relacionobrafrecucontrato.getNombreEntidad());
+        relaFuenteObraContratoDto.setDescripcionRubro(relacionobrafrecucontrato.getRubro().getStrdescripcion());
         relaFuenteObraContratoDto.setRubro(new RubroDTO(relacionobrafrecucontrato.getRubro().getIdrubro(), relacionobrafrecucontrato.getRubro().getStrdescripcion()));
         relaFuenteObraContratoDto.setValor(relacionobrafrecucontrato.getValor());
         relaFuenteObraContratoDto.setVigenciafonade(relacionobrafrecucontrato.getVigenciafonade());
@@ -1033,10 +1034,11 @@ public class CasteoGWT implements Serializable {
     public static Relacionobrafuenterecursoscontrato castearRelobrarecucontraDTOToRelobrarecucontra(RelacionobrafuenterecursoscontratoDTO relobfurecontdto,final Contrato contrato, int intusuario) {
         Relacionobrafuenterecursoscontrato relaFuenteObraContrato = new Relacionobrafuenterecursoscontrato();
         relaFuenteObraContrato.setIdrelacionobracontrato(relobfurecontdto.getIdrelacionobracontrato());
-        relaFuenteObraContrato.setRubro(new Rubro(relobfurecontdto.getRubro().getIdrubro()));
+        relaFuenteObraContrato.setRubro(new Rubro(relobfurecontdto.getRubro().getIdrubro(),relobfurecontdto.getDescripcionRubro()));
         relaFuenteObraContrato.setValor(relobfurecontdto.getValor());
         relaFuenteObraContrato.setVigenciafonade(relobfurecontdto.getVigenciafonade());
         relaFuenteObraContrato.setVigenciafuente(relobfurecontdto.getVigenciafuente());
+        relaFuenteObraContrato.setNombreEntidad(relobfurecontdto.getNombreEntidad());
 
         //Buscar la Obrafuente recurso convenio
         //System.out.println("obrafuenterecursoconvenio = " + relobfurecontdto.getObrafuenterecursosconvenios().getIdobrafuenterecursos());
