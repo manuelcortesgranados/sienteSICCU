@@ -295,9 +295,9 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         // LEGEND
         if (estilo.isVerLeyenda()) {
             script.append("var legend = new AmCharts.AmLegend();\n");
-//            script.append("legend.useGraphSettings = ");
-//            script.append(estilo.isUselinealegenda());
-//            script.append(";\n");
+            script.append("legend.useGraphSettings = ");
+            script.append(estilo.isUselinealegenda());
+            script.append(";\n");
             script.append("legend.markerLabelGap=30;\n");
             script.append("legend.top=-5;\n");
             script.append(nombreDiv).append(".addLegend(legend);\n\n");
