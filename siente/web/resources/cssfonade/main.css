@@ -4650,3 +4650,80 @@ a:hover {
     overflow-x:hidden;
 }
 
+
+.ikont-hpg-valoresproyecto{
+    width: 400px;
+}
+
+.ikont-hol-detalle-proyecto{
+    color : #58595B;
+    font-family: 'open';
+    font-size: 1em;
+}
+.ikont-hot-detalle-proyecto{
+    color : #000;
+    font-family: 'open';
+    font-size: 0.8em;
+}
+
+.ikont-hcb-ver_objeto{
+    border: 1px #999 solid;
+    border-radius: 5px;
+    width: 110px;
+    font-size: 0.8em;
+    font-family: 'open';
+    margin-top: 10px;
+    padding: 0px 10px;
+    color: #999;
+}
+
+.ikont-hcb-ver_objeto:hover{
+    background-color: #257500;
+    transition: .5s all ease-out;
+    color: #9CFF00;
+}
+
+.ikont-hcb-seguirspry{
+    height: 25px;
+    width: 148px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #257500;
+    font-size: 12px;
+    background-image: url(../imgs/ojo_cerrado.png);
+    display: block;
+    line-height: 80px;
+}
+
+.ikont-hcb-seguirspry:hover{
+    background-image: url(../imgs/ojo_abierto.png);
+    transition: 1s all;
+    height: 25px;
+    width: 148px;
+    color: #257500;
+}
+
+.ikont-hcb-sinseguirpry{
+    height: 25px;
+    width: 148px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 5px 10px;
+    color: #257500;
+    font-size: 12px;
+    background-image: url(../imgs/ojo_abierto.png);
+    display: block;
+    line-height: 80px;
+}
+
+.ikont-hcb-sinseguirpry:hover{
+    background-image: url(../imgs/ojo_cerrado.png);
+    transition: 1s all;
+    height: 25px;
+    width: 148px;
+    color: #257500;
+}
+
+
+
