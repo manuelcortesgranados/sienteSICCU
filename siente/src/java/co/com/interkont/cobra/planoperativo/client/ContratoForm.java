@@ -131,7 +131,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public ContratoForm() {
     }
 
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio,int numeracionActividad) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, int numeracionActividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -144,7 +144,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
-        this.numeracionActividad=numeracionActividad;
+        this.numeracionActividad = numeracionActividad;
 
     }
 
@@ -286,7 +286,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblFechaFin = new Label("Fecha finalización:");
         con.add(lblFechaFin, new HtmlData(".tfechafin"));
         con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
-        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato,editar,valorContrato);
+        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
 
@@ -612,27 +612,29 @@ public class ContratoForm implements IsWidget, EntryPoint {
         numeracionActividad++;
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
-        hitoFechaSuscripcion.setNumeracion(numeracionActividad);
-        numeracionActividad++;
-        lstHijos.add(hitoFechaSuscripcion);
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
-        hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
-        numeracionActividad++;
-        lstHijos.add(hitoFechaSuscripcionActa);
-        
-        Date fechaInicioPrecontractual=CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
-        fechaInicioPrecontractual=new Date(fechaInicioPrecontractual.getDate()-1);
+//        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+//        hitoFechaSuscripcion.setNumeracion(numeracionActividad);
+//        numeracionActividad++;
+//       // lstHijos.add(hitoFechaSuscripcion);
+//        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+//        hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
+//        numeracionActividad++;
+        // lstHijos.add(hitoFechaSuscripcionActa);
 
+//        Date fechaInicioPrecontractual = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
+//        fechaInicioPrecontractual = new Date(fechaInicioPrecontractual.getDate() - 1);
 
-        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);
+        Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
+        fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
+
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual",fechaInicioPre , 1, 0, TaskType.PARENT, 5, true);
         precontractual.setEsNoEditable(true);
         precontractual.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijos.add(precontractual);
 
         List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", fechaInicioPre, 1, 0, TaskType.LEAF, 4, true);
         revTecnica.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosPrecontra.add(revTecnica);
@@ -674,6 +676,21 @@ public class ContratoForm implements IsWidget, EntryPoint {
         numeracionActividad++;
         lstHijos.add(contractua);
 
+        List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        hitoFechaSuscripcion.setNumeracion(numeracionActividad);
+        numeracionActividad++;
+        lstHijosContra.add(hitoFechaSuscripcion);
+
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
+        numeracionActividad++;
+        lstHijosContra.add(hitoFechaSuscripcionActa);
+
+        Date copiaFechaUltimoHijoContrac = CalendarUtil.copyDate(hitoFechaSuscripcionActa.getEndDateTime());
+        contractua.setEndDateTime(copiaFechaUltimoHijoContrac);
+
+
         Date fechaCopiaContractual = CalendarUtil.copyDate(contractua.getEndDateTime());
 
 
@@ -688,6 +705,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         actividadObraContrato.setChildren(lstHijos);
         precontractual.setChildren(lstHijosPrecontra);
+        contractua.setChildren(lstHijosContra);
 
         DependenciaDTO dependenciaRevTecnica = GanttDatos.crearDependencia(revTecnica, elaboPliegos);
         DependenciaDTO dependenciaRevPliego = GanttDatos.crearDependencia(elaboPliegos, evaPropuestas);
@@ -791,7 +809,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         return esMenor;
     }
-
 
     public void modificacionValorDisponibleCreando() {
         for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {

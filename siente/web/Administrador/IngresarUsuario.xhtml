@@ -36,8 +36,12 @@
                 <h:form>
                     <rich:panel>
                         <a4j:region id="form_">
-
+                            <h:panelGrid  columns="2" styleClass="ikont-panel-registro">
+                                <h:selectBooleanCheckbox title="#{var.enviar} #{var.Correo}" value="#{Ciudadano$PerfilCiudadano.habilitarEnvioCorreo}"/>
+                                <h:outputLabel value="Desea enviarle correo electrónico de bienvenida al usuario creado?"/>
+                            </h:panelGrid>
                             <h:panelGrid id="ingresarciudadanonuevo" columns="2" styleClass="ikont-panel-registro" >
+
                                 <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  >
                                     <rich:placeholder value="Nombre" />
                                 </h:inputText>
@@ -55,18 +59,18 @@
                                 <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
                                     <rich:placeholder value="Em@il" />
                                 </h:inputText>
-                                <h:selectOneMenu id="combodepartamentoCiudadanuevo" rendered="false" value="2"  >
+                                <h:selectOneMenu id="combodepartamentoCiudadanuevo"  value="2"  >
                                     <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
                                     <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarTiposGrupo}" execute="@this"
                                               render="combocargargrupos"/>
                                 </h:selectOneMenu> 
 
-                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}" rendered="false"/>
-                                <rich:calendar rendered="false" id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
+                                <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}" />
+                                <rich:calendar  id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
                                                value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
 
-                                <h:outputLabel rendered="false" styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
-                                <h:selectOneMenu rendered="false" id="combogeneronuevo" value="genero">
+                                <h:outputLabel  styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
+                                <h:selectOneMenu  id="combogeneronuevo" value="genero">
                                     <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                                 </h:selectOneMenu>
 
@@ -87,8 +91,6 @@
                                             <f:selectItem itemLabel="Departamental" itemValue="2" />
                                             <a4j:ajax event="valueChange" execute="@this,combodepartamentoproyecto"  render="panelLocalidadProyecto,combodepartamentoproyecto" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
                                         </h:selectOneMenu>
-
-
 
                                         <h:panelGroup layout="block" id="panelLocalidadProyecto"  >
                                             <h:panelGroup    layout="block" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" >
@@ -191,22 +193,22 @@
                             <rich:collapsiblePanel header="#{var.configurarusuario}"  id="configurarusuario">
                                 <h:panelGrid   cellspacing="10" id="ikont-panel-selects-conusu">
                                     <h:panelGrid columns="2">
-                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.grupo}"/>
-                                    <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
-                                        <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
-                                        <a4j:ajax event="valueChange" execute="combocargarModulos,selectmodulo" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" 
-                                                  render="combocargarModulos,configurarusuario"/>
-                                    </h:selectOneMenu>
+                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.grupo}"/>
+                                        <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
+                                            <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
+                                            <a4j:ajax event="valueChange" execute="combocargarModulos,selectmodulo" listener="#{Ciudadano$PerfilCiudadano.llenarModulos}" 
+                                                      render="combocargarModulos,configurarusuario"/>
+                                        </h:selectOneMenu>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" id="selectmodulo" rendered="#{Ciudadano$PerfilCiudadano.habilitartablalistarusuario}">
-                                    <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.seleccionmodulo}" />
-                                    <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
-                                        <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
-                                        <a4j:ajax execute="idconfiguracionusuario" event="valueChange" render="idconfiguracionusuario"  />
-                                    </h:selectOneMenu>
-                                    <h:panelGrid>
-                                        <a4j:commandButton   value="#{var.adicionar}" id="agregar_modgru"  execute="configurarusuario,idconfiguracionusuario" render="configurarusuario"  actionListener="#{Ciudadano$PerfilCiudadano.listarGrupoModulo}" />
-                                    </h:panelGrid>
+                                        <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.seleccionmodulo}" />
+                                        <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
+                                            <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />
+                                            <a4j:ajax execute="idconfiguracionusuario" event="valueChange" render="idconfiguracionusuario"  />
+                                        </h:selectOneMenu>
+                                        <h:panelGrid>
+                                            <a4j:commandButton   value="#{var.adicionar}" id="agregar_modgru"  execute="configurarusuario,idconfiguracionusuario" render="configurarusuario"  actionListener="#{Ciudadano$PerfilCiudadano.listarGrupoModulo}" />
+                                        </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
 

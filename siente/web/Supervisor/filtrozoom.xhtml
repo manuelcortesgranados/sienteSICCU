@@ -192,19 +192,19 @@
                 <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;width: 236px!important;"
                                    var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
                     #{cap.strnombre}
-                    <rich:placeholder id="placeHolderContratista" value="Contratista" />
+                    <rich:placeholder id="placeHolderContratista" value="#{var.contratista}" />
                 </rich:autocomplete>
 
                 <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;width: 236px!important;"                                  
                                    var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
                     #{cap1.strinterventor}
-                    <rich:placeholder  id="placeHolderInterventor" value="Interventor" />
+                    <rich:placeholder  id="placeHolderInterventor" value="#{var.interventorObra}" />
                 </rich:autocomplete>
 
                 <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;width: 236px!important;"
                                    var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
                     #{cap2.strnombrecompleto}
-                    <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
+                    <rich:placeholder id="placeHolderGerente" value="#{var.gerenteconvenio}" />
                 </rich:autocomplete>
 
 
