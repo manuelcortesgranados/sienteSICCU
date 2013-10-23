@@ -4635,3 +4635,9 @@ a:hover {
     width: 236px!important;
 }
 
+.ikont-listado-contratoconvenio{
+    height:500px; 
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+

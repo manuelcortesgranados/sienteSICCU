@@ -24,7 +24,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGroup layout="block" id="gpTotalCont" >
+        <h:panelGroup styleClass="ikont-listado-contratoconvenio" layout="block" id="gpTotalCont" >
             <center>
                 <h:form>
                     <h:panelGrid columns="2" styleClass="ikont-panel-listadoconvenio-buscar" >
@@ -53,7 +53,7 @@
                                         rowKeyVar="filaSeleccionada"
                                         binding="#{Supervisor$Contrato.tablacontrapadrebindin}"
                                         value="#{Supervisor$Contrato.listacontratos}"
-                                        sortMode="single"  var="currentRow"  rows="6"
+                                        sortMode="single"  var="currentRow"  rows="5"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <f:facet name="header">
                                 <rich:columnGroup>
@@ -126,18 +126,10 @@
                                     <rich:column colspan="9" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton styleClass="ikont-acb-siguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
+                                                <a4j:commandButton immediate="true"  render="tabla-listado-contratospad" execute="tabla-listado-contratospad" styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" actionListener="#{Supervisor$Contrato.primeroDetcontrato}"/>
+                                                <a4j:commandButton immediate="true"  render="tabla-listado-contratospad" execute="tabla-listado-contratospad" styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" actionListener="#{Supervisor$Contrato.anterioresDetcontrato}"/>
+                                                <a4j:commandButton  immediate="true" render="tabla-listado-contratospad" execute="tabla-listado-contratospad" styleClass="ikont-acb-siguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" actionListener="#{Supervisor$Contrato.siguienteDetcontrato}"/>
+                                                <a4j:commandButton immediate="true" render="tabla-listado-contratospad" execute="tabla-listado-contratospad" styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" actionListener="#{Supervisor$Contrato.ultimoDetcontrato}"/>
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>
@@ -151,7 +143,7 @@
                                         rowKeyVar="filaSeleccionada"
                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
                                         binding="#{Supervisor$Contrato.tablacontrapadrebindinContratista}"
-                                        sortMode="single"  var="currentRow"  rows="6"
+                                        sortMode="single"  var="currentRow"  rows="5"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
 
                             <f:facet name="header">
@@ -225,18 +217,10 @@
                                     <rich:column colspan="9" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
-                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}">
-                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
-                                                </a4j:commandButton>
+                                                <a4j:commandButton value="#{var.primeroCiu}" render="tabla-listado-contratospadContratista" execute="tabla-listado-contratospadContratista" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" actionListener="#{Supervisor$Contrato.primeroDetcontratoContratista}"/>
+                                                <a4j:commandButton value="#{var.anteriorCiu}" render="tabla-listado-contratospadContratista" execute="tabla-listado-contratospadContratista" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" actionListener="#{Supervisor$Contrato.anterioresDetcontratoContratista}"/>
+                                                <a4j:commandButton value="#{var.siguienteCiu}" render="tabla-listado-contratospadContratista" execute="tabla-listado-contratospadContratista" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" actionListener="#{Supervisor$Contrato.siguienteDetcontratoContratista}"/>
+                                                <a4j:commandButton value="#{var.ultimoCiu}" render="tabla-listado-contratospadContratista" execute="tabla-listado-contratospadContratista" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" actionListener="#{Supervisor$Contrato.ultimoDetcontratoContratista}"/>
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>
