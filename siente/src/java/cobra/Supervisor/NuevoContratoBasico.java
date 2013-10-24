@@ -2616,7 +2616,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void comboEntidadesContrato() {
 
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
-            filtrocontrato.setAplicaafonade(true);
+//se deshabilitó para montaje producción 24 de octubre de 2013 (Se puso en false)  
+filtrocontrato.setAplicaafonade(false);
         } else {
             filtrocontrato.setAplicaafonade(false);
         }
@@ -5198,8 +5199,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String iniciarDetaConvenio() {
         enNuevoConvenio = false;
+        //se deshabilitó para montaje producción 24 de octubre de 2013 (Se puso en false)  
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
-            filtrocontrato.setAplicaafonade(true);
+            filtrocontrato.setAplicaafonade(false);
         } else {
             filtrocontrato.setAplicaafonade(false);
         }
