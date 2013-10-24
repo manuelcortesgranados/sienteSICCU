@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  * MBean encargado de gestionar la presentación del gráfico de evolución del
@@ -65,7 +66,13 @@ public abstract class GraficoEvolucionProyecto {
         grafico.setTipoGrafico(GraficoSeries.TIPO_LINEAS);
         grafico.getEstilo().setVerLeyenda(true);
         grafico.getEstilo().setVerCursor(true);
+        grafico.getEstilo().setUselinealegenda(true);
+        grafico.getEstilo().setAgregarimagenes(true);
         grafico.getEstilo().setColorTexto("#706F6F");
+        grafico.getEstilo().setColortextocursor(Propiedad.getValor("graevuproyetextocursor"));
+        grafico.getEstilo().setColorfondoocursor(Propiedad.getValor("graevuproyecolorcursor"));
+        grafico.getEstilo().setRutaimages(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/resources/amcharts/images/");
+        grafico.getEstilo().setAnimado(true);
         grafico.setTipoDatoEjeX(Grafico.FECHA);
 
         /**
@@ -150,12 +157,12 @@ public abstract class GraficoEvolucionProyecto {
         ConjuntoDatosGrafico conjuntoDatosPlanActual = new ConjuntoDatosGrafico();
         conjuntoDatosPlanActual.setCodigo("planactual");
         conjuntoDatosPlanActual.setEtiqueta(Propiedad.getValor("graevuproyplani"));
-        conjuntoDatosPlanActual.getEstilo().setColorSerie("#1c1c1a");
+        conjuntoDatosPlanActual.getEstilo().setColorSerie(Propiedad.getValor("graevuproyecolor1"));
 
         ConjuntoDatosGrafico conjuntoDatosEjecucionActual = new ConjuntoDatosGrafico();
         conjuntoDatosEjecucionActual.setCodigo("ejeactual");
         conjuntoDatosEjecucionActual.setEtiqueta(Propiedad.getValor("graevuproyejec"));
-        conjuntoDatosEjecucionActual.getEstilo().setColorSerie("#257500");
+        conjuntoDatosEjecucionActual.getEstilo().setColorSerie(Propiedad.getValor("graevuproyecolor2"));
         
         boolean esPrimerPeriodo = true;
         for (Periodo periodoObra : periodosActuales) {

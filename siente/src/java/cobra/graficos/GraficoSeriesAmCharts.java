@@ -62,9 +62,9 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         script.append("\n\n");
         // SERIAL CHART
         script.append("var ").append(nombreDiv).append(" = new AmCharts.AmSerialChart();\n");
-//        script.append(nombreDiv).append(".pathToImages = '")
-//                .append(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath())
-//                .append("/faces/amcharts/images/';\n");
+        if (estilo.isAgregarimagenes()) {
+            script.append(nombreDiv).append(".pathToImages ='").append(estilo.getRutaimages()).append("';\n");
+        }
         script.append(nombreDiv).append(".dataProvider = ").append(nombreDiv).append("Data;\n");
         script.append(nombreDiv).append(".categoryField = 'valorX';\n");
         if (estilo.isAnimado()) {
@@ -203,7 +203,7 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
                 }
             }
 
-            if ((conjuntoDatosGrafico.getEstilo().getColorSerie() != null)&& (!estilo.isEvolucionproyectociudadano())) {
+            if ((conjuntoDatosGrafico.getEstilo().getColorSerie() != null) && (!estilo.isEvolucionproyectociudadano())) {
                 if (conjuntoDatosGrafico.getEstilo().getColorSerie2() == null) {
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                     script.append(".fillColors = ['");
