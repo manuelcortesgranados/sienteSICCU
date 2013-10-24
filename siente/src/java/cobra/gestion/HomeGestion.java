@@ -731,7 +731,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setGerentes(List<Tercero> gerentes) {
         this.gerentes = gerentes;
     }
-    
+
     public List<NovedadFiltrada> getListaNovedadesFiltradas() {
         return listaNovedadesFiltradas;
     }
@@ -814,9 +814,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
-        
+//            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
+//                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
+
         filtro.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador());
-        
+
 //        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
 //            iniciarSlider();
 //        }
@@ -2814,15 +2816,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             setMostrarvalortotalproyectos(false);
         }
     }
-    
-    
+
     //Metodo para cargar las listas para el autocomplete del filtro
-    
-    public void mostrarContratistas(){
+    public void mostrarContratistas() {
         contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratista();
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
-        clientes =  getSessionBeanCobra().getCobraService().encontrarCliente();
+        clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
-            }
-    
+    }
 }

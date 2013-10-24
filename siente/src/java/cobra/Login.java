@@ -93,7 +93,7 @@ public class Login implements Serializable {
         Usuario usuarioExterno = null;
         try {
             getSessionBeanCobra().setMensajelogueo("");
-
+            
 
 
             getSessionBeanCobra().setTipologueo(getSessionBeanCobra().getUsuarioService().
@@ -161,10 +161,10 @@ public class Login implements Serializable {
                     getSessionBeanCobra().setMensajelogueo(getSessionBeanCobra().getTipologueo().getMensajeerror());
                     FacesUtils.addErrorMessage(getSessionBeanCobra().getTipologueo().getMensajeerror());
                     return "fallo";
-
+                   
                 case 1:
                 case 2:
-
+                    getSessionBeanCobra().getCiudadanoservice().setUsuariomostrar(getSessionBeanCobra().getUsuarioObra());
                     getSessionBeanCobra().llenadodatos();
                     String respuesta = "";
                     if (getSessionBeanCobra().getModulos().size() == 1) {
@@ -192,6 +192,7 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setCiu(false);
                         getSessionBeanCobra().setLogueado(true);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {
