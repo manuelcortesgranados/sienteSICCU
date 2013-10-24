@@ -120,7 +120,7 @@
                                                         <h:outputLabel value="#{var.buscar} #{var.entidad}"/>
                                                         <interkont:spacer/>
                                                         <h:inputText id="inputtextEntidad"  value="#{Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
-                                                                     onblur="clearText(this);"  onclick="this.value = '';" />
+                                                                        />
                                                         <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarentidad"   render="@ll,idbuscarentidad,asociarentidad,panelcontenidoentidad" 
                                                                             actionListener="#{Perfil$Usuario.buscarEntidad}" value="#{var.Buscar}"/>
                                                     </h:panelGrid>
