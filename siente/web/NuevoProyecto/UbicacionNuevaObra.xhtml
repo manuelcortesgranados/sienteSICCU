@@ -90,10 +90,8 @@
                                                     <h:outputText  styleClass="ikont-hot-txtbus"   id="txtbus"   value="#{var.ingresedir}"/>
                                                     <h:inputText id="txtAddress" styleClass="ikont-hit-txtAddress"   value="#{Supervisor$IngresarNuevaObra.address}"/>
                                                     <h:panelGroup  layout="block" >
-                                                        <h:outputLabel  styleClass="ikont-hot-latitud"   value="#{var.latitud}:" />
-                                                        <h:inputText id="txtlatitudAdress" styleClass="ikont-"   value="#{Supervisor$IngresarNuevaObra.latNewmanu}"/>
-                                                        <h:outputLabel  styleClass="ikont-hol-longitud"   value="#{var.longitud}:"  />
-                                                        <h:inputText id="txtlongitudAdress" styleClass="ikont-hit-txtlongitudAdress"   value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
+                                                        <h:inputHidden value="#{Supervisor$IngresarNuevaObra.latNewmanu}"/>
+                                                        <h:inputHidden id="txtlongitudAdress" value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
                                                     </h:panelGroup>
                                                     <rich:hotKey id="myKey" key="return" onkeyup="#{rich:element('newpunto')}.click();" selector="#txtAddress" />
                                                 </h:panelGrid>

@@ -41,6 +41,9 @@
                 <value>co/com/interkont/cobra/to/Subcuentaprincipal.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Comuna.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Novedad.hbm.xml</value>
+                
+                <value>co/com/interkont/cobra/to/NovedadFiltrada.hbm.xml</value>
+                
                 <value>co/com/interkont/cobra/to/Subestadosolicitudch.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Tipoorigen.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Tipopolizaseguimiento.hbm.xml</value>

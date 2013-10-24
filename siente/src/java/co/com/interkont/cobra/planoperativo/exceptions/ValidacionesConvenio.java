@@ -92,8 +92,11 @@ public class ValidacionesConvenio {
        }      
    }
    
-      public static void validarAgregarPolizasContrato (Date fechainicontrato, Date fechafincontrato, Date fechapoliza){       
-       if (fechapoliza.compareTo(fechafincontrato) <= 0){
+      public static void validarAgregarPolizasContrato (Date fechainicontrato, Date fechafincontrato, Date fechapoliza){  
+          Calendar fechatemppoliza = Calendar.getInstance();
+       fechatemppoliza.setTime(fechafincontrato);
+       fechatemppoliza.add(Calendar.DATE, -(1));
+       if (fechapoliza.compareTo(fechatemppoliza.getTime()) <= 0 ){
            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del contrato");       
        }      
    }

@@ -21,8 +21,12 @@ import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -227,6 +231,21 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
 
         getObjetoContrato().setWidth("" + cw);
+        objetoContrato.addBlurHandler(new BlurHandler() {
+            @Override
+            public void onBlur(BlurEvent event) {
+                if (objetoContrato.getText().isEmpty()) {
+                    objetoContrato.setText("Objeto");
+                }
+            }
+        });
+
+        objetoContrato.addFocusHandler(new FocusHandler() {
+            @Override
+            public void onFocus(FocusEvent event) {
+                objetoContrato.setText("");
+            }
+        });
         getObjetoContrato().setHeight("" + 80);
         Label lblObj = new Label("*Objetivos");
         con.add(lblObj, new HtmlData(".tobjetoC"));
@@ -627,7 +646,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
         fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
 
-        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual",fechaInicioPre , 1, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaInicioPre, 1, 0, TaskType.PARENT, 5, true);
         precontractual.setEsNoEditable(true);
         precontractual.setNumeracion(numeracionActividad);
         numeracionActividad++;

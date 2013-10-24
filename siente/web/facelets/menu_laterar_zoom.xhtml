@@ -217,9 +217,8 @@
                         <h:outputLabel styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuAyuda}"/>
                     </h:panelGrid>
                     <h:panelGroup styleClass="ikont-espacio-sub-menu">
-                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuSoporteLinea}"   onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-                        <br/>
-                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuTutorial}"  immediate="true"
+                        <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuSoporteLinea}"   onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
+                        <h:commandLink rendered="false" styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuTutorial}"  immediate="true"
                                        onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
                         <br/>
                         <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuPreguntasFrecuentes}" immediate="true" action="pregfrecuentes"/>

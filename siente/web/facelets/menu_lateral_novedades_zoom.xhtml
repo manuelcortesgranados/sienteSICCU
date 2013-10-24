@@ -42,14 +42,12 @@
        
         <h:panelGrid cellpadding="3" cellspacing="5" columns="2" styleClass="ikont-panel-ayuda">
             
-            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda"   immediate="true"
-                           onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
-            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.necesitasAyuda}"  immediate="true"
-                           onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
+            <h:commandLink  styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda"   immediate="true" action="pregfrecuentes"/>
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.necesitasAyuda}" immediate="true" action="pregfrecuentes"/>
            
-            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos" immediate="true"
+            <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.contactenos}" immediate="true"
+            <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.contactenos}" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
   
         </h:panelGrid>

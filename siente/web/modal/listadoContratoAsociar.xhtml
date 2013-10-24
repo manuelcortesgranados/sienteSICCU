@@ -112,18 +112,10 @@
                                         <rich:column colspan="8" breakRowBefore="true" >
                                             <center>
                                                 <h:panelGrid columns="4">
-                                                    <a4j:commandButton styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.primeroContratos}">
-                                                        <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
-                                                    </a4j:commandButton>
-                                                    <a4j:commandButton styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.anterioresContrato}">
-                                                        <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
-                                                    </a4j:commandButton>
-                                                    <a4j:commandButton styleClass="ikont-acb-siguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.siguienteContrato}">
-                                                        <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
-                                                    </a4j:commandButton>
-                                                    <a4j:commandButton styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.ultimoContrato}">
-                                                        <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
-                                                    </a4j:commandButton>
+                                                    <a4j:commandButton execute="tablacontratosasociar" render="tablacontratosasociar,gpTotalContAso" styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" actionListener="#{Supervisor$AsociarContratos.primeroContratos}"/>
+                                                    <a4j:commandButton execute="tablacontratosasociar" render="tablacontratosasociar,gpTotalContAso" styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" actionListener="#{Supervisor$AsociarContratos.anterioresContrato}"/>
+                                                    <a4j:commandButton execute="tablacontratosasociar" render="tablacontratosasociar,gpTotalContAso" styleClass="ikont-acb-siguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" actionListener="#{Supervisor$AsociarContratos.siguienteContrato}"/>
+                                                    <a4j:commandButton  execute="tablacontratosasociar" render="tablacontratosasociar,gpTotalContAso" styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" actionListener="#{Supervisor$AsociarContratos.ultimoContrato}"/>
                                                 </h:panelGrid>
                                             </center>
                                         </rich:column>
