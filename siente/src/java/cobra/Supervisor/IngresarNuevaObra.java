@@ -4528,7 +4528,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             puntonew.setStrlongitud(listamarcadores.get(i - 1).getLongitude().replaceAll(" ", ""));
             puntonew.setStrdireccion(marli.get(i - 1).getAddress().toString());
             obranueva.getPuntoobras().add(puntonew);
-            getSessionBeanCobra().getCobraService().guardarPunto(puntonew);
         }
 //         zoom="6";
 //         zoom=jsZoon;
