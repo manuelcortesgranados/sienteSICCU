@@ -56,7 +56,7 @@
                                 <interkont:spacer width="120" />
                                 <a4j:commandButton id="BTaceptar" value="#{var.aceptar}"
                                                    rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
-                                                   render="panel-grup-crear, gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}"
+                                                   render="panel-grup-crear, gpLogPrinci,panelingresarusuario" action="#{Ciudadano$PerfilCiudadano.regresar}"
                                                    oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;" />
 
                                 <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}"

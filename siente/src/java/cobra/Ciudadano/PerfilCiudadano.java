@@ -1038,7 +1038,10 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         // boolperfilusuario = false;
         //getSessionBeanCobra().getCiudadanoservice().setImagenComentario("/resources/imgs/bt_user.png");
         getSessionBeanCobra().setVerregistrarse(false);
-
+        getUsuario().limpiarSeleccionEntidad();
+        listausuGrupos = new ArrayList<JsfUsuarioGrupo>();
+        jsfusuariogrupo = new JsfUsuarioGrupo();
+        
 
     }
 
