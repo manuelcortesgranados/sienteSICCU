@@ -64,13 +64,13 @@
 
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink execute="@none" style="color: green;"  value="#{item.nombreobra}"  
+                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente}) {
                                                  document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';
                                                              }
                                                              else ({#{rich:component('NoPuedeVerDetalleActividadReciente')}.show());
                                                              }" rendered="#{item.intestadoobra==0}" />
-                    <a4j:commandLink execute="@none"  style="color: green;"  value="#{item.nombreobra}"  
+                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente})
                                                          {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; }
                                                                              else
