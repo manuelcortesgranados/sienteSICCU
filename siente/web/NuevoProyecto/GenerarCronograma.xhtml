@@ -177,9 +177,7 @@
                         <center>
                             <h:commandButton id="btVolverGenCron"  value="#{var.volver}" immediate="true"
                                              action="datosubicaciondelaObra" />
-                            <a4j:commandButton execute="@this" value="#{var.continuar}" immediate="true" 
-                                               action="datosGenerarImagenes" >
-                            </a4j:commandButton>
+                            <h:commandButton value="#{var.continuar}" action="datosGenerarImagenes"/>
                             <h:commandButton id="btCancelarGenerar"  value="#{var.cancelar}" immediate="true"
                                              action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                             </h:commandButton>
