@@ -91,7 +91,7 @@
                                 <br/>
                                 <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
                                 <br/>
-                                <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
+                                <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
                                     <h:commandLink  styleClass="ikont-hcb-seguirspry" value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
                                     </h:commandLink>
                                     <h:commandLink  styleClass="ikont-hcb-sinseguirpry" value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
