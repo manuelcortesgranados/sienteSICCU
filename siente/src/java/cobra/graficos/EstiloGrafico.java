@@ -31,6 +31,7 @@ public class EstiloGrafico {
     private boolean evolucionproyectociudadano = false;
     private boolean uselinealegenda = false;
     private boolean zoomcursor = true;
+    private boolean agregarimagenes = false;
     private String tamanoTexto;
     private String tipoTexto;
     private String tipoPila;
@@ -39,6 +40,23 @@ public class EstiloGrafico {
     private String numcolumnaslegenda = "1";
     private String colortextocursor = "";
     private String colorfondoocursor = "";
+    private String rutaimages = "";
+
+    public String getRutaimages() {
+        return rutaimages;
+    }
+
+    public void setRutaimages(String rutaimages) {
+        this.rutaimages = rutaimages;
+    }
+
+    public boolean isAgregarimagenes() {
+        return agregarimagenes;
+    }
+
+    public void setAgregarimagenes(boolean agregarimagenes) {
+        this.agregarimagenes = agregarimagenes;
+    }
 
     public boolean isEvolucionproyectociudadano() {
         return evolucionproyectociudadano;

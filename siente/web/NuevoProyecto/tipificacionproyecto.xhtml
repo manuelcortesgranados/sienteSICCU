@@ -60,8 +60,16 @@
                                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                                     <f:selectItem itemValue="true" itemLabel="Si"/>
                                                     <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.fnEsProyectoPadre}"/>
-                                                </h:selectOneMenu>
+                                                </h:selectOneMenu>                                                
                                             </h:panelGrid>
+                                           <h:panelGrid columns="2" id="tiposoli23" rendered="false">
+                                                <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
+                                                <h:panelGroup id="layoutClase23" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
+                                                    <h:selectOneMenu id="comboclaseobr23a" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
+                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
+                                            </h:panelGrid>     
                                         </h:panelGroup>
                                     </h:panelGrid>
 
@@ -142,7 +150,7 @@
                             </rich:collapsiblePanel>
                             <!--paso 2 fase tipo subtipo-->
 
-                            <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
+                            <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">                                
 
                                 <center>
                                     <h:panelGrid id="pgtipi" columns="1" styleClass="totalwidth tipificacionpro">

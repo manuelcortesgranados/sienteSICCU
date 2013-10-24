@@ -2615,8 +2615,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void comboEntidadesContrato() {
 
-        System.out.println("Debug - comboEntidadesContrato");
-
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
@@ -5657,14 +5655,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String primeroObra() {
-        System.out.println("Debug - primero obra...");
-        //if (aplicafiltroobra) {
         listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(),filtrocontrato.isEsadministrador());
-//        } else {
-//            listaObraContrato = getSessionBeanCobra().getCobraService().obtenerObraxContratos(getContrato().getIntidcontrato(), 0, 5);
-//            totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato());
-//        }
 
         pagina = 1;
         if (totalfilas <= 5) {
