@@ -902,17 +902,8 @@
                                             <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
                                     </rich:column>
-
-                                    <f:facet name="footer">
-                                        <rich:columnGroup>
-                                            <rich:column colspan="7" breakRowBefore="true">
-                                                <center>
-                                                    <rich:dataScroller for="tablacontratohijo" render="tablacontratohijo" />
-                                                </center>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                    </f:facet>
                                 </rich:dataTable>
+                                <rich:dataScroller maxPages="5" for="tablacontratohijo" render="tablacontratohijo" />
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
