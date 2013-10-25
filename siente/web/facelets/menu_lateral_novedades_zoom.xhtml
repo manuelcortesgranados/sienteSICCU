@@ -66,13 +66,13 @@
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
                     <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente}) {
-                                                 document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';
+                                                 document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}'; return false;
                                                              }
                                                              else ({#{rich:component('NoPuedeVerDetalleActividadReciente')}.show());
                                                              }" rendered="#{item.intestadoobra==0}" />
                     <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente})
-                                                         {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; }
+                                                         {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; return false;}
                                                                              else
                                                                              {(#{rich:component('NoPuedeVerDetalleActividadReciente')}.show()); }" rendered="#{item.intestadoobra!=0}" />                 
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>

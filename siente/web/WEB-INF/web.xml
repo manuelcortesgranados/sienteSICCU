@@ -65,10 +65,22 @@
         <welcome-file>homes/home_gestion.xhtml</welcome-file>
     </welcome-file-list>
     
-    <error-page>
+   <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/sesion_vencida.xhtml</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Errores.xhtml</location>
+    </error-page> 
+    
+    <error-page>
+        <error-code>500</error-code>
         <location>/Errores.xhtml</location>
     </error-page>
+    
+    
     <!--
     <filter>
         <filter-name>FiltroUsuario</filter-name>
