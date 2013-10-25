@@ -2985,7 +2985,7 @@ filtrocontrato.setAplicaafonade(false);
                         contrato.setJsfUsuarioByIntusumodificacion(getSessionBeanCobra().getUsuarioObra());
                         contrato.setJsfUsuarioByIntusucreacion(getSessionBeanCobra().getUsuarioObra());
                         contrato.setTipoestadobra(new Tipoestadobra(1));
-                        if (!boolcontrconsultoria) {
+                        if (!boolcontrconsultoria && filtrocontrato.getTipocontratoselect() != 1) {
                             contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
                         }
                         if (booltipocontratoconvenio) {

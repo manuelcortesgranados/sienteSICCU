@@ -201,16 +201,24 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-datosbasicoscontconvbasic" value="#{var.datosbasicos}" />
                                 </f:facet>
-                                <h:panelGrid columns="2"   >
-                                    <h:outputText  styleClass="ikont-hot-tipocontrcontraloria"   id="lblcontrconsContraloria"  value="#{var.TipoContratoContralorias}"  rendered="#{var.aplicaContralorias or var.aplicafonade}"/>
-                                    <h:selectOneMenu styleClass="ikont-hsom-contrcontraloria" id="cmbcontconContraloria" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}" rendered="#{var.aplicaContralorias or var.aplicafonade}" >
+                                <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
+                                    <h:outputLabel styleClass="ikont-hot-tipocontrcontraloria" id="lbltipocontratoselectselect1" value="#{var.selecciontipocontrato}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}"/>
+                                    <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" >
+                                        <f:selectItem itemLabel="Contrato" itemValue="0"/>
+                                        <f:selectItem itemLabel="Consultoria" itemValue="1"/>
+                                        <a4j:ajax event="valueChange" render="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon, ikont-hpg-tipocontrato" execute="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon,ikont-hpg-tipocontrato" />
+                                    </h:selectOneMenu>   
+
+                                    <h:outputText  styleClass="ikont-hot-tipocontrcontraloria"   id="lblcontrconsContraloria"  value="#{var.TipoContratoContralorias}"  rendered="#{var.aplicaContralorias or var.aplicafonade and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"/>                                    
+                                    <h:selectOneMenu styleClass="ikont-hsom-contrcontraloria" id="cmbcontconContraloria" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}" rendered="#{var.aplicaContralorias or var.aplicafonade and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"  >
                                         <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
                                     </h:selectOneMenu>
-                                    <h:outputText  styleClass="ikont-hot-contrconsultoria" id="lblcontrcons"  value="#{var.contratosdeconsultoria}" rendered="#{Supervisor$Contrato.boolcontrconsultoria and !var.aplicaContralorias }" />
-                                    <h:selectOneMenu styleClass="ikont-hsom-tipocontrconssultoria" id="cmbcontcon" value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria}" rendered="#{Supervisor$Contrato.boolcontrconsultoria and !var.aplicaContralorias}">
+                                    <h:outputText  styleClass="ikont-hot-contrconsultoria" id="lblcontrcons"  value="#{var.contratosdeconsultoria}" rendered="#{Supervisor$Contrato.boolcontrconsultoria and !var.aplicaContralorias or Supervisor$Contrato.filtrocontrato.tipocontratoselect == 1 }" />
+                                    <h:selectOneMenu styleClass="ikont-hsom-tipocontrconssultoria" id="cmbcontcon" value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria}" rendered="#{Supervisor$Contrato.boolcontrconsultoria and !var.aplicaContralorias or Supervisor$Contrato.filtrocontrato.tipocontratoselect == 1 }">
                                         <f:selectItems value="#{Supervisor$Contrato.tipocontratoconsultoria}" />
                                     </h:selectOneMenu>
-
+                                </h:panelGrid>
+                                <h:panelGrid columns="2">
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
 
                                     </h:outputLabel>
@@ -380,7 +388,7 @@
 
                                     <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
                                                     inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"   />
-                                           
+
                                     <h:outputText  styleClass="ikont-hot-numactparc" id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 || var.fechaformapago and  Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
                                     <rich:inputNumberSpinner id="innumactasparciales"  minValue="0" maxValue="100" rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 ||var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==2}"
                                                              inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
@@ -454,8 +462,8 @@
                                 <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,pgcontrato"
                                                    styleClass="ikont-acb-addpoliza">
                                     <a4j:ajax event="click" render="gpPolizaSelec,pgpolis" immediate="true"/>
-                                            </a4j:commandButton>
-                           </h:panelGrid>
+                                </a4j:commandButton>
+                            </h:panelGrid>
                         </h:panelGrid>
                         <interkont:spacer height="14"/>
                         <h:panelGrid id="pgpolis">
