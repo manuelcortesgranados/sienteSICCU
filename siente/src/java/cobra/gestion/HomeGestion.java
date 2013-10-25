@@ -2824,4 +2824,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
     }
+    
+    /**
+     * Ejecuta las acciones necesarias para presentar la vista proporcionada.
+     * 1=Vista Mapa
+     * 2=Vista thumbnail
+     * 3=Vista Lista
+     * @param vista 
+     */
+    public void cambiarVista(int vista) {
+        filtro.setIntvista(vista);
+    }
 }
