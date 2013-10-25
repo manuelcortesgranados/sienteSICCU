@@ -43,25 +43,25 @@
                 <br/> 
                 <br/>
                 <h:panelGrid columns="2" width="50%" id="pgmiperfil">
-                    <h:outputText  styleClass="ikont-label-general"   id="lblnombre" value="Nombre"/>   
+                    <h:outputText  styleClass="ikont-label-general"   id="lblnombre" value="#{var.nombre}"/>   
                     <h:panelGrid columns="2" width="80%" >
                         <h:inputText required="true" styleClass="ikont-hit-txtnombre"   id="txtnombre" value="#{Perfil$Usuario.usuariomod.tercero.strnombre}" disabled="#{Perfil$Usuario.modificarUsuario}" />
                         <rich:message styleClass="ikont-rm-txtnombre"    for="txtnombre"/>
                     </h:panelGrid>
 
-                    <h:outputText  styleClass="ikont-label-general"   id="lblapellidousuario" value="Primer Apellido"/>
+                    <h:outputText  styleClass="ikont-label-general"   id="lblapellidousuario" value="#{var.primerApellido}"/>
                     <h:inputText styleClass="ikont-hit-txtapellido"   id="txtapellido" value="#{Perfil$Usuario.usuariomod.tercero.strapellido1}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  styleClass="ikont-label-general"   id="lblapellidousuario1" value="Segundo Apellido"/>
+                    <h:outputText  styleClass="ikont-label-general"   id="lblapellidousuario1" value="#{var.segundoApellido}"/>
                     <h:inputText styleClass="ikont-hit-txtapellido2"   id="txtapellido2" value="#{Perfil$Usuario.usuariomod.tercero.strapellido2}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  styleClass="ikont-label-general"   id="lblcedulausuario" value="Cédula"/>
+                    <h:outputText  styleClass="ikont-label-general"   id="lblcedulausuario" value="#{var.cedulaContratista}"/>
                     <h:panelGrid columns="2" width="80%">
                         <h:inputText id="txtCedula" styleClass="ikont-hit-txtCedula"   value="#{Perfil$Usuario.usuariomod.tercero.intcedula}" disabled="#{Perfil$Usuario.modificarUsuario}" />
                         <rich:message styleClass="ikont-rm-txtCedula"    for="txtCedula" />
                     </h:panelGrid>
 
-                    <h:outputText  styleClass="ikont-label-general"   id="lblcorreoelectronico" value="Correo" />
+                    <h:outputText  styleClass="ikont-label-general"   id="lblcorreoelectronico" value="#{var.Correo}" />
                     <h:inputText styleClass="ikont-hit-textcorreo"   id="textcorreo" value="#{Perfil$Usuario.usuariomod.tercero.stremail}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
                     <h:outputText  styleClass="ikont-label-general"   id="lblcelularusuario" value="#{var.celular}"/>
@@ -72,10 +72,12 @@
                         <h:selectBooleanCheckbox title="#{Perfil$Usuario.estadousuario}" id="estadousuaqrio" styleClass="ikont-hsbcb-estadousuaqrio"   value="#{Perfil$Usuario.usuariomod.usuEstado}" disabled="#{Perfil$Usuario.modificarUsuario}" />
                         <h:outputText  styleClass="ikont-hot-estadousuario"   value="#{Perfil$Usuario.estadousuario}"/>
                     </h:panelGrid>
+                    <h:outputText value="#{var.tipo} #{var.usuariode}" styleClass="ikont-label-general"/>
+                    <h:outputText value="#{Perfil$Usuario.usuariomod.tipousuario.strtipousuario}"/>
                 </h:panelGrid>
-                <rich:collapsiblePanel header="Detalle Usuario"  expanded="true" switchType="ajax">
+                <rich:collapsiblePanel header="#{var.detalleusuario}"  expanded="false" switchType="ajax">
                     <h:panelGrid columns="4" columnClasses="20%" width="75%" id="tabladetalleusuario">
-                        <h:outputText  styleClass="ikont-label-general"   value="Tipo usuario"     />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.tipo} #{var.usuariode}"     />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbtipotercero"   id="cmbtipotercero" value="#{Perfil$Usuario.usuariomod.tercero.tipotercero.intcodigotipotercero}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipotercerosoption}" />
                         </h:selectOneMenu>
@@ -83,44 +85,44 @@
                         <h:outputText  styleClass="ikont-label-general"   value="Teléfono"/>
                         <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strtelefono1}" styleClass="ikont-hit-strtelefono1"   disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Departamento" />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.departamento}" />
                         <h:selectOneMenu styleClass="ikont-hsom-combodepartamentoUsuario"   id="combodepartamentoUsuario" value="#{Perfil$Usuario.coddeptoselec}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItem itemLabel="Todos" itemValue="#{Perfil$Usuario.todasLocalidad}" />
                             <f:selectItems value="#{Perfil$Usuario.deptosusuariooption}" />
                             <a4j:ajax event="change" listener="#{Perfil$Usuario.llenarMunicipiosUsuario}" execute="@this, combodepartamentoUsuario" render="gpMunicipioUsuario" />
                         </h:selectOneMenu> 
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Municipio"/>
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.municipio}"/>
                         <h:panelGroup id="gpMunicipioUsuario">
                             <h:selectOneMenu styleClass="ikont-hsom-combomunicipioUsuario"   id="combomunicipioUsuario" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
                                 <f:selectItems value="#{Perfil$Usuario.municipiosusuariooption}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Cargo"/>
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.CARGO}"/>
                         <h:selectOneMenu styleClass="ikont-hsom-intcargo"   disabled="#{Perfil$Usuario.modificarUsuario}"
                                          value="#{Perfil$Usuario.usuariomod.tercero.cargo.intcargo}">
                             <f:selectItems value="#{Perfil$Usuario.cargosoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Género" />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.generoContratista}" />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbgeneroUsuario"   id="cmbgeneroUsuario" value="#{Perfil$Usuario.usuariomod.tercero.genero.intgenero}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Fecha nacimiento"/>
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.fechaVencimiento}"/>
                         <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-rc-calendarfechnacimiento"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
                                         value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Dirección"/>
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.direccion}"/>
                         <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strdireccionprincipal}" styleClass="ikont-hit-strdireccionprincipal"   disabled="#{Perfil$Usuario.modificarUsuario}" /> 
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Tipo identificación" />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.tipo} #{var.identificacion}" />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbtipoidentificion"   id="cmbtipoidentificion" value="#{Perfil$Usuario.usuariomod.tercero.tipoidentificacion.intcodigotipoiden}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipoidentificacionsoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Estado civil" />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.estadoCivil}" />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbestadocivilusuario"   id="cmbestadocivilusuario" value="#{Perfil$Usuario.usuariomod.tercero.estadoCivil.intestadoCivil}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.estadocivilsoption}" />
                         </h:selectOneMenu>
@@ -151,7 +153,7 @@
                             </h:selectOneMenu>
                         </h:panelGroup>
 
-                        <h:outputText  styleClass="ikont-label-general"   value="Tipo origen" />
+                        <h:outputText  styleClass="ikont-label-general"   value="#{var.tipoorigen}" />
                         <h:selectOneMenu styleClass="ikont-hsom-selecttiposorigenes"   id="selecttiposorigenes" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipoorigensoption}" />
                         </h:selectOneMenu>
@@ -169,16 +171,46 @@
                         <h:panelGroup id="btndeshabilitarModificar">
                             <h:panelGrid rendered="#{Perfil$Usuario.deshabilitarBotonModificar}">
                                 <a4j:commandButton id="btnModificarUsuario" value="Modificar Informacion" styleClass="ikont-a4jcl-btnModificarUsuario"   action="#{Perfil$Usuario.habilitarModificarUsuario}" 
-                                                 render="formModificarUsuario, pgmiperfil, tabladetalleusuario" execute="btnHabilitarGuardarCancelar, btndeshabilitarModificar" />
+                                                   render="formModificarUsuario, pgmiperfil, tabladetalleusuario" execute="btnHabilitarGuardarCancelar, btndeshabilitarModificar" />
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGroup id="btnHabilitarGuardarCancelar">
                             <h:panelGrid columns="2" rendered="#{Perfil$Usuario.habilitarBotonGuardar}">
-                                <h:commandButton id="btnGuardarModificacion" value="Guardar"   action="#{Perfil$Usuario.guardarModificacion}" />
-                                <h:commandButton id="btnCancelarModificacion" value="Cancelar" styleClass="ikont-a4jcl-btnCancelarModificacion"   action="#{Perfil$Usuario.btnCancelar}"  />
+                                <h:commandButton id="btnGuardarModificacion" value="#{var.guardar}"   action="#{Perfil$Usuario.guardarModificacion}" />
+                                <h:commandButton id="btnCancelarModificacion" value="#{var.cancelar}" styleClass="ikont-a4jcl-btnCancelarModificacion"   action="#{Perfil$Usuario.btnCancelar}"  />
                             </h:panelGrid>
                         </h:panelGroup>
                     </center>
+                </rich:collapsiblePanel>
+                <rich:collapsiblePanel toggleListener="#{Perfil$Usuario.cargarEntidadesUsuario}" header="#{var.proyectos}"  expanded="false" switchType="ajax">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{var.entidades}"/>
+                        <h:selectOneMenu    id="rs-entidad"  value="#{Perfil$Usuario.entidad.strnombrecompleto}" required="true" style="font-style: italic!important; font-size: 12px!important;">                                
+                            <f:selectItems  value="#{Perfil$Usuario.listaEntidadUsuario}" var="ent" itemValue="#{ent.strnombrecompleto}" itemLabel="#{ent.strnombrecompleto}" />
+                            <a4j:ajax event="valueChange" render="listaobrasusuario" execute="listaobrasusuario" listener="#{Perfil$Usuario.CargarObraEntidad}"/>
+                        </h:selectOneMenu>
+                        <interkont:spacer/>
+                        <rich:dataTable style="width: 90%!important;" rows="10" var="varobrasusuario"  value="#{Perfil$Usuario.listaobrasentidad}" id="listaobrasusuario">
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.codigo} #{var.obra}"/>
+                                </f:facet>
+                                <h:outputText value="#{varobrasusuario.intcodigoobra}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombre} #{var.obra}"/>
+                                </f:facet>
+                                <h:outputText value="#{varobrasusuario.strnombreobra}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombre} #{var.entidad}"/>
+                                </f:facet>
+                                <h:outputText value="#{varobrasusuario.tercero.strnombrecompleto}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                    </h:panelGrid>
                 </rich:collapsiblePanel>
             </center>
         </h:form>
