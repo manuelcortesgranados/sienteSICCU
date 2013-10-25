@@ -625,7 +625,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
         validaTieneFechaFin();
-       
+
     }
 
     /*
@@ -635,13 +635,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
      * 
      */
     public void validaTieneFechaFin() {
-        if (getFechaFinalizacion().getValue() == null) {
-            int duracionContrato = CalendarUtil.getDaysBetween(contrato.getDatefechaini(), actividadObraPadre.getEndDateTime());
-            Date copiaFechaInicioContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
-            CalendarUtil.addDaysToDate(copiaFechaInicioContrato, duracionContrato);
-            contrato.setDatefechafin(copiaFechaInicioContrato);
-        } else {
-            contrato.setDatefechafin(getFechaFinalizacion().getValue());
+        if (contrato.getDatefechaini() != null) {
+            if (getFechaFinalizacion().getValue() == null) {
+                int duracionContrato = CalendarUtil.getDaysBetween(contrato.getDatefechaini(), actividadObraPadre.getEndDateTime());
+                Date copiaFechaInicioContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
+                CalendarUtil.addDaysToDate(copiaFechaInicioContrato, duracionContrato);
+                contrato.setDatefechafin(copiaFechaInicioContrato);
+            } else {
+                contrato.setDatefechafin(getFechaFinalizacion().getValue());
+            }
         }
 
     }
@@ -819,6 +821,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
             msgValidacion += "*El contrato debe de tener por lo menos una fuente de recursos asociado" + "<br/>";
         }
 
+        if (contrato.getDatefechaini() != null && contrato.getDatefechaactaini() != null) {
+            if (contrato.getDatefechaactaini().compareTo(contrato.getDatefechaini()) < 0) {
+                hayError = true;
+                msgValidacion += "*La fecha de acta de suscripcion no puede ser menor a la fecha de inicio del contrato" + "<br/>";
+            }
+        } else {
+            hayError = true;
+            msgValidacion += "" + "<br/>";
+        }
         return hayError;
 
     }
