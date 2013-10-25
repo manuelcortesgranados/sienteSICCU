@@ -567,8 +567,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             contrato.setNumvlrcontrato(valorContrato.getValue());
         }
 
+        if (tipocontrato != null) {
         if (contrato.getTipocontrato() != tipocontrato) {
             contrato.setTipocontrato(tipocontrato);
+        }
         }
 
 
