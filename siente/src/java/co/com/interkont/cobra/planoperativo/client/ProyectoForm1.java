@@ -362,7 +362,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         service.setLog("entre en fecha fin no null", null);
                         if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                             varErrorres = true;
-                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
+                            String df1 = DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechafin());
+                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio " + df1+ "<br/>";
                         }
                     }
                     if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
