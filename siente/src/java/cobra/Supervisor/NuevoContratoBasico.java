@@ -4136,7 +4136,7 @@ filtrocontrato.setAplicaafonade(false);
     public String detalleContrato() {
         //NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         //Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
-
+       getSessionBeanCobra().setConsulteContrato(true);
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         cargarContrato(contratotabla);
         if (contratotabla.getNumvlrcontrato() != null && contratotabla.getNumValorCuotaGerencia() != null) {
@@ -6700,6 +6700,8 @@ filtrocontrato.setAplicaafonade(false);
 
                                 getSessionBeanCobra().getCobraService().guardarActividadObra(new ArrayList<Actividadobra>(getContrato().getActividadobras()));
                             }
+                            
+                            if(!getSessionBeanCobra().isConsulteContrato()){                                
                             if (!getSessionBeanCobra().getCobraGwtService().getListaacteliminar().isEmpty()) {
                                 getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(new ArrayList<Actividadobra>(
                                         CasteoGWT.castearSetActividadesObra(new LinkedHashSet<ActividadobraDTO>(getSessionBeanCobra().getCobraGwtService().getListaacteliminar()), null, 1)));
@@ -6724,6 +6726,7 @@ filtrocontrato.setAplicaafonade(false);
                             }
                             setNumcontratotemporal(getContrato().getStrnumcontrato());
                             FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+                        }
 
                         } else {
                             validardatosbasicosplano = 1;
@@ -7064,6 +7067,7 @@ filtrocontrato.setAplicaafonade(false);
                 ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
+                getSessionBeanCobra().setConsulteContrato(false);
                 getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
                 //} else {
                 //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
@@ -7143,11 +7147,6 @@ filtrocontrato.setAplicaafonade(false);
                 listaProyectosConvenio.clear();
                 extraerProyectosActividad(act);
             }
-        }
-
-        for (Iterator it = contrato.getFuenterecursosconvenios().iterator(); it.hasNext();) {
-            Fuenterecursosconvenio f = (Fuenterecursosconvenio) it.next();
-            System.out.println("despues de castoe = " + f.getTercero().getStrnombrecompleto() + "estado:" + f.isEstaEnFuenteRecurso());
         }
     }
 

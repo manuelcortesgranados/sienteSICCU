@@ -134,6 +134,8 @@ public class SessionBeanCobra implements Serializable {
      * gwt y jsf
      */
     private boolean cargarcontrato = false;
+    
+    private boolean consulteContrato = false;
 
     public boolean isCargarcontrato() {
         return cargarcontrato;
@@ -1176,6 +1178,20 @@ public class SessionBeanCobra implements Serializable {
         HttpSession htpSession = (HttpSession) session;
         htpSession.invalidate();
 
+    }
+
+    /**
+     * @return the consulteContrato
+     */
+    public boolean isConsulteContrato() {
+        return consulteContrato;
+    }
+
+    /**
+     * @param consulteContrato the consulteContrato to set
+     */
+    public void setConsulteContrato(boolean consulteContrato) {
+        this.consulteContrato = consulteContrato;
     }
 
     
