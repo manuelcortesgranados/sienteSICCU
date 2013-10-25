@@ -4689,11 +4689,8 @@ a:hover {
     cursor: pointer;
     border-radius: 8px;
     padding: 5px 10px;
-    color: #257500;
-    font-size: 12px;
     background-image: url(../imgs/ojo_cerrado.png);
     display: block;
-    line-height: 80px;
 }
 
 .ikont-hcb-seguirspry:hover{
@@ -4701,7 +4698,12 @@ a:hover {
     transition: 1s all;
     height: 25px;
     width: 148px;
+}
+
+.ikont-hcb-seguirspry-label, .ikont-hcb-seguirspry-label:hover{
     color: #257500;
+    font-size: 0.8em;
+    cursor: pointer;
 }
 
 .ikont-hcb-sinseguirpry{
@@ -4722,7 +4724,12 @@ a:hover {
     transition: 1s all;
     height: 25px;
     width: 148px;
+}
+
+.ikont-hcb-sinseguirpry-label, .ikont-hcb-sinseguirpry-label:hover{
     color: #257500;
+    font-size: 0.8em;
+    cursor: pointer;
 }
 
 
