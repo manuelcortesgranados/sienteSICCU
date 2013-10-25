@@ -241,8 +241,7 @@ public class DetalleObra implements Serializable{
         this.listasegudires = listasegudires;
     }
 
-    public boolean isVeralimenta() {
-        System.out.println("this = " + veralimenta);
+    public boolean isVeralimenta() {        
         return veralimenta;
     }
 
