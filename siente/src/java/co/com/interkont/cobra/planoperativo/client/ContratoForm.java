@@ -611,15 +611,38 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     }
 
+    /*
+     * metodo que se encarga de cargar el contrato con
+     * los datos ingresados en la pantalla.
+     * 
+     */
     public void CrearContrato() {
         contrato.setTextobjeto(getObjetoContrato().getText());
         contrato.setNombreAbreviado(getNombreAbre().getValue());
         contrato.setDatefechaini(getFechaSuscripcionContrato().getValue());
         contrato.setDatefechaactaini(getFechaSuscripcionActaInicio().getValue());
-        contrato.setDatefechafin(getFechaFinalizacion().getValue());
         contrato.setTipocontrato(tipocontrato);
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
+        validaTieneFechaFin();
+       
+    }
+
+    /*
+     *Metodo que se encarga de validar si el usuario ingreso una fecha de finalizacion 
+     * para asignarla al contrato en caso de que no la haya ingresado se calcula la fecha final
+     * con recpecto a la fecha fin de la actividad padre.
+     * 
+     */
+    public void validaTieneFechaFin() {
+        if (getFechaFinalizacion().getValue() == null) {
+            int duracionContrato = CalendarUtil.getDaysBetween(contrato.getDatefechaini(), actividadObraPadre.getEndDateTime());
+            Date copiaFechaInicioContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
+            CalendarUtil.addDaysToDate(copiaFechaInicioContrato, duracionContrato);
+            contrato.setDatefechafin(copiaFechaInicioContrato);
+        } else {
+            contrato.setDatefechafin(getFechaFinalizacion().getValue());
+        }
 
     }
 
@@ -631,17 +654,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         numeracionActividad++;
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
-//        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
-//        hitoFechaSuscripcion.setNumeracion(numeracionActividad);
-//        numeracionActividad++;
-//       // lstHijos.add(hitoFechaSuscripcion);
-//        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
-//        hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
-//        numeracionActividad++;
-        // lstHijos.add(hitoFechaSuscripcionActa);
-
-//        Date fechaInicioPrecontractual = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
-//        fechaInicioPrecontractual = new Date(fechaInicioPrecontractual.getDate() - 1);
 
         Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
         fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);

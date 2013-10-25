@@ -41,10 +41,10 @@
                             <div id="buscador_space">
                                 <label>
                                     <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave"  
-                                                 onclick="this.value = '';"
+                                                 
                                                  value="#{Supervisor$Contrato.filtrocontrato.palabraClave}"
                                                  onfocus="clearText(this);"
-                                                 onblur="clearText(this);"
+                                                 
                                                  />                                        
 
                                     <a4j:commandButton id="filtrar" value="#{var.buscar}" execute="@this, txtPalabraClave"

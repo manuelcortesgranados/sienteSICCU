@@ -133,7 +133,7 @@
 
                         <h:panelGroup layout="block" id="layoutTablaMatrix" >
                             <center>
-                            <h:panelGrid columns="2" >
+                                <h:panelGrid columns="2" >
                                     <rich:dataTable  id="datosgeneralesAlimentar" >
 
                                         <f:facet name="header">
@@ -194,13 +194,13 @@
                                         </f:facet>
 
                                     </rich:dataTable>
-                         
-                                <h:panelGrid styleClass="ikont-hpg-gridalim1"   cellpadding="0" cellspacing="0" >
-                                    <a4j:commandLink styleClass="ikont-acl-calculaMatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
-                                                     render="layoutTablaMatrix, layoutComentafactor" />
+
+                                    <h:panelGrid styleClass="ikont-hpg-gridalim1"   cellpadding="0" cellspacing="0" >
+                                        <a4j:commandLink styleClass="ikont-acl-calculaMatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
+                                                         render="layoutTablaMatrix, layoutComentafactor" />
+                                    </h:panelGrid>
                                 </h:panelGrid>
-                            </h:panelGrid>
-                        </center>
+                            </center>
 
                             <interkont:spacer height="10" />
                             <center>
@@ -366,11 +366,11 @@
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali3"  />
                                         <h:outputLabel  styleClass="ikont-hol-lblLogroPry"   id="lblLogroProyecto"  value="#{var.logroProyecto}" />
-                                        <h:inputTextarea cols="55" id="txtLogroProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strlogro}"/>
+                                        <h:inputTextarea style="width:  870px!important;" cols="55" id="txtLogroProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strlogro}"/>
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali4"  />
                                         <h:outputLabel  styleClass="ikont-hol-difiPry"   id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
-                                        <h:inputTextarea cols="55" id="txtDificultadProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strdificultad}"/>
+                                        <h:inputTextarea style="width:  870px!important;" cols="55" id="txtDificultadProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strdificultad}"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" >
@@ -519,14 +519,8 @@
                                                                action="#{Supervisor$Alimentar.removerFactor}" render="pgFactores" />
                                         </rich:column>
                                     </rich:columnGroup>
-                                    <f:facet name="footer">
-                                        <rich:columnGroup >
-                                            <rich:column colspan="3">
-                                                <rich:dataScroller id="dsfactores" for="tablaFactores" render="tablaFactores"/>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                    </f:facet>
                                 </rich:dataTable>
+                                <rich:dataScroller id="dsfactores" for="tablaFactores" render="tablaFactores"/>
                             </h:panelGroup>
                         </h:panelGrid>
 
@@ -535,14 +529,14 @@
 
                 <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
                     <center>
-                    <h:panelGrid id="layoutImagenDetalle" styleClass="ikont-hpg-imgdeta"   >
-                        <h:graphicImage  styleClass="ikont-hgi-imgPeriodo"   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
-                        <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
-                                           onclick="#{rich:component('modalImagen')}.show();
-                                                   return true;"
-                                           styleClass="ikont-acb-adjunimg" />
-                    </h:panelGrid>
-                        </center>
+                        <h:panelGrid id="layoutImagenDetalle" styleClass="ikont-hpg-imgdeta"   >
+                            <h:graphicImage  styleClass="ikont-hgi-imgPeriodo"   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
+                            <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
+                                               onclick="#{rich:component('modalImagen')}.show();
+                                                       return true;"
+                                               styleClass="ikont-acb-adjunimg" />
+                        </h:panelGrid>
+                    </center>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel header="#{var.anadirotrosdoc}" switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}"  rendered="#{!Supervisor$Alimentar.editarActividades}">
 
@@ -556,7 +550,7 @@
                             <h:inputText size="40" id="txtActa" readonly="true" value="#{Supervisor$Alimentar.urlacta}" />
                             <a4j:commandButton id="btActa" value="#{var.examinar}" immediate="true"
                                                onclick="#{rich:component('panelActa')}.show();
-                                                   return true;"
+                                                       return true;"
                                                />
                         </h:panelGrid>
                     </center>

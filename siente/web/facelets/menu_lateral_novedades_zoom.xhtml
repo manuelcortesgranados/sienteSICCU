@@ -9,7 +9,7 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
     <br/>
-            <ui:include src="/facelets/menu_laterar_zoom.xhtml" />
+    <ui:include src="/facelets/menu_laterar_zoom.xhtml" />
 
     <h:panelGroup rendered="#{SessionBeanCobra.logueadodesdemapa}" >
         <hr  class="ikont-hr-separador-usuario" />
@@ -37,19 +37,19 @@
                 </rich:column>
             </h:panelGroup>
         </h:panelGrid>
-       <br/>
+        <br/>
         <hr  class="ikont-hr-separador-usuario" />
-       
+
         <h:panelGrid cellpadding="3" cellspacing="5" columns="2" styleClass="ikont-panel-ayuda">
-            
+
             <h:commandLink  styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda"   immediate="true" action="pregfrecuentes"/>
             <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.necesitasAyuda}" immediate="true" action="pregfrecuentes"/>
-           
+
             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.contactenos}" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-  
+
         </h:panelGrid>
 
     </h:panelGroup>
@@ -64,17 +64,23 @@
 
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink style="color: green;" type="submit" value="#{item.nombreobra}"  
-                                     onclick="if(#{item.puedeVerDetalleObraActividadReciente}) document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}'; else #{rich:component('NoPuedeVerDetalleActividadReciente')}.show();" rendered="#{item.intestadoobra==0}"/>
-                    <a4j:commandLink style="color: green;"  type="submit" value="#{item.nombreobra}"  
-                                     onclick="if(#{item.puedeVerDetalleObraActividadReciente})  document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; else #{rich:component('NoPuedeVerDetalleActividadReciente')}.show();" rendered="#{item.intestadoobra!=0}"/>                 
+                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
+                                     onclick="if (#{item.puedeVerDetalleObraActividadReciente}) {
+                                                 document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';
+                                                             }
+                                                             else ({#{rich:component('NoPuedeVerDetalleActividadReciente')}.show());
+                                                             }" rendered="#{item.intestadoobra==0}" />
+                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
+                                     onclick="if (#{item.puedeVerDetalleObraActividadReciente})
+                                                         {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; }
+                                                                             else
+                                                                             {(#{rich:component('NoPuedeVerDetalleActividadReciente')}.show()); }" rendered="#{item.intestadoobra!=0}" />                 
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
-              
+
                 </h:panelGroup>
             </h:panelGrid>
         </a4j:repeat>
 
     </h:panelGroup>
-
 
 </ui:composition>
