@@ -2816,7 +2816,6 @@ filtrocontrato.setAplicaafonade(false);
                             }
                         }
                     } else {
-                        removerAnticipo();
                         FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del anticipo.");
                         return false;
 
