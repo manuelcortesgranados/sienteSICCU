@@ -7335,7 +7335,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 case 1:
                     while (i < lisplanifiactapar.size()) {
                         if (fechapagoanticipo.compareTo(lisplanifiactapar.get(i).getDatefechapago()) > 0) {
-                            removerAnticipo();
                             return false;
                         }
                         i++;
