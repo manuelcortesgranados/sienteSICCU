@@ -3074,7 +3074,7 @@ filtrocontrato.setAplicaafonade(false);
      * @return no retorna nada
      */
     private void validadcionGuardarContrato() {
-        if (bundle.getString("boolencargofidu").equals("false")) {
+        if (bundle.getString("boolencargofidu").equals("true")) {
             if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
@@ -4171,6 +4171,8 @@ filtrocontrato.setAplicaafonade(false);
             contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
             contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
             recursosconvenio.sumaFuentesRecursos();
+            this.llenarDocumentoContrato();
+            listadocumentos = getSessionBeanCobra().getCobraService().getListaDocumentosContrato();
             llenarPolizas();
             return "nuevoConvenioPo";
         } else {
@@ -6241,7 +6243,7 @@ filtrocontrato.setAplicaafonade(false);
      * Llenar lista con los documento del contrato seleccionado
      */
     public void llenarDocumentoContrato() {
-        getSessionBeanCobra().getCobraService().setListaDocumentosContrato(getSessionBeanCobra().getCobraService().encontrarDocumentosContrato(contrato.getIntidcontrato()));
+        getSessionBeanCobra().getCobraService().setListaDocumentosContrato(getSessionBeanCobra().getCobraService().encontrarDocumentosContrato(contrato.getIntidcontrato()));        
     }
 
     /**
@@ -6668,13 +6670,10 @@ filtrocontrato.setAplicaafonade(false);
                             contrato.setModalidadcontratista(null);
                             //contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());
 //                    if (guardarborradorconvenio != true) {
-//                        if (!listadocumentos.isEmpty()) {
-//                            validadcionGuardarContrato();
-//                        } else {
-//                            getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-//                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
-//                        }
-//                    }                        
+                        if (!listadocumentos.isEmpty()) {
+                            validadcionGuardarContrato();
+//                        } 
+                   }                        
 
                             if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
                                 if (!contrato.getFuenterecursosconvenios().isEmpty()) {
