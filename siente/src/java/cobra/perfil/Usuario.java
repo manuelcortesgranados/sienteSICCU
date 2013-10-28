@@ -34,6 +34,7 @@ import org.richfaces.component.UIDataTable;
 import co.com.interkont.cobra.to.Grupo;
 import cobra.Ciudadano.PerfilCiudadano;
 import co.com.interkont.cobra.to.Modulo;
+import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Tipousuario;
 
 /**
@@ -672,6 +673,7 @@ public class Usuario implements Serializable {
         usuariomod.getTercero().setGenero(getSessionBeanCobra().getCobraService().encontrarGeneroPorId(usuariomod.getTercero().getGenero().getIntgenero()));
         usuariomod.getTercero().setTipoidentificacion(getSessionBeanCobra().getCobraService().encontrarTipoIdentificacionPorId(usuariomod.getTercero().getTipoidentificacion().getIntcodigotipoiden()));
         usuariomod.getTercero().setEstadoCivil(getSessionBeanCobra().getCobraService().encontrarEstadoCivilPorId(usuariomod.getTercero().getEstadoCivil().getIntestadoCivil()));
+        usuariomod.setTipousuario(getSessionBeanCobra().getCobraService().encontrarTipoUsuarioPorId(getUsuariomod().getTipousuario().getIntcodigotipousuario()));
         llenarDeptosUsuario();
         llenarMunicipiosUsuario();
         llenarMunicipiosExpedicion();
@@ -1039,8 +1041,10 @@ public class Usuario implements Serializable {
             FacesUtils.addErrorMessage(bundle.getString("noseencontrolaentidad"));
         }
     }
+
     /**
      * Metodo Utilizado para Carhar en un Selectitem la lista de los grupos
+     *
      * @return No retorna ningun valor
      */
     public void llenarGrupos() {
@@ -1053,11 +1057,13 @@ public class Usuario implements Serializable {
             gruposoption[i++] = genItem;
         }
     }
+
     /**
      * Metodo utilizado para cargar en un Selectitem el tipo de usuario
+     *
      * @return No retorna ningun valor
      */
-     public void llenarTipoUsuario() {
+    public void llenarTipoUsuario() {
         List<Tipousuario> listaGrupo = getSessionBeanCobra().getCobraService().encontrarTipousuario();
 
         tipousuariooption = new SelectItem[listaGrupo.size()];
@@ -1066,5 +1072,98 @@ public class Usuario implements Serializable {
             SelectItem genItem = new SelectItem(gene.getIntcodigotipousuario(), gene.getStrtipousuario());
             tipousuariooption[i++] = genItem;
         }
+    }
+    
+    private List<Obra> listaobrasasociadas = new ArrayList<Obra>();
+    private List<Obra> listaobrasentidad = new ArrayList<Obra>();
+    private List<Tercero> listaEntidadUsuario = new ArrayList<Tercero>();
+    private Tercero entidad = new Tercero();
+    private Map<String, List> maplistaobras = new HashMap<String, List>();
+
+    public Map<String, List> getMaplistaobras() {
+        return maplistaobras;
+    }
+
+    public void setMaplistaobras(Map<String, List> maplistaobras) {
+        this.maplistaobras = maplistaobras;
+    }
+
+    public List<Obra> getListaobrasentidad() {
+        return listaobrasentidad;
+    }
+
+    public void setListaobrasentidad(List<Obra> listaobrasentidad) {
+        this.listaobrasentidad = listaobrasentidad;
+    }
+
+    public Tercero getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(Tercero entidad) {
+        this.entidad = entidad;
+    }
+
+    public List<Tercero> getListaEntidadUsuario() {
+        return listaEntidadUsuario;
+    }
+
+    public void setListaEntidadUsuario(List<Tercero> listaEntidadUsuario) {
+        this.listaEntidadUsuario = listaEntidadUsuario;
+    }
+
+    public List<Obra> getListaobrasasociadas() {
+        return listaobrasasociadas;
+    }
+
+    public void setListaobrasasociadas(List<Obra> listaobrasasociadas) {
+        this.listaobrasasociadas = listaobrasasociadas;
+    }
+
+    public void cargarEntidadesUsuario() {
+        switch (usuariomod.getTipousuario().getIntcodigotipousuario()) {
+            case 1:
+                System.out.println("No Carga nada ya que es por entidad");
+                break;
+            case 2:
+                System.out.println("Se cargan las localidades");
+                break;
+            case 3:
+                System.out.println("Se cargan las entidades asociadas y las obras asociadas");
+
+                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(usuariomod, 6, false);
+                listaobrasasociadas = getSessionBeanCobra().getCobraService().encontrarRelacionObrajsfUsuario(usuariomod);
+                cargarMaplistaEntidad();
+                listaobrasentidad.addAll(listaobrasasociadas);
+                break;
+            case 4:
+                System.out.println("Se cargan las entidades asociadas");
+                break;
+        }
+
+    }
+
+    public void cargarMaplistaEntidad() {
+        for (Obra obrasasociada : listaobrasasociadas) {
+            if (maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto()) == null) {
+                List<Obra> listaobra = new ArrayList<Obra>();
+                listaobra.add(obrasasociada);
+                maplistaobras.put(obrasasociada.getTercero().getStrnombrecompleto(), listaobra);
+            } else {
+                List<Obra> listaobra = maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto());
+                listaobra.add(obrasasociada);
+                maplistaobras.put(obrasasociada.getTercero().getStrnombrecompleto(), listaobra);
+            }
+        }
+
+    }
+
+    public void CargarObraEntidad() {
+        if (maplistaobras.get(entidad.getStrnombrecompleto()) != null) {
+            listaobrasentidad = maplistaobras.get(entidad.getStrnombrecompleto());
+        } else {
+            System.out.println("Entro al else");
+        }
+
     }
 }

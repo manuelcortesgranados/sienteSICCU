@@ -64,15 +64,15 @@
 
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
+                    <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"   
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente}) {
-                                                 document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}'; return false;
+                                                 document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}'; 
                                                              }
                                                              else ({#{rich:component('NoPuedeVerDetalleActividadReciente')}.show());
                                                              }" rendered="#{item.intestadoobra==0}" />
                     <a4j:commandLink style="color: green;"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente})
-                                                         {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; return false;}
+                                                         {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; }
                                                                              else
                                                                              {(#{rich:component('NoPuedeVerDetalleActividadReciente')}.show()); }" rendered="#{item.intestadoobra!=0}" />                 
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
@@ -82,5 +82,7 @@
         </a4j:repeat>
 
     </h:panelGroup>
+    
+    <ui:include src="/modal/noPuedeVerDetalleActividadRecienteXPermisos.xhtml"/>
 
 </ui:composition>
