@@ -269,7 +269,7 @@ public class RecursosConvenio implements Serializable {
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {
-                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
+                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() <= 100) {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(
                                 getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
                         BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);

@@ -284,9 +284,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (boxConfim.getHideButton() == boxConfim.getButtonById(PredefinedButton.YES.name())) {
                     if (!tareaSeleccionada.isBoolobligatoria()) {
                         eliminarDepStore();
+                        service.setElimino(true, null);
                         if (tareaSeleccionada.getTipoActividad() == 2) {
                             ObraDTO obraEliminar = tareaSeleccionada.getObra();
+                            service.setLog("antes deliminar proyecto", null);
                             reembolsarFuenteRecursos(obraEliminar);
+                            service.setLog("sali deliminar proyecto", null);
                         }
                         if (tareaSeleccionada.getTipoActividad() == 3) {
                             ContratoDTO contratoActual = tareaSeleccionada.getContrato();
@@ -299,10 +302,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             }
 
                         }
+                        service.setLog("sali deliminar proyecto 1", null);
                         ActividadobraDTO actPadre = taskStore.getParent(tareaSeleccionada);
+                        service.setLog("sali deliminar proyecto 2", null);
                         actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
-                        service.adicionarActividadDtoEliminar(tareaSeleccionada, null);
+                        service.setLog("sali deliminar proyecto 3", null);
 
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
@@ -1243,10 +1248,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      *
      */
     public void reembolsarFuenteRecursos(ObraDTO obraEliminar) {
+        service.setLog("reembolsarFuenteRecursos 1", null);
         for (ObrafuenterecursosconveniosDTO fuenteRecursosObraEliminar : obraEliminar.getObrafuenterecursosconvenioses()) {
+            service.setLog("reembolsarFuenteRecursos 3", null);
             String nomEntidad = fuenteRecursosObraEliminar.getNombreEntidad();
+            service.setLog("reembolsarFuenteRecursos 2", null);
             int vigencia = fuenteRecursosObraEliminar.getVigencia();
+            service.setLog("reembolsarFuenteRecursos 4", null);
             FuenterecursosconvenioDTO fuenteRecursoPadre = encontrarFuenteRecurso(vigencia, nomEntidad);
+            service.setLog("reembolsarFuenteRecursos 5", null);
             if (fuenteRecursoPadre != null) {
                 fuenteRecursoPadre.setValorDisponible(fuenteRecursoPadre.getValorDisponible().add(fuenteRecursosObraEliminar.getValor()));
             }

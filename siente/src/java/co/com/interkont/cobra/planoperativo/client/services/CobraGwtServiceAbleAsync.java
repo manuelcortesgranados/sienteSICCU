@@ -50,16 +50,19 @@ public interface CobraGwtServiceAbleAsync {
 //    void getSeCargoPlanOperativoAntes(AsyncCallback<Boolean> call);
 //
 //    void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes, AsyncCallback<Void> call);
-    
-    void  getListaacteliminar(AsyncCallback<List<ActividadobraDTO>> call);
-    
+    void getListaacteliminar(AsyncCallback<List<ActividadobraDTO>> call);
+
     void setListaacteliminar(List<ActividadobraDTO> listaacteliminar, AsyncCallback<Void> call);
-    
+
     void adicionarActividadDtoEliminar(ActividadobraDTO actdto, AsyncCallback<Void> call);
-    
-     void  getDependenciasEliminar(AsyncCallback<Set> call);
-    
+
+    void getDependenciasEliminar(AsyncCallback<Set> call);
+
     void setDependenciasEliminar(Set dependenciasEliminar, AsyncCallback<Void> call);
-    
+
     void adicionarDepenciatoEliminar(DependenciaDTO dep, AsyncCallback<Void> call);
+
+    void isElimino(AsyncCallback<Boolean> call);
+
+    void setElimino(boolean elimino, AsyncCallback<Void> call);
 }

@@ -45,6 +45,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
     private int guardarconvenio = 0;
+    private boolean elimino=false;
     //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
     private Set dependenciasEliminar= new LinkedHashSet(0);
@@ -325,5 +326,22 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void adicionarDepenciatoEliminar(DependenciaDTO dep) {
         getDependenciasEliminar().add(dep);
     }
+
+    /**
+     * @return the elimino
+     */
+    @Override
+    public boolean isElimino() {
+        return elimino;
+    }
+
+    /**
+     * @param elimino the elimino to set
+     */
+    @Override
+    public void setElimino(boolean elimino) {
+        this.elimino = elimino;
+    }
+
 
 }

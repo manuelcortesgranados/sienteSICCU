@@ -801,8 +801,11 @@ public class CasteoGWT implements Serializable {
         obra.setNumvaldeclarado(BigDecimal.ZERO);
         obra.setNumvalprogramejec(BigDecimal.ZERO);
 
+        System.out.println("obra!= null" + obra.getStrnombreobra());
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
+        System.out.println("obra!= null 1" + obra.getStrnombreobra());
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
+        System.out.println("obra!= null 2" );
         obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra, intusuario));
 
         return obra;
@@ -821,11 +824,16 @@ public class CasteoGWT implements Serializable {
         // System.out.println("actvidades obra de gwt a jsf = " + SetActividadesDto.size());
         //System.out.println("obra = " + obra.getIntcodigoobra());
         for (ActividadobraDTO obj : SetActividadesDto) {
+            if(obra!=null){
+                System.out.println("obj obra elimina != null " );
             obj.setStartDateTime(obra.getDatefeciniobra());
             obj.setEndDateTime(obra.getDatefecfinobra());
             obj.setDuration(obj.calcularDuracion());
 
             setActividades.add(castearActividadobraDdoProyectoToActividadobra(obj, obra, intusuario));
+            }else{
+             System.out.println("obj obra elimina == null " );
+            }
         }
         return setActividades;
     }
