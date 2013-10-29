@@ -5109,10 +5109,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String ultimoDetcontrato() {
 
-        int num = totalfilas % 5;
-
 //        if (aplicafiltrocontrato) {
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        int num = totalfilas % 5;
+        if (num == 0) {
+            num = 5;
+        }
         listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilas - num, totalfilas);
 
 //        } else {

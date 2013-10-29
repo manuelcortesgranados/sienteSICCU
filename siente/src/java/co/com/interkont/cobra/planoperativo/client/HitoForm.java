@@ -12,7 +12,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
-import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -27,7 +26,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.TreeStore;
-import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
@@ -55,15 +53,15 @@ public class HitoForm implements IsWidget, EntryPoint {
     //private static final int COLUMN_FORM_WIDTH = 100;
     Window modalAct;
     // </editor-fold>
-    ActividadobraDTO actividadObraPadre;
-    ActividadobraDTO actividacreada;
-    Gantt<ActividadobraDTO, DependenciaDTO> gantt;
-    ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);
-    ContratoDTO contratoDto;
+    protected ActividadobraDTO actividadObraPadre;
+    protected ActividadobraDTO actividacreada;
+    protected Gantt<ActividadobraDTO, DependenciaDTO> gantt;
+    protected ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);
+    protected ContratoDTO contratoDto;
+    protected TreeStore<ActividadobraDTO> taskStore;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
-    GwtMensajes msj = GWT.create(GwtMensajes.class);
-     protected TreeStore<ActividadobraDTO> taskStore;
-     int numeracionActividad;
+    protected GwtMensajes msj = GWT.create(GwtMensajes.class);
+    int numeracionActividad;
 
     public VerticalPanel getVp() {
         return vp;
@@ -113,7 +111,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad,TreeStore<ActividadobraDTO> taskStore,int numeracionActividad) {
+    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore, int numeracionActividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -121,9 +119,9 @@ public class HitoForm implements IsWidget, EntryPoint {
         actividacreada = new ActividadobraDTO();
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
-        this.taskStore=taskStore;
-        this.numeracionActividad=numeracionActividad;
-        
+        this.taskStore = taskStore;
+        this.numeracionActividad = numeracionActividad;
+
     }
 
     private void crearFormulario() {
@@ -153,26 +151,31 @@ public class HitoForm implements IsWidget, EntryPoint {
 //        getPeso().setWidth(cw);
 //        con.add(getPeso(),new HtmlData(".peso") );
 // 
-    
+
         Button btnAdicionarActividad = new Button("Añadir Hito", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 AlertMessageBox d;
-                
-                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
-                    if (getFechainicioActividad().getValue() != null ) {
 
-                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {                            
-                                modalAct.hide();
-                                crearActividad();                            
+                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
+                    if (getFechainicioActividad().getValue() != null) {
+
+                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
+                           if(validarHito()){
+                            modalAct.hide();
+                            crearActividad();
+                           }else{
+                            d = new AlertMessageBox("Alerta", "Por favor verifique el nombre del hito, ya se encuentra un hito con este nombre:"+getDescripcionActividad().getValue());
+                            d.show();
+                           }
                         } else {
-                            d = new AlertMessageBox("Error", "La fecha de inicio no puede ser inferior a "
+                            d = new AlertMessageBox("Alerta", "La fecha de inicio no puede ser inferior a "
                                     + obtenerFecha(actividadObraPadre.getStartDateTime()));
                             d.show();
                         }
 
                     } else {
-                        d = new AlertMessageBox("Error", "Debe diligenciar la fecha ");
+                        d = new AlertMessageBox("Alerta", "Debe diligenciar la fecha ");
                         d.show();
                     }
 
@@ -189,7 +192,6 @@ public class HitoForm implements IsWidget, EntryPoint {
     }
 
     @Override
-
     public Widget asWidget() {
         if (getVp() == null) {
             setVp(new VerticalPanel());
@@ -232,9 +234,9 @@ public class HitoForm implements IsWidget, EntryPoint {
         tareaNueva.setNumeracion(numeracionActividad);
         numeracionActividad++;
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(),tareaNueva);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes,contratoDto);
+        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
@@ -244,5 +246,15 @@ public class HitoForm implements IsWidget, EntryPoint {
         DateWrapper dw = new DateWrapper(fecha).clearTime();
 
         return String.valueOf(dw.getFullYear()) + "-" + String.valueOf(dw.getMonth() + 1) + "-" + String.valueOf(dw.getDate());
+    }
+
+    public boolean validarHito() {
+        for (ActividadobraDTO act : taskStore.getAll()) {
+            if (act.getName().equals(getDescripcionActividad().getValue())) {
+                return false;
+            }
+        }
+        return true;
+
     }
 }
