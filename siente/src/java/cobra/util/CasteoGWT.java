@@ -801,11 +801,9 @@ public class CasteoGWT implements Serializable {
         obra.setNumvaldeclarado(BigDecimal.ZERO);
         obra.setNumvalprogramejec(BigDecimal.ZERO);
 
-        System.out.println("obra!= null" + obra.getStrnombreobra());
+        
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
-        System.out.println("obra!= null 1" + obra.getStrnombreobra());
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
-        System.out.println("obra!= null 2" );
         obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra, intusuario));
 
         return obra;
