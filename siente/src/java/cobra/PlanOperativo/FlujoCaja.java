@@ -273,7 +273,6 @@ public class FlujoCaja implements Serializable {
      * flujo de ingresos, inicia los totales 4. Crea la estructura para el flujo
      * de egresos, inicia los totales 5. Calcula los totales del flujo.
      *
-     * @return Cadena con el nombre de la página del flujo.
      */
     public void iniciarFlujoCaja() {
         nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");

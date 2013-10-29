@@ -3332,7 +3332,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        } else {
 //            limpiarContrato();
 //        }
-
 //        mensaje = bundle.getString("incluyeconvenios");
 //        mensajeout = bundle.getString("incluyeconveniosuperior");
 //        mensajeseleccion = bundle.getString("conveniosuperior");
@@ -3841,7 +3840,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * registros
      */
     public void calcuArraPorcenPago() {
-
 
         List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
 
@@ -5138,10 +5136,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String ultimoDetcontrato() {
 
-        int num = totalfilas % 5;
-
 //        if (aplicafiltrocontrato) {
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        int num = totalfilas % 5;
+        if (num == 0) {
+            num = 5;
+        }
         listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilas - num, totalfilas);
 
 //        } else {
@@ -6338,7 +6338,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6688,8 +6688,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } else {
                     contrato.setDatefechacreacion(new Date());
                 }
-
-
 
 //      Asignandole el valor del contrato en recursos terceros
                 contrato.setNumrecursostercero(contrato.getNumvlrcontrato());
@@ -7228,7 +7226,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 System.out.println("activi A eliminar = " + lstActividadesEliminar.size());
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
-
 
             }
 
