@@ -42,11 +42,19 @@ public class ValidacionesConvenio {
     }
 
     public static void validarValorCuotaGerencia(BigDecimal valorConvenio, BigDecimal valorCuota) {
-        if (valorCuota.compareTo(valorConvenio) > 0) {
-            throw new ConvenioException("El valor de la cuota de gerencia debe ser menor o igual al valor global del convenio.");
-        }
+        if (valorConvenio != null) {
+            if (valorConvenio.compareTo(BigDecimal.ZERO) > 0) {
+                if (valorCuota != null) {
+                    if (valorCuota.compareTo(valorConvenio) > 0) {
+                        throw new ConvenioException("El valor de la cuota de gerencia debe ser menor o igual al valor global del convenio.");
+                    }
+                }
+            }
 
+        }
     }
+
+    
 
     public static void validarFechasPlanOperativo(Date fechaactaini, Date fechaini, Date fechafin) {
         validarFechasConvenio(fechaini, fechafin);
@@ -116,8 +124,7 @@ public class ValidacionesConvenio {
     }
 
     public static void validarProyectosPlanOperativo(List<Obra> listadoproyectos) {
-        if(listadoproyectos.isEmpty())
-        {
+        if (listadoproyectos.isEmpty()) {
             throw new ConvenioException("Debe adicionar al menos un proyecto al Plan Operativo");
         }
 //        else
@@ -135,16 +142,13 @@ public class ValidacionesConvenio {
 //            }    
 //        }    
     }
-    
-    public static void validarDisponibilidadFuentesRecursos(List<Fuenterecursosconvenio> listarecursos) {
-        for(Fuenterecursosconvenio fue:listarecursos)
-        {
-            if(fue.getValorDisponible().compareTo(BigDecimal.ZERO)!=0)
-            {
-                throw new ConvenioException("La entidad "+fue.getTercero().getStrnombrecompleto() +", en la vigencia "+fue.getVigencia()
-                +" posee un valor disponible de ($"+fue.getValorDisponible()+") para ser distribuido en proyectos. ");
-            }    
-        }    
-    }
 
+    public static void validarDisponibilidadFuentesRecursos(List<Fuenterecursosconvenio> listarecursos) {
+        for (Fuenterecursosconvenio fue : listarecursos) {
+            if (fue.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
+                throw new ConvenioException("La entidad " + fue.getTercero().getStrnombrecompleto() + ", en la vigencia " + fue.getVigencia()
+                        + " posee un valor disponible de ($" + fue.getValorDisponible() + ") para ser distribuido en proyectos. ");
+            }
+        }
+    }
 }

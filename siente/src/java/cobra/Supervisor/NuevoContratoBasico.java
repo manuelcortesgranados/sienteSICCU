@@ -69,6 +69,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -4158,7 +4159,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
 
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));            
+            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
             contrato.setActividadobras(new LinkedHashSet<Actividadobra>());
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
 
@@ -4172,7 +4173,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 lstTemporalActividades.clear();
                 mapaReembolsoConvenio.clear();
                 getSessionBeanCobra().getCobraGwtService().setElimino(false);
-                encontrarActividadContrato(activiprincipal, lstTemporalActividades);            
+                encontrarActividadContrato(activiprincipal, lstTemporalActividades);
                 contrato.getActividadobras().add(activiprincipal);
                 // LLenar dependencias
                 contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
@@ -6311,7 +6312,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6637,10 +6638,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void guardarBorradorConvenio() {
 
         try {
+            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
 
             if (validacionesBasicasConvenioPO()) {
                 configuracionGuardadoPo(1, true);
             }
+
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
         }
@@ -6654,6 +6657,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void finalizarGuardado() {
         try {
+            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
 
             if (validacionesBasicasConvenioPO()) {
                 ValidacionesConvenio.validarDistribucionFinalFuenteRecursos(getContrato().getNumvlrcontrato(), recursosconvenio.getSumafuentes());
@@ -6662,13 +6666,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 ValidacionesConvenio.validarDisponibilidadFuentesRecursos(recursosconvenio.getLstFuentesRecursos());
                 if (!getFlujoCaja().isFlujoCajaIniciado()) {
                     //Aca deberiamos guardar borrador convenio antes de iniciar elflujo de caja
-                    configuracionGuardadoPo(1,true);                    
+                    configuracionGuardadoPo(1, true);
                     getFlujoCaja().iniciarFlujoCaja();
                 }
                 if (getFlujoCaja().validarFlujoCaja()) {
                     if (getFlujoCaja().getTotalIngresos() == getContrato().getNumvlrcontrato().doubleValue()) {
-                        if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {                            
-                            configuracionGuardadoPo(2,true);
+                        if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {
+                            configuracionGuardadoPo(2, true);
                         } else {
                             FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
                         }
@@ -6952,17 +6956,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 return null;
             } else {
                 ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
-                ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");                
+                ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
                 ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
-                if (contrato.getNumvlrcontrato() != null) {
-                    if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) > 0) {
-                        if (contrato.getNumValorCuotaGerencia() != null) {
-                            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-                        }
-                    }
-                }
+                ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
+                ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
+                validarFechaActaInicio(actiRaiz, cont);
                 getSessionBeanCobra().setConsulteContrato(false);
                 getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
                 //} else {
@@ -7006,8 +7007,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         /**
          * Datos Generales
          */
-        contrato.setDatefechaini(contratodto.getDatefechaini());
-        contrato.setDatefechafin(contratodto.getDatefechafin());
+       // contrato.setDatefechaini(contratodto.getDatefechaini());
+       // contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
@@ -7424,6 +7425,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
     }
 
+    public void encontrarActividadContratoDTO(ActividadobraDTO activdadRaiz, List<ActividadobraDTO> listaActividades) {
+        for (ActividadobraDTO actiHija : activdadRaiz.getChildren()) {
+            listaActividades.add(actiHija);
+            encontrarActividadContratoDTO(actiHija, listaActividades);
+        }
+    }
+
     public void cargarActividadesEliminar(Actividadobra activdadRaiz) {
         if (getSessionBeanCobra().getCobraGwtService().isElimino()) {
             if (!lstTemporalActividades.isEmpty()) {
@@ -7442,7 +7450,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
             }
         }
-    }  
+    }
 
     public boolean validacionesBasicasConvenioPO() {
         Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
@@ -7584,8 +7592,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
         }
     }
-    
-     public void reembolsarValoresDeObraFuenteRecursos(Set<Obrafuenterecursosconvenios> setObraFuentesRecursos) {
+
+    public void reembolsarValoresDeObraFuenteRecursos(Set<Obrafuenterecursosconvenios> setObraFuentesRecursos) {
         for (Obrafuenterecursosconvenios fuenteRecursoObra : setObraFuentesRecursos) {
             valoresReembolsarConvenio(fuenteRecursoObra.getFuenterecursosconvenio(), fuenteRecursoObra.getValor());
         }
@@ -7647,5 +7655,50 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return null;
 
     }
-    
+
+    public void validarFechaActaInicio(ActividadobraDTO actividadRaiz, ContratoDTO contratoDto) {
+        
+        List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
+        lstTodasActividadesDTO.add(actividadRaiz);
+        encontrarActividadContratoDTO(actividadRaiz, lstTodasActividadesDTO);
+        ActividadobraDTO actividadActaInici = null;
+        ActividadobraDTO actividadReglamento = null;
+        for (ActividadobraDTO actividad : lstTodasActividadesDTO) {
+            if (actividad.getName().equals("Acta de Inicio del Convenio")) {
+                actividadActaInici = actividad;
+            } else if (actividad.getName().equals("Reglamento Comité Operativo")) {
+                actividadReglamento = actividad;
+            }
+        }
+        if (actividadActaInici != null) {
+            if (contratoDto.getDatefechaactaini().compareTo(actividadActaInici.getStartDateTime()) != 0) {
+                if (actividadReglamento != null) {
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                    if (contratoDto.getDatefechaactaini().compareTo(actividadReglamento.getStartDateTime()) > 0) {
+                        throw new ConvenioException("La fecha del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
+
+                    } else {
+                        Calendar cale = new GregorianCalendar();
+                        cale.setLenient(false);
+                        cale.setTime(contratoDto.getDatefechaactaini());
+                        Date fechaCopiaActa = cale.getTime();
+                       
+                        Calendar cal = new GregorianCalendar();
+                        cal.setLenient(false);
+                        cal.setTime(fechaCopiaActa);
+                        cal.add(Calendar.DAY_OF_MONTH, actividadActaInici.getDuration());
+                        Date fechaFin = cal.getTime();
+                        
+                        if (fechaFin.compareTo(actividadReglamento.getStartDateTime()) > 0) {
+                            throw new ConvenioException("La fecha fin del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
+                        } else {
+                            actividadActaInici.setStartDateTime(fechaCopiaActa);
+                            actividadActaInici.setEndDateTime(fechaFin);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
 }
