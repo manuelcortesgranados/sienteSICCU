@@ -265,7 +265,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros, idobraRecursos, editar);
                 adicionarRubros.add(modalProyecto.asWidget());
                 adicionarRubros.show();
-                service.setLog("valor disponible en convenio:" + contratoDto.getValorDisponible(), null);
+                
             }
         });
         btnAdicionarMonto.setWidth("" + 20);
@@ -353,6 +353,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                             varErrorres = true;
                             msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
                         }
+                        
+                        Date actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto).getEndDateTime();
+                        if(proyectoDTO.getFechaInicio().compareTo(actividadDependenciaFrom)<0){
+                            service.setLog("entre en fecha inicio menor dep", null);
+                            varErrorres = true;
+                            String dfD = DateTimeFormat.getShortDateFormat().format(actividadDependenciaFrom);
+                            msgerrores +="La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente planeación del convenio:" + dfD;
+                         }
                     } else {
                         varErrorres = true;
                         msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
@@ -637,26 +645,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
-                    ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto);
-                    service.setLog("en crear" + actividadDependenciaFrom.getName(), null);
-                    if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
-                        enlazaractividadesHijas(act, tareaNueva);
-                    } else {
-                        AlertMessageBox alerta = new AlertMessageBox("Alerta", "La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
-                        alerta.show();
-                    }
+                      enlazaractividadesHijas(act, tareaNueva);
+                 
                 }
             }
 
         } else {
-            ActividadobraDTO actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto);
-            service.setLog("en crear 1" + actividadDependenciaFrom.getName(), null);
-            if (tareaNueva.getStartDateTime().compareTo(actividadDependenciaFrom.getEndDateTime()) >= 0) {
                 enlazaractividadesHijas(actividadObraPadre, tareaNueva);
-            } else {
-                AlertMessageBox alerta = new AlertMessageBox("Alerta", "La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
-                alerta.show();
-            }
+            
         }
 
     }
