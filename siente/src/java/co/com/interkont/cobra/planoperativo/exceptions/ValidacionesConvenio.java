@@ -5,6 +5,8 @@
  */
 package co.com.interkont.cobra.planoperativo.exceptions;
 
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
+import co.com.interkont.cobra.to.Obra;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
@@ -102,8 +104,47 @@ public class ValidacionesConvenio {
     }
 
     public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes) {
-        if (valorcontrato.compareTo(sumafuentes) == 0) {
-            throw new ConvenioException("La suma de las fuentes de recursos, debe ser igual al valor del contrato ");
+        if (valorcontrato.compareTo(sumafuentes) != 0) {
+            throw new ConvenioException("La suma de las fuentes de recursos (" + sumafuentes.toString() + "), debe ser igual al valor del contrato (" + valorcontrato.toString() + ")");
         }
     }
+
+    public static void validarDistribucionFinalCuotaGerencia(BigDecimal valorcuotagerenciacontrato, BigDecimal sumacuotasgerencia) {
+        if (valorcuotagerenciacontrato.compareTo(sumacuotasgerencia) != 0) {
+            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + sumacuotasgerencia.toString() + "), debe ser igual al valor de la cuota de gerencia del contrato (" + valorcuotagerenciacontrato.toString() + ")");
+        }
+    }
+
+    public static void validarProyectosPlanOperativo(List<Obra> listadoproyectos) {
+        if(listadoproyectos.isEmpty())
+        {
+            throw new ConvenioException("Debe adicionar al menos un proyecto al Plan Operativo");
+        }
+//        else
+//        {
+//            
+//            int i=0;
+//            while(i<listadoproyectos.size())            
+//            {
+//                if(listadoproyectos.get(i).getValorDisponible().compareTo(BigDecimal.ZERO)!=0)
+//                {
+//                    throw new ConvenioException("El Proyecto : "+listadoproyectos.get(i).getStrnombreobra()+", aún posee valor sin distribuir ("+listadoproyectos.get(i).getValorDisponible()+");");
+//                   
+//                }    
+//                i++;
+//            }    
+//        }    
+    }
+    
+    public static void validarDisponibilidadFuentesRecursos(List<Fuenterecursosconvenio> listarecursos) {
+        for(Fuenterecursosconvenio fue:listarecursos)
+        {
+            if(fue.getValorDisponible().compareTo(BigDecimal.ZERO)!=0)
+            {
+                throw new ConvenioException("La entidad "+fue.getTercero().getStrnombrecompleto() +", en la vigencia "+fue.getVigencia()
+                +" posee un valor disponible de ($"+fue.getValorDisponible()+") para ser distribuido en proyectos. ");
+            }    
+        }    
+    }
+
 }
