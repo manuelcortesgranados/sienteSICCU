@@ -100,5 +100,13 @@ public class ValidacionesConvenio {
            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del contrato");       
        }      
    }
+      
+      public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes)
+   {
+       if(valorcontrato.compareTo(sumafuentes)==0)
+       {
+           throw new ConvenioException("La suma de las fuentes de recursos, debe ser igual al valor del contrato ");  
+       }    
+   }
 
 }

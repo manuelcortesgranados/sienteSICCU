@@ -50,10 +50,10 @@
                 <center>
                 <h:panelGrid columns="3" cellspacing="15" cellpadding="0" id="menu-plan-operativo" styleClass="ikont-hpg-menu-plan-operativo">
                     <a4j:commandButton value="#{var.planificacion}" action="#{Supervisor$Contrato.planOperativo}"/>
-                    <a4j:commandButton value="#{var.flujocaja}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo}" immediate="true">
+                    <a4j:commandButton value="#{var.flujocaja}"  immediate="true" execute="@this" render="frmpanelgeneral" action="#{PlanOperativo.iniciarFlujoCaja()}">
                         <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="2"/>
                     </a4j:commandButton>                    
-                    <a4j:commandButton value="#{var.reportes}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo}" render="frmpanelgeneral" immediate="true">
+                    <a4j:commandButton value="#{var.reportes}"  render="frmpanelgeneral" immediate="true" execute="@this">
                         <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="3"/>
                     </a4j:commandButton>
                 </h:panelGrid>

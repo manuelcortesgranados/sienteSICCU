@@ -226,14 +226,18 @@ public class RecursosConvenio implements Serializable {
             if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                     .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
                 // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
-                fuenteRecursoConvenio.setContrato(n.getContrato());
+                
                 fuenteRecursoConvenio.setTercero(tercero);
                 fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
-                fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
                 calcularCuotaGerencia();
+                fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado().subtract(fuenteRecursoConvenio.getReservaiva().add(fuenteRecursoConvenio.getOtrasreservas()).add(fuenteRecursoConvenio.getValorcuotagerencia())));
+                System.out.println("fuente dispo "+fuenteRecursoConvenio.getValorDisponible());
                 lstFuentesRecursos.add(fuenteRecursoConvenio);
+                System.out.println("dispo = " + n.getContrato().getValorDisponible());
                 n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().subtract(fuenteRecursoConvenio.getValoraportado()));
                 n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().subtract(fuenteRecursoConvenio.getValorcuotagerencia()));
+                System.out.println("nuevo disponible = " + n.getContrato().getValorDisponible());
+                fuenteRecursoConvenio.setContrato(n.getContrato());
                 sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
                 reservaIva = reservaIva.add(fuenteRecursoConvenio.getReservaiva());
                 otrasReservas = otrasReservas.add(fuenteRecursoConvenio.getOtrasreservas());
@@ -356,8 +360,15 @@ public class RecursosConvenio implements Serializable {
     }
 
     public void sumaFuentesRecursos() {
+        sumafuentes= BigDecimal.ZERO;
+        reservaIva= BigDecimal.ZERO;
+        otrasReservas= BigDecimal.ZERO;
+        cuotaGerencia= BigDecimal.ZERO;
         for (Fuenterecursosconvenio f : lstFuentesRecursos) {
             sumafuentes = sumafuentes.add(f.getValoraportado());
+            reservaIva = reservaIva.add(f.getReservaiva());
+                otrasReservas = otrasReservas.add(f.getOtrasreservas());
+                cuotaGerencia = cuotaGerencia.add(f.getValorcuotagerencia());
         }
     }
 

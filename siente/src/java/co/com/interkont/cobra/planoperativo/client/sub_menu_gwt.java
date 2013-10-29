@@ -67,7 +67,7 @@ public class sub_menu_gwt implements IsWidget {
                     
                     @Override
                     public void onSuccess(Boolean result) {
-                        service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                        service.setNavegacion(6, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
                                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -97,7 +97,7 @@ public class sub_menu_gwt implements IsWidget {
                     
                     @Override
                     public void onSuccess(Boolean result) {
-                        service.setNavegacion(3, new AsyncCallback<Boolean>() {
+                        service.setNavegacion(9, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
                                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
