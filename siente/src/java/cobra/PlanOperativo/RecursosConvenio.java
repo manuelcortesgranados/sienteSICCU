@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
+
 /**
  *
  * @author Carlos Loaiza
@@ -152,27 +153,27 @@ public class RecursosConvenio implements Serializable {
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
         if (!f.isEstaEnFuenteRecurso()) {
-        if (f.getIdfuenterecursosconvenio() != 0) {
-            lstFuentesRecursosEliminar.add(f);
-        }
-        lstFuentesRecursos.remove(f);
-        n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
-        n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
-        sumafuentes = sumafuentes.subtract(f.getValoraportado());
-        reservaIva = reservaIva.subtract(f.getReservaiva());
-        otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
-        cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
+            if (f.getIdfuenterecursosconvenio() != 0) {
+                lstFuentesRecursosEliminar.add(f);
+            }
+            lstFuentesRecursos.remove(f);
+            n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
+            n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
+            sumafuentes = sumafuentes.subtract(f.getValoraportado());
+            reservaIva = reservaIva.subtract(f.getReservaiva());
+            otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
+            cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
 
-        if (lstFuentesRecursos.isEmpty()) {
-            sumafuentes = BigDecimal.ZERO;
-            reservaIva = BigDecimal.ZERO;
-            otrasReservas = BigDecimal.ZERO;
-            cuotaGerencia = BigDecimal.ZERO;
-        }
+            if (lstFuentesRecursos.isEmpty()) {
+                sumafuentes = BigDecimal.ZERO;
+                reservaIva = BigDecimal.ZERO;
+                otrasReservas = BigDecimal.ZERO;
+                cuotaGerencia = BigDecimal.ZERO;
+            }
         } else {
-             FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
-        
-    }
+            FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
+
+        }
     }
     //lstFuentesRecursos
 
@@ -207,14 +208,23 @@ public class RecursosConvenio implements Serializable {
                 }
             }
 
+
             if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getValorDisponible()) > 0) {
                 FacesUtils.addErrorMessage(bundle.getString("msgerrorvaloraportadomayor") + n.getContrato().getValorDisponible());
                 return null;
             }
 
-            if (fuenteRecursoConvenio.getValorcuotagerencia().compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) > 0) {
-                FacesUtils.addErrorMessage(bundle.getString("msgerrorsuperiorcuotagerencia") + n.getContrato().getValorDisponibleCuotaGerencia());
-                return null;
+            if (fuenteRecursoConvenio.getTipoaporte() == 1) {
+                BigDecimal valorCuotaCalculado = new BigDecimal((fuenteRecursoConvenio.getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue()) / 100);
+                if (valorCuotaCalculado.compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) > 0) {
+                    FacesUtils.addErrorMessage(bundle.getString("msgerrorsuperiorcuotagerencia") + n.getContrato().getValorDisponibleCuotaGerencia());
+                    return null;
+                }
+            } else {
+                if (fuenteRecursoConvenio.getValorcuotagerencia().compareTo(n.getContrato().getValorDisponibleCuotaGerencia()) > 0) {
+                    FacesUtils.addErrorMessage(bundle.getString("msgerrorsuperiorcuotagerencia") + n.getContrato().getValorDisponibleCuotaGerencia());
+                    return null;
+                }
             }
 //                       
 //            if(n.getContrato().getAuxiliarValorGerencia().compareTo(fuenteRecursoConvenio.getValoraportado())<0){
@@ -226,12 +236,12 @@ public class RecursosConvenio implements Serializable {
             if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                     .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
                 // if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getNumvlrcontrato()) <= 0) {
-                
+
                 fuenteRecursoConvenio.setTercero(tercero);
                 fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
                 calcularCuotaGerencia();
                 fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado().subtract(fuenteRecursoConvenio.getReservaiva().add(fuenteRecursoConvenio.getOtrasreservas()).add(fuenteRecursoConvenio.getValorcuotagerencia())));
-                System.out.println("fuente dispo "+fuenteRecursoConvenio.getValorDisponible());
+                System.out.println("fuente dispo " + fuenteRecursoConvenio.getValorDisponible());
                 lstFuentesRecursos.add(fuenteRecursoConvenio);
                 System.out.println("dispo = " + n.getContrato().getValorDisponible());
                 n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().subtract(fuenteRecursoConvenio.getValoraportado()));
@@ -360,15 +370,15 @@ public class RecursosConvenio implements Serializable {
     }
 
     public void sumaFuentesRecursos() {
-        sumafuentes= BigDecimal.ZERO;
-        reservaIva= BigDecimal.ZERO;
-        otrasReservas= BigDecimal.ZERO;
-        cuotaGerencia= BigDecimal.ZERO;
+        sumafuentes = BigDecimal.ZERO;
+        reservaIva = BigDecimal.ZERO;
+        otrasReservas = BigDecimal.ZERO;
+        cuotaGerencia = BigDecimal.ZERO;
         for (Fuenterecursosconvenio f : lstFuentesRecursos) {
             sumafuentes = sumafuentes.add(f.getValoraportado());
             reservaIva = reservaIva.add(f.getReservaiva());
-                otrasReservas = otrasReservas.add(f.getOtrasreservas());
-                cuotaGerencia = cuotaGerencia.add(f.getValorcuotagerencia());
+            otrasReservas = otrasReservas.add(f.getOtrasreservas());
+            cuotaGerencia = cuotaGerencia.add(f.getValorcuotagerencia());
         }
     }
 

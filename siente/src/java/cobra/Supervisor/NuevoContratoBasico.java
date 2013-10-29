@@ -3841,7 +3841,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * registros
      */
     public void calcuArraPorcenPago() {
-        
+
 
         List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
 
@@ -6663,6 +6663,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
             }
 
+            try {
+                if (contrato.getNumvlrcontrato() != null) {
+                    if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) > 0) {
+                        if (contrato.getNumValorCuotaGerencia() != null) {
+                            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+                        }
+                    }
+                }
+            } catch (ConvenioException e) {
+                band = false;
+                FacesUtils.addErrorMessage(e.getMessage());
+            }
+
             if (band) {
 
                 validardatosbasicosplano = 0;
@@ -6675,6 +6688,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } else {
                     contrato.setDatefechacreacion(new Date());
                 }
+
+
 
 //      Asignandole el valor del contrato en recursos terceros
                 contrato.setNumrecursostercero(contrato.getNumvlrcontrato());
@@ -7118,6 +7133,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             } else {
                 ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
                 ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
+                if (contrato.getNumvlrcontrato() != null) {
+                    if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) > 0) {
+                        if (contrato.getNumValorCuotaGerencia() != null) {
+                            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+                        }
+                    }
+                }
                 ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
@@ -7206,7 +7228,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 System.out.println("activi A eliminar = " + lstActividadesEliminar.size());
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
-                
+
 
             }
 
@@ -7606,7 +7628,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void valoresReembolsarConvenio(Fuenterecursosconvenio fuente, BigDecimal valor) {
-         if (!mapaReembolsoConvenio.isEmpty()) {
+        if (!mapaReembolsoConvenio.isEmpty()) {
             for (Fuenterecursosconvenio f : mapaReembolsoConvenio.keySet()) {
                 if (f.getTercero().getStrnombrecompleto().equals(fuente.getTercero().getStrnombrecompleto()) && f.getVigencia() == fuente.getVigencia()) {
                     BigDecimal valorFuente = mapaReembolsoConvenio.get(f);
@@ -7616,9 +7638,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     mapaReembolsoConvenio.put(fuente, valor);
                 }
             }
-        }else{
+        } else {
             mapaReembolsoConvenio.put(fuente, valor);
-         }
+        }
     }
 
     /*
@@ -7643,7 +7665,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         for (Fuenterecursosconvenio fuenterecursosconvenio : mapaReembolsoConvenio.keySet()) {
             Fuenterecursosconvenio fconvenio = buscarFuenteRecursos(fuenterecursosconvenio.getVigencia(), fuenterecursosconvenio.getTercero().getStrnombrecompleto());
             fconvenio.setValorDisponible(fconvenio.getValorDisponible().add(mapaReembolsoConvenio.get(fuenterecursosconvenio)));
-         }
+        }
     }
 
     /*
