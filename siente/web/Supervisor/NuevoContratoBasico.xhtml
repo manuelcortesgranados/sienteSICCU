@@ -230,7 +230,7 @@
 
                                     <h:outputLabel  styleClass="ikont-hol-lblcombenticontr" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
                                     <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra"  >
-                                        <rich:select styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.contrpadre != null or Supervisor$Contrato.boolnumencargosoli}"
+                                        <rich:select styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli}"
                                                      defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                         </rich:select>
