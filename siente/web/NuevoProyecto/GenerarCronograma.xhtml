@@ -58,11 +58,12 @@
                                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.formatoxlsx}" value="true"/>
                                 </a4j:commandLink>
                             </h:panelGrid>
-                            <h:panelGrid cellspacing="40" columns="2" style="position: relative; top: -63px; text-align: center;">
-                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronogramadatosbasicos}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                            <h:panelGrid cellspacing="10" columns="2" style="position: relative; top: -63px; text-align: center">
+                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronogramadatosbasicos}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>                                
                                 <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronogramadatosbasicosxlsx}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                            </h:panelGrid>
-
+                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.formatoxls}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.formatoxlsx}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                            </h:panelGrid>                           
                         </center>
                     </rich:collapsiblePanel>
                     <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">

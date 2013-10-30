@@ -328,6 +328,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 service.setLog("entre proyecto", null);
+                msgerrores="";
                 if (!editar) {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
@@ -348,12 +349,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
                     if (proyectoDTO.getFechaInicio() != null) {
                         service.setLog("entre en fecha inicio no null:" + proyectoDTO.getFechaInicio() + "Fecha contrato:" + contratoDto.getDatefechaini(), null);
-                        if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
-                            service.setLog("entre en fecha inicio no menor 1", null);
-                            varErrorres = true;
-                            msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
-                        }
-                        
                         Date actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto).getEndDateTime();
                         if(proyectoDTO.getFechaInicio().compareTo(actividadDependenciaFrom)<0){
                             service.setLog("entre en fecha inicio menor dep", null);

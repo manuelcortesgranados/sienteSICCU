@@ -9,6 +9,7 @@ import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.config.GanttConfig.DependencyType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.data.shared.ListStore;
@@ -308,7 +309,7 @@ public class GanttDatos {
                     setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha de inicio de Elaboración de pliegos de condiciones");
                     error = true;
                 }
-                
+
                 //posicion 1
             } else if (actividadSeleccionada.getName().equals("Elaboración de pliegos de condiciones")) {
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(0).getEndDateTime()) < 0) {
@@ -339,15 +340,21 @@ public class GanttDatos {
                 }
                 //posicion 3
             } else {
+                service.setLog("modificar el ultimo contractual", null);
                 if (actividadSeleccionada.getStartDateTime().compareTo(actividadPadrePrecontractual.getChildren().get(2).getEndDateTime()) < 0) {
                     setMsg(getMsg() + "La fecha de inicio no puede ser menor que la Evaluación de propuestas ");
                     error = true;
                 }
-                if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getEndDateTime()) > 0) {
-                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la fecha fin del contrato");
+
+                if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la fecha inicio de la etapa contractual");
                     error = true;
                 }
 
+                if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()) > 0) {
+                    setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha inicio de la etapa contractual");
+                    error = true;
+                }
             }
 
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Contractual")) {
@@ -360,7 +367,7 @@ public class GanttDatos {
                         setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta");
 
                     } else {
-                        ActividadobraDTO actiP=taskStore.getParent(actividadSeleccionada);
+                        ActividadobraDTO actiP = taskStore.getParent(actividadSeleccionada);
                         if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()) < 0) {
                             error = true;
                             setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser menor que fecha fin de etapa precontractual");
@@ -373,16 +380,70 @@ public class GanttDatos {
                     }
 
                 } else if (actividadSeleccionada.getName().equals("Suscripcion acta de inicio")) {
+                    service.setLog("en suscripicion acata ini", null);
                     if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()) < 0) {
                         error = true;
                         setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser menor que la fecha de fin de la Suscripcion del contrato");
 
+                    }
+                    ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
+                    service.setLog("en suscripicion acata ini 1:" + actiLiquidacion.getName(), null);
+                    if (!actiLiquidacion.getChildren().isEmpty()) {
+                        Date menorHijosLiquidacion = obtenerMenorFechaInicio(actiLiquidacion.getChildren());
+                        if (actividadSeleccionada.getStartDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                        }
+
+                        if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha fin de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                        }
+
+                    }
+                } else {
+                    ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
+                    if (!actiLiquidacion.getChildren().isEmpty()) {
+                        Date menorHijosLiquidacion = obtenerMenorFechaInicio(actiLiquidacion.getChildren());
+                        if (actividadSeleccionada.getStartDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha inicio de la actividad no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                        }
+
+                        if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha inicio no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                        }
                     }
                 }
 
             }
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Liquidaciones")) {
             service.setLog("sali a validar modificacion contrato", null);
+            ActividadobraDTO actiEjecucion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(1);
+            service.setLog("ejecucion:" + actiEjecucion.getEndDateTime(), null);
+            service.setLog("seleccionada:" + actividadSeleccionada.getStartDateTime(), null);
+            if (actiEjecucion.getEndDateTime().compareTo(actividadSeleccionada.getStartDateTime()) > 0) {
+                service.setLog("entre aca r445", null);
+                error = true;
+                setMsg(getMsg() + "La fecha inicio de la actividad no puede ser menor que la fecha fin de la etapa de contractual");
+            } else {
+                service.setLog("entre aca r445 yyyy", null);
+            }
+//            ActividadobraDTO actiRaiz = taskStore.getParent(taskStore.getParent(taskStore.getParent(taskStore.getParent(actividadSeleccionada))));
+//            if (actividadSeleccionada.getEndDateTime().compareTo(actiRaiz.getChildren().get(2).getStartDateTime()) > 0) {
+//                error = true;
+//                setMsg(getMsg() + "La fecha fin de la actividad no puede ser superior a la fecha inicio de la Liqidacion del convenio macro");
+//            }
+//
+//            if (actividadSeleccionada.getStartDateTime().compareTo(actiRaiz.getChildren().get(2).getStartDateTime()) > 0) {
+//                error = true;
+//                setMsg(getMsg() + "La fecha fin de la actividad no puede ser superior a la fecha inicio de la Liqidacion del convenio macro");
+//            }
 
         }
         return error;

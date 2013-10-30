@@ -224,6 +224,7 @@ public class CasteoGWT implements Serializable {
         ActividadobraDTO actdto = new ActividadobraDTO();
 
         actdto.setBoolobligatoria(actividadObra.getBoolobligatoria());
+        actdto.setEsNoEditable(actividadObra.getEsNoEditable());
         actdto.setDuration(actividadObra.getDuracion());
         actdto.setEliminar("Eliminar");
         DateWrapper dw = new DateWrapper(actividadObra.getFechaFin()).clearTime();
@@ -702,6 +703,7 @@ public class CasteoGWT implements Serializable {
         actividadObra.setNumeracion(actdto.getNumeracion());
         actividadObra.setLstPredecesores(obtenerListaPredecesores(actividadObra.getPredecesor()));
         actividadObra.setBoolaiu(false);
+        actividadObra.setEsNoEditable(actdto.isEsNoEditable());
 
         actividadObra.setActividadobra(actividadpadre);
 

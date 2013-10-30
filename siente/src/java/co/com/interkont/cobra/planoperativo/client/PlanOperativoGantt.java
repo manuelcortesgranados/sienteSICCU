@@ -1215,7 +1215,23 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     msg = "la fecha de Aprobación del plan operativo no puede ser inferior a la fecha del acta de inicio";
 
                 }
+                service.setLog("aca en nueva :", null);
+                Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
+                service.setLog("fecha menor:" + menorFechaEjecucion, null);
+                if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                }
                 service.setLog("msg:" + msg, null);
+            } else {
+                service.setLog("aca en nueva cualquiera:", null);
+                Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
+                service.setLog("fecha menor:" + menorFechaEjecucion, null);
+                if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                }
+
             }
         }
         if (i == 2 || i == 0) {
@@ -1226,6 +1242,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             } else if (actiModificada.getName().equals("Reglamento Comité Operativo")) {
                 if (actiModificada.getEndDateTime().compareTo(mapaHijas.get(3).getStartDateTime()) > 0) {
                     msg = "la fecha fin del Reglamento del plan operativo no puede ser superior a la  fecha de inicio de la Aprobación del plan operativo";
+                }
+            } else {
+                service.setLog("aca en nueva cualquiera final:", null);
+                Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
+                service.setLog("fecha menor:" + menorFechaEjecucion, null);
+                if (actiModificada.getEndDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
                 }
             }
 
