@@ -166,7 +166,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setListaPolizasEliminar(List<Polizacontrato> listaPolizasEliminar) {
         this.listaPolizasEliminar = listaPolizasEliminar;
     }
-    
     private int verEliminar = 0;
     /**
      * Objeto para acceder a los atributos de poliza
@@ -6982,8 +6981,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
-                ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
-                validarFechaActaInicio(actiRaiz, cont);
+                if (!cont.getActividadobras().isEmpty()) {
+                    ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
+                    validarFechaActaInicio(actiRaiz, cont);
+                }
                 getSessionBeanCobra().setConsulteContrato(false);
                 getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
                 //} else {
@@ -7027,8 +7028,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         /**
          * Datos Generales
          */
-       // contrato.setDatefechaini(contratodto.getDatefechaini());
-       // contrato.setDatefechafin(contratodto.getDatefechafin());
+        // contrato.setDatefechaini(contratodto.getDatefechaini());
+        // contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
@@ -7680,7 +7681,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void validarFechaActaInicio(ActividadobraDTO actividadRaiz, ContratoDTO contratoDto) {
-        
+
         List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
         lstTodasActividadesDTO.add(actividadRaiz);
         encontrarActividadContratoDTO(actividadRaiz, lstTodasActividadesDTO);
@@ -7705,13 +7706,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         cale.setLenient(false);
                         cale.setTime(contratoDto.getDatefechaactaini());
                         Date fechaCopiaActa = cale.getTime();
-                       
+
                         Calendar cal = new GregorianCalendar();
                         cal.setLenient(false);
                         cal.setTime(fechaCopiaActa);
                         cal.add(Calendar.DAY_OF_MONTH, actividadActaInici.getDuration());
                         Date fechaFin = cal.getTime();
-                        
+
                         if (fechaFin.compareTo(actividadReglamento.getStartDateTime()) > 0) {
                             throw new ConvenioException("La fecha fin del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
                         } else {
