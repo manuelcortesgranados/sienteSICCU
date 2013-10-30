@@ -154,6 +154,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Lista para llenar todas las pólizas de contrato
      */
     private List<Polizacontrato> listapolizas = new ArrayList<Polizacontrato>();
+    /**
+     * Listado de pólizas a eliminar del contrato
+     */
+    private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
+
+    public List<Polizacontrato> getListaPolizasEliminar() {
+        return listaPolizasEliminar;
+    }
+
+    public void setListaPolizasEliminar(List<Polizacontrato> listaPolizasEliminar) {
+        this.listaPolizasEliminar = listaPolizasEliminar;
+    }
+    
     private int verEliminar = 0;
     /**
      * Objeto para acceder a los atributos de poliza
@@ -2519,6 +2532,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return
      */
     public String llenarPolizas() {
+        listaPolizasEliminar = new ArrayList<Polizacontrato>();
         listaPolizacontratos = getSessionBeanCobra().getCobraService().encontrarPolizasxContrato(getContrato().getIntidcontrato());
         Poliza = new SelectItem[listaPolizacontratos.size()];
         int i = 0;
@@ -3495,6 +3509,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //Polizacontrato poleli = listapolizas.get(filaSeleccionada);
         Polizacontrato poleli = (Polizacontrato) tablaPolizasbin.getRowData();
         listapolizas.remove(poleli);
+        listaPolizasEliminar.add(poleli);
         //getSessionBeanCobra().getCobraService().borrarPolizaContrato(poleli);
         return null;
     }
@@ -7534,6 +7549,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        for (Polizacontrato poliza : listaPolizasEliminar) {
+            getSessionBeanCobra().getCobraService().borrarPolizaContrato(poliza);
+        }
         if (!listadocumentos.isEmpty()) {
             for (Documentoobra docContrato : listadocumentos) {
                 try {
