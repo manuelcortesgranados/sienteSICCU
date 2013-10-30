@@ -6655,7 +6655,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * en estado en ejecución.
      * 
      */
-    public void finalizarGuardado() {
+    public String finalizarGuardado() {
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
 
@@ -6673,6 +6673,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     if (getFlujoCaja().getTotalIngresos() == getContrato().getNumvlrcontrato().doubleValue()) {
                         if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {
                             configuracionGuardadoPo(2, true);
+                            getFiltrocontrato().setTipocontrato(2);
+                            getFiltrocontrato().setPalabraClave(getContrato().getStrnumcontrato());
+                            contrato.setTercero(new Tercero());
+                            return "consultarContratoConvenio";
                         } else {
                             FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
                         }
@@ -6684,6 +6688,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
         }
+        return null;
     }
 
     public Tercero obtenerTerceroXcodigo(int codigo) {

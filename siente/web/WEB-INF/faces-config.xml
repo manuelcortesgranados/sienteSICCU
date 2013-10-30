@@ -699,6 +699,7 @@
         <navigation-case>
             <from-outcome>consultarContratoConvenio</from-outcome>
             <to-view-id>/Supervisor/consultarContratoConvenio.xhtml</to-view-id>
+            <redirect/>  
         </navigation-case>
         <navigation-case>
             <from-outcome>evoluvionContrato</from-outcome>
