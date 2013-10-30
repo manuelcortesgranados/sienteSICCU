@@ -255,7 +255,7 @@
                                     <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
 
-                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma XLS"
+                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 97/2003"
                                                  onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
                                                  oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
                                                  styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
@@ -263,7 +263,7 @@
                                 </a4j:commandLink>
                                 <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
                                 
-                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma XLSX" 
+                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 2007/Superior" 
                                                  onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
                                                  oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
                                                  styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
