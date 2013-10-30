@@ -22,6 +22,7 @@ import co.com.interkont.cobra.to.Rubro;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -45,12 +46,12 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
     private int guardarconvenio = 0;
-    private boolean elimino=false;
+    private boolean elimino = false;
     //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
-    private Set dependenciasEliminar= new LinkedHashSet(0);
-  
-     /**
+    private Set dependenciasEliminar = new LinkedHashSet(0);
+
+    /**
      * @return the dependenciasEliminar
      */
     @Override
@@ -63,7 +64,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setDependenciasEliminar(Set dependenciasEliminar) {
         this.dependenciasEliminar = dependenciasEliminar;
     }
-    
+
     @Override
     public List<ActividadobraDTO> getListaacteliminar() {
         return listaacteliminar;
@@ -142,7 +143,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 enlazarDependenciasIniciales(lstActiObligatorias.get(0).getChildren().get(2), actiHija);
             }
         }
-       // System.out.println("lstDependencias:" + contratoDto.getDependenciasGenerales().size());
+        // System.out.println("lstDependencias:" + contratoDto.getDependenciasGenerales().size());
     }
 
     public void enlazarDependenciasIniciales(ActividadobraDTO actividadTo, ActividadobraDTO actividadFrom) {
@@ -172,7 +173,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return null;
     }
 
-@Override
+    @Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin) throws Exception {
         int numeracion = 1;
         Date fechaPlaneacion = new Date();
@@ -224,17 +225,18 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                     if (parhija.getParametricaactividadesobligatorias() != null && parhija.getParametricaactividadesobligatorias().getIdparametrica() == par.getIdparametrica()) {
                         //Coloca 1 dia para Acta de Inicio de convenio
                         if (parhija.getIdparametrica() == 4) {
-                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
+                            ActividadobraDTO actiHija = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
                             actdto.addChild(actiHija);
-                        } else if (parhija.getIdparametrica() == 7) {
-                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, contratoDto.getDatefechafin(), 1, 0);
+                        } else if (parhija.getIdparametrica() == 7) {                            
+                            DateWrapper dw = new DateWrapper(contratoDto.getDatefechafin()).clearTime();                
+                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, dw.addDays(-1).asDate(), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
                             actdto.addChild(actiHija);
                         } else {
-                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0);
+                            ActividadobraDTO actiHija = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
                             actdto.addChild(actiHija);
@@ -316,7 +318,6 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 //    public void setSeCargoPlanOperativoAntes(boolean seCargoPlanOperativoAntes) {
 //        this.seCargoPlanOperativoAntes = seCargoPlanOperativoAntes;
 //    }
-
     @Override
     public void adicionarActividadDtoEliminar(ActividadobraDTO actdto) {
         getListaacteliminar().add(actdto);
@@ -342,6 +343,4 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setElimino(boolean elimino) {
         this.elimino = elimino;
     }
-
-
 }
