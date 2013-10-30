@@ -69,7 +69,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -6639,7 +6638,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-
+            List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+            Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+            encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+            ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
             if (validacionesBasicasConvenioPO()) {
                 configuracionGuardadoPo(1, true);
             }
@@ -6658,7 +6660,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String finalizarGuardado() {
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-
+            List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+            Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+            encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+            ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
             if (validacionesBasicasConvenioPO()) {
                 ValidacionesConvenio.validarDistribucionFinalFuenteRecursos(getContrato().getNumvlrcontrato(), recursosconvenio.getSumafuentes());
                 ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
@@ -6968,7 +6973,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
                 ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
-                validarFechaActaInicio(actiRaiz, cont);
+                List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
+                lstTodasActividadesDTO.add(actiRaiz);
+                encontrarActividadContratoDTO(actiRaiz, lstTodasActividadesDTO);
+                ValidacionesConvenio.validarFechaActaInicio(lstTodasActividadesDTO, cont);
                 getSessionBeanCobra().setConsulteContrato(false);
                 getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
                 //} else {
@@ -7012,8 +7020,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         /**
          * Datos Generales
          */
-       // contrato.setDatefechaini(contratodto.getDatefechaini());
-       // contrato.setDatefechafin(contratodto.getDatefechafin());
+        // contrato.setDatefechaini(contratodto.getDatefechaini());
+        // contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
@@ -7661,49 +7669,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     }
 
-    public void validarFechaActaInicio(ActividadobraDTO actividadRaiz, ContratoDTO contratoDto) {
-        
-        List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
-        lstTodasActividadesDTO.add(actividadRaiz);
-        encontrarActividadContratoDTO(actividadRaiz, lstTodasActividadesDTO);
-        ActividadobraDTO actividadActaInici = null;
-        ActividadobraDTO actividadReglamento = null;
-        for (ActividadobraDTO actividad : lstTodasActividadesDTO) {
-            if (actividad.getName().equals("Acta de Inicio del Convenio")) {
-                actividadActaInici = actividad;
-            } else if (actividad.getName().equals("Reglamento Comité Operativo")) {
-                actividadReglamento = actividad;
-            }
-        }
-        if (actividadActaInici != null) {
-            if (contratoDto.getDatefechaactaini().compareTo(actividadActaInici.getStartDateTime()) != 0) {
-                if (actividadReglamento != null) {
-                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
-                    if (contratoDto.getDatefechaactaini().compareTo(actividadReglamento.getStartDateTime()) > 0) {
-                        throw new ConvenioException("La fecha del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
-
-                    } else {
-                        Calendar cale = new GregorianCalendar();
-                        cale.setLenient(false);
-                        cale.setTime(contratoDto.getDatefechaactaini());
-                        Date fechaCopiaActa = cale.getTime();
-                       
-                        Calendar cal = new GregorianCalendar();
-                        cal.setLenient(false);
-                        cal.setTime(fechaCopiaActa);
-                        cal.add(Calendar.DAY_OF_MONTH, actividadActaInici.getDuration());
-                        Date fechaFin = cal.getTime();
-                        
-                        if (fechaFin.compareTo(actividadReglamento.getStartDateTime()) > 0) {
-                            throw new ConvenioException("La fecha fin del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
-                        } else {
-                            actividadActaInici.setStartDateTime(fechaCopiaActa);
-                            actividadActaInici.setEndDateTime(fechaFin);
-                        }
-                    }
-
-                }
-            }
-        }
+    public void validacionFechaActaInicio() {
     }
 }

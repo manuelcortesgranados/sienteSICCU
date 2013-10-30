@@ -5,12 +5,18 @@
  */
 package co.com.interkont.cobra.planoperativo.exceptions;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.to.Actividadobra;
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Obra;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -148,6 +154,93 @@ public class ValidacionesConvenio {
             if (fue.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
                 throw new ConvenioException("La entidad " + fue.getTercero().getStrnombrecompleto() + ", en la vigencia " + fue.getVigencia()
                         + " posee un valor disponible de ($" + fue.getValorDisponible() + ") para ser distribuido en proyectos. ");
+            }
+        }
+    }
+    
+    
+    public static void validarFechaActaInicio(List<ActividadobraDTO> lstTodasActividadesDTO, ContratoDTO contratoDto) {
+        
+        
+        ActividadobraDTO actividadActaInici = null;
+        ActividadobraDTO actividadReglamento = null;
+        for (ActividadobraDTO actividad : lstTodasActividadesDTO) {
+            if (actividad.getName().equals("Acta de Inicio del Convenio")) {
+                actividadActaInici = actividad;
+            } else if (actividad.getName().equals("Reglamento Comité Operativo")) {
+                actividadReglamento = actividad;
+            }
+        }
+        if (actividadActaInici != null) {
+            if (contratoDto.getDatefechaactaini().compareTo(actividadActaInici.getStartDateTime()) != 0) {
+                if (actividadReglamento != null) {
+                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                    if (contratoDto.getDatefechaactaini().compareTo(actividadReglamento.getStartDateTime()) > 0) {
+                        throw new ConvenioException("La fecha del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
+
+                    } else {
+                        Calendar cale = new GregorianCalendar();
+                        cale.setLenient(false);
+                        cale.setTime(contratoDto.getDatefechaactaini());
+                        Date fechaCopiaActa = cale.getTime();
+                       
+                        Calendar cal = new GregorianCalendar();
+                        cal.setLenient(false);
+                        cal.setTime(fechaCopiaActa);
+                        cal.add(Calendar.DAY_OF_MONTH, actividadActaInici.getDuration());
+                        Date fechaFin = cal.getTime();
+                        
+                        if (fechaFin.compareTo(actividadReglamento.getStartDateTime()) > 0) {
+                            throw new ConvenioException("La fecha fin del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getStartDateTime()));
+                        } else {
+                            actividadActaInici.setStartDateTime(fechaCopiaActa);
+                            actividadActaInici.setEndDateTime(fechaFin);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    
+    public static void validarFechaActaInicioTO(List<Actividadobra> lstTodasActividades, Contrato contrato) {
+        
+        Actividadobra actividadActaInici = null;
+        Actividadobra actividadReglamento = null;
+        for (Actividadobra actividad : lstTodasActividades) {
+            if (actividad.getStrdescactividad().equals("Acta de Inicio del Convenio")) {
+                actividadActaInici = actividad;
+            } else if (actividad.getStrdescactividad().equals("Reglamento Comité Operativo")) {
+                actividadReglamento = actividad;
+            }
+        }
+        if (actividadActaInici != null) {
+            if (contrato.getFechaactaini().compareTo(actividadActaInici.getFechaInicio()) != 0) {
+                if (actividadReglamento != null) {
+                      java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                    if (contrato.getFechaactaini().compareTo(actividadReglamento.getFechaInicio()) > 0) {
+                        throw new ConvenioException("La fecha del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getFechaInicio()));
+
+                    } else {
+                        Calendar cale = new GregorianCalendar();
+                        cale.setLenient(false);
+                        cale.setTime(contrato.getFechaactaini());
+                        Date fechaCopiaActa = cale.getTime();
+                        Calendar cal = new GregorianCalendar();
+                        cal.setLenient(false);
+                        cal.setTime(fechaCopiaActa);
+                        cal.add(Calendar.DAY_OF_MONTH, actividadActaInici.getDuracion());
+                        Date fechaFin = cal.getTime();
+                        
+                        if (fechaFin.compareTo(actividadReglamento.getFechaInicio()) > 0) {
+                            throw new ConvenioException("La fecha fin del acta de inicio no puede ser superior a la fecha del reglamento del comite operativo:" + sdf.format(actividadReglamento.getFechaInicio()));
+                        } else {
+                            actividadActaInici.setFechaInicio(fechaCopiaActa);
+                            actividadActaInici.setFechaFin(fechaFin);
+                        }
+                    }
+
+                }
             }
         }
     }
