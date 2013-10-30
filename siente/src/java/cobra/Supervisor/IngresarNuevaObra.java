@@ -92,6 +92,7 @@ import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 /**
  * <p>
@@ -137,6 +138,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private boolean band = false;
     private boolean objeto = false;
     private boolean desdeconvenio = false;
+    private boolean formatoxlsx = false;
     // </editor-fold>
     /**
      * Variables String.
@@ -444,6 +446,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public void setDesdeconvenio(boolean desdeconvenio) {
         this.desdeconvenio = desdeconvenio;
+    }
+
+    public boolean isFormatoxlsx() {
+        return formatoxlsx;
+    }
+
+    public void setFormatoxlsx(boolean formatoxlsx) {
+        this.formatoxlsx = formatoxlsx;
     }
 
     public FiltroAvanzadoContrato getFiltrocontrato() {
@@ -2171,7 +2181,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             String ArchivoPath = "";
             ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-            ArchivoPath = theApplicationsServletContext.getRealPath("/resources/Plantilla/" + bundle.getString("plantillaobra"));
+            if (!isFormatoxlsx()) {
+                ArchivoPath = theApplicationsServletContext.getRealPath("/resources/Plantilla/" + bundle.getString("plantillaobra"));
+            } else {
+                ArchivoPath = theApplicationsServletContext.getRealPath("/resources/Plantilla/" + bundle.getString("plantillaobraxlsx"));
+            }
+
+
             File archivo = new File(ArchivoPath);
 
             if (archivo.exists()) {
@@ -2222,16 +2238,32 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         dataValidationxxact.setErrorStyle(HSSFDataValidation.ErrorStyle.STOP);
                         sheet.addValidationData(dataValidationxxact);
                     } else {
-                        HSSFCellStyle style = (HSSFCellStyle) wb.createCellStyle();
-                        style.setFillBackgroundColor(HSSFColor.WHITE.index);
-                        style.setFillForegroundColor(HSSFColor.WHITE.index);
-                        style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-                        for (int i = 8; i < 1000; i++) {
-                            Row row1 = sheet.getRow(i);
-                            Cell cell1 = row1.getCell(1);
-                            cell1.setCellStyle(style);
-                            cell1.setCellValue("");
+                        if (isFormatoxlsx()) {
+                            XSSFCellStyle style = (XSSFCellStyle) wb.createCellStyle();
+                            style.setFillBackgroundColor(HSSFColor.WHITE.index);
+                            style.setFillForegroundColor(HSSFColor.WHITE.index);
+                            style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+                            for (int i = 8; i < 1000; i++) {
+                                Row row1 = sheet.getRow(i);
+                                Cell cell1 = row1.getCell(1);
+                                cell1.setCellStyle(style);
+                                cell1.setCellValue("");
+                            }
+
+                        } else {
+                            HSSFCellStyle style = (HSSFCellStyle) wb.createCellStyle();
+                            style.setFillBackgroundColor(HSSFColor.WHITE.index);
+                            style.setFillForegroundColor(HSSFColor.WHITE.index);
+                            style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+                            for (int i = 8; i < 1000; i++) {
+                                Row row1 = sheet.getRow(i);
+                                Cell cell1 = row1.getCell(1);
+                                cell1.setCellStyle(style);
+                                cell1.setCellValue("");
+                            }
                         }
+
+
                     }
 
                     //-----LISTA UNIDAD DE MEDIDA CRONOGRAMA CON LAS LIB 3.8 14nov2011 ok
@@ -2380,12 +2412,22 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         carpeta.mkdirs();
 
                     }
+                    FileOutputStream fileOut;
                     // Write the output to a file
-                    FileOutputStream fileOut = new FileOutputStream(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
+                    if (!isFormatoxlsx()) {
+                        fileOut = new FileOutputStream(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
+                    } else {
+                        fileOut = new FileOutputStream(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobraxlsx"));
+                    }
+
                     //FileOutputStream fileOut = new FileOutputStream("workbook.xls");
                     wb.write(fileOut);
                     fileOut.close();
-                    this.getSessionBeanCobra().setUrlAbri(URL + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
+                    if (!isFormatoxlsx()){
+                        this.getSessionBeanCobra().setUrlAbri(URL + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
+                    }else{
+                        this.getSessionBeanCobra().setUrlAbri(URL + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobraxlsx"));
+                    }                    
                     //getHomeInterventor().cargarObrasUsuario();
                     FacesUtils.addInfoMessage(getSessionBeanCobra().getBundle().getString("laobrasehaguardadoysehaclasificado"));
                     //"La Obra se ha guardado y se ha clasificado como Obra en Proceso";
@@ -4831,8 +4873,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String primeroContratos() {
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), 0, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), 0, 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -4858,8 +4900,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String siguienteContratos() {
         int num = (pagina) * 5;
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4886,8 +4928,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public String anterioresContratos() {
         pagina = pagina - 1;
         int num = (pagina - 1) * 5;
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), num, num + 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4912,8 +4954,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String ultimoContratos() {
         int num = totalfilas % 5;
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(obranueva.getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(obranueva.getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -5011,8 +5053,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 }
                 if (validarFechasProyectoInicio() && validarFechasProyectoFin()) {
                     validacion.setDatosbasicos(true);
-                    
-                }else{
+
+                } else {
                     validacion.setDatosbasicos(false);
                 }
             } else {
@@ -5483,4 +5525,4 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             verConfirmar = false;
         }
     }
-        }
+}

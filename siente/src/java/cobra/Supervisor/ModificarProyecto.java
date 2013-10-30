@@ -49,6 +49,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.richfaces.component.UIDataTable;
 
 /**
@@ -86,6 +87,11 @@ public class ModificarProyecto  implements Serializable{
      * Carga la información de una obra a partir de otro objeto
      */
     private ConstructorObra constructorObra;
+    /*
+     * Variable para descargar el cronograma segun lo que haya seleccionada el usuario xls o xlsx
+     */
+    private boolean formatomodifxlsx = false;
+    
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Variables de visualización">
     /**
@@ -244,6 +250,14 @@ public class ModificarProyecto  implements Serializable{
 
     public void setConstructorObra(ConstructorObra constructorObra) {
         this.constructorObra = constructorObra;
+    }
+
+    public boolean isFormatomodifxlsx() {
+        return formatomodifxlsx;
+    }
+
+    public void setFormatomodifxlsx(boolean formatomodifxlsx) {
+        this.formatomodifxlsx = formatomodifxlsx;
     }
 
     public boolean isVerPaso5() {
@@ -969,7 +983,11 @@ public class ModificarProyecto  implements Serializable{
     public InputStream obtenerPlantilla() {
         File archivo = null;
         try {
+            if (!isFormatomodifxlsx()){
             archivo = ArchivoWebUtil.obtenerArchivo(Propiedad.getValor("ubicacionplantillamodificacion"));
+            }else{
+            archivo = ArchivoWebUtil.obtenerArchivo(Propiedad.getValor("ubicacionplantillamodificacionxlsx"));
+            }
         } catch (ArchivoNoExistenteException ex) {
             Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -994,7 +1012,11 @@ public class ModificarProyecto  implements Serializable{
     public Workbook cargarInfoProyectoEnPlantilla(InputStream archivoInputStream) {
         Workbook workbook = null;
         try {
+            if (!isFormatomodifxlsx()){
             workbook = new HSSFWorkbook(archivoInputStream);
+            }else{
+            workbook = new XSSFWorkbook(archivoInputStream);
+            }
             constructorCronogramaExcel = new ConstructorCronogramaExcelConObraModificada(obra, historicoobra);
             constructorCronogramaExcel.construirCronograma();
             cronogramaExcel = constructorCronogramaExcel.getCronogramaExcel();
@@ -1197,7 +1219,12 @@ public class ModificarProyecto  implements Serializable{
         cargarObra();
         String ubicacionRelativaCarpetaBase = Propiedad.getValor("ubicacioncarpetabasemodificacion");
         String nombreSubCarpeta = String.valueOf(obra.getIntcodigoobra());
-        String nombreArchivo = Propiedad.getValor("plantillamodificacion");
+        String nombreArchivo;
+        if (!isFormatomodifxlsx()){
+             nombreArchivo = Propiedad.getValor("plantillamodificacion");
+        }else{
+            nombreArchivo = Propiedad.getValor("plantillamodificacionxlsx");
+        }
 
         InputStream plantilla = obtenerPlantilla();
         Workbook workbook = cargarInfoProyectoEnPlantilla(plantilla);

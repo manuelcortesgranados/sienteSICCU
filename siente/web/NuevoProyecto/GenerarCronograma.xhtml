@@ -36,7 +36,7 @@
                     <interkont:spacer width="20"/>
                     <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}" header="#{var.pgenerarcronograma}">
                         <center>
-                            <h:panelGrid  columns="1" >
+                            <h:panelGrid cellspacing="20" cellpadding="80" columns="3" >
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-diligenciardatos "   value="#{var.debediligenciartodoslosdatos}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                     <h:graphicImage  styleClass="ikont-hgi-msgerror"   height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
@@ -45,14 +45,24 @@
                                                  action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" 
                                                  execute="@this"
                                                  oncomplete="#{rich:component('mp_cronograma')}.show();"
-                                                 styleClass="excel anchorlink"                                                                                    
-
-                                                 >
+                                                 styleClass="excel anchorlink"
+                                                 style="position: relative; right: 75px;">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.formatoxlsx}" value="false"/>
                                 </a4j:commandLink>
-
-
+                                <a4j:commandLink rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
+                                                 action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" 
+                                                 execute="@this"
+                                                 oncomplete="#{rich:component('mp_cronograma')}.show();"
+                                                 styleClass="excel anchorlink"
+                                                 style="position: relative; left: 50px;">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.formatoxlsx}" value="true"/>
+                                </a4j:commandLink>
                             </h:panelGrid>
-                            <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                            <h:panelGrid cellspacing="40" columns="2" style="position: relative; top: -63px; text-align: center;">
+                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronogramadatosbasicos}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronogramadatosbasicosxlsx}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                            </h:panelGrid>
+
                         </center>
                     </rich:collapsiblePanel>
                     <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
@@ -182,7 +192,7 @@
                                              action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                             </h:commandButton>
                         </center>
-                        
+
                     </h:panelGroup>
 
                 </rich:panel>

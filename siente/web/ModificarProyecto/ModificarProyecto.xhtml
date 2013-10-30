@@ -255,11 +255,20 @@
                                     <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
 
-                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" 
+                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma XLS"
                                                  onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
                                                  oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
-                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" />
+                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
+                                    <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="false"/>
+                                </a4j:commandLink>
                                 <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
+                                
+                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma XLSX" 
+                                                 onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
+                                                 oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
+                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
+                                <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="true"/>
+                                </a4j:commandLink>                               
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
                                     <h:outputText  styleClass="ikont-hot-textonotapaso3modificacion TextoTipificacionModificacion" value="#{var.textonotapaso3modificacion}"/>
