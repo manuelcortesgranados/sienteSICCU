@@ -328,11 +328,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 service.setLog("entre proyecto", null);
-                msgerrores="";
                 if (!editar) {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
                     boolean varErrorres = false;
+                   String fechasmostrar;
 
                     if (nombrePry.getValue() == null) {
                         varErrorres = true;
@@ -349,12 +349,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
                     if (proyectoDTO.getFechaInicio() != null) {
                         service.setLog("entre en fecha inicio no null:" + proyectoDTO.getFechaInicio() + "Fecha contrato:" + contratoDto.getDatefechaini(), null);
+                        if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
+                            service.setLog("entre en fecha inicio no menor 1", null);
+                            varErrorres = true;
+                            fechasmostrar = DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechaini());
+                            msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " +  fechasmostrar+ "<br/>";
+                        }
+                        
                         Date actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto).getEndDateTime();
                         if(proyectoDTO.getFechaInicio().compareTo(actividadDependenciaFrom)<0){
                             service.setLog("entre en fecha inicio menor dep", null);
                             varErrorres = true;
-                            String dfD = DateTimeFormat.getShortDateFormat().format(actividadDependenciaFrom);
-                            msgerrores +="La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente planeación del convenio:" + dfD;
+                            fechasmostrar = DateTimeFormat.getShortDateFormat().format(actividadDependenciaFrom);
+                            msgerrores +="La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente planeación del convenio:" + fechasmostrar + "<br/>";
                          }
                     } else {
                         varErrorres = true;
@@ -365,15 +372,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         service.setLog("entre en fecha fin no null", null);
                         if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                             varErrorres = true;
-                            String df1 = DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechafin());
-                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio " + df1+ "<br/>";
+                            fechasmostrar= DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechafin());
+                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio " + fechasmostrar+ "<br/>";
                         }
                     }
                     if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
                         if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
                             varErrorres = true;
-                            String df3 = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
-                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + df3 + "<br/>";
+                            fechasmostrar= DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
+                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + fechasmostrar+ "<br/>";
                         }
                     }
                     if (txtObjeG.getValue() == null) {
@@ -398,6 +405,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
                         d.show();
+                        msgerrores = "";
+                        
                     }
 
 
@@ -413,6 +422,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
                 }
             }
+     
         });
 
 
