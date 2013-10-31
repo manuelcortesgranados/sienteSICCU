@@ -81,6 +81,7 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.HeaderGroupConfig;
 import com.sencha.gxt.widget.core.client.grid.editing.GridInlineEditing;
+import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.util.ArrayList;
@@ -1158,6 +1159,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    service.setLog("Valor disponible" + convenioDTO.getValorDisponible(), null);
 
                     RootPanel.get().add(asWidget());
+                    if(convenioDTO.isVermensajeguardado())
+                    {  
+                    Info.display("", convenioDTO.getMensajeguardado());
+                    }
+                    convenioDTO.setVermensajeguardado(false);
+                    convenioDTO.setMensajeguardado("");
                 } else {
                     service.setLog(msg, null);
                     AlertMessageBox d = new AlertMessageBox("Alerta", msg);
