@@ -1159,9 +1159,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    service.setLog("Valor disponible" + convenioDTO.getValorDisponible(), null);
 
                     RootPanel.get().add(asWidget());
-                    if(convenioDTO.isVermensajeguardado())
-                    {  
-                    Info.display("", convenioDTO.getMensajeguardado());
+                    if (convenioDTO.isVermensajeguardado()) {
+                        Info.display("", convenioDTO.getMensajeguardado());
                     }
                     convenioDTO.setVermensajeguardado(false);
                     convenioDTO.setMensajeguardado("");
@@ -1223,11 +1222,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 }
                 service.setLog("aca en nueva :", null);
-                Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
-                service.setLog("fecha menor:" + menorFechaEjecucion, null);
-                if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
-                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                ActividadobraDTO actiEjeConvenio = taskStore.getParent(actiPadre).getChildren().get(1);
+                if (!actiEjeConvenio.getChildren().isEmpty()) {
+                    Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(actiEjeConvenio.getChildren());
+                    service.setLog("fecha menor:" + menorFechaEjecucion, null);
+                    if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                        String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                        msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    }
                 }
                 service.setLog("msg:" + msg, null);
             } else {
@@ -1236,7 +1238,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("fecha menor:" + menorFechaEjecucion, null);
                 if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
                     String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    msg = "la fecha de la actividad no puede  ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
                 }
 
             }
@@ -1256,7 +1258,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("fecha menor:" + menorFechaEjecucion, null);
                 if (actiModificada.getEndDateTime().compareTo(menorFechaEjecucion) >= 0) {
                     String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                    msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    msg = "la fecha de la actividad no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
                 }
             }
 
@@ -1476,8 +1478,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("soy una carpeta" + actividadP.getName(), null);
                 if (taskStore.getParent(actividadP) != null) {
                     if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
+                        mensaje = "continuar";
                         validandoHijosDelConvenio(ac, puedeEditar);
-                        mensaje = validacionCorrecta(actiPadre, ac, 1);
+                        if (actiPadre.getName().equals("Planeación del Convenio")) {
+                            mensaje = validacionCorrecta(actiPadre, ac, 1);
+                        } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
+                            mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore);
+                        }
                         if (mensaje.equals("continuar") && puedeEditar) {
                             modificarEnEditarFechaInicio(ac);
                         } else {
@@ -1490,7 +1497,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     }
                     if (taskStore.getParent(taskStore.getParent(ac)) != null) {
                         if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
+                            ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
                                 modificarEnEditarFechaInicio(ac);
                             } else {
                                 hayError = true;
@@ -1512,7 +1520,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         } else if (ac.getTipoActividad() == 6) {
             if (taskStore.getParent(taskStore.getParent(ac)) != null) {
                 if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
+                    ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
                         modificarEnEditarFechaInicio(ac);
                     } else {
                         hayError = true;
@@ -1579,8 +1588,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("soy una carpeta" + actividadP.getName(), null);
                 if (taskStore.getParent(actividadP) != null) {
                     if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
+                        mensaje = "continuar";
                         validandoHijosDelConvenio(ac, puedeEditar);
-                        mensaje = validacionCorrecta(actiPadre, ac, 2);
+                        if (actiPadre.getName().equals("Planeación del Convenio")) {
+                            mensaje = validacionCorrecta(actiPadre, ac, 2);
+                        } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
+                            mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore);
+                        }
                         if (mensaje.equals("continuar") && puedeEditar) {
                             modificarEnEditarFechaFin(ac);
                         } else {
@@ -1593,7 +1607,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     if (taskStore.getParent(taskStore.getParent(ac)) != null) {
                         if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
                             service.setLog("estoy en un contrato", null);
-                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
+                            ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
                                 modificarEnEditarFechaFin(ac);
                             } else {
                                 hayError = true;
@@ -1616,7 +1631,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         } else if (ac.getTipoActividad() == 6) {
             if (taskStore.getParent(taskStore.getParent(ac)) != null) {
                 if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac)) {
+                    ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
                         modificarEnEditarFechaFin(ac);
                     } else {
                         hayError = true;
