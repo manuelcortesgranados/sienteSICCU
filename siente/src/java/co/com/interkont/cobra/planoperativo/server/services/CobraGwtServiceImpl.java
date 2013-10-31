@@ -22,8 +22,11 @@ import co.com.interkont.cobra.to.Rubro;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -228,7 +231,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
                             actdto.addChild(actiHija);
-                        } else if (parhija.getIdparametrica() == 7) {
+                        } else if (parhija.getIdparametrica() == 7) {                              
                             ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, contratoDto.getDatefechafin(), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
@@ -280,7 +283,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public Boolean setGuardarconvenio(int guardarconvenio) {
-        this.guardarconvenio = guardarconvenio;
+        this.guardarconvenio = guardarconvenio;        
         return true;
     }
 
