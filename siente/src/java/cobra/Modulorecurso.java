@@ -285,7 +285,9 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("btn_reportes_administrativos")) {
                             renderrecurso.setBtn_reportes_administrativos(false);
                         }
-                        
+                        if (temprecusro.getRecNmbre().equals("btn_editarObjetoContrato")) {
+                            renderrecurso.setBtn_editarObjetoContrato(false);
+                        }
                         break;
                     
                     

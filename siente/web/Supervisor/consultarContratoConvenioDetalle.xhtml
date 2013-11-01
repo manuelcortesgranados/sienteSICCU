@@ -152,12 +152,12 @@
                         <h:panelGrid style="width:100%;border-spacing: 7px;" columns="1" >
                             <h:form>
                                 <h:panelGrid cellspacing="5" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                    <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}">
+                                    <h:panelGroup>
                                         <h:outputLabel  styleClass="ikont- "   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                     </h:panelGroup>
                                     <interkont:spacer width="20" />
 
-                                    <h:panelGroup id="form_editarNumeroContrato" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}">
+                                    <h:panelGroup id="form_editarNumeroContrato" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}">
                                         <h:panelGroup id="txthabilitarNumero" rendered="#{Supervisor$Contrato.habilitarModificarNumero}">
                                             <h:outputText  styleClass="ikont- "   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                             <a4j:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificarNumero"
@@ -194,7 +194,7 @@
 
                                     <interkont:spacer width="20" />                                        
 
-                                    <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}">
+                                    <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}">
                                         <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
                                             <h:outputText   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                             <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
@@ -223,7 +223,7 @@
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel    styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel    styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}" />
                                     <h:outputText  styleClass="ikont- "   value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
