@@ -15,6 +15,7 @@ import co.com.interkont.cobra.to.JsfUsuarioGrupo;
 import co.com.interkont.cobra.to.JsfUsuarioGrupoId;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Modulo;
+import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Opinionciudadano;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoidentificacion;
@@ -35,6 +36,7 @@ import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
 
 import cobra.Supervisor.ILifeCycleAware;
+import cobra.Supervisor.TerceroEntidadLista;
 import cobra.Utilidades;
 import cobra.perfil.Usuario;
 import cobra.util.ArchivoWebUtil;
@@ -64,6 +66,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -71,6 +74,14 @@ import javax.servlet.ServletContext;
 import org.apache.commons.collections.set.AbstractSerializableSetDecorator;
 import org.richfaces.component.UIDataTable;
 import org.richfaces.component.UIRepeat;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Clase que permite toda la interacción con el perfil
@@ -136,6 +147,11 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     private boolean cambioFotoCiudadano;
     private String CodDepartamento;
     private JsfUsuarioGrupo jsfusuariogrupo = new JsfUsuarioGrupo();
+    private Tercero tercero = new Tercero();
+    @ManagedProperty(value = "#{capitalsParser.capitalsList}")
+    private List<Obra> obrasseleccionadas;
+    private List<Obra> listaobrasasociar = new ArrayList<Obra>();
+    private SelectItem[] uno;
     /*
      * Variable Utilizada para almacenar  el grupo del usuario
      */
@@ -232,7 +248,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
      * Variable Utilizada para habilitar el envio del correo
      */
     private boolean habilitarEnvioCorreo=true;
-    
+
 
     public String getOpinion() {
         return opinion;
@@ -586,7 +602,39 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         this.habilitarEnvioCorreo = habilitarEnvioCorreo;
     }
     
+    public Tercero getTercero() {
+        return tercero;
+    }
+
+    public void setTercero(Tercero tercero) {
+        this.tercero = tercero;
+    }
+
+
+    public List<Obra> getListaobrasasociar() {
+        return listaobrasasociar;
+    }
+
+    public void setListaobrasasociar(List<Obra> listaobrasasociar) {
+        this.listaobrasasociar = listaobrasasociar;
+    }
+
+    public List<Obra> getObrasseleccionadas() {
+        return obrasseleccionadas;
+    }
+
+    public void setObrasseleccionadas(List<Obra> obrasseleccionadas) {
+        this.obrasseleccionadas = obrasseleccionadas;
+    }
     
+
+    public SelectItem[] getUno() {
+        return uno;
+    }
+
+    public void setUno(SelectItem[] uno) {
+        this.uno = uno;
+    }
 
     /**
      * Constructor del perfilCiudadano el cual invoca los métodos necesarios
@@ -619,6 +667,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
      * @return
      */
     public String inicializarCiudadano() {
+ //       cargarObras();
         iniciarCombos();
         limpiarCiudadano();
         // 
@@ -785,7 +834,10 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
             if (validarusuario()) {
                 //inicializar atributos del objeto tercero
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombrecompleto(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombre());
-                getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                }
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrlocalidadnacimiento(new Localidad("169"));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipoidentificacion(new Tipoidentificacion(6, "NIT"));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipotercero(new Tipotercero(1));
@@ -800,9 +852,19 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaCrcion(new Date());
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaVncmnto(new Date(2012, 11, 31));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(Boolean.FALSE);
-                getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(1));
+                //getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(intidtipousuario));
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(2));
+                }
+                if (intidgrupo == 19) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(4));
+                }
+
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(true);
-                getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
+                if (intidgrupo == 16 || intidgrupo == 19) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
+                }
+                //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
                 getSessionBeanCobra().getCiudadanoservice().guardarCiudadano(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
                 String rutaFoto = null;
@@ -817,6 +879,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
 //                } catch (ArchivoExistenteException ex) {
 //                    //  Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
 //                }
+
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrfoto(rutaFoto);
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
                 Comentarioobra comen = new Comentarioobra();
@@ -827,16 +890,29 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 for (JsfUsuarioGrupo jsfusuarioId : listausuGrupos) {
                     jsfusuarioId.getId().setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId());
                 }
-                getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19) {
+                    getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
+                }
+                //getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
                 getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajecorreo"));
                 getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(true);
                 try {
-                    if(habilitarEnvioCorreo){
-                         getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajecorreo"));
-                    enviarCorreoConfirmar();
-                    }
-                    else{
-                     getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajedecreacion"));
+                    if (habilitarEnvioCorreo) {
+                        if (intidgrupo == 1 || intidgrupo == 17) {
+                            getSessionBeanCobra().getCiudadanoservice().setMensaje("El Usuario con Perfil Administrador Ha sido Creado, ha este no se le asignan entidades ya que esta configuardo por localidad. El correo de confirmación de creacion ha sido Enviado.");
+                        }
+                        if (intidgrupo == 16) {
+                            getSessionBeanCobra().getCiudadanoservice().setMensaje("El Usuario con Perfil Consulta Ha sido Creado, El correo de confirmación de creacion ha sido Enviado.");
+                        } else {
+                            getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajecorreo"));
+                            enviarCorreoConfirmar();
+                        }
+                    } else {
+                        if (intidgrupo == 1 || intidgrupo == 17) {
+                            getSessionBeanCobra().getCiudadanoservice().setMensaje("El Usuario con Perfil Administrador Ha sido Creado, ha este no se le asignan entidades ya que esta configuardo por localidad.");
+                        } else {
+                            getSessionBeanCobra().getCiudadanoservice().setMensaje(bundle.getString("mensajedecreacionadm"));
+                        }
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
@@ -1041,7 +1117,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         getUsuario().limpiarSeleccionEntidad();
         listausuGrupos = new ArrayList<JsfUsuarioGrupo>();
         jsfusuariogrupo = new JsfUsuarioGrupo();
-        
+
 
     }
 
@@ -1766,5 +1842,9 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         limpiarCiudadano();
         getUsuario().limpiarSeleccionEntidad();
         return "gestion";
+    }
+    public void cargarObras() {
+
+        listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTercero(getTercero());
     }
 }

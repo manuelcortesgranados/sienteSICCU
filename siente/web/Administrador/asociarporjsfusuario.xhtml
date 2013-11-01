@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:panelGroup layout="block" id="pgasociarObrasUsuario"  >
+        <interkont:spacer height="20" />
+
+        <h:panelGrid columns="2" >
+            <h:outputLabel  styleClass="ikont-outtext-subtitulo"    id="lblEntidadusuario"  value="#{var.entidad}: "/>
+            <h:selectOneMenu  id="comboEntidadNuevoUsuario" style="position: relative;left: 163px;" value="#{Ciudadano$PerfilCiudadano.tercero.intcodigo}">
+                <f:selectItems  value="#{Perfil$Usuario.entidadcreacionusuario}" />
+                <a4j:ajax   event="valueChange"  execute="@this,combodepartamentoproyecto,pikc-usuario"
+                           listener="#{Ciudadano$PerfilCiudadano.cargarObras}"  render="comboEntidadNuevoUsuario,pikc-usuario"/>
+            </h:selectOneMenu>
+        </h:panelGrid>
+         <br/>
+         <br/>
+        <rich:panel id="pikc-usuario" style="width:1100px;"  >
+            <f:facet name="header">
+                <h:outputText value="Seleccione los proyectos a asociar." style="font-size: 14px;color: white;"></h:outputText>
+            </f:facet>
+            <rich:pickList id="rpl-proyectos" value="#{Ciudadano$PerfilCiudadano.obrasseleccionadas}" var="obrasseleccionadas" listHeight="300px" listWidth="470px" >
+                <f:selectItems value="#{Ciudadano$PerfilCiudadano.listaobrasasociar}" />
+                <f:converter converterId="CapitalsConverter" />
+                <rich:column style="text-align: right!important;">
+                    <f:facet name="header" class="pikc-usuario-class">Codigo Obra</f:facet>
+                    | #{obrasseleccionadas.intcodigoobra} 
+                   
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header" class="pikc-usuario-class">Nombre Proyecto</f:facet>
+                    <h:inputTextarea value="#{obrasseleccionadas.strnombrecrot}" rows="3" cols="60"/>
+                   
+                </rich:column>        
+            </rich:pickList>
+        </rich:panel>
+    </h:panelGroup>
+</ui:composition>

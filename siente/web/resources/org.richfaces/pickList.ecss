@@ -25,6 +25,7 @@
 
 .rf-pick-hdr-c {
     padding : 0 0.5em;
+    background: green;
 }
 
 .rf-pick-src-cptn, .rf-pick-tgt-cptn {
@@ -37,7 +38,7 @@
 .rf-pick-btn {
     width : 100%;
     white-space:nowrap;
-    background-image: "url(#{resource['org.richfaces.images:autocompleteButtonGradient.png']})";
+
     background-repeat: repeat-x;
     background-position: top left;
     background-color: '#{richSkin.headerBackgroundColor}';
@@ -61,6 +62,7 @@
     border-color: '#{richSkin.panelBorderColor}';
     padding: 0px;
     background-color: '#{richSkin.tableBackgroundColor}';
+    width: 470px!important;
 }
 
 .rf-pick-lst-scrl {

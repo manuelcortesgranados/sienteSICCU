@@ -192,6 +192,13 @@ public class Usuario implements Serializable {
      */
     private SelectItem[] tipousuariooption;
 
+    /* Variable para  listar los departamentos
+     */
+    private SelectItem[] entidadcreacionusuario;
+    /* Variable para  listar los departamentos
+     */
+    private Tercero tercero;
+    
     /**
      * /**
      * Inicio de los Get y Set de las variables anteriores
@@ -514,8 +521,23 @@ public class Usuario implements Serializable {
 
     public void setTipousuariooption(SelectItem[] tipousuariooption) {
         this.tipousuariooption = tipousuariooption;
+    }   
+
+    public Tercero getTercero() {
+        return tercero;
     }
 
+    public void setTercero(Tercero tercero) {
+        this.tercero = tercero;
+    }
+
+    public SelectItem[] getEntidadcreacionusuario() {
+        return entidadcreacionusuario;
+    }
+
+    public void setEntidadcreacionusuario(SelectItem[] entidadcreacionusuario) {
+        this.entidadcreacionusuario = entidadcreacionusuario;
+    }
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -530,6 +552,7 @@ public class Usuario implements Serializable {
         llenarlocalidadusuario();
         cargarEntidades();
         llenarGrupos();
+        llenarentidadcreacionusuario();
         llenarTipoUsuario();
     }
 
@@ -1194,7 +1217,7 @@ public class Usuario implements Serializable {
                 cargarMaplistaEntidad();
                 System.out.println("usuariomod.isRelacioncontrato()" + usuariomod.isRelacioncontrato());
                 boolpanellistaproyecto = true;
-                
+
 
                 if (usuariomod.isRelacioncontrato()) {
                     listarelacioncontratousuario = getSessionBeanCobra().getCobraService().buscarRelacionContratoUsuario(usuariomod);
@@ -1256,6 +1279,16 @@ public class Usuario implements Serializable {
             listaobrasentidad = maplistaobras.get(entidad.getStrnombrecompleto());
         } else {
             System.out.println("Entro al else");
+        }
+    }
+    public void llenarentidadcreacionusuario() {
+        List<Tercero> listaEntidades = getSessionBeanCobra().getUsuarioService().encontrarTotalEntidades();
+        entidadcreacionusuario = new SelectItem[listaEntidades.size()];
+        int i = 0;
+
+        for (Tercero terce : listaEntidades) {
+            SelectItem dep = new SelectItem(terce.getIntcodigo(), terce.getStrnombrecompleto());
+            entidadcreacionusuario[i++] = dep;
         }
     }
 }

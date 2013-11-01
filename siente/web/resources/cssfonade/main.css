@@ -4731,6 +4731,9 @@ a:hover {
     font-size: 0.8em;
     cursor: pointer;
 }
+.pikc-usuario-class{
+    background: green!important;
+}
 
 
 
