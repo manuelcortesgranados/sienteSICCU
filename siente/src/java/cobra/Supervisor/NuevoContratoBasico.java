@@ -2415,7 +2415,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void prerender() {
         if (getSessionBeanCobra().isCargarcontrato()) {
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-
+            getSessionBeanCobra().setCargarcontrato(false);
+            getContrato().setVermensajeguardado(true);
+            getContrato().setMensajeguardado("");
             switch (getSessionBeanCobra().getCobraGwtService().getNavegacion()) {
                 case 1:
                 case 3:
@@ -2425,20 +2427,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     break;
                 //Plan operativo y guardados
                 case 2:
-
                     if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 1) {
                         guardarBorradorConvenioPO();
                     } else if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 2) {
                         guardarFinalizarConvenioPO();
                     }
-
-//                    planOperativo();
-//                    try {
-//                        FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
-//
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
                     break;
 
                 case 6:
@@ -2455,7 +2448,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     break;
 
             }
-            getSessionBeanCobra().setCargarcontrato(false);
+
         }
 
     }
@@ -2472,10 +2465,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void guardarFinalizarConvenioPO() {
-        String regla = this.finalizarGuardado();
-        System.out.println("regla = " + regla);
-        if (regla.compareTo("null") == 0) {
+
+        if (finalizarGuardado() == null) {
             try {
+                planOperativo();
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
 
             } catch (IOException ex) {
@@ -3254,29 +3247,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 
-//            } else {
-//                if (booltipocontratoconvenio == true) {
-//                    FacesUtils.addErrorMessage("La Fecha Final del Contrato Actual es Superior a la Fecha de su Contrato Padre");
-//                } else {
-//                    FacesUtils.addErrorMessage("La Fecha Final del Convenio Actual es Superior a la Fecha de su Convenio Padre");
-//                }
-//            }
-//        } else {
-//            Calendar hoy = Calendar.getInstance();
-//            if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
-//                if (contrato.getDatefechafin().compareTo(contrato.getDatefechaini()) >= 0) {
-//                    long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getDatefechaini().getTime();
-//                    diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
-//                    contrato.setIntduraciondias(Integer.parseInt(String.valueOf(diferenciaFecha)));
-//                //int plazo = Integer.parseInt(String.valueOf(diferenciaFecha));
-//                } else {
-//                    contrato.setDatefechafin(null);
-//                    contrato.setIntduraciondias(0);
-//                    mensaje = bundle.getString("lafechadefinalizaciondebeser");//"La fecha de finalización debe ser mayor o igual a la fecha de inicio";
-//                    FacesUtils.addErrorMessage(mensaje);
-//                }
-//            }
-//       }
         return null;
     }
 
@@ -3483,7 +3453,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
             polizacontrato.setContrato(contrato);
             polizacontrato.setStrdocpoliza("");
-            System.out.println("bool tipo convenio " + getContrato().getBoolplanoperativo());
             //validacion si es plan operativo que valide las fechas dentro del rango de vida del convenio
             if (getContrato().getBooltipocontratoconvenio() == true && getContrato().getBooltipocontratoconvenio() != null) {
                 if (bundle.getString("conplanoperativo").equals("true")) {
@@ -3698,6 +3667,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setEstadoconvenio(new Estadoconvenio(1));
         contrato.setBooleantienehijos(false);
         contrato.setVermensajeguardado(false);
+        contrato.setVermensajeerror(false);
+        contrato.setMensajeguardado("");
         polizacontrato = new Polizacontrato();
         documentoobra = new Documentoobra();
         encargofiduciario = new Encargofiduciario();
@@ -4200,7 +4171,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (activiprincipal != null) {
                 listaProyectosConvenio.clear();
                 //extraerProyectosActividad(act);
-               // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
+                // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
                 cargarActividadesConsultadas(activiprincipal);
                 asignarNumeracionActividadesConsultadas(lstTodasActividades);
                 lstActividadesEliminar.clear();
@@ -6673,17 +6644,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-            List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
-            Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-            encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
-            ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+            if (!contrato.getActividadobras().isEmpty()) {
+                List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+                Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+                ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+            }
             if (validacionesBasicasConvenioPO()) {
                 configuracionGuardadoPo(1, true);
             }
 
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
-            setMensajePlanOperativo(true, e.getMessage());
+            setMensajePlanOperativo(true, true, e.getMessage());
         }
 
     }
@@ -6696,10 +6669,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String finalizarGuardado() {
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-            List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
-            Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-            encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
-            ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+            if (!contrato.getActividadobras().isEmpty()) {
+                List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+                Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+                ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+            }
             if (validacionesBasicasConvenioPO()) {
                 ValidacionesConvenio.validarDistribucionFinalFuenteRecursos(getContrato().getNumvlrcontrato(), recursosconvenio.getSumafuentes());
                 ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
@@ -6714,23 +6689,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     if (getFlujoCaja().getTotalIngresos() == getContrato().getNumvlrcontrato().doubleValue()) {
                         if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {
                             configuracionGuardadoPo(2, true);
-                            getFiltrocontrato().setTipocontrato(2);
-                            getFiltrocontrato().setPalabraClave(getContrato().getStrnumcontrato());
                             contrato.setTercero(new Tercero());
-                            return "consultarContratoConvenio";
+                            return "consultarContratoConvenioDetalle";
                         } else {
                             FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
-                            setMensajePlanOperativo(true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
+                            setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
                         }
                     } else {
                         FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total del convenio ($" + getContrato().getNumvlrcontrato() + "), en el flujo de caja.");
-                        setMensajePlanOperativo(true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total del convenio ($" + getContrato().getNumvlrcontrato() + "), en el flujo de caja.");
+                        setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total del convenio ($" + getContrato().getNumvlrcontrato() + "), en el flujo de caja.");
                     }
                 }
             }
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
-            setMensajePlanOperativo(true, e.getMessage());
+            setMensajePlanOperativo(false, true, e.getMessage());
         }
         return null;
     }
@@ -7003,13 +6976,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
-                
-                if(!cont.getActividadobras().isEmpty()){
-                ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
-                List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
-                lstTodasActividadesDTO.add(actiRaiz);
-                encontrarActividadContratoDTO(actiRaiz, lstTodasActividadesDTO);
-                ValidacionesConvenio.validarFechaActaInicio(lstTodasActividadesDTO, cont);
+
+                if (!cont.getActividadobras().isEmpty()) {
+                    ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
+                    List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
+                    lstTodasActividadesDTO.add(actiRaiz);
+                    encontrarActividadContratoDTO(actiRaiz, lstTodasActividadesDTO);
+                    ValidacionesConvenio.validarFechaActaInicio(lstTodasActividadesDTO, cont);
                 }
                 getSessionBeanCobra().setConsulteContrato(false);
 
@@ -7455,7 +7428,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             msgError = msgError + mapaValidacionFechasPO.get(2);
         }
         FacesUtils.addErrorMessage(msgError);
-        setMensajePlanOperativo(true, msgError);
+        setMensajePlanOperativo(false, true, msgError);
 
     }
 
@@ -7650,7 +7623,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (vermensaje) {
             setNumcontratotemporal(getContrato().getStrnumcontrato());
             FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
-            setMensajePlanOperativo(true, bundle.getString("losdatossehanguardado"));
+            setMensajePlanOperativo(true, false, bundle.getString("losdatossehanguardado"));
         }
     }
 
@@ -7719,21 +7692,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void modificarFuentesRecursosConvenioEstaAsociada(List<Fuenterecursosconvenio> lstFuenteRecursos) {
         for (Fuenterecursosconvenio fuente : lstFuenteRecursos) {
-            BigDecimal valorActual=fuente.getValorcuotagerencia().add(fuente.getOtrasreservas()).add(fuente.getReservaiva());
+            BigDecimal valorActual = fuente.getValorcuotagerencia().add(fuente.getOtrasreservas()).add(fuente.getReservaiva());
             System.out.println("valorActual = " + valorActual);
-            BigDecimal valorFinal=fuente.getValorDisponible().subtract(valorActual);
+            BigDecimal valorFinal = fuente.getValorDisponible().subtract(valorActual);
             System.out.println("valor dis = " + fuente.getValoraportado());
             System.out.println("valor dis desp = " + valorFinal);
             if (fuente.getValoraportado().compareTo(valorFinal) != 0) {
                 fuente.setEstaEnFuenteRecurso(true);
-            }else{
-            fuente.setEstaEnFuenteRecurso(false);
-    }
-}
+            } else {
+                fuente.setEstaEnFuenteRecurso(false);
+            }
+        }
     }
 
-    public void setMensajePlanOperativo(boolean ver, String mensaje) {
+    public void setMensajePlanOperativo(boolean ver, boolean error, String mensaje) {
         getContrato().setVermensajeguardado(ver);
+        getContrato().setVermensajeerror(error);
         getContrato().setMensajeguardado(mensaje);
     }
 }

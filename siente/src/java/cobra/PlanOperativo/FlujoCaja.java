@@ -576,8 +576,8 @@ public class FlujoCaja implements Serializable {
             if (flujoIngresosValidar.ingresoEntidad) {
                 if (flujoIngresosValidar.totalIngresosFuente.doubleValue() > flujoIngresosValidar.fuenteRecursosConvenio.getValoraportado().doubleValue()) {
                     cumpleRequisitos = false;
-
                     FacesUtils.addErrorMessage(bundle.getString("errorIngresosMayorAAportes"));
+                    nuevoContratoBasico.setMensajePlanOperativo(false,true, bundle.getString("errorIngresosMayorAAportes"));
                 }
             }
         }
@@ -588,6 +588,7 @@ public class FlujoCaja implements Serializable {
                     cumpleRequisitos = false;
 
                     FacesUtils.addErrorMessage(bundle.getString("errorEgresosMayorAValorProyecto"));
+                    nuevoContratoBasico.setMensajePlanOperativo(false,true,bundle.getString("errorEgresosMayorAValorProyecto"));
                 }
             }
         }
@@ -596,6 +597,7 @@ public class FlujoCaja implements Serializable {
             cumpleRequisitos = false;
 
             FacesUtils.addErrorMessage(bundle.getString("errorTotalEgresosMayorATotalIngresos"));
+            nuevoContratoBasico.setMensajePlanOperativo(false,true, bundle.getString("errorTotalEgresosMayorATotalIngresos"));
         }
 
         return cumpleRequisitos;

@@ -44,6 +44,7 @@ public class ContratoDTO implements IsSerializable {
     private BigDecimal auxiliarValorGerencia;
     private boolean vermensajeguardado;
     private String mensajeguardado;
+    private boolean vermensajeerror;
     
     public ContratoDTO() {       
     }
@@ -392,6 +393,14 @@ public class ContratoDTO implements IsSerializable {
 
     public void setMensajeguardado(String mensajeguardado) {
         this.mensajeguardado = mensajeguardado;
+    }
+
+    public boolean isVermensajeerror() {
+        return vermensajeerror;
+    }
+
+    public void setVermensajeerror(boolean vermensajeerror) {
+        this.vermensajeerror = vermensajeerror;
     }
     
     

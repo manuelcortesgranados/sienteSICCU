@@ -93,6 +93,7 @@ public class CasteoGWT implements Serializable {
         contratoDTO.setValorDisponible(contrato.getValorDisponible());
         contratoDTO.setVermensajeguardado(contrato.isVermensajeguardado());
         contratoDTO.setMensajeguardado(contrato.getMensajeguardado());
+        contratoDTO.setVermensajeerror(contrato.isVermensajeerror());
         if (!contrato.getFuenterecursosconvenios().isEmpty()) {
             contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
         }
