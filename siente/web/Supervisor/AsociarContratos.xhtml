@@ -65,80 +65,66 @@
 
                         <h:panelGroup id="pgdatacontratos">
                             <center>
-                                <rich:dataTable rows="10"  
-                                                rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}">
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-cocontr1 " style="position: relative;left: 12px;"  value="Número contrato" />
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-co2"  style="position: relative;left: 80px;" value="#{var.valor}" />
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column  style="width: 37%;">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-valordispo" style="position: relative;left: 107px;"   value="Valor Disponible"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column >
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-fechaincontse"  style="position: relative;left: 83px;"  value="#{var.datefechaini}"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-fecfin" style="position: relative;left: 82px;"  value="#{var.datefechafin}"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-tipocontrato" style="position: relative;left: 34px;"  value="Tipo Contrato"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-desaso" style="position: relative;left: -21px;
-"  value="Desasociar"/>
-                                        </f:facet>
-                                    </rich:column>
-                                   
-                                </rich:dataTable>
-                                <rich:dataTable style="text-align: center;" id="datacontratosaso"  rows="10"   var="contrarow"
-                                                value="#{Supervisor$AsociarContratos.listacontratosobra}"
-                                                rowKeyVar="filaSeleccionada"
-                                                binding="#{Supervisor$AsociarContratos.tablacontratos}"
-                                                rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}">
-                                    <rich:column id="cocontr1">
-                                        <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
-                                    </rich:column>
-                                    <rich:column id="co2">
-                                        <h:outputText  styleClass="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
-                                            <f:convertNumber pattern="$ ###,###,###"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="vlcongtrhijosse">
-                                        <h:outputText  styleClass="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
-                                            <f:convertNumber pattern="$###,###,###"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="fechaincontse" >
-                                        <h:outputText  styleClass="ikont-hot-fecini"    value="#{contrarow.contrato.datefechaini}"/>
-                                    </rich:column>
-                                    <rich:column id="fechaficontse" >
-                                        <h:outputText  styleClass="ikont-hot-datef"    value="#{contrarow.contrato.datefechafin}"/>
-                                    </rich:column>
-                                    <rich:column id="tipocontrato" >
-                                        <h:outputText  styleClass="ikont-hot-obr"    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
-                                        <h:outputText  styleClass="ikont-hot-interv "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
-                                    </rich:column>
-                                    <rich:column id="desasociar" >
-                                        <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria}"
-                                                           render="datacontratosaso,pgcontrat1aso">
+                                <rich:dataTable  styleClass="ikont-tabla-entidad-contratista" var="contrarow"  value="#{Supervisor$AsociarContratos.listacontratosobra}"
+                                                 rowKeyVar="filaSeleccionada"
+                                                 binding="#{Supervisor$AsociarContratos.tablacontratos}"
+                                                 rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}" rows="10"   >
+                                    <f:facet name="header">
+                                        <rich:columnGroup>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-cocontr1 "  value="Número contrato" />
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-co2"   value="#{var.valor}" />
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta" >
+                                                <h:outputText  styleClass="ikont-hot-valordispo"  value="Valor Disponible"/>
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta" >
+                                                <h:outputText  styleClass="ikont-hot-fechaincontse"    value="#{var.datefechaini}"/>
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-fecfin"  value="#{var.datefechafin}"/>
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-tipocontrato"   value="Tipo Contrato"/>
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-desaso"   value="Desasociar"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                    <rich:columnGroup >
+                                        <rich:column id="cocontr1">
+                                            <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                        </rich:column>
+                                        <rich:column id="co2">
+                                            <h:outputText  styleClass="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                                <f:convertNumber pattern="$ ###,###,###"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column id="vlcongtrhijosse">
+                                            <h:outputText  styleClass="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
+                                                <f:convertNumber pattern="$###,###,###"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column id="fechaincontse" >
+                                            <h:outputText  styleClass="ikont-hot-fecini"    value="#{contrarow.contrato.datefechaini}"/>
+                                        </rich:column>
+                                        <rich:column id="fechaficontse" >
+                                            <h:outputText  styleClass="ikont-hot-datef"    value="#{contrarow.contrato.datefechafin}"/>
+                                        </rich:column>
+                                        <rich:column id="tipocontrato" >
+                                            <h:outputText  styleClass="ikont-hot-obr"    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
+                                            <h:outputText  styleClass="ikont-hot-interv "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                                        </rich:column>
+                                        <rich:column id="desasociar" >
+                                            <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria}"
+                                                               render="datacontratosaso,pgcontrat1aso">
 
-                                        </a4j:commandButton>
-                                    </rich:column>
+                                            </a4j:commandButton>
+                                        </rich:column>
+                                    </rich:columnGroup>
                                     <f:facet name="footer">
                                         <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
                                     </f:facet>

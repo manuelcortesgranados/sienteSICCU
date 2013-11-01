@@ -108,46 +108,36 @@
                                              action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
                             </a4j:commandLink>
                         </h:panelGrid>
-                        <h:panelGrid id="pgdatacontratos">
+                        <h:panelGroup id="pgdatacontratos">
                             <center>
-                                <rich:dataTable styleClass="ikont-tabla-entidad-contratista"
-                                                rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
-                                    <rich:column id="cocontr1" width="100px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-cocontr1"   value="Número contrato" />
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column id="co2" width="100px" >
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-co2"   value="Valor del contrato" />
-                                        </f:facet>
-                                    </rich:column>
-
-                                    <rich:column id="vlcongtrhijosse">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-vlcongtrhijosse"   value="Valor Asociado"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column id="fechaincontse">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-fechaincontse"   value="#{var.datefechaini}"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column id="fechaficontse"  width="150px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-fechaficontse"   value="#{var.datefechafin}"/>
-                                        </f:facet>
-                                    </rich:column>
-                                    <rich:column id="desasociar"  width="150px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-rc-desasociar"   value="Desasociar"/>
-                                        </f:facet>
-                                    </rich:column>
-                                </rich:dataTable>
-                                <rich:dataTable id="datacontratos" styleClass="ikont-tabla-entidad-contratista"
+                                <rich:dataTable styleClass="ikont-tabla-entidad-contratista" id="datacontratos" 
                                                 var="contrarow" rowKeyVar="filaSeleccionada"
                                                 value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}"
                                                 binding="#{Supervisor$IngresarNuevaObra.tablalistacontratos}">
+                                      <f:facet name="header">
+                                           <rich:columnGroup>
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-cocontr1"   value="Número contrato" />
+                                    </rich:column>
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-co2"   value="Valor del contrato" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-vlcongtrhijosse"   value="Valor Asociado"/>
+                                    </rich:column>
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-fechaincontse"   value="#{var.datefechaini}"/>
+                                    </rich:column>
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-fechaficontse"   value="#{var.datefechafin}"/>
+                                    </rich:column>
+                                    <rich:column styleClass="ikont-colum-superior-consulta">
+                                            <h:outputText  styleClass="ikont-rc-desasociar"   value="Desasociar"/>
+                                    </rich:column>
+                                           </rich:columnGroup>
+                                      </f:facet>
+                                <rich:columnGroup >
                                     <rich:column id="cocontr1" width="100px">
                                         <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
                                     </rich:column>
@@ -172,9 +162,10 @@
                                                            render="datacontratos,pgcontrat1">
                                         </a4j:commandButton>
                                     </rich:column>
+                                </rich:columnGroup>
                                 </rich:dataTable>
                             </center>
-                        </h:panelGrid>
+                        </h:panelGroup>
                         <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
                             <center>
                                 <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
