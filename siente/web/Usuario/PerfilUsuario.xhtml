@@ -183,14 +183,19 @@
                     </center>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel toggleListener="#{Perfil$Usuario.cargarEntidadesUsuario}" header="#{var.proyectos}"  expanded="false" switchType="ajax">
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="#{var.entidades}"/>
-                        <h:selectOneMenu    id="rs-entidad"  value="#{Perfil$Usuario.entidad.strnombrecompleto}" required="true" style="font-style: italic!important; font-size: 12px!important;">                                
-                            <f:selectItems  value="#{Perfil$Usuario.listaEntidadUsuario}" var="ent" itemValue="#{ent.strnombrecompleto}" itemLabel="#{ent.strnombrecompleto}" />
-                            <a4j:ajax event="valueChange" render="listaobrasusuario" execute="listaobrasusuario" listener="#{Perfil$Usuario.CargarObraEntidad}"/>
-                        </h:selectOneMenu>
-                        <interkont:spacer/>
-                        <rich:dataTable style="width: 90%!important;" rows="10" var="varobrasusuario"  value="#{Perfil$Usuario.listaobrasentidad}" id="listaobrasusuario">
+                    <h:panelGroup>
+                        <h:panelGrid rendered="#{Perfil$Usuario.boolseleccionEntidad}" columns="2">
+                            <h:outputLabel  value="#{var.entidades}"/>
+                            <h:selectOneMenu   id="rs-entidad"  value="#{Perfil$Usuario.entidad.strnombrecompleto}" required="true" style="font-style: italic!important; font-size: 12px!important;">                                
+                                <f:selectItems  value="#{Perfil$Usuario.listaEntidadUsuario}" var="ent" itemValue="#{ent.strnombrecompleto}" itemLabel="#{ent.strnombrecompleto}" />
+                                <a4j:ajax event="valueChange" render="listaobrasusuario" execute="listaobrasusuario" listener="#{Perfil$Usuario.CargarObraEntidad}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:panelGrid>
+                            <h:outputText value="La #{var.localidad}"/>
+                            <h:outputText value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
+                        </h:panelGrid>
+                        <rich:dataTable  rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>0}" style="width: 90%!important;border-collapse: inherit!important;" rows="10" var="varobrasusuario"  value="#{Perfil$Usuario.listaobrasentidad}" id="listaobrasusuario">
                             <rich:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{var.codigo} #{var.obra}"/>
@@ -201,7 +206,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{var.nombre} #{var.obra}"/>
                                 </f:facet>
-                                <h:outputText value="#{varobrasusuario.strnombreobra}"/>
+                                <h:inputTextarea  styleClass="ikont-hit-intxtnombrecc" value="#{varobrasusuario.strnombreobra}" disabled="true" cols="35" rows="2" />
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header">
@@ -210,7 +215,41 @@
                                 <h:outputText value="#{varobrasusuario.tercero.strnombrecompleto}"/>
                             </rich:column>
                         </rich:dataTable>
-                    </h:panelGrid>
+                        <center>
+                            <rich:dataScroller rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>0}" maxPages="5" for="listaobrasusuario"/>
+                        </center>
+                        <!-- Table para Relacion contrato usuario-->
+                        <rich:dataTable rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>0}" style="width: 90%!important;border-collapse: inherit!important;" rows="10" var="varcontrato"  value="#{Perfil$Usuario.listarelacioncontratousuario}" id="listacontratos">
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.codigo} #{var.contrato}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.contrato.intidcontrato}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.numero} #{var.convenio}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.contrato.strnumcontrato}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombre} #{var.convenio}"/>
+                                </f:facet>
+                                <h:inputTextarea  styleClass="ikont-hit-intxtnombrecc" value="#{varcontrato.contrato.strnombrecorto}" disabled="true" cols="35" rows="2" />
+                                <h:outputText />
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombre} #{var.entidad}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.contrato.contratista.strnombre}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                        <center>
+                            <rich:dataScroller rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>0}" maxPages="5" for="listacontratos"/>
+                        </center>
+                    </h:panelGroup>
                 </rich:collapsiblePanel>
             </center>
         </h:form>

@@ -35,7 +35,11 @@ import co.com.interkont.cobra.to.Grupo;
 import cobra.Ciudadano.PerfilCiudadano;
 import co.com.interkont.cobra.to.Modulo;
 import co.com.interkont.cobra.to.Obra;
+import co.com.interkont.cobra.to.Relacioncontratojsfusuario;
 import co.com.interkont.cobra.to.Tipousuario;
+import co.com.interkont.cobra.vista.VistaObraMapa;
+import cobra.FiltroObra;
+import cobra.gestion.HomeGestion;
 
 /**
  *
@@ -1073,12 +1077,16 @@ public class Usuario implements Serializable {
             tipousuariooption[i++] = genItem;
         }
     }
-    
-    private List<Obra> listaobrasasociadas = new ArrayList<Obra>();
-    private List<Obra> listaobrasentidad = new ArrayList<Obra>();
+    private List<VistaObraMapa> listaobrasasociadas = new ArrayList<VistaObraMapa>();
+    private List<VistaObraMapa> listaobrasentidad = new ArrayList<VistaObraMapa>();
     private List<Tercero> listaEntidadUsuario = new ArrayList<Tercero>();
+    private List<Relacioncontratojsfusuario> listarelacioncontratousuario = new ArrayList<Relacioncontratojsfusuario>();
     private Tercero entidad = new Tercero();
     private Map<String, List> maplistaobras = new HashMap<String, List>();
+    private boolean boolpanellistaproyecto = true;
+    private boolean boolseleccionEntidad = true;
+    private boolean boolLocalidad = false;
+    private Relacioncontratojsfusuario relacioncontratojsfusuario = new Relacioncontratojsfusuario();
 
     public Map<String, List> getMaplistaobras() {
         return maplistaobras;
@@ -1088,11 +1096,11 @@ public class Usuario implements Serializable {
         this.maplistaobras = maplistaobras;
     }
 
-    public List<Obra> getListaobrasentidad() {
+    public List<VistaObraMapa> getListaobrasentidad() {
         return listaobrasentidad;
     }
 
-    public void setListaobrasentidad(List<Obra> listaobrasentidad) {
+    public void setListaobrasentidad(List<VistaObraMapa> listaobrasentidad) {
         this.listaobrasentidad = listaobrasentidad;
     }
 
@@ -1112,45 +1120,130 @@ public class Usuario implements Serializable {
         this.listaEntidadUsuario = listaEntidadUsuario;
     }
 
-    public List<Obra> getListaobrasasociadas() {
+    public List<VistaObraMapa> getListaobrasasociadas() {
         return listaobrasasociadas;
     }
 
-    public void setListaobrasasociadas(List<Obra> listaobrasasociadas) {
+    public void setListaobrasasociadas(List<VistaObraMapa> listaobrasasociadas) {
         this.listaobrasasociadas = listaobrasasociadas;
     }
 
+    public boolean getBoolpanellistaproyecto() {
+        return boolpanellistaproyecto;
+    }
+
+    public void setBoolpanellistaproyecto(boolean boolpanellistaproyecto) {
+        this.boolpanellistaproyecto = boolpanellistaproyecto;
+    }
+
+    public boolean getBoolseleccionEntidad() {
+        return boolseleccionEntidad;
+    }
+
+    public void setBoolseleccionEntidad(boolean boolseleccionEntidad) {
+        this.boolseleccionEntidad = boolseleccionEntidad;
+    }
+
+    public boolean getBoolLocalidad() {
+        return boolLocalidad;
+    }
+
+    public void setBoolLocalidad(boolean boolLocalidad) {
+        this.boolLocalidad = boolLocalidad;
+    }
+
+    public List<Relacioncontratojsfusuario> getListarelacioncontratousuario() {
+        return listarelacioncontratousuario;
+    }
+
+    public void setListarelacioncontratousuario(List<Relacioncontratojsfusuario> listarelacioncontratousuario) {
+        this.listarelacioncontratousuario = listarelacioncontratousuario;
+    }
+
+    public Relacioncontratojsfusuario getRelacioncontratojsfusuario() {
+        return relacioncontratojsfusuario;
+    }
+
+    public void setRelacioncontratojsfusuario(Relacioncontratojsfusuario relacioncontratojsfusuario) {
+        this.relacioncontratojsfusuario = relacioncontratojsfusuario;
+    }
+
     public void cargarEntidadesUsuario() {
+        listaEntidadUsuario = new ArrayList<Tercero>();
+        listaobrasasociadas = new ArrayList<VistaObraMapa>();
+        listaobrasentidad = new ArrayList<VistaObraMapa>();
         switch (usuariomod.getTipousuario().getIntcodigotipousuario()) {
             case 1:
-                System.out.println("No Carga nada ya que es por entidad");
+                System.out.println("El usuario es de tipo ciudadano (No aplica)");
                 break;
             case 2:
-                System.out.println("Se cargan las localidades");
+                FiltroObra filtro = new FiltroObra();
+                filtro.setStrcoddepto(usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad());
+                filtro.setStrmunicipio(usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad());
+                listaobrasasociadas = getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(usuariomod, filtro);
+                listaobrasentidad.addAll(listaobrasasociadas);
+                boolseleccionEntidad = false;
+                boolpanellistaproyecto = true;
+                boolLocalidad = true;
+                System.out.println("El usuario es de tipo Localidad");
                 break;
             case 3:
-                System.out.println("Se cargan las entidades asociadas y las obras asociadas");
-
-                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(usuariomod, 6, false);
+                System.out.println("El usuario es de tipo relacionobrajsfusuario");
+                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
                 listaobrasasociadas = getSessionBeanCobra().getCobraService().encontrarRelacionObrajsfUsuario(usuariomod);
                 cargarMaplistaEntidad();
+                System.out.println("usuariomod.isRelacioncontrato()" + usuariomod.isRelacioncontrato());
+                boolpanellistaproyecto = true;
+                
+
+                if (usuariomod.isRelacioncontrato()) {
+                    listarelacioncontratousuario = getSessionBeanCobra().getCobraService().buscarRelacionContratoUsuario(usuariomod);
+
+                    for (Relacioncontratojsfusuario jsfUsuario : listarelacioncontratousuario) {
+                        jsfUsuario.setContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(jsfUsuario.getContrato().getIntidcontrato()));
+                        System.out.println("jsfUsuario" + jsfUsuario.getContrato().getStrnombre());
+                    }
+
+                } else {
+                }
                 listaobrasentidad.addAll(listaobrasasociadas);
+                boolseleccionEntidad = true;
+                boolpanellistaproyecto = true;
+                boolLocalidad = false;
                 break;
             case 4:
-                System.out.println("Se cargan las entidades asociadas");
+                System.out.println(" El Usuario es de tipo Entidad");
+                boolseleccionEntidad = true;
+                boolLocalidad = false;
+                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
+                if (usuariomod.isRelacioncontrato()) {
+
+                    listarelacioncontratousuario = getSessionBeanCobra().getCobraService().buscarRelacionContratoUsuario(usuariomod);
+
+                    for (Relacioncontratojsfusuario jsfUsuario : listarelacioncontratousuario) {
+                        jsfUsuario.setContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(jsfUsuario.getContrato().getIntidcontrato()));
+                        System.out.println("jsfUsuario" + jsfUsuario.getContrato().getStrnombre());
+                    }
+                    System.out.println("El usuario esta por relacioncontratoobra");
+                    boolpanellistaproyecto = true;
+                } else {
+                    System.out.println("El usuario es supervisor de entidad");
+                    boolpanellistaproyecto = false;
+                }
                 break;
         }
 
     }
 
     public void cargarMaplistaEntidad() {
-        for (Obra obrasasociada : listaobrasasociadas) {
+        System.out.println("ingresa la entidad seleccionada ");
+        for (VistaObraMapa obrasasociada : listaobrasasociadas) {
             if (maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto()) == null) {
-                List<Obra> listaobra = new ArrayList<Obra>();
+                List<VistaObraMapa> listaobra = new ArrayList<VistaObraMapa>();
                 listaobra.add(obrasasociada);
                 maplistaobras.put(obrasasociada.getTercero().getStrnombrecompleto(), listaobra);
             } else {
-                List<Obra> listaobra = maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto());
+                List<VistaObraMapa> listaobra = maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto());
                 listaobra.add(obrasasociada);
                 maplistaobras.put(obrasasociada.getTercero().getStrnombrecompleto(), listaobra);
             }
@@ -1164,6 +1257,5 @@ public class Usuario implements Serializable {
         } else {
             System.out.println("Entro al else");
         }
-
     }
 }
