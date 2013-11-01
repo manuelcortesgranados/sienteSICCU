@@ -191,11 +191,12 @@
                                 <a4j:ajax event="valueChange" render="listaobrasusuario" execute="listaobrasusuario" listener="#{Perfil$Usuario.CargarObraEntidad}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>
-                        <h:panelGrid>
+                        <h:panelGrid  rendered="#{Perfil$Usuario.boolLocalidad}">
+                            <h:outputText value="#{var.numero} #{var.proyectos} #{Perfil$Usuario.listaobrasentidad.size()}"/>
                             <h:outputText value="La #{var.localidad}"/>
                             <h:outputText value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
                         </h:panelGrid>
-                        <rich:dataTable  rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>0}" style="width: 90%!important;border-collapse: inherit!important;" rows="10" var="varobrasusuario"  value="#{Perfil$Usuario.listaobrasentidad}" id="listaobrasusuario">
+                        <rich:dataTable  rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>0}" style="width: 80%!important;border-collapse: inherit!important;" rows="10" var="varobrasusuario"  value="#{Perfil$Usuario.listaobrasentidad}" id="listaobrasusuario">
                             <rich:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{var.codigo} #{var.obra}"/>
@@ -216,10 +217,10 @@
                             </rich:column>
                         </rich:dataTable>
                         <center>
-                            <rich:dataScroller rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>0}" maxPages="5" for="listaobrasusuario"/>
+                            <rich:dataScroller rendered="#{Perfil$Usuario.boolpanellistaproyecto and Perfil$Usuario.listaobrasentidad.size()>10}" maxPages="5" for="listaobrasusuario"/>
                         </center>
                         <!-- Table para Relacion contrato usuario-->
-                        <rich:dataTable rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>0}" style="width: 90%!important;border-collapse: inherit!important;" rows="10" var="varcontrato"  value="#{Perfil$Usuario.listarelacioncontratousuario}" id="listacontratos">
+                        <rich:dataTable rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>0}" style="width: 80%!important;border-collapse: inherit!important;" rows="5" var="varcontrato"  value="#{Perfil$Usuario.listarelacioncontratousuario}" id="listacontratos">
                             <rich:column>
                                 <f:facet name="header">
                                     <h:outputText value="#{var.codigo} #{var.contrato}"/>
@@ -247,7 +248,7 @@
                             </rich:column>
                         </rich:dataTable>
                         <center>
-                            <rich:dataScroller rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>0}" maxPages="5" for="listacontratos"/>
+                            <rich:dataScroller rendered="#{Perfil$Usuario.listarelacioncontratousuario.size()>4}" maxPages="5" for="listacontratos"/>
                         </center>
                     </h:panelGroup>
                 </rich:collapsiblePanel>

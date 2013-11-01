@@ -191,14 +191,60 @@ public class Usuario implements Serializable {
      * Variable para mostrar un selectitem con lis tipos de usuario
      */
     private SelectItem[] tipousuariooption;
-
+    /**
+     * Variable utilizada para almacenar la lista de obras desde vistamapa
+     * asociadas al usuario
+     */
+    private List<VistaObraMapa> listaobrasasociadas = new ArrayList<VistaObraMapa>();
+    /**
+     * Variable Utilizada para almacenar la lista de Las obras segun la entidad
+     */
+    private List<VistaObraMapa> listaobrasentidad = new ArrayList<VistaObraMapa>();
+    /**
+     * Variable utilizada para almacenar la lista las entidades asociadas al
+     * Usuario
+     */
+    private List<Tercero> listaEntidadUsuario = new ArrayList<Tercero>();
+    /**
+     * Variable utilizada para almacenar la lista de contratos (convenios)
+     * asociados al usuario
+     */
+    private List<Relacioncontratojsfusuario> listarelacioncontratousuario = new ArrayList<Relacioncontratojsfusuario>();
+    /**
+     * Variable Utilizada para almacenar el objecto Tercero
+     */
+    private Tercero entidad = new Tercero();
+    /**
+     * Variabe utilizada para guardar la entidad y la lista de obras
+     */
+    private Map<String, List> maplistaobras = new HashMap<String, List>();
+    /**
+     * Variable utilizada para deshabilitar la lista de proyectos asociados al
+     * usuario si es por entidad
+     */
+    private boolean boolpanellistaproyecto = true;
+    /**
+     * Variable utilizada para deshabilitar la lista de las entidades asociadas
+     * al usuario solo si es por (Localidad)
+     */
+    private boolean boolseleccionEntidad = true;
+    /**
+     * Variable que habilita informacion adicional solo al usuario si es por
+     * Localidad
+     */
+    private boolean boolLocalidad = false;
+    /**
+     * Variable que almacena el objeto Relacioncontratojsfusuario
+     */
+    private Relacioncontratojsfusuario relacioncontratojsfusuario = new Relacioncontratojsfusuario();
+    
+    
     /* Variable para  listar los departamentos
      */
     private SelectItem[] entidadcreacionusuario;
     /* Variable para  listar los departamentos
      */
     private Tercero tercero;
-    
     /**
      * /**
      * Inicio de los Get y Set de las variables anteriores
@@ -538,6 +584,87 @@ public class Usuario implements Serializable {
     public void setEntidadcreacionusuario(SelectItem[] entidadcreacionusuario) {
         this.entidadcreacionusuario = entidadcreacionusuario;
     }
+
+    public List<VistaObraMapa> getListaobrasasociadas() {
+        return listaobrasasociadas;
+    }
+
+    public void setListaobrasasociadas(List<VistaObraMapa> listaobrasasociadas) {
+        this.listaobrasasociadas = listaobrasasociadas;
+    }
+
+    public List<VistaObraMapa> getListaobrasentidad() {
+        return listaobrasentidad;
+    }
+
+    public void setListaobrasentidad(List<VistaObraMapa> listaobrasentidad) {
+        this.listaobrasentidad = listaobrasentidad;
+    }
+
+    public List<Tercero> getListaEntidadUsuario() {
+        return listaEntidadUsuario;
+    }
+
+    public void setListaEntidadUsuario(List<Tercero> listaEntidadUsuario) {
+        this.listaEntidadUsuario = listaEntidadUsuario;
+    }
+
+    public List<Relacioncontratojsfusuario> getListarelacioncontratousuario() {
+        return listarelacioncontratousuario;
+    }
+
+    public void setListarelacioncontratousuario(List<Relacioncontratojsfusuario> listarelacioncontratousuario) {
+        this.listarelacioncontratousuario = listarelacioncontratousuario;
+    }
+
+    public Tercero getEntidad() {
+        return entidad;
+    }
+
+    public void setEntidad(Tercero entidad) {
+        this.entidad = entidad;
+    }
+
+    public Map<String, List> getMaplistaobras() {
+        return maplistaobras;
+    }
+
+    public void setMaplistaobras(Map<String, List> maplistaobras) {
+        this.maplistaobras = maplistaobras;
+    }
+
+    public boolean isBoolpanellistaproyecto() {
+        return boolpanellistaproyecto;
+    }
+
+    public void setBoolpanellistaproyecto(boolean boolpanellistaproyecto) {
+        this.boolpanellistaproyecto = boolpanellistaproyecto;
+    }
+
+    public boolean isBoolseleccionEntidad() {
+        return boolseleccionEntidad;
+    }
+
+    public void setBoolseleccionEntidad(boolean boolseleccionEntidad) {
+        this.boolseleccionEntidad = boolseleccionEntidad;
+    }
+
+    public boolean isBoolLocalidad() {
+        return boolLocalidad;
+    }
+
+    public void setBoolLocalidad(boolean boolLocalidad) {
+        this.boolLocalidad = boolLocalidad;
+    }
+
+    public Relacioncontratojsfusuario getRelacioncontratojsfusuario() {
+        return relacioncontratojsfusuario;
+    }
+
+    public void setRelacioncontratojsfusuario(Relacioncontratojsfusuario relacioncontratojsfusuario) {
+        this.relacioncontratojsfusuario = relacioncontratojsfusuario;
+    }
+    
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -630,6 +757,7 @@ public class Usuario implements Serializable {
     public void buscarUsuarioporCriterios() {
         listausuarios = new ArrayList<JsfUsuario>();
         listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
+        
     }
 
     /**
@@ -1100,105 +1228,22 @@ public class Usuario implements Serializable {
             tipousuariooption[i++] = genItem;
         }
     }
-    private List<VistaObraMapa> listaobrasasociadas = new ArrayList<VistaObraMapa>();
-    private List<VistaObraMapa> listaobrasentidad = new ArrayList<VistaObraMapa>();
-    private List<Tercero> listaEntidadUsuario = new ArrayList<Tercero>();
-    private List<Relacioncontratojsfusuario> listarelacioncontratousuario = new ArrayList<Relacioncontratojsfusuario>();
-    private Tercero entidad = new Tercero();
-    private Map<String, List> maplistaobras = new HashMap<String, List>();
-    private boolean boolpanellistaproyecto = true;
-    private boolean boolseleccionEntidad = true;
-    private boolean boolLocalidad = false;
-    private Relacioncontratojsfusuario relacioncontratojsfusuario = new Relacioncontratojsfusuario();
 
-    public Map<String, List> getMaplistaobras() {
-        return maplistaobras;
-    }
-
-    public void setMaplistaobras(Map<String, List> maplistaobras) {
-        this.maplistaobras = maplistaobras;
-    }
-
-    public List<VistaObraMapa> getListaobrasentidad() {
-        return listaobrasentidad;
-    }
-
-    public void setListaobrasentidad(List<VistaObraMapa> listaobrasentidad) {
-        this.listaobrasentidad = listaobrasentidad;
-    }
-
-    public Tercero getEntidad() {
-        return entidad;
-    }
-
-    public void setEntidad(Tercero entidad) {
-        this.entidad = entidad;
-    }
-
-    public List<Tercero> getListaEntidadUsuario() {
-        return listaEntidadUsuario;
-    }
-
-    public void setListaEntidadUsuario(List<Tercero> listaEntidadUsuario) {
-        this.listaEntidadUsuario = listaEntidadUsuario;
-    }
-
-    public List<VistaObraMapa> getListaobrasasociadas() {
-        return listaobrasasociadas;
-    }
-
-    public void setListaobrasasociadas(List<VistaObraMapa> listaobrasasociadas) {
-        this.listaobrasasociadas = listaobrasasociadas;
-    }
-
-    public boolean getBoolpanellistaproyecto() {
-        return boolpanellistaproyecto;
-    }
-
-    public void setBoolpanellistaproyecto(boolean boolpanellistaproyecto) {
-        this.boolpanellistaproyecto = boolpanellistaproyecto;
-    }
-
-    public boolean getBoolseleccionEntidad() {
-        return boolseleccionEntidad;
-    }
-
-    public void setBoolseleccionEntidad(boolean boolseleccionEntidad) {
-        this.boolseleccionEntidad = boolseleccionEntidad;
-    }
-
-    public boolean getBoolLocalidad() {
-        return boolLocalidad;
-    }
-
-    public void setBoolLocalidad(boolean boolLocalidad) {
-        this.boolLocalidad = boolLocalidad;
-    }
-
-    public List<Relacioncontratojsfusuario> getListarelacioncontratousuario() {
-        return listarelacioncontratousuario;
-    }
-
-    public void setListarelacioncontratousuario(List<Relacioncontratojsfusuario> listarelacioncontratousuario) {
-        this.listarelacioncontratousuario = listarelacioncontratousuario;
-    }
-
-    public Relacioncontratojsfusuario getRelacioncontratojsfusuario() {
-        return relacioncontratojsfusuario;
-    }
-
-    public void setRelacioncontratojsfusuario(Relacioncontratojsfusuario relacioncontratojsfusuario) {
-        this.relacioncontratojsfusuario = relacioncontratojsfusuario;
-    }
-
+    /**
+     * Metodo Utilizado para cargar los proyectos segun la tipificacion del
+     * usuario (Tipo usuario).
+     */
     public void cargarEntidadesUsuario() {
         listaEntidadUsuario = new ArrayList<Tercero>();
         listaobrasasociadas = new ArrayList<VistaObraMapa>();
         listaobrasentidad = new ArrayList<VistaObraMapa>();
+        listarelacioncontratousuario = new ArrayList<Relacioncontratojsfusuario>();
         switch (usuariomod.getTipousuario().getIntcodigotipousuario()) {
+            //Ciudadano
             case 1:
                 System.out.println("El usuario es de tipo ciudadano (No aplica)");
                 break;
+            //Localidad
             case 2:
                 FiltroObra filtro = new FiltroObra();
                 filtro.setStrcoddepto(usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad());
@@ -1210,6 +1255,7 @@ public class Usuario implements Serializable {
                 boolLocalidad = true;
                 System.out.println("El usuario es de tipo Localidad");
                 break;
+            //Relacion obra jsfusuario
             case 3:
                 System.out.println("El usuario es de tipo relacionobrajsfusuario");
                 listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
@@ -1234,6 +1280,7 @@ public class Usuario implements Serializable {
                 boolpanellistaproyecto = true;
                 boolLocalidad = false;
                 break;
+            //Entidad
             case 4:
                 System.out.println(" El Usuario es de tipo Entidad");
                 boolseleccionEntidad = true;
@@ -1255,9 +1302,12 @@ public class Usuario implements Serializable {
                 }
                 break;
         }
-
     }
 
+    /**
+     * Metodo Utilizado para Cargar la lista listaobrasasociadas segun el
+     * usuario y la entidad (Asociadas a el).
+     */
     public void cargarMaplistaEntidad() {
         System.out.println("ingresa la entidad seleccionada ");
         for (VistaObraMapa obrasasociada : listaobrasasociadas) {
@@ -1274,10 +1324,16 @@ public class Usuario implements Serializable {
 
     }
 
+    /**
+     * Metodo Utilizado para asignarle a listaobrasentidad segun la lista
+     * maplistaobras.
+     */
     public void CargarObraEntidad() {
         if (maplistaobras.get(entidad.getStrnombrecompleto()) != null) {
             listaobrasentidad = maplistaobras.get(entidad.getStrnombrecompleto());
         } else {
+            FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("mensajedecreacionadm"));
+            listaobrasentidad.clear();
             System.out.println("Entro al else");
         }
     }
