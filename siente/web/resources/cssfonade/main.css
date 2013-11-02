@@ -2851,24 +2851,24 @@ css usuario modificacion
     /*top: 61px;*/
 }
 .inputlinkhomezoom:link{
-    font-size: 0.5em; 
+    font-size: 1em; 
     color: #58595B; 
     padding: 10px;
     margin-top: -14px;
     height: 178px;
 }
 .inputlinkhomezoom:hover{
-    font-size: 0.5em;
+    font-size: 1em; 
     color:  #257500 !important; 
     padding: 10px;
 }
 .inputlinkhomezoom:active{
-    font-size: 0.5em;  
+    font-size: 1em; 
     color:  #257500 !important; 
     padding: 10px;
 }
 .inputlinkhomezoom:visited{
-    font-size: 0.5em;  
+    font-size: 1em; 
     color:  #257500 !important; 
     padding: 10px;
 }
