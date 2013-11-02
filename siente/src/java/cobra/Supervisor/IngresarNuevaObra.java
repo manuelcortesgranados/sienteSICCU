@@ -66,6 +66,7 @@ import cobra.SessionBeanCobra;
 import cobra.gestion.HomeGestion;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
+import com.googlecode.gmaps4jsf.component.common.Position;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
 import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
@@ -4584,20 +4585,26 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String cambio(ValueChangeEvent event) {
-//        MarkerValue nuevo = (MarkerValue) event.getNewValue();
+        //Marker nuevo = (Marker) event.getNewValue();
+        Position posmarker= (Position) event.getNewValue();
+        
 //        latNewmanu = nuevo.getLatitude();
 //        longNewmanu = nuevo.getLongitude().replaceAll(" ", "");
-//        try {
-//            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(latNewmanu, longNewmanu);
-//            address = placeMarkNew.getAddress();
-//            
-//        } catch (Exception ex) {
-//            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
-//            address = "Faltante";
-//        }
-//        listamarcadores.get(listamarcadores.size() - 1).setLatitude(latNewmanu);
-//        listamarcadores.get(listamarcadores.size() - 1).setLongitude(longNewmanu);
-        return null;
+        
+                latNewmanu = posmarker.getLatitude();
+        longNewmanu = posmarker.getLongitude();
+        try {
+            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(latNewmanu, longNewmanu);
+            address = placeMarkNew.getAddress();
+            
+        } catch (Exception ex) {
+            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
+            address = "Faltante";
+        }
+////        setAddress(getGeocode().obtenerDireccionxLatyLong(latNewmanu, longNewmanu));
+        listamarcadores.get(listamarcadores.size() - 1).setLatitude(latNewmanu);
+        listamarcadores.get(listamarcadores.size() - 1).setLongitude(longNewmanu);
+        return null;       
     }
 
     /**
