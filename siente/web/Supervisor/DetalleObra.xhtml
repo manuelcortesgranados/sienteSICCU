@@ -25,7 +25,7 @@
         <script type="text/javascript">
             localStorage.setItem('accionDetalleProyecto', "ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto");
         </script>
-         <ui:include src="/includes/google_maps_key.xhtml" />   
+        <ui:include src="/includes/google_maps_key.xhtml" />   
     </ui:define>
 
     <ui:define name="title">
@@ -197,9 +197,25 @@
                                         </h:panelGrid>
                                     </h:panelGroup>
 
+                                    <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}"  styleClass="content-info-contrato" layout="block">
+                                        <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                            <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.verconvenios}" rendered="#{!SessionBeanCobra.cobraService.ciu}" immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
+                                                <h:graphicImage    value="/resources/imgs/bt_ver.png"/>
+                                                <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.obra.contrato.intidcontrato}" />
+                                            </h:commandLink>
+                                            <h:panelGroup layout="block">
+                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+
                                     <h:panelGroup  styleClass="content-info-contrato" layout="block">
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                            <h:commandLink styleClass="ikont-hcl-zoom-contratista" />
+                                            <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}"  immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
+                                                <h:graphicImage    value="/resources/imgs/bt_ver.png"/>
+                                                <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.primerContratoObra.intidcontrato}" />
+                                            </h:commandLink>
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
                                                 <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
@@ -377,21 +393,21 @@
                                     <interkont:spacer width="20" />
                                     <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
                                 </h:panelGrid>
-                            <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
-                                   <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
-                                          jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
-                                       <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
-                                                 longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
-                                              
-                                              jsVariable="#{HomeGestion.marcador.jsVariable}"
-                                              draggable="false" >
-                                              <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
-           
-                                    </m:marker>
-                                   </m:map>
+                                <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
+                                    <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
+                                           jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
+                                        <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
+                                                  longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
+
+                                                  jsVariable="#{HomeGestion.marcador.jsVariable}"
+                                                  draggable="false" >
+                                            <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
+
+                                        </m:marker>
+                                    </m:map>
                                 </h:panelGrid>
                             </h:panelGrid>                             
-                            
+
                         </rich:collapsiblePanel>
                         <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">
                             <h:panelGrid columns="3" styleClass="panelcenter">

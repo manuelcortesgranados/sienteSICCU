@@ -30,7 +30,7 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-    
+
     <ui:define name="body">
 
         <h:form id="form_datos_basicos"  >
@@ -169,21 +169,21 @@
                                 <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
                                 <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" >
-                                <rich:tooltip value="#{var.numbeneficiarios}" />
+                                    <rich:tooltip value="#{var.numbeneficiarios}" />
                                 </rich:inputNumberSpinner>
                                 <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
                                 <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20">
-                                <rich:tooltip value="#{var.numempleosdirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <rich:tooltip value="#{var.institucionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                    <rich:tooltip value="#{var.numempleosdirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                    <rich:tooltip value="#{var.institucionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 </rich:inputNumberSpinner>
                                 <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
                                 <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
                                                          maxValue="50000000" inputSize="20" >
 
-                                <rich:tooltip value="#{var.numempleosindirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <rich:tooltip value="#{var.organizacionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
+                                    <rich:tooltip value="#{var.numempleosindirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                    <rich:tooltip value="#{var.organizacionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
                                 </rich:inputNumberSpinner>
 
                             </h:panelGrid>
@@ -230,15 +230,17 @@
                         <h:panelGrid id="valores3" columns="2" cellspacing="9" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
                             <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
                             <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
-
                             <h:outputLabel  styleClass="ikont-hol-numconvenio"   value="Número de Convenio:"/>
-                            <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
-
+                            <h:panelGrid columns="2">
+                                <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
+                                <h:commandLink title="#{var.verconvenios}" rendered="#{!SessionBeanCobra.cobraService.ciu}" immediate="true"  id="irdetalleconvenii" action="#{Supervisor$Contrato.cargarContratoConvenio}">
+                                    <h:graphicImage    value="/resources/imgs/bt_ver.png"/>
+                                    <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.intidcontrato}" />
+                                </h:commandLink>
+                            </h:panelGrid>
                             <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
                             <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
                         </h:panelGrid>
-
-
                     </rich:collapsiblePanel>
                     <interkont:spacer height="10px" />
                     <h:panelGroup >
@@ -251,7 +253,7 @@
                                              action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                             </h:commandButton>
                         </center>
-                        
+
                     </h:panelGroup>
 
                 </rich:panel>

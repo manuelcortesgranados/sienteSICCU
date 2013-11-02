@@ -387,7 +387,7 @@
 
 
     <navigation-rule>
-        <from-view-id>/Supervisor/consultarContratoConvenio.xhtml</from-view-id>
+        <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>consultarContrato</from-outcome>
             <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
