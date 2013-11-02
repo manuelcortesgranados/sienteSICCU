@@ -1532,9 +1532,12 @@ a.vtitle23:hover{
     width: 250px;
     height:127px;
     background-repeat:no-repeat;
-    background-position: 40px 30px;
-    top: 10%;
-    left: 5%;
+    background-position: 40px 21px;
+    top: 18%;
+    left: 13%;
+    display: block;
+
+
 }
 .topbar_encabezado_1{
     width:100%;
