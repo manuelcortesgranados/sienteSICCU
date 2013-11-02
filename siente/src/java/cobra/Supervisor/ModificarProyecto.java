@@ -1318,9 +1318,11 @@ public class ModificarProyecto  implements Serializable{
      * Realiza una copia del cronograma anterior
      */
     public void copiarArchivoCronogramaAnterior() {
+        System.out.println("Debug - copiarArchivoCronogramaAnterior");
         String ubicacionArchivoDestino = MessageFormat.format(RutasWebArchivos.DOCS_MODI, "" + obra.getIntcodigoobra(),  "" + historicoobra.getOididhistoricoobra());
         String nombreArchivo = obra.getStrurlcronograma().substring(obra.getStrurlcronograma().lastIndexOf("/"));
         ubicacionArchivoDestino = ubicacionArchivoDestino + nombreArchivo;
+        System.out.println("copiar archivo nombre archivo = " + nombreArchivo);
         try {
             ArchivoWebUtil.copiarArchivo(obra.getStrurlcronograma(), ubicacionArchivoDestino, true, false);
         } catch (FileNotFoundException ex) {
@@ -1338,9 +1340,12 @@ public class ModificarProyecto  implements Serializable{
      * existe y sobreescrivir = false
      */
     public void copiarArchivoCronogramaModificacion() throws FileNotFoundException, ArchivoExistenteException {
+        System.out.println("Debug - copiarArchivoCronogramaModificacion");
         String ubicacionCronogramaModificacion = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+obra.getIntcodigoobra());
         cargadorCronograma.guardarArchivosTemporales(ubicacionCronogramaModificacion,false);
+        
         obra.setStrurlcronograma(cargadorCronograma.getArchivos().get(0).getRutaWeb());
+        
         documentomodificacion.setObra(obra);
         Tipodocumento tipodocumento = new Tipodocumento();
         tipodocumento.setInttipodoc(CronogramaExcel.TIPODOC_CRONO_MOD);
