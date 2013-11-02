@@ -97,14 +97,10 @@
                                     </h:outputText>
                                 </h:outputLabel>
                                 <h:panelGroup layout="block">
-                                    <h:outputLabel styleClass="ikont-hol-detalle-proyecto">
-                                        Asi va 
-                                    </h:outputLabel>    
-                                    <h:outputText styleClass="ikont-hot-detalle-proyecto" value="vrs. " >
+                                    <h:outputLabel styleClass="ikont-hol-detalle-proyecto" value="#{var.modalciudadanoasiva}"></h:outputLabel>    
+                                    <h:outputText styleClass="ikont-hot-detalle-proyecto" value=" vrs. " >
                                     </h:outputText>    
-                                    <h:outputLabel styleClass="ikont-hol-detalle-proyecto">
-                                        Asi deberia ir
-                                    </h:outputLabel>    
+                                    <h:outputLabel styleClass="ikont-hol-detalle-proyecto" value="#{var.modalciudadanodeberiair}"></h:outputLabel>    
                                 </h:panelGroup>
                                 <div class="your-clock"></div>
                                 <h:panelGrid  >
@@ -293,11 +289,11 @@
                                     <h:panelGrid columns="2" styleClass="panelcenter">
                                         <h:outputLabel styleClass="ikont- hot-desde" value="Desde:"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
                                         </h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-hasta" value="Hasta:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
                                         </h:outputLabel>
                                     </h:panelGrid>
 
