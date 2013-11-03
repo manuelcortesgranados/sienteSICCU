@@ -53,6 +53,7 @@ public class ModalAddMontos implements IsWidget {
     protected List<RubroDTO> lstRubrosDto;
     protected NumberField<BigDecimal> valorRubros;
     protected NumberField<BigDecimal> valorContrato;
+    private NumberField<BigDecimal> valorDisponibleFuente;
     protected WidgetTablaMontos widTblMontos;
     /*elementos para cargar los datos ingresados por el usuario*/
     protected RubroDTO rubro;
@@ -70,9 +71,9 @@ public class ModalAddMontos implements IsWidget {
     protected String entidadSeleccionada;
     protected ObrafuenterecursosconveniosDTO obraFrDto;
     private BigDecimal valorContratoO;
-    private boolean  editar;
+    private boolean editar;
 
-    public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Window modalActual, int idTemp,boolean  editar) {
+    public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Window modalActual, int idTemp, boolean editar) {
         lstRubrosDto = new ArrayList<RubroDTO>();
 
         lstE = new ListBox(false);
@@ -84,10 +85,13 @@ public class ModalAddMontos implements IsWidget {
         this.idTemp = idTemp;
         this.valorContratoO = valorContrato.getValue();
         this.valorContrato = valorContrato;
-        this.editar=editar;
+        this.editar = editar;
+        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
 
+        
         Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator();
         obraFrDto = (ObrafuenterecursosconveniosDTO) it.next();
+        valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
         entidadSeleccionada = obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto();
         mapaRelacionEntidadVigencias = new HashMap<String, List<Integer>>();
 
@@ -155,6 +159,14 @@ public class ModalAddMontos implements IsWidget {
         getValorRubros().setWidth(cw);
         con.add(new FieldLabel(getValorRubros(), "Valor"), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
 
+        
+        
+        
+        getValorDisponibleFuente().setEmptyText("Valor disponible");
+        getValorDisponibleFuente().setWidth(cw);
+        getValorDisponibleFuente().setEnabled(false);
+        con.add(new FieldLabel(getValorDisponibleFuente(), "Valor disponible"), new AbstractHtmlLayoutContainer.HtmlData(".valordis"));
+        
         llenarComboEntidadesConvenio();
         lstE.setWidth(cw);
         lstE.addChangeHandler(new ChangeHandler() {
@@ -174,6 +186,8 @@ public class ModalAddMontos implements IsWidget {
             @Override
             public void onChange(ChangeEvent event) {
                 vigenciafuente = Integer.parseInt(lstVigenFuente.getItemText(lstVigenFuente.getSelectedIndex()));
+                obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
+                valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
             }
         });
         con.add(new FieldLabel(lstVigenFuente, "Vigencia de la fuente"), new AbstractHtmlLayoutContainer.HtmlData(".vigenciafuente"));
@@ -245,6 +259,7 @@ public class ModalAddMontos implements IsWidget {
      '<tr><td class=rubrocont></td><td class=rubrosub></td></tr>',
      '<tr><td class=valorubro></td><td><table><tr><td class=vigencia></td></tr></table></td></tr>',
      '<tr><td class=fuenter></td><td class=vigenciafuente></td></tr>',
+     '<tr><td class=valordis></td></tr>',
      '</table>'
      ].join("");
      }-*/;
@@ -347,7 +362,7 @@ public class ModalAddMontos implements IsWidget {
                 valorContratoO = valorContratoO.add(relacionFuente.getValor());
                 valorContrato.setValue(valorContratoO);
                 contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
-                if(editar){
+                if (editar) {
                 relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
                 service.setLog("valor disponible despues de substraer:" + relacionFuente.getObrafuenterecursosconvenios().getValorDisponible(), null);
                 }
@@ -417,5 +432,19 @@ public class ModalAddMontos implements IsWidget {
      */
     public void setValorContratoO(BigDecimal valorContratoO) {
         this.valorContratoO = valorContratoO;
+    }
+
+    /**
+     * @return the valorDisponibleFuente
+     */
+    public NumberField<BigDecimal> getValorDisponibleFuente() {
+        return valorDisponibleFuente;
+}
+
+    /**
+     * @param valorDisponibleFuente the valorDisponibleFuente to set
+     */
+    public void setValorDisponibleFuente(NumberField<BigDecimal> valorDisponibleFuente) {
+        this.valorDisponibleFuente = valorDisponibleFuente;
     }
 }
