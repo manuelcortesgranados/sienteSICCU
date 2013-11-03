@@ -11,10 +11,8 @@
     <h:panelGroup id="panelContrato" >
         <center>
 
-            <h:panelGrid  width="100%" >
-                <f:facet name="header">
-                    <h:outputLabel  styleClass="ikont-hot-panelcontrato"   value="#{var.contrato}"></h:outputLabel>
-                </f:facet>
+            <h:panelGroup  >
+                
 
                 <rich:dataTable id="tablacontrato"  
                                 sortMode="single" 
@@ -97,7 +95,7 @@
                         <f:facet name="header">
                             <h:outputText  styleClass="ikont-hot-vercosto"   value="#{var.vercosto}"/>
                         </f:facet>
-                        <a4j:commandLink  value="X" id="vercosto"  
+                        <a4j:commandLink  id="vercosto"  
                                           render="panelContrato"
                                          onclick="#{rich:component('panelCostoContrato')}.show();return true;">
                             <h:graphicImage  styleClass="ikont-hgi-vercosto"    value="/resources/imgs/bt_ver.png"/>
@@ -108,7 +106,7 @@
 
                 </rich:dataTable>
 
-            </h:panelGrid>
+            </h:panelGroup>
         </center>
     </h:panelGroup>
 

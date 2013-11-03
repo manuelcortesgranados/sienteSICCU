@@ -85,24 +85,22 @@
                         <rich:column>
                             <h:panelGroup styleClass="panelzoomhome2">
                                 <center><rich:column rowspan="3">  
-                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba2,panelinfo,tituloproyectocontrol" id="boton1" value="#{var.titulocantidadzoom}" action="#{HomeGestion.mostrarVariableProyecto}">
+                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba2,panelinfo,tituloproyectocontrol" id="boton1" action="#{HomeGestion.mostrarVariableProyecto}">
                                             <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="1" />
                                         </a4j:commandLink>
 
-                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba2,panelinfo,tituloproyectocontrol" id="boton2" value="#{var.tituloinversionzoom}" action="#{HomeGestion.mostrarVariableProyecto}">
+                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba2,panelinfo,tituloproyectocontrol" id="boton2" action="#{HomeGestion.mostrarVariableProyecto}">
                                             <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="2" />
                                         </a4j:commandLink>
 
-                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba3,panelinfo,tituloproyectocontrol" id="boton3" value="#{var.tituloconvenioszoom}" action="#{HomeGestion.mostrarVariableProyecto}">
+                                        <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo, tituloproyectocontrol" execute="prueba3,panelinfo,tituloproyectocontrol" id="boton3" action="#{HomeGestion.mostrarVariableProyecto}">
                                             <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="3" />
                                         </a4j:commandLink>
                                     </rich:column> </center>
                             </h:panelGroup>
                         </rich:column>
                     </h:panelGrid> 
-                    <h:panelGroup><center>
-                            <h:graphicImage styleClass="imagen_flecha_home1" value="/resources/imgs/flecha_home1.png"/>
-                        </center></h:panelGroup>                     
+                    <br/><br/>                     
                     <center><a4j:commandLink styleClass="inputlinkhomevermas" id="vermas" value="Ver mas" rendered="false"/></center>
                 </div>
             </center>

@@ -263,7 +263,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<Tercero> clientes = new ArrayList<Tercero>();
     private List<Tercero> gerentes = new ArrayList<Tercero>();
     //variable para el titulo de proyecto
-    private int tituloproyectocontrol = 1;
+    private int tituloproyectocontrol = 2;
 
     public int getTituloproyectocontrol() {
         return tituloproyectocontrol;

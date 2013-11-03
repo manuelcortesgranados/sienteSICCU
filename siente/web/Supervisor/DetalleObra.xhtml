@@ -25,7 +25,7 @@
         <script type="text/javascript">
             localStorage.setItem('accionDetalleProyecto', "ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto");
         </script>
-         <ui:include src="/includes/google_maps_key.xhtml" />   
+        <ui:include src="/includes/google_maps_key.xhtml" />   
     </ui:define>
 
     <ui:define name="title">
@@ -157,23 +157,19 @@
                                             <f:convertNumber pattern="$###,###" />
                                         </h:outputText>
                                     </h:panelGrid>
-                                    <h:commandLink  styleClass="ikont-hcb-ver_objeto" id="otNumContratos" value="#{var.verinfciu}">
-                                        <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                      verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
-                                            <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
-                                                <h:outputText value="#{var.objetocontrato}: " /><br/>
-                                                <h:outputText value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
-                                                <h:outputText  value="#{var.houtnrocontrato}"/><br/>
-                                                <h:outputText value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/><br/>
-                                            </a4j:repeat>
-                                        </rich:tooltip>
-                                    </h:commandLink> 
-                                    <h:outputLabel styleClass="ikont-hol-detalle-proyecto">Otros contratos asociados</h:outputLabel>
-                                    <h:commandLink value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
-                                        <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                      verticalOffset="5" styleClass="ikont-rtt-tool3">
-                                        </rich:tooltip>
-                                    </h:commandLink>
+                                    <h:panelGroup>
+                                        <h:commandLink  styleClass="ikont-hcb-ver_objeto" id="otNumContratos" value="#{var.verinfciu}" rendered="#{Supervisor$DetalleObra.valorinterventoria > 0}">
+                                            <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                          verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
+                                                <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
+                                                    <h:outputText value="#{var.objetocontrato}: " /><br/>
+                                                    <h:outputText value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
+                                                    <h:outputText  value="#{var.houtnrocontrato}"/><br/>
+                                                    <h:outputText value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/><br/>
+                                                </a4j:repeat>
+                                            </rich:tooltip>
+                                        </h:commandLink>
+                                    </h:panelGroup>
 
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
@@ -197,15 +193,6 @@
                                         </h:panelGrid>
                                     </h:panelGroup>
 
-                                    <h:panelGroup  styleClass="content-info-contrato" layout="block">
-                                        <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                            <h:commandLink styleClass="ikont-hcl-zoom-contratista" />
-                                            <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
-                                            </h:panelGroup>
-                                        </h:panelGrid>
-                                    </h:panelGroup>
                                     <h:panelGroup layout="block" styleClass="content-info-contrato">
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-supervosor " />
@@ -226,6 +213,9 @@
 
                                 </h:panelGrid>
                             </h:panelGrid>
+                        </rich:collapsiblePanel>
+                        <rich:collapsiblePanel switchType="ajax" header="Contratos asociados" expanded="true" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                            <ui:include src="/modal/contratoModal.xhtml"/>                        
                         </rich:collapsiblePanel>
                         <rich:collapsiblePanel switchType="client" header="Imágenes y evolución" expanded="true">
                             <h:panelGrid columns="2">
@@ -305,11 +295,11 @@
                                 <h:panelGrid id="form_editarImpactosocial" styleClass="ikont-hpg-pg_impactosocial">
                                     <h:panelGrid  id="habilitarModificacionImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto}" >
                                         <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
-                                        <h:outputText styleClass="ikont-hol-numhabbeneficiados" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputText>
+                                        <h:outputLabel styleClass="ikont-hol-numhabbeneficiados" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
-                                        <h:outputText styleClass="ikont-hol-numempdirectos" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputText>
+                                        <h:outputLabel styleClass="ikont-hol-numempdirectos" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
-                                        <h:outputText styleClass="ikont-hol-numempindirectos" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:outputText>
+                                        <h:outputLabel styleClass="ikont-hol-numempindirectos" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:outputLabel>
 
                                         <rich:column  colspan="2">
                                             <center>
@@ -353,11 +343,11 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
                                     <h:panelGrid columns="2" >
-                                        <h:outputText styleClass="ikont-hol-clspry " value="Sector : " />
+                                        <h:outputLabel styleClass="ikont-hol-clspry " value="Sector : " />
                                         <h:outputLabel styleClass="ikont-hol-strdescclaseobra" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
-                                        <h:outputText styleClass="ikont-hol-tipoPry" value="#{var.tipoProyecto}" />
+                                        <h:outputLabel styleClass="ikont-hol-tipoPry" value="#{var.tipoProyecto}" />
                                         <h:outputLabel styleClass="ikont-hol-tipprynom" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
-                                        <h:outputText styleClass="ikont-hol-subtipo " value="Subtipo:"  />
+                                        <h:outputLabel styleClass="ikont-hol-subtipo " value="Subtipo:"  />
                                         <h:outputLabel styleClass="ikont-hol-strdesctipoobra" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
                                     </h:panelGrid>
                                 </h:panelGrid>
@@ -377,22 +367,23 @@
                                     <interkont:spacer width="20" />
                                     <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
                                 </h:panelGrid>
-                            <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
-                                   <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
-                                          jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
-                                       <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
-                                                 longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
-                                              
-                                              jsVariable="#{HomeGestion.marcador.jsVariable}"
-                                              draggable="false" >
-                                              <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
-           
-                                    </m:marker>
-                                   </m:map>
+                                <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
+                                    <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
+                                           jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
+                                        <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
+                                                  longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
+
+                                                  jsVariable="#{HomeGestion.marcador.jsVariable}"
+                                                  draggable="false" >
+                                            <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
+
+                                        </m:marker>
+                                    </m:map>
                                 </h:panelGrid>
                             </h:panelGrid>                             
-                            
+
                         </rich:collapsiblePanel>
+
                         <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">
                             <h:panelGrid columns="3" styleClass="panelcenter">
                                 <h:commandLink id="pdf_infociu2" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="butonreport zoom-pdf" target="_blank" />

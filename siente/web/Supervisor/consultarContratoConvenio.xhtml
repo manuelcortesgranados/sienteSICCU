@@ -129,7 +129,7 @@
                                     rowKeyVar="filaSeleccionada"
                                     value="#{Supervisor$Contrato.listacontratos}"
                                     rendered="#{Supervisor$Contrato.listacontratos.size()>0}"
-                                    sortMode="single" var="currentRow"  rows="6"
+                                    sortMode="single" var="currentRow"  rows="20"
                                     rowClasses="cabezo_tabla01, cabezo_tabla02"
                                     binding="#{Supervisor$Contrato.tablacontratoconvenio}">
                         <f:facet name="header">
@@ -210,8 +210,8 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtvlrcc"   id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###.00" />
+                            <h:outputText  styleClass="ikont-hot-numtxtvlrcc"  style="text-align: right;" id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
+                                <f:convertNumber pattern="$#,###" />
                             </h:outputText>
                         </rich:column>
 
@@ -363,8 +363,8 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###.00" />
+                            <h:outputText  styleClass="ikont-hot-numvlrcontrato" style="text-align: right;" value="#{currentRow.numvlrcontrato}">
+                                <f:convertNumber pattern="$#,###" />
                             </h:outputText>
                         </rich:column>
 

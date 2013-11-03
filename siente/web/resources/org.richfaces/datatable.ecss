@@ -6,10 +6,12 @@
     margin : 10px 0px;
 }
 
-*.rf-dt tbody:nth-child(odd) {
+.rf-dt tbody tr:nth-child(odd) {
     background-color: '#{richSkin.tablebackgraudcolorpar}';
 }
-
+.rf-dt tbody textarea{
+    background-color: transparent;
+}
 
 .rf-dt-cap {
     
@@ -73,6 +75,7 @@
     font-weight: bold;
     padding: 4px;
     text-align: center;
+    border-right : solid 1px '#{richSkin.colorTextButton}';
 }
 
 .rf-dt-sftr {
