@@ -104,6 +104,16 @@ import java.util.Set;
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //px 
 
+    private boolean modolectura=false;
+
+    public boolean isModolectura() {
+        return modolectura;
+    }
+
+    public void setModolectura(boolean modolectura) {
+        this.modolectura = modolectura;
+    }
+
     public PlanOperativoGantt() {
     }
 
@@ -219,7 +229,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         taskStore.setAutoCommit(true);
         root = GanttDatos.getTareas(convenioDTO);
 
-
         for (ActividadobraDTO base : root.getChildren()) {
             taskStore.add(base);
             if (base.hasChildren()) {
@@ -227,16 +236,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         }
 
-
         numeracionActividades = (taskStore.getAllItemsCount()) + 1;
-        service.setLog("En numeracionActi actua" + numeracionActividades, null);
         depStore.clear();
         depStore.addAll(GanttDatos.getDependencia(convenioDTO));
-        service.setLog("depstores:" + depStore.size(), null);
         config = new GanttConfig();
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
-
         ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
         headers.add(new WeekTimeAxisGenerator("MMM d"));
         headers.add(new DayTimeAxisGenerator("EEE"));
@@ -244,10 +249,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Enable task resize
         config.resizeHandle = ResizeHandle.BOTH;
         // Enable dependency DnD
-        config.dependencyDnDEnabled = true;
-        config.dragCreateEnabled = true;
+        config.dependencyDnDEnabled = !isModolectura();
+        config.dragCreateEnabled = !isModolectura();
         // Enable task DnD
-        config.taskDnDEnabled = true;
+        config.taskDnDEnabled = !isModolectura();
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -261,16 +266,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Define column width
         config.columnWidth = 60;
         // Enable task contextMenu
-        config.taskContextMenuEnabled = true;
+        config.taskContextMenuEnabled = !isModolectura();
         // Enable dependency contextMenu
-        config.dependencyContextMenuEnabled = true;
+        config.dependencyContextMenuEnabled = !isModolectura();
         config.eventContextMenuEnabled = false;
         config.showTaskLabel = true;
         config.useEndDate = true;
         config.clickCreateEnabled = false;
-        config.dependencyDnDEnabled = true;
         config.cascadeChanges = true;
-
 
         /**
          * Ventana Modal Confirmar Eliminar Actividad
@@ -318,7 +321,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-
         /**
          * Personalizando el menú
          */
@@ -340,8 +342,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         config.taskContextMenu.add(menuItemProyecto);
-
-
 
         /**
          * Opciones de la actividad proyecto
@@ -466,7 +466,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         /*Se crea el menu asociado a las dependencias**/
         config.dependencyContextMenu = new Menu();
 
-
         final AlertMessageBox d = new AlertMessageBox("Error", "La dependencia no puede ser eliminada");
         MenuItem menuItemEliminarDependencia = new MenuItem("Eliminar dependencia");
         menuItemEliminarDependencia.addSelectionHandler(new SelectionHandler<Item>() {
@@ -489,9 +488,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.taskProperties = props;
         config.dependencyProperties = depProps;
 
-        // Cascade Changes
-        config.cascadeChanges = true;
-
         // Add zones to weekends
         ArrayList<ZoneGeneratorInt> zoneGenerators = new ArrayList<ZoneGeneratorInt>();
         zoneGenerators.add(new WeekendZoneGenerator()); // Create a zone every weekend
@@ -500,28 +496,27 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         setGantt(new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-            @Override
-            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
-                if (toTask.getPredecesor() != null) {
-                    if (!toTask.getPredecesor().isEmpty()) {
-                        toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
-                    } else {
-                        toTask.setPredecesor("" + fromTask.getNumeracion());
+                    @Override
+                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                        actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
+                        if (toTask.getPredecesor() != null) {
+                            if (!toTask.getPredecesor().isEmpty()) {
+                                toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
+                            } else {
+                                toTask.setPredecesor("" + fromTask.getNumeracion());
+                            }
+                        } else {
+                            toTask.setPredecesor("" + fromTask.getNumeracion());
+                        }
+
+                        DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
+                        getGantt().getGanttPanel().getContainer().reconfigure(true);
+                        getGantt().getGanttPanel().getContainer().refresh();
+
+                        // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
+                        return dependencia;
                     }
-                } else {
-                    toTask.setPredecesor("" + fromTask.getNumeracion());
-                }
-
-                DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
-                getGantt().getGanttPanel().getContainer().reconfigure(true);
-                getGantt().getGanttPanel().getContainer().refresh();
-
-                // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
-
-                return dependencia;
-            }
-        ;
+                ;
 
         });     
         
@@ -531,7 +526,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
-
 
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
@@ -707,82 +701,72 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-
         // Editing
-        final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
+         
+        if (!isModolectura()) {
+            final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
 
+            editing.addEditor(config.leftColumns.getColumn(1), new DateField());
+            editing.addEditor(config.leftColumns.getColumn(2), new DateField());
+            editing.addEditor(config.leftColumns.getColumn(3), new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor()));
+            editing.addEditor(config.leftColumns.getColumn(6), new TextField());
+            SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
 
-        editing.addEditor(config.leftColumns.getColumn(1), new DateField());
-        editing.addEditor(config.leftColumns.getColumn(2), new DateField());
-        editing.addEditor(config.leftColumns.getColumn(3), new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor()));
-        editing.addEditor(config.leftColumns.getColumn(6), new TextField());
-        SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
+            spinner.setMinValue(
+                    0);
+            spinner.setMaxValue(
+                    100);
+            spinner.setIncrement(
+                    1);
+            editing.addEditor(config.leftColumns.getColumn(3), spinner);
+            //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
 
-        spinner.setMinValue(
-                0);
-        spinner.setMaxValue(
-                100);
-        spinner.setIncrement(
-                1);
-        editing.addEditor(config.leftColumns.getColumn(3), spinner);
-        //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
+            editing.addBeforeStartEditHandler(
+                    new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
+                        @Override
+                        public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
+                            ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                            ActividadobraDTO ac = store.get(event.getEditCell().getRow());
+                            if (!ac.isEsNoEditable()) {
+                                actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
+                            } else {
+                                alertaMensajes("Esta Actividad no se puede editar");
+                            }
+                        }
+                    });
 
-        editing.addBeforeStartEditHandler(
-                new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
-            @Override
-            public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
-                ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                if (!ac.isEsNoEditable()) {
-                    actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
-                } else {
-                    alertaMensajes("Esta Actividad no se puede editar");
+            editing.addCompleteEditHandler(
+                    new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
+                        @Override
+                        public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
+                            ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                            ActividadobraDTO ac = store.get(event.getEditCell().getRow());
+
+                            if (!ac.isEsNoEditable()) {
+                                if (event.getEditCell().getCol() == 1) {
+                                    modificarFechaInicio(ac);
+                                } else if (event.getEditCell().getCol() == 2) {
+                                    modificarFechaFin(ac);
+                                } else if (event.getEditCell().getCol() == 3) {
+                                    modificarPorDuracion(ac);
+                                } else if (event.getEditCell().getCol() == 6) {
+                                    modificarPredecesoresActividad(ac);
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                }
+                            } else {
+                                service.setLog("entre en el else nuevo", null);
+                                editing.cancelEditing();
+                            }
+                        }
+                    });
+
+            editing.addCancelEditHandler(new CancelEditEvent.CancelEditHandler<ActividadobraDTO>() {
+                @Override
+                public void onCancelEdit(CancelEditEvent<ActividadobraDTO> event) {
+                    service.setLog("entre en cancelar edicion", null);
                 }
-            }
-        });
-
-
-        editing.addCompleteEditHandler(
-                new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
-            @Override
-            public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
-                ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-
-                if (!ac.isEsNoEditable()) {
-                    if (event.getEditCell().getCol() == 1) {
-                        modificarFechaInicio(ac);
-                    } else if (event.getEditCell().getCol() == 2) {
-                        modificarFechaFin(ac);
-                    } else if (event.getEditCell().getCol() == 3) {
-                        modificarPorDuracion(ac);
-                    } else if (event.getEditCell().getCol() == 6) {
-                        modificarPredecesoresActividad(ac);
-                        getGantt().getGanttPanel().getContainer().refresh();
-                    }
-                } else {
-                    service.setLog("entre en el else nuevo", null);
-                    editing.cancelEditing();
-                }
-            }
-        });
-
-
-
-
-
-
-        editing.addCancelEditHandler(new CancelEditEvent.CancelEditHandler<ActividadobraDTO>() {
-            @Override
-            public void onCancelEdit(CancelEditEvent<ActividadobraDTO> event) {
-                service.setLog("entre en cancelar edicion", null);
-            }
-        });
-
-
-
-
-
+            });
+        }
 
         getGantt().getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
@@ -808,11 +792,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             cp.setPixelSize(980, 460);
             cp.getElement().setMargins(new Margins(0));
 
-
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
             vc1.setWidth("400");
             vc1.setPosition(140, 0);
-
 
             Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
             tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
@@ -839,21 +821,26 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-
             // main.setPagePosition(300, 0);
-
-            menu_superior_gwt menuSupe = new menu_superior_gwt(service, taskStore, convenioDTO, depStore);
-            main.add(menuSupe.asWidget());
+            service.setLog("lectura "+modolectura, null);
+            if (!isModolectura()) {
+                Menu_superior_gwt menuSupe = new Menu_superior_gwt(service, taskStore, convenioDTO, depStore);
+                main.add(menuSupe.asWidget());
+            }
             main.add(vc1);
-            sub_menu_gwt submenu = new sub_menu_gwt(service, taskStore, convenioDTO, depStore);
+
+            Sub_menu_gwt submenu = new Sub_menu_gwt(service, taskStore, convenioDTO, depStore);
             main.add(submenu.asWidget());
-            ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
-            main.add(toolBar.asWidget());
+            if (!isModolectura()) {
+                ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
+                main.add(toolBar.asWidget());
+            }
             //main.add(tablaNumeracion.asWidget());
             main.add(cp);
-
-//            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-//            main.add(toolinferior);
+             if (!isModolectura()) {
+            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+            main.add(toolinferior);
+             }
         } else {
             main = new FlowLayoutContainer();
             main.getElement().setMargins(new Margins(136, 0, 0, 5));
@@ -872,8 +859,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
             main.setPagePosition(0, 0);
             main.add(cp);
-
-
 
         }
         return main;
@@ -924,8 +909,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         tbar.add(days);
-
-
 
         TextButton weeks = new TextButton("Semanas");
         weeks.addSelectHandler(new SelectHandler() {
@@ -1032,7 +1015,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-
         tbar.add(critical);
 
         return tbar;
@@ -1103,9 +1085,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        service.setLog("Load module", null);
         cargar();
-
     }
 
     private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {
@@ -1128,41 +1108,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onSuccess(ContratoDTO result) {
                 convenioDTO = result;
-                service.setLog("valor disponible" + convenioDTO.getValorDisponible(), null);
                 if (validandoDatosBasicosConvenio()) {
-                    // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
-//                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
-//                    d.show();
-
-//                    DateWrapper dw;
-//                    dw = new DateWrapper(convenioDTO.getDatefechaini());
-//                    
-//                    while(dw.asDate().compareTo(convenioDTO.getDatefechafin())<=0)
-//                    {
-//                        dw=dw.addDays(30);
-//                       service.setLog("dw = " + dw.asDate(),null);
-//                    }    
-
-//                    service.setLog("Size fuentes" + convenioDTO.getFuenterecursosconvenios().size(), null);
-//                    service.setLog("Idcontrato" + convenioDTO.getIntidcontrato(), null);
-//                    service.setLog("Nombre abreviado" + convenioDTO.getNombreAbreviado(), null);
-//                    service.setLog("Numero contrato" + convenioDTO.getStrnumcontrato(), null);
-//                    service.setLog("Objeto contrato" + convenioDTO.getTextobjeto(), null);
-//                    service.setLog("Fecha ini" + convenioDTO.getDatefechaactaini(), null);
-//                    service.setLog("Fecha fin" + convenioDTO.getDatefechafin(), null);
-//                    service.setLog("Estado convenio" + convenioDTO.getEstadoConvenio(), null);
-//                    service.setLog("Numero días" + convenioDTO.getIntduraciondias(), null);
-//                    service.setLog("Montos" + convenioDTO.getMontos().size(), null);
-//                    service.setLog("Valor contrato" + convenioDTO.getNumvlrcontrato(), null);
-//                    service.setLog("Relacion obra fuente recursos" + convenioDTO.getRelacionobrafuenterecursoscontratos().size(), null);
-//                    service.setLog("Tipo contrato" + convenioDTO.getTipocontrato().getInttipocontrato(), null);
-//                    service.setLog("Valor disponible" + convenioDTO.getValorDisponible(), null);
-
+                    setModolectura(convenioDTO.isModolecturaplanop());
                     RootPanel.get().add(asWidget());
                     if (convenioDTO.isVermensajeguardado()) {
                         Info.display("", convenioDTO.getMensajeguardado());
+                    } else if (convenioDTO.isVermensajeerror()) {
+                        AlertMessageBox d = new AlertMessageBox("Alerta", convenioDTO.getMensajeguardado());
+                        d.show();
                     }
                     convenioDTO.setVermensajeguardado(false);
+                    convenioDTO.setVermensajeerror(false);
                     convenioDTO.setMensajeguardado("");
                 } else {
                     service.setLog(msg, null);

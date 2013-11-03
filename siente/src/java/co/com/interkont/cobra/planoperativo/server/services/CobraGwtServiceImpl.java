@@ -49,8 +49,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private boolean elimino = false;
     //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
-    private Set dependenciasEliminar = new LinkedHashSet(0);
-
+    private Set dependenciasEliminar = new LinkedHashSet(0);   
     /**
      * @return the dependenciasEliminar
      */
@@ -342,5 +341,5 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     @Override
     public void setElimino(boolean elimino) {
         this.elimino = elimino;
-    }
+    }    
 }

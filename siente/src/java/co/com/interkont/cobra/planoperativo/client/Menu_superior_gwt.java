@@ -24,14 +24,14 @@ import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
  *
  * @author Daniela
  */
-public class menu_superior_gwt implements IsWidget {
+public class Menu_superior_gwt implements IsWidget {
     
     protected CobraGwtServiceAbleAsync service;
     protected TreeStore<ActividadobraDTO> taskStore;
     protected ContratoDTO convenio;
     protected ListStore<DependenciaDTO> depStore;
     
-    public menu_superior_gwt(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
+    public Menu_superior_gwt(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
         this.service = service;
         this.taskStore = taskStore;
         this.convenio = convenio;

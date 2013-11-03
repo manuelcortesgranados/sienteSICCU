@@ -45,6 +45,7 @@ public class ContratoDTO implements IsSerializable {
     private boolean vermensajeguardado;
     private String mensajeguardado;
     private boolean vermensajeerror;
+    private boolean modolecturaplanop;
     
     public ContratoDTO() {       
     }
@@ -402,6 +403,12 @@ public class ContratoDTO implements IsSerializable {
     public void setVermensajeerror(boolean vermensajeerror) {
         this.vermensajeerror = vermensajeerror;
     }
-    
-    
+
+    public boolean isModolecturaplanop() {
+        return modolecturaplanop;
+    }
+
+    public void setModolecturaplanop(boolean modolecturaplanop) {
+        this.modolecturaplanop = modolecturaplanop;
+    }
 }

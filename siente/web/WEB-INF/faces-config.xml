@@ -495,6 +495,11 @@
             <from-outcome>consultar_atencion</from-outcome>
             <to-view-id>/AtencionHumanitaria/ConsultarSolicitud.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>fuenteRecursos</from-outcome>
+            <to-view-id>/Supervisor/FuenteRecursosConvenio.xhtml</to-view-id>
+            <redirect/>            
+        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>

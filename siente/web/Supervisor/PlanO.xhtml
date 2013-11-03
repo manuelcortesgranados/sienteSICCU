@@ -17,32 +17,32 @@
     <body>
         <h:form id="form_menu">
             <ui:include src="/facelets/menu_gestion.xhtml" />
-        </h:form>
-        <h:form>
-            <table  align="center" border="0" cellpadding="0" >
-                <tr>
-                    <td valign="top">
+        </h:form>        
+        <table  align="center" border="0" cellpadding="0" >            
+            <tr>
+                <td valign="top">
+                    <h:form>
                         <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
                             <tr>
-                                 <td>
+                                <td>
                                     <h:panelGroup rendered="#{var.permisonuevodiseno}"  id="form_menu_lateral">
                                         <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
                                     </h:panelGroup>
                                 </td>
-                                <td>
+                                <td>                                    
                                     <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
                                     <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
                                 </td>
                             </tr>
-
                         </table>
+                    </h:form> 
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-            </table>
+        </table>
 
-        </h:form> 
+
         <h:form id="form_footer" style="position: relative;top:350px;">
             <ui:include src="/facelets/footer.xhtml"/>
         </h:form>

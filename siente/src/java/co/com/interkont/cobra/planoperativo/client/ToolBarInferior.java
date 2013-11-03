@@ -11,6 +11,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.sencha.gxt.data.shared.ListStore;
@@ -38,9 +39,42 @@ public class ToolBarInferior extends ToolBar {
                     public void onFailure(Throwable caught) {
                         service.setLog("Problema al transferir el objeto a JSF", null);
                     }
+                    
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        service.setNavegacion(6, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+                            
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                            }
+                        });
+                    }
+                });
+                
+                
+            }
+        });
+        continuar.setStyleName("ikont-po-img-continuarGWTInferior");
+
+
+        finalizar.setText("Finalizar");
+        finalizar.addClickHandler(new ClickHandler() {        
+            @Override
+            public void onClick(ClickEvent event) {
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
 
                     @Override
                     public void onSuccess(Boolean result) {
+
                         service.setNavegacion(2, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
@@ -49,21 +83,21 @@ public class ToolBarInferior extends ToolBar {
 
                             @Override
                             public void onSuccess(Boolean result) {
-                                com.google.gwt.user.client.Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                                service.setGuardarconvenio(2, new AsyncCallback<Boolean>() {
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Boolean result) {
+                                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                                    }
+                                });
                             }
                         });
                     }
                 });
-            }
-        });
-        continuar.setStyleName("ikont-po-img-continuarGWTInferior");
-
-
-        finalizar.setText("Finalizar");
-        finalizar.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
         finalizar.setStyleName("ikont-po-img-finalizarGWTInferior");

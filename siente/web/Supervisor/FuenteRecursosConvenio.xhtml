@@ -1,0 +1,44 @@
+8
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml">
+    <ui:define name="head">
+        <title>Cobra - Supervisor</title>
+        <h:outputScript name="script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
+    </ui:define>
+    
+    <ui:define  rendered="#{var.permisonuevodiseno and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
+        <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
+    </ui:define>
+    <ui:define name="body">
+        <center>
+            <h:panelGroup   layout="block" style="width: 900px;" styleClass="ikont-rp-db" >
+                <ui:include src="/Supervisor/FuenteRecursos.xhtml"/> 
+            </h:panelGroup>
+        
+        </center>
+    </ui:define>
+</ui:composition>
+

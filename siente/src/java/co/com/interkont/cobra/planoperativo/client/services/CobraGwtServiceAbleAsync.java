@@ -64,5 +64,5 @@ public interface CobraGwtServiceAbleAsync {
 
     void isElimino(AsyncCallback<Boolean> call);
 
-    void setElimino(boolean elimino, AsyncCallback<Void> call);
+    void setElimino(boolean elimino, AsyncCallback<Void> call);    
 }

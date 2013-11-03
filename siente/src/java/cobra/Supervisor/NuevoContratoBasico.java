@@ -63,6 +63,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -101,7 +102,7 @@ import javax.servlet.ServletContext;
  */
 public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-
+    
     /**
      * Objeto para acceder a los atributos de contrato
      */
@@ -4164,34 +4165,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
-            contrato.setActividadobras(new LinkedHashSet<Actividadobra>());
-            contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
-
-            Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(contrato.getIntidcontrato());
-            if (activiprincipal != null) {
-                listaProyectosConvenio.clear();
-                //extraerProyectosActividad(act);
-                // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
-                cargarActividadesConsultadas(activiprincipal);
-                asignarNumeracionActividadesConsultadas(lstTodasActividades);
-                lstActividadesEliminar.clear();
-                lstTemporalActividades.clear();
-                mapaReembolsoConvenio.clear();
-                getSessionBeanCobra().getCobraGwtService().setElimino(false);
-                encontrarActividadContrato(activiprincipal, lstTemporalActividades);
-                contrato.getActividadobras().add(activiprincipal);
-                // LLenar dependencias
-                contrato.setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
-                asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
-            }
-            String copiaValorContrato = "" + contrato.getNumvlrcontrato();
-            String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
-            contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
-            contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
             recursosconvenio.sumaFuentesRecursos();
+            contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
+            cargarActividadesPlanOperativo();            
+            contrato.setAuxiliarValorContrato(contrato.getNumvlrcontrato());
+            contrato.setAuxiliarValorGerencia(contrato.getNumValorCuotaGerencia());
+            
             this.llenarDocumentoContrato();
             listadocumentos = getSessionBeanCobra().getCobraService().getListaDocumentosContrato();
             llenarPolizas();
+            getContrato().setModolecturaplanop(false);
             return "nuevoConvenioPo";
         } else {
             return "consultarContrato";
@@ -4212,6 +4195,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         cargarContrato(contratotabla);
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
 //            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+            getContrato().setModolecturaplanop(false);
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
             llenarPolizas();
             return "nuevoConvenioPo";
@@ -6531,7 +6515,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String irApaginaconvenio() {
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
-            panelPantalla = 1;
+            panelPantalla = 1;            
             return "nuevoConvenioPo";
         }
         return "nuevoContrato";
@@ -6702,7 +6686,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
             }
         } catch (ConvenioException e) {
-            FacesUtils.addErrorMessage(e.getMessage());
+            FacesUtils.addErrorMessage(e.getMessage());           
             setMensajePlanOperativo(false, true, e.getMessage());
         }
         return null;
@@ -7305,15 +7289,24 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
             puedeEditarValorFuentes = boolActivarValor;
         } else {
-            if (contrato.getAuxiliarValorContrato().compareTo(contrato.getNumvlrcontrato()) != 0) {
-                String copiaValorContrato = "" + contrato.getNumvlrcontrato();
-                contrato.setAuxiliarValorContrato(new BigDecimal(copiaValorContrato));
-                FacesUtils.addErrorMessage("No es posible modificar el valor Global del convenio,porque ya posee fuente de recursos!");
+            //if (contrato.getAuxiliarValorContrato().compareTo(contrato.getNumvlrcontrato()) < 0) {
+            if (contrato.getAuxiliarValorContrato().compareTo(recursosconvenio.getSumafuentes()) < 0) {
+                contrato.setAuxiliarValorContrato(contrato.getNumvlrcontrato());
+                FacesUtils.addErrorMessage("No es posible reducir el valor Global del convenio, porque ya posee fuente de recursos por un valor de $" + recursosconvenio.getSumafuentes());
+            } else {
+                contrato.setNumvlrcontrato(contrato.getAuxiliarValorContrato());
+                contrato.setValorDisponible(contrato.getNumvlrcontrato().subtract(recursosconvenio.getSumafuentes()));
             }
-            if (contrato.getAuxiliarValorGerencia().compareTo(contrato.getNumValorCuotaGerencia()) != 0) {
-                String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
-                contrato.setAuxiliarValorGerencia(new BigDecimal(copiaValorGerencia));
-                FacesUtils.addErrorMessage("No es posible modificar el valor Global de la cuota de gerencia,porque ya posee fuente de recursos!");
+            //if (contrato.getAuxiliarValorGerencia().compareTo(contrato.getNumValorCuotaGerencia()) != 0) {
+            if (contrato.getAuxiliarValorGerencia().compareTo(recursosconvenio.getCuotaGerencia()) < 0) {
+                //String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
+                contrato.setAuxiliarValorGerencia(contrato.getNumValorCuotaGerencia());
+                FacesUtils.addErrorMessage("No es posible reducir el valor Global de la cuota de gerencia,porque ya distribución de cuota de gerencia en fuente de recursos por un valor de $" + recursosconvenio.getCuotaGerencia());
+            }
+            else
+            {
+                contrato.setNumValorCuotaGerencia(contrato.getAuxiliarValorGerencia());
+                contrato.setValorDisponibleCuotaGerencia(contrato.getNumValorCuotaGerencia().subtract(recursosconvenio.getCuotaGerencia()));
             }
         }
     }
@@ -7710,4 +7703,57 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         getContrato().setVermensajeerror(error);
         getContrato().setMensajeguardado(mensaje);
     }
+    
+    /**
+     * Iniciar Fuentes de Recurso Contrato desde el menu superior administrar convenio
+     * 
+     *
+     * @return Formulario Fuente Recurso
+     */
+    public String iraFuenteRecursos() {
+        setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
+            recursosconvenio.setVerAgregarRecurso(false);
+            recursosconvenio.setVerEliminarRecurso(false);
+            recursosconvenio.sumaFuentesRecursos();
+            
+        return "fuenteRecursos";
+    }
+    /**
+     * Iniciar Plan Operativo proyecto en ejecución
+     * @return String
+     */
+    public String iraPlanOperativoEjecucion()
+    {
+       setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(getContrato().getIntidcontrato()));
+            recursosconvenio.sumaFuentesRecursos();
+        cargarActividadesPlanOperativo();
+        getContrato().setAuxiliarValorContrato(getContrato().getNumvlrcontrato());
+            getContrato().setAuxiliarValorGerencia(getContrato().getNumValorCuotaGerencia());
+        getContrato().setModolecturaplanop(true);
+        return planOperativo();
+    }   
+    
+    public void cargarActividadesPlanOperativo()
+    {
+        getContrato().setActividadobras(new LinkedHashSet<Actividadobra>());
+            Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(getContrato().getIntidcontrato());
+            if (activiprincipal != null) {
+                listaProyectosConvenio.clear();
+                //extraerProyectosActividad(act);
+                // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
+                cargarActividadesConsultadas(activiprincipal);
+                asignarNumeracionActividadesConsultadas(lstTodasActividades);
+                lstActividadesEliminar.clear();
+                lstTemporalActividades.clear();
+                mapaReembolsoConvenio.clear();
+                getSessionBeanCobra().getCobraGwtService().setElimino(false);
+                encontrarActividadContrato(activiprincipal, lstTemporalActividades);
+                getContrato().getActividadobras().add(activiprincipal);
+                // LLenar dependencias
+                getContrato().setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
+                asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
+            }
+    }        
 }

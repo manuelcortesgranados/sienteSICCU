@@ -41,6 +41,26 @@ public class RecursosConvenio implements Serializable {
     private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
     private SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     private ResourceBundle bundle = sbc.getBundle();
+    private boolean verAgregarRecurso=true;
+    private boolean verEliminarRecurso=true;
+
+    public boolean isVerEliminarRecurso() {
+        return verEliminarRecurso;
+    }
+
+    public void setVerEliminarRecurso(boolean verEliminarRecurso) {
+        this.verEliminarRecurso = verEliminarRecurso;
+    }    
+    
+    public boolean isVerAgregarRecurso() {
+        return verAgregarRecurso;
+    }
+
+    public void setVerAgregarRecurso(boolean verAgregarRecurso) {
+        this.verAgregarRecurso = verAgregarRecurso;
+    }
+    
+    
 
     public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
         return lstFuentesRecursosEliminar;
@@ -79,6 +99,8 @@ public class RecursosConvenio implements Serializable {
         llenarTipoAporte();
         llenarRoles(cobraService);
         llenarVigencia();
+        verAgregarRecurso=true;
+        verEliminarRecurso=true;
     }
 
     public void limpiarFuenteRecurso() {

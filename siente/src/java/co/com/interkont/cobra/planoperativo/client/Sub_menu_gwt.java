@@ -25,7 +25,7 @@ import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
  *
  * @author Daniela
  */
-public class sub_menu_gwt implements IsWidget {
+public class Sub_menu_gwt implements IsWidget {
     
     protected CobraGwtServiceAbleAsync service;
     protected TreeStore<ActividadobraDTO> taskStore;
@@ -35,7 +35,7 @@ public class sub_menu_gwt implements IsWidget {
     final Button flujodecaja = new Button("Flujo de Caja");
     final Button reportes = new Button("Reportes");
     
-    public sub_menu_gwt(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
+    public Sub_menu_gwt(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio, final ListStore<DependenciaDTO> depStore) {
         this.service = service;
         this.taskStore = taskStore;
         this.convenio = convenio;
