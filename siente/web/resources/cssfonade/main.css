@@ -2853,28 +2853,20 @@ css usuario modificacion
     padding: 100px; 
     /*top: 61px;*/
 }
-.inputlinkhomezoom:link{
-    font-size: 1em; 
-    color: #58595B; 
-    padding: 10px;
-    margin-top: -14px;
-    height: 178px;
+.inputlinkhomezoom{
+    background-color: #257500; 
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 15px;
 }
+
 .inputlinkhomezoom:hover{
-    font-size: 1em; 
-    color:  #257500 !important; 
-    padding: 10px;
+    background-color:  #9CFF00 !important; 
 }
-.inputlinkhomezoom:active{
-    font-size: 1em; 
-    color:  #257500 !important; 
-    padding: 10px;
-}
-.inputlinkhomezoom:visited{
-    font-size: 1em; 
-    color:  #257500 !important; 
-    padding: 10px;
-}
+
 .panelzoomhome1{
     position: relative !important; 
     background-position: bottom;
@@ -3082,10 +3074,16 @@ css usuario modificacion
 /*Css para la pagina de consultar convenio*/
 
 .ikont-tabla-entidad-contratista{
-    background-color: #F2F2F2;
     font-size: 13px;
     text-align: center;
     width: 91%;
+    border-collapse:collapse; border: none;
+}
+.ikont-tabla-entidad-contratista tbody tr:nth-child(odd){
+    background-color: #F1F3F2;
+}
+.ikont-tabla-entidad-contratista textarea{
+    background-color: transparent;
 }
 .ikont-hpg-consulconvenio{
     font-size: 14px;
@@ -3093,6 +3091,7 @@ css usuario modificacion
 .ikont-colum-superior-consulta{
     color: #FFF;
     background-color: #257500;
+    border-right: solid 1px #9CFF00;
 }
 /*Detalle proyecto en ejecucion incompleta*/
 .ikont-textarea-datosbasicos{
