@@ -2,6 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
+                template="./../facelets/template_main.xhtml"
                 >
     <h:head>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
@@ -14,6 +15,33 @@
         <h:outputStylesheet name="reset.css" library="cssfonade"/>
         <h:outputStylesheet name="planoperativo.css" library="cssfonade"/>
     </h:head>
+   <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>            
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup> 
+    </ui:define>
+    <ui:define name="body">
+        <h:panelGroup rendered="#{var.permisonuevodiseno  and Supervisor$Contrato.contrato.modolecturaplanop}" >
+            <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
+        </h:panelGroup>       
+                    <h:form>
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
+                        <tr>                            
+                            <td>  
+                                <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+                                    <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+                            </td>
+                        </tr>
+                    </table>                   
+                    </h:form> 
+    </ui:define>
+    <!--
     <body>
         <h:form id="form_menu">
             <ui:include src="/facelets/menu_gestion.xhtml" />
@@ -22,19 +50,19 @@
             <tr>
                 <td valign="top">
                     <h:form>
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
-                            <tr>
-                                <td>
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
+                        <tr>
+                            <td>
                                     <h:panelGroup rendered="#{var.permisonuevodiseno}"  id="form_menu_lateral">
                                         <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
                                     </h:panelGroup>
-                                </td>
-                                <td>                                    
-                                    <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+                            </td>
+                            <td>  
+                                <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
                                     <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
-                                </td>
-                            </tr>
-                        </table>
+                            </td>
+                        </tr>
+                    </table>                   
                     </h:form> 
 
                 </td>
@@ -52,5 +80,5 @@
 
     </body>
 
-
+-->
 </ui:composition>

@@ -104,7 +104,7 @@ import java.util.Set;
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //px 
 
-    private boolean modolectura=false;
+    private boolean modolectura = false;
 
     public boolean isModolectura() {
         return modolectura;
@@ -702,7 +702,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
         // Editing
-         
         if (!isModolectura()) {
             final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
 
@@ -785,7 +784,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
             main.setWidth(980);
-            main.setStyleName("main-contenedor-gwt");
+             if (!isModolectura()) {
+                 main.setStyleName("main-contenedor-gwt");
+             }
+             else
+             {
+                 main.setStyleName("main-contenedor-gwt-en-ejecucion");
+             }   
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
@@ -795,24 +800,24 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
             vc1.setWidth("400");
             vc1.setPosition(140, 0);
+            if (!isModolectura()) {
+                Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
+                tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
+                Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
+                subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
+                Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
+                mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
+                Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
+                mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
 
-            Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
-            tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
-            Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
-            subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
-            Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
-            mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
-            Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
-            mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
+                vc1.add(tituloPrincipal);
+                vc1.add(subTituloPrincipal);
+                vc1.add(mensajeG1);
+                vc1.add(mensajeG2);
 
-            vc1.add(tituloPrincipal);
-            vc1.add(subTituloPrincipal);
-            vc1.add(mensajeG1);
-            vc1.add(mensajeG2);
-
-            HorizontalPanel linea = new HorizontalPanel();
-            linea.addStyleName("ikont-hr-separador-convenio");
-
+                HorizontalPanel linea = new HorizontalPanel();
+                linea.addStyleName("ikont-hr-separador-convenio");
+            }
             VerticalLayoutContainer vc = new VerticalLayoutContainer();
             cp.setWidget(vc);
             //WidgetTblNumeracion tablaNumeracion=new WidgetTblNumeracion(numeracionActividades);
@@ -820,9 +825,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(createToolBarPeriodo());
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-
-            // main.setPagePosition(300, 0);
-            service.setLog("lectura "+modolectura, null);
+            
+            
             if (!isModolectura()) {
                 Menu_superior_gwt menuSupe = new Menu_superior_gwt(service, taskStore, convenioDTO, depStore);
                 main.add(menuSupe.asWidget());
@@ -837,10 +841,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
             //main.add(tablaNumeracion.asWidget());
             main.add(cp);
-             if (!isModolectura()) {
-            ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
-            main.add(toolinferior);
-             }
+            if (!isModolectura()) {
+                ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
+                main.add(toolinferior);
+            }              
+            
         } else {
             main = new FlowLayoutContainer();
             main.getElement().setMargins(new Margins(136, 0, 0, 5));

@@ -30,7 +30,8 @@
             <ui:include src="/facelets/menu_superior_administrar.xhtml" />
             </h:panelGroup>
             <center>
-                <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" rendered="#{Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5 }">
+                
+                <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" rendered="#{(Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5) and !Supervisor$Contrato.contrato.modolecturaplanop}">
                     <br/>
                     <h:outputText styleClass="ikont-title-1-convenio" value="#{var.nuevoconvenio}"/>
                     <br/>
@@ -102,7 +103,7 @@
                 </h:panelGroup>
             </a4j:region> 
 
-            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">                
+            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0" rendered="#{!Supervisor$Contrato.contrato.modolecturaplanop}">                
                
                 <a4j:commandLink styleClass="ikont-po-img-posicion-borrador-finalizar ikont-po-img-borrador"  title="Guardar borrador"  action="#{Supervisor$Contrato.guardarBorradorConvenio}"                                  render="@form"
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
