@@ -40,7 +40,7 @@ a.rf-ds-btn {
     background-image: "url(#{resource['org.richfaces.images:dsBtnGrad.png']})";
     font-size: '#{richSkin.generalSizeFont}';
     font-family: '#{richSkin.generalFamilyFont}';
-    color: '#{richSkin.generalTextColor}';
+    color: '#{richSkin.colorTextButton}';
     text-decoration: none;
     font-weight: normal;
 }

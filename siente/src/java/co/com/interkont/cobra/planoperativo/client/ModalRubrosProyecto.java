@@ -54,6 +54,7 @@ public class ModalRubrosProyecto implements IsWidget {
     protected TextField campoTipoRecurso;
     protected TextField rubro;
     protected NumberField<BigDecimal> montoAportado;
+    protected NumberField<BigDecimal> valorDisponibleFuente;
     protected ListBox lstVigen;
     private Window modalActual;
     EntidadProperties propse = GWT.create(EntidadProperties.class);
@@ -89,8 +90,10 @@ public class ModalRubrosProyecto implements IsWidget {
         tipoAporte = 0;
         formaPago = 0;
         lstE = new ListBox(false);
+        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
         Iterator it = contratoDto.getFuenterecursosconvenios().iterator();
         fuenteRecursosConveDTO = (FuenterecursosconvenioDTO) it.next();
+        valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
         entidadSeleccionada = fuenteRecursosConveDTO.getTercero().getStrnombrecompleto();
 
         this.contratoDto = contratoDto;
@@ -205,6 +208,11 @@ public class ModalRubrosProyecto implements IsWidget {
         });
         con.add(new FieldLabel(lstVigen, "Vigencia"), new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
 
+        valorDisponibleFuente.setEmptyText("Valor disponible");
+        valorDisponibleFuente.setWidth(cw);
+        valorDisponibleFuente.setEnabled(false);
+        con.add(new FieldLabel(valorDisponibleFuente, "Valor disponible"), new AbstractHtmlLayoutContainer.HtmlData(".valordis"));
+        
         Button botanAddRubros = new Button("Adicionar", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -441,7 +449,7 @@ public class ModalRubrosProyecto implements IsWidget {
      '<tr><td class=entidad ></td><td class=rubro></td></tr>',
      '<tr><td class=vigencia></td><td class=tipor></td></tr>',
      '<tr><td class=formapago></td><td class=monto></td></tr>',
-     '<tr><td class=especie></td></tr>',
+     '<tr><td class=especie></td><td class=valordis></td></tr>',
      '</table>'
      ].join("");
      }-*/;

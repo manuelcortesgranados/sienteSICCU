@@ -2659,7 +2659,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (comboEntidadesContratoguardar()) {
 
             primeroDetcontrato();
-            primeroDetcontratoContratista();
+
+            if (getContrato().getTercero().getIntcodigo() != -1) {
+                primeroDetcontratoContratista();
+            }
         } else {
 
             getContrato().getTercero().setIntcodigo(0);
@@ -3582,7 +3585,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setTipocontratointer(1);
         primeroDetcontrato();
-        primeroDetcontratoContratista();
+        if (getContrato().getTercero().getIntcodigo() != -1) {
+            primeroDetcontratoContratista();
+        }
     }
 
     /**
@@ -4880,7 +4885,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 //aplicafiltrocontrato = true;
             }
             primeroDetcontrato();
-            primeroDetcontratoContratista();
+            if (getContrato().getTercero().getIntcodigo() != -1) {
+                primeroDetcontratoContratista();
+            }
 
         } catch (Exception e) {
         }
@@ -4896,18 +4903,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        if (aplicafiltrocontrato) {
 
         if (comboEntidadesContratoguardar()) {
-            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 20);
             totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
             //        } else {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), 0, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
             pagina = 1;
-            if (totalfilas <= 5) {
+            if (totalfilas <= 20) {
                 totalpaginas = 1;
             } else {
-                totalpaginas = totalfilas / 5;
-                if (totalfilas % 5 > 0) {
+                totalpaginas = totalfilas / 20;
+                if (totalfilas % 20 > 0) {
                     totalpaginas++;
                 }
             }
@@ -4934,14 +4941,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String primeroDetcontratoContratista() {
         if (comboEntidadesContratoguardar()) {
-            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+            listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 20);
             totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
             paginaContratista = 1;
-            if (totalfilasContratista <= 5) {
+            if (totalfilasContratista <= 20) {
                 totalpaginasContratista = 1;
             } else {
-                totalpaginasContratista = totalfilasContratista / 5;
-                if (totalfilasContratista % 5 > 0) {
+                totalpaginasContratista = totalfilasContratista / 20;
+                if (totalfilasContratista % 20 > 0) {
                     totalpaginasContratista++;
                 }
             }
@@ -4958,17 +4965,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los siguiente 5 contratos por filtro (nombre, nro de
+     * Muestra los siguiente 20 contratos por filtro (nombre, nro de
      * contrato,etc)
      *
      * @return null
      */
     public String siguienteDetcontrato() {
 
-        int num = (pagina) * 5;
+        int num = (pagina) * 20;
 
 //        if (aplicafiltrocontrato) {
-        listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 20);
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
 
 //        } else {
@@ -4976,11 +4983,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), num, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -4996,23 +5003,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los siguiente 5 contratos por filtro (nombre, nro de
+     * Muestra los siguiente 20 contratos por filtro (nombre, nro de
      * contrato,etc) para la tabla de convenios según el contratista
      *
      * @return null
      */
     public String siguienteDetcontratoContratista() {
 
-        int num = (paginaContratista) * 5;
+        int num = (paginaContratista) * 20;
 
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 20);
         totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
 
-        if (totalfilasContratista <= 5) {
+        if (totalfilasContratista <= 20) {
             totalpaginasContratista = 1;
         } else {
-            totalpaginasContratista = totalfilasContratista / 5;
-            if (totalfilasContratista % 5 > 0) {
+            totalpaginasContratista = totalfilasContratista / 20;
+            if (totalfilasContratista % 20 > 0) {
                 totalpaginasContratista++;
             }
         }
@@ -5027,17 +5034,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los anterior 5 contratos por filtro (nombre, nro de contrato,etc)
+     * Muestra los anterior 20 contratos por filtro (nombre, nro de contrato,etc)
      *
      * @return null
      */
     public String anterioresDetcontrato() {
 
         pagina = pagina - 1;
-        int num = (pagina - 1) * 5;
+        int num = (pagina - 1) * 20;
 
 //        if (aplicafiltrocontrato) {
-        listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 20);
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
 
 //        } else {
@@ -5045,11 +5052,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), num, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -5064,7 +5071,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los anterior 5 contratos por filtro (nombre, nro de contrato,etc)
+     * Muestra los anterior 20 contratos por filtro (nombre, nro de contrato,etc)
      * para la tabla de convenios según el contratista
      *
      * @return null
@@ -5072,14 +5079,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String anterioresDetcontratoContratista() {
 
         paginaContratista = paginaContratista - 1;
-        int num = (paginaContratista - 1) * 5;
-        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 5);
+        int num = (paginaContratista - 1) * 20;
+        listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, num, 20);
         totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
-        if (totalfilasContratista <= 5) {
+        if (totalfilasContratista <= 20) {
             totalpaginasContratista = 1;
         } else {
-            totalpaginasContratista = totalfilasContratista / 5;
-            if (totalfilasContratista % 5 > 0) {
+            totalpaginasContratista = totalfilasContratista / 20;
+            if (totalfilasContratista % 20 > 0) {
                 totalpaginasContratista++;
             }
         }
@@ -5093,7 +5100,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los último 5 contratos por filtro (nombre, nro de contrato,etc)
+     * Muestra los último 20 contratos por filtro (nombre, nro de contrato,etc)
      *
      * @return null
      */
@@ -5101,9 +5108,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
 //        if (aplicafiltrocontrato) {
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
-        int num = totalfilas % 5;
+        int num = totalfilas % 20;
         if (num == 0) {
-            num = 5;
+            num = 20;
         }
         listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilas - num, totalfilas);
 
@@ -5113,11 +5120,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtro);
 //
 //        }
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -5133,21 +5140,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los último 5 contratos por filtro (nombre, nro de contrato,etc)
+     * Muestra los último 20 contratos por filtro (nombre, nro de contrato,etc)
      * para la tabla de convenios según el contratista
      *
      * @return null
      */
     public String ultimoDetcontratoContratista() {
-        int num = totalfilasContratista % 5;
+        int num = totalfilasContratista % 20;
         totalfilasContratista = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
         listacontratoscontratista = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilasContratista - num, totalfilasContratista);
 
-        if (totalfilasContratista <= 5) {
+        if (totalfilasContratista <= 20) {
             totalpaginasContratista = 1;
         } else {
-            totalpaginasContratista = totalfilasContratista / 5;
-            if (totalfilasContratista % 5 > 0) {
+            totalpaginasContratista = totalfilasContratista / 20;
+            if (totalfilasContratista % 20 > 0) {
                 totalpaginasContratista++;
             }
         }
@@ -5190,7 +5197,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.getEstadoConvenio();
         limpiarContrato();
         primeroDetcontrato();
-        primeroDetcontratoContratista(); // ojo porque anteriormente no se llamaba desde aca.    
+        if (getContrato().getTercero().getIntcodigo() != -1) {
+            primeroDetcontratoContratista(); // ojo porque anteriormente no se llamaba desde aca.    
+        }
         modificartipocontrato = true;
         habiitarmodificartipocontrato = false;
 
@@ -5227,7 +5236,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             limpiarContrato();
         }
         primeroDetcontrato();
-        primeroDetcontratoContratista();
+        if (getContrato().getTercero().getIntcodigo() != -1) {
+            primeroDetcontratoContratista();
+        }
         return "consultarContratoConvenio";
     }
 
@@ -6634,7 +6645,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
                 ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
             }
-            if (validacionesBasicasConvenioPO()) {
+            if (validacionesBasicasConvenioPO(true)) {
                 configuracionGuardadoPo(1, true);
             }
 
@@ -6659,7 +6670,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
                 ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
             }
-            if (validacionesBasicasConvenioPO()) {
+            if (validacionesBasicasConvenioPO(false)) {
                 ValidacionesConvenio.validarDistribucionFinalFuenteRecursos(getContrato().getNumvlrcontrato(), recursosconvenio.getSumafuentes());
                 ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
                 ValidacionesConvenio.validarProyectosPlanOperativo(getListaProyectosConvenio());
@@ -7053,7 +7064,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     mapaReembolsoConvenio.clear();
                 }
                 cargarActividadesEliminar(activi);
-                System.out.println("activi A eliminar = " + lstActividadesEliminar.size());
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
 
@@ -7469,7 +7479,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
     }
 
-    public boolean validacionesBasicasConvenioPO() {
+    public boolean validacionesBasicasConvenioPO(boolean isBorrador) {
         Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
         if (!mapaValidacionFechasPO.isEmpty()) {
             validarModificacionFechasPO(mapaValidacionFechasPO);
@@ -7478,18 +7488,45 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (!validarNumeroContrato()) {
                 FacesUtils.addErrorMessage("El número del convenio ya existe.");
                 return false;
-            } else if (contrato.getIntduraciondias() <= 0) {
-                validardatosbasicosplano = 3;
-                FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
-                return false;
-            } else if (contrato.getFechaactaini() == null) {
-                validardatosbasicosplano = 2;
-                FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionvalida"));
-                return false;
-            } else if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
-                validardatosbasicosplano = 1;
-                FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
-                return false;
+            } else if (isBorrador) {
+
+                if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
+                    if (contrato.getIntduraciondias() <= 0) {
+                        validardatosbasicosplano = 3;
+                        FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
+                        return false;
+                    }
+
+                    if (contrato.getFechaactaini() != null) {
+                        if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
+                            validardatosbasicosplano = 1;
+                            FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
+                            return false;
+                        }
+                    }
+
+                }
+
+            } else {
+                if (contrato.getDatefechaini() == null) {
+                    FacesUtils.addErrorMessage(bundle.getString("fechaInicioNotNull"));
+                    return false;
+                } else if (contrato.getDatefechafin() == null) {
+                    FacesUtils.addErrorMessage(bundle.getString("fechaFinalizacionNotNull"));
+                    return false;
+                } else if (contrato.getIntduraciondias() <= 0) {
+                    validardatosbasicosplano = 3;
+                    FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
+                    return false;
+                } else if (contrato.getFechaactaini() == null) {
+                    validardatosbasicosplano = 2;
+                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionvalida"));
+                    return false;
+                } else if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
+                    validardatosbasicosplano = 1;
+                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
+                    return false;
+                }
             }
         }
 
@@ -7546,7 +7583,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         if (!mapaReembolsoConvenio.isEmpty()) {
-            System.out.println("tengo para devolver f = ");
             devolverValoresConvenio();
         }
 
@@ -7686,10 +7722,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void modificarFuentesRecursosConvenioEstaAsociada(List<Fuenterecursosconvenio> lstFuenteRecursos) {
         for (Fuenterecursosconvenio fuente : lstFuenteRecursos) {
             BigDecimal valorActual = fuente.getValorcuotagerencia().add(fuente.getOtrasreservas()).add(fuente.getReservaiva());
-            System.out.println("valorActual = " + valorActual);
             BigDecimal valorFinal = fuente.getValorDisponible().subtract(valorActual);
-            System.out.println("valor dis = " + fuente.getValoraportado());
-            System.out.println("valor dis desp = " + valorFinal);
             if (fuente.getValoraportado().compareTo(valorFinal) != 0) {
                 fuente.setEstaEnFuenteRecurso(true);
             } else {

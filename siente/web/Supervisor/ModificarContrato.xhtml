@@ -86,11 +86,11 @@
                                 <h:outputText  styleClass="ikont-hot-pnduraciondias"   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" />
                                 <h:outputText  styleClass="ikont-hot-pnduraciondesde"   value="desde" />
                                 <h:outputText  styleClass="ikont-hot-pnduracionda"  value="#{Supervisor$Contrato.contrato.datefechaini}" >
-                                    <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                    <f:convertDateTime pattern="yyyy-MM-dd" />
                                 </h:outputText>
                                 <h:outputText  styleClass="ikont-hot-"   value="#{var.diashasta}" />
                                 <h:outputText  styleClass="ikont-hot-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
-                                    <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
                                 </h:outputText>
                             </h:panelGrid>
                         </rich:panel>
@@ -330,7 +330,7 @@
                                                     <h:outputText  styleClass="ikont-hot-vencimientoPoliza"   value="#{var.fecha} #{var.vencimientoPoliza}" />
                                                 </f:facet>
                                                 <h:outputText  styleClass="ikont-hot-otxtstrVencimientoPolizaModi"   id="otxt-strVencimientoPolizaModi" value="#{localRow.datefechavecimiento}">
-                                                    <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
                                                 </h:outputText>
                                             </rich:column>
 

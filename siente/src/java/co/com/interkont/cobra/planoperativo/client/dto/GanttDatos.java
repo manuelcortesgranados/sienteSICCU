@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * @author desarrollo2
  */
 public class GanttDatos {
-    
+
     private static CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     private static Date fechaComparar;
     private static String msg;
@@ -47,7 +47,7 @@ public class GanttDatos {
      * childrens seteados
      */
     public static ActividadobraDTO getTareas(ContratoDTO convenio) {
-        
+
         ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>(convenio.getActividadobras());
 
 //        ///Actividad Principal - ConvenioDTO
@@ -64,10 +64,10 @@ public class GanttDatos {
         //list.get(0).addChild(new ActividadobraDTO("M2", list.get(0).getStartDateTime(), 0,0, TaskType.MILESTONE,5,true));
 
         ActividadobraDTO root = new ActividadobraDTO(list);
-        
+
         return root;
     }
-    
+
     public static ArrayList getDependencia(ContratoDTO convenio) {
         ArrayList<DependenciaDTO> list = new ArrayList<DependenciaDTO>(convenio.getDependenciasGenerales());
         return list;
@@ -110,32 +110,36 @@ public class GanttDatos {
                     if (act.getDependenciasForFkActividadOrigen() != null) {
                         act.getDependenciasForFkActividadOrigen().add(dep);
                         encontro = true;
-                        
+
                     }
-                    
-                    
+
+
                 }
             }
-            
+
         }
         return convenio;
     }
-    
+
     public static void limpiarActividadesListaDependencia(List<ActividadobraDTO> lista) {
         for (ActividadobraDTO act : lista) {
             act.getDependenciasForFkActividadOrigen().clear();
         }
-        
+
     }
-    
+
     public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
         if (actividadPadre != null) {
             if (actividadPadre.getTipoActividad() != 1) {
                 List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-                int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
-                Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
-                CalendarUtil.addDaysToDate(copiaFecha, duracion);
-                props.endDateTime().setValue(actividadPadre, copiaFecha);
+                Date menor = obtenerMenorFechaInicio(listaHijas);
+                service.setLog("menor:" + menor, null);
+                Date mayor = obtenerMayorFechaFin(listaHijas);
+                service.setLog("mayor:" + mayor, null);
+                int duracion = CalendarUtil.getDaysBetween(menor, mayor);
+                service.setLog("en duracion:" + duracion, null);
+                props.duration().setValue(actividadPadre, duracion);
+                //props.endDateTime().setValue(actividadPadre, copiaFecha);
                 if (actividadPadre.getName().equals("Planeación del Convenio")) {
                     fechaComparar = actividadPadre.getEndDateTime();
                     buscarActividad(contrato, 1, taskStore, props);
@@ -143,16 +147,17 @@ public class GanttDatos {
                     fechaComparar = actividadPadre.getEndDateTime();
                     buscarActividad(contrato, 2, taskStore, props);
                 }
-                
+                service.setLog("al final:" + actividadPadre.getName() + "duracion:" + actividadPadre.getDuration(), null);
+
                 modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
-                
+
             }
         } else {
             service.setLog("entre en gant datos Con padre convenio", null);
         }
-        
+
     }
-    
+
     public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
         List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
         if (tipo == 1) {
@@ -165,35 +170,35 @@ public class GanttDatos {
             odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
         }
     }
-    
+
     public static void odifi(ActividadobraDTO act, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
         m(act, taskStore, props, contrato);
-        
+
         if (!act.getChildren().isEmpty()) {
             for (ActividadobraDTO actiHija : act.getChildren()) {
                 odifi(actiHija, taskStore, props, contrato);
             }
         }
     }
-    
+
     public static void m(ActividadobraDTO actiHija, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
 
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
         if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
-            
+
             int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaComparar);
             Date fecha = CalendarUtil.copyDate(actiHija.getStartDateTime());
             CalendarUtil.addDaysToDate(fecha, duracion);
-            
+
             Date asigFin = CalendarUtil.copyDate(fecha);
             actiHija.setEndDateTime(asigFin);
-            
+
             CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
-            
+
             if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
-                
+
             }
             if (actiHija.getName().equals("Suscripcion del contrato")) {
                 actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
@@ -205,17 +210,18 @@ public class GanttDatos {
                 actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
             }
             props.startDateTime().setValue(actiHija, fecha);
-            
+
             taskStore.update(actiHija);
-            
+
         }
     }
-    
+
     public static void modifi(ActividadobraDTO actiObraInicial, ActividadobraDTO actividadObraFinal, int etapaModificar, TreeStore<ActividadobraDTO> taskStore) {
         taskStore.getChildren(actiObraInicial);
     }
-    
+
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
+        service.setLog("entre aca", null);
         if (!listaHijas.isEmpty()) {
             Date menor = listaHijas.get(0).getStartDateTime();
             for (int i = 1; i < listaHijas.size(); i++) {
@@ -223,11 +229,12 @@ public class GanttDatos {
                     menor = listaHijas.get(i).getStartDateTime();
                 }
             }
+            service.setLog("menorrrr 1" + menor, null);
             return CalendarUtil.copyDate(menor);
         }
         return null;
     }
-    
+
     public static Date obtenerMayorFechaFin(List<ActividadobraDTO> listaHijas) {
         if (!listaHijas.isEmpty()) {
             Date mayor = listaHijas.get(0).getEndDateTime();
@@ -236,11 +243,12 @@ public class GanttDatos {
                     mayor = listaHijas.get(i).getEndDateTime();
                 }
             }
+            service.setLog("mayorrrr:" + mayor, null);
             return CalendarUtil.copyDate(mayor);
         }
         return null;
     }
-    
+
     public static void enlazarActividadConDependencia(List<DependenciaDTO> lstDependencias, List<ActividadobraDTO> lstActividades) {
         for (DependenciaDTO dependencia : lstDependencias) {
             buscarActividadDependencia(dependencia.getFromId(), dependencia, lstActividades, 1);
@@ -253,25 +261,25 @@ public class GanttDatos {
         for (ActividadobraDTO act : lstActividades) {
             if (act.getId().equals(actibuscada)) {
                 act.getDependenciasForFkActividadOrigen().add(dependencia);
-                
+
             }
         }
-        
+
     }
-    
+
     public static ActividadobraDTO obtenerActividadDeRaiz(int i, ContratoDTO contratoDto) {
         Iterator it = contratoDto.getActividadobras().iterator();
         ActividadobraDTO actiRaiz = (ActividadobraDTO) it.next();
         return actiRaiz.getChildren().get(i);
     }
-    
+
     public static void modificarFechaInicioConvenio(ContratoDTO convenioDTO, Date fechaInicio, Date fechaFin) {
         Iterator it = convenioDTO.getActividadobras().iterator();
         ActividadobraDTO ac = (ActividadobraDTO) it.next();
         ac.setStartDateTime(fechaInicio);
         ac.setEndDateTime(fechaFin);
     }
-    
+
     public static DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
         DependenciaDTO dep = new DependenciaDTO();
         dep.setId("" + dep.hashCode());
@@ -283,11 +291,11 @@ public class GanttDatos {
         dep.setIsobligatoria(true);
         return dep;
     }
-    
+
     public static Boolean verificarModificacionFechasContrato(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada, ActividadobraDTO actividadSConvenio) {
         boolean error = false;
         msg = "";
-        
+
         if (taskStore.getParent(actividadSeleccionada).getName().equals("Precontractual")) {
             ActividadobraDTO actividadPadrePrecontractual = taskStore.getParent(actividadSeleccionada);
 
@@ -346,44 +354,44 @@ public class GanttDatos {
                     setMsg(getMsg() + "La fecha de inicio no puede ser menor que la Evaluación de propuestas:" + darFormatoAfecha(actividadPadrePrecontractual.getChildren().get(2).getEndDateTime()));
                     error = true;
                 }
-                
+
                 if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()) > 0) {
                     setMsg(getMsg() + "La fecha de inicio no puede ser mayor que la fecha inicio de la etapa contractual:" + darFormatoAfecha(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()));
                     error = true;
                 }
-                
+
                 if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()) > 0) {
                     setMsg(getMsg() + "La fecha de fin no puede ser mayor que la fecha inicio de la etapa contractual:" + darFormatoAfecha(taskStore.getParent(actividadPadrePrecontractual).getChildren().get(1).getStartDateTime()));
                     error = true;
                 }
             }
-            
+
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Contractual")) {
-            
+
             if (actividadSeleccionada.getTipoActividad() == 6) {
                 if (actividadSeleccionada.getName().equals("Suscripcion del contrato")) {
                     if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
                         error = true;
                         setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
-                        
+
                     } else {
-                        
+
                         if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()) < 0) {
                             error = true;
                             setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser menor que fecha fin de etapa precontactual:" + darFormatoAfecha(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()));
-                            
+
                         }
                     }
                     if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
                         error = true;
                         setMsg(getMsg() + "La fecha fin de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta de inicio:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
                     }
-                    
+
                 } else if (actividadSeleccionada.getName().equals("Suscripcion acta de inicio")) {
                     if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()) < 0) {
                         error = true;
                         setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser menor que la fecha de fin de la Suscripcion del contrato:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()));
-                        
+
                     }
                     ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
                     if (!actiLiquidacion.getChildren().isEmpty()) {
@@ -393,13 +401,13 @@ public class GanttDatos {
                             String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
                             setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                         }
-                        
+
                         if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
                             error = true;
                             String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
                             setMsg(getMsg() + "La fecha fin de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                         }
-                        
+
                     }
                 } else {
                     ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
@@ -410,7 +418,7 @@ public class GanttDatos {
                             String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
                             setMsg(getMsg() + "La fecha inicio de la actividad no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                         }
-                        
+
                         if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
                             error = true;
                             String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
@@ -418,7 +426,7 @@ public class GanttDatos {
                         }
                     }
                 }
-                
+
             }
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Liquidaciones")) {
             ActividadobraDTO actiEjecucion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(1);
@@ -451,7 +459,7 @@ public class GanttDatos {
         }
         return error;
     }
-    
+
     public static boolean validacionParaTodasLasActividades(ActividadobraDTO ac, ContratoDTO convenioDTO) {
         if (ac.getStartDateTime().compareTo(convenioDTO.getDatefechaini()) < 0) {
             return false;
@@ -461,15 +469,15 @@ public class GanttDatos {
         }
         return true;
     }
-    
+
     public static Boolean verificacionModificacionFechaFin(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
         if (actividadSeleccionada.getTipoActividad() == 2) {
         } else if (actividadSeleccionada.getTipoActividad() == 3) {
         }
         return false;
-        
+
     }
-    
+
     public static Boolean validacionCadenaPredecesoras(String cadena) {
         RegExp pat = RegExp.compile("^[\\d+]$|(([\\d]+)([,])?(([\\d]+)$))");
         if (pat.test(cadena)) {
@@ -477,7 +485,7 @@ public class GanttDatos {
         }
         return false;
     }
-    
+
     public static List<Integer> eliminarPredecesor(ActividadobraDTO acti, String predecesorAnterior, ActividadobraDTO actividadAnterior) {
         service.setLog("en eliminar predecesores" + predecesorAnterior, null);
         List<Integer> lstPredecesoresEliminados = null;
@@ -499,7 +507,7 @@ public class GanttDatos {
         service.setLog("lsta predecesores" + acti.getLstPredecesores().size(), null);
         return lstPredecesoresEliminados;
     }
-    
+
     public static boolean contienePredecesor(String[] tempNuevo, String predecesor, ActividadobraDTO acti) {
         boolean estaPredecesor = false;
         for (int i = 0; i < tempNuevo.length; i++) {
@@ -509,7 +517,7 @@ public class GanttDatos {
         }
         return estaPredecesor;
     }
-    
+
     public static Map<Boolean, Set<Integer>> separarPredecesores(ActividadobraDTO acti) {
         Map<Boolean, Set<Integer>> mapaPredecesores = new HashMap<Boolean, Set<Integer>>();
         String[] temp;
@@ -526,14 +534,14 @@ public class GanttDatos {
                 }
             }
         }
-        
+
         if (!boolEstaPredecesor) {
             acti.getLstPredecesores().addAll(lstTemporalPredecesores);
         }
         mapaPredecesores.put(boolEstaPredecesor, lstTemporalPredecesores);
         return mapaPredecesores;
     }
-    
+
     public static int cantidadVecesPredecesor(String[] temp, int predecesor) {
         int contador = 0;
         for (int i = 0; i < temp.length; i++) {
@@ -543,14 +551,14 @@ public class GanttDatos {
         }
         return contador;
     }
-    
+
     public static String validarHijosLiquidacionConvenioMacro(ActividadobraDTO actiSeleccionada, ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore) {
         String msg = "continuar";
         if (actiSeleccionada.getStartDateTime().compareTo(convenio.getDatefechafin()) >= 0) {
             msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
-            
+
         } else {
-           if (actiSeleccionada.getEndDateTime().compareTo(convenio.getDatefechafin()) > 0) {
+            if (actiSeleccionada.getEndDateTime().compareTo(convenio.getDatefechafin()) > 0) {
                 msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
             } else {
                 ActividadobraDTO actiEjecucionConvenio = taskStore.getParent(actiSeleccionada).getChildren().get(1);
@@ -561,12 +569,33 @@ public class GanttDatos {
                         msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
                     }
                 }
-                
+
             }
-            
+
         }
         return msg;
+
+    }
+
+    public static List calcularDuracionActividad(ActividadobraDTO actividadPadre, Date fechaInicioHijo,Date fechaFinHijo) {
+        List lstInfo=new ArrayList();
+        Date fechaInicio = actividadPadre.getStartDateTime();
+        service.setLog("Padre FI:"+fechaInicio+"hijo FI:"+fechaInicioHijo, null);
+        Date fechaFin = actividadPadre.getEndDateTime();
+        service.setLog("Padre FF:"+fechaFin+"Hijo FF"+fechaFinHijo, null);
+        if (fechaInicioHijo.compareTo(actividadPadre.getStartDateTime()) < 0) {
+            fechaInicio =fechaInicioHijo;
+        }
+        if (fechaFinHijo.compareTo(actividadPadre.getEndDateTime()) > 0) {
+            fechaFin =fechaFinHijo;
+        }
+        service.setLog("FI:"+fechaInicio, null);
+        service.setLog("FF:"+fechaFin, null);
+        lstInfo.add((CalendarUtil.getDaysBetween(fechaInicio, fechaFin)));
+        lstInfo.add(fechaInicio);
+        lstInfo.add(fechaFin);
         
+        return lstInfo;
     }
 
     /**
@@ -582,7 +611,7 @@ public class GanttDatos {
     public static void setMsg(String aMsg) {
         msg = aMsg;
     }
-    
+
     public static String darFormatoAfecha(Date fecha) {
         return DateTimeFormat.getShortDateFormat().format(fecha);
     }

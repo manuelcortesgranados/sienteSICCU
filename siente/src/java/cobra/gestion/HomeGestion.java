@@ -262,6 +262,16 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<VistaObraMapa> interventores = new ArrayList<VistaObraMapa>();
     private List<Tercero> clientes = new ArrayList<Tercero>();
     private List<Tercero> gerentes = new ArrayList<Tercero>();
+    //variable para el titulo de proyecto
+    private int tituloproyectocontrol = 2;
+
+    public int getTituloproyectocontrol() {
+        return tituloproyectocontrol;
+    }
+
+    public void setTituloproyectocontrol(int tituloproyectocontrol) {
+        this.tituloproyectocontrol = tituloproyectocontrol;
+    }
 
     public List<Contratista> getContratistas() {
         return contratistas;
@@ -2804,16 +2814,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             setMostrartotalproyectos(true);
             setMostrarvalortotalproyectos(false);
             setMostrartotalconvenios(false);
+            setTituloproyectocontrol(1);
         }
         if (panelmostrarvaloreszoom == 2) {
             setMostrarvalortotalproyectos(true);
             setMostrartotalproyectos(false);
             setMostrartotalconvenios(false);
+            setTituloproyectocontrol(2);
         }
         if (panelmostrarvaloreszoom == 3) {
             setMostrartotalconvenios(true);
             setMostrartotalproyectos(false);
             setMostrarvalortotalproyectos(false);
+            setTituloproyectocontrol(3);
         }
     }
 
