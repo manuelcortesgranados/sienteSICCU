@@ -682,10 +682,10 @@
                                     <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarObraAsociada}" render="tablacontratoconv" />
                                 </h:panelGrid >
 
-                                <rich:dataTable id="tablacontratoconv" 
+                                <rich:dataTable id="tablacontratoconv" styleClass="ikont-table-sin-detalles-fila"
                                                 value="#{Supervisor$Contrato.listaObraContrato}"
                                                 rendered="#{Supervisor$Contrato.listaObraContrato.size()>0}"
-                                                sortMode="single" var="row" rows="6"
+                                                sortMode="single" var="row" rows="20"
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02">
                                     <f:facet name="header">
                                         <rich:columnGroup>
@@ -704,7 +704,7 @@
                                     </f:facet>
 
                                     <rich:columnGroup id="cuerpoContrato">
-                                        <rich:column width="150px" breakRowBefore="true">
+                                        <rich:column width="150px" breakRowBefore="true" style="text-align: left;">
                                             <h:outputText  styleClass="ikont- "   value="#{row.strnombreobra}" />
                                         </rich:column>
 

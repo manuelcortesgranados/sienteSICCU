@@ -5682,22 +5682,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los primeros 5 proyectos cuando se inicia el simpletooglepanel ,
+     * Muestra los primeros 20 proyectos cuando se inicia el simpletooglepanel ,
      * si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
      * esta buscando
      *
      * @return null
      */
     public String primeroObra() {
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
         pagina = 1;
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -5712,23 +5712,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los siguiente 5 proyectos cuando se inicia el simpletooglepanel ,
+     * Muestra los siguiente 20 proyectos cuando se inicia el simpletooglepanel ,
      * si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
      * esta buscando
      *
      * @return null
      */
     public String siguienteObra() {
-        int num = (pagina) * 5;
+        int num = (pagina) * 20;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -5744,7 +5744,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los anteriores 5 proyectos cuando se inicia el simpletooglepanel
+     * Muestra los anteriores 20 proyectos cuando se inicia el simpletooglepanel
      * , si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
      * esta buscando
      *
@@ -5752,16 +5752,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String anteriorObra() {
         pagina = pagina - 1;
-        int num = (pagina - 1) * 5;
+        int num = (pagina - 1) * 20;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -5783,15 +5783,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String ultimoObra() {
-        int num = totalfilas % 5;
+        int num = totalfilas % 20;
 
-        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, 5, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
-        if (totalfilas <= 5) {
+        if (totalfilas <= 20) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
+            totalpaginas = totalfilas / 20;
             if (totalfilas % 5 > 0) {
                 totalpaginas++;
             }
