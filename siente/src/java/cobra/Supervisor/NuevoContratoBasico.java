@@ -789,6 +789,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private SelectItem[] tipocontratoselectitem;
     List<Actividadobra> lstTemporalActividades = new ArrayList<Actividadobra>();
     List<Actividadobra> lstActividadesEliminar = new ArrayList<Actividadobra>();
+    public int mostrarContratoConvenio;
     /**
      * Indica que el bean ha sido invocado desde la funcionalidad de nuevo
      * convenio
@@ -2358,6 +2359,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setVerultimoscontratoContratista(boolean verultimoscontratoContratista) {
         this.verultimoscontratoContratista = verultimoscontratoContratista;
     }
+
+    public int getMostrarContratoConvenio() {
+        return mostrarContratoConvenio;
+    }
+
+    public void setMostrarContratoConvenio(int mostrarContratoConvenio) {
+        this.mostrarContratoConvenio = mostrarContratoConvenio;
+    }
+    
     /**
      * Binding creado para acceder al registro seleccionado en la tabla de
      * contratos según el contratista
@@ -7788,5 +7798,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 getContrato().setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
                 asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
             }
-    }        
+    }  
+    
+     public String cargarContratoConvenio() {
+       cargarContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio));
+        return "consultarContrato";
+    }
 }
