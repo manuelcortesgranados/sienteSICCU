@@ -199,8 +199,8 @@
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.obra.contrato.intidcontrato}" />
                                             </h:commandLink>
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
+                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="N. DE CONVENIO: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.obra.contrato.strnumcontrato}" />                                                   
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -210,7 +210,7 @@
                                             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}"  immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.primerContratoObra.intidcontrato}" />
                                             </h:commandLink>
-                                            <h:commandLink rendered="#{SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin=='ciudadano'}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}" />
+                                            <h:commandLink rendered="#{SessionBeanCobra.cobraService.ciu or SessionBeanCobra.usuarioObra.usuLogin=='ciudadano'}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
                                                 <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
