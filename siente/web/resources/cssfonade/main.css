@@ -3,6 +3,11 @@
     src: url("font/open.ttf");
 }
 
+.ikont-editar-hit{
+    height: 100px !important;
+    width: 400px !important;
+}
+
 .totalwidth{
     width: 100%;
 }
