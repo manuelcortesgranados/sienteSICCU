@@ -379,33 +379,34 @@
                         </rich:collapsiblePanel>
 
                         <rich:collapsiblePanel switchType="ajax" header="Dónde está ubicado el proyecto" expanded="false" >                         
-                            <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
-                                <h:panelGrid  columnClasses="textalingright">
-                                    <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
-                                    <interkont:spacer width="20" />
-                                    <h:outputText styleClass="ikont-hol-strDireccionProyecto" value="#{var.label_direccion}" />
-                                    <interkont:spacer width="20" />
-                                    <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
-                                    <interkont:spacer width="20" />
-                                    <h:outputText styleClass="ikont-hol-strZona" value="#{var.zona}" />
-                                    <interkont:spacer width="20" />
-                                    <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
-                                </h:panelGrid>
-                                <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
-                                    <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
-                                           jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
-                                        <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
-                                                  longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
+                            <h:panelGroup styleClass="panelcenter" layout="block">
+                                <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
+                                    <h:panelGrid  columnClasses="textalingright">
+                                        <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                        <interkont:spacer width="20" />
+                                        <h:outputText styleClass="ikont-hol-strDireccionProyecto" value="#{var.label_direccion}" />
+                                        <interkont:spacer width="20" />
+                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
+                                        <interkont:spacer width="20" />
+                                        <h:outputText styleClass="ikont-hol-strZona" value="#{var.zona}" />
+                                        <interkont:spacer width="20" />
+                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
+                                    </h:panelGrid>
+                                    <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
+                                        <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
+                                               jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
+                                            <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
+                                                      longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
 
-                                                  jsVariable="#{HomeGestion.marcador.jsVariable}"
-                                                  draggable="false" >
-                                            <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
+                                                      jsVariable="#{HomeGestion.marcador.jsVariable}"
+                                                      draggable="false" >
+                                                <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
 
-                                        </m:marker>
-                                    </m:map>
-                                </h:panelGrid>
-                            </h:panelGrid>                             
-
+                                            </m:marker>
+                                        </m:map>
+                                    </h:panelGrid>
+                                </h:panelGrid>                             
+                            </h:panelGroup>
                         </rich:collapsiblePanel>
 
                         <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">

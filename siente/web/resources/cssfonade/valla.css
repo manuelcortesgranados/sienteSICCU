@@ -399,3 +399,8 @@ a.imgaction:hover:after{
     display: block;    
 }
 
+.label-obj-proyecto{
+    border: 1px solid #257500;
+    padding: 3px 10px;
+    border-radius: 20px;
+}

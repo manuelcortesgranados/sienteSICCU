@@ -2672,18 +2672,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
-                descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 tool\">OBJETO");
+                
+                descripcion.append("</p>");
+                descripcion.append("<p>");
+                descripcion.append("<div class=\"columna textvalla5\">");
+                descripcion.append(money.format(obra.getNumvaltotobra()));
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO");
                 descripcion.append("<div>");
                 descripcion.append("<p>");
                 descripcion.append(obra.getStrobjetoobra().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
                 descripcion.append("</p>");
                 descripcion.append("</div>");
                 descripcion.append("</label></div>");
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla5\">");
-                descripcion.append(money.format(obra.getNumvaltotobra()));
-                descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla3\"> Contratante : </div>");
