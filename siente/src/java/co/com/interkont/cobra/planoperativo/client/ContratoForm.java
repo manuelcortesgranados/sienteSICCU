@@ -135,7 +135,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public ContratoForm() {
     }
     
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, int numeracionActividad) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -148,7 +148,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
-        this.numeracionActividad = numeracionActividad;
+        this.numeracionActividad = taskStore.getAllItemsCount()+1;
         
     }
     
@@ -737,7 +737,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
         Liquidaciones.setEsNoEditable(true);
         Liquidaciones.setNumeracion(numeracionActividad);
-        numeracionActividad++;
         lstHijos.add(Liquidaciones);
         
         Date fechaCopiaLiquidacion = CalendarUtil.copyDate(Liquidaciones.getEndDateTime());
