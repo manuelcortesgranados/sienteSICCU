@@ -3098,6 +3098,9 @@ css usuario modificacion
 .ikont-tabla-entidad-contratista tbody tr:nth-child(odd){
     background-color: #F1F3F2;
 }
+.ikont-tabla-entidad-contratista tbody tr td{
+    vertical-align: top;
+}
 .ikont-tabla-entidad-contratista textarea{
     background-color: transparent;
 }
@@ -3114,6 +3117,11 @@ css usuario modificacion
 .ikont-table-sin-detalles-fila tbody:nth-child(odd){
     background-color: #F1F3F2;
 }
+
+.ikont-table-sin-detalles-fila tbody tr td{
+    vertical-align: top;
+}
+
 .ikont-table-sin-detalles-fila tbody tr{
     background-color: transparent!important;
 }
