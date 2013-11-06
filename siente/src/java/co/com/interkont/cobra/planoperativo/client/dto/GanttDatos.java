@@ -136,6 +136,7 @@ public class GanttDatos {
                 service.setLog("menor:" + menor, null);
                 Date mayor = obtenerMayorFechaFin(listaHijas);
                 service.setLog("mayor:" + mayor, null);
+                if(menor!=null && mayor!=null){
                 int duracion = CalendarUtil.getDaysBetween(menor, mayor);
                 service.setLog("en duracion:" + duracion, null);
                 props.duration().setValue(actividadPadre, duracion);
@@ -150,7 +151,7 @@ public class GanttDatos {
                 service.setLog("al final:" + actividadPadre.getName() + "duracion:" + actividadPadre.getDuration(), null);
 
                 modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
-
+                }
             }
         } else {
             service.setLog("entre en gant datos Con padre convenio", null);
@@ -577,24 +578,24 @@ public class GanttDatos {
 
     }
 
-    public static List calcularDuracionActividad(ActividadobraDTO actividadPadre, Date fechaInicioHijo,Date fechaFinHijo) {
-        List lstInfo=new ArrayList();
+    public static List calcularDuracionActividad(ActividadobraDTO actividadPadre, Date fechaInicioHijo, Date fechaFinHijo) {
+        List lstInfo = new ArrayList();
         Date fechaInicio = actividadPadre.getStartDateTime();
-        service.setLog("Padre FI:"+fechaInicio+"hijo FI:"+fechaInicioHijo, null);
+        service.setLog("Padre FI:" + fechaInicio + "hijo FI:" + fechaInicioHijo, null);
         Date fechaFin = actividadPadre.getEndDateTime();
-        service.setLog("Padre FF:"+fechaFin+"Hijo FF"+fechaFinHijo, null);
+        service.setLog("Padre FF:" + fechaFin + "Hijo FF" + fechaFinHijo, null);
         if (fechaInicioHijo.compareTo(actividadPadre.getStartDateTime()) < 0) {
-            fechaInicio =fechaInicioHijo;
+            fechaInicio = fechaInicioHijo;
         }
         if (fechaFinHijo.compareTo(actividadPadre.getEndDateTime()) > 0) {
-            fechaFin =fechaFinHijo;
+            fechaFin = fechaFinHijo;
         }
-        service.setLog("FI:"+fechaInicio, null);
-        service.setLog("FF:"+fechaFin, null);
+        service.setLog("FI:" + fechaInicio, null);
+        service.setLog("FF:" + fechaFin, null);
         lstInfo.add((CalendarUtil.getDaysBetween(fechaInicio, fechaFin)));
         lstInfo.add(fechaInicio);
         lstInfo.add(fechaFin);
-        
+
         return lstInfo;
     }
 

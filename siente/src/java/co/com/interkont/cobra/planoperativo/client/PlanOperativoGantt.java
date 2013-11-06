@@ -246,21 +246,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
-        if(!isModolectura())
-        {    
-        config.resizeHandle = ResizeHandle.BOTH;
+        if (!isModolectura()) {
+            config.resizeHandle = ResizeHandle.BOTH;
+        } else {
+            config.resizeHandle = ResizeHandle.NONE;
         }
-        else
-        {
-        config.resizeHandle = ResizeHandle.NONE;    
-        }    
-        
+
         // Enable dependency DnD
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD
-        config.taskDnDEnabled = false;       
-        //config.taskDnDEnabled = !isModolectura();        
+       // config.taskDnDEnabled = false;
+       config.taskDnDEnabled = !isModolectura();        
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -504,27 +501,27 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         setGantt(new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-                    @Override
-                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                        actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
-                        if (toTask.getPredecesor() != null) {
-                            if (!toTask.getPredecesor().isEmpty()) {
-                                toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
-                            } else {
-                                toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
-                            }
-                        } else {
-                            toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
-                        }
-
-                        DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
-                        getGantt().getGanttPanel().getContainer().reconfigure(true);
-                        getGantt().getGanttPanel().getContainer().refresh();
-
-                        // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
-                        return dependencia;
+            @Override
+            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                actividadAnterior = new ActividadobraDTO(toTask.getPredecesor());
+                if (toTask.getPredecesor() != null) {
+                    if (!toTask.getPredecesor().isEmpty()) {
+                        toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
+                    } else {
+                        toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
                     }
-                ;
+                } else {
+                    toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
+                }
+
+                DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
+                getGantt().getGanttPanel().getContainer().reconfigure(true);
+                getGantt().getGanttPanel().getContainer().refresh();
+
+                // DependenciaDTO dependencia = new DependenciaDTO("" + this.hashCode(), fromTask.getId(), toTask.getId(), type, fromTask, toTask);
+                return dependencia;
+            }
+        ;
 
         });     
         
@@ -533,7 +530,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
-                tareaSeleccionada = event.getTask();                
+                tareaSeleccionada = event.getTask();
                 //config.taskDnDEnabled = false;
 //                getGantt().getGanttPanel().getConfig().taskDnDEnabled= false;
 //                getGantt().getGanttPanel().getContainer().reconfigure(true);
@@ -692,7 +689,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     //se modifica fecha inicio
                     int duracion = CalendarUtil.getDaysBetween(actiresi.getStartDateTime(), actiresi.getEndDateTime());
                     props.duration().setValue(actiresi, duracion);
-                    boolean hayError = modificarFechaInicio(actiresi);
+                    boolean hayError = modificarFechaInicio(actiresi, 1);
                     if (hayError) {
                         props.duration().setValue(actiresi, actividadAnterior.getDuration());
                         props.endDateTime().setValue(actiresi, actividadAnterior.getEndDateTime());
@@ -732,42 +729,42 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
             editing.addBeforeStartEditHandler(
                     new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
-                        @Override
-                        public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
-                            ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                            ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                            if (!ac.isEsNoEditable()) {
-                                actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
-                            } else {
-                                alertaMensajes("Esta Actividad no se puede editar");
-                            }
-                        }
-                    });
+                @Override
+                public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
+                    ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                    ActividadobraDTO ac = store.get(event.getEditCell().getRow());
+                    if (!ac.isEsNoEditable()) {
+                        actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
+                    } else {
+                        alertaMensajes("Esta Actividad no se puede editar");
+                    }
+                }
+            });
 
             editing.addCompleteEditHandler(
                     new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
-                        @Override
-                        public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
-                            ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                            ActividadobraDTO ac = store.get(event.getEditCell().getRow());
+                @Override
+                public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
+                    ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                    ActividadobraDTO ac = store.get(event.getEditCell().getRow());
 
-                            if (!ac.isEsNoEditable()) {
-                                if (event.getEditCell().getCol() == 1) {
-                                    modificarFechaInicio(ac);
-                                } else if (event.getEditCell().getCol() == 2) {
-                                    modificarFechaFin(ac);
-                                } else if (event.getEditCell().getCol() == 3) {
-                                    modificarPorDuracion(ac);
-                                } else if (event.getEditCell().getCol() == 6) {
-                                    modificarPredecesoresActividad(ac);
-                                    getGantt().getGanttPanel().getContainer().refresh();
-                                }
-                            } else {
-                                service.setLog("entre en el else nuevo", null);
-                                editing.cancelEditing();
-                            }
+                    if (!ac.isEsNoEditable()) {
+                        if (event.getEditCell().getCol() == 1) {
+                            modificarFechaInicio(ac, 0);
+                        } else if (event.getEditCell().getCol() == 2) {
+                            modificarFechaFin(ac);
+                        } else if (event.getEditCell().getCol() == 3) {
+                            modificarPorDuracion(ac);
+                        } else if (event.getEditCell().getCol() == 6) {
+                            modificarPredecesoresActividad(ac);
+                            getGantt().getGanttPanel().getContainer().refresh();
                         }
-                    });
+                    } else {
+                        service.setLog("entre en el else nuevo", null);
+                        editing.cancelEditing();
+                    }
+                }
+            });
 
             editing.addCancelEditHandler(new CancelEditEvent.CancelEditHandler<ActividadobraDTO>() {
                 @Override
@@ -794,13 +791,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
             main.setWidth(980);
-             if (!isModolectura()) {
-                 main.setStyleName("main-contenedor-gwt");
-             }
-             else
-             {
-                 main.setStyleName("main-contenedor-gwt-en-ejecucion");
-             }   
+            if (!isModolectura()) {
+                main.setStyleName("main-contenedor-gwt");
+            } else {
+                main.setStyleName("main-contenedor-gwt-en-ejecucion");
+            }
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
@@ -835,8 +830,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(createToolBarPeriodo());
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-            
-            
+
+
             if (!isModolectura()) {
                 Menu_superior_gwt menuSupe = new Menu_superior_gwt(service, taskStore, convenioDTO, depStore);
                 main.add(menuSupe.asWidget());
@@ -854,8 +849,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             if (!isModolectura()) {
                 ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
                 main.add(toolinferior);
-            }              
-            
+            }
+
         } else {
             main = new FlowLayoutContainer();
             main.getElement().setMargins(new Margins(136, 0, 0, 5));
@@ -875,7 +870,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             main.setPagePosition(0, 0);
             main.add(cp);
 
-        }        
+        }
         return main;
     }
 
@@ -1196,10 +1191,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 ActividadobraDTO actiEjeConvenio = taskStore.getParent(actiPadre).getChildren().get(1);
                 if (!actiEjeConvenio.getChildren().isEmpty()) {
                     Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(actiEjeConvenio.getChildren());
-                    service.setLog("fecha menor:" + menorFechaEjecucion, null);
-                    if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
-                        String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                        msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    if (menorFechaEjecucion != null) {
+                        service.setLog("fecha menor:" + menorFechaEjecucion, null);
+                        if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                            msg = "la fecha de Aprobación del plan operativo no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                        }
                     }
                 }
                 service.setLog("msg:" + msg, null);
@@ -1207,9 +1204,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("aca en nueva cualquiera:", null);
                 Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
                 service.setLog("fecha menor:" + menorFechaEjecucion, null);
-                if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
-                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                    msg = "la fecha de la actividad no puede  ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                if (menorFechaEjecucion != null) {
+                    if (actiModificada.getStartDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                        String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                        msg = "la fecha de la actividad no puede  ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    }
                 }
 
             }
@@ -1227,9 +1226,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("aca en nueva cualquiera final:", null);
                 Date menorFechaEjecucion = GanttDatos.obtenerMenorFechaInicio(taskStore.getParent(actiPadre).getChildren().get(1).getChildren());
                 service.setLog("fecha menor:" + menorFechaEjecucion, null);
-                if (actiModificada.getEndDateTime().compareTo(menorFechaEjecucion) >= 0) {
-                    String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
-                    msg = "la fecha de la actividad no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                if (menorFechaEjecucion != null) {
+                    if (actiModificada.getEndDateTime().compareTo(menorFechaEjecucion) >= 0) {
+                        String df1 = DateTimeFormat.getShortDateFormat().format(menorFechaEjecucion);
+                        msg = "la fecha de la actividad no puede ser superior a la menor fecha de las actividades de la ejecución del convenio:" + df1;
+                    }
                 }
             }
 
@@ -1283,6 +1284,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         return null;
     }
 
+    
     /*
      * metodo que se encarga de reembolsar el valor de las fuentes de recursos asociadas 
      * al contrato a las respectivas fuente de recursos de la obra padre
@@ -1389,22 +1391,37 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
     }
 
-    public void modificarEnEditarFechaInicio(ActividadobraDTO ac) {
+    public void modificarEnEditarFechaInicio(ActividadobraDTO ac, int opcion) {
         int duracionModificar = 0;
         if (ac.getStartDateTime().compareTo(actividadAnterior.getStartDateTime()) > 0) {
-            duracionModificar = CalendarUtil.getDaysBetween(actividadAnterior.getStartDateTime(), ac.getStartDateTime());
-            CalendarUtil.addDaysToDate(ac.getEndDateTime(), duracionModificar);
-            getGantt().getGanttPanel().getContainer().refresh();
+            if (opcion == 1) {
+                duracionModificar = CalendarUtil.getDaysBetween(ac.getStartDateTime(), ac.getEndDateTime());
+                service.setLog("es mayor la fI" + duracionModificar, null);
+                props.duration().setValue(ac, duracionModificar);
+                getGantt().getGanttPanel().getContainer().refresh();
+            } else {
+                duracionModificar = CalendarUtil.getDaysBetween(actividadAnterior.getStartDateTime(), ac.getStartDateTime());
+                CalendarUtil.addDaysToDate(ac.getEndDateTime(), duracionModificar);
+                getGantt().getGanttPanel().getContainer().refresh();
+            }
+
         } else if (ac.getStartDateTime().compareTo(actividadAnterior.getStartDateTime()) < 0) {
-            duracionModificar = CalendarUtil.getDaysBetween(ac.getStartDateTime(), actividadAnterior.getStartDateTime());
-            ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - duracionModificar);
+            if (opcion == 1) {
+                duracionModificar = CalendarUtil.getDaysBetween(ac.getStartDateTime(), ac.getEndDateTime());
+                service.setLog("es mayor la fI" + duracionModificar, null);
+                props.duration().setValue(ac, duracionModificar);
+            } else {
+                duracionModificar = CalendarUtil.getDaysBetween(ac.getStartDateTime(), actividadAnterior.getStartDateTime());
+                ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - duracionModificar);
+            }
             getGantt().getGanttPanel().getContainer().refresh();
+
         }
         GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
         gantt.refresh();
     }
 
-    public boolean modificarFechaInicio(ActividadobraDTO ac) {
+    public boolean modificarFechaInicio(ActividadobraDTO ac, int opcion) {
         boolean hayError = false;
         ActividadobraDTO actiPadre = taskStore.getParent(ac);
         String mensaje = "";
@@ -1426,7 +1443,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                     getGantt().getGanttPanel().getContainer().refresh();
                 } else {
-                    modificarEnEditarFechaInicio(ac);
+                    modificarEnEditarFechaInicio(ac, opcion);
                     ac.getObra().setFechaInicio(ac.getStartDateTime());
                     ac.getObra().setFechaFin(ac.getEndDateTime());
                 }
@@ -1437,7 +1454,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                     getGantt().getGanttPanel().getContainer().refresh();
                 } else {
-                    modificarEnEditarFechaInicio(ac);
+                    modificarEnEditarFechaInicio(ac, opcion);
                     ac.getObra().setFechaInicio(ac.getStartDateTime());
                     ac.getObra().setFechaFin(ac.getEndDateTime());
                 }
@@ -1457,7 +1474,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore);
                         }
                         if (mensaje.equals("continuar") && puedeEditar) {
-                            modificarEnEditarFechaInicio(ac);
+                            modificarEnEditarFechaInicio(ac, opcion);
                         } else {
                             hayError = true;
                             alertaMensajes(mensaje);
@@ -1470,7 +1487,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
                             ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
                             if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
-                                modificarEnEditarFechaInicio(ac);
+                                modificarEnEditarFechaInicio(ac, opcion);
                             } else {
                                 hayError = true;
                                 alertaMensajes(GanttDatos.getMsg());
@@ -1493,7 +1510,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
                     ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
                     if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
-                        modificarEnEditarFechaInicio(ac);
+                        modificarEnEditarFechaInicio(ac, opcion);
                     } else {
                         hayError = true;
                         alertaMensajes(GanttDatos.getMsg());
@@ -1501,10 +1518,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         getGantt().getGanttPanel().getContainer().refresh();
                     }
                 } else {
-                    modificarEnEditarFechaInicio(ac);
+                    modificarEnEditarFechaInicio(ac, opcion);
                 }
             } else {
-                modificarEnEditarFechaInicio(ac);
+                modificarEnEditarFechaInicio(ac, opcion);
             }
         }
         return hayError;
