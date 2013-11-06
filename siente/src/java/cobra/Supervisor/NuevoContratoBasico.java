@@ -102,7 +102,7 @@ import javax.servlet.ServletContext;
  */
 public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-    
+
     /**
      * Objeto para acceder a los atributos de contrato
      */
@@ -606,7 +606,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para almacenar el parametro de busqueda de un proyecto
      */
-    private String buscarproyecto = "";
+    private String buscarproyecto = " ";
     /**
      * Listado de municipios
      */
@@ -2367,7 +2367,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setMostrarContratoConvenio(int mostrarContratoConvenio) {
         this.mostrarContratoConvenio = mostrarContratoConvenio;
     }
-    
     /**
      * Binding creado para acceder al registro seleccionado en la tabla de
      * contratos según el contratista
@@ -4182,10 +4181,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
             recursosconvenio.sumaFuentesRecursos();
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>());
-            cargarActividadesPlanOperativo();            
+            cargarActividadesPlanOperativo();
             contrato.setAuxiliarValorContrato(contrato.getNumvlrcontrato());
             contrato.setAuxiliarValorGerencia(contrato.getNumValorCuotaGerencia());
-            
+
             this.llenarDocumentoContrato();
             listadocumentos = getSessionBeanCobra().getCobraService().getListaDocumentosContrato();
             llenarPolizas();
@@ -5044,7 +5043,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los anterior 20 contratos por filtro (nombre, nro de contrato,etc)
+     * Muestra los anterior 20 contratos por filtro (nombre, nro de
+     * contrato,etc)
      *
      * @return null
      */
@@ -5081,8 +5081,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Muestra los anterior 20 contratos por filtro (nombre, nro de contrato,etc)
-     * para la tabla de convenios según el contratista
+     * Muestra los anterior 20 contratos por filtro (nombre, nro de
+     * contrato,etc) para la tabla de convenios según el contratista
      *
      * @return null
      */
@@ -5675,7 +5675,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         if (buscarproyecto.length() != 0) {
             listaObraContrato.clear();
-
+        }else{
+            FacesUtils.addErrorMessage("No se encontrarón parametros de busqueda");
         }
         primeroObra();
         return null;
@@ -5693,27 +5694,34 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
         pagina = 1;
-        if (totalfilas <= 20) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 20;
-            if (totalfilas % 20 > 0) {
-                totalpaginas++;
+        
+        if (totalfilas > 0) {
+            if (totalfilas <= 20) {
+                totalpaginas = 1;
+            } else {
+                totalpaginas = totalfilas / 20;
+                if (totalfilas % 20 > 0) {
+                    totalpaginas++;
+                }
             }
+            veranteriorobra = false;
+            if (totalpaginas > 1) {
+                verultimoobra = true;
+            } else {
+                verultimoobra = false;
+            }
+            buscarproyecto = "";
+            return null;
+        }else{
+            buscarproyecto = "";
+            FacesUtils.addInfoMessage("No se encontrarón proyectos");
         }
-        veranteriorobra = false;
-        if (totalpaginas > 1) {
-            verultimoobra = true;
-        } else {
-            verultimoobra = false;
-        }
-
         return null;
     }
 
     /**
-     * Muestra los siguiente 20 proyectos cuando se inicia el simpletooglepanel ,
-     * si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
+     * Muestra los siguiente 20 proyectos cuando se inicia el simpletooglepanel
+     * , si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
      * esta buscando
      *
      * @return null
@@ -6322,7 +6330,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6536,7 +6544,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String irApaginaconvenio() {
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
-            panelPantalla = 1;            
+            panelPantalla = 1;
             return "nuevoConvenioPo";
         }
         return "nuevoContrato";
@@ -6707,7 +6715,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
             }
         } catch (ConvenioException e) {
-            FacesUtils.addErrorMessage(e.getMessage());           
+            FacesUtils.addErrorMessage(e.getMessage());
             setMensajePlanOperativo(false, true, e.getMessage());
         }
         return null;
@@ -7322,9 +7330,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 //String copiaValorGerencia = "" + contrato.getNumValorCuotaGerencia();
                 contrato.setAuxiliarValorGerencia(contrato.getNumValorCuotaGerencia());
                 FacesUtils.addErrorMessage("No es posible reducir el valor Global de la cuota de gerencia,porque ya distribución de cuota de gerencia en fuente de recursos por un valor de $" + recursosconvenio.getCuotaGerencia());
-            }
-            else
-            {
+            } else {
                 contrato.setNumValorCuotaGerencia(contrato.getAuxiliarValorGerencia());
                 contrato.setValorDisponibleCuotaGerencia(contrato.getNumValorCuotaGerencia().subtract(recursosconvenio.getCuotaGerencia()));
             }
@@ -7746,62 +7752,63 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         getContrato().setVermensajeerror(error);
         getContrato().setMensajeguardado(mensaje);
     }
-    
+
     /**
-     * Iniciar Fuentes de Recurso Contrato desde el menu superior administrar convenio
-     * 
+     * Iniciar Fuentes de Recurso Contrato desde el menu superior administrar
+     * convenio
+     *
      *
      * @return Formulario Fuente Recurso
      */
     public String iraFuenteRecursos() {
         setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
-            recursosconvenio.setVerAgregarRecurso(false);
-            recursosconvenio.setVerEliminarRecurso(false);
-            recursosconvenio.sumaFuentesRecursos();
-            
+        recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
+        recursosconvenio.setVerAgregarRecurso(false);
+        recursosconvenio.setVerEliminarRecurso(false);
+        recursosconvenio.sumaFuentesRecursos();
+
         return "fuenteRecursos";
     }
+
     /**
      * Iniciar Plan Operativo proyecto en ejecución
+     *
      * @return String
      */
-    public String iraPlanOperativoEjecucion()
-    {
-       setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(getContrato().getIntidcontrato()));
-            recursosconvenio.sumaFuentesRecursos();
+    public String iraPlanOperativoEjecucion() {
+        setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
+        recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(getContrato().getIntidcontrato()));
+        recursosconvenio.sumaFuentesRecursos();
         cargarActividadesPlanOperativo();
         getContrato().setAuxiliarValorContrato(getContrato().getNumvlrcontrato());
-            getContrato().setAuxiliarValorGerencia(getContrato().getNumValorCuotaGerencia());
+        getContrato().setAuxiliarValorGerencia(getContrato().getNumValorCuotaGerencia());
         getContrato().setModolecturaplanop(true);
         return planOperativo();
-    }   
-    
-    public void cargarActividadesPlanOperativo()
-    {
+    }
+
+    public void cargarActividadesPlanOperativo() {
         getContrato().setActividadobras(new LinkedHashSet<Actividadobra>());
-            Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(getContrato().getIntidcontrato());
-            if (activiprincipal != null) {
-                listaProyectosConvenio.clear();
-                //extraerProyectosActividad(act);
-                // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
-                cargarActividadesConsultadas(activiprincipal);
-                asignarNumeracionActividadesConsultadas(lstTodasActividades);
-                lstActividadesEliminar.clear();
-                lstTemporalActividades.clear();
-                mapaReembolsoConvenio.clear();
-                getSessionBeanCobra().getCobraGwtService().setElimino(false);
-                encontrarActividadContrato(activiprincipal, lstTemporalActividades);
-                getContrato().getActividadobras().add(activiprincipal);
-                // LLenar dependencias
-                getContrato().setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
-                asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
-            }
-    }  
-    
-     public String cargarContratoConvenio() {
-       cargarContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio));
+        Actividadobra activiprincipal = getSessionBeanCobra().getCobraService().obtenerEstructuraActividadObraPlanOperativo(getContrato().getIntidcontrato());
+        if (activiprincipal != null) {
+            listaProyectosConvenio.clear();
+            //extraerProyectosActividad(act);
+            // modificarFuentesRecursosConvenioEstaAsociada(recursosconvenio.getLstFuentesRecursos());
+            cargarActividadesConsultadas(activiprincipal);
+            asignarNumeracionActividadesConsultadas(lstTodasActividades);
+            lstActividadesEliminar.clear();
+            lstTemporalActividades.clear();
+            mapaReembolsoConvenio.clear();
+            getSessionBeanCobra().getCobraGwtService().setElimino(false);
+            encontrarActividadContrato(activiprincipal, lstTemporalActividades);
+            getContrato().getActividadobras().add(activiprincipal);
+            // LLenar dependencias
+            getContrato().setDependenciasGenerales(CasteoGWT.encontrarDependenciaActividadObrad(activiprincipal));
+            asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
+        }
+    }
+
+    public String cargarContratoConvenio() {
+        cargarContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio));
         return "consultarContrato";
     }
 }

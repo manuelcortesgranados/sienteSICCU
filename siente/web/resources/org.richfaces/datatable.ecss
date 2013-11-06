@@ -9,6 +9,10 @@
 .rf-dt tr:nth-child(odd) {
     background-color: '#{richSkin.tablebackgraudcolorpar}';
 }
+
+.rf-dt tr td{
+    vertical-align: top;
+}
 .rf-dt tbody textarea{
     background-color: transparent;
 }
