@@ -33,8 +33,7 @@
 
     </h:head>
 
-    <h:body onload="#{rich:component('ajaxLoadingModalBox')}.hide();
-            return false;" >
+    <h:body  >
         <h:form id="form_menu">
             <ui:insert name="menu"/>
         </h:form>
@@ -71,7 +70,9 @@
                                     <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
                                         <tr>
                                             <td>
-                                                <rich:notifyMessages stayTime="5000" nonblocking="true" />
+                                                <a4j:outputPanel>
+                                                    <rich:notifyMessages  stayTime="3000" showShadow="true" showCloseButton="true" />
+                                                </a4j:outputPanel>
                                                 <ui:insert name="menusuperior"/>
                                                 <ui:insert name="body"/>                                                   
                                                 <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     

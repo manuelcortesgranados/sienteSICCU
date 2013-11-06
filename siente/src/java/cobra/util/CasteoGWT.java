@@ -244,7 +244,7 @@ public class CasteoGWT implements Serializable {
         actdto.setPercentDone(0);
         actdto.setTaskType(tipoTask(actividadObra.getTipotareagantt()));
         actdto.setTipoActividad(actividadObra.getTipotareagantt());
-        actdto.setPredecesor(actividadObra.getPredecesor());
+        actdto.setPredecesor(actividadObra.getPredecesor());        
         actdto.setNumeracion(actividadObra.getNumeracion());
         actdto.setLstPredecesores(obtenerListaPredecesores(actdto.getPredecesor()));
         actdto.setOidactiviobra(actividadObra.getOidactiviobra());
@@ -409,7 +409,7 @@ public class CasteoGWT implements Serializable {
         obraFuenteRecurso.setDescripcionaporte(obrafuenterecursoobra.getDescripciontipoaporte());
         obraFuenteRecurso.setEliminar("Eliminar");
         obraFuenteRecurso.setEstaEnFuenteRecurso(obrafuenterecursoobra.isEstaenfuenterecurso());
-        obraFuenteRecurso.setFormaingreso(obrafuenterecursoobra.getFormaingreso());
+        obraFuenteRecurso.setFormaingreso(obrafuenterecursoobra.getFormaingreso());        
         obraFuenteRecurso.setFuenterecursosconvenio(castearFuenteRecursosConvenio(obrafuenterecursoobra.getFuenterecursosconvenio(), convenio, indice));
         obraFuenteRecurso.setIdobrafuenterecursos(obrafuenterecursoobra.getIdobrafuenterecursos());
         obraFuenteRecurso.setObra(obra);
@@ -702,7 +702,7 @@ public class CasteoGWT implements Serializable {
         actividadObra.setTipotareagantt(actdto.getTipoActividad());
         actividadObra.setNumvalorplanifao(BigDecimal.ZERO);
         actividadObra.setFloatcantplanifao(0.0);
-        actividadObra.setPredecesor(actdto.getPredecesor());
+        actividadObra.setPredecesor(actdto.getPredecesor());        
         actividadObra.setNumeracion(actdto.getNumeracion());
         actividadObra.setLstPredecesores(obtenerListaPredecesores(actividadObra.getPredecesor()));
         actividadObra.setBoolaiu(false);

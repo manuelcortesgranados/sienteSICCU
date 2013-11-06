@@ -101,7 +101,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 try {
                     contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
                     obtenerDependenciasObligatorias();
-                    //seCargoPlanOperativoAntes = true;
+//seCargoPlanOperativoAntes = true;
                 } catch (Exception ex) {
                     Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
                 }

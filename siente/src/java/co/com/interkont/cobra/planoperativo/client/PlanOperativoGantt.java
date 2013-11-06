@@ -27,7 +27,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.Relacionobrafuenterecurso
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import co.com.interkont.cobra.to.Relacionobrafuenterecursoscontrato;
 import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
@@ -247,12 +246,21 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
+        if(!isModolectura())
+        {    
         config.resizeHandle = ResizeHandle.BOTH;
+        }
+        else
+        {
+        config.resizeHandle = ResizeHandle.NONE;    
+        }    
+        
         // Enable dependency DnD
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD
-        config.taskDnDEnabled = !isModolectura();
+        config.taskDnDEnabled = false;       
+        //config.taskDnDEnabled = !isModolectura();        
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -503,10 +511,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             if (!toTask.getPredecesor().isEmpty()) {
                                 toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
                             } else {
-                                toTask.setPredecesor("" + fromTask.getNumeracion());
+                                toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
                             }
                         } else {
-                            toTask.setPredecesor("" + fromTask.getNumeracion());
+                            toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
                         }
 
                         DependenciaDTO dependencia = modificarPredecesoresActividadDesdePanel(toTask, type);
@@ -525,8 +533,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
-                tareaSeleccionada = event.getTask();
-
+                tareaSeleccionada = event.getTask();                
+                //config.taskDnDEnabled = false;
+//                getGantt().getGanttPanel().getConfig().taskDnDEnabled= false;
+//                getGantt().getGanttPanel().getContainer().reconfigure(true);
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
 //                
@@ -865,7 +875,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             main.setPagePosition(0, 0);
             main.add(cp);
 
-        }
+        }        
         return main;
     }
 
