@@ -111,7 +111,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore, int numeracionActividad) {
+    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -120,7 +120,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
         this.taskStore = taskStore;
-        this.numeracionActividad = numeracionActividad;
+        this.numeracionActividad = taskStore.getAll().size()+1;
 
     }
 
@@ -232,7 +232,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
-        numeracionActividad++;
+        
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);

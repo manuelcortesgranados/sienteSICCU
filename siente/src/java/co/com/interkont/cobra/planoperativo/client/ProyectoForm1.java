@@ -131,7 +131,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
     }
 
-    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore,int numeracionActividad) {
+    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         this.modalPry = di;
@@ -144,7 +144,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
         this.propes = propes;
         this.taskStore = taskStore;
-        this.numeracionActividad=numeracionActividad;
+        this.numeracionActividad=taskStore.getAll().size()+1;
         instanciarElementosPantalla();
     }
 
@@ -637,13 +637,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
             tareaNueva.setNumeracion(numeracionActividad);
-            numeracionActividad++;
+            
 
         } else {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
              tareaNueva.setNumeracion(numeracionActividad);
-             numeracionActividad++;
+            
 
 
         }
