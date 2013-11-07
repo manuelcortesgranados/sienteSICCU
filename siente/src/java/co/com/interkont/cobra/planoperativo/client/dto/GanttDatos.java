@@ -136,21 +136,21 @@ public class GanttDatos {
                 service.setLog("menor:" + menor, null);
                 Date mayor = obtenerMayorFechaFin(listaHijas);
                 service.setLog("mayor:" + mayor, null);
-                if(menor!=null && mayor!=null){
-                int duracion = CalendarUtil.getDaysBetween(menor, mayor);
-                service.setLog("en duracion:" + duracion, null);
-                props.duration().setValue(actividadPadre, duracion);
-                //props.endDateTime().setValue(actividadPadre, copiaFecha);
-                if (actividadPadre.getName().equals("Planeación del Convenio")) {
-                    fechaComparar = actividadPadre.getEndDateTime();
-                    buscarActividad(contrato, 1, taskStore, props);
-                } else if (actividadPadre.getName().equals("Ejecución del Convenio")) {
-                    fechaComparar = actividadPadre.getEndDateTime();
-                    buscarActividad(contrato, 2, taskStore, props);
-                }
-                service.setLog("al final:" + actividadPadre.getName() + "duracion:" + actividadPadre.getDuration(), null);
+                if (menor != null && mayor != null) {
+                    int duracion = CalendarUtil.getDaysBetween(menor, mayor);
+                    service.setLog("en duracion:" + duracion, null);
+                    props.duration().setValue(actividadPadre, duracion);
+                    //props.endDateTime().setValue(actividadPadre, copiaFecha);
+                    if (actividadPadre.getName().equals("Planeación del Convenio")) {
+                        fechaComparar = actividadPadre.getEndDateTime();
+                        buscarActividad(contrato, 1, taskStore, props);
+                    } else if (actividadPadre.getName().equals("Ejecución del Convenio")) {
+                        fechaComparar = actividadPadre.getEndDateTime();
+                        buscarActividad(contrato, 2, taskStore, props);
+                    }
+                    service.setLog("al final:" + actividadPadre.getName() + "duracion:" + actividadPadre.getDuration(), null);
 
-                modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
+                    modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
                 }
             }
         } else {
@@ -480,8 +480,12 @@ public class GanttDatos {
     }
 
     public static Boolean validacionCadenaPredecesoras(String cadena) {
-        RegExp pat = RegExp.compile("^[\\d+]$|(([\\d]+)([,])?(([\\d]+)$))");
-        if (pat.test(cadena)) {
+        if (cadena != null) {
+            RegExp pat = RegExp.compile("^[\\d+]$|(([\\d]+)([,])?(([\\d]+)$))");
+            if (pat.test(cadena)) {
+                return true;
+            }
+        } else {
             return true;
         }
         return false;
@@ -491,7 +495,7 @@ public class GanttDatos {
         service.setLog("en eliminar predecesores" + predecesorAnterior, null);
         List<Integer> lstPredecesoresEliminados = null;
         if (predecesorAnterior != null) {
-            if (!predecesorAnterior.isEmpty()) {
+            if (!predecesorAnterior.isEmpty() && acti.getPredecesor() != null) {
                 service.setLog("en eliminar predecesores anteriores:" + predecesorAnterior, null);
                 lstPredecesoresEliminados = new ArrayList<Integer>();
                 String[] tempNuevo = acti.getPredecesor().split(",");
@@ -502,6 +506,14 @@ public class GanttDatos {
                         acti.getLstPredecesores().remove(Integer.parseInt(tempAnterior[i]));
                         actividadAnterior.setPredecesor(actividadAnterior.getPredecesor().replace("" + tempAnterior[i], ""));
                     }
+                }
+            } else {
+                service.setLog("aca en else de eliminar", null);
+                lstPredecesoresEliminados = new ArrayList<Integer>();
+                String[] tempAnterior = predecesorAnterior.split(",");
+                for (int i = 0; i < tempAnterior.length; i++) {
+                    lstPredecesoresEliminados.add(Integer.parseInt(tempAnterior[i]));
+
                 }
             }
         }
@@ -521,25 +533,27 @@ public class GanttDatos {
 
     public static Map<Boolean, Set<Integer>> separarPredecesores(ActividadobraDTO acti) {
         Map<Boolean, Set<Integer>> mapaPredecesores = new HashMap<Boolean, Set<Integer>>();
-        String[] temp;
-        temp = acti.getPredecesor().split(",");
-        Set<Integer> lstTemporalPredecesores = new HashSet<Integer>();
-        boolean boolEstaPredecesor = false;
-        for (int i = 0; i < temp.length; i++) {
-            Integer predecesor = Integer.parseInt(temp[i]);
-            if (!acti.getLstPredecesores().contains(predecesor)) {
-                lstTemporalPredecesores.add(predecesor);
-            } else {
-                if (cantidadVecesPredecesor(temp, predecesor) > 1) {
-                    boolEstaPredecesor = true;
+        if (acti.getPredecesor() != null) {
+            String[] temp;
+            temp = acti.getPredecesor().split(",");
+            Set<Integer> lstTemporalPredecesores = new HashSet<Integer>();
+            boolean boolEstaPredecesor = false;
+            for (int i = 0; i < temp.length; i++) {
+                Integer predecesor = Integer.parseInt(temp[i]);
+                if (!acti.getLstPredecesores().contains(predecesor)) {
+                    lstTemporalPredecesores.add(predecesor);
+                } else {
+                    if (cantidadVecesPredecesor(temp, predecesor) > 1) {
+                        boolEstaPredecesor = true;
+                    }
                 }
             }
-        }
 
-        if (!boolEstaPredecesor) {
-            acti.getLstPredecesores().addAll(lstTemporalPredecesores);
+            if (!boolEstaPredecesor) {
+                acti.getLstPredecesores().addAll(lstTemporalPredecesores);
+            }
+            mapaPredecesores.put(boolEstaPredecesor, lstTemporalPredecesores);
         }
-        mapaPredecesores.put(boolEstaPredecesor, lstTemporalPredecesores);
         return mapaPredecesores;
     }
 
