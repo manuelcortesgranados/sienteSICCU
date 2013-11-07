@@ -4789,5 +4789,12 @@ a:hover {
     left: 45%;
 }
 
+.ikont-hpg-content-modal-cronograma span{
+    font-size: 1.3em;
+}
 
-
+.ikont-hot-deseacerrar{
+    color: #58595B;
+    font-family: 'open';
+    font-size: 0.9em;
+}
