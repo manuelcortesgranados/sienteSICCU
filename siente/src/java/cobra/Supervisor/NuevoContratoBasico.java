@@ -7182,6 +7182,30 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     tipoContCon = "Sociopolítico";
                     iniciarDetaContrato();
                     break;
+                case 5:
+                    tipoContCon = "Compraventa";
+                    iniciarDetaContrato();
+                    break;
+                case 6:
+                    tipoContCon = "Prestación de servicios profesionales";
+                    iniciarDetaContrato();
+                    break;
+                case 7:
+                    tipoContCon = "Interadministrativo";
+                    iniciarDetaContrato();
+                    break;
+                case 8:
+                    tipoContCon = "Apoyo a la gestión";
+                    iniciarDetaContrato();
+                    break;
+                case 9:
+                    tipoContCon = "Suministro";
+                    iniciarDetaContrato();
+                    break;
+                case 10:
+                    tipoContCon = "Cooperación";
+                    iniciarDetaContrato();
+                    break;
             }
         }
 
