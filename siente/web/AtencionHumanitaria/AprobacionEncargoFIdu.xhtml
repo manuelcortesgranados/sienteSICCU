@@ -33,13 +33,13 @@
                     <h:panelGrid id="panelAprobacionFinanciera" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
                         <h:outputText  styleClass="ikont-hot-fechapert" value="#{var.fechaapertura}:"/>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecAprobFinanciera2"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fecAprobFinanciera2"
                                        inputSize="10" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
                         </rich:calendar>
                         <h:outputLabel  styleClass="ikont-hol-apertencargofidu" id="fecAprobFidu" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                         value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                         </h:outputLabel>
 
                         <h:outputLabel  styleClass="ikont-hol-lbencargofidu" id="lblEncargoAH"  value="#{var.encargofiduciario}:"/>

@@ -256,14 +256,14 @@
                                     </h:panelGrid>
                                     <h:outputLabel  styleClass="ikont-hol-fechasusc" id="lblFecsusc"  value="#{var.fechasus}:" for="fecIniContrato"/>
                                     <h:panelGrid columns="2">
-                                        <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
                                             <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
                                         </rich:calendar>
                                         <rich:message for="fecIniContrato" styleClass="ikont-"  />
                                     </h:panelGrid>
                                     <h:outputLabel  styleClass="ikont-hol-fecfinal" id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato"/>
                                     <h:panelGrid columns="2">
-                                        <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="topRight" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
                                             <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" render="gpDuracion" execute="@this" />
                                         </rich:calendar>
                                         <rich:message for="fecfinContrato" styleClass="ikont-rm-fecfincontrato"  />
@@ -364,7 +364,7 @@
                                     <h:panelGrid rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==3}">
                                         <h:outputText  styleClass="ikont-hot-fechaformadepa" id="lbfechaformadepa"  value="Fecha de Pago: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"/>
 
-                                        <rich:calendar  datePattern="yyyy-MM-dd" id="fecpagoactaunica"
+                                        <rich:calendar  datePattern="#{var.formatofecha}" id="fecpagoactaunica"
                                                         rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"
                                                         inputSize="10" value="#{Supervisor$Contrato.planificacionpago.datefechapago}" >
                                         </rich:calendar>
@@ -386,7 +386,7 @@
 
                                     <h:outputText  styleClass="ikont-hot-fecanticipo" value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
 
-                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
+                                    <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
                                                     inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"   />
 
                                     <h:outputText  styleClass="ikont-hot-numactparc" id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 || var.fechaformapago and  Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
@@ -415,7 +415,7 @@
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-fechagiro" value="#{var.fechagiro}:" />
                                             </f:facet>
-                                            <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoactapargir"
+                                            <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecpagoactapargir"
                                                             inputSize="10" value="#{arr.datefechapago}" >
                                             </rich:calendar>
                                         </rich:column>
@@ -448,7 +448,7 @@
                             <h:outputLabel  styleClass="ikont-hol-vencepoliza" id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                             </h:outputLabel>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
                                            value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
@@ -492,7 +492,7 @@
                                         <h:outputText  styleClass="ikont-hot-vencepoliza" value="#{var.vencimientoPoliza}:" />
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-fechavence" id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column id="tc-strEntidadPoliza" 

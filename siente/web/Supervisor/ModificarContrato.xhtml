@@ -86,11 +86,11 @@
                                 <h:outputText  styleClass="ikont-hot-pnduraciondias"   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" />
                                 <h:outputText  styleClass="ikont-hot-pnduraciondesde"   value="desde" />
                                 <h:outputText  styleClass="ikont-hot-pnduracionda"  value="#{Supervisor$Contrato.contrato.datefechaini}" >
-                                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                                    <f:convertDateTime pattern="#{var.formatofecha}" />
                                 </h:outputText>
                                 <h:outputText  styleClass="ikont-hot-"   value="#{var.diashasta}" />
                                 <h:outputText  styleClass="ikont-hot-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
-                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </h:panelGrid>
                         </rich:panel>
@@ -156,7 +156,7 @@
                             <h:panelGrid id="modificar1" columnClasses="aiu" columns="2" >
                                 <h:outputLabel  styleClass="ikont-hol-lblFecmodi"   id="lblFecmodi"  value="#{var.fechamodificacion}:" for="fecmodifi"/>
                                 <h:panelGrid columns="5">
-                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecmodifi" inputSize="10"
+                                    <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecmodifi" inputSize="10"
                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.datefechamodificacionseleccionada}" required="true">
                                     </rich:calendar>
                                     <rich:message for="fecmodifi" />
@@ -173,7 +173,7 @@
                                     <h:outputLabel  styleClass="ikont-hol-lblFectermi"   id="lblFectermi"  value="#{var.nuevafechatermincacion}:" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"/>
                                 </h:panelGroup>
                                 <h:panelGroup id="pgprorroga">
-                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fectermi" inputSize="10" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"
+                                    <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fectermi" inputSize="10" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"
                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.datefechafinalizacion}">
                                     </rich:calendar>
 
@@ -290,7 +290,7 @@
 
                                         </h:outputLabel>
 
-                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPolizaModi" inputSize="10"
+                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPolizaModi" inputSize="10"
                                                        value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
@@ -330,7 +330,7 @@
                                                     <h:outputText  styleClass="ikont-hot-vencimientoPoliza"   value="#{var.fecha} #{var.vencimientoPoliza}" />
                                                 </f:facet>
                                                 <h:outputText  styleClass="ikont-hot-otxtstrVencimientoPolizaModi"   id="otxt-strVencimientoPolizaModi" value="#{localRow.datefechavecimiento}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                                 </h:outputText>
                                             </rich:column>
 
@@ -437,7 +437,7 @@
                                         <h:outputLabel  styleClass="ikont-anticipopago"   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                                         <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                                         <h:outputText  styleClass="ikont-hot-fechapago"      value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                                            <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                                         </h:outputText>
 
                                     </h:panelGrid>
@@ -481,7 +481,7 @@
                                                 </rich:column>
                                                 <rich:column >
                                                     <h:outputText  styleClass="ikont-hot-datefechapago"   value="#{planificacion.datefechapago}">
-                                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >

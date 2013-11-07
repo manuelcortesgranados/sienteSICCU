@@ -52,7 +52,7 @@
                     </rich:column>
                     <rich:column>
                         <h:outputText  styleClass="ikont-hot-datefechavisita"   value="#{segumiento.datefechavisita}">
-                            <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>

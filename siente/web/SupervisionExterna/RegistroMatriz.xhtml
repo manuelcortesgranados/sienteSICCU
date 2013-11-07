@@ -43,7 +43,7 @@
 
                         <h:panelGrid id="panelInformacionArchivo" columns="2" columnClasses="panelizquierda, panelizquierda">
                             <h:outputText  styleClass="ikont- "   value="#{var.fechainforme}" />
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarInforme"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarInforme"
                                            inputSize="20" immediate="true" value="#{Supervision$Externa.supervisionExterna.visita.datefechainforme}">
                             </rich:calendar>
 

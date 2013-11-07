@@ -47,7 +47,7 @@
                                     <h:outputText  styleClass="ikont-hot-fechaapertura"   value="#{var.fechaapertura}: "/>
                                     <interkont:spacer width="20"/>
                                     <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
 
                                     <h:outputText  styleClass="ikont-hot-saldoinicial"   value="#{var.saldoinicial}: "/>
@@ -78,7 +78,7 @@
                                     <h:outputText  styleClass="ikont-hot-fechaapertura1"   value="#{var.fechaapertura}: "/>
                                     <interkont:spacer width="20"/>
                                     <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
 
                                     <h:outputText  styleClass="ikont-hot-saldoinicial1"   value="#{var.saldoinicial}: "/>

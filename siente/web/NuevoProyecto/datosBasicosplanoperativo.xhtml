@@ -104,7 +104,7 @@
                                 <h:outputText value="Fecha suscripción" styleClass="input_fec_convenio label_texto_convenio" />
                             </rich:column>
                             <rich:column>
-                                <rich:calendar id="id-fechasuscripcion"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" style="width: 320px !important;">                                                  
+                                <rich:calendar id="id-fechasuscripcion"  datePattern="#{var.formatofecha}" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" style="width: 320px !important;">                                                  
                                     <rich:message for="id-fechasuscripcion"  />
                                     <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
                                     <rich:tooltip  value="#{var.fechasuscripcion}"/>
@@ -118,7 +118,7 @@
                                 <h:outputText value="Fecha finalización" styleClass="input_fec_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <rich:calendar id="id-datefechafin" datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" >                    
+                                <rich:calendar id="id-datefechafin" datePattern="#{var.formatofecha}" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" >                    
                                     <rich:message for="id-datefechafin"  />
                                     <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
                                     <rich:tooltip  value="#{var.fechafinalizacion}"/>
@@ -132,7 +132,7 @@
                                 <h:outputText value="Fecha acta de inicio" styleClass="input_fec_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <rich:calendar  id="id-datefechaini" datePattern="yyyy-MM-dd" direction="bottomRight" value="#{Supervisor$Contrato.contrato.fechaactaini}">
+                                <rich:calendar  id="id-datefechaini" datePattern="#{var.formatofecha}" direction="bottomRight" value="#{Supervisor$Contrato.contrato.fechaactaini}">
                                     <rich:tooltip  value="#{var.fechaactainicio}"/>
                                 </rich:calendar>
                             </rich:column>

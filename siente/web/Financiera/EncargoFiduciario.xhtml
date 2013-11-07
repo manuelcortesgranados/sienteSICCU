@@ -55,7 +55,7 @@
                                 <h:panelGrid styleClass="ikont-hpg-panelEncargo5"  />
                                 <h:outputText  styleClass="ikont-hot-lblfecha"   id="lblfecha"  value="#{var.fecha}"/>
                                 <h:panelGroup id="layoutFechaEncargo" >
-                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
                                                    required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}" >
                                         <a4j:ajax  event="change" />

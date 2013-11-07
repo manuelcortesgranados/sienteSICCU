@@ -56,7 +56,7 @@
                             <h:outputText  styleClass="ikont-hot-ingreselafechadeesta TextoTipificacionModificacion" value="#{var.ingreselafechadeesta}" />
                             <interkont:spacer height="20" width="100"/>
                               <br/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight"
                                            id="date_fechaModificacion" inputSize="10"
                                            value="#{Supervisor$ModificarProyecto.historicoobra.datefecobrahist}"/>
                             <interkont:spacer height="20" width="100" />
@@ -99,7 +99,7 @@
                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="ikont-hsbc-adicionpresu" onchange="checkAdicionarPresupuestoOnChangue();"/>
                                     <h:outputLabel  styleClass="ikont-hol TextoTipificacionModificacion "   value="#{var.nuevovaloradicionmodificacion}" />
                                 </h:panelGroup>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="12"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_adicionTiempo" inputSize="12"
                                                value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" styleClass="datefecfinhist"  >
                                     <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                 </rich:calendar>
@@ -384,7 +384,7 @@
 
                                             <rich:column>
                                                 <h:outputText  styleClass="ikont-hot-datefecha"   value="#{currentRow.datefecha}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column>

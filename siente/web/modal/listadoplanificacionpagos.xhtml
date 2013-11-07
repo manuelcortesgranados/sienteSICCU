@@ -41,7 +41,7 @@
 
                 <h:outputLabel  styleClass="ikont-hot-datantipago" value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <h:outputText  styleClass="ikont-hot-datpago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                    <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                 </h:outputText>
 
             </h:panelGrid>
@@ -84,7 +84,7 @@
                             </rich:column>
                             <rich:column >
                                 <h:outputText  styleClass="ikont-hot-datpago" value="#{planificacion.datefechapago}">
-                                    <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </rich:column>
                         </rich:columnGroup>

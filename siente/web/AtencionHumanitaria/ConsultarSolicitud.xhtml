@@ -81,7 +81,7 @@
 
                             <h:outputText  styleClass="ikont-hot-evenfechsolic" value="#{var.fecha} Solicitud:" />
                             <h:outputText  styleClass="ikont-hot-maesfechsolic" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechasolicitud}">
-                                <f:convertDateTime pattern="dd,MMMM, yyyy"  />
+                                <f:convertDateTime pattern="#{var.formatofecha}"  />
                             </h:outputText>
 
 

@@ -38,7 +38,7 @@
                             </h:panelGroup>
 
                             <h:outputText  styleClass="ikont-hot-fecha"    value="#{var.fecha}"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fechaorden"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fechaorden"
                                            value="#{Financiera$FiduFinanciera.financieraService.ordendepago.datefechaordenpago}" inputSize="10" immediate="true">
 
                             </rich:calendar>

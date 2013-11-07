@@ -32,7 +32,7 @@
                         <interkont:spacer width="10"/>
                         <h:outputLabel  styleClass="ikont-hol-houtfechayhora"    value="#{var.houtfechayhora}"/>
                         <h:inputText id="txt-datefecmensaje-nuevo" value="#{Mensajes.mensajeNuevo.datefecmensaje}" size="65" readonly="true">
-                            <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
+                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
                         <h:outputLabel  styleClass="ikont-hol-houtdestinatario"    value="#{var.houtdestinatario}"/>

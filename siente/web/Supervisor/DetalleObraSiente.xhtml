@@ -181,11 +181,11 @@
                                         <h:outputText  styleClass="ikont- hot-dias"   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
                                         <h:outputText  styleClass="ikont- hot-diasdesde"   value="#{var.diasdesde}" />
                                         <h:outputText  styleClass="ikont- hot-datefeciniobra"     value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputText>
                                         <h:outputText  styleClass="ikont- hot-diashasta"   value="#{var.diashasta}" />
                                         <h:outputText  styleClass="ikont- hot-datefecfinobra"  value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
-                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                                         </h:outputText>
                                     </h:panelGrid>
                                 </rich:panel>
@@ -491,7 +491,7 @@
                                             <h:outputText  styleClass="ikont- hot-fechaapertura"   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
                                             <h:outputText  styleClass="ikont- hot-encargofiduciario"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                                             </h:outputText>
 
                                             <h:outputText  styleClass="ikont- hot-saldoinicial"   value="#{var.saldoinicial}: "/>
@@ -521,7 +521,7 @@
                                             <h:outputText  styleClass="ikont- hot-fechaapertura"   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
                                             <h:outputText  styleClass="ikont- hot-datefechaapertura"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                                             </h:outputText>
 
                                             <h:outputText  styleClass="ikont- hot-saldoinicial1"   value="#{var.saldoinicial}: "/>
@@ -1206,11 +1206,11 @@
                                 <h:panelGrid columns="2" >
                                     <h:outputText  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputText>
                                     <h:outputText  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        <f:convertDateTime pattern="#{var.formatofecha}" />
                                     </h:outputText>
                                     <h:outputText  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputText>
                                     <h:outputText  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </h:panelGrid>
 
@@ -1606,11 +1606,11 @@
                                         <h:panelGrid columns="2" styleClass="panelcenter">
                                             <h:outputLabel  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputLabel>
                                             <h:outputLabel  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                                                <f:convertDateTime pattern="#{var.formatofecha}" />
                                             </h:outputLabel>
                                             <h:outputLabel  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputLabel>
                                             <h:outputLabel  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                                             </h:outputLabel>
                                         </h:panelGrid>
 

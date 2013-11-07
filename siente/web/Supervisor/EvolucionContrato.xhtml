@@ -73,7 +73,7 @@
                     <h:outputLabel  styleClass="ikont-hol-fechaanticipopago"   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <h:outputText  styleClass="ikont-hot-fechapago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                     </h:outputText>
 
                 </h:panelGrid>
@@ -115,7 +115,7 @@
                                 </rich:column>
                                 <rich:column >
                                     <h:outputText  styleClass="ikont-hot-datefechapago"   value="#{planificacion.datefechapago}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                             </rich:columnGroup>
@@ -161,7 +161,7 @@
                                 </rich:column>
                                 <rich:column >
                                     <h:outputText  styleClass="ikont-hot-fechamovimiento"   value="#{movimiento.fechamovimiento}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>

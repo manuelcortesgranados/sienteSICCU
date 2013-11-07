@@ -307,11 +307,11 @@
                                     <h:panelGrid columns="2" styleClass="panelcenter">
                                         <h:outputLabel styleClass="ikont- hot-desde" value="Desde:"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-hasta" value="Hasta:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
                                     </h:panelGrid>
 

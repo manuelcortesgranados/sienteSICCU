@@ -135,7 +135,7 @@
 
                                 <h:outputText  styleClass="ikont-hot-fechasol"   value="#{var.fechasol}:"/>
                                 <rich:calendar locale="#{var.rcalendarlocale}"
-                                               datePattern="yyyy-MM-dd" rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
+                                               datePattern="#{var.formatofecha}" rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
@@ -519,7 +519,7 @@
                                                  cols="20" />
 
                                 <h:outputText  styleClass="ikont-hot-fechajuntadirectiva"    value="#{var.fechajuntadirectiva}"/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
@@ -643,7 +643,7 @@
 
                             <h:outputText  styleClass="ikont-hot-fechadecarta"    value="#{var.fechadecarta}"/>
                             <interkont:spacer width="95"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" 
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" 
                                            direction="topRight" id="fecorden" inputSize="10"
                                            value="#{SessionBeanCobra.solicitudService.ordendepago.datefechaordenpago}"
                                            immediate="true">
@@ -675,7 +675,7 @@
                         <h:panelGrid id="panelAprobacionFinanciera" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
                             <h:outputText  styleClass="ikont-hot-fechaapertura"    value="#{var.fechaapertura}"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true">
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fecInfo" inputSize="10" immediate="true">
                                 <a4j:ajax  event="changed" onbeforesubmit="#{rich:component('panelCargando')}.show();">
                                     <a4j:ajax event="complete" onbeforesubmit="#{rich:component('panelCargando')}.hide();"/>
                                 </a4j:ajax>

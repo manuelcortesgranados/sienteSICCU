@@ -25,7 +25,7 @@
                     <h:outputLabel  styleClass="ikont-hol-vencepoliza" id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                     </h:outputLabel>
-                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
+                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
                                    value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
@@ -91,7 +91,7 @@
                         <rich:column id="tc-strVencimientoPoliza" width="100px"                                     >
                             
                             <h:outputText  styleClass="ikont-hot-fechavence" id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}" style="color: #000">
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column id="tc-strEntidadPoliza" 

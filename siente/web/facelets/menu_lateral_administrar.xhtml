@@ -153,14 +153,14 @@
             <h:outputText  styleClass="ikont-hot-stfechaini"   id="stFecIni"  value="#{var.fechadeinicio}"/>
             <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-fechainiobra"  value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                <f:convertDateTime pattern="#{var.formatofecha}"/>
             </h:outputText>
 
             <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-fechadefinilizacion"   id="stFecFin"  value="#{var.fechadefinalizacion}"/>
             <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-datefechafinobra"  value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                <f:convertDateTime pattern="#{var.formatofecha}"/>
             </h:outputText>
 
             <interkont:spacer width="5"/>
