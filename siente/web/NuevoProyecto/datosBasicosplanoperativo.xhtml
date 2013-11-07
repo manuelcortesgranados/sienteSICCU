@@ -92,9 +92,7 @@
                                 <h:outputText value="Gerente del convenio" styleClass="input_ger_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <rich:select id="select-gerente-convenio"  value="#{Supervisor$Contrato.contrato.gerenteconvenio}" style="height: 32px!important; width: 306px!important;">
-                                    <f:selectItems value="#{Supervisor$Contrato.gerentesDeConvenio}"  />
-                                </rich:select>
+                                <h:inputText id="hit-gerente-convenio" value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}" disabled="true" style="background:transparent!important;color: rgb(66, 64, 64);width: 290px;position: relative;top: -10px;"> </h:inputText>
                             </rich:column>
                         </h:panelGrid> 
 
