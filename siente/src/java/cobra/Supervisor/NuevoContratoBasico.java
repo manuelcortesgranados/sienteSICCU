@@ -2452,7 +2452,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                     subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion() / 3;
                     if (getSubpantalla() == 2) {
-
+                        if(!getContrato().isModolecturaplanop())
+                        {    
+                        this.guardarBorradorConvenio();
+                        }
+                        listaProyectosConvenio.clear();
+                        lstTodasActividades.clear();
+                        if (!getContrato().getActividadobras().isEmpty()) {
+                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
+                        }
                         getFlujoCaja().iniciarFlujoCaja();
                     }
                     break;
@@ -7810,6 +7818,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(getContrato().getIntidcontrato()));
             recursosconvenio.sumaFuentesRecursos();
+            recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
+        recursosconvenio.setVerAgregarRecurso(false);
+        recursosconvenio.setVerEliminarRecurso(false);
+        recursosconvenio.sumaFuentesRecursos();
         cargarActividadesPlanOperativo();
         if(getContrato().getActividadobras().isEmpty())
         {
