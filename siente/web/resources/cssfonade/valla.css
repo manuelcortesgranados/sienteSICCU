@@ -401,6 +401,13 @@ a.imgaction:hover:after{
 
 .label-obj-proyecto{
     border: 1px solid #257500;
-    padding: 1px 10px;
+    padding: 0px 10px;
     border-radius: 20px;
+    font-family: 'open';
+}
+
+.label-obj-proyecto:hover {
+    color: #9CFF00;
+    background-color: #257500;
+    transition: background-color 0.5s ease 0s;
 }
