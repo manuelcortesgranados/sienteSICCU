@@ -49,7 +49,7 @@
                         <h:panelGrid styleClass="ikont-hpg-grid3"   />
 
                         <h:outputLabel  styleClass="ikont-hol-vencimientoPoliza"   id="lblVencimientoPoliza" value="#{var.vencimientoPoliza}" />
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"
                                        value="#{Supervisor$ModificarObra.polizaeditar.datefechavecimiento}" />
 
                         <h:panelGrid styleClass="ikont-hpg-grid4"   />

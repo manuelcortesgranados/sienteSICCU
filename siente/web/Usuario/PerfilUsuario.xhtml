@@ -111,7 +111,7 @@
                         </h:selectOneMenu>
 
                         <h:outputText  styleClass="ikont-label-general"   value="#{var.fechaVencimiento}"/>
-                        <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-rc-calendarfechnacimiento"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
+                        <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-rc-calendarfechnacimiento"   locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarfechnacimiento" inputSize="10"
                                         value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
 
                         <h:outputText  styleClass="ikont-label-general"   value="#{var.direccion}"/>

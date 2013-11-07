@@ -267,11 +267,11 @@
                             <!--**************************************************************************************-->
                             <h:panelGrid columns="2" id="fechasAh" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten >= 5 }">
                                 <h:outputText value="#{var.fecha} Inicio: "/>
-                                <rich:calendar  datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.feciniah}" >
+                                <rich:calendar  datePattern="#{var.formatofecha}" inputSize="10" value="#{Reportes.feciniah}" >
                                     <a4j:ajax event="change" render="fechasAh"/>
                                 </rich:calendar>
                                 <h:outputText value="#{var.fecha} Fin: "/>
-                                <rich:calendar  datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fecfinah}" >
+                                <rich:calendar  datePattern="#{var.formatofecha}" inputSize="10" value="#{Reportes.fecfinah}" >
                                     <a4j:ajax event="change" render="fechasAh"/>
                                 </rich:calendar>
                             </h:panelGrid>

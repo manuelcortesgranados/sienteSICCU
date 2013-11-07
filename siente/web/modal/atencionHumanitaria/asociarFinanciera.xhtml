@@ -17,7 +17,7 @@
                 <h:panelGrid  columns="2">
                     <h:panelGrid  columns="2">
                         <h:outputLabel  styleClass="ikont-hol-lbfe "   id="lbfe"  value="#{var.fechaencargo}" />
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight"  inputSize="10" value="" >
                         </rich:calendar>
                         <h:outputLabel  styleClass="ikont-hol-lblnumen "   id="lblnumen"  value="#{var.numeroordenp}" />
                         <h:inputText value=""/>

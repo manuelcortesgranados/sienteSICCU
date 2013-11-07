@@ -32,7 +32,7 @@
 
                     <h:outputText  styleClass="ikont-hot-fech" id="lblfecha"  value="#{var.fecha}" />
                     <h:panelGroup id="layoutFechaEncargo">
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="fechaapertura" inputSize="10"
                                        required="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
                             <a4j:ajax event="change" />
                         </rich:calendar>

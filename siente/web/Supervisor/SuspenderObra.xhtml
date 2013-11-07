@@ -53,13 +53,13 @@
 
                                 <h:outputText  styleClass="ikont-hot-ingrefec"   value="#{var.ingreselafechadeini} " />
                                 <h:panelGroup>
-                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_iniSuspe" 
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="date_iniSuspe" 
                                                    inputSize="10"  value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}" >
                                     </rich:calendar>
                                 </h:panelGroup>
 
                                 <h:outputText  styleClass="ikont-hot-ingreselafec"   value="#{var.ingreselafechadefinali}" />
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_finSuspe"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="date_finSuspe"
                                                inputSize="10" value="#{Supervisor$SuspenderObra.suspension.datefecfinhist}" >
                                 </rich:calendar>
 

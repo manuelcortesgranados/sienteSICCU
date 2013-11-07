@@ -52,7 +52,7 @@
                             <interkont:spacer height="20" />
                             <h:panelGrid columns="2" cellspacing="15">
                                 <h:outputText  styleClass="ikont-hot-fechreinicio" value="#{var.ingreselafechadereinicio} "/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_Reinicio" inputSize="10"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_Reinicio" inputSize="10"
                                                value="#{Supervisor$SuspenderObra.reinicio.datefecobrahist}">
                                 </rich:calendar>
                             </h:panelGrid>

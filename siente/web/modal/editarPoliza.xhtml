@@ -45,7 +45,7 @@
                         <h:outputLabel  styleClass="ikon-hol-lblvencimientopoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                         </h:outputLabel>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 

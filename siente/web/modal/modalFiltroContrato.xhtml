@@ -64,12 +64,12 @@
 
                         <h:outputLabel  styleClass="ikont-hol-lblperiodo"    id="lblperiodo"  value="#{var.periodoejecucionentre}?" />
 
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"   id="fec"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"   id="fec"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMin}">
 
                         </rich:calendar>
                         <h:outputLabel  styleClass="ikont-hol-labely"    id="labely" value=" #{var.y} "  />
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  id="fech"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  id="fech"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMax}">
                         </rich:calendar>
                     </h:panelGrid>

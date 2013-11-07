@@ -56,7 +56,7 @@
                             <rich:message for="calendarVenciPoliza" />
                         </h:panelGroup>
 
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$IngresarNuevaObra.polizacontrato.datefechavecimiento}" required="true"/>
 
                         <h:panelGrid styleClass="ikont-hpg-space2"  />
