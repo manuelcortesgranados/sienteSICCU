@@ -97,7 +97,7 @@
             </h:panelGroup>
             <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outVlInterventoriaCont" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 

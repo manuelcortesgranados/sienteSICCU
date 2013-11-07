@@ -72,7 +72,7 @@
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
                                         <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                                            <f:convertNumber pattern="$ ###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                 </h:panelGroup>
@@ -267,7 +267,7 @@
                                     <interkont:spacer width="20" />
                                     <h:panelGroup rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios or Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                         <h:outputLabel  id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="true">
-                                            <f:convertNumber pattern="$ ###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputLabel>
                                     </h:panelGroup>
 
@@ -275,7 +275,7 @@
                                         <h:panelGroup id="txthabilitarrecursopropios" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
                                             <h:outputLabel  id="txtrecurpropios"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursospropios}">
-                                                <f:convertNumber pattern="$ ###,###" /></h:outputLabel>
+                                                <f:convertNumber pattern="#{var.formatomoneda}" /></h:outputLabel>
                                             <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurpropios" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
                                                 <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
                                             </a4j:commandLink>
@@ -298,7 +298,7 @@
                                     <interkont:spacer width="20" />
                                     <h:panelGroup rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH  or  Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                         <h:outputLabel     id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="true">
-                                            <f:convertNumber pattern="$ ###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputLabel>
                                     </h:panelGroup>
 
@@ -306,7 +306,7 @@
                                         <h:panelGroup id="txthabilitarrecursoch" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
                                             <h:outputLabel  id="txtrecurch"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursosch}">
-                                                <f:convertNumber pattern="$ ###,###" />
+                                                <f:convertNumber pattern="#{var.formatomoneda}" />
                                             </h:outputLabel>
                                             <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurch" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
                                                 <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
@@ -329,7 +329,7 @@
                                     <interkont:spacer width="20" />
                                     <h:panelGroup rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros or Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                         <h:outputLabel    id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="true">
-                                            <f:convertNumber pattern="$ ###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputLabel>
                                     </h:panelGroup>
 
@@ -337,7 +337,7 @@
                                         <h:panelGroup id="txthabilitarrecurtercero" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
                                             <h:outputLabel  id="txtrecurtercero"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursostercero}">
-                                                <f:convertNumber pattern="$ ###,###" /></h:outputLabel>
+                                                <f:convertNumber pattern="#{var.formatomoneda}" /></h:outputLabel>
                                             <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurtercero" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios">
                                                 <h:graphicImage styleClass="ikont-img-administrar" value="/resources/imgs/bt_editar.png"/>
                                             </a4j:commandLink>
@@ -388,7 +388,7 @@
                                     <interkont:spacer width="20" />
 
                                     <h:outputLabel    id="strcostocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                                        <f:convertNumber pattern="$ ###,###" />
+                                        <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputLabel>
 
                                     <h:outputLabel  styleClass="ikont- "   id="dispo" value="#{var.vlrdispo}:" />
@@ -396,7 +396,7 @@
                                     <interkont:spacer width="20" />
 
                                     <h:outputLabel    id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
-                                        <f:convertNumber pattern="$ ###,###" />
+                                        <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputLabel>
 
                                     <h:outputText  styleClass="ikont- "   id="documento" value="#{var.documento}" />
@@ -521,7 +521,7 @@
 
                                         <h:outputText  styleClass="ikont- "   value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                         <h:outputText  styleClass="ikont- "   id="vlranti" value="#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
-                                            <f:convertNumber pattern="$ ###,###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
 
                                         <h:outputText  styleClass="ikont- "   value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
@@ -797,7 +797,7 @@
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
-                                            <f:convertNumber pattern="$#,###.00" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </rich:column>
 
@@ -880,7 +880,7 @@
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
-                                            <f:convertNumber pattern="$#,###.00" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </rich:column>
 
@@ -990,7 +990,7 @@
 
                                         <rich:column  width="120px">
                                             <h:outputText  styleClass="ikont- "    value="#{girodirecto.numvlrgiro}">
-                                                <f:convertNumber pattern="$#,###.00" />
+                                                <f:convertNumber pattern="#{var.formatomoneda}" />
                                             </h:outputText>
                                         </rich:column>
 
@@ -1075,7 +1075,7 @@
                                     </f:facet>
 
                                     <h:outputText  styleClass="ikont- "    value="#{modificarcontr.numvlrcontrato}">
-                                        <f:convertNumber pattern="$#,###.00" />
+                                        <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputText>
                                 </rich:column>
 
@@ -1085,7 +1085,7 @@
                                     </f:facet>
 
                                     <h:outputText  styleClass="ikont- "    value="#{modificarcontr.numvlrnuevo}">
-                                        <f:convertNumber pattern="$#,###.00" />
+                                        <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputText>
                                 </rich:column>
 

@@ -100,12 +100,12 @@
                                         </rich:column>
                                         <rich:column id="co2">
                                             <h:outputText  styleClass="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
-                                                <f:convertNumber pattern="$ ###,###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="vlcongtrhijosse">
                                             <h:outputText  styleClass="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
-                                                <f:convertNumber pattern="$###,###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="fechaincontse" >

@@ -35,11 +35,11 @@
                         <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" />
                         <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="Valor contrato:" />                        
                         <h:outputText  styleClass="ikont-hot-numvlrcontrato1 "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}">
-                            <f:convertNumber pattern="$#,###.00"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>                        
                         <h:outputText  styleClass="ikont-hot-solipry"   value="Valor #{var.solicitudproyecto}:" />
                         <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                            <f:convertNumber pattern="$#,###.00"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
 
                     </h:panelGrid>
@@ -49,7 +49,7 @@
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
                         <h:outputText  styleClass="ikont-hot-por"   value="por"  /> 
                         <h:outputText  styleClass="ikont-hot-numvalordisponible"   value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" >
-                            <f:convertNumber pattern="$#,###.00"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
                     <h:outputText  styleClass="ikont-hot-valsolicipry"   value="Qué valor desea asociar a este #{var.solicitudproyecto}?"/>

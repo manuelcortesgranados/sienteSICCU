@@ -36,7 +36,7 @@
 
                 <h:outputLabel  styleClass="ikont-hol-vlanticipo" value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <h:outputText  styleClass="ikont-hot-vlanticipo" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                    <f:convertNumber pattern="$###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
 
                 <h:outputLabel  styleClass="ikont-hot-datantipago" value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
@@ -79,7 +79,7 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-nmvlrpago" value="#{planificacion.numvlrpago}">
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >

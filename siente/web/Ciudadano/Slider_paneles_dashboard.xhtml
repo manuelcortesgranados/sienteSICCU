@@ -22,7 +22,7 @@
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-inversiontotalnal vtitle10 "   value="#{ControlGerencial.informaciondash.inversionTotalNal}"   >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -39,7 +39,7 @@
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-inversionobra vtitle10"   value="#{ControlGerencial.informaciondash.inversionObra}">
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -58,7 +58,7 @@
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-inversionah vtitle10"   value="#{ControlGerencial.informaciondash.inversionAh}" >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -78,7 +78,7 @@
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-persdamniff vtitle10"   value="#{ControlGerencial.informaciondash.persdamnif}" >
-                                        <f:convertNumber pattern="###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -98,7 +98,7 @@
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-persafect vtitle10"   value="#{ControlGerencial.informaciondash.persafect}">
-                                        <f:convertNumber pattern="###,###.##"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -118,7 +118,7 @@
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-hogdamniff vtitle10"   value="#{ControlGerencial.informaciondash.hogdamnif}">
-                                        <f:convertNumber pattern="###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
@@ -138,7 +138,7 @@
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-hogaafect vtitle10"   value="#{ControlGerencial.informaciondash.hogafect}">
-                                        <f:convertNumber pattern="###,###.##"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>

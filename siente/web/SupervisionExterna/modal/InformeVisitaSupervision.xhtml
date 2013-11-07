@@ -69,7 +69,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont-hot-inTotalEjecutado "   id="inTotalEjecutado" value="#{Supervision$Externa.objetoActividadSeguimiento.numvlrtotalejec}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -87,7 +87,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont-hot-inVlrProgram "   id="inVlrProgram" value="#{Supervision$Externa.objetoSeguimiento.numvlrprogramadofecha}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 

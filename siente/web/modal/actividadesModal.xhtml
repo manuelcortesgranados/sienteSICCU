@@ -75,32 +75,32 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hol-layoutcantidad"   id="layoutcantidad" value="#{row.actividadobra.numvalorplanifao}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hot-layoutcostounitario"   id="layoutcostounitario" value="#{row.actividadobra.floatcantplanifao}" >
-                                    <f:convertNumber pattern="###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hol-layoutcantidadejecutada"   id="layoutcantidadejecutada" value="#{row.floatcantejec}" >
-                                    <f:convertNumber pattern="###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hol-layoutcantidadejecutadaacumulado"   id="layoutcantidadejecutadaacumulado"  value="#{row.actividadobra.floatcantidadejecutao}" >
-                                    <f:convertNumber pattern="###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hol-layoutporcentajealimentacion"   id="layoutporcentajealimentacion" value="#{row.floatcantejec/row.actividadobra.floatcantplanifao*100}" >
-                                    <f:convertNumber pattern="###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
                                 <h:outputLabel  styleClass="ikont-hol-layoutporcentajetotalactividad"   id="layoutporcentajetotalactividad" value="#{row.actividadobra.floatcantidadejecutao/row.actividadobra.floatcantplanifao*100}">
-                                    <f:convertNumber pattern="###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputLabel>
                             </rich:column>
                         </rich:columnGroup>

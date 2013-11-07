@@ -104,7 +104,7 @@
                                     <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                 </rich:calendar>
                                 <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
-                                    <f:convertNumber pattern="###,###" maxFractionDigits="6"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6"/>
                                 </h:inputText>
                                 <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
@@ -450,7 +450,7 @@
                                                 <h:outputText  styleClass="ikont-hot-valor"   value="#{var.valor}" />
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-numvlcontrato"   value="#{contrarow.contrato.numvlrcontrato}">
-                                                <f:convertNumber pattern="$###,###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
 
                                             </h:outputText>
                                         </rich:column>
@@ -460,7 +460,7 @@
                                                 <h:outputText  styleClass="ikont-hot-valordisponible"   value="Valor Disponible"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-valordisponibleproyecto"   value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
-                                                <f:convertNumber pattern="$###,###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column width="150px">

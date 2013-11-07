@@ -86,12 +86,12 @@
                                     </rich:column>
                                     <rich:column>
                                         <h:outputText  styleClass="ikont-hot-numvlrcontrato" id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
-                                            <f:convertNumber pattern="$#,###.00"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
                                         <h:outputText  styleClass="ikont-hot-numvlrsumproyectos" id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
-                                            <f:convertNumber pattern="$#,###.00"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>

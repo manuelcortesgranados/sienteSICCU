@@ -151,7 +151,7 @@
                                                 <h:outputText  styleClass="ikont-hot-valorcontconvbasico" value="#{var.valor}"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-numvlrcontconvbasico" id="idvalor" value="#{currentRow.numvlrcontrato}">
-                                                <f:convertNumber pattern="$###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="vlcongtrhijossele"  width="60px">
@@ -159,7 +159,7 @@
                                                 <h:outputText  styleClass="ikont-hot-vlrdisponible"   value="Valor Disponible"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-numsumproyectocontconv" id="vlcondissele" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}">
-                                                <f:convertNumber pattern="$###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
 
@@ -170,15 +170,15 @@
                                             <h:panelGrid >
                                                 <h:outputText  styleClass="ikont-hot-recursospropiocontconvbasico" value="Recursos Propios (Entidad Contratante)"/>
                                                 <h:outputText  styleClass="ikont-hot-numrecursopropiocontconvbasic" id="vlcondisrecprosele" value="#{currentRow.numrecursospropios}">
-                                                    <f:convertNumber pattern="$###,###"/>
+                                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                                 </h:outputText>
                                                 <h:outputText  styleClass="ikont-hot-recursosch" value="Recursos C H"/>
                                                 <h:outputText  styleClass="ikont-hot-numrecursochcontconvbasic" id="vlcondisrecurchsele" value="#{currentRow.numrecursosch}">
-                                                    <f:convertNumber pattern="$###,###"/>
+                                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                                 </h:outputText>
                                                 <h:outputText  styleClass="ikont-hot-recursotercero" value="Recursos  Tercero"/>
                                                 <h:outputText  styleClass="ikont-hot-numrecursotercontconvbasic" id="vlconditercerossele" value="#{currentRow.numrecursostercero}">
-                                                    <f:convertNumber pattern="$###,###"/>
+                                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                                 </h:outputText>
                                             </h:panelGrid>
                                         </rich:column>
@@ -336,7 +336,7 @@
                                     <h:outputText  styleClass="ikont-hot-valrtipocontconv" id="lblvalor"  value="(*)#{var.valor} #{Supervisor$Contrato.tipoContCon} :"/>
                                     <h:panelGroup id="gpValContrato">
                                         <h:outputText  styleClass="ikont-hot-valrcontconv" id="lblval" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                                            <f:convertNumber pattern="$ ###,###.###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -380,7 +380,7 @@
                                     </h:panelGrid>
                                     <h:outputText  styleClass="ikont-hot-vlranticipo" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                     <h:outputText  styleClass="ikont-hot-vlranti" id = "vlranti" value = "#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
-                                        <f:convertNumber pattern="$ ###,###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
 
 

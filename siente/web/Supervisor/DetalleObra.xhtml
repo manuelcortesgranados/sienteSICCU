@@ -127,7 +127,7 @@
                                     <h:panelGrid >
                                         <h:outputLabel styleClass=" ikont-hol-detalle-proyecto" >Valor global del proyecto</h:outputLabel>    
                                         <h:outputText styleClass="ikont-hot-zoom-numvobra" value="#{Supervisor$DetalleObra.valorinterventoria + Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGroup>
@@ -136,7 +136,7 @@
                                     <h:panelGrid >
                                         <h:outputLabel styleClass="ikont- hot-textobra9 ikont-hol-detalle-proyecto">Valor del proyecto</h:outputLabel>
                                         <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra }">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:commandLink  id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
@@ -154,7 +154,7 @@
                                     <h:panelGrid>
                                         <h:outputLabel styleClass="ikont-hol-detalle-proyecto">Valor de la interventoría</h:outputLabel>
                                         <h:outputText styleClass="ikont-hot-zoom-numvaltotobra" value="#{Supervisor$DetalleObra.valorinterventoria}">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGroup>

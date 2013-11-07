@@ -77,7 +77,7 @@
                         </rich:column>
                         <rich:column >
                             <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrunit}">
-                                <f:convertNumber pattern="$###,###" />
+                                <f:convertNumber pattern="#{var.formatomoneda}" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
@@ -85,7 +85,7 @@
                         </rich:column>
                         <rich:column>
                             <h:outputText  styleClass="ikont- "   value="#{currentRow.valortotalactividad}">
-                                <f:convertNumber pattern="$###,###" />
+                                <f:convertNumber pattern="#{var.formatomoneda}" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
@@ -93,7 +93,7 @@
                         </rich:column>
                         <rich:column>
                             <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrtotalejec}">
-                                <f:convertNumber pattern="$###,###.##" />
+                                <f:convertNumber pattern="#{var.formatomoneda}" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>

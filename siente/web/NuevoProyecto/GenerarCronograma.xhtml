@@ -139,10 +139,10 @@
                                     <h:outputLabel  styleClass="ikont-hl-lblcostodirecto"   id="lblcostodirecto"  value="#{var.costodirecto}"/>
                                     <h:panelGroup id="layoutCostoDirecto">
                                         <h:outputText  styleClass="ikont-hot-stcostodirecto"   id="stcostodirecto"  value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
-                                            <f:convertNumber pattern="$#,###.00"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                         <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
-                                            <f:convertNumber pattern="###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
                                         </h:inputText>
                                     </h:panelGroup>
@@ -175,7 +175,7 @@
                                     <h:panelGroup id="layoutCostoTotal">                                                            
                                         <h:outputText  styleClass="ikont-hot-stCosto"  id="stCosto"  
                                                        value="#{Supervisor$IngresarNuevaObra.valortotalobra}">
-                                            <f:convertNumber pattern="$ ###,###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGrid>

@@ -40,7 +40,7 @@
                     <h:outputLabel  styleClass="ikont-hol-lblvalorencargo"   id="lblvalorencargo" value="#{var.valorencargo}" />
                     <h:inputText id="txtValor" required="true" disabled="true"
                                  value="#{SessionBeanCobra.solicitudService.solicitudObrachD.doublevaloraprobado}">
-                        <f:convertNumber pattern="#,###.00" />
+                        <f:convertNumber pattern="#{var.formatomoneda}" />
                     </h:inputText>
                 </h:panelGrid>
 

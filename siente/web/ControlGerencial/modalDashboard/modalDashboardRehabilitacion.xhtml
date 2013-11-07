@@ -45,11 +45,11 @@
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-recursosaprobados"    value="#{var.recursosaprobados}:" ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-valorAprobado "   value="#{ControlGerencial.valorAprobado}"   >
-                    <f:convertNumber pattern="$###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-recursosejecutados"    value="#{var.recursosejecutados}:" ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-valorEjecutado"   value="#{ControlGerencial.valorEjecutado}">
-                    <f:convertNumber pattern="$###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-porcentajetotalnacional"    value="#{var.porcentajetotalnacional}:" ></h:outputText>
                 <h:outputText  styleClass="ikont-hottotalNacionalInvertido"   value="#{ControlGerencial.totalNacionalInvertido}" >

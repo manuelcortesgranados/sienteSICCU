@@ -99,12 +99,12 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numvlrcontratobasico" id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}" >
-                                        <f:convertNumber pattern="$#,###.00"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numvalorsumaproyecto" id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}">
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
@@ -190,12 +190,12 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont "   value="#{currentRow.numvlrcontrato}" >
-                                        <f:convertNumber pattern="$#,###.00"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont "   value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}">
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>

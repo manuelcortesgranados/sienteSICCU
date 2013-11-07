@@ -41,23 +41,23 @@
             <h:panelGrid  columns="2">
                 <h:outputText  styleClass="ikont-hot-totalobra"    value="#{var.totalobra}s:" ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-totalproy"   value="#{ControlGerencial.informaciondashconvenios.totalproy}" >
-                    <f:convertNumber pattern="###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-proyectosterminados"    value="#{var.proyectosterminados}:"  ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-proyterm"   value="#{ControlGerencial.informaciondashconvenios.proyterm}" >
-                    <f:convertNumber pattern="###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-totalrecursos"    value="#{var.totalrecursos}:"></h:outputText>
                 <h:outputText  styleClass="ikont-houttotalRecValDec"   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}">
-                    <f:convertNumber pattern="$ ###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-totalrecursosprogramados"    value="#{var.totalrecursosprogramados}:"></h:outputText>
                 <h:outputText  styleClass="ikont-houttotalRecProgEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}">
-                    <f:convertNumber pattern="$ ###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hout-totalrecursosejecutados"    value="#{var.totalrecursosejecutados}:"></h:outputText>
                 <h:outputText  styleClass="ikont-houttotalRecEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}">
-                    <f:convertNumber pattern="$ ###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-porcentajejecutado"    value="#{var.porcentajejecutado}:" ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-porcEjec"   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" >
@@ -65,7 +65,7 @@
                 </h:outputText>
                 <h:outputText  styleClass="ikont-hot-numeroentidadesnacionalesejecutadas "    value="#{var.numeroentidadesnacionalesejecutadas}:"  ></h:outputText>
                 <h:outputText  styleClass="ikont-hot-numentiejec"   value="#{ControlGerencial.informaciondashconvenios.numentiejec}"   >
-                    <f:convertNumber pattern=" ###,###"/>
+                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />

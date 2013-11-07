@@ -230,7 +230,7 @@
                                                              rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"/>
                                     <h:outputText  styleClass="ikont-hot-doublevalorsolicitado" rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                                   value="#{SessionBeanCobra.solicitudService.solicitudObrach.doublevalorsolicitado}">
-                                        <f:convertNumber pattern="$ ###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGroup>
                                 <h:outputText  styleClass="ikont-hot-defprioridad"   value="#{var.defprioridad}:"/>

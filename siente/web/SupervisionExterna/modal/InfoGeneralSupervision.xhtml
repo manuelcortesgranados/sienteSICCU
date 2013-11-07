@@ -110,7 +110,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont-hot-invalorContrato "   id="invalorContrato" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -161,7 +161,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont-hot-inAdiciones "   id="inAdiciones" value="#{Supervision$Externa.objetoSeguimiento.numvlradicion}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -170,7 +170,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont-hot-invalorTotal"   id="invalorTotal" value="#{Supervision$Externa.objetoSeguimiento.numvlrtotal}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 

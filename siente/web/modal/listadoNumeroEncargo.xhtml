@@ -74,12 +74,12 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-numsaldoinis" id="txt_saldoini" value="#{currentRow.numsaldoinicial}">
-                                    <f:convertNumber pattern="$ ###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-numsaldoactual" id="txt_saldoactu" value="#{currentRow.numsaldoactual}">
-                                    <f:convertNumber pattern="$ ###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >

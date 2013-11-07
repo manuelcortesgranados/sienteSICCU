@@ -33,7 +33,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="inValorContratoFinanciera" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -43,7 +43,7 @@
 
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inValorPagadoActas" value="#{Supervision$Externa.objetoSeguimiento.numvlrpagadoactasobra}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -53,7 +53,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="inValorAnticipo" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipoobra}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -63,7 +63,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="inSaldoPagarContrato" value="#{Supervision$Externa.objetoSeguimiento.numsaldoxpagar}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -73,7 +73,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="inTotalAmortizadoAnticipo" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipoobra}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -83,7 +83,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="inSaldoPorAmortizar" value="#{Supervision$Externa.objetoSeguimiento.numsaldoxamortizaranticipo}">
-                    <f:convertNumber pattern="$ ###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
         </h:panelGrid>

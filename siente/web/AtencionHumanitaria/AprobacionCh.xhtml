@@ -101,7 +101,7 @@
 
                         <h:outputLabel  styleClass="ikont-hol-numvlraprobado" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                            <f:convertNumber pattern="$ ###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputLabel>
 
                         <h:outputText  styleClass="ikont-hot-observarcion" value="#{var.observaciones}"/>
