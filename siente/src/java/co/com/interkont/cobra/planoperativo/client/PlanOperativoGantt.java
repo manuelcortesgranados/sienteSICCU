@@ -376,6 +376,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
+                editarProyDialog.setClosable(false);
                 service.setLog("en proyecto editar act Inicio:" + tareaSeleccionada.getObra().getFechaInicio(), null);
                 service.setLog("en proyecto editar act fn:" + tareaSeleccionada.getObra().getFechaFin(), null);
                 ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
@@ -405,6 +406,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
+                crearContratoDialog.setClosable(false);
                 ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
