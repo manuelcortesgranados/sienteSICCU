@@ -38,8 +38,8 @@
                     <center>
                         <interkont:spacer height="15" />
                         <h:panelGroup>
-                            <a4j:commandButton id="BTaceptarCambio" value="Si" styleClass="ikont-acb-btaceptarcambio"   oncomplete="#{rich:component('confirmarCambioEstado')}.hide();" action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}"/>
-                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" styleClass="ikont-acb-btnoaceptarcambio"   onclick="#{rich:component('confirmarCambioEstado')}.hide();
+                            <h:commandButton id="BTaceptarCambio" value="Si" styleClass="ikont-acb-btaceptarcambio"   onclick="#{rich:component('confirmarCambioEstado')}.hide();" action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}"/>
+                            <h:commandButton id="BTnoaceptarCambio" value="NO" styleClass="ikont-acb-btnoaceptarcambio"   onclick="#{rich:component('confirmarCambioEstado')}.hide();
                                               return false;"/>
                         </h:panelGroup>
                     </center>
