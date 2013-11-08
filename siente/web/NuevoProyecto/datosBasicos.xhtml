@@ -240,6 +240,14 @@
                             </h:panelGrid>
                             <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
                             <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechaini}:"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechaini}">
+                                <f:convertDateTime pattern="#{var.formatofecha}" />
+                            </h:outputText>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechafin}"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechafin}">
+                                <f:convertDateTime pattern="#{var.formatofecha}"/>
+                            </h:outputText>
                         </h:panelGrid>
                     </rich:collapsiblePanel>
                     <interkont:spacer height="10px" />
