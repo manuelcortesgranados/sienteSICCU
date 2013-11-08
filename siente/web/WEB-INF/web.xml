@@ -58,7 +58,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            120
         </session-timeout>
     </session-config>
     <welcome-file-list>
@@ -68,8 +68,7 @@
    <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/sesion_vencida.xhtml</location>
-    </error-page>
-    
+    </error-page>    
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/Errores.xhtml</location>

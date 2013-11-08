@@ -15,8 +15,8 @@
         <h:outputScript name="jscharts.js" library="js"/>
         <h:outputScript name="amcharts.js" library="amcharts"/>
     </ui:define>
-    <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
+    <ui:define rendered="#{!var.permisonuevodiseno}" name="title">
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
