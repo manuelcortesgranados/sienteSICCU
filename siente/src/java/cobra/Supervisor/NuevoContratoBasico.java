@@ -7623,6 +7623,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setBoolplanoperativo(false);
         contrato.setEncargofiduciario(null);
         contrato.setModalidadcontratista(null);
+        contrato.setGerenteconvenio( getSessionBeanCobra().getUsuarioObra().getTercero());
         //contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());                  
 
         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
