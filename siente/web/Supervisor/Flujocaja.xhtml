@@ -186,9 +186,18 @@
 
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
                     </h:inputText>
+                    
+                    <h:inputText value="#{fuenteEgresos.planMovimientosContrato[columna].valor}" 
+                                 rendered="#{fuenteEgresos.egresoContrato}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;"
+                                 disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
+                        <f:validateDoubleRange minimum="0" />
+
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
+                    </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
-                                 rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}"
+                                 rendered="#{fuenteEgresos.egresoOtros and !fuenteEgresos.itemFlujoEgresos.boolcalculado}"
                                  style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">

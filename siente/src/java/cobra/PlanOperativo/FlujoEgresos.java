@@ -4,6 +4,7 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
+import co.com.interkont.cobra.to.Planificacionmovimientocontrato;
 import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
 import java.io.Serializable;
@@ -24,15 +25,68 @@ import java.util.List;
 public class FlujoEgresos implements Serializable {
 
     Obra proyecto;
-    Itemflujocaja itemFlujoEgresos;
+    Itemflujocaja itemFlujoEgresos = new Itemflujocaja();
     boolean egresoProyecto;
+    boolean egresoContrato;
+    boolean egresoOtros;
     List<Planificacionmovimientoproyecto> planMovimientosProyecto;
     List<Planificacionmovconvenio> planMovimientosEgresosConvenio;
     List<Planificacionmovimientoproyecto> movimientosProyectoEliminados;
     List<Planificacionmovconvenio> movimientosEgresosConvenioEliminados;
+    List<Planificacionmovimientocontrato> planMovimientosContrato;
+    List<Planificacionmovimientocontrato> planMovimientosContratoEliminados;
     BigDecimal totalEgresosFuente;
     double contrapartida;
+    private Contrato contrato;
 
+    public boolean isEgresoContrato() {
+        return egresoContrato;
+    }
+
+    public void setEgresoContrato(boolean egresoContrato) {
+        this.egresoContrato = egresoContrato;
+        if (egresoContrato) {
+            egresoProyecto = false;
+            egresoOtros = false;
+        }
+    }
+
+    public boolean isEgresoOtros() {
+        return egresoOtros;
+    }
+
+    public void setEgresoOtros(boolean egresoOtros) {
+        this.egresoOtros = egresoOtros;
+        if (egresoOtros) {
+            egresoProyecto = false;
+            egresoContrato = false;
+        }
+    }
+
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
+    public List<Planificacionmovimientocontrato> getPlanMovimientosContrato() {
+        return planMovimientosContrato;
+    }
+
+    public void setPlanMovimientosContrato(List<Planificacionmovimientocontrato> planMovimientosContrato) {
+        this.planMovimientosContrato = planMovimientosContrato;
+    }
+
+    public List<Planificacionmovimientocontrato> getPlanMovimientosContratoEliminados() {
+        return planMovimientosContratoEliminados;
+    }
+
+    public void setPlanMovimientosContratoEliminados(List<Planificacionmovimientocontrato> planMovimientosContratoEliminados) {
+        this.planMovimientosContratoEliminados = planMovimientosContratoEliminados;
+    }
+    
     public FlujoEgresos() {
     }
 
@@ -117,11 +171,7 @@ public class FlujoEgresos implements Serializable {
      * @return Nombre de la fuente de egresos.
      */
     public String getDescripcionFuenteEgreso() {
-        if (!egresoProyecto) {
             return itemFlujoEgresos.getStrdescripcion();
-        }
-
-        return proyecto.getStrnombreobra();
     }
 
     /**
@@ -137,6 +187,7 @@ public class FlujoEgresos implements Serializable {
     public void crearEstructuraFlujoEgresosProyecto(Obra proyecto, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         this.planMovimientosProyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
+        itemFlujoEgresos.setStrdescripcion(proyecto.getStrnombrecrot());
         this.proyecto = proyecto;
         this.egresoProyecto = true;
 
@@ -148,6 +199,32 @@ public class FlujoEgresos implements Serializable {
             planMovimientoProyecto.setValor(BigDecimal.ZERO);
 
             planMovimientosProyecto.add(planMovimientoProyecto);
+        }
+    }
+    
+    /**
+     * Crear la estructura del flujo de ingresos por entidad.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * egresos en los periodos del flujo de caja para el contrato asociado. Este
+     * método inicializa el flujo de egresos del contrato al no existir alguno.
+     *
+     * @param contrato Contrato asociado a un proyecto del convenio.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     */
+    public void crearEstructuraFlujoEgresosContrato(Contrato contrato, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
+        int numPeriodoFlujoEgresos = 0;
+        this.planMovimientosContrato = new ArrayList<Planificacionmovimientocontrato>();
+        this.planMovimientosContratoEliminados = new ArrayList<Planificacionmovimientocontrato>();
+        this.contrato = contrato;
+        setEgresoContrato(true);
+        for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
+            Planificacionmovimientocontrato planMovimientoContrato = new Planificacionmovimientocontrato();
+            planMovimientoContrato.setPlanificacionmovimientoproyecto(planMovimientosProyecto.get(numPeriodoFlujoEgresos));
+            planMovimientoContrato.setContrato(contrato);
+            planMovimientoContrato.setValor(BigDecimal.ZERO);
+            planMovimientosContrato.add(planMovimientoContrato);
+            numPeriodoFlujoEgresos++;
         }
     }
 
@@ -280,8 +357,10 @@ public class FlujoEgresos implements Serializable {
         while (iterador < cantidadPeriodos) {
             if (egresoProyecto) {
                 totalEgresos += planMovimientosProyecto.get(iterador).getValor().doubleValue();
-            } else {
+            } else if (egresoOtros){
                 totalEgresos += planMovimientosEgresosConvenio.get(iterador).getValor().doubleValue();
+            } else if (egresoContrato) {
+                totalEgresos += planMovimientosContrato.get(iterador).getValor().doubleValue();
             }
 
             iterador++;
