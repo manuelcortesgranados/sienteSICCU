@@ -129,7 +129,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
         this.taskStore = taskStore;
-        this.numeracionActividad=taskStore.getAllItemsCount()+1;
+        this.numeracionActividad = taskStore.getAllItemsCount() + 1;
     }
 
     private void crearFormulario() {
@@ -166,41 +166,98 @@ public class ActividadForm implements IsWidget, EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 AlertMessageBox d;
-                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
-                    if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
-
-                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
-                            if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
-                                if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) >= 0) {
-                                    modalAct.hide();
-                                    crearActividad();
-                                } else {
-                                    d = new AlertMessageBox("Error", "La fecha de finalización no puede ser inferior a "
-                                            + obtenerFecha(getFechainicioActividad().getValue()));
-                                    d.show();
-                                }
-
-                            } else {
-                                d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
-                                        + obtenerFecha(actividadObraPadre.getEndDateTime()));
-                                d.show();
-
-                            }
-                        } else {
-                            d = new AlertMessageBox("Error", "La fecha de inicio de la actividad no puede ser inferior a "
-                                    + obtenerFecha(actividadObraPadre.getStartDateTime()));
-                            d.show();
+                String msg = "";
+                boolean error = false;
+                service.setLog("entre 1", null);
+                if (getDescripcionActividad().getValue() == null || getDescripcionActividad().getValue().compareTo("") == 0) {
+                    error = true;
+                    msg = msg + "Ingrese la descripción de la actividad" + "<br/>";
+                    service.setLog("entre 2", null);
+                }
+                service.setLog("entre 3", null);
+                if (getFechainicioActividad().getValue() == null) {
+                    error = true;
+                    msg = msg + "Ingrese la fecha de inicio" + "<br/>";
+                    service.setLog("entre 4", null);
+                }
+                service.setLog("entre 5", null);
+                if (getFechafinActividad().getValue() == null) {
+                    error = true;
+                    msg = msg + "Ingrese la fecha de finalización" + "<br/>";
+                    service.setLog("entre 6", null);
+                }
+                service.setLog("entre 7", null);
+                if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
+                    service.setLog("entre 8", null);
+                    if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) >= 0) {
+                        error = true;
+                        msg = msg + "La fecha de inicio de la actividad no puede ser superior a la fecha de finalización:" + obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
+                        service.setLog("entre 9", null);
+                    }
+                    service.setLog("entre 10", null);
+                    if (!error) {
+                        if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) <= 0) {
+                            error = true;
+                            msg = msg + "La fecha de finalización de la actividad no puede ser inferior  a la fecha de inicio" + "<br/>";
+                            service.setLog("entre 11", null);
                         }
+                    }
+                    service.setLog("entre 12", null);
 
-                    } else {
-                        d = new AlertMessageBox("Error", "Debe diligenciar las fechas para la actividad");
-                        d.show();
+                    if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
+                        error = true;
+                        msg = msg + "La fecha de inicio de la actividad no puede ser inferior a:" + obtenerFecha(actividadObraPadre.getStartDateTime()) + "<br/>";
+                        service.setLog("entre 13", null);
                     }
 
-                } else {
-                    d = new AlertMessageBox("Error", "Debe Ingresar una descripción para la actividad");
-                    d.show();
+                    service.setLog("entre 14", null);
+                    if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
+                        error = true;
+                        msg = msg + "La fecha fin de la actividad no puede ser superior a:" + obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
+                        service.setLog("entre 15", null);
+                    }
+
                 }
+                if (error) {
+                    d = new AlertMessageBox("Error", msg);
+                    d.show();
+                } else {
+                    modalAct.hide();
+                    crearActividad();
+                }
+//                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
+//                    if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
+//
+//                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
+//                            if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
+//                                if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) >= 0) {
+//                                } else {
+//                                    d = new AlertMessageBox("Error", "La fecha de finalización no puede ser inferior a "
+//                                            + obtenerFecha(getFechainicioActividad().getValue()));
+//                                    d.show();
+//                                }
+//
+//                            } else {
+//                                d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
+//                                        + obtenerFecha(actividadObraPadre.getEndDateTime()));
+//                                d.show();
+//
+//                            }
+//                        } else {
+//                            d = new AlertMessageBox("Error", "La fecha de inicio de la actividad no puede ser inferior a "
+//                                    + obtenerFecha(actividadObraPadre.getStartDateTime()));
+//                            d.show();
+//                        }
+//
+//                    } else {
+//                        d = new AlertMessageBox("Error", "Debe diligenciar las fechas para la actividad");
+//                        d.show();
+//                    }
+//
+//                } else {
+//                    d = new AlertMessageBox("Error", "Debe Ingresar una descripción para la actividad");
+//                    d.show();
+//                }
             }
         });
 
@@ -251,7 +308,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
-        
+
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
         actividadObraPadre.addChild(tareaNueva);

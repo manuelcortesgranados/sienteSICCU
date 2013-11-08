@@ -513,7 +513,7 @@ public class GanttDatos {
                 String[] tempAnterior = predecesorAnterior.split(",");
                 for (int i = 0; i < tempAnterior.length; i++) {
                     lstPredecesoresEliminados.add(Integer.parseInt(tempAnterior[i]));
-
+                    acti.getLstPredecesores().remove(Integer.parseInt(tempAnterior[i]));
                 }
             }
         }
