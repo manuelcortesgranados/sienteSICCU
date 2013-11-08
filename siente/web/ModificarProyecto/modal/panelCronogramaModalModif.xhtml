@@ -40,7 +40,7 @@
                         <h:panelGrid columns="2"  styleClass="ikont-hpg-datoscronograma"   border="0" cellspacing="0" cellpadding="0" rowClasses="background_azul,background_blanco">
                             <h:outputText  styleClass="ikont-hot-costodirecto"   value="#{var.costodirecto}"  ></h:outputText>
                             <h:outputText  styleClass="ikont-hot-valortotalobraCosto"   value="#{Supervisor$ModificarProyecto.valortotalobraCosto}" >
-                                <f:convertNumber pattern="$###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                             <h:outputText  styleClass="ikont-hot-administracion"   value="#{var.administracion}(%)" ></h:outputText>
                             <h:outputText  styleClass="ikont-hot-floatporadmon"   id="itfloatporadmon" value="#{Supervisor$ModificarProyecto.obra.floatporadmon}" />
@@ -54,7 +54,7 @@
                             <h:outputText  styleClass="ikont-hot-floatporotros"   id="itfloatporotros" value="#{Supervisor$ModificarProyecto.obra.floatporotros}" />
                             <h:outputText  styleClass="ikont-hot-costototal"   value="#{var.costototal}" ></h:outputText>
                             <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$ModificarProyecto.obra.numvaltotobra}" >
-                                <f:convertNumber pattern="$###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                             <h:outputText  styleClass="ikont-hot-ivasobrautilidad"   value="#{ivasobrautilidad}" ></h:outputText>
                         </h:panelGrid>

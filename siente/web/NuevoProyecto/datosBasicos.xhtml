@@ -65,14 +65,14 @@
                                 <rich:message for="fecIni" />
                             </h:panelGroup>
 
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
                                 <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
                             </rich:calendar>
 
                             <h:outputLabel  styleClass="ikont-hol-FecFin"   id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
                             <h:panelGroup id="layoutFechaFin" >
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
                                     <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
                                 </rich:calendar>
                             </h:panelGroup>
@@ -240,6 +240,14 @@
                             </h:panelGrid>
                             <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
                             <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechaini}:"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechaini}">
+                                <f:convertDateTime pattern="#{var.formatofecha}" />
+                            </h:outputText>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechafin}"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechafin}">
+                                <f:convertDateTime pattern="#{var.formatofecha}"/>
+                            </h:outputText>
                         </h:panelGrid>
                     </rich:collapsiblePanel>
                     <interkont:spacer height="10px" />

@@ -35,7 +35,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="verHabitantesBeneficiados" value="#{Supervision$Externa.objetoSeguimiento.inthabbeneficiados}">
-                    <f:convertNumber pattern="###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -45,7 +45,7 @@
 
             <h:panelGroup layout="block">
                 <h:outputText  styleClass="ikont- "   id="verEmpleosDirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosdirectos}">
-                    <f:convertNumber pattern="###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
@@ -54,7 +54,7 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="verEmpleosIndirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosindirectos}">
-                    <f:convertNumber pattern="###,###.##" />
+                    <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
         </h:panelGrid>

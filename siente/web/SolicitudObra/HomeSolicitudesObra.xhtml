@@ -115,7 +115,7 @@
                         </rich:column>
                         <rich:column>
                             <h:outputText  styleClass="ikont-hot-doublevalorsolicitado"   value="#{currentRowTemp.doublevalorsolicitado}">
-                                <f:convertNumber pattern="$ ###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
@@ -238,7 +238,7 @@
                         </rich:column>
                         <rich:column>
                             <h:outputText  styleClass="ikont-hot-doublevalorsolicitado"   value="#{currentRowObra.doublevalorsolicitado}">
-                                <f:convertNumber pattern="$ ###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>

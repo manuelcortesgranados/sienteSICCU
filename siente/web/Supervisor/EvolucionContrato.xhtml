@@ -15,8 +15,8 @@
         <h:outputScript name="jscharts.js" library="js"/>
         <h:outputScript name="amcharts.js" library="amcharts"/>
     </ui:define>
-    <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
+    <ui:define rendered="#{!var.permisonuevodiseno}" name="title">
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -67,13 +67,13 @@
                     <h:outputLabel  styleClass="ikont-hol-valoranticipo"   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <h:outputText  styleClass="ikont-hot-vloranticipo" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                        <f:convertNumber pattern="$###,###"/>
+                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                     </h:outputText>
 
                     <h:outputLabel  styleClass="ikont-hol-fechaanticipopago"   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <h:outputText  styleClass="ikont-hot-fechapago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
-                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                     </h:outputText>
 
                 </h:panelGrid>
@@ -110,12 +110,12 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numvlrpago"   value="#{planificacion.numvlrpago}">
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
                                     <h:outputText  styleClass="ikont-hot-datefechapago"   value="#{planificacion.datefechapago}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                             </rich:columnGroup>
@@ -161,12 +161,12 @@
                                 </rich:column>
                                 <rich:column >
                                     <h:outputText  styleClass="ikont-hot-fechamovimiento"   value="#{movimiento.fechamovimiento}">
-                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numvlrejecutado"   value="#{movimiento.numvlrejecutado}">
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >

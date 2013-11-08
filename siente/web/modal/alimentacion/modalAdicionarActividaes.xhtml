@@ -105,12 +105,12 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-calcularValorUnitario"   value="#{itemsprevis.calcularValorUnitario}">
-                                    <f:convertNumber pattern="$#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
                                 <h:outputText  styleClass="ikont-hot-numvalorplanifao"   value="#{itemsprevis.numvalorplanifao}">
-                                    <f:convertNumber pattern="$#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
@@ -153,7 +153,7 @@
                                     <interkont:spacer width="20" />
                                     <h:panelGroup>
                                         <h:outputText  styleClass="ikont-hot-numvaltotobra"  value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                            <f:convertNumber pattern="$#,###.00"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
 
@@ -181,7 +181,7 @@
                                     <h:outputLabel  styleClass="ikont-hol-costototal" value="#{var.costototal}:"/>
                                     <interkont:spacer width="20" />
                                     <h:outputText  styleClass="ikont-hot-numvaltotobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                        <f:convertNumber pattern="$ ###,###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGrid>
                             </h:panelGroup>

@@ -80,7 +80,7 @@
                                 <h:outputText  styleClass="ikont- hot-fecdoc"    value="#{var.fechadeldocumento}"/>
                             </f:facet>
                             <h:outputText  styleClass="ikont- hot-datfec"   value="#{currentRow.datefecha}">
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column  width="60px">

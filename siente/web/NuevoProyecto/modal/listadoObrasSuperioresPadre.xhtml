@@ -94,7 +94,7 @@
                             </rich:column>
                             <rich:column >
                                 <h:outputText  styleClass="ikont-hot-numvalorobra "   id="numvalorobra" value="#{ObraPadre.numvaltotobra}">
-                                    <f:convertNumber pattern="$#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >

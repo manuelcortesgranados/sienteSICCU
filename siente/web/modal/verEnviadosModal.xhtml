@@ -37,7 +37,7 @@
 
                         <h:outputLabel  styleClass="ikont-hol-houtfechayhora"    value="#{var.houtfechayhora}" />
                         <h:inputText id="txt-datefecmensaje-ver-enviado" value="#{Mensajes.mensajeEnviadoVer.datefecmensaje}" size="65" readonly="true">
-                            <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
+                            <f:convertDateTime pattern="#{var.formatomoneda}" />
                         </h:inputText>
 
                         <interkont:spacer width="10" />

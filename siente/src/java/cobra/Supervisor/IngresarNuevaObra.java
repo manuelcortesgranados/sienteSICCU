@@ -1772,6 +1772,16 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 long diferenciaFecha = obranueva.getDatefecfinobra().getTime() - obranueva.getDatefeciniobra().getTime();
                 diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
                 obranueva.setIntplazoobra(Integer.parseInt(String.valueOf(diferenciaFecha)));
+                if (desdeconvenio) {
+                    long fechaInicioConvenio = obranueva.getDatefeciniobra().getTime() - obranueva.getContrato().getDatefechaini().getTime();
+                    long fechaFinConvenio = obranueva.getContrato().getDatefechafin().getTime() - obranueva.getDatefecfinobra().getTime();
+                    if(fechaInicioConvenio < 0){
+                        FacesUtils.addErrorMessage(bundle.getString("lafechainicioproyectomenorconvenio"));
+                    }
+                    if(fechaFinConvenio < 0){
+                        FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
+                    }
+                }
             } else {
                 obranueva.setDatefecfinobra(null);
                 obranueva.setIntplazoobra(0);
@@ -2424,11 +2434,11 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     //FileOutputStream fileOut = new FileOutputStream("workbook.xls");
                     wb.write(fileOut);
                     fileOut.close();
-                    if (!isFormatoxlsx()){
+                    if (!isFormatoxlsx()) {
                         this.getSessionBeanCobra().setUrlAbri(URL + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
-                    }else{
+                    } else {
                         this.getSessionBeanCobra().setUrlAbri(URL + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobraxlsx"));
-                    }                    
+                    }
                     //getHomeInterventor().cargarObrasUsuario();
                     FacesUtils.addInfoMessage(getSessionBeanCobra().getBundle().getString("laobrasehaguardadoysehaclasificado"));
                     //"La Obra se ha guardado y se ha clasificado como Obra en Proceso";
@@ -4586,17 +4596,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String cambio(ValueChangeEvent event) {
         //Marker nuevo = (Marker) event.getNewValue();
-        Position posmarker= (Position) event.getNewValue();
-        
+        Position posmarker = (Position) event.getNewValue();
+
 //        latNewmanu = nuevo.getLatitude();
 //        longNewmanu = nuevo.getLongitude().replaceAll(" ", "");
-        
-                latNewmanu = posmarker.getLatitude();
+
+        latNewmanu = posmarker.getLatitude();
         longNewmanu = posmarker.getLongitude();
         try {
             PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(latNewmanu, longNewmanu);
             address = placeMarkNew.getAddress();
-            
+
         } catch (Exception ex) {
             //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             address = "Faltante";
@@ -4604,7 +4614,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 ////        setAddress(getGeocode().obtenerDireccionxLatyLong(latNewmanu, longNewmanu));
         listamarcadores.get(listamarcadores.size() - 1).setLatitude(latNewmanu);
         listamarcadores.get(listamarcadores.size() - 1).setLongitude(longNewmanu);
-        return null;       
+        return null;
     }
 
     /**

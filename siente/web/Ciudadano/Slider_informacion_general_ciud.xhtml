@@ -51,7 +51,7 @@
                                     <interkont:spacer width="20" height="50" />
                                     <h:panelGroup >
                                         <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" >
-                                            <f:convertNumber pattern="$###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>

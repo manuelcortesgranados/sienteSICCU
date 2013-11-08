@@ -41,7 +41,7 @@
                 <h:panelGrid>
                     <h:commandLink id="excelReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoXLS}" styleClass="butonreport zoom-excel" type="submit" target="_blank" />                            
                 </h:panelGrid>
-                <h:panelGrid rendered="#{Supervisor$Contrato.tipoReporteVarTmp==2}">
+                <h:panelGrid rendered="#{Supervisor$Contrato.tipoReporteVarTmp==2 and false}" >
                     <h:commandLink id="mppReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoMPP}" styleClass="butonreport zoom-mpp" type="submit" target="_blank" />
                 </h:panelGrid>
             </h:panelGrid>

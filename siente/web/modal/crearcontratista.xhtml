@@ -80,7 +80,7 @@
                         </h:selectOneMenu>
 
                         <h:outputLabel  styleClass="ikont-hol-lblfechanacimientocrea"   id="lblfechaNacimientoCrea"  value="#{var.fechadeNacimiento}" for="calendarfechVencim" rendered="#{Supervisor$Contrato.habidescontratista}"/>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechVencim" inputSize="10"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarfechVencim" inputSize="10"
                                        value="#{Supervisor$Contrato.contratista.datefechanacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
 

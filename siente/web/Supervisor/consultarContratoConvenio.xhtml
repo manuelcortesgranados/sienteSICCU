@@ -211,7 +211,7 @@
 
                         <rich:column>
                             <h:outputText  styleClass="ikont-hot-numtxtvlrcc"  style="text-align: right;" id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###" />
+                                <f:convertNumber pattern="#{var.formatomoneda}" />
                             </h:outputText>
                         </rich:column>
 
@@ -364,7 +364,7 @@
 
                         <rich:column>
                             <h:outputText  styleClass="ikont-hot-numvlrcontrato" style="text-align: right;" value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###" />
+                                <f:convertNumber pattern="#{var.formatomoneda}" />
                             </h:outputText>
                         </rich:column>
 

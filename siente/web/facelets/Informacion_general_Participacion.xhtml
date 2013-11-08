@@ -26,7 +26,7 @@
         <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda">
             <h:outputText  styleClass="ikont-hot-valor "   value="#{var.valor}"/>
             <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
-                <f:convertNumber pattern="$###,###"/>
+                <f:convertNumber pattern="#{var.formatomoneda}"/>
             </h:outputText>
             <h:outputText  styleClass="ikont-hot-avancefisico"   value="#{var.avancefisico}" />
             <h:outputText  styleClass="ikont-hot-totalavancefisico"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >

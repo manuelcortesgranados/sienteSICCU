@@ -27,8 +27,11 @@ import co.com.interkont.cobra.planoperativo.client.dto.Relacionobrafuenterecurso
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.event.BeforeTaskDnDEvent;
 import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
+import com.gantt.client.event.TaskClickEvent;
+import com.gantt.client.event.TaskDnDStartEvent;
 import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -256,8 +259,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD
-       // config.taskDnDEnabled = false;
-       config.taskDnDEnabled = !isModolectura();        
+        // config.taskDnDEnabled = false;
+        config.taskDnDEnabled = !isModolectura();
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -373,6 +376,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
+                editarProyDialog.setClosable(false);
                 service.setLog("en proyecto editar act Inicio:" + tareaSeleccionada.getObra().getFechaInicio(), null);
                 service.setLog("en proyecto editar act fn:" + tareaSeleccionada.getObra().getFechaFin(), null);
                 ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
@@ -402,6 +406,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
+                crearContratoDialog.setClosable(false);
                 ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
@@ -525,8 +530,38 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         });     
         
-      
-        
+      getGantt().addBeforeTaskDnDHandler(new BeforeTaskDnDEvent.BeforeTaskDnDHandler<ActividadobraDTO>() {
+            @Override
+            public void onBeforeTaskDnD(BeforeTaskDnDEvent<ActividadobraDTO> event) {
+                actividadAnterior = event.getEventModel();
+                service.setLog("estoy en drag", null);
+            }
+        });
+        getGantt().addTaskDnDStartHandler(new TaskDnDStartEvent.TaskDnDStartHandler<ActividadobraDTO>() {
+            @Override
+            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {
+                ActividadobraDTO actividadMove = event.getEventModel();
+                service.setLog("estoy ya en mover" + event.getEventModel().getEndDateTime(), null);
+
+            }
+        });
+
+        getGantt().addTaskDnDStartHandler(new TaskDnDStartEvent.TaskDnDStartHandler<ActividadobraDTO>() {
+            @Override
+            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {
+                getGantt().refresh();
+                service.setLog("acaaaaaaaaaaaaaaaaaaa" + event.getEventModel().getEndDateTime(), null);
+            }
+        });
+
+        getGantt().addTaskClickHandler(new TaskClickEvent.TaskClickHandler<ActividadobraDTO>() {
+            @Override
+            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {
+                service.setLog("entre en click" + event.getEventModel().getName(), null);
+            }
+        });
+
+
         getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
@@ -734,6 +769,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                     ActividadobraDTO ac = store.get(event.getEditCell().getRow());
                     if (!ac.isEsNoEditable()) {
+                        service.setLog("predecesor anterior:" + store.get(event.getEditCell().getRow()).getPredecesor(), null);
                         actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
                     } else {
                         alertaMensajes("Esta Actividad no se puede editar");
@@ -825,7 +861,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
             VerticalLayoutContainer vc = new VerticalLayoutContainer();
             cp.setWidget(vc);
-            
+
             vc.add(createToolBarPeriodo());
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
@@ -1283,7 +1319,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         return null;
     }
 
-    
     /*
      * metodo que se encarga de reembolsar el valor de las fuentes de recursos asociadas 
      * al contrato a las respectivas fuente de recursos de la obra padre
@@ -1759,37 +1794,39 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * @param ActividadobraDTO ac, actividad que se esta modificando.
      */
     public void modificarPredecesoresActividad(ActividadobraDTO ac) {
+        service.setLog("predecesor a:" + ac.getPredecesor(), null);
         if (GanttDatos.validacionCadenaPredecesoras(ac.getPredecesor())) {
-//            ac.setLstPredecesores(cargarSetLstPredecesoras(ac.getNumeracion()));
-//            actividadAnterior.setPredecesor(crearCadenaPredecesoresAnteriores(ac.getLstPredecesores()));
-            if (!actividadAnterior.getPredecesor().equals(ac.getPredecesor())) {
+            if (ac.getPredecesor() == null) {
                 eliminarPredecesorasActividad(ac);
-                Map<Boolean, Set<Integer>> mapaPredecesores = GanttDatos.separarPredecesores(ac);
-                if (mapaPredecesores.get(false) != null) {
-                    Set<Integer> map = mapaPredecesores.get(false);
-                    for (int in : map) {
-                        if (ac.getNumeracion() != in) {
-                            if (verificarNumeracionActividad(in)) {
-                                crearDependencia(in, ac, 0, null);
+            } else {
+                if (!actividadAnterior.getPredecesor().equals(ac.getPredecesor())) {
+                    eliminarPredecesorasActividad(ac);
+                    Map<Boolean, Set<Integer>> mapaPredecesores = GanttDatos.separarPredecesores(ac);
+                    if (mapaPredecesores.get(false) != null) {
+                        Set<Integer> map = mapaPredecesores.get(false);
+                        for (int in : map) {
+                            if (ac.getNumeracion() != in) {
+                                if (verificarNumeracionActividad(in)) {
+                                    crearDependencia(in, ac, 0, null);
+                                } else {
+                                    alertaMensajes("El numero de la actividad no se encuentra");
+                                    props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                }
                             } else {
-                                alertaMensajes("El numero de la actividad no se encuentra");
+                                alertaMensajes("El predecesor tiene que ser diferente a la actividad");
                                 props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
                                 getGantt().getGanttPanel().getContainer().refresh();
                             }
-                        } else {
-                            alertaMensajes("El predecesor tiene que ser diferente a la actividad");
-                            props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
-                            getGantt().getGanttPanel().getContainer().refresh();
                         }
+                        gantt.refresh();
+                    } else {
+                        alertaMensajes("El predecesor ya se encuentra asociado a la actividad");
+                        props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
+                        getGantt().getGanttPanel().getContainer().refresh();
                     }
-                    gantt.refresh();
-                } else {
-                    alertaMensajes("El predecesor ya se encuentra asociado a la actividad");
-                    props.predecesor().setValue(ac, actividadAnterior.getPredecesor());
-                    getGantt().getGanttPanel().getContainer().refresh();
                 }
             }
-
         } else {
             alertaMensajes("El predecesor ingresado no es correcto, por favor verifique");
             props.predecesor().setValue(ac, actividadAnterior.getPredecesor());

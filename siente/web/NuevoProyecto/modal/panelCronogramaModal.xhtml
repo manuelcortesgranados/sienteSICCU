@@ -8,7 +8,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp_cronograma" moveable="true" width="350" height="300" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-atencion"   value="#{var.atencion}"  />
@@ -30,7 +30,7 @@
 
                 <h:panelGroup >
 
-                    <h:panelGroup>
+                    <h:panelGroup styleClass="ikont-hpg-content-modal-cronograma">
 
                         <h:outputText  styleClass="ikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
                         <h:outputText  styleClass="ikont-hot-cobra"     value="#{var.cobra} "/>
@@ -42,13 +42,13 @@
                         <h:outputText  styleClass="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
                         <h:outputText  styleClass="ikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
                     </h:panelGroup>
-
+                    <br/><br/>
                     <h:panelGrid>
                         <interkont:spacer height="5"/>
                         <h:outputText  styleClass="ikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
 
                     </h:panelGrid>
-
+                    <br/><br/>
                     <center>
                         <interkont:spacer height="20" width="50"/>
                         <h:form>

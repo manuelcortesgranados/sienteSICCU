@@ -10,6 +10,10 @@
     background-color: '#{richSkin.tablebackgraudcolorpar}';
 }
 
+.rf-dt tfoot tr {
+    background-color: rgba(0, 0, 0, 0)!important;
+}
+
 .rf-dt tr td{
     vertical-align: top;
 }

@@ -71,7 +71,7 @@
                                 <h:outputText  styleClass="ikont-hot-houtfechaalimentacion"   value="#{var.houtfechaalimentacion}" />
                             </f:facet>
                             <h:outputText  styleClass="ikont-hot-datefechaalimen"   id="otfecalim" value="#{avance.datefechaalimen}" >
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                <f:convertDateTime pattern="#{var.formatofecha}"/>
                             </h:outputText>
                         </rich:column>
 
@@ -80,7 +80,7 @@
                                 <h:outputText  styleClass="ikont-hot-totalejecutado"   value="#{var.totalejecutado}" />
                             </f:facet>
                             <h:outputText  styleClass="ikont-hot-ottotejec"   id="ottotejec" value="#{avance.numtotalejec}">
-                                <f:convertNumber pattern="$ ###,###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
 
                             </h:outputText>
                         </rich:column>
@@ -90,7 +90,7 @@
                                 <h:outputText  styleClass="ikont-hot-valorejecutadoacumulado"   value="#{var.valorejecutadoacumulado}" />
                             </f:facet>
                             <h:outputText  styleClass="ikont-hot-ottotproyacu"   id="ottotproyacu" value="#{avance.numtotalejecacu}">
-                                <f:convertNumber pattern="$ ###,###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
 
                             </h:outputText>
                         </rich:column>
@@ -142,7 +142,7 @@
                                     <h:panelGroup>
                                         <h:panelGrid columns="1" columnClasses="tabla-center">
                                             <h:outputText  styleClass="ikont-hot-numtotalejec"   id="stcantidadejecutada" value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalejec}">
-                                                <f:convertNumber pattern="$ ###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                             <h:outputText  styleClass="ikont-hot-valorejecutado"   value="#{var.valorejecutado}" />
                                         </h:panelGrid>

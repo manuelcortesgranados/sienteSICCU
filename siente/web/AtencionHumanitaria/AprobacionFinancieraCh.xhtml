@@ -61,14 +61,14 @@
                         </h:panelGroup>
 
                         <h:outputText  styleClass="ikont-fechcarta" value="#{var.fechadecarta}:"/>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecAprobFinanciera"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fecAprobFinanciera"
                                        inputSize="10" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}">
                         </rich:calendar>
 
                         <h:outputLabel  styleClass="ikont-hol-fechcartaprob" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}"
                                         rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                         </h:outputLabel>
 
                         <h:outputText  styleClass="ikont-hot-txtobservacion" value="#{var.observaciones}"/>

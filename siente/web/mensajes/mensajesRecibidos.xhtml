@@ -60,7 +60,7 @@
                                     <h:outputText  styleClass="ikont-hot-tcdatefecmensajerecibido"   value="#{var.Fecha}"/>
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-fkdatefecmensajerecibido"   id="otxt-fkdatefecmensajerecibido" value="#{currentRow.datefecmensaje}">
-                                    <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
+                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column    id="tc-verrecibidos"  >

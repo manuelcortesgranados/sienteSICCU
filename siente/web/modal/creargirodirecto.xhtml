@@ -33,7 +33,7 @@
 
                         <h:outputText  styleClass="ikont-hot-lblfechagirofidu"   id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
                         <h:panelGrid columns="2">
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirofidu" inputSize="10" required="true"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarfechagirofidu" inputSize="10" required="true"
                                            disabled="#{Supervisor$Contrato.boolcreargiro}" value="#{Supervisor$Contrato.movimientocontrato.datefechagirofiduprevisora}"/>
                             <rich:message for="calendarfechagirofidu" styleClass="ikont-rm-calendarfechagirofidu"  />
                         </h:panelGrid>
@@ -67,7 +67,7 @@
 
                         <h:outputText  styleClass="ikont-hot-lblfechagirocontratista"   id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
                         <h:panelGrid columns="2">
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirocontratista" inputSize="10" required="true"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarfechagirocontratista" inputSize="10" required="true"
                                            value="#{Supervisor$Contrato.movimientocontrato.datefechagirocontratista}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
                             <rich:message for="calendarfechagirocontratista" styleClass="ikont-rc-calendarfechagirocontratista"  />
                         </h:panelGrid>

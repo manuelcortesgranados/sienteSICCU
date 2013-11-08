@@ -80,12 +80,12 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numsaldoinicial" value="#{_Encargo.numsaldoinicial}">
-                                        <f:convertNumber pattern="$ ###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numsaldoactualfidu" value="#{_Encargo.numsaldoactual}">
-                                        <f:convertNumber pattern="$ ###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >

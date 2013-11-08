@@ -105,7 +105,7 @@
                                     <h:graphicImage  styleClass="ikont-hgi-invporregion "   url="/resources/imgs/dash_01.png" width="50" height="50" />
                                     <h:panelGroup >
                                         <h:outputText  styleClass="ikont-hot-inversionTotalNal"   value="#{ControlGerencial.informaciondash.inversionTotalNal}">
-                                            <f:convertNumber pattern="$###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -114,7 +114,7 @@
                                     <h:graphicImage  styleClass="ikont-hgi-invporregion1"   url="/resources/imgs/dash_01.png" width="50" height="50" />
                                     <h:panelGroup >
                                         <h:outputText  styleClass="ikont-hot-inversionTotalRegion"   value="#{ControlGerencial.informaciondash.inversionTotalRegion}">
-                                            <f:convertNumber pattern="$###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -126,7 +126,7 @@
                                     <h:outputLabel  styleClass="ikont-hot-carteracolectiva"   value="#{var.carteracolectiva}" />
                                     <h:outputText  styleClass="ikont-hot-porcentajeCartera "   value="#{ControlGerencial.porcentajeCartera}%" />
                                     <h:outputLabel  styleClass="ikont-hol-totalCartera"   value="#{ControlGerencial.totalCartera}" >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputLabel>
                                 </h:panelGrid>
 
@@ -139,7 +139,7 @@
                                     <h:outputLabel  styleClass="ikont-hol-pago"   value="#{var.pago} a contratistas" />
                                     <h:outputText  styleClass="ikont-hot-porcentajePago"   value="#{ControlGerencial.porcentajePago}%" />
                                     <h:outputLabel  styleClass="ikont-hol-totalPago"   value="#{ControlGerencial.totalPago}" >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputLabel>
                                 </h:panelGrid>
                                 <h:outputText  styleClass="ikont-hot-scriptcolumnaporcentual1"   value="#{ControlGerencial.columnapagocontratistas.scriptcolumnaporcentual}" escape="false"/>
@@ -151,7 +151,7 @@
                                     <h:outputLabel  styleClass="ikont-hol-legalizacion"   value="#{var.legalizacion}" />
                                     <h:outputText  styleClass="ikont-hot-porcentajeLegalizado"   value="#{ControlGerencial.porcentajeLegalizado}%"  />
                                     <h:outputText  styleClass="ikont-hot-totalLegalizado"   value="#{ControlGerencial.totalLegalizado}" >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </h:panelGrid>
                                 <h:outputText  styleClass="ikont-hot-scriptcolumnaporcentual2"   value="#{ControlGerencial.columnalegalizacion.scriptcolumnaporcentual}" escape="false"/>
@@ -190,7 +190,7 @@
                             </f:facet>
                             <h:panelGroup>
                                 <h:outputText  styleClass="ikont-hot-inversionConvenios tituloValor"   value="#{ControlGerencial.informaciondash.inversionConvenios}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                                 <h:inputHidden id="estaen" value="#{ControlGerencial.informaciondash.intPorcentageEje}" />
 
@@ -240,7 +240,7 @@
                                             <div id="proyectospie" ></div>
                                         </h:panelGrid>
                                         <h:outputText  styleClass="ikont-hot-inversionObra tituloValor"   value="#{ControlGerencial.informaciondash.inversionObra}">
-                                            <f:convertNumber pattern="$###,###"/>
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                         <h:panelGrid  rendered="false">
                                             <h:outputLabel  styleClass="ikont-hol-ejecuciontotal"   value="#{var.ejecuciontotal}" />
@@ -274,7 +274,7 @@
                                             <h:outputText  styleClass="ikont-hot-etiqueta labelItemAtencion"   value="#{item.etiqueta}:"/>
 
                                             <h:outputText  styleClass="ikont-hot-valormoney valorItemAtencion"   value="#{item.valormoney}">
-                                                <f:convertNumber pattern="###,###"/>
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
 
                                         </li>
@@ -287,7 +287,7 @@
                             <h:panelGrid>
                                 <interkont:spacer height="20" />
                                 <h:outputText  styleClass="ikont-hot-inversionAh tituloValor"   value="#{ControlGerencial.informaciondash.inversionAh}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                                 <interkont:spacer height="5" />                                        
                                 <h:panelGroup>

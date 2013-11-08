@@ -40,7 +40,7 @@
                                 <h:outputText  styleClass="ikont-hot-amigosupervisorantesdereemplazar" value="#{var.amigosupervisorantesdereemplazar}" />
                                 <interkont:spacer height="15px" />
                                 <h:outputText  styleClass="ikont-hot-ingreselafechadeesta"    value="#{var.ingreselafechadeesta} "/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
                                                disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                 <interkont:spacer height="10px" />
                                 <h:panelGrid >
@@ -52,7 +52,7 @@
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-ingreselanueva" value="#{var.ingreselanueva} "/>
-                                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
+                                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
                                                                    disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" event="changed" render="panel_botonsoporte" />
                                                     </rich:calendar>
@@ -148,7 +148,7 @@
                                                         <h:outputText  styleClass="ikont-hot-vencimientopoliza"   value="#{var.vencimientoPoliza}" />
                                                     </f:facet>
                                                     <h:outputText  styleClass="ikont-hot-otxtstrvencimientopoliza"   id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
-                                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column id="tc-strEntidadPoliza"  styleClass="ikont-rc-tcstrentidadpoliza">

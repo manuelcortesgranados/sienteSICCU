@@ -24,7 +24,7 @@
                     <h:outputLabel  styleClass="ikont-hol-lblpriEdit"   id="lblpriEdit"  value="#{var.prioridad}" />
                     <rich:inputNumberSpinner id="numberSpinnerPrioridad" minValue="1" maxValue="100"/>
                     <h:outputLabel  styleClass="ikont-hol-lblFecjuEdit"   id="lblFecjuEdit"  value="#{var.fechajunta}" />
-                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
+                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight"  inputSize="10" value="" >
                     </rich:calendar>
                     <h:outputLabel  styleClass="ikont-hol-observaciones"    value="#{var.observaciones}"/>
                 </h:panelGrid>

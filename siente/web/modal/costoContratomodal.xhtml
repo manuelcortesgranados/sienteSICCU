@@ -53,7 +53,7 @@
                                 <h:outputText  styleClass="ikont-hot-tcnumvaltotobracostodirecto"   value="#{var.costodirecto}"/>
                             </f:facet>
                             <h:outputText  styleClass="ikont-hot-stnumvaltotobra"   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
-                                <f:convertNumber pattern="$###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                         </rich:column>
 
@@ -95,7 +95,7 @@
                                                                                                              +currentRow.numvaltotobra*currentRow.floatporimprevi/100
                                                                                                              +currentRow.numvaltotobra*currentRow.floatporadmon/100
                                                                                                              +currentRow.numvaltotobra*currentRow.floatporotros/100}">
-                                <f:convertNumber pattern="$###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                         </rich:column>
 

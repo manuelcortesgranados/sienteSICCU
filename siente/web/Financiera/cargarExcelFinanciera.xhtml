@@ -33,7 +33,7 @@
                         <rich:message for="fecIni" />
                     </h:panelGroup>
 
-                    <rich:calendar locale="#{var.fechadocumento}"  datePattern="d-MMM-yyyy" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
+                    <rich:calendar locale="#{var.fechadocumento}"  datePattern="#{var.formatomoneda}" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
                         <a4j:ajax event="change" render="hpCargar"/>
                     </rich:calendar>
 

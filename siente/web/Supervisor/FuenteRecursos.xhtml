@@ -180,14 +180,17 @@
                 <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                     <h:outputText value="#{var.rol}"/>
                 </rich:column>
+                <rich:column width="100px" styleClass="ikont-colum-superior-fuente-recurso">
+                    <h:outputText value="#{var.porcentaje}"/>
+                </rich:column>
+                <rich:column width="100px" styleClass="ikont-colum-superior-fuente-recurso">
+                    <h:outputText value="#{var.cuotagerencia}"/>
+                </rich:column>
                 <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                     <h:outputText value="#{var.reservaiva}"/>
                 </rich:column>
                 <rich:column width="200px" styleClass="ikont-colum-superior-fuente-recurso">
                     <h:outputText value="#{var.otrasreservas}"/>
-                </rich:column>
-                <rich:column width="100px" styleClass="ikont-colum-superior-fuente-recurso">
-                    <h:outputText value="#{var.cuotagerencia}"/>
                 </rich:column>
                 <rich:column width="100px" styleClass="ikont-colum-superior-fuente-recurso">
                     <h:outputText value="#{var.valoraportado}"/>
@@ -207,6 +210,15 @@
             <rich:column>
                 <h:outputText value="#{fuente.rolentidad.strnombre}"/>
             </rich:column>
+            <rich:column >
+                <h:outputText value="#{fuente.porcentajegerencia}%">
+                </h:outputText>
+            </rich:column>
+            <rich:column >
+                <h:outputText value="#{fuente.valorcuotagerencia}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
+            </rich:column>
             <rich:column>
                 <h:outputText value="#{fuente.reservaiva}">
                     <f:convertNumber currencySymbol="$" type="currency" />
@@ -214,11 +226,6 @@
             </rich:column>
             <rich:column >
                 <h:outputText value="#{fuente.otrasreservas}">
-                    <f:convertNumber currencySymbol="$" type="currency" />
-                </h:outputText>
-            </rich:column>
-            <rich:column >
-                <h:outputText value="#{fuente.valorcuotagerencia}">
                     <f:convertNumber currencySymbol="$" type="currency" />
                 </h:outputText>
             </rich:column>
@@ -235,8 +242,13 @@
         </rich:columnGroup>
         <f:facet name="footer">
             <rich:columnGroup id="headerFuente">
-                <rich:column colspan="3">
+                <rich:column colspan="4">
                     <h:outputText value="Total:"/>
+                </rich:column>
+                <rich:column>
+                    <h:outputText value="#{Supervisor$Contrato.recursosconvenio.cuotaGerencia}">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
                 </rich:column>
                 <rich:column>
                     <h:outputText value="#{Supervisor$Contrato.recursosconvenio.reservaIva}">
@@ -245,11 +257,6 @@
                 </rich:column>
                 <rich:column>
                     <h:outputText value="#{Supervisor$Contrato.recursosconvenio.otrasReservas}">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
-                </rich:column>
-                <rich:column>
-                    <h:outputText value="#{Supervisor$Contrato.recursosconvenio.cuotaGerencia}">
                         <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
                 </rich:column>

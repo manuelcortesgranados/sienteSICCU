@@ -216,7 +216,7 @@
                 </rich:column>
                 <rich:column>
                     <h:outputText  styleClass="ikont-hot-valtotayudaentregamerc" value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
-                        <f:convertNumber pattern="$###,###"/>
+                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                     </h:outputText>
                 </rich:column>
 
@@ -279,7 +279,7 @@
                 </rich:column>
                 <rich:column>
                     <h:outputText  styleClass="ikont-hot-valayudaentregada" value="#{currentRow.valAyudaentregada}"> 
-                        <f:convertNumber pattern="$###,###"/>
+                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                     </h:outputText>
                 </rich:column>
 

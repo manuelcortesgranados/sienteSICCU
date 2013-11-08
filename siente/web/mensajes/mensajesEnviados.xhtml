@@ -60,7 +60,7 @@
                                     <h:outputText  styleClass="ikont-hot-pltablaenviadosfecha"   value="#{var.Fecha}"/>
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-pltablaenviadosdatefecmensaje"   value="#{currentRow.datefecmensaje}">
-                                    <f:convertDateTime pattern="dd-MMM-yy hh:mm:ss"/>
+                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column   width="60px">

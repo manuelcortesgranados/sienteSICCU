@@ -8,7 +8,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelConfirmaGuardar" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmaGuardar" autosized="true" width="300"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- hot-"   value="Confirmar Guardar"/>
@@ -33,7 +33,7 @@
 
                     <h:outputText  styleClass="ikont-hot-solicitudpry"   value="El #{var.solicitudproyecto} no pudo guardarse. Por favor revisar los datos faltantes."  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"/>
 
-                    <interkont:spacer height="30"/>
+                    <br/><br/>
                     <a4j:commandButton id="BTaceptarDocFin"  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"  value="#{var.aceptar}"
                                        oncomplete="#{rich:component('panelConfirmaGuardar')}.hide();" 
                                        />

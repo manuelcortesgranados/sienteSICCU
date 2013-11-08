@@ -99,7 +99,7 @@
                                             <h:outputText  styleClass="ikont-hot-fechadelaimagenheader"   id="fechadelaimagen" value="#{var.fechadelaimagen}"/>
                                         </f:facet>
                                         <h:outputText  styleClass="ikont-hot-fechadelaimagen"   value="#{currentRow.datefecha}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column styleClass="ikont-rc-rcver">

@@ -127,7 +127,7 @@
 
                                 <h:outputText  styleClass="ikont-hot-fechasol"   value="#{var.fechasol}"/>
                                 <rich:calendar locale="#{var.rcalendarlocale}"
-                                               datePattern="yyyy-MM-dd"
+                                               datePattern="#{var.formatofecha}"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -493,7 +493,7 @@
                                                  cols="20" />
 
                                 <h:outputText  styleClass="ikont-hot-fechajuntadirectiva"    value="#{var.fechajuntadirectiva}"/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
@@ -617,7 +617,7 @@
 
 
                             <h:outputText  styleClass="ikont-hot-fechadecarta"    value="#{var.fechadecarta}"/>                                    
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"
                                            direction="topRight" id="fecorden" inputSize="10"
                                            value="#{SessionBeanCobra.solicitudService.ordendepago.datefechaordenpago}"
                                            immediate="true">
@@ -655,7 +655,7 @@
                             <rich:calendar locale="#{var.rcalendarlocale}"
                                            disabled="true"
                                            value="#{SessionBeanCobra.solicitudService.encargofiduciario.datefechaaperturaencargofiduciario}"
-                                           datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true"/>
+                                           datePattern="#{var.formatofecha}" direction="topRight" id="fecInfo" inputSize="10" immediate="true"/>
 
                             <h:outputLabel  styleClass="ikont-hol-lblEncargo"   id="lblEncargo"  value="#{var.encargofiduciario}" for="txtEncargo"/>
                             <h:panelGroup>

@@ -40,7 +40,7 @@
                     <h:panelGrid  columns="2" >
                         <h:outputText  styleClass="ikont-hot-valortotalah"   value="#{var.valortotalah}:"></h:outputText>
                         <h:outputText  styleClass="ikont-hot-totalInvAh"   value="#{ControlGerencial.informaciondashah.totalInvAh}" >
-                            <f:convertNumber pattern="$ ###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
                     <interkont:spacer height="20" />
@@ -48,19 +48,19 @@
                     <h:panelGrid  columns="2" columnClasses="panelizquierda,panelderecha">
                         <h:outputText  styleClass="ikont-hot-valorinvertidomercadoyaseo"   value="#{var.valorinvertidomercadoyaseo}:"></h:outputText>
                         <h:outputText  styleClass="ikont-hot-valorInvMercAseo"   value="#{ControlGerencial.informaciondashah.valorInvMercAseo}">
-                            <f:convertNumber pattern="$ ###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-toneladasentregadasmercadoyaseo"   value="#{var.toneladasentregadasmercadoyaseo}:" ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-tonEntMercAseo"   value="#{ControlGerencial.informaciondashah.tonEntMercAseo}" >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-mercadosykits"   value="#{var.mercadosykits}:" ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-mercAseoEnt"   value="#{ControlGerencial.informaciondashah.mercAseoEnt}">
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-familiasbeneficiadas"   value="#{var.familiasbeneficiadas}"  ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-famBenMercAseo"   value="#{ControlGerencial.informaciondashah.famBenMercAseo}">
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
                     <interkont:spacer height="20" />
@@ -68,27 +68,27 @@
                     <h:panelGrid  columns="2">
                         <h:outputText  styleClass="ikont-hot-arriendosentregados"   value="#{var.arriendosentregados}" ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-arriendEnt"   value="#{ControlGerencial.informaciondashah.arriendEnt}" >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-familiasaatendidasseg"   value="Total #{var.familiasaatendidasseg} en arriendos"  ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-totFamAtendArriend"   value="#{ControlGerencial.informaciondashah.totFamAtendArriend}"   >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-viviendasreparadas"   value="#{var.viviendasreparadas}"  ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-vivRep"   value="#{ControlGerencial.informaciondashah.vivRep}"  >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-alberguesconstruidos "   value="#{var.alberguesconstruidos}"  ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-alberguesConstruidos"   value="#{ControlGerencial.informaciondashah.alberguesConstruidos}"   >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-familiasbeneficiadas2 "   value="#{var.familiasbeneficiadas} con albergues" ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-famBenAlbergues"   value="#{ControlGerencial.informaciondashah.famBenAlbergues}" >
-                            <f:convertNumber pattern="###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                         <h:outputText  styleClass="ikont-hot-totalrecursosdesembolsados"   value="#{var.totalrecursosdesembolsados}" ></h:outputText>
                         <h:outputText  styleClass="ikont-hot-totRecDesmAloj"   value="#{ControlGerencial.informaciondashah.totRecDesmAloj}" >
-                            <f:convertNumber pattern="$ ###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
                 </h:panelGrid>

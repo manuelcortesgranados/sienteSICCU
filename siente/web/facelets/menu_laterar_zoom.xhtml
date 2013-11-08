@@ -93,7 +93,7 @@
                                 </h:selectOneMenu> 
 
                                 <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
-                                <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="inputText_registro"  
+                                <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"  
                                                value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
                                 <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
                                 <h:selectOneMenu id="combogeneronuevo" value="genero">

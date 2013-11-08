@@ -127,7 +127,7 @@
                                     <h:panelGrid >
                                         <h:outputLabel styleClass=" ikont-hol-detalle-proyecto" >Valor global del proyecto</h:outputLabel>    
                                         <h:outputText styleClass="ikont-hot-zoom-numvobra" value="#{Supervisor$DetalleObra.valorinterventoria + Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGroup>
@@ -136,7 +136,7 @@
                                     <h:panelGrid >
                                         <h:outputLabel styleClass="ikont- hot-textobra9 ikont-hol-detalle-proyecto">Valor del proyecto</h:outputLabel>
                                         <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra }">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:commandLink  id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
@@ -154,7 +154,7 @@
                                     <h:panelGrid>
                                         <h:outputLabel styleClass="ikont-hol-detalle-proyecto">Valor de la interventoría</h:outputLabel>
                                         <h:outputText styleClass="ikont-hot-zoom-numvaltotobra" value="#{Supervisor$DetalleObra.valorinterventoria}">
-                                            <f:convertNumber pattern="$###,###" />
+                                            <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGroup>
@@ -307,11 +307,11 @@
                                     <h:panelGrid columns="2" styleClass="panelcenter">
                                         <h:outputLabel styleClass="ikont- hot-desde" value="Desde:"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-hasta" value="Hasta:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont- hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                            <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
                                     </h:panelGrid>
 
@@ -379,7 +379,7 @@
                         </rich:collapsiblePanel>
 
                         <rich:collapsiblePanel switchType="ajax" header="Dónde está ubicado el proyecto" expanded="false" >                         
-                            <h:panelGroup styleClass="panelcenter" layout="block">
+                            <h:panelGroup layout="block" styleClass="ikont-hpg">
                                 <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
                                     <h:panelGrid  columnClasses="textalingright">
                                         <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
@@ -392,7 +392,7 @@
                                         <interkont:spacer width="20" />
                                         <h:outputLabel styleClass="ikont-hol-strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
                                     </h:panelGrid>
-                                    <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="color: red;">
+                                    <h:panelGrid  id="vistaMapa" width="360" style="color: red;">
                                         <m:map latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map12" 
                                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="193px" width="350px">                                                                 
                                             <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"

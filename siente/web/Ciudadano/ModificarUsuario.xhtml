@@ -49,7 +49,7 @@
                     <h:inputText  size="25" maxlength="250" styleClass="ikont-"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.intcedula}"/>
 
                     <h:outputText  styleClass="ikont-hot-lblfecnacimiento"   id="lblfecnacimiento"  value="#{var.fechadeNacimiento}:" />
-                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="ikont-rc-datefechanacimiento"  
+                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="ikont-rc-datefechanacimiento"  
                                    value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
 
                     <h:outputLabel  styleClass="ikont-hol-lblubicacion"   id="lblubicacion"  value="#{var.departamento}" for="combodepartamentoCiudadano"/>

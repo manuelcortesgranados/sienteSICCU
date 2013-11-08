@@ -30,7 +30,7 @@
                                 </h:outputLabel>
                                 <h:inputText  id="txtNumeroencargo" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.intnumencargofiduciario}"
                                               required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
-                                    <f:convertNumber pattern="#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:inputText>
                                 <rich:message for="txtNumeroencargo" />
                                 <h:panelGrid styleClass="ikont-hpg-PanelEncargo2"  />
@@ -42,20 +42,20 @@
                                 <h:outputLabel  styleClass="ikont-hol-lblsaldoincial"   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
                                 <h:inputText id="txtsaldoinicial" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoinicial}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
-                                    <f:convertNumber pattern="#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoinicial" />
                                 <h:panelGrid styleClass="ikont-hpg-panelEncargo4"  />
                                 <h:outputLabel  styleClass="ikont-hol-lblsaldoactual"   id="lblsaldoactual"  value="#{var.saldoactual}"/>
                                 <h:inputText id="txtsaldoactual" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoactual}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
-                                    <f:convertNumber pattern="#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoactual" />
                                 <h:panelGrid styleClass="ikont-hpg-panelEncargo5"  />
                                 <h:outputText  styleClass="ikont-hot-lblfecha"   id="lblfecha"  value="#{var.fecha}"/>
                                 <h:panelGroup id="layoutFechaEncargo" >
-                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
                                                    required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}" >
                                         <a4j:ajax  event="change" />

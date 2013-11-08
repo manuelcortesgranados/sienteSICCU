@@ -242,12 +242,12 @@
                         </rich:column>
                         <rich:column id="valorObras" width="80px">
                             <h:outputText  styleClass="ikont-hot-numvalortotalobra"   id="otxt-valorObras" value="#{obra.numvaltotobra}">
-                                <f:convertNumber pattern="$###,###"/>
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column id="duracionObras" width="60px">
                             <h:outputText  styleClass="ikont-hot-duracionobras"   id="otxt-duracionObras" value="#{obra.intplazoobra/30}">
-                                <f:convertNumber pattern="###,### meses"/>
+                                <f:convertNumber pattern="#{var.formatomoneda} meses"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column id="avanceObras" width="50px"  styleClass="ikont-rcl-avanceobras">

@@ -38,7 +38,7 @@
                             </h:panelGroup>
 
                             <h:outputText  styleClass="ikont-hot-fecha"    value="#{var.fecha}"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fechaorden"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fechaorden"
                                            value="#{Financiera$FiduFinanciera.financieraService.ordendepago.datefechaordenpago}" inputSize="10" immediate="true">
 
                             </rich:calendar>
@@ -66,7 +66,7 @@
                             <h:panelGroup>
                                 <h:inputText id="txtvalororden" value="#{Financiera$FiduFinanciera.financieraService.ordendepago.numvlrordenpago}"
                                              required="true" >
-                                    <f:convertNumber pattern="#,###.00"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:inputText>
                                 <rich:message for="txtvalororden" />
                             </h:panelGroup>
@@ -137,7 +137,7 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-numvlrordenpago"   id="otxt-valorObras" value="#{_Orden.numvlrordenpago}">
-                                    <f:convertNumber pattern="$ ###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>

@@ -101,7 +101,7 @@
 
                         <h:outputLabel  styleClass="ikont-hol-numvlraprobado" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                            <f:convertNumber pattern="$ ###,###"/>
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputLabel>
 
                         <h:outputText  styleClass="ikont-hot-observarcion" value="#{var.observaciones}"/>
@@ -127,13 +127,13 @@
 
 
                         <h:outputText  styleClass="ikont-hot-fechjuntadirec" value="#{var.fechajuntadirectiva}"/>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}" inputSize="10" immediate="true">
 
                         </rich:calendar>
                         <h:outputLabel  styleClass="ikont-hol-fechjunta" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            <f:convertDateTime pattern="#{var.formatofecha}"/>
                         </h:outputLabel>
 
 

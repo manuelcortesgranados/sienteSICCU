@@ -153,21 +153,21 @@
             <h:outputText  styleClass="ikont-hot-stfechaini"   id="stFecIni"  value="#{var.fechadeinicio}"/>
             <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-fechainiobra"  value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                <f:convertDateTime pattern="#{var.formatofecha}"/>
             </h:outputText>
 
             <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-fechadefinilizacion"   id="stFecFin"  value="#{var.fechadefinalizacion}"/>
             <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-datefechafinobra"  value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
-                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                <f:convertDateTime pattern="#{var.formatofecha}"/>
             </h:outputText>
 
             <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-valordelproyecto"   id="stValorDetalle"  value="#{var.valor} del proyecto"/>
             <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-valortotalproycto"   id="stValorTotalDeta" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                <f:convertNumber pattern="$#,###"/>
+                <f:convertNumber pattern="#{var.formatomoneda}"/>
             </h:outputText>
 
             <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
@@ -180,7 +180,7 @@
 
             <interkont:spacer width="10" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
             <h:outputText  styleClass="ikont-hot-stottextcodsol"   id="stOtTextcodsol" value="#{Supervisor$DetalleObra.valorinterventoria +Supervisor$AdministrarObraNew.obra.numvaltotobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}">
-                <f:convertNumber pattern="$#,###"/>
+                <f:convertNumber pattern="#{var.formatomoneda}"/>
             </h:outputText>
         </h:panelGrid>
     </rich:panel>

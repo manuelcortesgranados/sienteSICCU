@@ -16,6 +16,7 @@ import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,8 @@ public class RecursosConvenio implements Serializable {
 
     public void setVerEliminarRecurso(boolean verEliminarRecurso) {
         this.verEliminarRecurso = verEliminarRecurso;
-    }    
-    
+    }
+
     public boolean isVerAgregarRecurso() {
         return verAgregarRecurso;
     }
@@ -59,7 +60,7 @@ public class RecursosConvenio implements Serializable {
     public void setVerAgregarRecurso(boolean verAgregarRecurso) {
         this.verAgregarRecurso = verAgregarRecurso;
     }
-    
+
     
 
     public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
@@ -214,6 +215,12 @@ public class RecursosConvenio implements Serializable {
      */
 
     public String adicionarFuenteRecursos() {
+        if (fuenteRecursoConvenio.getTipoaporte() == 2) {
+            fuenteRecursoConvenio.setPorcentajegerencia( BigDecimal.valueOf(fuenteRecursoConvenio.getPorcentajecuotagerencia()).setScale(2, RoundingMode.HALF_UP));
+        }
+        if (fuenteRecursoConvenio.getTipoaporte() == 1) {
+            fuenteRecursoConvenio.setPorcentajegerencia(fuenteRecursoConvenio.getValorcuotagerencia().setScale(2, RoundingMode.HALF_UP));
+        }
         try {
             NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
             n.validarPuedeEditarValorFuente();

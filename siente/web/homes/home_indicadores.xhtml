@@ -173,7 +173,7 @@
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
                                     <h:outputText value="#{fila.valorAprobado}"  >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                     <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
                                 </h:panelGrid>
@@ -192,12 +192,12 @@
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.numGiro}" > 
-                                    <f:convertNumber pattern="###,###.##" />
+                                    <f:convertNumber pattern="#{var.formatomoneda}" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.numAvanFisico}" > 
-                                    <f:convertNumber pattern="###,###.##" />
+                                    <f:convertNumber pattern="#{var.formatomoneda}" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
@@ -291,14 +291,14 @@
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
                                     <h:outputText value="#{fila.pgValorAprobado}"  >
-                                        <f:convertNumber pattern="$###,###"/>
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                     <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.pgRecursosAprobados}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
@@ -311,12 +311,12 @@
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.pgPorcentajeAvance}" >
-                                    <f:convertNumber pattern="###,###.##" />
+                                    <f:convertNumber pattern="#{var.formatomoneda}" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.sgRecursosAprobados}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
@@ -329,12 +329,12 @@
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.sgPorcentajeAvance}" >
-                                    <f:convertNumber pattern="###,###.##"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.tgRecursosAprobados}" >
-                                    <f:convertNumber pattern="$###,###"/>
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
@@ -347,7 +347,7 @@
                             </rich:column>
                             <rich:column>                                        
                                 <h:outputText  styleClass="txt_outtext" value="#{fila.tgPorcentajeAvance}" >
-                                    <f:convertNumber pattern="###,###.##" />
+                                    <f:convertNumber pattern="#{var.formatomoneda}" />
                                 </h:outputText>
                             </rich:column>
 
