@@ -865,7 +865,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             iniciarHome();
         } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../Vencimiento.xhtml");
 
             } catch (IOException ex) {
                 Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
