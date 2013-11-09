@@ -141,6 +141,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private boolean objeto = false;
     private boolean desdeconvenio = false;
     private boolean formatoxlsx = false;
+    private boolean fechasvalidas = false;
     // </editor-fold>
     /**
      * Variables String.
@@ -1778,24 +1779,28 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     Calendar fechaFinConvenio = new GregorianCalendar();
                     Calendar fechaInicioProyecto = new GregorianCalendar();
                     Calendar fechaFinProyecto = new GregorianCalendar();
-                    
+
                     fechaInicioConvenio.setTime(obranueva.getContrato().getDatefechaini());
                     fechaFinConvenio.setTime(obranueva.getContrato().getDatefechafin());
                     fechaInicioProyecto.setTime(obranueva.getDatefeciniobra());
                     fechaFinProyecto.setTime(obranueva.getDatefecfinobra());
-                    
-                    if(fechaInicioProyecto.before(fechaInicioConvenio)){
+
+                    if (fechaInicioProyecto.before(fechaInicioConvenio)) {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicioproyectomenorconvenio"));
                     }
-                    
-                    if(fechaInicioProyecto.after(fechaFinConvenio)){
+
+                    if (fechaInicioProyecto.after(fechaFinConvenio)) {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicioproyectomayorconvenio"));
                     }
-                    if(fechaFinProyecto.after(fechaFinConvenio)){
+                    if (fechaFinProyecto.after(fechaFinConvenio)) {
                         FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
                     }
-                    if(fechaFinProyecto.before(fechaInicioConvenio)){
+                    if (fechaFinProyecto.before(fechaInicioConvenio)) {
                         FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
+                    }
+                    
+                    if((!fechaInicioProyecto.before(fechaInicioConvenio)) && (!fechaInicioProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.before(fechaInicioConvenio))){
+                        fechasvalidas = true;
                     }
                 }
             } else {
@@ -3641,9 +3646,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         if (comboEntidadesObraguardar()) {
             if (validarTipificacion()) {
-                obranueva.setTipoestadobra(new Tipoestadobra(0));
-                guardarObraTemporal();
-
+                if (fechasvalidas) {
+                    obranueva.setTipoestadobra(new Tipoestadobra(0));
+                    guardarObraTemporal();
+                }else{
+                    fechaCambio();
+                    return "datosbasicosnuevoproyecto";
+                }
             } else {
                 //"Debe dar un nombre a la obra";
                 FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
@@ -5076,6 +5085,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 && (obranueva.getNumhabbeneficiados() >= 0 && obranueva.getNumempdirectos() >= 0 && obranueva.getNumempindirectos() >= 0)) {
             validacion.setDatosbasicos(false);
         } else {
+            if (!fechasvalidas) {
+                validacion.setDatosbasicos(false);
+                fechaCambio();
+            }
             if (obranueva.getDatefeciniobra() != null && obranueva.getDatefecfinobra() != null) {
                 if (obranueva.getDatefeciniobra().compareTo(obranueva.getDatefecfinobra()) > 0) {
                     validacion.setDatosbasicos(false);
