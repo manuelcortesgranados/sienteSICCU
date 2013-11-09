@@ -4329,6 +4329,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public void fnEsProyectoPadre() {
         // si es padre deshabilitrar cronograma
+        disableCronograma = 0;
+        disableAiu = 0;
         if (obranueva.isBooleantienehijos()) {
             disableCronograma = 1;
             disableAiu = 1;

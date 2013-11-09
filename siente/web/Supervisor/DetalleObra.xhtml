@@ -409,7 +409,7 @@
                             </h:panelGroup>
                         </rich:collapsiblePanel>
 
-                        <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">
+                        <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}">
                             <h:panelGrid columns="3" styleClass="panelcenter">
                                 <h:commandLink id="pdf_infociu2" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="butonreport zoom-pdf" target="_blank" />
                                 <h:commandLink id="excel_infociu2" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="butonreport zoom-excel" target="_blank" />
