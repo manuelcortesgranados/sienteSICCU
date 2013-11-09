@@ -157,7 +157,7 @@
                                     <h:outputText  styleClass="ikont-hot-outxttipocc"   id="outxttipocc" value="#{var.tipocontr}" />
                                 </rich:column>
 
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                <rich:column styleClass="ikont-colum-superior-consulta" width="200px">
                                     <h:outputText  styleClass="ikont-hot-outxtvlrcc"   id="outxtvlrcc" value="#{var.valor}" />
                                 </rich:column>
 
@@ -179,11 +179,11 @@
                                     <h:outputText  styleClass="ikont-hot-contratosdeconsultoria"   value="#{var.contratosdeconsultoria}" />
                                 </rich:column>
 
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                <rich:column styleClass="ikont-colum-superior-consulta" width="100px">
                                     <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
                                 </rich:column>
 
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <rich:column styleClass="ikont-colum-superior-consulta" width="100px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
                                     <h:outputText  styleClass="ikont-hot-contratopadre"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
                                 </rich:column>
 
