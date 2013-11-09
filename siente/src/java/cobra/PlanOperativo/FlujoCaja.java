@@ -434,17 +434,19 @@ public class FlujoCaja implements Serializable {
         
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
-        for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosConvenio()) {
+        //for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosConvenio()) {
+        for(ProyectoPlanOperativo proyectoConvenio: getProyectosPlanOperativo())
+        {   
             FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
-            itemFlujoEgresos.getItemFlujoEgresos().setStrdescripcion(proyectoConvenio.getStrnombrecrot());
-            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
+            itemFlujoEgresos.getItemFlujoEgresos().setStrdescripcion(proyectoConvenio.getProyecto().getStrnombrecrot());
+            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getProyecto().getIntcodigoobra());
             
             if (planifmovimientoconvenioproyecto.isEmpty()) {
-                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio, periodosConvenio);
+                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio.getProyecto(), periodosConvenio);
                 itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             } else {
                 itemFlujoEgresos.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
-                itemFlujoEgresos.setProyecto(proyectoConvenio);
+                itemFlujoEgresos.setProyecto(proyectoConvenio.getProyecto());
                 itemFlujoEgresos.actualizarPlanMovimientosProyecto(periodosConvenio);
                 itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             }
@@ -490,9 +492,10 @@ public class FlujoCaja implements Serializable {
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
         //TODO JHON Eliminar el siguiente ciclo cuando Carlos llene la lista de Proyectos del plan operativo
-        for(Obra obra : nuevoContratoBasico.getListaProyectosConvenio()) {
+        //for(Obra obra : nuevoContratoBasico.getListaProyectosConvenio()) {
+        for(ProyectoPlanOperativo obra : getProyectosPlanOperativo()) {
             ProyectoPlanOperativo proyectoPlanOperativo = new ProyectoPlanOperativo();
-            proyectoPlanOperativo.setProyecto(obra);
+            proyectoPlanOperativo.setProyecto(obra.getProyecto());
             proyectosPlanOperativo.add(proyectoPlanOperativo);
         }
         for (ProyectoPlanOperativo proyectoPlanOperativo : proyectosPlanOperativo) {
