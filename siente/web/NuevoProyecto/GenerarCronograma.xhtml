@@ -142,8 +142,8 @@
                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                         <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
-                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
+                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="@all"/>
                                         </h:inputText>
                                     </h:panelGroup>
 
