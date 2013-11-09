@@ -91,8 +91,17 @@
                             <rich:column>
                                 <h:outputText value="Gerente del convenio" styleClass="input_ger_convenio label_texto_convenio"/>
                             </rich:column>
-                            <rich:column>
-                                <h:inputText id="hit-gerente-convenio" value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}" disabled="true" style="background:transparent!important;color: rgb(66, 64, 64);width: 290px;position: relative;top: -10px;"> </h:inputText>
+                            <rich:column rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
+                                <h:inputText id="hit-gerente-convenio"  value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}" disabled="true" style="background:transparent!important;color: rgb(66, 64, 64);width: 290px;position: relative;top: -10px;" > 
+                                
+                                </h:inputText>
+                            </rich:column>
+                            <rich:column  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
+                                <h:selectOneMenu  id="rs-gerentes-convenio"  value="#{Supervisor$Contrato.tercero.intcodigo}" required="true" style="font-style: italic!important; font-size: 12px!important;" >                              
+                                    <f:selectItems value="#{Supervisor$Contrato.lstgerentes}" var="ent" itemValue="#{ent.intcodigo}" itemLabel="#{ent.strnombrecompleto}" />
+                                    <a4j:ajax event="valueChange"/>
+                                   
+                                </h:selectOneMenu>  
                             </rich:column>
                         </h:panelGrid> 
 

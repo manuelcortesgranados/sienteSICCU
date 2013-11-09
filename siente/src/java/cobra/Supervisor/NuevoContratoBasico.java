@@ -88,6 +88,7 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import co.com.interkont.cobra.to.JsfUsuario;
 
 /**
  * <p>
@@ -792,11 +793,32 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private SelectItem[] tipocontratoselectitem;
     List<Actividadobra> lstTemporalActividades = new ArrayList<Actividadobra>();
     List<Actividadobra> lstActividadesEliminar = new ArrayList<Actividadobra>();
-    public int mostrarContratoConvenio;
+    public int mostrarContratoConvenio;     
+    private List<Tercero> lstgerentes = new ArrayList<Tercero>();
+    private Tercero tercero = new Tercero();
     /**
      * Indica que el bean ha sido invocado desde la funcionalidad de nuevo
      * convenio
      */
+
+
+    public List<Tercero> getLstgerentes() {
+        return lstgerentes;
+    }
+
+    public void setLstgerentes(List<Tercero> lstgerentes) {
+        this.lstgerentes = lstgerentes;
+    }
+    
+
+    public Tercero getTercero() {
+        return tercero;
+    }
+
+    public void setTercero(Tercero tercero) {
+        this.tercero = tercero;
+    }
+    
     private boolean enNuevoConvenio;
 
     public boolean isEnNuevoConvenio() {
@@ -6765,16 +6787,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *metodo que  carga los gerentes en la lista de seleccion
      *      
      */
-    public void llenarGerentes() {
-        List<Tercero> lstgerentesConvenio = new ArrayList<Tercero>();
-        lstgerentesConvenio = getSessionBeanCobra().getCobraService().encontrarGerentesConvenio();
-        setGerentesDeConvenio(new SelectItem[lstgerentesConvenio.size()]);
-        int i = 0;
-        for (Tercero gerenteConvenio : lstgerentesConvenio) {
-            SelectItem itGerenteConvenio = new SelectItem(gerenteConvenio.getIntcodigo(), gerenteConvenio.getStrnombrecompleto());
-            getGerentesDeConvenio()[i++] = itGerenteConvenio;
-        }
-
+      public void llenarGerentes() {
+        lstgerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
     }
 
     /**
@@ -7648,7 +7662,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setBoolplanoperativo(false);
         contrato.setEncargofiduciario(null);
         contrato.setModalidadcontratista(null);
-        contrato.setGerenteconvenio(getSessionBeanCobra().getUsuarioObra().getTercero());
+        //Guarda gerente de convenio, segun si es administrador o gerente de convenio.
+        if (tercero.getIntcodigo() == 0) {
+            contrato.setGerenteconvenio(getSessionBeanCobra().getUsuarioObra().getTercero());
+        } else {
+            contrato.setGerenteconvenio(getTercero());
+        }
+        
         //contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());                  
 
         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
