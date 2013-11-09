@@ -11,6 +11,7 @@ import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Obra;
+import cobra.PlanOperativo.ProyectoPlanOperativo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -129,7 +130,7 @@ public class ValidacionesConvenio {
         }
     }
 
-    public static void validarProyectosPlanOperativo(List<Obra> listadoproyectos) {
+    public static void validarProyectosPlanOperativo(List<ProyectoPlanOperativo> listadoproyectos) {
         if (listadoproyectos.isEmpty()) {
             throw new ConvenioException("Debe adicionar al menos un proyecto al Plan Operativo");
         }

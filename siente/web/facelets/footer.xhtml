@@ -105,7 +105,7 @@
             statesessionaplication();
             setInterval(function() {
                 statesessionaplication();
-            }, 5000);
+            }, 60000);
         });
 
         function statesessionaplication() {
@@ -114,7 +114,7 @@
             }
             var _after = (parseInt(localStorage.getItem('closeaplicaction'))) ? parseInt(localStorage.getItem('closeaplicaction')) : new Date().getTime();
             var _time = parseInt(new Date().getTime()) - _after;
-            if (parseInt(_time) > 500000) {
+            if (parseInt(_time) > 7200000) {
                 localStorage.setItem('closeaplicaction', 'true');
                 closeaplication();
             } else {

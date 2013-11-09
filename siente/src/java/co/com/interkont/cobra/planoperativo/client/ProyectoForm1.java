@@ -326,8 +326,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
-            public void onClick(ClickEvent event) {
-                service.setLog("entre proyecto", null);
+            public void onClick(ClickEvent event) {                
                 if (!editar) {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
@@ -397,6 +396,36 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         varErrorres = true;
                         msgerrores += "*Ingrese  una meta" + "<br/>";
                     }
+                    /**
+                     * Validando otros pagos y pagos directos
+                     */
+                    if(otrospagos.getValue()!=null)
+                    {
+                       if(otrospagos.getValue().compareTo(proyectoDTO.getValor())>0)
+                       {
+                           varErrorres = true;
+                            msgerrores += "*Otros pagos ($"+otrospagos.getValue()
+                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
+                       }    
+                    }
+                    if(pagodirecto.getValue()!=null)
+                    {
+                       if(pagodirecto.getValue().compareTo(proyectoDTO.getValor())>0)
+                       {
+                           varErrorres = true;
+                            msgerrores += "*Pagos directos ($"+pagodirecto.getValue()
+                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
+                       }    
+                    }
+                    if(pagodirecto.getValue()!=null && otrospagos.getValue()!=null)
+                    {
+                        if(pagodirecto.getValue().add(otrospagos.getValue()).compareTo(proyectoDTO.getValor())>0)
+                       {
+                           varErrorres = true;
+                            msgerrores += "*Pagos directos + Otros Pagos ($"+pagodirecto.getValue().add(otrospagos.getValue())
+                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
+                       }  
+                    }    
 
                     if (!varErrorres) {
                         modificarValorDisponibleCreando();
@@ -700,13 +729,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
    
     public void modificarValorDisponibleCreando() {
-        for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
-            service.setLog("entre en modificar valor disponible editar nuevos", null);
+        for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {            
             ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
-            obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
-            service.setLog("valor disponible despues de substraer:" + obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible(), null);
-
+            obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);            
         }
     }
 
