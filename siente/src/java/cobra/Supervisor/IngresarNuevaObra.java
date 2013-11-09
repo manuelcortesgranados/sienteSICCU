@@ -81,6 +81,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -1773,12 +1774,27 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
                 obranueva.setIntplazoobra(Integer.parseInt(String.valueOf(diferenciaFecha)));
                 if (desdeconvenio) {
-                    long fechaInicioConvenio = obranueva.getDatefeciniobra().getTime() - obranueva.getContrato().getDatefechaini().getTime();
-                    long fechaFinConvenio = obranueva.getContrato().getDatefechafin().getTime() - obranueva.getDatefecfinobra().getTime();
-                    if(fechaInicioConvenio < 0){
+                    Calendar fechaInicioConvenio = new GregorianCalendar();
+                    Calendar fechaFinConvenio = new GregorianCalendar();
+                    Calendar fechaInicioProyecto = new GregorianCalendar();
+                    Calendar fechaFinProyecto = new GregorianCalendar();
+                    
+                    fechaInicioConvenio.setTime(obranueva.getContrato().getDatefechaini());
+                    fechaFinConvenio.setTime(obranueva.getContrato().getDatefechafin());
+                    fechaInicioProyecto.setTime(obranueva.getDatefeciniobra());
+                    fechaFinProyecto.setTime(obranueva.getDatefecfinobra());
+                    
+                    if(fechaInicioProyecto.before(fechaInicioConvenio)){
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicioproyectomenorconvenio"));
                     }
-                    if(fechaFinConvenio < 0){
+                    
+                    if(fechaInicioProyecto.after(fechaFinConvenio)){
+                        FacesUtils.addErrorMessage(bundle.getString("lafechainicioproyectomayorconvenio"));
+                    }
+                    if(fechaFinProyecto.after(fechaFinConvenio)){
+                        FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
+                    }
+                    if(fechaFinProyecto.before(fechaInicioConvenio)){
                         FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
                     }
                 }
@@ -4313,6 +4329,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public void fnEsProyectoPadre() {
         // si es padre deshabilitrar cronograma
+        disableCronograma = 0;
+        disableAiu = 0;
         if (obranueva.isBooleantienehijos()) {
             disableCronograma = 1;
             disableAiu = 1;
