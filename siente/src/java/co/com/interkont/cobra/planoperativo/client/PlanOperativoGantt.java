@@ -46,6 +46,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
+import com.scheduler.client.core.event.EventClickEvent;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.MonthTimeAxisGenerator;
@@ -258,9 +259,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Enable dependency DnD
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
-        // Enable task DnD
-        config.taskDnDEnabled = false;
-        //config.taskDnDEnabled = !isModolectura();
+        // Enable task DnD        
+        //config.taskDnDEnabled = false;
+        config.taskDnDEnabled = !isModolectura();       
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -281,8 +282,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.useEndDate = true;
         config.clickCreateEnabled = false;
-        config.cascadeChanges = true;
-
+        config.cascadeChanges = true;        
+        
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -332,8 +333,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         /**
          * Personalizando el menú
          */
-        config.taskContextMenu = new Menu();
-
+        config.taskContextMenu = new Menu();  
+       
         /**
          * Opciones de la actividad Convenio
          */
@@ -467,8 +468,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final MenuItem menuItemEliminarTarea = new MenuItem("Eliminar Actividad");
         menuItemEliminarTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
-            public void onSelection(SelectionEvent<Item> event) {
-                boxConfim.show();
+            public void onSelection(SelectionEvent<Item> event) {                
+                boxConfim.show();                
             }
         });
         config.taskContextMenu.add(menuItemEliminarTarea);
@@ -542,7 +543,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {
                 ActividadobraDTO actividadMove = event.getEventModel();
                 service.setLog("estoy ya en mover" + event.getEventModel().getEndDateTime(), null);
-
+                
             }
         });
 
@@ -556,22 +557,22 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         getGantt().addTaskClickHandler(new TaskClickEvent.TaskClickHandler<ActividadobraDTO>() {
             @Override
-            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {
+            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {                
                 service.setLog("entre en click" + event.getEventModel().getName(), null);
             }
-        });
-
+        });      
+       
 
         getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
-                tareaSeleccionada = event.getTask();
+                tareaSeleccionada = event.getTask();               
                 //config.taskDnDEnabled = false;
 //                getGantt().getGanttPanel().getConfig().taskDnDEnabled= false;
 //                getGantt().getGanttPanel().getContainer().reconfigure(true);
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
-//                
+//
 //                /*se verifica si el estado del convenio es en estructuracion en tal caso si 
 //                * es posible eliminar las diferentes actividades
 //                */
@@ -670,10 +671,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemAnadirHito.setVisible(false);
                         break;
 
-                }
+                }                
             }
         });
-
+                
         /**
          * metodo que se encarga de obtener la dependencia seleccionada cuando
          * se activa el menu contextual
@@ -734,14 +735,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
 
             }
-        });
-
-        gantt.addMoveHandler(new MoveEvent.MoveHandler() {
-            @Override
-            public void onMove(MoveEvent event) {
-                alertaMensajes("estoy moviendo");
-            }
-        });
+        });        
 
         // Editing
         if (!isModolectura()) {
@@ -749,17 +743,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
             editing.addEditor(config.leftColumns.getColumn(1), new DateField());
             editing.addEditor(config.leftColumns.getColumn(2), new DateField());
-            editing.addEditor(config.leftColumns.getColumn(3), new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor()));
+            SpinnerField<Integer> spinnerduracion = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
+            spinnerduracion.setMinValue(0);
+            spinnerduracion.setIncrement(1);
+            //spinnerduracion.setMaxValue(100);
+            editing.addEditor(config.leftColumns.getColumn(3), spinnerduracion);
             editing.addEditor(config.leftColumns.getColumn(6), new TextField());
             SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
 
-            spinner.setMinValue(
-                    0);
-            spinner.setMaxValue(
-                    100);
-            spinner.setIncrement(
-                    1);
-            editing.addEditor(config.leftColumns.getColumn(3), spinner);
+            spinner.setMinValue(0);
+            spinner.setMaxValue(100);
+            spinner.setIncrement(1);
+            editing.addEditor(config.leftColumns.getColumn(4), spinner);
             //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
 
             editing.addBeforeStartEditHandler(
@@ -819,8 +814,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
 
-        getGantt()
-                .setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+        getGantt().setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
 
         FlowLayoutContainer main;
         if (!fullScreen) {
@@ -995,8 +989,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
     public void configurarSemanas() {
-        for (int i = 0; i <= 1; i++) {
-            service.setLog("entre", null);
+        for (int i = 0; i <= 1; i++) {            
             GanttConfig ganttConfig = getGantt().getConfig();
             ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
             headers.add(new MonthTimeAxisGenerator("MMMM y"));
