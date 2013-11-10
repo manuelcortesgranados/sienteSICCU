@@ -803,7 +803,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
 
         gantt.getGanttPanel().getContainer().refresh();
-        GanttDatos.asignarNumeracion(taskStore, numeracionActual,3);
+        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);
 
 
     }
@@ -820,6 +820,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public boolean validaciones() {
         boolean hayError = false;
         msgValidacion = new String();
+        if (!GanttDatos.validarNombreActividad(contrato.getNombreAbreviado(), taskStore)) {
+            hayError = true;
+            msgValidacion += "*Por favor verifique el nombre del contrato, ya se encuentra en el plan operativo."+"<br/>";
+        }
         if (contrato.getDatefechaini() == null) {
             hayError = true;
             msgValidacion += "*por favor ingrese la fecha de suscripcion" + "<br/>";

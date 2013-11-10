@@ -710,5 +710,15 @@ public class GanttDatos {
         }
          return numeracionActual;
     }
+     
+     public static boolean validarNombreActividad(String nombre,TreeStore<ActividadobraDTO> taskStore){
+     for (ActividadobraDTO act : taskStore.getAll()) {
+            if (act.getName().equals(nombre)) {
+                return false;
+            }
+        }
+        return true;
+
+     }
 
 }

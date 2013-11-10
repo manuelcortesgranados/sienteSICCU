@@ -162,7 +162,7 @@ public class HitoForm implements IsWidget, EntryPoint {
                     if (getFechainicioActividad().getValue() != null) {
 
                         if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
-                           if(validarHito()){
+                           if(GanttDatos.validarNombreActividad(getDescripcionActividad().getValue(), taskStore)){
                             modalAct.hide();
                             crearActividad();
                            }else{

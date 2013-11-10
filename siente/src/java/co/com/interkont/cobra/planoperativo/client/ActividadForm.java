@@ -217,8 +217,13 @@ public class ActividadForm implements IsWidget, EntryPoint {
                         msg = msg + "La fecha fin de la actividad no puede ser superior a:" + obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
                         service.setLog("entre 15", null);
                     }
-
+                    
                 }
+                 if (!GanttDatos.validarNombreActividad(getDescripcionActividad().getValue(), taskStore)) {
+                        error = true;
+                        msg += "*Por favor verifique el nombre de la actividad, ya se encuentra en el plan operativo." + "<br/>";
+                    }
+
                 if (error) {
                     d = new AlertMessageBox("Error", msg);
                     d.show();

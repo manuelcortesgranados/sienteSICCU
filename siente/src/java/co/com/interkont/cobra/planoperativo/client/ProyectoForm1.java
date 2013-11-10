@@ -95,7 +95,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTO actividadobraProyectoEditar;
     protected ActividadobraDTOProps propes;
     protected TreeStore<ActividadobraDTO> taskStore;
-    protected  int numeroFuentes;
+    protected int numeroFuentes;
     protected Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
     protected int numeracionActividad;
     protected int numeracionActual = 0;
@@ -144,7 +144,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
         this.propes = propes;
         this.taskStore = taskStore;
-        this.numeracionActividad=taskStore.getAll().size()+1;
+        this.numeracionActividad = taskStore.getAll().size() + 1;
         instanciarElementosPantalla();
     }
 
@@ -265,7 +265,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros, idobraRecursos, editar);
                 adicionarRubros.add(modalProyecto.asWidget());
                 adicionarRubros.show();
-                
+
             }
         });
         btnAdicionarMonto.setWidth("" + 20);
@@ -326,12 +326,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
-            public void onClick(ClickEvent event) {                
+            public void onClick(ClickEvent event) {
                 if (!editar) {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
                     boolean varErrorres = false;
-                   String fechasmostrar;
+                    String fechasmostrar;
 
                     if (nombrePry.getValue() == null) {
                         varErrorres = true;
@@ -352,16 +352,16 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                             service.setLog("entre en fecha inicio no menor 1", null);
                             varErrorres = true;
                             fechasmostrar = DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechaini());
-                            msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " +  fechasmostrar+ "<br/>";
+                            msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + fechasmostrar + "<br/>";
                         }
-                        
+
                         Date actividadDependenciaFrom = GanttDatos.obtenerActividadDeRaiz(0, contratoDto).getEndDateTime();
-                        if(proyectoDTO.getFechaInicio().compareTo(actividadDependenciaFrom)<0){
+                        if (proyectoDTO.getFechaInicio().compareTo(actividadDependenciaFrom) < 0) {
                             service.setLog("entre en fecha inicio menor dep", null);
                             varErrorres = true;
                             fechasmostrar = DateTimeFormat.getShortDateFormat().format(actividadDependenciaFrom);
-                            msgerrores +="La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente planeación del convenio:" + fechasmostrar + "<br/>";
-                         }
+                            msgerrores += "La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente planeación del convenio:" + fechasmostrar + "<br/>";
+                        }
                     } else {
                         varErrorres = true;
                         msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
@@ -371,15 +371,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         service.setLog("entre en fecha fin no null", null);
                         if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                             varErrorres = true;
-                            fechasmostrar= DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechafin());
-                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio " + fechasmostrar+ "<br/>";
+                            fechasmostrar = DateTimeFormat.getShortDateFormat().format(contratoDto.getDatefechafin());
+                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio " + fechasmostrar + "<br/>";
                         }
                     }
                     if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
                         if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
                             varErrorres = true;
-                            fechasmostrar= DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
-                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + fechasmostrar+ "<br/>";
+                            fechasmostrar = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
+                            msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + fechasmostrar + "<br/>";
                         }
                     }
                     if (txtObjeG.getValue() == null) {
@@ -399,33 +399,32 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     /**
                      * Validando otros pagos y pagos directos
                      */
-                    if(otrospagos.getValue()!=null)
-                    {
-                       if(otrospagos.getValue().compareTo(proyectoDTO.getValor())>0)
-                       {
-                           varErrorres = true;
-                            msgerrores += "*Otros pagos ($"+otrospagos.getValue()
-                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
-                       }    
+                    if (otrospagos.getValue() != null) {
+                        if (otrospagos.getValue().compareTo(proyectoDTO.getValor()) > 0) {
+                            varErrorres = true;
+                            msgerrores += "*Otros pagos ($" + otrospagos.getValue()
+                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                        }
                     }
-                    if(pagodirecto.getValue()!=null)
-                    {
-                       if(pagodirecto.getValue().compareTo(proyectoDTO.getValor())>0)
-                       {
-                           varErrorres = true;
-                            msgerrores += "*Pagos directos ($"+pagodirecto.getValue()
-                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
-                       }    
+                    if (pagodirecto.getValue() != null) {
+                        if (pagodirecto.getValue().compareTo(proyectoDTO.getValor()) > 0) {
+                            varErrorres = true;
+                            msgerrores += "*Pagos directos ($" + pagodirecto.getValue()
+                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                        }
                     }
-                    if(pagodirecto.getValue()!=null && otrospagos.getValue()!=null)
-                    {
-                        if(pagodirecto.getValue().add(otrospagos.getValue()).compareTo(proyectoDTO.getValor())>0)
-                       {
-                           varErrorres = true;
-                            msgerrores += "*Pagos directos + Otros Pagos ($"+pagodirecto.getValue().add(otrospagos.getValue())
-                                    +") debe ser inferior al valor del proyecto ($"+proyectoDTO.getValor() + ")<br/>";
-                       }  
-                    }    
+                    if (pagodirecto.getValue() != null && otrospagos.getValue() != null) {
+                        if (pagodirecto.getValue().add(otrospagos.getValue()).compareTo(proyectoDTO.getValor()) > 0) {
+                            varErrorres = true;
+                            msgerrores += "*Pagos directos + Otros Pagos ($" + pagodirecto.getValue().add(otrospagos.getValue())
+                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                        }
+                    }
+
+                    if (!GanttDatos.validarNombreActividad(proyectoDTO.getStrnombreobra(), taskStore)) {
+                        varErrorres = true;
+                        msgerrores += "*Por favor verifique el nombre del proyecto, ya se encuentra en el plan operativo." + "<br/>";
+                    }
 
                     if (!varErrorres) {
                         modificarValorDisponibleCreando();
@@ -435,23 +434,22 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
                         d.show();
                         msgerrores = "";
-                        
+
                     }
 
 
                 } else {
                     if (proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
                         ventanaDeError("El proyecto debe de tener al menos una fuente de recursos asociada!");
-                    }else{
-                    editarProyecto();
-                    actividadobraProyectoEditar.setObra(proyectoDTO);
-                    modalPry.hide();
-                    gantt.getGanttPanel().runCascadeChanges();
-                    gantt.getGanttPanel().getContainer().refresh();
+                    } else {
+                        editarProyecto();
+                        actividadobraProyectoEditar.setObra(proyectoDTO);
+                        modalPry.hide();
+                        gantt.getGanttPanel().runCascadeChanges();
+                        gantt.getGanttPanel().getContainer().refresh();
                     }
                 }
             }
-     
         });
 
 
@@ -666,30 +664,30 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
             tareaNueva.setNumeracion(numeracionActividad);
-            
+
 
         } else {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-             tareaNueva.setNumeracion(numeracionActividad);
-            
+            tareaNueva.setNumeracion(numeracionActividad);
+
 
 
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
-                    numeracionActual=GanttDatos.modificarEnCascadaNumeracion(act);
-                      enlazaractividadesHijas(act, tareaNueva);
-                    GanttDatos.asignarNumeracion(taskStore, numeracionActual,2);
+                    numeracionActual = GanttDatos.modificarEnCascadaNumeracion(act);
+                    enlazaractividadesHijas(act, tareaNueva);
+                    GanttDatos.asignarNumeracion(taskStore, numeracionActual, 2);
                 }
             }
 
         } else {
-            numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
-                enlazaractividadesHijas(actividadObraPadre, tareaNueva);
-            GanttDatos.asignarNumeracion(taskStore, numeracionActual,2);
-            
+            numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
+            enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+            GanttDatos.asignarNumeracion(taskStore, numeracionActual, 2);
+
         }
 
     }
@@ -730,12 +728,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      ].join("");
      }-*/;
 
-   
     public void modificarValorDisponibleCreando() {
-        for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {            
+        for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
-            obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);            
+            obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
         }
     }
 
