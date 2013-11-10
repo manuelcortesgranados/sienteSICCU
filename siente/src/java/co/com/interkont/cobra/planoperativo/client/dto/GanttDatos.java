@@ -12,6 +12,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.interkont.cobra.dto.ActividadObraDTO;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.util.ArrayList;
@@ -630,4 +631,84 @@ public class GanttDatos {
     public static String darFormatoAfecha(Date fecha) {
         return DateTimeFormat.getShortDateFormat().format(fecha);
     }
+
+    public static void asignarNumeracion(TreeStore<ActividadobraDTO> taskStore, int numeracionAnterior, int tipo) {
+        Integer numeracion = new Integer(numeracionAnterior + 1);
+        service.setLog("numeracon anterior:" + numeracion, null);
+        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>();
+        cargarActividadesTaskStore(taskStore.getAll().get(0),lstActividades);
+                
+        for (ActividadobraDTO acti : lstActividades) {
+            service.setLog("como coloca la lista" + acti.getName(), null);
+            if (acti.getNumeracion() > numeracionAnterior) {
+                service.setLog("aca tengo cumplo" + numeracion + "en num ante:" + acti.getNumeracion(), null);
+                acti.setNumeracion(numeracion);
+                reasignarPredecesores(acti, numeracionAnterior,tipo);
+                numeracion++;
+            }
+
+        }
+
+    }
+
+    public static void reasignarPredecesores(ActividadobraDTO actividad, int numeracionAnterior,int tipo) {
+        Set<Integer> lstPredecesores = new HashSet<Integer>();
+        for (Integer numPredecesor : actividad.getLstPredecesores()) {
+            if (numPredecesor > numeracionAnterior) {
+                if(tipo!=3){
+                numPredecesor++;
+                }else{
+                numPredecesor=numPredecesor+10;
+                }
+            }
+            service.setLog("predecesor en L:" + numPredecesor, null);
+            lstPredecesores.add(numPredecesor);
+        }
+        if (!lstPredecesores.isEmpty()) {
+            actividad.setLstPredecesores(lstPredecesores);
+            modificarPredecesor(actividad);
+        }
+    }
+
+    public static void modificarPredecesor(ActividadobraDTO acti) {
+        StringBuilder predecesorNuevo = new StringBuilder();
+        Iterator it = acti.getLstPredecesores().iterator();
+        for (int i = 0; i < acti.getLstPredecesores().size(); i++) {
+            if (it.hasNext()) {
+                predecesorNuevo.append(it.next());
+                if (i != acti.getLstPredecesores().size() - 1) {
+                    predecesorNuevo.append(',');
+                }
+            }
+        }
+        service.setLog("modif:" + predecesorNuevo.toString(), null);
+        acti.setPredecesor(predecesorNuevo.toString());
+
+    }
+
+    public static void cargarActividadesTaskStore(ActividadobraDTO actiRaiz, List<ActividadobraDTO> lstActividades) {
+        for (ActividadobraDTO acti : actiRaiz.getChildren()) {
+            lstActividades.add(acti);
+            if (acti.hasChildren()) {
+                cargarActividadesTaskStore(acti, lstActividades);
+            }
+
+        }
+    }
+    
+     public static int  modificarEnCascadaNumeracion(ActividadobraDTO act) {
+        int numeracionActual=0;
+         if (!act.hasChildren()) {
+            numeracionActual = act.getNumeracion();
+            service.setLog("ultimo 1:" + numeracionActual, null);
+        } else {
+            service.setLog("entre en else", null);
+            int ultimo = act.getChildren().size() - 1;
+            service.setLog("ultimo sd:" + ultimo, null);
+            numeracionActual = act.getChildren().get(ultimo).getNumeracion();
+            service.setLog("ultimo 2:" + numeracionActual, null);
+        }
+         return numeracionActual;
+    }
+
 }

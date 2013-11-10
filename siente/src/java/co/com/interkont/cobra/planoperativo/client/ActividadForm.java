@@ -63,6 +63,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     GwtMensajes msj = GWT.create(GwtMensajes.class);
     TreeStore<ActividadobraDTO> taskStore;
     int numeracionActividad;
+    protected int numeracionActual = 0;
 
     public VerticalPanel getVp() {
         return vp;
@@ -305,6 +306,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     }
 
     public void crearActividad() {
+        numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
@@ -315,7 +317,8 @@ public class ActividadForm implements IsWidget, EntryPoint {
         GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-
+        
+        GanttDatos.asignarNumeracion(taskStore, numeracionActual,4);
     }
 
     public String obtenerFecha(Date fecha) {

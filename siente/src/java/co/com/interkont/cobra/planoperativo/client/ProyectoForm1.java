@@ -97,8 +97,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected TreeStore<ActividadobraDTO> taskStore;
     protected  int numeroFuentes;
     protected Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
-    
     protected int numeracionActividad;
+    protected int numeracionActual = 0;
 
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
@@ -679,13 +679,16 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
+                    numeracionActual=GanttDatos.modificarEnCascadaNumeracion(act);
                       enlazaractividadesHijas(act, tareaNueva);
-                 
+                    GanttDatos.asignarNumeracion(taskStore, numeracionActual,2);
                 }
             }
 
         } else {
+            numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
                 enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+            GanttDatos.asignarNumeracion(taskStore, numeracionActual,2);
             
         }
 
