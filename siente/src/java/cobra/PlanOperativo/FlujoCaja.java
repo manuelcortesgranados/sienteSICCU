@@ -4,24 +4,27 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
-import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
+import co.com.interkont.cobra.to.Planificacionmovimientocontrato;
 import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
+import co.com.interkont.cobra.to.Planificacionmovimientoprydirecto;
+import co.com.interkont.cobra.to.Planificacionmovimientopryotros;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
-import co.com.interkont.cobra.to.Relacionobrafuenterecursoscontrato;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.NuevoContratoBasico;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import org.richfaces.component.UIExtendedDataTable;
 
@@ -62,7 +65,19 @@ public class FlujoCaja implements Serializable {
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
     NuevoContratoBasico nuevoContratoBasico;
     UIExtendedDataTable tablaFuentesIngresos;
+    /**
+     * Referencia a la tabla de egresos del flujo de caja
+     */
+    UIExtendedDataTable extendedDataTableEgresos;
     int columnaEvento;
+
+    public UIExtendedDataTable getExtendedDataTableEgresos() {
+        return extendedDataTableEgresos;
+    }
+
+    public void setExtendedDataTableEgresos(UIExtendedDataTable extendedDataTableEgresos) {
+        this.extendedDataTableEgresos = extendedDataTableEgresos;
+    }
     /**
      * Listado de proyectos del plan operativo con sus contratos asociados. Este
      * es un insumo necesario para el flujo de caja
@@ -301,10 +316,10 @@ public class FlujoCaja implements Serializable {
         generarPeriodosFlujoCaja();
         crearEstructuraFlujoIngresos();
         iniciarTotalesIngresosPeriodo();
-        crearEstructuraFlujoEgresos();
+        crearEstructuraFlujoEgresosConContratos();
         iniciarTotalesEgresosPeriodo();
         refrescarTotalesIngresos();
-        refrescarTotalesEgresos();
+        calcularTotalesFlujoEgreso();
         generarPeriodosFlujoCaja();
 
         flujoCajaIniciado = true;
@@ -382,6 +397,38 @@ public class FlujoCaja implements Serializable {
             iterador++;
         }
     }
+    
+    /**
+     * Cambió valor de un ingreso por entidad. Valida que el nuevo ingreso
+     * diligenciado no exceda el valor disponible por distribuir de la fuente de
+     * ingresos. En caso de superarlo se ajusta el valor diligenciado al total
+     * disponible y se informa del error.
+     *
+     */
+    public void cambioValorIngreso() {
+        FlujoIngresos fuenteIngresosEvento = (FlujoIngresos) tablaFuentesIngresos.getRowData();
+        BigDecimal disponibleInicial = BigDecimal.ZERO;
+        BigDecimal disponible = BigDecimal.ZERO;
+
+        if (fuenteIngresosEvento.isIngresoEntidad()) {
+            Map<String, String> parametros = FacesUtils.getExternalContext().getRequestParameterMap();
+            columnaEvento = Integer.valueOf(parametros.get("columnaEvento"));
+            disponibleInicial = fuenteIngresosEvento.getFuenteRecursosConvenio().getValoraportado().subtract(fuenteIngresosEvento.getTotalIngresosFuente());
+            fuenteIngresosEvento.calcularTotalIngresosFuente(periodosConvenio.size());
+            disponible = fuenteIngresosEvento.fuenteRecursosConvenio.getValoraportado().subtract(fuenteIngresosEvento.getTotalIngresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ajusta el valor al disponible.");
+                FacesUtils.addInfoMessage("Se ajusta el valor al disponible.");
+                fuenteIngresosEvento.planMovimientosConvenioEntidad.get(columnaEvento).setValor(disponibleInicial);
+                fuenteIngresosEvento.calcularTotalIngresosFuente(periodosConvenio.size());
+                disponible = fuenteIngresosEvento.fuenteRecursosConvenio.getValoraportado().subtract(fuenteIngresosEvento.getTotalIngresosFuente());
+                fuenteIngresosEvento.planMovimientosConvenioEntidad.get(columnaEvento).setValor(disponibleInicial.add(disponible));
+            }
+        }
+
+        refrescarTotalesIngresos();
+    }
 
     /**
      * Refrescar totales del flujo de ingresos.
@@ -418,7 +465,7 @@ public class FlujoCaja implements Serializable {
             iterador++;
         }
     }
-    
+
     /**
      * Crear la estructura del flujo de egresos.
      *
@@ -431,22 +478,20 @@ public class FlujoCaja implements Serializable {
         this.totalEgresos = 0;
         this.planifmovimientoconvenioproyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
-        
+
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
-        //for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosConvenio()) {
-        for(ProyectoPlanOperativo proyectoConvenio: getProyectosPlanOperativo())
-        {   
+        for (ProyectoPlanOperativo proyectoPlanOperativo : proyectosPlanOperativo) {
             FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
-            itemFlujoEgresos.getItemFlujoEgresos().setStrdescripcion(proyectoConvenio.getProyecto().getStrnombrecrot());
-            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getProyecto().getIntcodigoobra());
-            
+            itemFlujoEgresos.getItemFlujoEgresos().setStrdescripcion(proyectoPlanOperativo.getProyecto().getStrnombrecrot());
+            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoPlanOperativo.getProyecto().getIntcodigoobra());
+
             if (planifmovimientoconvenioproyecto.isEmpty()) {
-                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio.getProyecto(), periodosConvenio);
+                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoPlanOperativo.getProyecto(), periodosConvenio);
                 itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             } else {
                 itemFlujoEgresos.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
-                itemFlujoEgresos.setProyecto(proyectoConvenio.getProyecto());
+                itemFlujoEgresos.setProyecto(proyectoPlanOperativo.getProyecto());
                 itemFlujoEgresos.actualizarPlanMovimientosProyecto(periodosConvenio);
                 itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             }
@@ -491,56 +536,123 @@ public class FlujoCaja implements Serializable {
 
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
-        //TODO JHON Eliminar el siguiente ciclo cuando Carlos llene la lista de Proyectos del plan operativo
-        //for(Obra obra : nuevoContratoBasico.getListaProyectosConvenio()) {
-        for(ProyectoPlanOperativo obra : getProyectosPlanOperativo()) {
-            ProyectoPlanOperativo proyectoPlanOperativo = new ProyectoPlanOperativo();
-            proyectoPlanOperativo.setProyecto(obra.getProyecto());
-            proyectosPlanOperativo.add(proyectoPlanOperativo);
-        }
         for (ProyectoPlanOperativo proyectoPlanOperativo : proyectosPlanOperativo) {
             flujoEgresosContratos = new ArrayList<FlujoEgresos>();
-            FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
-            itemFlujoEgresos.getItemFlujoEgresos().setStrdescripcion(proyectoPlanOperativo.getProyecto().getStrnombrecrot());
+            FlujoEgresos itemFlujoEgresosProyecto = new FlujoEgresos();
+            itemFlujoEgresosProyecto.getItemFlujoEgresos().setStrdescripcion(proyectoPlanOperativo.getProyecto().getStrnombrecrot());
+            
+            FlujoEgresos itemFlujoEgresosPryDirecto = new FlujoEgresos();
+            itemFlujoEgresosPryDirecto.setEgresoPryDirecto(true);
+            itemFlujoEgresosPryDirecto.getItemFlujoEgresos().setStrdescripcion("Pagos Directos");
+            itemFlujoEgresosPryDirecto.setPlanMovimientosProyecto(itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
+            itemFlujoEgresosPryDirecto.setTotalEsperadoEgresosFuente(proyectoPlanOperativo.getProyecto().getPagodirecto());
+            
+            FlujoEgresos itemFlujoEgresosPryOtros = new FlujoEgresos();
+            itemFlujoEgresosPryOtros.setEgresoPryOtros(true);
+            itemFlujoEgresosPryOtros.getItemFlujoEgresos().setStrdescripcion("Otros Pagos");
+            itemFlujoEgresosPryOtros.setPlanMovimientosProyecto(itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
+            itemFlujoEgresosPryOtros.setTotalEsperadoEgresosFuente(proyectoPlanOperativo.getProyecto().getOtrospagos());
+                
             planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoPlanOperativo.getProyecto().getIntcodigoobra());
-            
-            for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : planifmovimientoconvenioproyecto) {
-                planificacionmovimientoproyecto.setPlanificacionmovimientocontratos(new LinkedHashSet(getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(planificacionmovimientoproyecto.getIdplanificacionmovpry())));
-            }
-            
+            //Si no se han cargado aún las planificaciones de proyecto 
             if (planifmovimientoconvenioproyecto.isEmpty()) {
-                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoPlanOperativo.getProyecto(), periodosConvenio);
-                itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
+                itemFlujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(proyectoPlanOperativo.getProyecto(), periodosConvenio);
+                itemFlujoEgresosProyecto.calcularTotalEgresosFuente(periodosConvenio.size());
+                //Se cargan los registros correspondientes a los contratos del proyecto
                 for (Contrato contratoProyecto : proyectoPlanOperativo.getContratosProyecto()) {
                     FlujoEgresos itemFlujoEgresosContrato = new FlujoEgresos();
                     itemFlujoEgresosContrato.setEgresoContrato(true);
-                    itemFlujoEgresosContrato.getItemFlujoEgresos().setStrdescripcion(contratoProyecto.getContrato().getStrnombre());
-                    itemFlujoEgresosContrato.crearEstructuraFlujoEgresosContrato(contratoProyecto.getContrato(), periodosConvenio);
+                    itemFlujoEgresosContrato.getItemFlujoEgresos().setStrdescripcion(contratoProyecto.getStrnombre());
+                    itemFlujoEgresosContrato.setPlanMovimientosProyecto(itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
+                    itemFlujoEgresosContrato.crearEstructuraFlujoEgresosContrato(contratoProyecto, periodosConvenio);
                     flujoEgresosContratos.add(itemFlujoEgresosContrato);
                 }
-                
-            } else {
-                //TODO JHON Verificar este ciclo
+                //Se carga el registro correspondiente a los pagos directos del proyecto
+                itemFlujoEgresosPryDirecto.crearEstructuraFlujoEgresosPryDirecto(periodosConvenio);
+
+                //Se carga el registro correspondiente a los otros pagos del proyecto
+                itemFlujoEgresosPryOtros.crearEstructuraFlujoEgresosPryOtros(periodosConvenio);
+            } else {//Si ya se han establecido las planificaciones de movimientos del proyecto
+                //Se cargan las  planificaciones de contrato, pagos directos y otros pagos para el proyecto
                 for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : planifmovimientoconvenioproyecto) {
+                    planificacionmovimientoproyecto.setPlanificacionmovimientocontratos(new LinkedHashSet(getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioContrato(planificacionmovimientoproyecto.getIdplanificacionmovpry())));
+                    planificacionmovimientoproyecto.setPlanificacionmovimientoprydirectos(new LinkedHashSet(getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioPrydirecto(planificacionmovimientoproyecto.getIdplanificacionmovpry())));
+                    planificacionmovimientoproyecto.setPlanificacionmovimientopryotroses(new LinkedHashSet(getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioPryotros(planificacionmovimientoproyecto.getIdplanificacionmovpry())));
+                }
+                for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : planifmovimientoconvenioproyecto) {
+                    //Se crean nuevas planificaciones de contrato para aquellos sin planificación
                     if (planificacionmovimientoproyecto.getPlanificacionmovimientocontratos().isEmpty()) {
                         for (Contrato contratoProyecto : proyectoPlanOperativo.getContratosProyecto()) {
-                            FlujoEgresos itemFlujoEgresosContrato = new FlujoEgresos();
-                            itemFlujoEgresosContrato.setEgresoContrato(true);
-                            itemFlujoEgresosContrato.getItemFlujoEgresos().setStrdescripcion(contratoProyecto.getContrato().getStrnombre());
-                            itemFlujoEgresosContrato.crearEstructuraFlujoEgresosContrato(contratoProyecto.getContrato(), periodosConvenio);
-                            flujoEgresosContratos.add(itemFlujoEgresosContrato);
+                            Planificacionmovimientocontrato planMovimientoContrato = new Planificacionmovimientocontrato();
+                            planMovimientoContrato.setContrato(contratoProyecto);
+                            planMovimientoContrato.setPlanificacionmovimientoproyecto(planificacionmovimientoproyecto);
+                            planMovimientoContrato.setValor(BigDecimal.ZERO);
+                            planificacionmovimientoproyecto.getPlanificacionmovimientocontratos().add(planMovimientoContrato);
                         }
                     }
+                    //Se crean nuevas planificaciones de pago directo para aquellos sin planificación
+                    if (planificacionmovimientoproyecto.getPlanificacionmovimientoprydirectos().isEmpty()) {
+                        System.out.println("------------------------------------- Pasó por 1");
+                        Planificacionmovimientoprydirecto planMovimientoPryDirecto = new Planificacionmovimientoprydirecto();
+                        planMovimientoPryDirecto.setPlanificacionmovimientoproyecto(planificacionmovimientoproyecto);
+                        planMovimientoPryDirecto.setValor(BigDecimal.ZERO);
+                        planificacionmovimientoproyecto.getPlanificacionmovimientoprydirectos().add(planMovimientoPryDirecto);
+                        System.out.println("------------------------------------- Pasó por 2");
+                    }
+                    //Se crean nuevas planificaciones de otros pagos para aquellos sin planificación
+                    if (planificacionmovimientoproyecto.getPlanificacionmovimientopryotroses().isEmpty()) {
+                        System.out.println("------------------------------------- Pasó por 3");
+                        Planificacionmovimientopryotros planMovimientoPryOtros = new Planificacionmovimientopryotros();
+                        planMovimientoPryOtros.setPlanificacionmovimientoproyecto(planificacionmovimientoproyecto);
+                        planMovimientoPryOtros.setValor(BigDecimal.ZERO);
+                        planificacionmovimientoproyecto.getPlanificacionmovimientopryotroses().add(planMovimientoPryOtros);
+                        System.out.println("------------------------------------- Pasó por 4");
+                    }
                 }
-                itemFlujoEgresos.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
-                itemFlujoEgresos.setProyecto(proyectoPlanOperativo.getProyecto());
-                itemFlujoEgresos.actualizarPlanMovimientosProyecto(periodosConvenio);
-                itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
+                FlujoEgresos itemFlujoEgresosContrato = null;
+                for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : planifmovimientoconvenioproyecto) {
+                    //Se cargan los registros de planificaciones de contrato
+                    for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientocontratos()) {
+                        Planificacionmovimientocontrato planMovimientoContrato = (Planificacionmovimientocontrato) object;
+                        for (FlujoEgresos fe : flujoEgresosContratos) {
+                            if (fe.getContrato().getIntidcontrato() == planMovimientoContrato.getContrato().getIntidcontrato()) {
+                                itemFlujoEgresosContrato = fe;
+                            }
+                        }
+                        if (itemFlujoEgresosContrato == null) {
+                            itemFlujoEgresosContrato = new FlujoEgresos();
+                            itemFlujoEgresosContrato.setContrato(planMovimientoContrato.getContrato());
+                            itemFlujoEgresosContrato.setEgresoContrato(true);
+                            itemFlujoEgresosContrato.getItemFlujoEgresos().setStrdescripcion(planMovimientoContrato.getContrato().getStrnombre());
+                            flujoEgresosContratos.add(itemFlujoEgresosContrato);
+                        }
+                        itemFlujoEgresosContrato.getPlanMovimientosContrato().add(planMovimientoContrato);
+                    }
+                    
+                    //Se cargan todas las planificaciones de pagos directos en el registro pagos directos
+                    for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientoprydirectos()) {
+                        Planificacionmovimientoprydirecto planMovimientoPryDirecto = (Planificacionmovimientoprydirecto) object;
+                        itemFlujoEgresosPryDirecto.getPlanMovimientosPryDirecto().add(planMovimientoPryDirecto);
+                        System.out.println("------------------------------------- Pasó por 5");
+                    }
+                    
+                    //Se cargan todas las planificaciones de otros pagos en el registro de otros pagos
+                    for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientopryotroses()) {
+                        Planificacionmovimientopryotros planMovimientoPryOtros = (Planificacionmovimientopryotros) object;
+                        itemFlujoEgresosPryOtros.getPlanMovimientosPryOtros().add(planMovimientoPryOtros);
+                        System.out.println("------------------------------------- Pasó por 6");
+                    }
+                }
+                itemFlujoEgresosProyecto.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
+                itemFlujoEgresosProyecto.setProyecto(proyectoPlanOperativo.getProyecto());
+                itemFlujoEgresosProyecto.actualizarPlanMovimientosProyecto(periodosConvenio);
+                itemFlujoEgresosProyecto.calcularTotalEgresosFuente(periodosConvenio.size());
             }
-            flujoEgresos.add(itemFlujoEgresos);
+            flujoEgresos.add(itemFlujoEgresosProyecto);
             flujoEgresos.addAll(flujoEgresosContratos);
+            flujoEgresos.add(itemFlujoEgresosPryDirecto);
+            flujoEgresos.add(itemFlujoEgresosPryOtros);
         }
-
         for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
             FlujoEgresos flujoEgresosEntidad = new FlujoEgresos();
 
@@ -589,7 +701,6 @@ public class FlujoCaja implements Serializable {
      * de egresos.
      */
     public void refrescarTotalesEgresos() {
-        //TODO JHON Ajustar con el cálculo de totales de contrato
         int iterador;
         iniciarTotalesEgresosPeriodo();
         totalEgresos = 0;
@@ -609,7 +720,7 @@ public class FlujoCaja implements Serializable {
                     if (flujoEgresosRefrescar.getItemFlujoEgresos().getBooltienegmf()) {
                         acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
                     }
-                } 
+                }
                 iterador++;
             }
         }
@@ -682,7 +793,7 @@ public class FlujoCaja implements Serializable {
                 if (flujoIngresosValidar.totalIngresosFuente.doubleValue() > flujoIngresosValidar.fuenteRecursosConvenio.getValoraportado().doubleValue()) {
                     cumpleRequisitos = false;
                     FacesUtils.addErrorMessage(bundle.getString("errorIngresosMayorAAportes"));
-                    nuevoContratoBasico.setMensajePlanOperativo(false,true, bundle.getString("errorIngresosMayorAAportes"));
+                    nuevoContratoBasico.setMensajePlanOperativo(false, true, bundle.getString("errorIngresosMayorAAportes"));
                 }
             }
         }
@@ -693,7 +804,7 @@ public class FlujoCaja implements Serializable {
                     cumpleRequisitos = false;
 
                     FacesUtils.addErrorMessage(bundle.getString("errorEgresosMayorAValorProyecto"));
-                    nuevoContratoBasico.setMensajePlanOperativo(false,true,bundle.getString("errorEgresosMayorAValorProyecto"));
+                    nuevoContratoBasico.setMensajePlanOperativo(false, true, bundle.getString("errorEgresosMayorAValorProyecto"));
                 }
             }
         }
@@ -702,7 +813,7 @@ public class FlujoCaja implements Serializable {
             cumpleRequisitos = false;
 
             FacesUtils.addErrorMessage(bundle.getString("errorTotalEgresosMayorATotalIngresos"));
-            nuevoContratoBasico.setMensajePlanOperativo(false,true, bundle.getString("errorTotalEgresosMayorATotalIngresos"));
+            nuevoContratoBasico.setMensajePlanOperativo(false, true, bundle.getString("errorTotalEgresosMayorATotalIngresos"));
         }
 
         return cumpleRequisitos;
@@ -718,47 +829,59 @@ public class FlujoCaja implements Serializable {
         guardarPeriodosConvenio();
 
         //if (validarFlujoCaja()) {
-            for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
-                flujoIngresosGuardar.refrescarPeriodos(periodosConvenio);
+        for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
+            flujoIngresosGuardar.refrescarPeriodos(periodosConvenio);
 
-                if (flujoIngresosGuardar.ingresoEntidad) {
-                    getSessionBeanCobra().getCobraService().guardarFlujoIngresosConvenioEntidad(flujoIngresosGuardar.planMovimientosConvenioEntidad);
+            if (flujoIngresosGuardar.ingresoEntidad) {
+                getSessionBeanCobra().getCobraService().guardarFlujoIngresosConvenioEntidad(flujoIngresosGuardar.planMovimientosConvenioEntidad);
 
-                    if (flujoIngresosGuardar.movimientosConvenioEntidadEliminados.size() > 0) {
-                        getSessionBeanCobra().getCobraService().borrarIngresosConvenioEntidad(flujoIngresosGuardar.movimientosConvenioEntidadEliminados);
-                    }
-                } else {
-                    getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoIngresosGuardar.planMovimientosIngresosConvenio);
+                if (flujoIngresosGuardar.movimientosConvenioEntidadEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarIngresosConvenioEntidad(flujoIngresosGuardar.movimientosConvenioEntidadEliminados);
+                }
+            } else {
+                getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoIngresosGuardar.planMovimientosIngresosConvenio);
 
-                    if (flujoIngresosGuardar.movimientosIngresosConvenioEliminados.size() > 0) {
-                        getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoIngresosGuardar.movimientosIngresosConvenioEliminados);
-                    }
+                if (flujoIngresosGuardar.movimientosIngresosConvenioEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoIngresosGuardar.movimientosIngresosConvenioEliminados);
                 }
             }
+        }
 
-            for (FlujoEgresos flujoEgresosGuardar : flujoEgresos) {
-                flujoEgresosGuardar.refrescarPeriodos(periodosConvenio);
+        for (FlujoEgresos flujoEgresosGuardar : flujoEgresos) {
+            flujoEgresosGuardar.refrescarPeriodos(periodosConvenio);
 
-                if (flujoEgresosGuardar.egresoProyecto) {
-                    getSessionBeanCobra().getCobraService().guardarFlujoEgresosProyecto(flujoEgresosGuardar.planMovimientosProyecto);
+            if (flujoEgresosGuardar.egresoProyecto) {
+                getSessionBeanCobra().getCobraService().guardarFlujoEgresosProyecto(flujoEgresosGuardar.planMovimientosProyecto);
 
-                    if (flujoEgresosGuardar.movimientosProyectoEliminados.size() > 0) {
-                        getSessionBeanCobra().getCobraService().borrarEgresosProyecto(flujoEgresosGuardar.movimientosProyectoEliminados);
-                    }
-                } else if (flujoEgresosGuardar.egresoOtros) {
-                    getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoEgresosGuardar.planMovimientosEgresosConvenio);
+                if (flujoEgresosGuardar.movimientosProyectoEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarEgresosProyecto(flujoEgresosGuardar.movimientosProyectoEliminados);
+                }
+            } else if (flujoEgresosGuardar.egresoOtros) {
+                getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoEgresosGuardar.planMovimientosEgresosConvenio);
 
-                    if (flujoEgresosGuardar.movimientosEgresosConvenioEliminados.size() > 0) {
-                        getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoEgresosGuardar.movimientosEgresosConvenioEliminados);
-                    }
-                } else if (flujoEgresosGuardar.egresoContrato) {
-                    getSessionBeanCobra().getCobraService().guardarFlujoEgresosContrato(flujoEgresosGuardar.planMovimientosContrato);
+                if (flujoEgresosGuardar.movimientosEgresosConvenioEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoEgresosGuardar.movimientosEgresosConvenioEliminados);
+                }
+            } else if (flujoEgresosGuardar.egresoContrato) {
+                getSessionBeanCobra().getCobraService().guardarFlujoEgresosContrato(flujoEgresosGuardar.planMovimientosContrato);
 
-                    if (flujoEgresosGuardar.planMovimientosContratoEliminados.size() > 0) {
-                        getSessionBeanCobra().getCobraService().borrarEgresosContrato(flujoEgresosGuardar.planMovimientosContratoEliminados);
-                    }
+                if (flujoEgresosGuardar.planMovimientosContratoEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarEgresosContrato(flujoEgresosGuardar.planMovimientosContratoEliminados);
+                }
+            } else if (flujoEgresosGuardar.egresoPryDirecto) {
+                getSessionBeanCobra().getCobraService().guardarFlujoEgresosPrydirecto(flujoEgresosGuardar.planMovimientosPryDirecto);
+
+                if (flujoEgresosGuardar.planMovimientosPryDirectoEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarEgresosPrydirecto(flujoEgresosGuardar.planMovimientosPryDirectoEliminados);
+                }
+            } else if (flujoEgresosGuardar.egresoPryOtros) {
+                getSessionBeanCobra().getCobraService().guardarFlujoEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtros);
+
+                if (flujoEgresosGuardar.planMovimientosPryOtrosEliminados.size() > 0) {
+                    getSessionBeanCobra().getCobraService().borrarEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtrosEliminados);
                 }
             }
+        }
         //}
     }
 
@@ -936,7 +1059,7 @@ public class FlujoCaja implements Serializable {
     private String etiquetarPeriodo(Calendar fechaReferencia) {
         String etiquetaPeriodo;
 
-        etiquetaPeriodo = (fechaReferencia.get(Calendar.MONTH) + 1) + " / " + fechaReferencia.get(Calendar.YEAR);
+        etiquetaPeriodo = (new SimpleDateFormat("MMM").format(fechaReferencia.getTime())) + "-" + fechaReferencia.get(Calendar.YEAR);
 
         return etiquetaPeriodo;
     }
@@ -959,5 +1082,76 @@ public class FlujoCaja implements Serializable {
                 - ((fechaInicial.get(Calendar.YEAR) * 12) + (fechaInicial.get(Calendar.MONTH) + 1));
 
         return (meses + 1);
+    }
+
+    /**
+     * Metodo ejecutado cada vez que se modifica el valor de la planificación de
+     * un contrato del flujo de caja
+     */
+    public void calcularTotalesFlujoEgreso() {
+        FlujoEgresos flujoEgresosContrato = (FlujoEgresos) extendedDataTableEgresos.getRowData();
+
+        int iterador;
+        iniciarTotalesEgresosPeriodo();
+        totalEgresos = 0;
+
+        for (FlujoEgresos flujoEgresosProyecto : flujoEgresos) {
+            if (flujoEgresosProyecto.isEgresoProyecto()) {
+                for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : flujoEgresosProyecto.planMovimientosProyecto) {
+                    planificacionmovimientoproyecto.setValor(BigDecimal.ZERO);
+                }
+            }
+        }
+
+        for (FlujoEgresos flujoEgresosRefrescar : flujoEgresos) {
+            System.out.println("flujoEgresosRefrescar = " + flujoEgresosRefrescar.getDescripcionFuenteEgreso());
+            System.out.println("flujoEgresosRefrescar.isEgresoPryDirecto = " + flujoEgresosRefrescar.isEgresoPryDirecto());
+            System.out.println("flujoEgresosRefrescar.isEgresoPryOtros = " + flujoEgresosRefrescar.isEgresoPryOtros());
+            flujoEgresosRefrescar.calcularTotalEgresosFuente(periodosConvenio.size());
+            totalEgresos += flujoEgresosRefrescar.getTotalEgresosFuente().doubleValue();
+
+            iterador = 0;
+            while (iterador < periodosConvenio.size()) {
+                if (flujoEgresosRefrescar.isEgresoProyecto()) {
+//                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
+//                    acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
+                } else if (flujoEgresosRefrescar.isEgresoOtros()) {
+                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
+
+                    if (flujoEgresosRefrescar.getItemFlujoEgresos().getBooltienegmf()) {
+                        acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
+                    }
+                } else if (flujoEgresosRefrescar.isEgresoContrato()) {
+                    //TODO JHON Crear un método que me localice el la planificación de proyecto correspondiete al contrato y le asigne el valor acumulado
+                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador).getValor().doubleValue();
+                    System.out.println("totalEgresosPeriodo[iterador] = " + totalEgresosPeriodo[iterador]);
+                    if (totalEgresosPeriodo[iterador] > flujoEgresosRefrescar.getContrato().getNumvlrcontrato().doubleValue()) {
+                        FacesUtils.addErrorMessage("El valor planificado no puede ser mayor al valor total del contrato");
+                    }
+                    acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador).getValor().doubleValue();
+                    Planificacionmovimientocontrato planificacionmovimientocontrato = flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador);
+                    for (FlujoEgresos flujoEgresosProyecto : flujoEgresos) {
+                        if (flujoEgresosProyecto.isEgresoProyecto()) {
+                            if (flujoEgresosProyecto.planMovimientosProyecto.get(iterador).getIdplanificacionmovpry() == planificacionmovimientocontrato.getPlanificacionmovimientoproyecto().getIdplanificacionmovpry()) {
+                                BigDecimal valorProyecto = flujoEgresosProyecto.planMovimientosProyecto.get(iterador).getValor();
+                                flujoEgresosProyecto.planMovimientosProyecto.get(iterador).setValor(valorProyecto.add(planificacionmovimientocontrato.getValor()));
+                            }
+                        }
+                    }
+                }
+                iterador++;
+            }
+        }
+
+        calcularGMF();
+
+        totalEgresosPeriodoAcumulativo[0] += totalEgresosPeriodo[0];
+        iterador = 1;
+
+        while (iterador < periodosConvenio.size()) {
+            totalEgresosPeriodoAcumulativo[iterador] += (totalEgresosPeriodoAcumulativo[iterador - 1] + totalEgresosPeriodo[iterador]);
+
+            iterador++;
+        }
     }
 }

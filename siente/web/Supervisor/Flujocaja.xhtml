@@ -61,7 +61,7 @@
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
 
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorIngreso}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="${fuenteIngresos.planMovimientosIngresosConvenio[columna].valor}"
@@ -123,7 +123,7 @@
 
         <br />
         <rich:extendedDataTable id="extendedDataTableEgresos" value="#{PlanOperativo.flujoEgresos}" var="fuenteEgresos"
-                                frozenColumns="4" style="width: 100%;">
+                                binding="#{PlanOperativo.extendedDataTableEgresos}" frozenColumns="4" style="width: 100%;">
             <rich:column width="200px">
                 <f:facet name="header">
                     <h:outputLabel value="Fuente egresos" />
@@ -157,7 +157,7 @@
                     <h:outputLabel value="Valor total del proyecto" />
                 </f:facet>
 
-                <h:outputText id="hot-recursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}">
+                <h:outputText id="hot-recursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}"  rendered="#{fuenteEgresos.egresoProyecto}">
                     <f:convertNumber currencySymbol="$" type="currency" />
                 </h:outputText>
             </rich:column>
@@ -167,7 +167,19 @@
                     <h:outputLabel value="Con cargo al convenio" />
                 </f:facet>
 
-                <h:outputText id="hot-cargoconvenio" value="#{fuenteEgresos.proyecto.numvaltotobra}">
+                <h:outputText id="hot-cargoconvenio" value="#{fuenteEgresos.proyecto.numvaltotobra}" rendered="#{fuenteEgresos.egresoProyecto}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
+                
+                <h:outputText id="hot-numvlrcontrato" value="#{fuenteEgresos.contrato.numvlrcontrato}" rendered="#{fuenteEgresos.egresoContrato}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
+                
+                <h:outputText id="hot-numvlrprydirecto" value="#{fuenteEgresos.totalEsperadoEgresosFuente}" rendered="#{fuenteEgresos.egresoPryDirecto}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
+                
+                <h:outputText id="hot-numvlrpryotros" value="#{fuenteEgresos.totalEsperadoEgresosFuente}" rendered="#{fuenteEgresos.egresoPryOtros}">
                     <f:convertNumber currencySymbol="$" type="currency" />
                 </h:outputText>
             </rich:column>
@@ -180,13 +192,17 @@
                     </f:facet>                   
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;"
+                                 rendered="false" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
 
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
                     </h:inputText>
+                    <h:outputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
+                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosContrato[columna].valor}" 
                                  rendered="#{fuenteEgresos.egresoContrato}" style="text-align: right; width: 100%;"
@@ -194,7 +210,25 @@
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
 
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                    </h:inputText>
+                    
+                    <h:inputText value="#{fuenteEgresos.planMovimientosPryDirecto[columna].valor}" 
+                                 rendered="#{fuenteEgresos.egresoPryDirecto}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;"
+                                 disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
+                        <f:validateDoubleRange minimum="0" />
+
+                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                    </h:inputText>
+                    
+                    <h:inputText value="#{fuenteEgresos.planMovimientosPryOtros[columna].valor}" 
+                                 rendered="#{fuenteEgresos.egresoPryOtros}" style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;"
+                                 disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
+                        <f:validateDoubleRange minimum="0" />
+
+                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
