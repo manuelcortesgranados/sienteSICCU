@@ -767,6 +767,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         service.setLog("predecesor anterior:" + store.get(event.getEditCell().getRow()).getPredecesor(), null);
                         actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getPredecesor(), store.get(event.getEditCell().getRow()).getDuration());
                     } else {
+                        event.setCancelled(true);
                         alertaMensajes("Esta Actividad no se puede editar");
                     }
                 }
@@ -1390,6 +1391,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public void alertaMensajes(String mensaje) {
         AlertMessageBox alerta = new AlertMessageBox("Alerta", mensaje);
+        alerta.setModal(true);
         alerta.show();
 
     }
