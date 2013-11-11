@@ -12,7 +12,8 @@
     <h:panelGroup id="formFlujoCaja" layout="block" styleClass="ikont-rp-fc"> 
 
         <rich:extendedDataTable id="extendedDataTableIngresos" value="#{PlanOperativo.flujoIngresos}"
-                                var="fuenteIngresos" frozenColumns="3" style="width: 100%;">
+                                var="fuenteIngresos" frozenColumns="3" style="width: 100%;"
+                                binding="#{PlanOperativo.tablaFuentesIngresos}">
             <rich:column width="300px">
                 <f:facet name="header">
                     <h:outputLabel value="Recursos que ingresas a la cuenta del convenio" />
@@ -61,6 +62,7 @@
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
 
+                        <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorIngreso}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
