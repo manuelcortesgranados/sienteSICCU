@@ -7,10 +7,12 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.DependencyType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.dto.ActividadObraDTO;
 import com.sencha.gxt.data.shared.ListStore;
@@ -721,4 +723,50 @@ public class GanttDatos {
 
      }
 
+     public static void guardarBorradorConvenio(final ContratoDTO convenio,final  CobraGwtServiceAbleAsync service, Gantt<ActividadobraDTO, DependenciaDTO> gantt)
+    {
+        service.setContratoDto(estructurarDatosConvenio(convenio, gantt.getTreeStore(), service, gantt.getDependencyStore()), new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                service.setGuardarconvenio(1, new AsyncCallback<Boolean>() {
+                                    @Override
+                                    public void onFailure(Throwable caught) {
+                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Boolean result) {
+                                        com.google.gwt.user.client.Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+        
+    }
+     
+    public static String retornarNuevoContrato() {
+
+        return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
+
+    }
+
+    public static String retornarConfiguracionPagina() {
+        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
+    } 
+     
 }

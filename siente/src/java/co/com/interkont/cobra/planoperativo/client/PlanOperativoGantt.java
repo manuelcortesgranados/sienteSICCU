@@ -260,8 +260,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
-        //config.taskDnDEnabled = false;
-        config.taskDnDEnabled = !isModolectura();       
+        config.taskDnDEnabled = false;
+        //config.taskDnDEnabled = !isModolectura();       
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -321,7 +321,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
                         service.setLog("sali deliminar proyecto 3", null);
-
+                        GanttDatos.guardarBorradorConvenio(convenioDTO, service, gantt);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
                         d.show();

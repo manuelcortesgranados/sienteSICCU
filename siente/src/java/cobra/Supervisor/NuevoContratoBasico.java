@@ -7117,6 +7117,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (!getSessionBeanCobra().getCobraGwtService().isElimino()) {
                     mapaReembolsoConvenio.clear();
                 }
+                lstActividadesEliminar.clear();
                 cargarActividadesEliminar(activi);
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
@@ -7719,7 +7720,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             lstactguardar.get(0).setContrato(getContrato());
 
             getSessionBeanCobra().getCobraService().guardarActividadObra(lstactguardar);
-        }
+            }    
 
         if (!getSessionBeanCobra().isConsulteContrato()) {
             if (getSessionBeanCobra().getCobraGwtService().isElimino()) {

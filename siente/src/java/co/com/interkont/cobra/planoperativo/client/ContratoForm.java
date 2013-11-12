@@ -360,6 +360,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         modalContrato.hide();
                         crearTareaContrato();
                         gantt.getGanttPanel().runCascadeChanges();
+                        GanttDatos.guardarBorradorConvenio(convenioDto, service, gantt);
                     }
                 } else {
                     editarContrato();
@@ -387,7 +388,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         modalContrato.hide();
                         gantt.getGanttPanel().getContainer().refresh();
                         modalContrato.hide();
-
+                        GanttDatos.guardarBorradorConvenio(convenioDto, service, gantt);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
@@ -803,8 +804,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
 
         gantt.getGanttPanel().getContainer().refresh();
-        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);
-
+        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
 
     }
 
