@@ -2721,7 +2721,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("</div>");
-                descripcion.append("<div class=\"tabla content-rigth\">");
+                    descripcion.append("<div class=\"tabla content-rigth\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna\">");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {

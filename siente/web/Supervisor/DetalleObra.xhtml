@@ -193,7 +193,7 @@
                                         </h:panelGrid>
                                     </h:panelGroup>
 
-                                    <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}"  styleClass="content-info-contrato" layout="block">
+                                    <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}"  styleClass="content-info-contrato" layout="block">
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.verconvenios}" rendered="#{!SessionBeanCobra.cobraService.ciu}" immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.obra.contrato.intidcontrato}" />
@@ -207,10 +207,10 @@
 
                                     <h:panelGroup  styleClass="content-info-contrato" layout="block">
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                            <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}"  immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
+                                            <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}"  immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.primerContratoObra.intidcontrato}" />
                                             </h:commandLink>
-                                            <h:commandLink rendered="#{SessionBeanCobra.cobraService.ciu or SessionBeanCobra.usuarioObra.usuLogin=='ciudadano'}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}" />
+                                            <h:commandLink rendered="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
                                                 <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
@@ -409,7 +409,7 @@
                             </h:panelGroup>
                         </rich:collapsiblePanel>
 
-                        <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}">
+                        <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
                             <h:panelGrid columns="3" styleClass="panelcenter">
                                 <h:commandLink id="pdf_infociu2" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="butonreport zoom-pdf" target="_blank" />
                                 <h:commandLink id="excel_infociu2" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="butonreport zoom-excel" target="_blank" />
