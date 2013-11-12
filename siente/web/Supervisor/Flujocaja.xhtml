@@ -61,7 +61,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorIngreso}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -71,7 +71,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
@@ -206,7 +206,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
@@ -221,6 +221,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -230,6 +231,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -239,6 +241,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -249,6 +252,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -266,6 +270,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
