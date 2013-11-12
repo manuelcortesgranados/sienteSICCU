@@ -217,7 +217,7 @@
                     </h:panelGroup>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosContrato[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoContrato}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoContrato and fuenteEgresos.planMovimientosContrato[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
