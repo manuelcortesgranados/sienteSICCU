@@ -226,7 +226,7 @@
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryDirecto[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoPryDirecto}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoPryDirecto and fuenteEgresos.planMovimientosPryDirecto[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
@@ -235,7 +235,7 @@
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryOtros[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoPryOtros}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoPryOtros and fuenteEgresos.planMovimientosPryOtros[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
