@@ -549,8 +549,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         getGantt().addTaskDnDStartHandler(new TaskDnDStartEvent.TaskDnDStartHandler<ActividadobraDTO>() {
             @Override
-            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {
-                getGantt().refresh();
+            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {                
                 service.setLog("acaaaaaaaaaaaaaaaaaaa" + event.getEventModel().getEndDateTime(), null);
             }
         });

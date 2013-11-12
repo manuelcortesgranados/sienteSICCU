@@ -59,7 +59,7 @@
                         <a4j:commandButton value="#{var.flujocaja}"  immediate="true" execute="@this" render="frmpanelgeneral" action="#{PlanOperativo.iniciarFlujoCaja()}">
                             <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="2"/>
                         </a4j:commandButton>                    
-                        <a4j:commandButton value="#{var.reportes}"  render="frmpanelgeneral" immediate="true" execute="@this">
+                        <a4j:commandButton value="#{var.reportes}" action="#{Supervisor$Contrato.guardarBorradorConvenio}"  render="frmpanelgeneral" immediate="true" execute="@this">
                             <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="3"/>
                         </a4j:commandButton>
                     </h:panelGrid>

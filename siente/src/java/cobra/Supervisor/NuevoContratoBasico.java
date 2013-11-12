@@ -2481,12 +2481,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             this.guardarBorradorConvenio();
                         }
                         //listaProyectosConvenio.clear();
-                        getFlujoCaja().getProyectosPlanOperativo().clear();
-                        lstTodasActividades.clear();
-                        System.out.println("getC = " + getContrato().getActividadobras().size());
-                        if (!getContrato().getActividadobras().isEmpty()) {
-                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
-                        }
+                        
+//                        lstTodasActividades.clear();
+//                        System.out.println("getC = " + getContrato().getActividadobras().size());
+//                        if (!getContrato().getActividadobras().isEmpty()) {
+//                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
+//                        }
                         getFlujoCaja().iniciarFlujoCaja();
                     }
                     break;
@@ -7121,7 +7121,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 cargarActividadesEliminar(activi);
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
-
+                
+                       // System.out.println("getC = " + getContrato().getActividadobras().size());
+                        //if (!getContrato().getActividadobras().isEmpty()) {
+                            
+//}
             }
 
         }
@@ -7681,7 +7685,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                                }
 
         }
-
+        
         if (!mapaReembolsoConvenio.isEmpty()) {
             devolverValoresConvenio();
         }
@@ -7720,10 +7724,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             lstactguardar.get(0).setContrato(getContrato());
 
             getSessionBeanCobra().getCobraService().guardarActividadObra(lstactguardar);
+            lstTodasActividades.clear();
+            getFlujoCaja().getProyectosPlanOperativo().clear();
+                cargarActividadesConsultadas( lstactguardar.get(0));
             }    
 
         if (!getSessionBeanCobra().isConsulteContrato()) {
             if (getSessionBeanCobra().getCobraGwtService().isElimino()) {
+                
                 if (!lstActividadesEliminar.isEmpty()) {
                     getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(lstActividadesEliminar);
                     getSessionBeanCobra().getCobraGwtService().setElimino(false);
@@ -7743,6 +7751,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         CasteoGWT.castearSetDependenciasaaeliminar(getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar()));
                 getSessionBeanCobra().getCobraGwtService().setDependenciasEliminar(new LinkedHashSet());
             }
+            
+                        getFlujoCaja().iniciarFlujoCaja();
             if (getFlujoCaja().isFlujoCajaIniciado()) {
                 if (getFlujoCaja().validarFlujoCaja()) {
                     getFlujoCaja().guardarFlujoCaja();
