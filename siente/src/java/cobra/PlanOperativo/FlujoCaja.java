@@ -823,13 +823,18 @@ public class FlujoCaja implements Serializable {
         
         //Se inicializa el consolidado de las cuotas de gerencia
         for (FlujoEgresos flujoEgresosCuotaGerencia : flujoEgresos) {
-            if (flujoEgresosCuotaGerencia.isEgresoOtros() && flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6) {
+            if (
+                    flujoEgresosCuotaGerencia.isEgresoOtros() && ( 
+                        flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6
+                        || flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 4
+                    )
+                    ){
                 for (Planificacionmovconvenio planificacionmovconvenio : flujoEgresosCuotaGerencia.planMovimientosEgresosConvenio) {
                     planificacionmovconvenio.setValor(BigDecimal.ZERO);
                 }
             }
         }
-
+        
         iniciarAcumuladoGMF();
     }
 
