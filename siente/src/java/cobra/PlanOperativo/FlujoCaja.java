@@ -568,9 +568,11 @@ public class FlujoCaja implements Serializable {
                     flujoEgresosContratos.add(itemFlujoEgresosContrato);
                 }
                 //Se carga el registro correspondiente a los pagos directos del proyecto
+                itemFlujoEgresosPryDirecto.setPlanMovimientosProyecto(itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
                 itemFlujoEgresosPryDirecto.crearEstructuraFlujoEgresosPryDirecto(periodosConvenio);
-
+                
                 //Se carga el registro correspondiente a los otros pagos del proyecto
+                itemFlujoEgresosPryOtros.setPlanMovimientosProyecto(itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
                 itemFlujoEgresosPryOtros.crearEstructuraFlujoEgresosPryOtros(periodosConvenio);
             } else {//Si ya se han establecido las planificaciones de movimientos del proyecto
                 //Se cargan las  planificaciones de contrato, pagos directos y otros pagos para el proyecto
