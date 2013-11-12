@@ -202,6 +202,7 @@ public class ModalAddMontos implements IsWidget {
                     obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
                     if (obraFrDto != null) {
                         RelacionobrafuenterecursoscontratoDTO relacionFuenteRecursos = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorRubros.getValue(), entidadSeleccionada, rubro, vigencia, vigenciafuente, rubro.getStrdescripcion());
+                        relacionFuenteRecursos.setValorFormato(GanttDatos.obtenerFormatoNumero(relacionFuenteRecursos.getValor()));
                         String validacionDevuelta = validarFuenteRecurso(relacionFuenteRecursos);
                         if (!validacionDevuelta.equals("La fuente ha sido guardada")) {
                             AlertMessageBox d = new AlertMessageBox("Alerta", validacionDevuelta);

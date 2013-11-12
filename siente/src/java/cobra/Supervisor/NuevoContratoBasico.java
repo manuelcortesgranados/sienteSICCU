@@ -2498,7 +2498,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void guardarBorradorConvenioPO() {
-        this.guardarBorradorConvenio();
+        //this.guardarBorradorConvenio();
         planOperativo();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
