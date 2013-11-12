@@ -131,7 +131,10 @@
                     <h:outputLabel value="Fuente egresos" />
                 </f:facet>
 
-                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" />
+                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.egresoOtros}" />
+                <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%" rendered="#{fuenteEgresos.egresoProyecto or fuenteEgresos.egresoOtros}">
+                    <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" />
+                </h:panelGroup>
 
                 <f:facet name="footer">
                     <h:panelGrid columns="1">
@@ -145,33 +148,34 @@
                 <f:facet name="header">
                     <h:outputLabel value="Contrapartidas" />
                 </f:facet>
-
-                <h:inputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
-                             rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;"
-                             onkeypress="return event.keyCode !== 13;"
-                             disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
-                    <f:validateDoubleRange minimum="0" />
-                </h:inputText>
+                <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                    <h:outputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
+                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
+                </h:panelGroup>
             </rich:column>
 
             <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Valor total del proyecto" />
                 </f:facet>
-
-                <h:outputText id="hot-recursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}"  rendered="#{fuenteEgresos.egresoProyecto}">
-                    <f:convertNumber currencySymbol="$" type="currency" />
-                </h:outputText>
+                <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                    <h:outputText id="hot-recursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}"  rendered="#{fuenteEgresos.egresoProyecto}">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
+                </h:panelGroup>
             </rich:column>
 
             <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Con cargo al convenio" />
                 </f:facet>
-
-                <h:outputText id="hot-cargoconvenio" value="#{fuenteEgresos.proyecto.numvaltotobra}" rendered="#{fuenteEgresos.egresoProyecto}">
-                    <f:convertNumber currencySymbol="$" type="currency" />
-                </h:outputText>
+                <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                    <h:outputText id="hot-cargoconvenio" value="#{fuenteEgresos.proyecto.numvaltotobra}" rendered="#{fuenteEgresos.egresoProyecto}">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
+                </h:panelGroup>
                 
                 <h:outputText id="hot-numvlrcontrato" value="#{fuenteEgresos.contrato.numvlrcontrato}" rendered="#{fuenteEgresos.egresoContrato}">
                     <f:convertNumber currencySymbol="$" type="currency" />
@@ -184,6 +188,10 @@
                 <h:outputText id="hot-numvlrpryotros" value="#{fuenteEgresos.totalEsperadoEgresosFuente}" rendered="#{fuenteEgresos.egresoPryOtros}">
                     <f:convertNumber currencySymbol="$" type="currency" />
                 </h:outputText>
+                
+<!--                <h:outputText id="hot-numvlrcuotagerencia" value="#{fuenteEgresos.fuenteRecursosConvenio.valoraportado}" rendered="#{fuenteEgresos.egresoCuotaGerencia}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>-->
             </rich:column>
 
 
@@ -199,20 +207,22 @@
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
 
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
-                    <h:outputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
+                    <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                        <h:outputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
+                                     rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                        </h:outputText>
+                    </h:panelGroup>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosContrato[columna].valor}" 
                                  rendered="#{fuenteEgresos.egresoContrato}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
-                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <f:param name="columnaEvento" value="#{columna}" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryDirecto[columna].valor}" 
@@ -220,8 +230,8 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
-                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <f:param name="columnaEvento" value="#{columna}" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryOtros[columna].valor}" 
@@ -229,8 +239,8 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
-                        <a4j:ajax event="change" listener="#{PlanOperativo.calcularTotalesFlujoEgreso}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <f:param name="columnaEvento" value="#{columna}" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
@@ -239,15 +249,26 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="hot-totalegresosfuente, extendedDataTableFlujoNeto" />
+                        <f:param name="columnaEvento" value="#{columna}" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
-
-                    <a4j:outputPanel ajaxRendered="true" rendered="#{!fuenteEgresos.egresoProyecto and fuenteEgresos.itemFlujoEgresos.boolcalculado}" style="text-align: right; width: 100%; background-color: lightgrey;">
-                        <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}">
-                            <f:convertNumber currencySymbol="$" type="currency" />
-                        </h:outputText>
-                    </a4j:outputPanel>
+                    <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                        <a4j:outputPanel ajaxRendered="true" rendered="#{fuenteEgresos.egresoOtros and fuenteEgresos.itemFlujoEgresos.boolcalculado}" style="text-align: right; width: 100%;">
+                            <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}">
+                                <f:convertNumber currencySymbol="$" type="currency" />
+                            </h:outputText>
+                        </a4j:outputPanel>
+                    </h:panelGroup>
+                    
+                    <h:inputText value="#{fuenteEgresos.planificacionesmovcuotagerencia[columna].valor}"
+                                 rendered="#{fuenteEgresos.egresoCuotaGerencia}"
+                                 style="text-align: right; width: 100%;"
+                                 onkeypress="return event.keyCode !== 13;"
+                                 disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
+                        <f:validateDoubleRange minimum="0" />
+                        <f:param name="columnaEvento" value="#{columna}" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                    </h:inputText>
 
                     <f:facet name="footer">
                         <h:panelGrid columns="1" style="text-align: right; width: 100%;">
@@ -272,15 +293,14 @@
                     <h:outputLabel value="Total egresos" />
                 </f:facet>
 
-                <h:outputText id="hot-totalegresosfuente" value="#{fuenteEgresos.totalEgresosFuente}" rendered="#{!fuenteEgresos.itemFlujoEgresos.boolcalculado}">
+                <h:outputText value="#{fuenteEgresos.totalEgresosFuente}" rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.egresoOtros}">
                     <f:convertNumber currencySymbol="$" type="currency" />
                 </h:outputText>
-
-                <a4j:outputPanel ajaxRendered="true" rendered="#{!fuenteEgresos.egresoProyecto and fuenteEgresos.itemFlujoEgresos.boolcalculado}">
-                    <h:outputText value="#{fuenteEgresos.totalEgresosFuente}">
+                <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
+                    <h:outputText value="#{fuenteEgresos.totalEgresosFuente}" rendered="#{fuenteEgresos.egresoProyecto or fuenteEgresos.egresoOtros}">
                         <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
-                </a4j:outputPanel>
+                </h:panelGroup>
 
                 <f:facet name="footer">
                     <h:panelGrid columns="1" style="text-align: right; width: 100%; font-weight: bold;">

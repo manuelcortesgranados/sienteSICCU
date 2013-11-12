@@ -1,14 +1,18 @@
 package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
+import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
+import co.com.interkont.cobra.to.Planificacionmovcuotagerencia;
 import co.com.interkont.cobra.to.Planificacionmovimientocontrato;
 import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Planificacionmovimientoprydirecto;
 import co.com.interkont.cobra.to.Planificacionmovimientopryotros;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
+import co.com.interkont.cobra.to.Tercero;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class FlujoEgresos implements Serializable {
     boolean egresoOtros;
     boolean egresoPryDirecto;
     boolean egresoPryOtros;
+    boolean egresoCuotaGerencia;
     List<Planificacionmovimientoproyecto> planMovimientosProyecto;
     List<Planificacionmovconvenio> planMovimientosEgresosConvenio;
     List<Planificacionmovimientoproyecto> movimientosProyectoEliminados;
@@ -43,11 +48,47 @@ public class FlujoEgresos implements Serializable {
     List<Planificacionmovimientoprydirecto> planMovimientosPryDirectoEliminados = new ArrayList<Planificacionmovimientoprydirecto>();
     List<Planificacionmovimientopryotros> planMovimientosPryOtros = new ArrayList<Planificacionmovimientopryotros>();
     List<Planificacionmovimientopryotros> planMovimientosPryOtrosEliminados = new ArrayList<Planificacionmovimientopryotros>();
+    List<Planificacionmovcuotagerencia> planificacionesmovcuotagerencia = new ArrayList<Planificacionmovcuotagerencia>();
+    List<Planificacionmovcuotagerencia> planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
     BigDecimal totalEgresosFuente;
     BigDecimal totalEsperadoEgresosFuente;
     double contrapartida;
     private Contrato contrato;
+    Fuenterecursosconvenio fuenteRecursosConvenio;
+    Tercero entidadAportante;
 
+    public Fuenterecursosconvenio getFuenteRecursosConvenio() {
+        return fuenteRecursosConvenio;
+    }
+
+    public void setFuenteRecursosConvenio(Fuenterecursosconvenio fuenteRecursosConvenio) {
+        this.fuenteRecursosConvenio = fuenteRecursosConvenio;
+    }
+
+    public Tercero getEntidadAportante() {
+        return entidadAportante;
+    }
+
+    public void setEntidadAportante(Tercero entidadAportante) {
+        this.entidadAportante = entidadAportante;
+    }
+    
+    public List<Planificacionmovcuotagerencia> getPlanificacionesmovcuotagerencia() {
+        return planificacionesmovcuotagerencia;
+    }
+
+    public void setPlanificacionesmovcuotagerencia(List<Planificacionmovcuotagerencia> planificacionesmovcuotagerencia) {
+        this.planificacionesmovcuotagerencia = planificacionesmovcuotagerencia;
+    }
+
+    public List<Planificacionmovcuotagerencia> getPlanificacionesmovcuotagerenciaEliminados() {
+        return planificacionesmovcuotagerenciaEliminados;
+    }
+
+    public void setPlanificacionesmovcuotagerenciaEliminados(List<Planificacionmovcuotagerencia> planificacionesmovcuotagerenciaEliminados) {
+        this.planificacionesmovcuotagerenciaEliminados = planificacionesmovcuotagerenciaEliminados;
+    }
+    
     public BigDecimal getTotalEsperadoEgresosFuente() {
         return totalEsperadoEgresosFuente;
     }
@@ -67,6 +108,7 @@ public class FlujoEgresos implements Serializable {
             egresoOtros = false;
             egresoPryDirecto = false;
             egresoPryOtros = false;
+            egresoCuotaGerencia = false;
         }
     }
 
@@ -81,6 +123,7 @@ public class FlujoEgresos implements Serializable {
             egresoOtros = false;
             egresoPryDirecto = false;
             egresoPryOtros = false;
+            egresoCuotaGerencia = false;
         }
     }
 
@@ -95,6 +138,7 @@ public class FlujoEgresos implements Serializable {
             egresoContrato = false;
             egresoPryDirecto = false;
             egresoPryOtros = false;
+            egresoCuotaGerencia = false;
         }
     }
 
@@ -109,6 +153,7 @@ public class FlujoEgresos implements Serializable {
             egresoContrato = false;
             egresoOtros = false;
             egresoPryOtros = false;
+            egresoCuotaGerencia = false;
         }
     }
 
@@ -123,9 +168,25 @@ public class FlujoEgresos implements Serializable {
             egresoContrato = false;
             egresoPryDirecto = false;
             egresoOtros = false;
+            egresoCuotaGerencia = false;
         }
     }
 
+    public boolean isEgresoCuotaGerencia() {
+        return egresoCuotaGerencia;
+    }
+
+    public void setEgresoCuotaGerencia(boolean egresoCuotaGerencia) {
+        this.egresoCuotaGerencia = egresoCuotaGerencia;
+        if (egresoCuotaGerencia) {
+            egresoContrato = false;
+            egresoOtros = false;
+            egresoPryDirecto = false;
+            egresoPryOtros = false;
+            egresoProyecto = false;
+        }
+    }
+    
     public List<Planificacionmovimientoprydirecto> getPlanMovimientosPryDirecto() {
         return planMovimientosPryDirecto;
     }
@@ -376,7 +437,6 @@ public class FlujoEgresos implements Serializable {
         this.planMovimientosEgresosConvenio = new ArrayList<Planificacionmovconvenio>();
         this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.itemFlujoEgresos = itemFlujoEgresos;
-        this.egresoProyecto = false;
 
         for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
             Planificacionmovconvenio planMovimientoEgreso = new Planificacionmovconvenio();
@@ -495,10 +555,11 @@ public class FlujoEgresos implements Serializable {
             } else if (egresoContrato) {
                 totalEgresos += planMovimientosContrato.get(iterador).getValor().doubleValue();
             } else if (egresoPryDirecto) {
-                System.out.println("planMovimientosPryDirecto.size() = " + planMovimientosPryDirecto.size());
                 totalEgresos += planMovimientosPryDirecto.get(iterador).getValor().doubleValue();
             } else if (egresoPryOtros) {
                 totalEgresos += planMovimientosPryOtros.get(iterador).getValor().doubleValue();
+            } else if (egresoCuotaGerencia) {
+                totalEgresos += planificacionesmovcuotagerencia.get(iterador).getValor().doubleValue();
             }
 
             iterador++;
@@ -523,6 +584,77 @@ public class FlujoEgresos implements Serializable {
                 planMovimientosEgresosConvenio.get(iterador).setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
             } 
             iterador++;
+        }
+    }
+    
+    /**
+     * Crear la estructura del flujo de ingresos por entidad.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * ingresos en los periodos del flujo de caja para la entidad aportante.
+     * Este método inicializa el flujo de ingresos de la entidad al no existir
+     * alguno.
+     *
+     * @param fuenterecursosconvenio Fuente de recursos del convenio.
+     * @param entidadAportante Tercero de la entidad aportante.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     */
+    public void crearEstructuraFlujoEgresosEntidad(Fuenterecursosconvenio fuenterecursosconvenio, Tercero entidadAportante, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
+        this.planificacionesmovcuotagerencia = new ArrayList<Planificacionmovcuotagerencia>();
+        this.planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
+        this.fuenteRecursosConvenio = fuenterecursosconvenio;
+        this.entidadAportante = entidadAportante;
+        this.setEgresoCuotaGerencia(true);
+
+        for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
+            Planificacionmovcuotagerencia planificacionmovcuotagerencia = new Planificacionmovcuotagerencia();
+
+            planificacionmovcuotagerencia.setPeriodoflujocaja(periodoConvenio.getPeriodoflujocaja());
+            planificacionmovcuotagerencia.setFuenterecursosconvenio(fuenterecursosconvenio);
+            planificacionmovcuotagerencia.setValor(BigDecimal.ZERO);
+
+            this.planificacionesmovcuotagerencia.add(planificacionmovcuotagerencia);
+        }
+    }
+    
+    /**
+     * Actualizar la estructura del flujo de ingresos por entidad.
+     *
+     * Con base en una lista de ingresos consultados se actualiza el flujo de
+     * ingresos por entidad.
+     *
+     * @param periodosConvenio Periodos del flujo de caja.
+     * @param fuenteRecursosConvenio Fuente de recursos del convenio.
+     */
+    public void actualizarPlanMovimientosEntidad(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Fuenterecursosconvenio fuenteRecursosConvenio) {
+        this.planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
+        this.fuenteRecursosConvenio = fuenteRecursosConvenio;
+        this.setEgresoCuotaGerencia(true);
+        int iterador;
+
+        if (this.planificacionesmovcuotagerencia.size() < periodosConvenio.size()) {
+            iterador = this.planificacionesmovcuotagerencia.size();
+
+
+            while (iterador < periodosConvenio.size()) {
+                Planificacionmovcuotagerencia planificacionmovcuotagerencia = new Planificacionmovcuotagerencia();
+
+                planificacionmovcuotagerencia.setFuenterecursosconvenio(fuenteRecursosConvenio);
+                planificacionmovcuotagerencia.setPeriodoflujocaja(periodosConvenio.get(iterador).getPeriodoflujocaja());
+                planificacionmovcuotagerencia.setValor(BigDecimal.ZERO);
+
+                this.planificacionesmovcuotagerencia.add(planificacionmovcuotagerencia);
+
+                iterador++;
+            }
+        } else if (this.planificacionesmovcuotagerencia.size() > periodosConvenio.size()) {
+            Planificacionmovcuotagerencia planificacionmovcuotagerencia;
+
+            while (periodosConvenio.size() < planificacionesmovcuotagerencia.size()) {
+                planificacionmovcuotagerencia = planificacionesmovcuotagerencia.remove(periodosConvenio.size());
+
+                planificacionesmovcuotagerenciaEliminados.add(planificacionmovcuotagerencia);
+            }
         }
     }
 }
