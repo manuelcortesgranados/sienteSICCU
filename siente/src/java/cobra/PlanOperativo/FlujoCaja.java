@@ -347,7 +347,6 @@ public class FlujoCaja implements Serializable {
         this.totalIngresos = 0;
         planifmovimientoconvenioentidad = new ArrayList<Planificacionmovconvenioentidad>();
         planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
-
         itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
 
         for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getRecursosconvenio().getLstFuentesRecursos()) {
@@ -441,12 +440,12 @@ public class FlujoCaja implements Serializable {
     }
 
     /**
-     * Cambió valor planificado de un egreso de contrato. Valida que el nuevo
+     * Cambió valor planificado de un egreso. Valida que el nuevo
      * valor diligenciado no exceda el valor disponible por distribuir del
-     * contrato. En caso de superarlo se ajusta el valor diligenciado al total
+     * egreso. En caso de superarlo se ajusta el valor diligenciado al total
      * disponible y se informa del error.
      */
-    public void cambioValorEgresoContrato() {
+    public void cambioValorEgreso() {
         FlujoEgresos flujoEgresosDetallePry = (FlujoEgresos) extendedDataTableEgresos.getRowData();
         BigDecimal disponibleInicial = BigDecimal.ZERO;
         BigDecimal disponible = BigDecimal.ZERO;
@@ -495,8 +494,39 @@ public class FlujoCaja implements Serializable {
                 flujoEgresosDetallePry.planMovimientosPryOtros.get(columnaEvento).setValor(disponibleInicial.add(disponible));
             }
         }
+        
+        if (flujoEgresosDetallePry.isEgresoCuotaGerencia()) {
+            disponibleInicial = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+            flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+            disponible = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ajusta el valor al disponible.");
+                FacesUtils.addInfoMessage("Se ajusta el valor al disponible.");
+                flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).setValor(disponibleInicial);
+                flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+                disponible = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+                flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).setValor(disponibleInicial.add(disponible));
+            }
+        }
 
         calcularTotalesFlujoEgreso();
+    }
+    
+    /**
+     * Calcula el valor total planificado de la cuota de gerencia
+     * @return valor total planificado de la cuota de gerencia
+     */
+    public BigDecimal getTotalPlaniCuotaGerencia() {
+        BigDecimal totalPlaniCuotaGerencia = BigDecimal.ZERO;
+        for (FlujoEgresos flujoEgreso : flujoEgresos) {
+            if (flujoEgreso.isEgresoCuotaGerencia()) {
+                for (Planificacionmovcuotagerencia planificacionmovcuotagerencia : flujoEgreso.getPlanificacionesmovcuotagerencia()) {
+                   totalPlaniCuotaGerencia =  totalPlaniCuotaGerencia.add(planificacionmovcuotagerencia.getValor());
+                }
+            }
+        }
+        return totalPlaniCuotaGerencia;
     }
 
     /**
@@ -766,29 +796,10 @@ public class FlujoCaja implements Serializable {
 
                     flujoEgresos.add(flujoEgresosCuotaGerencia);
                 }
-
-                for (Itemflujocaja itemFlujoIngresos : itemsFlujoIngresos) {
-                    FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
-
-                    planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoIngresos.getIditemflujocaja(), convenio.getIntidcontrato());
-
-                    if (planifmovimientoconvenio.isEmpty()) {
-                        flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosConvenio, convenio);
-                        flujoIngresosEntidad.calcularTotalIngresosFuente(periodosConvenio.size());
-                    } else {
-                        flujoIngresosEntidad.setPlanMovimientosIngresosConvenio(planifmovimientoconvenio);
-                        flujoIngresosEntidad.setItemFlujoIngresos(itemFlujoIngresos);
-                        flujoIngresosEntidad.actualizarPlanMovimientosIngresosConvenio(periodosConvenio, convenio);
-                        flujoIngresosEntidad.calcularTotalIngresosFuente(periodosConvenio.size());
-                    }
-
-                    flujoIngresos.add(flujoIngresosEntidad);
-                }
             }
         }
 
         if (guardarPlanificacionInicial) {
-            System.out.println("guardarFlujoCaja");
             guardarFlujoCaja();
         }
     }
@@ -808,6 +819,15 @@ public class FlujoCaja implements Serializable {
             totalEgresosPeriodo[iterador] = 0;
 
             iterador++;
+        }
+        
+        //Se inicializa el consolidado de las cuotas de gerencia
+        for (FlujoEgresos flujoEgresosCuotaGerencia : flujoEgresos) {
+            if (flujoEgresosCuotaGerencia.isEgresoOtros() && flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6) {
+                for (Planificacionmovconvenio planificacionmovconvenio : flujoEgresosCuotaGerencia.planMovimientosEgresosConvenio) {
+                    planificacionmovconvenio.setValor(BigDecimal.ZERO);
+                }
+            }
         }
 
         iniciarAcumuladoGMF();
@@ -1264,12 +1284,15 @@ public class FlujoCaja implements Serializable {
             while (iterador < periodosConvenio.size()) {
                 if (flujoEgresosRefrescar.isEgresoProyecto()) {
 //                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
-                } else if (flujoEgresosRefrescar.isEgresoOtros()) {
+                    /**
+                     * Se adiciona al total del periodo el valor de las planificaciones de: 
+                     * "Pagos estimados con cargo directo al convenio" (3)
+                     * "Otros egresos" (5)
+                     */
+                } else if (flujoEgresosRefrescar.isEgresoOtros() && (flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == 3 || flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == 5)) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
-                    System.out.println("totalEgresosPeriodo[" + iterador + "] = " + totalEgresosPeriodo[iterador]);
                 } else if (flujoEgresosRefrescar.isEgresoContrato()) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador).getValor().doubleValue();
-                    System.out.println("totalEgresosPeriodo[" + iterador + "] = " + totalEgresosPeriodo[iterador]);
                     Planificacionmovimientocontrato planificacionmovimientocontrato = flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador);
                     for (FlujoEgresos flujoEgresosProyecto : flujoEgresos) {
                         if (flujoEgresosProyecto.isEgresoProyecto()) {
@@ -1281,7 +1304,6 @@ public class FlujoCaja implements Serializable {
                     }
                 } else if (flujoEgresosRefrescar.isEgresoPryDirecto()) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosPryDirecto().get(iterador).getValor().doubleValue();
-                    System.out.println("totalEgresosPeriodo[" + iterador + "] = " + totalEgresosPeriodo[iterador]);
                     Planificacionmovimientoprydirecto planificacionmovimientoprydirecto = flujoEgresosRefrescar.getPlanMovimientosPryDirecto().get(iterador);
                     for (FlujoEgresos flujoEgresosProyecto : flujoEgresos) {
                         if (flujoEgresosProyecto.isEgresoProyecto()) {
@@ -1304,7 +1326,6 @@ public class FlujoCaja implements Serializable {
                     }
                 } else if (flujoEgresosRefrescar.isEgresoCuotaGerencia()) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanificacionesmovcuotagerencia().get(iterador).getValor().doubleValue();
-                    System.out.println("totalEgresosPeriodo[" + iterador + "] = " + totalEgresosPeriodo[iterador]);
                     Planificacionmovcuotagerencia planificacionmovcuotagerencia = flujoEgresosRefrescar.getPlanificacionesmovcuotagerencia().get(iterador);
                     for (FlujoEgresos flujoEgresosCuotaGerencia : flujoEgresos) {
                         if (flujoEgresosCuotaGerencia.isEgresoOtros() && flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6) {

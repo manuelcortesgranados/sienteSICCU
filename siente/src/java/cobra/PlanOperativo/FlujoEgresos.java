@@ -371,6 +371,26 @@ public class FlujoEgresos implements Serializable {
             planMovimientoContrato.setPlanificacionmovimientoproyecto(planMovimientosProyecto.get(numPeriodoFlujoEgresos));
             planMovimientoContrato.setContrato(contrato);
             planMovimientoContrato.setValor(BigDecimal.ZERO);
+//            System.out.println("periodoConvenio.getPeriodoflujocaja().getFechainicio() = " + periodoConvenio.getPeriodoflujocaja().getFechainicio());
+//            System.out.println("contrato.getDatefechaini() = " + contrato.getDatefechaini());
+//            System.out.println("periodoConvenio.getPeriodoflujocaja().getFechafin() = " + periodoConvenio.getPeriodoflujocaja().getFechafin());
+//            System.out.println("contrato.getDatefechaini() = " + contrato.getDatefechaini());
+//            System.out.println("periodoConvenio.getPeriodoflujocaja().getFechainicio() = " + periodoConvenio.getPeriodoflujocaja().getFechainicio());
+//            System.out.println("contrato.getDatefechafin() = " + contrato.getDatefechafin());
+//            System.out.println("periodoConvenio.getPeriodoflujocaja().getFechafin() = " + periodoConvenio.getPeriodoflujocaja().getFechafin());
+//            System.out.println("contrato.getDatefechafin() = " + contrato.getDatefechafin());
+            if(
+                    periodoConvenio.getPeriodoflujocaja().getFechainicio().before(contrato.getDatefechaini())
+                    && periodoConvenio.getPeriodoflujocaja().getFechafin().before(contrato.getDatefechaini())
+                    && periodoConvenio.getPeriodoflujocaja().getFechainicio().after(contrato.getDatefechafin())
+                    && periodoConvenio.getPeriodoflujocaja().getFechafin().after(contrato.getDatefechafin())
+                    ) {
+//                System.out.println("true");
+                planMovimientoContrato.setActivo(false);
+            } else {
+//                System.out.println("false");
+                planMovimientoContrato.setActivo(true);
+            }
             planMovimientosContrato.add(planMovimientoContrato);
             numPeriodoFlujoEgresos++;
         }
