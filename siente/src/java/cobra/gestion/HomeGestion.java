@@ -618,7 +618,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     protected AdministrarObraNew getAdministrarObraNew() {
-        System.out.println("que miercoles = ");
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
 
@@ -1829,7 +1828,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return bol;
     }
 
-    public String primeroListProyectos() {
+    public String primeroListProyectos() {       
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
@@ -2722,7 +2721,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("</div>");
-                descripcion.append("<div class=\"tabla content-rigth\">");
+                    descripcion.append("<div class=\"tabla content-rigth\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna\">");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
