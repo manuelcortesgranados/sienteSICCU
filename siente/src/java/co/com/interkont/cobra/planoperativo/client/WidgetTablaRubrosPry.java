@@ -3,6 +3,7 @@ package co.com.interkont.cobra.planoperativo.client;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
@@ -31,11 +32,11 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
-import java.math.BigDecimal;
 import java.util.Iterator;
+import java.util.Set;
 
 public class WidgetTablaRubrosPry implements IsWidget {
-
+    
     protected ObraDTO obraDto;
     protected ActividadobraDTO actividadObraPadre;
     protected ActividadobraDTO actividadObraEditar;
@@ -53,7 +54,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         this.editar = editar;
         this.actividadObraEditar = actividadObraEditar;
     }
-
+    
     public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
         return store;
     }
@@ -64,54 +65,55 @@ public class WidgetTablaRubrosPry implements IsWidget {
     public void setStore(ListStore<ObrafuenterecursosconveniosDTO> store) {
         this.store = store;
     }
-
+    
     interface PlaceProperties extends PropertyAccess<ObrafuenterecursosconveniosDTO> {
-
+        
         @Path("idobrafuenterecursos")
         ModelKeyProvider<ObrafuenterecursosconveniosDTO> key();
-
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, Integer> idobrafuenterecursos();
-
-        ValueProvider<ObrafuenterecursosconveniosDTO, BigDecimal> valor();
-
+        
+        ValueProvider<ObrafuenterecursosconveniosDTO, String> valorFormato();
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, String> rubro();
-
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, String> nombreEntidad();
-
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, String> eliminar();
-
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, String> descripcionaporte();
-
+        
         ValueProvider<ObrafuenterecursosconveniosDTO, Integer> vigencia();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
     private ListStore<ObrafuenterecursosconveniosDTO> store;
-
+    
     @Override
     public Widget asWidget() {
-
+        
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> nameColumn = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.nombreEntidad(), 120, "Entidad");
+        
+        ColumnConfig<ObrafuenterecursosconveniosDTO, String> nameColumn = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.nombreEntidad(), 278, "Entidad");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
-
+        
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> rubro = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.rubro(), 100, "Rubro");
         rubro.setColumnTextStyle(textStyles);
-
+        
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> tipoAporte = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.descripcionaporte(), 75, "Tipo aporte");
         tipoAporte.setColumnTextStyle(textStyles);
-
+        
         ColumnConfig<ObrafuenterecursosconveniosDTO, Integer> vigencia = new ColumnConfig<ObrafuenterecursosconveniosDTO, Integer>(properties.vigencia(), 55, "Vigencia");
         vigencia.setColumnTextStyle(textStyles);
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, BigDecimal> valor = new ColumnConfig<ObrafuenterecursosconveniosDTO, BigDecimal>(properties.valor(), 85, "Valor");
-        tipoAporte.setColumnTextStyle(textStyles);
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> eliminar = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.eliminar(), 50, "Eliminar");
+        
+        ColumnConfig<ObrafuenterecursosconveniosDTO, String> valor = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.valorFormato(), 85, "Valor");
+        valor.setColumnTextStyle(textStyles);
+        
+        
+        ColumnConfig<ObrafuenterecursosconveniosDTO, String> eliminar = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.eliminar(), 80, "Eliminar");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
-
+        
         TextButtonCell button = new TextButtonCell();
         button.addSelectHandler(new SelectHandler() {
             @Override
@@ -134,12 +136,12 @@ public class WidgetTablaRubrosPry implements IsWidget {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
                         alerta.show();
                     }
-
+                    
                 }
             }
         });
         eliminar.setCell(button);
-
+        
         List<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>> l = new ArrayList<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>>();
         l.add(nameColumn);
         l.add(rubro);
@@ -147,32 +149,38 @@ public class WidgetTablaRubrosPry implements IsWidget {
         l.add(valor);
         l.add(vigencia);
         l.add(eliminar);
-
+        
         ColumnModel<ObrafuenterecursosconveniosDTO> cm = new ColumnModel<ObrafuenterecursosconveniosDTO>(l);
         setStore(new ListStore<ObrafuenterecursosconveniosDTO>(properties.key()));
-
-        List<ObrafuenterecursosconveniosDTO> plants = new ArrayList<ObrafuenterecursosconveniosDTO>(obraDto.getObrafuenterecursosconvenioses());
+        
+        List<ObrafuenterecursosconveniosDTO> plants = new ArrayList<ObrafuenterecursosconveniosDTO>(agregarValorDisponibleConFormato(obraDto.getObrafuenterecursosconvenioses()));
         getStore().addAll(plants);
-
+        
         final Grid<ObrafuenterecursosconveniosDTO> grid = new Grid<ObrafuenterecursosconveniosDTO>(getStore(), cm);
         grid.setBorders(true);
-        grid.getView().setAutoExpandColumn(nameColumn);
+//        grid.getView().setAutoExpandColumn(nameColumn);
+//        grid.getView().setAutoExpandColumn(tipoAporte);
+//        grid.getView().setAutoExpandColumn(valor);
+//        grid.getView().setAutoExpandColumn(vigencia);
+//        grid.getView().setAutoExpandColumn(eliminar);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText("Por favor ingrese los roles y enidades");
         grid.getView().setColumnLines(true);
-
+        grid.getView().setAdjustForHScroll(true);
+        
         FramedPanel cp = new FramedPanel();
         cp.setHeadingText("*FINANCIAMIENTO DEL PROYECTO");
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
         cp.setExpanded(true);
-        cp.setPixelSize(500, 150);
+        cp.setPixelSize(550, 150);
         cp.addStyleName("margin-10");
-
+        
+        
         return cp;
     }
-
+    
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
         service.setLog("entre estaContrato", null);
         boolean estaRelacionado = false;
@@ -189,5 +197,12 @@ public class WidgetTablaRubrosPry implements IsWidget {
             }
         }
         return estaRelacionado;
+    }
+    
+    public Set<ObrafuenterecursosconveniosDTO> agregarValorDisponibleConFormato(Set<ObrafuenterecursosconveniosDTO> lstObraFuenteRecursos) {
+        for (ObrafuenterecursosconveniosDTO obraFuenteRec : lstObraFuenteRecursos) {
+            obraFuenteRec.setValorFormato(GanttDatos.obtenerFormatoNumero(obraFuenteRec.getValor()));
+        }
+        return lstObraFuenteRecursos;
     }
 }

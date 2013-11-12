@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
@@ -17,6 +18,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
@@ -75,7 +77,7 @@ public class ModalRubrosProyecto implements IsWidget {
     protected String entidadSeleccionada;
     protected boolean editar;
 
-    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso,boolean editar) {
+    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso, boolean editar) {
         entidades = new ListStore<TerceroDTO>(propse.intcodigo());
         lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
         campoTipoRecurso = new TextField();
@@ -83,14 +85,14 @@ public class ModalRubrosProyecto implements IsWidget {
         lstTipoAporte = new ListBox(false);
         lstFormaP = new ListBox(false);
         lstFormaP.setEnabled(true);
-        montoAportado = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
+        montoAportado = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat()));
         montoAportado.setEnabled(true);
         lstVigen = new ListBox(false);
         rubro = new TextField();
         tipoAporte = 0;
         formaPago = 0;
         lstE = new ListBox(false);
-        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
+        valorDisponibleFuente = ((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         Iterator it = contratoDto.getFuenterecursosconvenios().iterator();
         fuenteRecursosConveDTO = (FuenterecursosconvenioDTO) it.next();
         valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
@@ -102,7 +104,7 @@ public class ModalRubrosProyecto implements IsWidget {
         this.modalActual = modalActual;
         this.tblrubros = tblrubros;
         this.idTempObraRecurso = idTempObraRecurso;
-        this.editar=editar;
+        this.editar = editar;
 
         mapaRelacionEntidadVigencias = new HashMap<String, List<Integer>>();
 
@@ -138,6 +140,9 @@ public class ModalRubrosProyecto implements IsWidget {
                 entidadSeleccionada = lstE.getValue(lstE.getSelectedIndex());
                 List<Integer> lstVigenciasEntidad = mapaRelacionEntidadVigencias.get(entidadSeleccionada);
                 llenarV(lstVigenciasEntidad);
+                fuenteRecursosConveDTO = buscarFuenteRecursosDto(entidadSeleccionada, vigencia);
+                service.setLog("valor dispo cambio" + fuenteRecursosConveDTO.getValorDisponible(), null);
+                valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
             }
         });
 
@@ -204,6 +209,9 @@ public class ModalRubrosProyecto implements IsWidget {
             @Override
             public void onChange(ChangeEvent event) {
                 vigencia = Integer.parseInt(lstVigen.getItemText(lstVigen.getSelectedIndex()));
+                fuenteRecursosConveDTO = buscarFuenteRecursosDto(entidadSeleccionada, vigencia);
+                service.setLog("valor dispo cambio" + fuenteRecursosConveDTO.getValorDisponible(), null);
+                valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
             }
         });
         con.add(new FieldLabel(lstVigen, "Vigencia"), new AbstractHtmlLayoutContainer.HtmlData(".vigencia"));
@@ -226,6 +234,7 @@ public class ModalRubrosProyecto implements IsWidget {
                             if (formaPago == 0) {
                                 if (requeridos.equals("")) {
                                     obraFuenteDto = new ObrafuenterecursosconveniosDTO(montoAportado.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, tipoAporte, formaPago, idTempObraRecurso);
+                                    obraFuenteDto.setValorFormato(GanttDatos.obtenerFormatoNumero(obraFuenteDto.getValorDisponible()));
                                     validacionDevuelta = validarMontosAportados(obraFuenteDto);
                                 } else {
                                     validacionDevuelta = requeridos;
@@ -233,6 +242,7 @@ public class ModalRubrosProyecto implements IsWidget {
                             } else {
                                 if (requeridos.equals("")) {
                                     obraFuenteDto = new ObrafuenterecursosconveniosDTO(calcularValor(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, montoAportado.getValue(), tipoAporte, formaPago);
+                                    obraFuenteDto.setValorFormato(GanttDatos.obtenerFormatoNumero(obraFuenteDto.getValorDisponible()));
                                     validacionDevuelta = validarMontosAportados(obraFuenteDto);
                                 } else {
                                     validacionDevuelta = requeridos;
@@ -349,7 +359,7 @@ public class ModalRubrosProyecto implements IsWidget {
             proyectoDTO.setValor(BigDecimal.ZERO);
         }
         proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));  
-        if(editar){
+        if (editar) {
         FuenterecursosconvenioDTO fuenteRecursos = obraFuenteDto.getFuenterecursosconvenio();
         fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().subtract(obraFuenteDto.getValor()));
         service.setLog("valor fuente recursos disponible antes:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
