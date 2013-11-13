@@ -2504,7 +2504,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                        if (!getContrato().getActividadobras().isEmpty()) {
 //                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
 //                        }
-                        getFlujoCaja().iniciarFlujoCaja();
+                        //getFlujoCaja().iniciarFlujoCaja();
                     }
                     break;
 

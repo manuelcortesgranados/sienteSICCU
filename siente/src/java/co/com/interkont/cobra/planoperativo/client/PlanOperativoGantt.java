@@ -258,8 +258,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
-        config.taskDnDEnabled = false;
-//        config.taskDnDEnabled = !isModolectura();       
+        //config.taskDnDEnabled = false;
+        config.taskDnDEnabled = !isModolectura();       
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -746,12 +746,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             //spinnerduracion.setMaxValue(100);
             editing.addEditor(config.leftColumns.getColumn(3), spinnerduracion);
             editing.addEditor(config.leftColumns.getColumn(6), new TextField());
-            SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
+            /*SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
 
             spinner.setMinValue(0);
             spinner.setMaxValue(100);
             spinner.setIncrement(1);
-            editing.addEditor(config.leftColumns.getColumn(4), spinner);
+            editing.addEditor(config.leftColumns.getColumn(4), spinner);*/
             //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
 
             editing.addBeforeStartEditHandler(
@@ -1090,14 +1090,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         column3.setSortable(true);
         column3.setResizable(true);
         configs.add(column3);
-
+/*
         ColumnConfig<ActividadobraDTO, Integer> column4 = new ColumnConfig<ActividadobraDTO, Integer>(props.percentDone());
         column4.setHeader("Peso");
         column4.setWidth(60);
         column4.setSortable(true);
         column4.setResizable(true);
         configs.add(column4);
-
+*/
         ColumnConfig<ActividadobraDTO, ?> columnNumeracion = new ColumnConfig<ActividadobraDTO, Integer>(props.numeracion());
         columnNumeracion.setHeader("Nro");
         columnNumeracion.setWidth(35);
@@ -1113,8 +1113,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         configs.add(columnPredecesor);
 
         ColumnModel cm = new ColumnModel(configs);
-        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Operativo", 1,
-                7));
+        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Operativo", 1,6));
 
         return cm;
     }
