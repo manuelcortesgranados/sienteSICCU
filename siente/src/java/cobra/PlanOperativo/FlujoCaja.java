@@ -695,6 +695,24 @@ public class FlujoCaja implements Serializable {
                             planMovimientoContrato.setValor(BigDecimal.ZERO);
                             planificacionmovimientoproyecto.getPlanificacionmovimientocontratos().add(planMovimientoContrato);
                         }
+                    } else {
+                        for (Contrato contratoProyecto : proyectoPlanOperativo.getContratosProyecto()) {
+                            boolean estaPlanificado = false;
+                            for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientocontratos()) {
+                                Planificacionmovimientocontrato planificacionmovimientocontrato = (Planificacionmovimientocontrato) object;
+                                if(planificacionmovimientocontrato.getContrato().getIntidcontrato() == contratoProyecto.getIntidcontrato()) {
+                                    estaPlanificado = true;
+                                    break;
+                                }
+                            }
+                            if(!estaPlanificado) {
+                                Planificacionmovimientocontrato planMovimientoContrato = new Planificacionmovimientocontrato();
+                                planMovimientoContrato.setContrato(contratoProyecto);
+                                planMovimientoContrato.setPlanificacionmovimientoproyecto(planificacionmovimientoproyecto);
+                                planMovimientoContrato.setValor(BigDecimal.ZERO);
+                                planificacionmovimientoproyecto.getPlanificacionmovimientocontratos().add(planMovimientoContrato);
+                            }
+                        }
                     }
                     //Se crean nuevas planificaciones de pago directo para aquellos sin planificación
                     if (planificacionmovimientoproyecto.getPlanificacionmovimientoprydirectos().isEmpty()) {
@@ -713,11 +731,11 @@ public class FlujoCaja implements Serializable {
                         planificacionmovimientoproyecto.getPlanificacionmovimientopryotroses().add(planMovimientoPryOtros);
                     }
                 }
-                FlujoEgresos itemFlujoEgresosContrato = null;
                 for (Planificacionmovimientoproyecto planificacionmovimientoproyecto : planifmovimientoconvenioproyecto) {
                     //Se cargan los registros de planificaciones de contrato
                     for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientocontratos()) {
                         Planificacionmovimientocontrato planMovimientoContrato = (Planificacionmovimientocontrato) object;
+                        FlujoEgresos itemFlujoEgresosContrato = null;
                         for (FlujoEgresos fe : flujoEgresosContratos) {
                             if (fe.getContrato().getIntidcontrato() == planMovimientoContrato.getContrato().getIntidcontrato()) {
                                 itemFlujoEgresosContrato = fe;
