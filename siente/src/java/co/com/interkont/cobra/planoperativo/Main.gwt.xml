@@ -5,6 +5,7 @@
 <module rename-to="planoperativo">
    
     <inherits name="com.google.gwt.user.User"/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
     
     <inherits name='com.sencha.gxt.ui.GXT'/>    
     <inherits name='com.sencha.gxt.chart.Chart' />
@@ -14,7 +15,7 @@
      
     <inherits name='co.com.interkont.cobra.planoperativo.client.dto'/>   
     <collapse-all-properties/>
-   <set-property name="user.agent" value="gecko1_8"></set-property>
+    <set-property name="user.agent" value="gecko1_8"></set-property>
     
     <entry-point class="co.com.interkont.cobra.planoperativo.client.PlanOperativoGantt"/>
     <source path="client"/>

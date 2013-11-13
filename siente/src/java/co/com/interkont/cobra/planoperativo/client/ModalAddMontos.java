@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
@@ -18,6 +19,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -86,7 +88,7 @@ public class ModalAddMontos implements IsWidget {
         this.valorContratoO = valorContrato.getValue();
         this.valorContrato = valorContrato;
         this.editar = editar;
-        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
+        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
 
         
         Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator();
@@ -154,7 +156,7 @@ public class ModalAddMontos implements IsWidget {
 
         this.vigencia = Integer.parseInt(lstVigen.getItemText(0));
 
-        setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
+        setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         getValorRubros().setEmptyText("Valor");
         getValorRubros().setWidth(cw);
         con.add(new FieldLabel(getValorRubros(), "Valor"), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
@@ -200,6 +202,7 @@ public class ModalAddMontos implements IsWidget {
                     obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
                     if (obraFrDto != null) {
                         RelacionobrafuenterecursoscontratoDTO relacionFuenteRecursos = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorRubros.getValue(), entidadSeleccionada, rubro, vigencia, vigenciafuente, rubro.getStrdescripcion());
+                        relacionFuenteRecursos.setValorFormato(GanttDatos.obtenerFormatoNumero(relacionFuenteRecursos.getValor()));
                         String validacionDevuelta = validarFuenteRecurso(relacionFuenteRecursos);
                         if (!validacionDevuelta.equals("La fuente ha sido guardada")) {
                             AlertMessageBox d = new AlertMessageBox("Alerta", validacionDevuelta);
@@ -353,7 +356,7 @@ public class ModalAddMontos implements IsWidget {
     public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
         if (obraFrDto.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
             if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) > 0) {
-                return "El valor ingresado supera el valor disponible de la fuente de recursos:" + obraFrDto.getValorDisponible() + "<br/>";
+                return "El valor ingresado supera el valor disponible de la fuente de recursos:" + GanttDatos.obtenerFormatoNumero(obraFrDto.getValorDisponible()) + "<br/>";
             } else {
 
                 if (valorContratoO == null) {

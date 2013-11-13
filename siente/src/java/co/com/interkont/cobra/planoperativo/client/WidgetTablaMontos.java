@@ -2,6 +2,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
@@ -32,20 +33,21 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class WidgetTablaMontos implements IsWidget {
 
     protected ContratoDTO contrato;
-    protected  boolean editar;
+    protected boolean editar;
     protected NumberField<BigDecimal> valorContrato;
 
     /**
      * @return the store
      */
-    public WidgetTablaMontos(ContratoDTO contrato,boolean editar,NumberField<BigDecimal> valorContrato) {
+    public WidgetTablaMontos(ContratoDTO contrato, boolean editar, NumberField<BigDecimal> valorContrato) {
         this.contrato = contrato;
-        this.editar=editar;
-        this.valorContrato=valorContrato;
+        this.editar = editar;
+        this.valorContrato = valorContrato;
     }
 
     public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
@@ -66,7 +68,7 @@ public class WidgetTablaMontos implements IsWidget {
 
         ValueProvider<RelacionobrafuenterecursoscontratoDTO, Integer> idrelacionobracontrato();
 
-        ValueProvider<RelacionobrafuenterecursoscontratoDTO, BigDecimal> valor();
+        ValueProvider<RelacionobrafuenterecursoscontratoDTO, String> valorFormato();
 
         ValueProvider<RelacionobrafuenterecursoscontratoDTO, String> descripcionRubro();
 
@@ -87,12 +89,12 @@ public class WidgetTablaMontos implements IsWidget {
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
 
 
-        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> nameColumn = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.descripcionRubro(), 300, "Rubro");
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> nameColumn = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.descripcionRubro(), 350, "Rubro");
         nameColumn.setColumnTextStyle(textStyles);
 
 
 
-        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal> valor = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, BigDecimal>(properties.valor(), 100, "Valor");
+        ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String> valor = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, String>(properties.valorFormato(), 100, "Valor");
         valor.setColumnTextStyle(textStyles);
 
         ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer> vigencia = new ColumnConfig<RelacionobrafuenterecursoscontratoDTO, Integer>(properties.vigenciafonade(), 100, "Vigencia");
@@ -115,18 +117,18 @@ public class WidgetTablaMontos implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                if(editar){
-                ObrafuenterecursosconveniosDTO obraFuenteRecursos = store.get(row).getObrafuenterecursosconvenios();
-                obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
-                obraFuenteRecursos.setEstaEnFuenteRecurso(false);
+                if (editar) {
+                    ObrafuenterecursosconveniosDTO obraFuenteRecursos = store.get(row).getObrafuenterecursosconvenios();
+                    obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
+                    obraFuenteRecursos.setEstaEnFuenteRecurso(false);
                 }
-                BigDecimal valor=valorContrato.getValue();
-                valor=valor.subtract(store.get(row).getValor());                
+                BigDecimal valor = valorContrato.getValue();
+                valor = valor.subtract(store.get(row).getValor());
                 valorContrato.setValue(valor);
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
-                
-               
+
+
             }
         });
         eliminar.setCell(button);
@@ -143,17 +145,16 @@ public class WidgetTablaMontos implements IsWidget {
 
         setStore(new ListStore<RelacionobrafuenterecursoscontratoDTO>(properties.key()));
 
-        List<RelacionobrafuenterecursoscontratoDTO> plants = new ArrayList<RelacionobrafuenterecursoscontratoDTO>(contrato.getRelacionobrafuenterecursoscontratos());
+        List<RelacionobrafuenterecursoscontratoDTO> plants = new ArrayList<RelacionobrafuenterecursoscontratoDTO>(obtenerRelacionFuenteContratoFormato(contrato.getRelacionobrafuenterecursoscontratos()));
         getStore().addAll(plants);
 
         final Grid<RelacionobrafuenterecursoscontratoDTO> grid = new Grid<RelacionobrafuenterecursoscontratoDTO>(getStore(), cm);
         grid.setBorders(true);
-        grid.getView().setAutoExpandColumn(nameColumn);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText("Por favor ingrese los montos del contrato");
         grid.getView().setColumnLines(true);
+        grid.getView().setAdjustForHScroll(true);
 
-        grid.getView().setAutoFill(true);
         FramedPanel cp = new FramedPanel();
         cp.setHeadingText("*Rubros");
         cp.setWidget(grid);
@@ -164,5 +165,12 @@ public class WidgetTablaMontos implements IsWidget {
         cp.addStyleName("margin-10");
 
         return cp;
+    }
+
+    public Set<RelacionobrafuenterecursoscontratoDTO> obtenerRelacionFuenteContratoFormato(Set<RelacionobrafuenterecursoscontratoDTO> lstFuenteRecursosContrato) {
+        for (RelacionobrafuenterecursoscontratoDTO relacionFuente : lstFuenteRecursosContrato) {
+            relacionFuente.setValorFormato(GanttDatos.obtenerFormatoNumero(relacionFuente.getValor()));
+        }
+        return lstFuenteRecursosContrato;
     }
 }

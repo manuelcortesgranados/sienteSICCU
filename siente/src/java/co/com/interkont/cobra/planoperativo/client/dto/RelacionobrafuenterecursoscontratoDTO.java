@@ -25,6 +25,7 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
     private int vigenciafuente;
      private String eliminar;
     private String descripcionRubro;
+     private String valorFormato;
 
     public RelacionobrafuenterecursoscontratoDTO() {
     }	
@@ -209,6 +210,19 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
         this.descripcionRubro = descripcionRubro;
     }
     
+       /**
+     * @return the valorFormato
+     */
+    public String getValorFormato() {
+        return valorFormato;
+    }
+
+    /**
+     * @param valorFormato the valorFormato to set
+     */
+    public void setValorFormato(String valorFormato) {
+        this.valorFormato = valorFormato;
+    }
     
    
     

@@ -31,6 +31,7 @@ import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
@@ -68,7 +69,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     // <editor-fold defaultstate="collapsed" desc="Elementos visuales">
     private VerticalPanel vp;
     private TextArea objetoContrato = new TextArea();
-    private NumberField<BigDecimal> valorContrato = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
+    private NumberField<BigDecimal> valorContrato = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat()));
     private NumberField<BigDecimal> valorRubros;
     private NumberField<BigDecimal> valorFuenteRecurso;
     private TextField nombreAbre = new TextField();
@@ -360,6 +361,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         modalContrato.hide();
                         crearTareaContrato();
                         gantt.getGanttPanel().runCascadeChanges();
+                        GanttDatos.guardarBorradorConvenio(convenioDto, service, gantt);
                     }
                 } else {
                     editarContrato();
@@ -387,7 +389,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         modalContrato.hide();
                         gantt.getGanttPanel().getContainer().refresh();
                         modalContrato.hide();
-
+                        GanttDatos.guardarBorradorConvenio(convenioDto, service, gantt);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
                         d.show();
@@ -803,8 +805,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
 
         gantt.getGanttPanel().getContainer().refresh();
-        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);
-
+        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
 
     }
 

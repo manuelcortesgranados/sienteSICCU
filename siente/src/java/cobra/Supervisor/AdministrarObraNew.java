@@ -906,7 +906,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             iniciarImagenes();
             llenarSelectTipoImagenes();
 
-            // mostrarGoogle();
+            mostrarGoogle();
             //obtenerTacometro();
 
 

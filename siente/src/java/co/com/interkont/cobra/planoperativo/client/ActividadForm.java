@@ -324,6 +324,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
         
         GanttDatos.asignarNumeracion(taskStore, numeracionActual,4);
+        GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
     }
 
     public String obtenerFecha(Date fecha) {

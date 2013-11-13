@@ -31,6 +31,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private String nombreEntidadTipo;
     private boolean estaEnFuenteRecurso;
     private int idgwt;
+     private String valorFormato;
 
     public ObrafuenterecursosconveniosDTO() {
     }
@@ -375,6 +376,20 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
 
     public void setIdgwt(int idgwt) {
         this.idgwt = idgwt;
+    }
+    
+        /**
+     * @return the valorFormato
+     */
+    public String getValorFormato() {
+        return valorFormato;
+    }
+
+    /**
+     * @param valorFormato the valorFormato to set
+     */
+    public void setValorFormato(String valorFormato) {
+        this.valorFormato = valorFormato;
     }
     
 }

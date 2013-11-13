@@ -21,6 +21,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -406,6 +407,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                                     + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
                         }
                     }
+                    else
+                    {
+                        proyectoDTO.setOtrospagos(BigDecimal.ZERO);
+                    }    
                     if (pagodirecto.getValue() != null) {
                         if (pagodirecto.getValue().compareTo(proyectoDTO.getValor()) > 0) {
                             varErrorres = true;
@@ -413,6 +418,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                                     + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
                         }
                     }
+                    else
+                    {
+                        proyectoDTO.setPagodirecto(BigDecimal.ZERO);
+                    }    
                     if (pagodirecto.getValue() != null && otrospagos.getValue() != null) {
                         if (pagodirecto.getValue().add(otrospagos.getValue()).compareTo(proyectoDTO.getValor()) > 0) {
                             varErrorres = true;
@@ -426,10 +435,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         msgerrores += "*Por favor verifique el nombre del proyecto, ya se encuentra en el plan operativo." + "<br/>";
                     }
 
-                    if (!varErrorres) {
+                    if (!varErrorres) {                        
                         modificarValorDisponibleCreando();
                         modalPry.hide();
                         crearActividadPry();
+                        GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
                         d.show();
@@ -447,6 +457,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         modalPry.hide();
                         gantt.getGanttPanel().runCascadeChanges();
                         gantt.getGanttPanel().getContainer().refresh();
+                        GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
                     }
                 }
             }
@@ -660,6 +671,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      */
     public void crearActividadPry() {
         ActividadobraDTO tareaNueva = null;
+        proyectoDTO.setValorDisponible(proyectoDTO.getValor().subtract(proyectoDTO.getOtrospagos().add(proyectoDTO.getPagodirecto())));
         if (fechaFin.getValue() == null) {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
@@ -670,9 +682,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
             tareaNueva.setNumeracion(numeracionActividad);
-
-
-
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {

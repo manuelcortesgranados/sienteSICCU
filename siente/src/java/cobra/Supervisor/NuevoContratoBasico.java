@@ -2481,12 +2481,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             this.guardarBorradorConvenio();
                         }
                         //listaProyectosConvenio.clear();
-                        getFlujoCaja().getProyectosPlanOperativo().clear();
-                        lstTodasActividades.clear();
-                        System.out.println("getC = " + getContrato().getActividadobras().size());
-                        if (!getContrato().getActividadobras().isEmpty()) {
-                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
-                        }
+                        
+//                        lstTodasActividades.clear();
+//                        System.out.println("getC = " + getContrato().getActividadobras().size());
+//                        if (!getContrato().getActividadobras().isEmpty()) {
+//                            cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
+//                        }
                         getFlujoCaja().iniciarFlujoCaja();
                     }
                     break;
@@ -2498,7 +2498,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void guardarBorradorConvenioPO() {
-        this.guardarBorradorConvenio();
+        //this.guardarBorradorConvenio();
         planOperativo();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
@@ -3762,8 +3762,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
         }
         panelPantalla = 1;
-        actualizarPanel();
-
+        getSessionBeanCobra().setConsulteContrato(true);
+        actualizarPanel();       
     }
 
     /**
@@ -7117,10 +7117,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (!getSessionBeanCobra().getCobraGwtService().isElimino()) {
                     mapaReembolsoConvenio.clear();
                 }
+                lstActividadesEliminar.clear();
                 cargarActividadesEliminar(activi);
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
-
+                
+                       // System.out.println("getC = " + getContrato().getActividadobras().size());
+                        //if (!getContrato().getActividadobras().isEmpty()) {
+                            
+//}
             }
 
         }
@@ -7581,7 +7586,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage("El número del convenio ya existe.");
                 return false;
             } else if (isBorrador) {
-
+                
                 if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
                     if (contrato.getIntduraciondias() <= 0) {
                         validardatosbasicosplano = 3;
@@ -7680,12 +7685,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                                }
 
         }
-
+        
         if (!mapaReembolsoConvenio.isEmpty()) {
             devolverValoresConvenio();
         }
 
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        setNumcontratotemporal(getContrato().getStrnumcontrato());
         for (Polizacontrato poliza : listaPolizasEliminar) {
             getSessionBeanCobra().getCobraService().borrarPolizaContrato(poliza);
         }
@@ -7719,10 +7725,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             lstactguardar.get(0).setContrato(getContrato());
 
             getSessionBeanCobra().getCobraService().guardarActividadObra(lstactguardar);
-        }
-
+            lstTodasActividades.clear();
+            getFlujoCaja().getProyectosPlanOperativo().clear();
+                cargarActividadesConsultadas( lstactguardar.get(0));
+            }    
+        
         if (!getSessionBeanCobra().isConsulteContrato()) {
             if (getSessionBeanCobra().getCobraGwtService().isElimino()) {
+                
                 if (!lstActividadesEliminar.isEmpty()) {
                     getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(lstActividadesEliminar);
                     getSessionBeanCobra().getCobraGwtService().setElimino(false);
@@ -7742,6 +7752,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         CasteoGWT.castearSetDependenciasaaeliminar(getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar()));
                 getSessionBeanCobra().getCobraGwtService().setDependenciasEliminar(new LinkedHashSet());
             }
+            
+                        getFlujoCaja().iniciarFlujoCaja();
             if (getFlujoCaja().isFlujoCajaIniciado()) {
                 if (getFlujoCaja().validarFlujoCaja()) {
                     getFlujoCaja().guardarFlujoCaja();

@@ -61,7 +61,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorIngreso}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
@@ -71,7 +71,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
@@ -206,7 +206,7 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
-
+                        <f:convertNumber pattern="###,###.00"/>
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
@@ -217,30 +217,33 @@
                     </h:panelGroup>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosContrato[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoContrato}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoContrato and fuenteEgresos.planMovimientosContrato[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryDirecto[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoPryDirecto}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoPryDirecto and fuenteEgresos.planMovimientosPryDirecto[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     
                     <h:inputText value="#{fuenteEgresos.planMovimientosPryOtros[columna].valor}" 
-                                 rendered="#{fuenteEgresos.egresoPryOtros}" style="text-align: right; width: 100%;"
+                                 rendered="#{fuenteEgresos.egresoPryOtros and fuenteEgresos.planMovimientosPryOtros[columna].activo}" style="text-align: right; width: 100%;"
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
@@ -249,8 +252,9 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
                     <h:panelGroup style="background-color: #257500; color: #FFFFFF; width: 100%">
                         <a4j:outputPanel ajaxRendered="true" rendered="#{fuenteEgresos.egresoOtros and fuenteEgresos.itemFlujoEgresos.boolcalculado}" style="text-align: right; width: 100%;">
@@ -266,8 +270,9 @@
                                  onkeypress="return event.keyCode !== 13;"
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
+                        <f:convertNumber pattern="###,###.00"/>
                         <f:param name="columnaEvento" value="#{columna}" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgresoContrato}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.cambioValorEgreso()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <f:facet name="footer">

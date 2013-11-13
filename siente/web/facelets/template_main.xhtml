@@ -12,7 +12,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
-        <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.usuLogin!='ciudadano'}">
+        <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
         <script  src="/#{var.versioncobra}/resources/js/zopim/#{var.srczopim}" type="text/javascript"></script>
         </h:panelGroup>
         <script src="/#{var.versioncobra}/resources/script_supervisor.js" type="text/javascript"></script>
@@ -71,7 +71,7 @@
                                         <tr>
                                             <td>
                                                 <a4j:outputPanel>
-                                                    <rich:notifyMessages  stayTime="5000" showShadow="true" showCloseButton="true" />
+                                                    <rich:notifyMessages  stayTime="5000" showShadow="true" showCloseButton="false" />
                                                 </a4j:outputPanel>
                                                 <ui:insert name="menusuperior"/>
                                                 <ui:insert name="body"/>                                                   

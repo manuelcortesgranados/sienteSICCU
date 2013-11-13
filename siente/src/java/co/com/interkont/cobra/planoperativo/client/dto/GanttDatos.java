@@ -7,14 +7,18 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.DependencyType;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.dto.ActividadObraDTO;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -636,14 +640,14 @@ public class GanttDatos {
         Integer numeracion = new Integer(numeracionAnterior + 1);
         service.setLog("numeracon anterior:" + numeracion, null);
         List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>();
-        cargarActividadesTaskStore(taskStore.getAll().get(0),lstActividades);
-                
+        cargarActividadesTaskStore(taskStore.getAll().get(0), lstActividades);
+
         for (ActividadobraDTO acti : lstActividades) {
             service.setLog("como coloca la lista" + acti.getName(), null);
             if (acti.getNumeracion() > numeracionAnterior) {
                 service.setLog("aca tengo cumplo" + numeracion + "en num ante:" + acti.getNumeracion(), null);
                 acti.setNumeracion(numeracion);
-                reasignarPredecesores(acti, numeracionAnterior,tipo);
+                reasignarPredecesores(acti, numeracionAnterior, tipo);
                 numeracion++;
             }
 
@@ -651,14 +655,14 @@ public class GanttDatos {
 
     }
 
-    public static void reasignarPredecesores(ActividadobraDTO actividad, int numeracionAnterior,int tipo) {
+    public static void reasignarPredecesores(ActividadobraDTO actividad, int numeracionAnterior, int tipo) {
         Set<Integer> lstPredecesores = new HashSet<Integer>();
         for (Integer numPredecesor : actividad.getLstPredecesores()) {
             if (numPredecesor > numeracionAnterior) {
-                if(tipo!=3){
-                numPredecesor++;
-                }else{
-                numPredecesor=numPredecesor+10;
+                if (tipo != 3) {
+                    numPredecesor++;
+                } else {
+                    numPredecesor = numPredecesor + 10;
                 }
             }
             service.setLog("predecesor en L:" + numPredecesor, null);
@@ -695,10 +699,10 @@ public class GanttDatos {
 
         }
     }
-    
-     public static int  modificarEnCascadaNumeracion(ActividadobraDTO act) {
-        int numeracionActual=0;
-         if (!act.hasChildren()) {
+
+    public static int modificarEnCascadaNumeracion(ActividadobraDTO act) {
+        int numeracionActual = 0;
+        if (!act.hasChildren()) {
             numeracionActual = act.getNumeracion();
             service.setLog("ultimo 1:" + numeracionActual, null);
         } else {
@@ -708,17 +712,66 @@ public class GanttDatos {
             numeracionActual = act.getChildren().get(ultimo).getNumeracion();
             service.setLog("ultimo 2:" + numeracionActual, null);
         }
-         return numeracionActual;
+        return numeracionActual;
     }
-     
-     public static boolean validarNombreActividad(String nombre,TreeStore<ActividadobraDTO> taskStore){
-     for (ActividadobraDTO act : taskStore.getAll()) {
+
+    public static boolean validarNombreActividad(String nombre, TreeStore<ActividadobraDTO> taskStore) {
+        for (ActividadobraDTO act : taskStore.getAll()) {
             if (act.getName().equals(nombre)) {
                 return false;
             }
         }
         return true;
 
-     }
+    }
 
+    public static void guardarBorradorConvenio(final ContratoDTO convenio, final CobraGwtServiceAbleAsync service, Gantt<ActividadobraDTO, DependenciaDTO> gantt) {
+        service.setContratoDto(estructurarDatosConvenio(convenio, gantt.getTreeStore(), service, gantt.getDependencyStore()), new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                        service.setGuardarconvenio(1, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                com.google.gwt.user.client.Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+    }
+
+    public static String retornarNuevoContrato() {
+
+        return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
+
+    }
+
+    public static String retornarConfiguracionPagina() {
+        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
+    }
+
+    public static String obtenerFormatoNumero(BigDecimal valor) {
+        NumberFormat fmt = NumberFormat.getDecimalFormat();
+        return fmt.format(valor);
+    }
 }

@@ -321,7 +321,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         actPadre.getChildren().remove(tareaSeleccionada);
                         taskStore.remove(tareaSeleccionada);
                         service.setLog("sali deliminar proyecto 3", null);
-
+                        GanttDatos.guardarBorradorConvenio(convenioDTO, service, gantt);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
                         d.show();
@@ -549,8 +549,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         getGantt().addTaskDnDStartHandler(new TaskDnDStartEvent.TaskDnDStartHandler<ActividadobraDTO>() {
             @Override
-            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {
-                getGantt().refresh();
+            public void onTaskDnDStart(TaskDnDStartEvent<ActividadobraDTO> event) {                
                 service.setLog("acaaaaaaaaaaaaaaaaaaa" + event.getEventModel().getEndDateTime(), null);
             }
         });
