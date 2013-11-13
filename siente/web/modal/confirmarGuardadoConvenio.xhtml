@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfirmarGuardadoConvenio" autosized="true" width="250"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-panelConfirmarGuardadoConvenio"    value="#{var.confirmarguardado}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder_panelConfirmarGuardadoConvenio" action="#{Supervisor$Contrato.consultarContratoConvenio}" styleClass="ikont-acl-esconderpanelConfirmarGuardadoConvenio closemodal"  
+                                      title="#{var.cerrar}" oncomplete="#{rich:component('panelConfirmarGuardadoConvenio')}.hide();
+                                                 return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" >         
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-panelconfguardar"   value="El convenio se guardo con éxito"   />
+            </h:panelGroup>
+            <center>
+                <h:form>
+                    <h:panelGrid columns="2" >
+
+                        <a4j:commandButton  id="aceptar" value="#{var.aceptar}"  action="#{Supervisor$Contrato.consultarContratoConvenio}" 
+                                       oncomplete="#{rich:component('panelConfirmarGuardadoConvenio')}.hide(); return false;"                                          
+                                       title="#{var.aceptar}" />
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </h:panelGroup>
+    </rich:popupPanel>
+</ui:composition>

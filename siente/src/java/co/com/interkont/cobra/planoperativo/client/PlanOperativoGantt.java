@@ -46,7 +46,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
-import com.scheduler.client.core.event.EventClickEvent;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.MonthTimeAxisGenerator;
@@ -72,7 +71,6 @@ import com.sencha.gxt.widget.core.client.event.CancelEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
-import com.sencha.gxt.widget.core.client.event.MoveEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
@@ -260,8 +258,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
-        //config.taskDnDEnabled = false;
-        config.taskDnDEnabled = !isModolectura();       
+        config.taskDnDEnabled = false;
+//        config.taskDnDEnabled = !isModolectura();       
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
