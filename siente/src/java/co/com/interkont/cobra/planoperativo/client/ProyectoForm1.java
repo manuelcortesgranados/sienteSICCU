@@ -686,17 +686,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
-                    numeracionActual = GanttDatos.modificarEnCascadaNumeracion(act);
-                    enlazaractividadesHijas(act, tareaNueva);
-                    GanttDatos.asignarNumeracion(taskStore, numeracionActual, 2);
+                     enlazaractividadesHijas(act, tareaNueva);
+                  
                 }
             }
 
         } else {
-            numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
-            enlazaractividadesHijas(actividadObraPadre, tareaNueva);
-            GanttDatos.asignarNumeracion(taskStore, numeracionActual, 2);
-
+             enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+           
         }
 
     }

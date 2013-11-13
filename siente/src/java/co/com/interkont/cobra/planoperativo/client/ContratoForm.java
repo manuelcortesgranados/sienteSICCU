@@ -656,7 +656,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public void crearTareaContrato() {
         ActividadobraDTO actividadEjecucion = taskStore.getParent(actividadObraPadre);
 
-        numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
+        //numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
 
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
@@ -805,7 +805,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
 
         gantt.getGanttPanel().getContainer().refresh();
-        GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
+       // GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
 
     }
 

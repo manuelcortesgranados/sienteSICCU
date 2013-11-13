@@ -231,39 +231,6 @@ public class ActividadForm implements IsWidget, EntryPoint {
                     modalAct.hide();
                     crearActividad();
                 }
-//                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
-//                    if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
-//
-//                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
-//                            if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
-//                                if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) >= 0) {
-//                                } else {
-//                                    d = new AlertMessageBox("Error", "La fecha de finalización no puede ser inferior a "
-//                                            + obtenerFecha(getFechainicioActividad().getValue()));
-//                                    d.show();
-//                                }
-//
-//                            } else {
-//                                d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
-//                                        + obtenerFecha(actividadObraPadre.getEndDateTime()));
-//                                d.show();
-//
-//                            }
-//                        } else {
-//                            d = new AlertMessageBox("Error", "La fecha de inicio de la actividad no puede ser inferior a "
-//                                    + obtenerFecha(actividadObraPadre.getStartDateTime()));
-//                            d.show();
-//                        }
-//
-//                    } else {
-//                        d = new AlertMessageBox("Error", "Debe diligenciar las fechas para la actividad");
-//                        d.show();
-//                    }
-//
-//                } else {
-//                    d = new AlertMessageBox("Error", "Debe Ingresar una descripción para la actividad");
-//                    d.show();
-//                }
             }
         });
 
@@ -311,7 +278,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     }
 
     public void crearActividad() {
-        numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
+        //numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
@@ -323,7 +290,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
         
-        GanttDatos.asignarNumeracion(taskStore, numeracionActual,4);
+       // GanttDatos.asignarNumeracion(taskStore, numeracionActual,4);
         GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
     }
 

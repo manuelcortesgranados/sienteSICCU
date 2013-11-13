@@ -227,16 +227,14 @@ public class GanttDatos {
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
-        service.setLog("entre aca", null);
-        if (!listaHijas.isEmpty()) {
+         if (!listaHijas.isEmpty()) {
             Date menor = listaHijas.get(0).getStartDateTime();
             for (int i = 1; i < listaHijas.size(); i++) {
                 if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
                     menor = listaHijas.get(i).getStartDateTime();
                 }
             }
-            service.setLog("menorrrr 1" + menor, null);
-            return CalendarUtil.copyDate(menor);
+             return CalendarUtil.copyDate(menor);
         }
         return null;
     }
@@ -249,7 +247,6 @@ public class GanttDatos {
                     mayor = listaHijas.get(i).getEndDateTime();
                 }
             }
-            service.setLog("mayorrrr:" + mayor, null);
             return CalendarUtil.copyDate(mayor);
         }
         return null;
@@ -577,6 +574,9 @@ public class GanttDatos {
         if (actiSeleccionada.getStartDateTime().compareTo(convenio.getDatefechafin()) >= 0) {
             msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
 
+        }
+        if (actiSeleccionada.getStartDateTime().compareTo(actiSeleccionada.getEndDateTime()) >= 0) {
+            msg = "la fecha inicio de la actividad no puede ser superior a la fecha de fin de la misma";
         } else {
             if (actiSeleccionada.getEndDateTime().compareTo(convenio.getDatefechafin()) > 0) {
                 msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
@@ -773,5 +773,39 @@ public class GanttDatos {
     public static String obtenerFormatoNumero(BigDecimal valor) {
         NumberFormat fmt = NumberFormat.getDecimalFormat();
         return fmt.format(valor);
+    }
+
+    public static Date obtenerMenorFechaActividad(ActividadobraDTO actividadSeleccionada) {
+
+        if (actividadSeleccionada.hasChildren()) {
+            return GanttDatos.obtenerMenorFechaInicio(actividadSeleccionada.getChildren());
+
+        }
+        return null;
+    }
+
+    public static boolean validarConLiquidacionConvenio(ActividadobraDTO actiSeleccionada, ContratoDTO convenioDTO) {
+        Date fechaMenor = obtenerMenorFechaActividad(obtenerActividadDeRaiz(2, convenioDTO));
+        service.setLog("en valida pry:"+fechaMenor, null);
+        if (fechaMenor != null) {
+            service.setLog("fecha din del pry:"+actiSeleccionada.getStartDateTime(), null);
+            if (actiSeleccionada.getStartDateTime().compareTo(fechaMenor) > 0) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public static boolean validarActividadaEstaDentroConvenio(ActividadobraDTO acti, ContratoDTO convenioDto) {
+        if (acti.getStartDateTime().compareTo(convenioDto.getDatefechaini()) < 0) {
+            return true;
+        }
+        if (acti.getEndDateTime().compareTo(convenioDto.getDatefechafin()) > 0) {
+            return true;
+        }
+
+        return false;
+
     }
 }

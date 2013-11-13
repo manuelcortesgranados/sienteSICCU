@@ -7041,6 +7041,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (!getContrato().isModolecturaplanop()) {
                     guardarBorradorConvenio();
                 }
+
+                if (!contrato.getActividadobras().isEmpty()) {
+                    if (!getSessionBeanCobra().isConsulteContrato()) {
+                        Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                        lstTodasActividades.clear();
+                        limpiarPredecesoresActividad(actiRaiz);
+                        cargarActividadesConsultadas(actiRaiz);
+                        asignarNumeracionActividadesConsultadas(lstTodasActividades);
+                        if (!contrato.getDependenciasGenerales().isEmpty()) {
+                            asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
+                        }
+                    }
+                }
+
                 ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
 
                 if (!cont.getActividadobras().isEmpty()) {
@@ -7933,17 +7947,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return "consultarContrato";
     }
 
-    /**
-     * Metodo para cargar el detalle del convenio que acabo de guardar.
-     *
-     */
-    public void consultarContratoConvenio() {
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/consultarContratoConvenioDetalle.xhtml");
-
-        } catch (IOException ex) {
-            Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+    public void limpiarPredecesoresActividad(Actividadobra actividadRaiz) {
+        actividadRaiz.setPredecesor("");
+        actividadRaiz.getLstPredecesores().clear();
+        if (!actividadRaiz.getActividadobras().isEmpty()) {
+            for (Iterator it = actividadRaiz.getActividadobras().iterator(); it.hasNext();) {
+                Actividadobra actiHija = (Actividadobra) it.next();
+                limpiarPredecesoresActividad(actiHija);
         }
     }
 }
-
+}
