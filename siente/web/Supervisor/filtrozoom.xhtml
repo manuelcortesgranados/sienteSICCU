@@ -127,7 +127,7 @@
                 <h:panelGrid styleClass="ikont-hpg-slider-avance">
 
                     <rich:column>
-                        <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1"/> 
+                        <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1 " disabled="true"/> 
                     </rich:column>
 
                 </h:panelGrid>
@@ -137,7 +137,7 @@
                 <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo1"  value="#{var.buscar}"
                                  styleClass="boton1 ikont-filtro-filtrar_btn"    />
             </center>
-            <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2" /> 
+            <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
         </rich:tab>              
         <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />

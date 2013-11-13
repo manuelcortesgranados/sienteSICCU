@@ -1744,6 +1744,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtroObrasActionMapaAvanModal() {
+        filtro.setPalabraclave("");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
                 filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -1828,7 +1829,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return bol;
     }
 
-    public String primeroListProyectos() {       
+    public String filtrosSeparacion() {
+        filtro.setPalabraclavefiltro("");
+        primeroListProyectos();
+        return null;
+    }
+
+    public String primeroListProyectos() {
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
@@ -2671,7 +2678,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
-                
+
                 descripcion.append("</p>");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla5\">");
@@ -2721,7 +2728,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("</div>");
-                    descripcion.append("<div class=\"tabla content-rigth\">");
+                descripcion.append("<div class=\"tabla content-rigth\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna\">");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
@@ -2837,13 +2844,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
     }
-    
+
     /**
      * Ejecuta las acciones necesarias para presentar la vista proporcionada.
      * 1=Vista Mapa
      * 2=Vista thumbnail
      * 3=Vista Lista
-     * @param vista 
+     * @param vista
      */
     public void cambiarVista(int vista) {
         filtro.setIntvista(vista);
