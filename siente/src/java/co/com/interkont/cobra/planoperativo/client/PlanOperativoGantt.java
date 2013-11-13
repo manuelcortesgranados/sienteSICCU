@@ -259,7 +259,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
         //config.taskDnDEnabled = false;
-        config.taskDnDEnabled = !isModolectura();       
+        config.taskDnDEnabled = !isModolectura();
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
@@ -280,8 +280,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.useEndDate = true;
         config.clickCreateEnabled = false;
-        config.cascadeChanges = true;        
-        
+        config.cascadeChanges = true;
+
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -326,8 +326,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         /**
          * Personalizando el menú
          */
-        config.taskContextMenu = new Menu();  
-       
+        config.taskContextMenu = new Menu();
+
         /**
          * Opciones de la actividad Convenio
          */
@@ -459,8 +459,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final MenuItem menuItemEliminarTarea = new MenuItem("Eliminar Actividad");
         menuItemEliminarTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
-            public void onSelection(SelectionEvent<Item> event) {                
-                boxConfim.show();                
+            public void onSelection(SelectionEvent<Item> event) {
+                boxConfim.show();
             }
         });
         config.taskContextMenu.add(menuItemEliminarTarea);
@@ -531,16 +531,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         getGantt().addTaskClickHandler(new TaskClickEvent.TaskClickHandler<ActividadobraDTO>() {
             @Override
-            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {                
+            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {
                 service.setLog("entre en click" + event.getEventModel().getName(), null);
             }
-        });      
-       
+        });
+
 
         getGantt().addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
-                tareaSeleccionada = event.getTask();               
+                tareaSeleccionada = event.getTask();
                 //config.taskDnDEnabled = false;
 //                getGantt().getGanttPanel().getConfig().taskDnDEnabled= false;
 //                getGantt().getGanttPanel().getContainer().reconfigure(true);
@@ -646,10 +646,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemAnadirHito.setVisible(false);
                         break;
 
-                }                
+                }
             }
         });
-                
+
         /**
          * metodo que se encarga de obtener la dependencia seleccionada cuando
          * se activa el menu contextual
@@ -703,7 +703,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
 
             }
-        });        
+        });
 
         // Editing
         if (!isModolectura()) {
@@ -719,10 +719,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             editing.addEditor(config.leftColumns.getColumn(6), new TextField());
             /*SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
 
-            spinner.setMinValue(0);
-            spinner.setMaxValue(100);
-            spinner.setIncrement(1);
-            editing.addEditor(config.leftColumns.getColumn(4), spinner);*/
+             spinner.setMinValue(0);
+             spinner.setMaxValue(100);
+             spinner.setIncrement(1);
+             editing.addEditor(config.leftColumns.getColumn(4), spinner);*/
             //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
 
             editing.addBeforeStartEditHandler(
@@ -956,7 +956,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
     public void configurarSemanas() {
-        for (int i = 0; i <= 1; i++) {            
+        for (int i = 0; i <= 1; i++) {
             GanttConfig ganttConfig = getGantt().getConfig();
             ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
             headers.add(new MonthTimeAxisGenerator("MMMM y"));
@@ -1059,14 +1059,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         column3.setSortable(true);
         column3.setResizable(true);
         configs.add(column3);
-/*
-        ColumnConfig<ActividadobraDTO, Integer> column4 = new ColumnConfig<ActividadobraDTO, Integer>(props.percentDone());
-        column4.setHeader("Peso");
-        column4.setWidth(60);
-        column4.setSortable(true);
-        column4.setResizable(true);
-        configs.add(column4);
-*/
+        /*
+         ColumnConfig<ActividadobraDTO, Integer> column4 = new ColumnConfig<ActividadobraDTO, Integer>(props.percentDone());
+         column4.setHeader("Peso");
+         column4.setWidth(60);
+         column4.setSortable(true);
+         column4.setResizable(true);
+         configs.add(column4);
+         */
         ColumnConfig<ActividadobraDTO, ?> columnNumeracion = new ColumnConfig<ActividadobraDTO, Integer>(props.numeracion());
         columnNumeracion.setHeader("Nro");
         columnNumeracion.setWidth(35);
@@ -1082,7 +1082,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         configs.add(columnPredecesor);
 
         ColumnModel cm = new ColumnModel(configs);
-        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Operativo", 1,6));
+        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Operativo", 1, 6));
 
         return cm;
     }
@@ -1367,21 +1367,21 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         props.endDateTime().setValue(actividadSeleccionada, actividadAnterior.getEndDateTime());
                         alertaMensajes("La fecha de la actividad debe ser menor o igual a la menor fecha de las actividades asociadas a la etapa de liquidación.");
 
-            }
+                    }
                 }
 
             }
 
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Liquidación del Convenio Marco")) {
             if (actividadSeleccionada.getStartDateTime().compareTo(actividadAnterior.getStartDateTime()) != 0) {
-            if (actividadSeleccionada.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(1, convenioDTO).getEndDateTime()) < 0) {
-                puedeEditar = false;
-                alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente 'Ejecución del Convenio'");
-                props.startDateTime().setValue(actividadSeleccionada, actividadAnterior.getStartDateTime());
-                getGantt().getGanttPanel().getContainer().refresh();
+                if (actividadSeleccionada.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(1, convenioDTO).getEndDateTime()) < 0) {
+                    puedeEditar = false;
+                    alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente 'Ejecución del Convenio'");
+                    props.startDateTime().setValue(actividadSeleccionada, actividadAnterior.getStartDateTime());
+                    getGantt().getGanttPanel().getContainer().refresh();
+                }
             }
         }
-    }
     }
 
     public void modificarEnEditarFechaInicio(ActividadobraDTO ac, int opcion) {
@@ -1418,40 +1418,40 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         String mensaje = "";
         boolean puedeEditar = true;
         if (!GanttDatos.validarActividadaEstaDentroConvenio(ac, convenioDTO)) {
-        if (ac.getTipoActividad() == 2) {
-            //se tiene que verificar que la fecha a modificar  sea mayor que el mayor de las actividades hijas
-            Date fechaMenorHijosProyecto = GanttDatos.obtenerMenorFechaInicio(ac.getChildren());
-            if (fechaMenorHijosProyecto != null) {
-                if (ac.getStartDateTime().compareTo(fechaMenorHijosProyecto) >= 0) {
-                    hayError = true;
-                    alertaMensajes("La fecha inicio del proyecto no puede ser superior a la fecha menor de las actividades asociadas a el:" + fechaMenorHijosProyecto);
-                    props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                    getGantt().getGanttPanel().getContainer().refresh();
-                } else if (ac.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(0, convenioDTO).getEndDateTime()) < 0) {
-                    hayError = true;
-                    alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
-                    props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                    getGantt().getGanttPanel().getContainer().refresh();
+            if (ac.getTipoActividad() == 2) {
+                //se tiene que verificar que la fecha a modificar  sea mayor que el mayor de las actividades hijas
+                Date fechaMenorHijosProyecto = GanttDatos.obtenerMenorFechaInicio(ac.getChildren());
+                if (fechaMenorHijosProyecto != null) {
+                    if (ac.getStartDateTime().compareTo(fechaMenorHijosProyecto) >= 0) {
+                        hayError = true;
+                        alertaMensajes("La fecha inicio del proyecto no puede ser superior a la fecha menor de las actividades asociadas a el:" + fechaMenorHijosProyecto);
+                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                        getGantt().getGanttPanel().getContainer().refresh();
+                    } else if (ac.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(0, convenioDTO).getEndDateTime()) < 0) {
+                        hayError = true;
+                        alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
+                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                        getGantt().getGanttPanel().getContainer().refresh();
                     } else if (GanttDatos.validarConLiquidacionConvenio(ac, convenioDTO)) {
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         alertaMensajes("La fecha de la actividad debe ser menor o igual a la menor fecha de las actividades asociadas a la etapa liquidación.");
+                    } else {
+                        modificarEnEditarFechaInicio(ac, opcion);
+                        ac.getObra().setFechaInicio(ac.getStartDateTime());
+                        ac.getObra().setFechaFin(ac.getEndDateTime());
+                    }
                 } else {
-                    modificarEnEditarFechaInicio(ac, opcion);
-                    ac.getObra().setFechaInicio(ac.getStartDateTime());
-                    ac.getObra().setFechaFin(ac.getEndDateTime());
-                }
-            } else {
-                if (ac.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(0, convenioDTO).getEndDateTime()) < 0) {
-                    hayError = true;
-                    alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
-                    props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                    getGantt().getGanttPanel().getContainer().refresh();
+                    if (ac.getStartDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(0, convenioDTO).getEndDateTime()) < 0) {
+                        hayError = true;
+                        alertaMensajes("La fecha de inicio de la actividad debe ser mayor o igual a la fecha de finalizacion de la actividad dependiente");
+                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                        getGantt().getGanttPanel().getContainer().refresh();
                     } else if (GanttDatos.validarConLiquidacionConvenio(ac, convenioDTO)) {
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         alertaMensajes("La fecha de la actividad debe ser menor o igual a la menor fecha de las actividades asociadas a la etapa liquidación.");
-                } else {
+                    } else {
                         Date copiaFechaInicio = CalendarUtil.copyDate(ac.getStartDateTime());
                         CalendarUtil.addDaysToDate(copiaFechaInicio, ac.getDuration());
                         ActividadobraDTO actiLiquidacion = GanttDatos.obtenerActividadDeRaiz(2, convenioDTO);
@@ -1462,10 +1462,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                                 alertaMensajes("La fecha fin de la actividad debe ser menor o igual a la  fecha de inicio de la etapa de liquidación.");
                             } else {
-                    modificarEnEditarFechaInicio(ac, opcion);
-                    ac.getObra().setFechaInicio(ac.getStartDateTime());
-                    ac.getObra().setFechaFin(ac.getEndDateTime());
-                }
+                                modificarEnEditarFechaInicio(ac, opcion);
+                                ac.getObra().setFechaInicio(ac.getStartDateTime());
+                                ac.getObra().setFechaFin(ac.getEndDateTime());
+                            }
                         } else {
                             if (copiaFechaInicio.compareTo(convenioDTO.getDatefechafin()) > 0) {
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
@@ -1476,82 +1476,82 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 ac.getObra().setFechaInicio(ac.getStartDateTime());
                                 ac.getObra().setFechaFin(ac.getEndDateTime());
 
-            }
+                            }
 
                         }
 
                     }
                 }
-        } else if (ac.getTipoActividad() == 4) {
-            ActividadobraDTO actividadP = taskStore.getParent(ac);
-            if (actividadP.getTipoActividad() == 5) {
-                if (taskStore.getParent(actividadP) != null) {
-                    if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
-                        mensaje = "continuar";
-                        validandoHijosDelConvenio(ac, puedeEditar);
-                        if (actiPadre.getName().equals("Planeación del Convenio")) {
-                            mensaje = validacionCorrecta(actiPadre, ac, 1);
-                        } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
-                            mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore);
-                        }
-                        if (mensaje.equals("continuar") && puedeEditar) {
-                            modificarEnEditarFechaInicio(ac, opcion);
-                        } else {
-                            hayError = true;
-                            alertaMensajes(mensaje);
-                            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-
-                        }
-                    }
-                    if (taskStore.getParent(taskStore.getParent(ac)) != null) {
-                        if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                            ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
-                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
+            } else if (ac.getTipoActividad() == 4) {
+                ActividadobraDTO actividadP = taskStore.getParent(ac);
+                if (actividadP.getTipoActividad() == 5) {
+                    if (taskStore.getParent(actividadP) != null) {
+                        if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
+                            mensaje = "continuar";
+                            validandoHijosDelConvenio(ac, puedeEditar);
+                            if (actiPadre.getName().equals("Planeación del Convenio")) {
+                                mensaje = validacionCorrecta(actiPadre, ac, 1);
+                            } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
+                                mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore, actividadAnterior);
+                            }
+                            if (mensaje.equals("continuar") && puedeEditar) {
                                 modificarEnEditarFechaInicio(ac, opcion);
                             } else {
                                 hayError = true;
-                                alertaMensajes(GanttDatos.getMsg());
+                                alertaMensajes(mensaje);
+                                props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                getGantt().getGanttPanel().getContainer().refresh();
+
+                            }
+                        }
+                        if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                            if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                                ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                                if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
+                                    modificarEnEditarFechaInicio(ac, opcion);
+                                } else {
+                                    hayError = true;
+                                    alertaMensajes(GanttDatos.getMsg());
+                                    props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                }
+                            }
+                        } else if (taskStore.getParent(ac).getTipoActividad() == 3) {
+                            if (ac.getStartDateTime().compareTo(taskStore.getParent(ac).getEndDateTime()) < 0) {
+                                hayError = true;
+                                alertaMensajes("La fecha inicio de la actividad no puede ser mayor que la fecha inicio del contrato");
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                                 getGantt().getGanttPanel().getContainer().refresh();
                             }
                         }
-                    } else if (taskStore.getParent(ac).getTipoActividad() == 3) {
-                        if (ac.getStartDateTime().compareTo(taskStore.getParent(ac).getEndDateTime()) < 0) {
+                    }
+                }
+            } else if (ac.getTipoActividad() == 6) {
+                if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                    if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                        ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                        if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
+                            modificarEnEditarFechaInicio(ac, opcion);
+                        } else {
                             hayError = true;
-                            alertaMensajes("La fecha inicio de la actividad no puede ser mayor que la fecha inicio del contrato");
+                            alertaMensajes(GanttDatos.getMsg());
                             props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                             getGantt().getGanttPanel().getContainer().refresh();
                         }
-                    }
-                }
-            }
-        } else if (ac.getTipoActividad() == 6) {
-            if (taskStore.getParent(taskStore.getParent(ac)) != null) {
-                if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                    ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
-                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
-                        modificarEnEditarFechaInicio(ac, opcion);
                     } else {
-                        hayError = true;
-                        alertaMensajes(GanttDatos.getMsg());
-                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                        getGantt().getGanttPanel().getContainer().refresh();
+                        modificarEnEditarFechaInicio(ac, opcion);
                     }
                 } else {
                     modificarEnEditarFechaInicio(ac, opcion);
                 }
-            } else {
-                modificarEnEditarFechaInicio(ac, opcion);
             }
-        }
         } else {
             service.setLog("en vali principal", null);
             hayError = true;
             props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
             props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
             props.duration().setValue(ac, actividadAnterior.getDuration());
-            alertaMensajes("la fecha de inicio y de fin de la actividad deben de estar dentro del rango de fechas del convenio, fecha inicio: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechaini()) + ",</br> fecha fin: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechafin()));
+            alertaMensajes("la fecha de inicio y de fin de la actividad deben de estar dentro del rango de fechas del convenio, fecha inicio: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechaini()) + ", fecha fin: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechafin()));
         }
         return hayError;
     }
@@ -1573,92 +1573,101 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ActividadobraDTO actiPadre = taskStore.getParent(ac);
         String mensaje = "";
         boolean puedeEditar = true;
-        if (ac.getTipoActividad() == 2) {
-            ActividadobraDTO actividadPlanificacion = GanttDatos.obtenerActividadDeRaiz(0, convenioDTO);
-            if (ac.getEndDateTime().compareTo(actividadPlanificacion.getEndDateTime()) <= 0) {
-                hayError = true;
-                alertaMensajes("La fecha fin del proyecto no puede ser inferior a la fecha fin de la etapa de planeacion de convenio");
-                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                getGantt().getGanttPanel().getContainer().refresh();
-            } else if (ac.getEndDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(2, convenioDTO).getStartDateTime()) > 0) {
-                hayError = true;
-                alertaMensajes("La fecha fin del proyecto no puede ser superior a la fecha fin de la etapa de liquidación de convenio");
-                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                getGantt().getGanttPanel().getContainer().refresh();
-            } else if (GanttDatos.obtenerMayorFechaFin(ac.getChildren()) != null) {
-                if (ac.getEndDateTime().compareTo(GanttDatos.obtenerMayorFechaFin(ac.getChildren())) < 0) {
+        if (!GanttDatos.validarActividadaEstaDentroConvenio(ac, convenioDTO)) {
+            if (ac.getTipoActividad() == 2) {
+                ActividadobraDTO actividadPlanificacion = GanttDatos.obtenerActividadDeRaiz(0, convenioDTO);
+                if (ac.getEndDateTime().compareTo(actividadPlanificacion.getEndDateTime()) <= 0) {
                     hayError = true;
-                    alertaMensajes("La fecha fin de la actividad debe ser meno a  la fecha de mayor fecha fin de las actividades asociadas a él");
+                    alertaMensajes("La fecha fin del proyecto no puede ser inferior a la fecha fin de la etapa de planeacion de convenio");
                     props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                     getGantt().getGanttPanel().getContainer().refresh();
-                }
-            } else {
-                modificarEnEditarFechaFin(ac);
-                ac.getObra().setFechaInicio(ac.getStartDateTime());
-                ac.getObra().setFechaFin(ac.getEndDateTime());
-            }
-        } else if (ac.getTipoActividad() == 4) {
-            ActividadobraDTO actividadP = taskStore.getParent(ac);
-            if (actividadP.getTipoActividad() == 5) {
-                if (taskStore.getParent(actividadP) != null) {
-                    if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
-                        mensaje = "continuar";
-                        validandoHijosDelConvenio(ac, puedeEditar);
-                        if (actiPadre.getName().equals("Planeación del Convenio")) {
-                            mensaje = validacionCorrecta(actiPadre, ac, 2);
-                        } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
-                            mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore);
-                        }
-                        if (mensaje.equals("continuar") && puedeEditar) {
-                            modificarEnEditarFechaFin(ac);
-                        } else {
-                            hayError = true;
-                            alertaMensajes(mensaje);
-                            props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-                        }
-                    }
-                    if (taskStore.getParent(taskStore.getParent(ac)) != null) {
-                        if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                            ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
-                            if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
-                                modificarEnEditarFechaFin(ac);
-                            } else {
-                                hayError = true;
-                                alertaMensajes(GanttDatos.getMsg());
-                                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                                getGantt().getGanttPanel().getContainer().refresh();
-                            }
-                        }
-                    } else if (taskStore.getParent(ac).getTipoActividad() == 3) {
-                        if (ac.getEndDateTime().compareTo(taskStore.getParent(ac).getChildren().get(2).getStartDateTime()) > 0) {
-                            hayError = true;
-                            alertaMensajes("La fecha fin de la actividad no puede ser mayor que la fecha inicio de la etapa precontractual");
-                            props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                            getGantt().getGanttPanel().getContainer().refresh();
-                        }
-                    }
-
-                }
-            }
-        } else if (ac.getTipoActividad() == 6) {
-            if (taskStore.getParent(taskStore.getParent(ac)) != null) {
-                if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
-                    ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
-                    if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
-                        modificarEnEditarFechaFin(ac);
-                    } else {
+                } else if (ac.getEndDateTime().compareTo(GanttDatos.obtenerActividadDeRaiz(2, convenioDTO).getStartDateTime()) > 0) {
+                    hayError = true;
+                    alertaMensajes("La fecha fin del proyecto no puede ser superior a la fecha fin de la etapa de liquidación de convenio");
+                    props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                    getGantt().getGanttPanel().getContainer().refresh();
+                } else if (GanttDatos.obtenerMayorFechaFin(ac.getChildren()) != null) {
+                    if (ac.getEndDateTime().compareTo(GanttDatos.obtenerMayorFechaFin(ac.getChildren())) < 0) {
                         hayError = true;
-                        alertaMensajes(GanttDatos.getMsg());
+                        alertaMensajes("La fecha fin de la actividad debe ser meno a  la fecha de mayor fecha fin de las actividades asociadas a él");
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         getGantt().getGanttPanel().getContainer().refresh();
                     }
                 } else {
                     modificarEnEditarFechaFin(ac);
+                    ac.getObra().setFechaInicio(ac.getStartDateTime());
+                    ac.getObra().setFechaFin(ac.getEndDateTime());
                 }
-            } else {
-                modificarEnEditarFechaFin(ac);
+            } else if (ac.getTipoActividad() == 4) {
+                ActividadobraDTO actividadP = taskStore.getParent(ac);
+                if (actividadP.getTipoActividad() == 5) {
+                    if (taskStore.getParent(actividadP) != null) {
+                        if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
+                            mensaje = "continuar";
+                            validandoHijosDelConvenio(ac, puedeEditar);
+                            if (actiPadre.getName().equals("Planeación del Convenio")) {
+                                mensaje = validacionCorrecta(actiPadre, ac, 2);
+                            } else if (actiPadre.getName().equals("Liquidación del Convenio Marco")) {
+                                mensaje = GanttDatos.validarHijosLiquidacionConvenioMacro(ac, convenioDTO, taskStore, actividadAnterior);
+                            }
+                            if (mensaje.equals("continuar") && puedeEditar) {
+                                modificarEnEditarFechaFin(ac);
+                            } else {
+                                hayError = true;
+                                alertaMensajes(mensaje);
+                                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                                getGantt().getGanttPanel().getContainer().refresh();
+                            }
+                        }
+                        if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                            if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                                ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                                if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
+                                    modificarEnEditarFechaFin(ac);
+                                } else {
+                                    hayError = true;
+                                    alertaMensajes(GanttDatos.getMsg());
+                                    props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                                    getGantt().getGanttPanel().getContainer().refresh();
+                                }
+                            }
+                        } else if (taskStore.getParent(ac).getTipoActividad() == 3) {
+                            if (ac.getEndDateTime().compareTo(taskStore.getParent(ac).getChildren().get(2).getStartDateTime()) > 0) {
+                                hayError = true;
+                                alertaMensajes("La fecha fin de la actividad no puede ser mayor que la fecha inicio de la etapa precontractual");
+                                props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                                getGantt().getGanttPanel().getContainer().refresh();
+                            }
+                        }
+
+                    }
+                }
+            } else if (ac.getTipoActividad() == 6) {
+                if (taskStore.getParent(taskStore.getParent(ac)) != null) {
+                    if (taskStore.getParent(taskStore.getParent(ac)).getTipoActividad() == 3) {
+                        ActividadobraDTO aciConvenio = (ActividadobraDTO) convenioDTO.getActividadobras().iterator().next();
+                        if (!GanttDatos.verificarModificacionFechasContrato(taskStore, ac, aciConvenio)) {
+                            modificarEnEditarFechaFin(ac);
+                        } else {
+                            hayError = true;
+                            alertaMensajes(GanttDatos.getMsg());
+                            props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                            getGantt().getGanttPanel().getContainer().refresh();
+                        }
+                    } else {
+                        modificarEnEditarFechaFin(ac);
+                    }
+                } else {
+                    modificarEnEditarFechaFin(ac);
+                }
             }
+        } else {
+            service.setLog("en vali principal", null);
+            hayError = true;
+            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+            props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+            props.duration().setValue(ac, actividadAnterior.getDuration());
+            alertaMensajes("la fecha de inicio y de fin de la actividad deben de estar dentro del rango de fechas del convenio, fecha inicio: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechaini()) + ", fecha fin: " + GanttDatos.darFormatoAfecha(convenioDTO.getDatefechafin()));
         }
         return hayError;
     }

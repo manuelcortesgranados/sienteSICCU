@@ -227,14 +227,14 @@ public class GanttDatos {
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
-         if (!listaHijas.isEmpty()) {
+        if (!listaHijas.isEmpty()) {
             Date menor = listaHijas.get(0).getStartDateTime();
             for (int i = 1; i < listaHijas.size(); i++) {
                 if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
                     menor = listaHijas.get(i).getStartDateTime();
                 }
             }
-             return CalendarUtil.copyDate(menor);
+            return CalendarUtil.copyDate(menor);
         }
         return null;
     }
@@ -569,27 +569,31 @@ public class GanttDatos {
         return contador;
     }
 
-    public static String validarHijosLiquidacionConvenioMacro(ActividadobraDTO actiSeleccionada, ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore) {
+    public static String validarHijosLiquidacionConvenioMacro(ActividadobraDTO actiSeleccionada, ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadAnterior) {
         String msg = "continuar";
         if (actiSeleccionada.getStartDateTime().compareTo(convenio.getDatefechafin()) >= 0) {
-            msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
+            msg = "la fecha de la actividad no puede ser superior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
 
         }
-        if (actiSeleccionada.getStartDateTime().compareTo(actiSeleccionada.getEndDateTime()) >= 0) {
-            msg = "la fecha inicio de la actividad no puede ser superior a la fecha de fin de la misma";
+        if (actiSeleccionada.getEndDateTime().compareTo(actiSeleccionada.getStartDateTime()) <= 0) {
+            msg = "la fecha fin de la actividad no puede ser inferior a la fecha de inicio de la misma:"+darFormatoAfecha(actiSeleccionada.getStartDateTime());
         } else {
-            if (actiSeleccionada.getEndDateTime().compareTo(convenio.getDatefechafin()) > 0) {
-                msg = "la fecha de la actividad no puede ser inferior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
+            if (actiSeleccionada.getStartDateTime().compareTo(actiSeleccionada.getEndDateTime()) >= 0) {
+                msg = "la fecha inicio de la actividad no puede ser superior a la fecha de fin de la misma:"+darFormatoAfecha(actiSeleccionada.getEndDateTime());
             } else {
-                ActividadobraDTO actiEjecucionConvenio = taskStore.getParent(actiSeleccionada).getChildren().get(1);
-                if (actiSeleccionada.getStartDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
-                    msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
+                if (actiSeleccionada.getEndDateTime().compareTo(convenio.getDatefechafin()) > 0) {
+                    msg = "la fecha de la actividad no puede ser superior a la fecha final del convenio:" + darFormatoAfecha(convenio.getDatefechafin());
                 } else {
-                    if (actiSeleccionada.getEndDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
+                    ActividadobraDTO actiEjecucionConvenio = taskStore.getParent(actiSeleccionada).getChildren().get(1);
+                    if (actiSeleccionada.getStartDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
                         msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
+                    } else {
+                        if (actiSeleccionada.getEndDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
+                            msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
+                        }
                     }
-                }
 
+                }
             }
 
         }
@@ -786,9 +790,9 @@ public class GanttDatos {
 
     public static boolean validarConLiquidacionConvenio(ActividadobraDTO actiSeleccionada, ContratoDTO convenioDTO) {
         Date fechaMenor = obtenerMenorFechaActividad(obtenerActividadDeRaiz(2, convenioDTO));
-        service.setLog("en valida pry:"+fechaMenor, null);
+        service.setLog("en valida pry:" + fechaMenor, null);
         if (fechaMenor != null) {
-            service.setLog("fecha din del pry:"+actiSeleccionada.getStartDateTime(), null);
+            service.setLog("fecha din del pry:" + actiSeleccionada.getStartDateTime(), null);
             if (actiSeleccionada.getStartDateTime().compareTo(fechaMenor) > 0) {
                 return true;
             }
