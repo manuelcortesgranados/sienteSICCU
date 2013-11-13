@@ -629,6 +629,7 @@ public class FlujoCaja implements Serializable {
     public void crearEstructuraFlujoEgresosConContratos() {
         List<FlujoEgresos> flujoEgresosContratos;
         this.flujoEgresos = new ArrayList<FlujoEgresos>();
+        guardarPeriodosConvenio();
         this.totalEgresos = 0;
         boolean guardarPlanificacionInicial = false;
         this.planifmovimientoconvenioproyecto = new ArrayList<Planificacionmovimientoproyecto>();
@@ -1055,6 +1056,10 @@ public class FlujoCaja implements Serializable {
                     getSessionBeanCobra().getCobraService().borrarEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtrosEliminados);
                 }
             } else if (flujoEgresosGuardar.egresoCuotaGerencia) {
+                for (Planificacionmovcuotagerencia planificacionmovcuotagerencia : flujoEgresosGuardar.planificacionesmovcuotagerencia) {
+                    System.out.println("planificacionmovcuotagerencia = " + planificacionmovcuotagerencia.getPeriodoflujocaja().getFechainicio());
+                    System.out.println("planificacionmovcuotagerencia = " + planificacionmovcuotagerencia.getPeriodoflujocaja().getIdperiodo());
+                }
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosCuotaGerencia(flujoEgresosGuardar.planificacionesmovcuotagerencia);
 
                 if (flujoEgresosGuardar.planificacionesmovcuotagerenciaEliminados.size() > 0) {
