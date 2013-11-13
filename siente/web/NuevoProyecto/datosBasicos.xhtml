@@ -194,7 +194,7 @@
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
                                          size="20"  maxlength="20"
                                          onkeypress="return validar(event);">
-                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                                <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
 
                             </h:inputText>
 
@@ -206,7 +206,7 @@
                                 %
                                 <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
                                              size="20"  maxlength="20">                                             
-                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                    <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                 </h:inputText>
                             </h:panelGrid>
 
@@ -216,7 +216,7 @@
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
                                          size="20"  maxlength="20"
                                          onkeypress="return validar(event);" >
-                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                                <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
                             </h:inputText>
 
                             <h:outputLabel  styleClass="ikont-hol-numvalprogramadoejecicion"   id="lblnumvalprogramadoejecicion"   value="#{var.numvalprogejecucion}" >
@@ -224,7 +224,7 @@
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalprogramejec}"
                                          size="20"  maxlength="20"
                                          onkeypress="return validar(event);" >
-                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                                <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
                             </h:inputText>
                         </h:panelGrid>
                         <h:panelGrid id="valores3" columns="2" cellspacing="9" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">

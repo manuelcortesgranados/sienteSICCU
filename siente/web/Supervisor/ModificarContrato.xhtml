@@ -218,7 +218,7 @@
                                                      size="20"  maxlength="20"
                                                      onkeypress="return validar(event)">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
-                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <h:outputText  styleClass="ikont-hot-lblnumrecursosch"   id="lblnumrecursosch"  value="#{var.numrecursosch}:" rendered="#{var.varrecurosoch}" />
                                         <h:inputText id="innumrecursosch" rendered="#{var.varrecurosoch}"
@@ -226,7 +226,7 @@
                                                      size="20"  maxlength="20"
                                                      onkeypress="return validar(event)">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
-                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                            <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"/>
                                         </h:inputText>
                                         <h:outputText  styleClass="ikont-hot-lblnumrecursoster"   id="lblnumrecursoster"  value="#{var.numrecursoster}:"/>
                                         <h:inputText id="innumrecursoster"
@@ -234,14 +234,14 @@
                                                      size="20"  maxlength="20"
                                                      onkeypress="return validar(event)">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
-                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                            <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"/>
                                         </h:inputText>
 
                                         <h:outputText  styleClass="ikont-hot-lblnumvlrtotal"   id="lblnumvlrtotal"  value="#{var.presupuestoconadicion}:"/>
                                         <h:panelGroup id="pgnumvlrtotal">
                                             <h:inputText id="innumvlrtotal"  value="#{Supervisor$ModificarContrato.modificarcontrato.numvlrnuevo}"
                                                          size="20"  maxlength="20" disabled="true">
-                                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                                <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"/>
                                             </h:inputText>
                                         </h:panelGroup>
                                     </h:panelGrid>

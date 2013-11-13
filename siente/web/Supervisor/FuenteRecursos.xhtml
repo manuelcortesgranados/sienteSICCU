@@ -71,7 +71,7 @@
                 </rich:column>
                 <rich:column>
                     <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" styleClass="ikont-hit-valoraporteconve"  readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
-                        <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                        <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                         <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                         <f:validateDoubleRange minimum="0"/>
                         <f:validateLength maximum="26" minimum="1"/>
@@ -131,7 +131,7 @@
         </rich:column>
         <rich:column>
             <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.reservaiva}" styleClass="ikont-hit-valoraporteconve">
-                <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                 <rich:placeholder value="Ej: $74,784.0"  />
                 <f:validateDoubleRange minimum="0"/>
                 <f:validateLength maximum="26" minimum="1"/>
@@ -145,7 +145,7 @@
         </rich:column>
         <rich:column>
             <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.otrasreservas}" styleClass="ikont-hit-valoraporteconve">
-                <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                 <rich:placeholder value="Ej: $975.356.00" />
                 <f:validateDoubleRange minimum="0"/>
                 <f:validateLength maximum="26" minimum="1"/>

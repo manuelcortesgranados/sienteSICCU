@@ -48,7 +48,7 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:inputText id="hit-valorglobal-convenio" value="#{Supervisor$Contrato.contrato.auxiliarValorContrato}"  style="width: 321px!important;" >
-                                        <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                        <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                                         <f:validateDoubleRange minimum="0"/>
                                         <f:validateLength maximum="26" minimum="1"/>
@@ -66,7 +66,7 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:inputText id="hit-valorglobal-gerencia" value="#{Supervisor$Contrato.contrato.auxiliarValorGerencia}"  style="width: 321px!important;" >
-                                        <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                        <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                                         <f:validateDoubleRange minimum="0"/>
                                         <f:validateLength maximum="26" minimum="1"/>

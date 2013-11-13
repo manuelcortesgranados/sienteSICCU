@@ -271,7 +271,7 @@
                                     <h:outputText  styleClass="ikont-hot-duracioncont"   id="lblduracionContrato"  value="#{var.duracioncont} #{Supervisor$Contrato.tipoContCon}:"/>
                                     <h:panelGroup id="gpDuracion">
                                         <h:inputText styleClass="ikont-hit-duraciondias" id="txtdurcont" value="#{Supervisor$Contrato.contrato.intduraciondias/30}" size="3" readonly="true" >
-                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <h:outputText  styleClass="ikont-hot-meses" value="#{var.meses}"/>
                                     </h:panelGroup>
@@ -311,7 +311,7 @@
                                         <h:inputText styleClass="ikont-hit-numrecursopropio" id="innumrecursospropios"  value="#{Supervisor$Contrato.contrato.numrecursospropios}"
                                                      size="20"  maxlength="20" required="true" >
                                             <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
-                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <rich:message for="innumrecursospropios" styleClass="ikont-"  />
                                     </h:panelGrid>
@@ -320,7 +320,7 @@
                                         <h:inputText styleClass="ikont-hit-numrecursoch" id="innumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}"
                                                      size="20"  maxlength="20" required="true">
                                             <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
-                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <rich:message for="innumrecursosch" styleClass="ikont-rm-numrecursoch"  />
                                     </h:panelGrid>
@@ -329,7 +329,7 @@
                                         <h:inputText styleClass="ikont-hit-numrecursoter" id="innumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}"
                                                      size="20"  maxlength="20" required="true">
                                             <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
-                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                            <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <rich:message for="innumrecursoster" styleClass="ikont-rm-numrecursoter"  />
                                     </h:panelGrid>

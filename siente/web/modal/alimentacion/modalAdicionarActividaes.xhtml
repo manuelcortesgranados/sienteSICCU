@@ -49,7 +49,7 @@
                                 <h:panelGrid columns="1">
                                     <h:inputText onfocus="clearText(this);" required="true"
                                                  id="numHabitantes" value="#{Supervisor$Alimentar.actividadobra.calcularValorUnitario}">
-                                        <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                        <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         <f:validateDoubleRange minimum="0"/>
                                     </h:inputText>
                                     <rich:message for="numHabitantes" styleClass="ikont-rm-numHabitantes"  />
