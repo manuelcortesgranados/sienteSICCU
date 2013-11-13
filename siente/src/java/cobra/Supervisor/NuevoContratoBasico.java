@@ -3762,8 +3762,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
         }
         panelPantalla = 1;
-        actualizarPanel();
-
+        getSessionBeanCobra().setConsulteContrato(true);
+        actualizarPanel();       
     }
 
     /**
@@ -7586,7 +7586,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage("El número del convenio ya existe.");
                 return false;
             } else if (isBorrador) {
-
+                
                 if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
                     if (contrato.getIntduraciondias() <= 0) {
                         validardatosbasicosplano = 3;
@@ -7691,6 +7691,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        setNumcontratotemporal(getContrato().getStrnumcontrato());
         for (Polizacontrato poliza : listaPolizasEliminar) {
             getSessionBeanCobra().getCobraService().borrarPolizaContrato(poliza);
         }
@@ -7728,7 +7729,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getFlujoCaja().getProyectosPlanOperativo().clear();
                 cargarActividadesConsultadas( lstactguardar.get(0));
             }    
-
+        
         if (!getSessionBeanCobra().isConsulteContrato()) {
             if (getSessionBeanCobra().getCobraGwtService().isElimino()) {
                 
