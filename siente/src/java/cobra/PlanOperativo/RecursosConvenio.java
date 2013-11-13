@@ -316,8 +316,8 @@ public class RecursosConvenio implements Serializable {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(
                                 getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
                         BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
-                        DecimalFormat valorConDecimal = new DecimalFormat("0.00");
-                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + valorConDecimal.format(valorConverPorcentajeGerencia));
+                            DecimalFormat valorConDecimal = new DecimalFormat("'$' ####,###.00");
+                            getFuenteRecursoConvenio().setStrporcentajecuotagerencia(valorConDecimal.format(valorConverPorcentajeGerencia));
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("validarporcentajefuente"));
                     }
