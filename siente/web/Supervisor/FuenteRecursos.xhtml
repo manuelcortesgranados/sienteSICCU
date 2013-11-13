@@ -70,11 +70,12 @@
                     <h:outputText value="Valor aporte al convenio" styleClass="input_var_convenio label_texto_convenio"/>
                 </rich:column>
                 <rich:column>
-                    <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" style="width: 321px!important;" readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
+                    <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" styleClass="ikont-hit-valoraporteconve"  readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
+                        <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                         <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                         <f:validateDoubleRange minimum="0"/>
                         <f:validateLength maximum="26" minimum="1"/>
-                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
+                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor,hpg-fuenter-valoraportado"/>
                     </h:inputText>
                     <rich:message for="hit-valoraportado-convenio"  />
                 </rich:column>                          
@@ -129,8 +130,12 @@
             <h:outputText value="Reserva para IVA"  styleClass="input_var_convenio label_texto_convenio"/>
         </rich:column>
         <rich:column>
-            <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.reservaiva}" style="width: 321px!important;">
-                <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
+            <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.reservaiva}" styleClass="ikont-hit-valoraporteconve">
+                <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                <rich:placeholder value="Ej: $74,784.0"  />
+                <f:validateDoubleRange minimum="0"/>
+                <f:validateLength maximum="26" minimum="1"/>
+                <a4j:ajax event="change" render="hpg-fuenter-reservaiva"/>
             </h:inputText>
         </rich:column>
     </h:panelGrid>
@@ -139,8 +144,12 @@
             <h:outputText value="Otras reservas" styleClass="input_var_convenio label_texto_convenio"/>
         </rich:column>
         <rich:column>
-            <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.otrasreservas}" style="width: 321px!important;" >
-                <rich:placeholder value="Ej: $975.356.00"  styleClass="input_num_convenio"/>
+            <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.otrasreservas}" styleClass="ikont-hit-valoraporteconve">
+                <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                <rich:placeholder value="Ej: $975.356.00" />
+                <f:validateDoubleRange minimum="0"/>
+                <f:validateLength maximum="26" minimum="1"/>
+                <a4j:ajax event="change" render="hpg-fuenter-otrasreservas"/>
             </h:inputText>
         </rich:column>
     </h:panelGrid>
