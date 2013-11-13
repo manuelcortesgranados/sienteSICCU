@@ -1056,10 +1056,6 @@ public class FlujoCaja implements Serializable {
                     getSessionBeanCobra().getCobraService().borrarEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtrosEliminados);
                 }
             } else if (flujoEgresosGuardar.egresoCuotaGerencia) {
-                for (Planificacionmovcuotagerencia planificacionmovcuotagerencia : flujoEgresosGuardar.planificacionesmovcuotagerencia) {
-                    System.out.println("planificacionmovcuotagerencia = " + planificacionmovcuotagerencia.getPeriodoflujocaja().getFechainicio());
-                    System.out.println("planificacionmovcuotagerencia = " + planificacionmovcuotagerencia.getPeriodoflujocaja().getIdperiodo());
-                }
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosCuotaGerencia(flujoEgresosGuardar.planificacionesmovcuotagerencia);
 
                 if (flujoEgresosGuardar.planificacionesmovcuotagerenciaEliminados.size() > 0) {
