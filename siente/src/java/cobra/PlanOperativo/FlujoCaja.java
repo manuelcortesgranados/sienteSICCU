@@ -496,16 +496,16 @@ public class FlujoCaja implements Serializable {
         }
         
         if (flujoEgresosDetallePry.isEgresoCuotaGerencia()) {
-            disponibleInicial = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+            disponibleInicial = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
             flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
-            disponible = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+            disponible = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
 
             if (disponible.compareTo(BigDecimal.ZERO) < 0) {
                 FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ajusta el valor al disponible.");
                 FacesUtils.addInfoMessage("Se ajusta el valor al disponible.");
                 flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).setValor(disponibleInicial);
                 flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
-                disponible = convenio.getNumValorCuotaGerencia().subtract(getTotalPlaniCuotaGerencia());
+                disponible = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
                 flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).setValor(disponibleInicial.add(disponible));
             }
         }
@@ -796,6 +796,7 @@ public class FlujoCaja implements Serializable {
                 for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getRecursosconvenio().getLstFuentesRecursos()) {
                     FlujoEgresos flujoEgresosCuotaGerencia = new FlujoEgresos();
                     flujoEgresosCuotaGerencia.setEgresoCuotaGerencia(true);
+                    flujoEgresosCuotaGerencia.setTotalEsperadoEgresosFuente(fuenteRecursosConvenio.getValorcuotagerencia());
                     Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
                     flujoEgresosCuotaGerencia.setItemFlujoEgresos(new Itemflujocaja());
                     flujoEgresosCuotaGerencia.getItemFlujoEgresos().setStrdescripcion(entidadAportante.getStrnombrecompleto());
