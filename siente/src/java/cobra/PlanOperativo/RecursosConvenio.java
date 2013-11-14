@@ -7,6 +7,8 @@ package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
+import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
+import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
@@ -42,8 +44,8 @@ public class RecursosConvenio implements Serializable {
     private List<Fuenterecursosconvenio> lstFuentesRecursosEliminar = new ArrayList<Fuenterecursosconvenio>();
     private SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     private ResourceBundle bundle = sbc.getBundle();
-    private boolean verAgregarRecurso=true;
-    private boolean verEliminarRecurso=true;
+    private boolean verAgregarRecurso = true;
+    private boolean verEliminarRecurso = true;
 
     public boolean isVerEliminarRecurso() {
         return verEliminarRecurso;
@@ -60,8 +62,6 @@ public class RecursosConvenio implements Serializable {
     public void setVerAgregarRecurso(boolean verAgregarRecurso) {
         this.verAgregarRecurso = verAgregarRecurso;
     }
-
-    
 
     public List<Fuenterecursosconvenio> getLstFuentesRecursosEliminar() {
         return lstFuentesRecursosEliminar;
@@ -100,15 +100,14 @@ public class RecursosConvenio implements Serializable {
         llenarTipoAporte();
         llenarRoles(cobraService);
         llenarVigencia();
-        verAgregarRecurso=true;
-        verEliminarRecurso=true;
+        verAgregarRecurso = true;
+        verEliminarRecurso = true;
     }
 
     public void limpiarFuenteRecurso() {
         fuenteRecursoConvenio = new Fuenterecursosconvenio();
         fuenteRecursoConvenio.setRolentidad(new Rolentidad());
         fuenteRecursoConvenio.setTercero(new Tercero());
-
     }
 
     /**
@@ -173,29 +172,41 @@ public class RecursosConvenio implements Serializable {
      *      
      */
     public void eliminarFuenteRecursos() {
+
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
-        if (!f.isEstaEnFuenteRecurso()) {
-            if (f.getIdfuenterecursosconvenio() != 0) {
-                lstFuentesRecursosEliminar.add(f);
-            }
+        if (f.getIdfuenterecursosconvenio() == 0) {
+            lstFuentesRecursosEliminar.add(f);
             lstFuentesRecursos.remove(f);
-            n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
-            n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
-            sumafuentes = sumafuentes.subtract(f.getValoraportado());
-            reservaIva = reservaIva.subtract(f.getReservaiva());
-            otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
-            cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
-
-            if (lstFuentesRecursos.isEmpty()) {
-                sumafuentes = BigDecimal.ZERO;
-                reservaIva = BigDecimal.ZERO;
-                otrasReservas = BigDecimal.ZERO;
-                cuotaGerencia = BigDecimal.ZERO;
-            }
         } else {
-            FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
 
+            List<Obrafuenterecursosconvenios> obraFuenteRecursosConvenios;
+            List<Planificacionmovconvenioentidad> planificaMovConvenioEntidad;
+
+            obraFuenteRecursosConvenios = sbc.getCobraService().encontrarObrafuenteRecursosConveniosPorIdFuenteRecursos(f);
+            planificaMovConvenioEntidad = sbc.getCobraService().encontraPlanificacionMovConvenioEntidadPorIdFuenteRecursos(f);
+
+            //  if (!f.isEstaEnFuenteRecurso()) { // Se remplaza este encabezado del if por otro. 
+            if (obraFuenteRecursosConvenios.size() <= 0 && planificaMovConvenioEntidad.size() <= 0) {
+                lstFuentesRecursosEliminar.add(f);
+                lstFuentesRecursos.remove(f);
+                n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
+                n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
+                sumafuentes = sumafuentes.subtract(f.getValoraportado());
+                reservaIva = reservaIva.subtract(f.getReservaiva());
+                otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
+                cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
+
+                if (lstFuentesRecursos.isEmpty()) {
+                    sumafuentes = BigDecimal.ZERO;
+                    reservaIva = BigDecimal.ZERO;
+                    otrasReservas = BigDecimal.ZERO;
+                    cuotaGerencia = BigDecimal.ZERO;
+                }
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
+
+            }
         }
     }
     //lstFuentesRecursos
@@ -216,7 +227,7 @@ public class RecursosConvenio implements Serializable {
 
     public String adicionarFuenteRecursos() {
         if (fuenteRecursoConvenio.getTipoaporte() == 2) {
-            fuenteRecursoConvenio.setPorcentajegerencia( BigDecimal.valueOf(fuenteRecursoConvenio.getPorcentajecuotagerencia()).setScale(2, RoundingMode.HALF_UP));
+            fuenteRecursoConvenio.setPorcentajegerencia(BigDecimal.valueOf(fuenteRecursoConvenio.getPorcentajecuotagerencia()).setScale(2, RoundingMode.HALF_UP));
         }
         if (fuenteRecursoConvenio.getTipoaporte() == 1) {
             fuenteRecursoConvenio.setPorcentajegerencia(fuenteRecursoConvenio.getValorcuotagerencia().setScale(2, RoundingMode.HALF_UP));
@@ -236,7 +247,6 @@ public class RecursosConvenio implements Serializable {
 
                 }
             }
-
 
             if (fuenteRecursoConvenio.getValoraportado().compareTo(n.getContrato().getValorDisponible()) > 0) {
                 FacesUtils.addErrorMessage(bundle.getString("msgerrorvaloraportadomayor") + n.getContrato().getValorDisponible());
@@ -316,8 +326,8 @@ public class RecursosConvenio implements Serializable {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(
                                 getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
                         BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
-                            DecimalFormat valorConDecimal = new DecimalFormat("'$' ####,###.00");
-                            getFuenteRecursoConvenio().setStrporcentajecuotagerencia(valorConDecimal.format(valorConverPorcentajeGerencia));
+                        DecimalFormat valorConDecimal = new DecimalFormat("'$' ####,###.00");
+                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia(valorConDecimal.format(valorConverPorcentajeGerencia));
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("validarporcentajefuente"));
                     }

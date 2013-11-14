@@ -2501,7 +2501,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         getFlujoCaja().getProyectosPlanOperativo().clear();
                         if (!getContrato().getActividadobras().isEmpty()) {
                             cargarActividadesConsultadas((Actividadobra) getContrato().getActividadobras().iterator().next());
-                        }                       
+                        }
                         getFlujoCaja().iniciarFlujoCaja();
                     }
                     break;
@@ -7077,7 +7077,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 return "PlanOperativo";
             }
         } catch (ConvenioException e) {
-            FacesUtils.addErrorMessage(e.getMessage());            
+            FacesUtils.addErrorMessage(e.getMessage());
         }
         return null;
     }
@@ -7744,10 +7744,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
 
         }
-        if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
-            getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
-            getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
+        try {
+
+            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+                getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
+            }
+
+        } catch (Exception e) {
+            FacesUtils.addErrorMessage("No puede eliminar la fuente de recursos. + =", e.getMessage());
+
+            FacesUtils.addInfoMessage("No puede eliminar la fuente de recursos =");
+            setMensajePlanOperativo(true, false, "No puede eliminar la fuente de recursos=");
         }
+
         if (!getContrato().getActividadobras().isEmpty()) {
             List<Actividadobra> lstactguardar = new ArrayList<Actividadobra>(getContrato().getActividadobras());
             lstactguardar.get(0).setContrato(getContrato());
@@ -7956,6 +7966,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
     }
+
     /**
      * Metodo para cargar el detalle del convenio que acabo de guardar.
      *
