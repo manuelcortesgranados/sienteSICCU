@@ -28,7 +28,7 @@
         <ui:insert name="head"/>
     </h:head>
 
-    <h:body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
+    <h:body onload="style_background();#{rich:component('ajaxLoadingModalBox')}.hide(); return false; ">
         <h:form>
             <h:panelGroup layout="block" styleClass="ikont-hpg-loginheader"  >
                 <h:graphicImage  styleClass="ikont-hgi-iconheaderpng "   url="/resources/imgs/login/icon_header.png"   />
@@ -46,7 +46,7 @@
                     <h:graphicImage url="/resources/imgs/login/icon_yt.png" width="40" height="40" styleClass="footer-login-img-social"/>
                 </a> 
                 <a target="_blank" href="#{var.btnfacebook}" >                
-                <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                    <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
                 </a>
                 <a target="_blank" href="#{var.btntwitter}" >
                     <h:graphicImage url="/resources/imgs/login/icon_tw.png" width="40" height="40" styleClass="footer-login-img-social"/>

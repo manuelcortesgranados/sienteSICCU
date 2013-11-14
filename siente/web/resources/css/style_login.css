@@ -121,15 +121,6 @@ body{
     margin: 0px auto;
 }   
 
-input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
-    height: 23px !important;
-    width: 50px !important;
-    text-align: center !important;
-    line-height: inherit !important;
-    border-style: solid;
-    border-width: 1px !important;
-    font-weight: bold;
-}
 
 .tab-login-input-button-register{
     text-align: center !important;
@@ -179,7 +170,7 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     -ms-border-bottom-left-radius: 10px !important; 
     -webkit-bottom-left-radius: 10px !important; 
     border-bottom-left-radius: 10px !important; 
-    width: 320px !important;
+    width: 350px !important;
     height: 360px !important;
     margin-top: 1px !important;
     margin-left: 1px !important;
@@ -304,4 +295,115 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
 
 input[type="password"].ikont-hit-contrasenados, input[type="text"].ikont-hit-contrasenados{
     width: 146px;
+}
+
+.footer-login-img-social{
+    position: relative !important; 
+    float: right !important; 
+    margin-right: 20px;
+}
+
+.tab-login-input-text{
+    width: 175px !important;
+    height: 22px !important;    
+    color: black !important;
+    background-color: white !important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    border: solid 1px #1D629F !important;
+    display:block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 5px 5px 0px 5px !important;
+    font-family: "futura" !important;
+    font-size: 0.8em!important;
+}    
+.tab-login-input-password{
+    width: 123px !important;
+    height: 22px !important;
+    color: black !important;
+    background-color: white !important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    border: solid 1px #1D629F !important;
+    display:block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 5px 5px 0px 5px !important;
+    font-size: 0.8em!important;
+}
+
+.tab-login-input-button{
+    height: 21px !important;
+    width: 50px !important;
+    text-align: center !important;
+    line-height: inherit !important;
+    background-color: whitesmoke !important;
+    font-size: 10px !important;
+    font-family: "century"!important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
+    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
+    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
+    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
+    border: solid 1px #F6A502 !important;
+}
+
+.tab-login-input-button:hover, .tab-login-input-button-register:hover, .tab-login-input-button-photo:hover{
+    color: #000;
+}
+
+.tab-login-input-button-register{
+    height: 21px !important;
+    color: black !important;
+    width: 50px !important;
+    font-family: "century"!important;
+    text-align: center !important;
+    line-height: inherit !important;
+    background-color: whitesmoke !important;
+    font-size: 10px !important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
+    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
+    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
+    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
+    border: solid 1px #F6A502 !important;
+    margin-left: 10px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 20px;
+    padding-right: 20px;    
+}
+
+.tab-login-input-button-photo{
+    position: relative;
+    left: 30px;
+    width: 80px !important;
+    height: 21px !important;
+    color: black !important;
+    width: 50px !important;
+    text-align: center !important;
+    line-height: inherit !important;
+    background-color: whitesmoke !important;
+    font-size: 10px !important;
+    font-family: "century";
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    background: -webkit-gradient(linear, left top, left bottom, from(#F2F2F2), to(#A4A4A4), color-stop(0.7, #A4A4A4))!important;
+    background: -moz-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
+    background: -ms-linear-gradient(top, rgba(242,242,242, 1) 0%, rgba(164,164,164,1) 100%)!important;
+    background: -o-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
+    border: solid 1px #A4A4A4 !important;
 }

@@ -35,7 +35,7 @@
                                             <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarconuno "   value="#{var.logintabentrarcontenidoingresarconuno}"   />    
                                             <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarcondos "   value="#{var.logintabentrarcontenidoingresarcondos}"   />    
                                         </h:panelGrid>
-                                        <h:inputText id="usuariodos" styleClass="ikont-hit-usuLogin"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" size="35">
+                                        <h:inputText id="usuariodos" styleClass="ikont-hit-usuLogin tab-login-input-text"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" size="35">
                                             <rich:placeholder value="Usuario" />
                                         </h:inputText>
                                         <h:panelGroup layout="block"  styleClass="tab-login-label-error">
@@ -44,12 +44,12 @@
                                         <h:panelGroup >
                                             <center>
                                                 <h:panelGrid columns="2">
-                                                    <h:inputSecret id="contrasenados"  styleClass="ikont-hit-contrasenados"    required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" size="35">
+                                                    <h:inputSecret id="contrasenados"  styleClass="ikont-hit-contrasenados tab-login-input-password"    required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" size="35">
                                                         <f:validateLength maximum="20" minimum="8"/>
                                                         <rich:placeholder value="Contraseña" />
                                                     </h:inputSecret>
 
-                                                    <h:commandButton id="enviardos" styleClass="ikont-hcb-logintabentrarbtnentrar"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                    <h:commandButton id="enviardos" styleClass="ikont-hcb-logintabentrarbtnentrar tab-login-input-button"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
                                                                      type="submit" 
                                                                      onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                 return true;"
@@ -155,31 +155,31 @@
                                                 <center>
                                                     <h:panelGrid columns="2">
                                                         <h:panelGrid >
-                                                            <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  >
+                                                            <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre tab-login-input-text"  >
                                                                 <rich:placeholder value="Nombre" />
                                                             </h:inputText>
                                                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                                                 <rich:message for="textnombre" />
                                                             </h:panelGroup>
-                                                            <h:inputText required="true"  id="textusuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario"  >
+                                                            <h:inputText required="true"  id="textusuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario tab-login-input-text"  >
                                                                 <rich:placeholder value="Usuario" />
                                                             </h:inputText>
                                                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                                                 <rich:message for="textusuario"/>
                                                             </h:panelGroup>
-                                                            <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
+                                                            <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo tab-login-input-text" >
                                                                 <rich:placeholder value="Em@il" />
                                                             </h:inputText>
                                                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                                                 <rich:message for="textcorreo"  />
                                                             </h:panelGroup>
-                                                            <h:inputSecret required="true" id="textpassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword"  >
+                                                            <h:inputSecret required="true" id="textpassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword tab-login-input-text"  >
                                                                 <rich:placeholder value="Contraseña" />
                                                             </h:inputSecret>
                                                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                                                 <rich:message for="textpassword"  />
                                                             </h:panelGroup>
-                                                            <h:inputSecret  required="true" id="textrepassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword"  >
+                                                            <h:inputSecret  required="true" id="textrepassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword tab-login-input-text"  >
                                                                 <rich:placeholder value="Confirmar Contraseña" />
                                                             </h:inputSecret>
                                                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
@@ -195,7 +195,7 @@
                                                                     </h:panelGroup>
                                                                 </center>
                                                             </h:panelGroup>
-                                                            <a4j:commandLink styleClass="ikont-a4jcl-logintabregistratephoto"   value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
+                                                            <a4j:commandLink styleClass="ikont-a4jcl-logintabregistratephoto tab-login-input-button-photo"   value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
                                                             </a4j:commandLink>  
                                                         </h:panelGrid>
                                                     </h:panelGrid>
