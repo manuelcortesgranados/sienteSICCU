@@ -27,7 +27,16 @@
                         <h:outputLabel value="Acumulado" />
                     </h:panelGrid>
                 </f:facet>
-            </rich:column> 
+            </rich:column>
+            
+            <rich:column width="60px" style="text-align: right; font-weight: bold;">
+                <f:facet name="header">
+                    <h:outputLabel value="Vigencia" />
+                </f:facet>
+
+                <h:outputText value="#{fuenteIngresos.fuenteRecursosConvenio.vigencia}" />
+
+            </rich:column>
 
             <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">

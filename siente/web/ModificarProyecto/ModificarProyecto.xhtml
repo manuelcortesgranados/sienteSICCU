@@ -414,8 +414,8 @@
                                 <interkont:spacer height="10" />
 
                                 <h:panelGroup styleClass="ikont-hpg-accionespaso4"  >
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso4 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso4 BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}"   styleClass="ikont-acl-atraspaso4 BotonesPasosModificar"   value="#{var.atras}" />
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}"  styleClass="ikont-acl-siguientepaso4 BotonesPasosModificar"   value="#{var.siguiente}"/>
                                     <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"   styleClass="ikont-acl-cancelarpaso4 BotonesPasosModificar"   value="#{var.cancelar}"/>
                                 </h:panelGroup>
 
@@ -506,8 +506,8 @@
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="ikont-hpg-accionespaso5"  >
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso5 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso5 BotonesPasosModificar"   value="#{var.guardar}" execute="@form"/>
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}"   styleClass="ikont-acl-atraspaso5 BotonesPasosModificar"   value="#{var.atras}" />
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}"  styleClass="ikont-acl-siguientepaso5 BotonesPasosModificar"   value="#{var.guardar}" />
                                     <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont-acl-cancelarpaso5 BotonesPasosModificar"   value="#{var.cancelar}" />
                                 </h:panelGroup>
 
