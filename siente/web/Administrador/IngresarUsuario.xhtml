@@ -135,7 +135,7 @@
                                 <br/>
                                 <br/>
                                 <h:panelGroup id="ikont-panel-localidad"  rendered="#{Ciudadano$PerfilCiudadano.intidtipousuario==2}">
-                                    <rich:collapsiblePanel header="Seleccione la localidad"   expanded="true" switchType="ajax" id="asociarentidad">
+                                    <rich:collapsiblePanel header="Seleccione la localidad"   expanded="true" switchType="ajax">
                                         <h:outputLabel  styleClass="ikont-outtext-subtitulo"   id="lblclasificacionProyecto"  value="Tipo origen" for="comboclasificacionproyecto" style="position: relative;left: -270px;top: -5px;"/>
                                         <h:selectOneMenu id="comboclasificacionproyecto" value="#{Ciudadano$PerfilCiudadano.intorigen}" disabled="#{Supervisor$IngresarNuevaObra.tipoOrigenSoloLectura}" style="top: 29px;position: relative;left: 145px;">  
                                             <f:selectItem itemLabel="Nacional" itemValue="1" />
@@ -161,9 +161,9 @@
                                     </rich:collapsiblePanel>
                                 </h:panelGroup>
 
-                                <h:panelGroup id="ikont-panel-entidad" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==16 || Ciudadano$PerfilCiudadano.intidgrupo ==19  || Ciudadano$PerfilCiudadano.intidgrupo ==20}">
+                                <h:panelGroup id="ikont-panel-entidad" >
                                     <h:form>
-                                        <rich:collapsiblePanel header="#{var.asociar} #{var.entidad}"    switchType="ajax" id="asociarentidad">
+                                        <rich:collapsiblePanel rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==16 || Ciudadano$PerfilCiudadano.intidgrupo ==19  || Ciudadano$PerfilCiudadano.intidgrupo ==20}" header="#{var.asociar} #{var.entidad}"    switchType="ajax" id="asociarentidad">
 
                                             <h:panelGrid style="width: 100%;" id="panelcontenidoentidad" columns="3">
                                                 <h:panelGroup>
@@ -237,12 +237,12 @@
                                             </h:panelGrid>
 
                                         </rich:collapsiblePanel>
-                                        <h:panelGroup id="ikont-panel-relacionobrajsfusuario" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==20 || Ciudadano$PerfilCiudadano.intidgrupo ==23}">
-                                            <h:form>
-                                                <rich:collapsiblePanel header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax" id="asociarentidad">
+                                        <h:panelGroup id="ikont-panel-relacionobrajsfusuario" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==20 || Ciudadano$PerfilCiudadano.intidgrupo ==23 || Ciudadano$PerfilCiudadano.intidgrupo ==18}">
+                                            
+                                                <rich:collapsiblePanel header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax">
                                                     <ui:include src="/Administrador/asociarporjsfusuario.xhtml" />
                                                 </rich:collapsiblePanel>
-                                            </h:form>
+                                          
                                         </h:panelGroup>
                                     </h:form> 
                                 </h:panelGroup>
