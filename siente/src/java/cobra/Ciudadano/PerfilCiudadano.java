@@ -148,9 +148,6 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     private String CodDepartamento;
     private JsfUsuarioGrupo jsfusuariogrupo = new JsfUsuarioGrupo();
     private Tercero tercero = new Tercero();
-    @ManagedProperty(value = "#{capitalsParser.capitalsList}")
-    private List<Obra> obrasseleccionadas;
-    private List<Obra> listaobrasasociar = new ArrayList<Obra>();
     private SelectItem[] uno;
     /*
      * Variable Utilizada para almacenar  el grupo del usuario
@@ -609,24 +606,6 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     public void setTercero(Tercero tercero) {
         this.tercero = tercero;
     }
-
-
-    public List<Obra> getListaobrasasociar() {
-        return listaobrasasociar;
-    }
-
-    public void setListaobrasasociar(List<Obra> listaobrasasociar) {
-        this.listaobrasasociar = listaobrasasociar;
-    }
-
-    public List<Obra> getObrasseleccionadas() {
-        return obrasseleccionadas;
-    }
-
-    public void setObrasseleccionadas(List<Obra> obrasseleccionadas) {
-        this.obrasseleccionadas = obrasseleccionadas;
-    }
-    
 
     public SelectItem[] getUno() {
         return uno;
@@ -1842,9 +1821,5 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         limpiarCiudadano();
         getUsuario().limpiarSeleccionEntidad();
         return "gestion";
-    }
-    public void cargarObras() {
-
-        listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTercero(getTercero());
     }
 }

@@ -74,7 +74,7 @@
                                     <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                                 </h:selectOneMenu>
 
-                                </h:panelGrid>
+                            </h:panelGrid>
                             <rich:collapsiblePanel header="#{var.configurarusuario}"  id="configurarusuario" style="width: 1000px" >
                                 <h:panelGrid   cellspacing="10" id="ikont-panel-selects-conusu">
                                     <h:panelGrid columns="2">
@@ -124,8 +124,8 @@
                                     </rich:column>
                                 </rich:dataTable>
                             </rich:collapsiblePanel>
-                                
-                            
+
+
                             <h:panelGroup id="ikont-panel-tipoUsuario" >
                                 <h:selectOneMenu id="combocargartipousuario" value="#{Ciudadano$PerfilCiudadano.intidtipousuario}" rendered="false  " style="position: relative;left: 225px;top: 4px;">
                                     <f:selectItems value="#{Perfil$Usuario.tipousuariooption}" />
@@ -159,13 +159,6 @@
                                             </h:panelGroup>
                                         </h:panelGroup>
                                     </rich:collapsiblePanel>
-                                </h:panelGroup>
-                                <h:panelGroup id="ikont-panel-relacionobrajsfusuario" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==20}">
-                                    <h:form>
-                                        <rich:collapsiblePanel header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax" id="asociarentidad">
-                                            <ui:include src="/Administrador/asociarporjsfusuario.xhtml" />
-                                        </rich:collapsiblePanel>
-                                    </h:form>
                                 </h:panelGroup>
 
                                 <h:panelGroup id="ikont-panel-entidad" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==16 || Ciudadano$PerfilCiudadano.intidgrupo ==19  || Ciudadano$PerfilCiudadano.intidgrupo ==20}">
@@ -244,6 +237,13 @@
                                             </h:panelGrid>
 
                                         </rich:collapsiblePanel>
+                                        <h:panelGroup id="ikont-panel-relacionobrajsfusuario" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==20 || Ciudadano$PerfilCiudadano.intidgrupo ==23}">
+                                            <h:form>
+                                                <rich:collapsiblePanel header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax" id="asociarentidad">
+                                                    <ui:include src="/Administrador/asociarporjsfusuario.xhtml" />
+                                                </rich:collapsiblePanel>
+                                            </h:form>
+                                        </h:panelGroup>
                                     </h:form> 
                                 </h:panelGroup>
 

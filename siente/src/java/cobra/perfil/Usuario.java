@@ -570,6 +570,7 @@ public class Usuario implements Serializable {
     }   
 
     public Tercero getTercero() {
+        System.out.println("tercero   " + getTercero().getIntcodigo());
         return tercero;
     }
 
@@ -1347,4 +1348,95 @@ public class Usuario implements Serializable {
             entidadcreacionusuario[i++] = dep;
         }
     }
+    
+    //Parte de ingresar usuario
+    private UIDataTable datatablelistaobras;
+    private boolean seleccionProyecto;
+
+    public boolean isSeleccionProyecto() {
+        return seleccionProyecto;
+    }
+
+    public void setSeleccionProyecto(boolean seleccionProyecto) {
+        this.seleccionProyecto = seleccionProyecto;
+    }
+    
+    public UIDataTable getDatatablelistaobras() {
+        return datatablelistaobras;
+    }
+
+    public void setDatatablelistaobras(UIDataTable datatablelistaobras) {
+        this.datatablelistaobras = datatablelistaobras;
+    }
+    private Map<VistaObraMapa, Boolean> listaproyectosbooleana = new HashMap<VistaObraMapa, Boolean>();
+
+    public Map<VistaObraMapa, Boolean> getListaproyectosbooleana() {
+        return listaproyectosbooleana;
+    }
+
+    public void setListaproyectosbooleana(Map<VistaObraMapa, Boolean> listaproyectosbooleana) {
+        this.listaproyectosbooleana = listaproyectosbooleana;
+    }
+    private List<VistaObraMapa> listaobrasasociar = new ArrayList<VistaObraMapa>();
+
+    public List<VistaObraMapa> getListaobrasasociar() {
+        return listaobrasasociar;
+    }
+
+    public void setListaobrasasociar(List<VistaObraMapa> listaobrasasociar) {
+        this.listaobrasasociar = listaobrasasociar;
+    }
+    Tercero terce = new Tercero();
+
+    public Tercero getTerce() {
+        return terce;
+    }
+
+    public void setTerce(Tercero terce) {
+        this.terce = terce;
+    }
+
+   public void cargarObras() {
+     listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTerceroVista(getTerce());
+     }
+
+     public void seleccionarUnProyecto(ValueChangeEvent event) {
+        listaproyectosbooleana.put((VistaObraMapa) datatablelistaobras.getRowData(), (Boolean) event.getNewValue());
+
+    }
+      private ArrayList<VistaObraMapa> listaproyecto = new ArrayList<VistaObraMapa>();
+
+    public ArrayList<VistaObraMapa> getListaproyecto() {
+        return listaproyecto;
+    }
+
+    public void setListaproyecto(ArrayList<VistaObraMapa> listaproyecto) {
+        this.listaproyecto = listaproyecto;
+    }
+
+
+     public List<VistaObraMapa> listarProyectosSeleccionadas() {
+        if (isSeleccionProyecto()) {
+            
+            return getListaobrasasociar();
+        }
+        List<VistaObraMapa> result = new ArrayList<VistaObraMapa>();
+        Iterator<?> iterator = listaproyectosbooleana.keySet().iterator();
+        listaproyecto = new ArrayList<VistaObraMapa>();
+        while (iterator.hasNext()) {
+
+            VistaObraMapa key = (VistaObraMapa) iterator.next();
+            if (listaproyectosbooleana.get(key)) {
+                result.add(key);
+                listaproyecto.add(key);
+            }
+        }
+        //inhabilitarseleccionentidades = true;
+        if (listaproyecto.size() < 1) {
+            FacesUtils.addErrorMessage("debe elegir un proyecto");
+        }
+        return result;
+
+    }
 }
+
