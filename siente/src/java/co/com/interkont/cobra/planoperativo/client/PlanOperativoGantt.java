@@ -1490,7 +1490,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 service.setLog("Tipo actividad padre "+actividadP.getTipoActividad(), null);
                 if (actividadP.getTipoActividad() == 5) {
                     if (taskStore.getParent(actividadP) != null) {
-                        service.setLog("Aca 1", null);
+                        //service.setLog("Aca 1", null);
                         if (taskStore.getParent(actividadP).getTipoActividad() == 1) {
                             service.setLog("Aca 2", null);
                             mensaje = "continuar";
