@@ -56,7 +56,7 @@ public class ToolBarSuperior implements IsWidget {
                 service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        service.setLog(caught.getMessage(), null);
                     }
 
                     @Override
@@ -65,7 +65,7 @@ public class ToolBarSuperior implements IsWidget {
                         service.setNavegacion(2, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
-                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                service.setLog(caught.getMessage(), null);
                             }
 
                             @Override
@@ -73,7 +73,7 @@ public class ToolBarSuperior implements IsWidget {
                                 service.setGuardarconvenio(2, new AsyncCallback<Boolean>() {
                                     @Override
                                     public void onFailure(Throwable caught) {
-                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                        service.setLog(caught.getMessage(), null);
                                     }
 
                                     @Override
@@ -96,7 +96,7 @@ public class ToolBarSuperior implements IsWidget {
                 service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                       service.setLog(caught.getMessage(), null);
                     }
 
                     @Override
@@ -104,7 +104,7 @@ public class ToolBarSuperior implements IsWidget {
                         service.setNavegacion(2, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
-                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                               service.setLog(caught.getMessage(), null);
                             }
 
                             @Override
@@ -112,7 +112,7 @@ public class ToolBarSuperior implements IsWidget {
                                 service.setGuardarconvenio(1, new AsyncCallback<Boolean>() {
                                     @Override
                                     public void onFailure(Throwable caught) {
-                                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                        service.setLog(caught.getMessage(), null);
                                     }
 
                                     @Override

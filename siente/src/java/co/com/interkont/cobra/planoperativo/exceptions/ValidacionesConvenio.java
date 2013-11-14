@@ -151,12 +151,12 @@ public class ValidacionesConvenio {
     }
 
     public static void validarDisponibilidadFuentesRecursos(List<Fuenterecursosconvenio> listarecursos) {
-        for (Fuenterecursosconvenio fue : listarecursos) {
-            if (fue.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
-                throw new ConvenioException("La entidad " + fue.getTercero().getStrnombrecompleto() + ", en la vigencia " + fue.getVigencia()
-                        + " posee un valor disponible de ($" + fue.getValorDisponible() + ") para ser distribuido en proyectos. ");
-            }
-        }
+//        for (Fuenterecursosconvenio fue : listarecursos) {
+//            if (fue.getValorDisponible().compareTo(BigDecimal.ZERO) != 0) {
+//                throw new ConvenioException("La entidad " + fue.getTercero().getStrnombrecompleto() + ", en la vigencia " + fue.getVigencia()
+//                        + " posee un valor disponible de ($" + fue.getValorDisponible() + ") para ser distribuido en proyectos. ");
+//            }
+//        }
     }
     
     

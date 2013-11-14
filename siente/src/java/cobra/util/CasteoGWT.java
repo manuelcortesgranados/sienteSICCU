@@ -828,14 +828,12 @@ public class CasteoGWT implements Serializable {
         //System.out.println("obra = " + obra.getIntcodigoobra());
         for (ActividadobraDTO obj : SetActividadesDto) {
             if(obra!=null){
-                System.out.println("obj obra elimina != null " );
+                
             obj.setStartDateTime(obra.getDatefeciniobra());
             obj.setEndDateTime(obra.getDatefecfinobra());
             obj.setDuration(obj.calcularDuracion());
 
             setActividades.add(castearActividadobraDdoProyectoToActividadobra(obj, obra, intusuario));
-            }else{
-             System.out.println("obj obra elimina == null " );
             }
         }
         return setActividades;
