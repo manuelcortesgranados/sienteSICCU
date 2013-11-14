@@ -14,32 +14,98 @@
 
         <h:panelGrid columns="2" >
             <h:outputLabel  styleClass="ikont-outtext-subtitulo"    id="lblEntidadusuario"  value="#{var.entidad}: "/>
-            <h:selectOneMenu  id="comboEntidadNuevoUsuario" style="position: relative;left: 163px;" value="#{Ciudadano$PerfilCiudadano.tercero.intcodigo}">
+            <h:selectOneMenu  id="comboEntidadNuevoUsuario" style="position: relative;left: 163px;" value="#{Perfil$Usuario.terce.intcodigo}">
                 <f:selectItems  value="#{Perfil$Usuario.entidadcreacionusuario}" />
-                <a4j:ajax   event="valueChange"  execute="@this,combodepartamentoproyecto,pikc-usuario"
-                           listener="#{Ciudadano$PerfilCiudadano.cargarObras}"  render="comboEntidadNuevoUsuario,pikc-usuario"/>
+                <a4j:ajax   event="valueChange"  execute="@this,combodepartamentoproyecto,tableasociarproyecto,asociarproyecto"
+                            listener="#{Perfil$Usuario.cargarObras}"  render="comboEntidadNuevoUsuario,tableasociarproyecto,ikont-panel-proyecto"/>
             </h:selectOneMenu>
         </h:panelGrid>
-         <br/>
-         <br/>
-        <rich:panel id="pikc-usuario" style="width:1100px;"  >
-            <f:facet name="header">
-                <h:outputText value="Seleccione los proyectos a asociar." style="font-size: 14px;color: white;"></h:outputText>
-            </f:facet>
-            <rich:pickList id="rpl-proyectos" value="#{Ciudadano$PerfilCiudadano.obrasseleccionadas}" var="obrasseleccionadas" listHeight="300px" listWidth="470px" >
-                <f:selectItems value="#{Ciudadano$PerfilCiudadano.listaobrasasociar}" />
-                <f:converter converterId="CapitalsConverter" />
-                <rich:column style="text-align: right!important;">
-                    <f:facet name="header" class="pikc-usuario-class">Codigo Obra</f:facet>
-                    | #{obrasseleccionadas.intcodigoobra} 
-                   
-                </rich:column>
-                <rich:column>
-                    <f:facet name="header" class="pikc-usuario-class">Nombre Proyecto</f:facet>
-                    <h:inputTextarea value="#{obrasseleccionadas.strnombrecrot}" rows="3" cols="60"/>
-                   
-                </rich:column>        
-            </rich:pickList>
-        </rich:panel>
-    </h:panelGroup>
+        <h:panelGroup id="ikont-panel-proyecto" >
+            <h:form>
+                <rich:collapsiblePanel header="#{var.asociar} #{var.obra}"    switchType="ajax" id="asociarproyecto">
+
+                    <h:panelGrid style="width: 100%;" id="panelcontenidoproyecto" columns="3">
+                        <h:panelGroup>
+                            <!--                            <h:panelGrid columns="2">
+                                                            <h:outputLabel value="# {var.buscar} # {var.obra}"/>
+                                                            <interkont:spacer/>
+                                                            <h:inputText id="inputtextEntidad"  value="# {Perfil$Usuario.strbuscarentidad}"  onfocus="clearText(this);"
+                                                                         />
+                                                            <a4j:commandButton  execute="@this,inputtextEntidad,idbuscarentidad,tableasociarproyecto"   render="@ll,idbuscarentidad,asociarproyecto,panelcontenidoproyecto" 
+                                                                                actionListener="# {Perfil$Usuario.buscarEntidad}" value="# {var.Buscar}"/>
+                                                        </h:panelGrid>-->
+                            <rich:dataTable style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistaobras}"
+                                            rows="8" var="varproyecto"  value="#{Perfil$Usuario.listaobrasasociar}" id="tableasociarproyecto">
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="#{var.seleccionar}"/>
+                                    </f:facet>
+                                    <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaproyectosbooleana[varproyecto]}"
+                                                             immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnProyecto}">
+                                        <f:ajax event="click" render="@form"/>
+
+                                    </h:selectBooleanCheckbox>
+                                </rich:column>
+
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.codigo} #{var.obra}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{varproyecto.intcodigoobra}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.nombreobra}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{varproyecto.strnombrecrot}"/>
+                                </rich:column>
+                            </rich:dataTable>
+                            <!--                            <h:panelGroup rendered="# {!Perfil$Usuario.strnoencontrabusqueda}">
+                                                            <h:outputText value="# {var.noseencontrolaentidad}"/>
+                                                        </h:panelGroup>-->
+                            <rich:dataScroller rendered="#{Perfil$Usuario.listaobrasasociar.size()>10}" for="tableasociarproyecto" maxPages="5" />
+                        </h:panelGroup>
+                        <rich:column>
+                            <center>
+                                <a4j:commandButton rendered="#{Perfil$Usuario.listaobrasasociar.size()>0}" immediate="true" execute="repeatproyectosselecionados" render="repeatproyectosselecionados,asociarproyecto" actionListener="#{Perfil$Usuario.listarProyectosSeleccionadas}" value="#{var.listar} #{var.obra} #{var.seleccion}"/>
+                                <br/>
+                                <br/>
+                                <a4j:commandButton immediate="true" execute="repeatproyectosselecionados" render="repeatproyectosselecionados,asociarproyecto" actionListener="#{Perfil$Usuario.limpiarSeleccionEntidad}" value="#{var.cancelar}"/>
+                            </center>
+                        </rich:column>
+                        <h:panelGrid id="idbuscarentidad">
+                            <h:panelGroup >
+                                <rich:dataTable  style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
+                                                 rows="5" var="varproyecto"  value="#{Perfil$Usuario.listaproyecto}" id="repeatproyectosselecionados">
+                                    <rich:column>
+                                        <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaproyectosbooleana[varproyecto]}"
+                                                                 immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnProyecto}">
+                                            <f:ajax event="click" render="@form"/>
+                                        </h:selectBooleanCheckbox>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.nombreobra}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{varproyecto.strnombrecrot}"/>
+                                    </rich:column>
+                                </rich:dataTable>
+                                <rich:dataScroller rendered="#{Perfil$Usuario.listaobrasasociar.size()> 4}" for="repeatproyectosselecionados" maxPages="5" />
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </rich:collapsiblePanel>
+               
+            </h:form> 
+        </h:panelGroup>
+
+
+        <a4j:commandButton id="btnGuardaru"  
+                           value="#{var.guardar}"  
+                           
+
+                           >
+        </a4j:commandButton>
+        </h:panelGroup>
 </ui:composition>
