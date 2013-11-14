@@ -586,10 +586,10 @@ public class GanttDatos {
                 } else {
                     ActividadobraDTO actiEjecucionConvenio = taskStore.getParent(actiSeleccionada).getChildren().get(1);
                     if (actiSeleccionada.getStartDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
-                        msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
+                        msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
                     } else {
                         if (actiSeleccionada.getEndDateTime().compareTo(actiEjecucionConvenio.getEndDateTime()) < 0) {
-                            msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
+                            msg = "la fecha de la actividad no puede ser inferior a la fecha final de la ejecucion del convenio:" + darFormatoAfecha(actiEjecucionConvenio.getEndDateTime());
                         }
                     }
 
