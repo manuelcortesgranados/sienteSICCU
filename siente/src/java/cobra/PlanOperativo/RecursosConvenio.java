@@ -178,6 +178,8 @@ public class RecursosConvenio implements Serializable {
         if (f.getIdfuenterecursosconvenio() == 0) {
             lstFuentesRecursosEliminar.add(f);
             lstFuentesRecursos.remove(f);
+            recalcularValoresFuenteRecursos(n,f);
+
         } else {
 
             List<Obrafuenterecursosconvenios> obraFuenteRecursosConvenios;
@@ -187,30 +189,39 @@ public class RecursosConvenio implements Serializable {
             planificaMovConvenioEntidad = sbc.getCobraService().encontraPlanificacionMovConvenioEntidadPorIdFuenteRecursos(f);
 
             //  if (!f.isEstaEnFuenteRecurso()) { // Se remplaza este encabezado del if por otro. 
-            if (obraFuenteRecursosConvenios.size() <= 0 && planificaMovConvenioEntidad.size() <= 0) {
+            if (obraFuenteRecursosConvenios.isEmpty() && planificaMovConvenioEntidad.isEmpty()) {
                 lstFuentesRecursosEliminar.add(f);
                 lstFuentesRecursos.remove(f);
-                n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
-                n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
-                sumafuentes = sumafuentes.subtract(f.getValoraportado());
-                reservaIva = reservaIva.subtract(f.getReservaiva());
-                otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
-                cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
-
-                if (lstFuentesRecursos.isEmpty()) {
-                    sumafuentes = BigDecimal.ZERO;
-                    reservaIva = BigDecimal.ZERO;
-                    otrasReservas = BigDecimal.ZERO;
-                    cuotaGerencia = BigDecimal.ZERO;
-                }
+                recalcularValoresFuenteRecursos(n,f);
             } else {
                 FacesUtils.addErrorMessage(bundle.getString("msgerrorvalidacionfuenterecurso"));
 
             }
         }
     }
-    //lstFuentesRecursos
 
+    /**
+     * Metodo que recalcula valores al momento de eliminar una fuente de recursos. 
+     * @param n
+     * @param f 
+     */
+    private void recalcularValoresFuenteRecursos( NuevoContratoBasico n, Fuenterecursosconvenio f ) {
+        n.getContrato().setValorDisponible(n.getContrato().getValorDisponible().add(f.getValoraportado()));
+        n.getContrato().setValorDisponibleCuotaGerencia(n.getContrato().getValorDisponibleCuotaGerencia().add(f.getValorcuotagerencia()));
+        sumafuentes = sumafuentes.subtract(f.getValoraportado());
+        reservaIva = reservaIva.subtract(f.getReservaiva());
+        otrasReservas = otrasReservas.subtract(f.getOtrasreservas());
+        cuotaGerencia = cuotaGerencia.subtract(f.getValorcuotagerencia());
+
+        if (lstFuentesRecursos.isEmpty()) {
+            sumafuentes = BigDecimal.ZERO;
+            reservaIva = BigDecimal.ZERO;
+            otrasReservas = BigDecimal.ZERO;
+            cuotaGerencia = BigDecimal.ZERO;
+        }
+    }
+
+    //lstFuentesRecursos
     public BigDecimal sumaFuenteRecursos(BigDecimal valorNuevo) {
         BigDecimal valorSuma = BigDecimal.ZERO;
         for (Fuenterecursosconvenio f : lstFuentesRecursos) {
