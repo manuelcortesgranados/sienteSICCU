@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition id="menu_lateral_proyecto"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf">
+
+    <rich:panel header="Conozca el Proyecto" >
+        <center>
+            <h:panelGrid columns="3" border="0"  columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
+                <interkont:spacer width="1" />
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="ikont-acl-iniciardeta"    
+                        action="#{Supervisor$AdministrarObraNew.iniciardeta}">
+                    </a4j:commandLink>
+                </h:panelGroup>
+                <h:commandLink styleClass="ikont-hcl-houinfo" value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
+
+                <h:outputText  styleClass="ikont-hot-comen" value="#{SessionBeanCobra.cobraService.comen}" />
+                <h:panelGroup>
+                    <a4j:commandLink  styleClass="ikont-acl-iniciaropciones"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
+                     </a4j:commandLink>
+                </h:panelGroup>
+                <h:commandLink styleClass="ikont-hcl-comentarios"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
+
+                <h:outputText  styleClass="ikont-hot-cobraserviceimag"  value="#{SessionBeanCobra.cobraService.imag}" />
+                <h:panelGroup>                   
+                        <a4j:commandLink styleClass="ikont-acl-iniciarimagenes"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
+                </h:panelGroup>
+                <h:commandLink styleClass="ikont-hcl-iniciarimagenes"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
+                <h:outputText  styleClass="ikont-hot-documentos" value="#{SessionBeanCobra.cobraService.docu}"  />
+                <h:panelGroup>                    
+                        <a4j:commandLink styleClass="ikont-acl-iniciardocumentos"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
+               </h:panelGroup>
+                <h:commandLink styleClass="ikont-hcl-iniciardocumentos"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
+                
+            </h:panelGrid>
+        </center>
+    </rich:panel>
+
+
+</ui:composition>

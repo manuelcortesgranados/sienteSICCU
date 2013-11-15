@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+>
+
+
+    <rich:panel header="Administrar Proyecto" id="menuAdministrar" rendered="#{!SessionBeanCobra.cobraService.ciu}" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+            <h:panelGrid styleClass="ikont-hpg-btndetalle"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciardeta img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-iniciardeta1 text-button-panel"   value="Detalle" action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-iniciaraliment"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro==null and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciaraliment img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                               immediate="true"/>
+                <a4j:commandLink styleClass="ikont-acl-reporteavance text-button-panel"   value="Reportar Avance" action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                                 immediate="true" />                
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="ikont-hpg-iniciarseguimientosah"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"> 
+                <h:commandLink styleClass="ikont-hpg-iniciarseguimientosah img-button-panel"   action="#{Supervisor$SeguimientosAh.iniciarSeguimientosAh}"
+                               immediate="true"/>
+                <a4j:commandLink styleClass="ikont-acl-seguimientosatencionhumanitaria text-button-panel"   value="Seguimientos Atención Humanitaria" action="#{Supervisor$SeguimientosAh.iniciarSeguimientosAh}"
+                                 render="panelBody" immediate="true" />
+
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="ikont-hpg-iniciaramodificar"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarmodificar img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                               immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-modificar text-button-panel"   value="Modificar" action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                               immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-iniciarevolucion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnevolucion and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarevolucion img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
+                               immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-evolucion text-button-panel"   value="Evolucion" action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
+                               immediate="true" />
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="ikont-hpg-documentos"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndocumentos}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciardocumentos img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-documentos text-button-panel"   value="Documentos" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-imagenes"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnimagenes}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarimagenes img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-imagenes text-button-panel"   value="Imagenes" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-videos"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnvideos}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarvideos img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-videos text-button-panel"   value="Videos" action="#{Supervisor$AdministrarObraNew.iniciarVideos}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-finalizar"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfinalizar}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarfinalizar img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                               immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-finalizar text-button-panel"   value="Finalizar" action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                               immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-asociarcontratos"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnasociar_consultoria}" >
+                <h:commandLink styleClass="ikont-hcl-iniciarasociarcontratos img-button-panel"   action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                               immediate="true"/>
+                <h:commandLink styleClass="ikont-hcl-asociarcontratos text-button-panel"   value="Asociar Contratos" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                               immediate="true"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-validarinformacion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null}">
+                <h:commandLink styleClass="ikont-hcl-iniciarvalidarinformacion img-button-panel"    action="#{Supervisor$AdministrarObraNew.iniciarSolicitarValidacion}"/>
+                <a4j:commandLink styleClass="ikont-acl-validarinformacion text-button-panel"   value="Solicitar validar información" action="#{Supervisor$AdministrarObraNew.iniciarSolicitarValidacion}"
+                                 render="panelBody"/>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="ikont-hpg-estadoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <h:commandLink styleClass="ikont-hcl-estadoproyecto img-button-panel"    action="cambiarestado"/>
+                <a4j:commandLink styleClass="ikont-acl-estadoproyecto text-button-panel"   value="Cambiar estado del proyecto" action="cambiarestado"
+                                 render="panelBody"/>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="ikont-hpg-eliminaravance"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <h:commandLink styleClass="ikont-hcl-eliminaravance img-button-panel"    action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"/>
+                <a4j:commandLink styleClass="ikont-acl-eliminaravance text-button-panel"   value="Eliminar último avance" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"
+                                 render="panelBody"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-revisioninformacion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null or SessionBeanCobra.usuarioObra.renderrecurso.btn_habilitar_validacion }">
+
+                <a4j:commandLink  styleClass="ikont-acl-revisioninformacion img-button-panel"    execute="@this" immediate="true"
+                                onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';" />                                    
+
+                <a4j:commandLink styleClass="ikont-acl-historialrevisioninformacion text-button-panel"    execute="@this" immediate="true"
+                                 value="Historial revisiones de información" onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  />
+
+
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-datosbasicos"   cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$AdministrarObraNew.obra.obra}">
+                <a4j:commandLink execute="@this" styleClass="ikont-acl-nuevoproyecto"   rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra == 0}"
+                                 immediate="true" id="irDatosBasicos"  onclick="document.location.href='../NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';">
+                </a4j:commandLink>
+                <a4j:commandLink execute="@this" styleClass="ikont-acl-datosbasicos"   value="#{var.proysuperior}" immediate="true"
+                                 onclick="document.location.href='../NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';" 
+                                 rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra == 0}"/>
+                <a4j:commandLink execute="@this" styleClass="ikont-acl-detalleobraejecucion "   rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra >= 1}"
+                            immediate="true" onclick="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';">
+                </a4j:commandLink>
+                <a4j:commandLink execute="@this" styleClass="ikont-acl-detalleobraincompleto text-button-panel"   value="#{var.proysuperior}" immediate="true"
+                                 onclick="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';"
+                                 rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra >= 1}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-"   cellpadding="0" cellspacing="0" 
+                         rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <a4j:commandLink  execute="@this" styleClass="ikont-acl-crearsubproyecto img-button-panel"   action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true"  />
+                <a4j:commandLink  styleClass="ikont-acl-nuevosubproyecto text-button-panel"   value="#{var.nuevosubproyecto}" action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true" />
+            </h:panelGrid>
+
+        </h:panelGrid>
+    </rich:panel>
+
+    <interkont:spacer height="5px"/>
+
+    <rich:panel header="#{var.datosgenerales}" bodyClass="rich-panel-grid-body" rendered="#{!SessionBeanCobra.cobraService.ciu}">
+        <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
+            <interkont:spacer height="5"/>
+            <interkont:spacer height="5"/>
+            <interkont:spacer/><interkont:spacer />
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-estadodetalle"   id="stEstadoDetalle"  value="#{var.estado}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-stestado"   id="stEstado" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                <f:convertNumber  maxFractionDigits="2" pattern="###.## %"/>
+            </h:outputText>
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-contratista"   id="stContratistaDetalle"  value="#{var.houtcontratis}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-contratantedetalle"   id="stContratanteDetalle" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-interventordatalle"   id="stInterventorDetalle"  value="#{var.houtsupervisor}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-interventordeta "   id="stInterventorDeta" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-numcontratodetalle "   id="stNumContratoDetalle"  value="#{var.houtnrocontrato}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-numbcontratodeta"   id="stNumContratoDeta" value="#{Supervisor$DetalleObra.idcontratos}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-plazodetalle"   id="stPlazoDetalle"  value="#{var.plazo}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-plazodeta"   id="stPlazoDeta" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-stfechaini"   id="stFecIni"  value="#{var.fechadeinicio}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-fechainiobra"  value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
+                <f:convertDateTime pattern="yyyy-MMM-dd"/>
+            </h:outputText>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-fechadefinilizacion"   id="stFecFin"  value="#{var.fechadefinalizacion}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-datefechafinobra"  value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
+                <f:convertDateTime pattern="yyyy-MMM-dd"/>
+            </h:outputText>
+
+            <interkont:spacer width="5"/>
+            <h:outputText  styleClass="ikont-hot-valordelproyecto"   id="stValorDetalle"  value="#{var.valor} del proyecto"/>
+            <interkont:spacer width="10"/>
+            <h:outputText  styleClass="ikont-hot-valortotalproycto"   id="stValorTotalDeta" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                <f:convertNumber pattern="$#,###"/>
+            </h:outputText>
+
+            <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <h:outputText  styleClass="ikont-hot-sectornombre"   value="#{Supervisor$AdministrarObraNew.obra.contrato.tercero.sector.strnombre}" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+
+            <interkont:spacer width="5" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+            <h:outputText  styleClass="ikont-hot-codigosolicitud"   id="stCodigoSolicitud"  value="#{var.totalobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+
+            <interkont:spacer width="10" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+            <h:outputText  styleClass="ikont-hot-stottextcodsol"   id="stOtTextcodsol" value="#{Supervisor$DetalleObra.valorinterventoria +Supervisor$AdministrarObraNew.obra.numvaltotobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}">
+                <f:convertNumber pattern="$#,###"/>
+            </h:outputText>
+        </h:panelGrid>
+    </rich:panel>
+    <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+        <ui:include src="/facelets/Informacion_general_Participacion.xhtml" />
+    </h:panelGroup>
+    <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+        <ui:include src="/Ciudadano/Slider_informacion_general_ciud.xhtml"/>
+    </h:panelGroup>
+</ui:composition>

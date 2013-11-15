@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{var.titulogeneral}</title>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>            
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <ui:insert name="head"/>
+
+        <style type="text/css">
+            body,td,th {
+                margin: 0px;
+                font-family: Verdana, Geneva, sans-serif;
+            }
+        </style> 
+
+
+    </h:head>
+
+    <h:body >
+        <h:form id="form_menu">
+            <ui:insert name="menu"/>
+        </h:form>
+
+        <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth">
+            
+            <tr>
+                <a4j:outputPanel id="panelBody">                        
+                    <ui:insert name="body"/>
+                    <ui:include src="/facelets/ajaxStatus.xhtml" />
+                    <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
+                </a4j:outputPanel>
+
+            </tr>
+        </table>
+        <table  border="0" cellspacing="0" cellpadding="0" class="templatetablafooter">
+            <tr />
+            <tr>
+                <td >
+                    <h:form id="form_footer">
+                        <ui:include src="/facelets/footer.xhtml"/>
+
+                    </h:form>
+                </td>
+            </tr>
+        </table>
+    </h:body>
+
+</ui:composition>
