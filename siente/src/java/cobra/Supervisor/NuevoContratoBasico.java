@@ -7748,18 +7748,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
 
         }
-        try {
 
-            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
-                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
-                getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
-            }
-
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage("No puede eliminar la fuente de recursos. + =", e.getMessage());
-
-            FacesUtils.addInfoMessage("No puede eliminar la fuente de recursos =");
-            setMensajePlanOperativo(true, false, "No puede eliminar la fuente de recursos=");
+        if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+            getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+            getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
         }
 
         if (!getContrato().getActividadobras().isEmpty()) {
