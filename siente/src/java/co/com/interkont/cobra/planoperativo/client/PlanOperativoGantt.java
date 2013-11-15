@@ -259,8 +259,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
-        //config.taskDnDEnabled = false;
-        config.taskDnDEnabled = !isModolectura();
+        config.taskDnDEnabled = false;
+        //config.taskDnDEnabled = !isModolectura();
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;

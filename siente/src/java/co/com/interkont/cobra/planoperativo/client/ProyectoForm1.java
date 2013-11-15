@@ -22,7 +22,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -738,7 +737,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void modificarValorDisponibleCreando() {
         for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
+            if(obrafuenterecursoscontratoDTO.getDescripcionaporte().compareTo("Dinero")==0)
+            {    
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
+            
+            }
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
         }
     }
