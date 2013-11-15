@@ -7471,7 +7471,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             for (Obrafuenterecursosconvenios ofrc : actividaObraPrincipal.getObra().getObrafuenterecursosconvenioses()) {
                 //getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos());
                 for (Relacionobrafuenterecursoscontrato robrc : getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos())) {
-                    proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    boolean estaEnContratosProyecto = false;
+                    for (Contrato cont : proyplaop.getContratosProyecto()) {
+                        if(cont.getIntidcontrato() == robrc.getContrato().getIntidcontrato()) {
+                            estaEnContratosProyecto = true;
+                        }
+                    }
+                    if(!estaEnContratosProyecto) {
+                        proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    }
                 }
             }
             getFlujoCaja().getProyectosPlanOperativo().add(proyplaop);
