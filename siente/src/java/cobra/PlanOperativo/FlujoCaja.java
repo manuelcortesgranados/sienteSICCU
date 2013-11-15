@@ -1082,6 +1082,7 @@ public class FlujoCaja implements Serializable {
                 }
             }
         }
+        FacesUtils.addInfoMessage("Los valores del flujo de caja han sido almacenados.");
         //}
     }
 

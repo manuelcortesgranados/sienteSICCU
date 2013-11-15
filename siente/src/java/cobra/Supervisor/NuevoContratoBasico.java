@@ -2611,7 +2611,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Poliza[i++] = poli;
         }
         if (!listaPolizacontratos.isEmpty()) {
-            listapolizas = listaPolizacontratos;
+            listapolizas.addAll(listaPolizacontratos);
         }
         return null;
     }
@@ -3533,8 +3533,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     return null;
                 }
             }
+
             listapolizas.add(polizacontrato);
             listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
+
             polizacontrato = new Polizacontrato();
             polizacontrato.setTipopoliza(new Tipopoliza());
             polizacontrato.setAseguradora(new Aseguradora());
