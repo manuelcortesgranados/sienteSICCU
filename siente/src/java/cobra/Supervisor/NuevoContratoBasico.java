@@ -5244,6 +5244,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return la pagina detallecontrato
      */
     public String iniciarDetaContrato() {
+        filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setTipocontrato(0);
+        filtrocontrato.setEstadoConvenio(2);
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
@@ -5283,6 +5286,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String iniciarDetaConvenio() {
         enNuevoConvenio = false;
+        filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setTipocontrato(0);
         //se deshabilitó para montaje producción 24 de octubre de 2013 (Se puso en false)  
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(false);
