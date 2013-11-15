@@ -18,11 +18,11 @@
     </context-param>
     <context-param>
         <param-name>org.richfaces.skin</param-name>
-        <!--Skin fonade
+        <!--Skin fonade-->
         <param-value>fonade</param-value>
-        -->
-        <!--Skin general-->
-        <param-value>general</param-value>
+        
+        <!--Skin general
+        <param-value>general</param-value>-->
         
     </context-param>
     <listener>
@@ -71,14 +71,14 @@
             30
         </session-timeout>
     </session-config>
-    <!--
+    
     <welcome-file-list>
         <welcome-file>homes/home_gestion.xhtml</welcome-file>
-    </welcome-file-list>-->
-    <!--Inicio Cobras -->
+    </welcome-file-list>
+    <!--Inicio Cobras 
     <welcome-file-list>
         <welcome-file>Inicio.xhtml</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
     
    <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
