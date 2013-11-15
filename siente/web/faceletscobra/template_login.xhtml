@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:rich="http://richfaces.org/rich" 
+                >
+
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{var.titulogeneral}</title>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_login.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/slider_queessiente.css?#{var.version}" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/login.js"></script>
+
+        <ui:insert name="head"/>
+    </h:head>
+
+    <h:body onload="style_background();">
+        <h:form>
+            <h:panelGroup layout="block" styleClass="ikont-hpg-loginheader"  >
+                <h:graphicImage  styleClass="ikont-hgi-iconheaderpng "   url="/resources/imgs/login/icon_header.png"   />
+                <h:outputText  styleClass="ikont-hot-loginheader "   value="#{var.loginheader}"     />
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="ikont-hpg-loginfooter"  >
+                <h:graphicImage  styleClass="ikont-hgi-iconfooterpng "   url="/resources/imgs/login/icon_footer.png"    />
+                <h:outputText  styleClass="ikont-hot-loginfotercopy"   value="#{var.loginfotercopy}"     />
+                <a4j:commandLink value="#{var.loginfoterterminos}"  styleClass="ikont-a4jcl-loginfoterterminos"  />
+                <a4j:commandLink value="#{var.loginfoteracerca}"  styleClass="ikont-a4cl-loginfoteracerca"  />
+                <h:commandLink value="#{var.loginfoterquees}" styleClass="ikont-a4jcl-loginfoterquees"  >
+                    <rich:componentControl target="queessiente" operation="show"/>
+                </h:commandLink>
+                <h:graphicImage  styleClass="ikont-hgi-iconytpng "   url="/resources/imgs/login/icon_yt.png" width="40" height="40"   />
+                <h:graphicImage  styleClass="ikont-hgi-iconfbpng "   url="/resources/imgs/login/icon_fb.png" width="40" height="40"   />
+                <h:graphicImage  styleClass="ikont-hgi-icontwpng "   url="/resources/imgs/login/icon_tw.png" width="40" height="40"   />
+            </h:panelGroup>
+        </h:form>
+
+
+        <ui:insert name="body"/>                                      
+        <ui:include src="ajaxStatus.xhtml"/>
+        <ui:include src="/modal/login/queessiente.xhtml"/>
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js"/>
+
+    </h:body>
+
+</ui:composition>

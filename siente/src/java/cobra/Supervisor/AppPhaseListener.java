@@ -29,12 +29,13 @@ public class AppPhaseListener implements PhaseListener {
     public AppPhaseListener() {
     }
 
+    @Override
     public void beforePhase(PhaseEvent pe) {
         FacesContext facesContext = pe.getFacesContext();
         
         if (pe.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 
-            String viewId = pe.getFacesContext().getViewRoot().getViewId();            
+            String viewId = pe.getFacesContext().getViewRoot().getViewId();           
             if (viewId.endsWith(".xhtml")) {
                 String ManagedBeanName = this.getFileName(viewId);
 

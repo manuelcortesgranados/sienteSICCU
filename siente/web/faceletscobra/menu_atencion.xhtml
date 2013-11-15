@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+
+
+    <div class="topbar"><div > <h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
+        <div id="iconosientw" class="sienteicon">
+            <h:panelGroup>
+                <h:outputText  styleClass="ikont-hot-strnombre" id="label_usuario" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
+                <h:outputText  styleClass="ikont-hot-apellido1" id="label_apellido" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
+                <h:outputText  styleClass="ikont-hot-apellido2" id="label_apellido2" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
+                <h:outputText  styleClass="ikont-hot-codigotercero" value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <rich:toolbar>
+        <rich:toolbarGroup>
+            <h:commandLink styleClass="ikont-hcl-siente"  />
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}">
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle1"  />
+            <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
+                <a4j:commandLink styleClass="ikont-acl-strurlmdloruta"   onclick="document.location.href='#{modulo.strurlMdloRuta}';" value="Inicio"
+                                 render="panelBody" immediate="true"/>
+            </a4j:repeat>
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos > 1}">
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle2"  />
+        </rich:toolbarGroup>
+
+        <rich:dropDownMenu rendered="#{SessionBeanCobra.countModulos > 1}">
+            <f:facet name="label">
+                <h:outputText  styleClass="ikont-hot-inicio"   value="Inicio" />
+            </f:facet>
+
+            <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
+
+                <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" iconDisabled="#{modulo.striconoInicio}"
+                               onclick="document.location.href='../#{modulo.strurlMdloRuta}';" immediate="true" />
+            </a4j:repeat>
+        </rich:dropDownMenu>
+
+        <rich:toolbarGroup>
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle3"  />
+        </rich:toolbarGroup>
+
+        <rich:dropDownMenu>
+            <f:facet name="label">
+                <h:outputText  styleClass="ikont-hot-gestionar" value="Gestionar"/>
+            </f:facet>
+
+            <rich:menuGroup label="Solicitud Atención" iconDisabled="icon-atencion">
+                <rich:menuItem  label="Nuevo" iconDisabled="icon-nuevo"
+                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}" render="panelBody" immediate="true"/>
+
+               
+                <rich:menuGroup label="Consultar" iconDisabled="icon-consultar">
+
+                    <rich:menuItem label="Mis Solicitudes" iconDisabled="icon-suspendidos" action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarSolicitudMaestro}"
+                                   immediate="true" render="panelBody">
+
+                    </rich:menuItem>
+                    <rich:menuItem label="Pendientes" iconDisabled="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarPendientes}"
+                                   immediate="true" render="panelBody">
+                    </rich:menuItem>
+
+                    <rich:menuItem label="Aprobadas" iconDisabled="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarAprobados}"
+                                   immediate="true" render="panelBody">
+
+                    </rich:menuItem>
+                </rich:menuGroup>
+            </rich:menuGroup>
+
+        </rich:dropDownMenu>
+
+        <rich:toolbarGroup>
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle4"  />
+        </rich:toolbarGroup>
+
+        <rich:dropDownMenu>
+            <f:facet name="label">
+                <h:outputText  styleClass="ikont-hot-miperfil"   value="Mi Perfil" />
+            </f:facet>
+
+            <!--<rich:menuItem  value="Editar Perfil" iconstyleClassicon-miperfil"
+                            action="#{ddmenu.doSaveAll}" immediate="true"/>-->
+
+            <rich:menuItem label="Cambiar Contraseña" iconDisabled="icon-miperfil" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"
+                           action="#{Perfil$Usuario.initusu}" immediate="true"/>
+        </rich:dropDownMenu>
+
+        <rich:toolbarGroup>
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle5"  />
+        </rich:toolbarGroup>
+
+        <rich:dropDownMenu>
+            <f:facet name="label">
+                <h:outputText  styleClass="ikont-hot-ayuda"   value="Ayuda" />
+            </f:facet>
+
+            <rich:menuItem label="Soporte en linea"   immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
+                           onclick="document.location.href='http://soportesiente.ning.com';" iconDisabled="icon-soporte"/>
+            <rich:menuItem label="Tutorial" immediate="true"
+                           action="manual" iconDisabled="icon-tutorial"/>
+            <rich:menuItem label="Preguntas Frecuentes" immediate="true"
+                           action="pregfrecuentes" iconDisabled="icon-preguntas"/>
+        </rich:dropDownMenu>
+
+        <rich:toolbarGroup>
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle6"  />
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup>
+             <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
+                           styleClass="ikont-hcl-salir"  />
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup>
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle7"  />
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup location="right" rendered="#{var.variconch}">
+            <a target="_blank" href="http://wsp.presidencia.gov.co/" class="ikont-a-republica"></a>
+        </rich:toolbarGroup>
+
+        <rich:toolbarGroup location="right">
+            <a target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
+        </rich:toolbarGroup>
+
+    </rich:toolbar>
+
+</ui:composition>

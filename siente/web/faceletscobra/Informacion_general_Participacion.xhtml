@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+
+    <interkont:spacer  height="10"/>
+    <rich:panel styleClass="ikont-rp-infogeneral"   header="Información General" id="infogeneral">
+        <h:graphicImage styleClass="ikont-hgi-strimagneobra" url="#{var.ipserver}#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.strimagenobra}" />
+        <h:panelGrid columns="6">
+            <interkont:spacer width="35"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+        </h:panelGrid>
+        <h:panelGrid styleClass="ikont-hpg-strobjetoobra"   >
+            <h:outputText  styleClass="ikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
+        </h:panelGrid>
+        <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda">
+            <h:outputText  styleClass="ikont-hot-valor "   value="#{var.valor}"/>
+            <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+                <f:convertNumber pattern="$###,###"/>
+            </h:outputText>
+            <h:outputText  styleClass="ikont-hot-avancefisico"   value="#{var.avancefisico}" />
+            <h:outputText  styleClass="ikont-hot-totalavancefisico"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+                <f:convertNumber pattern="###.## %"/>
+            </h:outputText>
+            <h:outputText  styleClass="ikont-hot-intduration"   value="#{var.intduracion}" />
+            <h:outputText  styleClass="ikont-hot-intplazoobra"   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
+            <h:outputText  styleClass="ikont-hot-contratistas"   value="#{var.contratista}(s)" />
+            <h:panelGroup layout="block"   >
+                <h:outputLabel  styleClass="ikont-hol-contratistanombrecomple" id="st_strnomcontratista" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+            </h:panelGroup>
+        </h:panelGrid>
+    </rich:panel>
+    <interkont:spacer height="5px"/>
+</ui:composition>

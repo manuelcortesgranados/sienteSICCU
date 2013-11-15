@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf">
+    
+    <interkont:spacer height="20" />
+  
+    <table  align="center" border="0" cellspacing="0" cellpadding="0">
+        <td>
+            <tr>
+                <h:outputText  styleClass="ikont-hot-Indicadores"   value="Indicadores"  />
+            </tr>
+            <tr>
+                <div id="navIndicadores" >
+                    <div id="elipse">
+
+                    </div>
+
+                    <ul>
+                        <li><h:commandLink value="#{var.header1}" styleClass="ikont-hcl-menuConsolidados"  
+                                             action="#{GraficarIndicadores.menuConsolidados}">
+                                
+                            </h:commandLink>
+                        </li>
+                        <li><h:commandLink value="#{var.header2}" styleClass="ikont-hcl-menuAvanceAh"  
+                                              action="#{GraficarIndicadores.menuAvanceAh}"
+                                            >
+                                
+                            </h:commandLink></li>
+                        <li><h:commandLink value="#{var.header3}" styleClass="ikont-hcl-menuAvanceObras"  
+                                             action="#{GraficarIndicadores.menuAvanceObras}"
+                                          >
+                                
+                            </h:commandLink></li>
+                        <li><h:commandLink value="#{var.header4}" styleClass="ikont-hcl-menuAvanceConvenios"  
+                                             action="#{GraficarIndicadores.menuAvanceConvenios}"
+                                            >
+                                
+                            </h:commandLink></li>
+                    </ul>
+                </div>
+            </tr>
+        </td>
+    </table>
+
+   
+
+</ui:composition>

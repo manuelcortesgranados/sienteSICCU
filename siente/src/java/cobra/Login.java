@@ -100,7 +100,8 @@ public class Login implements Serializable {
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
             //Si el sistema está paramatrizado para autenticarse mediante LDAP
-            if (Propiedad.getValor("autenticacionLDAP").equals("true") && !getSessionBeanCobra().getTipologueo().isUsuarioEncontrado()) {
+            if (Propiedad.getValor("autenticacionLDAP").equals("true") && !getSessionBeanCobra().getTipologueo().isUsuarioEncontrado()) 
+            {
                 if (getSessionBeanCobra().getTipologueo().getTipoerror() == 0) {
                     try {
                         usuarioExterno = getSessionBeanCobra().getUsuarioService().solicitarAccesoLDAP(getSessionBeanCobra().getUsuarioObra().getUsuLogin(), getSessionBeanCobra().getUsuarioObra().getUsuPasswd());
@@ -171,7 +172,10 @@ public class Login implements Serializable {
                         respuesta = getSessionBeanCobra().getModulos().get(0).getStraction();
                     } else {
                         respuesta = "home";
+                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
+                        {    
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        }
                     }
 
                     if (verificarGrupo(getSessionBeanCobra().getUsuarioObra())) {
@@ -182,7 +186,10 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Herramientas");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
                         getSessionBeanCobra().setLogueado(true);
+                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
+                        {    
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        }
                     } else {
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_" + getSessionBeanCobra().getBundle().getString("versioncobra") + "(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
@@ -191,7 +198,10 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setHeaderStyle("headertool");
                         getSessionBeanCobra().getCobraService().setCiu(false);
                         getSessionBeanCobra().setLogueado(true);
+                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
+                        {    
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        }
                         
                     }
 

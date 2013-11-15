@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:fb='http://www.facebook.com/2008/fbml'
+   >
+
+    <rich:panel header="Facebook"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfacebook}">
+        <div ></div>
+        <script>
+            var j = jQuery.noConflict();
+          
+            window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '313539815403577',
+              secret     : '3fcb03639304d19f696e26b1b801b2a3',
+              channelUrl : '//localhost:8084/siente/channel.html',
+              status     : true,
+              cookie     : true,
+              xfbml      : true
+            });
+
+                FB.getLoginStatus(function(response) {
+                    FB.api('/me', function(response) {
+                            j('.pru').html("Bienvenido " + response.name);
+                    });
+                })
+            };
+
+
+
+          // Load the SDK Asynchronously
+          (function(d){
+             var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement('script'); js.id = id; js.async = true;
+             js.src = "//connect.facebook.net/en_US/all.js";
+             ref.parentNode.insertBefore(js, ref);
+           }(document));
+        </script>
+
+        <div
+           
+            data-show-faces="false"  client_id="true"
+            scope="
+            user_about_me,user_activities,user_birthday,user_checkins,user_education_history,
+            user_events,user_groups,user_hometown,user_interests,user_likes,user_location,user_notes,
+            user_photos,user_questions,user_relationships,user_relationship_details,user_religion_politics,
+            user_status,user_subscriptions,user_videos,user_website,user_work_history,email">
+            facebook login
+        </div>
+        
+        <div  id="pru" />
+
+    </rich:panel>
+</ui:composition>

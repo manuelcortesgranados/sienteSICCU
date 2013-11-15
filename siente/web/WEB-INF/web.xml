@@ -18,7 +18,12 @@
     </context-param>
     <context-param>
         <param-name>org.richfaces.skin</param-name>
+        <!--Skin fonade
         <param-value>fonade</param-value>
+        -->
+        <!--Skin general-->
+        <param-value>general</param-value>
+        
     </context-param>
     <listener>
         <listener-class>
@@ -57,12 +62,22 @@
         <url-pattern>/planoperativo/springGwtServices/*</url-pattern>
     </servlet-mapping>
     <session-config>
+        <!-- Session timeout zoom
         <session-timeout>
             120
+        </session-timeout>-->
+        <!-- Session timeout cobras-->
+        <session-timeout>
+            30
         </session-timeout>
     </session-config>
+    <!--
     <welcome-file-list>
         <welcome-file>homes/home_gestion.xhtml</welcome-file>
+    </welcome-file-list>-->
+    <!--Inicio Cobras -->
+    <welcome-file-list>
+        <welcome-file>Inicio.xhtml</welcome-file>
     </welcome-file-list>
     
    <error-page>

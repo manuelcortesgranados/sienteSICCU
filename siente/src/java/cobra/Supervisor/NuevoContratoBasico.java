@@ -2480,6 +2480,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 //Plan operativo y guardados
                 case 2:
                     if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 1) {
+                        getFlujoCaja().setFlujoCajaIniciado(false);
                         guardarBorradorConvenioPO();
                     } else if (getSessionBeanCobra().getCobraGwtService().getGuardarconvenio() == 2) {
                         guardarFinalizarConvenioPO();
@@ -2495,6 +2496,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion() / 3;
                     if (getSubpantalla() == 2) {
                         if (!getContrato().isModolecturaplanop()) {
+                            getFlujoCaja().setFlujoCajaIniciado(false);
                             this.guardarBorradorConvenio();
                         }
                         lstTodasActividades.clear();

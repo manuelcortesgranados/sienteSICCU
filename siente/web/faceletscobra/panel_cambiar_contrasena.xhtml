@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+
+    <h:panelGroup layout="block" id="cambiocontrasena" >
+
+        <h:form id="form_cambiocontra">
+
+            1. la longitud de el campo contraseña es de 11 caracteres.
+            <h:panelGrid id="cambiocontra" columns="2" >
+
+                <h:panelGroup>
+                    <h:outputLabel  styleClass="ikont-hot-usuario"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
+                    <rich:message for="txtusuario" />
+                </h:panelGroup>
+
+                <h:inputText  size="20" id="txtusuario" value="#{Perfil$Usuario.username}" disabled="true">
+                    <f:validateLength maximum="15" minimum="1"/>
+                </h:inputText>
+
+
+                <h:panelGroup>
+                    <h:outputLabel  styleClass="ikont-hot-contrasenaact"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
+                    <rich:message for="txtcontrasenaact" />
+                </h:panelGroup>
+
+                <h:inputSecret id="txtcontrasenaact" styleClass="ikont-his-txtcontrasenaact"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                    <f:validateLength maximum="11" minimum="8"/>
+                </h:inputSecret>
+
+                <h:panelGroup>
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuev"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
+                    <rich:message for="txtcontrasenanuev" />
+                </h:panelGroup>
+
+                <h:inputSecret id="txtcontrasenanuev" styleClass="ikont-his-txtcontrasenanuev"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                    <f:validateLength maximum="11" minimum="8"/>
+                </h:inputSecret>
+
+                <h:panelGroup>
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuevcom"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
+                    <rich:message for="txtcontrasenanuevcom" />
+                </h:panelGroup>
+
+                <h:inputSecret id="txtcontrasenanuevcom" styleClass="ikont-his-txtcontrasenanuevcom"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                    <f:validateLength maximum="11" minimum="8"/>
+                </h:inputSecret>
+
+            </h:panelGrid>
+
+            <h:commandButton id="enviar" onclick="#{rich:component('ajaxLoadingModalBox')}.show();
+                        return true;"
+                             value="Enviar" action="#{Perfil$Usuario.enviodatos}" styleClass="ikont-hcl-enviar"   
+                             type="submit">
+
+            </h:commandButton>
+
+        </h:form>
+
+    </h:panelGroup>
+</ui:composition>
