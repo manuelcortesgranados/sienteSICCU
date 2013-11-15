@@ -1698,7 +1698,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void modificarPorDuracion(ActividadobraDTO ac) {
 
         if (ac.getDuration() >= 0) {
-            if (actividadAnterior.getDuration() < ac.getDuration()) {
+            service.setLog("en modi duracion:"+ac.getDuration(), null);
+           // if (actividadAnterior.getDuration() < ac.getDuration()) {
                 //modificarFechaFin
                 Date fechaCopia = CalendarUtil.copyDate(ac.getStartDateTime());
                 CalendarUtil.addDaysToDate(fechaCopia, ac.getDuration());
@@ -1712,19 +1713,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 } else {
                     GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
                 }
-            } else {
-                ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
-                Date copiaFechaModificada = CalendarUtil.copyDate(ac.getEndDateTime());
-                modificarFechaFin(ac);
-                if (ac.getEndDateTime().compareTo(copiaFechaModificada) != 0) {
-                    props.duration().setValue(ac, actividadAnterior.getDuration());
-                    getGantt().getGanttPanel().getContainer().refresh();
-
-                } else {
-                    GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
-                }
-
-            }
+//            } else {
+//                ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
+//                Date copiaFechaModificada = CalendarUtil.copyDate(ac.getEndDateTime());
+//                modificarFechaFin(ac);
+//                if (ac.getEndDateTime().compareTo(copiaFechaModificada) != 0) {
+//                    props.duration().setValue(ac, actividadAnterior.getDuration());
+//                    getGantt().getGanttPanel().getContainer().refresh();
+//
+//                } else {
+//                    GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
+//                }
+//
+//            }
 
         } else {
             alertaMensajes("Por favor ingrese valores positivos");

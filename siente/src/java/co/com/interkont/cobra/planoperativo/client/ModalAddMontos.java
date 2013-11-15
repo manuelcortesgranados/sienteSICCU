@@ -211,6 +211,7 @@ public class ModalAddMontos implements IsWidget {
                             d.show();
                         } else {
                             limpiarMontos();                            
+                            relacionFuenteRecursos.getObrafuenterecursosconvenios().setValorDisponible(relacionFuenteRecursos.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuenteRecursos.getValor()));
                             widTblMontos.getStore().add(relacionFuenteRecursos);
                             modalActual.hide();
                         }

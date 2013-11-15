@@ -117,12 +117,12 @@ public class WidgetTablaMontos implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
+                ObrafuenterecursosconveniosDTO obraFuenteRecursos = store.get(row).getObrafuenterecursosconvenios();
                 if (editar) {
-                    ObrafuenterecursosconveniosDTO obraFuenteRecursos = store.get(row).getObrafuenterecursosconvenios();
-                    obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
                     obraFuenteRecursos.setEstaEnFuenteRecurso(false);
                 }
                 BigDecimal valor = valorContrato.getValue();
+                obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
                 valor = valor.subtract(store.get(row).getValor());
                 valorContrato.setValue(valor);
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));

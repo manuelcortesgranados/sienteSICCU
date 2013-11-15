@@ -37,6 +37,7 @@ import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.FormPanel.LabelAlign;
@@ -256,7 +257,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
-
+       
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -321,8 +322,40 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         String nombreBotonPrincipal = "";
         if (!editar) {
             nombreBotonPrincipal = "Añadir Proyecto";
+            modalPry.addHideHandler(new HideEvent.HideHandler() {
+            @Override
+            public void onHide(HideEvent event) {
+                devolverValorAfuenteRecursos(tblRubros.getStore().getAll());
+            }
+        });
+
         } else {
             nombreBotonPrincipal = "Editar Proyecto";
+            modalPry.addHideHandler(new HideEvent.HideHandler() {
+            @Override
+            public void onHide(HideEvent event) {
+                    proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
+                    for(ObrafuenterecursosconveniosDTO obraFuente:relacionObraFuenteRecursosCopia){
+                    obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
+                    obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
+                    service.setLog("ace en cancelar pry"+obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
+                    }
+            }
+        });
+
+//            btnCancelar = new Button("Cancelar", new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent event) {
+//                    modalPry.hide();
+//                    proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
+//                    for(ObrafuenterecursosconveniosDTO obraFuente:relacionObraFuenteRecursosCopia){
+//                    obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
+//                    obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
+//                    service.setLog("ace en cancelar pry"+obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
+//                    }
+//                }
+//            });
+//            btnCancelar.setWidth("" + 150);
         }
 
         Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
@@ -468,7 +501,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         btnAdicionarPry.setWidth("" + 150);
         con.add(btnAdicionarPry);
-
+       
         // need to call after everything is constructed
         List<FieldLabel> labels = FormPanelHelper.getFieldLabels(vp);
         for (FieldLabel lbl : labels) {
@@ -813,5 +846,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      */
     public void setOtrospagos(NumberField<BigDecimal> otrospagos) {
         this.otrospagos = otrospagos;
+    }
+
+    public void devolverValorAfuenteRecursos(List<ObrafuenterecursosconveniosDTO> lstFuenteRecursosObra) {
+        for (ObrafuenterecursosconveniosDTO obraFuente : lstFuenteRecursosObra) {
+            if (obraFuente.getTipoaporte() == 0) {
+                obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().add(obraFuente.getValor()));
+                service.setLog("devolviendo en x:" + obraFuente.getValorDisponible(), null);
+}
+        }
+
     }
 }
