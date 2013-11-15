@@ -91,7 +91,9 @@ public class ModalAddMontos implements IsWidget {
         valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
 
         
-        Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator();
+        Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator();
+        
+        
         obraFrDto = (ObrafuenterecursosconveniosDTO) it.next();
         valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
         entidadSeleccionada = obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto();
@@ -208,7 +210,7 @@ public class ModalAddMontos implements IsWidget {
                             AlertMessageBox d = new AlertMessageBox("Alerta", validacionDevuelta);
                             d.show();
                         } else {
-                            limpiarMontos();
+                            limpiarMontos();                            
                             widTblMontos.getStore().add(relacionFuenteRecursos);
                             modalActual.hide();
                         }
@@ -292,7 +294,7 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public void llenarComboEntidadesConvenio() {
-        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obraFuenteRecurso = (ObrafuenterecursosconveniosDTO) it.next();
             TerceroDTO tercero = obraFuenteRecurso.getFuenterecursosconvenio().getTercero();
             if (mapaRelacionEntidadVigencias.size() > 0) {
@@ -325,7 +327,7 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public ObrafuenterecursosconveniosDTO buscarFuenteRecursosDto(String nombreEntidad, Integer vigencia) {
-        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obraFuenteRecurso = (ObrafuenterecursosconveniosDTO) it.next();
             if (obraFuenteRecurso.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad) && obraFuenteRecurso.getFuenterecursosconvenio().getVigencia().equals(vigencia)) {
                 return obraFuenteRecurso;

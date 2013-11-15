@@ -739,9 +739,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
             if(obrafuenterecursoscontratoDTO.getDescripcionaporte().compareTo("Dinero")==0)
             {    
-            obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));
-            
-            }
+                obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));            
+            }              
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
         }
     }

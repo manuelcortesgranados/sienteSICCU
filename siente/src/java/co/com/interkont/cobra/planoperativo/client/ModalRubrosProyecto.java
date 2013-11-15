@@ -252,6 +252,8 @@ public class ModalRubrosProyecto implements IsWidget {
                             validacionDevuelta = validarEspecieAportada();
                             if (validacionDevuelta.equals("El monto ha sido guardado")) {
                                 obraFuenteDto = new ObrafuenterecursosconveniosDTO(campoTipoRecurso.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, idTempObraRecurso);
+                                obraFuenteDto.setValor(BigDecimal.ZERO);
+                                obraFuenteDto.setValorDisponible(BigDecimal.ZERO);
                                 proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
                                 idTempObraRecurso++;
                                 idTemp++;

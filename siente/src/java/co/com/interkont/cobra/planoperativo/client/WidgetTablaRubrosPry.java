@@ -135,8 +135,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
                         alerta.show();
-                    }
-                    
+                    }                    
                 }
             }
         });
