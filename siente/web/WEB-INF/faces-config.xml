@@ -336,6 +336,10 @@
             <property-name>cobraGwtService</property-name>
             <value>#{cobraGwtServiceAble}</value>
         </managed-property>
+          <managed-property>
+            <property-name>marcoLogicoService</property-name>
+            <value>#{marcoLogicoService}</value>
+        </managed-property>
 
     </managed-bean>
     <managed-bean>

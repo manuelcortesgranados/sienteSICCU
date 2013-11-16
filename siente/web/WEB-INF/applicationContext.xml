@@ -16,7 +16,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrafonade</value>
+            <value>jdbc:postgresql:cobramontaje</value>
         </property>
         <property name="username">
             <value>cobra</value>
@@ -238,6 +238,22 @@
                 <value>co/com/interkont/cobra/to/Rubro.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Parametricaactividadesobligatorias.hbm.xml</value>
+                
+                <!-- Medios de Vida-->                
+                <value>co/com/interkont/cobra/marcologico/to/Frecuenciaperiocidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Planificacionrelacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Avanceplanificacionrelacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Tipomarcologico.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Unidadmedidamediosvida.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Estrategia.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Marcologico.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Contratoestrategia.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Tipoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Cronogramaobligacionesejecutada.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Relacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Obligacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Indicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>
                
             </list>
         </property>
@@ -303,7 +319,7 @@
     <bean id="supervisionExternaDao" class="supervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="ciudadanoDao" class="ciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-
+    <bean id="marcoLogicoDao" class="cobra.MarcoLogico.dao.MarcoLogicoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <!--
     <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao"></bean>
 
@@ -382,6 +398,15 @@
         <property name="cobraDao">
             <ref local="cobraDao" />
         </property>
+    </bean>
+    
+    <bean id="marcoLogicoServiceTarget" scope="prototype"
+          class="cobra.MarcoLogico.service.MarcoLogicoServiceImpl">
+        
+        <property name="marcoLogicoDao">
+            <ref local="marcoLogicoDao" />
+        </property>
+        
     </bean>
 
     <!--
@@ -646,6 +671,29 @@
                 <prop key="delete*">PROPAGATION_REQUIRED</prop>
                 <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
                 <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+     <bean id="marcoLogicoService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="marcoLogicoServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
             </props>
         </property>
     </bean>
