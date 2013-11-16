@@ -62,14 +62,14 @@
         <url-pattern>/planoperativo/springGwtServices/*</url-pattern>
     </servlet-mapping>
     <session-config>
-        <!-- Session timeout zoom
+        <!-- Session timeout zoom-->
         <session-timeout>
             120
-        </session-timeout>-->
-        <!-- Session timeout cobras-->
+        </session-timeout>
+        <!-- Session timeout cobras
         <session-timeout>
             30
-        </session-timeout>
+        </session-timeout>-->
     </session-config>
     
     <welcome-file-list>

@@ -5243,7 +5243,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return la pagina detallecontrato
      */
-    public String iniciarDetaContrato() {
+    public String iniciarDetaContrato() {       
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
@@ -5283,6 +5283,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String iniciarDetaConvenio() {
         enNuevoConvenio = false;
+        filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setTipocontrato(0);
         //se deshabilitó para montaje producción 24 de octubre de 2013 (Se puso en false)  
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(false);
@@ -7471,7 +7473,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             for (Obrafuenterecursosconvenios ofrc : actividaObraPrincipal.getObra().getObrafuenterecursosconvenioses()) {
                 //getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos());
                 for (Relacionobrafuenterecursoscontrato robrc : getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos())) {
-                    proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    boolean estaEnContratosProyecto = false;
+                    for (Contrato cont : proyplaop.getContratosProyecto()) {
+                        if(cont.getIntidcontrato() == robrc.getContrato().getIntidcontrato()) {
+                            estaEnContratosProyecto = true;
+                        }
+                    }
+                    if(!estaEnContratosProyecto) {
+                        proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    }
                 }
             }
             getFlujoCaja().getProyectosPlanOperativo().add(proyplaop);
@@ -7748,18 +7758,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
 
         }
-        try {
 
-            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
-                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
-                getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
-            }
-
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage("No puede eliminar la fuente de recursos. + =", e.getMessage());
-
-            FacesUtils.addInfoMessage("No puede eliminar la fuente de recursos =");
-            setMensajePlanOperativo(true, false, "No puede eliminar la fuente de recursos=");
+        if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+            getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+            getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
         }
 
         if (!getContrato().getActividadobras().isEmpty()) {
