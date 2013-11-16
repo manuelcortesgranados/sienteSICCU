@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-eliminar-obligacion" moveable="true" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Eliminar Oblogación"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-eliminar-obligacion" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-eliminar-obligacion')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+            <rich:panel id="rpeliminarobligacion" styleClass="rich-panel-body" style="padding:0px;">
+                <h:form>
+                <h:panelGrid width="100%">
+                    <interkont:spacer height="10"/>
+                    <h:outputText id="st_confirmacionEliminarOblig" value="#{varMarcoLogico.estaseguroeliminarobligacion}" />
+                    <interkont:spacer height="20"/>
+                <h:panelGrid columns="2" width="100%" style="text-align:center;">
+                    <a4j:commandButton value="Aceptar" action="#{MarcoLogico$MarcoLogico.eliminarObligacion}"
+                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
+                                       render="pgSeguimientoConvenio,tablaSeguimientoConvenio"
+                                       style="font-size:12px;"/>
+                    <a4j:commandButton value="Cancelar" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
+                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
+                                       render="pgSeguimientoConvenio,tablaSeguimientoConvenio" 
+                                       style="font-size:12px;"/>
+                </h:panelGrid>
+                </h:panelGrid>
+                </h:form>
+            </rich:panel>
+    </rich:popupPanel>   
+</ui:composition>

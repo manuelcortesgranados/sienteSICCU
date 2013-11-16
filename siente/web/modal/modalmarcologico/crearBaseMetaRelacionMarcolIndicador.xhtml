@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-asociar-indicadormarcologico" moveable="true" width="360" height="400" resizeable="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Definir Línea base y/o Programar Meta"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-asociar-indicadormarcologico" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-asociar-indicadormarcologico')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="rpasociarMarcologicoIndicador">
+                <center>
+                    <h:panelGrid>
+                        <h:outputText value="Definir Línea Base" styleClass="modal-indicador-head"/>
+                        <h:panelGrid  width="100%" columns="2" cellspacing="10">
+
+                            <h:outputText id="lblfechalineabase"  value="(*) Fecha linea base"  />
+                            <h:panelGrid >
+                                <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechal" inputSize="10" 
+                                               required="true" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase != null}" />
+                                <rich:message for="calendarfechal" styleClass="error_texto" />
+                            </h:panelGrid>
+
+                            <h:outputText id="outputTextvalor1lineabase"  value="Variable 1 línea base:" />
+                            <h:inputText  id="inputTextvalor1lineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
+                                          value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" >
+                                <f:validateDoubleRange minimum="0" />
+                                <rich:message for="inputTextvalor1lineabase" style="color: #ed0606;"/>
+                            </h:inputText>
+
+                            <h:outputText id="outputTextlineabase"  value="Variable 2 línea base:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables== 2}" />
+                            <h:inputText  id="inputTextlineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
+                                          value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables == 2}" >
+                                <f:validateDoubleRange minimum="0" />
+                                <rich:message for="inputTextlineabase" style="color: #ed0606;"/>
+                            </h:inputText>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <h:panelGrid>
+                        <h:outputText value="Programar Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+
+                        <h:panelGrid   columns="2" cellspacing="6">
+                            <h:outputText id="outputTextvariable1"  value="Meta esperada al final del proyecto:" />
+                            <h:inputText  id="inputTextvariable1" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
+                                          value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" >                                                       
+                                <f:validateDoubleRange minimum="0" />
+                                <rich:message for="inputTextvariable1" style="color: #ed0606;"/>
+                            </h:inputText>
+                            
+                            <h:outputText id="lbldescripcionmeta"  value="#{varMarcoLogico.descripcion}" />
+                            <h:inputTextarea  id="textdescripcionmeta" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta!=null}">
+                            <rich:message for="textdescripcionmeta" styleClass="error_texto"/>
+                            </h:inputTextarea>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <center>
+                        <a4j:commandButton value="#{varMarcoLogico.guardar}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta==null}"
+                                           action="#{MarcoLogico$MarcoLogico.guardarMetaLineabaseAsociacionMarcoLogicoIndicador}" 
+                                           render="rpasociarMarcologicoIndicador,pgMarcolIndicadorAsociado">
+                        </a4j:commandButton>
+                    </center>
+
+                </center>
+                <a4j:outputPanel id="panelErrorAsociacionMarcolIndicador">
+                    <rich:messages id="messagesAsociacionMarcolIndicador" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                  >
+                        <f:facet name="infoMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>
+                        <f:facet name="errorMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
+
+            </rich:panel>
+
+        </h:form>
+        <ui:include src="/modal/modalmarcologico/indicador.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/marcoLogico.xhtml"/>
+    </rich:popupPanel>   
+</ui:composition>

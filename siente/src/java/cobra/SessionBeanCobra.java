@@ -23,6 +23,7 @@ import co.com.interkont.cobra.to.Relacionactividadobraperiodo;
 import co.com.interkont.cobra.to.RestaurarPassword;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
 import cobra.Supervisor.FacesUtils;
 import cobra.gestion.HomeGestion;
 import cobra.reportes.ReporteUsuariosXls;
@@ -95,6 +96,8 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
+    //Medios de vida
+    private MarcoLogicoServiceAble marcoLogicoService;
 
     public boolean isLogueadodesdemapa() {
         return (
@@ -338,7 +341,15 @@ public class SessionBeanCobra implements Serializable {
     public void setCobraService(CobraServiceAble cobraService) {
         this.cobraService = cobraService;
     }
+    //Medios de vida
+    public MarcoLogicoServiceAble getMarcoLogicoService() {
+        return marcoLogicoService;
+    }
 
+    public void setMarcoLogicoService(MarcoLogicoServiceAble marcoLogicoService) {
+        this.marcoLogicoService = marcoLogicoService;
+    }
+    
     public ResourceBundle getBundle() {
 
         return bundle;

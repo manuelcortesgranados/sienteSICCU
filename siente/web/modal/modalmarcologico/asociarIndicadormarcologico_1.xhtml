@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-asociar-indicadormarcologico" moveable="true" width="300" height="300" resizeable="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{varMarcoLogico.asociarMarcoLogico}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-asociar-indicadormarcologico" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalAsociacion}"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-asociar-indicadormarcologico')}.hide();
+                                             return false;"/>
+
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="rpasociarMarcologicoIndicador">
+                <center>
+                    <h:panelGrid  width="100%" columns="3" cellspacing="10">
+
+
+                        <h:outputText id="outputtextma"  value="#{varMarcoLogico.marcol}:" />
+                        <h:inputText  id="textdescripcionmarco" style="width: 100%" value="#{MarcoLogico$MarcoLogico.marcologico.strtitulo}"/>
+                        <a4j:commandLink id="btomarcologico" action="#{MarcoLogico$MarcoLogico.llenarMarcoLogico}" render="rpMarcoLogico" >
+                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
+                            <a4j:ajax oncomplete="#{rich:component('mp-marcoLogico')}.show();" />
+                        </a4j:commandLink>
+
+                        <h:outputText id="lbldescripcionindicador"  value="#{varMarcoLogico.indicador}:" />
+                        <h:inputText  id="textdescripcionindicador" style="width: 100%" value="#{MarcoLogico$MarcoLogico.indicador.strnombreindicador}"/>
+                        <a4j:commandLink id="btoindicador" action="#{MarcoLogico$MarcoLogico.llenarIndicador}" immediate="true" render="rpindicador" >
+                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
+                            <a4j:ajax oncomplete="#{rich:component('mp-indicador')}.show();" />
+
+                        </a4j:commandLink>
+
+
+
+                        <h:outputText id="outputTextvalor1lineabase"  value="Variable línea base:" />
+                        <h:inputText  id="inputTextvalor1lineabase" style="width: 100%" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" >
+                            <f:validateDoubleRange minimum="0" />
+                            <rich:message for="inputTextvalor1lineabase" style="color: #ed0606;"/>
+                        </h:inputText>
+                        <h:outputText id="outputText01" />
+
+                        <h:outputText id="outputTextlineabase"  value="Variable 2 línea base:" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables== 2}" />
+                        <h:inputText  id="inputTextlineabase" style="width: 100%" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables == 2}" >
+                            <f:validateDoubleRange minimum="0" />
+                            <rich:message for="inputTextlineabase" style="color: #ed0606;"/>
+                        </h:inputText>
+                        <h:outputText id="outputText02" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables == 2}"/>
+
+                        <h:outputText id="outputTextvariable1"  value="Variable 1 meta:" />
+                        <h:inputText  id="inputTextvariable1" style="width: 100%" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" /> 
+                        <h:outputText id="outputText03" />                           
+
+
+                        <center>
+                            <a4j:commandButton value="#{varMarcoLogico.guardar}" action="#{MarcoLogico$MarcoLogico.guardarAsociacionMarcoLogicoIndicador}" 
+                                               render="rpasociarMarcologicoIndicador,pgAsociacionmarcolIndicador,tablaRelacionMarcoIndicador">
+                            </a4j:commandButton>
+                        </center>
+
+
+                    </h:panelGrid>
+
+
+                </center>
+                <a4j:outputPanel id="panelErrorAsociacionMarcolIndicador">
+                    <rich:messages id="messagesAsociacionMarcolIndicador" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                   >
+                        <f:facet name="infoMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>
+                        <f:facet name="errorMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
+
+            </rich:panel>
+
+        </h:form>
+        <ui:include src="/modal/modalmarcologico/indicador.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/marcoLogico.xhtml"/>
+    </rich:popupPanel>   
+</ui:composition>

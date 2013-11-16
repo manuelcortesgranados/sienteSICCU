@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-crear-avance" moveable="true" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{varMarcoLogico.cronoramaObligacion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-crear-avance" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-avance')}.hide();
+                                         return false;" render="pgSeguimientoConvenio"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="rpnuevoavance" >
+                <h:outputText value="La obligación no tiene cronograma" rendered="#{MarcoLogico$MarcoLogico.listaObligacionavance.size()==0}"/>
+                <interkont:spacer height="10px" width="100%"/>
+                    <center>
+                    <a4j:commandButton id="btcrearNuevoavance"  value="#{varMarcoLogico.btnuevaPlanificacionObligacion}" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}" immediate="true" 
+                                       render="rpnuevafechanuevaplanicion" rendered="#{MarcoLogico$MarcoLogico.listaObligacionavance.size()>0}" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"
+                                       onclick="Richfaces.showModalPanel('mp-crear-fechaPlanificacion')" >
+
+                    </a4j:commandButton>
+                </center>
+                <interkont:spacer height="10px" width="100%"/>
+
+                <rich:dataTable id="tablaavance"  sortMode="single"
+                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaObligacionavance}"
+                                binding="#{MarcoLogico$MarcoLogico.tablaCronogAvancebin}"
+                                rows="4"
+                                var="crongAvance" >
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{varMarcoLogico.fechasreportemes} "/>
+                        </f:facet>
+                        <h:outputText  id="datefechaavance" value="#{crongAvance.datefechaavance}"  />
+                    </rich:column>
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="Logros"/>
+                        </f:facet>
+                        <h:inputTextarea rows="4"  id="strLogrosavance" value="#{crongAvance.strdescripcion}"  />
+                    </rich:column>
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="Dificultades"/>
+                        </f:facet>
+                       <h:inputTextarea rows="4"  id="strdificultadavance" value="#{crongAvance.strdificultades}"  />
+                    </rich:column>
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{varMarcoLogico.fechasrepavance} "/>
+                        </f:facet>
+                        <h:outputText  id="sdatefechacreacionavance" value="#{crongAvance.datefechacreacion}"  >
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </rich:column>
+
+                    <rich:column width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{varMarcoLogico.registrar}" />
+                        </f:facet>
+                        <a4j:commandLink id="bt_generanovedad" action="#{MarcoLogico$MarcoLogico.editarAvance}" 
+                                         title="#{varMarcoLogico.registroavance}" render="pgguardaravance" 
+                                         disabled="#{crongAvance.strdescripcion != null || MarcoLogico$MarcoLogico.obligacion.boolestado == true}" 
+                                         oncomplete="javascript:Richfaces.showModalPanel('mp-crear-nuevoavance');">
+                            <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                            <rich:message for="bt_generanovedad" styleClass="error_texto"/>
+                        </a4j:commandLink>
+
+                    </rich:column>
+                    <f:facet name="footer">
+                        <rich:columnGroup>
+                            <rich:column colspan="5" style="text-align: center;">
+                                <rich:dataScroller id="idscrolltablaavance" for="tablaavance" render="tablaavance"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+
+                </rich:dataTable>
+
+                <interkont:spacer height="10px" width="100%"/>
+                    <center>
+
+                        <h:panelGrid columns="2" cellspacing="10" rendered="#{MarcoLogico$MarcoLogico.listaObligacionavance.size()> 0}">
+                        <rich:column>
+                            <h:outputText value="Obigación cumplida"/>
+                            <h:selectBooleanCheckbox value="#{MarcoLogico$MarcoLogico.obligacion.boolestado}" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado==true}"/>  
+                        </rich:column>   
+
+                        <rich:column rendered="#{MarcoLogico$MarcoLogico.obligacion.boolestado != true}">
+                            <a4j:commandButton id="btobligacioncumplida"  value="Aprobar" 
+                                               render="rpcamibiarestadoobligacion" immediate="true">
+                                 <a4j:ajax oncomplete="#{rich:component('mp-guardarestado-obligacion')}.show();" />
+                            </a4j:commandButton>
+                        </rich:column>
+
+                    </h:panelGrid>
+
+                </center>
+                <interkont:spacer height="10px" width="100%"/>
+
+            </rich:panel>
+        </h:form>
+        <ui:include src="/modal/modalmarcologico/editarAvance.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/crearFechaPlanificaObligacion.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/cambiarEstadoObligacion.xhtml"/>
+
+    </rich:popupPanel>   
+</ui:composition>

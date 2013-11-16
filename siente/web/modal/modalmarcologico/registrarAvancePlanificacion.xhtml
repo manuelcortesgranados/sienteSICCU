@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-registro-avanceplanificacion" moveable="true" width="330" height="350"  autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{varMarcoLogico.nuevoavance}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink render="rpPlaneacionAvanceMarcolIndicador" id="esconder_mp-registro-avanceplanificacion" action="#{MarcoLogico$MarcoLogico.limpiarModalAvancePlanificacion}" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}"  immediate="true" onclick="#{rich:component('mp-registro-avanceplanificacion')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <h:panelGroup id="pgavanceplanificacion">
+                <rich:panel id="rpRegistroAvancePlanificacion">
+                    <center>
+                        <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+                        <h:panelGrid columns="2"  width="100%" >
+
+                            <h:outputText id="lblditfechaavance"  value="(*)Fecha del reporte" />
+                            <h:panelGrid columns="2" >
+                                <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" inputSize="10" datePattern="yyyy-MM-dd" id="calendarfechaavan"
+                                               value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.datefecharealizacion}"/>
+                                <rich:message for="calendarfechaavan" styleClass="error_texto"/>
+                            </h:panelGrid>
+                            
+                            <h:outputText id="lbleditvariableavance"  value="Variable avance" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==1}"/>
+                            <h:outputText id="lbleditvarbEsperd1"  value="Variable 1 avance:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
+                            <h:inputText  id="texteditvariableesperada1" size="12"  value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada1}">
+                            <f:validateDoubleRange minimum="0" />
+                            <rich:message for="texteditvariableesperada1" style="color: #ed0606;"/>
+                            </h:inputText>                            
+                            
+                            <h:outputText id="lblditvarbEsperd2"  value="Variable 2 avance:"  rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
+                            <h:inputText id="textditvariableesperada2" size="12" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada2}" 
+                                         rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}">
+                            <f:validateDoubleRange minimum="0" />
+                            <rich:message for="textditvariableesperada2" style="color: #ed0606;"/>
+                            </h:inputText>
+                    
+                            <h:outputText id="lblditobservacionAvanceplanificacion"  value="Observación avance:" />
+                            <h:panelGrid columns="1" >
+                                <h:inputTextarea id="textditobservacionAvanceplanificacion" style="width: 100%" rows="4" cols="40" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.strobservacion}"/>
+                                <rich:message for="textditobservacionAvanceplanificacion" styleClass="error_texto"/>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+                        <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
+                                           disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
+                                           render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida" >
+                        </a4j:commandButton>
+
+                    </center>
+                </rich:panel>
+                <a4j:outputPanel id="panelErrorRegistroAvancePlanificacion">
+                    <rich:messages id="messagesRegistroAvancePlanificacion" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                   >
+                        <f:facet name="infoMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>
+                        <f:facet name="errorMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
+            </h:panelGroup>
+        </h:form>
+
+
+    </rich:popupPanel>   
+</ui:composition>

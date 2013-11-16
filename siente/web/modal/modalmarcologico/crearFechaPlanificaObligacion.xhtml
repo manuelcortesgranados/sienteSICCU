@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel id="mp-crear-fechaPlanificacion" moveable="true"   width="300" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{varMarcoLogico.nuevaFechaAvanceObligacion}" />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-fechaPlanificacion" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-fechaPlanificacion')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+                <rich:panel id="rpnuevafechanuevaplanicion">
+                    <center>
+                        <h:panelGrid columns="2"  width="100%"  >
+                            <h:outputText id="lbplanicicarfechaavance"  value="Fecha avance"/>
+                            <h:panelGrid>
+                                <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaplanificado" 
+                                               inputSize="10"
+                                               value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechaavance}"/>
+                                <rich:message for="calendarfechaplanificado" styleClass="error_texto"/>
+                            </h:panelGrid>                     
+                        </h:panelGrid>
+
+                    </center>
+
+                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarFechaAvanceAdicionalObligacion}"
+                                       render="rpnuevoavance,rpnuevafechanuevaplanicion">
+                    </a4j:commandButton>
+                </rich:panel>
+                <a4j:outputPanel id="panelErrorPlanificarfecha">
+                    <rich:messages id="messagesAvance" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                 >
+                        <f:facet name="infoMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>                        
+                        <f:facet name="errorMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
+        </h:form>
+    </rich:popupPanel>   
+</ui:composition>
