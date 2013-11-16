@@ -86,6 +86,9 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
+import co.com.interkont.cobra.marcologico.to.Estrategia;
+import cobra.MarcoLogico.MarcoLogicoBean;
 
 /**
  * <p>
@@ -103,6 +106,7 @@ import javax.servlet.ServletContext;
  */
 public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
+
     /**
      * Objeto para acceder a los atributos de contrato
      */
@@ -792,7 +796,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int mostrarContratoConvenio;
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
     private Tercero tercero = new Tercero();
-
     /**
      * Variable para confirmar el guardado con plan operativo.
      */
@@ -806,6 +809,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public boolean isConfirmacionGuardado() {
         return confirmacionGuardado;
     }
+    /**
+     * Variable para saber a que estrategia ingreso el usuario
+     */
+    private int estrategia = 0;
+    /**
+     * Variable para que liste todas las entidades
+     */
+    private int entidades = 0;
 
     /**
      * Set the value of confirmacionGuardado
@@ -835,7 +846,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTercero(Tercero tercero) {
         this.tercero = tercero;
     }
-
     private boolean enNuevoConvenio;
 
     public boolean isEnNuevoConvenio() {
@@ -2451,6 +2461,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.habiitarmodificartipocontrato = habiitarmodificartipocontrato;
     }
 
+    public int getEstrategia() {
+        return estrategia;
+    }
+
+    public void setEstrategia(int estrategia) {
+        this.estrategia = estrategia;
+    }
+
     /**
      * <p>
      * Automatically managed component initialization.
@@ -3164,7 +3182,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return no retorna nada
      */
     private void validadcionGuardarContrato() {
-        if (bundle.getString("boolencargofidu").equals("false")) {
+        if (bundle.getString("boolencargofidu").equals("true") || bundle.getString("boolencargofidu").equals("false")) {
             if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
@@ -4388,6 +4406,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolproyectos = false;
         boolgiros = false;
         boolmodifca = false;
+        if (filtrocontrato.getIdestrategia() != 0) {
+//            getMarcoLogicoBean().setBoolcrearobligacion(false);
+//            setAvancemedios(getSessionBeanCobra().getMarcoLogicoService().encontrarAvanceConvenioMediosVida(contrato.getIntidcontrato()));
+        }
+
         if (contrato.getBooltipocontratoconvenio()) {
             tipoContCon = "Convenio";
             booltipocontratoconvenio = true;
@@ -5243,7 +5266,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return la pagina detallecontrato
      */
-    public String iniciarDetaContrato() {       
+    public String iniciarDetaContrato() {
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
@@ -6391,7 +6414,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -7475,11 +7498,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 for (Relacionobrafuenterecursoscontrato robrc : getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos())) {
                     boolean estaEnContratosProyecto = false;
                     for (Contrato cont : proyplaop.getContratosProyecto()) {
-                        if(cont.getIntidcontrato() == robrc.getContrato().getIntidcontrato()) {
+                        if (cont.getIntidcontrato() == robrc.getContrato().getIntidcontrato()) {
                             estaEnContratosProyecto = true;
                         }
                     }
-                    if(!estaEnContratosProyecto) {
+                    if (!estaEnContratosProyecto) {
                         proyplaop.getContratosProyecto().add(robrc.getContrato());
                     }
                 }
@@ -7984,5 +8007,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Comienza medios de vida.
+     *
+     * @return
+     */
+    protected MarcoLogicoBean getMarcoLogicoBean() {
+        return (MarcoLogicoBean) FacesUtils.getManagedBean("MarcoLogico$MarcoLogico");
     }
 }
