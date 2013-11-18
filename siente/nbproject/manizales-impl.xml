@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<project name="compileManizales" default="-pre-compile" basedir="..">
+    <description>Archivo para compilar y generar manizales</description>        
+    
+    
+    <condition property="ismanizales">
+        <equals arg1="${version}" arg2="manizales" />        
+    </condition>  
+  
+    <target name="doManizales" if="ismanizales" >
+        <echo message="generando manizales" />       
+        <copy todir="${build.web.dir}/resources/imgs">
+            <fileset dir="web/resources/imgsmanizales/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/css">
+            <fileset dir="web/resources/cssmanizales/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/resources/js/login">
+            <fileset  dir="web/resources/js/loginmanizales/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/facelets">
+            <fileset  dir="web/faceletscobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/homes">
+            <fileset  dir="web/homescobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/org.richfaces">
+            <fileset  dir="web/resources/org.richfacescobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <!-- Archivos de configuracion-->        
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/manizales/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/manizales/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion//WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/siente/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/siente/resources/skinning.ecss"/>
+        <!-- Archivos de configuracion-->        
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
+    </target> 
+</project>
+

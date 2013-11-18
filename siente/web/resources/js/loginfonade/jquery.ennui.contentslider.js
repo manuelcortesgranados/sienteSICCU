@@ -2,8 +2,8 @@
   $.fn.ContentSlider = function(options)
   {
     var defaults = {
-      leftBtn : '/cobrafonade/resources/imgs/prev.png',
-      rightBtn :'/cobrafonade/resources/imgs/next.png',
+      leftBtn : '/zoom/resources/imgs/prev.png',
+      rightBtn :'/zoom/resources/imgs/next.png',
       width : '900px',
       height : '400px',
       speed : 400,

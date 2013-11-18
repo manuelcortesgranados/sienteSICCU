@@ -45,7 +45,7 @@ function style_background(){
     function img(){
         _img = _listImg[parseInt(localStorage.getItem('position'))];
         if(_img==null || _img==undefined || _img=="" || _img==false){
-            _img = "/cobrafonde/resources/imgs/login/bg2.jpg";
+            _img = "/zoom/resources/imgs/login/bg2.jpg";
             img_background();
         }else{
             img_background();

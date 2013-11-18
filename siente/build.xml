@@ -9,8 +9,21 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="siente" default="default" basedir=".">
     <description>Builds, tests, and runs the project siente.</description>
-    <!--<import file="nbproject/build-gwt.xml"/>-->
-	<import file="nbproject/build-impl.xml"/>
+    <property name="version" value="siente"/> 
+    <property name="dist.war" value="dist/${version}.war"/>
+    <!--
+    <import file="nbproject/build-gwt.xml"/>
+    -->
+   <import file="nbproject/zoom-impl.xml"/>
+   <import file="nbproject/siente-impl.xml"/>
+   <import file="nbproject/manizales-impl.xml"/>
+   <import file="nbproject/tolima-impl.xml"/>
+    
+   <import file="nbproject/build-impl.xml"/>
+   
+    
+    
+    
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -69,25 +82,8 @@
     nbproject/build-impl.xml file. 
 
     -->
-     <target name="-pre-compile">
-        <!-- Empty placeholder for easier customization. -->
-        <!-- You can override this target in the ../build.xml file. -->
-        <copy todir="${build.web.dir}/resources/imgs">
-            <fileset dir="${war.carpetaimagenes}" excludes="${build.web.excludes}"/>
-        </copy>
-         <copy todir="${build.web.dir}/resources/css">
-            <fileset dir="${war.carpetacss}" excludes="${build.web.excludes}"/>
-        </copy>
-       
-        <copy todir="${build.web.dir}/resources/js/login">
-            <fileset  dir="${war.carpetajs}" excludes="${build.web.excludes}"/>
-        </copy>
-       
-        <copy todir="${build.web.dir}/facelets">
-            <fileset  dir="${war.carpetafacelets}" excludes="${build.web.excludes}"/>
-        </copy>
-        <copy todir="${build.web.dir}/homes">
-            <fileset  dir="${war.carpetahomes}" excludes="${build.web.excludes}"/>
-        </copy>
+    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima">       
     </target>
+    
+
 </project>

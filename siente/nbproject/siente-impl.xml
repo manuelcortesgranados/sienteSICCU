@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<project name="compileSiente" default="-pre-compile" basedir="..">
+    <description>Archivo para compilar y generar siente</description>        
+    
+    
+    <condition property="issiente">
+        <equals arg1="${version}" arg2="siente" />        
+    </condition>  
+  
+    <target name="doSiente" if="issiente" >
+        <echo message="generando siente" />
+        <echo message=" nombre war ${dist.war}"/>      
+        <copy todir="${build.web.dir}/resources/imgs">
+            <fileset dir="web/resources/imgs/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/css">
+            <fileset dir="web/resources/css/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/resources/js/login">
+            <fileset  dir="web/resources/js/login/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/facelets">
+            <fileset  dir="web/faceletscobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/homes">
+            <fileset  dir="web/homescobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/org.richfaces">
+            <fileset  dir="web/resources/org.richfacescobra/" excludes="${build.web.excludes}"/>
+        </copy>
+        <!-- Archivos de configuracion-->        
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
+        
+    </target> 
+</project>
+
