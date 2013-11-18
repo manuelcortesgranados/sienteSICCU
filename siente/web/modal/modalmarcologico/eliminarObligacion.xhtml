@@ -33,11 +33,11 @@
                     <interkont:spacer height="20"/>
                 <h:panelGrid columns="2" width="100%" style="text-align:center;">
                     <a4j:commandButton value="Aceptar" action="#{MarcoLogico$MarcoLogico.eliminarObligacion}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
+                                       onclick="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
                                        render="pgSeguimientoConvenio,tablaSeguimientoConvenio"
                                        style="font-size:12px;"/>
                     <a4j:commandButton value="Cancelar" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
+                                       onclick="javascript:Richfaces.hideModalPanel('mp-eliminar-obligacion')"
                                        render="pgSeguimientoConvenio,tablaSeguimientoConvenio" 
                                        style="font-size:12px;"/>
                 </h:panelGrid>

@@ -9,7 +9,7 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-crear-obligacion" moveable="true" width="300" height="300" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-crear-obligacion" moveable="true" width="400" height="300" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.crearObligacion}"/>
@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-obligacion" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalAgredarObligacion}"
+                    <a4j:commandLink id="esconder_mp-crear-obligacion" styleClass="cerrar" style="color: #000000;" value="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalAgredarObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-obligacion')}.hide();
                                          return false;" render="pgSeguimientoConvenio"/> 
                 </h:panelGroup>
@@ -49,7 +49,7 @@
                                            required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechainireal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicioreal == true}"/>
                             <rich:message for="calendarfechaInicioreal" styleClass="error_texto"/>
                         </h:panelGrid>
-                        
+
                         <h:outputText id="lblfechafinreal"  value="(*)Fecha fin real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
                         <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}">
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinreal"
