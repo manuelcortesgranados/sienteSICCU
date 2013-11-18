@@ -4,6 +4,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
@@ -35,11 +37,12 @@ public class WidgetTablaMontos implements IsWidget {
     protected ContratoDTO contrato;
     protected boolean editar;
     protected NumberField<BigDecimal> valorContrato;
-    protected boolean sololectura=false;
-    
+    protected boolean sololectura = false;
+    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     /**
      * Constructor solo lectura
+     *
      * @param contrato
      * @param editar
      * @param valorContrato
@@ -49,8 +52,9 @@ public class WidgetTablaMontos implements IsWidget {
         this.contrato = contrato;
         this.editar = editar;
         this.valorContrato = valorContrato;
-        this.sololectura=readonly;
+        this.sololectura = readonly;
     }
+
     public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
         return store;
     }
@@ -113,7 +117,7 @@ public class WidgetTablaMontos implements IsWidget {
         nameColumn.setColumnTextStyle(textStyles);
 
         TextButtonCell button = new TextButtonCell();
-       
+
         button.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
@@ -125,7 +129,14 @@ public class WidgetTablaMontos implements IsWidget {
                 }
                 BigDecimal valor = valorContrato.getValue();
                 obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
-                valor = valor.subtract(store.get(row).getValor());
+                 BigDecimal valorArestar = store.get(row).getValor();
+                 if (valorArestar.compareTo(valor) == 0) {
+                    service.setLog("son iguales", null);
+                    valor = BigDecimal.ZERO;
+                } else {
+                    valor = valor.subtract(valorArestar);
+                   
+                }
                 valorContrato.setValue(valor);
                 //GanttDatos.adicionarRelacionObraFuenteRecursoContratoEliminar(store.get(row));
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
@@ -133,9 +144,8 @@ public class WidgetTablaMontos implements IsWidget {
 
             }
         });
-        if(!sololectura)
-        {    
-        eliminar.setCell(button);
+        if (!sololectura) {
+            eliminar.setCell(button);
         }
         List<ColumnConfig<RelacionobrafuenterecursoscontratoDTO, ?>> l = new ArrayList<ColumnConfig<RelacionobrafuenterecursoscontratoDTO, ?>>();
         l.add(nameColumn);
@@ -143,9 +153,8 @@ public class WidgetTablaMontos implements IsWidget {
         l.add(vigencia);
         l.add(entidad);
         l.add(vigenciaFuente);
-        if(!sololectura)
-        { 
-        l.add(eliminar);
+        if (!sololectura) {
+            l.add(eliminar);
         }
         ColumnModel<RelacionobrafuenterecursoscontratoDTO> cm = new ColumnModel<RelacionobrafuenterecursoscontratoDTO>(l);
 

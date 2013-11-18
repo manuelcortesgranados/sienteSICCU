@@ -814,12 +814,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijos.add(contractua);
 
         List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcion);
 
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcionActa);
