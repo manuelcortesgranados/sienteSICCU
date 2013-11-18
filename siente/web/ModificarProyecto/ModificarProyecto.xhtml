@@ -104,7 +104,7 @@
                                         <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                     </rich:calendar>
                                     <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
-                                        <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6"/>
+                                    <f:convertNumber type="number"/>
                                     </h:inputText>
                                     <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
                                                 return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
