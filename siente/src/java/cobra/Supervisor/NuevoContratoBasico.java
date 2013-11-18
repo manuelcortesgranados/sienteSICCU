@@ -6821,9 +6821,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         /**
          * Se comprueba si los periodos no estan por fuera del rango de fechas.
          */
-        
-        
-        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() inicial "+ isValidarPeriodoConveniosFueraRango());
+        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() inicial " + isValidarPeriodoConveniosFueraRango());
+
         if (contrato.getIntidcontrato() != 0 && !isEliminarPeriodosFueraRango() && isValidarPeriodoConveniosFueraRango()) {
 
             System.out.println("DEbug - contrato.getIntidcontrato() != 0");
@@ -6837,9 +6836,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 setEliminarPeriodosFueraRango(true);
                 setGuardarborradorconvenio(false);
                 System.out.println("periodo fuera de rango en  TRUE");
-            }else{
+            } else {
                 setValidarPeriodoConveniosFueraRango(false);
             }
+        }
+
+        if (contrato.getIntidcontrato() != 0) {
+            setValidarPeriodoConveniosFueraRango(false);
         }
 
         System.out.println("Despues de validaciones iniciales. ");
@@ -6847,18 +6850,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
          * Si el usuario acepta redimensionar el flujo de caja, se procede a
          * eliminar los periodos fuera de rango.
          */
-        
-        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() segundo "+ isValidarPeriodoConveniosFueraRango());
-        
+
+        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() segundo " + isValidarPeriodoConveniosFueraRango());
+
         if (isEliminarPeriodosFueraRango() && !isGuardarborradorconvenio() && !isValidarPeriodoConveniosFueraRango()) {
             System.out.println("Debug - entro a eliminar periodos fuera de rango");
             getSessionBeanCobra().getCobraService().borrarPeriodosflujocaja(periodoConveniosFueraRango);
         }
 
         try {
-            
-            System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() tercero "+ isValidarPeriodoConveniosFueraRango());
-            
+
+            System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() tercero " + isValidarPeriodoConveniosFueraRango());
+
             if (!isValidarPeriodoConveniosFueraRango()) { // la variable entra por parametro
                 System.out.println("DEbug - Entro a guardar");
                 ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());

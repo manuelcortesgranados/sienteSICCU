@@ -30,10 +30,14 @@
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia">
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia"
+                                 oncomplete="if (#{Supervisor$Contrato.eliminarPeriodosFueraRango})  #{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.show();">
+                    <a4j:param value="true" assignTo="#{Supervisor$Contrato.validarPeriodoConveniosFueraRango}"/>
                 </a4j:commandLink>
                 <a4j:commandLink value="#{var.planoperativo}" style="width: 120px;" action="#{Supervisor$Contrato.planOperativo()}"  styleClass="img-button-ncpo ikont-menu-detalle-text" 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia">
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia"
+                                 oncomplete="if (#{Supervisor$Contrato.eliminarPeriodosFueraRango})  #{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.show();">
+                    <a4j:param value="true" assignTo="#{Supervisor$Contrato.validarPeriodoConveniosFueraRango}"/>
                 </a4j:commandLink>
             </h:panelGroup>
             <h:panelGroup layout="block" >
