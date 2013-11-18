@@ -1,6 +1,6 @@
 function style_background(){  
     
-    var _listImg = ["/cobramanizales/resources/imgs/login/bg.jpg","/cobramanizales/resources/imgs/login/bg2.jpg"];
+    var _listImg = ["/manizales/resources/imgs/login/bg.jpg","/manizales/resources/imgs/login/bg2.jpg"];
     var _position = 0;
     var _heigth  = 0;
     var _img = "";
@@ -45,7 +45,7 @@ function style_background(){
     function img(){
         _img = _listImg[parseInt(localStorage.getItem('position'))];
         if(_img==null || _img==undefined || _img=="" || _img==false){
-            _img = "/cobrafonde/resources/imgs/login/bg2.jpg";
+            _img = "/manizales/resources/imgs/login/bg2.jpg";
             img_background();
         }else{
             img_background();

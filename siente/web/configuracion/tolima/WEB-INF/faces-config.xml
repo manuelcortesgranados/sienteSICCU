@@ -25,7 +25,7 @@
 
     <application>
         <resource-bundle>            
-            <base-name>cobra/properties/Bundle</base-name>            
+            <base-name>cobra/properties/BundleTolima</base-name>            
             <var>var</var>
         </resource-bundle>
         <resource-bundle>

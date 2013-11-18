@@ -32,14 +32,8 @@ and open the template in the editor.
             <fileset  dir="web/homescobra/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/org.richfaces">
-            <fileset  dir="web/resources/org.richfacescobra/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/resources/org.richfacessiente/" excludes="${build.web.excludes}"/>
         </copy>
-        <!-- Archivos de configuracion-->        
-        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/manizales/META-INF/context.xml"/>        
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/manizales/WEB-INF/applicationContext.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion//WEB-INF/faces-config.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/siente/WEB-INF/web.xml"/>
-        <copy todir="${build.web.dir}/resources/" file="web/configuracion/siente/resources/skinning.ecss"/>
         <!-- Archivos de configuracion-->        
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
