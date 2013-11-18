@@ -40,16 +40,10 @@ public class FlujoEgresos implements Serializable {
     boolean egresoCuotaGerencia;
     List<Planificacionmovimientoproyecto> planMovimientosProyecto;
     List<Planificacionmovconvenio> planMovimientosEgresosConvenio;
-    List<Planificacionmovimientoproyecto> movimientosProyectoEliminados;
-    List<Planificacionmovconvenio> movimientosEgresosConvenioEliminados;
     List<Planificacionmovimientocontrato> planMovimientosContrato = new ArrayList<Planificacionmovimientocontrato>();
-    List<Planificacionmovimientocontrato> planMovimientosContratoEliminados = new ArrayList<Planificacionmovimientocontrato>();
     List<Planificacionmovimientoprydirecto> planMovimientosPryDirecto = new ArrayList<Planificacionmovimientoprydirecto>();
-    List<Planificacionmovimientoprydirecto> planMovimientosPryDirectoEliminados = new ArrayList<Planificacionmovimientoprydirecto>();
     List<Planificacionmovimientopryotros> planMovimientosPryOtros = new ArrayList<Planificacionmovimientopryotros>();
-    List<Planificacionmovimientopryotros> planMovimientosPryOtrosEliminados = new ArrayList<Planificacionmovimientopryotros>();
     List<Planificacionmovcuotagerencia> planificacionesmovcuotagerencia = new ArrayList<Planificacionmovcuotagerencia>();
-    List<Planificacionmovcuotagerencia> planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
     BigDecimal totalEgresosFuente;
     BigDecimal totalEsperadoEgresosFuente;
     double contrapartida;
@@ -81,14 +75,6 @@ public class FlujoEgresos implements Serializable {
         this.planificacionesmovcuotagerencia = planificacionesmovcuotagerencia;
     }
 
-    public List<Planificacionmovcuotagerencia> getPlanificacionesmovcuotagerenciaEliminados() {
-        return planificacionesmovcuotagerenciaEliminados;
-    }
-
-    public void setPlanificacionesmovcuotagerenciaEliminados(List<Planificacionmovcuotagerencia> planificacionesmovcuotagerenciaEliminados) {
-        this.planificacionesmovcuotagerenciaEliminados = planificacionesmovcuotagerenciaEliminados;
-    }
-    
     public BigDecimal getTotalEsperadoEgresosFuente() {
         return totalEsperadoEgresosFuente;
     }
@@ -195,14 +181,6 @@ public class FlujoEgresos implements Serializable {
         this.planMovimientosPryDirecto = planMovimientosPryDirecto;
     }
 
-    public List<Planificacionmovimientoprydirecto> getPlanMovimientosPryDirectoEliminados() {
-        return planMovimientosPryDirectoEliminados;
-    }
-
-    public void setPlanMovimientosPryDirectoEliminados(List<Planificacionmovimientoprydirecto> planMovimientosPryDirectoEliminados) {
-        this.planMovimientosPryDirectoEliminados = planMovimientosPryDirectoEliminados;
-    }
-
     public List<Planificacionmovimientopryotros> getPlanMovimientosPryOtros() {
         return planMovimientosPryOtros;
     }
@@ -211,14 +189,6 @@ public class FlujoEgresos implements Serializable {
         this.planMovimientosPryOtros = planMovimientosPryOtros;
     }
 
-    public List<Planificacionmovimientopryotros> getPlanMovimientosPryOtrosEliminados() {
-        return planMovimientosPryOtrosEliminados;
-    }
-
-    public void setPlanMovimientosPryOtrosEliminados(List<Planificacionmovimientopryotros> planMovimientosPryOtrosEliminados) {
-        this.planMovimientosPryOtrosEliminados = planMovimientosPryOtrosEliminados;
-    }
-    
     public Contrato getContrato() {
         return contrato;
     }
@@ -235,14 +205,6 @@ public class FlujoEgresos implements Serializable {
         this.planMovimientosContrato = planMovimientosContrato;
     }
 
-    public List<Planificacionmovimientocontrato> getPlanMovimientosContratoEliminados() {
-        return planMovimientosContratoEliminados;
-    }
-
-    public void setPlanMovimientosContratoEliminados(List<Planificacionmovimientocontrato> planMovimientosContratoEliminados) {
-        this.planMovimientosContratoEliminados = planMovimientosContratoEliminados;
-    }
-    
     public FlujoEgresos() {
     }
 
@@ -276,22 +238,6 @@ public class FlujoEgresos implements Serializable {
 
     public void setPlanMovimientosEgresosConvenio(List<Planificacionmovconvenio> planMovimientosEgresosConvenio) {
         this.planMovimientosEgresosConvenio = planMovimientosEgresosConvenio;
-    }
-
-    public List<Planificacionmovimientoproyecto> getMovimientosProyectoEliminados() {
-        return movimientosProyectoEliminados;
-    }
-
-    public void setMovimientosProyectoEliminados(List<Planificacionmovimientoproyecto> movimientosProyectoEliminados) {
-        this.movimientosProyectoEliminados = movimientosProyectoEliminados;
-    }
-
-    public List<Planificacionmovconvenio> getMovimientosEgresosConvenioEliminados() {
-        return movimientosEgresosConvenioEliminados;
-    }
-
-    public void setMovimientosEgresosConvenioEliminados(List<Planificacionmovconvenio> movimientosEgresosConvenioEliminados) {
-        this.movimientosEgresosConvenioEliminados = movimientosEgresosConvenioEliminados;
     }
 
     public BigDecimal getTotalEgresosFuente() {
@@ -334,7 +280,6 @@ public class FlujoEgresos implements Serializable {
      */
     public void crearEstructuraFlujoEgresosProyecto(Obra proyecto, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         this.planMovimientosProyecto = new ArrayList<Planificacionmovimientoproyecto>();
-        this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
         itemFlujoEgresos.setStrdescripcion(proyecto.getStrnombrecrot());
         this.proyecto = proyecto;
         this.egresoProyecto = true;
@@ -363,7 +308,6 @@ public class FlujoEgresos implements Serializable {
     public void crearEstructuraFlujoEgresosContrato(Contrato contrato, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         int numPeriodoFlujoEgresos = 0;
         this.planMovimientosContrato = new ArrayList<Planificacionmovimientocontrato>();
-        this.planMovimientosContratoEliminados = new ArrayList<Planificacionmovimientocontrato>();
         this.contrato = contrato;
         setEgresoContrato(true);
         for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
@@ -388,7 +332,6 @@ public class FlujoEgresos implements Serializable {
     public void crearEstructuraFlujoEgresosPryDirecto(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         int numPeriodoFlujoEgresos = 0;
         this.planMovimientosPryDirecto = new ArrayList<Planificacionmovimientoprydirecto>();
-        this.planMovimientosPryDirectoEliminados = new ArrayList<Planificacionmovimientoprydirecto>();
         setEgresoPryDirecto(true);
         for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
             Planificacionmovimientoprydirecto planMovimientoPryDirecto = new Planificacionmovimientoprydirecto();
@@ -411,7 +354,6 @@ public class FlujoEgresos implements Serializable {
     public void crearEstructuraFlujoEgresosPryOtros(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         int numPeriodoFlujoEgresos = 0;
         this.planMovimientosPryOtros = new ArrayList<Planificacionmovimientopryotros>();
-        this.planMovimientosPryOtrosEliminados = new ArrayList<Planificacionmovimientopryotros>();
         setEgresoPryOtros(true);
         for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
             Planificacionmovimientopryotros planMovimientoPryOtros = new Planificacionmovimientopryotros();
@@ -435,7 +377,6 @@ public class FlujoEgresos implements Serializable {
      */
     public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Relacioncontratoperiodoflujocaja> periodosConvenio, Contrato convenio) {
         this.planMovimientosEgresosConvenio = new ArrayList<Planificacionmovconvenio>();
-        this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.itemFlujoEgresos = itemFlujoEgresos;
 
         for (Relacioncontratoperiodoflujocaja periodoConvenio : periodosConvenio) {
@@ -459,7 +400,6 @@ public class FlujoEgresos implements Serializable {
      * @param periodosFlujoCaja Periodos del flujo de caja.
      */
     public void actualizarPlanMovimientosProyecto(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
-        this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
         this.egresoProyecto = true;
         int iterador;
 
@@ -478,16 +418,6 @@ public class FlujoEgresos implements Serializable {
 
                 iterador++;
             }
-        } else if (this.planMovimientosProyecto.size() > periodosConvenio.size()) {
-            Planificacionmovimientoproyecto planMovimientoProyecto;
-
-            while (periodosConvenio.size() < planMovimientosProyecto.size()) {
-                planMovimientoProyecto = planMovimientosProyecto.remove(periodosConvenio.size());
-
-                if (planMovimientoProyecto.getIdplanificacionmovpry() > 0) {
-                    movimientosProyectoEliminados.add(planMovimientoProyecto);
-                }
-            }
         }
     }
 
@@ -501,7 +431,6 @@ public class FlujoEgresos implements Serializable {
      * @param convenio Convenio marco.
      */
     public void actualizarPlanMovimientosEgresosConvenio(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Contrato convenio) {
-        this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.egresoProyecto = false;
         int iterador;
 
@@ -520,16 +449,6 @@ public class FlujoEgresos implements Serializable {
                 this.planMovimientosEgresosConvenio.add(planMovimientoEgresoConvenio);
 
                 iterador++;
-            }
-        } else if (this.planMovimientosEgresosConvenio.size() > periodosConvenio.size()) {
-            Planificacionmovconvenio planMovimientoEgresoConvenio;
-
-            while (periodosConvenio.size() < planMovimientosEgresosConvenio.size()) {
-                planMovimientoEgresoConvenio = planMovimientosEgresosConvenio.remove(periodosConvenio.size());
-
-                if (planMovimientoEgresoConvenio.getIdplanificacionmovimientoconv() > 0) {
-                    movimientosEgresosConvenioEliminados.add(planMovimientoEgresoConvenio);
-                }
             }
         }
     }
@@ -601,7 +520,6 @@ public class FlujoEgresos implements Serializable {
      */
     public void crearEstructuraFlujoEgresosEntidad(Fuenterecursosconvenio fuenterecursosconvenio, Tercero entidadAportante, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         this.planificacionesmovcuotagerencia = new ArrayList<Planificacionmovcuotagerencia>();
-        this.planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
         this.fuenteRecursosConvenio = fuenterecursosconvenio;
         this.entidadAportante = entidadAportante;
         this.setEgresoCuotaGerencia(true);
@@ -627,7 +545,6 @@ public class FlujoEgresos implements Serializable {
      * @param fuenteRecursosConvenio Fuente de recursos del convenio.
      */
     public void actualizarPlanMovimientosEntidad(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Fuenterecursosconvenio fuenteRecursosConvenio) {
-        this.planificacionesmovcuotagerenciaEliminados = new ArrayList<Planificacionmovcuotagerencia>();
         this.fuenteRecursosConvenio = fuenteRecursosConvenio;
         this.setEgresoCuotaGerencia(true);
         int iterador;
@@ -646,14 +563,6 @@ public class FlujoEgresos implements Serializable {
                 this.planificacionesmovcuotagerencia.add(planificacionmovcuotagerencia);
 
                 iterador++;
-            }
-        } else if (this.planificacionesmovcuotagerencia.size() > periodosConvenio.size()) {
-            Planificacionmovcuotagerencia planificacionmovcuotagerencia;
-
-            while (periodosConvenio.size() < planificacionesmovcuotagerencia.size()) {
-                planificacionmovcuotagerencia = planificacionesmovcuotagerencia.remove(periodosConvenio.size());
-
-                planificacionesmovcuotagerenciaEliminados.add(planificacionmovcuotagerencia);
             }
         }
     }
