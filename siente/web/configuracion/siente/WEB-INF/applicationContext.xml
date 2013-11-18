@@ -392,14 +392,14 @@
             <ref local="ciudadanoDao" />
         </property>
     </bean>
-    
+    <!--
     <bean id="gwtServiceTarget" scope="prototype"
           class="co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl">
         <property name="cobraDao">
             <ref local="cobraDao" />
         </property>
     </bean>
-    
+    -->
     <bean id="marcoLogicoServiceTarget" scope="prototype"
           class="cobra.MarcoLogico.service.MarcoLogicoServiceImpl">
         
@@ -654,7 +654,7 @@
             </props>
         </property>
     </bean>
-    
+    <!--
     <bean id="cobraGwtServiceAble" scope="session"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -675,7 +675,7 @@
         </property>
     </bean>
     
-    
+    -->
      <bean id="marcoLogicoService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">

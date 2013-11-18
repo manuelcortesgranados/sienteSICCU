@@ -324,11 +324,7 @@
         <managed-property>
             <property-name>modificarProyectoService</property-name>
             <value>#{modificarProyectoService}</value>
-        </managed-property>
-        <managed-property>
-            <property-name>cobraGwtService</property-name>
-            <value>#{cobraGwtServiceAble}</value>
-        </managed-property>
+        </managed-property>        
           <managed-property>
             <property-name>marcoLogicoService</property-name>
             <value>#{marcoLogicoService}</value>

@@ -34,7 +34,7 @@
             <!--Bundle para Manizales
             <base-name>cobra/properties/BundleManizales</base-name>-->
             <var>var</var>
-        </resource-bundle>
+        </resource-bundle>        
         <resource-bundle>
             <!--Bundle para siente-->
             <base-name>cobra/properties/BundleMarcoLogico</base-name>
@@ -304,6 +304,7 @@
             <property-name>cobraService</property-name>
             <value>#{cobraService}</value>
         </managed-property>
+        <!--
         <managed-property>
             <property-name>financieraService</property-name>
             <value>#{financieraService}</value>
@@ -316,6 +317,7 @@
             <property-name>solicitudService</property-name>
             <value>#{solicitudService}</value>
         </managed-property>
+        -->
         <managed-property>
             <property-name>supervisionExternaService</property-name>
             <value>#{supervisionExternaService}</value>
@@ -336,11 +338,12 @@
             <property-name>cobraGwtService</property-name>
             <value>#{cobraGwtServiceAble}</value>
         </managed-property>
-          <managed-property>
+        <!--
+        <managed-property>
             <property-name>marcoLogicoService</property-name>
             <value>#{marcoLogicoService}</value>
         </managed-property>
-
+-->
     </managed-bean>
     <managed-bean>
         <managed-bean-name>SubirArchivoBean</managed-bean-name>

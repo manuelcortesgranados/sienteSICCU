@@ -314,12 +314,12 @@
     <bean id="cobraDao" class="cobra.dao.CobraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="modificarProyectoDao" class="cobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <!--<bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
     <bean id="supervisionExternaDao" class="supervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="ciudadanoDao" class="ciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="marcoLogicoDao" class="cobra.MarcoLogico.dao.MarcoLogicoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <!--<bean id="marcoLogicoDao" class="cobra.MarcoLogico.dao.MarcoLogicoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
     <!--
     <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao"></bean>
 
@@ -357,21 +357,22 @@
             <ref local="financieraDao" />
         </property>
     </bean>
-
+<!--
     <bean id="atencionhumanitariaServiceTarget" scope="prototype"
           class="atencionHumanitaria.service.AtencionHumanitariaServiceImpl">
         <property name="atencionHumanitariaDao">
             <ref local="atencionhumanitariaDao" />
         </property>
     </bean>
-
+    -->
+<!--
     <bean id="solicitudServiceTarget" scope="prototype"
           class="chsolicitud.dao.service.SolicitudServiceImpl">
         <property name="solicitudDao">
             <ref local="solicitudDao" />
         </property>
     </bean>
-
+-->
     <bean id="supervisionExternaTarget" scope="prototype"
           class="supervision.service.SupervisionExternaServiceImpl">
         <property name="supervisionExternaDao">
@@ -399,7 +400,7 @@
             <ref local="cobraDao" />
         </property>
     </bean>
-    
+    <!--
     <bean id="marcoLogicoServiceTarget" scope="prototype"
           class="cobra.MarcoLogico.service.MarcoLogicoServiceImpl">
         
@@ -408,7 +409,7 @@
         </property>
         
     </bean>
-
+-->
     <!--
     <bean id="financieraServiceTarget"
           class="financiera.service.FinancieraServiceImpl">
@@ -528,7 +529,7 @@
                 <prop key="guardar*">PROPAGATION_REQUIRED</prop>
             </props>
         </property>
-    </bean>-->
+    </bean>
 
     <bean id="atencionhumanitariaService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
@@ -550,7 +551,8 @@
             </props>
         </property>
     </bean>
-
+    -->
+<!--
     <bean id="solicitudService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
@@ -570,7 +572,7 @@
             </props>
         </property>
     </bean>
-
+-->
     <bean id="supervisionExternaService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
@@ -675,7 +677,7 @@
         </property>
     </bean>
     
-    
+    <!--
      <bean id="marcoLogicoService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -697,5 +699,5 @@
             </props>
         </property>
     </bean>
-   
+   -->
 </beans>
