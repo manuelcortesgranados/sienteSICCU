@@ -6,6 +6,7 @@ package cobra.SolicitudObra;
 
 import chsolicitud.dao.service.SolicitudServiceAble;
 import co.com.interkont.cobra.to.*;
+import cobra.service.UsuarioServiceAble;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +53,7 @@ public class SessionChsolicitud implements Serializable{
     private Locale local = new Locale("es");
     private Log logger = LogFactory.getLog(this.getClass());
     private SolicitudServiceAble solicitudService;
+    private UsuarioServiceAble usuarioService;
     private SelectItem[] itemsEstadoSolicitudCh;
     private SelectItem[] itemsEstadoDocumentacion;
     private SelectItem[] itemsTipoObra;
@@ -574,7 +576,7 @@ public class SessionChsolicitud implements Serializable{
 
     public void setItemsEstadoSolicitudCh(SelectItem[] itemsEstadoSolicitudCh) {
         this.itemsEstadoSolicitudCh = itemsEstadoSolicitudCh;
-    }
+    }   
 
     public SolicitudServiceAble getSolicitudService() {
         return solicitudService;
@@ -584,6 +586,14 @@ public class SessionChsolicitud implements Serializable{
         this.solicitudService = solicitudService;
     }
 
+    public UsuarioServiceAble getUsuarioService() {
+        return usuarioService;
+    }
+
+    public void setUsuarioService(UsuarioServiceAble usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+    
     public Locale getLocal() {
         return local;
     }
@@ -1099,7 +1109,7 @@ public class SessionChsolicitud implements Serializable{
 
     public String habilitarPerfil() {
         perfil = 0;
-        listagrupo = getSolicitudService().encontrarGrupoUsuario(getUsuariolog().getUsuId());
+        listagrupo = getUsuarioService().encontrarGrupoUsuario(getUsuariolog().getUsuId());
         Iterator iter = listagrupo.iterator();
         while (iter.hasNext()) {
             Grupo grupo = (Grupo) iter.next();

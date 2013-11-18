@@ -68,7 +68,7 @@ public class Login implements Serializable {
 
     public boolean verificarGrupo(JsfUsuario usu) {
         int i = 0;
-        List<Grupo> grupusu = getSessionBeanCobra().getSolicitudService().encontrarGrupoUsuario(usu.getUsuId());
+        List<Grupo> grupusu = getSessionBeanCobra().getUsuarioService().encontrarGrupoUsuario(usu.getUsuId());
         while (i < grupusu.size()) {
             if (grupusu.get(i).getGruGid() == 21 || grupusu.get(i).getGruGid() == 22) {
                 getSessionBeanCobra().getCobraService().setCiu(true);

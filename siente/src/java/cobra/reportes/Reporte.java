@@ -25,6 +25,7 @@ import co.com.interkont.cobra.to.Zonaespecifica;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
+import cobra.service.UsuarioServiceAble;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLEncoder;
@@ -56,6 +57,7 @@ public class Reporte implements ILifeCycleAware, Serializable {
     private String regionint = "";
     private String nombreTerritorio = "";
     private SolicitudServiceAble solicitudService;
+    private UsuarioServiceAble usuarioService;
     private JsfUsuario usuariolog = new JsfUsuario();
     private Tipoorigen tipoOrigenUsuario;
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
@@ -516,6 +518,14 @@ public class Reporte implements ILifeCycleAware, Serializable {
         this.solicitudService = solicitudService;
     }
 
+    public UsuarioServiceAble getUsuarioService() {
+        return usuarioService;
+    }
+
+    public void setUsuarioService(UsuarioServiceAble usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+    
     public String getTiposoliresumen() {
         return tiposoliresumen;
     }
@@ -1824,7 +1834,7 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String habilitarPerfil() {
         perfil = 0;
-        listagrupo = solicitudService.encontrarGrupoUsuario(getSessionBeanCobra().getUsuarioObra().getUsuId());
+        listagrupo = usuarioService.encontrarGrupoUsuario(getSessionBeanCobra().getUsuarioObra().getUsuId());
         Iterator iter = listagrupo.iterator();
         while (iter.hasNext()) {
             Grupo grupo = (Grupo) iter.next();
