@@ -59,16 +59,17 @@
             </h:panelGroup>
             <h:panelGroup layout="block">
 
-                <a4j:commandLink  value="#{var.finalizar}" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-finalizar"  >
-                    <a4j:ajax execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia"
-                              render="@form" event="click" oncomplete="if (#{Supervisor$Contrato.finalizarGuardado})  #{rich:component('panelConfirmarGuardadoConvenio')}.show();" />
-                </a4j:commandLink> 
+                <a4j:commandLink  value="#{var.finalizar}" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-finalizar" action="#{Supervisor$Contrato.finalizarGuardado}"  render="@form"
+                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia" 
+                                  oncomplete="if (#{Supervisor$Contrato.confirmacionGuardado})  #{rich:component('panelConfirmarGuardadoConvenio')}.show();" />
+
             </h:panelGroup>
             <h:panelGroup layout="block">
-                <a4j:commandLink value="Guardar borrador" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-guardar" action="#{Supervisor$Contrato.guardarBorradorConvenio}" 
-                                 render="@form"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia">
+                <a4j:commandLink value="Guardar borrador" styleClass="img-button-ncpo ikont-menu-detalle-text ikont-acl-menu-buttons-ext-guardar" action="#{Supervisor$Contrato.guardarBorradorConvenio}" render="@form"
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio,hit-valorglobal-convenio,hit-valorglobal-gerencia"
+                                 oncomplete="if (#{Supervisor$Contrato.eliminarPeriodosFueraRango})  #{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.show();">
                     <a4j:param assignTo="#{Supervisor$Contrato.guardarborradorconvenio}" value="false"/>
+                    <a4j:param value="false" assignTo="#{Supervisor$Contrato.validarPeriodoConveniosFueraRango}"/>
                 </a4j:commandLink>
             </h:panelGroup>
         </h:panelGrid>
