@@ -1212,13 +1212,9 @@
                                     </f:facet>
 
 
-<!--
-                                    <a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObligacion}" id="bt_editarObligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}" render="rpnuevaobligacion1"
-                                                     title="#{varMarcoLogico.editar}" >
-                                        <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                    </a4j:commandLink>-->
-                                    
-                                     <a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObligacion}"  id="bt_editarObligacion"  render="rpnuevaobligacion1,mp-crear-obligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}"
+
+
+                                     <a4j:commandLink   id="bt_editarObligacion"  render="rpnuevaobligacion1,mp-crear-obligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}"
                                                      execute="mp-crear-obligacion,rpnuevaobligacion1" oncomplete="#{rich:component('mp-crear-obligacion')}.show();"
                                                      title="#{varMarcoLogico.editar}" >
                                         <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
