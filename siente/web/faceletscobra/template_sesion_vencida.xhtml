@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+    <h:form>
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>#{var.titulogeneral}</title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+                <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>        
+                <link  href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css?#{var.version}" rel="stylesheet" type="text/css"/>-->
+            </h:panelGroup>
+            <ui:insert name="head"/>
+        </h:head>    
+        <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+            <center>
+                <h:panelGrid border="0" cellspacing="0" cellpadding="0" >
+                    <div id="logo"></div><div id="logo_ch"></div>
+                    <h:panelGroup style="position: relative; top: 82px;">  
+                        <center>
+                            <p>#{var.debeHaberAlgoMal}<br/>
+                                #{var.estamosTrabajandoEnlaSolucion}<br/>
+                                #{var.puedesVolver} <h:commandLink   
+                                    value="#{var.paginaInicio}" action="#{SessionBeanCobra.cerrarSession_action}"/>#{var.reportarAlaRedSoporte}<h:commandLink styleClass="ikont-a4jcl-cerrarSession"   
+                                    value="#{var.clickAqui}" action="#{var.linksoporte}"/>
+                            </p>
+                        </center>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{var.logologin}">
+                        <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </center>
+
+            <div id="login_image"></div>
+            <h:panelGroup rendered="#{var.logologin}">
+                <div styleClass="social">
+                    <a href="#{var.btnfacebook}" styleClass="fb anchorLink" target="_blank"></a>
+                    <a href="#{var.btntwitter}" styleClass="tw anchorLink" target="_blank"></a>
+                    <a href="#{var.btnyoutube}" styleClass="yt anchorLink" target="_blank"></a>
+                </div>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <!--Pagina de Error para Zoom-->
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <div id="contenedor_principal_error">
+                <div id="contenedor_imagen_error"></div>
+                <div id="contenedor_imagen_logo"></div>
+                <div id="contenedor_error_texto">
+                    <h2>#{var.whoops}</h2><br/>
+                    <p>#{var.seVencioLaSesion}<br/>
+                        #{var.puedesVolver} <h:commandLink  styleClass="ikont-link-error"  
+                            value="#{var.paginaInicio}" action="#{SessionBeanCobra.cerrarSession_action}"/>                             
+                    </p>
+                </div>
+            </div>
+
+        </h:panelGroup>
+    </h:form>
+
+
+
+</ui:composition>

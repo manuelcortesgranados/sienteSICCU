@@ -86,11 +86,11 @@
                                     </h:commandLink>
                                 </label>
                             </div></div></td>
-                    <td><h:commandButton styleClass="ikont-acl-busquedaavanzada"  value="#{var.houtbusquedaavanza}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                     onclick="#{rich:component('panelFiltroAvanzado')}.show(); return false;" /> 
+                    <td><h:commandLink styleClass="ikont-acl-busquedaavanzada"  value="#{var.houtbusquedaavanza}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}" onclick="#{rich:component('panelFiltroAvanzado')}.show();
+                return false;" /> 
 
-                        <h:commandButton styleClass="ikont-acl-btnfiltrociudadano" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                         onclick="#{rich:component('panelFiltroAvanzadoCiud')}.show();return false;"/>
+                        <h:commandLink styleClass="ikont-acl-btnfiltrociudadano" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}" onclick="#{rich:component('panelFiltroAvanzadoCiud')}.show();
+                return false;"/>
 
 
                     </td>

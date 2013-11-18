@@ -20,6 +20,7 @@
         <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph" />
         <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
         <link href="/#{var.versioncobra}/resources/gSlider/style/image-slider.css" rel="stylesheet" type="text/css" />
+         <link href="/#{var.versioncobra}/resources/css/tablerocontrol.css" rel="stylesheet" type="text/css" />
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -44,7 +45,7 @@
         <h:form id="dashboard">
             <h:panelGrid columns="1" id="panelgerencial" cellpadding="0" cellspacing="0" width="90%" columnClasses="panelcenter">
                 <h:outputText  styleClass="ikont-hot-texto1inversion "   value="#{var.texto1_inversion_tablerocontrol}" />
-                <h:panelGrid id="panelcombos"  columns="5" styleClass="ikont-hpg-panelcombos">
+                <h:panelGrid id="panelcombos"  columns="5" >
                     <h:panelGroup styleClass="ikont-hpg-panelcombos"  >
                         <h:selectOneMenu value="#{ControlGerencial.vistaicom}" styleClass="ikont-hsom-vistaicom"  >
                             <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
@@ -165,7 +166,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-personashogares"   value="Personas y hogares"/>
                             </f:facet>
-                            <h:panelGrid>
+                            <h:panelGrid styleClass="panelcenter">
                                 <h:panelGroup>
                                     <h:panelGrid columns="2" cellpadding="0" captionStyle="0"   >
                                         <h:graphicImage  styleClass="ikont-hgi-personas"   value="/resources/imgs/dash_07.png" />
@@ -231,7 +232,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-facerentesterritoriales"   value="Entes Territoriales"/>
                             </f:facet>
-                            <h:panelGrid  rowClasses="ikont-cell-top">
+                            <h:panelGrid  rowClasses="ikont-cell-top" styleClass="panelcenter">
                                 <h:panelGroup>
                                     <center>
                                         <h:panelGrid>
@@ -266,7 +267,7 @@
                             </f:facet>
 
                             <h:panelGroup>
-                                <ul >
+                                <ul class="ikont-ul-liItemAtencion">
                                     <interkont:spacer height="50"/>
                                     <a4j:repeat value="#{ControlGerencial.listaServiciosAHAtendidas}" var="item">
 

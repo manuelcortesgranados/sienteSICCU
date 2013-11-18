@@ -32,7 +32,7 @@
                                         </h:outputLink>
                                     </h:panelGroup>
 
-                                    <h:panelGroup  layout="block" styleClass="sliderpanel_element" id="contenedor_total_intro_usuario_registrado" >
+                                    <h:panelGroup rendered="#{var.permisonuevodiseno}" layout="block" styleClass="sliderpanel_element" id="contenedor_total_intro_usuario_registrado" >
 
                                         <div style=""  id="contenedor_texto">
                                             <h:outputLink styleClass="#{modulo.strestilo} a"
@@ -51,7 +51,7 @@
 
             </h:panelGroup>
 
-            <script>
+            <script >
 
                 setInterval(function() {
                     if (localStorage.getItem('closeaplicaction') == 'true') {

@@ -38,13 +38,13 @@
                         <td align="center">
                             <table border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td align="center" styleClasscolorTexto">
+                                    <td align="center" class="colorTexto">
                                         Este aplicativo funciona correctamente <br />
-                                        en <strong styleClasscolorSoporte">Mozilla Firefox</strong>, recomendamos<br/>
+                                        en <strong class="colorSoporte">Mozilla Firefox</strong>, recomendamos<br/>
                                         lo descargue e instale desde este link
                                     </td>
                                     <td>
-                                        <div styleClassnave">
+                                        <div class="nave">
                                             <a4j:commandLink type="submit" styleClass="ikont-a4jcl-submitfirefox"   onclick="document.location.href='http://www.mozilla-europe.org/es/firefox/'" execute="@this"/>
                                         </div>
                                     </td>
@@ -60,7 +60,7 @@
                     </tr>
                     <h:panelGroup rendered="#{var.logologin}">
                         <tr>
-                            <td styleClasstext02" align="center"><img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/Logo_republica.png" width="70" height="70"/></td>
+                            <td class="text02" align="center"><img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/Logo_republica.png" width="70" height="70"/></td>
                         </tr>
                     </h:panelGroup>
                 </table>
@@ -68,10 +68,10 @@
 
             <div id="login_image"></div>
         <h:panelGroup rendered="#{var.logologin}">
-            <div styleClasssocial">
-                <a href="#{var.btnfacebook}" styleClassfb anchorLink" target="_blank"></a>
-                <a href="#{var.btntwitter}" styleClasstw anchorLink" target="_blank"></a>
-                <a href="#{var.btnyoutube}" styleClassyt anchorLink" target="_blank"></a>
+            <div class="social">
+                <a href="#{var.btnfacebook}" class="fb anchorLink" target="_blank"></a>
+                <a href="#{var.btntwitter}" class="tw anchorLink" target="_blank"></a>
+                <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
             </div>
         </h:panelGroup>
         </body>

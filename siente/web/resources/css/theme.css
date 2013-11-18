@@ -56,6 +56,12 @@ a.excel {
     margin-right: 0px;
     background-image: url(../imgs/bt_file_excel.png);
     background-position: 0px 20px;
+    color: #999;
+    font-family: Verdana,Geneva,sans-serif;
+    font-style: italic;
+    text-align: left;
+    font-size: 12px;
+    padding-right: 12px;
 }
 a.excel:hover {
     background-position: 0px -144px;
@@ -202,6 +208,12 @@ a.word {
     margin-right: 0px;
     background-image: url(../imgs/bt_file_word.png);
     background-position: 0px 20px;
+    color: #999;
+    font-family: Verdana,Geneva,sans-serif;
+    font-style: italic;
+    text-align: left;
+    font-size: 12px;
+    padding-right: 12px;
 }
 a.word:hover {
     background-position: 0px -144px;
@@ -215,6 +227,12 @@ a.pdf {
     margin-right: 0px;
     background-image: url(../imgs/bt_file_pdf.png);
     background-position: 0px 20px;
+    color: #999;
+    font-family: Verdana,Geneva,sans-serif;
+    font-style: italic;
+    text-align: left;
+    font-size: 12px;
+    padding-right: 12px;
 }
 a.pdf:hover {
     background-position: 0px -144px;
@@ -470,7 +488,7 @@ a.interventoria:hover {
     font-size: x-small;
 }
 
-.busquedavanzada {
+.busquedavanza {
     width:150px;
     height:25px;
     background-color:#003;
@@ -530,7 +548,7 @@ a.interventoria:hover {
     -webkit-box-shadow: 0.1em 0.1em 0.1em #51819E;
 }
 
-.busquedavanzada {
+.busquedavanza {
     width:150px;
     height:25px;
     background-color:#003;
@@ -549,7 +567,7 @@ a.interventoria:hover {
     -moz-box-shadow: 0.1em 0.1em 0.1em #51819E;
     -webkit-box-shadow: 0.1em 0.1em 0.1em #51819E;
 }
-.busquedavanzada:hover {
+.busquedavanza:hover {
     width:150px;
     height:25px;
     background-color:#87A7BB;
@@ -618,7 +636,7 @@ a.interventoria:hover {
     -moz-border-radius-bottomleft: 10px;
     height: auto;   
 }
-    
+
 rich-panel-grid-activimodal{
     width: 49%;
     height:auto;
@@ -1469,8 +1487,8 @@ a.superv10:hover {
     text-align:justify;
 }
 .vtitle21:hover{
-     font-size:15px;
-     color:#F90;
+    font-size:15px;
+    color:#F90;
 }
 .vtitle08 {
     font-family:Verdana, Geneva, sans-serif;
@@ -1506,56 +1524,56 @@ a.superv10:hover {
 }
 
 a.Cobra_bt59 {
-	width: 40px;
-	height:40px;
-	background-image:url(../imgs/Cobra_bt59.png);
-	background-position: 0px 0px;
-	display:block;
+    width: 40px;
+    height:40px;
+    background-image:url(../imgs/Cobra_bt59.png);
+    background-position: 0px 0px;
+    display:block;
 }
 a.Cobra_bt59:hover {
-	background-position: 0px -46px;
+    background-position: 0px -46px;
 }
 
 a.Cobra_bt60 {
-	width: 40px;
-	height:40px;
-	background-image:url(../imgs/Cobra_bt60.png);
-	background-position: 0px 0px;
-	display: block;
+    width: 40px;
+    height:40px;
+    background-image:url(../imgs/Cobra_bt60.png);
+    background-position: 0px 0px;
+    display: block;
 }
 a.Cobra_bt60:hover {
-	background-position: 0px -46px;
+    background-position: 0px -46px;
 }
 
 a.Cobra_bt61 {
-	width: 40px;
-	height:40px;
-	background-image:url(../imgs/Cobra_bt61.png);
-	background-position: 0px 0px;
-	display: block;
+    width: 40px;
+    height:40px;
+    background-image:url(../imgs/Cobra_bt61.png);
+    background-position: 0px 0px;
+    display: block;
 }
 a.Cobra_bt61:hover {
-	background-position: 0px -46px;
+    background-position: 0px -46px;
 }
 
 a.Cobra_bt62 {
-	width: 40px;
-	height:40px;
-	background-image:url(../imgs/Cobra_bt62.png);
-	background-position: 0px 0px;
-	display: block;
+    width: 40px;
+    height:40px;
+    background-image:url(../imgs/Cobra_bt62.png);
+    background-position: 0px 0px;
+    display: block;
 }
 a.Cobra_bt62:hover {
-	background-position: 0px -46px;
+    background-position: 0px -46px;
 }
 
 a.Cobra_bt63 {
-	width: 40px;
-	height:40px;
-	background-image:url(../imgs/Cobra_bt63.png);
-	background-position: 0px 0px;
-	display: block;
+    width: 40px;
+    height:40px;
+    background-image:url(../imgs/Cobra_bt63.png);
+    background-position: 0px 0px;
+    display: block;
 }
 a.Cobra_bt63:hover {
-	background-position: 0px -46px;
+    background-position: 0px -46px;
 }

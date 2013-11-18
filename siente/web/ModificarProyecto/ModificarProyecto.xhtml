@@ -33,7 +33,7 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-           <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
         <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="body">
@@ -47,20 +47,20 @@
                             <h:outputText style="alignment-adjust: central;" styleClass="ikont-hot-textopaso1modificacion TextoTipificacionModificacion"   value="#{var.textopaso1modificacion}" />
                             <br/>
                             <center>
-                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion1 TituloModificarProyecto" value="#{var.tituloPaso1Modificacion1}" />
-                            <br/>       
-                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion2 TituloModificarProyecto"  value="#{var.tituloPaso1Modificacion2}" />
-                             </center>
+                                <h:outputText  styleClass="ikont-hot-titulopaso1modificacion1 TituloModificarProyecto" value="#{var.tituloPaso1Modificacion1}" />
+                                <br/>       
+                                <h:outputText  styleClass="ikont-hot-titulopaso1modificacion2 TituloModificarProyecto"  value="#{var.tituloPaso1Modificacion2}" />
+                            </center>
                             <interkont:spacer height="15" width="100"/>
                             <br/>
                             <h:outputText  styleClass="ikont-hot-ingreselafechadeesta TextoTipificacionModificacion" value="#{var.ingreselafechadeesta}" />
                             <interkont:spacer height="20" width="100"/>
-                              <br/>
+                            <br/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight"
                                            id="date_fechaModificacion" inputSize="10"
                                            value="#{Supervisor$ModificarProyecto.historicoobra.datefecobrahist}"/>
                             <interkont:spacer height="20" width="100" />
-                             <br/>
+                            <br/>
                             <h:outputText  styleClass="ikont-hot-porfavorjustifique TextoTipificacionModificacion"   value="#{var.porfavorjustifique}" />
                             <br/>
                             <interkont:spacer height="20" width="100"/>
@@ -68,247 +68,247 @@
                             <interkont:spacer height="20" width="100"/>
                             <br/>
                             <center>
-                            <h:panelGroup styleClass="ikont-hpg-accionespaso1"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="ikont  BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
-                                <h:commandLink action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont BotonesPasosModificar"   value="#{var.cancelar}" />
-                            </h:panelGroup>
-                           </center>
+                                <h:panelGroup styleClass="ikont-hpg-accionespaso1"  >
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="ikont  BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                    <h:commandLink action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont BotonesPasosModificar"   value="#{var.cancelar}" />
+                                </h:panelGroup>
+                            </center>
                         </h:panelGroup>
 
                         <center>
-                        <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
-                            <interkont:spacer height="10px" />
-                            <br/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion1 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion1}"/>
-                             <br/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion2 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion2}"/>
-                            <interkont:spacer height="15px" />
-                             <br/>
-                            <h:outputText  styleClass="ikont-hot-textopaso2modificacion TextoTipificacionModificacion"   value="#{var.textopaso2modificacion}"/>
-                            <interkont:spacer height="15px" />
-                            <h:panelGrid columns="2" styleClass="ikont-hpg-tipificacionmodificacion"   columnClasses="CeldaPanelTipificacionModificacion">
-                                <a4j:commandLink styleClass="ikont-acl-prorroga "   onclick="if (!prorrogaOnClick())
-                                            return false;"/>
-                                <a4j:commandLink styleClass="ikont-acl-adicionpresupuesto "   onclick="if (!adicionPresupuestoOnClick())
-                                            return false;"/>
-                                <h:panelGroup>
-                                    <h:selectBooleanCheckbox  value="#{Supervisor$ModificarProyecto.historicoobra.adiciontiempo}" styleClass="ikont-hsbc-adiciontiempo"   onchange="checkRealizarProrrogaOnChangue();"/>
-                                    <h:outputLabel  styleClass="ikont-hot-nuevafechaterminacionmodificacion TextoTipificacionModificacion"   value="#{var.nuevafechaterminacionmodificacion}" />
-                                </h:panelGroup>
-                                <h:panelGroup>
-                                    <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="ikont-hsbc-adicionpresu" onchange="checkAdicionarPresupuestoOnChangue();"/>
-                                    <h:outputLabel  styleClass="ikont-hol TextoTipificacionModificacion "   value="#{var.nuevovaloradicionmodificacion}" />
-                                </h:panelGroup>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_adicionTiempo" inputSize="12"
-                                               value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" styleClass="datefecfinhist"  >
-                                    <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
-                                </rich:calendar>
-                                <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
-                                    <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6"/>
-                                </h:inputText>
-                                <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
-                                            return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <a4j:commandLink styleClass="ikont-acl-adicionactividades "   onclick="if (!adicionActividadesOnClick())
-                                            return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.cambioprecios}" styleClass="ikont-hsbc-cambioprecios"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionactivi}" styleClass="ikont-hsbc-adicionactividades"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                            </h:panelGrid>
-                            <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-notapaso2modificacion TextoTipificacionModificacion"   value="#{var.notapaso2modificacion}" />
-                            <interkont:spacer height="10" />
-                            <br/>
-                            <br/>
-                            <h:panelGroup styleClass="ikont-hpg-accionespaso2"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="ikont-acl-atras BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="ikont-acl-siguiente BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
-                                <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont-acl-cancelar BotonesPasosModificar"   value="#{var.cancelar}" />
-                            </h:panelGroup>
-
-                            <f:verbatim>
-                                <script type="text/javascript">
-
-                                    /**
-                                     * Activa y desactiva el checkbox prorroga al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function prorrogaOnClick() {
-                                        if (jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                            jQuery('.datefecfinhist').attr('value', '');
-                                        } else {
-                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
-                                     */
-                                    function checkRealizarProrrogaOnChangue() {
-                                        if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                            jQuery('.datefecfinhist').attr('value', '');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox adición de presupuesto al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function adicionPresupuestoOnClick() {
-                                        if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                            jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                            jQuery('.numvalorhist').attr('value', '');
-                                        } else {
-                                            jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Reestablece el valor de la adición cuando se desactiva el checkbox de
-                                     * adicionar presupuesto
-                                     */
-                                    function checkAdicionarPresupuestoOnChangue() {
-                                        if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                            jQuery('.numvalorhist').attr('value', '');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox adición de actividades al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function adicionActividadesOnClick() {
-                                        if (jQuery('.CheckAdicionarActividades').is(':checked')) {
-                                            jQuery('.CheckAdicionarActividades').removeAttr('checked');
-                                        } else {
-                                            jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox cambio de precios al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function cambioPreciosOnClick() {
-                                        if (jQuery('.CheckCambiarPrecios').is(':checked')) {
-                                            jQuery('.CheckCambiarPrecios').removeAttr('checked');
-                                        } else {
-                                            jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox prorroga al ingresar una fecha
-                                     */
-                                    function datefecfinhistOnChange() {
-                                        if (jQuery('.datefecfinhist').attr('value') != '') {
-                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                        } else {
-                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                        }
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox de adición de presupuesto al
-                                     * cambiar el valor de la adición
-                                     */
-                                    function numvalorhistOnchange() {
-                                        if (jQuery('.numvalorhist').attr('value') != '') {
-                                            if (jQuery('.numvalorhist').attr('value') != '0') {
-                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                            } else {
-                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                            }
-                                        }
-                                    }
-                                </script>
-                            </f:verbatim>
-
-                        </h:panelGroup>
-                           
-                        <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">                            
-                            <interkont:spacer height="10px" />
-                             <br/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion1 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion1}"/>
-                            <br/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion2 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion2}"/>
-                            <interkont:spacer height="15px" />
-                            <br/>
-                            <h:outputText  styleClass="ikont-hot-textopaso3modificacion TextoTipificacionModificacion"   value="#{var.textopaso3modificacion}"  />
-                            <interkont:spacer height="15px" />
-                             <br/>
-                            <rich:panel >
-                                <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-pgenerarcronograma "   value="#{var.pgenerarcronograma}"/>
-                                </f:facet>
-                                <h:panelGroup rendered ="false">
-                                    <h:outputText  styleClass="ikont-hot-debediligenciartodoslosdatos"   value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerror"    url="/resources/imgs/msgerror.png"/>
-                                </h:panelGroup>
-                                <h:panelGroup rendered ="false">
-                                    <h:outputText  styleClass="ikont-hot-debediligenciartodoslosdatos"   value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png"/>
-                                </h:panelGroup>
-
-                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 97/2003"
-                                                 onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
-                                                 oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
-                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
-                                    <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="false"/>
-                                </a4j:commandLink>
-                                <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
-                                
-                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 2007/Superior" 
-                                                 onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
-                                                 oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
-                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
-                                <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="true"/>
-                                </a4j:commandLink>                               
-                                <h:panelGroup>
-                                    <h:outputText  styleClass="ikont-hot-notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
-                                    <h:outputText  styleClass="ikont-hot-textonotapaso3modificacion TextoTipificacionModificacion" value="#{var.textonotapaso3modificacion}"/>
-                                </h:panelGroup>
-                            </rich:panel>
-                            <interkont:spacer height="15px" />
-                            <rich:panel id="ikont-rp-subircronograma">
-                                <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-subircronograma "   value="#{var.subircronograma}"/>
-                                </f:facet>
-                                <h:outputLabel  styleClass="ikont-hol-importeelcronograma TextoTipificacionModificacion"   value="#{var.importeelcronograma}" />
+                            <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
+                                <interkont:spacer height="10px" />
+                                <br/>
+                                <h:outputText  styleClass="ikont-hot-titulopaso2modificacion1 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion1}"/>
+                                <br/>
+                                <h:outputText  styleClass="ikont-hot-titulopaso2modificacion2 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion2}"/>
                                 <interkont:spacer height="15px" />
                                 <br/>
-                                <a4j:commandButton styleClass="ikont-acl-subircronograma"    value="#{var.examinar}"  id="subircronograma"
-                                                   oncomplete="#{rich:component('panelUploadCronograma')}.show(); return true;" />
+                                <h:outputText  styleClass="ikont-hot-textopaso2modificacion TextoTipificacionModificacion"   value="#{var.textopaso2modificacion}"/>
                                 <interkont:spacer height="15px" />
-                                <h:outputText  styleClass="ikont-hot-nosuarc NoFileModificar"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" />
+                                <h:panelGrid columns="2" styleClass="ikont-hpg-tipificacionmodificacion"   columnClasses="CeldaPanelTipificacionModificacion">
+                                    <a4j:commandLink styleClass="ikont-acl-prorroga "   onclick="if (!prorrogaOnClick())
+                                                return false;"/>
+                                    <a4j:commandLink styleClass="ikont-acl-adicionpresupuesto "   onclick="if (!adicionPresupuestoOnClick())
+                                                return false;"/>
+                                    <h:panelGroup>
+                                        <h:selectBooleanCheckbox  value="#{Supervisor$ModificarProyecto.historicoobra.adiciontiempo}" styleClass="ikont-hsbc-adiciontiempo"   onchange="checkRealizarProrrogaOnChangue();"/>
+                                        <h:outputLabel  styleClass="ikont-hot-nuevafechaterminacionmodificacion TextoTipificacionModificacion"   value="#{var.nuevafechaterminacionmodificacion}" />
+                                    </h:panelGroup>
+                                    <h:panelGroup>
+                                        <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="ikont-hsbc-adicionpresu" onchange="checkAdicionarPresupuestoOnChangue();"/>
+                                        <h:outputLabel  styleClass="ikont-hol TextoTipificacionModificacion "   value="#{var.nuevovaloradicionmodificacion}" />
+                                    </h:panelGroup>
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" direction="topRight" id="date_adicionTiempo" inputSize="12"
+                                                   value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" styleClass="datefecfinhist"  >
+                                        <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
+                                    </rich:calendar>
+                                    <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
+                                        <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6"/>
+                                    </h:inputText>
+                                    <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
+                                                return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                    <a4j:commandLink styleClass="ikont-acl-adicionactividades "   onclick="if (!adicionActividadesOnClick())
+                                                return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                    <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.cambioprecios}" styleClass="ikont-hsbc-cambioprecios"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                    <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionactivi}" styleClass="ikont-hsbc-adicionactividades"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                </h:panelGrid>
+                                <interkont:spacer height="15px" />
+                                <h:outputText  styleClass="ikont-hot-notapaso2modificacion TextoTipificacionModificacion"   value="#{var.notapaso2modificacion}" />
+                                <interkont:spacer height="10" />
+                                <br/>
+                                <br/>
+                                <h:panelGroup styleClass="ikont-hpg-accionespaso2"  >
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="ikont-acl-atras BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="ikont-acl-siguiente BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont-acl-cancelar BotonesPasosModificar"   value="#{var.cancelar}" />
+                                </h:panelGroup>
 
-                                <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                                    <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" styleClass="ikont-hpg-numeroarchivos"  >
-                                        <h:panelGroup>
-                                            <h:graphicImage  styleClass="ikont-hgi-msginfo"   url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                                            <h:outputText  styleClass="ikont-hot-validarcronograma NoFileModificar"   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}"   />
-                                            <h:graphicImage  styleClass="ikont-hgi-msgerror2"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                                            <h:outputText  styleClass="ikont-hot-cronogramamodificacioninvalido NoFileModificar"   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                                        </h:panelGroup>
-                                        <h:outputText  styleClass="ikont- hot-"   value=" #{file.nombre}"  />
-                                    </h:panelGrid>
-                                </a4j:repeat>
-                            </rich:panel>
+                                <f:verbatim>
+                                    <script type="text/javascript">
 
-                            <interkont:spacer height="10" />
-                            <h:panelGroup styleClass="ikont-hpg-accionespaso3"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso3 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso3 BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
-                                <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont-acl-cancelarpaso3 BotonesPasosModificar"   value="#{var.cancelar}"/>
+                                        /**
+                                         * Activa y desactiva el checkbox prorroga al dar click en
+                                         * la imagen correspondiente
+                                         */
+                                        function prorrogaOnClick() {
+                                            if (jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                                jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                                jQuery('.datefecfinhist').attr('value', '');
+                                            } else {
+                                                jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
+                                         */
+                                        function checkRealizarProrrogaOnChangue() {
+                                            if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                                jQuery('.datefecfinhist').attr('value', '');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Activa y desactiva el checkbox adición de presupuesto al dar click en
+                                         * la imagen correspondiente
+                                         */
+                                        function adicionPresupuestoOnClick() {
+                                            if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                                jQuery('.numvalorhist').attr('value', '');
+                                            } else {
+                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Reestablece el valor de la adición cuando se desactiva el checkbox de
+                                         * adicionar presupuesto
+                                         */
+                                        function checkAdicionarPresupuestoOnChangue() {
+                                            if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                                jQuery('.numvalorhist').attr('value', '');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Activa y desactiva el checkbox adición de actividades al dar click en
+                                         * la imagen correspondiente
+                                         */
+                                        function adicionActividadesOnClick() {
+                                            if (jQuery('.CheckAdicionarActividades').is(':checked')) {
+                                                jQuery('.CheckAdicionarActividades').removeAttr('checked');
+                                            } else {
+                                                jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Activa y desactiva el checkbox cambio de precios al dar click en
+                                         * la imagen correspondiente
+                                         */
+                                        function cambioPreciosOnClick() {
+                                            if (jQuery('.CheckCambiarPrecios').is(':checked')) {
+                                                jQuery('.CheckCambiarPrecios').removeAttr('checked');
+                                            } else {
+                                                jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
+                                            }
+                                            return false;
+                                        }
+
+                                        /**
+                                         * Activa y desactiva el checkbox prorroga al ingresar una fecha
+                                         */
+                                        function datefecfinhistOnChange() {
+                                            if (jQuery('.datefecfinhist').attr('value') != '') {
+                                                jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
+                                            } else {
+                                                jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                            }
+                                        }
+
+                                        /**
+                                         * Activa y desactiva el checkbox de adición de presupuesto al
+                                         * cambiar el valor de la adición
+                                         */
+                                        function numvalorhistOnchange() {
+                                            if (jQuery('.numvalorhist').attr('value') != '') {
+                                                if (jQuery('.numvalorhist').attr('value') != '0') {
+                                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                                } else {
+                                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                </f:verbatim>
+
                             </h:panelGroup>
 
-                        </h:panelGroup>
- </center>
+                            <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">                            
+                                <interkont:spacer height="10px" />
+                                <br/>
+                                <h:outputText  styleClass="ikont-hot-titulopaso3modificacion1 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion1}"/>
+                                <br/>
+                                <h:outputText  styleClass="ikont-hot-titulopaso3modificacion2 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion2}"/>
+                                <interkont:spacer height="15px" />
+                                <br/>
+                                <h:outputText  styleClass="ikont-hot-textopaso3modificacion TextoTipificacionModificacion"   value="#{var.textopaso3modificacion}"  />
+                                <interkont:spacer height="15px" />
+                                <br/>
+                                <rich:panel styleClass="ikont-rp-textopaso3modificacion">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-pgenerarcronograma "   value="#{var.pgenerarcronograma}"/>
+                                    </f:facet>
+                                    <h:panelGroup rendered ="false">
+                                        <h:outputText  styleClass="ikont-hot-debediligenciartodoslosdatos"   value="#{var.debediligenciartodoslosdatos}"/>
+                                        <h:graphicImage  styleClass="ikont-hgi-msgerror"    url="/resources/imgs/msgerror.png"/>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered ="false">
+                                        <h:outputText  styleClass="ikont-hot-debediligenciartodoslosdatos"   value="#{var.debediligenciartodoslosdatos}"/>
+                                        <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png"/>
+                                    </h:panelGroup>
+
+                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 97/2003"
+                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
+                                                     oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
+                                                     styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
+                                        <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="false"/>
+                                    </a4j:commandLink>
+                                    <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
+
+                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" value="Cronograma 2007/Superior" 
+                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
+                                                     oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
+                                                     styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" >
+                                        <a4j:param assignTo="#{Supervisor$ModificarProyecto.formatomodifxlsx}" value="true"/>
+                                    </a4j:commandLink>                               
+                                    <h:panelGroup>
+                                        <h:outputText  styleClass="ikont-hot-notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
+                                        <h:outputText  styleClass="ikont-hot-textonotapaso3modificacion TextoTipificacionModificacion" value="#{var.textonotapaso3modificacion}"/>
+                                    </h:panelGroup>
+                                </rich:panel>
+                                <interkont:spacer height="15px" />
+                                <rich:panel id="ikont-rp-subircronograma">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-subircronograma "   value="#{var.subircronograma}"/>
+                                    </f:facet>
+                                    <h:outputLabel  styleClass="ikont-hol-importeelcronograma TextoTipificacionModificacion"   value="#{var.importeelcronograma}" />
+                                    <interkont:spacer height="15px" />
+                                    <br/>
+                                    <a4j:commandButton styleClass="ikont-acl-subircronograma"    value="#{var.examinar}"  id="subircronograma"
+                                                       oncomplete="#{rich:component('panelUploadCronograma')}.show(); return true;" />
+                                    <interkont:spacer height="15px" />
+                                    <h:outputText  styleClass="ikont-hot-nosuarc NoFileModificar"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" />
+
+                                    <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
+                                        <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" styleClass="ikont-hpg-numeroarchivos"  >
+                                            <h:panelGroup>
+                                                <h:graphicImage  styleClass="ikont-hgi-msginfo"   url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                                <h:outputText  styleClass="ikont-hot-validarcronograma NoFileModificar"   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}"   />
+                                                <h:graphicImage  styleClass="ikont-hgi-msgerror2"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                                <h:outputText  styleClass="ikont-hot-cronogramamodificacioninvalido NoFileModificar"   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            </h:panelGroup>
+                                            <h:outputText  styleClass="ikont- hot-"   value=" #{file.nombre}"  />
+                                        </h:panelGrid>
+                                    </a4j:repeat>
+                                </rich:panel>
+
+                                <interkont:spacer height="10" />
+                                <h:panelGroup styleClass="ikont-hpg-accionespaso3"  >
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso3 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso3 BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                    <h:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}"  styleClass="ikont-acl-cancelarpaso3 BotonesPasosModificar"   value="#{var.cancelar}"/>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+                        </center>
                         <h:panelGroup styleClass="ikont-hpg-varpaso4"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
                             <h:outputText  styleClass="ikont-hot-paso4 TituloModificarProyecto"   value="Paso 4" />
                             <h:outputText  styleClass="ikont-hot-documentosrelacionados TituloModificarProyecto"   value="Anexe los documentos relacionados"/>
