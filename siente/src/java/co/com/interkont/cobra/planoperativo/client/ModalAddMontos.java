@@ -88,10 +88,12 @@ public class ModalAddMontos implements IsWidget {
         this.valorContratoO = valorContrato.getValue();
         this.valorContrato = valorContrato;
         this.editar = editar;
-        valorDisponibleFuente=((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
+        valorDisponibleFuente = ((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
 
-        
-        Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator();
+
+        Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator();
+
+
         obraFrDto = (ObrafuenterecursosconveniosDTO) it.next();
         valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
         entidadSeleccionada = obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto();
@@ -161,14 +163,14 @@ public class ModalAddMontos implements IsWidget {
         getValorRubros().setWidth(cw);
         con.add(new FieldLabel(getValorRubros(), "Valor"), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
 
-        
-        
-        
+
+
+
         getValorDisponibleFuente().setEmptyText("Valor disponible");
         getValorDisponibleFuente().setWidth(cw);
         getValorDisponibleFuente().setEnabled(false);
         con.add(new FieldLabel(getValorDisponibleFuente(), "Valor disponible"), new AbstractHtmlLayoutContainer.HtmlData(".valordis"));
-        
+
         llenarComboEntidadesConvenio();
         lstE.setWidth(cw);
         lstE.addChangeHandler(new ChangeHandler() {
@@ -209,6 +211,7 @@ public class ModalAddMontos implements IsWidget {
                             d.show();
                         } else {
                             limpiarMontos();
+                            relacionFuenteRecursos.getObrafuenterecursosconvenios().setValorDisponible(relacionFuenteRecursos.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuenteRecursos.getValor()));
                             widTblMontos.getStore().add(relacionFuenteRecursos);
                             modalActual.hide();
                         }
@@ -292,7 +295,7 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public void llenarComboEntidadesConvenio() {
-        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obraFuenteRecurso = (ObrafuenterecursosconveniosDTO) it.next();
             TerceroDTO tercero = obraFuenteRecurso.getFuenterecursosconvenio().getTercero();
             if (mapaRelacionEntidadVigencias.size() > 0) {
@@ -325,7 +328,7 @@ public class ModalAddMontos implements IsWidget {
     }
 
     public ObrafuenterecursosconveniosDTO buscarFuenteRecursosDto(String nombreEntidad, Integer vigencia) {
-        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+        for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconveniosesAporteDinero().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obraFuenteRecurso = (ObrafuenterecursosconveniosDTO) it.next();
             if (obraFuenteRecurso.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad) && obraFuenteRecurso.getFuenterecursosconvenio().getVigencia().equals(vigencia)) {
                 return obraFuenteRecurso;
@@ -358,7 +361,6 @@ public class ModalAddMontos implements IsWidget {
             if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) > 0) {
                 return "El valor ingresado supera el valor disponible de la fuente de recursos:" + GanttDatos.obtenerFormatoNumero(obraFrDto.getValorDisponible()) + "<br/>";
             } else {
-
                 if (valorContratoO == null) {
                     valorContratoO = BigDecimal.ZERO;
                 }
@@ -366,8 +368,7 @@ public class ModalAddMontos implements IsWidget {
                 valorContrato.setValue(valorContratoO);
                 contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
                 if (editar) {
-                relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
-                service.setLog("valor disponible despues de substraer:" + relacionFuente.getObrafuenterecursosconvenios().getValorDisponible(), null);
+                    relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
                 }
                 return "La fuente ha sido guardada";
             }
@@ -442,7 +443,7 @@ public class ModalAddMontos implements IsWidget {
      */
     public NumberField<BigDecimal> getValorDisponibleFuente() {
         return valorDisponibleFuente;
-}
+    }
 
     /**
      * @param valorDisponibleFuente the valorDisponibleFuente to set

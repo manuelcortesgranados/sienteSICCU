@@ -197,4 +197,22 @@ public class ObraDTO implements IsSerializable {
     }
     
     
+    /**
+     * @return the obrafuenterecursosconvenioses
+     */
+    public Set<ObrafuenterecursosconveniosDTO> getObrafuenterecursosconveniosesAporteDinero() {
+        
+        Set<ObrafuenterecursosconveniosDTO> setOfrcDinero= new LinkedHashSet<ObrafuenterecursosconveniosDTO>();
+        
+        for(ObrafuenterecursosconveniosDTO ofrc: obrafuenterecursosconvenioses)
+        {
+            if(ofrc.getDescripcionaporte().compareTo("Dinero")==0)
+            {    
+            setOfrcDinero.add(ofrc);
+            }
+        }    
+        return setOfrcDinero;
+    }
+
+    
 }

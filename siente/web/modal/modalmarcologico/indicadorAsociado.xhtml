@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-indicadorasociado" moveable="true"  autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Indicador Asociado"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-indicadorasociado" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-indicadorasociado')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="rpindicadorasociado">
+
+                <h:panelGrid columns="2" columnClasses="modal-indicador-head,modal-indicador-texto" width="500px">
+                    <h:outputText  value="Nombre Indicador"/>
+                    <h:outputText  id="asoOutputTextnombreindicador" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strnombreindicador}"  />
+                    <h:outputText  value="Descripción"/>
+                    <h:inputTextarea  id="asoOutputTextdescripcion" cols="35" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strdescripcionindicador}" disabled="true" />
+                    <h:outputText  value="Tipo Indicador"/>
+                    <h:outputText  id="asotipomindicador" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.tipoindicador.strnombre}"  />
+                    <h:outputText  value="Unidad de Medida"/>
+                    <h:outputText  id="asounidadMedida" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.unidadmedidamediosvida.strdescripcion}"  />
+                    <h:outputText  value="Periodicidad del reporte"/>                   
+                    <h:outputText  id="asofrecuenciaperioc" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.frecuenciaperiocidad.strdescripcion}"  />
+                    <h:outputText  value="Variables del indicador"/>
+
+                    <h:inputTextarea  id="asoStrdescripvariables" cols="35" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strdescripcionvariables}" disabled="true" />
+                    <h:outputText  value=" Número de Variables"/>
+                    <h:outputText  id="asointnumvariables" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.numcantidadvariables}"  />
+
+                    <h:outputText  value="Fórmula de Cálculo"/>
+
+                    <h:outputText  id="asoformulacalculo" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strformulacalculo}"  />
+                    <h:outputText  value="Forma de cálculo"/>
+
+                    <h:outputText  id="asoformacalculo" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strformacalculo}"  />
+                    <h:outputText  value="Orientación esperada"/>
+
+                    <h:outputText  id="asoOrientesperada" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strorientacionesperada}"  />
+                </h:panelGrid>               
+
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>   
+</ui:composition>

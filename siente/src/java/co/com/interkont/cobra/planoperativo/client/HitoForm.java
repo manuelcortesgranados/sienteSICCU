@@ -147,11 +147,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         getFechainicioActividad().setEmptyText("Fecha");
         con.add(new FieldLabel(getFechainicioActividad(), "Fecha:"), new HtmlData(".fechaini"));
 
-//        setPeso(new TextField());
-//        getPeso().setEmptyText("Peso");
-//        getPeso().setWidth(cw);
-//        con.add(getPeso(),new HtmlData(".peso") );
-// 
+
 
         Button btnAdicionarActividad = new Button("Añadir Hito", new ClickHandler() {
             @Override
@@ -232,7 +228,7 @@ public class HitoForm implements IsWidget, EntryPoint {
     public void crearActividad() {
        // numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
         cargarDatosActividad();
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), 0, 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
         
         /*Se cargan el Panel del Gantt con la actividad Creada*/

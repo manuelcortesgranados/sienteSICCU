@@ -231,6 +231,28 @@
                     <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
                                     action="#{Supervisor$Contrato.contrConsultoria}" immediate="true"/>
                 </rich:menuGroup>
+
+                <rich:menuGroup icon="/resources/imgs/bt_convenio.png" label="#{var.estrategia}"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios and !var.aplicaContralorias}">
+                    <rich:menuGroup icon="/resources/imgs/bt_convenio.png" label="#{var.mediosdevida}"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios and !var.aplicaContralorias}">                   
+                        <rich:menuGroup icon="/resources/imgs/bt_nuevo.png" label="#{var.convenio}" 
+                                          style="width: 150px;">         
+                            <rich:menuItem  label="#{var.nuevo}" icon="/resources/imgs/bt_nuevo.png"
+                                            actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}">
+                                <a4j:param value="1" assignTo="#{Supervisor$Contrato.estrategia}" />
+                            </rich:menuItem>
+                            <rich:menuItem  label="#{var.consultar}"  icon="/resources/imgs/bt_consultar.png"
+                                            action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true">
+                                <a4j:param value="1" assignTo="#{Supervisor$Contrato.estrategia}" />                            
+                            </rich:menuItem>
+                        </rich:menuGroup>
+                        <rich:menuItem label="#{var.proyectos}" icon="/resources/imgs/bt_consultar.png"  action="#{HomeGestion.activarvistamapa}" immediate="true"
+                                       style="width: 150px;">
+                            <a4j:param value="1" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="1" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />                        
+                        </rich:menuItem>
+
+                    </rich:menuGroup>                
+                </rich:menuGroup>
             </rich:dropDownMenu>
 
             <rich:dropDownMenu rendered="#{SessionBeanCobra.cobraService.ciu}">
@@ -524,7 +546,7 @@
             </h:panelGrid>
         </div>
     </h:panelGroup>
- <br/>
+    <br/>
     <hr class="ikont-hr-separador-inicial" style="position: relative;top: -15px;" />
 
 

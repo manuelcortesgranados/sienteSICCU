@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-marcoLogicoasociado" moveable="true" width="500" height="180" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Marco Logico Asociado"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-marcoLogicoasociado" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-marcoLogicoasociado')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="rpMarcoLogicoAsociado">
+                
+                <rich:dataTable id="tablaMarcolAsociado"  sortMode="single"
+                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaMarcoLogicoAsociado}"
+                                var="marcologicoasociado" >
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="Titulo"/>
+                        </f:facet>
+                        <h:outputText  id="tipomarcol" value="#{marcologicoasociado.strtitulo}"  />
+                    </rich:column>
+
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"/>
+                        </f:facet>
+                        <h:inputTextarea  id="strdescripcionmarcol" value="#{marcologicoasociado.strdescripcion}" disabled="true" />
+                    </rich:column>
+                    
+                    <rich:column  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText  id="strtipo" value="#{marcologicoasociado.tipomarcologico.strdescripcion}"  />
+                    </rich:column>
+                    
+                    
+
+                </rich:dataTable>
+                
+                <a4j:outputPanel id="panelErrorMarcoLogicoAsociado">
+                    <rich:messages id="messagesMarcoLogicoAsociado" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                  >
+                        <f:facet name="infoMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>
+                        <f:facet name="errorMarker">
+                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
+
+            </rich:panel>
+            </h:form>
+
+        
+    </rich:popupPanel>   
+</ui:composition>
+

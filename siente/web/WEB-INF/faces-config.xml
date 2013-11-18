@@ -26,7 +26,7 @@
     <application>
         <resource-bundle>
             <!--Bundle para siente-->
-            <base-name>cobra/properties/Bundle</base-name>
+            <base-name>cobra/properties/BundleFonade</base-name>
             <!--Bundle para cali
             <base-name>cobra/properties/BundleCali</base-name>-->
             <!--Bundle para Fonade
@@ -34,6 +34,11 @@
             <!--Bundle para Manizales
             <base-name>cobra/properties/BundleManizales</base-name>-->
             <var>var</var>
+        </resource-bundle>
+        <resource-bundle>
+            <!--Bundle para siente-->
+            <base-name>cobra/properties/BundleMarcoLogico</base-name>
+            <var>varMarcoLogico</var>
         </resource-bundle>
     </application>
     <application>
@@ -247,6 +252,11 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>MarcoLogico$MarcoLogico</managed-bean-name>
+        <managed-bean-class>cobra.MarcoLogico.MarcoLogicoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>Supervisor$ModificarContrato</managed-bean-name>
         <managed-bean-class>cobra.Supervisor.ModificarContrato</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -276,7 +286,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
     <!--Inicio de Managed Bean Plan Operativo-->
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>PlanOperativo</managed-bean-name>
         <managed-bean-class>cobra.PlanOperativo.FlujoCaja</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -325,6 +335,10 @@
         <managed-property>
             <property-name>cobraGwtService</property-name>
             <value>#{cobraGwtServiceAble}</value>
+        </managed-property>
+          <managed-property>
+            <property-name>marcoLogicoService</property-name>
+            <value>#{marcoLogicoService}</value>
         </managed-property>
 
     </managed-bean>
@@ -437,7 +451,7 @@
             <to-view-id>/Usuario/PerfilUsuario.xhtml</to-view-id>
         </navigation-case>
         
-         <navigation-case>
+        <navigation-case>
             <from-outcome>filtronuevo</from-outcome>
             <to-view-id>/homes/home_gestion.xhtml</to-view-id>
         </navigation-case>
@@ -446,22 +460,22 @@
             <from-outcome>restaurar_password</from-outcome>
             <to-view-id>/Cobra/password/restaurarPassword.xhtml</to-view-id>
         </navigation-case>
-          <navigation-case>
+        <navigation-case>
             <from-outcome>FlujoCaja</from-outcome>
             <to-view-id>/Supervisor/Flujocaja.xhtml</to-view-id>
         </navigation-case>
-         <navigation-case>
+        <navigation-case>
             <from-outcome>PlanOperativo</from-outcome>
             <to-view-id>/Supervisor/PlanO.xhtml</to-view-id>
             <redirect/>            
         </navigation-case>
         
-         <navigation-case>
+        <navigation-case>
             <from-outcome>ingresarEntidad</from-outcome>
             <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
         </navigation-case>
         
-         <navigation-case>
+        <navigation-case>
             <from-outcome>ingresarUsuario</from-outcome>
             <to-view-id>/Administrador/IngresarUsuario.xhtml</to-view-id>
         </navigation-case>
@@ -657,7 +671,7 @@
             <from-outcome>nuevoContrato</from-outcome>
             <to-view-id>/Supervisor/NuevoContratoBasico.xhtml</to-view-id>
         </navigation-case>
-          <navigation-case>
+        <navigation-case>
             <from-outcome>nuevoConvenioPo</from-outcome>
             <to-view-id>/Supervisor/nuevoContratoPlanOperativo.xhtml</to-view-id>
         </navigation-case>

@@ -121,21 +121,26 @@ public class WidgetTablaRubrosPry implements IsWidget {
                 Context c = event.getContext();
                 int row = c.getIndex();
                 if (!editar) {
-                    obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                    if(store.get(row).getTipoaporte()==0){
+                    store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
                     obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
+                    }
+                    obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
                     if (!store.get(row).isEstaEnFuenteRecurso()) {
-                        FuenterecursosconvenioDTO fuenteRecursos = store.get(row).getFuenterecursosconvenio();
-                        fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
-                        service.setLog("en eliminar fuente pry:" + fuenteRecursos.getValorDisponible(), null);
-                        obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                        if(store.get(row).getTipoaporte()==0){
+                        service.setLog("en eliminar fuente pry aca:", null);
+                        store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
+                        service.setLog("en eliminar fuente pry:" +  store.get(row).getFuenterecursosconvenio().getValorDisponible(), null);
                         obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
+                        }
+                        obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                         getStore().remove(store.get(row));
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
                         alerta.show();
-                    }
+                    }                    
                     
                 }
             }

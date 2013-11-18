@@ -1171,7 +1171,7 @@ public class Usuario implements Serializable {
                 listaentidad.add(key);
             }
         }
-        inhabilitarseleccionentidades = true;
+        inhabilitarseleccionproyecto = true;
         if (listaentidad.size() < 1) {
             FacesUtils.addErrorMessage(bundle.getString("debeeligirunentidad"));
         }
@@ -1352,6 +1352,7 @@ public class Usuario implements Serializable {
     //Parte de ingresar usuario
     private UIDataTable datatablelistaobras;
     private boolean seleccionProyecto;
+    private boolean  inhabilitarseleccionproyecto = false;
 
     public boolean isSeleccionProyecto() {
         return seleccionProyecto;
@@ -1360,10 +1361,19 @@ public class Usuario implements Serializable {
     public void setSeleccionProyecto(boolean seleccionProyecto) {
         this.seleccionProyecto = seleccionProyecto;
     }
+
+    public boolean isInhabilitarseleccionproyecto() {
+        return inhabilitarseleccionproyecto;
+    }
+
+    public void setInhabilitarseleccionproyecto(boolean inhabilitarseleccionproyecto) {
+        this.inhabilitarseleccionproyecto = inhabilitarseleccionproyecto;
+    }
     
     public UIDataTable getDatatablelistaobras() {
         return datatablelistaobras;
     }
+    
 
     public void setDatatablelistaobras(UIDataTable datatablelistaobras) {
         this.datatablelistaobras = datatablelistaobras;
@@ -1386,18 +1396,18 @@ public class Usuario implements Serializable {
     public void setListaobrasasociar(List<VistaObraMapa> listaobrasasociar) {
         this.listaobrasasociar = listaobrasasociar;
     }
-    Tercero terce = new Tercero();
+    Tercero entidadproyecto = new Tercero();
 
-    public Tercero getTerce() {
-        return terce;
+    public Tercero getEntidadproyecto() {
+        return entidadproyecto;
     }
 
-    public void setTerce(Tercero terce) {
-        this.terce = terce;
+    public void setEntidadproyecto(Tercero entidadproyecto) {
+        this.entidadproyecto = entidadproyecto;
     }
 
    public void cargarObras() {
-     listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTerceroVista(getTerce());
+     listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTerceroVista(getEntidadproyecto());
      }
 
      public void seleccionarUnProyecto(ValueChangeEvent event) {
@@ -1431,12 +1441,19 @@ public class Usuario implements Serializable {
                 listaproyecto.add(key);
             }
         }
-        //inhabilitarseleccionentidades = true;
+        inhabilitarseleccionproyecto = true;
         if (listaproyecto.size() < 1) {
             FacesUtils.addErrorMessage("debe elegir un proyecto");
         }
         return result;
-
+    }
+     
+     public void limpiarSeleccionproyecto() {
+         inhabilitarseleccionproyecto = false;
+         cargarObras();
+        seleccionProyecto = false;
+        listaproyectosbooleana.clear();
+        listaproyecto.clear();
     }
 }
 

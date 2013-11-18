@@ -195,7 +195,7 @@
                 <h:panelGroup styleClass="ikont-espacio-sub-menu">
                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.nuevoconvenio}" actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="#{Supervisor$Contrato.irApaginaconvenio}" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}" />
                     <br/>
-                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuConsultarConvenio}" action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>    
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuConsultarConvenio}" action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>
                 </h:panelGroup>
             </h:panelGroup>
             <hr  class="ikont-hr-separador-menu " rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}" />
@@ -207,7 +207,11 @@
                 <h:panelGroup styleClass="ikont-espacio-sub-menu"> 
                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
                     <br/> 
-                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo"  value="-#{var.menuConsultarContrato}" action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true"/>   
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo"  value="-#{var.menuConsultarContrato}" action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true">
+                        <a4j:param assignTo="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" value="0"/>
+                        <a4j:param assignTo="#{Supervisor$Contrato.filtrocontrato.tipocontrato}" value="0"/>
+                        <a4j:param assignTo="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}" value="2"/>
+                    </h:commandLink>
                 </h:panelGroup>
             </h:panelGroup>
             <hr class="ikont-hr-separador-menu "  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}"/>

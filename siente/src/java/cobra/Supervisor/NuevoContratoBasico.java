@@ -86,6 +86,10 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
+import co.com.interkont.cobra.marcologico.to.Estrategia;
+import co.com.interkont.cobra.to.Periodoflujocaja;
+import cobra.MarcoLogico.MarcoLogicoBean;
 
 /**
  * <p>
@@ -103,6 +107,7 @@ import javax.servlet.ServletContext;
  */
 public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
+
     /**
      * Objeto para acceder a los atributos de contrato
      */
@@ -792,6 +797,49 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int mostrarContratoConvenio;
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
     private Tercero tercero = new Tercero();
+    private boolean eliminarPeriodosFueraRango = false;
+
+    /**
+     * Get the value of eliminarPeriodosFueraRango
+     *
+     * @return the value of eliminarPeriodosFueraRango
+     */
+    public boolean isEliminarPeriodosFueraRango() {
+        return eliminarPeriodosFueraRango;
+    }
+
+    /**
+     * Set the value of eliminarPeriodosFueraRango
+     *
+     * @param eliminarPeriodosFueraRango new value of eliminarPeriodosFueraRango
+     */
+    public void setEliminarPeriodosFueraRango(boolean eliminarPeriodosFueraRango) {
+        this.eliminarPeriodosFueraRango = eliminarPeriodosFueraRango;
+    }
+
+    /**
+     * Variable para confirmar el guardado de borrador de convenio.
+     */
+    private boolean confirmaGuardarBorradorConvenio = false;
+
+    /**
+     * Get the value of confirmaGuardarBorradorConvenio
+     *
+     * @return the value of confirmaGuardarBorradorConvenio
+     */
+    public boolean isConfirmaGuardarBorradorConvenio() {
+        return confirmaGuardarBorradorConvenio;
+    }
+
+    /**
+     * Set the value of confirmaGuardarBorradorConvenio
+     *
+     * @param confirmaGuardarBorradorConvenio new value of
+     * confirmaGuardarBorradorConvenio
+     */
+    public void setConfirmaGuardarBorradorConvenio(boolean confirmaGuardarBorradorConvenio) {
+        this.confirmaGuardarBorradorConvenio = confirmaGuardarBorradorConvenio;
+    }
 
     /**
      * Variable para confirmar el guardado con plan operativo.
@@ -806,6 +854,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public boolean isConfirmacionGuardado() {
         return confirmacionGuardado;
     }
+    /**
+     * Variable para saber a que estrategia ingreso el usuario
+     */
+    private int estrategia = 0;
+    /**
+     * Variable para que liste todas las entidades
+     */
+    private int entidades = 0;
 
     /**
      * Set the value of confirmacionGuardado
@@ -835,7 +891,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTercero(Tercero tercero) {
         this.tercero = tercero;
     }
-
     private boolean enNuevoConvenio;
 
     public boolean isEnNuevoConvenio() {
@@ -2451,6 +2506,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.habiitarmodificartipocontrato = habiitarmodificartipocontrato;
     }
 
+    public int getEstrategia() {
+        return estrategia;
+    }
+
+    public void setEstrategia(int estrategia) {
+        this.estrategia = estrategia;
+    }
+
     /**
      * <p>
      * Automatically managed component initialization.
@@ -2527,7 +2590,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void guardarFinalizarConvenioPO() {
 
-        if (!getFinalizarGuardado()) {// se modifico para que el metodo retorne false cuando no guarda y true cuando hace un guardado exitoso
+        finalizarGuardado(); // metodo para finalizar el guardado
+
+        if (!isConfirmacionGuardado()) {// con la variable booleana se sabe si guardo satisfactoriamente o no. 
+
             try {
                 planOperativo();
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
@@ -3164,7 +3230,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return no retorna nada
      */
     private void validadcionGuardarContrato() {
-        if (bundle.getString("boolencargofidu").equals("false")) {
+        if (bundle.getString("boolencargofidu").equals("true") || bundle.getString("boolencargofidu").equals("false")) {
             if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
@@ -4388,6 +4454,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolproyectos = false;
         boolgiros = false;
         boolmodifca = false;
+        if (filtrocontrato.getIdestrategia() != 0) {
+//            getMarcoLogicoBean().setBoolcrearobligacion(false);
+//            setAvancemedios(getSessionBeanCobra().getMarcoLogicoService().encontrarAvanceConvenioMediosVida(contrato.getIntidcontrato()));
+        }
+
         if (contrato.getBooltipocontratoconvenio()) {
             tipoContCon = "Convenio";
             booltipocontratoconvenio = true;
@@ -5283,6 +5354,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String iniciarDetaConvenio() {
         enNuevoConvenio = false;
+        filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setTipocontrato(0);
         //se deshabilitó para montaje producción 24 de octubre de 2013 (Se puso en false)  
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(false);
@@ -6706,25 +6779,104 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return true;
     }
+
+    private boolean validarPeriodoConveniosFueraRango;
+
+    /**
+     * Get the value of validarPeriodoConveniosFueraRango
+     *
+     * @return the value of validarPeriodoConveniosFueraRango
+     */
+    public boolean isValidarPeriodoConveniosFueraRango() {
+        return validarPeriodoConveniosFueraRango;
+    }
+
+    /**
+     * Set the value of validarPeriodoConveniosFueraRango
+     *
+     * @param validarPeriodoConveniosFueraRango new value of
+     * validarPeriodoConveniosFueraRango
+     */
+    public void setValidarPeriodoConveniosFueraRango(boolean validarPeriodoConveniosFueraRango) {
+        this.validarPeriodoConveniosFueraRango = validarPeriodoConveniosFueraRango;
+    }
+
+    List<Periodoflujocaja> periodoConveniosFueraRango = new ArrayList<Periodoflujocaja>();
+
+    public List<Periodoflujocaja> getPeriodoConveniosFueraRango() {
+        return periodoConveniosFueraRango;
+    }
+
+    public void setPeriodoConveniosFueraRango(List<Periodoflujocaja> periodoConveniosFueraRango) {
+        this.periodoConveniosFueraRango = periodoConveniosFueraRango;
+    }
+
     /*
      *Metodo que se encarga de guardar el convenio en estado en estructuración.
      * 
      * @return void
      */
-
     public void guardarBorradorConvenio() {
-        try {
-            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-            if (!contrato.getActividadobras().isEmpty()) {
-                List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
-                Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-                encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
-                ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
-            }
-            if (validacionesBasicasConvenioPO(true)) {
-                configuracionGuardadoPo(1, true);
-            }
 
+        /**
+         * Se comprueba si los periodos no estan por fuera del rango de fechas.
+         */
+        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() inicial " + isValidarPeriodoConveniosFueraRango());
+
+        if (contrato.getIntidcontrato() != 0 && !isEliminarPeriodosFueraRango() && isValidarPeriodoConveniosFueraRango()) {
+
+            System.out.println("DEbug - contrato.getIntidcontrato() != 0");
+
+            periodoConveniosFueraRango = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenioPorFueraDeRango(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getIntidcontrato());
+
+            System.out.println("Debug - periodoConveniosFueraRango " + periodoConveniosFueraRango.size());
+
+            if (!periodoConveniosFueraRango.isEmpty()) { // se debe poner diferente
+                System.out.println("Debug - la lista retorno datos");
+                setEliminarPeriodosFueraRango(true);
+                setGuardarborradorconvenio(false);
+                System.out.println("periodo fuera de rango en  TRUE");
+            } else {
+                setValidarPeriodoConveniosFueraRango(false);
+            }
+        }
+
+        if (contrato.getIntidcontrato() != 0) {
+            setValidarPeriodoConveniosFueraRango(false);
+        }
+
+        System.out.println("Despues de validaciones iniciales. ");
+        /**
+         * Si el usuario acepta redimensionar el flujo de caja, se procede a
+         * eliminar los periodos fuera de rango.
+         */
+
+        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() segundo " + isValidarPeriodoConveniosFueraRango());
+
+        if (isEliminarPeriodosFueraRango() && !isGuardarborradorconvenio() && !isValidarPeriodoConveniosFueraRango()) {
+            System.out.println("Debug - entro a eliminar periodos fuera de rango");
+            getSessionBeanCobra().getCobraService().borrarPeriodosflujocaja(periodoConveniosFueraRango);
+        }
+
+        try {
+
+            System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() tercero " + isValidarPeriodoConveniosFueraRango());
+
+            if (!isValidarPeriodoConveniosFueraRango()) { // la variable entra por parametro
+                System.out.println("DEbug - Entro a guardar");
+                ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+                if (!contrato.getActividadobras().isEmpty()) {
+                    List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+                    Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                    encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+                    ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+                }
+                if (validacionesBasicasConvenioPO(true)) {
+                    configuracionGuardadoPo(1, true);
+                    setConfirmaGuardarBorradorConvenio(true);
+                    setPeriodoConveniosFueraRango(new ArrayList<Periodoflujocaja>());
+                }
+            }
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
             setMensajePlanOperativo(true, true, e.getMessage());
@@ -6737,7 +6889,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * en estado en ejecución.
      * 
      */
-    public boolean getFinalizarGuardado() {
+    public void finalizarGuardado() {
+
+        System.out.println("Debug - finalizarGuardado()");
         setConfirmacionGuardado(false); // se inicia con la variable de confirmacion en false, si guarda satisfactoriamente se pasa a true. 
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
@@ -6766,7 +6920,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             configuracionGuardadoPo(2, true);
                             contrato.setTercero(new Tercero());
                             setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
-                            return isConfirmacionGuardado();
+                            //return isConfirmacionGuardado();
                         } else {
                             FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
                             setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
@@ -6782,7 +6936,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             setMensajePlanOperativo(false, true, e.getMessage());
         }
 
-        return isConfirmacionGuardado();
+        //return isConfirmacionGuardado();
     }
 
     public Tercero obtenerTerceroXcodigo(int codigo) {
@@ -7471,7 +7625,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             for (Obrafuenterecursosconvenios ofrc : actividaObraPrincipal.getObra().getObrafuenterecursosconvenioses()) {
                 //getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos());
                 for (Relacionobrafuenterecursoscontrato robrc : getSessionBeanCobra().getCobraService().buscarRelacionobrafuenterecursoscontrato(ofrc.getIdobrafuenterecursos())) {
-                    proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    boolean estaEnContratosProyecto = false;
+                    for (Contrato cont : proyplaop.getContratosProyecto()) {
+                        if (cont.getIntidcontrato() == robrc.getContrato().getIntidcontrato()) {
+                            estaEnContratosProyecto = true;
+                        }
+                    }
+                    if (!estaEnContratosProyecto) {
+                        proyplaop.getContratosProyecto().add(robrc.getContrato());
+                    }
                 }
             }
             getFlujoCaja().getProyectosPlanOperativo().add(proyplaop);
@@ -7748,18 +7910,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
 
         }
-        try {
 
-            if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
-                getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
-                getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
-            }
-
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage("No puede eliminar la fuente de recursos. + =", e.getMessage());
-
-            FacesUtils.addInfoMessage("No puede eliminar la fuente de recursos =");
-            setMensajePlanOperativo(true, false, "No puede eliminar la fuente de recursos=");
+        if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
+            getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
+            getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
         }
 
         if (!getContrato().getActividadobras().isEmpty()) {
@@ -7982,5 +8136,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Comienza medios de vida.
+     *
+     * @return
+     */
+    protected MarcoLogicoBean getMarcoLogicoBean() {
+        return (MarcoLogicoBean) FacesUtils.getManagedBean("MarcoLogico$MarcoLogico");
     }
 }

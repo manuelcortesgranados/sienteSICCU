@@ -48,7 +48,6 @@ public class FlujoCaja implements Serializable {
     List<Itemflujocaja> itemsFlujoIngresos;
     List<Itemflujocaja> itemsFlujoEgresos;
     List<Relacioncontratoperiodoflujocaja> periodosConvenio;
-    List<Relacioncontratoperiodoflujocaja> periodosConvenioEliminados;
     Calendar fechaInicioConvenio;
     Calendar fechaFinConvenio;
     List<FlujoIngresos> flujoIngresos;
@@ -156,14 +155,6 @@ public class FlujoCaja implements Serializable {
 
     public void setPeriodosConvenio(List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         this.periodosConvenio = periodosConvenio;
-    }
-
-    public List<Relacioncontratoperiodoflujocaja> getPeriodosConvenioEliminados() {
-        return periodosConvenioEliminados;
-    }
-
-    public void setPeriodosConvenioEliminados(List<Relacioncontratoperiodoflujocaja> periodosConvenioEliminados) {
-        this.periodosConvenioEliminados = periodosConvenioEliminados;
     }
 
     public Calendar getFechaInicioConvenio() {
@@ -1028,16 +1019,8 @@ public class FlujoCaja implements Serializable {
 
             if (flujoIngresosGuardar.ingresoEntidad) {
                 getSessionBeanCobra().getCobraService().guardarFlujoIngresosConvenioEntidad(flujoIngresosGuardar.planMovimientosConvenioEntidad);
-
-                if (flujoIngresosGuardar.movimientosConvenioEntidadEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarIngresosConvenioEntidad(flujoIngresosGuardar.movimientosConvenioEntidadEliminados);
-                }
             } else {
                 getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoIngresosGuardar.planMovimientosIngresosConvenio);
-
-                if (flujoIngresosGuardar.movimientosIngresosConvenioEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoIngresosGuardar.movimientosIngresosConvenioEliminados);
-                }
             }
         }
 
@@ -1047,39 +1030,21 @@ public class FlujoCaja implements Serializable {
             if (flujoEgresosGuardar.egresoProyecto) {
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosProyecto(flujoEgresosGuardar.planMovimientosProyecto);
 
-                if (flujoEgresosGuardar.movimientosProyectoEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarEgresosProyecto(flujoEgresosGuardar.movimientosProyectoEliminados);
-                }
             } else if (flujoEgresosGuardar.egresoOtros) {
                 getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoEgresosGuardar.planMovimientosEgresosConvenio);
 
-                if (flujoEgresosGuardar.movimientosEgresosConvenioEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoEgresosGuardar.movimientosEgresosConvenioEliminados);
-                }
             } else if (flujoEgresosGuardar.egresoContrato) {
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosContrato(flujoEgresosGuardar.planMovimientosContrato);
 
-                if (flujoEgresosGuardar.planMovimientosContratoEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarEgresosContrato(flujoEgresosGuardar.planMovimientosContratoEliminados);
-                }
             } else if (flujoEgresosGuardar.egresoPryDirecto) {
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosPrydirecto(flujoEgresosGuardar.planMovimientosPryDirecto);
 
-                if (flujoEgresosGuardar.planMovimientosPryDirectoEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarEgresosPrydirecto(flujoEgresosGuardar.planMovimientosPryDirectoEliminados);
-                }
             } else if (flujoEgresosGuardar.egresoPryOtros) {
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtros);
 
-                if (flujoEgresosGuardar.planMovimientosPryOtrosEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarEgresosPryotros(flujoEgresosGuardar.planMovimientosPryOtrosEliminados);
-                }
             } else if (flujoEgresosGuardar.egresoCuotaGerencia) {
                 getSessionBeanCobra().getCobraService().guardarFlujoEgresosCuotaGerencia(flujoEgresosGuardar.planificacionesmovcuotagerencia);
 
-                if (flujoEgresosGuardar.planificacionesmovcuotagerenciaEliminados.size() > 0) {
-                    getSessionBeanCobra().getCobraService().borrarEgresosCuotaGerencia(flujoEgresosGuardar.planificacionesmovcuotagerenciaEliminados);
-                }
             }
         }
         FacesUtils.addInfoMessage("Los valores del flujo de caja han sido almacenados.");
@@ -1094,10 +1059,6 @@ public class FlujoCaja implements Serializable {
      */
     public void guardarPeriodosConvenio() {
         getSessionBeanCobra().getCobraService().guardarPeriodosConvenio(periodosConvenio);
-
-        if (!periodosConvenioEliminados.isEmpty()) {
-            getSessionBeanCobra().getCobraService().borrarPeriodosConvenio(periodosConvenioEliminados);
-        }
     }
 
     /**
@@ -1111,7 +1072,6 @@ public class FlujoCaja implements Serializable {
      */
     public void generarPeriodosFlujoCaja() {
         periodosConvenio = new ArrayList<Relacioncontratoperiodoflujocaja>();
-        periodosConvenioEliminados = new ArrayList<Relacioncontratoperiodoflujocaja>();
         Relacioncontratoperiodoflujocaja periodoConvenio;
         Periodoflujocaja periodo;
         Calendar fechaPeriodos = GregorianCalendar.getInstance();
@@ -1155,12 +1115,6 @@ public class FlujoCaja implements Serializable {
         } else if (periodosConvenio.size() > mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio)) {
             int meses = mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio);
             fechaPeriodos.setTime(convenio.getDatefechaini());
-
-            while (periodosConvenio.size() > meses) {
-                periodoConvenio = periodosConvenio.remove(periodosConvenio.size() - 1);
-                periodosConvenioEliminados.add(periodoConvenio);
-            }
-
             actualizarPeriodosConvenio(fechaPeriodos);
         } else {
             fechaPeriodos.setTime(convenio.getDatefechaini());

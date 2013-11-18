@@ -51,6 +51,7 @@ import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberField;
@@ -133,6 +134,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
     Set<RelacionobrafuenterecursoscontratoDTO> relacionFuenteRecursosContratoCopia;
     int numeracionActividad;
     protected int numeracionActual = 0;
+    Button btnCancelar;
+    Set<RelacionobrafuenterecursoscontratoDTO> lstRelacionObraFuenteContrato;
+    boolean sololectura=false;
 
     public ContratoForm() {
     }
@@ -167,11 +171,43 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.taskStore = taskStore;
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
+        lstRelacionObraFuenteContrato = new HashSet<RelacionobrafuenterecursoscontratoDTO>();
         CargarFormularioEditar();
         seEdito(actividadObraEditar);
         numeroRubros = contrato.getRelacionobrafuenterecursoscontratos().size();
         relacionFuenteRecursosContratoCopia = ((Set) ((HashSet) contrato.getRelacionobrafuenterecursoscontratos()).clone());
 
+    }
+    /**
+     * Constructor formulario contrato solo consulta
+     * @param actividadobraContratoEditar
+     * @param gantt
+     * @param di
+     * @param actividadObraPadre
+     * @param propes
+     * @param taskStore
+     * @param convenio 
+     */
+    
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, boolean readonly) {
+        this.actividadObraEditar = actividadobraContratoEditar;
+        this.gantt = gantt;
+        modalContrato = di;
+        this.contrato = actividadobraContratoEditar.getContrato();
+        this.actividadObraPadre = actividadObraPadre;
+        this.editar = true;
+        fechaContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
+        lstRubrosDto = new ArrayList<RubroDTO>();
+        this.propes = propes;
+        this.taskStore = taskStore;
+        this.convenioDto = convenio;
+        valorContrato.setEnabled(false);
+        lstRelacionObraFuenteContrato = new HashSet<RelacionobrafuenterecursoscontratoDTO>();
+        CargarFormularioEditar();
+        seEdito(actividadObraEditar);
+        numeroRubros = contrato.getRelacionobrafuenterecursoscontratos().size();
+        relacionFuenteRecursosContratoCopia = ((Set) ((HashSet) contrato.getRelacionobrafuenterecursoscontratos()).clone());
+        sololectura=readonly;
     }
 
     private void seEdito(ActividadobraDTO actiEditar) {
@@ -219,6 +255,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
         } else {
             tituloPantalla = "Editar contrato";
         }
+        if(sololectura)
+        {
+         tituloPantalla = "Consultar contrato";   
+        }    
 
         Label tituloPagina = new Label(tituloPantalla);
         tituloPagina.setStyleName("ikont-po-label");
@@ -245,15 +285,21 @@ public class ContratoForm implements IsWidget, EntryPoint {
         objetoContrato.addFocusHandler(new FocusHandler() {
             @Override
             public void onFocus(FocusEvent event) {
+                if(!sololectura)
+                {    
                 objetoContrato.setText("");
+                }
             }
         });
         getObjetoContrato().setHeight("" + 80);
+        objetoContrato.setReadOnly(sololectura);
+        
         Label lblObj = new Label("*Objetivos");
         con.add(lblObj, new HtmlData(".tobjetoC"));
         con.add(getObjetoContrato(), new HtmlData(".objetoC"));
 
         getValorContrato().setWidth(cw);
+        getValorContrato().setReadOnly(sololectura);
 
         Label lblvalor = new Label("Valor estimado:");
         con.add(lblvalor, new HtmlData(".tvalor"));
@@ -272,17 +318,20 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 tipocontrato = event.getSelectedItem();
             }
         });
+        getLstTipoContrato().setReadOnly(sololectura);
         Label lbltipocontrato = new Label("Tipo contrato:");
         con.add(lbltipocontrato, new HtmlData(".ttipocontrato"));
         con.add(getLstTipoContrato(), new HtmlData(".tipocontrato"));
 
         getNombreAbre().setWidth(cw);
+        getNombreAbre().setReadOnly(sololectura);
         Label lblnombreAbreviado = new Label("Nombre abreviado:");
         con.add(lblnombreAbreviado, new HtmlData(".tnomabreviado"));
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
 
 
         getFechaSuscripcionContrato().setWidth(cw);
+        getFechaSuscripcionContrato().setReadOnly(sololectura);
         fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
             @Override
             public void onKeyDown(KeyDownEvent event) {
@@ -301,15 +350,16 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblFechaSuscripcionActa = new Label("Fecha de suscripción acta inicio:");
         con.add(lblFechaSuscripcionActa, new HtmlData(".tfechasusacta"));
         getFechaSuscripcionActaInicio().setWidth(cw);
+        getFechaSuscripcionActaInicio().setReadOnly(sololectura);
         con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
 
         getFechaFinalizacion().setWidth(cw);
+        getFechaFinalizacion().setReadOnly(sololectura);
         Label lblFechaFin = new Label("Fecha finalización:");
         con.add(lblFechaFin, new HtmlData(".tfechafin"));
         con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
-        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato);
+        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato, sololectura);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
-
 
 
 
@@ -326,7 +376,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
             }
         });
+        btnAdicionarRubros.setVisible(!sololectura);
         con.add(btnAdicionarRubros, new HtmlData(".addr"));
+
 
 
 
@@ -342,11 +394,50 @@ public class ContratoForm implements IsWidget, EntryPoint {
             getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
             getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
             getFechaFinalizacion().setEmptyText("Fecha finalización");
+              modalContrato.addHideHandler(new HideEvent.HideHandler() {
+                @Override
+                public void onHide(HideEvent event) {
+                    devolverValorFuenteObra(tblMontos.getStore().getAll());
+                }
+            });
 
         } else {
             nombreBotonPrincipal = "Editar Contrato";
             lstTipoContrato.setValue(contrato.getTipocontrato());
+          
+
+//            btnCancelar = new Button("Cancelar", new ClickHandler() {
+//                @Override
+//                public void onClick(ClickEvent event) {
+//                    modalContrato.hide();
+//                    contrato.setRelacionobrafuenterecursoscontratos(relacionFuenteRecursosContratoCopia);
+//                    service.setLog("aca en cancelar editar contrato" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
+//                    for(RelacionobrafuenterecursoscontratoDTO fuenteRecursosContrato:relacionFuenteRecursosContratoCopia){
+//                    fuenteRecursosContrato.getObrafuenterecursosconvenios().setValorDisponible(fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible().subtract(fuenteRecursosContrato.getValor()));
+//                    fuenteRecursosContrato.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
+//                    service.setLog("aca en cancelar contrato"+fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible(), null);
+//                    }
+//                }
+//            });
+//            btnCancelar.setWidth("" + 150);
+
+            modalContrato.addHideHandler(new HideEvent.HideHandler() {
+                @Override
+                public void onHide(HideEvent event) {
+                    contrato.setRelacionobrafuenterecursoscontratos(relacionFuenteRecursosContratoCopia);
+                    service.setLog("aca en cancelar editar contrato" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
+                    for (RelacionobrafuenterecursoscontratoDTO fuenteRecursosContrato : relacionFuenteRecursosContratoCopia) {
+                        fuenteRecursosContrato.getObrafuenterecursosconvenios().setValorDisponible(fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible().subtract(fuenteRecursosContrato.getValor()));
+                        fuenteRecursosContrato.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
+                        service.setLog("aca en cancelar contrato" + fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible(), null);
+                    }
+                }
+            });
+
+
         }
+
+
 
         Button btnAdicionarContrato = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
@@ -400,6 +491,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         });
 
         btnAdicionarContrato.setWidth("" + 150);
+        btnAdicionarContrato.setVisible(!sololectura);
         con.add(btnAdicionarContrato);
 
 
@@ -722,12 +814,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijos.add(contractua);
 
         List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcion);
 
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcionActa);
@@ -805,7 +897,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
 
         gantt.getGanttPanel().getContainer().refresh();
-       // GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
+        // GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
 
     }
 
@@ -823,7 +915,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         msgValidacion = new String();
         if (!GanttDatos.validarNombreActividad(contrato.getNombreAbreviado(), taskStore)) {
             hayError = true;
-            msgValidacion += "*Por favor verifique el nombre del contrato, ya se encuentra en el plan operativo."+"<br/>";
+            msgValidacion += "*Por favor verifique el nombre del contrato, ya se encuentra en el plan operativo." + "<br/>";
         }
         if (contrato.getDatefechaini() == null) {
             hayError = true;
@@ -1183,5 +1275,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     public void modificarValorContrato(BigDecimal valorModificado) {
         this.valorContrato.setValue(valorModificado);
+    }
+
+    public void devolverValorFuenteObra(List<RelacionobrafuenterecursoscontratoDTO> lstRecursosFuentes) {
+        for (RelacionobrafuenterecursoscontratoDTO relacionFuente : lstRecursosFuentes) {
+            relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().add(relacionFuente.getValor()));
+        }
+
     }
 }
