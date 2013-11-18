@@ -416,6 +416,21 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
         config.taskContextMenu.add(menuItemEliminarContrato);
 
+        final MenuItem menuItemConsultarContrato = new MenuItem("Consultar Contrato");
+        menuItemConsultarContrato.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+            public void onSelection(SelectionEvent<Item> event) {
+                final Window crearContratoDialog = new Window();
+                crearContratoDialog.setBlinkModal(true);
+                crearContratoDialog.setModal(true);
+                crearContratoDialog.setClosable(true);
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO, true);
+                crearContratoDialog.add(contratoFormEditar);
+                crearContratoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemConsultarContrato);
+        
         final MenuItem menuItemEliminarHito = new MenuItem("Eliminar hito");
         menuItemEliminarHito.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
@@ -568,6 +583,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEditarPry.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemEliminarHito.setVisible(false);
                         menuItemAnadirHito.setVisible(false);
@@ -581,6 +597,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEliminarPry.setVisible(true);
                         // menuItemEliminarPry.setVisible(mostrarEliminar);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemEliminarHito.setVisible(false);
                         menuItemAnadirHito.setVisible(true);
@@ -591,7 +608,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemProyecto.setVisible(false);
                         menuItemEliminarTarea.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
-                        menuItemEditarContrato.setVisible(true);
+                        //Se deshabilitó la edición de contrato, mientras se soluciona el borrado y actualizado en cascada
+                        // de obra fuente recurso contrato
+                        menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(true);
                         menuItemEliminarContrato.setVisible(true);
                         menuItemEliminarHito.setVisible(false);
                         menuItemAnadirHito.setVisible(true);
@@ -605,6 +625,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEditarPry.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemAñadirTarea.setVisible(false);
                         menuItemEliminarHito.setVisible(false);
@@ -618,6 +639,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEditarPry.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemEliminarHito.setVisible(false);
                         menuItemAnadirHito.setVisible(false);
@@ -630,6 +652,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEditarPry.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemEliminarHito.setVisible(true);
                         menuItemAnadirHito.setVisible(false);
@@ -642,6 +665,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEditarPry.setVisible(false);
                         menuItemEliminarPry.setVisible(false);
                         menuItemEditarContrato.setVisible(false);
+                        menuItemConsultarContrato.setVisible(false);
                         menuItemEliminarContrato.setVisible(false);
                         menuItemEliminarHito.setVisible(false);
                         menuItemAnadirHito.setVisible(false);

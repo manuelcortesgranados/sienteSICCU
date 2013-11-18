@@ -4,8 +4,6 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Contrato;
-import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
