@@ -797,7 +797,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int mostrarContratoConvenio;
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
     private Tercero tercero = new Tercero();
-    private boolean eliminarPeriodosFueraRango = false;
 
     /**
      * Get the value of eliminarPeriodosFueraRango
@@ -805,16 +804,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return the value of eliminarPeriodosFueraRango
      */
     public boolean isEliminarPeriodosFueraRango() {
-        return eliminarPeriodosFueraRango;
-    }
-
-    /**
-     * Set the value of eliminarPeriodosFueraRango
-     *
-     * @param eliminarPeriodosFueraRango new value of eliminarPeriodosFueraRango
-     */
-    public void setEliminarPeriodosFueraRango(boolean eliminarPeriodosFueraRango) {
-        this.eliminarPeriodosFueraRango = eliminarPeriodosFueraRango;
+        return !periodoConveniosFueraRango.isEmpty();
     }
 
     /**
@@ -863,6 +853,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private int entidades = 0;
 
+       private int botonGuardado;
+
+    /**
+     * Get the value of botonGuaradado
+     *
+     * @return the value of botonGuaradado
+     */
+    public int getBotonGuardado() {
+        return botonGuardado;
+    }
+
+    /**
+     * Set the value of botonGuaradado
+     *
+     * @param botonGuardado new value of botonGuaradado
+     */
+    public void setBotonGuardado(int botonGuardado) {
+        this.botonGuardado = botonGuardado;
+    }
+
+
     /**
      * Set the value of confirmacionGuardado
      *
@@ -870,6 +881,37 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setConfirmacionGuardado(boolean confirmacionGuardado) {
         this.confirmacionGuardado = confirmacionGuardado;
+    }
+
+    private boolean validarPeriodoConveniosFueraRango;
+
+    /**
+     * Get the value of validarPeriodoConveniosFueraRango
+     *
+     * @return the value of validarPeriodoConveniosFueraRango
+     */
+    public boolean isValidarPeriodoConveniosFueraRango() {
+        return validarPeriodoConveniosFueraRango;
+    }
+
+    /**
+     * Set the value of validarPeriodoConveniosFueraRango
+     *
+     * @param validarPeriodoConveniosFueraRango new value of
+     * validarPeriodoConveniosFueraRango
+     */
+    public void setValidarPeriodoConveniosFueraRango(boolean validarPeriodoConveniosFueraRango) {
+        this.validarPeriodoConveniosFueraRango = validarPeriodoConveniosFueraRango;
+    }
+
+    List<Periodoflujocaja> periodoConveniosFueraRango = new ArrayList<Periodoflujocaja>();
+
+    public List<Periodoflujocaja> getPeriodoConveniosFueraRango() {
+        return periodoConveniosFueraRango;
+    }
+
+    public void setPeriodoConveniosFueraRango(List<Periodoflujocaja> periodoConveniosFueraRango) {
+        this.periodoConveniosFueraRango = periodoConveniosFueraRango;
     }
 
     /**
@@ -6780,35 +6822,74 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return true;
     }
 
-    private boolean validarPeriodoConveniosFueraRango;
+    /**
+     *
+     */
+    public void preValidarFinalizarConvenio() {
+        botonGuardado=3;
+        if (contrato.getIntidcontrato() != 0) {
+            periodoConveniosFueraRango = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenioPorFueraDeRango(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getIntidcontrato());
+
+            if (periodoConveniosFueraRango.isEmpty()) {
+                finalizarGuardado();
+            }
+
+        } else {
+            finalizarGuardado();
+        }
+    }
 
     /**
-     * Get the value of validarPeriodoConveniosFueraRango
+     * *
      *
-     * @return the value of validarPeriodoConveniosFueraRango
      */
-    public boolean isValidarPeriodoConveniosFueraRango() {
-        return validarPeriodoConveniosFueraRango;
+    public void preValidarGuardarBorrador() {
+        botonGuardado=1;
+        if (contrato.getIntidcontrato() != 0) {
+            
+            
+            periodoConveniosFueraRango = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenioPorFueraDeRango(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getIntidcontrato());
+            if (periodoConveniosFueraRango.isEmpty()) {
+                guardarBorradorConvenio();
+            }
+
+        } else {
+            guardarBorradorConvenio();
+        }
     }
 
     /**
-     * Set the value of validarPeriodoConveniosFueraRango
+     * *
      *
-     * @param validarPeriodoConveniosFueraRango new value of
-     * validarPeriodoConveniosFueraRango
      */
-    public void setValidarPeriodoConveniosFueraRango(boolean validarPeriodoConveniosFueraRango) {
-        this.validarPeriodoConveniosFueraRango = validarPeriodoConveniosFueraRango;
+    public String preValidarGuardarBorradorBotonPO() {
+        botonGuardado=2;
+        if (contrato.getIntidcontrato() != 0) {
+            periodoConveniosFueraRango = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenioPorFueraDeRango(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getIntidcontrato());
+
+            if (periodoConveniosFueraRango.isEmpty()) {
+                return planOperativo();
+            }
+
+        } else {
+            return planOperativo();
+        }
+        return null;
     }
 
-    List<Periodoflujocaja> periodoConveniosFueraRango = new ArrayList<Periodoflujocaja>();
+    /**
+     * *
+     *
+     */
+    private void eliminarPeriodosFueraRango() {
 
-    public List<Periodoflujocaja> getPeriodoConveniosFueraRango() {
-        return periodoConveniosFueraRango;
-    }
-
-    public void setPeriodoConveniosFueraRango(List<Periodoflujocaja> periodoConveniosFueraRango) {
-        this.periodoConveniosFueraRango = periodoConveniosFueraRango;
+        /**
+         * Si el usuario acepta redimensionar el flujo de caja, se procede a
+         * eliminar los periodos fuera de rango.
+         */
+        getSessionBeanCobra().getCobraService().borrarPeriodosflujocaja(periodoConveniosFueraRango);
+        getFlujoCaja().iniciarFlujoCaja();
+        getFlujoCaja().guardarFlujoCaja();
     }
 
     /*
@@ -6817,65 +6898,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
-
-        /**
-         * Se comprueba si los periodos no estan por fuera del rango de fechas.
-         */
-        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() inicial " + isValidarPeriodoConveniosFueraRango());
-
-        if (contrato.getIntidcontrato() != 0 && !isEliminarPeriodosFueraRango() && isValidarPeriodoConveniosFueraRango()) {
-
-            System.out.println("DEbug - contrato.getIntidcontrato() != 0");
-
-            periodoConveniosFueraRango = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenioPorFueraDeRango(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getIntidcontrato());
-
-            System.out.println("Debug - periodoConveniosFueraRango " + periodoConveniosFueraRango.size());
-
-            if (!periodoConveniosFueraRango.isEmpty()) { // se debe poner diferente
-                System.out.println("Debug - la lista retorno datos");
-                setEliminarPeriodosFueraRango(true);
-                setGuardarborradorconvenio(false);
-                System.out.println("periodo fuera de rango en  TRUE");
-            } else {
-                setValidarPeriodoConveniosFueraRango(false);
-            }
-        }
-
-        if (contrato.getIntidcontrato() != 0) {
-            setValidarPeriodoConveniosFueraRango(false);
-        }
-
-        System.out.println("Despues de validaciones iniciales. ");
-        /**
-         * Si el usuario acepta redimensionar el flujo de caja, se procede a
-         * eliminar los periodos fuera de rango.
-         */
-
-        System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() segundo " + isValidarPeriodoConveniosFueraRango());
-
-        if (isEliminarPeriodosFueraRango() && !isGuardarborradorconvenio() && !isValidarPeriodoConveniosFueraRango()) {
-            System.out.println("Debug - entro a eliminar periodos fuera de rango");
-            getSessionBeanCobra().getCobraService().borrarPeriodosflujocaja(periodoConveniosFueraRango);
-            getFlujoCaja().iniciarFlujoCaja();
-        }
-
         try {
-
-            System.out.println("Debug -  isValidarPeriodoConveniosFueraRango() tercero " + isValidarPeriodoConveniosFueraRango());
-
-            if (!isValidarPeriodoConveniosFueraRango()) { // la variable entra por parametro
-                System.out.println("DEbug - Entro a guardar");
-                ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-                if (!contrato.getActividadobras().isEmpty()) {
-                    List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
-                    Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-                    encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
-                    ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
-                }
-                if (validacionesBasicasConvenioPO(true)) {
-                    configuracionGuardadoPo(1, true);
-                    setConfirmaGuardarBorradorConvenio(true);
-                    setPeriodoConveniosFueraRango(new ArrayList<Periodoflujocaja>());
+            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+            if (!contrato.getActividadobras().isEmpty()) {
+                List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+                Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+                ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+            }
+            if (validacionesBasicasConvenioPO(true)) {
+                configuracionGuardadoPo(1, true);
+                if (isEliminarPeriodosFueraRango()) {
+                    eliminarPeriodosFueraRango();
                 }
             }
         } catch (ConvenioException e) {
@@ -6892,8 +6926,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void finalizarGuardado() {
 
-        System.out.println("Debug - finalizarGuardado()");
-        setConfirmacionGuardado(false); // se inicia con la variable de confirmacion en false, si guarda satisfactoriamente se pasa a true. 
         try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
             if (!contrato.getActividadobras().isEmpty()) {
@@ -6907,8 +6939,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
                 ValidacionesConvenio.validarProyectosPlanOperativo(getFlujoCaja().getProyectosPlanOperativo());
                 ValidacionesConvenio.validarDisponibilidadFuentesRecursos(recursosconvenio.getLstFuentesRecursos());
-                System.out.println("getFluj = " + getFlujoCaja().isFlujoCajaIniciado());
-
+                if (isEliminarPeriodosFueraRango()) {
+                    eliminarPeriodosFueraRango();
+                }
                 if (!getFlujoCaja().isFlujoCajaIniciado()) {
                     //Aca deberiamos guardar borrador convenio antes de iniciar elflujo de caja
                     configuracionGuardadoPo(1, true);
@@ -6917,11 +6950,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (getFlujoCaja().validarFlujoCaja()) {
                     if (getFlujoCaja().getTotalIngresos() == getContrato().getNumvlrcontrato().doubleValue()) {
                         if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {
-                            System.out.println("entre a finalizar = ");
                             configuracionGuardadoPo(2, true);
                             contrato.setTercero(new Tercero());
                             setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
-                            //return isConfirmacionGuardado();
                         } else {
                             FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
                             setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
@@ -6936,8 +6967,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage(e.getMessage());
             setMensajePlanOperativo(false, true, e.getMessage());
         }
-
-        //return isConfirmacionGuardado();
     }
 
     public Tercero obtenerTerceroXcodigo(int codigo) {
@@ -7033,48 +7062,60 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 /*Reporte Consolidado*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 2:
                 /*Reporte Cronograma*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 3:
                 /*Reporte Presupuesto*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 5:
                 /*Reporte Plan operativo*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
         }
 
@@ -7092,48 +7133,60 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 /*Reporte Consolidado*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadoxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 2:
                 /*Reporte Cronograma*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramaxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 3:
                 /*Reporte Presupuesto*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestoxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajaxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 5:
                 /*Reporte Plan operativo*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativoxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionxls") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
         }
 
@@ -7152,8 +7205,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 /*Reporte Cronograma*/
                 try {
                     FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramampp") + contrato.getIntidcontrato());
+
                 } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Contrato.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
         }
@@ -7315,9 +7370,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 lstTemporalActividades.clear();
                 encontrarActividadContrato(activi, lstTemporalActividades);
 
-                // System.out.println("getC = " + getContrato().getActividadobras().size());
-                //if (!getContrato().getActividadobras().isEmpty()) {
-//}
             }
 
         }
@@ -7899,10 +7951,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             true, false);
                     docContrato.setStrubicacion(nuevaRutaWeb);
                     getSessionBeanCobra().getCobraService().guardarDocumento(docContrato);
+
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NuevoContratoBasico.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 } catch (ArchivoExistenteException ex) {
-                    Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(NuevoContratoBasico.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 //                        } 
@@ -8135,7 +8190,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/consultarContratoConvenioDetalle.xhtml");
 
         } catch (IOException ex) {
-            Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevoContratoBasico.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 

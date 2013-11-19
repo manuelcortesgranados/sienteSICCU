@@ -15,22 +15,37 @@
                 <h:outputText  styleClass="ikont-hot-panelConfirmarEliminarPeriodosFueraRango"    value="#{var.confirmarguardado}"/>
             </h:panelGroup>
         </f:facet>
-        
+
         <h:panelGroup layout="block" >         
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-panelconfguardar"   value="El cambio en las fechas, redimensionara el flujo de caja "   />
             </h:panelGroup>
             <center>
                 <h:form>
-                    <h:panelGrid columns="2" >
+                    <h:panelGrid columns="2" id="ikont-hpg-botones-eliminar-periodos">
 
-                        <a4j:commandButton  id="aceptar" value="#{var.aceptar}"  action="#{Supervisor$Contrato.guardarBorradorConvenio}" 
+                        <a4j:commandButton  id="aceptarBorrador" value="#{var.aceptar}"  action="#{Supervisor$Contrato.guardarBorradorConvenio}" 
                                             oncomplete="#{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.hide(); return false;"                                          
-                                            title="#{var.aceptar}" >
-                            <a4j:param value="false" assignTo="#{Supervisor$Contrato.validarPeriodoConveniosFueraRango}"/>
+                                            title="#{var.aceptar}" rendered="#{Supervisor$Contrato.botonGuardado==1}" >
+
                         </a4j:commandButton>
 
-                        <a4j:commandButton onclick="#{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.hide(); return false;"
+                        <a4j:commandButton  id="aceptarBorradorPo" value="#{var.aceptar}"  action="#{Supervisor$Contrato.planOperativo}" 
+                                            oncomplete="#{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.hide(); return false;"                                          
+                                            title="#{var.aceptar}" rendered="#{Supervisor$Contrato.botonGuardado==2}" >
+
+                        </a4j:commandButton>
+
+                        <a4j:commandButton  id="aceptarFinalizar" value="#{var.aceptar}"  action="#{Supervisor$Contrato.finalizarGuardado}" 
+                                            oncomplete="#{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.hide(); 
+                                            if (#{Supervisor$Contrato.confirmacionGuardado}){#{rich:component('panelConfirmarGuardadoConvenio')}.show();}
+                                            return false;"                                          
+                                            title="#{var.aceptar}" rendered="#{Supervisor$Contrato.botonGuardado==3}" >
+
+                        </a4j:commandButton>
+
+                        <a4j:commandButton onclick="#{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.hide();
+                                return false;"
                                            value="#{var.cancelar}" title="#{var.cancelar}"/>
                     </h:panelGrid>
                 </h:form>
