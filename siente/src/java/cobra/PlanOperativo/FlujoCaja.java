@@ -321,7 +321,6 @@ public class FlujoCaja implements Serializable {
         iniciarTotalesEgresosPeriodo();
         refrescarTotalesIngresos();
         calcularTotalesFlujoEgreso();
-        generarPeriodosFlujoCaja();
 
         flujoCajaIniciado = true;
     }
@@ -759,6 +758,12 @@ public class FlujoCaja implements Serializable {
                 itemFlujoEgresosProyecto.actualizarPlanMovimientosProyecto(periodosConvenio);
                 itemFlujoEgresosProyecto.calcularTotalEgresosFuente(periodosConvenio.size());
             }
+            itemFlujoEgresosProyecto.actualizarPlanMovimientosProyecto(periodosConvenio);
+            for (FlujoEgresos fec : flujoEgresosContratos) {
+                fec.actualizarPlanMovimientosContrato(periodosConvenio, fec.getContrato(), itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
+            }
+            itemFlujoEgresosPryDirecto.actualizarPlanMovimientosPryDirecto(periodosConvenio, itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
+            itemFlujoEgresosPryOtros.actualizarPlanMovimientosPryOtros(periodosConvenio, itemFlujoEgresosProyecto.getPlanMovimientosProyecto());
             flujoEgresos.add(itemFlujoEgresosProyecto);
             flujoEgresos.addAll(flujoEgresosContratos);
             flujoEgresos.add(itemFlujoEgresosPryDirecto);
@@ -801,17 +806,13 @@ public class FlujoCaja implements Serializable {
                     } else {
                         flujoEgresosCuotaGerencia.setPlanificacionesmovcuotagerencia(planificacionmovcuotagerencia);
                         flujoEgresosCuotaGerencia.setEntidadAportante(entidadAportante);
-                        flujoEgresosCuotaGerencia.actualizarPlanMovimientosEntidad(periodosConvenio, fuenteRecursosConvenio);
+                        flujoEgresosCuotaGerencia.actualizarPlanMovimientosCuotaGerencia(periodosConvenio, fuenteRecursosConvenio);
                         flujoEgresosCuotaGerencia.calcularTotalEgresosFuente(periodosConvenio.size());
                     }
 
                     flujoEgresos.add(flujoEgresosCuotaGerencia);
                 }
             }
-        }
-
-        if (guardarPlanificacionInicial) {
-            guardarFlujoCaja();
         }
     }
 

@@ -420,6 +420,85 @@ public class FlujoEgresos implements Serializable {
             }
         }
     }
+    
+    /**
+     * Actualizar el flujo de egresos del contrato.
+     *
+     * Con base en una lista de egresos consultada, se actualiza el flujo de
+     * egresos del contrato.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param contrato Contrato.
+     * @param planificacionesProyecto Listado de planificaciones del proyecto.
+     */
+    public void actualizarPlanMovimientosContrato(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Contrato contrato, List<Planificacionmovimientoproyecto> planificacionesProyecto ) {
+        this.egresoContrato = true;
+        int iterador;
+
+        if (this.planMovimientosContrato.size() < periodosConvenio.size()) {
+            iterador = this.planMovimientosContrato.size();
+
+            while (iterador < periodosConvenio.size()) {
+                Planificacionmovimientocontrato planMovimientoContrato = new Planificacionmovimientocontrato();
+                planMovimientoContrato.setPlanificacionmovimientoproyecto(planificacionesProyecto.get(iterador));
+                planMovimientoContrato.setValor(BigDecimal.ZERO);
+                planMovimientoContrato.setContrato(contrato);
+                this.planMovimientosContrato.add(planMovimientoContrato);
+
+                iterador++;
+            }
+        }
+    }
+    
+    /**
+     * Actualizar el flujo de egresos de pagos directos.
+     *
+     * Con base en una lista de egresos consultada, se actualiza el flujo de
+     * egresos de pagos directos.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param planificacionesProyecto Listado de planificaciones del proyecto.
+     */
+    public void actualizarPlanMovimientosPryDirecto(List<Relacioncontratoperiodoflujocaja> periodosConvenio, List<Planificacionmovimientoproyecto> planificacionesProyecto) {
+        this.egresoPryDirecto = true;
+        int iterador;
+        if (this.planMovimientosPryDirecto.size() < periodosConvenio.size()) {
+            iterador = this.planMovimientosPryDirecto.size();
+
+            while (iterador < periodosConvenio.size()) {
+                Planificacionmovimientoprydirecto planMovimiento = new Planificacionmovimientoprydirecto();
+                planMovimiento.setPlanificacionmovimientoproyecto(planificacionesProyecto.get(iterador));
+                planMovimiento.setValor(BigDecimal.ZERO);
+                this.planMovimientosPryDirecto.add(planMovimiento);
+                iterador++;
+            }
+        }
+    }
+    
+    /**
+     * Actualizar el flujo de egresos de otros pagos.
+     *
+     * Con base en una lista de egresos consultada, se actualiza el flujo de
+     * egresos de otros pagos.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param planificacionesProyecto Listado de planificaciones del proyecto.
+     */
+    public void actualizarPlanMovimientosPryOtros(List<Relacioncontratoperiodoflujocaja> periodosConvenio, List<Planificacionmovimientoproyecto> planificacionesProyecto) {
+        this.egresoPryOtros = true;
+        int iterador;
+        if (this.planMovimientosPryOtros.size() < periodosConvenio.size()) {
+            iterador = this.planMovimientosPryOtros.size();
+
+            while (iterador < periodosConvenio.size()) {
+                Planificacionmovimientopryotros planMovimiento = new Planificacionmovimientopryotros();
+                planMovimiento.setPlanificacionmovimientoproyecto(planificacionesProyecto.get(iterador));
+                planMovimiento.setValor(BigDecimal.ZERO);
+                this.planMovimientosPryOtros.add(planMovimiento);
+                iterador++;
+            }
+        }
+    }
 
     /**
      * Actualizar el flujo de egresos por item de egreso.
@@ -544,7 +623,7 @@ public class FlujoEgresos implements Serializable {
      * @param periodosConvenio Periodos del flujo de caja.
      * @param fuenteRecursosConvenio Fuente de recursos del convenio.
      */
-    public void actualizarPlanMovimientosEntidad(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Fuenterecursosconvenio fuenteRecursosConvenio) {
+    public void actualizarPlanMovimientosCuotaGerencia(List<Relacioncontratoperiodoflujocaja> periodosConvenio, Fuenterecursosconvenio fuenteRecursosConvenio) {
         this.fuenteRecursosConvenio = fuenteRecursosConvenio;
         this.setEgresoCuotaGerencia(true);
         int iterador;

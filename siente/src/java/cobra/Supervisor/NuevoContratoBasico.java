@@ -6856,6 +6856,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (isEliminarPeriodosFueraRango() && !isGuardarborradorconvenio() && !isValidarPeriodoConveniosFueraRango()) {
             System.out.println("Debug - entro a eliminar periodos fuera de rango");
             getSessionBeanCobra().getCobraService().borrarPeriodosflujocaja(periodoConveniosFueraRango);
+            getFlujoCaja().iniciarFlujoCaja();
         }
 
         try {
