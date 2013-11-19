@@ -95,6 +95,8 @@ public class ModalRubrosProyecto implements IsWidget {
         valorDisponibleFuente = ((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         Iterator it = contratoDto.getFuenterecursosconvenios().iterator();
         fuenteRecursosConveDTO = (FuenterecursosconvenioDTO) it.next();
+        service.setLog("en add fuente pry:"+fuenteRecursosConveDTO.getValorDisponible(), null);
+        service.setLog("aca en eliminar fuente pry num en modal:"+fuenteRecursosConveDTO.getIdfuenterecursosconvenio(), null);
         valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
         entidadSeleccionada = fuenteRecursosConveDTO.getTercero().getStrnombrecompleto();
 
@@ -265,8 +267,6 @@ public class ModalRubrosProyecto implements IsWidget {
                             AlertMessageBox d = new AlertMessageBox("Error", validacionDevuelta);
                             d.show();
                         } else {
-                            fuenteRecursosConveDTO.setValorDisponible(fuenteRecursosConveDTO.getValorDisponible().subtract(obraFuenteDto.getValor()));
-                            service.setLog("en valor d:" + fuenteRecursosConveDTO.getValorDisponible(), null);
                             tblrubros.getStore().add(obraFuenteDto);
                             modalActual.hide();
                         }
@@ -363,12 +363,10 @@ public class ModalRubrosProyecto implements IsWidget {
             proyectoDTO.setValor(BigDecimal.ZERO);
         }
         proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));  
-        if (editar) {
-        FuenterecursosconvenioDTO fuenteRecursos = obraFuenteDto.getFuenterecursosconvenio();
+        FuenterecursosconvenioDTO fuenteRecursos = GanttDatos.buscarFuenteRecursos(obraFuenteDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuenteDto.getFuenterecursosconvenio().getVigencia(), contratoDto);
         fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().subtract(obraFuenteDto.getValor()));
-        service.setLog("valor fuente recursos disponible antes:" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
+        
         }
-    }
 
 
     /*metodo que se encarga de llenar el combo de entidades

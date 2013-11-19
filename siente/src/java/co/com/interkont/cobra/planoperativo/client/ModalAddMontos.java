@@ -211,7 +211,6 @@ public class ModalAddMontos implements IsWidget {
                             d.show();
                         } else {
                             limpiarMontos();
-                            relacionFuenteRecursos.getObrafuenterecursosconvenios().setValorDisponible(relacionFuenteRecursos.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuenteRecursos.getValor()));
                             widTblMontos.getStore().add(relacionFuenteRecursos);
                             modalActual.hide();
                         }
@@ -367,9 +366,8 @@ public class ModalAddMontos implements IsWidget {
                 valorContratoO = valorContratoO.add(relacionFuente.getValor());
                 valorContrato.setValue(valorContratoO);
                 contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
-                if (editar) {
                     relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
-                }
+             
                 return "La fuente ha sido guardada";
             }
         } else {
