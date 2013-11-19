@@ -415,22 +415,22 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
 
 
-//            modalContrato.addHideHandler(new HideEvent.HideHandler() {
-//                @Override
-//                public void onHide(HideEvent event) {
-//                    if (!estaEnbotonAddModificar) {
-//                        contrato.setRelacionobrafuenterecursoscontratos(relacionFuenteRecursosContratoCopia);
-//                        service.setLog("aca en cancelar editar contrato" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
-//                        for (RelacionobrafuenterecursoscontratoDTO fuenteRecursosContrato : relacionFuenteRecursosContratoCopia) {
-//                            fuenteRecursosContrato.getObrafuenterecursosconvenios().setValorDisponible(fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible().subtract(fuenteRecursosContrato.getValor()));
-//                            fuenteRecursosContrato.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
-//                            service.setLog("aca en cancelar contrato" + fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible(), null);
-//                        }
-//                    } else {
-//                        service.setLog("estoy aca en else de editar", null);
-//                    }
-//                }
-//            });
+            modalContrato.addHideHandler(new HideEvent.HideHandler() {
+                @Override
+                public void onHide(HideEvent event) {
+                    if (!estaEnbotonAddModificar) {
+                        contrato.setRelacionobrafuenterecursoscontratos(relacionFuenteRecursosContratoCopia);
+                        service.setLog("aca en cancelar editar contrato" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
+                        for (RelacionobrafuenterecursoscontratoDTO fuenteRecursosContrato : relacionFuenteRecursosContratoCopia) {
+                            fuenteRecursosContrato.getObrafuenterecursosconvenios().setValorDisponible(fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible().subtract(fuenteRecursosContrato.getValor()));
+                            fuenteRecursosContrato.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
+                            service.setLog("aca en cancelar contrato" + fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible(), null);
+                        }
+                    } else {
+                        service.setLog("estoy aca en else de editar", null);
+                    }
+                }
+            });
 
 
         }

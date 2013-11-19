@@ -336,24 +336,24 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         } else {
             nombreBotonPrincipal = "Editar Proyecto";
-//            modalPry.addHideHandler(new HideEvent.HideHandler() {
-//                @Override
-//                public void onHide(HideEvent event) {
-//                    if (!estaEnbotonAddModificar) {
-//                        proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
-//                        for (ObrafuenterecursosconveniosDTO obraFuente : relacionObraFuenteRecursosCopia) {
-//                            service.setLog("devol valores pry " + obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
-//                            service.setLog("devol valores pry " + obraFuente.getValor(), null);
-//                            obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
-//                            obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
-//                            service.setLog("ace en cancelar pry" + obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
-//
-//                        }
-//                    } else {
-//                        service.setLog("aca probando 2", null);
-//                    }
-//                }
-//            });
+            modalPry.addHideHandler(new HideEvent.HideHandler() {
+                @Override
+                public void onHide(HideEvent event) {
+                    if (!estaEnbotonAddModificar) {
+                        proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
+                        for (ObrafuenterecursosconveniosDTO obraFuente : relacionObraFuenteRecursosCopia) {
+                            FuenterecursosconvenioDTO f=GanttDatos.buscarFuenteRecursos(obraFuente.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuente.getFuenterecursosconvenio().getVigencia(), contratoDto);
+                            f.setValorDisponible(f.getValorDisponible().subtract(obraFuente.getValor()));
+                            f.setEstaEnFuenteRecurso(true);
+                            obraFuente.getFuenterecursosconvenio().setValorDisponible(f.getValorDisponible());
+                            obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
+                            
+                        }
+                    } else {
+                        service.setLog("aca probando 2", null);
+                    }
+                }
+            });
 
         }
 

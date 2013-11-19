@@ -37,7 +37,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class WidgetTablaRubrosPry implements IsWidget {
-    
+
     protected ObraDTO obraDto;
     protected ActividadobraDTO actividadObraPadre;
     protected ActividadobraDTO actividadObraEditar;
@@ -49,15 +49,15 @@ public class WidgetTablaRubrosPry implements IsWidget {
     /**
      * @return the store
      */
-    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar,ContratoDTO convenio) {
+    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar, ContratoDTO convenio) {
         this.obraDto = obraDto;
         this.actividadObraPadre = actividadObraPadre;
         this.taskStore = taskStore;
         this.editar = editar;
         this.actividadObraEditar = actividadObraEditar;
-        this.convenio=convenio;
+        this.convenio = convenio;
     }
-    
+
     public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
         return store;
     }
@@ -68,55 +68,55 @@ public class WidgetTablaRubrosPry implements IsWidget {
     public void setStore(ListStore<ObrafuenterecursosconveniosDTO> store) {
         this.store = store;
     }
-    
+
     interface PlaceProperties extends PropertyAccess<ObrafuenterecursosconveniosDTO> {
-        
+
         @Path("idobrafuenterecursos")
         ModelKeyProvider<ObrafuenterecursosconveniosDTO> key();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, Integer> idobrafuenterecursos();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> valorFormato();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> rubro();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> nombreEntidad();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> eliminar();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> descripcionaporte();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, Integer> vigencia();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
     private ListStore<ObrafuenterecursosconveniosDTO> store;
-    
+
     @Override
     public Widget asWidget() {
-        
+
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> nameColumn = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.nombreEntidad(), 278, "Entidad");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> rubro = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.rubro(), 100, "Rubro");
         rubro.setColumnTextStyle(textStyles);
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> tipoAporte = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.descripcionaporte(), 75, "Tipo aporte");
         tipoAporte.setColumnTextStyle(textStyles);
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, Integer> vigencia = new ColumnConfig<ObrafuenterecursosconveniosDTO, Integer>(properties.vigencia(), 55, "Vigencia");
         vigencia.setColumnTextStyle(textStyles);
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> valor = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.valorFormato(), 85, "Valor");
         valor.setColumnTextStyle(textStyles);
-        
-        
+
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> eliminar = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.eliminar(), 80, "Eliminar");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
-        
+
         TextButtonCell button = new TextButtonCell();
         button.addSelectHandler(new SelectHandler() {
             @Override
@@ -125,32 +125,32 @@ public class WidgetTablaRubrosPry implements IsWidget {
                 int row = c.getIndex();
                 if (!editar) {
                     if (store.get(row).getTipoaporte() == 0) {
-                    store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
-                    obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
+                        store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
+                        obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                     }
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
                     if (!store.get(row).isEstaEnFuenteRecurso()) {
                         if (store.get(row).getTipoaporte() == 0) {
-                            BigDecimal valorDispo=store.get(row).getFuenterecursosconvenio().getValorDisponible();
-                            FuenterecursosconvenioDTO fuenteAsociada=GanttDatos.buscarFuenteRecursos(store.get(row).getFuenterecursosconvenio().getTercero().getStrnombrecompleto(),store.get(row).getFuenterecursosconvenio().getVigencia(),convenio);
+                            BigDecimal valorDispo = store.get(row).getFuenterecursosconvenio().getValorDisponible();
+                            FuenterecursosconvenioDTO fuenteAsociada = GanttDatos.buscarFuenteRecursos(store.get(row).getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), store.get(row).getFuenterecursosconvenio().getVigencia(), convenio);
                             fuenteAsociada.setValorDisponible(valorDispo);
                             fuenteAsociada.setValorDisponible(fuenteAsociada.getValorDisponible().add(store.get(row).getValor()));
-                        obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
+                            obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                         }
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                         getStore().remove(store.get(row));
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
                         alerta.show();
-                    }                    
-                    
+                    }
+
                 }
             }
         });
         eliminar.setCell(button);
-        
+
         List<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>> l = new ArrayList<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>>();
         l.add(nameColumn);
         l.add(rubro);
@@ -158,20 +158,20 @@ public class WidgetTablaRubrosPry implements IsWidget {
         l.add(valor);
         l.add(vigencia);
         l.add(eliminar);
-        
+
         ColumnModel<ObrafuenterecursosconveniosDTO> cm = new ColumnModel<ObrafuenterecursosconveniosDTO>(l);
         setStore(new ListStore<ObrafuenterecursosconveniosDTO>(properties.key()));
-        
+
         List<ObrafuenterecursosconveniosDTO> plants = new ArrayList<ObrafuenterecursosconveniosDTO>(agregarValorDisponibleConFormato(obraDto.getObrafuenterecursosconvenioses()));
         getStore().addAll(plants);
-        
+
         final Grid<ObrafuenterecursosconveniosDTO> grid = new Grid<ObrafuenterecursosconveniosDTO>(getStore(), cm);
         grid.setBorders(true);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText("Por favor ingrese los roles y enidades");
         grid.getView().setColumnLines(true);
         grid.getView().setAdjustForHScroll(true);
-        
+
         FramedPanel cp = new FramedPanel();
         cp.setHeadingText("*FINANCIAMIENTO DEL PROYECTO");
         cp.setWidget(grid);
@@ -180,11 +180,11 @@ public class WidgetTablaRubrosPry implements IsWidget {
         cp.setExpanded(true);
         cp.setPixelSize(550, 150);
         cp.addStyleName("margin-10");
-        
-        
+
+
         return cp;
     }
-    
+
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
         service.setLog("entre estaContrato", null);
         boolean estaRelacionado = false;
@@ -202,7 +202,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         }
         return estaRelacionado;
     }
-    
+
     public Set<ObrafuenterecursosconveniosDTO> agregarValorDisponibleConFormato(Set<ObrafuenterecursosconveniosDTO> lstObraFuenteRecursos) {
         for (ObrafuenterecursosconveniosDTO obraFuenteRec : lstObraFuenteRecursos) {
             obraFuenteRec.setValorFormato(GanttDatos.obtenerFormatoNumero(obraFuenteRec.getValor()));

@@ -371,7 +371,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
-                editarProyDialog.setClosable(false);
+                //editarProyDialog.setClosable(false);
                 ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 editarProyDialog.add(proyectoForm);
                 editarProyDialog.show();
@@ -399,7 +399,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                crearContratoDialog.setClosable(false);
+                //crearContratoDialog.setClosable(false);
                 ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, getGantt(), crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
@@ -610,7 +610,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEliminarPry.setVisible(false);
                         //Se deshabilitó la edición de contrato, mientras se soluciona el borrado y actualizado en cascada
                         // de obra fuente recurso contrato
-                        menuItemEditarContrato.setVisible(false);
+                        //menuItemEditarContrato.setVisible(true);
                         menuItemConsultarContrato.setVisible(true);
                         menuItemEliminarContrato.setVisible(true);
                         menuItemEliminarHito.setVisible(false);

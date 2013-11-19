@@ -129,7 +129,7 @@ public class WidgetTablaMontos implements IsWidget {
                 }
                 BigDecimal valor = valorContrato.getValue();
                 obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
-                 BigDecimal valorArestar = store.get(row).getValor();
+                BigDecimal valorArestar = store.get(row).getValor();
                  if (valorArestar.compareTo(valor) == 0) {
                     service.setLog("son iguales", null);
                     valor = BigDecimal.ZERO;
@@ -138,7 +138,6 @@ public class WidgetTablaMontos implements IsWidget {
                    
                 }
                 valorContrato.setValue(valor);
-                //GanttDatos.adicionarRelacionObraFuenteRecursoContratoEliminar(store.get(row));
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
 
