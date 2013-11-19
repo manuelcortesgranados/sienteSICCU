@@ -197,9 +197,10 @@ public abstract class GraficoEvolucionProyecto {
              * Se obtienen las alimentaciones realizadas para el periodo
              */
             Iterator alimentacionIterador= getSessionBeanCobra().getCobraService().obtenerAlimentacionxFechaPeriodo(periodoObra.getDatefeciniperiodo(), periodoObra.getDatefecfinperiodo(), intcodigoobra).iterator();
-           
             vlrEjecutado = BigDecimal.ZERO;
+            boolean existeAlimentacion = false;
             while (alimentacionIterador.hasNext()) {
+                existeAlimentacion = true;
                 Alimentacion alimenta = (Alimentacion) alimentacionIterador.next();
                 vlrEjecutado = vlrEjecutado.add(alimenta.getNumtotalejec());
                 
@@ -235,14 +236,16 @@ public abstract class GraficoEvolucionProyecto {
                  * Se construye el dato correspondiente a la línea del valor 
                  * ejecutado actual del proyecto
                  */
-                DatoGrafico datoEjeActual = new DatoGrafico();
-                datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-                acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
-                datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-                StringBuilder stringEtiDatoEjeActual = new StringBuilder();
-                stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoeje")).append(vlrEjecutado.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
-                datoEjeActual.setEtiqueta(stringEtiDatoEjeActual.toString());
-                conjuntoDatosEjecucionActual.getListaDatos().add(datoEjeActual);
+                if(existeAlimentacion) {
+                    DatoGrafico datoEjeActual = new DatoGrafico();
+                    datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
+                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
+                    datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    StringBuilder stringEtiDatoEjeActual = new StringBuilder();
+                    stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoeje")).append(vlrEjecutado.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    datoEjeActual.setEtiqueta(stringEtiDatoEjeActual.toString());
+                    conjuntoDatosEjecucionActual.getListaDatos().add(datoEjeActual);
+                }
             }
 
         }
