@@ -19,14 +19,14 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-indicadorasociado" styleClass="cerrar"
-                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-indicadorasociado')}.hide();
+                    <a4j:commandLink execute="@this"  actionListener="#{MarcoLogico$MarcoLogico.limpiar}" render="rpindicadorasociado,@ll" value="cerrar" id="esconder_mp-indicadorasociado" styleClass="cerrar"
+                                     title="#{varMarcoLogico.cerrar}"  onclick="#{rich:component('mp-indicadorasociado')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpindicadorasociado">
+            <h:panelGroup id="rpindicadorasociado">
 
                 <h:panelGrid columns="2" columnClasses="modal-indicador-head,modal-indicador-texto" width="500px">
                     <h:outputText  value="Nombre Indicador"/>
@@ -56,7 +56,7 @@
                     <h:outputText  id="asoOrientesperada" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strorientacionesperada}"  />
                 </h:panelGrid>               
 
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>   
 </ui:composition>

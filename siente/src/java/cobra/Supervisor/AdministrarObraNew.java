@@ -4,6 +4,7 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.marcologico.vista.VistaCalculoIndicadorProyectos;
 import co.com.interkont.cobra.to.Barrio;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
@@ -158,6 +159,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
+
+    /**
+     * Variable para proyectos que pertenecen a Marco
+     */
+    private boolean proyectoestrategia = false;
     /**
      * Variable para habilitar el boton modificar El impacto
      */
@@ -166,12 +172,38 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * Variable para habilitar El boton Guardar la modificacion del impacto
      */
     public boolean habilitarGuardarimpacto = false;
+    /**
+     * Objetos para almacenar avace fisico medios vida
+     *
+     */
+    private VistaCalculoIndicadorProyectos vproductomedios= new VistaCalculoIndicadorProyectos();
+    private VistaCalculoIndicadorProyectos vproductogestion= new VistaCalculoIndicadorProyectos();
+
+    public VistaCalculoIndicadorProyectos getVproductomedios() {
+        return vproductomedios;
+    }
+
+    public void setVproductomedios(VistaCalculoIndicadorProyectos vproductomedios) {
+        this.vproductomedios = vproductomedios;
+    }
+
+    public VistaCalculoIndicadorProyectos getVproductogestion() {
+        return vproductogestion;
+    }
+
+    public void setVproductogestion(VistaCalculoIndicadorProyectos vproductogestion) {
+        this.vproductogestion = vproductogestion;
+    }
+
+    public boolean isProyectoestrategia() {
+        return proyectoestrategia;
+    }
+
+    public void setProyectoestrategia(boolean proyectoestrategia) {
+        this.proyectoestrategia = proyectoestrategia;
+    }
 
     public List<Barrio> getListaBarrios() {
-        for (Barrio documentoobra1 : listaBarrios) {
-            System.out.println("documentoobra1 Barrios = " + documentoobra1.getStrnombrebarrio());
-        }
-        System.out.println("gfdgfdgdfgfdgd" + listaBarrios);
         return listaBarrios;
     }
 
@@ -998,7 +1030,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
 
         obtenerTacometro();
-        
+
     }
 
     public void obtenerTacometro() {
@@ -2228,6 +2260,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.vereda = vereda;
     }
 
+    public void actualizarIndicador() {
+        setVproductomedios(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(2, getObra().getIntcodigoobra()));
+        setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, getObra().getIntcodigoobra()));
+    }
+
     public String llenarLocalidadesBarrioVereda() {
 
         getListaBarrios().addAll(getSessionBeanCobra().getCobraService().obtenerBarriosObra(getObra()));
@@ -2268,7 +2305,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         habilitarGuardarimpacto = true;
     }
 
-   /**
+    /**
      * Metodo Utilizado para cancelar  La modificacion del impacto social del proyecto
      *
      * @return void

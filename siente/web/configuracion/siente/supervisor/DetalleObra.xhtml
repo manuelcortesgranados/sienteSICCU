@@ -18,14 +18,14 @@
         <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/reloj/css/flipclock.css" rel="stylesheet" type="text/css" />
 
-        
+
         <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/script_supervisor.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/js/sliderman.1.3.6.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/amcharts.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/serial.js" type="text/javascript"></script>
-        
-        
+
+
         <h:outputScript name="coda-slider.1.1.1.pack.js" library="js"/>
         <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js"/>
         <h:outputScript name="jquery-easing-compatibility.1.2.pack.js" library="js"/>
@@ -1002,6 +1002,258 @@
                         </rich:collapsiblePanel>
                     </h:form>
 
+                    <!--Marco logico-->
+                    <!--rendered=" {Supervisor$AdministrarObraNew.proyectoestrategia and var.aplicamarcologico}"-->
+                    <h:form>
+                        <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="client"  header="#{varMarcoLogico.marcologicoproyecto}"  
+                                               toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}">
+                            <a4j:ajax event="switch" render="pgMarcolIndicadorAsociado"  />       
+                            <center>
+                                <a4j:commandButton id="btrelacionmarcolindic"  value="Crear Avance Relaciones" action="#{MarcoLogico$MarcoLogico.calcularAvanceRelacionMarcoLogicoIndicadorByPeridicidad}" immediate="true"
+                                                   render="pgMarcolIndicadorAsociado" rendered="#{SessionBeanCobra.usuarioObra.usuId==1}">
+                                </a4j:commandButton>
+                            </center>
+                            <h:panelGroup id="pgMarcolIndicadorAsociado">
+                                <rich:dataTable id="tablaRelacionMarcoIndicador" sortMode="single"
+                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listarelacionMarcolIndicador}"
+                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorbin}"
+                                                var="relacionMarcolIndicador" >
+                                    <f:facet name="header">
+                                        <h:outputText value="#{varMarcoLogico.nivelproposito}"/>
+                                    </f:facet>
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.proposito}"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strNombreMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strtitulo}" rows="3" disabled="true"/>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.descripcion}"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strdescripcionMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strdescripcion}" rows="3" disabled="true"/>
+                                    </rich:column> 
+
+                                    <rich:column width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
+                                        </f:facet>
+                                        <h:panelGrid columns="2">
+                                            <h:inputTextarea  id="strNombreIndicadorProposito" value="#{relacionMarcolIndicador.indicador.strnombreindicador}" rows="3" disabled="true"/>
+                                            <h:commandLink immediate="true"  type="submit"  id="bt_consultaIndicadorAsociadol" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" 
+                                                                >
+                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
+                                             <a4j:ajax execute="@this" render="rpindicadorasociado,@ll" oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
+                                            </h:commandLink>
+                                        </h:panelGrid>
+                                    </rich:column>                                      
+
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
+                                        </f:facet>
+                                        <a4j:commandLink id="bt_crearBaseMetaProposito"  
+                                                         action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaProposito}" execute="mp-asociar-indicadormarcologico,rpasociarMarcologicoIndicador"  render="rpasociarMarcologicoIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column>
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
+                                        </f:facet>
+                                        <a4j:commandLink id="bt_registrarplanificacionj"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociada}" render="rpRegistroPlanificacionAsociacionMarcolIndicador"
+                                                         rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" >
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
+                                        </f:facet>
+                                        <a4j:commandLink immediate="true" id="bt_consultarplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicador}" execute="rpPlaneacionMarcolIndicador" render="rpPlaneacionMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
+                                        </f:facet>
+                                        <a4j:commandLink rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" id="bt_registraravanceplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicador}" render="rpPlaneacionAvanceMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+                                </rich:dataTable>
+                                <interkont:spacer height="30px" width="100%"/>
+                                <rich:dataTable id="tablaRelacionMarcolIndicadorComponente"  sortMode="single"
+                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listaMarcolIndicadorcomponente}"
+                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorComponentebin}"
+                                                var="relacionMarcolIndicadorComponente" >
+                                    <f:facet name="header">
+                                        <h:outputText value="#{varMarcoLogico.nivelcomponente}"/>
+                                    </f:facet>
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.componente}"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strNombreMarcolComponente" value="#{relacionMarcolIndicadorComponente.marcologico.strtitulo}" rows="3" disabled="true"/>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.descripcion}"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strdescripcionMarcolComponente" value="#{relacionMarcolIndicadorComponente.marcologico.strdescripcion}" rows="3" disabled="true"/>
+                                    </rich:column> 
+
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
+                                        </f:facet>
+                                        <h:panelGrid columns="2">
+                                            <h:inputTextarea  id="strNombreIndicadorComponente" value="#{relacionMarcolIndicadorComponente.indicador.strnombreindicador}" rows="3" disabled="true"/>
+                                            <h:commandLink id="bt_consultaIndicadorAsociadoComponente"  action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociadoByComponente}">
+                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
+                                                <a4j:ajax oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
+                                            </h:commandLink>
+                                        </h:panelGrid>
+                                    </rich:column>                                       
+
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="Crear Línea de base/Programar Meta"/>
+                                        </f:facet>
+                                        <h:commandLink id="bt_crearBaseMetacomponente"  action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaComponente}" >
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
+                                        </h:commandLink>
+                                    </rich:column>
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
+                                        </f:facet>
+                                        <h:commandLink rendered="#{relacionMarcolIndicadorComponente.doublevalor1meta!=null}" id="bt_registrarplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociadaByComponente}" >
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
+                                        </h:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
+                                        </f:facet>
+                                        <a4j:commandLink id="bt_consultarplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicadorByComponente}" render="rpPlaneacionMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
+                                        </f:facet>
+                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorComponente.doublevalor1meta!=null}" id="bt_registraravanceplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicadorComponente}" render="rpPlaneacionAvanceMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                </rich:dataTable>
+
+
+                                <interkont:spacer height="30px" width="100%"/>
+
+                                <rich:dataTable id="tablaRelacionMarcolIndicadorActividad" sortMode="single"
+                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listaMarcolIndicadoractividad}"
+                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorActividadbin}"
+                                                var="relacionMarcolIndicadorActividad" >
+
+                                    <f:facet name="header">
+                                        <h:outputText value="#{varMarcoLogico.nivelactividades}"/>
+                                    </f:facet>
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.actividad}"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strNombreMarcoActividad" value="#{relacionMarcolIndicadorActividad.marcologico.strtitulo}" rows="3" disabled="true"/>
+                                    </rich:column> 
+                                    <!--
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Descripción"/>
+                                        </f:facet>
+                                        <h:inputTextarea  id="strdescripcionMarcolActividad" value="#{relacionMarcolIndicadorActividad.marcologico.strdescripcion}" rows="3" disabled="true"/>
+                                    </rich:column> 
+                                    -->
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
+                                        </f:facet>
+                                        <h:panelGrid columns="2">
+                                            <h:inputTextarea  id="strNombreIndicadorActividad" value="#{relacionMarcolIndicadorActividad.indicador.strnombreindicador}" rows="3" disabled="true"/>
+                                            <a4j:commandLink id="bt_consultaIndicadorAsociadoActividad"  action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociadoByActividad}" render="rpindicadorasociado">
+                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
+                                                <a4j:ajax oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
+                                            </a4j:commandLink>
+                                        </h:panelGrid>
+                                    </rich:column>                                      
+
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
+                                        </f:facet>
+                                        <a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}" id="bt_crearBaseMetaPr"  action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaActividad}"  render="rpasociarMarcologicoIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column>
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
+                                        </f:facet>
+                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorActividad.doublevalor1meta!=null and SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}"  id="bt_registrarplanificacionactividad"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociadoByActividad}" render="rpRegistroPlanificacionAsociacionMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
+                                        </f:facet>
+                                        <a4j:commandLink id="bt_consultarplanificacioncomponenteactividad"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicadorByActividad}" render="rpPlaneacionMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
+                                        </f:facet>
+                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorActividad.doublevalor1meta!=null and SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}" id="bt_registraravanceplanificacionactividad"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicadorActividad}" render="rpPlaneacionAvanceMarcolIndicador">
+                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
+                                        </a4j:commandLink>
+                                    </rich:column> 
+
+                                </rich:dataTable>
+                            </h:panelGroup>
+                        </rich:collapsiblePanel>
+                    </h:form>
+
                 </h:form>
 
 
@@ -1368,8 +1620,8 @@
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>
-            
-            
+
+
             <h:panelGroup id="modalesDetalle">
                 <ui:include src="/modal/verPolizasModal.xhtml"/>
                 <ui:include src="/modal/objetoObra.xhtml"/>
@@ -1378,33 +1630,39 @@
                 <ui:include src="/modal/dificultadModalDetalle.xhtml"/>
                 <ui:include src="/modal/logrosModalDetalle.xhtml"/>
                 <ui:include src="/modal/modalLocalidadCiudadano.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/crearBaseMetaRelacionMarcolIndicador.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/marcoLogicoAsociado.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/indicadorAsociado.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/registrarPlanificacionAsociacion.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/planificacionRelacionMarcolIndicador.xhtml"/>
+                <ui:include src="/modal/modalmarcologico/avanceplanificacionRelacionMarcolIndicador.xhtml"/>
 
             </h:panelGroup>
 
             <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/libs/prefixfree.min.js" type="text/javascript"></script>
             <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/flipclock.min.js" type="text/javascript"></script>
             <script type="text/javascript">
-            var $jpanel = jQuery.noConflict();
-            $jpanel(document).ready(function() {
-                var clock = $jpanel('.your-clock').FlipClock({
-                    autoStart: true,
-                    countdown: true,
-                    clockFace: 'DailyCounter'
-                });
-                var timefalta = document.getElementById("finfecha").value;
-                var futuro = new Date(timefalta).getTime();
+                                        var $jpanel = jQuery.noConflict();
+                                        $jpanel(document).ready(function() {
+                                            var clock = $jpanel('.your-clock').FlipClock({
+                                                autoStart: true,
+                                                countdown: true,
+                                                clockFace: 'DailyCounter'
+                                            });
+                                            var timefalta = document.getElementById("finfecha").value;
+                                            var futuro = new Date(timefalta).getTime();
 
-                var ahora = new Date().getTime();
-                var faltan = futuro - ahora;
-                if (faltan > 0) {
-                    var segundos = Math.round(faltan / 1000);
-                }
-                else {
-                    var segundos = 00;
-                }
-                clock.setTime(segundos);
-                clock.start();
-            });
+                                            var ahora = new Date().getTime();
+                                            var faltan = futuro - ahora;
+                                            if (faltan > 0) {
+                                                var segundos = Math.round(faltan / 1000);
+                                            }
+                                            else {
+                                                var segundos = 00;
+                                            }
+                                            clock.setTime(segundos);
+                                            clock.start();
+                                        });
 
             </script>
         </body>
