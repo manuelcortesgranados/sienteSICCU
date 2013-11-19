@@ -136,7 +136,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     protected int numeracionActual = 0;
     Button btnCancelar;
     Set<RelacionobrafuenterecursoscontratoDTO> lstRelacionObraFuenteContrato;
-    boolean sololectura=false;
+    boolean sololectura = false;
 
     public ContratoForm() {
     }
@@ -178,17 +178,19 @@ public class ContratoForm implements IsWidget, EntryPoint {
         relacionFuenteRecursosContratoCopia = ((Set) ((HashSet) contrato.getRelacionobrafuenterecursoscontratos()).clone());
 
     }
+
     /**
      * Constructor formulario contrato solo consulta
+     *
      * @param actividadobraContratoEditar
      * @param gantt
      * @param di
      * @param actividadObraPadre
      * @param propes
      * @param taskStore
-     * @param convenio 
+     * @param convenio
      */
-    
+
     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, boolean readonly) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
@@ -207,7 +209,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         seEdito(actividadObraEditar);
         numeroRubros = contrato.getRelacionobrafuenterecursoscontratos().size();
         relacionFuenteRecursosContratoCopia = ((Set) ((HashSet) contrato.getRelacionobrafuenterecursoscontratos()).clone());
-        sololectura=readonly;
+        sololectura = readonly;
     }
 
     private void seEdito(ActividadobraDTO actiEditar) {
@@ -255,10 +257,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
         } else {
             tituloPantalla = "Editar contrato";
         }
-        if(sololectura)
-        {
-         tituloPantalla = "Consultar contrato";   
-        }    
+        if (sololectura) {
+            tituloPantalla = "Consultar contrato";
+        }
 
         Label tituloPagina = new Label(tituloPantalla);
         tituloPagina.setStyleName("ikont-po-label");
@@ -270,7 +271,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         getVp().add(con);
 
         int cw = 270;
-
 
         getObjetoContrato().setWidth("" + cw);
         objetoContrato.addBlurHandler(new BlurHandler() {
@@ -285,15 +285,16 @@ public class ContratoForm implements IsWidget, EntryPoint {
         objetoContrato.addFocusHandler(new FocusHandler() {
             @Override
             public void onFocus(FocusEvent event) {
-                if(!sololectura)
-                {    
-                objetoContrato.setText("");
+                if (!sololectura) {
+                    if (!objetoContrato.getText().isEmpty() && objetoContrato.getText().compareTo("Objeto") == 0) {
+                        objetoContrato.setText("");
+                    }
                 }
             }
         });
         getObjetoContrato().setHeight("" + 80);
         objetoContrato.setReadOnly(sololectura);
-        
+
         Label lblObj = new Label("*Objetivos");
         con.add(lblObj, new HtmlData(".tobjetoC"));
         con.add(getObjetoContrato(), new HtmlData(".objetoC"));
@@ -304,8 +305,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblvalor = new Label("Valor estimado:");
         con.add(lblvalor, new HtmlData(".tvalor"));
         con.add(getValorContrato(), new HtmlData(".valor"));
-
-
 
         llenarListaTipoContrato(tiposContrato);
         setLstTipoContrato(new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato()));
@@ -328,7 +327,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblnombreAbreviado = new Label("Nombre abreviado:");
         con.add(lblnombreAbreviado, new HtmlData(".tnomabreviado"));
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
-
 
         getFechaSuscripcionContrato().setWidth(cw);
         getFechaSuscripcionContrato().setReadOnly(sololectura);
@@ -361,8 +359,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato, sololectura);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
-
-
         PushButton btnAdicionarRubros = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -373,15 +369,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 adicionarMontos.add(modalMontos);
                 adicionarMontos.show();
 
-
             }
         });
         btnAdicionarRubros.setVisible(!sololectura);
         con.add(btnAdicionarRubros, new HtmlData(".addr"));
-
-
-
-
 
         String nombreBotonPrincipal = "";
 
@@ -394,7 +385,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
             getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
             getFechaFinalizacion().setEmptyText("Fecha finalización");
-              modalContrato.addHideHandler(new HideEvent.HideHandler() {
+            modalContrato.addHideHandler(new HideEvent.HideHandler() {
                 @Override
                 public void onHide(HideEvent event) {
                     devolverValorFuenteObra(tblMontos.getStore().getAll());
@@ -404,7 +395,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         } else {
             nombreBotonPrincipal = "Editar Contrato";
             lstTipoContrato.setValue(contrato.getTipocontrato());
-          
 
 //            btnCancelar = new Button("Cancelar", new ClickHandler() {
 //                @Override
@@ -420,7 +410,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
 //                }
 //            });
 //            btnCancelar.setWidth("" + 150);
-
             modalContrato.addHideHandler(new HideEvent.HideHandler() {
                 @Override
                 public void onHide(HideEvent event) {
@@ -434,10 +423,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 }
             });
 
-
         }
-
-
 
         Button btnAdicionarContrato = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
@@ -494,7 +480,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         btnAdicionarContrato.setVisible(!sololectura);
         con.add(btnAdicionarContrato);
 
-
     }
 
     public boolean validarCambiofechaSuscripcionContrato() {
@@ -503,7 +488,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 service.setLog("es mayor al padre", null);
                 contrato.setDatefechaini(fechaSuscripcionContrato.getValue());
                 odifi(actividadObraEditar);
-
 
             } else {
                 service.setLog("es menor al padre", null);
@@ -574,7 +558,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
                 ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
-
                 service.setLog("Actividad fecha fin primera" + actiHija.getEndDateTime(), null);
                 CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
                 service.setLog("Actividad fecha fin segunda" + actiHija.getEndDateTime(), null);
@@ -598,7 +581,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
                 propes.startDateTime().setValue(actiHija, fechaI);
-
 
                 Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
                 dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
@@ -667,8 +649,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 contrato.setTipocontrato(tipocontrato);
             }
         }
-
-
 
     }
 
@@ -749,7 +729,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO actividadEjecucion = taskStore.getParent(actividadObraPadre);
 
         //numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
-
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
         actividadObraContrato.setNumeracion(numeracionActividad);
@@ -801,8 +780,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date copiaFechaUltimoHijo = CalendarUtil.copyDate(elaContrato.getEndDateTime());
         precontractual.setEndDateTime(copiaFechaUltimoHijo);
 
-
-
         Date fechaCopiaPrecontractual = CalendarUtil.copyDate(precontractual.getEndDateTime());
 
         int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1);
@@ -830,7 +807,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         Date fechaCopiaContractual = CalendarUtil.copyDate(contractua.getEndDateTime());
 
-
         ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
         Liquidaciones.setEsNoEditable(true);
         Liquidaciones.setNumeracion(numeracionActividad);
@@ -843,10 +819,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         precontractual.setChildren(lstHijosPrecontra);
         contractua.setChildren(lstHijosContra);
 
-
         int duracionContrato = CalendarUtil.getDaysBetween(GanttDatos.obtenerMenorFechaInicio(actividadObraContrato.getChildren()), GanttDatos.obtenerMayorFechaFin(actividadObraContrato.getChildren()));
         actividadObraContrato.setDuration(duracionContrato);
-
 
         DependenciaDTO dependenciaRevTecnica = GanttDatos.crearDependencia(revTecnica, elaboPliegos);
         DependenciaDTO dependenciaRevPliego = GanttDatos.crearDependencia(elaboPliegos, evaPropuestas);
@@ -889,13 +863,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             actividadEjecucion.setDuration(duracionEjecucion);
         }
 
-
-
         actividadObraPadre.addChild(actividadObraContrato);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
 
         //GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes, convenioDto);
-
         gantt.getGanttPanel().getContainer().refresh();
         // GanttDatos.asignarNumeracion(taskStore, numeracionActual, 3);        
 

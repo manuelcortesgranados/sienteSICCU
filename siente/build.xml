@@ -10,10 +10,8 @@
 <project name="siente" default="default" basedir=".">
     <description>Builds, tests, and runs the project siente.</description>
     <property name="version" value="zoom"/> 
-    <property name="dist.war" value="dist/${version}.war"/>
-    <!--
+    <property name="dist.war" value="dist/${version}.war"/>    
     <import file="nbproject/build-gwt.xml"/>
-    -->
    <import file="nbproject/zoom-impl.xml"/>
    <import file="nbproject/siente-impl.xml"/>
    <import file="nbproject/manizales-impl.xml"/>

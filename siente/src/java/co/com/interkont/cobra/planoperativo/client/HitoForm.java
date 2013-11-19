@@ -238,6 +238,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
        // GanttDatos.asignarNumeracion(taskStore, numeracionActual,6);
+        GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
     }
 
     public String obtenerFecha(Date fecha) {

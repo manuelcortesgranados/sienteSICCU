@@ -834,7 +834,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
 
-        getGantt().setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+        getGantt().setStartEnd(new DateWrapper(convenioDTO.getDatefechaactaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
 
         FlowLayoutContainer main;
         if (!fullScreen) {

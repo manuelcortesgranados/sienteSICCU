@@ -192,7 +192,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
                     service.setLog("entre 8", null);
                     if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) >= 0) {
                         error = true;
-                        msg = msg + "La fecha de inicio de la actividad no puede ser superior a la fecha de finalización:" + obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
+                        msg = msg + "La fecha de inicio de la actividad debe ser inferior a la fecha de finalización:" + obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
                         service.setLog("entre 9", null);
                     }
                     service.setLog("entre 10", null);
