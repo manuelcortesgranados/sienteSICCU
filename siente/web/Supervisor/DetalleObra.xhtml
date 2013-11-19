@@ -116,7 +116,7 @@
                                 <h:panelGroup layout="block" >
                                     <div id="graficoAvanceFisico" style="width: 350px; height: 80px; margin-top: -50px; margin-left: -15px;">
                                     </div>
-                                    <h:outputText  styleClass="ikont- hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
+                                    <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
                                 </h:panelGroup>
 
                             </h:panelGrid>
@@ -134,7 +134,7 @@
 
                                     </h:panelGroup>
                                     <h:panelGrid >
-                                        <h:outputLabel styleClass="ikont- hot-textobra9 ikont-hol-detalle-proyecto">Valor del proyecto</h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-textobra9 ikont-hol-detalle-proyecto">Valor del proyecto</h:outputLabel>
                                         <h:outputText styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra }">
                                             <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
@@ -177,8 +177,8 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-contrante" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-contrataneciu" value="#{var.contrataneciu}: "></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-supervisorciu" value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}"></h:outputLabel>
+                                                <h:outputText styleClass="ikont-hot-contrataneciu" value="#{var.contrataneciu}: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont-hot-supervisorciu" value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}"></h:outputLabel>
                                             </h:panelGroup>
 
                                         </h:panelGrid>
@@ -187,8 +187,8 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-nocontrato" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-supervisorciu" value="#{var.supervisorciu}: " ></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputLabel>
+                                                <h:outputText styleClass="ikont-hot-supervisorciu" value="#{var.supervisorciu}: " ></h:outputText>
+                                                <h:outputLabel styleClass="ikont-hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputLabel>
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -199,8 +199,8 @@
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.obra.contrato.intidcontrato}" />
                                             </h:commandLink>
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="N. DE CONVENIO: "></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.obra.contrato.strnumcontrato}" />                                                   
+                                                <h:outputText styleClass="ikont-hot-ncontratociu" value="N. DE CONVENIO: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont-hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.obra.contrato.strnumcontrato}" />                                                   
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -212,8 +212,8 @@
                                             </h:commandLink>
                                             <h:commandLink rendered="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}" />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
-                                                <h:outputLabel styleClass="ikont- hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
+                                                <h:outputText styleClass="ikont-hot-ncontratociu" value="#{var.ncontratociu}: "></h:outputText>
+                                                <h:outputLabel styleClass="ikont-hot-strnumcontrato" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -221,13 +221,13 @@
                                         <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink styleClass="ikont-hcl-zoom-supervosor " />
                                             <h:panelGroup layout="block">
-                                                <h:outputText styleClass="ikont- hot-contraticiu" value="#{var.contratistaciu}: " />
-                                                <h:outputLabel styleClass="ikont- hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
-                                                <h:outputLabel styleClass="ikont- hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
+                                                <h:outputText styleClass="ikont-hot-contraticiu" value="#{var.contratistaciu}: " />
+                                                <h:outputLabel styleClass="ikont-hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
+                                                <h:outputLabel styleClass="ikont-hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
                                                     <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5" styleClass="ikont-rtt-tool">
                                                         <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                            <h:outputText styleClass="ikont- hot-nbre1" value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
+                                                            <h:outputText styleClass="ikont-hot-nbre1" value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
                                                         </a4j:repeat>
                                                     </rich:tooltip>
                                                 </h:outputLabel>
@@ -274,7 +274,7 @@
                                 <h:panelGrid id="pg_ubicacion_evolucion"  columns="1" >
                                     <h:outputLabel>Conozca la evolución</h:outputLabel>
                                     <h:panelGroup layout="block" styleClass="panelcenter">
-                                        <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
+                                        <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
                                         <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
                                         <div id="graficoEvolucionProyecto" style="width: 550px; height: 200px; text-align: left;">
                                         </div>
@@ -302,15 +302,15 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <interkont:spacer height="15" />
-                                    <h:outputText styleClass="ikont- hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.diasciu}"></h:outputText>
+                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.diasciu}"></h:outputText>
 
                                     <h:panelGrid columns="2" styleClass="panelcenter">
-                                        <h:outputLabel styleClass="ikont- hot-desde" value="Desde:"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
+                                        <h:outputLabel styleClass="ikont-hot-desde" value="Desde:"></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
                                             <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
-                                        <h:outputLabel styleClass="ikont- hot-hasta" value="Hasta:" ></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont- hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
+                                        <h:outputLabel styleClass="ikont-hot-hasta" value="Hasta:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
                                             <f:convertDateTime pattern="#{var.formatofecha}" />
                                         </h:outputLabel>
                                     </h:panelGrid>
@@ -318,11 +318,11 @@
                                 </h:panelGrid>    
                                 <h:panelGrid id="form_editarImpactosocial" styleClass="ikont-hpg-pg_impactosocial">
                                     <h:panelGrid  id="habilitarModificacionImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto}" >
-                                        <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numhabbeneficiados" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numempdirectos" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont- hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numempindirectos" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:outputLabel>
 
                                         <rich:column  colspan="2">
@@ -332,18 +332,18 @@
                                                                      action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarImpacto}"
                                                                      render="form_editarImpactosocial" execute="habilitarModificarImpacto,habilitarModificacionImpacto"
                                                                      title="#{var.editar}">
-                                                        <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                        <h:graphicImage  styleClass="ikont-"    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                                     </a4j:commandLink>
                                                 </h:panelGroup>
                                             </center>
                                         </rich:column>
                                     </h:panelGrid>
                                     <h:panelGrid  id="habilitarModificarImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" >
-                                        <h:outputLabel styleClass="ikont- hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
                                         <h:inputText id="numpersonasbeneficiadas" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
-                                        <h:outputLabel styleClass="ikont- hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
                                         <h:inputText id="numpempleosdirectos" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:inputText>
-                                        <h:outputLabel styleClass="ikont- hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
                                         <h:inputText id="numpempleosindirectos" styleClass="ikont-estilo-modificacion-impacto" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:inputText>
                                         <rich:column colspan="2" >
                                             <center>
@@ -351,19 +351,19 @@
                                                     action="#{Supervisor$AdministrarObraNew.modificarImpactoSocialProyecto}"
                                                     render="form_editarImpactosocial" execute="habilitarModificarImpacto,habilitarModificacionImpacto"
                                                     title="#{var.editar}">
-                                                    <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                    <h:graphicImage  styleClass="ikont-"    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
                                                 </a4j:commandLink>
                                                 <a4j:commandLink immediate="true"  render="form_editarImpactosocial"
                                                                  action="#{Supervisor$AdministrarObraNew.cancelarModifcacionModificarImpacto}"
                                                                  execute="@this, habilitarModificarImpacto,habilitarModificacionImpacto">
-                                                    <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                    <h:graphicImage  styleClass="ikont-"    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
                                                 </a4j:commandLink>  
                                             </center>
                                         </rich:column>
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 <h:panelGrid  styleClass="ikont-hgi-imgestobra">
-                                    <h:outputText styleClass="ikont- hot-estobra " value="#{Supervisor$AdministrarObraNew.obra.estadoObra}" ></h:outputText>
+                                    <h:outputText styleClass="ikont-hot-estobra " value="#{Supervisor$AdministrarObraNew.obra.estadoObra}" ></h:outputText>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
                                     <h:panelGrid columns="2" >
