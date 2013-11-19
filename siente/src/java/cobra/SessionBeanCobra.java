@@ -206,7 +206,7 @@ public class SessionBeanCobra implements Serializable {
         this.actualdash = actualdash;
     }
 
-    public boolean isActualcomentario() {
+    public boolean isActualcomentario() {        
         return actualcomentario;
     }
 
@@ -254,7 +254,7 @@ public class SessionBeanCobra implements Serializable {
         this.indicadorService = indicadorService;
     }
     private Integer idModulo;
-    private ResourceBundle bundle = ResourceBundle.getBundle(ResourceBundle.getBundle("cobra.properties.General").getString("varproperties"));
+    private ResourceBundle bundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "var");    
     private int codinicial = 0;
     private int codfinal = 0;
 
@@ -462,7 +462,7 @@ public class SessionBeanCobra implements Serializable {
      * <p>Construct a new session data bean instance.</p>
      */
     public SessionBeanCobra() {
-        verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
+        verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));        
     }
 
     public void llenadodatos() {

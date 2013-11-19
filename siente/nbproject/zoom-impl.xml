@@ -41,6 +41,7 @@ and open the template in the editor.
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
         <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
+        <copy todir="${build.classes.dir}/" file="web/configuracion/${version}/properties/log4j.properties"/>
     </target> 
 </project>
 
