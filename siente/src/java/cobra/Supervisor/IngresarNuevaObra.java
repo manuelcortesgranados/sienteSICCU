@@ -4,6 +4,8 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.marcologico.to.Avanceplanificacionrelacionmarcologicoindicador;
+import co.com.interkont.cobra.marcologico.to.Relacionmarcologicoindicador;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Aseguradora;
 import co.com.interkont.cobra.to.Barrio;
@@ -342,6 +344,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.longitudmapa = longitudmapa;
     }
     // </editor-fold>
+    /**
+     * Medios de vida
+     */
+    private boolean proyectoestrategia = false;
+
+    public boolean isProyectoestrategia() {
+        return proyectoestrategia;
+    }
+
+    public void setProyectoestrategia(boolean proyectoestrategia) {
+        this.proyectoestrategia = proyectoestrategia;
+    }
 
     /**
      * Encapsulamiento
@@ -2600,8 +2614,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                             }
                             break;
                     }
-                    if (!obranueva.isBooleantienehijos()) {
 
+                    if (!obranueva.isBooleantienehijos() && !isProyectoestrategia()) {
                         Set<Periodo> perios = new LinkedHashSet<Periodo>();
                         while (i < division) {
                             listadoperiodos[i].setObra(obranueva);
@@ -2647,16 +2661,36 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     obranueva.setNumvlrsumahijos(BigDecimal.ZERO);
                     //para mineria valor del proyecto se va restando cada vez q se le asigne un hijo al proyecto
                     obranueva.setRelacioncontratoobras(new LinkedHashSet());
-                    if (listacontratosobra.size() > 0) {
+                    if (listacontratosobra.size() > 0 || isProyectoestrategia()) {
                         // obranueva.setContratos(new LinkedHashSet(listacontratosobra));
                         for (Relacioncontratoobra cont : listacontratosobra) {
                             obranueva.getRelacioncontratoobras().add(cont);
                         }
+                        if (isProyectoestrategia()) {
+                            BigDecimal dispo = obranueva.getContrato().getNumvlrcontrato().subtract(obranueva.getContrato().getNumvlrsumahijos().add(obranueva.getContrato().getNumvlrsumaproyectos()));
+
+                            if (dispo.compareTo(obranueva.getNumvaltotobra()) >= 0) {
+
+                                Relacioncontratoobra cont = new Relacioncontratoobra();
+                                cont.setContrato(obranueva.getContrato());
+                                cont.setObra(obranueva);
+                                cont.setNumvalorrelacion(obranueva.getNumvaltotobra());
+                                obranueva.getRelacioncontratoobras().add(cont);
                     } else {
+                                FacesUtils.addErrorMessage("El convenio solo posee disponibilidad de recursos de $"+dispo);
+                                setMensaje("El convenio solo posee disponibilidad de recursos de $"+dispo);
+                                return null;
+                            }
+
+                        }
+                    } else {
+
                         FacesUtils.addErrorMessage("Debe asociar al menos un contrato al proyecto.");
                         return null;
                     }
-                    if (!obranueva.isBooleantienehijos()) {
+
+                    /// revisar esto                    
+                    if (!obranueva.isBooleantienehijos() && !isProyectoestrategia()) {
                         //para aplicar el aiu al valor de la obra
                         Iterator actividadesIterador = obranueva.getActividadobras().iterator();
                         while (actividadesIterador.hasNext()) {
@@ -2748,12 +2782,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
                     obranueva.setTipoestadobra(new Tipoestadobra(1));
                     cargarPuntosaobra();
-                    getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), 1);
-                    if (!obranueva.isBooleantienehijos()) {
+
+                    getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), -1);
+                    if (!obranueva.isBooleantienehijos() && !isProyectoestrategia()) {
                         guardarCronograma();
                     }
                     guardarImagenesaobra(RutasWebArchivos.IMGS_OBRA);
                     getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), 1);
+                    //Validamos si el proyecto es de marcológico para insertar los avances
+                    if(isProyectoestrategia())
+                    {
+                        crearPeriodosAvanceMarcoLogico();
+                    }
                     FacesUtils.addInfoMessage(bundle.getString("hasidoanadidaconexito"));
                     estadoguardado = 1;
                 } else {
@@ -2779,6 +2819,19 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @throws Exception
      */
     public void cargarObra(Obra obra) throws Exception {
+        setProyectoestrategia(false);
+        obranueva = obra;
+        disableCronograma = 0;
+        /**
+         * Verificando si pertenece a estrategia
+         */
+        if (obranueva.getContrato() != null) {
+            if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obranueva.getIntcodigoobra()) != null) {
+                setProyectoestrategia(true);
+                disableCronograma = 1;
+                llenarTiposCosto();
+            }
+        }
 
         setObranueva(obra);
         getObranueva().setNumvaldeclarado(BigDecimal.ZERO);
@@ -4340,7 +4393,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         // si es padre deshabilitrar cronograma
         disableCronograma = 0;
         disableAiu = 0;
-        if (obranueva.isBooleantienehijos()) {
+        if (obranueva.isBooleantienehijos() || isProyectoestrategia()) {
             disableCronograma = 1;
             disableAiu = 1;
             llenarTiposCosto();
@@ -4727,7 +4780,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String pasoGenerarCronograma() {
         validarFinalizar();
-        if (obranueva.isBooleantienehijos()) {
+        if (obranueva.isBooleantienehijos() || isProyectoestrategia()) {
             validarCostos();
         }
         navegacion = 3;
@@ -4744,7 +4797,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * contrario True
      */
     public boolean validarPasoDatosBasicos() {
-        System.out.println("entro al validar = ");
         if (obranueva.getStrnombreobra() == null || obranueva.getStrnombreobra().equals("")) {
             FacesUtils.addErrorMessage(bundle.getString("debedarunnombraalaobra"));
             datosbas = false;
@@ -5074,7 +5126,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 validacion.setPresupuesto(true);
             }
         } else {
+            if (isProyectoestrategia()) {
+                obranueva.setNumvlrsumahijos(BigDecimal.ZERO);
+                validarCostos();
+                if (obranueva.getNumvaltotobra().compareTo(BigDecimal.ZERO) > 0) {
             validacion.setPresupuesto(true);
+                } else {
+                    validacion.setPresupuesto(false);
+        }
+            } else {
+
+                validacion.setPresupuesto(true);
+            }
         }
         if (validarTipificacion()) {
             validacion.setTipificacion(true);
@@ -5125,7 +5188,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 validacion.setUbicacion(false);
             }
         }
-        if (!obranueva.isBooleantienehijos()) {
+        if (!obranueva.isBooleantienehijos() && !isProyectoestrategia()) {
             validarCronograma();
         } else {
             valido = 1;
@@ -5133,7 +5196,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         if (valido == 1) {
             validacion.setCronograma(true);
         }
-        if (listacontratosobra.size() > 0) {
+        if (listacontratosobra.size() > 0 || isProyectoestrategia()) {
             validacion.setContratos(true);
         }
         int i = 0;
@@ -5572,5 +5635,67 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             address = "";
             verConfirmar = false;
         }
+    }
+    
+    /**
+     * Método para verificar si el proyecto pertenece a una estrategia, y verficar si posee marcos logicos asociados
+     * y verificar si posee indicadores asociados a los marcos logicos crear los avances planificacion
+     */
+    private boolean tieneAvancesPlanificados() {
+        List<Avanceplanificacionrelacionmarcologicoindicador> listAvancPlani = getSessionBeanCobra().getMarcoLogicoService().encontrarAvancePlanificadosByObra(getObranueva().getIntcodigoobra()); 
+            
+        if(listAvancPlani.isEmpty()) {
+            return false;
+        } else {
+            return true;
+}
+    }
+    
+    public void crearPeriodosAvanceMarcoLogico()
+    {
+        List<Relacionmarcologicoindicador> lisrel= getSessionBeanCobra().getMarcoLogicoService().encontrarRelMarcoIndXcodigoObra(getObranueva().getIntcodigoobra());
+        
+        
+        if(tieneAvancesPlanificados() != true){
+            
+             for (Relacionmarcologicoindicador relac : lisrel) {
+            
+                 
+            int per = 1;
+            switch (relac.getIndicador().getFrecuenciaperiocidad().getIntidfrecuenciaperiocidad()) {
+                case 4:
+                    per = 30;
+                    break;
+                case 5:
+                    per = 60;
+                    break;
+                case 6:
+                    per = 90;
+                    break;
+
+            }           
+            
+                Calendar fecha = Calendar.getInstance();
+                fecha.setTime(getObranueva().getDatefeciniobra());
+                while (fecha.getTime().compareTo(getObranueva().getDatefecfinobra()) <= 0) {
+                    fecha.add(Calendar.DATE, +(per));
+                    Avanceplanificacionrelacionmarcologicoindicador avanceplan = new Avanceplanificacionrelacionmarcologicoindicador();
+                    avanceplan.setDatefechaplanificada(fecha.getTime());
+                    //avanceplan.setFkUsureporta(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                    avanceplan.setRelacionmarcologicoindicador(relac);
+                    if (fecha.getTime().compareTo(getObranueva().getDatefecfinobra()) > 0) {
+                        avanceplan.setDatefechaplanificada(getObranueva().getDatefecfinobra());
+                    }
+                    getSessionBeanCobra().getMarcoLogicoService().guardarAvancesByAsociaciones(avanceplan);
+                    
+                 
+                    }
+           
+        }
+            
+            
+        }
+        
+       
     }
 }
