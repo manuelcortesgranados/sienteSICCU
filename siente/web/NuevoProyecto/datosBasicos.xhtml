@@ -165,22 +165,23 @@
                         </h:panelGrid>
                         <h:panelGroup layout="block">
                             <h:panelGrid  cellspacing="9" id="valores" columns="2" >
-                                <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
-                                <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
-                                <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
+                                 <h:outputText value="Familias participantes:" rendered="#{Supervisor$IngresarNuevaObra.proyectoestrategia}" />    
+                                <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
+                                <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
+                                <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" >
                                     <rich:tooltip value="#{var.numbeneficiarios}" />
                                 </rich:inputNumberSpinner>
-                                <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
-                                <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20">
-                                    <rich:tooltip value="#{var.numempleosdirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                    <rich:tooltip value="#{var.institucionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <rich:inputNumberSpinner rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia }" styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20">
+                                    <rich:tooltip value="#{var.numempleosdirectos}" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                    <rich:tooltip value="#{var.institucionesfortalecidas}" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 </rich:inputNumberSpinner>
-                                <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
-                                                         maxValue="50000000" inputSize="20" >
+                                                         maxValue="50000000" inputSize="20" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia }" >
 
                                     <rich:tooltip value="#{var.numempleosindirectos}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
                                     <rich:tooltip value="#{var.organizacionesfortalecidas}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
@@ -188,7 +189,7 @@
 
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGrid cellspacing="7" id="valores2" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
+                        <h:panelGrid cellspacing="7" id="valores2" columns="2" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
                             <h:outputLabel  styleClass="ikont-hol-numvaldeclarado"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
