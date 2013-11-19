@@ -47,8 +47,10 @@
     padding-left: 10px;
     cursor: move;
     padding: 2px;
-    border-top-left-radius: '#{richSkin.panelBorderRadius}';
-    border-top-right-radius: '#{richSkin.panelBorderRadius}';
+    border-top-left-radius: '#{richSkin.borderadiuspanellateral}';
+    border-top-right-radius: '#{richSkin.borderadiuspanellateral}';
+    width: 99.5%;
+    margin-left: -1px;
 }
 
 .rf-pp-hdr-cnt {
@@ -61,6 +63,11 @@
     font-size: '#{richSkin.headerSizeFont}';
     padding: 2px;
     padding-left: 10px;
+}
+
+.rf-pp-cnt label, .rf-pp-cnt span {
+    font-size : 11px;
+    color : #666666;
 }
 
 .rf-pp-hdr-cnt label, .rf-pp-hdr-cnt span{
@@ -96,8 +103,11 @@
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
-    border-bottom-left-radius: '#{richSkin.panelBorderRadius}';
-    border-bottom-right-radius: '#{richSkin.panelBorderRadius}';
+    border-bottom-left-radius: '#{richSkin.borderadiuspanellateral}';
+    border-bottom-right-radius: '#{richSkin.borderadiuspanellateral}';
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: '#{richSkin.headerBackgroundColor}';
 }
 
 .rf-pp-hndlr {

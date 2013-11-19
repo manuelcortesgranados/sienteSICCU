@@ -418,7 +418,7 @@ a.pdf:hover {
     background-position: 0px -144px;
 }
 
-a.interventoria {
+a.ikont-acl-interven {
     float: left;
     height: 163px;
     width: 150px; /* for validator */
@@ -435,7 +435,7 @@ a.interventoria {
     text-align:center;
     line-height:280px;
 }
-a.interventoria:hover {
+a.ikont-acl-interven:hover {
     background-position: 0px -144px;
     color:#003;
 }
@@ -844,7 +844,7 @@ a.subir:hover {
     background-position: 0px -144px;
 }
 
-a.asociarcontrato {
+a.ikont-acl-asocontrato {
     float: left;
     height: 163px;
     width: 150px; /* for validator */
@@ -861,7 +861,7 @@ a.asociarcontrato {
     text-align:center;
     line-height:280px;
 }
-a.asociarcontrato:hover {
+a.ikont-acl-asocontrato:hover {
     background-position: 0px -144px;
 }
 a.crearcontrato {
