@@ -854,4 +854,17 @@ public class GanttDatos {
         }
     
 }
+    
+        public static FuenterecursosconvenioDTO buscarFuenteRecursos(String nombreEntidad, int vigencia,ContratoDTO convenio) {
+        for (Iterator it = convenio.getFuenterecursosconvenios().iterator(); it.hasNext();) {
+            FuenterecursosconvenioDTO fuente = (FuenterecursosconvenioDTO) it.next();
+            service.setLog("en buscar"+fuente.getTercero().getStrnombrecompleto()+"vigencia:"+fuente.getVigencia(), null);
+            if (fuente.getTercero().getStrnombrecompleto().equals(nombreEntidad) && fuente.getVigencia() == vigencia) {
+                return fuente;
+            }
+
+        }
+        return null;
+
+    }
 }

@@ -101,6 +101,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected Set<ObrafuenterecursosconveniosDTO> relacionObraFuenteRecursosCopia;
     protected int numeracionActividad;
     protected int numeracionActual = 0;
+    protected boolean estaEnbotonAddModificar = false;
 
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
@@ -254,7 +255,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
 
-        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar);
+        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar, contratoDto);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
        
@@ -325,42 +326,41 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             modalPry.addHideHandler(new HideEvent.HideHandler() {
             @Override
             public void onHide(HideEvent event) {
+                    if (!estaEnbotonAddModificar) {
                 devolverValorAfuenteRecursos(tblRubros.getStore().getAll());
+                    } else {
+                        service.setLog("aca en else de crear", null);
             }
+                }
         });
 
         } else {
             nombreBotonPrincipal = "Editar Proyecto";
-            modalPry.addHideHandler(new HideEvent.HideHandler() {
-            @Override
-            public void onHide(HideEvent event) {
-                    proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
-                    for(ObrafuenterecursosconveniosDTO obraFuente:relacionObraFuenteRecursosCopia){
-                    obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
-                    obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
-                    service.setLog("ace en cancelar pry"+obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
-                    }
-            }
-        });
-
-//            btnCancelar = new Button("Cancelar", new ClickHandler() {
+//            modalPry.addHideHandler(new HideEvent.HideHandler() {
 //                @Override
-//                public void onClick(ClickEvent event) {
-//                    modalPry.hide();
-//                    proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
-//                    for(ObrafuenterecursosconveniosDTO obraFuente:relacionObraFuenteRecursosCopia){
-//                    obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
-//                    obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
-//                    service.setLog("ace en cancelar pry"+obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
+//                public void onHide(HideEvent event) {
+//                    if (!estaEnbotonAddModificar) {
+//                        proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
+//                        for (ObrafuenterecursosconveniosDTO obraFuente : relacionObraFuenteRecursosCopia) {
+//                            service.setLog("devol valores pry " + obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
+//                            service.setLog("devol valores pry " + obraFuente.getValor(), null);
+//                            obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuente.getValor()));
+//                            obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
+//                            service.setLog("ace en cancelar pry" + obraFuente.getFuenterecursosconvenio().getValorDisponible(), null);
+//
+//                        }
+//                    } else {
+//                        service.setLog("aca probando 2", null);
 //                    }
 //                }
 //            });
-//            btnCancelar.setWidth("" + 150);
+
         }
 
         Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                estaEnbotonAddModificar = true;
                 if (!editar) {
                     /*Se carga el proyectoDTO */
                     cargarDatosProyectoDTO();
@@ -439,9 +439,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                             msgerrores += "*Otros pagos ($" + otrospagos.getValue()
                                     + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
                         }
-                    }
-                    else
-                    {
+                    } else {
                         proyectoDTO.setOtrospagos(BigDecimal.ZERO);
                     }    
                     if (pagodirecto.getValue() != null) {
@@ -450,9 +448,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                             msgerrores += "*Pagos directos ($" + pagodirecto.getValue()
                                     + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
                         }
-                    }
-                    else
-                    {
+                    } else {
                         proyectoDTO.setPagodirecto(BigDecimal.ZERO);
                     }    
                     if (pagodirecto.getValue() != null && otrospagos.getValue() != null) {
@@ -469,7 +465,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
 
                     if (!varErrorres) {                        
-                        modificarValorDisponibleCreando();
+                        //modificarValorDisponibleCreando();
                         modalPry.hide();
                         crearActividadPry();
                         GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
@@ -770,9 +766,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void modificarValorDisponibleCreando() {
         for (Iterator it = proyectoDTO.getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obrafuenterecursoscontratoDTO = (ObrafuenterecursosconveniosDTO) it.next();
-            if(obrafuenterecursoscontratoDTO.getDescripcionaporte().compareTo("Dinero")==0)
-            {    
-                obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setValorDisponible(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getValorDisponible().subtract(obrafuenterecursoscontratoDTO.getValor()));            
+            if (obrafuenterecursoscontratoDTO.getDescripcionaporte().compareTo("Dinero") == 0) {
+                FuenterecursosconvenioDTO fuenteRecursos = GanttDatos.buscarFuenteRecursos(obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().getVigencia(), contratoDto);
+                fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible());
+
             }              
             obrafuenterecursoscontratoDTO.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
         }

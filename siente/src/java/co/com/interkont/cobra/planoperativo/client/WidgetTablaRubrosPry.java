@@ -32,6 +32,7 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -42,17 +43,19 @@ public class WidgetTablaRubrosPry implements IsWidget {
     protected ActividadobraDTO actividadObraEditar;
     protected TreeStore<ActividadobraDTO> taskStore;
     protected boolean editar;
+    protected ContratoDTO convenio;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     /**
      * @return the store
      */
-    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar) {
+    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar,ContratoDTO convenio) {
         this.obraDto = obraDto;
         this.actividadObraPadre = actividadObraPadre;
         this.taskStore = taskStore;
         this.editar = editar;
         this.actividadObraEditar = actividadObraEditar;
+        this.convenio=convenio;
     }
     
     public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
@@ -121,7 +124,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
                 Context c = event.getContext();
                 int row = c.getIndex();
                 if (!editar) {
-                    if(store.get(row).getTipoaporte()==0){
+                    if (store.get(row).getTipoaporte() == 0) {
                     store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
                     obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                     }
@@ -129,10 +132,11 @@ public class WidgetTablaRubrosPry implements IsWidget {
                     getStore().remove(store.get(row));
                 } else {
                     if (!store.get(row).isEstaEnFuenteRecurso()) {
-                        if(store.get(row).getTipoaporte()==0){
-                        service.setLog("en eliminar fuente pry aca:", null);
-                        store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
-                        service.setLog("en eliminar fuente pry:" +  store.get(row).getFuenterecursosconvenio().getValorDisponible(), null);
+                        if (store.get(row).getTipoaporte() == 0) {
+                            BigDecimal valorDispo=store.get(row).getFuenterecursosconvenio().getValorDisponible();
+                            FuenterecursosconvenioDTO fuenteAsociada=GanttDatos.buscarFuenteRecursos(store.get(row).getFuenterecursosconvenio().getTercero().getStrnombrecompleto(),store.get(row).getFuenterecursosconvenio().getVigencia(),convenio);
+                            fuenteAsociada.setValorDisponible(valorDispo);
+                            fuenteAsociada.setValorDisponible(fuenteAsociada.getValorDisponible().add(store.get(row).getValor()));
                         obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                         }
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
@@ -163,11 +167,6 @@ public class WidgetTablaRubrosPry implements IsWidget {
         
         final Grid<ObrafuenterecursosconveniosDTO> grid = new Grid<ObrafuenterecursosconveniosDTO>(getStore(), cm);
         grid.setBorders(true);
-//        grid.getView().setAutoExpandColumn(nameColumn);
-//        grid.getView().setAutoExpandColumn(tipoAporte);
-//        grid.getView().setAutoExpandColumn(valor);
-//        grid.getView().setAutoExpandColumn(vigencia);
-//        grid.getView().setAutoExpandColumn(eliminar);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText("Por favor ingrese los roles y enidades");
         grid.getView().setColumnLines(true);
