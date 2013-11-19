@@ -525,12 +525,12 @@
     <h:panelGroup>
         <div class="topbar_encabezado_1"></div>
         <div class="topbar_encabezado_2">
-            <h:panelGrid>
+            <h:panelGrid rendered="#{var.permisonuevodiseno}">
                 <rich:column>
                     <h:commandLink   id="iconozoom" styleClass="zoomicon" action="#{HomeGestion.activarvistamapa}" /> 
                 </rich:column>
                 <rich:column>
-                    <div id="nuevobuscador" class="topbar_encabezado_3">
+                    <div  id="nuevobuscador" class="topbar_encabezado_3">
                         <h:panelGrid columns="6" style=""> 
                             <h:inputText id="txtPalabraClave2" styleClass="ikont-hit-palabraclave2"    value="#{HomeGestion.filtro.palabraclave}">
                                 <rich:placeholder value="¿Qué proyecto estás buscando?" /></h:inputText> 
