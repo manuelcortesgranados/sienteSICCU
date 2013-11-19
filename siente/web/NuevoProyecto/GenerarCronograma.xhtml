@@ -138,10 +138,10 @@
 
                                     <h:outputLabel  styleClass="ikont-hl-lblcostodirecto"   id="lblcostodirecto"  value="#{var.costodirecto}"/>
                                     <h:panelGroup id="layoutCostoDirecto">
-                                        <h:outputText  styleClass="ikont-hot-stcostodirecto"   id="stcostodirecto"  value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
+                                        <h:outputText  styleClass="ikont-hot-stcostodirecto"   id="stcostodirecto"  value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos and Supervisor$IngresarNuevaObra.disableCronograma==0}">
                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
-                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos || Supervisor$IngresarNuevaObra.disableCronograma==1}" size="20">
                                             <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                             <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="@all"/>
                                         </h:inputText>

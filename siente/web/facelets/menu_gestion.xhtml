@@ -68,7 +68,9 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png"  
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -76,6 +78,8 @@
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -83,6 +87,8 @@
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -90,6 +96,8 @@
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -97,6 +105,8 @@
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
 
                         <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" 
@@ -105,6 +115,8 @@
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                     </rich:menuGroup>
 
@@ -116,6 +128,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png"  
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -123,6 +137,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -130,6 +146,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
@@ -137,6 +155,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
 
                         <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" 
@@ -145,6 +165,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
 
                         <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" 
@@ -153,6 +175,8 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                     </rich:menuGroup>
 
@@ -162,26 +186,32 @@
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
-
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png"  
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                             <a4j:param value="0" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                             <a4j:param value="6" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
-
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                         <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" 
                                        action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
 
                         <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" 
@@ -189,6 +219,8 @@
                             <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
 
                         <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" 
@@ -196,7 +228,8 @@
                             <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                             <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
-
+                            <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                            <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                         </rich:menuItem>
                     </rich:menuGroup>
                     <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" 
@@ -205,6 +238,8 @@
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                        <a4j:param value="0" assignTo="#{HomeGestion.filtro.estrategia}"/>
+                        <a4j:param value="0" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />
                     </rich:menuItem>
 
                 </rich:menuGroup>
@@ -235,7 +270,7 @@
                 <rich:menuGroup icon="/resources/imgs/bt_convenio.png" label="#{var.estrategia}"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
                     <rich:menuGroup icon="/resources/imgs/bt_convenio.png" label="#{var.mediosdevida}"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios and !var.aplicaContralorias}">                   
                         <rich:menuGroup icon="/resources/imgs/bt_nuevo.png" label="#{var.convenio}" 
-                                          style="width: 150px;">         
+                                        style="width: 150px;">         
                             <rich:menuItem  label="#{var.nuevo}" icon="/resources/imgs/bt_nuevo.png"
                                             actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}">
                                 <a4j:param value="1" assignTo="#{Supervisor$Contrato.estrategia}" />
@@ -245,7 +280,8 @@
                                 <a4j:param value="1" assignTo="#{Supervisor$Contrato.estrategia}" />                            
                             </rich:menuItem>
                         </rich:menuGroup>
-                        <rich:menuItem label="#{var.proyectos}" icon="/resources/imgs/bt_consultar.png"  action="#{HomeGestion.activarvistamapa}" immediate="true"
+                                                
+                        <rich:menuItem render="panelBody" label="#{var.proyectos}" icon="/resources/imgs/bt_consultar.png"  action="#{HomeGestion.activarvistamapa}" immediate="true"
                                        style="width: 150px;">
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.estrategia}"/>
                             <a4j:param value="1" assignTo="#{ Supervisor$Contrato.filtrocontrato.idestrategia}" />                        
