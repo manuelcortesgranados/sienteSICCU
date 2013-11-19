@@ -2825,13 +2825,15 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         /**
          * Verificando si pertenece a estrategia
          */
+        if(Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("aplicamarcologico"))){
+            
         if (obranueva.getContrato() != null) {
             if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obranueva.getIntcodigoobra()) != null) {
                 setProyectoestrategia(true);
                 disableCronograma = 1;
                 llenarTiposCosto();
             }
-        }
+        }}
 
         setObranueva(obra);
         getObranueva().setNumvaldeclarado(BigDecimal.ZERO);
