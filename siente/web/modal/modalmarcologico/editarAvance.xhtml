@@ -10,7 +10,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="mp-crear-nuevoavance" moveable="true"   width="300" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel  id="mp-crear-nuevoavance" moveable="true"   width="460" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.registraravance}" rendered="#{MarcoLogico$MarcoLogico.fechareal == 0}" />
@@ -21,7 +21,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-nuevoavance" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalEditarAvance}"
+                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-nuevoavance" value="cerrar" style="color: black;" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalEditarAvance}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-nuevoavance')}.hide();
                                               return false;"/>
                 </h:panelGroup>
@@ -35,7 +35,7 @@
                          
                          <h:outputText id="lblfechaavance"  value="(*) Fecha avance:"  />
                         <h:panelGrid >
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaavancemes" inputSize="10" 
+                            <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaavancemes" inputSize="10" 
                                    required="true" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechacreacion}"
                                    disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
                                            />
@@ -44,14 +44,14 @@
                          
                          <h:outputText id="lbldescripcion"  value="Logros" />
                          <h:panelGrid>
-                         <h:inputTextarea  id="textdescripcion" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdescripcion}" 
+                         <h:inputTextarea  id="textdescripcion" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdescripcion}" 
                                            cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
                         <rich:message for="textdescripcion" styleClass="error_texto"/>
                          </h:panelGrid>
                          
                          <h:outputText id="lbldificultades"  value="#{varMarcoLogico.dificultades}" />
                          <h:panelGrid>
-                             <h:inputTextarea  id="textdificultad" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdificultades}" 
+                             <h:inputTextarea  id="textdificultad" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdificultades}" 
                                             cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
                         <rich:message for="textdificultad" styleClass="error_texto"/>
                          </h:panelGrid>
