@@ -4644,6 +4644,36 @@ a.closemodal{
     margin: 20px;
 }
 
+.ikont-hpg-griddetaob .rf-p .rf-p-b{
+    overflow-y: auto;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b span, .ikont-hpg-griddetaob .rf-p .rf-p-b label{
+    font-size: 12px;
+    color: #666666;
+}
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-numvaltotobra, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valorinterventoria, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valinter, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stclaseProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-sttipoProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stsubtipoProyecto {
+    font-size: 14px;
+    color: #336699;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-numhabbeneficiados, .ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hol-numempdirectos, .ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hol-numempindirectos{
+    font-size: 14px;
+    color: #336699;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hot-dias{
+    font-size: 30px;
+    color: #336699;
+    font-weight: bold;
+}
+
 .ikont-hot-stEstado{
     font-size: 30px;
     color: #336699;
@@ -4653,4 +4683,17 @@ a.closemodal{
 .ikont-hot-veravance{
     font-size: 13px;
     color: #666666;
+}
+
+.mapsearchbar{
+    width: 100%;
+}
+
+.ikont-rpp-modal-box{
+    background: transparent!important;
+    box-shadow: 0px 0px 0px transparent!important;
+}
+
+.ikont-rpp-modal-box .rf-pp-cnt-scrlr{
+    background-color: transparent;
 }

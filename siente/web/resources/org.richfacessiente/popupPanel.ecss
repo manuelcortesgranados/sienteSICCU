@@ -17,13 +17,13 @@
     height: 100%;
     top: 0px;
     left: 0px;
-    background-color: #D0D0D0;
-    opacity: 0.5;
-    filter: 'alpha(opacity=50)';
+    background-color: #FFF;
+    opacity: 0.6;
+    filter: 'alpha(opacity=60)';
 }
 
 .rf-pp-shdw {
-    background-color: #000000;
+    background-color: transparent;
     opacity: 0.1;
     filter: 'alpha(opacity=10)';
     position: absolute;
@@ -35,7 +35,6 @@
 }
 
 .rf-pp-cntr {
-    border: '1px solid #{richSkin.panelBorderColor}';
     border-radius: '#{richSkin.panelBorderRadius}';
     background: '#{richSkin.generalBackgroundColor}';
     z-index: 100;
@@ -62,6 +61,12 @@
     font-size: '#{richSkin.headerSizeFont}';
     padding: 2px;
     padding-left: 10px;
+}
+
+.rf-pp-hdr-cnt label, .rf-pp-hdr-cnt span{
+    color: #FFF !important;
+    font-size: 12px;
+    font-weight: bolder
 }
 
 .rf-pp-hdr-cntrls {

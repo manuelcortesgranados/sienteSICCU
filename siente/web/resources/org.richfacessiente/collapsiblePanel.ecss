@@ -1,9 +1,6 @@
 .rf-cp {
     background-color: '#{richSkin.generalBackgroundColor}';
-    color: '#{richSkin.panelBorderColor}';
-    border-width: 1px;
-    border-style: solid;
-    border-radius: '#{richSkin.panelBorderRadius}';
+    
     padding: 1px;
 }
 
@@ -23,6 +20,8 @@
     background-position: top left;
     background-repeat: repeat-x;
     background-image: "url(#{resource['org.richfaces.images:gradientA.png']})";
+    border-top-left-radius: '#{richSkin.borderadiuspanellateral}';
+    border-top-right-radius: '#{richSkin.borderadiuspanellateral}';
 }
 
 .rf-cp-hdr-exp {
@@ -39,6 +38,12 @@
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     padding: 10px;
+    border-bottom-left-radius: '#{richSkin.borderadiuspanellateral}';
+    border-bottom-right-radius: '#{richSkin.borderadiuspanellateral}';
+    border-color: '#{richSkin.headerBackgroundColor}';
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+
 }
 
 .rf-cp-gr {

@@ -24,7 +24,7 @@
 
     </ui:define>
     <ui:define name="title">
-        <!--<h:outputText  styleClass="ikont- "   value="Mapa" rendered="#{SessionBeanCobra.cobraService.ciu}"/>-->
+        <!--<h:outputText  styleClass="ikont-"   value="Mapa" rendered="#{SessionBeanCobra.cobraService.ciu}"/>-->
         <h:panelGroup id="gpPaginacion" >
             <h:outputText  styleClass="ikont-hot-obrasvigentes"   value="#{var.obrasvigentes} " rendered="#{HomeGestion.filtro.intestadoobra==1}"/>
             <h:outputText  styleClass="ikont-hot-obrasprupuestas"   value="#{var.obraspropuestas} " rendered="#{HomeGestion.filtro.intestadoobra==0}"/>
@@ -159,7 +159,7 @@
                     <center>
                         <h:panelGrid columns="1">
                             <a4j:commandLink id="irNuevaObra"  onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra==0}" disabled="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
-                                <h:graphicImage  styleClass="ikont- " value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
+                                <h:graphicImage  styleClass="ikont-" value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
                             </a4j:commandLink>
                             <a4j:commandLink id="irDetalle"  onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra>0}">
                                 <h:graphicImage  styleClass="ikont-hgi-strimagneobra" value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />

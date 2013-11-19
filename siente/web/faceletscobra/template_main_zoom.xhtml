@@ -14,11 +14,11 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>#{var.titulogeneral}</title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
-        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>            
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
-           <ui:insert name="head"/>
+            <ui:insert name="head"/>
 
             <style type="text/css">
                 body,td,th {
@@ -26,8 +26,8 @@
                     font-family: Verdana, Geneva, sans-serif;
                 }
             </style> 
-            
-            
+
+
         </head>
 
         <body >
@@ -37,7 +37,7 @@
 
             <table   align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
-                   
+
                     <td >
                         <div id="header_content">
                             <div class="ubicacion">
@@ -47,31 +47,18 @@
                     </td>
                 </tr>
                 <tr>
-                   
+
                     <td valign="top" height="35">
                         <table  border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td >
                                     <a4j:outputPanel id="panelBody">
-                                        <rich:messages id="messages" globalOnly="true"
-                                                       styleClass="ikont-rm-messages"   ajaxRendered="true"
-                                                       >
-                                            <f:facet name="infoMarker">
-                                                <h:graphicImage  styleClass="ikont-hgi-msginfopng "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                            </f:facet>
-                                            <f:facet name="warnMarker">
-                                                <h:graphicImage  styleClass="ikont-hgi-msgwarnpng "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                            </f:facet>
-                                            <f:facet name="errorMarker">
-                                                <h:graphicImage  styleClass="ikont-hgi-msgerrorpng "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                            </f:facet>
-                                            <f:facet name="fatalMarker">
-                                                <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                            </f:facet>
-                                        </rich:messages>
+                                        <a4j:outputPanel>
+                                            <rich:notifyMessages  stayTime="5000" showShadow="true" showCloseButton="false" />
+                                        </a4j:outputPanel>
                                         <ui:insert name="body"/>
-                                   <ui:include src="/facelets/ajaxStatus.xhtml" />
-                                    <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
+                                        <ui:include src="/facelets/ajaxStatus.xhtml" />
+                                        <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
                                     </a4j:outputPanel>
                                 </td>
                             </tr>
@@ -79,7 +66,7 @@
                     </td>
                 </tr>
             </table>
-           
+
         </body>
     </html>
 </ui:composition>

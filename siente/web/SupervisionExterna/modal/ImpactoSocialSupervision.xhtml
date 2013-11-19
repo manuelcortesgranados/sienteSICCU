@@ -23,37 +23,37 @@
                     <a4j:commandLink id="esconder-modalimpactosocial"
                                        onclick="#{rich:component('modalimpactosocial')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont- closemodal"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-closemodal"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
             <h:panelGroup layout="block"  >
-                <h:outputText  styleClass="ikont- "   id="titHabitantesBeneficiados" value="#{var.habitantesbeneficiados}:" />
+                <h:outputText  styleClass="ikont-"   id="titHabitantesBeneficiados" value="#{var.habitantesbeneficiados}:" />
             </h:panelGroup>
 
             <h:panelGroup layout="block">
-                <h:outputText  styleClass="ikont- "   id="verHabitantesBeneficiados" value="#{Supervision$Externa.objetoSeguimiento.inthabbeneficiados}">
+                <h:outputText  styleClass="ikont-"   id="verHabitantesBeneficiados" value="#{Supervision$Externa.objetoSeguimiento.inthabbeneficiados}">
                     <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
             <h:panelGroup layout="block">
-                <h:outputText  styleClass="ikont- "   id="titEmpleosDirectos" value="#{var.empleosdirectos}:" />
+                <h:outputText  styleClass="ikont-"   id="titEmpleosDirectos" value="#{var.empleosdirectos}:" />
             </h:panelGroup>
 
             <h:panelGroup layout="block">
-                <h:outputText  styleClass="ikont- "   id="verEmpleosDirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosdirectos}">
+                <h:outputText  styleClass="ikont-"   id="verEmpleosDirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosdirectos}">
                     <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>
 
             <h:panelGroup layout="block" >
-                <h:outputText  styleClass="ikont- "   id="titEmpleosIndirectos" value="#{var.empleosindirectos}:" />
+                <h:outputText  styleClass="ikont-"   id="titEmpleosIndirectos" value="#{var.empleosindirectos}:" />
             </h:panelGroup>
             <h:panelGroup layout="block" >
-                <h:outputText  styleClass="ikont- "   id="verEmpleosIndirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosindirectos}">
+                <h:outputText  styleClass="ikont-"   id="verEmpleosIndirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosindirectos}">
                     <f:convertNumber pattern="#{var.formatomoneda}" />
                 </h:outputText>
             </h:panelGroup>

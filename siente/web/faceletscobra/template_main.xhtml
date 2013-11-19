@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf">
-    
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
@@ -19,7 +19,7 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
-      <ui:insert name="head"/>
+        <ui:insert name="head"/>
         <style type="text/css">
             body,td,th {
                 margin: 0px;
@@ -66,22 +66,9 @@
                                         <tr>
                                             <td>
                                                 <a4j:outputPanel id="panelBody">
-                                                    <rich:messages id="messages" globalOnly="true"
-                                                                   styleClass="ikont-rm-messages"   ajaxRendered="true"
-                                                                   >
-                                                        <f:facet name="infoMarker">
-                                                            <h:graphicImage  styleClass="ikont-hgi-msginfopng"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                        </f:facet>
-                                                        <f:facet name="warnMarker">
-                                                            <h:graphicImage  styleClass="ikont-hgi-msgwarnpng"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                        </f:facet>
-                                                        <f:facet name="errorMarker">
-                                                            <h:graphicImage  styleClass="ikont-hgi-msgerrorpng"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                        </f:facet>
-                                                        <f:facet name="fatalMarker">
-                                                            <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                        </f:facet>
-                                                    </rich:messages>
+                                                    <a4j:outputPanel>
+                                                        <rich:notifyMessages  stayTime="5000" showShadow="true" showCloseButton="false" />
+                                                    </a4j:outputPanel>
                                                     <ui:insert name="menusuperior"/>
                                                     <ui:insert name="body"/>                                                   
                                                     <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     

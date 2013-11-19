@@ -5,6 +5,7 @@
     border-style: solid;
     border-color: '#{richSkin.tableBorderColor}';
     empty-cells: show;
+    margin: 20px 0px;
 }
 
 .rf-dt-cap {
