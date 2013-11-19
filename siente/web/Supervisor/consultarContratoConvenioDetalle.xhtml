@@ -1128,17 +1128,14 @@
 
                     <!--Medios De vida-->
                     <rich:collapsiblePanel toggleListener="#{MarcoLogico$MarcoLogico.llenarObligacionesContrato}" id="simpleToggleModuloSeguimientoConvenio" switchType="ajax"  header="#{varMarcoLogico.modelosegumiento}"
-                                           expanded="#{MarcoLogico$MarcoLogico.boolcrearobligacion}" rendered="#{var.aplicamarcologico}" >
-                        <!--                        <a4j:ajax event="onexpand" >
-                                                    <a4j:ajax oncomplete="true" render="pgSeguimientoConvenio"/>
-                                                </a4j:ajax>-->
+                                           expanded="#{MarcoLogico$MarcoLogico.boolcrearobligacion}" rendered="#{var.aplicamarcologico and Supervisor$Contrato.filtrocontrato.idestrategia != 0 }" >
 
                         <h:panelGroup id="pgSeguimientoConvenio">
 
                             <center>
-                                <!--rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_agregarObligacion}"-->
+                              
                                 <a4j:commandButton id="btobligacion"  value="#{varMarcoLogico.agregarObligacion}" action="#{MarcoLogico$MarcoLogico.cancelarGuardado}" render="rpnuevaobligacion1" immediate="true" 
-                                                   >
+                                                  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_agregarObligacion}" >
                                     <a4j:ajax oncomplete="#{rich:component('mp-crear-obligacion')}.show();" />
                                 </a4j:commandButton>
 
@@ -1150,7 +1147,6 @@
                                             rendered="#{MarcoLogico$MarcoLogico.listaObligaciones.size()>0}"
                                             binding="#{MarcoLogico$MarcoLogico.tablaObligacionbin}"
                                             var="obligacionContr"  >
-
 
                                 <rich:column>
                                     <f:facet name="header">
@@ -1210,10 +1206,6 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{varMarcoLogico.editar}" />
                                     </f:facet>
-
-
-
-
                                     <a4j:commandLink   id="bt_editarObligacion"  render="rpnuevaobligacion1,mp-crear-obligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}"
                                                        execute="mp-crear-obligacion,rpnuevaobligacion1" oncomplete="#{rich:component('mp-crear-obligacion')}.show();"
                                                        title="#{varMarcoLogico.editar}" >
