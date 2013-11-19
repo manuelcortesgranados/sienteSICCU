@@ -9,7 +9,7 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-crear-obligacion" moveable="true" width="400" height="400" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-crear-obligacion" moveable="true" width="525" height="380" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.crearObligacion}"/>
@@ -31,7 +31,7 @@
 
                         <h:outputText id="lblfechaInicioestimada"  value="(*)#{varMarcoLogico.fechaInicoEstimada}" />
                         <h:panelGrid columns="2">
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioEstimada"
+                            <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioEstimada"
                                            value="#{MarcoLogico$MarcoLogico.obligacion.datefechainiestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}"/>
                             <rich:message for="calendarfechaInicioEstimada" styleClass="error_texto"/>
                         </h:panelGrid>
@@ -58,11 +58,11 @@
                         </h:panelGrid>
 
                         <h:outputText id="outputtextobligacion"  value="#{varMarcoLogico.obligacion}" />
-                        <h:inputTextarea  id="textobligacion" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.obligacion.strdescripcion}" cols="80" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
+                        <h:inputTextarea  id="textobligacion" style="width: 89%;" rows="4" value="#{MarcoLogico$MarcoLogico.obligacion.strdescripcion}" cols="80" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
                         
                     </h:panelGrid>
 
-                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarObligacion}" render="pgSeguimientoConvenio, rpnuevaobligacion1" 
+                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarObligacion}" render="pgSeguimientoConvenio, rpnuevaobligacion1"
                                        disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}">                    
 
                     </a4j:commandButton>

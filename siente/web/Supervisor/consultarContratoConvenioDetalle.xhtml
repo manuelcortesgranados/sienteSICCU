@@ -1214,9 +1214,9 @@
 
 
 
-                                     <a4j:commandLink   id="bt_editarObligacion"  render="rpnuevaobligacion1,mp-crear-obligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}"
-                                                     execute="mp-crear-obligacion,rpnuevaobligacion1" oncomplete="#{rich:component('mp-crear-obligacion')}.show();"
-                                                     title="#{varMarcoLogico.editar}" >
+                                    <a4j:commandLink   id="bt_editarObligacion"  render="rpnuevaobligacion1,mp-crear-obligacion" action="#{MarcoLogico$MarcoLogico.editarObligacion}"
+                                                       execute="mp-crear-obligacion,rpnuevaobligacion1" oncomplete="#{rich:component('mp-crear-obligacion')}.show();"
+                                                       title="#{varMarcoLogico.editar}" >
                                         <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
@@ -1239,8 +1239,12 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{varMarcoLogico.avance}" />
                                     </f:facet>
+                                    <a4j:commandLink id="bt_consultafechaavance"  action="#{MarcoLogico$MarcoLogico.llenarCronogramaObligacionesAvance}" render="rpnuevoavance">
+                                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                        <a4j:ajax oncomplete="#{rich:component('mp-crear-avance')}.show();" />
+                                    </a4j:commandLink>
                                 </rich:column>
-
+                                    
                                 <f:facet name="footer">
                                     <h:panelGroup>
                                         <rich:dataScroller id="dstablaSeguimientoConvenio" for="tablaSeguimientoConvenio" render="tablaSeguimientoConvenio"/>
@@ -1273,9 +1277,9 @@
         <ui:include src="/modal/modicontratoDetaDoc.xhtml" />
         <ui:include src="/modal/listadoplanificacionpagos.xhtml" />
         <ui:include src="/modal/creargirodirecto.xhtml" />
-                <ui:include src="/modal/modalmarcologico/crearobligacion.xhtml"/>
-                <ui:include src="/modal/modalmarcologico/crearavance.xhtml"/>
-                <ui:include src="/modal/modalmarcologico/eliminarObligacion.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/crearobligacion.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/crearavance.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/eliminarObligacion.xhtml"/>
         <h:outputScript name="csspopup.js" library="js" />
         <h:outputScript name="jquery.timers-1.0.0.js" library="js" />
         <script type="text/javascript" language="JavaScript">

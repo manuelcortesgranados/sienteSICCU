@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-avance" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-crear-avance" styleClass="cerrar" value="Cerrar" style="color: black;"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-avance')}.hide();
                                          return false;" render="pgSeguimientoConvenio"/>
                 </h:panelGroup>
@@ -31,7 +31,7 @@
                     <center>
                     <a4j:commandButton id="btcrearNuevoavance"  value="#{varMarcoLogico.btnuevaPlanificacionObligacion}" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}" immediate="true" 
                                        render="rpnuevafechanuevaplanicion" rendered="#{MarcoLogico$MarcoLogico.listaObligacionavance.size()>0}" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"
-                                       onclick="Richfaces.showModalPanel('mp-crear-fechaPlanificacion')" >
+                                       oncomplete="#{rich:component('mp-crear-fechaPlanificacion')}.show();" >
 
                     </a4j:commandButton>
                 </center>
@@ -80,9 +80,9 @@
                         <a4j:commandLink id="bt_generanovedad" action="#{MarcoLogico$MarcoLogico.editarAvance}" 
                                          title="#{varMarcoLogico.registroavance}" render="pgguardaravance" 
                                          disabled="#{crongAvance.strdescripcion != null || MarcoLogico$MarcoLogico.obligacion.boolestado == true}" 
-                                         oncomplete="javascript:Richfaces.showModalPanel('mp-crear-nuevoavance');">
+                                         oncomplete="#{rich:component('mp-crear-nuevoavance')}.show();">
                             <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                            <rich:message for="bt_generanovedad" styleClass="error_texto"/>
+                            <!--<rich:message for="bt_generanovedad" styleClass="error_texto"/>-->
                         </a4j:commandLink>
 
                     </rich:column>

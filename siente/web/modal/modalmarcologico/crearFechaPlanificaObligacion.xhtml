@@ -8,7 +8,7 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-    <rich:popupPanel id="mp-crear-fechaPlanificacion" moveable="true"   width="300" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-crear-fechaPlanificacion" moveable="true"   width="430" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.nuevaFechaAvanceObligacion}" />
@@ -17,7 +17,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-fechaPlanificacion" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}"
+                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-fechaPlanificacion" styleClass="cerrar" value="cerrar" style="color:black;" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-fechaPlanificacion')}.hide();
                                               return false;"/>
                 </h:panelGroup>
@@ -29,8 +29,8 @@
                         <h:panelGrid columns="2"  width="100%"  >
                             <h:outputText id="lbplanicicarfechaavance"  value="Fecha avance"/>
                             <h:panelGrid>
-                                <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaplanificado" 
-                                               inputSize="10"
+                                <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaplanificado" 
+                                               inputSize="5" 
                                                value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechaavance}"/>
                                 <rich:message for="calendarfechaplanificado" styleClass="error_texto"/>
                             </h:panelGrid>                     
