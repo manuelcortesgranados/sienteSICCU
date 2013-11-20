@@ -84,7 +84,7 @@ body{
 }
 
 .tab-pestania-inactive-usu{
-     position: relative!important;
+    position: relative!important;
     bottom: -1px !important;
     width: 100px!important;  
     height: 31px!important;
@@ -330,10 +330,10 @@ body{
     background-color: whitesmoke !important;
     font-size: 10px !important;
     font-family: "century";
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    border-radius: 10px !important;
     background: -webkit-gradient(linear, left top, left bottom, from(#F2F2F2), to(#A4A4A4), color-stop(0.7, #A4A4A4))!important;
     background: -moz-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
     background: -ms-linear-gradient(top, rgba(242,242,242, 1) 0%, rgba(164,164,164,1) 100%)!important;
@@ -484,4 +484,120 @@ body{
     -o-background-size : cover;
     -moz-background-size : cover;
     -ms-background-size : cover;
+}
+
+.ikont-hpg-gpLogPrinci .rf-p, .ikont-hpg-gpLogPrinci .rf-p-b{
+    border: solid 0px transparent !important;
+    background: transparent !important;
+}
+
+.rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top{
+    background: transparent !important;
+    border-color: transparent !important;
+    border-style: solid !important;
+    border-width: 0px !important;
+    border-bottom-width: 0px !important;
+    padding-top: 0px !important;
+    overflow: visible !important;
+    height: 25px !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    margin-bottom: 6px !important;    
+}
+
+.rf-tab-hdr-brd{
+    display: none;    
+}
+
+.ikont-hpg-gpLogPrinci {
+    width: 400px !important;
+    position: relative !important;
+    float: right !important;
+    top: 50px;
+    left: -50px;
+    font-family: "century";
+}
+
+.ikont-hpg-loginheader {
+    position: fixed;
+    top: -0px;
+    left: -0px;
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 100;
+}
+
+.ikont-hot-loginheader {
+    position: relative;
+    text-align: left;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.ikont-hgi-iconheaderpng {
+    margin-left: 20px!important;
+    float: left !important;
+    width: 40px;
+    height: 40px;
+}
+
+.ikont-hpg-loginfooter {
+    position: fixed;
+    bottom: -0px;
+    left: -0px;
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 100;
+    font-family: "furura";
+}
+
+.ikont-hgi-iconfooterpng {
+    margin-left: 20px!important;
+    float: left !important;
+    width: 40px;
+    height: 40px;
+}
+
+.ikont-hot-loginfotercopy {
+    margin-left: 10px;
+    position: relative;
+    top: 10px;
+}
+.ikont-hgi-iconytpng, .ikont-hgi-iconfbpng, .ikont-hgi-icontwpng {
+    position: relative !important;
+    float: right !important;
+    margin-right: 20px;
+}
+
+.ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees {
+    margin-left: 10px;
+    position: relative;
+    top: 10px;
+    text-decoration: none;
+}
+
+.rf-pp-hdr{
+    background: #38CC66 !important;
+    background: -moz-linear-gradient(top, #38CC66 0%, #004A38 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#38CC66), color-stop(64%,#004A38), color-stop(100%,#004A38)) !important;
+    background: -webkit-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: -o-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: -ms-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    -moz-border-top-left-radius: 20px !important;
+    -moz-border-top-right-radius: 20px !important;
+    -ms-border-top-left-radius: 20px !important;
+    -ms-border-top-right-radius: 20px !important;
+    repeat-x: 'top left #{richSkin.headerBackgroundColor}';
+    position: relative;
+    padding-left: 10px;
+    cursor: move;
+    padding: 2px;
+    border-top-left-radius: '#{richSkin.panelBorderRadius}';
+    border-top-right-radius: '#{richSkin.panelBorderRadius}';
 }

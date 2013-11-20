@@ -331,3 +331,37 @@ ul#slider li{
 #slider-li-tree.animation-one-left-two{
     left:100%!important;
 }
+
+.rf-pp-cntr{
+    background: transparent!important;
+    border: solid 1px transparent !important;
+
+}
+.rf-pp-cnt-scrlr{
+
+    width: 100%;
+    overflow: hidden;
+    border-width: 0px;
+    border: transparent !important;
+    -moz-border-top-right-radius: 0px!important;
+    -ms-border-top-right-radius: 0px!important;
+    -webkit-border-top-right-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+    -moz-border-bottom-right-radius: 20px !important;
+    -ms-border-bottom-right-radius: 20px !important;
+    -webkit-bottom-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    -moz-border-bottom-left-radius: 20px !important;
+    -ms-border-bottom-left-radius: 20px !important;
+    -webkit-bottom-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    -moz-box-shadow: transparent !important;
+    -webkit-box-shadow: transparent !important;
+    -ms-box-shadow: transparent !important;
+    box-shadow: transparent !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,74,56,0.7)), to(rgba(29,140,79,0.7))) !important;
+    background: -moz-linear-gradient(top, rgba(0,74,56,0.7), rgba(29,140,79,0.7)) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.7, StartColorstr='#1D629F', EndColorstr='#1C2B38') !important;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.7, StartColorstr='#1D629F', EndColorstr='#1C2B38') !important;
+    background: -o-linear-gradient(top,rgba(0,74,56,0.7), rgba(29,140,79,0.7))!important;
+}
