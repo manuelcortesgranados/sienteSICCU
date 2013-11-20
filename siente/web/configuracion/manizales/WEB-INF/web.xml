@@ -19,8 +19,8 @@
     <context-param>
         <param-name>org.richfaces.skin</param-name>
         
-        <!--Skin general-->
-        <param-value>general</param-value>
+        <!--Skin manizales-->
+        <param-value>manizales</param-value>
         
     </context-param>
     <listener>
