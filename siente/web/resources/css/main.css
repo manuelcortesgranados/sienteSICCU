@@ -4733,3 +4733,26 @@ a.ikont-busquedavanzada:hover {
     height:60px;
     background-color:#DCE4EA;
 }
+
+.ikont-hot-filtbusqueda {
+    color: #333333;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ikont-hot-filtavanzada2{
+    color: #666666;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.panelFiltroAvanzadotxt{
+    background-color: #FFFFFF;
+    border: 7px solid #004670;
+    box-shadow: 1px 1px 10px #FFFFFF;
+    text-align: center;
+}
+

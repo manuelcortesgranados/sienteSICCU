@@ -9,11 +9,11 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelFiltroAvanzado" width="600" autosized="true"    headerClass="header_filtro" >
+    <rich:popupPanel id="panelFiltroAvanzado" width="600" autosized="true"  styleClass="panelFiltroAvanzadotxt"  headerClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-filtbusqueda"   value="#{var.filtbusqueda} " />
-                <h:outputText  styleClass="ikont-hot-filtavanzada"   value="#{var.filtavanzada}"   />
+                <h:outputText  styleClass="ikont-hot-filtavanzada2"   value="#{var.filtavanzada}"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -32,26 +32,26 @@
                         <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
                                      onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  />
 
-                        <h:panelGrid columns="2" >
+                        <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" width="100%" >
                             <h:outputLabel  styleClass="ikont-hol-lblevente"    id="lblevente" value="#{var.eventopertenece}"  />
                             <h:outputLabel  styleClass="ikont-hol-label_tipo_proyectoge"    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}"  />
                             <h:panelGroup>
-                                <h:selectOneMenu  id="even" value="#{HomeGestion.filtro.intcodevento}">
+                                <h:selectOneMenu  id="even" value="#{HomeGestion.filtro.intcodevento}" style="width:200px;">
                                     <f:selectItems value="#{HomeGestion.eventos}" />
                                 </h:selectOneMenu> 
-                                <h:selectOneMenu id="cmbPeriodoProyecto" value="#{HomeGestion.filtro.intperiodoevento}" >
+                                <h:selectOneMenu id="cmbPeriodoProyecto" value="#{HomeGestion.filtro.intperiodoevento}" style="width:200px;">
                                     <f:selectItems value="#{SessionBeanCobra.periodoEvento}" />
                                 </h:selectOneMenu>
                             </h:panelGroup>
                             <h:panelGroup>
-                                <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}">
+                                <h:selectOneMenu style="width:200px;" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}">
 
                                     <f:selectItems value="#{HomeGestion.tiposProyectos}" />
                                     <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
                                                  render="subtiposProyecto"/>
                                 </h:selectOneMenu>
                                 <h:panelGroup id="subtiposProyecto" >
-                                    <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}" >
+                                    <h:selectOneMenu style="width:200px;"  id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}" >
                                         <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
                                     </h:selectOneMenu>
                                 </h:panelGroup>
@@ -60,7 +60,7 @@
 
                             <h:outputLabel  styleClass="ikont-hol-label_fase "    id="label_fase" value="#{var.fasepertenece}:" />
                             <h:outputLabel  styleClass="ikont -hol-label_cuanti"    id="label_cuanti"  value="#{var.cuantocuesta}" />
-                            <h:selectOneMenu  id="fase" value="#{HomeGestion.filtro.intcodfase}">
+                            <h:selectOneMenu style="width:200px;" id="fase" value="#{HomeGestion.filtro.intcodfase}">
                                 <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                 <f:selectItems value="#{HomeGestion.fases}" />
                             </h:selectOneMenu>
@@ -82,28 +82,28 @@
                             <h:outputLabel  styleClass="ikont-hol-label_donde"    id="label_donde" value="#{var.dondeestaubicado}:"/>
 
                             <h:outputLabel  styleClass="ikont-hol-label_quetan"    id="label_quetan"  value="#{var.quetanavanzado}:" />
-                            <h:panelGrid columns="1" columnClasses="panelcenter" >
-                                <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}">
+                            <h:panelGrid columns="1" columnClasses="panelcenter" width="100%">
+                                <h:selectOneMenu style="width:200px;" value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                                     <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
                                     <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
                                 </h:selectOneMenu>
                                 <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
-                                    <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
-                                        <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
+                                    <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{HomeGestion.inttipoorigen == 0}" >
+                                        <h:selectOneMenu style="width:200px;" id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                             <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
                                             <f:selectItems value="#{HomeGestion.zonaespe}"/>
                                             <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
                                         </h:selectOneMenu>
                                     </h:panelGrid>
-                                    <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
-                                        <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"
+                                    <h:panelGrid id="filtrodeptos" columnClasses="panelcenter" columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
+                                        <h:selectOneMenu style="width:200px;" id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"
                                                           rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                             <f:selectItems value="#{HomeGestion.departamentos}"/>
                                             <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
                                                          render="municipios"/>
                                         </h:selectOneMenu>
-                                        <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"
+                                        <h:selectOneMenu style="width:200px;" id="municipios" value="#{HomeGestion.filtro.strmunicipio}"
                                                          rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
                                             <f:selectItems value="#{HomeGestion.municipios}" />
                                         </h:selectOneMenu>
@@ -111,7 +111,7 @@
                                 </h:panelGrid>
                             </h:panelGrid>
 
-                            <h:panelGrid columns="3" columnClasses="panelcenter"  id="avancefil">
+                            <h:panelGrid columns="3" columnClasses="panelcenter"  id="avancefil" style="width:200px;">
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.avance1}">
                                 </rich:inputNumberSpinner>
@@ -148,15 +148,13 @@
 
                      </h:panelGrid>
 
-                        <h:panelGrid columns="2"  >
+                        <h:panelGrid columns="2"  columnClasses="panelcenter">
                             <h:panelGrid columns="1" >
                                 <h:outputLabel  styleClass="ikont-hol-label_contratista"    id="label_contratista" value="#{var.quieneselcontratista}" />
 
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
-
-
-                                <h:outputLabel  styleClass="ikont-hol-label_estado_obra"   id="label_estado_obra" value="#{var.enqueestadoseencuentra}"  />
+                                <h:outputLabel style="width:200px;"  styleClass="ikont-hol-label_estado_obra"   id="label_estado_obra" value="#{var.enqueestadoseencuentra}"  />
 
 
                                 <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}">
