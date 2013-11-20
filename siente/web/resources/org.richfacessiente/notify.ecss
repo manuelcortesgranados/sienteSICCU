@@ -71,7 +71,7 @@ html > body .rf-ntf {
 .rf-ntf-sum {
     margin: 0;
     font-weight: bold;
-    font-size: 1.3em;
+    font-size: 13px;
 }
 
 .rf-ntf-det {

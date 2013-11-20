@@ -2916,14 +2916,14 @@ a.califica:hover {
     background-position: 0px 0px;
 }
 
-a.tacometro {
+a.ikont-hcl-imgTacometro {
     width:85px;
     height:85px;
     display: block;
     background-position: 0px 0px;
     background-image:url(../imgs/bt_tacometro.png);
 }
-a.tacometro:hover {
+a.ikont-hcl-imgTacometro:hover {
     background-position: 0px -85px;
 }
 
@@ -3048,14 +3048,14 @@ a.tacometro:hover {
     background:url(../imgs/line.png) bottom no-repeat;
 }
 
-a.filtrar {
+a.ikont-acl-btnfiltrociudadano{
     background-image:url(../imgs/bt_filtrar.png);
     width:110px;
     height:30px;
     display:block;
     background-position: 0px 0px;
 }
-a.filtrar:hover {
+a.ikont-acl-btnfiltrociudadano:hover {
     background-position: 0px -31px;
 }
 .commentframe {
@@ -3079,7 +3079,7 @@ a.publicar:hover {
     background-position: 0px -25px;
 }
 
-.buscadorciudadano_button {
+.ikont-hgi-bnver {
     background: #F4F7F9;
     background: -moz-linear-gradient(top,  #F4F7F9 0%,  #D5E1E9 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F7F9), color-stop(64%,#D5E1E9), color-stop(100%,#D5E1E9));
@@ -3092,7 +3092,7 @@ a.publicar:hover {
     height:26px;
     border: thin solid #51819E;
 }
-.buscadorciudadano_button:hover {
+.ikont-hgi-bnver:hover {
     background: #D5E1E9;
     background: -moz-linear-gradient(top,  #D5E1E9 0%,  #F4F7F9 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#D5E1E9), color-stop(64%,#F4F7F9), color-stop(100%,#F4F7F9));
@@ -3755,7 +3755,9 @@ a.p_cancelar{
 a.p_cancelar:hover {
     background-position: 0px -25px;
 }
-.picborder2{
+.ikont-hgi-strimagneobra{
+    height: 100px;
+    width: 130px;
     border:#FFF 4px solid; -moz-box-shadow: 0.1em 0.1em 0.1em #51819E; -webkit-box-shadow: 0.1em 0.1em 0.1em #51819E; box-shadow: 0.1em 0.1em 0.1em #51819E;
 }
 
@@ -4025,7 +4027,7 @@ table.centrado {
     position:relative;
     margin-right:5px;
 }
-.buttonblue2{
+.ikont-hcl-iniciarOpiniones{
     width:180px;
     height:25px;
     background-color:#2A2F82;
@@ -4042,8 +4044,13 @@ table.centrado {
     float:left;
     position:relative;
     margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
 }
-.buttonblue2:hover {
+.ikont-hcl-iniciarOpiniones:hover {
     background-color:#CCC;
     color:#2A2F82;
 }
@@ -4066,7 +4073,7 @@ table.centrado {
     margin-right:5px;
 }
 
-.buttonblue3{
+.ikont-hcl-iniciarImagenes_cui{
     width:180px;
     height:25px;
     background-color:#1171B6;
@@ -4083,12 +4090,17 @@ table.centrado {
     float:left;
     position:relative;
     margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
 }
-.buttonblue3:hover {
+.ikont-hcl-iniciarImagenes_cui:hover {
     background-color:#CCC;
     color:#1171B6;
 }
-.buttonblue3seleccionado{
+.ikont-hcl-iniciarImagenes_cui1{
     width:180px;
     height:25px;
     background-color:#CCC;
@@ -4105,9 +4117,14 @@ table.centrado {
     float:left;
     position:relative;
     margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
 }
 
-.buttonblue4{
+.ikont-hcl-iniciarDocumentos_ciu{
     width:180px;
     height:25px;
     background-color:#2CA8E0;
@@ -4124,12 +4141,16 @@ table.centrado {
     float:left;
     position:relative;
     margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
 }
-.buttonblue4:hover {
+.ikont-hcl-iniciarDocumentos_ciu:hover {
     background-color:#CCC;
     color:#2CA8E0;
 }
-.buttonblue1_active{
+.ikont-hcl-iniciardeta1{
     width:180px;
     height:25px;
     color:#FFF;
@@ -4178,7 +4199,7 @@ table.centrado {
     background-repeat: no-repeat;
     padding: 3px 46px 13px 27px;
 }
-.buttonblue5{
+.ikont-hcb-seguirspry{
     color:#FFF!important;
     padding: 5px 10px 5px 10px!important;
     font-size:15px!important;
@@ -4197,7 +4218,7 @@ table.centrado {
     background: linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA7E5', endColorstr='#27225F',GradientType=0 )!important;
 }
-.buttonblue5:hover {
+.ikont-hcb-seguirspry:hover {
     background: #F5F5F5!important;
     background: -moz-linear-gradient(top,  #F5F5F5 0%,  #B1B1B1 100%)!important;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F5F5), color-stop(64%,#B1B1B1), color-stop(100%,#B1B1B1))!important;
@@ -4237,7 +4258,7 @@ table.centrado {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#B1B1B1',GradientType=0 )!important;
     color:#27225F!important;
 }
-.buttonphoto {
+.ikont-acl-omvermas {
     width: 25px; /* for validator */
     height: 25px;
     background-image:url(../imgs/btn_medios_fotos.png);
@@ -4247,7 +4268,7 @@ table.centrado {
     display:block;
     float: left;
 }
-.buttonphoto:hover {
+.ikont-acl-omvermas:hover {
     background-position: 0px -28px;
 }
 .buttonvideos {
@@ -4263,7 +4284,7 @@ table.centrado {
 .buttonvideos:hover {
     background-position: 0px -28px;
 }
-.numberblue {
+.ikont-hot-numvobra {
     font-family:"knockout", Arial, Helvetica, sans-serif;
     font-size:80px;
     color:#1D71B8;
@@ -4273,7 +4294,7 @@ table.centrado {
     font-size:80px;
     color:#DADADA;
 }
-.numberbluebig {
+.ikont-hot-intplazoo {
     font-family:"knockout", Arial, Helvetica, sans-serif;
     font-size:130px;
     line-height:80px;
@@ -4756,3 +4777,42 @@ a.ikont-busquedavanzada:hover {
     text-align: center;
 }
 
+#sideline {
+    text-align: center;
+    position: relative;
+    font-family: Verdana, Geneva, sans-serif;
+    background-image: url("/siente/resources/imgs/lineCiudadano.png");
+    background-position-y: -8px;
+}
+
+label.textlittle2 {
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ikont-hcb-ver_objeto, .ikont-hcb-contratointerve{
+    width: 40px!important;
+    height: 20px!important;
+}
+
+.ikont-hcb-btnlocalidadubicacion{
+    width: 100px!important;
+    height: 20px!important;
+}
+
+.ikont-hpg-strobjetoobra{
+    border-top: #FFF thin solid;
+    border-bottom: #FFF thin solid;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    font-style: italic;
+    color: #FFF;
+    line-height: 10px;
+    text-align: justify;
+}
+
+.ikont-hpg-contratistanombrecomplelateral{
+    overflow-y: scroll;
+    height: 30px;
+}
