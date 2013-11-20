@@ -4751,6 +4751,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         if (obranueva.getTercero().getIntcodigo() == 5212 && obranueva.getSedeeducativa() != null) {
             obranueva.setSedeeducativa(null);
         }
+        redibujarmapa = false;
         return null;
     }
 
