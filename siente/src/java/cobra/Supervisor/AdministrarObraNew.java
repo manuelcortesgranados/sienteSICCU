@@ -2314,4 +2314,19 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         habilitarModificarimpacto = true;
         habilitarGuardarimpacto = false;
     }
+    
+    /**
+     * Reporte historial de validaciones
+     * 
+     */
+     public String reporteHistorialValidaciones() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
+        } catch (IOException ex) {
+            Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
 }

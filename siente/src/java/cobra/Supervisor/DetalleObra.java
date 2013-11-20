@@ -1384,9 +1384,8 @@ public class DetalleObra implements Serializable{
     }
 
     public String mostrarUltimasAlimentacionCualitativa() {
-        getSessionBeanCobra().getCobraService().setListAlimetCualitativa(getSessionBeanCobra().getCobraService().encontrarUltimasAlimentacionesCualitativa(getAdministrarObraNew().getObra().getIntcodigoobra(), 0, 10));
-
-
+        getSessionBeanCobra().getCobraService().setListAlimetCualitativa(getSessionBeanCobra().getCobraService().encontrarUltimasAlimentacionesCualitativa(getAdministrarObraNew().getObra().getIntcodigoobra(), 0, 10));        
+        System.out.println("entre aca = ");
         return null;
     }
 

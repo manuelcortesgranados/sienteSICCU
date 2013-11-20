@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink execute="@this"  actionListener="#{MarcoLogico$MarcoLogico.limpiar}" render="rpindicadorasociado,@ll" value="cerrar" id="esconder_mp-indicadorasociado" styleClass="cerrar"
+                    <a4j:commandLink execute="@this"   render="rpindicadorasociado,@ll"  id="esconder_mp-indicadorasociado" styleClass="cerrar"
                                      title="#{varMarcoLogico.cerrar}"  onclick="#{rich:component('mp-indicadorasociado')}.hide();
                                               return false;"/>
                 </h:panelGroup>

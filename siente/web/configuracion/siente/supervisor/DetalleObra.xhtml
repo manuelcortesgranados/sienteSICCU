@@ -68,9 +68,10 @@
     </ui:define>
 
     <ui:define name="body">
-        <h:body onload="cargarDetalle()">
-            <rich:messages />
+        <h:body onload="cargarDetalle();"> 
+           
             <h:form prependId="false">
+                 
                 <a4j:jsFunction id="iniDetalle" name="cargarDetalle">
                     <a4j:ajax event="complete" oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}" />
                 </a4j:jsFunction>
@@ -443,8 +444,7 @@
                                 </rich:panel>
                                 <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-objeto"   headerClass="font-header-panel"
                                             rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
-                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
-                                            return true;">
+                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();return true;">
                                         <h:graphicImage  styleClass="ikont-hgi-verobjeto"   value="#{var.verobjeto}" />
                                     </a4j:commandLink>
                                 </rich:panel>
@@ -459,12 +459,9 @@
                                 </rich:panel>
                             </h:panelGrid>
                         </center>
+                        <interkont:spacer height="20px" width="100%" />
                     </h:panelGrid>
-
-
-
-                    <interkont:spacer height="20px" />
-
+                    
                     <rich:collapsiblePanel id="simpleToggleImagenes" switchType="client" header="#{var.imagenes}" expanded="false" toggleListener="#{Supervisor$DetalleObra.imagenEvolucion}" >
                         <a4j:ajax event="click" render="ima1,ima2"/>
                         <ui:include src="/modal/imagenDetaModal.xhtml"/>
@@ -477,25 +474,25 @@
                         <a4j:ajax event="switch"  render="panelContrato,layoutGral"/>
                         <ui:include src="/modal/contratoModal.xhtml"/>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="client" header="#{var.logro}s y #{var.dificultad}es" expanded="false" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
+                    <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="ajax" header="#{var.logro}s y #{var.dificultad}es" expanded="false" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
+                        <a4j:ajax event="switch"  render="hp-panelLogros" />
                         <center>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" id="hp-panelLogros">
                                 <a4j:commandLink id="btlogros" styleClass="ikont-acl-mostrarcuali evo01"  
-                                                 action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
-
+                                                 action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"                                                 
                                                  render="modalLogrosDetalle">
-                                    <rich:componentControl  target="modalLogrosDetalle" operation="show" />
+                                    <rich:componentControl  target="modalLogrosDetalle" event="click" operation="show" />
                                 </a4j:commandLink>
                                 <a4j:commandLink id="btlogrosx" styleClass="ikont-acl-infocuali evo02"  
                                                  action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
                                                  render="modalDificultadDetalle">
-                                    <rich:componentControl  target="modalDificultadDetalle" operation="show" />
+                                    <rich:componentControl  target="modalDificultadDetalle" event="click"  operation="show" />
                                 </a4j:commandLink>
                             </h:panelGrid>
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="MovimientosFinancieros" switchType="client" expanded="false" header="#{var.movimientosfinancieros}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlmovientosfinancieros}" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                    <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax" expanded="false" header="#{var.movimientosfinancieros}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlmovientosfinancieros}" toggleListener="#{Supervisor$DetalleObra.llenarMovimientos}" >
                         <a4j:ajax event="click"  render="gpMovFinan"/>
                         <f:facet name="header">
                             <h:outputText  styleClass="ikont-hot-movifinan"   value="#{var.movimientosfinancieros}"/>
@@ -675,14 +672,15 @@
                         <a4j:ajax event="switch"  render="panelprorroga" />
                         <ui:include src="/modal/historialModiModal.xhtml"/>
                     </rich:collapsiblePanel>
-
-                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos and !Supervisor$AdministrarObraNew.proyectoestrategia}"
-                                           header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
-                        <a4j:ajax event="switch" render="gpListaSeguimientos"/>
-                        <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>
-                    </rich:collapsiblePanel>
-
-
+                </h:form>
+                <h:form>
+                <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos and !Supervisor$AdministrarObraNew.proyectoestrategia}"
+                                       header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
+                    <a4j:ajax event="switch" render="gpListaSeguimientos"/>
+                    <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>
+                </rich:collapsiblePanel>
+                </h:form>
+                <h:form>
                     <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="client" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria and !Supervisor$AdministrarObraNew.proyectoestrategia}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
                         <a4j:ajax event="click"  render="panelInterventoriaContra"/>
                         <h:panelGroup layout="block" id="panelInterventoriaContra"  >
@@ -767,25 +765,43 @@
                             </rich:dataTable>
                         </h:panelGroup>
                     </rich:collapsiblePanel>
+                </h:form>
+<h:form target="_blank">
+                <rich:collapsiblePanel id="simpleToggleReportes" switchType="client" header="#{var.reportedeobra}" expanded="false">
+                    <a4j:ajax event="click"  render="panelReporteObra"/>
+                    <h:panelGroup layout="block" id="panelReporteObra"  >
+                        
 
-                    <rich:collapsiblePanel id="simpleToggleReportes" switchType="client" header="#{var.reportedeobra}" expanded="false">
-                        <a4j:ajax event="click"  render="panelReporteObra"/>
-                        <h:panelGroup layout="block" id="panelReporteObra"  >
-                            <h:form target="_blank">
+                            <center>
+                                Generar reporte en:
+                                <h:panelGrid columns="3" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                    <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="ikont-hcl-reportePdf pdf butonreport"  value="PDF"  />
+                                    <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="ikont-hcl-reporteExcel excel butonreport"  value="EXCEL"    />
+                                    <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="ikont-hcl-reporteWord word butonreport"  value="WORD"  />
 
-                                <center>
-                                    Generar reporte en:
-                                    <h:panelGrid columns="3">
-
-                                        <h:commandLink id="pdf" onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf pdf butonreport"  value="PDF"  target="_blank"  />
-                                        <h:commandLink id="excel" onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel excel butonreport"  value="EXCEL"  target="_blank" />
-                                        <h:commandLink id="word" onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord word butonreport"  value="WORD" target="_blank" />
+                                </h:panelGrid>
+                                <h:panelGrid columns="3" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                    <h:panelGrid columnClasses="panelcenter">
+                                        <h:commandLink  id="reporteMediosVidapdf" action="#{MarcoLogico$MarcoLogico.reporteMarcoLogicoPdf}" styleClass="ikont-hcl-reportePdf pdf butonreport"  />
+                                        <h:outputText id="outputTextreportepdf" value="Reporte proyecto"  />
                                     </h:panelGrid>
-                                </center>
-                            </h:form>
-                        </h:panelGroup>
-                    </rich:collapsiblePanel>
 
+                                    <h:panelGrid columnClasses="panelcenter">
+                                        <h:commandLink id="reporteMediosVidaexcel" action="#{MarcoLogico$MarcoLogico.reporteMarcoLogicoExcel}" styleClass="ikont-hcl-reporteExcel excel butonreport"  />
+                                        <h:outputText id="outputreporteexcel" value="Matriz proyecto"  />
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columnClasses="panelcenter">
+                                        <h:commandLink id="reporteconsolidadomarcologicoexcel" action="#{MarcoLogico$MarcoLogico.reporteConsolidadoMarcoLogicoExcel}" styleClass="ikont-hcl-reporteExcel excel butonreport"  />
+                                        <h:outputText id="outputreporteconsolidadoexcel" value="Consolidado"  />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </center>
+                        
+                    </h:panelGroup>
+                </rich:collapsiblePanel>
+                </h:form>
+                <h:form>
                     <rich:collapsiblePanel id="simpleToggleBeneficiariosxproyecto" switchType="client" expanded="false" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null
                                                                                                                                     and SessionBeanCobra.usuarioObra.renderrecurso.verbeneficiariosah}"
                                            header="#{var.listabeneficiario}"
@@ -870,451 +886,295 @@
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
-                    <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos and !Supervisor$AdministrarObraNew.proyectoestrategia}">
+                </h:form>
+                <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos and !Supervisor$AdministrarObraNew.proyectoestrategia}">
 
-                        <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
-                            <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
-                            <h:panelGroup layout="block" id="rpListaActividadesProyecto" >
-                                <rich:dataTable id="listaActividadesAlimentar2"
-                                                onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                                onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
-                                                value="#{Supervisor$DetalleObra.listactividades}" var="registros" >
+                    <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
+                        <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
+                        <h:panelGroup layout="block" id="rpListaActividadesProyecto" >
+                            <rich:dataTable id="listaActividadesAlimentar2"
+                                            onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                            onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                                            value="#{Supervisor$DetalleObra.listactividades}" var="registros" >
 
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column id= "actividades" colspan="1" width="300px">
+
+                                            <h:outputText  styleClass="ikont-hot-acti"   value="#{var.actividades}"/>
+                                        </rich:column>
+                                        <rich:column id= "total" colspan="4" >
+                                            <h:outputText  styleClass="ikont-hot-totalact"   value="#{var.totalactividad}"/>
+                                        </rich:column>
+                                        <rich:column id= "totalEjecutado" colspan="3" >
+                                            <h:outputText  styleClass="ikont-hot-totejec"   value="#{var.totalejecutado}"/>
+                                        </rich:column>
+
+                                        <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="250px">
+                                            <h:outputText  styleClass="ikont-hot-desc"   value="#{var.descripcion}" />
+                                        </rich:column>
+                                        <rich:column id= "unidad" rowspan="2" width="25px">
+                                            <h:outputText  styleClass="ikont-hot-uni-uni"   value="#{var.unidad}"/>
+                                        </rich:column>
+                                        <rich:column id= "valorUnitario" rowspan="2" width="25px">
+                                            <h:outputText  styleClass="ikont-hot-valuni"   value="#{var.valorunitaio}"/>
+                                        </rich:column>
+                                        <rich:column id= "cantidad" rowspan="2" width="30px">
+                                            <h:outputText  styleClass="ikont-hot-cant"   value="#{var.cantidad}"/>
+                                        </rich:column>
+                                        <rich:column id= "precio" rowspan="2" width="30px">
+                                            <h:outputText  styleClass="ikont-hot-valorprog"   value="#{var.valorprogramado}"/>
+                                        </rich:column>
+                                        <rich:column id= "cantidad2" rowspan="2" width="30px">
+                                            <h:outputText  styleClass="ikont-hot-cantejec"   value="#{var.cantidadejecutada}"/>
+                                        </rich:column>
+                                        <rich:column id= "precio2" rowspan="2" width="30px">
+                                            <h:outputText  styleClass="ikont-hot-valorejec"   value="#{var.valorejecutado}"/>
+                                        </rich:column>
+                                        <rich:column id= "cantidad3" rowspan="2" width="30px">
+                                            <h:outputText  styleClass="ikont-hot-porceavan"   value="#{var.porcentajeavance}"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+
+                                <rich:columnGroup >
+                                    <rich:column id="Descripcion" width="250px">
+                                        <h:panelGroup >
+                                            <h:outputText  styleClass="ikont-hot-desacti"   value="#{registros.strdescactividad}"
+                                                           rendered="#{!registros.boolimprevisto}"/>
+                                            <h:outputText  styleClass="ikont-hot-desacti1"   value="#{registros.strdescactividad}"
+                                                           rendered="#{registros.boolimprevisto}"/>
+                                        </h:panelGroup>
+                                    </rich:column>
+                                    <rich:column id="Unidad"  >
+                                        <h:outputText  styleClass="ikont-hot-tipou"   value="#{registros.strtipounidadmed}" />
+                                    </rich:column>
+                                    <rich:column id="Precio" >
+                                        <h:outputText  styleClass="ikont-hot-numplani"   value="#{registros.numvalorplanifao}"  >
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="Cantidad2" >
+                                        <h:outputText  styleClass="ikont-hot-cantplani"   value="#{registros.floatcantplanifao}"  />
+                                    </rich:column>
+                                    <rich:column id="TotalActividad" >
+                                        <h:outputText  styleClass="ikont-hot-totacti"   value="#{registros.numvalorplanifao*registros.floatcantplanifao}" >
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                        </h:outputText>
+                                    </rich:column>
+
+                                    <rich:column id="ValorEjec" >
+                                        <h:outputText  styleClass="ikont-hot-valejecobra"   id="ValorEjecObra" value="#{registros.floatcantidadejecutao}"  >
+
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="ValorFaltanAct" >
+                                        <h:outputText  styleClass="ikont-hot-valfalta"   id="valorFaltante"  value="#{registros.numvalorejecutao}"  >
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="CantidadEjec" >
+                                        <h:outputText  styleClass="ikont-hot-txtCantEjec"    id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
+                                            <f:convertNumber type="percent"/>
+
+                                        </h:outputText>
+                                    </rich:column>
+                                </rich:columnGroup>
+
+                                <f:facet name="footer">
+                                    <rich:columnGroup id="pie">
+                                        <rich:column colspan="3">TOTALES
+                                        </rich:column>
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText  styleClass="ikont-hot-Pie0"   id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" >
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+
+                                        <rich:column >
+                                            <h:outputText  styleClass="ikont-hot-Pie1"   id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}"  >
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                            </rich:dataTable>
+                        </h:panelGroup>
+                    </rich:collapsiblePanel>
+                </h:form>
+
+                <h:form id="formSubProyectos" rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" header="#{var.detsubproyectos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
+                        <a4j:ajax event="click" render="panelSubProyectos"/>
+                        <center>
+                            <h:panelGroup id="panelSubProyectos">
+                                <rich:dataTable id="tablaSubProyectos"
+                                                value="#{Supervisor$DetalleObra.listaSubProyectos}"
+                                                rendered="#{!empty Supervisor$DetalleObra.listaSubProyectos}"
+                                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                                sortMode="single"  var="row"  rows="6"
+                                                rowClasses="cabezo_tabla01, cabezo_tabla02">
                                     <f:facet name="header">
                                         <rich:columnGroup>
-                                            <rich:column id= "actividades" colspan="1" width="300px">
-
-                                                <h:outputText  styleClass="ikont-hot-acti"   value="#{var.actividades}"/>
+                                            <rich:column colspan="2">
+                                                <h:outputText  styleClass="ikont-hot-detnumsubpry"   value="#{var.detnumsubproyectos}: "/>
+                                                <h:outputText  styleClass="ikont-hot-numsubpry"   value="#{Supervisor$DetalleObra.numSubproyectos}"/>
                                             </rich:column>
-                                            <rich:column id= "total" colspan="4" >
-                                                <h:outputText  styleClass="ikont-hot-totalact"   value="#{var.totalactividad}"/>
+                                            <rich:column width="90%" breakRowBefore="true">
+                                                <h:outputText  styleClass="ikont-hot-txtnomspry"   id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
                                             </rich:column>
-                                            <rich:column id= "totalEjecutado" colspan="3" >
-                                                <h:outputText  styleClass="ikont-hot-totejec"   value="#{var.totalejecutado}"/>
-                                            </rich:column>
-
-                                            <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="250px">
-                                                <h:outputText  styleClass="ikont-hot-desc"   value="#{var.descripcion}" />
-                                            </rich:column>
-                                            <rich:column id= "unidad" rowspan="2" width="25px">
-                                                <h:outputText  styleClass="ikont-hot-uni-uni"   value="#{var.unidad}"/>
-                                            </rich:column>
-                                            <rich:column id= "valorUnitario" rowspan="2" width="25px">
-                                                <h:outputText  styleClass="ikont-hot-valuni"   value="#{var.valorunitaio}"/>
-                                            </rich:column>
-                                            <rich:column id= "cantidad" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont-hot-cant"   value="#{var.cantidad}"/>
-                                            </rich:column>
-                                            <rich:column id= "precio" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont-hot-valorprog"   value="#{var.valorprogramado}"/>
-                                            </rich:column>
-                                            <rich:column id= "cantidad2" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont-hot-cantejec"   value="#{var.cantidadejecutada}"/>
-                                            </rich:column>
-                                            <rich:column id= "precio2" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont-hot-valorejec"   value="#{var.valorejecutado}"/>
-                                            </rich:column>
-                                            <rich:column id= "cantidad3" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont-hot-porceavan"   value="#{var.porcentajeavance}"/>
+                                            <rich:column width="10%">
+                                                <h:outputText  styleClass="ikont-hot-txtconsulspry"   id="outputTexConsultarSubProyecto" value="#{var.consultar}" />
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
+                                    <rich:columnGroup id="cuerpoTablaSubproyectos">
+                                        <rich:column width="150px" breakRowBefore="true">
+                                            <h:outputText  styleClass="ikont-hot-nomo"   value="#{row.strnombreobra}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:panelGroup styleClass="ikont-hpg-datbasico"  >
+                                                <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
+                                                                 id="irDatosBasicos"  onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
+                                                    <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
+                                                </a4j:commandLink>
 
-                                    <rich:columnGroup >
-                                        <rich:column id="Descripcion" width="250px">
-                                            <h:panelGroup >
-                                                <h:outputText  styleClass="ikont-hot-desacti"   value="#{registros.strdescactividad}"
-                                                               rendered="#{!registros.boolimprevisto}"/>
-                                                <h:outputText  styleClass="ikont-hot-desacti1"   value="#{registros.strdescactividad}"
-                                                               rendered="#{registros.boolimprevisto}"/>
+                                                <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
+                                                                 onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
+                                                    <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    value="/resources/imgs/bt_ver.png"/>
+                                                </a4j:commandLink>
                                             </h:panelGroup>
                                         </rich:column>
-                                        <rich:column id="Unidad"  >
-                                            <h:outputText  styleClass="ikont-hot-tipou"   value="#{registros.strtipounidadmed}" />
-                                        </rich:column>
-                                        <rich:column id="Precio" >
-                                            <h:outputText  styleClass="ikont-hot-numplani"   value="#{registros.numvalorplanifao}"  >
-                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                            </h:outputText>
-                                        </rich:column>
-                                        <rich:column id="Cantidad2" >
-                                            <h:outputText  styleClass="ikont-hot-cantplani"   value="#{registros.floatcantplanifao}"  />
-                                        </rich:column>
-                                        <rich:column id="TotalActividad" >
-                                            <h:outputText  styleClass="ikont-hot-totacti"   value="#{registros.numvalorplanifao*registros.floatcantplanifao}" >
-                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                            </h:outputText>
-                                        </rich:column>
-
-                                        <rich:column id="ValorEjec" >
-                                            <h:outputText  styleClass="ikont-hot-valejecobra"   id="ValorEjecObra" value="#{registros.floatcantidadejecutao}"  >
-
-                                            </h:outputText>
-                                        </rich:column>
-                                        <rich:column id="ValorFaltanAct" >
-                                            <h:outputText  styleClass="ikont-hot-valfalta"   id="valorFaltante"  value="#{registros.numvalorejecutao}"  >
-                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                            </h:outputText>
-                                        </rich:column>
-                                        <rich:column id="CantidadEjec" >
-                                            <h:outputText  styleClass="ikont-hot-txtCantEjec"    id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
-                                                <f:convertNumber type="percent"/>
-
-                                            </h:outputText>
-                                        </rich:column>
                                     </rich:columnGroup>
-
                                     <f:facet name="footer">
-                                        <rich:columnGroup id="pie">
-                                            <rich:column colspan="3">TOTALES
-                                            </rich:column>
-                                            <rich:column>
-                                                <interkont:spacer width="2"/>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-Pie0"   id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" >
-                                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                                </h:outputText>
-                                            </rich:column>
-
-                                            <rich:column>
-                                                <interkont:spacer width="2"/>
-                                            </rich:column>
-
-                                            <rich:column >
-                                                <h:outputText  styleClass="ikont-hot-Pie1"   id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}"  >
-                                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                                </h:outputText>
-                                            </rich:column>
-
-
-                                            <rich:column>
-                                                <interkont:spacer width="2"/>
+                                        <rich:columnGroup>
+                                            <rich:column colspan="2" breakRowBefore="true" >
+                                                <rich:dataScroller id="datascrollerTablaSubProyectos" for="tablaSubProyectos" render="panelSubProyectos"/>
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
                                 </rich:dataTable>
                             </h:panelGroup>
-                        </rich:collapsiblePanel>
-                    </h:form>
-
-                    <h:form id="formSubProyectos" rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                        <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" header="#{var.detsubproyectos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
-                            <a4j:ajax event="click" render="panelSubProyectos"/>
-                            <center>
-                                <h:panelGroup id="panelSubProyectos">
-                                    <rich:dataTable id="tablaSubProyectos"
-                                                    value="#{Supervisor$DetalleObra.listaSubProyectos}"
-                                                    rendered="#{!empty Supervisor$DetalleObra.listaSubProyectos}"
-                                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                                    onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                                    sortMode="single"  var="row"  rows="6"
-                                                    rowClasses="cabezo_tabla01, cabezo_tabla02">
-                                        <f:facet name="header">
-                                            <rich:columnGroup>
-                                                <rich:column colspan="2">
-                                                    <h:outputText  styleClass="ikont-hot-detnumsubpry"   value="#{var.detnumsubproyectos}: "/>
-                                                    <h:outputText  styleClass="ikont-hot-numsubpry"   value="#{Supervisor$DetalleObra.numSubproyectos}"/>
-                                                </rich:column>
-                                                <rich:column width="90%" breakRowBefore="true">
-                                                    <h:outputText  styleClass="ikont-hot-txtnomspry"   id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
-                                                </rich:column>
-                                                <rich:column width="10%">
-                                                    <h:outputText  styleClass="ikont-hot-txtconsulspry"   id="outputTexConsultarSubProyecto" value="#{var.consultar}" />
-                                                </rich:column>
-                                            </rich:columnGroup>
-                                        </f:facet>
-                                        <rich:columnGroup id="cuerpoTablaSubproyectos">
-                                            <rich:column width="150px" breakRowBefore="true">
-                                                <h:outputText  styleClass="ikont-hot-nomo"   value="#{row.strnombreobra}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:panelGroup styleClass="ikont-hpg-datbasico"  >
-                                                    <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
-                                                                     id="irDatosBasicos"  onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
-                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
-                                                    </a4j:commandLink>
-
-                                                    <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
-                                                                     onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
-                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    value="/resources/imgs/bt_ver.png"/>
-                                                    </a4j:commandLink>
-                                                </h:panelGroup>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                        <f:facet name="footer">
-                                            <rich:columnGroup>
-                                                <rich:column colspan="2" breakRowBefore="true" >
-                                                    <rich:dataScroller id="datascrollerTablaSubProyectos" for="tablaSubProyectos" render="panelSubProyectos"/>
-                                                </rich:column>
-                                            </rich:columnGroup>
-                                        </f:facet>
-                                    </rich:dataTable>
-                                </h:panelGroup>
 
 
-                            </center>
+                        </center>
 
-                        </rich:collapsiblePanel>
-                    </h:form>
+                    </rich:collapsiblePanel>
+                     
+                </h:form>
 
-                    <!--Marco logico-->
-                    <!--rendered=" {Supervisor$AdministrarObraNew.proyectoestrategia and var.aplicamarcologico}"-->
-                    <h:form>
-                        <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="ajax"  header="#{varMarcoLogico.marcologicoproyecto}"  
-                                               expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
+                <!--Marco logico-->
+                <h:form >
+                
+                    <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="ajax"  header="#{varMarcoLogico.marcologicoproyecto}"  
+                                           expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
                             <a4j:ajax event="switch" render="pgMarcolIndicadorAsociado"  />       
                             <center>
                                 <a4j:commandButton id="btrelacionmarcolindic"  value="Crear Avance Relaciones" action="#{MarcoLogico$MarcoLogico.calcularAvanceRelacionMarcoLogicoIndicadorByPeridicidad}" immediate="true"
                                                    render="pgMarcolIndicadorAsociado" rendered="#{SessionBeanCobra.usuarioObra.usuId==1}">
                                 </a4j:commandButton>
                             </center>
-                            <h:panelGroup id="pgMarcolIndicadorAsociado">
-                                <rich:dataTable id="tablaRelacionMarcoIndicador" sortMode="single"
-                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listarelacionMarcolIndicador}"
-                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorbin}"
-                                                var="relacionMarcolIndicador" >
+                        <h:panelGroup id="pgMarcolIndicadorAsociado">
+                            <rich:dataTable id="tablaRelacionMarcoIndicador" 
+                                            style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listarelacionMarcolIndicador}"
+                                            binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorbin}"
+                                            var="relacionMarcolIndicador"  >
+                                <f:facet name="header">
+                                    <h:outputText value="#{varMarcoLogico.nivelproposito}"/>
+                                </f:facet>
+                                <rich:column  width="120px">
                                     <f:facet name="header">
-                                        <h:outputText value="#{varMarcoLogico.nivelproposito}"/>
+                                        <h:outputText value="#{varMarcoLogico.proposito}"/>
                                     </f:facet>
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.proposito}"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strNombreMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strtitulo}" rows="3" disabled="true"/>
-                                    </rich:column> 
+                                    <h:inputTextarea  id="strNombreMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strtitulo}" rows="3" disabled="true"/>
+                                </rich:column> 
 
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.descripcion}"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strdescripcionMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strdescripcion}" rows="3" disabled="true"/>
-                                    </rich:column> 
-
-                                    <rich:column width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
-                                        </f:facet>
-                                        <h:panelGrid columns="2">
-                                            <h:inputTextarea  id="strNombreIndicadorProposito" value="#{relacionMarcolIndicador.indicador.strnombreindicador}" rows="3" disabled="true"/>
-                                            <a4j:commandLink value="que miercoles" action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" execute="tablaRelacionMarcoIndicador" oncomplete="#{rich:component('mp-indicadorasociado')}.show();"
-                                                             >
-                                                <a4j:ajax event="complete" render="rpindicadorasociado" execute="rpindicadorasociado" />
-                                            </a4j:commandLink>    
-
-                                            <h:commandLink immediate="true"  type="submit"  id="bt_consultaIndicadorAsociadol" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" 
-                                                           >
-                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
-                                                <a4j:ajax execute="@this" render="rpindicadorasociado,@ll" oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
-                                            </h:commandLink>
-                                        </h:panelGrid>
-                                    </rich:column>                                      
-
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
-                                        </f:facet>
-                                        <a4j:commandLink id="bt_crearBaseMetaProposito"  
-                                                         action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaProposito}" execute="mp-asociar-indicadormarcologico,rpasociarMarcologicoIndicador"  render="rpasociarMarcologicoIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column>
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
-                                        </f:facet>
-                                        <a4j:commandLink id="bt_registrarplanificacionj"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociada}" render="rpRegistroPlanificacionAsociacionMarcolIndicador"
-                                                         rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" >
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
-                                        </f:facet>
-                                        <a4j:commandLink immediate="true" id="bt_consultarplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicador}" execute="rpPlaneacionMarcolIndicador" render="rpPlaneacionMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
-                                        </f:facet>
-                                        <a4j:commandLink rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" id="bt_registraravanceplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicador}" render="rpPlaneacionAvanceMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-                                </rich:dataTable>
-                                <interkont:spacer height="30px" width="100%"/>
-                                <rich:dataTable id="tablaRelacionMarcolIndicadorComponente"  sortMode="single"
-                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listaMarcolIndicadorcomponente}"
-                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorComponentebin}"
-                                                var="relacionMarcolIndicadorComponente" >
+                                <rich:column  width="120px">
                                     <f:facet name="header">
-                                        <h:outputText value="#{varMarcoLogico.nivelcomponente}"/>
+                                        <h:outputText value="#{varMarcoLogico.descripcion}"/>
                                     </f:facet>
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.componente}"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strNombreMarcolComponente" value="#{relacionMarcolIndicadorComponente.marcologico.strtitulo}" rows="3" disabled="true"/>
-                                    </rich:column> 
+                                    <h:inputTextarea  id="strdescripcionMarcolProposito" value="#{relacionMarcolIndicador.marcologico.strdescripcion}" rows="3" disabled="true"/>
+                                </rich:column> 
 
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{var.descripcion}"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strdescripcionMarcolComponente" value="#{relacionMarcolIndicadorComponente.marcologico.strdescripcion}" rows="3" disabled="true"/>
-                                    </rich:column> 
-
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
-                                        </f:facet>
-                                        <h:panelGrid columns="2">
-                                            <h:inputTextarea  id="strNombreIndicadorComponente" value="#{relacionMarcolIndicadorComponente.indicador.strnombreindicador}" rows="3" disabled="true"/>
-                                            <h:commandLink id="bt_consultaIndicadorAsociadoComponente"  action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociadoByComponente}">
-                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
-                                                <a4j:ajax oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
-                                            </h:commandLink>
-                                        </h:panelGrid>
-                                    </rich:column>                                       
-
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="Crear Línea de base/Programar Meta"/>
-                                        </f:facet>
-                                        <h:commandLink id="bt_crearBaseMetacomponente"  action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaComponente}" >
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
-                                        </h:commandLink>
-                                    </rich:column>
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
-                                        </f:facet>
-                                        <h:commandLink rendered="#{relacionMarcolIndicadorComponente.doublevalor1meta!=null}" id="bt_registrarplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociadaByComponente}" >
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
-                                        </h:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
-                                        </f:facet>
-                                        <a4j:commandLink id="bt_consultarplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicadorByComponente}" render="rpPlaneacionMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
-                                        </f:facet>
-                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorComponente.doublevalor1meta!=null}" id="bt_registraravanceplanificacioncomponente"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicadorComponente}" render="rpPlaneacionAvanceMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                </rich:dataTable>
-
-
-                                <interkont:spacer height="30px" width="100%"/>
-
-                                <rich:dataTable id="tablaRelacionMarcolIndicadorActividad" sortMode="single"
-                                                style="text-align:center;" value="#{MarcoLogico$MarcoLogico.listaMarcolIndicadoractividad}"
-                                                binding="#{MarcoLogico$MarcoLogico.tablaRelacionMarcolIndicadorActividadbin}"
-                                                var="relacionMarcolIndicadorActividad" >
-
+                                <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText value="#{varMarcoLogico.nivelactividades}"/>
+                                        <h:outputText value="#{varMarcoLogico.indicador}"/>
                                     </f:facet>
+                                    <h:panelGrid columns="2">
+                                        <h:inputTextarea  id="strNombreIndicadorProposito" value="#{relacionMarcolIndicador.indicador.strnombreindicador}" rows="3" disabled="true"/>
+                                        
+                                        <a4j:commandButton value="prueba" id="prueba1" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}">
+                                            <rich:componentControl  target="mp-indicadorasociado" event="complete" operation="show" />
+                                        </a4j:commandButton>
+                                        
+                                        <a4j:commandLink id="btvermarcologicoindicador"   value="que miercoles" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}"                                                 
+                                                 render="rpindicadorasociado">
+                                    <rich:componentControl  target="mp-indicadorasociado" event="click" operation="show" />
+                                </a4j:commandLink>
+                                        
+                                         
+                                    </h:panelGrid>
+                                </rich:column>                                      
 
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{var.actividad}"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strNombreMarcoActividad" value="#{relacionMarcolIndicadorActividad.marcologico.strtitulo}" rows="3" disabled="true"/>
-                                    </rich:column> 
-                                    <!--
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="Descripción"/>
-                                        </f:facet>
-                                        <h:inputTextarea  id="strdescripcionMarcolActividad" value="#{relacionMarcolIndicadorActividad.marcologico.strdescripcion}" rows="3" disabled="true"/>
-                                    </rich:column> 
-                                    -->
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
+                                    </f:facet>
+                                    <a4j:commandLink id="bt_crearBaseMetaProposito"  
+                                                     action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaProposito}" execute="mp-asociar-indicadormarcologico,rpasociarMarcologicoIndicador"  render="rpasociarMarcologicoIndicador">
+                                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                        <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
+                                    </a4j:commandLink>
+                                </rich:column>
 
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText value="#{varMarcoLogico.indicador}"/>
-                                        </f:facet>
-                                        <h:panelGrid columns="2">
-                                            <h:inputTextarea  id="strNombreIndicadorActividad" value="#{relacionMarcolIndicadorActividad.indicador.strnombreindicador}" rows="3" disabled="true"/>
-                                            <a4j:commandLink id="bt_consultaIndicadorAsociadoActividad"  action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociadoByActividad}" render="rpindicadorasociado">
-                                                <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
-                                                <a4j:ajax oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
-                                            </a4j:commandLink>
-                                        </h:panelGrid>
-                                    </rich:column>                                      
+                                <rich:column  width="120px">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
+                                    </f:facet>
+                                    <a4j:commandLink id="bt_registrarplanificacionj"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociada}" render="rpRegistroPlanificacionAsociacionMarcolIndicador"
+                                                     rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" >
+                                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                        <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
+                                    </a4j:commandLink>
+                                </rich:column> 
 
-                                    <rich:column>
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
-                                        </f:facet>
-                                        <a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}" id="bt_crearBaseMetaPr"  action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaActividad}"  render="rpasociarMarcologicoIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column>
+                                <rich:column  width="120px">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
+                                    </f:facet>
+                                    <a4j:commandLink immediate="true" id="bt_consultarplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicador}" execute="rpPlaneacionMarcolIndicador" render="rpPlaneacionMarcolIndicador">
+                                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                        <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
+                                    </a4j:commandLink>
+                                </rich:column> 
 
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.programarmetas}"/>
-                                        </f:facet>
-                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorActividad.doublevalor1meta!=null and SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}"  id="bt_registrarplanificacionactividad"  action="#{MarcoLogico$MarcoLogico.cargarIdRelacionMarcologicoIndicadorAsociadoByActividad}" render="rpRegistroPlanificacionAsociacionMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-registro-planificacion')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.consultarmeta}"/>
-                                        </f:facet>
-                                        <a4j:commandLink id="bt_consultarplanificacioncomponenteactividad"  action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcolIndicadorByActividad}" render="rpPlaneacionMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                    <rich:column  width="120px">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
-                                        </f:facet>
-                                        <a4j:commandLink rendered="#{relacionMarcolIndicadorActividad.doublevalor1meta!=null and SessionBeanCobra.usuarioObra.renderrecurso.btn_marcologico}" id="bt_registraravanceplanificacionactividad"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicadorActividad}" render="rpPlaneacionAvanceMarcolIndicador">
-                                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                            <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
-                                        </a4j:commandLink>
-                                    </rich:column> 
-
-                                </rich:dataTable>
-                            </h:panelGroup>
-                        </rich:collapsiblePanel>
-                    </h:form>
-
+                                <rich:column  width="120px">
+                                    <f:facet name="header">
+                                        <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.reporteavance}"/>
+                                    </f:facet>
+                                    <a4j:commandLink rendered="#{relacionMarcolIndicador.doublevalor1meta!=null}" id="bt_registraravanceplanificacionj"  action="#{MarcoLogico$MarcoLogico.llenarAvancePlanificacionRelacionMarcolIndicador}" render="rpPlaneacionAvanceMarcolIndicador">
+                                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
+                                        <a4j:ajax oncomplete="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.show();" />
+                                    </a4j:commandLink>
+                                </rich:column> 
+                            </rich:dataTable>
+                            <interkont:spacer height="30px" width="100%"/>
+                            
+                        </h:panelGroup>
+                    </rich:collapsiblePanel>
                 </h:form>
 
 
@@ -1325,7 +1185,7 @@
                 <h:panelGrid  id="gpPrincipalInfCiudad" >
                     <h:form prependId="false">
 
-                        <div id="sideline"><label class="textlittle2">INFORMACIÃ“N GENERAL #{vat.textobra8}</label></div>
+                        <div id="sideline"><label class="textlittle2">INFORMACIÓN GENERAL #{vat.textobra8}</label></div>
                         <h:outputText  styleClass="ikont-hot-intcodobra"   value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"   />
                         <h:panelGrid columns="2"  columnClasses="panelizquierda, panelderecha">
                             <h:outputText  styleClass="ikont-hot-nomcor"   value="#{Supervisor$AdministrarObraNew.obra.strnombrecrot}"  />
@@ -1422,7 +1282,7 @@
                                     <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
                                     <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
                                         <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
-                                                                             return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
+                                                                         return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
                                         <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
 
                                     </h:panelGrid>
@@ -1680,8 +1540,8 @@
 
                     </h:form>
                 </h:panelGrid>
-            </h:panelGroup>
-
+            </h:panelGroup>            
+            
 
             <h:panelGroup id="modalesDetalle">
                 <ui:include src="/modal/verPolizasModal.xhtml"/>
@@ -1701,6 +1561,6 @@
             </h:panelGroup>
 
         </h:body>
-
+        
     </ui:define>
 </ui:composition>

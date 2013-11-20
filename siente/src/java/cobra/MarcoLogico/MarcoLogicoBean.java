@@ -18,6 +18,7 @@ import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.NuevoContratoBasico;
 //import com.sun.rave.web.ui.appbase.AbstractPageBean;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,8 +35,13 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo9
  */
-public class MarcoLogicoBean {
+public class MarcoLogicoBean implements Serializable{
 
+    public MarcoLogicoBean() {
+        
+    }
+
+    
     //Instancia de la clase Obligacion
     Obligacion obligacion = new Obligacion();
     Cronogramaobligacionesejecutada cronogramaobligacionesejecutada = new Cronogramaobligacionesejecutada();
@@ -1222,7 +1228,7 @@ public class MarcoLogicoBean {
     public void llenarIndicadorByAsociado() {
         
         relacionmarcologicoindicador = (Relacionmarcologicoindicador) tablaRelacionMarcolIndicadorbin.getRowData();
-        indicadorAsociado = getSessionBeanCobra().getMarcoLogicoService().encontrarIndicadorXId(relacionmarcologicoindicador.getIndicador().getIntidindicador());
+        indicadorAsociado = getSessionBeanCobra().getMarcoLogicoService().encontrarIndicadorXId(relacionmarcologicoindicador.getIndicador().getIntidindicador());        
         System.out.println("indic = " + indicadorAsociado.getStrdescripcionindicador());
         System.out.println("relacion = " + relacionmarcologicoindicador.getMarcologico().getStrdescripcion());
     }
@@ -1714,5 +1720,10 @@ public class MarcoLogicoBean {
         }
 
     }
+    
+    public void entrehaber()
+    {
+        System.out.println("ehhhhhh = ");
+    }        
 
 }

@@ -73,10 +73,9 @@
                 </f:facet>
             </rich:dataTable>
          <center>
-
           
                 <h:panelGrid columnClasses="panelcenter" >
-                    <h:commandLink target="_blank"  styleClass="ikont-hcl-reporteinterventoriaseguimiento"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
+                    <h:commandLink target="_blank"  styleClass="ikont-hcl-reportePdf pdf butonreport"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
                 </h:panelGrid>
             
             <h:outputText  styleClass="ikont-hot-intervenreport"   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
