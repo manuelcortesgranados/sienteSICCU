@@ -25,29 +25,29 @@
 
 .style-modal-dialog-head{
     /*modal */
-    font-size: 13px;
-    font-weight: 100;
-    height: 50px;
-    line-height: 20px;
-    text-indent: 10px;
-    border-style: none;
-    border-width: 0px;
-    background: #38CC66;
-    background: -moz-linear-gradient(top,  #38CC66 0%,  #004A38 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#38CC66), color-stop(64%,#004A38), color-stop(100%,#004A38));
-    background: -webkit-linear-gradient(top,  #38CC66 0%,#004A38 100%);
-    background: -o-linear-gradient(top,  #38CC66 0%,#004A38 100%);
-    background: -ms-linear-gradient(top,  #38CC66 0%,#004A38 100%);
-    background: linear-gradient(top,  #38CC66 0%,#004A38 100%);
-    -moz-border-top-left-radius: 20px;
-    -moz-border-top-right-radius: 20px;
-    -ms-border-top-left-radius: 20px;
-    -ms-border-top-right-radius: 20px;
-    -webkit-border-top-left-radius: 20px;
-    -webkit-border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px; 
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#51819E', endColorstr='#004A38',GradientType=0 );
+    font-size: 13px !important;
+    font-weight: 100 !important;
+    height: 50px !important;
+    line-height: 20px !important;
+    text-indent: 10px !important;
+    border-style: none !important;
+    border-width: 0px !important;
+    background: #38CC66 !important;
+    background: -moz-linear-gradient(top, #38CC66 0%, #004A38 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#38CC66), color-stop(64%,#004A38), color-stop(100%,#004A38)) !important;
+    background: -webkit-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: -o-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: -ms-linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    background: linear-gradient(top, #38CC66 0%,#004A38 100%) !important;
+    -moz-border-top-left-radius: 20px !important;
+    -moz-border-top-right-radius: 20px !important;
+    -ms-border-top-left-radius: 20px !important;
+    -ms-border-top-right-radius: 20px !important;
+    -webkit-border-top-left-radius: 20px !important;
+    -webkit-border-top-right-radius: 20px !important;
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#51819E', endColorstr='#004A38',GradientType=0 ) !important;
 }
 
 .style-modal-dialog td.rich-mpnl-body{

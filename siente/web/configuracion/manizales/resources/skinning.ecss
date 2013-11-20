@@ -327,5 +327,5 @@ input, select{
 
 textarea{
     height: 60px;
-    width : 200px;
+    width : 120%;
 }
