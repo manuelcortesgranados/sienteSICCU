@@ -1062,6 +1062,8 @@ public class DetalleObra implements Serializable{
     }
 
     public void iniciardetalle() {
+        getAdministrarObraNew().setProyectoestrategia(false);
+       
         imagenEvolucion();
         getAdministrarObraNew().cargarListas();
         llenarContratosInterventoria();
@@ -1070,6 +1072,15 @@ public class DetalleObra implements Serializable{
          getAdministrarObraNew().habilitarModificarimpacto = true;
         getAdministrarObraNew().habilitarGuardarimpacto = false;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
+        if (getSessionBeanCobra().getBundle().getString("versioncobra").compareTo("siente")==0 && obraMapa.getContrato() != null ) {
+            if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obraMapa.getIntcodigoobra()) != null) {
+                getAdministrarObraNew().setProyectoestrategia(true);  
+                //Llenamos objetos de avance                
+                getAdministrarObraNew().setVproductomedios(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(2, obraMapa.getIntcodigoobra()));
+                getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));
+                
+            }
+        }     
         limpiardetalle();
         if (getSessionBeanCobra().getCobraService().isCiu()) {
             llenarseguidores();
@@ -1177,8 +1188,7 @@ public class DetalleObra implements Serializable{
     }
 
     public String reportePdf() {
-        try {
-            System.out.println("entre reporte pdf");
+        try {            
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);

@@ -1835,7 +1835,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return null;
     }
 
-    public String primeroListProyectos() {
+    public String primeroListProyectos() {        
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
@@ -1894,8 +1894,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         } else {
             verultimosobra = false;
         }
-        obrasEncontradas = listaobrasusu.size();
-
+        obrasEncontradas = listaobrasusu.size();        
         return "filtronuevo";
     }
 

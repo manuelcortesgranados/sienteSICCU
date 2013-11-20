@@ -10,7 +10,7 @@
                    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
                    >
-    <ui:define name="head">
+    <ui:define name="head">        
         <link href="/#{var.versioncobra}/resources/css/main.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
         <script src="/#{var.versioncobra}/resources/js/sliderman.1.3.6.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/amcharts.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/serial.js" type="text/javascript"></script>
-        
+
         <h:outputScript name="coda-slider.1.1.1.pack.js" library="js"/>
         <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js"/>
         <h:outputScript name="jquery-easing-compatibility.1.2.pack.js" library="js"/>
@@ -36,7 +36,7 @@
         <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
         <h:outputScript name="RGraph.meter.js" library="js/RGraph"/>
         <h:outputScript name="slider.min_imagnes.js" library="js"/>
-        
+
         <ui:include src="/includes/google_maps_key.xhtml" />   
     </ui:define>
 
@@ -64,7 +64,7 @@
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml" />
         </h:panelGroup>
-        
+
     </ui:define>
 
     <ui:define name="body">
@@ -123,9 +123,9 @@
                                                         <h:outputText  styleClass="ikont-hot-textoobra3"   value="#{var.valor} #{var.textoobra3}"  />
                                                         <h:outputText  styleClass="ikont-hot-numvaltotobra"    value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                                        </h:outputText>
-                                                        <h:outputText  styleClass="ikont-hot-interventorObra"   value="#{var.valor} #{var.interventorObra}ia" />
-                                                        <h:outputText  styleClass="ikont-hot-valorinterventoria"   value="#{Supervisor$DetalleObra.valorinterventoria}">
+                                                        </h:outputText>                                                        
+                                                        <h:outputText  styleClass="ikont-hot-interventorObra"   value="#{var.valor} #{var.interventorObra}ía" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                                        <h:outputText  styleClass="ikont-hot-valorinterventoria"   value="#{Supervisor$DetalleObra.valorinterventoria}" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                                         </h:outputText>
                                                         <h:outputText  styleClass="ikont-hot-totalobra"   value="#{var.totalobra}" />
@@ -159,44 +159,44 @@
 
                                     <script type="text/javascript" language="JavaScript">
 
-            jQuery(document).ready(function() {
-                var j = jQuery.noConflict();
-                var timefalta = document.getElementById("finfecha").value;
-                var futuro = new Date(timefalta);
-                setInterval(function() {
-                    var ahora = new Date();
-                    var faltan = futuro - ahora;
-                    if (faltan > 0) {
-                        var segundos = Math.round(faltan / 1000);
-                        var minutos = Math.floor(segundos / 60);
-                        var segundos_s = segundos % 60;
-                        var horas = Math.floor(minutos / 60);
-                        var minutos_s = minutos % 60;
-                        var dias = Math.floor(horas / 24);
-                        var horas_s = horas % 24;
-                        horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
-                        dias = (!(dias > 9)) ? '0' + dias : dias;
-                        minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
-                        segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
+                                        jQuery(document).ready(function() {
+                                            var j = jQuery.noConflict();
+                                            var timefalta = document.getElementById("finfecha").value;
+                                            var futuro = new Date(timefalta);
+                                            setInterval(function() {
+                                                var ahora = new Date();
+                                                var faltan = futuro - ahora;
+                                                if (faltan > 0) {
+                                                    var segundos = Math.round(faltan / 1000);
+                                                    var minutos = Math.floor(segundos / 60);
+                                                    var segundos_s = segundos % 60;
+                                                    var horas = Math.floor(minutos / 60);
+                                                    var minutos_s = minutos % 60;
+                                                    var dias = Math.floor(horas / 24);
+                                                    var horas_s = horas % 24;
+                                                    horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
+                                                    dias = (!(dias > 9)) ? '0' + dias : dias;
+                                                    minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
+                                                    segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
 
-                        var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" >' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" >Dias</p></td><td></td></tr><tr><td><h2 align="center" >' + horas_s + '</h2></td><td><h2 align="center" >' + minutos_s + '</h2></td><td><h2 align="center" >' + segundos_s + '</h2></td></tr><tr> <td><p align="center" >Horas</p></td> <td><p align="center" >Minutos</p></td> <td><p align="center" >seg</p></td>  </tr></table>';
+                                                    var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" >' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" >Dias</p></td><td></td></tr><tr><td><h2 align="center" >' + horas_s + '</h2></td><td><h2 align="center" >' + minutos_s + '</h2></td><td><h2 align="center" >' + segundos_s + '</h2></td></tr><tr> <td><p align="center" >Horas</p></td> <td><p align="center" >Minutos</p></td> <td><p align="center" >seg</p></td>  </tr></table>';
 
-                        j('#refreshMe').html(cuentaRegresiva);
+                                                    j('#refreshMe').html(cuentaRegresiva);
 
-                    }
-                    else {
-                        var dias = 0;
-                        var horas_s = 0;
-                        var minutos_s = 00;
-                        var segundos_s = 00;
-                        var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" >' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" >Dias</p></td><td></td></tr><tr><td><h2 align="center" >' + horas_s + '</h2></td><td><h2 align="center" >' + minutos_s + '</h2></td><td><h2 align="center" >' + segundos_s + '</h2></td></tr><tr> <td><p align="center" >Horas</p></td> <td><p align="center" >Minutos</p></td> <td><p align="center" >seg</p></td>  </tr></table></center>';
+                                                }
+                                                else {
+                                                    var dias = 0;
+                                                    var horas_s = 0;
+                                                    var minutos_s = 00;
+                                                    var segundos_s = 00;
+                                                    var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" >' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" >Dias</p></td><td></td></tr><tr><td><h2 align="center" >' + horas_s + '</h2></td><td><h2 align="center" >' + minutos_s + '</h2></td><td><h2 align="center" >' + segundos_s + '</h2></td></tr><tr> <td><p align="center" >Horas</p></td> <td><p align="center" >Minutos</p></td> <td><p align="center" >seg</p></td>  </tr></table></center>';
 
-                        j('#refreshMe').html(cuentaRegresiva);
-                        return true;
-                    }
-                }, 100);
+                                                    j('#refreshMe').html(cuentaRegresiva);
+                                                    return true;
+                                                }
+                                            }, 100);
 
-            });
+                                        });
                                     </script>
 
                                     <div id="refreshMe" >
@@ -206,13 +206,21 @@
                                 </rich:panel>
 
                                 <rich:panel id="contratista" header="#{var.contratista}" bodyClass="rich-panel-grid-body"
-                                            styleClass="ikont-rp-contratista"   headerClass="font-header-panel" >
+                                            styleClass="ikont-rp-contratista"   headerClass="font-header-panel" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                     <h:panelGroup  layout="block" >
                                         <h:outputLabel  styleClass="ikont-hol-st_strnomcontratista "   id="st_strnomcontratista"
                                                         value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
                                     </h:panelGroup>
                                 </rich:panel>
 
+                                <rich:panel header="#{var.socion}" bodyClass="rich-panel-grid-body"
+                                            styleClass="rich-panel-grid" headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                    <rich:panel  style="overflow-y: scroll;height:100px;" >
+                                        <h:outputLabel id="st_strnomsocio"
+                                                       style="font-size:13px; color:#666666;"
+                                                       value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+                                    </rich:panel>
+                                </rich:panel>
 
                                 <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
                                             styleClass="ikont-rp-tipoproyecto"   headerClass="font-header-panel">
@@ -255,51 +263,74 @@
                                         </h:panelGroup>
                                     </center>
                                 </rich:panel>
-
                                 <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
-                                    <interkont:spacer height="5"/>
-                                    <h:panelGrid id="empleos" columns="1"  >
+                                    <interkont:spacer height="5"/>                                
+                                    <h:panelGrid id="empleos" columns="1" width="100%" style="vertical-align:middle;text-align:center;">
                                         <center>
-                                            <h:outputLabel  styleClass="ikont-hol-numhabbeneficiados"    
+                                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
                                                             value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
+                                            <h:inputText rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" id="numpersonasbeneficiadas" style="font-size:12px; color:#666666;width: 62px!important;" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
 
-                                            <h:outputText  styleClass="ikont-hot-imp_bene"   value="#{var.imp_bene}"  rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                                            <h:outputText  styleClass="ikont-hot-poblacionestudiantil1"   value="#{var.poblacionestudiantil}"  rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                            <h:outputText value="Familias Participantes" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.otrosactores}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
                                         </center>
-                                        <h:panelGroup id="layoutEmpleoGenerados">
+                                        <h:panelGroup id="layoutEmpleoGenerados" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                             <center>
-                                                <h:panelGrid columns="2">
+                                                <h:panelGrid id="panelimpactosocial" columns="2">
                                                     <h:panelGroup>
                                                         <center>
-                                                            <h:outputLabel  styleClass="ikont-hol-numempdirectos "  
+                                                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
                                                                             value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}" />
+                                                            <h:inputText rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" id="numpempleosdirectos" style="font-size:12px; color:#666666;width: 62px!important;" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:inputText>
                                                         </center>
                                                     </h:panelGroup>
                                                     <h:panelGroup>
                                                         <center>
-                                                            <h:outputLabel  styleClass="ikont-hol-numempindirectos"  
+                                                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
                                                                             value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" />
+                                                            <h:inputText rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" id="numpempleosindirectos" style="font-size:12px; color:#666666;width: 62px!important;" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:inputText>
+                                                        </center>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup>                                                                                                                                                                        
+                                                        <center>
+                                                            <h:outputText value="#{var.imp_direc}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                                            <h:outputText value="#{var.imp_inst}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                                         </center>
                                                     </h:panelGroup>
                                                     <h:panelGroup>
                                                         <center>
-                                                            <h:outputText  styleClass="ikont-hot-imp_direc"   value="#{var.imp_direc}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                            <h:outputText  styleClass="ikont-hot-imp_inst"   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                                        </center>
-                                                    </h:panelGroup>
-                                                    <h:panelGroup>
-                                                        <center>
-                                                            <h:outputText  styleClass="ikont-hot-imp_indirec1"   value="#{var.imp_indirec}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                            <h:outputText  styleClass="ikont-hot-imp_acto1"   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                                            <h:outputText  value="#{var.imp_indirec}" style="font-size:10px; color:#666666;                                                                                                                                                                                                                                                                                                                                                                                                                                 " rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                                            <h:outputText value="#{var.organizacionesfortalecidas}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                                         </center>
                                                     </h:panelGroup>
                                                 </h:panelGrid>
+
+                                                <h:panelGroup  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
+                                                    <a4j:commandLink rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" 
+                                                                     action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarImpacto}"
+                                                                     render="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados,layoutGral"  execute="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados"
+                                                                     title="#{var.editar}">
+                                                        <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                    </a4j:commandLink>
+                                                    <a4j:commandLink   rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}"  action="#{Supervisor$AdministrarObraNew.modificarImpactoSocialProyecto}"
+                                                                       render="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados,layoutGral"  execute="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados"
+                                                                       title="#{var.editar}">
+                                                        <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                    </a4j:commandLink>
+                                                    <a4j:commandLink  rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" immediate="true"   render="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados,layoutGral"  execute="layoutEmpleoGenerados,panelimpactosocial,empleos,empleosgenerados"
+                                                                      action="#{Supervisor$AdministrarObraNew.cancelarModifcacionModificarImpacto}">
+                                                        <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                    </a4j:commandLink>  
+                                                </h:panelGroup>
                                             </center>
                                         </h:panelGroup>
                                     </h:panelGrid>
                                 </rich:panel>
 
-                                <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-deberiaestar"   headerClass="font-header-panel">
+
+                                <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-deberiaestar"   headerClass="font-header-panel" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                     <interkont:spacer height="40"/>
                                     <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
                                         <h:outputText  styleClass="ikont-hot-houtobraestaen"   value="#{var.houtobraestaen}" />
@@ -313,9 +344,10 @@
                                         </h:outputText>
                                     </h:panelGrid>
 
-                                </rich:panel>
+                                </rich:panel>                                
 
-                                <rich:panel id="avancefisico" bodyClass="rich-panel-grid-body"  styleClass="ikont-rp-avancefisico"   headerClass="font-header-panel">
+                                <rich:panel id="avancefisico" bodyClass="rich-panel-grid-body"  styleClass="ikont-rp-avancefisico"   headerClass="font-header-panel"
+                                            rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                     <f:facet name="header">
                                         <h:outputLabel  styleClass="ikont-hol-numvalfisisco"   value="#{var.numvalavanfisicodeclarado}" />
                                     </f:facet>
@@ -379,7 +411,7 @@
                                         <h3>
 
                                             <a href="javascript:void(0);" onclick="init();
-                                            return false;" title="Abrir PopUp" id="abrirPop">
+                                                    return false;" title="Abrir PopUp" id="abrirPop">
 
                                                 <h:outputText  styleClass="ikont-hot-stEstado"   id="stEstado" 
                                                                value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
@@ -391,10 +423,39 @@
                                         </h3>
                                     </div>
                                 </rich:panel>
-                                <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-objeto"   headerClass="font-header-panel">
-                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();return true;">
+                                <rich:panel rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}" id="avancefisicomediosvida" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="#{var.numvalavanfisico}" />
+                                    </f:facet>
+                                    <interkont:spacer height="30"/>
+                                    <center>
+                                        <h:panelGrid columnClasses="panelcenter">
+                                            <h:outputText value="Producto" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.vproductomedios.avance}">
+                                                <f:convertNumber type="percent" pattern="##.## %"/>
+                                            </h:outputText>
+                                            <h:outputText value="Gestión" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.vproductogestion.avance}">
+                                                <f:convertNumber type="percent" pattern="##.## %"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:panel>
+                                <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-objeto"   headerClass="font-header-panel"
+                                            rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
+                                            return true;">
                                         <h:graphicImage  styleClass="ikont-hgi-verobjeto"   value="#{var.verobjeto}" />
                                     </a4j:commandLink>
+                                </rich:panel>
+                                <rich:panel header="#{var.nombreproyecto}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" 
+                                            headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                    <center>
+                                        <rich:panel  style="overflow-y: scroll;height:100px;">
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
+                                        </rich:panel>
+
+                                    </center>
                                 </rich:panel>
                             </h:panelGrid>
                         </center>
@@ -412,11 +473,11 @@
                         <a4j:ajax event="switch" render="panelUbicacion, pgtablapuntos"/>
                         <ui:include src="/modal/ubicacionProyModal.xhtml"/>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="simpleToggleContratos" switchType="ajax" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                    <rich:collapsiblePanel id="simpleToggleContratos" switchType="ajax" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}" >
                         <a4j:ajax event="switch"  render="panelContrato,layoutGral"/>
                         <ui:include src="/modal/contratoModal.xhtml"/>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="client" header="#{var.logro}s y #{var.dificultad}es" expanded="false" >
+                    <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="client" header="#{var.logro}s y #{var.dificultad}es" expanded="false" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                         <center>
                             <h:panelGrid columns="2">
                                 <a4j:commandLink id="btlogros" styleClass="ikont-acl-mostrarcuali evo01"  
@@ -610,19 +671,19 @@
                         </h:panelGroup>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleHistoria" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.historico}" header="#{var.historialmodificacion}" expanded="false" >
+                    <rich:collapsiblePanel id="simpleToggleHistoria" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.historico and !Supervisor$AdministrarObraNew.proyectoestrategia}" header="#{var.historialmodificacion}" expanded="false" >
                         <a4j:ajax event="switch"  render="panelprorroga" />
                         <ui:include src="/modal/historialModiModal.xhtml"/>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos}"
+                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos and !Supervisor$AdministrarObraNew.proyectoestrategia}"
                                            header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
                         <a4j:ajax event="switch" render="gpListaSeguimientos"/>
                         <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>
                     </rich:collapsiblePanel>
 
 
-                    <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="client" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
+                    <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="client" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria and !Supervisor$AdministrarObraNew.proyectoestrategia}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
                         <a4j:ajax event="click"  render="panelInterventoriaContra"/>
                         <h:panelGroup layout="block" id="panelInterventoriaContra"  >
                             <rich:dataTable id="tablaInterventoria"
@@ -809,7 +870,7 @@
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
-                    <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                    <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos and !Supervisor$AdministrarObraNew.proyectoestrategia}">
 
                         <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
                             <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
@@ -1001,7 +1062,7 @@
                     <!--rendered=" {Supervisor$AdministrarObraNew.proyectoestrategia and var.aplicamarcologico}"-->
                     <h:form>
                         <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="ajax"  header="#{varMarcoLogico.marcologicoproyecto}"  
-                                               expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}">
+                                               expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
                             <a4j:ajax event="switch" render="pgMarcolIndicadorAsociado"  />       
                             <center>
                                 <a4j:commandButton id="btrelacionmarcolindic"  value="Crear Avance Relaciones" action="#{MarcoLogico$MarcoLogico.calcularAvanceRelacionMarcoLogicoIndicadorByPeridicidad}" immediate="true"
@@ -1037,14 +1098,14 @@
                                         <h:panelGrid columns="2">
                                             <h:inputTextarea  id="strNombreIndicadorProposito" value="#{relacionMarcolIndicador.indicador.strnombreindicador}" rows="3" disabled="true"/>
                                             <a4j:commandLink value="que miercoles" action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" execute="tablaRelacionMarcoIndicador" oncomplete="#{rich:component('mp-indicadorasociado')}.show();"
-                                                               >
+                                                             >
                                                 <a4j:ajax event="complete" render="rpindicadorasociado" execute="rpindicadorasociado" />
                                             </a4j:commandLink>    
-                                            
+
                                             <h:commandLink immediate="true"  type="submit"  id="bt_consultaIndicadorAsociadol" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" 
-                                                                >
+                                                           >
                                                 <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
-                                             <a4j:ajax execute="@this" render="rpindicadorasociado,@ll" oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
+                                                <a4j:ajax execute="@this" render="rpindicadorasociado,@ll" oncomplete="#{rich:component('mp-indicadorasociado')}.show();" />
                                             </h:commandLink>
                                         </h:panelGrid>
                                     </rich:column>                                      
@@ -1361,7 +1422,7 @@
                                     <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
                                     <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
                                         <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
-                                            return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
+                                                                             return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
                                         <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
 
                                     </h:panelGrid>
@@ -1522,7 +1583,8 @@
                                             <h:outputLabel  styleClass="ikont-hol-strMunicipioOut"   id="strMunicipioOut"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
                                             <h:panelGroup>
                                                 <h:commandButton styleClass="ikont-hcb-btnlocalidadubicacion" value="Ver localidades" 
-                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano').show()};return false;" />
+                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano').show()};
+                                                                         return false;" />
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGrid>
@@ -1637,7 +1699,7 @@
                 <ui:include src="/modal/modalmarcologico/avanceplanificacionRelacionMarcolIndicador.xhtml"/>
 
             </h:panelGroup>
-            
+
         </h:body>
 
     </ui:define>

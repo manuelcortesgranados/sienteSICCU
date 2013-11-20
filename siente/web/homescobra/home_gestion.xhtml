@@ -79,7 +79,7 @@
                     <td><div ><div id="buscador_space">
                                 <label>
                                     <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palabraclave"    value="#{HomeGestion.filtro.palabraclave}" /><!--obrafiltrar.strnombreobra-->
-                                    <a4j:commandButton type="button" styleClass="ikont-acb-primerolistproyectos"   action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" render="vistaMapa" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
+                                    <h:commandButton type="submit"  styleClass="ikont-acb-primerolistproyectos"   action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
 
                                     <h:commandLink action="#{HomeGestion.primeroListProyectos}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
                                         <h:graphicImage  styleClass="ikont-hgi-bnver"    url="/resources/imgs/bt_buscar.png"/>
@@ -87,10 +87,10 @@
                                 </label>
                             </div></div></td>
                     <td><h:commandLink styleClass="ikont-acl-busquedaavanzada"  value="#{var.houtbusquedaavanza}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}" onclick="#{rich:component('panelFiltroAvanzado')}.show();
-                return false;" /> 
+                                    return false;" /> 
 
                         <h:commandLink styleClass="ikont-acl-btnfiltrociudadano" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}" onclick="#{rich:component('panelFiltroAvanzadoCiud')}.show();
-                return false;"/>
+                                                return false;"/>
 
 
                     </td>
@@ -102,15 +102,15 @@
 
                                     </div></td>
                                 <td><div >
-                                        <a4j:commandLink styleClass="ikont-acl-activarimgs"   render="form_gestion,vistaThumb" execute="@this"
+                                        <h:commandLink styleClass="ikont-acl-activarimgs"   
                                                          action="#{HomeGestion.filtrarObrasPorEstado}"    >
                                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </div></td>
-                                <td><div ><a4j:commandLink styleClass="ikont-acl-activarlista"   render="form_gestion,vistaLista" execute="@this"
+                                <td><div ><h:commandLink styleClass="ikont-acl-activarlista"   
                                                            action="#{HomeGestion.filtrarObrasPorEstado}"   >
                                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </div></td>
                             </tr>
                         </table></td>
@@ -308,7 +308,7 @@
 
         <a4j:region>
             <h:form>
-                <a4j:poll id = "refreshId"  action="#{HomeGestion.llenarTablaNovedades}"  render = "Novedades" interval = "50000" >
+                <a4j:poll id = "refreshId"  action="#{HomeGestion.llenarTablaNovedades}"  render = "Novedades" interval = "100000" >
 
                 </a4j:poll>
             </h:form>
@@ -327,12 +327,12 @@
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/image-slider.js" type="text/javascript"></script>
         <script type="text/javascript">
-            var $jpanel = jQuery.noConflict();
-            $jpanel(document).ready(function() {
-                var $i = jQuery.noConflict();
-                $i('#slider2').slider2({speed: 500, action: true});
+                                var $jpanel = jQuery.noConflict();
+                                $jpanel(document).ready(function() {
+                                    var $i = jQuery.noConflict();
+                                    $i('#slider2').slider2({speed: 500, action: true});
 
-            });
+                                });
         </script>
         <script type="text/javascript">
             var $j = jQuery.noConflict();

@@ -4610,7 +4610,7 @@ a.closemodal{
 .ikont-hpg-griddetaob .rf-p{
     width: 180px;
     height: 150px;
-    margin: 10px;
+    margin: 6px;
 }
 
 .ikont-hpg-griddetaob .rf-p .rf-p-b{
@@ -4695,4 +4695,12 @@ a.closemodal{
 
 .ikont-hpg-varpaso4{
     text-align: center;
+}
+.ikont-acl-esconder{
+    background-image: url("../imgs/bt_cerrar2.png");
+    background-repeat: no-repeat;
+    float: right;
+    height: 25px;
+    margin: 5px;
+    width: 25px;
 }
