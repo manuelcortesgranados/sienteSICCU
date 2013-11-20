@@ -1220,9 +1220,11 @@ public class MarcoLogicoBean {
 
     //Carga inidcador asociado de tipo proposito
     public void llenarIndicadorByAsociado() {
+        
         relacionmarcologicoindicador = (Relacionmarcologicoindicador) tablaRelacionMarcolIndicadorbin.getRowData();
         indicadorAsociado = getSessionBeanCobra().getMarcoLogicoService().encontrarIndicadorXId(relacionmarcologicoindicador.getIndicador().getIntidindicador());
-
+        System.out.println("indic = " + indicadorAsociado.getStrdescripcionindicador());
+        System.out.println("relacion = " + relacionmarcologicoindicador.getMarcologico().getStrdescripcion());
     }
 
     //=========================================================

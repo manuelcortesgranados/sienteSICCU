@@ -9,8 +9,7 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
     >
-    <html>
-        <head>
+        <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>#{var.titulogeneral}</title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
@@ -19,9 +18,9 @@
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css?#{var.version}" rel="stylesheet" type="text/css"/>
             <ui:insert name="head"/>
-        </head>
+        </h:head>
        
-        <body>
+        <h:body>
             <center>
                 <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
                     <tr>
@@ -86,6 +85,5 @@
                 <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
             </div>
         </h:panelGroup>
-        </body>
-    </html>
+        </h:body>
 </ui:composition>

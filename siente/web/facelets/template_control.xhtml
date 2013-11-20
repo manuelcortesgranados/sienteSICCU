@@ -43,7 +43,7 @@
             
         </head>
 
-        <body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
+        <h:body onload="#{rich:component('ajaxLoadingModalBox')}.hide(); return false;">
             <h:form id="form_menu">
                 <ui:insert name="menu"/>
             </h:form>
@@ -80,6 +80,6 @@
                     </td>
                 </tr>
             </table>
-        </body>
+        </h:body>
     </html>
 </ui:composition>

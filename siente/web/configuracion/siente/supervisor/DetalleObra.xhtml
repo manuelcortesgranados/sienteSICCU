@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition    xmlns="http://www.w3.org/1999/xhtml"
-                   xmlns:ui="http://java.sun.com/jsf/facelets"
+                   xmlns:ui="http://java.sun.com/jsf/facelets"                   
                    template="./../facelets/template_main.xhtml"
                    xmlns:a4j="http://richfaces.org/a4j"
                    xmlns:interkont="http://www.interkont.com/jsf"
@@ -69,7 +68,8 @@
     </ui:define>
 
     <ui:define name="body">
-        <body onload="cargarDetalle()">
+        <h:body onload="cargarDetalle()">
+            <rich:messages />
             <h:form prependId="false">
                 <a4j:jsFunction id="iniDetalle" name="cargarDetalle">
                     <a4j:ajax event="complete" oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}" />
@@ -392,8 +392,7 @@
                                     </div>
                                 </rich:panel>
                                 <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-objeto"   headerClass="font-header-panel">
-                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
-                                            return true;">
+                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();return true;">
                                         <h:graphicImage  styleClass="ikont-hgi-verobjeto"   value="#{var.verobjeto}" />
                                     </a4j:commandLink>
                                 </rich:panel>
@@ -1037,6 +1036,11 @@
                                         </f:facet>
                                         <h:panelGrid columns="2">
                                             <h:inputTextarea  id="strNombreIndicadorProposito" value="#{relacionMarcolIndicador.indicador.strnombreindicador}" rows="3" disabled="true"/>
+                                            <a4j:commandLink value="que miercoles" action="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" execute="tablaRelacionMarcoIndicador" oncomplete="#{rich:component('mp-indicadorasociado')}.show();"
+                                                               >
+                                                <a4j:ajax event="complete" render="rpindicadorasociado" execute="rpindicadorasociado" />
+                                            </a4j:commandLink>    
+                                            
                                             <h:commandLink immediate="true"  type="submit"  id="bt_consultaIndicadorAsociadol" actionListener="#{MarcoLogico$MarcoLogico.llenarIndicadorByAsociado}" 
                                                                 >
                                                 <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_consultar.png"/>
@@ -1379,7 +1383,7 @@
                         <h:panelGrid id="pg_valores_financieros"  columns="4"  rowClasses="alignverticaldetalle"
                                      columnClasses="pg_valores_financieros_col1,pg_valores_financieros_col2,pg_valores_financieros_col3,pg_valores_financieros_col4">
                             <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom">
-                                <div id="sideline"><label class="textlittle2">Â¿CUANTO CUESTA #{vat.textobra9}?</label></div>
+                                <div id="sideline"><label class="textlittle2">¿CUÁNTO CUESTA #{vat.textobra9}?</label></div>
                                 <h:panelGrid  styleClass="ikont-hpg-griddetaob4"   >
                                     <h:outputText  styleClass="ikont-hot-numvobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                                         <f:convertNumber pattern="#{var.formatomoneda}" />
@@ -1436,7 +1440,7 @@
                             </h:panelGrid>
 
                             <h:panelGrid    styleClass="ikont-hpg-griddetaob"   >
-                                <div id="sideline"><label class="textlittle2">AVANCE FÃ�SICO</label></div>
+                                <div id="sideline"><label class="textlittle2">AVANCE FÍSICO</label></div>
                                 <h:panelGrid columns="2" >
                                     <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
@@ -1518,8 +1522,7 @@
                                             <h:outputLabel  styleClass="ikont-hol-strMunicipioOut"   id="strMunicipioOut"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
                                             <h:panelGroup>
                                                 <h:commandButton styleClass="ikont-hcb-btnlocalidadubicacion" value="Ver localidades" 
-                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano')}.show();
-                                            return false;" />
+                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano').show()};return false;" />
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGrid>
@@ -1533,7 +1536,7 @@
 
                             <h:panelGrid  >
 
-                                <div id="sideline"><label class="textlittle2">CONÃ“ZCA LA EVOLUCIÃ“N</label></div>
+                                <div id="sideline"><label class="textlittle2">CONÓZCA LA EVOLUCIÓN</label></div>
                                 <h:panelGrid columnClasses="panelderecha" >
                                     <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
 
@@ -1635,7 +1638,7 @@
 
             </h:panelGroup>
             
-        </body>
+        </h:body>
 
     </ui:define>
 </ui:composition>

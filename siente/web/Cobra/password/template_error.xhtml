@@ -8,7 +8,7 @@
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     contentType="text/html">
     <html>
-        <head>
+        <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title><h:outputText  styleClass="ikont-hot-titulgen" value="#{var.titulogeneral}"></h:outputText></title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
@@ -69,9 +69,9 @@
 
             </style>
         <ui:insert name="head"/>
-        </head>
+        </h:head>
 
-        <body>
+        <h:body>
         <center>
             <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
@@ -122,6 +122,6 @@
             </table>
         </center>
 
-        </body>
+        </h:body>
     </html>
 </f:view>

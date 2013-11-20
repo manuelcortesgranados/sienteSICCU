@@ -6516,6 +6516,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String reporteProyectosConvenio() {
         try {
+         if(getSessionBeanCobra().getBundle().getString("versioncobra").compareTo("siente")==0)
+         {    
+             
             if (contrato.getContratista().getIntcodigocontratista() != 3120) {
 
                 if (contrato.getContratista().getIntcodigocontratista() != 7860) {
@@ -6526,7 +6529,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             } else {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelproyectosconvenioeducacion") + contrato.getIntidcontrato());
             }
-
+         }
+         else
+         {
+             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelproyectosconvenio") + contrato.getIntidcontrato());
+         }    
         } catch (IOException ex) {
             Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
         }

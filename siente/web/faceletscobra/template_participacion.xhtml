@@ -9,9 +9,7 @@
     xmlns:a4j="http://richfaces.org/a4j"
     xmlns:interkont="http://www.interkont.com/jsf"
     >
-    <html>
-
-        <head>
+        <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title><h:outputText  styleClass="ikont-"   value="#{var.titulogeneral}"></h:outputText></title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
@@ -38,9 +36,9 @@ $.src='//cdn.zopim.com/?xhIi6ynK6w15eXomZpg6ajumZp1tTAh3';z.t=+new Date;$.
 type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 </script>-->
             <!--End of Zopim Live Chat Script-->
-        </head>
+        </h:head>
 
-        <body >
+        <h:body >
             <h:form id="form_menu">
                 <ui:insert name="menu"/>
             </h:form>
@@ -86,6 +84,5 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
                     </td>
                 </tr>
             </table>
-        </body>
-    </html>
+        </h:body>    
 </ui:composition>

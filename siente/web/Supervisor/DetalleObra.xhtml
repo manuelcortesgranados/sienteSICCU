@@ -56,7 +56,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <body onload="cargarDetalle()">
+        <h:body onload="cargarDetalle()">
             <h:form prependId="false">
                 <a4j:jsFunction id="iniDetalle" name="cargarDetalle">
                     <a4j:ajax event="complete" oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}" />
@@ -457,7 +457,7 @@
             });
 
             </script>
-        </body>
+        </h:body>
 
     </ui:define>
 </ui:composition>

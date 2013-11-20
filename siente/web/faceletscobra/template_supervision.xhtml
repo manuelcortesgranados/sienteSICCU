@@ -7,8 +7,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     >
-    <html>
-        <head>
+        <h:head>
             <title>sliderpanel</title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
@@ -46,11 +45,8 @@
                 -->
             </style>
             <link href="css/siente.css" rel="stylesheet" type="text/css" />
-        </head>
-        <body>
-
-
-
+        </h:head>
+        <h:body>
             <div styleClasssliderpanel_element" id="product_gallery" >
                 <ui:insert name="body"/>
                <ui:include src="/facelets/ajaxStatus.xhtml"/>
@@ -63,6 +59,5 @@
 
             </div> 
 
-        </body>
-    </html>
+        </h:body>
 </ui:composition>

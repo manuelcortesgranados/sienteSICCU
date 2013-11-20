@@ -35,7 +35,7 @@
                         <interkont:spacer width="20" />
                         <h:panelGrid>
                             <rich:inplaceInput  id="inplaceInputLatitud" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" showControls="true" rendered="false">
-                                <a4j:ajax listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}" rendered="false" render="panelUbicacion,mapastatic,tabla" />
+                                <a4j:ajax listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}"  render="panelUbicacion,mapastatic,tabla" />
                             </rich:inplaceInput>
                             <h:outputLabel  styleClass="ikont-hol-lati"   id="Latitud" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}" />
                         </h:panelGrid>     
@@ -44,7 +44,7 @@
                         <interkont:spacer width="20" />
                         <h:panelGrid>
                             <rich:inplaceInput id="inplaceInputLongitud" showControls="true" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="false">
-                                <a4j:ajax  listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}"  rendered="false" render="panelUbicacion,mapastatic,tabla" />
+                                <a4j:ajax  listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}"   render="panelUbicacion,mapastatic,tabla" />
                             </rich:inplaceInput> 
                             <h:outputLabel  styleClass="ikont-hol-longi1"   id="Longitud" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}" />
                         </h:panelGrid>

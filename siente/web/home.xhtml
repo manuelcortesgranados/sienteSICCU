@@ -17,7 +17,7 @@
                 <h:panelGroup layout="block"  id="sliderpanel_outer">
                     <h:panelGroup layout="block"  id="sliderpanel_inner">
                         <h:panelGroup layout="block" id="sliderpanel_items">
-                            <a4j:region id="form_home">
+                            <a4j:region id="form_home" >
                                 <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
                                     <h:panelGroup rendered="#{!var.permisonuevodiseno}" layout="block" styleClass="sliderpanel_element" >
 
@@ -26,7 +26,7 @@
                                             <h:outputText  styleClass="ikont-hot-strmodNmbre "   value="#{modulo.strmodNmbre}" />
 
                                         </h:panelGroup>
-                                        <h:outputLink styleClass="#{modulo.strestilo} anchorLink"
+                                        <h:outputLink styleClass="#{modulo.strestilo} anchorLink" 
                                                       value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
 
                                         </h:outputLink>
