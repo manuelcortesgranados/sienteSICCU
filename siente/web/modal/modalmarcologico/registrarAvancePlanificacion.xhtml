@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink render="rpPlaneacionAvanceMarcolIndicador" id="esconder_mp-registro-avanceplanificacion" action="#{MarcoLogico$MarcoLogico.limpiarModalAvancePlanificacion}" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-registro-avanceplanificacion" action="#{MarcoLogico$MarcoLogico.limpiarModalAvancePlanificacion}" styleClass="cerrar"
                                      title="#{varMarcoLogico.cerrar}"  immediate="true" onclick="#{rich:component('mp-registro-avanceplanificacion')}.hide();
                                               return false;"/>
                 </h:panelGroup>
@@ -36,34 +36,31 @@
                             <h:panelGrid columns="2" >
                                 <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" inputSize="10" datePattern="yyyy-MM-dd" id="calendarfechaavan"
                                                value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.datefecharealizacion}"/>
-                                <rich:message for="calendarfechaavan" styleClass="error_texto"/>
+                                
                             </h:panelGrid>
                             
                             <h:outputText id="lbleditvariableavance"  value="Variable avance" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==1}"/>
                             <h:outputText id="lbleditvarbEsperd1"  value="Variable 1 avance:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
                             <h:inputText  id="texteditvariableesperada1" size="12"  value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada1}">
                             <f:validateDoubleRange minimum="0" />
-                            <rich:message for="texteditvariableesperada1" style="color: #ed0606;"/>
                             </h:inputText>                            
                             
                             <h:outputText id="lblditvarbEsperd2"  value="Variable 2 avance:"  rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
                             <h:inputText id="textditvariableesperada2" size="12" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada2}" 
                                          rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}">
                             <f:validateDoubleRange minimum="0" />
-                            <rich:message for="textditvariableesperada2" style="color: #ed0606;"/>
                             </h:inputText>
                     
                             <h:outputText id="lblditobservacionAvanceplanificacion"  value="Observación avance:" />
                             <h:panelGrid columns="1" >
                                 <h:inputTextarea id="textditobservacionAvanceplanificacion" style="width: 100%" rows="4" cols="40" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.strobservacion}"/>
-                                <rich:message for="textditobservacionAvanceplanificacion" styleClass="error_texto"/>
                             </h:panelGrid>
 
                         </h:panelGrid>
 
                         <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
                                            disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
-                                           render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida" >
+                                           render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida, rpnuevoavance" >
                         </a4j:commandButton>
 
                     </center>

@@ -39,21 +39,18 @@
                                    required="true" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechacreacion}"
                                    disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
                                            />
-                            <rich:message for="calendarfechaavancemes" styleClass="error_texto"/>
                         </h:panelGrid>
                          
                          <h:outputText id="lbldescripcion"  value="Logros" />
                          <h:panelGrid>
                          <h:inputTextarea  id="textdescripcion" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdescripcion}" 
                                            cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
-                        <rich:message for="textdescripcion" styleClass="error_texto"/>
                          </h:panelGrid>
                          
                          <h:outputText id="lbldificultades"  value="#{varMarcoLogico.dificultades}" />
                          <h:panelGrid>
                              <h:inputTextarea  id="textdificultad" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdificultades}" 
                                             cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
-                        <rich:message for="textdificultad" styleClass="error_texto"/>
                          </h:panelGrid>
                          
                      </h:panelGrid>
