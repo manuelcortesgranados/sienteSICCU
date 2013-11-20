@@ -82,7 +82,7 @@
                                          disabled="#{crongAvance.strdescripcion != null || MarcoLogico$MarcoLogico.obligacion.boolestado == true}" 
                                          oncomplete="#{rich:component('mp-crear-nuevoavance')}.show();">
                             <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                            <!--<rich:message for="bt_generanovedad" styleClass="error_texto"/>-->
+                         
                         </a4j:commandLink>
 
                     </rich:column>
@@ -107,8 +107,8 @@
 
                         <rich:column rendered="#{MarcoLogico$MarcoLogico.obligacion.boolestado != true}">
                             <a4j:commandButton id="btobligacioncumplida"  value="Aprobar" 
-                                               render="rpcamibiarestadoobligacion" immediate="true">
-                                 <a4j:ajax oncomplete="#{rich:component('mp-guardarestado-obligacion')}.show();" />
+                                               render="rpcamibiarestadoobligacion" immediate="true"
+                                               oncomplete="#{rich:component('mp-guardarestado-obligacion')}.show();">
                             </a4j:commandButton>
                         </rich:column>
 

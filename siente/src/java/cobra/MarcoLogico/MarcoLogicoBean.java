@@ -766,12 +766,16 @@ public class MarcoLogicoBean implements Serializable{
 
     //Metodo que guarda la obligacion de un convenio
     public String guardarObligacion() {
+        System.out.println("fecha fin real = " + obligacion.getDatefechafinreal());
+        System.out.println("fecha inicio real = " + obligacion.getDatefechainireal());
         if (obligacion.getDatefechainiestimada() != null) {
             if (obligacion.getDatefechafinestimada() != null) {
                 if ((obligacion.getStrdescripcion() != null && obligacion.getStrdescripcion().compareTo("") != 0) && analizarStringSoloespacios(obligacion.getStrdescripcion())) {
 
                     if (getFechafinobligaciontem() != null && obligacion.getDatefechafinreal() != null) {
+                        System.out.println("fecha inico real if 1= " + obligacion.getDatefechafinreal());
                         if (getFechafinobligaciontem().compareTo(obligacion.getDatefechafinreal()) > 0) {
+                            System.out.println("fecha fin real if 2 = " + obligacion.getDatefechafinreal());
                             FacesUtils.addErrorMessage("La nueva fecha finalización no debe ser menor a la que esta ingresada");
                             return null;
                         }
