@@ -4696,6 +4696,9 @@ a.closemodal{
 .ikont-hpg-varpaso4{
     text-align: center;
 }
+/* css modal filtro avanzado
+*/
+
 .ikont-acl-esconder{
     background-image: url("../imgs/bt_cerrar2.png");
     background-repeat: no-repeat;
@@ -4703,4 +4706,30 @@ a.closemodal{
     height: 25px;
     margin: 5px;
     width: 25px;
+}
+
+
+a.ikont-busquedavanzada {
+    width:300px;
+    height:60px;
+    background-color:#EEE;
+    color:#F90;
+    padding: 15px 80px 15px 30px;
+    background-image:url(../imgs/bt_buscar2.png);
+    background-repeat:no-repeat;
+    background-position:right;
+    font-size:25px;
+    line-height:30px;
+    font-style:italic;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: 0.1em 0.1em 0.1em #51819E;
+    -webkit-box-shadow: 0.1em 0.1em 0.1em #51819E;
+}
+a.ikont-busquedavanzada:hover {
+    color:#003;
+    width:150px;
+    height:60px;
+    background-color:#DCE4EA;
 }
