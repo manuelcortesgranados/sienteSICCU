@@ -530,7 +530,7 @@ public class MarcoLogicoBean implements Serializable{
     // metodo encargado de mostrar las obligaciones que tiene un convenio
     public void llenarObligacionesContrato() {
         listaObligaciones = getSessionBeanCobra().getMarcoLogicoService().encontrarObligacionesxContrato(getNuevoContratoBasico().getContrato().getIntidcontrato());
-        obligacion = new Obligacion();
+        //obligacion = new Obligacion();
     }
 
     public void llenarCronogramaObligacionesAvance() {
@@ -766,16 +766,11 @@ public class MarcoLogicoBean implements Serializable{
 
     //Metodo que guarda la obligacion de un convenio
     public String guardarObligacion() {
-        System.out.println("fecha fin real = " + obligacion.getDatefechafinreal());
-        System.out.println("fecha inicio real = " + obligacion.getDatefechainireal());
         if (obligacion.getDatefechainiestimada() != null) {
             if (obligacion.getDatefechafinestimada() != null) {
                 if ((obligacion.getStrdescripcion() != null && obligacion.getStrdescripcion().compareTo("") != 0) && analizarStringSoloespacios(obligacion.getStrdescripcion())) {
-
                     if (getFechafinobligaciontem() != null && obligacion.getDatefechafinreal() != null) {
-                        System.out.println("fecha inico real if 1= " + obligacion.getDatefechafinreal());
                         if (getFechafinobligaciontem().compareTo(obligacion.getDatefechafinreal()) > 0) {
-                            System.out.println("fecha fin real if 2 = " + obligacion.getDatefechafinreal());
                             FacesUtils.addErrorMessage("La nueva fecha finalización no debe ser menor a la que esta ingresada");
                             return null;
                         }
@@ -942,9 +937,8 @@ public class MarcoLogicoBean implements Serializable{
     }
 
     public String guardarFechaAvanceAdicionalObligacion() {
-
+        
         if (cronogramaobligacionesejecutada.getDatefechaavance() != null) {
-
             cronogramaobligacionesejecutada.setObligacion(obligacion);
             cronogramaobligacionesejecutada.setBooleanavanceobligatorio(false);
             cronogramaobligacionesejecutada.setFkIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
@@ -987,7 +981,6 @@ public class MarcoLogicoBean implements Serializable{
                 if (cronogramaobligacionesejecutada.getDatefechacreacion().compareTo(listaObligacionavance.get(indextable).getDatefechaavance()) <= 0) {
                     if (cronogramaobligacionesejecutada.getStrdescripcion().length() > 0 || cronogramaobligacionesejecutada.getStrdescripcion().isEmpty()) {
                         if (validarEspacios(cronogramaobligacionesejecutada.getStrdescripcion()) == false) {
-                            System.out.println("cronogramaobligacionesejecutada.getStrdescripcion() = " + cronogramaobligacionesejecutada.getStrdescripcion());
                             cronogramaobligacionesejecutada.setFkIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                             cronogramaobligacionesejecutada.setDatefechacreacion(new Date());
                             getSessionBeanCobra().getMarcoLogicoService().guardarAvanceObligacion(cronogramaobligacionesejecutada, getSessionBeanCobra().getUsuarioObra().getUsuLogin());
@@ -1233,8 +1226,6 @@ public class MarcoLogicoBean implements Serializable{
         
         relacionmarcologicoindicador = (Relacionmarcologicoindicador) tablaRelacionMarcolIndicadorbin.getRowData();
         indicadorAsociado = getSessionBeanCobra().getMarcoLogicoService().encontrarIndicadorXId(relacionmarcologicoindicador.getIndicador().getIntidindicador());        
-        System.out.println("indic = " + indicadorAsociado.getStrdescripcionindicador());
-        System.out.println("relacion = " + relacionmarcologicoindicador.getMarcologico().getStrdescripcion());
     }
 
     //=========================================================
@@ -1713,8 +1704,9 @@ public class MarcoLogicoBean implements Serializable{
     }
 
     public void obligacionCumplida() {
-
+         System.out.println("obligacion.isBoolestado()1 = " + obligacion.isBoolestado());
         if (obligacion.isBoolestado() == true) {
+            System.out.println("obligacion.isBoolestado()2 = " + obligacion.isBoolestado());
             obligacion.setDatefechacreacion(new Date());
             obligacion.setFkIntusumodificacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
             getSessionBeanCobra().getMarcoLogicoService().guardarObligacion(obligacion, getSessionBeanCobra().getUsuarioObra().getUsuLogin());
@@ -1724,10 +1716,6 @@ public class MarcoLogicoBean implements Serializable{
         }
 
     }
-    
-    public void entrehaber()
-    {
-        System.out.println("ehhhhhh = ");
-    }        
+     
 
 }

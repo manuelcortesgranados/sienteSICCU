@@ -58,7 +58,7 @@
                  </center>
                  
                   <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvanceObligacion}" disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
-                                       render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
+                                     render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio" execute="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
                     </a4j:commandButton>
             </rich:panel>
             <a4j:outputPanel id="panelErrorAvance">

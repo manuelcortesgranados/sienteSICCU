@@ -21,25 +21,23 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp-guardarestado-obligacion" styleClass="cerrar"  style="color: black" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-guardarestado-obligacion')}.hide();
-                                              return false;"/>
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <rich:panel id="rpcamibiarestadoobligacion" styleClass="rich-panel-body" style="padding:0px;">
-            <h:form>
+            <a4j:region>
                 <h:panelGrid width="100%">
                     <interkont:spacer height="10"/>
                     <h:outputText id="st_confirmacionCambiarEstadoOblig" value="¿ Esta seguro que la oligacion se ha cumplido ?" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" width="100%" style="text-align:center;">
-                        <a4j:commandButton value="Aceptar" action="#{MarcoLogico$MarcoLogico.obligacionCumplida}"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp-guardarestado-obligacion')"
-                                           render="rpnuevoavance,tablaavance,pgSeguimientoConvenio,tablaSeguimientoConvenio"
-                                           style="font-size:12px;"/>
+                        <a4j:commandButton execute="rpnuevoavance,tablaavance,pgSeguimientoConvenio,tablaSeguimientoConvenio" value="Aceptar" actionListener="#{MarcoLogico$MarcoLogico.obligacionCumplida}" immediate="true"
+                                           render="rpnuevoavance,tablaavance,pgSeguimientoConvenio,tablaSeguimientoConvenio"  style="font-size:12px;" />
 
                     </h:panelGrid>
                 </h:panelGrid>
-            </h:form>
+            </a4j:region>
         </rich:panel>
     </rich:popupPanel>   
 </ui:composition>
