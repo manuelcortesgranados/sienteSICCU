@@ -95,7 +95,7 @@
     </error-page>
     
     
-    <!--
+    
     <filter>
         <filter-name>FiltroUsuario</filter-name>
         <filter-class>cobra.FiltroZoom.FiltroDocumentos</filter-class>
@@ -107,5 +107,5 @@
     <filter-mapping>
         <filter-name>FiltroUsuario</filter-name>
         <url-pattern>/resources/Documentos/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
 </web-app>

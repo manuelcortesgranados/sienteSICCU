@@ -35,12 +35,11 @@
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaavanceplanificacion" inputSize="10" required="true"
                                            value="#{MarcoLogico$MarcoLogico.planificacionrelacionmarcologicoindicador.datefechaplanificada}"/>
-                            <rich:message for="calendarfechaavanceplanificacion" styleClass="error_texto"/>
+                         
                         </h:panelGrid>
                             <h:outputText id="lblvariablemeta"  value="Meta esperada:" styleClass="modal-indicador-head" />                            
                             <h:inputText  id="textvariableEsperd1" style="width: 100%"  value="#{MarcoLogico$MarcoLogico.planificacionrelacionmarcologicoindicador.doublevariable1metaesperada}">
                             <f:validateDoubleRange minimum="0" />
-                            <rich:message for="textvariableEsperd1" style="color: #ed0606;"/>
                             </h:inputText>                                                        
 
                     </h:panelGrid>
