@@ -1119,7 +1119,7 @@
                 <h:form>
 
                     <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="ajax"  header="#{varMarcoLogico.marcologicoproyecto}"  
-                                           expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
+                                           expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" >
                         <a4j:ajax event="switch" render="pgMarcolIndicadorAsociado"  />       
                         <center>
                             <a4j:commandButton id="btrelacionmarcolindic"  value="Crear Avance Relaciones" action="#{MarcoLogico$MarcoLogico.calcularAvanceRelacionMarcoLogicoIndicadorByPeridicidad}" immediate="true"
@@ -1166,7 +1166,7 @@
                                     <f:facet name="header">
                                         <h:outputText styleClass="obligacion-mediosvida-txt" value="#{varMarcoLogico.crearlineabase}"/>
                                     </f:facet>
-                                    <a4j:commandLink id="bt_crearBaseMetaProposito"  
+                                    <a4j:commandLink  id="bt_crearBaseMetaProposito"  
                                                      action="#{MarcoLogico$MarcoLogico.crearLineaBaseMetaProposito}" execute="mp-asociar-indicadormarcologico,rpasociarMarcologicoIndicador"  render="rpasociarMarcologicoIndicador">
                                         <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                         <a4j:ajax oncomplete="#{rich:component('mp-asociar-indicadormarcologico')}.show();" />

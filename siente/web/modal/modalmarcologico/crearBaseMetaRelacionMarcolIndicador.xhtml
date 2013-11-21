@@ -17,18 +17,18 @@
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
-            <h:form>
+            <a4j:region>
                 <h:panelGroup>
-                    <a4j:commandLink value="cerrar" id="esconder_mp-asociar-indicadormarcologico" styleClass="cerrar"
+                    <a4j:commandLink  id="esconder_mp-asociar-indicadormarcologico" styleClass="cerrar"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-asociar-indicadormarcologico')}.hide();
                                               return false;"/>
                 </h:panelGroup>
-            </h:form>
+            </a4j:region>
         </f:facet>
-        <h:form>
+        <a4j:region>
             <rich:panel id="rpasociarMarcologicoIndicador">
                 <center>
-                    <h:panelGrid>
+                    <h:panelGrid >
                         <h:outputText value="Definir Línea Base" styleClass="modal-indicador-head"/>
                         <h:panelGrid  width="100%" columns="2" cellspacing="10">
 
@@ -36,21 +36,18 @@
                             <h:panelGrid >
                                 <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechal" inputSize="10" 
                                                required="true" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase != null}" />
-                                <rich:message for="calendarfechal" styleClass="error_texto" />
                             </h:panelGrid>
 
                             <h:outputText id="outputTextvalor1lineabase"  value="Variable 1 línea base:" />
                             <h:inputText  id="inputTextvalor1lineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
                                           value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" >
                                 <f:validateDoubleRange minimum="0" />
-                                <rich:message for="inputTextvalor1lineabase" style="color: #ed0606;"/>
                             </h:inputText>
 
                             <h:outputText id="outputTextlineabase"  value="Variable 2 línea base:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables== 2}" />
                             <h:inputText  id="inputTextlineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
                                           value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables == 2}" >
                                 <f:validateDoubleRange minimum="0" />
-                                <rich:message for="inputTextlineabase" style="color: #ed0606;"/>
                             </h:inputText>
                         </h:panelGrid>
                     </h:panelGrid>
@@ -62,12 +59,10 @@
                             <h:inputText  id="inputTextvariable1" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
                                           value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" >                                                       
                                 <f:validateDoubleRange minimum="0" />
-                                <rich:message for="inputTextvariable1" style="color: #ed0606;"/>
                             </h:inputText>
                             
                             <h:outputText id="lbldescripcionmeta"  value="#{varMarcoLogico.descripcion}" />
                             <h:inputTextarea  id="textdescripcionmeta" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta!=null}">
-                            <rich:message for="textdescripcionmeta" styleClass="error_texto"/>
                             </h:inputTextarea>
                         </h:panelGrid>
                     </h:panelGrid>
@@ -101,7 +96,7 @@
 
             </rich:panel>
 
-        </h:form>
+        </a4j:region>
         <ui:include src="/modal/modalmarcologico/indicador.xhtml"/>
         <ui:include src="/modal/modalmarcologico/marcoLogico.xhtml"/>
     </rich:popupPanel>   
