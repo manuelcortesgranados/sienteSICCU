@@ -198,20 +198,14 @@
                                 <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
 
                             </h:inputText>
-
-
-
-                            <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}" >
+                            
+                            <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}  %" >
                             </h:outputLabel>
-                            <h:panelGrid columns="2">
-                                %
                                 <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
                                              size="20"  maxlength="20">                                             
                                     <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                 </h:inputText>
-                            </h:panelGrid>
-
-
+                  
                             <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"

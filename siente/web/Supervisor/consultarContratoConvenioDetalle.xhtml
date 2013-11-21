@@ -468,16 +468,19 @@
                         </h:panelGrid>
 
                         <h:form target="_blank">
-                            <h:panelGrid columns="2" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                            <h:panelGrid columns="3" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                 <h:panelGrid columnClasses="panelcenter">
                                     <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
-
                                     <h:outputText  styleClass="ikont-"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
                                 </h:panelGrid>
 
                                 <h:panelGrid columnClasses="panelcenter">
-                                    <h:commandLink styleClass="excel butonreport"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
+                                    <h:commandLink styleClass="excel" action="#{Supervisor$Contrato.ReporteConvenioExcel}" />
+                                    <h:outputText id="reporteconvenioexcel" value="#{var.reporte} #{var.convenio}"  />
+                                </h:panelGrid>
 
+                                <h:panelGrid columnClasses="panelcenter" rendered="#{Supervisor$Contrato.filtrocontrato.idestrategia != 1}">
+                                    <h:commandLink styleClass="excel butonreport"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
                                     <h:outputText  styleClass="ikont-"   id="reporteexcel" value="#{var.listadoproyectos}" />
                                 </h:panelGrid>
                             </h:panelGrid>
@@ -1133,9 +1136,9 @@
                         <h:panelGroup id="pgSeguimientoConvenio">
 
                             <center>
-                              
+
                                 <a4j:commandButton id="btobligacion"  value="#{varMarcoLogico.agregarObligacion}" action="#{MarcoLogico$MarcoLogico.cancelarGuardado}" render="rpnuevaobligacion1" immediate="true" 
-                                                  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_agregarObligacion}" >
+                                                   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_agregarObligacion}" >
                                     <a4j:ajax oncomplete="#{rich:component('mp-crear-obligacion')}.show();" />
                                 </a4j:commandButton>
 
@@ -1211,8 +1214,8 @@
                                                        title="#{varMarcoLogico.editar}" >
                                         <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                     </a4j:commandLink>
-                                    
-                                    
+
+
                                 </rich:column>
                                 <!--                                        sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
                                                                                      sortIconDescending="../resources/images/des.gif"-->
@@ -1237,9 +1240,9 @@
                                                      oncomplete="#{rich:component('mp-crear-avance')}.show();" render="rpnuevoavance">
                                         <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
                                     </a4j:commandLink>
-                                    
+
                                 </rich:column>
-                                    
+
                                 <f:facet name="footer">
                                     <h:panelGroup>
                                         <rich:dataScroller id="dstablaSeguimientoConvenio" for="tablaSeguimientoConvenio" render="tablaSeguimientoConvenio"/>
