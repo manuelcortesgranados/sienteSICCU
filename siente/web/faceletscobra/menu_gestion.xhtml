@@ -245,17 +245,24 @@
 
                 <rich:menuGroup label="Convenio" icon="/resources/imgs/bt_convenio.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
                     <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
-                                    actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="#{Supervisor$Contrato.irApaginaconvenio}" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"/>
+                                    actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="#{Supervisor$Contrato.irApaginaconvenio}" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}">
+                    <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
+                    </rich:menuItem>
                     <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
-                                    action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>
+                                    action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true">
+                    <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
+                    </rich:menuItem>
                 </rich:menuGroup>
 
                 <rich:menuGroup label="Contrato" icon="/resources/imgs/bt_contrato.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
                     <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
-                                    actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
+                                    actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}">
+                     <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
+                    </rich:menuItem>
                     <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
                                     action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true">
                         <a4j:param assignTo="#{Supervisor$ModificarContrato.permitirGuardar}" value="false"/>
+                         <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
                     </rich:menuItem>
                 </rich:menuGroup>
 
