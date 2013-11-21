@@ -33,28 +33,24 @@
                         <h:panelGrid columns="2">
                             <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioEstimada"
                                            value="#{MarcoLogico$MarcoLogico.obligacion.datefechainiestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}"/>
-                            <rich:message for="calendarfechaInicioEstimada" styleClass="error_texto"/>
                         </h:panelGrid>
                         
                         <h:outputText id="lblfechafinestimada"  value="(*)#{varMarcoLogico.fechaFinEstimada}" />
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinEstimada"
                                            value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
-                            <rich:message for="calendarfechaFinEstimada" styleClass="error_texto"/>
                         </h:panelGrid>
                         
                         <h:outputText id="lblfechaInicioreal"  value="(*)Fecha inicio real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" />
                         <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" >
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioreal"
                                            required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechainireal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicioreal == true}"/>
-                            <rich:message for="calendarfechaInicioreal" styleClass="error_texto"/>
                         </h:panelGrid>
 
                         <h:outputText id="lblfechafinreal"  value="(*)Fecha fin real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
                         <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}">
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinreal"
                                            required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinreal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
-                            <rich:message for="calendarfechaFinreal" styleClass="error_texto"/>
                         </h:panelGrid>
 
                         <h:outputText id="outputtextobligacion"  value="#{varMarcoLogico.obligacion}" />

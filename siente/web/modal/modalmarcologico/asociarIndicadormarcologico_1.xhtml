@@ -51,14 +51,12 @@
                         <h:outputText id="outputTextvalor1lineabase"  value="Variable línea base:" />
                         <h:inputText  id="inputTextvalor1lineabase" style="width: 100%" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" >
                             <f:validateDoubleRange minimum="0" />
-                            <rich:message for="inputTextvalor1lineabase" style="color: #ed0606;"/>
                         </h:inputText>
                         <h:outputText id="outputText01" />
 
                         <h:outputText id="outputTextlineabase"  value="Variable 2 línea base:" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables== 2}" />
                         <h:inputText  id="inputTextlineabase" style="width: 100%" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables == 2}" >
                             <f:validateDoubleRange minimum="0" />
-                            <rich:message for="inputTextlineabase" style="color: #ed0606;"/>
                         </h:inputText>
                         <h:outputText id="outputText02" rendered="#{MarcoLogico$MarcoLogico.indicador.numcantidadvariables == 2}"/>
 
