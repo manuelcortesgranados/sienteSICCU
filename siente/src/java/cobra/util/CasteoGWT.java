@@ -324,8 +324,7 @@ public class CasteoGWT implements Serializable {
         DateWrapper dw = new DateWrapper(obran.getDatefeciniobra()).clearTime();
         obra.setIntcodigoobra(obran.getIntcodigoobra());
         obra.setFechaInicio(dw.asDate());
-        //dw= new DateWrapper(obran.getDatefecfinobra()).clearTime();
-        dw = new DateWrapper(new Date()).clearTime();
+        dw= new DateWrapper(obran.getDatefecfinobra()).clearTime();        
         obra.setFechaFin(dw.asDate());
         obra.setOtrospagos(obran.getOtrospagos());
         obra.setPagodirecto(obran.getPagodirecto());

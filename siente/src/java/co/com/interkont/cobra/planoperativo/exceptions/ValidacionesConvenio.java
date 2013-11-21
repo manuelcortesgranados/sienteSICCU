@@ -12,6 +12,7 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Obra;
 import cobra.PlanOperativo.ProyectoPlanOperativo;
+import com.interkont.cobra.util.CobraUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -120,13 +121,13 @@ public class ValidacionesConvenio {
 
     public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes) {
         if (valorcontrato.compareTo(sumafuentes) != 0) {
-            throw new ConvenioException("La suma de las fuentes de recursos (" + sumafuentes.toString() + "), debe ser igual al valor del contrato (" + valorcontrato.toString() + ")");
+            throw new ConvenioException("La suma de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumafuentes.doubleValue()) + "), debe ser igual al valor del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcontrato.doubleValue()) + ")");
         }
     }
 
     public static void validarDistribucionFinalCuotaGerencia(BigDecimal valorcuotagerenciacontrato, BigDecimal sumacuotasgerencia) {
         if (valorcuotagerenciacontrato.compareTo(sumacuotasgerencia) != 0) {
-            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + sumacuotasgerencia.toString() + "), debe ser igual al valor de la cuota de gerencia del contrato (" + valorcuotagerenciacontrato.toString() + ")");
+            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumacuotasgerencia.doubleValue()) + "), debe ser igual al valor de la cuota de gerencia del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcuotagerenciacontrato.doubleValue()) + ")");
         }
     }
 

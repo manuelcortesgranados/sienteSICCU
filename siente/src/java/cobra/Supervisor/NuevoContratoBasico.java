@@ -90,6 +90,7 @@ import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import cobra.MarcoLogico.MarcoLogicoBean;
+import com.interkont.cobra.util.CobraUtil;
 
 /**
  * <p>
@@ -6760,6 +6761,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //       variable para esconder los botones que llaman a los reportes
         boolreporte = false;
         //this.panelPantalla = panelPantalla;
+
         switch (panelPantalla) {
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
@@ -6772,7 +6774,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
-                variabletitulo = Propiedad.getValor("terceropolizas");
+                variabletitulo = Propiedad.getValor("terceropolizas");                
+                if (!getContrato().isModolecturaplanop()) {
+                    this.guardarBorradorConvenio();
+                }
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 4:
@@ -6780,7 +6785,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 5:
-                variabletitulo = Propiedad.getValor("quintodocumento");
+                variabletitulo = Propiedad.getValor("quintodocumento");                
+                if (!getContrato().isModolecturaplanop()) {
+                    this.guardarBorradorConvenio();
+                }
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
 
@@ -6958,12 +6966,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             contrato.setTercero(new Tercero());
                             setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
                         } else {
-                            FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
-                            setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total de los egresos ($" + getFlujoCaja().getTotalEgresos() + "), en el flujo de caja.");
+                            FacesUtils.addErrorMessage("El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                            setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
                         }
                     } else {
-                        FacesUtils.addErrorMessage("El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total del convenio ($" + getContrato().getNumvlrcontrato() + "), en el flujo de caja.");
-                        setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + getFlujoCaja().getTotalIngresos() + ") , debe ser igual al valor total del convenio ($" + getContrato().getNumvlrcontrato() + "), en el flujo de caja.");
+                        FacesUtils.addErrorMessage("El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
+                        setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
                     }
                 }
             }
