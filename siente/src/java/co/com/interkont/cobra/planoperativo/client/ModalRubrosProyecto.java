@@ -35,6 +35,7 @@ import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
+import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class ModalRubrosProyecto implements IsWidget {
     protected ListBox lstTipoAporte;
     protected ListBox lstFormaP;
     protected ListBox lstE;
-    protected TextField campoTipoRecurso;
+    protected TextArea campoTipoRecurso;
     protected TextField rubro;
     protected NumberField<BigDecimal> montoAportado;
     protected NumberField<BigDecimal> valorDisponibleFuente;
@@ -76,12 +77,17 @@ public class ModalRubrosProyecto implements IsWidget {
     protected HashMap<String, List<Integer>> mapaRelacionEntidadVigencias;
     protected String entidadSeleccionada;
     protected boolean editar;
+    protected FieldLabel formapago;
+    protected FieldLabel montoaportado;
+    protected FieldLabel descripcionaporte;
+    protected FieldLabel valordisponible;
 
     public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros, int idTempObraRecurso, boolean editar) {
         entidades = new ListStore<TerceroDTO>(propse.intcodigo());
         lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
-        campoTipoRecurso = new TextField();
-        campoTipoRecurso.setEnabled(false);
+        campoTipoRecurso = new TextArea();
+        campoTipoRecurso.setWidth(150);
+        //campoTipoRecurso.setEnabled(false);
         lstTipoAporte = new ListBox(false);
         lstFormaP = new ListBox(false);
         lstFormaP.setEnabled(true);
@@ -95,8 +101,6 @@ public class ModalRubrosProyecto implements IsWidget {
         valorDisponibleFuente = ((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         Iterator it = contratoDto.getFuenterecursosconvenios().iterator();
         fuenteRecursosConveDTO = (FuenterecursosconvenioDTO) it.next();
-        service.setLog("en add fuente pry:"+fuenteRecursosConveDTO.getValorDisponible(), null);
-        service.setLog("aca en eliminar fuente pry num en modal:"+fuenteRecursosConveDTO.getIdfuenterecursosconvenio(), null);
         valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
         entidadSeleccionada = fuenteRecursosConveDTO.getTercero().getStrnombrecompleto();
 
@@ -119,13 +123,13 @@ public class ModalRubrosProyecto implements IsWidget {
         vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
         vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         vp.setStyleName("ikont-po-tb");
-        crearModalRoles();
+        crearModalRubros();
 
         return vp;
 
     }
 
-    public void crearModalRoles() {
+    public void crearModalRubros() {
         final String cw = "200";
         Label tituloPagina = new Label("FINANCIAMIENTO DEL PROYECTO");
         tituloPagina.setStyleName("ikont-po-label");
@@ -143,7 +147,6 @@ public class ModalRubrosProyecto implements IsWidget {
                 List<Integer> lstVigenciasEntidad = mapaRelacionEntidadVigencias.get(entidadSeleccionada);
                 llenarV(lstVigenciasEntidad);
                 fuenteRecursosConveDTO = buscarFuenteRecursosDto(entidadSeleccionada, vigencia);
-                service.setLog("valor dispo cambio" + fuenteRecursosConveDTO.getValorDisponible(), null);
                 valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
             }
         });
@@ -164,10 +167,12 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-        con.add(new FieldLabel(montoAportado, "Monto"), new AbstractHtmlLayoutContainer.HtmlData(".monto"));
+        montoaportado = new FieldLabel(montoAportado, "Monto");
+        con.add(montoaportado, new AbstractHtmlLayoutContainer.HtmlData(".monto"));
         campoTipoRecurso.setWidth(cw);
-        campoTipoRecurso.setEmptyText("Descripcion aporte");
-        con.add(new FieldLabel(campoTipoRecurso, "Descripcion aporte"), new AbstractHtmlLayoutContainer.HtmlData(".especie"));
+        campoTipoRecurso.setEmptyText("Descripción aporte");
+        descripcionaporte = new FieldLabel(campoTipoRecurso, "Descripción aporte");
+        con.add(descripcionaporte, new AbstractHtmlLayoutContainer.HtmlData(".especie"));
 
         lstTipoAporte.setWidth("" + cw);
         llenarTipoAporte();
@@ -176,13 +181,23 @@ public class ModalRubrosProyecto implements IsWidget {
             public void onChange(ChangeEvent event) {
                 tipoAporte = lstTipoAporte.getSelectedIndex();
                 if (tipoAporte == 0) {
-                    montoAportado.setEnabled(true);
-                    lstFormaP.setEnabled(true);
-                    campoTipoRecurso.setEnabled(false);
+                    montoaportado.setVisible(true);
+                    formapago.setVisible(true);
+                    descripcionaporte.setVisible(false);
+                    valordisponible.setVisible(true);
+                    /*montoAportado.setEnabled(true);
+                     lstFormaP.setEnabled(true);
+                     campoTipoRecurso.setEnabled(false);*/
                 } else if (tipoAporte == 1) {
-                    campoTipoRecurso.setEnabled(true);
-                    montoAportado.setEnabled(false);
-                    lstFormaP.setEnabled(false);
+                    montoaportado.setVisible(false);
+                    formapago.setVisible(false);
+                    descripcionaporte.setVisible(true);
+                    valordisponible.setVisible(false);
+                    /*
+                     campoTipoRecurso.setEnabled(true);
+                     montoAportado.setEnabled(false);
+                     lstFormaP.setEnabled(false);
+                     */
                 }
             }
         });
@@ -200,7 +215,9 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-        con.add(new FieldLabel(lstFormaP, "Forma de pago"), new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
+        formapago = new FieldLabel(lstFormaP, "Forma de pago");
+
+        con.add(formapago, new AbstractHtmlLayoutContainer.HtmlData(".formapago"));
 
         rubro.setEmptyText("Rubro");
         rubro.setWidth(cw);
@@ -212,7 +229,6 @@ public class ModalRubrosProyecto implements IsWidget {
             public void onChange(ChangeEvent event) {
                 vigencia = Integer.parseInt(lstVigen.getItemText(lstVigen.getSelectedIndex()));
                 fuenteRecursosConveDTO = buscarFuenteRecursosDto(entidadSeleccionada, vigencia);
-                service.setLog("valor dispo cambio" + fuenteRecursosConveDTO.getValorDisponible(), null);
                 valorDisponibleFuente.setValue(fuenteRecursosConveDTO.getValorDisponible());
             }
         });
@@ -221,8 +237,9 @@ public class ModalRubrosProyecto implements IsWidget {
         valorDisponibleFuente.setEmptyText("Valor disponible");
         valorDisponibleFuente.setWidth(cw);
         valorDisponibleFuente.setEnabled(false);
-        con.add(new FieldLabel(valorDisponibleFuente, "Valor disponible"), new AbstractHtmlLayoutContainer.HtmlData(".valordis"));
-        
+        valordisponible = new FieldLabel(valorDisponibleFuente, "Valor disponible");
+        con.add(valordisponible, new AbstractHtmlLayoutContainer.HtmlData(".valordis"));
+
         Button botanAddRubros = new Button("Adicionar", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -263,7 +280,7 @@ public class ModalRubrosProyecto implements IsWidget {
                         }
                         if (!validacionDevuelta.equals("El monto ha sido guardado")) {
                             montoAportado.setEmptyText("Monto aportado");
-                            campoTipoRecurso.setEmptyText("descripción aporte");
+                            campoTipoRecurso.setEmptyText("Descripción aporte");
                             AlertMessageBox d = new AlertMessageBox("Error", validacionDevuelta);
                             d.show();
                         } else {
@@ -278,22 +295,24 @@ public class ModalRubrosProyecto implements IsWidget {
                 }
             }
         });
-
-
+        montoaportado.setVisible(true);
+        formapago.setVisible(true);
+        descripcionaporte.setVisible(false);
+        valordisponible.setVisible(true);
 
         vp.add(botanAddRubros);
-
 
     }
 
     public boolean validarObraFuenteConIgualEntidadViencia(String nombreEntidad, Integer vigencia) {
-        for (ObrafuenterecursosconveniosDTO obraFuenteRecurso : tblrubros.getStore().getAll()) {
-            if (obraFuenteRecurso.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad) && obraFuenteRecurso.getFuenterecursosconvenio().getVigencia().equals(vigencia)) {
-                return false;
+        if (tipoAporte == 0) {
+            for (ObrafuenterecursosconveniosDTO obraFuenteRecurso : tblrubros.getStore().getAll()) {
+                if (obraFuenteRecurso.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(nombreEntidad) && obraFuenteRecurso.getFuenterecursosconvenio().getVigencia().equals(vigencia)) {
+                    return false;
+                }
             }
         }
         return true;
-
 
     }
 
@@ -362,11 +381,11 @@ public class ModalRubrosProyecto implements IsWidget {
         if (proyectoDTO.getValor() == null) {
             proyectoDTO.setValor(BigDecimal.ZERO);
         }
-        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));  
+        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
         FuenterecursosconvenioDTO fuenteRecursos = GanttDatos.buscarFuenteRecursos(obraFuenteDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuenteDto.getFuenterecursosconvenio().getVigencia(), contratoDto);
         fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().subtract(obraFuenteDto.getValor()));
-        
-        }
+
+    }
 
 
     /*metodo que se encarga de llenar el combo de entidades
