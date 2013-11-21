@@ -1119,7 +1119,7 @@
                 <h:form>
 
                     <rich:collapsiblePanel id="simpleToggleMarcolIndicadorAsociado" switchType="ajax"  header="#{varMarcoLogico.marcologicoproyecto}"  
-                                           expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" >
+                                           expanded="false"   toggleListener="#{MarcoLogico$MarcoLogico.llenarRelacionmarcologicoindicador}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
                         <a4j:ajax event="switch" render="pgMarcolIndicadorAsociado"  />       
                         <center>
                             <a4j:commandButton id="btrelacionmarcolindic"  value="Crear Avance Relaciones" action="#{MarcoLogico$MarcoLogico.calcularAvanceRelacionMarcoLogicoIndicadorByPeridicidad}" immediate="true"
