@@ -71,7 +71,7 @@ public class FlujoCaja implements Serializable {
      */
     UIExtendedDataTable extendedDataTableEgresos;
     int columnaEvento;
-
+    
     public List<Planificacionmovcuotagerencia> getPlanificacionmovcuotagerencia() {
         return planificacionmovcuotagerencia;
     }
@@ -428,7 +428,7 @@ public class FlujoCaja implements Serializable {
 
         refrescarTotalesIngresos();
     }
-
+    
     /**
      * Cambió valor planificado de un egreso. Valida que el nuevo
      * valor diligenciado no exceda el valor disponible por distribuir del
@@ -437,8 +437,8 @@ public class FlujoCaja implements Serializable {
      */
     public void cambioValorEgreso() {
         FlujoEgresos flujoEgresosDetallePry = (FlujoEgresos) extendedDataTableEgresos.getRowData();
-        BigDecimal disponibleInicial = BigDecimal.ZERO;
-        BigDecimal disponible = BigDecimal.ZERO;
+        BigDecimal disponibleInicial;
+        BigDecimal disponible;
 
         Map<String, String> parametros = FacesUtils.getExternalContext().getRequestParameterMap();
         columnaEvento = Integer.valueOf(parametros.get("columnaEvento"));
@@ -503,6 +503,86 @@ public class FlujoCaja implements Serializable {
         calcularTotalesFlujoEgreso();
     }
     
+    /**
+     * Cambió valor de un ingreso por entidad. Valida que el nuevo ingreso
+     * diligenciado no exceda el valor disponible por distribuir de la fuente de
+     * ingresos. En caso de superarlo se ajusta el valor diligenciado al valor
+     * anterior y se informa del error.
+     *
+     */
+    public void valorIngresoOnChangue() {
+        FlujoIngresos fuenteIngresosEvento = (FlujoIngresos) tablaFuentesIngresos.getRowData();
+        BigDecimal disponible;
+
+        if (fuenteIngresosEvento.isIngresoEntidad()) {
+            Map<String, String> parametros = FacesUtils.getExternalContext().getRequestParameterMap();
+            columnaEvento = Integer.valueOf(parametros.get("columnaEvento"));
+            fuenteIngresosEvento.calcularTotalIngresosFuente(periodosConvenio.size());
+            disponible = fuenteIngresosEvento.fuenteRecursosConvenio.getValoraportado().subtract(fuenteIngresosEvento.getTotalIngresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ha restablecido el valor anterior.");
+                fuenteIngresosEvento.planMovimientosConvenioEntidad.get(columnaEvento).setValor(fuenteIngresosEvento.planMovimientosConvenioEntidad.get(columnaEvento).getValorAnterior());
+            }
+        }
+
+        refrescarTotalesIngresos();
+    }
+    
+    /**
+     * Cambió valor de un ingreso por entidad. Valida que el nuevo ingreso
+     * diligenciado no exceda el valor disponible por distribuir de la fuente de
+     * ingresos. En caso de superarlo se ajusta el valor diligenciado al valor
+     * anterior y se informa del error.
+     *
+     */
+    public void valorEgresoOnChangue() {
+        FlujoEgresos flujoEgresosDetallePry = (FlujoEgresos) extendedDataTableEgresos.getRowData();
+        BigDecimal disponible;
+
+        Map<String, String> parametros = FacesUtils.getExternalContext().getRequestParameterMap();
+        columnaEvento = Integer.valueOf(parametros.get("columnaEvento"));
+        if (flujoEgresosDetallePry.isEgresoContrato()) {
+            flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+            disponible = flujoEgresosDetallePry.getContrato().getNumvlrcontrato().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ha restablecido el valor anterior.");
+                flujoEgresosDetallePry.planMovimientosContrato.get(columnaEvento).setValor(flujoEgresosDetallePry.planMovimientosContrato.get(columnaEvento).getValorAnterior());
+            }
+        }
+        if (flujoEgresosDetallePry.isEgresoPryDirecto()) {
+            flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+            disponible = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ha restablecido el valor anterior.");
+                flujoEgresosDetallePry.planMovimientosPryDirecto.get(columnaEvento).setValor(flujoEgresosDetallePry.planMovimientosPryDirecto.get(columnaEvento).getValorAnterior());
+            }
+        }
+        if (flujoEgresosDetallePry.isEgresoPryOtros()) {
+            flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+            disponible = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ha restablecido el valor anterior.");
+                flujoEgresosDetallePry.planMovimientosPryOtros.get(columnaEvento).setValor(flujoEgresosDetallePry.planMovimientosPryOtros.get(columnaEvento).getValorAnterior());
+            }
+        }
+        
+        if (flujoEgresosDetallePry.isEgresoCuotaGerencia()) {
+            flujoEgresosDetallePry.calcularTotalEgresosFuente(periodosConvenio.size());
+            disponible = flujoEgresosDetallePry.getTotalEsperadoEgresosFuente().subtract(flujoEgresosDetallePry.getTotalEgresosFuente());
+
+            if (disponible.compareTo(BigDecimal.ZERO) < 0) {
+                FacesUtils.addErrorMessage("El valor ingresado es superior al valor disponible. Se ha restablecido el valor anterior.");
+                flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).setValor(flujoEgresosDetallePry.planificacionesmovcuotagerencia.get(columnaEvento).getValorAnterior());
+            }
+        }
+
+        calcularTotalesFlujoEgreso();
+    }
+
     /**
      * Calcula el valor total planificado de la cuota de gerencia
      * @return valor total planificado de la cuota de gerencia
