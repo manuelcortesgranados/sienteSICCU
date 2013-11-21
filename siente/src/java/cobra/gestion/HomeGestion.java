@@ -2853,6 +2853,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * @param vista
      */
     public void cambiarVista(int vista) {
+
         filtro.setIntvista(vista);
+
+        if (filtro.getIntvista() == 1) {
+            filtroObrasActionMapaAvanModal();
+        }
     }
 }
