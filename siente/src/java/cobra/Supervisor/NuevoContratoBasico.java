@@ -6966,12 +6966,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             contrato.setTercero(new Tercero());
                             setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
                         } else {
-                            FacesUtils.addErrorMessage("El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
-                            setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                            FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                            setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
                         }
                     } else {
-                        FacesUtils.addErrorMessage("El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
-                        setMensajePlanOperativo(false, true, "El valor total de los ingresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
+                        FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
+                        setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total del convenio ($" + CobraUtil.getInstance().parserCurrencyLocale(getContrato().getNumvlrcontrato().doubleValue()) + "), en el flujo de caja.");
                     }
                 }
             }

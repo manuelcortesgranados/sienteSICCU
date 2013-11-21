@@ -97,7 +97,7 @@ public class ValidacionesConvenio {
         BigDecimal totalvalor = new BigDecimal(BigInteger.ZERO);
         totalvalor = totalvalor.add(valoraporte).add(sumafuentes);
         if (totalvalor.compareTo(valorcontrato) > 0) {
-            throw new ConvenioException("La suma de las fuentes de recursos superan al valor estimado del convenio");
+            throw new ConvenioException("La suma de las fuentes de recursos supera al valor estimado del convenio");
         }
     }
 
@@ -115,19 +115,19 @@ public class ValidacionesConvenio {
         fechatemppoliza.setTime(fechafincontrato);
         fechatemppoliza.add(Calendar.DATE, -(1));
         if (fechapoliza.compareTo(fechatemppoliza.getTime()) <= 0) {
-            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del contrato");
+            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del convenio");
         }
     }
 
     public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes) {
         if (valorcontrato.compareTo(sumafuentes) != 0) {
-            throw new ConvenioException("La suma de las fuentes de recursos (" + sumafuentes.toString() + "), debe ser igual al valor del convenio (" + valorcontrato.toString() + ")");
+            throw new ConvenioException("La suma de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumafuentes.doubleValue()) + "), debe ser igual al valor del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcontrato.doubleValue()) + ")");
         }
     }
 
     public static void validarDistribucionFinalCuotaGerencia(BigDecimal valorcuotagerenciacontrato, BigDecimal sumacuotasgerencia) {
         if (valorcuotagerenciacontrato.compareTo(sumacuotasgerencia) != 0) {
-            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + sumacuotasgerencia.toString() + "), debe ser igual al valor global de la cuota de gerencia del convenio (" + valorcuotagerenciacontrato.toString() + ")");
+            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumacuotasgerencia.doubleValue()) + "), debe ser igual al valor de la cuota de gerencia del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcuotagerenciacontrato.doubleValue()) + ")");
         }
     }
 
