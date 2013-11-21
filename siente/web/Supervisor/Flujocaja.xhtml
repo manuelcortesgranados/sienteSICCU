@@ -81,7 +81,7 @@
                                  disabled="#{Supervisor$Contrato.contrato.modolecturaplanop}">
                         <f:validateDoubleRange minimum="0" />
                         <f:convertNumber pattern="###,###.00"/>
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="hot-valordisponible, hot-totalingresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <f:facet name="footer">
