@@ -831,7 +831,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setConfirmaGuardarBorradorConvenio(boolean confirmaGuardarBorradorConvenio) {
         this.confirmaGuardarBorradorConvenio = confirmaGuardarBorradorConvenio;
     }
-
     /**
      * Variable para confirmar el guardado con plan operativo.
      */
@@ -853,7 +852,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Variable para que liste todas las entidades
      */
     private int entidades = 0;
-
     private int botonGuardado;
 
     /**
@@ -882,7 +880,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setConfirmacionGuardado(boolean confirmacionGuardado) {
         this.confirmacionGuardado = confirmacionGuardado;
     }
-
     private boolean validarPeriodoConveniosFueraRango;
 
     /**
@@ -903,7 +900,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setValidarPeriodoConveniosFueraRango(boolean validarPeriodoConveniosFueraRango) {
         this.validarPeriodoConveniosFueraRango = validarPeriodoConveniosFueraRango;
     }
-
     List<Periodoflujocaja> periodoConveniosFueraRango = new ArrayList<Periodoflujocaja>();
 
     public List<Periodoflujocaja> getPeriodoConveniosFueraRango() {
@@ -3277,7 +3273,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.setEncargofiduciario(null);
             }
         }
+          
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        if (Boolean.parseBoolean(bundle.getString("aplicamarcologico"))) {
+            if (estrategia != 0 && booltipocontratoconvenio) {
+                Contratoestrategia contratoestrategia = new Contratoestrategia();
+                contratoestrategia.setFkIntidcontrato(contrato.getIntidcontrato());
+                contratoestrategia.setEstrategia(new Estrategia(estrategia));
+                contratoestrategia.setFkIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                contratoestrategia.setDatefechacreacion(new Date());
+                getSessionBeanCobra().getMarcoLogicoService().guardarContratoEstrategia(contratoestrategia);
+            }
+        }
+         estrategia = 0;
+     
         for (Documentoobra docContrato : listadocumentos) {
             try {
                 String nuevaRutaWeb = ArchivoWebUtil.copiarArchivo(
@@ -3877,6 +3886,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = null;
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
+        
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
@@ -3892,7 +3902,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         panelPantalla = 1;
         getSessionBeanCobra().setConsulteContrato(true);
         actualizarPanel();
-
+        if (Boolean.parseBoolean(bundle.getString("aplicamarcologico"))) {
+            if (filtrocontrato.getIdestrategia() != 0) {
+                contrato.getTercero().setStrnombrecompleto("TODOS");
+            }
+        }
     }
 
     /**
@@ -5413,6 +5427,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);
+        filtrocontrato.setIdestrategia(estrategia);
         if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
             contrato = new Contrato();
             limpiarContrato();
@@ -5434,6 +5449,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String ReporteConvenio() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+        } catch (IOException ex) {
+            Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String ReporteConvenioExcel() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelconvenio") + "&convenio=" + contrato.getIntidcontrato());
         } catch (IOException ex) {
             Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -6401,6 +6425,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String crearProyecto() {
         String ret = getIngresarNuevaObra().limpiarobra();
+        if (filtrocontrato.getIdestrategia() != 0) {
+            getIngresarNuevaObra().setProyectoestrategia(true);
+            getIngresarNuevaObra().fnEsProyectoPadre();
+        }
         List<Tercero> listentcontxcontratistaconvenio = new ArrayList<Tercero>();
 
         if (contrato.getContratista() != null) {
@@ -6506,7 +6534,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -6774,7 +6802,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
-                variabletitulo = Propiedad.getValor("terceropolizas");                
+                variabletitulo = Propiedad.getValor("terceropolizas");
                 if (!getContrato().isModolecturaplanop()) {
                     this.guardarBorradorConvenio();
                 }
@@ -6785,7 +6813,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 5:
-                variabletitulo = Propiedad.getValor("quintodocumento");                
+                variabletitulo = Propiedad.getValor("quintodocumento");
                 if (!getContrato().isModolecturaplanop()) {
                     this.guardarBorradorConvenio();
                 }
