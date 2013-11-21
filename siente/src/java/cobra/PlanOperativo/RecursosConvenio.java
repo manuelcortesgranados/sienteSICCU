@@ -350,7 +350,7 @@ public class RecursosConvenio implements Serializable {
                 try {
                     if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
-                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia(getFuenteRecursoConvenio().getPorcentajecuotagerencia() + " %");
+                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia(BigDecimal.valueOf(getFuenteRecursoConvenio().getPorcentajecuotagerencia()).setScale(2,RoundingMode.HALF_UP) + " %");
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("validarvalorfuente"));
                     }
