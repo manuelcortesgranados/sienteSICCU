@@ -121,13 +121,13 @@ public class ValidacionesConvenio {
 
     public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes) {
         if (valorcontrato.compareTo(sumafuentes) != 0) {
-            throw new ConvenioException("La suma de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumafuentes.doubleValue()) + "), debe ser igual al valor del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcontrato.doubleValue()) + ")");
+            throw new ConvenioException("La suma de las fuentes de recursos (" + sumafuentes.toString() + "), debe ser igual al valor del convenio (" + valorcontrato.toString() + ")");
         }
     }
 
     public static void validarDistribucionFinalCuotaGerencia(BigDecimal valorcuotagerenciacontrato, BigDecimal sumacuotasgerencia) {
         if (valorcuotagerenciacontrato.compareTo(sumacuotasgerencia) != 0) {
-            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + CobraUtil.getInstance().parserCurrencyLocale(sumacuotasgerencia.doubleValue()) + "), debe ser igual al valor de la cuota de gerencia del convenio (" + CobraUtil.getInstance().parserCurrencyLocale(valorcuotagerenciacontrato.doubleValue()) + ")");
+            throw new ConvenioException("La distribución de las cuotas de gerencia de las fuentes de recursos (" + sumacuotasgerencia.toString() + "), debe ser igual al valor global de la cuota de gerencia del convenio (" + valorcuotagerenciacontrato.toString() + ")");
         }
     }
 
