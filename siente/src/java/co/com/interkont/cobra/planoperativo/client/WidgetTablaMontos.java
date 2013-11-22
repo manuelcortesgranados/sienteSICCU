@@ -39,6 +39,7 @@ public class WidgetTablaMontos implements IsWidget {
     protected NumberField<BigDecimal> valorContrato;
     protected boolean sololectura = false;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    protected List<RelacionobrafuenterecursoscontratoDTO> lstFuentesRecursosEliminar;
 
     /**
      * Constructor solo lectura
@@ -48,11 +49,12 @@ public class WidgetTablaMontos implements IsWidget {
      * @param valorContrato
      * @param readonly
      */
-    public WidgetTablaMontos(ContratoDTO contrato, boolean editar, NumberField<BigDecimal> valorContrato, boolean readonly) {
+    public WidgetTablaMontos(ContratoDTO contrato, boolean editar, NumberField<BigDecimal> valorContrato, boolean readonly,List<RelacionobrafuenterecursoscontratoDTO> lstFuentesRecursosEliminar) {
         this.contrato = contrato;
         this.editar = editar;
         this.valorContrato = valorContrato;
         this.sololectura = readonly;
+        this.lstFuentesRecursosEliminar=lstFuentesRecursosEliminar;
     }
 
     public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
@@ -137,6 +139,7 @@ public class WidgetTablaMontos implements IsWidget {
                     valor = valor.subtract(valorArestar);
                    
                 }
+                lstFuentesRecursosEliminar.add(store.get(row));
                 valorContrato.setValue(valor);
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
