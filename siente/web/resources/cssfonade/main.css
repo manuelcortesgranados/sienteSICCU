@@ -52,6 +52,10 @@ a.closemodal{
 }
 
 
+.ikont-hcl-ordenarCampo{
+    background-image: url(../imgs/down.png);
+}
+
 .ikont-hcl-navegarNuevaObra1{
     background-image:url(../imgs/Cobra_bt44.png);
 }
@@ -4847,3 +4851,49 @@ a:hover {
     height: 34px!important;
     padding-left: 3px!important;
 }
+
+.ikont-hpg-listaproyecto{
+    width: 100%;
+    display: inline;
+}
+
+.ikont-hpg-listaproyecto .ikont-hot-nombreobra,.ikont-hpg-listaproyecto .ikont-hot-convenio, .ikont-hpg-listaproyecto .ikont-hot-tipoobra, .ikont-hpg-listaproyecto .ikont-hot-valor, .ikont-hpg-listaproyecto .ikont-hot-avance{
+    display: inline;
+    float: left;
+}
+
+.ikont-hpg-listaproyecto .ikont-hgi-ordenalista{
+    display: inline;
+    float: left;
+    background-image: url(../imgs/down.png);
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.ikont-rdt-rc-nombreobra{
+    width: 27%;
+}
+
+.ikont-rdt-rc-convenio{
+    width: 13%;
+}
+
+.ikont-rdt-rc-tipoobra{
+    width: 18%;
+}
+
+.ikont-rdt-rc-valor{
+    width: 15%;
+}
+
+.ikont-rdt-rc-duracion{
+    width: 10%;
+}
+
+.ikont-rdt-rc-avance{
+    width: 18%;
+}
+
+
