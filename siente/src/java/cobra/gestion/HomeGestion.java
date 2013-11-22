@@ -202,7 +202,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.txtPor22 = txtPor22;
     }
     // </editor-fold>
-    //Novedades
+    //Novedades    
     private String valorFiltroMensajeRecibido = "";
     private UIDataTable tablaMensajesRecibidos = new UIDataTable();
     private boolean verMapa = true;
@@ -1743,6 +1743,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtroObrasActionMapaAvanModal() {
+        System.out.println("Debug - filtroObrasActionMapaAvanModal()");
         filtro.setPalabraclave("");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
@@ -1751,6 +1752,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 filtro.setIntcodigoentidad(0);
             }
         }
+        
+        
+        System.out.println("filtro.getOrdenarPor() = " + filtro.getOrdenarPor());
         //filtro.setBoolconvenio(false);
         primeroListProyectos();
 
@@ -1835,13 +1839,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String primeroListProyectos() {
+        System.out.println("Debug - primeroListProyectos()");
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
         filtro.setIsciu(getSessionBeanCobra().getCobraService().isCiu());
+
+        System.out.println("filtro.getIntvista() = " + filtro.getIntvista());
         switch (filtro.getIntvista()) {
             case 1:
+                System.out.println("Debug - primeroListProyectos() case 1");
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
                     filtro.setFactorpagina(100);
                     //filtro.setIntestadoobra(1);
@@ -1864,11 +1872,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 }
                 break;
             case 2:
+                System.out.println("Debug - primeroListProyectos() Case 2");
                 filtro.setFactorpagina(9);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
             case 3:
+                System.out.println("Debug - primeroListProyectos() Case 3");
                 filtro.setFactorpagina(10);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
@@ -2855,9 +2865,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void cambiarVista(int vista) {
 
         filtro.setIntvista(vista);
-
-        if (filtro.getIntvista() == 1) {
-            filtroObrasActionMapaAvanModal();
-        }
+        filtroObrasActionMapaAvanModal();
     }
 }

@@ -868,7 +868,7 @@ public class FlujoCaja implements Serializable {
             }
 
             flujoEgresos.add(flujoEgresosEntidad);
-            if (itemFlujoEgresos.getIditemflujocaja() == 6) {
+            if (itemFlujoEgresos.getIditemflujocaja() == Itemflujocaja.ID_GERENCIA_CONVENIO) {
                 for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getRecursosconvenio().getLstFuentesRecursos()) {
                     FlujoEgresos flujoEgresosCuotaGerencia = new FlujoEgresos();
                     flujoEgresosCuotaGerencia.setEgresoCuotaGerencia(true);
@@ -917,8 +917,8 @@ public class FlujoCaja implements Serializable {
         for (FlujoEgresos flujoEgresosCuotaGerencia : flujoEgresos) {
             if (
                     flujoEgresosCuotaGerencia.isEgresoOtros() && ( 
-                        flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6
-                        || flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 4
+                        flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GERENCIA_CONVENIO
+                        || flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GMF
                     )
                     ){
                 for (Planificacionmovconvenio planificacionmovconvenio : flujoEgresosCuotaGerencia.planMovimientosEgresosConvenio) {
@@ -1350,7 +1350,7 @@ public class FlujoCaja implements Serializable {
                      * "Pagos estimados con cargo directo al convenio" (3)
                      * "Otros egresos" (5)
                      */
-                } else if (flujoEgresosRefrescar.isEgresoOtros() && (flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == 3 || flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == 5)) {
+                } else if (flujoEgresosRefrescar.isEgresoOtros() && (flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_PAGOS_CARGO_DIRECTO_CONVENIO || flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_OTROS_EGRESOS)) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
                 } else if (flujoEgresosRefrescar.isEgresoContrato()) {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosContrato().get(iterador).getValor().doubleValue();
@@ -1389,7 +1389,7 @@ public class FlujoCaja implements Serializable {
                     totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanificacionesmovcuotagerencia().get(iterador).getValor().doubleValue();
                     Planificacionmovcuotagerencia planificacionmovcuotagerencia = flujoEgresosRefrescar.getPlanificacionesmovcuotagerencia().get(iterador);
                     for (FlujoEgresos flujoEgresosCuotaGerencia : flujoEgresos) {
-                        if (flujoEgresosCuotaGerencia.isEgresoOtros() && flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == 6) {
+                        if (flujoEgresosCuotaGerencia.isEgresoOtros() && flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GERENCIA_CONVENIO) {
                             BigDecimal valorCuotaGerencia = flujoEgresosCuotaGerencia.planMovimientosEgresosConvenio.get(iterador).getValor();
                             flujoEgresosCuotaGerencia.planMovimientosEgresosConvenio.get(iterador).setValor(valorCuotaGerencia.add(planificacionmovcuotagerencia.getValor()));
                         }
@@ -1409,5 +1409,22 @@ public class FlujoCaja implements Serializable {
 
             iterador++;
         }
+    }
+    
+    /**
+     * Obtiene el total planificado de un item del flujo de ingresos, dado el
+     * identificador del item
+     * @param idItemFlujoCaja identificador del item de flujo de caja
+     * @return total planificado para el item
+     */
+    public BigDecimal getTotalItemFlujoIngreso(int idItemFlujoCaja) {
+        for (FlujoIngresos flujoIngresosTotalItem : flujoIngresos) {
+            if(flujoIngresosTotalItem.getItemFlujoIngresos() != null) {
+                if (flujoIngresosTotalItem.getItemFlujoIngresos().getIditemflujocaja() == idItemFlujoCaja) {
+                    return flujoIngresosTotalItem.getTotalIngresosFuente();
+                }
+            }
+        }
+        return null;
     }
 }

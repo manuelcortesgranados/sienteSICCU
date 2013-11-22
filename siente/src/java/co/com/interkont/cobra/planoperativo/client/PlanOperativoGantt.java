@@ -1086,14 +1086,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ColumnConfig<ActividadobraDTO, ?> column = new ColumnConfig<ActividadobraDTO, String>(props.name());
         column.setHeader("Actividades");
         column.setWidth(200);
-        column.setSortable(true);
+        column.setSortable(false);
         column.setResizable(true);
         configs.add(column);
 
         ColumnConfig<ActividadobraDTO, Date> column2 = new ColumnConfig<ActividadobraDTO, Date>(props.startDateTime());
         column2.setHeader("Inicio");
         column2.setWidth(90);
-        column2.setSortable(true);
+        column2.setSortable(false);
         column2.setResizable(true);
         column2.setCell(new DateCell(DateTimeFormat.getFormat("yyyy-MM-dd")));
         configs.add(column2);
@@ -1101,7 +1101,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ColumnConfig<ActividadobraDTO, Date> columnfin = new ColumnConfig<ActividadobraDTO, Date>(props.endDateTime());
         columnfin.setHeader("Fin");
         columnfin.setWidth(90);
-        columnfin.setSortable(true);
+        columnfin.setSortable(false);
         columnfin.setResizable(true);
         columnfin.setCell(new DateCell(DateTimeFormat.getFormat("yyyy-MM-dd")));
         configs.add(columnfin);
@@ -1109,7 +1109,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ColumnConfig<ActividadobraDTO, Integer> column3 = new ColumnConfig<ActividadobraDTO, Integer>(props.duration());
         column3.setHeader("Duración");
         column3.setWidth(60);
-        column3.setSortable(true);
+        column3.setSortable(false);
         column3.setResizable(true);
         configs.add(column3);
         /*
@@ -1123,14 +1123,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ColumnConfig<ActividadobraDTO, ?> columnNumeracion = new ColumnConfig<ActividadobraDTO, Integer>(props.numeracion());
         columnNumeracion.setHeader("Nro");
         columnNumeracion.setWidth(35);
-        columnNumeracion.setSortable(true);
+        columnNumeracion.setSortable(false);
         columnNumeracion.setResizable(true);
         configs.add(columnNumeracion);
 
         ColumnConfig<ActividadobraDTO, ?> columnPredecesor = new ColumnConfig<ActividadobraDTO, String>(props.predecesor());
         columnPredecesor.setHeader("Predecesor");
         columnPredecesor.setWidth(85);
-        columnPredecesor.setSortable(true);
+        columnPredecesor.setSortable(false);
         columnPredecesor.setResizable(true);
         configs.add(columnPredecesor);
 
