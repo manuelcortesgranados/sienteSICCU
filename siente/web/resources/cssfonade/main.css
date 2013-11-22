@@ -4862,10 +4862,20 @@ a:hover {
     float: left;
 }
 
-.ikont-hpg-listaproyecto .ikont-hgi-ordenalista{
+.ikont-hpg-listaproyecto .ikont-hgi-ordenalistadescendente{
     display: inline;
     float: left;
     background-image: url(../imgs/down.png);
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.ikont-hpg-listaproyecto .ikont-hgi-ordenalistaascendente{
+    display: inline;
+    float: left;
+    background-image: url(../imgs/up.png);
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
