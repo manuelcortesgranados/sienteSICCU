@@ -19,8 +19,9 @@
         <h:outputScript name="RGraph.common.tooltips.js" library="js/RGraph" />
         <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph" />
         <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
-        <link href="/#{var.versioncobra}/resources/gSlider/style/image-slider.css" rel="stylesheet" type="text/css" />
-         <link href="/#{var.versioncobra}/resources/css/tablerocontrol.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/tablerocontrol.css" rel="stylesheet" type="text/css" />
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -311,14 +312,14 @@
         <ui:include src="/ControlGerencial/modalDashboard/modalDashboardConvenios.xhtml"/>
         <ui:include src="/ControlGerencial/modalDashboard/modalDashboardAtencionH.xhtml"/>
         <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
-        <script src="/#{var.versioncobra}/resources/gSlider/js/image-slider.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
+        <script src="/#{var.versioncobra}/resources/gSlider/js/image-slider.js" type="text/javascript"></script>
         <script type="text/javascript">
-            var $j = jQuery.noConflict();
-            $j(document).ready(function() {
+            var $jpanel = jQuery.noConflict();
+            $jpanel(document).ready(function() {
                 var $i = jQuery.noConflict();
-                $i('#slider').slider({speed: 500});
                 $i('#slider2').slider2({speed: 500, action: true});
+
             });
         </script>
         <script>
