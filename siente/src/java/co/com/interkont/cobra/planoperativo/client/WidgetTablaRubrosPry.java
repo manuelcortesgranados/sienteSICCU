@@ -45,17 +45,21 @@ public class WidgetTablaRubrosPry implements IsWidget {
     protected boolean editar;
     protected ContratoDTO convenio;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    protected List<ObrafuenterecursosconveniosDTO> lstFuentesRecursosEliminar;
+    boolean elimino;
 
     /**
      * @return the store
      */
-    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar, ContratoDTO convenio) {
+    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, TreeStore<ActividadobraDTO> taskStore, boolean editar, ActividadobraDTO actividadObraEditar, ContratoDTO convenio, List<ObrafuenterecursosconveniosDTO> lstFuentesRecursosEliminar, boolean elimino) {
         this.obraDto = obraDto;
         this.actividadObraPadre = actividadObraPadre;
         this.taskStore = taskStore;
         this.editar = editar;
         this.actividadObraEditar = actividadObraEditar;
         this.convenio = convenio;
+        this.lstFuentesRecursosEliminar = lstFuentesRecursosEliminar;
+        this.elimino = elimino;
     }
 
     public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
@@ -123,13 +127,17 @@ public class WidgetTablaRubrosPry implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
+                elimino = true;
                 if (!editar) {
                     if (store.get(row).getTipoaporte() == 0) {
-                        store.get(row).getFuenterecursosconvenio().setValorDisponible(store.get(row).getFuenterecursosconvenio().getValorDisponible().add(store.get(row).getValor()));
+                        FuenterecursosconvenioDTO fuenteRecursos = GanttDatos.buscarFuenteRecursos(store.get(row).getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), store.get(row).getFuenterecursosconvenio().getVigencia(), convenio);
+                        fuenteRecursos.setValorDisponible(fuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
+                        service.setLog("aca en crear:" + fuenteRecursos.getValorDisponible(), null);
                         obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                     }
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
+                    service.setLog("estoy aca en eliminar de tabla de obra fuente 1", null);
                 } else {
                     if (!store.get(row).isEstaEnFuenteRecurso()) {
                         if (store.get(row).getTipoaporte() == 0) {
@@ -140,7 +148,10 @@ public class WidgetTablaRubrosPry implements IsWidget {
                             obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                         }
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                        lstFuentesRecursosEliminar.add(store.get(row));
+                        service.setLog("en eliminar:" + lstFuentesRecursosEliminar.size(), null);
                         getStore().remove(store.get(row));
+                        service.setLog("estoy aca en eliminar de tabla de obra fuente 2", null);
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato!");
                         alerta.show();

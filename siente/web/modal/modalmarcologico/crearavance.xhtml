@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-avance" styleClass="cerrar" value="Cerrar" style="color: black;"
+                    <a4j:commandLink id="esconder_mp-crear-avance" styleClass="cerrar"  style="color: black;"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-avance')}.hide();
                                          return false;" render="pgSeguimientoConvenio"/>
                 </h:panelGroup>
@@ -54,14 +54,14 @@
                         <f:facet name="header">
                             <h:outputText value="Logros"/>
                         </f:facet>
-                        <h:inputTextarea rows="4"  id="strLogrosavance" value="#{crongAvance.strdescripcion}"  />
+                        <h:inputTextarea rows="4"  id="strLogrosavance" value="#{crongAvance.strdescripcion}"   disabled="true"/>
                     </rich:column>
 
                     <rich:column  width="120px">
                         <f:facet name="header">
                             <h:outputText value="Dificultades"/>
                         </f:facet>
-                       <h:inputTextarea rows="4"  id="strdificultadavance" value="#{crongAvance.strdificultades}"  />
+                        <h:inputTextarea rows="4"  id="strdificultadavance" value="#{crongAvance.strdificultades}"  disabled="true"/>
                     </rich:column>
 
                     <rich:column  width="120px">
@@ -107,7 +107,7 @@
 
                         <rich:column rendered="#{MarcoLogico$MarcoLogico.obligacion.boolestado != true}">
                             <a4j:commandButton id="btobligacioncumplida"  value="Aprobar" 
-                                               render="rpcamibiarestadoobligacion" immediate="true"
+                                               render="rpcamibiarestadoobligacion"
                                                oncomplete="#{rich:component('mp-guardarestado-obligacion')}.show();">
                             </a4j:commandButton>
                         </rich:column>

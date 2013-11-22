@@ -570,7 +570,6 @@ public class Usuario implements Serializable {
     }   
 
     public Tercero getTercero() {
-        System.out.println("tercero   " + getTercero().getIntcodigo());
         return tercero;
     }
 
@@ -808,7 +807,6 @@ public class Usuario implements Serializable {
 
         }
         if (usuariomod.getTercero().getGenero() == null) {
-            System.out.println("ingreso al if de genero");
             usuariomod.getTercero().setGenero(new Genero(3));
         }
         if (usuariomod.getTercero().getCargo() == null) {
@@ -1132,10 +1130,8 @@ public class Usuario implements Serializable {
      */
     public void seleccionarTodo(ValueChangeEvent event) {
         seleccionEntidad = ((Boolean) event.getNewValue()).booleanValue();
-        System.out.println("((Boolean) event.getNewValue()).booleanValue() = " + ((Boolean) event.getNewValue()).booleanValue());
         if (!seleccionEntidad) {
             limpiarSeleccionEntidad();
-            System.out.println("event = " + event);
         }
     }
 
@@ -1242,7 +1238,6 @@ public class Usuario implements Serializable {
         switch (usuariomod.getTipousuario().getIntcodigotipousuario()) {
             //Ciudadano
             case 1:
-                System.out.println("El usuario es de tipo ciudadano (No aplica)");
                 break;
             //Localidad
             case 2:
@@ -1254,15 +1249,12 @@ public class Usuario implements Serializable {
                 boolseleccionEntidad = false;
                 boolpanellistaproyecto = true;
                 boolLocalidad = true;
-                System.out.println("El usuario es de tipo Localidad");
                 break;
             //Relacion obra jsfusuario
             case 3:
-                System.out.println("El usuario es de tipo relacionobrajsfusuario");
                 listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
                 listaobrasasociadas = getSessionBeanCobra().getCobraService().encontrarRelacionObrajsfUsuario(usuariomod);
                 cargarMaplistaEntidad();
-                System.out.println("usuariomod.isRelacioncontrato()" + usuariomod.isRelacioncontrato());
                 boolpanellistaproyecto = true;
 
 
@@ -1271,7 +1263,6 @@ public class Usuario implements Serializable {
 
                     for (Relacioncontratojsfusuario jsfUsuario : listarelacioncontratousuario) {
                         jsfUsuario.setContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(jsfUsuario.getContrato().getIntidcontrato()));
-                        System.out.println("jsfUsuario" + jsfUsuario.getContrato().getStrnombre());
                     }
 
                 } else {
@@ -1283,7 +1274,6 @@ public class Usuario implements Serializable {
                 break;
             //Entidad
             case 4:
-                System.out.println(" El Usuario es de tipo Entidad");
                 boolseleccionEntidad = true;
                 boolLocalidad = false;
                 listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
@@ -1293,12 +1283,9 @@ public class Usuario implements Serializable {
 
                     for (Relacioncontratojsfusuario jsfUsuario : listarelacioncontratousuario) {
                         jsfUsuario.setContrato(getSessionBeanCobra().getCobraService().encontrarContratoxId(jsfUsuario.getContrato().getIntidcontrato()));
-                        System.out.println("jsfUsuario" + jsfUsuario.getContrato().getStrnombre());
                     }
-                    System.out.println("El usuario esta por relacioncontratoobra");
                     boolpanellistaproyecto = true;
                 } else {
-                    System.out.println("El usuario es supervisor de entidad");
                     boolpanellistaproyecto = false;
                 }
                 break;
@@ -1310,7 +1297,6 @@ public class Usuario implements Serializable {
      * usuario y la entidad (Asociadas a el).
      */
     public void cargarMaplistaEntidad() {
-        System.out.println("ingresa la entidad seleccionada ");
         for (VistaObraMapa obrasasociada : listaobrasasociadas) {
             if (maplistaobras.get(obrasasociada.getTercero().getStrnombrecompleto()) == null) {
                 List<VistaObraMapa> listaobra = new ArrayList<VistaObraMapa>();
@@ -1335,7 +1321,6 @@ public class Usuario implements Serializable {
         } else {
             FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("mensajedecreacionadm"));
             listaobrasentidad.clear();
-            System.out.println("Entro al else");
         }
     }
     public void llenarentidadcreacionusuario() {

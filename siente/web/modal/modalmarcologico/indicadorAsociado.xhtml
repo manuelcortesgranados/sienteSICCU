@@ -17,18 +17,18 @@
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
-            <h:form>
+            <a4j:region>
                 <h:panelGroup>
                     <a4j:commandLink execute="@this"   render="rpindicadorasociado,@ll"  id="esconder_mp-indicadorasociado" styleClass="cerrar"
                                      title="#{varMarcoLogico.cerrar}"  onclick="#{rich:component('mp-indicadorasociado')}.hide();
                                               return false;"/>
                 </h:panelGroup>
-            </h:form>
+            </a4j:region>
         </f:facet>
-        <h:form>
+        <a4j:region>
             <h:panelGroup id="rpindicadorasociado">
 
-                <h:panelGrid columns="2" columnClasses="modal-indicador-head,modal-indicador-texto" width="500px">
+                <h:panelGrid id="prueba_indicadorasociado" columns="2" columnClasses="modal-indicador-head,modal-indicador-texto" width="500px">
                     <h:outputText  value="Nombre Indicador"/>
                     <h:outputText  id="asoOutputTextnombreindicador" value="#{MarcoLogico$MarcoLogico.indicadorAsociado.strnombreindicador}"  />
                     <h:outputText  value="Descripción"/>
@@ -57,6 +57,6 @@
                 </h:panelGrid>               
 
             </h:panelGroup>
-        </h:form>
+        </a4j:region>
     </rich:popupPanel>   
 </ui:composition>

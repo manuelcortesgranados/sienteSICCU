@@ -138,6 +138,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     Set<RelacionobrafuenterecursoscontratoDTO> lstRelacionObraFuenteContrato;
     boolean sololectura = false;
     boolean estaEnbotonAddModificar = false;
+    protected List<RelacionobrafuenterecursoscontratoDTO> lstFuentesRecursosEliminar;
 
     public ContratoForm() {
     }
@@ -177,7 +178,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         seEdito(actividadObraEditar);
         numeroRubros = contrato.getRelacionobrafuenterecursoscontratos().size();
         relacionFuenteRecursosContratoCopia = ((Set) ((HashSet) contrato.getRelacionobrafuenterecursoscontratos()).clone());
-
+        lstFuentesRecursosEliminar = new ArrayList<RelacionobrafuenterecursoscontratoDTO>();
     }
 
     /**
@@ -362,7 +363,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label lblFechaFin = new Label("Fecha finalización:");
         con.add(lblFechaFin, new HtmlData(".tfechafin"));
         con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
-        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato, sololectura);
+        final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato, sololectura, lstFuentesRecursosEliminar);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
 
@@ -402,7 +403,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 @Override
                 public void onHide(HideEvent event) {
                     if (!estaEnbotonAddModificar) {
+                        if (!tblMontos.getStore().getAll().isEmpty()) {
                     devolverValorFuenteObra(tblMontos.getStore().getAll());
+                        }
                     } else {
                         service.setLog("estoy aca en edlse de crear", null);
                 }
@@ -412,19 +415,25 @@ public class ContratoForm implements IsWidget, EntryPoint {
         } else {
             nombreBotonPrincipal = "Editar Contrato";
             lstTipoContrato.setValue(contrato.getTipocontrato());
-
-
-
             modalContrato.addHideHandler(new HideEvent.HideHandler() {
                 @Override
                 public void onHide(HideEvent event) {
                     if (!estaEnbotonAddModificar) {
+                        List<RelacionobrafuenterecursoscontratoDTO> lstContratoFuentesNuevas = obtenerFuentesNuevasEnEditar();
+                        List<RelacionobrafuenterecursoscontratoDTO> lstContratoFuentesEliminadas = obtenerFuentesEliminadas();
                         contrato.setRelacionobrafuenterecursoscontratos(relacionFuenteRecursosContratoCopia);
+                        if (!lstContratoFuentesEliminadas.isEmpty()) {
                         service.setLog("aca en cancelar editar contrato" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
                         for (RelacionobrafuenterecursoscontratoDTO fuenteRecursosContrato : relacionFuenteRecursosContratoCopia) {
                             fuenteRecursosContrato.getObrafuenterecursosconvenios().setValorDisponible(fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible().subtract(fuenteRecursosContrato.getValor()));
                             fuenteRecursosContrato.getObrafuenterecursosconvenios().setEstaEnFuenteRecurso(true);
-                            service.setLog("aca en cancelar contrato" + fuenteRecursosContrato.getObrafuenterecursosconvenios().getValorDisponible(), null);
+                                service.setLog("aca en cancelar contrato" + fuenteRecursosContrato.getObrafuenterecursosconvenios().isEstaEnFuenteRecurso(), null);
+                        }
+                        }
+
+                        if (!lstContratoFuentesNuevas.isEmpty()) {
+                            service.setLog("aca en el else", null);
+                            devolverValorFuenteObra(lstContratoFuentesNuevas);
                         }
                     } else {
                         service.setLog("estoy aca en else de editar", null);
@@ -1281,5 +1290,36 @@ public class ContratoForm implements IsWidget, EntryPoint {
             relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().add(relacionFuente.getValor()));
         }
 
+    }
+
+    public List<RelacionobrafuenterecursoscontratoDTO> obtenerFuentesNuevasEnEditar() {
+        List<RelacionobrafuenterecursoscontratoDTO> lstObraFuentes = new ArrayList<RelacionobrafuenterecursoscontratoDTO>();
+        for (Iterator it = contrato.getRelacionobrafuenterecursoscontratos().iterator(); it.hasNext();) {
+            RelacionobrafuenterecursoscontratoDTO contratoFuenteCopia = (RelacionobrafuenterecursoscontratoDTO) it.next();
+            if (contratoFuenteCopia.getIdrelacionobracontrato() == 0) {
+                lstObraFuentes.add(contratoFuenteCopia);
+}
+        }
+        return lstObraFuentes;
+    }
+
+    public List<RelacionobrafuenterecursoscontratoDTO> obtenerFuentesEliminadas() {
+        List<RelacionobrafuenterecursoscontratoDTO> lstContratoFuentes = new ArrayList<RelacionobrafuenterecursoscontratoDTO>();
+        for (RelacionobrafuenterecursoscontratoDTO contratoFuenteCopia : relacionFuenteRecursosContratoCopia) {
+            if (!estaObraFuenteRecursos(contratoFuenteCopia)) {
+                lstContratoFuentes.add(contratoFuenteCopia);
+            }
+        }
+        return lstContratoFuentes;
+    }
+
+    public boolean estaObraFuenteRecursos(RelacionobrafuenterecursoscontratoDTO contratoFuente) {
+        for (Iterator it = contrato.getFuenterecursosconvenios().iterator(); it.hasNext();) {
+            RelacionobrafuenterecursoscontratoDTO contratoFuenteActual = (RelacionobrafuenterecursoscontratoDTO) it.next();
+            if (contratoFuente.getIdrelacionobracontrato() == contratoFuenteActual.getIdrelacionobracontrato()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

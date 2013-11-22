@@ -17,7 +17,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-fechaPlanificacion" styleClass="cerrar" value="cerrar" style="color:black;" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}"
+                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-fechaPlanificacion" styleClass="cerrar"  style="color:black;" action="#{MarcoLogico$MarcoLogico.limpiarModalPlanificarNuevafechaAvanceObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-fechaPlanificacion')}.hide();
                                               return false;"/>
                 </h:panelGroup>
@@ -32,14 +32,13 @@
                                 <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaplanificado" 
                                                inputSize="5" 
                                                value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechaavance}"/>
-                                <rich:message for="calendarfechaplanificado" styleClass="error_texto"/>
                             </h:panelGrid>                     
                         </h:panelGrid>
 
                     </center>
 
                     <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarFechaAvanceAdicionalObligacion}"
-                                       render="rpnuevoavance,rpnuevafechanuevaplanicion">
+                                       render="rpnuevoavance,rpnuevafechanuevaplanicion" execute="rpnuevoavance,rpnuevafechanuevaplanicion">
                     </a4j:commandButton>
                 </rich:panel>
                 <a4j:outputPanel id="panelErrorPlanificarfecha">

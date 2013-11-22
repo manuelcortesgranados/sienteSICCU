@@ -33,7 +33,7 @@ public class FiltroDocumentos implements Filter {
     }
 
     @Override
-    public void init(FilterConfig config) throws ServletException {      
+    public void init(FilterConfig config) throws ServletException {
 //        this.config = config;   
 //        this.urlLogin =   config.getInitParameter("ciudadano");
 //        if (urlLogin == null || urlLogin.trim().length() == 0){
@@ -49,23 +49,23 @@ public class FiltroDocumentos implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession(true);
         //Se condiciona de si hay session deje ver el archivo y sino que salga la pagina de error
-        if (sessionBeanCobra == null) {            
-                try {
-                    httpRequest.getRequestDispatcher("/Errores.xhtml").forward(request, response);
-                    return;
-                } catch (ServletException e) {
-                } catch (IOException e) {
-                }   
-                //Se verifica si el Usuario esta logueado y si es ciudadano si es asi muestra la pagina de error de lo contrario muestra el archivo
-         }else if (!sessionBeanCobra.isLogueadodesdemapa()) {
+        if (sessionBeanCobra == null) {
             try {
-                    httpRequest.getRequestDispatcher("/Errores.xhtml").forward(request, response);
-                    return;
-                } catch (ServletException e) {
-                } catch (IOException e) {
-                }   
+                httpRequest.getRequestDispatcher("/AccesoDenegado.xhtml").forward(request, response);
+                return;
+            } catch (ServletException e) {
+            } catch (IOException e) {
+            }
+            //Se verifica si el Usuario esta logueado y si es ciudadano si es asi muestra la pagina de error de lo contrario muestra el archivo
+        } else if (!sessionBeanCobra.isLogueadodesdemapa()) {
+            try {
+                httpRequest.getRequestDispatcher("/AccesoDenegado.xhtml").forward(request, response);
+                return;
+            } catch (ServletException e) {
+            } catch (IOException e) {
+            }
         }
-        
+
         try {
             chain.doFilter(request, response);
         } catch (IOException e) {
@@ -79,6 +79,6 @@ public class FiltroDocumentos implements Filter {
     @Override
     public void destroy() {
         config = null;
-        
+
     }
 }

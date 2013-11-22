@@ -21,7 +21,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-nuevoavance" value="cerrar" style="color: black;" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalEditarAvance}"
+                    <a4j:commandLink render="rpnuevoavance" id="esconder_mp-crear-nuevoavance"  style="color: black;" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalEditarAvance}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-nuevoavance')}.hide();
                                               return false;"/>
                 </h:panelGroup>
@@ -58,7 +58,7 @@
                  </center>
                  
                   <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvanceObligacion}" disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
-                                       render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
+                                     render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio" execute="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
                     </a4j:commandButton>
             </rich:panel>
             <a4j:outputPanel id="panelErrorAvance">
