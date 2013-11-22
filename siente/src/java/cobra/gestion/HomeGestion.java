@@ -202,7 +202,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.txtPor22 = txtPor22;
     }
     // </editor-fold>
-    //Novedades
+    //Novedades    
     private String valorFiltroMensajeRecibido = "";
     private UIDataTable tablaMensajesRecibidos = new UIDataTable();
     private boolean verMapa = true;
