@@ -29,7 +29,7 @@
             <center>
                 <h:panelGrid id="gppanelFiltroAvanzado"  columnClasses="panelcenter">
                     <center>
-                        <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
+                        <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclavefiltro}"
                                      onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  />
 
                         <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" width="100%" >
@@ -72,9 +72,9 @@
                                 </h:inputText>
 
                                 <h:outputLabel  styleClass="ikont-hol-label8"    id="label8" value=" #{var.y} " />
-                                <h:inputText value="#{HomeGestion.filtro.cuantiafin}" size="13" id="txtCuantiafin">
+                                <h:inputText value="#{HomeGestion.filtro.cuantiafin}" size="22" id="txtCuantiafin">
                                     <f:validateLongRange minimum="0"/>
-                                    <f:validateLength maximum="15"/>
+                                    <f:validateLength maximum="22"/>
                                 </h:inputText>
                             </h:panelGroup>
 
@@ -205,7 +205,7 @@
                             </h:panelGroup>
                             <h:panelGroup>
                                 <center>
-                                    <h:commandLink immediate="true" type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar"  value="#{var.buscar}rrrr" 
+                                    <h:commandLink  type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar"  value="#{var.buscar}rrrr" 
                                                    styleClass="ikont-busquedavanzada"   
                                                    />
                                 </center>
