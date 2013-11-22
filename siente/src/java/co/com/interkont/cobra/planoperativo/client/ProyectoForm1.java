@@ -734,19 +734,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, taskStore.getChildren(actividadPadre).size(), actividadHija);
         actividadPadre.addChild(actividadHija);
-        GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes, contratoDto);
+        //GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
     }
 
-    public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
-        if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {
-            int diferencia = CalendarUtil.getDaysBetween(propes.endDateTime().getValue(actividadPadre), propes.endDateTime().getValue(actividadHija));
-            Date copiaFecha = propes.endDateTime().getValue(actividadPadre);
-            CalendarUtil.addDaysToDate(copiaFecha, diferencia);
-            propes.endDateTime().setValue(actividadPadre, copiaFecha);
-        }
-    }
+//    public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
+//        if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {
+//            int diferencia = CalendarUtil.getDaysBetween(propes.endDateTime().getValue(actividadPadre), propes.endDateTime().getValue(actividadHija));
+//            Date copiaFecha = propes.endDateTime().getValue(actividadPadre);
+//            CalendarUtil.addDaysToDate(copiaFecha, diferencia);
+//            propes.endDateTime().setValue(actividadPadre, copiaFecha);
+//        }
+//    }
 
     private native String getTableMarkup() /*-{
      return ['<table width=100% cellpadding=0 cellspacing=10>',

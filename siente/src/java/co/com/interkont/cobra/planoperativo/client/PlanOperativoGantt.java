@@ -281,7 +281,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.useEndDate = true;
         config.clickCreateEnabled = false;
-        config.cascadeChanges = true;
+        config.cascadeChanges = false;
 
         /**
          * Ventana Modal Confirmar Eliminar Actividad
@@ -1053,11 +1053,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         // Button to endable/disable cascadeChanges
         final ToggleButton cascade = new ToggleButton("Cambiar a Cascada");
-        cascade.setValue(true);
+        cascade.setValue(false);
         cascade.addSelectHandler(new SelectEvent.SelectHandler() {
             @Override
-            public void onSelect(SelectEvent event) {
-                gantt.getConfig().cascadeChanges = cascade.getValue();
+            public void onSelect(SelectEvent event) {                
+                gantt.getConfig().cascadeChanges = cascade.getValue();                
                 getGantt().reconfigure(false);
             }
         });
@@ -1074,7 +1074,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
         tbar.add(critical);
-
+        tbar.add(cascade);
         return tbar;
     }
 
