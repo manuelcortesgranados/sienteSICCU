@@ -179,6 +179,8 @@ public class ModalAddMontos implements IsWidget {
                 entidadSeleccionada = lstE.getValue(lstE.getSelectedIndex());
                 List<Integer> lstVigenciasEntidad = mapaRelacionEntidadVigencias.get(entidadSeleccionada);
                 llenarVigenciaFuente(lstVigenciasEntidad);
+                obraFrDto = buscarFuenteRecursosDto(entidadSeleccionada, vigenciafuente);
+                valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
             }
         });
 
@@ -366,8 +368,8 @@ public class ModalAddMontos implements IsWidget {
                 valorContratoO = valorContratoO.add(relacionFuente.getValor());
                 valorContrato.setValue(valorContratoO);
                 contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
-                    relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
-             
+                relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
+
                 return "La fuente ha sido guardada";
             }
         } else {
