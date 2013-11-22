@@ -49,7 +49,7 @@
                 <interkont:spacer height="10"/>
                 <h:panelGrid columns="1" >
                     <a4j:region id="idregion">
-                        <h:panelGrid  cellspacing="10" id="txtcomentario1" columns="1"  >
+                        <h:panelGrid  cellspacing="10" id="txtcomentario1" columns="1"  styleClass="totalwidth">
                             <a4j:status id="idstatuscomentario" />
 
                             <h:outputText id="idcontarmensaje" value="#{Ciudadano$PerfilCiudadano.contarmensaje}"
@@ -58,7 +58,7 @@
                             <h:inputTextarea id="iacomentario" rows="5" cols="120"
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}"
                                              onfocus="borrar_campo1(this);" onkeydown="return maximaLongitud(this, 400);"
-                                             styleClass="ikont-hit-iacomentario">
+                                             styleClass="ikont-hit-iacomentario commentframe">
                                 <a4j:ajax event="keyup" listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" render="idcontarmensaje" status="idstatuscomentario" />
                             </h:inputTextarea>
 
@@ -68,26 +68,26 @@
                     </a4j:region>
 
                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.AgregarComentarioGeneral}"
-                                     render="pgcomentario, panelcomentarios" styleClass="ikont-acl-agregarcomentario" />
+                                     render="pgcomentario, panelcomentarios" styleClass="ikont-acl-agregarcomentario publicar" />
 
-                    <h:panelGrid columns="2" id="pgcomentario" >
+                    <h:panelGrid columns="2" id="pgcomentario"  styleClass="totalwidth">
                         <a4j:repeat id="rpcomentario" value="#{SessionBeanCobra.ciudadanoservice.listaComentarios}"
                                     binding="#{Ciudadano$PerfilCiudadano.repeatusuario}" var="rowcomentario" rows="3" >
-                            <h:panelGrid columns="3">
-                                <h:panelGrid styleClass="ikont-hpg-cargarusuario">
+                            <h:panelGrid columns="3"  styleClass="totalwidth">
+                                <h:panelGrid styleClass="ikont-hpg-cargarusuario commentframe">
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuario}" type="submit" >
                                         <h:graphicImage url="#{var.ipserver}#{var.versioncobra}#{rowcomentario.jsfUsuario.tercero.strfoto}"
-                                                        styleClass="ikont-hgi-strfoto"/>
+                                                        styleClass="ikont-hgi-strfoto picborder"/>
                                     </a4j:commandLink>
 
                                     <interkont:spacer width="30" />
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="3">
-                                    <h:graphicImage  styleClass="ikont-hgi-com_arrow"   url="/resources/imgs/com_arrow.png" />
+                                <h:panelGrid columns="3" >
+                                    <h:graphicImage  styleClass="ikont-hgi-com_arrow " url="/resources/imgs/com_arrow.png" />
 
-                                    <h:panelGrid styleClass="ikont-hpg-comentarios">
-                                        <h:panelGroup>
+                                    <h:panelGrid styleClass="ikont-hpg-comentarios commentuser ">
+                                        <h:panelGroup styleClass="">
                                             <h:outputText id="idstrnombre" value="#{rowcomentario.jsfUsuario.tercero.strnombrecompleto}"
                                                           styleClass="ikont-hot-idstrnombre vtitle03" />
 
@@ -100,7 +100,7 @@
 
                                         <h:panelGrid>
                                             <h:outputLabel id="idcomentario" value="#{rowcomentario.stropinion}"
-                                                           styleClass="ikont-hot-idcomentario" />
+                                                           styleClass="ikont-hot-idcomentario " />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>

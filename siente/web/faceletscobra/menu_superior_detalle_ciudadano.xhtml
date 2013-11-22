@@ -13,11 +13,11 @@
             <h:panelGrid columns="4"  rowClasses="alignverticaldetalle" >
                 <h:panelGrid cellpadding="0" cellspacing="0"  >
                     <h:panelGroup layout="block"  >
-                        <h:commandLink styleClass="ikont-hcl-iniciardeta"   rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
+                        <h:commandLink styleClass="ikont-hcl-iniciardeta_ciu"   rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
                                          immediate="true"  value="#{var.informacionciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
-                        <h:commandLink styleClass="ikont-hcl-iniciardeta1"   rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
+                        <h:commandLink styleClass="ikont-hcl-iniciardeta_ciu1"   rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
                                          immediate="true"  value="#{var.informacionciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
@@ -25,11 +25,11 @@
                 </h:panelGrid>
                 <h:panelGrid  cellpadding="0" cellspacing="0"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnparticipacion_ciudadano}" >
                     <h:panelGroup layout="block"  >
-                        <a4j:commandLink styleClass="ikont-hcl-iniciarOpiniones"   rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
+                        <a4j:commandLink styleClass="ikont-hcl-iniciarOpiniones_ciu"   rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
                                          immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
-                        <a4j:commandLink styleClass="ikont--hcl-iniciarOpiniones1"   rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
+                        <a4j:commandLink styleClass="ikont-hcl-iniciarOpiniones_ciu1"   rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
                                          immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />

@@ -48,6 +48,7 @@ import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -102,6 +103,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected int numeracionActividad;
     protected int numeracionActual = 0;
     protected boolean estaEnbotonAddModificar = false;
+    protected List<ObrafuenterecursosconveniosDTO> lstFuentesRecursosEliminar;
+    protected boolean elimino = false;
 
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
@@ -120,6 +123,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         fechaProyecto = CalendarUtil.copyDate(actividadobraProyectoEditar.getStartDateTime());
         numeroFuentes = proyectoDTO.getObrafuenterecursosconvenioses().size();
         relacionObraFuenteRecursosCopia = ((Set) ((HashSet) proyectoDTO.getObrafuenterecursosconvenioses()).clone());
+        lstFuentesRecursosEliminar = new ArrayList<ObrafuenterecursosconveniosDTO>();
         instanciarElementosPantalla();
         cargarFormularioEditar();
     }
@@ -255,7 +259,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
 
-        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar, contratoDto);
+        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar, contratoDto, lstFuentesRecursosEliminar, elimino);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
        
@@ -327,7 +331,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             @Override
             public void onHide(HideEvent event) {
                     if (!estaEnbotonAddModificar) {
+                        service.setLog("elimino:" + tblRubros.getStore().getAll().isEmpty(), null);
+                        if (!tblRubros.getStore().getAll().isEmpty()) {
                 devolverValorAfuenteRecursos(tblRubros.getStore().getAll());
+                        }
+
                     } else {
                         service.setLog("aca en else de crear", null);
             }
@@ -340,15 +348,24 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 @Override
                 public void onHide(HideEvent event) {
                     if (!estaEnbotonAddModificar) {
+                        service.setLog("elimino:" + elimino, null);
+                        List<ObrafuenterecursosconveniosDTO> lstObrasFuentesNuevas = obtenerFuentesNuevasEnEditar();
+                        List<ObrafuenterecursosconveniosDTO> lstObrasFuentesEliminadas = obtenerFuentesEliminadas();
                         proyectoDTO.setObrafuenterecursosconvenioses(relacionObraFuenteRecursosCopia);
-                        for (ObrafuenterecursosconveniosDTO obraFuente : relacionObraFuenteRecursosCopia) {
-                            FuenterecursosconvenioDTO f=GanttDatos.buscarFuenteRecursos(obraFuente.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuente.getFuenterecursosconvenio().getVigencia(), contratoDto);
+                        if (!lstObrasFuentesEliminadas.isEmpty()) {
+                            for (ObrafuenterecursosconveniosDTO obraFuente : lstObrasFuentesEliminadas) {
+                                FuenterecursosconvenioDTO f = GanttDatos.buscarFuenteRecursos(obraFuente.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuente.getFuenterecursosconvenio().getVigencia(), contratoDto);
                             f.setValorDisponible(f.getValorDisponible().subtract(obraFuente.getValor()));
                             f.setEstaEnFuenteRecurso(true);
-                            obraFuente.getFuenterecursosconvenio().setValorDisponible(f.getValorDisponible());
                             obraFuente.getFuenterecursosconvenio().setEstaEnFuenteRecurso(true);
-                            
+                            }
                         }
+                            
+                        if (!lstObrasFuentesNuevas.isEmpty()) {
+                            service.setLog("aca en el else", null);
+                            devolverValorAfuenteRecursos(lstObrasFuentesNuevas);
+                        }
+
                     } else {
                         service.setLog("aca probando 2", null);
                     }
@@ -848,10 +865,41 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void devolverValorAfuenteRecursos(List<ObrafuenterecursosconveniosDTO> lstFuenteRecursosObra) {
         for (ObrafuenterecursosconveniosDTO obraFuente : lstFuenteRecursosObra) {
             if (obraFuente.getTipoaporte() == 0) {
-                obraFuente.getFuenterecursosconvenio().setValorDisponible(obraFuente.getFuenterecursosconvenio().getValorDisponible().add(obraFuente.getValor()));
-                service.setLog("devolviendo en x:" + obraFuente.getValorDisponible(), null);
+                FuenterecursosconvenioDTO fuente = GanttDatos.buscarFuenteRecursos(obraFuente.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), obraFuente.getFuenterecursosconvenio().getVigencia(), contratoDto);
+                fuente.setValorDisponible(fuente.getValorDisponible().add(obraFuente.getValor()));
+                service.setLog("aca en devolver 1:" + fuente.getValorDisponible(), null);
+
 }
         }
 
+    }
+
+    public List<ObrafuenterecursosconveniosDTO> obtenerFuentesNuevasEnEditar() {
+        List<ObrafuenterecursosconveniosDTO> lstObraFuentes = new ArrayList<ObrafuenterecursosconveniosDTO>();
+        for (ObrafuenterecursosconveniosDTO obraFuenteCopia : proyectoDTO.getObrafuenterecursosconvenioses()) {
+            if (obraFuenteCopia.getIdobrafuenterecursos() == 0) {
+                lstObraFuentes.add(obraFuenteCopia);
+}
+        }
+        return lstObraFuentes;
+    }
+
+    public List<ObrafuenterecursosconveniosDTO> obtenerFuentesEliminadas() {
+        List<ObrafuenterecursosconveniosDTO> lstObraFuentes = new ArrayList<ObrafuenterecursosconveniosDTO>();
+        for (ObrafuenterecursosconveniosDTO obraFuenteCopia : relacionObraFuenteRecursosCopia) {
+            if (!estaObraFuenteRecursos(obraFuenteCopia)) {
+                lstObraFuentes.add(obraFuenteCopia);
+            }
+        }
+        return lstObraFuentes;
+    }
+
+    public boolean estaObraFuenteRecursos(ObrafuenterecursosconveniosDTO obraFuente) {
+        for (ObrafuenterecursosconveniosDTO obraFuenteActual : proyectoDTO.getObrafuenterecursosconvenioses()) {
+            if (obraFuente.getIdobrafuenterecursos() == obraFuenteActual.getIdobrafuenterecursos()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

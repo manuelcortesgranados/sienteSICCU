@@ -243,30 +243,30 @@
 
             </rich:menuGroup>
 
-            <rich:menuGroup label="Convenio" icon="/resources/imgs/bt_convenio.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
-                <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
+            <rich:menuGroup label="#{var.convenio}" icon="/resources/imgs/bt_convenio.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
+                <rich:menuItem  label="#{var.nuevo}" icon="/resources/imgs/bt_nuevo.png"
                                 actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="#{Supervisor$Contrato.irApaginaconvenio}" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}">
                     <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
                 </rich:menuItem>
-                <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
+                <rich:menuItem  label="#{var.consultar}" icon="/resources/imgs/bt_consultar.png"
                                 action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true">
                     <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="Contrato" icon="/resources/imgs/bt_contrato.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
-                <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
+            <rich:menuGroup label="#{var.contrato}" icon="/resources/imgs/bt_contrato.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
+                <rich:menuItem  label="#{var.nuevo}" icon="/resources/imgs/bt_nuevo.png"
                                 actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}">
                     <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
                 </rich:menuItem>
-                <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
+                <rich:menuItem  label="#{var.consultar}" icon="/resources/imgs/bt_consultar.png"
                                 action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true">
                     <a4j:param assignTo="#{Supervisor$ModificarContrato.permitirGuardar}" value="false"/>
                     <a4j:param value="0" assignTo="#{Supervisor$Contrato.estrategia}" />
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="Contrato Consultoria" icon="/resources/imgs/bt_consultoria.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
+            <rich:menuGroup label="#{var.contrato}" icon="/resources/imgs/bt_consultoria.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
                 <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
                                 actionListener="#{Supervisor$Contrato.iniciarContrConsultoria}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontrato_consultoria}"/>
                 <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
@@ -433,12 +433,12 @@
 
         <rich:dropDownMenu rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_miperfil}">
             <f:facet name="label">
-                <h:outputText  styleClass="ikont-hot-miperfil"   value="Mi Perfil"/>
+                <h:outputText  styleClass="ikont-hot-miperfil"   value="#{var.miperfil}"/>
             </f:facet>
-            <rich:menuItem label="Cambiar Contraseña" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.usuId!=1287}"
+            <rich:menuItem label="#{var.cambiar} #{var.contraseña}" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.usuId!=1287}"
                            action="#{Perfil$Usuario.initusu}" immediate="true"/>
 
-            <rich:menuItem  label="Mi Perfil Ciudadano" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}"
+            <rich:menuItem  label="#{var.miperfil} #{var.ciudadanosinregistro}" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}"
                             action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}" immediate="true"/>
 
         </rich:dropDownMenu>
@@ -455,20 +455,23 @@
                 <h:outputText  styleClass="ikont-hot-administrador"   value="#{var.administrador}" />
             </f:facet>
 
-            <rich:menuGroup label="Usuario" icon="/resources/imgs/bt_soliciobra.png" >   
-                <rich:menuItem label="Asociar Entidad" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Administrador$AdministrarEntidad.asociarEntidad}"
+            <rich:menuGroup label="#{var.usuariode}" icon="/resources/imgs/bt_soliciobra.png" >   
+                <rich:menuItem label="#{var.asociarentidadusuario}" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Administrador$AdministrarEntidad.asociarEntidad}"
                                >
                 </rich:menuItem>
-                <rich:menuItem label="Administrar proyectos" icon="/resources/imgs/bt_vigentes.png" immediate="true" rendered="false"
+                <rich:menuItem label="#{var.adminobra}" icon="/resources/imgs/bt_vigentes.png" immediate="true" rendered="false"
                                >
                 </rich:menuItem>
-                <rich:menuItem label="Gestionar usuarios" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Perfil$Usuario.iniciarperfilusuario}" rendered="true"
+                <rich:menuItem label="#{var.gestionarUsuario}" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Perfil$Usuario.iniciarperfilusuario}" rendered="true"
+                               >
+                </rich:menuItem>
+                <rich:menuItem label="#{var.ingresarUsuario}" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Ciudadano$PerfilCiudadano.ingresarUsuario}" rendered="true"
                                >
                 </rich:menuItem>
             </rich:menuGroup>
 
             <rich:menuGroup rendered="false" label="Parametricas" icon="/resources/imgs/bt_soliciobra.png" >   
-                <rich:menuItem label="Tipo Polizas" icon="/resources/imgs/bt_vigentes.png" immediate="true"
+                <rich:menuItem label="#{var.tipo} #{var.polizas}" icon="/resources/imgs/bt_vigentes.png" immediate="true"
                                >
                 </rich:menuItem>
                 <rich:menuItem label="Tipo Contrato Consultoria" icon="/resources/imgs/bt_vigentes.png" immediate="true"

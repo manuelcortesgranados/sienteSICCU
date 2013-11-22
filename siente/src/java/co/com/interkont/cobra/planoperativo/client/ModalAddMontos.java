@@ -369,7 +369,7 @@ public class ModalAddMontos implements IsWidget {
                 valorContrato.setValue(valorContratoO);
                 contrato.getRelacionobrafuenterecursoscontratos().add(relacionFuente);
                 relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
-
+                obraFrDto.setEstaEnFuenteRecurso(true);
                 return "La fuente ha sido guardada";
             }
         } else {
