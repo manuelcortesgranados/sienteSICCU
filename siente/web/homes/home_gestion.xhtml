@@ -122,8 +122,12 @@
                     <h:panelGrid columns="4" >
                         <h:outputText  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas} "  />
                         <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyecto}s encontrados "  />
-                        <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista(1)}" immediate="true" type="submit"/>
-                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista(3)}" immediate="true"/>
+                        <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista}" immediate="true" type="submit">
+                            <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
+                        </h:commandLink>
+                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista}" immediate="true">
+                            <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
+                        </h:commandLink>
                     </h:panelGrid>
 
 
@@ -212,8 +216,13 @@
                                     </rich:column>
                                     <rich:column id="nombreObra" breakRowBefore="true" styleClass="ikont-rdt-rc-nombreobra">
                                         <h:panelGroup  styleClass="ikont-hpg-listaproyecto">
-                                            <h:commandLink  title="ordenar" styleClass="ikont-hgi-ordenalista" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true">
+                                            <h:commandLink  title="ordenar descendente" styleClass="ikont-hgi-ordenalistaascendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{HomeGestion.ordenandoPorNombreProyectoAsc}">
                                                 <a4j:param value="1" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="false" assignTo="#{HomeGestion.ordenandoPorNombreProyectoAsc}"/>
+                                            </h:commandLink>
+                                            <h:commandLink  title="ordenar ascendente" styleClass="ikont-hgi-ordenalistadescendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{!HomeGestion.ordenandoPorNombreProyectoAsc}">
+                                                <a4j:param value="1" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorNombreProyectoAsc}"/>
                                             </h:commandLink>
                                             <h:outputText  styleClass="ikont-hot-nombreobra"  value="Nombre proyecto   " />
                                         </h:panelGroup>
@@ -221,8 +230,13 @@
 
                                     <rich:column id="nombreConvenio" styleClass="ikont-rdt-rc-convenio" rendered="#{HomeGestion.filtro.tipointervencion==3 or HomeGestion.filtro.tipointervencion==-1}">
                                         <h:panelGroup styleClass="ikont-hpg-listaproyecto">
-                                            <h:commandLink  styleClass="ikont-hgi-ordenalista" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true">
+                                            <h:commandLink title="ordenar descendente " styleClass="ikont-hgi-ordenalistaascendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{HomeGestion.ordenandoPorConvenioAsc}">
                                                 <a4j:param value="2" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="false" assignTo="#{HomeGestion.ordenandoPorConvenioAsc}"/>
+                                            </h:commandLink>
+                                            <h:commandLink title="ordenar ascendente " styleClass="ikont-hgi-ordenalistadescendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{!HomeGestion.ordenandoPorConvenioAsc}">
+                                                <a4j:param value="2" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorConvenioAsc}"/>
                                             </h:commandLink>
                                             <h:outputText  styleClass="ikont-hot-convenio"   value="Convenio  " />
                                         </h:panelGroup>
@@ -230,16 +244,26 @@
 
                                     <rich:column id="tipoObra" styleClass="ikont-rdt-rc-tipoobra" >
                                         <h:panelGroup styleClass="ikont-hpg-listaproyecto">
-                                            <h:commandLink  styleClass="ikont-hgi-ordenalista" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true">
+                                            <h:commandLink title="ordenar descendente "  styleClass="ikont-hgi-ordenalistaascendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{HomeGestion.ordenandoPorTipoProyectoAsc}">
                                                 <a4j:param value="3" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="false" assignTo="#{HomeGestion.ordenandoPorTipoProyectoAsc}"/>
+                                            </h:commandLink>
+                                            <h:commandLink title="ordenar ascendente "  styleClass="ikont-hgi-ordenalistadescendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{!HomeGestion.ordenandoPorTipoProyectoAsc}">
+                                                <a4j:param value="3" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorTipoProyectoAsc}"/>
                                             </h:commandLink>
                                             <h:outputText  styleClass="ikont-hot-tipoobra"   value="Tipo proyecto  " />
                                         </h:panelGroup>
                                     </rich:column>
                                     <rich:column id="valorObra" styleClass="ikont-rdt-rc-valor" >
                                         <h:panelGroup styleClass="ikont-hpg-listaproyecto">
-                                            <h:commandLink styleClass="ikont-hgi-ordenalista" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true">
+                                            <h:commandLink title="ordenar descendente" styleClass="ikont-hgi-ordenalistaascendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{HomeGestion.ordenandoPorValorAsc}">
                                                 <a4j:param value="4" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="false" assignTo="#{HomeGestion.ordenandoPorValorAsc}"/>
+                                            </h:commandLink>
+                                            <h:commandLink title="ordenar ascendente" styleClass="ikont-hgi-ordenalistadescendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{!HomeGestion.ordenandoPorValorAsc}">
+                                                <a4j:param value="4" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorValorAsc}"/>
                                             </h:commandLink>
                                             <h:outputText  styleClass="ikont-hot-valor"   value="Valor  " />
                                         </h:panelGroup>
@@ -249,8 +273,13 @@
                                     </rich:column>
                                     <rich:column id="avanceObra" styleClass="ikont-rdt-rc-avance">
                                         <h:panelGroup styleClass="ikont-hpg-listaproyecto">
-                                            <h:commandLink styleClass="ikont-hgi-ordenalista" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" >
+                                            <h:commandLink title="ordenar descendente " styleClass="ikont-hgi-ordenalistaascendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{HomeGestion.ordenandoPorAvanceAsc}">
                                                 <a4j:param value="5" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="false" assignTo="#{HomeGestion.ordenandoPorAvanceAsc}"/>
+                                            </h:commandLink>                                            
+                                            <h:commandLink title="ordenar ascendente " styleClass="ikont-hgi-ordenalistadescendente" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" type="submit" immediate="true" rendered="#{!HomeGestion.ordenandoPorAvanceAsc}">
+                                                <a4j:param value="5" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
+                                                <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorAvanceAsc}"/>
                                             </h:commandLink>                                            
                                             <h:outputText  styleClass="ikont-hot-avance"   value="Avance  " />
                                         </h:panelGroup>

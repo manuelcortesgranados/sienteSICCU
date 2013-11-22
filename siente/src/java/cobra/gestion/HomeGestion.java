@@ -10,8 +10,6 @@ import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.ControlPanel;
 import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
-import co.com.interkont.cobra.to.Grupo;
-import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.JsfUsuarioGrupo;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Lugarobra;
@@ -48,7 +46,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -262,6 +259,121 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<VistaObraMapa> interventores = new ArrayList<VistaObraMapa>();
     private List<Tercero> clientes = new ArrayList<Tercero>();
     private List<Tercero> gerentes = new ArrayList<Tercero>();
+
+    /**
+     * *********** Inicio propiedades booleanas para ordenamiento en tabla
+     * **********
+     */
+    private boolean ordenandoPorNombreProyectoAsc = false;
+
+    /**
+     * Get the value of ordenandoPorNombreProyectoAsc
+     *
+     * @return the value of ordenandoPorNombreProyectoAsc
+     */
+    public boolean isOrdenandoPorNombreProyectoAsc() {
+        return ordenandoPorNombreProyectoAsc;
+    }
+
+    /**
+     * Set the value of ordenandoPorNombreProyectoAsc
+     *
+     * @param ordenandoPorNombreProyectoAsc new value of
+     * ordenandoPorNombreProyectoAsc
+     */
+    public void setOrdenandoPorNombreProyectoAsc(boolean ordenandoPorNombreProyectoAsc) {
+        this.ordenandoPorNombreProyectoAsc = ordenandoPorNombreProyectoAsc;
+    }
+
+    //-------------------------------------------------------------------------
+    private boolean ordenandoPorConvenioAsc = false;
+
+    /**
+     * Get the value of ordenandoPorConvenioAsc
+     *
+     * @return the value of ordenandoPorConvenioAsc
+     */
+    public boolean isOrdenandoPorConvenioAsc() {
+        return ordenandoPorConvenioAsc;
+    }
+
+    /**
+     * Set the value of ordenandoPorConvenioAsc
+     *
+     * @param ordenandoPorConvenioAsc new value of ordenandoPorConvenioAsc
+     */
+    public void setOrdenandoPorConvenioAsc(boolean ordenandoPorConvenioAsc) {
+        this.ordenandoPorConvenioAsc = ordenandoPorConvenioAsc;
+    }
+
+    //-------------------------------------------------------------------------
+    private boolean ordenandoPorTipoProyectoAsc = false;
+
+    /**
+     * Get the value of ordenandoPorTipoProyectoAsc
+     *
+     * @return the value of ordenandoPorTipoProyectoAsc
+     */
+    public boolean isOrdenandoPorTipoProyectoAsc() {
+        return ordenandoPorTipoProyectoAsc;
+    }
+
+    /**
+     * Set the value of ordenandoPorTipoProyectoAsc
+     *
+     * @param ordenandoPorTipoProyectoAsc new value of
+     * ordenandoPorTipoProyectoAsc
+     */
+    public void setOrdenandoPorTipoProyectoAsc(boolean ordenandoPorTipoProyectoAsc) {
+        this.ordenandoPorTipoProyectoAsc = ordenandoPorTipoProyectoAsc;
+    }
+
+    //-------------------------------------------------------------------------
+    private boolean ordenandoPorValorAsc = false;
+
+    /**
+     * Get the value of ordenandoPorValorAsc
+     *
+     * @return the value of ordenandoPorValorAsc
+     */
+    public boolean isOrdenandoPorValorAsc() {
+        return ordenandoPorValorAsc;
+    }
+
+    /**
+     * Set the value of ordenandoPorValorAsc
+     *
+     * @param ordenandoPorValorAsc new value of ordenandoPorValorAsc
+     */
+    public void setOrdenandoPorValorAsc(boolean ordenandoPorValorAsc) {
+        this.ordenandoPorValorAsc = ordenandoPorValorAsc;
+    }
+
+    //-------------------------------------------------------------------------
+    private boolean ordenandoPorAvanceAsc = false;
+
+    /**
+     * Get the value of ordenandoPorAvanceAsc
+     *
+     * @return the value of ordenandoPorAvanceAsc
+     */
+    public boolean isOrdenandoPorAvanceAsc() {
+        return ordenandoPorAvanceAsc;
+    }
+
+    /**
+     * Set the value of ordenandoPorAvanceAsc
+     *
+     * @param ordenandoPorAvanceAsc new value of ordenandoPorAvanceAsc
+     */
+    public void setOrdenandoPorAvanceAsc(boolean ordenandoPorAvanceAsc) {
+        this.ordenandoPorAvanceAsc = ordenandoPorAvanceAsc;
+    }
+
+    /**
+     * *********** Fin de propiedades booleanas para ordenamiento en tabla
+     * **********
+     */
     //variable para el titulo de proyecto
     private int tituloproyectocontrol = 2;
 
@@ -1743,7 +1855,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtroObrasActionMapaAvanModal() {
-        System.out.println("Debug - filtroObrasActionMapaAvanModal()");
         filtro.setPalabraclave("");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
@@ -1752,14 +1863,73 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 filtro.setIntcodigoentidad(0);
             }
         }
-        
-        
-        System.out.println("filtro.getOrdenarPor() = " + filtro.getOrdenarPor());
-        //filtro.setBoolconvenio(false);
+
+        sincronizarBotonesDeOrdenamiento();
         primeroListProyectos();
 
         return null;
+    }
 
+    private void sincronizarBotonesDeOrdenamiento() {
+        switch (filtro.getOrdenarPor()) {
+            case 0: // Para hacer el primer ordenamiento
+                setOrdenandoPorNombreProyectoAsc(true);
+            case 1:
+                if (isOrdenandoPorNombreProyectoAsc()) {
+                    filtro.setOrdenarPorAscendente(true);
+                    setOrdenandoPorConvenioAsc(false);
+                    setOrdenandoPorTipoProyectoAsc(false);
+                    setOrdenandoPorValorAsc(false);
+                    setOrdenandoPorAvanceAsc(false);
+                } else {
+                    filtro.setOrdenarPorAscendente(false);
+                }
+                break;
+            case 2:
+                if (isOrdenandoPorConvenioAsc()) {
+                    filtro.setOrdenarPorAscendente(true);
+                    setOrdenandoPorNombreProyectoAsc(false);
+                    setOrdenandoPorTipoProyectoAsc(false);
+                    setOrdenandoPorValorAsc(false);
+                    setOrdenandoPorAvanceAsc(false);
+                } else {
+                    filtro.setOrdenarPorAscendente(false);
+                }
+                break;
+            case 3:
+                if (isOrdenandoPorTipoProyectoAsc()) {
+                    filtro.setOrdenarPorAscendente(true);
+                    setOrdenandoPorNombreProyectoAsc(false);
+                    setOrdenandoPorConvenioAsc(false);
+                    setOrdenandoPorValorAsc(false);
+                    setOrdenandoPorAvanceAsc(false);
+                } else {
+                    filtro.setOrdenarPorAscendente(false);
+                }
+                break;
+            case 4:
+                if (isOrdenandoPorValorAsc()) {
+                    filtro.setOrdenarPorAscendente(true);
+                    setOrdenandoPorNombreProyectoAsc(false);
+                    setOrdenandoPorConvenioAsc(false);
+                    setOrdenandoPorTipoProyectoAsc(false);
+                    setOrdenandoPorAvanceAsc(false);
+                } else {
+                    filtro.setOrdenarPorAscendente(false);
+                }
+                break;
+            case 5:
+                if (isOrdenandoPorAvanceAsc()) {
+                    filtro.setOrdenarPorAscendente(true);
+                    setOrdenandoPorNombreProyectoAsc(false);
+                    setOrdenandoPorConvenioAsc(false);
+                    setOrdenandoPorTipoProyectoAsc(false);
+                    setOrdenandoPorValorAsc(false);
+                } else {
+                    filtro.setOrdenarPorAscendente(false);
+                }
+                break;
+        }
     }
 
     //public String  primeroObrasUsuario() {
@@ -1839,17 +2009,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String primeroListProyectos() {
-        System.out.println("Debug - primeroListProyectos()");
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
         filtro.setIsciu(getSessionBeanCobra().getCobraService().isCiu());
 
-        System.out.println("filtro.getIntvista() = " + filtro.getIntvista());
         switch (filtro.getIntvista()) {
             case 1:
-                System.out.println("Debug - primeroListProyectos() case 1");
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
                     filtro.setFactorpagina(100);
                     //filtro.setIntestadoobra(1);
@@ -1872,13 +2039,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 }
                 break;
             case 2:
-                System.out.println("Debug - primeroListProyectos() Case 2");
                 filtro.setFactorpagina(9);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
             case 3:
-                System.out.println("Debug - primeroListProyectos() Case 3");
                 filtro.setFactorpagina(10);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
@@ -1908,15 +2073,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String siguienteProyectos() {
-        System.out.println("DEbug - siguienteProyectos ");
         obrasEncontradas = 0;
         int num = (pagina) * filtro.getFactorpagina();
         filtro.setIntpagini(num);
 
-        System.out.println("Debug -  filtro.getIntvista() = " + filtro.getIntvista());
         switch (filtro.getIntvista()) {
             case 1:
-                System.out.println("Debug - case 1");
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
                     // filtro.setIntestadoobra(1);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
@@ -1938,7 +2100,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 break;
             case 2:
             case 3:
-                System.out.println("DEbug - case 3");
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
@@ -2860,11 +3021,10 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * Ejecuta las acciones necesarias para presentar la vista proporcionada.
      * 1=Vista Mapa 2=Vista thumbnail 3=Vista Lista
      *
-     * @param vista
      */
-    public void cambiarVista(int vista) {
+    public void cambiarVista() {
 
-        filtro.setIntvista(vista);
+        //filtro.setIntvista(vista);
         filtroObrasActionMapaAvanModal();
     }
 }
