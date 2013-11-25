@@ -14,7 +14,9 @@
     <f:subview id="Comentarios" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}">
         <h:form>
             <a4j:poll id="pollComentarios" rendered="#{SessionBeanCobra.actualcomentario}"
-                      action="#{SessionBeanCobra.LlenarComentarios}" render="pgcomentario" interval="5000" />
+                      action="#{SessionBeanCobra.LlenarComentarios}" render="pgcomentario" interval="500000" >
+                <a4j:status id="statuspollComentarios"/>
+            </a4j:poll>
         </h:form>
 
         <h:form id="formComentarios">
