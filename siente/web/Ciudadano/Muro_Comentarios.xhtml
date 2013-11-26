@@ -75,7 +75,7 @@
                     <h:panelGrid columns="2" id="pgcomentario"  styleClass="totalwidth">
                         <a4j:repeat id="rpcomentario" value="#{SessionBeanCobra.ciudadanoservice.listaComentarios}"
                                     binding="#{Ciudadano$PerfilCiudadano.repeatusuario}" var="rowcomentario" rows="3" >
-                            <h:panelGrid columns="3"  styleClass="totalwidth">
+                            <h:panelGrid columns="2"  styleClass="totalwidth" columnClasses=",totalwidth">
                                 <h:panelGrid styleClass="ikont-hpg-cargarusuario commentframe">
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuario}" type="submit" >
                                         <h:graphicImage url="#{var.ipserver}#{var.versioncobra}#{rowcomentario.jsfUsuario.tercero.strfoto}"
@@ -85,10 +85,10 @@
                                     <interkont:spacer width="30" />
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="3" >
+                                <h:panelGrid columns="2" styleClass="totalwidth tablesinspace" columnClasses="ikont-hgi-td-com_arrow">
                                     <h:graphicImage  styleClass="ikont-hgi-com_arrow " url="/resources/imgs/com_arrow.png" />
 
-                                    <h:panelGrid styleClass="ikont-hpg-comentarios commentuser ">
+                                    <h:panelGrid styleClass="ikont-hpg-comentarios commentuser totalwidth">
                                         <h:panelGroup styleClass="">
                                             <h:outputText id="idstrnombre" value="#{rowcomentario.jsfUsuario.tercero.strnombrecompleto}"
                                                           styleClass="ikont-hot-idstrnombre vtitle03" />

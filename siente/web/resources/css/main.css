@@ -22,6 +22,15 @@
     text-align: left;
 }
 
+.tablesinspace{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.fontsize18{
+    font-size: 18px!important;
+}
+
 body {
     margin:0;
     font-family: Verdana, Geneva, sans-serif;
@@ -3503,6 +3512,10 @@ a.perfil01:hover {
     text-align: center; -webkit-border-radius: 8px; border-radius: 8px;	-moz-border-radius: 8px; border:#FFF 2px solid;
 }
 
+.blueframe .rf-p-b {
+    border: solid 0px transparent;
+}
+
 .vtitle13 {
     font-family:Verdana, Geneva, sans-serif;
     font-size:15px;
@@ -4333,7 +4346,7 @@ table.centrado {
 .ikont-hot-intplazoo {
     font-family:"knockout", Arial, Helvetica, sans-serif;
     font-size:130px;
-    line-height:80px;
+    line-height:100px;
     color:#1D71B8;
 }
 .numbersmall{
@@ -4620,11 +4633,18 @@ a.closemodal{
     display: block;
     background-repeat: no-repeat;
     margin-right: 0px;
-    background-image: url(../imgs/modal_btn_sombra.png);
-    background-position: -210px -15px;
+    background-image: url(../imgs/modal/btn_cerrar.png);
+    background-position: 0px 0px;
     position: absolute;
-    top: -13px;
-    left: 10px;
+    top: 15px;
+    left: -30px;
+}
+
+.rf-pp-cntr .rf-pp-hdr {
+    background-image: url(../imgs/modal/imagotipo_siente.png);
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: 15px 0px;
 }
 
 .templatetablamenulateral{
@@ -4640,6 +4660,11 @@ a.closemodal{
 
 .ikont-hot-obrastrnombremedio, .ikont-hot-strnombremedio{
     font-size: 10px;
+    float: right;
+}
+
+.ikont-hot-intcodobra{
+    font-size: 8px;
     float: right;
 }
 
@@ -4703,7 +4728,7 @@ a.closemodal{
 .ikont-hot-stEstado{
     font-size: 30px;
     color: #336699;
-    font-weight: bold;
+    font-weight: bold;    
 }
 
 .ikont-hot-veravance{
@@ -4908,4 +4933,22 @@ label.textlittle2 {
     color: #666;
     font-style: italic;
     text-align: justify;
+}
+
+.ikont-hgi-td-com_arrow{
+    width: 18px;
+}
+
+#container3 .rf-p {
+    width: 195px;
+    height: 140px;
+    margin-left: 5px;
+}
+
+#container3 .rf-p .rf-p-b{
+    border : solid 0px transparent;
+}
+
+.ikont-hcb-sinseguirpry{
+    background: #D33F02!important;
 }
