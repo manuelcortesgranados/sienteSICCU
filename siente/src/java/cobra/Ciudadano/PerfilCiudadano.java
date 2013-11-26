@@ -814,8 +814,11 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 //inicializar atributos del objeto tercero
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombrecompleto(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombre());
                 //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
-                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19) {
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19 || intidgrupo == 20 || intidgrupo == 23 ) {
                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                }
+                if (intidgrupo == 20 || intidgrupo == 23) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setObras(new LinkedHashSet(getUsuario().getListaproyecto()));
                 }
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrlocalidadnacimiento(new Localidad("169"));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipoidentificacion(new Tipoidentificacion(6, "NIT"));
@@ -838,10 +841,16 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 if (intidgrupo == 19) {
                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(4));
                 }
+                if (intidgrupo == 20 || intidgrupo == 23) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(3));
+                }
 
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(true);
                 if (intidgrupo == 16 || intidgrupo == 19) {
                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
+                }
+                if (intidgrupo == 20 || intidgrupo == 23) {
+                   // getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListatercero()));
                 }
                 //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
@@ -869,7 +878,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 for (JsfUsuarioGrupo jsfusuarioId : listausuGrupos) {
                     jsfusuarioId.getId().setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId());
                 }
-                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19) {
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19 || intidgrupo == 20 || intidgrupo == 23) {
                     getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
                 }
                 //getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
@@ -1821,5 +1830,5 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         limpiarCiudadano();
         getUsuario().limpiarSeleccionEntidad();
         return "gestion";
-    }
+    } 
 }
