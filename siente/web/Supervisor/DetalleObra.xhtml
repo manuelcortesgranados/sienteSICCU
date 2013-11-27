@@ -254,8 +254,8 @@
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" columnClasses="panelcenter">
                                         <h:panelGrid styleClass="ikont-hpg-griddetaob2" >
-                                            <a4j:commandLink onclick=" #{rich:component('modalImagenvermas')}.show();
-                return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  >
+                                            <a4j:commandLink oncomplete=" #{rich:component('modalImagenvermas')}.show();
+                                                             return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  render="modalImagenvermas">
                                                 <h:graphicImage styleClass="ikont-hgi-imganterior " width="169" height="150" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
                                             </a4j:commandLink>
                                             <h:outputLabel styleClass="ikont-hol-detalle-proyecto" value="Antes" style="border-bottom: solid 1px #8D8D8D;"></h:outputLabel>
