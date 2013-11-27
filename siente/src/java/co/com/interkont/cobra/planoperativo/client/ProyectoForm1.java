@@ -453,8 +453,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     if (otrospagos.getValue() != null) {
                         if (otrospagos.getValue().compareTo(proyectoDTO.getValor()) > 0) {
                             varErrorres = true;
-                            msgerrores += "*Otros pagos ($" + otrospagos.getValue()
-                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                            msgerrores += "*Otros pagos (" + GanttDatos.parserCurrencyLocale(otrospagos.getValue())
+                                    + ") debe ser inferior al valor del proyecto (" + GanttDatos.parserCurrencyLocale(proyectoDTO.getValor()) + ")<br/>";
                         }
                     } else {
                         proyectoDTO.setOtrospagos(BigDecimal.ZERO);
@@ -462,8 +462,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     if (pagodirecto.getValue() != null) {
                         if (pagodirecto.getValue().compareTo(proyectoDTO.getValor()) > 0) {
                             varErrorres = true;
-                            msgerrores += "*Pagos directos ($" + pagodirecto.getValue()
-                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                            msgerrores += "*Pagos directos (" + GanttDatos.parserCurrencyLocale(pagodirecto.getValue())
+                                    + ") debe ser inferior al valor del proyecto (" + GanttDatos.parserCurrencyLocale(proyectoDTO.getValor()) + ")<br/>";
                         }
                     } else {
                         proyectoDTO.setPagodirecto(BigDecimal.ZERO);
@@ -471,8 +471,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     if (pagodirecto.getValue() != null && otrospagos.getValue() != null) {
                         if (pagodirecto.getValue().add(otrospagos.getValue()).compareTo(proyectoDTO.getValor()) > 0) {
                             varErrorres = true;
-                            msgerrores += "*Pagos directos + Otros Pagos ($" + pagodirecto.getValue().add(otrospagos.getValue())
-                                    + ") debe ser inferior al valor del proyecto ($" + proyectoDTO.getValor() + ")<br/>";
+                            msgerrores += "*Pagos directos + Otros Pagos (" + GanttDatos.parserCurrencyLocale(pagodirecto.getValue().add(otrospagos.getValue()))
+                                    + ") debe ser inferior al valor del proyecto (" + GanttDatos.parserCurrencyLocale(proyectoDTO.getValor()) + ")<br/>";
                         }
                     }
 
@@ -501,7 +501,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         editarProyecto();
                         actividadobraProyectoEditar.setObra(proyectoDTO);
                         modalPry.hide();
-                        gantt.getGanttPanel().runCascadeChanges();
+                        //gantt.getGanttPanel().runCascadeChanges();
                         gantt.getGanttPanel().getContainer().refresh();
                         GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
                     }
@@ -751,19 +751,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
         gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, taskStore.getChildren(actividadPadre).size(), actividadHija);
         actividadPadre.addChild(actividadHija);
-        GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes, contratoDto);
+        //GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes, contratoDto);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
     }
 
-    public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
-        if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {
-            int diferencia = CalendarUtil.getDaysBetween(propes.endDateTime().getValue(actividadPadre), propes.endDateTime().getValue(actividadHija));
-            Date copiaFecha = propes.endDateTime().getValue(actividadPadre);
-            CalendarUtil.addDaysToDate(copiaFecha, diferencia);
-            propes.endDateTime().setValue(actividadPadre, copiaFecha);
-        }
-    }
+//    public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
+//        if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {
+//            int diferencia = CalendarUtil.getDaysBetween(propes.endDateTime().getValue(actividadPadre), propes.endDateTime().getValue(actividadHija));
+//            Date copiaFecha = propes.endDateTime().getValue(actividadPadre);
+//            CalendarUtil.addDaysToDate(copiaFecha, diferencia);
+//            propes.endDateTime().setValue(actividadPadre, copiaFecha);
+//        }
+//    }
 
     private native String getTableMarkup() /*-{
      return ['<table width=100% cellpadding=0 cellspacing=10>',

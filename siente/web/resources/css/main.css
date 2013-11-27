@@ -3776,6 +3776,7 @@ a.p_examinar {
     background-position: 0px 0px;
     text-align: center;
     /*float:right;*/
+    margin: 0px auto;
 }
 a.p_examinar:hover {
     background-position: 0px -25px;
@@ -4681,6 +4682,10 @@ a.closemodal{
     width: 100%;
 }
 
+.mediunwidth{
+    width: 50%;
+}
+
 .ikont-hot-prorrogasadcciones, .ikont-hot-suspenderobra{
     font-size: 11px;
 }
@@ -4951,4 +4956,27 @@ label.textlittle2 {
 
 .ikont-hcb-sinseguirpry{
     background: #D33F02!important;
+}
+
+.ikont-hgi-strfoto{
+    height: 113px;
+    width: 110px;
+}
+
+.bcg-tb-per-ciu{
+    background: #F2F7FA;
+}
+
+.ikont-hpg-falsoboolotrousuario{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.ikont-hpg-falsoboolotrousuario td{
+    border-bottom:  solid 6px #FFF;
+    height: 28px;
+}
+
+.ikont-rp-murociudadano .rf-p-b{
+    border: solid 0px transparent;
 }

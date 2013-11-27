@@ -28,58 +28,57 @@
     </ui:define>
     <ui:define name="body">
         <h:form>
-            <h:panelGrid columns="2"   id="modif_ciudadano">
-                <h:panelGrid    id="layoutImagenDetalleCiu" columnClasses="panelcenter">
-                    <h:graphicImage  style="width: 79px;height: 93px;" styleClass="ikont-hgi-imgperiodo"   id="imgPeriodo" url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" />
-                    <h:panelGrid columns="2">
-                        <interkont:spacer width="150"/>
-                        <a4j:commandLink id="btAdjuntarImagen" 
-                                         oncomplete="#{rich:component('modalImagenCiu')}.show(); return true;"
-                                         styleClass="ikont-acl-btadjuntarimagen"  />
-                    </h:panelGrid>
+            <h:panelGrid columns="2"   id="modif_ciudadano" styleClass="totalwidth" columnClasses="mediunwidth,mediunwidth">
+                <h:panelGrid    id="layoutImagenDetalleCiu" columnClasses="panelcenter" styleClass="bcg-tb-per-ciu totalwidth">
+                    <br/>
+                    <h:graphicImage  styleClass="ikont-hgi-strfoto"   id="imgPeriodo" url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" />
+                    <br/><br/>
+                    <a4j:commandLink id="btAdjuntarImagen" 
+                                     oncomplete="#{rich:component('modalImagenCiu')}.show(); return true;"
+                                     styleClass="ikont-acl-btadjuntarimagen p_examinar panelcenter"  />
+                    <br/>
                 </h:panelGrid>
-                <h:panelGrid columns="2"  columnClasses="panelizquierda,panelizquierda" cellspacing="5">
-                    <h:outputText  styleClass="ikont-hot-lblnombreciudadano"   id="lblnombreciudadano"  value="#{var.nombre}:" />
-                    <h:inputText styleClass="ikont-"   size="25" maxlength="250" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombrecompleto}"/>
+                <h:panelGrid columns="2"  columnClasses="panelizquierda,panelizquierda" cellspacing="5" styleClass="totalwidth">
+                    <h:outputText  styleClass="ikont-hot-lblnombreciudadano vtitle19"   id="lblnombreciudadano"  value="#{var.nombre}:" />
+                    <h:inputText styleClass="ikont- fill"   size="25" maxlength="250" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombrecompleto}"/>
 
-                    <h:outputText  styleClass="ikont-hot-lblcorreoelectronico"   id="lblcorreoelectronico"  value="#{var.correo}" />
-                    <h:inputText  size="25" maxlength="250" styleClass="ikont-"    value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}"/>
+                    <h:outputText  styleClass="ikont-hot-lblcorreoelectronico vtitle19"   id="lblcorreoelectronico"  value="#{var.correo}" />
+                    <h:inputText  size="25" maxlength="250" styleClass="ikont-  fill"    value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}"/>
 
-                    <h:outputText  styleClass="ikont-hol-lblcedula"   id="lblCedula"  value="#{var.cedula}" />
-                    <h:inputText  size="25" maxlength="250" styleClass="ikont-"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.intcedula}"/>
+                    <h:outputText  styleClass="ikont-hol-lblcedula vtitle19"   id="lblCedula"  value="#{var.cedula}" />
+                    <h:inputText  size="25" maxlength="250" styleClass="ikont- fill"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.intcedula}"/>
 
-                    <h:outputText  styleClass="ikont-hot-lblfecnacimiento"   id="lblfecnacimiento"  value="#{var.fechadeNacimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-lblfecnacimiento  vtitle19"   id="lblfecnacimiento"  value="#{var.fechadeNacimiento}:" />
                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="ikont-rc-datefechanacimiento"  
                                    value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
 
-                    <h:outputLabel  styleClass="ikont-hol-lblubicacion"   id="lblubicacion"  value="#{var.departamento}" for="combodepartamentoCiudadano"/>
-                    <h:selectOneMenu id="combodepartamentoCiudadao" value="#{Ciudadano$PerfilCiudadano.codDepartamentoCiudadano}" styleClass="ikont-hsom-combodepartamentociudadano"  >
+                    <h:outputLabel  styleClass="ikont-hol-lblubicacion  vtitle19"   id="lblubicacion"  value="#{var.departamento}" for="combodepartamentoCiudadano"/>
+                    <h:selectOneMenu id="combodepartamentoCiudadao" value="#{Ciudadano$PerfilCiudadano.codDepartamentoCiudadano}" styleClass="ikont-hsom-combodepartamentociudadano  fill"  >
                         <f:selectItems value="#{Ciudadano$PerfilCiudadano.departamentoCiudadano}" />
                         <a4j:ajax execute="combodepartamentoCiudadano" event="change" listener="#{Ciudadano$PerfilCiudadano.llenarMunicipioCiudadano}"
                                   render="gpMuniCiudadano" />
                     </h:selectOneMenu>
-                    <h:outputLabel  styleClass="ikont-hol-lblubicacionmuni"   id="lblubicacionmuni"  value="#{var.municipio}" for="combomunicipiociudadano" />
+                    <h:outputLabel  styleClass="ikont-hol-lblubicacionmuni  vtitle19"   id="lblubicacionmuni"  value="#{var.municipio}" for="combomunicipiociudadano" />
                     <h:panelGroup id="gpMuniCiudadano">
-                        <h:selectOneMenu id="combomunicipiociudadano" styleClass="ikont-hsom-combomunicipiociudadano"  
+                        <h:selectOneMenu id="combomunicipiociudadano" styleClass="ikont-hsom-combomunicipiociudadano  fill"  
                                          value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}">
                             <f:selectItems value="#{Ciudadano$PerfilCiudadano.municipioCiudadano}"/>
                         </h:selectOneMenu>
                     </h:panelGroup>
-                    <h:outputText  styleClass="ikont-hot-lblcelular"   id="lblcelular"  value="#{var.celular}"  />
-                    <h:inputText  size="25" maxlength="250" id="txcelular" styleClass="ikont-hit-txtcelular"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtelefono1}"/>
-                    <h:outputText  styleClass="ikont-hot-lblcuentafacebook"   id="lblcuentaFacebook"  value="#{var.cuentaFacebook}"/>
-                    <h:inputText  size="25" maxlength="250" id="txtcuentaFacebook" styleClass="ikont-hit-txtcuentafacebook"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strfacebook}"/>
-                    <h:outputText  styleClass="ikont-hot-lblcuentatwiteer"   id="lblcuentaTwitter"  value="#{var.cuentaTwitter}" />
-                    <h:inputText  size="25" maxlength="250" id="txtcuentaTwitter" styleClass="ikont-hit-txtcuentatwitter"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtwiter}"/>
-                    <center>
-                        <h:panelGrid columns="3">
-                            <interkont:spacer width="50"/>
-                            <h:commandLink id="btnModificar"   styleClass="ikont-acl-modificarciudadno"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}">
-                            </h:commandLink>
-                            <h:commandLink id="btncancelar"   styleClass="ikont-acl-btncancelarciudadano"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
-                            </h:commandLink>
-                        </h:panelGrid>
-                    </center>
+                    <h:outputText  styleClass="ikont-hot-lblcelular  vtitle19"   id="lblcelular"  value="#{var.celular}"  />
+                    <h:inputText  size="25" maxlength="250" id="txcelular" styleClass="ikont-hit-txtcelular  fill"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtelefono1}"/>
+                    <h:outputText  styleClass="ikont-hot-lblcuentafacebook  vtitle19"   id="lblcuentaFacebook"  value="#{var.cuentaFacebook}"/>
+                    <h:inputText  size="25" maxlength="250" id="txtcuentaFacebook" styleClass="ikont-hit-txtcuentafacebook  fill"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strfacebook}"/>
+                    <h:outputText  styleClass="ikont-hot-lblcuentatwiteer  vtitle19"   id="lblcuentaTwitter"  value="#{var.cuentaTwitter}" />
+                    <h:inputText  size="25" maxlength="250" id="txtcuentaTwitter" styleClass="ikont-hit-txtcuentatwitter  fill"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtwiter}"/>
+                    <h:panelGrid columns="3" styleClass="panelcenter">
+                        <interkont:spacer width="50"/>
+                        <h:commandLink id="btnModificar"   styleClass="ikont-acl-modificarciudadno p_guardar"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}">
+                        </h:commandLink>
+                        <h:commandLink id="btncancelar"   styleClass="ikont-acl-btncancelarciudadano p_cancelar"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
+                        </h:commandLink>
+                    </h:panelGrid>
+
                 </h:panelGrid>
             </h:panelGrid>
         </h:form>

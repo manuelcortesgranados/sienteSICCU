@@ -394,10 +394,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             nombreBotonPrincipal = "Añadir Contrato";
             getObjetoContrato().setText("Objeto");
             getValorContrato().setEmptyText("Valor estimado");
-            getLstTipoContrato().setEmptyText("Tipo contratacion");
+            getLstTipoContrato().setEmptyText("Tipo contratación");
             getNombreAbre().setEmptyText("Nombre Abreviado");
-            getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
-            getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
+            getFechaSuscripcionContrato().setEmptyText("Fecha de suscripción");
+            getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripción acta inicio");
             getFechaFinalizacion().setEmptyText("Fecha finalización");
             modalContrato.addHideHandler(new HideEvent.HideHandler() {
                 @Override
@@ -458,8 +458,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     } else {
                         //modificacionValorDisponibleCreando();
                         modalContrato.hide();
+                        service.setLog("Antes de tarea crear contrato", null);
                         crearTareaContrato();
-                        gantt.getGanttPanel().runCascadeChanges();
+                        service.setLog("Despues de tarea crear contrato", null);
+                        //gantt.getGanttPanel().runCascadeChanges();
                         GanttDatos.guardarBorradorConvenio(convenioDto, service, gantt);
                     }
                 } else {
@@ -480,7 +482,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     }
                     if (contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
                         error = true;
-                        msgValidacion += "El contrato debe de tener al meno una fuente de recursos asociada!" + "<br/>";
+                        msgValidacion += "El contrato debe de tener al menos una fuente de recursos asociada!" + "<br/>";
                     }
                     if (!error) {
 
@@ -587,7 +589,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
                 service.setLog("Actividad fecha fin segunda" + actiHija.getEndDateTime(), null);
 
-                if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+                if (actiHija.getName().equals("Suscripción acta de inicio")) {
                     contrato.setDatefechaactaini(actiHija.getStartDateTime());
 
                 }
@@ -624,7 +626,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
                 }
 
-                if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+                if (actiHija.getName().equals("Suscripción acta de inicio")) {
                     contrato.setDatefechaactaini(actiHija.getStartDateTime());
 
                 }
@@ -757,8 +759,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO actividadEjecucion = taskStore.getParent(actividadObraPadre);
 
         //numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
-
-        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
+        Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
+        fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
+        
+        //ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
+        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaInicioPre, CalendarUtil.getDaysBetween(fechaInicioPre, fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEsNoEditable(true);
         actividadObraContrato.setNumeracion(numeracionActividad);
         numeracionActividad++;
@@ -766,9 +771,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         List<ActividadobraDTO> lstHijosPadreObra = actividadObraPadre.getChildren();
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
-
-        Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
-        fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
+        
 
         ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaInicioPre, 4, 0, TaskType.PARENT, 5, true);
         precontractual.setEsNoEditable(true);
@@ -822,12 +825,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijos.add(contractua);
 
         List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripción del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcion);
 
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripción acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcionActa);
