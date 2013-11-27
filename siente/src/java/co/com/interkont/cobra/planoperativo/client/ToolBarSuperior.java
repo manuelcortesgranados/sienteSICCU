@@ -50,6 +50,8 @@ public class ToolBarSuperior implements IsWidget {
         ToolBar toolBarSuperior = new ToolBar();
         Button finalizarbasicos = new Button();
         Button guardarborrador = new Button();
+        Button fullScreen = new Button();
+       
         finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -96,7 +98,7 @@ public class ToolBarSuperior implements IsWidget {
                 service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                       service.setLog(caught.getMessage(), null);
+                        service.setLog(caught.getMessage(), null);
                     }
 
                     @Override
@@ -104,7 +106,7 @@ public class ToolBarSuperior implements IsWidget {
                         service.setNavegacion(2, new AsyncCallback<Boolean>() {
                             @Override
                             public void onFailure(Throwable caught) {
-                               service.setLog(caught.getMessage(), null);
+                                service.setLog(caught.getMessage(), null);
                             }
 
                             @Override
@@ -127,10 +129,44 @@ public class ToolBarSuperior implements IsWidget {
 
             }
         });
+       
+        fullScreen.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                service.setFullScreen(true, new AsyncCallback<Void>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Void result) {
+                        service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service, depStore), new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                               
+                                Window.open(retornarPOFullScreen(), "_parent", retornarConfiguracionPagina());
+                              
+                            }
+                        });
+                    }
+                });
+
+
+            }
+        });
+
         finalizarbasicos.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-finalizarGWT");
         guardarborrador.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-borradorGWT");
+        fullScreen.setStyleName("ikont-po-img-posicion-borrador-finalizarGWT ikont-po-img-fullscreen-GWT");
         toolBarSuperior.add(finalizarbasicos);
         toolBarSuperior.add(guardarborrador);
+        toolBarSuperior.add(fullScreen);
         toolBarSuperior.setStyleName("ikont-po-tb");
         toolBarSuperior.setWidth(980);
         return toolBarSuperior;
@@ -141,8 +177,14 @@ public class ToolBarSuperior implements IsWidget {
         return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
 
     }
+    
+     public String retornarPOFullScreen() {
+
+        return "/zoom/Supervisor/PlanOFullScreen.xhtml";
+
+    }
 
     public String retornarConfiguracionPagina() {
-        return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
+        return "menubar=no, location=false, resizable=no, scrollbars=si, status=no, dependent=true, fullscreen=yes";
     }
 }

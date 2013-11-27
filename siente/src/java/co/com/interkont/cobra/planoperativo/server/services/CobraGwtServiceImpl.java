@@ -49,6 +49,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     //private boolean seCargoPlanOperativoAntes = false;
     private List<ActividadobraDTO> listaacteliminar = new ArrayList<ActividadobraDTO>();
     private Set dependenciasEliminar = new LinkedHashSet(0);   
+    private boolean fullScreen=false;
     /**
      * @return the dependenciasEliminar
      */
@@ -331,4 +332,18 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setElimino(boolean elimino) {
         this.elimino = elimino;
     }    
+
+    /**
+     * @return the fullScreen
+     */
+    public boolean isFullScreen() {
+        return fullScreen;
+}
+
+    /**
+     * @param fullScreen the fullScreen to set
+     */
+    public void setFullScreen(boolean fullScreen) {
+        this.fullScreen = fullScreen;
+    }
 }
