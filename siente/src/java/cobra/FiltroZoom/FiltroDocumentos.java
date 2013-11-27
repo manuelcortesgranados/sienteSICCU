@@ -57,8 +57,8 @@ public class FiltroDocumentos implements Filter {
             if (sessionBeanCobra == null || !sessionBeanCobra.isLogueadodesdemapa()) {
                 
                 httpRequest.getRequestDispatcher("/AccesoDenegado.xhtml").forward(httpRequest, httpResponse);
+                return;
             }
-            return;
         }
         chain.doFilter(httpRequest, httpResponse);
     }
