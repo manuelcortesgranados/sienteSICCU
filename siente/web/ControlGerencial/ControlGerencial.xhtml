@@ -20,6 +20,7 @@
         <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph" />
         <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/gSlider/style/image-slider.css" rel="stylesheet" type="text/css"/>
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/tablerocontrol.css" rel="stylesheet" type="text/css" />
     </ui:define>
@@ -318,6 +319,7 @@
             var $jpanel = jQuery.noConflict();
             $jpanel(document).ready(function() {
                 var $i = jQuery.noConflict();
+                        $i('#slider').slider({ speed: 500 });                
                 $i('#slider2').slider2({speed: 500, action: true});
 
             });
@@ -365,7 +367,7 @@
             }
             window.onload = init;
         </script>
-
+        
     </ui:define>
 
 

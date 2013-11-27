@@ -259,7 +259,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<VistaObraMapa> interventores = new ArrayList<VistaObraMapa>();
     private List<Tercero> clientes = new ArrayList<Tercero>();
     private List<Tercero> gerentes = new ArrayList<Tercero>();
-
     /**
      * *********** Inicio propiedades booleanas para ordenamiento en tabla
      * **********
@@ -284,7 +283,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setOrdenandoPorNombreProyectoAsc(boolean ordenandoPorNombreProyectoAsc) {
         this.ordenandoPorNombreProyectoAsc = ordenandoPorNombreProyectoAsc;
     }
-
     //-------------------------------------------------------------------------
     private boolean ordenandoPorConvenioAsc = false;
 
@@ -305,7 +303,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setOrdenandoPorConvenioAsc(boolean ordenandoPorConvenioAsc) {
         this.ordenandoPorConvenioAsc = ordenandoPorConvenioAsc;
     }
-
     //-------------------------------------------------------------------------
     private boolean ordenandoPorTipoProyectoAsc = false;
 
@@ -327,7 +324,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setOrdenandoPorTipoProyectoAsc(boolean ordenandoPorTipoProyectoAsc) {
         this.ordenandoPorTipoProyectoAsc = ordenandoPorTipoProyectoAsc;
     }
-
     //-------------------------------------------------------------------------
     private boolean ordenandoPorValorAsc = false;
 
@@ -348,7 +344,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setOrdenandoPorValorAsc(boolean ordenandoPorValorAsc) {
         this.ordenandoPorValorAsc = ordenandoPorValorAsc;
     }
-
     //-------------------------------------------------------------------------
     private boolean ordenandoPorAvanceAsc = false;
 
@@ -369,7 +364,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setOrdenandoPorAvanceAsc(boolean ordenandoPorAvanceAsc) {
         this.ordenandoPorAvanceAsc = ordenandoPorAvanceAsc;
     }
-
     /**
      * *********** Fin de propiedades booleanas para ordenamiento en tabla
      * **********
@@ -940,9 +934,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
         filtro.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador());
 
-//        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
-//            iniciarSlider();
-//        }
+        if (bundle.getString("nuevomapa").equals("false")) {
+            if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
+                iniciarSlider();
+            }
+        } 
+
         //getPerfilControl().encontrarEtiqueta();
         //Debería utilizarse solo en ciudadano
 //        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
@@ -1077,8 +1074,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the <code>activate()</code> method will be called
-     * to indicate that the transfer is complete.</p>
+     * instance, after which the
+     * <code>activate()</code> method will be called to indicate that the
+     * transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
