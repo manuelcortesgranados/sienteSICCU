@@ -145,6 +145,19 @@ public class DetalleObra implements Serializable{
      * Objeto que contiene los datos básicos de una obra
      */
     private VistaObraMapa obraMapa;
+    
+    /**
+     * Si true se renderiza la modal modalImagenvermas de lo contrario no
+     */
+    private boolean verModalImagenvermas;
+
+    public boolean isVerModalImagenvermas() {
+        return verModalImagenvermas;
+    }
+
+    public void setVerModalImagenvermas(boolean verModalImagenvermas) {
+        this.verModalImagenvermas = verModalImagenvermas;
+    }
 
     public VistaObraMapa getObraMapa() {
         return obraMapa;
@@ -1291,6 +1304,7 @@ public class DetalleObra implements Serializable{
         } else {
             setStrimagenFutura(bundle.getString("noimagen"));
         }
+        verModalImagenvermas = true;
         return null;
     }
 

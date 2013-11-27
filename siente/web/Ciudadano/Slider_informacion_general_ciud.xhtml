@@ -17,7 +17,7 @@
                 <center>
                     <div id="slider3">
                         <div>
-                            <rich:panel header="Semaforo" styleClass="ikont-hp-semaforo"  >
+                            <rich:panel header="Semaforo" styleClass="ikont-hp-semaforo blueframe"  >
                                 <h:panelGroup >
                                     <center>
                                         <h:graphicImage  styleClass="ikont-hgi-imgsemaobra"   id="imgSemaObra"
@@ -27,7 +27,7 @@
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
                                         <interkont:spacer width="80%" height="5" />
                                         <center>
-                                            <h:outputText  styleClass="ikont-hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}" />
+                                            <h:outputText  styleClass="ikont-hot-semaforo titletool3"   value="#{Supervisor$DetalleObra.semaforo}" />
                                         </center>
 
                                     </center>
@@ -35,22 +35,22 @@
                             </rich:panel>
                         </div>
                         <div>
-                            <rich:panel header="Tipo #{var.proyecto}" styleClass="ikont-hp-tipoproyecto"   >
+                            <rich:panel header="Tipo #{var.proyecto}" styleClass="ikont-hp-tipoproyecto blueframe"   >
                                 <h:panelGroup >
-                                    <interkont:spacer width="20" height="50" />
+                                    <br/><br/><br/>
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="ikont-hot-tipoproyecto"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  >
+                                        <h:outputText  styleClass="ikont-hot-tipoproyecto titletool3 fontsize18"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Valor Actual" styleClass="ikont-rp-valoractual"   >
+                            <rich:panel header="Valor Actual" styleClass="ikont-rp-valoractual blueframe"   >
                                 <h:panelGroup>
-                                    <interkont:spacer width="20" height="50" />
+                                    <br/><br/><br/>
                                     <h:panelGroup >
-                                        <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" >
+                                        <h:outputText  styleClass="ikont-hot-numvaltotobra titletool3 fontsize18"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" >
                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
@@ -59,19 +59,19 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Ente que lo ejecuta" styleClass="ikont-rp-enqueloejecuta"   >
-                                <h:panelGrid columns="1">
-                                    <interkont:spacer width="20" height="10" />
-                                    <h:outputText  styleClass="ikont-hot-contratistanombrecomple"   value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+                            <rich:panel header="Ente que lo ejecuta" styleClass="ikont-rp-enqueloejecuta blueframe"   >
+                                <h:panelGrid columns="1" columnClasses="panelcenter">
+                                    <br/>
+                                    <h:outputText  styleClass="ikont-hot-contratistanombrecomple titletool3 "   value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
                                 </h:panelGrid>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Visitas #{var.textoobra4}" styleClass="ikont-rp-visitas"   >
+                            <rich:panel header="Visitas #{var.textoobra4}" styleClass="ikont-rp-visitas blueframe"   >
                                 <h:panelGroup>
-                                    <interkont:spacer width="20" height="50" />
+                                    <br/><br/><br/>
                                     <h:panelGroup  styleClass="ikont-hpg-visitas"  >
-                                        <h:outputText  styleClass="ikont-hot-numvisitas"   value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" >
+                                        <h:outputText  styleClass="ikont-hot-numvisitas titletool3 fontsize18"   value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
@@ -79,11 +79,11 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Personas Inscritas" styleClass="ikont-rp-personasinscritas">
+                            <rich:panel header="Personas Inscritas" styleClass="ikont-rp-personasinscritas blueframe">
                                 <h:panelGroup>
-                                    <interkont:spacer width="4"  height="50"/>
+                                    <br/><br/><br/>
                                     <h:panelGroup styleClass="ikont-hpg-listasegudires">
-                                        <h:outputText  styleClass="ikont-hot-listasegudires "   value="#{Supervisor$DetalleObra.listasegudires}" >
+                                        <h:outputText  styleClass="ikont-hot-listasegudires titletool3 fontsize18"   value="#{Supervisor$DetalleObra.listasegudires}" >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>

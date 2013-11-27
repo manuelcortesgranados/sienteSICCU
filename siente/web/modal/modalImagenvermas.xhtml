@@ -11,7 +11,7 @@
 
 
     <rich:popupPanel id="modalImagenvermas" autosized="true" 
-                     styleClass="ikont-rpp-modalImagenvermas"  >
+                     styleClass="ikont-rpp-modalImagenvermas"  rendered="#{Supervisor$DetalleObra.verModalImagenvermas}">
 
         <f:facet name="header" >
             <h:panelGroup >
@@ -23,8 +23,9 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalImagenvermas" styleClass="ikont-acl-cerrar closemodal"  
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenvermas')}.hide();
-                                             return false;"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenvermas')}.hide();">
+                        <a4j:param assignTo="#{Supervisor$DetalleObra.verModalImagenvermas}" value="false" />
+                    </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -34,9 +35,9 @@
                 <div>
                     <div id="SliderName_2" styleClass="SliderName_2">
                         <a4j:repeat value="#{Supervisor$DetalleObra.listaImagenesevolucionobra}" var="item" >
-                            <h:graphicImage  styleClass="ikont-hgi-demo2"   width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
+                            <h:outputText styleClass="ikont-hgi-demo2" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
                             <div styleClass="SliderName_2Description"><h:outputText  styleClass="ikont-hot-nomfec"   value="#{item.strnombre} - #{item.datefecha}"/></div>
-
+                        
                         </a4j:repeat>
 
 
