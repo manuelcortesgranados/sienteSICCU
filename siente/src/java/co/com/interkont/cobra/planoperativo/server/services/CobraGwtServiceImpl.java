@@ -25,7 +25,6 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -82,18 +81,6 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         this.cobraDao = cobraDao;
     }
 
-//    @Override
-//    public ContratoDTO casteoContrato() throws Exception {
-//
-//        //    ContratoDTO contratodto = new ContratoDTO(contrato);
-////        Set<Fuenterecursosconvenio> fuenterecursos= contrato.getFuenterecursosconvenios();
-////        Set<FuenterecursosconvenioDTO> fuenterecursosdto= new HashSet<FuenterecursosconvenioDTO>();
-////        if(fuenterecursos!=null){
-////            fuenterecursosdto = CobraUtil.convertirSet(fuenterecursos,"FuenterecursosconvenioDTO",  "Fuenterecursosconvenio", VAR_DTO, contratodto, "contrato");
-////        }
-////            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
-//        return null;
-//    }
     @Override
     public ContratoDTO obtenerContratoDTO() {
         if (contratoDto != null) {
@@ -208,12 +195,14 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
 
                 } else if (par.getIdparametrica() == 2) {
-                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechaPlaneacion, 1, 0);
-                    actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
+                    
+                    int dur=CalendarUtil.getDaysBetween(fechaPlaneacion,fechafin);                    
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechaPlaneacion, dur-1, 0);
+                    
                     actdto.setEsNoEditable(true);
                     actdto.setNumeracion(numeracion);
                     numeracion++;
-                    CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
+                    
                 } else {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
                     actdto.setNumeracion(numeracion);

@@ -10,8 +10,10 @@ import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleA
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.DependencyType;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.i18n.client.CurrencyData;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.i18n.client.impl.CurrencyDataImpl;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
@@ -25,6 +27,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -202,11 +205,11 @@ public class GanttDatos {
 
             CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
 
-            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
+            if (actiHija.getName().equals("Suscripción acta de inicio")) {
                 actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
 
             }
-            if (actiHija.getName().equals("Suscripcion del contrato")) {
+            if (actiHija.getName().equals("Suscripción del contrato")) {
                 actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
             }
             if (actiHija.getTipoActividad() == 2) {
@@ -372,28 +375,28 @@ public class GanttDatos {
         } else if (taskStore.getParent(actividadSeleccionada).getName().equals("Contractual")) {
 
             if (actividadSeleccionada.getTipoActividad() == 6) {
-                if (actividadSeleccionada.getName().equals("Suscripcion del contrato")) {
+                if (actividadSeleccionada.getName().equals("Suscripción del contrato")) {
                     if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
                         error = true;
-                        setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
+                        setMsg(getMsg() + "La fecha inicio de la Suscripción del contrato no puede ser mayor que la fecha de inicio de la Suscripción del acta:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
 
                     } else {
 
                         if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()) < 0) {
                             error = true;
-                            setMsg(getMsg() + "La fecha inicio de la Suscripcion del contrato no puede ser menor que fecha fin de etapa precontactual:" + darFormatoAfecha(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()));
+                            setMsg(getMsg() + "La fecha inicio de la Suscripción del contrato no puede ser menor que fecha fin de etapa precontactual:" + darFormatoAfecha(taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(0).getEndDateTime()));
 
                         }
                     }
                     if (actividadSeleccionada.getEndDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()) > 0) {
                         error = true;
-                        setMsg(getMsg() + "La fecha fin de la Suscripcion del contrato no puede ser mayor que la fecha de inicio de la Suscripcion del acta de inicio:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
+                        setMsg(getMsg() + "La fecha fin de la Suscripción del contrato no puede ser mayor que la fecha de inicio de la Suscripción del acta de inicio:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(1).getStartDateTime()));
                     }
 
-                } else if (actividadSeleccionada.getName().equals("Suscripcion acta de inicio")) {
+                } else if (actividadSeleccionada.getName().equals("Suscripción acta de inicio")) {
                     if (actividadSeleccionada.getStartDateTime().compareTo(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()) < 0) {
                         error = true;
-                        setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser menor que la fecha de fin de la Suscripcion del contrato:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()));
+                        setMsg(getMsg() + "La fecha inicio de la Suscripción del acta no puede ser menor que la fecha de fin de la Suscripción del contrato:" + darFormatoAfecha(taskStore.getParent(actividadSeleccionada).getChildren().get(0).getEndDateTime()));
 
                     }
                     ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
@@ -404,13 +407,13 @@ public class GanttDatos {
                             if (actividadSeleccionada.getStartDateTime().compareTo(menorHijosLiquidacion) > 0) {
                                 error = true;
                                 String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
-                                setMsg(getMsg() + "La fecha inicio de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                                setMsg(getMsg() + "La fecha inicio de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                             }
 
                             if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
                                 error = true;
                                 String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
-                                setMsg(getMsg() + "La fecha fin de la Suscripcion del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                                setMsg(getMsg() + "La fecha fin de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                             }
                     
                     } else {
@@ -866,5 +869,21 @@ public class GanttDatos {
         }
         return null;
 
+    }
+        
+     public static String parserCurrencyLocale(Double number) {        
+        CurrencyData cu= new CurrencyDataImpl("COP", "$", 0);           
+                 
+        String format = NumberFormat.getCurrencyFormat(cu).format(number);
+        
+        return format;
+    }
+     
+     public static String parserCurrencyLocale(BigDecimal number) {  
+        CurrencyData cu= new CurrencyDataImpl("COP", "$", 0);
+           
+                 
+        String format = NumberFormat.getCurrencyFormat(cu).format(number);
+        return format;
     }
 }
