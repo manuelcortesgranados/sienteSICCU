@@ -54,15 +54,15 @@
             }
         </script>
         <h:form>
-            <h:panelGrid columns="3"   id="pgmiperfil">
-                <h:panelGrid    columnClasses="panelcenter" styleClass="ikont-hpg-fotociuda bcg-tb-per-ciu">
-                    <h:graphicImage  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
+            <h:panelGrid columns="3"   id="pgmiperfil" styleClass="totalwidth">
+                <h:panelGrid    columnClasses="panelcenter" styleClass="ikont-hpg-fotociuda bcg-tb-per-ciu totalwidth">
+                    <h:graphicImage  styleClass="ikont-hgi-strfoto picborder " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
                     <h:outputLabel  styleClass="ikont-hol-strnombrecompleto vtitle17"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}"/>
                     <h:outputLabel  styleClass="ikont-hol-departamento vtitle18"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"/>
                     <interkont:spacer width="30"/>
                 </h:panelGrid>
 
-                <h:panelGrid columns="2" styleClass="ikont-hpg-falsoboolotrousuario bcg-tb-per-ciu" cellspacing="9"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                <h:panelGrid columns="2" styleClass="ikont-hpg-falsoboolotrousuario bcg-tb-per-ciu totalwidth" cellspacing="9"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
 
                     <h:outputText  styleClass="ikont-hot-correo vtitle19"   id="lblcorreoelectronico"  value="#{var.correo}" />
                     <h:outputLabel  styleClass="ikont-hol-stremail vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.stremail}" />
@@ -80,8 +80,8 @@
                     <h:outputLabel  styleClass="ikont-hol-strtelefono1 vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" />
 
                 </h:panelGrid>
-                <h:panelGrid  >
-                    <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario bcg-tb-per-ciu"    rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
+                <h:panelGrid  styleClass="totalwidth">
+                    <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario bcg-tb-per-ciu totalwidth"    rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
                         <h:outputText  styleClass="ikont-hot-idioma2"   id="lblidiomaotro"  value="#{var.idioma}" />
                         <h:outputLabel  styleClass="ikont-"     value="Español" />
                         <interkont:spacer height="5"/>
@@ -90,20 +90,16 @@
                         <h:outputLabel  styleClass="ikont-hol-municipiodepartamento"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"  />
                     </h:panelGrid>
 
-                    <h:panelGrid columns="1"    styleClass="bcg-tb-per-ciu">
-                        <interkont:spacer height="5"/>
-                        <interkont:spacer height="5"/>
-                        <interkont:spacer height="5"/>
-                        <interkont:spacer height="5"/>
-                        <h:outputLabel  styleClass="ikont-hol-strfacebook"   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfacebook}" />
-                        <a4j:commandLink styleClass="ikont-acl-space"  />
-                        <h:outputLabel  styleClass="ikont-hol-strtwiter"   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtwiter}"  />
-                        <a4j:commandLink styleClass="ikont-acl-space2"   />
+                    <h:panelGrid columns="1"    styleClass="bcg-tb-per-ciu totalwidth">
+                        <br/><br/>
+                        <h:outputLabel  styleClass="ikont-hol-strfacebook "   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfacebook}" />
+                        <a4j:commandLink styleClass="ikont-acl-space social_fb_"  />
+                        <h:outputLabel  styleClass="ikont-hol-strtwiter "   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtwiter}"  />
+                        <a4j:commandLink styleClass="ikont-acl-space2 social_tw_"   />
                     </h:panelGrid>
                     <interkont:spacer height="5"/>
-                    <h:panelGrid styleClass="bcg-tb-per-ciu"   rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
-                        <h:commandLink styleClass="ikont-hcl-modificarusuario"    action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" immediate="true"/>
-                        <h:commandLink styleClass="ikont-enlace-boton-administrar" value="#{var.modificarContrasena}"   action="#{Perfil$Usuario.initusu}" immediate="true"/>
+                    <h:panelGrid styleClass="bcg-tb-per-ciu totalwidth"   rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                        <h:commandLink styleClass="ikont-hcl-modificarusuario perfil01 "    action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" immediate="true"/>
                     </h:panelGrid>
                     
                 </h:panelGrid>
@@ -118,6 +114,7 @@
 
         <interkont:spacer height="20"/>
         <h:form>
+            <br/><br/>
             <h:panelGrid columns="2" id="pgcontenido">
                 <h:panelGroup layout="block" styleClass="ikont-hpg-pgcontenido sliderichcontentblue "   >
                     <h:outputLabel  styleClass="ikont-hol-proyecto vtitle13"   value="#{var.proyecto}"/>
@@ -146,6 +143,7 @@
 
             </h:panelGrid>
         </h:form>
+        <br/>
         <div id="header_content">
             <div class ="comentario">
                 <h:outputText  styleClass="ikont-hot-mimuro"   value="Mi muro" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}"/>
@@ -154,13 +152,13 @@
         </div>
         <interkont:spacer height="20"/>
         <h:form id="frmcomentariomuro" >
-            <rich:panel id="panelmuro">    
-                <h:panelGrid columns="1" width="100%">
+            <rich:panel id="panelmuro" styleClass="ikont-rp-murociudadano">    
+                <h:panelGrid columns="1" styleClass="totalwidth">
                     <a4j:region id="idregion">
-                        <h:panelGrid columns="1"  width="100%" >
+                        <h:panelGrid columns="1"  styleClass="totalwidth">
                             <a4j:status id="idstatuscomentario3"/>                            
                             <h:outputText style="float:right;" styleClass="ikont-hot-contarmensaje vtitle12"   id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" />
-                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this, 400);"
+                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion commentframe totalwidth"   rows="5" cols="120" onkeydown="return maximaLongitud(this, 400);"
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo3(this);" >
                                 <rich:placeholder value="Escriba Su Comentario..." />
                                 <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje3" status="idstatuscomentario3" />
