@@ -6,6 +6,7 @@ package cobra.perfil;
 
 import Seguridad.Encrypter;
 import co.com.interkont.cobra.to.Cargo;
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.EstadoCivil;
 import co.com.interkont.cobra.to.Genero;
 import co.com.interkont.cobra.to.JsfUsuario;
@@ -38,6 +39,7 @@ import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Relacioncontratojsfusuario;
 import co.com.interkont.cobra.to.Tipousuario;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import cobra.FiltroAvanzadoContrato;
 import cobra.FiltroObra;
 import cobra.gestion.HomeGestion;
 
@@ -237,14 +239,52 @@ public class Usuario implements Serializable {
      * Variable que almacena el objeto Relacioncontratojsfusuario
      */
     private Relacioncontratojsfusuario relacioncontratojsfusuario = new Relacioncontratojsfusuario();
-    
-    
     /* Variable para  listar los departamentos
      */
     private SelectItem[] entidadcreacionusuario;
     /* Variable para  listar los departamentos
      */
     private Tercero tercero;
+    /*
+     * Tabla utilizada para mostrar  los proyectos segun la entidad
+     */
+    private UIDataTable datatablelistaobras;
+    /*
+     * Variable para utilizar en Map de lista de proyectos
+     */
+    private boolean seleccionProyecto;
+    /*
+     * Variable utilizada para habilitar la seleccion de proyecto
+     */
+    private boolean inhabilitarseleccionproyecto = false;
+    /**
+     * Lista utilizada para mostrar las las obras seleccionadas
+     */
+    private Map<Obra, Boolean> listaproyectosbooleana = new HashMap<Obra, Boolean>();
+    /*
+     *  Lista utilizada para almacenar las obras seleccionadas
+     */
+    private List<Obra> listaobrasasociar = new ArrayList<Obra>();
+    /*
+     * Variable para utlizar la entidad de tercero
+     */
+    Tercero entidadproyecto = new Tercero();
+    private ArrayList<Obra> listaproyecto = new ArrayList<Obra>();
+    private boolean habilitarGuardarContrato = false;
+    private PerfilCiudadano perfilCiudadano = new PerfilCiudadano();
+    private List<Contrato> listacontratoasociar = new ArrayList<Contrato>();
+    private Map<Contrato, Boolean> listacontratobooleana = new HashMap<Contrato, Boolean>();
+    private UIDataTable datatablelistacontratos;
+    private List<Contrato> listacancontrato = new ArrayList<Contrato>();
+    private boolean inhabilitarseleccionconvenio = false;
+    private List<Contrato> listasubcontratoasociar = new ArrayList<Contrato>();
+    private Map<Contrato, Boolean> listasubcontratobooleana = new HashMap<Contrato, Boolean>();
+    private UIDataTable datatablelistasubcontratos;
+    private boolean habilitarsubconvenios = false;
+    private boolean habilitarmensajesubconvenios = false;
+    private List<Contrato> listacanSubcontrato = new ArrayList<Contrato>();
+    private List<Contrato> listacontratosproyecto = new ArrayList<Contrato>();
+
     /**
      * /**
      * Inicio de los Get y Set de las variables anteriores
@@ -567,7 +607,7 @@ public class Usuario implements Serializable {
 
     public void setTipousuariooption(SelectItem[] tipousuariooption) {
         this.tipousuariooption = tipousuariooption;
-    }   
+    }
 
     public Tercero getTercero() {
         return tercero;
@@ -664,7 +704,175 @@ public class Usuario implements Serializable {
     public void setRelacioncontratojsfusuario(Relacioncontratojsfusuario relacioncontratojsfusuario) {
         this.relacioncontratojsfusuario = relacioncontratojsfusuario;
     }
-    
+
+    public UIDataTable getDatatablelistaobras() {
+        return datatablelistaobras;
+    }
+
+    public void setDatatablelistaobras(UIDataTable datatablelistaobras) {
+        this.datatablelistaobras = datatablelistaobras;
+    }
+
+    public boolean isSeleccionProyecto() {
+        return seleccionProyecto;
+    }
+
+    public void setSeleccionProyecto(boolean seleccionProyecto) {
+        this.seleccionProyecto = seleccionProyecto;
+    }
+
+    public boolean isInhabilitarseleccionproyecto() {
+        return inhabilitarseleccionproyecto;
+    }
+
+    public void setInhabilitarseleccionproyecto(boolean inhabilitarseleccionproyecto) {
+        this.inhabilitarseleccionproyecto = inhabilitarseleccionproyecto;
+    }
+
+    public Map<Obra, Boolean> getListaproyectosbooleana() {
+        return listaproyectosbooleana;
+    }
+
+    public void setListaproyectosbooleana(Map<Obra, Boolean> listaproyectosbooleana) {
+        this.listaproyectosbooleana = listaproyectosbooleana;
+    }
+
+    public List<Obra> getListaobrasasociar() {
+        return listaobrasasociar;
+    }
+
+    public void setListaobrasasociar(List<Obra> listaobrasasociar) {
+        this.listaobrasasociar = listaobrasasociar;
+    }
+
+    public Tercero getEntidadproyecto() {
+        return entidadproyecto;
+    }
+
+    public void setEntidadproyecto(Tercero entidadproyecto) {
+        this.entidadproyecto = entidadproyecto;
+    }
+
+    public boolean isHabilitarGuardarContrato() {
+        return habilitarGuardarContrato;
+    }
+
+    public void setHabilitarGuardarContrato(boolean habilitarGuardarContrato) {
+        this.habilitarGuardarContrato = habilitarGuardarContrato;
+    }
+
+    public PerfilCiudadano getPerfilCiudadano() {
+        return perfilCiudadano;
+    }
+
+    public void setPerfilCiudadano(PerfilCiudadano perfilCiudadano) {
+        this.perfilCiudadano = perfilCiudadano;
+    }
+
+    public List<Contrato> getListacontratoasociar() {
+        return listacontratoasociar;
+    }
+
+    public void setListacontratoasociar(List<Contrato> listacontratoasociar) {
+        this.listacontratoasociar = listacontratoasociar;
+    }
+
+    public Map<Contrato, Boolean> getListacontratobooleana() {
+        return listacontratobooleana;
+    }
+
+    public void setListacontratobooleana(Map<Contrato, Boolean> listacontratobooleana) {
+        this.listacontratobooleana = listacontratobooleana;
+    }
+
+    public UIDataTable getDatatablelistacontratos() {
+        return datatablelistacontratos;
+    }
+
+    public void setDatatablelistacontratos(UIDataTable datatablelistacontratos) {
+        this.datatablelistacontratos = datatablelistacontratos;
+    }
+
+    public List<Contrato> getListacancontrato() {
+        return listacancontrato;
+    }
+
+    public void setListacancontrato(List<Contrato> listacancontrato) {
+        this.listacancontrato = listacancontrato;
+    }
+
+    public boolean isInhabilitarseleccionconvenio() {
+        return inhabilitarseleccionconvenio;
+    }
+
+    public void setInhabilitarseleccionconvenio(boolean inhabilitarseleccionconvenio) {
+        this.inhabilitarseleccionconvenio = inhabilitarseleccionconvenio;
+    }
+
+    public List<Contrato> getListasubcontratoasociar() {
+        return listasubcontratoasociar;
+    }
+
+    public void setListasubcontratoasociar(List<Contrato> listasubcontratoasociar) {
+        this.listasubcontratoasociar = listasubcontratoasociar;
+    }
+
+    public Map<Contrato, Boolean> getListasubcontratobooleana() {
+        return listasubcontratobooleana;
+    }
+
+    public void setListasubcontratobooleana(Map<Contrato, Boolean> listasubcontratobooleana) {
+        this.listasubcontratobooleana = listasubcontratobooleana;
+    }
+
+    public UIDataTable getDatatablelistasubcontratos() {
+        return datatablelistasubcontratos;
+    }
+
+    public void setDatatablelistasubcontratos(UIDataTable datatablelistasubcontratos) {
+        this.datatablelistasubcontratos = datatablelistasubcontratos;
+    }
+
+    public boolean isHabilitarsubconvenios() {
+        return habilitarsubconvenios;
+    }
+
+    public void setHabilitarsubconvenios(boolean habilitarsubconvenios) {
+        this.habilitarsubconvenios = habilitarsubconvenios;
+    }
+
+    public boolean isHabilitarmensajesubconvenios() {
+        return habilitarmensajesubconvenios;
+    }
+
+    public void setHabilitarmensajesubconvenios(boolean habilitarmensajesubconvenios) {
+        this.habilitarmensajesubconvenios = habilitarmensajesubconvenios;
+    }
+
+    public List<Contrato> getListacanSubcontrato() {
+        return listacanSubcontrato;
+    }
+
+    public void setListacanSubcontrato(List<Contrato> listacanSubcontrato) {
+        this.listacanSubcontrato = listacanSubcontrato;
+    }
+
+    public List<Contrato> getListacontratosproyecto() {
+        return listacontratosproyecto;
+    }
+
+    public void setListacontratosproyecto(List<Contrato> listacontratosproyecto) {
+        this.listacontratosproyecto = listacontratosproyecto;
+    }
+
+    public ArrayList<Obra> getListaproyecto() {
+        return listaproyecto;
+    }
+
+    public void setListaproyecto(ArrayList<Obra> listaproyecto) {
+        this.listaproyecto = listaproyecto;
+    }
+
     /**
      * Constructor de la pagina, Se estan inicializando algunas variables.
      */
@@ -757,7 +965,7 @@ public class Usuario implements Serializable {
     public void buscarUsuarioporCriterios() {
         listausuarios = new ArrayList<JsfUsuario>();
         listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
-        
+
     }
 
     /**
@@ -1323,122 +1531,217 @@ public class Usuario implements Serializable {
             listaobrasentidad.clear();
         }
     }
+
+    /**
+     * Metodo Utilizado para cargar la lista de entidades.
+     */
     public void llenarentidadcreacionusuario() {
         List<Tercero> listaEntidades = getSessionBeanCobra().getUsuarioService().encontrarTotalEntidades();
         entidadcreacionusuario = new SelectItem[listaEntidades.size()];
         int i = 0;
-
         for (Tercero terce : listaEntidades) {
             SelectItem dep = new SelectItem(terce.getIntcodigo(), terce.getStrnombrecompleto());
             entidadcreacionusuario[i++] = dep;
         }
     }
-    
-    //Parte de ingresar usuario
-    private UIDataTable datatablelistaobras;
-    private boolean seleccionProyecto;
-    private boolean  inhabilitarseleccionproyecto = false;
 
-    public boolean isSeleccionProyecto() {
-        return seleccionProyecto;
+    /**
+     * Metodo Utilizado para Cargar en la lista listaobrasasociar los proyectos
+     * segun la entidad.
+     *
+     */
+    public void cargarObras() {
+        listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTercero(getEntidadproyecto());
     }
 
-    public void setSeleccionProyecto(boolean seleccionProyecto) {
-        this.seleccionProyecto = seleccionProyecto;
+    /**
+     * Metodo Utilizado para cargar en la lista la seleccion del proyecto por
+     * medio del selectBooleanCheckbox
+     *
+     * @param event
+     */
+    public void seleccionarUnProyecto(ValueChangeEvent event) {
+        listaproyectosbooleana.put((Obra) datatablelistaobras.getRowData(), (Boolean) event.getNewValue());
     }
 
-    public boolean isInhabilitarseleccionproyecto() {
-        return inhabilitarseleccionproyecto;
-    }
-
-    public void setInhabilitarseleccionproyecto(boolean inhabilitarseleccionproyecto) {
-        this.inhabilitarseleccionproyecto = inhabilitarseleccionproyecto;
-    }
-    
-    public UIDataTable getDatatablelistaobras() {
-        return datatablelistaobras;
-    }
-    
-
-    public void setDatatablelistaobras(UIDataTable datatablelistaobras) {
-        this.datatablelistaobras = datatablelistaobras;
-    }
-    private Map<VistaObraMapa, Boolean> listaproyectosbooleana = new HashMap<VistaObraMapa, Boolean>();
-
-    public Map<VistaObraMapa, Boolean> getListaproyectosbooleana() {
-        return listaproyectosbooleana;
-    }
-
-    public void setListaproyectosbooleana(Map<VistaObraMapa, Boolean> listaproyectosbooleana) {
-        this.listaproyectosbooleana = listaproyectosbooleana;
-    }
-    private List<VistaObraMapa> listaobrasasociar = new ArrayList<VistaObraMapa>();
-
-    public List<VistaObraMapa> getListaobrasasociar() {
-        return listaobrasasociar;
-    }
-
-    public void setListaobrasasociar(List<VistaObraMapa> listaobrasasociar) {
-        this.listaobrasasociar = listaobrasasociar;
-    }
-    Tercero entidadproyecto = new Tercero();
-
-    public Tercero getEntidadproyecto() {
-        return entidadproyecto;
-    }
-
-    public void setEntidadproyecto(Tercero entidadproyecto) {
-        this.entidadproyecto = entidadproyecto;
-    }
-
-   public void cargarObras() {
-     listaobrasasociar = getSessionBeanCobra().getCobraService().encontrarObrasPorTerceroVista(getEntidadproyecto());
-     }
-
-     public void seleccionarUnProyecto(ValueChangeEvent event) {
-        listaproyectosbooleana.put((VistaObraMapa) datatablelistaobras.getRowData(), (Boolean) event.getNewValue());
-
-    }
-      private ArrayList<VistaObraMapa> listaproyecto = new ArrayList<VistaObraMapa>();
-
-    public ArrayList<VistaObraMapa> getListaproyecto() {
-        return listaproyecto;
-    }
-
-    public void setListaproyecto(ArrayList<VistaObraMapa> listaproyecto) {
-        this.listaproyecto = listaproyecto;
-    }
-
-
-     public List<VistaObraMapa> listarProyectosSeleccionadas() {
+    /**
+     * Metodo para adicionar en la lista listaproyecto los proyectos
+     * seleccionados segun la lista listaproyectosbooleana (de tipo booleana)
+     *
+     * @return
+     */
+    public List<Obra> listarProyectosSeleccionadas() {
         if (isSeleccionProyecto()) {
-            
+
             return getListaobrasasociar();
         }
-        List<VistaObraMapa> result = new ArrayList<VistaObraMapa>();
+        List<Obra> result = new ArrayList<Obra>();
         Iterator<?> iterator = listaproyectosbooleana.keySet().iterator();
-        listaproyecto = new ArrayList<VistaObraMapa>();
+        listaproyecto = new ArrayList<Obra>();
         while (iterator.hasNext()) {
 
-            VistaObraMapa key = (VistaObraMapa) iterator.next();
+            Obra key = (Obra) iterator.next();
             if (listaproyectosbooleana.get(key)) {
                 result.add(key);
                 listaproyecto.add(key);
             }
         }
         inhabilitarseleccionproyecto = true;
+        listacontratosproyecto.clear();
         if (listaproyecto.size() < 1) {
             FacesUtils.addErrorMessage("debe elegir un proyecto");
+        } else {
+            for (Obra obra : listaproyecto) {
+                if (obra.getContrato() != null) {
+                    habilitarGuardarContrato = true;
+                    getPerfilCiudadano().setHabilitarguardarConvenio(true);
+                } else {
+                    getPerfilCiudadano().setHabilitarguardarConvenio(true);
+                }
+            }
         }
+
         return result;
     }
-     
-     public void limpiarSeleccionproyecto() {
-         inhabilitarseleccionproyecto = false;
-         cargarObras();
+
+    /**
+     * Metodo Utilizado para inicializar las variables para asociar proyecto
+     * usuario.
+     */
+    public void limpiarSeleccionproyecto() {
+        inhabilitarseleccionproyecto = false;
+        cargarObras();
         seleccionProyecto = false;
         listaproyectosbooleana.clear();
         listaproyecto.clear();
+        listacontratosproyecto.clear();
+    }
+
+    /**
+     * Metodo Utilizado para Cargar los convenios segun la entidad seleccionada.
+     */
+    public void cargarConvenioAsociar() {
+        FiltroAvanzadoContrato filtrocontrato = new FiltroAvanzadoContrato();
+        filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setTipocontrato(0);
+        filtrocontrato.setRaiz(true);
+        filtrocontrato.setBoolcontrconsultoria(false);
+        filtrocontrato.setBooltienehijo(false);
+        filtrocontrato.setBooltipocontconv(true);
+        listacontratoasociar = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getEntidadproyecto().getIntcodigo(), filtrocontrato, 0, 20);
+        listacontratoasociar = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratista(getSessionBeanCobra().getUsuarioObra(), getEntidadproyecto().getIntcodigo(), filtrocontrato, 0, 20);
+    }
+
+    /**
+     * Metodo Utilizado para Cargar en la lista listacontratobooleana los
+     * proyectos seleciconados segun el selectBooleanCheckbox segun la entidad.
+     *
+     * @param event
+     */
+    public void seleccionarUnContrato(ValueChangeEvent event) {
+        listacontratobooleana.put((Contrato) datatablelistacontratos.getRowData(), (Boolean) event.getNewValue());
+    }
+
+    /**
+     * Metodo para adicionar en la lista listacancontrato los convenios
+     * seleccionados segun la lista listacontratobooleana (de tipo booleana)
+     *
+     * @return
+     */
+    public List<Contrato> listarContratosSeleccionadas() {
+        listasubcontratoasociar.clear();
+        List<Contrato> result = new ArrayList<Contrato>();
+        Iterator<?> iterator = listacontratobooleana.keySet().iterator();
+        listacancontrato = new ArrayList<Contrato>();
+        while (iterator.hasNext()) {
+            Contrato key = (Contrato) iterator.next();
+            if (listacontratobooleana.get(key)) {
+                result.add(key);
+                listacancontrato.add(key);
+            }
+        }
+        inhabilitarseleccionconvenio = true;
+        habilitarmensajesubconvenios = true;
+        listasubcontratoasociar.clear();
+        if (listacancontrato.size() < 1) {
+            FacesUtils.addErrorMessage("debe elegir un Convenio");
+        }
+        return result;
+    }
+
+    /**
+     * Metodo utilizado para cargar en la lista listasubcontratoasociar los
+     * subconvenios si los convenios de la lista listacancontrato tiene
+     * subconvenios.
+     */
+    public void subconveniosConvenio() {
+        List<Contrato> listacon = new ArrayList<Contrato>();
+        listacon.clear();
+        listacon = listacancontrato;
+        for (Contrato contrato : listacon) {
+            listasubcontratoasociar = getSessionBeanCobra().getCobraService().encontrarContratosHijos(contrato, true, getSessionBeanCobra().getUsuarioObra());
+        }
+        if (listasubcontratoasociar.size() > 1) {
+            inhabilitarseleccionconvenio = false;
+            habilitarsubconvenios = true;
+            listacancontrato.clear();
+            listasubcontratobooleana.clear();
+            habilitarmensajesubconvenios = false;
+            listacancontrato.clear();
+            cargarConvenioAsociar();
+            FacesUtils.addInfoMessage("El convenio seleccionado tiene subconvenios");
+        } else {
+            FacesUtils.addErrorMessage("El convenio seleccionado No tiene subconvenios");
+        }
+    }
+    /**
+     * Metodo Utilizado para  guardar en la lista  listasubcontratobooleana el subconvenio seleeccionado
+     * @param event 
+     */
+    public void seleccionarUnSubContrato(ValueChangeEvent event) {
+        listasubcontratobooleana.put((Contrato) datatablelistasubcontratos.getRowData(), (Boolean) event.getNewValue());
+    }
+    /**
+     * Metodo para iniciar los objectos.
+     */
+    public void cancelarasociarSubConvenio() {
+        inhabilitarseleccionconvenio = false;
+        cargarConvenioAsociar();
+        listacontratobooleana.clear();
+        listacancontrato.clear();
+        listasubcontratoasociar.clear();
+        habilitarGuardarContrato = false;
+        habilitarsubconvenios = false;
+        habilitarmensajesubconvenios = false;
+        listacanSubcontrato.clear();
+        listasubcontratobooleana.clear();
+    }
+    
+    /**
+     * Metodo utilizado para cargar en la lista listacanSubcontrato los
+     * subconvenios  de la lista listasubcontratobooleana (Tipo booleana)
+     * subconvenios.
+     */
+    public List<Contrato> listarSubContratosSeleccionadas() {
+
+        List<Contrato> result = new ArrayList<Contrato>();
+        Iterator<?> iterator = listasubcontratobooleana.keySet().iterator();
+        listacanSubcontrato = new ArrayList<Contrato>();
+        while (iterator.hasNext()) {
+
+            Contrato key = (Contrato) iterator.next();
+            if (listasubcontratobooleana.get(key)) {
+                result.add(key);
+                listacanSubcontrato.add(key);
+            }
+        }
+        if (listacanSubcontrato.size() < 1) {
+            FacesUtils.addErrorMessage("debe elegir un SubConvenio");
+        } else {
+            FacesUtils.addInfoMessage("Se ha almacenado correctamente");
+        }
+        listacontratobooleana.clear();
+        listacancontrato.clear();
+        return result;
     }
 }
-

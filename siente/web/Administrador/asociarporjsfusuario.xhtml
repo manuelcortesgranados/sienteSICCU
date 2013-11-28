@@ -53,35 +53,42 @@
                                 <h:outputText value="#{varproyecto.strnombrecrot}"/>
                             </rich:column>
                         </rich:dataTable>
-                        <rich:dataScroller rendered="#{Perfil$Usuario.listaobrasasociar.size()>10}" for="tableasociarproyecto" maxPages="5" />
+                        <rich:dataScroller execute="tableasociarproyecto" render="tableasociarproyecto" rendered="#{Perfil$Usuario.listaobrasasociar.size()>10}" for="tableasociarproyecto" maxPages="5" />
                     </h:panelGroup>
                     <rich:column>
                         <center>
-                            <a4j:commandButton rendered="#{Perfil$Usuario.listaproyectosbooleana.size()>0}" immediate="true" execute="repeatproyectosselecionados,idbuscarproyecto,pgasociarObrasUsuario" render="repeatproyectosselecionados,asociarproyecto,idbuscarproyecto,pgasociarObrasUsuario" actionListener="#{Perfil$Usuario.listarProyectosSeleccionadas}" value="#{var.listar} #{var.obra} #{var.seleccion}"/>
+                            <a4j:commandButton  rendered="#{Perfil$Usuario.listaproyectosbooleana.size()>0}" immediate="true" execute="repeatproyectosselecionados,idbuscarproyecto,pgasociarObrasUsuario,confirmarasociarcontrato" render="repeatproyectosselecionados,asociarproyecto,idbuscarproyecto,pgasociarObrasUsuario,confirmarasociarcontrato" 
+                                                actionListener="#{Perfil$Usuario.listarProyectosSeleccionadas}" value="#{var.listar} #{var.obra} #{var.seleccion}"/>
                             <br/>
                             <br/>
                             <a4j:commandButton rendered="#{Perfil$Usuario.listaproyecto.size()>0}" immediate="true" execute="repeatproyectosselecionados,idbuscarproyecto" render="repeatproyectosselecionados,asociarproyecto,pgasociarObrasUsuario" actionListener="#{Perfil$Usuario.limpiarSeleccionproyecto}" value="#{var.cancelar}"/>
                         </center>
                     </rich:column>
 
-                    <h:panelGroup rendered="#{Perfil$Usuario.inhabilitarseleccionproyecto and Perfil$Usuario.listaproyecto.size()>0}" >
-                            <rich:dataTable  style="border-collapse: inherit!important;width:422px;bottom: -49px;position: relative;"
-                                             rows="5" var="varproyecto"  value="#{Perfil$Usuario.listaproyecto}" id="repeatproyectosselecionados">
-                                <rich:column>
-                                    <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaproyectosbooleana[varproyecto]}"
-                                                             immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnProyecto}">
-                                        <f:ajax event="click" render="@form"/>
-                                    </h:selectBooleanCheckbox>
-                                </rich:column>
-                                <rich:column>
-                                    <f:facet name="header">
+                    <h:panelGrid rendered="#{Perfil$Usuario.inhabilitarseleccionproyecto and Perfil$Usuario.listaproyecto.size()>0}" >
+                        <h:panelGrid id="confirmarasociarcontrato"  rendered="#{Perfil$Usuario.habilitarGuardarContrato}"  columnClasses="panelcenter">
+                            <h:panelGrid  columns="2" styleClass="ikont-panel-registro">
+                                <h:selectBooleanCheckbox id="ckeckboxcontratoguar"  title="Guardar Convenio?"  value="#{Ciudadano$PerfilCiudadano.habilitarguardarConvenio}"/>
+                                <h:outputLabel  value="Los proyectos pertenecen a un convenio desea asociarlo al usuario ?"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                        <rich:dataTable  style="border-collapse: inherit!important;"
+                                         rows="5" var="varproyecto"  value="#{Perfil$Usuario.listaproyecto}" id="repeatproyectosselecionados">
+                            <rich:column>
+                                <h:selectBooleanCheckbox value="#{Perfil$Usuario.listaproyectosbooleana[varproyecto]}"
+                                                         immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnProyecto}">
+                                    <f:ajax event="click" render="@form"/>
+                                </h:selectBooleanCheckbox>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
                                         <h:outputText value="#{var.nombreobra}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{varproyecto.strnombrecrot}"/>
-                                </rich:column>
-                            </rich:dataTable>
-                            <rich:dataScroller rendered="#{Perfil$Usuario.listaobrasasociar.size()> 4}" for="repeatproyectosselecionados" maxPages="5" />
-                        </h:panelGroup>
+                                </f:facet>
+                                <h:outputText value="#{varproyecto.strnombrecrot}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                        <rich:dataScroller rendered="#{Perfil$Usuario.listaobrasasociar.size()> 4}" execute="repeatproyectosselecionados" render="repeatproyectosselecionados" for="repeatproyectosselecionados" maxPages="5" />
+                    </h:panelGrid>
                     </h:panelGrid>
             </h:panelGroup>
         </h:panelGroup>

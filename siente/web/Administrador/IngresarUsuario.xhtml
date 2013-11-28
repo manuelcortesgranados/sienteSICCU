@@ -123,6 +123,13 @@
                                         <a4j:commandLink execute="idconfiguracionusuario,configurarusuario" render="idconfiguracionusuario,configurarusuario,ikont-panel-localidad,ikont-panel-tipoUsuario,ikont-panel-entidad" value="#{var.eliminar}" action="#{Ciudadano$PerfilCiudadano.eliminarGrupoModulo}"/>
                                     </rich:column>
                                 </rich:dataTable>
+                                <h:panelGrid  rendered="false">
+                                    <h:selectOneRadio id="radiotipousuario" value="#{Ciudadano$PerfilCiudadano.tipoasociacion}">
+                                         <f:selectItem  itemValue="1" itemLabel="Asociación de Proyectos"/>   
+                                         <f:selectItem itemValue="2" itemLabel="Asociación de  Convenios"/>   
+                                         <a4j:ajax  render="ikont-panel-relacionobrajsfusuario,relacionproyectousua,relacioncontratousuario" execute="ikont-panel-relacionobrajsfusuario,relacionproyectousua,relacioncontratousuario"/>
+                                    </h:selectOneRadio>
+                                </h:panelGrid>
                             </rich:collapsiblePanel>
 
 
@@ -238,12 +245,17 @@
 
                                         </rich:collapsiblePanel>
                                         <h:panelGroup id="ikont-panel-relacionobrajsfusuario" rendered="#{Ciudadano$PerfilCiudadano.intidgrupo ==20 || Ciudadano$PerfilCiudadano.intidgrupo ==23 || Ciudadano$PerfilCiudadano.intidgrupo ==18}">
-                                            
-                                                <rich:collapsiblePanel header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax">
-                                                    <ui:include src="/Administrador/asociarporjsfusuario.xhtml" />
-                                                </rich:collapsiblePanel>
-                                          
+
+                                            <rich:collapsiblePanel id="relacionproyectousua"  header="#{var.asociar} Obra Jsf Usuario"    switchType="ajax">
+                                                <ui:include src="/Administrador/asociarporjsfusuario.xhtml" />
+                                            </rich:collapsiblePanel>
+
+                                            <rich:collapsiblePanel id="relacioncontratousuario" rendered="false" header="#{var.asociar} Convenio Usuario"    switchType="ajax">
+                                                <ui:include src="/Administrador/asociarContratoUsuario.xhtml" />
+                                            </rich:collapsiblePanel>
+
                                         </h:panelGroup>
+
                                     </h:form> 
                                 </h:panelGroup>
 
