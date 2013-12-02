@@ -10,11 +10,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="modalDashboard_ah" resizeable="false"
-                      headerClass="ikont-modal-dialog-head" styleClass="ikont-rpp-modalDashboard_ah"  >
+    <rich:popupPanel  id="modalDashboard_ah" resizeable="false" width="550" height="600" 
+                      styleClass="ikont-rpp-modalDashboard_ah style-modal-dialog"  headerClass="style-modal-dialog-head" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:panelGrid columns="3">
+                <h:panelGrid columns="2">
+                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
                     <h:outputText  styleClass="ikont-hot-atencionhumanitaria"    value="Atención Humanitaria"   />
                 </h:panelGrid>
             </h:panelGroup>
@@ -30,71 +31,73 @@
         </f:facet>
         
         <h:panelGroup layout="block"  id="modalDashboardAhInfo">
-                <interkont:spacer height="20" />
+                <br/><br/>
                 <h:panelGrid >
-                    <h:outputText  styleClass="ikont-hot-resumenatencion"   value="#{var.resumenatencion}"></h:outputText>
+                    <h:outputText  styleClass="ikont-hot-resumenatencion style-modal-dialog-title-body"   value="#{var.resumenatencion}"></h:outputText>
                 </h:panelGrid>
-                <interkont:spacer height="20" />
+                <br/><br/>
                 <h:panelGrid  >
                     <h:panelGrid  columns="2" >
-                        <h:outputText  styleClass="ikont-hot-valortotalah"   value="#{var.valortotalah}:"></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-totalInvAh"   value="#{ControlGerencial.informaciondashah.totalInvAh}" >
+                        <h:outputText  styleClass="ikont-hot-valortotalah style-modal-dialog-text-body"   value="#{var.valortotalah}:"></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-totalInvAh style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.totalInvAh}" >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
-                    <interkont:spacer height="20" />
-                    <h:outputText  styleClass="ikont-hot-kidsaseo"   value="KITS DE MERCADO Y ASEO"></h:outputText>
+                    <br/>
+                    <h:outputText  styleClass="ikont-hot-kidsaseo style-modal-dialog-title-body"   value="KITS DE MERCADO Y ASEO"></h:outputText>
+                    <br/>
                     <h:panelGrid  columns="2" columnClasses="panelizquierda,panelderecha">
-                        <h:outputText  styleClass="ikont-hot-valorinvertidomercadoyaseo"   value="#{var.valorinvertidomercadoyaseo}:"></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-valorInvMercAseo"   value="#{ControlGerencial.informaciondashah.valorInvMercAseo}">
+                        <h:outputText  styleClass="ikont-hot-valorinvertidomercadoyaseo style-modal-dialog-text-body"   value="#{var.valorinvertidomercadoyaseo}:"></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-valorInvMercAseo style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.valorInvMercAseo}">
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-toneladasentregadasmercadoyaseo"   value="#{var.toneladasentregadasmercadoyaseo}:" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-tonEntMercAseo"   value="#{ControlGerencial.informaciondashah.tonEntMercAseo}" >
+                        <h:outputText  styleClass="ikont-hot-toneladasentregadasmercadoyaseo style-modal-dialog-text-body"   value="#{var.toneladasentregadasmercadoyaseo}:" ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-tonEntMercAseo style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.tonEntMercAseo}" >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-mercadosykits"   value="#{var.mercadosykits}:" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-mercAseoEnt"   value="#{ControlGerencial.informaciondashah.mercAseoEnt}">
+                        <h:outputText  styleClass="ikont-hot-mercadosykits style-modal-dialog-text-body"   value="#{var.mercadosykits}:" ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-mercAseoEnt style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.mercAseoEnt}">
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-familiasbeneficiadas"   value="#{var.familiasbeneficiadas}"  ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-famBenMercAseo"   value="#{ControlGerencial.informaciondashah.famBenMercAseo}">
+                        <h:outputText  styleClass="ikont-hot-familiasbeneficiadas style-modal-dialog-text-body"   value="#{var.familiasbeneficiadas}"  ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-famBenMercAseo style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.famBenMercAseo}">
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
-                    <interkont:spacer height="20" />
-                    <h:outputText  styleClass="ikont-hot-alojamientotemporal"   value="ALOJAMIENTOS TEMPORALES"  ></h:outputText>
+                    <br/>
+                    <h:outputText  styleClass="ikont-hot-alojamientotemporal style-modal-dialog-title-body"   value="ALOJAMIENTOS TEMPORALES"  ></h:outputText>
+                    <br/>
                     <h:panelGrid  columns="2">
-                        <h:outputText  styleClass="ikont-hot-arriendosentregados"   value="#{var.arriendosentregados}" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-arriendEnt"   value="#{ControlGerencial.informaciondashah.arriendEnt}" >
+                        <h:outputText  styleClass="ikont-hot-arriendosentregados style-modal-dialog-text-body"   value="#{var.arriendosentregados}" ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-arriendEnt style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.arriendEnt}" >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-familiasaatendidasseg"   value="Total #{var.familiasaatendidasseg} en arriendos"  ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-totFamAtendArriend"   value="#{ControlGerencial.informaciondashah.totFamAtendArriend}"   >
+                        <h:outputText  styleClass="ikont-hot-familiasaatendidasseg style-modal-dialog-text-body"   value="Total #{var.familiasaatendidasseg} en arriendos"  ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-totFamAtendArriend style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.totFamAtendArriend}"   >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-viviendasreparadas"   value="#{var.viviendasreparadas}"  ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-vivRep"   value="#{ControlGerencial.informaciondashah.vivRep}"  >
+                        <h:outputText  styleClass="ikont-hot-viviendasreparadas style-modal-dialog-text-body"   value="#{var.viviendasreparadas}"  ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-vivRep style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.vivRep}"  >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-alberguesconstruidos "   value="#{var.alberguesconstruidos}"  ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-alberguesConstruidos"   value="#{ControlGerencial.informaciondashah.alberguesConstruidos}"   >
+                        <h:outputText  styleClass="ikont-hot-alberguesconstruidos style-modal-dialog-text-body"   value="#{var.alberguesconstruidos}"  ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-alberguesConstruidos style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.alberguesConstruidos}"   >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-familiasbeneficiadas2 "   value="#{var.familiasbeneficiadas} con albergues" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-famBenAlbergues"   value="#{ControlGerencial.informaciondashah.famBenAlbergues}" >
+                        <h:outputText  styleClass="ikont-hot-familiasbeneficiadas2 style-modal-dialog-text-body"   value="#{var.familiasbeneficiadas} con albergues" ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-famBenAlbergues style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.famBenAlbergues}" >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
-                        <h:outputText  styleClass="ikont-hot-totalrecursosdesembolsados"   value="#{var.totalrecursosdesembolsados}" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-totRecDesmAloj"   value="#{ControlGerencial.informaciondashah.totRecDesmAloj}" >
+                        <h:outputText  styleClass="ikont-hot-totalrecursosdesembolsados style-modal-dialog-text-body"   value="#{var.totalrecursosdesembolsados}" ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-totRecDesmAloj style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashah.totRecDesmAloj}" >
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </h:panelGrid>
                 </h:panelGrid>
-                <interkont:spacer height="20" />
+                <br/><br/>
                 <center>
                     <h:panelGrid columns="3" >
-                        <h:outputText  styleClass="ikont-hot-descargareporte"   value="Descargue Reporte"  ></h:outputText>
+                        <h:outputText  styleClass="ikont-hot-descargareporte style-modal-dialog-title-body"   value="Descargue Reporte"  ></h:outputText>
                         <interkont:spacer width="10" />                        
                     </h:panelGrid>
                     <interkont:spacer height="20" />
@@ -105,7 +108,7 @@
                             execute="@this"
                             immediate="true"
                             render="@this"
-                            styleClass="ikont-hcl-vermasdashboard"  
+                            styleClass="style-modal-button"
                             />
 
                     </h:panelGrid>

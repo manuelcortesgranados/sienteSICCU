@@ -9,12 +9,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false"
-                     headerClass="ikont-modal-dialog-head" styleClass="ikont-rpp-modalDashboard_entesnacionales"  >
+    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false" width="500" height="450" 
+                     headerClass="style-modal-dialog-head" styleClass="ikont-rpp-modalDashboard_entesnacionales  style-modal-dialog"  >
         <f:facet name="header" >
 
             <h:panelGroup >
-                <h:panelGrid columns="3">
+                <h:panelGrid columns="2">
+                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
                     <h:outputText  styleClass="ikont-hot-entesnacionales"    value="#{var.entesnacionales}"  />
                 </h:panelGrid>
             </h:panelGroup>
@@ -32,49 +33,49 @@
 
         <h:panelGroup layout="block" id="modalDashboardConveniosInfo">
 
-            <interkont:spacer height="20" />
+            <br/><br/>
             <h:panelGrid >
-                <h:outputText  styleClass="ikont-hot-resumengeneralnacionales"   value="#{var.resumengeneral} nacionales"></h:outputText>
+                <h:outputText  styleClass="ikont-hot-resumengeneralnacionales style-modal-dialog-title-body"   value="#{var.resumengeneral} nacionales"></h:outputText>
             </h:panelGrid>
-            <interkont:spacer height="20" />
+            <br/><br/>
             <h:panelGrid  columns="2">
-                <h:outputText  styleClass="ikont-hot-totalobra"    value="#{var.totalobra}s:" ></h:outputText>
-                <h:outputText  styleClass="ikont-hot-totalproy"   value="#{ControlGerencial.informaciondashconvenios.totalproy}" >
+                <h:outputText  styleClass="ikont-hot-totalobra style-modal-dialog-text-body" value="#{var.totalobra}s:" ></h:outputText>
+                <h:outputText  styleClass="ikont-hot-totalproy style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.totalproy}" >
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hot-proyectosterminados"    value="#{var.proyectosterminados}:"  ></h:outputText>
-                <h:outputText  styleClass="ikont-hot-proyterm"   value="#{ControlGerencial.informaciondashconvenios.proyterm}" >
+                <h:outputText  styleClass="ikont-hot-proyectosterminados style-modal-dialog-text-body"    value="#{var.proyectosterminados}:"  ></h:outputText>
+                <h:outputText  styleClass="ikont-hot-proyterm style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.proyterm}" >
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hot-totalrecursos"    value="#{var.totalrecursos}:"></h:outputText>
-                <h:outputText  styleClass="ikont-houttotalRecValDec"   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}">
+                <h:outputText  styleClass="ikont-hot-totalrecursos style-modal-dialog-text-body"    value="#{var.totalrecursos}:"></h:outputText>
+                <h:outputText  styleClass="ikont-houttotalRecValDec style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}">
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hot-totalrecursosprogramados"    value="#{var.totalrecursosprogramados}:"></h:outputText>
-                <h:outputText  styleClass="ikont-houttotalRecProgEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}">
+                <h:outputText  styleClass="ikont-hot-totalrecursosprogramados style-modal-dialog-text-body"    value="#{var.totalrecursosprogramados}:"></h:outputText>
+                <h:outputText  styleClass="ikont-houttotalRecProgEjec style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}">
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hout-totalrecursosejecutados"    value="#{var.totalrecursosejecutados}:"></h:outputText>
-                <h:outputText  styleClass="ikont-houttotalRecEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}">
+                <h:outputText  styleClass="ikont-hout-totalrecursosejecutados style-modal-dialog-text-body"    value="#{var.totalrecursosejecutados}:"></h:outputText>
+                <h:outputText  styleClass="ikont-houttotalRecEjec style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}">
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hot-porcentajejecutado"    value="#{var.porcentajejecutado}:" ></h:outputText>
-                <h:outputText  styleClass="ikont-hot-porcEjec"   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" >
+                <h:outputText  styleClass="ikont-hot-porcentajejecutado style-modal-dialog-text-body"    value="#{var.porcentajejecutado}:" ></h:outputText>
+                <h:outputText  styleClass="ikont-hot-porcEjec style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" >
                     <f:convertNumber pattern="###.## %"/>
                 </h:outputText>
-                <h:outputText  styleClass="ikont-hot-numeroentidadesnacionalesejecutadas "    value="#{var.numeroentidadesnacionalesejecutadas}:"  ></h:outputText>
-                <h:outputText  styleClass="ikont-hot-numentiejec"   value="#{ControlGerencial.informaciondashconvenios.numentiejec}"   >
+                <h:outputText  styleClass="ikont-hot-numeroentidadesnacionalesejecutadas style-modal-dialog-text-body"    value="#{var.numeroentidadesnacionalesejecutadas}:"  ></h:outputText>
+                <h:outputText  styleClass="ikont-hot-numentiejec style-modal-dialog-text-body"   value="#{ControlGerencial.informaciondashconvenios.numentiejec}"   >
                     <f:convertNumber pattern="#{var.formatomoneda}"/>
                 </h:outputText>
             </h:panelGrid>
-            <interkont:spacer height="20" />
+            <br/><br/>
             <center>
                 <h:panelGrid columns="3" >
-                    <h:outputText  styleClass="ikont-hot-descarguereporte"   value="Descargue Reportes"  ></h:outputText>
+                    <h:outputText  styleClass="ikont-hot-descarguereporte style-modal-dialog-title-body"   value="Descargue Reportes"  ></h:outputText>
                     <interkont:spacer width="10" />
 
                 </h:panelGrid>
-                <interkont:spacer height="20" />
+                <br/><br/>
 
                 <h:panelGrid  columns="2" >
                     
@@ -84,6 +85,7 @@
                             execute="@this"
                             immediate="true"
                             render="@this"
+                            styleClass="style-modal-button"
                             />
                  
                         <a4j:commandButton 
@@ -92,6 +94,7 @@
                             execute="@this"
                             immediate="true"
                             render="@this"
+                            styleClass="style-modal-button"
                             />
                    
                 </h:panelGrid>

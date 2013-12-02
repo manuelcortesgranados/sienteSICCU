@@ -125,7 +125,7 @@ img.line-avance-slider{
 
 .table-ubication{
     position: relative!important;
-    
+
 }
 
 .info-contratante{
@@ -224,11 +224,63 @@ img.line-avance-slider{
 
 .sidelinedetalle{
     text-align: center;
-    position: relative;
-    font-family: Verdana, Geneva, sans-serif;
-    
+    background-image: url(../imgs/linea_ciu.png);
+    background-repeat: repeat-x;
+    background-position-y: -5px;
+    display: block;
+    width: 28px;
+    height: 20px;
+}
+.sidelinedetalle-cuanto{
+    text-align: center;
+    background-image: url(../imgs/linea_ciu.png);
+    background-repeat: repeat-x;
+    background-position-y: -5px;
+    display: block;
+    width: 65px;
+    height: 20px;
+}
+.sidelinedetalle-donde{
+    text-align: center;
+    background-image: url(../imgs/linea_ciu.png);
+    background-repeat: repeat-x;
+    background-position-y: -5px;
+    display: block;
+    width: 36px;
+    height: 20px;
+}
+.sidelinedetalle-contrato{
+    text-align: center;
+    background-image: url(../imgs/linea_ciu.png);
+    background-repeat: repeat-x;
+    background-position-y: -5px;
+    display: block;
+    width: 42px;
+    height: 20px;
+}
+.sidelinedetalle-objeto{
+    text-align: center;
+    background-image: url(../imgs/linea_ciu.png);
+    background-repeat: repeat-x;
+    background-position-y: -5px;
+    display: block;
+    width: 157px;
+    height: 20px;
 }
 
 .ikont-hpg-ubicacionobra{
     margin: 0px auto;
+}
+
+.ikont-hpg-modalciudadanocontratante{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.ikont-hpg-modalciudadanocontratista{
+    margin-left: -4px;
+}
+
+.ikont-hpg-modalciudadanoavancefisico{
+    margin-left: -8px;
 }
