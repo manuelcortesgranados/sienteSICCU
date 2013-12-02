@@ -397,3 +397,7 @@
 .style-modal-dialog .rf-pp-cnt{
     border: solid 0px transparent!important;
 }
+
+.style-modal-dialog .rf-pp-hdr {
+    width: 99.4%!important;
+}
