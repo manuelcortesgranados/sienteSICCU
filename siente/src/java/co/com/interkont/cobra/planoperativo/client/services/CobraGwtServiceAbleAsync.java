@@ -64,5 +64,8 @@ public interface CobraGwtServiceAbleAsync {
 
     void isElimino(AsyncCallback<Boolean> call);
 
-    void setElimino(boolean elimino, AsyncCallback<Void> call);    
+    void setElimino(boolean elimino, AsyncCallback<Void> call);  
+    
+    void isFullScreen(AsyncCallback<Boolean> call);
+    void setFullScreen(boolean fullScreen, AsyncCallback<Void> call);
 }

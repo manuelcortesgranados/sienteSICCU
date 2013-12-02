@@ -56,7 +56,7 @@
         <h:form>
             <h:panelGrid columns="3"   id="pgmiperfil" styleClass="totalwidth">
                 <h:panelGrid    columnClasses="panelcenter" styleClass="ikont-hpg-fotociuda bcg-tb-per-ciu totalwidth">
-                    <h:graphicImage  styleClass="ikont-hgi-strfoto picborder " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
+                    <h:graphicImage  styleClass="ikont-hgi-strfoto picborder " url="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
                     <h:outputLabel  styleClass="ikont-hol-strnombrecompleto vtitle17"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}"/>
                     <h:outputLabel  styleClass="ikont-hol-departamento vtitle18"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"/>
                     <interkont:spacer width="30"/>
@@ -119,7 +119,7 @@
                 <h:panelGroup layout="block" styleClass="ikont-hpg-pgcontenido sliderichcontentblue "   >
                     <h:outputLabel  styleClass="ikont-hol-proyecto vtitle13"   value="#{var.proyecto}"/>
                     <h:panelGrid columns="3">
-                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_01"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  />
+                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_01"    url="/resources/imgs/ciudadano_01.png"  />
                         <h:outputLabel  styleClass="ikont-hol-obraseguida vtitle15 "   value="#{SessionBeanCobra.obraseguida}" />
                         <h:outputLabel  styleClass="ikont-hol-solicitudproyectos vtitle14"   value="Ver #{var.solicitudproyecto}s" />
                     </h:panelGrid>
@@ -127,7 +127,7 @@
                 <h:panelGroup layout="block" styleClass="ikont-rp-comentarios sliderichcontentblue">
                     <h:outputLabel  styleClass="ikont-hol-comentarios vtitle13"   value="Comentarios" />
                     <h:panelGrid columns="3">
-                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_02"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_02.png"  />
+                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_02"    url="/resources/imgs/ciudadano_02.png"  />
                         <h:outputLabel  styleClass="ikont-hol-intcomentario vtitle15"   value="#{SessionBeanCobra.ciudadanoservice.intcomentario}" />
                         <h:outputLabel  styleClass="ikont-hol-vermimuro vtitle14"   value="Ver mi muro" />
                     </h:panelGrid>
@@ -135,7 +135,7 @@
                 <h:panelGroup layout="block" styleClass="ikont-rp-fotos sliderichcontentblue"   >
                     <h:outputLabel  styleClass="ikont-hol-fotos vtitle13"   value="Fotos" />
                     <h:panelGrid columns="3">
-                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_03"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_03.png" />
+                        <h:graphicImage  styleClass="ikont-hgi-ciudadano_03"    url="/resources/imgs/ciudadano_03.png" />
                         <h:outputLabel  styleClass="ikont-hol-intfotos vtitle15"   value="#{SessionBeanCobra.ciudadanoservice.intfotos}" />
                         <h:outputLabel  styleClass="ikont-hol-verimagagenes vtitle14"   value="Ver imágenes"  />
                     </h:panelGrid>
@@ -175,7 +175,7 @@
 
                                 <h:panelGrid styleClass="ikont-hpg-cargarusuarioperfil"  >
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuarioPerfil}" type="submit" >
-                                        <h:graphicImage  styleClass="ikont-hgi-cargarusuarioperfil" width="85" height="65"   url="#{var.ipserver}#{var.versioncobra}#{rowcomentario.jsfUsuariocomento.tercero.strfoto}" />
+                                        <h:graphicImage  styleClass="ikont-hgi-cargarusuarioperfil" width="85" height="65"   url="#{rowcomentario.jsfUsuariocomento.tercero.strfoto}" />
                                     </a4j:commandLink>
                                     <interkont:spacer width="30"/>
                                 </h:panelGrid>

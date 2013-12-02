@@ -8,6 +8,7 @@ import Seguridad.Encrypter;
 import co.com.interkont.cobra.to.Cargo;
 import co.com.interkont.cobra.to.Comentarioobra;
 import co.com.interkont.cobra.to.Contratista;
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
 import co.com.interkont.cobra.to.JsfUsuario;
@@ -17,6 +18,7 @@ import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Modulo;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Opinionciudadano;
+import co.com.interkont.cobra.to.Relacioncontratojsfusuario;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoidentificacion;
 import co.com.interkont.cobra.to.Tipoopinion;
@@ -82,6 +84,7 @@ import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Clase que permite toda la interacción con el perfil
@@ -244,8 +247,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     /**
      * Variable Utilizada para habilitar el envio del correo
      */
-    private boolean habilitarEnvioCorreo=true;
-
+    private boolean habilitarEnvioCorreo = true;
 
     public String getOpinion() {
         return opinion;
@@ -598,7 +600,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     public void setHabilitarEnvioCorreo(boolean habilitarEnvioCorreo) {
         this.habilitarEnvioCorreo = habilitarEnvioCorreo;
     }
-    
+
     public Tercero getTercero() {
         return tercero;
     }
@@ -646,7 +648,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
      * @return
      */
     public String inicializarCiudadano() {
- //       cargarObras();
+        //       cargarObras();
         iniciarCombos();
         limpiarCiudadano();
         // 
@@ -811,15 +813,17 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
     public void guardarUsuario() {
         if (listausuGrupos.size() > 0) {
             if (validarusuario()) {
+                Set<Tercero> listaguardartercero = new HashSet();
+                Set<Relacioncontratojsfusuario> relacioncontratojsfusuarios = new HashSet();
+                Set<Relacioncontratojsfusuario> relacioncontratoobrajsfusuarios = new HashSet();
+                List<Contrato>listacontratosproyecto= new ArrayList<Contrato>();
+                Relacioncontratojsfusuario relacioncontrato = new Relacioncontratojsfusuario();
+                getSessionBeanCobra().getCiudadanoservice().getCiudadano().setRelacioncontrato(true);
                 //inicializar atributos del objeto tercero
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombrecompleto(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombre());
+                getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
+                getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(1));
                 //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
-                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19 || intidgrupo == 20 || intidgrupo == 23 ) {
-                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrcodigolocalidad(new Localidad("169"));
-                }
-                if (intidgrupo == 20 || intidgrupo == 23) {
-                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setObras(new LinkedHashSet(getUsuario().getListaproyecto()));
-                }
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setLocalidadByStrlocalidadnacimiento(new Localidad("169"));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipoidentificacion(new Tipoidentificacion(6, "NIT"));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTipotercero(new Tipotercero(1));
@@ -834,7 +838,34 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaCrcion(new Date());
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaVncmnto(new Date(2012, 11, 31));
                 getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(Boolean.FALSE);
-                //getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(intidtipousuario));
+
+                //Condicion para asociarle proyectos al usuario
+                if (intidgrupo == 20 || intidgrupo == 23 || intidgrupo == 18 || intidgrupo == 19) {
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setObras(new LinkedHashSet(getUsuario().getListaproyecto()));
+                    
+                    //Se adicina las entidades  y contratos que selecciono segun los proyectos
+                    for (Obra obramapa : getUsuario().getListaproyecto()) {
+                        listaguardartercero.add(obramapa.getTercero());
+                        listacontratosproyecto = getSessionBeanCobra().getCobraService().encontrarContratosxObra(obramapa.getIntcodigoobra());
+
+                    }
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(listaguardartercero));
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(3));
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setObraspermitidas(new LinkedHashSet(getUsuario().getListaproyecto()));
+                    System.out.println("listacontratosproyecto = " + listacontratosproyecto.size());
+                    relacioncontrato= new Relacioncontratojsfusuario();
+                    for (Contrato object : listacontratosproyecto) {
+                        System.out.println("object = " + object.getStrnumcontrato());
+                        relacioncontrato.setContrato(object);
+                        relacioncontrato.setEditar(true);
+                        relacioncontrato.setEliminar(true);
+                        relacioncontrato.setConsultar(true);
+                        relacioncontrato.setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
+                        relacioncontratojsfusuarios.add(relacioncontrato);
+
+                    }
+                }
+
                 if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16) {
                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new Tipousuario(2));
                 }
@@ -850,7 +881,7 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
                 }
                 if (intidgrupo == 20 || intidgrupo == 23) {
-                   // getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListatercero()));
+                    // getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListatercero()));
                 }
                 //getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTercerosForIntcodigoentidad(new LinkedHashSet(getUsuario().getListaentidad()));
                 getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
@@ -875,10 +906,28 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                 comen.setJsfUsuario(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
                 comen.setStrdesccoment(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombrecompleto() + " ya es parte de " + bundle.getString("cobra"));
                 getSessionBeanCobra().getCiudadanoservice().guardarComentarioObra(comen);
+                System.out.println("habilitarguardarConvenio = " + habilitarguardarConvenio);
+                System.out.println("habilitarEnvioCorreo = " + habilitarEnvioCorreo);
+                relacioncontrato = new Relacioncontratojsfusuario();
+                if (habilitarguardarConvenio) {
+                    for (Obra object : getUsuario().getListaproyecto()) {
+                        relacioncontrato.setContrato(object.getContrato());
+                        relacioncontrato.setUsuId(getUsuario().getUsuariomod());
+                        relacioncontrato.setEditar(true);
+                        relacioncontrato.setEliminar(true);
+                        relacioncontrato.setConsultar(true);
+                        relacioncontrato.setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
+                        relacioncontratojsfusuarios.add(relacioncontrato);
+                    }
+                    
+                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().setRelacioncontrato(true);
+                    getSessionBeanCobra().getCiudadanoservice().guardarListaContrato(relacioncontratojsfusuarios);
+                }
+
                 for (JsfUsuarioGrupo jsfusuarioId : listausuGrupos) {
                     jsfusuarioId.getId().setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId());
                 }
-                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19 || intidgrupo == 20 || intidgrupo == 23) {
+                if (intidgrupo == 1 || intidgrupo == 17 || intidgrupo == 16 || intidgrupo == 19 || intidgrupo == 20 || intidgrupo == 23 || intidgrupo == 18) {
                     getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
                 }
                 //getSessionBeanCobra().getCiudadanoservice().guardarListaGrupo(listausuGrupos);
@@ -1830,5 +1879,23 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         limpiarCiudadano();
         getUsuario().limpiarSeleccionEntidad();
         return "gestion";
-    } 
+    }
+    private boolean habilitarguardarConvenio = true;
+    private int tipoasociacion = 0;
+
+    public boolean isHabilitarguardarConvenio() {
+        return habilitarguardarConvenio;
+    }
+
+    public void setHabilitarguardarConvenio(boolean habilitarguardarConvenio) {
+        this.habilitarguardarConvenio = habilitarguardarConvenio;
+    }
+
+    public int getTipoasociacion() {
+        return tipoasociacion;
+    }
+
+    public void setTipoasociacion(int tipoasociacion) {
+        this.tipoasociacion = tipoasociacion;
+    }
 }

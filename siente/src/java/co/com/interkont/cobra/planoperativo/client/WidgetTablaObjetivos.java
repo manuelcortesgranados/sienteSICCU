@@ -3,14 +3,17 @@ package co.com.interkont.cobra.planoperativo.client;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
+import com.google.gwt.cell.client.AbstractCell;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.editor.client.Editor.Path;
 import com.google.gwt.safecss.shared.SafeStyles;
 import com.google.gwt.safecss.shared.SafeStylesUtils;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.TextButtonCell;
@@ -28,7 +31,7 @@ import com.sencha.gxt.widget.core.client.grid.Grid;
 import java.util.Iterator;
 
 public class WidgetTablaObjetivos implements IsWidget {
-
+    
     protected ObraDTO obraDto;
     protected ActividadobraDTO actividadObraPadre;
     protected String emptyText;
@@ -46,7 +49,7 @@ public class WidgetTablaObjetivos implements IsWidget {
         this.nombreTbl = nombreTbl;
         this.esObjetivo = esObjetivo;
     }
-
+    
     public ListStore<ObjetivosDTO> getStore() {
         return store;
     }
@@ -57,38 +60,55 @@ public class WidgetTablaObjetivos implements IsWidget {
     public void setStore(ListStore<ObjetivosDTO> store) {
         this.store = store;
     }
-
+    
     interface PlaceProperties extends PropertyAccess<ObjetivosDTO> {
-
+        
         @Path("idobjetivo")
         ModelKeyProvider<ObjetivosDTO> key();
-
+        
         ValueProvider<ObjetivosDTO, Integer> idobjetivo();
-
+        
         ValueProvider<ObjetivosDTO, String> descripcion();
-
+        
         ValueProvider<ObjetivosDTO, String> strtipoObj();
-
+        
         ValueProvider<ObjetivosDTO, String> eliminar();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
     private ListStore<ObjetivosDTO> store;
-
+    
     @Override
     public Widget asWidget() {
-
+        
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
+        SafeStyles cellStyles = SafeStylesUtils.fromTrustedString("width:136px;");
+        SafeStyles cellStylesDelete = SafeStylesUtils.fromTrustedString("width:50px;");
+        //SafeStyles cellStyles = SafeStylesUtils.forHeight(50, Style.Unit.PX);
 
         ColumnConfig<ObjetivosDTO, String> nameColumn = new ColumnConfig<ObjetivosDTO, String>(properties.descripcion(), 157, "Descripción");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
-        nameColumn.setResizable(false);
-        nameColumn.setColumnTextStyle(textStyles);
+        nameColumn.setResizable(true);
+//        nameColumn.setColumnStyle(textStyles);
+//        nameColumn.setColumnTextStyle(cellStyles);
+//        
+//        nameColumn.setCell(new AbstractCell<String>(null) {
+//            @Override
+//            public void render(Context context, String value, SafeHtmlBuilder sb) {
+//                StringBuilder textoModificado
+//                if(value.length()>10){
+//                
+//                }
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
 
-
+        
         ColumnConfig<ObjetivosDTO, String> eliminar = new ColumnConfig<ObjetivosDTO, String>(properties.eliminar(), 55, "Eliminar");
         eliminar.setResizable(false);
-        nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
-        nameColumn.setColumnTextStyle(textStyles);
+        eliminar.setColumnTextClassName(CommonStyles.get().inlineBlock());
+//        eliminar.setColumnTextStyle(textStyles);
+//        eliminar.setColumnTextStyle(cellStylesDelete);
+//        
 
         TextButtonCell button = new TextButtonCell();
         button.addSelectHandler(new SelectHandler() {
@@ -98,28 +118,29 @@ public class WidgetTablaObjetivos implements IsWidget {
                 int row = c.getIndex();
                 obraDto.getObjetivoses().remove(store.get(row));
                 getStore().remove(store.get(row));
-
+                
             }
         });
         eliminar.setCell(button);
-
+        
         List<ColumnConfig<ObjetivosDTO, ?>> l = new ArrayList<ColumnConfig<ObjetivosDTO, ?>>();
         l.add(nameColumn);
         l.add(eliminar);
-
+        
         ColumnModel<ObjetivosDTO> cm = new ColumnModel<ObjetivosDTO>(l);
         setStore(new ListStore<ObjetivosDTO>(properties.key()));
-
+        
         List<ObjetivosDTO> plants = new ArrayList<ObjetivosDTO>(cargarInformacionEspecificos());
         getStore().addAll(plants);
-
+        
         final Grid<ObjetivosDTO> grid = new Grid<ObjetivosDTO>(getStore(), cm);
         grid.setBorders(true);
-        grid.getView().setAutoExpandColumn(nameColumn);
+        //grid.getView().setAutoExpandColumn(nameColumn);
         grid.getView().setTrackMouseOver(false);
         grid.getView().setEmptyText(emptyText);
         grid.getView().setColumnLines(true);
-
+        grid.getView().setStripeRows(true);
+        grid.getView().setForceFit(true);
         FramedPanel cp = new FramedPanel();
         cp.setHeadingText(nombreTbl);
         cp.setWidget(grid);
@@ -128,18 +149,18 @@ public class WidgetTablaObjetivos implements IsWidget {
         cp.setAnimCollapse(true);
         cp.setPixelSize(215, 150);
         cp.addStyleName("margin-10");
-
+        
         return cp;
     }
-
+    
     public List cargarInformacionEspecificos() {
         List<ObjetivosDTO> lst = new ArrayList<ObjetivosDTO>();
         if (esObjetivo) {
             for (Iterator it = obraDto.getObjetivoses().iterator(); it.hasNext();) {
                 ObjetivosDTO obj = (ObjetivosDTO) it.next();
                 if (obj.getEsobjetivo()) {
-                    if(obj.getTipoobjetivo()!=1){
-                    lst.add(obj);
+                    if (obj.getTipoobjetivo() != 1) {
+                        lst.add(obj);
                     }
                 }
             }
@@ -150,7 +171,7 @@ public class WidgetTablaObjetivos implements IsWidget {
                     lst.add(obj);
                 }
             }
-
+            
         }
         return lst;
     }

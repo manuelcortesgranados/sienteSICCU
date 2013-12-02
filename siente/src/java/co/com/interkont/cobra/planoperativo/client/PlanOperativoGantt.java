@@ -906,14 +906,38 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         } else {
             main = new FlowLayoutContainer();
-            main.getElement().setMargins(new Margins(136, 0, 0, 5));
-            main.setWidth(1000);
-            main.setHeight(500);
+            main.setStyleName("main-contenedor-gwt-fullscreen");
+            main.getElement().setMargins(new Margins(-50, 0, 0, 0));
+            main.setWidth(1300);
+            main.setHeight(600);
             ContentPanel cp = new ContentPanel();
-            cp.setHeadingText("Plan Operativo screen");
+            cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-            cp.setPixelSize(1000, 500);
-            cp.getElement().setMargins(new Margins(5));
+            cp.setPixelSize(1480, 650);
+            cp.getElement().setMargins(new Margins(0));
+
+            VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
+            vc1.setWidth("400");
+            vc1.setPosition(400, 0);
+
+            Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
+            tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
+            Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
+            subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
+            Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
+            mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
+            Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
+            mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
+
+            vc1.add(tituloPrincipal);
+            vc1.add(subTituloPrincipal);
+            vc1.add(mensajeG1);
+            vc1.add(mensajeG2);
+
+            HorizontalPanel linea = new HorizontalPanel();
+            linea.addStyleName("ikont-hr-separador-convenio");
+            
+            main.add(vc1);
 
             VerticalLayoutContainer vc = new VerticalLayoutContainer();
             cp.setWidget(vc);
@@ -1160,6 +1184,15 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public void cargar() {
         //Cargando el convenio        
+        service.isFullScreen(new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                fullScreen = result;
         service.obtenerContratoDTO(new AsyncCallback<ContratoDTO>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -1181,12 +1214,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     convenioDTO.setVermensajeguardado(false);
                     convenioDTO.setVermensajeerror(false);
                     convenioDTO.setMensajeguardado("");
+
                 } else {
                     AlertMessageBox d = new AlertMessageBox("Alerta", msg);
                     d.show();
                 }
             }
         });
+            }
+        });
+
 
     }
 

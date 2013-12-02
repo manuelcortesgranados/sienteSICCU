@@ -70,4 +70,6 @@ public interface CobraGwtServiceAble extends RemoteService {
 //    public void eliminarDependencia(DependenciaDTO dependenciaDto)throws Exception;
     public boolean isElimino();
     public void setElimino(boolean elimino);
+    public boolean isFullScreen();
+    public void setFullScreen(boolean fullScreen);
 }

@@ -3936,14 +3936,20 @@ a:hover {
 
 .ikont-po-img-borradorGWT{
     background-position: -35px 1px; 
-    margin: 0px; left: 92% !important; top: 2px;
+    margin: 0px; left:89% !important; top: 2px;
 }
 .ikont-po-img-finalizarGWT{
-    background-position: 1px 1px;
+    background-position: 0px 1px;
+    margin: 0px; left: 92% !important ; top: 2px;
+}
+
+.ikont-po-img-fullscreen-GWT{
+    background-position: -68px 1px;
     margin: 0px; left: 95% !important ; top: 2px;
 
 
 }
+
 .ikont-po-img-borradorGWT:hover{
     background-position: -35px -27px; 
     background-color: #ffffff !important;
@@ -3952,6 +3958,12 @@ a:hover {
 .ikont-po-img-finalizarGWT:hover{
     background-position: 1px -27px;  
     background-color: #ffffff !important;
+}
+
+.ikont-po-img-fullscreen-GWT:hover{
+    background-position: -68px -27px;  
+    background-color: #ffffff !important;
+
 }
 
 .ikont-po-tb{
@@ -4904,6 +4916,14 @@ a:hover {
 
 .ikont-rdt-rc-avance{
     width: 18%;
+}
+
+
+.main-contenedor-gwt-fullscreen{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
 }
 
 

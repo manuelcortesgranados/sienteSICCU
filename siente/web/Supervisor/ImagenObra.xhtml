@@ -70,7 +70,7 @@
                                         </f:facet>
                                         <center>
                                             <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}" immediate="true">
-                                                <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
+                                                <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"
                                                                  />
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />

@@ -43,7 +43,7 @@
                                         <h:panelGrid id="tablaopinionciudadano" styleClass="ikont-table-opinion"  columns="1">
                                             <h:panelGroup >
 
-                                                <h:graphicImage styleClass="ikont-img-opinion-ciudadano"   url="#{var.ipserver}#{var.versioncobra}#{rowcomentario_par.jsfUsuario.tercero.strfoto}" 
+                                                <h:graphicImage styleClass="ikont-img-opinion-ciudadano"   url="#{rowcomentario_par.jsfUsuario.tercero.strfoto}" 
                                                        rendered="#{!rowcomentario_par.boolidentidadoculta}" />
                                                 <h:graphicImage   styleClass="ikont-img-opinion-ciudadano"   url="/resources/imgs/bt_nodisponible.png" rendered="#{rowcomentario_par.boolidentidadoculta}" />
 
@@ -65,7 +65,7 @@
                                             <hr class="ikont-hr-oponion-separador"/>
                                             <h:panelGrid>
                                                 <h:outputLabel  styleClass="ikont-hol-idcomentario_par"    id="idcomentario_par" value="#{rowcomentario_par.stropinion}" />
-                                                <h:graphicImage rendered="#{rowcomentario_par.strfotoopinion != null}" styleClass="ikont-img-opinion-comentario"   url="#{var.ipserver}#{var.versioncobra}#{rowcomentario_par.strfotoopinion}" />
+                                                <h:graphicImage rendered="#{rowcomentario_par.strfotoopinion != null}" styleClass="ikont-img-opinion-comentario"   url="#{rowcomentario_par.strfotoopinion}" />
                                                 <h:graphicImage rendered="#{rowcomentario_par.strfotoopinion == null}" styleClass="ikont-img-opinion-comentario"   url="/resources/imgs/bt_nodisponible.png"/>
 
                                             </h:panelGrid>

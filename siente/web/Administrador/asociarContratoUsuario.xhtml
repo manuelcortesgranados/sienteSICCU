@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:form >
+        <h:panelGroup layout="block" id="pgasociarContratoUsuario"  >
+            <h:panelGrid columns="2" >
+                <h:outputLabel  styleClass="ikont-outtext-subtitulo"    id="lblEntidadcontrato"  value="#{var.entidad}: "/>
+                <h:selectOneMenu  id="comboEntidadcontratoUsuario" style="position: relative;left: 163px;" value="#{Perfil$Usuario.entidadproyecto.intcodigo}">
+                    <f:selectItems  value="#{Perfil$Usuario.entidadcreacionusuario}" />
+                    <a4j:ajax   event="valueChange"  execute="@this,combodepartamentoproyecto,tableasociarcontratousuario,asociarproyecto,ikont-panel-contrato"
+                                listener="#{Perfil$Usuario.cargarConvenioAsociar}"  render="comboEntidadcontratoUsuario,tableasociarcontratousuario,ikont-panel-contrato,pgasociarContratoUsuario"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGroup rendered="#{Perfil$Usuario.listacontratoasociar.size()==0}">
+                <h:outputText value=" La Entidad no tiene Convenios"/>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{Perfil$Usuario.listacontratoasociar.size()>0}" id="ikont-panel-contrato" >
+                <h:panelGrid style="width: 100%;" id="panelcontenidoproyecto" columns="3">
+                    <h:panelGroup>
+                        <h:panelGrid>
+                            <a4j:commandButton value="#{var.Buscar} #{var.obra}"/>
+                        </h:panelGrid>
+                        <rich:dataTable  style="border-collapse: inherit!important;"  binding="#{Perfil$Usuario.datatablelistacontratos}"
+                                         rows="8" var="varcontrato"  value="#{Perfil$Usuario.listacontratoasociar}" id="tableasociarcontratousuario">
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputLabel value="#{var.seleccionar}"/>
+                                </f:facet>
+                                <h:selectBooleanCheckbox value="#{Perfil$Usuario.listacontratobooleana[varcontrato]}"
+                                                         immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnContrato}">
+                                    <f:ajax event="click" render="@form"/>
+
+                                </h:selectBooleanCheckbox>
+                            </rich:column>
+
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.codigo} #{var.convenio}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.intidcontrato}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.numero} #{var.convenio}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.strnumcontrato}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombreConvenio}"/>
+                                </f:facet>
+                                <h:outputText value="#{varcontrato.strnombre}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                        <rich:dataScroller rendered="#{Perfil$Usuario.listacontratoasociar.size()>10}" for="tableasociarcontratousuario" maxPages="5" />
+                    </h:panelGroup>
+                    <rich:column>
+                        <center>
+                            <a4j:commandButton  rendered="#{Perfil$Usuario.listacontratobooleana.size()>0}" immediate="true" execute="repeatcontratoselecionados,idbuscarproyecto,pgasociarContratoUsuario,confirmarasociarcontrato,panelversubconvenio" render="repeatcontratoselecionados,asociarproyecto,idbuscarproyecto,pgasociarContratoUsuario,confirmarasociarcontrato,panelversubconvenio" 
+                                                actionListener="#{Perfil$Usuario.listarContratosSeleccionadas}" value="#{var.listar} #{var.obra} #{var.seleccion}"/>
+                            <br/>
+                            <br/>
+                            <a4j:commandButton rendered="#{Perfil$Usuario.listacancontrato.size()>0}" immediate="true" execute="repeatcontratoselecionados,idbuscarproyecto" render="repeatcontratoselecionados,asociarproyecto,pgasociarContratoUsuario" actionListener="#{Perfil$Usuario.cancelarasociarSubConvenio}" value="#{var.cancelar}"/>
+                        </center>
+                    </rich:column>
+
+                    <h:panelGrid id="panelasociarconvenio" >
+                        <h:panelGroup>
+                            <h:panelGrid rendered="#{Perfil$Usuario.inhabilitarseleccionconvenio and Perfil$Usuario.listacancontrato.size()>0}">
+                                <rich:dataTable 
+                                                 rows="5" var="varcontrato"  value="#{Perfil$Usuario.listacancontrato}" id="repeatcontratoselecionados">
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputLabel value="#{var.seleccionar}"/>
+                                        </f:facet>
+                                        <h:selectBooleanCheckbox value="#{Perfil$Usuario.listacontratobooleana[varcontrato]}"
+                                                                 immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnContrato}">
+                                            <f:ajax event="click" render="@form"/>
+                                        </h:selectBooleanCheckbox>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.numero} #{var.convenio}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{varcontrato.strnumcontrato}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.nombreConvenio}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{varcontrato.strnombre}"/>
+                                    </rich:column>
+                                </rich:dataTable>
+                                <rich:dataScroller rendered="#{Perfil$Usuario.listacancontrato.size()> 4}" for="repeatcontratoselecionados" maxPages="5" />
+                            </h:panelGrid>
+                            <h:panelGrid  rendered="#{Perfil$Usuario.habilitarmensajesubconvenios}" id="panelversubconvenio" >
+                            <h:outputLabel value="El convenio seleccionado tiene subconvenios desea verlos?"/>
+                            <a4j:commandButton execute="repeatsubcontratoselecionados,panelasociarconvenio,panelsubconvenio,@ll" immediate="true" actionListener="#{Perfil$Usuario.subconveniosConvenio}" render="repeatsubcontratoselecionados,panelasociarconvenio,panelsubconvenio,@all" value="Ver"/>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{Perfil$Usuario.habilitarsubconvenios and Perfil$Usuario.listasubcontratoasociar.size()>1}" id="panelsubconvenio">
+                        <h:panelGrid   columns="2">
+                            <rich:dataTable  rows="5" var="varcontrato" binding="#{Perfil$Usuario.datatablelistasubcontratos}"  value="#{Perfil$Usuario.listasubcontratoasociar}"
+                                             id="repeatsubcontratoselecionados">
+                                <rich:column  colspan="4">
+                                    <h:outputText  styleClass="ikont-hot-contratoencontrados"   value="SubConvenios Encontrados" />
+                                </rich:column>
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputLabel value="#{var.seleccionar}"/>
+                                    </f:facet>
+                                    <h:selectBooleanCheckbox value="#{Perfil$Usuario.listasubcontratobooleana[varcontrato]}"
+                                                             immediate="true" valueChangeListener="#{Perfil$Usuario.seleccionarUnSubContrato}">
+                                        <f:ajax event="click" render="@form"/>
+
+                                    </h:selectBooleanCheckbox>
+                                </rich:column>
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.numero} Sub#{var.convenio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{varcontrato.strnumcontrato}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Sub#{var.nombreConvenio}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{varcontrato.strnombre}"/>
+                                </rich:column>
+                            </rich:dataTable>
+                            <rich:dataScroller rendered="#{Perfil$Usuario.listacancontrato.size()> 4}" for="repeatcontratoselecionados" maxPages="5" />
+                        </h:panelGrid>
+                            
+                        <center>
+                            <a4j:commandButton  rendered="#{Perfil$Usuario.listasubcontratoasociar.size()>0}" immediate="true" execute="repeatcontratoselecionados,idbuscarproyecto,pgasociarContratoUsuario,confirmarasociarcontrato,panelversubconvenio" render="repeatcontratoselecionados,asociarproyecto,idbuscarproyecto,pgasociarContratoUsuario,confirmarasociarcontrato,panelversubconvenio" 
+                                                actionListener="#{Perfil$Usuario.listarSubContratosSeleccionadas}" value="Listar Subconvenio"/>
+                           
+                            <a4j:commandButton rendered="#{Perfil$Usuario.listasubcontratoasociar.size()>0}" immediate="true" execute="repeatcontratoselecionados,idbuscarproyecto" render="repeatcontratoselecionados,asociarproyecto,pgasociarContratoUsuario" actionListener="#{Perfil$Usuario.cancelarasociarSubConvenio}" value="#{var.cancelar}"/>
+                        </center>
+                   
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:panelGroup> 
+        </h:panelGroup>
+    </h:form>
+</ui:composition>
