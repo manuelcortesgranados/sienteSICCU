@@ -17,12 +17,11 @@
     background-color: rgba(0,0,0,0.5)!important;
 }
 
-.style-modal-dialog div.rich-mpnl-shadow{
+.rf-pp-cntr.style-modal-dialog{
     background: transparent !important;
 }
 
 .style-modal-dialog-head{
-    margin-left: 1px !important;
     font-size: 13px!important;
     font-weight: 100!important;
     height: 50px!important;
@@ -46,7 +45,11 @@
     border-top-right-radius: 20px!important;   
 }
 
-.style-modal-dialog td.rich-mpnl-body{
+.style-modal-dialog-head table{
+    margin: 0px!important;
+}
+
+.style-modal-dialog .rf-pp-cnt-scrlr{
     border-style: none!important;
     border-width: 0px!important;
     font-size: 14px!important;
@@ -100,7 +103,6 @@
 
 .serch-advanced-header div{
     margin-top: 30px!important;
-    margin-left: -100px!important;
 }
 
 .serch-advanced-header div input[type=text]{
@@ -203,6 +205,7 @@
     border: solid 1px white!important;
     background: url("img/fecha_abajo.png") no-repeat right transparent!important;
     padding-left: 5px!important;
+    font-style: normal!important;
 }
 
 .serch-advanced-footer option{
@@ -220,7 +223,7 @@
     color: black!important;
     width: 100px!important;
     background-color: whitesmoke!important;
-    font-size: 80%!important;
+    font-size: 12px!important;
     font-family: "century"!important;
     -moz-border-radius: 10px!important;
     -ms-border-radius: 10px!important;
@@ -339,4 +342,42 @@
     font-size: larger!important;
 }
 
+#queessiente_header_content table{
+    margin: 0px;
+}
 
+#queessiente_header_content span{
+    font-family: "century"!important;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+#queessiente_content{
+    border: solid 0px transparent;
+}
+
+#what-siente span{
+    color : #FFF!important;
+    font-size: 16px;
+}
+
+.ikont-l-whatsientetitle{
+    font-size: 35px!important;
+}
+
+.ikont-font-modal-search-ciu{
+    color: #FFF!important;
+    font-family: "century"!important;
+    font-size: 15px!important;
+}
+
+.ikont-font-check-proyectos-ciu{
+    color: #FFF!important;
+    font-family: "century"!important;
+    font-size: 11px!important;
+    margin: 0px 5px;
+}
+
+.ikont-hsor-boolcomentario{
+    margin-left: 30px;
+}

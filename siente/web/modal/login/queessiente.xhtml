@@ -9,7 +9,7 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel  id="queessiente" autosized="true" resizeable="false" width="700" 
+    <rich:popupPanel  id="queessiente" autosized="true" resizeable="false" width="700" height="500"
                       headerClass="style-modal-dialog-head" styleClass="ikont-rpp-queessiente"   onshow="completModal()" >
         <f:facet name="header" >            
             <h:panelGroup >
@@ -50,7 +50,7 @@
                                         <h:outputText  styleClass="ikont-hot-leyendamodalquees "   value="#{var.leyendamodalquees}"></h:outputText>
 
                                     </p>
-                                    <div styleClass="what-siente-img">
+                                    <div styleClass="what-siente-img" style="text-align: center;">
                                         <img src="/#{var.versioncobra}/resources/imgs/login/logo_prin1.png" width="70" height="70"/>
                                         <img src="/#{var.versioncobra}/resources/imgs/login/separador.png" width="10" height="70"/>
                                         <img src="/#{var.versioncobra}/resources/imgs/login/logo_prin2.png" width="120" height="70"/>
