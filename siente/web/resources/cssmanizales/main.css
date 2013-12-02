@@ -3681,7 +3681,7 @@ a.buttonform:hover {
 .TituloModificarProyecto {
     color: #004670;
     font-family: Verdana,Geneva,sans-serif;
-    font-size: 2em;
+    font-size: 20px;
     font-style: italic;
     font-weight: bold;
     line-height: 20px;
@@ -3701,7 +3701,7 @@ a.buttonform:hover {
     font-style: italic;
     text-align: left;
     width: 100%;
-    font-size: 1.3em;
+    font-size: 12px;
 }
 .rowtop {
     vertical-align: top;
@@ -4655,7 +4655,7 @@ a.closemodal{
     height:60px;
     float:left;
     position:relative;
-    background-image: url(../imgs/Manizales_Logo_.png);
+    background-image: url(../imgs/Cobramanizales_Logo.png);
     background-repeat:no-repeat;
     background-position: 0px 0px;
     margin-top: 0px;
@@ -4688,4 +4688,438 @@ ikont-hcl-siente:hover{
 }
 .totalwidth{
     width: 100%;
+}
+
+.ikont-hot-obrastrnombremedio, .ikont-hot-strnombremedio{
+    font-size: 10px;
+    float: right;
+}
+.ikont-hpg-griddetaob .rf-p{    
+    width: 180px;
+    height: 150px;
+    margin: 6px;
+}
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-numvaltotobra, .ikont-hpg-griddetaob 
+.rf-p .rf-p-b .ikont-hot-valorinterventoria, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valinter, 
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stclaseProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b 
+.ikont-hol-sttipoProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stsubtipoProyecto {
+
+    font-size: 14px;
+    color: #336699;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b span, .ikont-hpg-griddetaob .rf-p .rf-p-b label{
+    font-size: 12px;
+    color: #666666;
+}
+
+.rf-cp-hdr, .rf-pp-hdr, .rf-fu-hdr, .rf-insp-btns, .rf-ds-btn, .rf-dt-hdr-c{
+    background-image: none !important;
+}
+.rf-ds-dis {
+    color: #FFFFFF !important;
+}
+.rf-pp-hdr{
+    background: #A9CBAE !important;
+    background: -moz-linear-gradient(top, #A9CBAE 0%, #666666 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#A9CBAE), color-stop(64%,#666666), color-stop(100%,#666666)) !important;
+    background: -webkit-linear-gradient(top, #A9CBAE 0%,#666666 100%) !important;
+    background: -o-linear-gradient(top, #A9CBAE 0%,#666666 100%) !important;
+    background: -ms-linear-gradient(top, #A9CBAE 0%,#666666 100%) !important;
+    background: linear-gradient(top, #A9CBAE 0%,#666666 100%) !important;
+}
+
+.ikont-hpg-panelmodiinicial{
+    margin: 0px auto !important;
+}
+
+.ikont-panel-modificarobra{
+    width: 80%;
+    margin: 50px auto;
+}
+.ikont-hit-strrazonmodif{
+    width: 99%;
+    height: 120px;
+    margin-bottom: 30px !important;
+}
+
+.ikont-rp-textopaso3modificacion .rf-p-b {
+    height: 160px;
+}
+.ikont-hpg-varpaso4{
+    text-align: center;
+}
+.ikont-hpg-subirdocmodificacion{
+    width: 80%;
+}
+
+.ikont-hit-txtstrnombredocumento {
+    background-color: #F0F4F8;
+    text-indent: 5px;
+    height: 20px;
+    font-size: 15px;
+    line-height: 20px;
+    font-style: italic;
+    color: #003;
+    border: thin solid #51819E;
+    margin-right: 20px;
+}
+
+.ikont-acb-adjuntardocumento{
+    margin-right: 20px;
+}
+
+.ikont-hgi-add{
+    position: relative;
+    top: 10px;
+    left: 10px;
+}
+
+.marcocambioestado{
+    text-align: center;
+    border: solid 1px #266185;
+    width: 80%;
+    margin-top: 50px;
+    border-radius: 3px;
+}
+
+a.ikont-acl-cambioestado {
+    background: #919396;
+    background: -moz-linear-gradient(top,  #919396 48%, #45596d 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#919396), color-stop(50%,#45596d));
+    background: -webkit-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: -o-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: -ms-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: linear-gradient(top,  #919396 48%,#45596d 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#919396', endColorstr='#45596d',GradientType=0 );
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: #FFF 2px solid;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#fff;
+    text-align:center;
+    padding:8px;
+}
+a.ikont-acl-cambioestado:hover {
+    background: #45596d;
+    background: -moz-linear-gradient(top,  #45596d 48%, #919396 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#45596d), color-stop(50%,#919396));
+    background: -webkit-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: -o-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: -ms-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: linear-gradient(top,  #45596d 48%,#919396 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45596d', endColorstr='#919396',GradientType=0 );
+}
+.ikont-acl-deleteultimoavance  {
+    background: #919396;
+    background: -moz-linear-gradient(top,  #919396 48%, #45596d 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#919396), color-stop(50%,#45596d));
+    background: -webkit-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: -o-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: -ms-linear-gradient(top,  #919396 48%,#45596d 50%);
+    background: linear-gradient(top,  #919396 48%,#45596d 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#919396', endColorstr='#45596d',GradientType=0 );
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: #FFF 2px solid;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#fff;
+    text-align:center;
+    padding:8px;
+}
+.ikont-acl-deleteultimoavance:hover  {
+    background: #45596d;
+    background: -moz-linear-gradient(top,  #45596d 48%, #919396 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#45596d), color-stop(50%,#919396));
+    background: -webkit-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: -o-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: -ms-linear-gradient(top,  #45596d 48%,#919396 50%);
+    background: linear-gradient(top,  #45596d 48%,#919396 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45596d', endColorstr='#919396',GradientType=0 );
+}
+
+.ikont-hcl-iniciardeta_ciu{
+    width:180px;
+    height:25px;
+    background-color:#28245B;
+    color:#FFF;
+    background-image: url("../imgs/bt_05.png");
+    background-position: center center fixed;
+    background-repeat: no-repeat;
+    font-size:13px;
+    font-family:"Century Gothic";
+    line-height:25px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    float:left;
+    position:relative;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
+}
+.ikont-hcl-iniciardeta_ciu:hover {
+    background-color:#CCC;
+    color:#28245B;
+}
+
+.ikont-hcl-iniciardeta_ciu1{
+    width:180px;
+    height:25px;
+    color:#FFF;
+    font-size:13px;
+    font-family:"Century Gothic";
+    background-image: url("../imgs/info_hover.png")!important;
+    background-position-x: 0px !important;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    padding: 3px 46px 13px 27px;
+}
+.ikont-hcl-iniciarOpiniones_ciu{
+    width:180px;
+    height:25px;
+    background-color:#2A2F82;
+    color:#FFF;
+    background-image:url(../imgs/bt_06.png);
+    background-repeat:no-repeat;
+    background-position:left;
+    font-size:13px;
+    font-family:"Century Gothic";
+    line-height:25px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    float:left;
+    position:relative;  
+    margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
+}
+.ikont-hcl-iniciarOpiniones_ciu:hover {
+    background-color:#CCC;
+    color:#2A2F82;
+}
+
+.ikont-hcl-iniciarImagenes_cui:hover {
+    background-color:#CCC;
+    color:#1171B6;
+}
+.ikont-hcl-iniciarImagenes_cui1{
+    width:180px;
+    height:25px;
+    background-color:#CCC;
+    color:#1171B6;
+    background-image:url(../imgs/bt_07.png);
+    background-repeat:no-repeat;
+    background-position:left;
+    font-size:13px;
+    font-family:"Century Gothic";
+    line-height:25px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    float:left;
+    position:relative;
+    margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
+}
+
+.ikont-hcl-iniciarDocumentos_ciu{
+    width:180px;
+    height:25px;
+    background-color:#2CA8E0;
+    color:#FFF;
+    background-image:url(../imgs/bt_08.png);
+    background-repeat:no-repeat;
+    background-position:left;
+    font-size:13px;
+    font-family:"Century Gothic";
+    line-height:25px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    float:left;
+    position:relative;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
+}
+.ikont-hcl-iniciarDocumentos_ciu:hover {
+    background-color:#CCC;
+    color:#2CA8E0;
+}
+.ikont-hcl-iniciardeta_ciu1{
+    width:180px;
+    height:25px;
+    color:#FFF;
+    font-size:13px;
+    font-family:"Century Gothic";
+    background-image: url("../imgs/info_hover.png")!important;
+    background-position-x: 0px !important;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    padding: 3px 46px 13px 27px;
+}
+
+.ikont-hcl-iniciarOpiniones_ciu1{
+    width:180px;
+    height:25px;
+    color:#FFF;
+    font-size:13px;
+    font-family:"Century Gothic";
+    background-image: url("../imgs/comentarios_hover.png")!important;
+    background-position-x: 0px !important;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    padding: 3px 46px 13px 27px;
+}
+.ikont-hcl-iniciarImagenes_ciu1{
+    width:180px;
+    height:25px;
+    color:#FFF;
+    font-size:13px;
+    font-family:"Century Gothic";
+    background-image: url("../imgs/fotos_hover.png")!important;
+    background-position-x: 0px !important;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    padding: 3px 70px 13px 52px;
+}
+.ikont-hcl-iniciarDocumentos_cui1{
+    width:180px;
+    height:25px;
+    color:#FFF;
+    font-size:13px;
+    font-family:"Century Gothic";
+    background-image: url("../imgs/comentarios_hover.png")!important;
+    background-position-x: 0px !important;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    padding: 3px 46px 13px 27px;
+}
+
+.ikont-hcl-iniciarImagenes_cui{
+    width:180px;
+    height:25px;
+    background-color:#1171B6;
+    color:#FFF;
+    background-image:url(../imgs/bt_07.png);
+    background-repeat:no-repeat;
+    background-position:left;
+    font-size:13px;
+    font-family:"Century Gothic";
+    line-height:25px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
+    float:left;
+    position:relative;
+    margin-right:5px;
+    margin-right:5px;
+    text-align: center;
+    width: 180px!important;
+    height: 25px!important;
+    color: #FFF!important;
+}
+
+.ikont-hcb-seguirspry{
+    color:#FFF!important;
+    padding: 5px 10px 5px 10px!important;
+    font-size:15px!important;
+    font-family:"Century Gothic"!important;
+    line-height:0px!important;
+    padding: 2px 35px 2px 35px!important;
+    -webkit-border-radius: 28px!important;
+    -moz-border-radius: 28px!important;
+    border-radius: 28px!important;
+    background: #3AA7E5!important;
+    background: -moz-linear-gradient(top,  #3AA7E5 0%,  #27225F 100%)!important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3AA7E5), color-stop(64%,#27225F), color-stop(100%,#27225F))!important;
+    background: -webkit-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: -o-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: -ms-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA7E5', endColorstr='#27225F',GradientType=0 )!important;
+}
+.ikont-hcb-seguirspry:hover {
+    background: #F5F5F5!important;
+    background: -moz-linear-gradient(top,  #F5F5F5 0%,  #B1B1B1 100%)!important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F5F5), color-stop(64%,#B1B1B1), color-stop(100%,#B1B1B1))!important;
+    background: -webkit-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: -o-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: -ms-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#B1B1B1',GradientType=0 )!important;
+    color:#27225F!important;
+}
+
+.ikont-hot-numvobra {
+    font-family: "knockout", Arial, Helvetica, sans-serif;
+    font-size: 80px;
+    color: #1D71B8;
+}
+
+.ikont-hot-intplazoo {
+    font-family: "knockout", Arial, Helvetica, sans-serif;
+    font-size: 130px;
+    line-height: 100px;
+    color: #1D71B8;
+}
+.rf-sel-btn {
+    background-image: none !important;
+}
+
+.rf-dt-thd .rf-dt-hdr-fst .rf-dt-hdr-c {
+    background-color: #20812F;
+    color: #FFF!important;
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: solid 1px #C0C0C0;
+    border-right: solid 1px #C0C0C0;
+}
+
+.rf-dt-b .rf-dt-r .rf-dt-c {
+    padding: 10px;
+    border-bottom: solid 1px #C0C0C0;
+    border-right: solid 1px #C0C0C0;
+}
+
+.rf-dt .rf-dt-thd tr{
+    border-right: solid 1px #C0C0C0;
+    border-bottom: solid 1px #C0C0C0;
+    padding: 4px 4px 4px 4px;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: Arial,Verdana,sans-serif;
+}
+.ikont-rp-tipocontrato, .ikont-rp-valorcontrato, .ikont-rp-duracioncontrato, .ikont-rp-entregacontrato{
+    width: 180px;
+    height: 150px;
+    border: 0px;
 }

@@ -1215,7 +1215,6 @@ public class ModificarProyecto  implements Serializable{
      * Genera el cronograma para la modificación
      */
     private void generarCronograma() {
-        System.out.println("Ingreso ");
         cargarObra();
         String ubicacionRelativaCarpetaBase = Propiedad.getValor("ubicacioncarpetabasemodificacion");
         String nombreSubCarpeta = String.valueOf(obra.getIntcodigoobra());
@@ -1230,7 +1229,6 @@ public class ModificarProyecto  implements Serializable{
         Workbook workbook = cargarInfoProyectoEnPlantilla(plantilla);
         almacenarArchivo(workbook, ubicacionRelativaCarpetaBase, nombreSubCarpeta, nombreArchivo);
         this.getSessionBeanCobra().setUrlAbri(ubicacionRelativaCarpetaBase + nombreSubCarpeta + "/" + nombreArchivo);
-        System.out.println("sali"+getSessionBeanCobra().getUrlAbri());
     }
 
     /**
@@ -1318,11 +1316,9 @@ public class ModificarProyecto  implements Serializable{
      * Realiza una copia del cronograma anterior
      */
     public void copiarArchivoCronogramaAnterior() {
-        System.out.println("Debug - copiarArchivoCronogramaAnterior");
         String ubicacionArchivoDestino = MessageFormat.format(RutasWebArchivos.DOCS_MODI, "" + obra.getIntcodigoobra(),  "" + historicoobra.getOididhistoricoobra());
         String nombreArchivo = obra.getStrurlcronograma().substring(obra.getStrurlcronograma().lastIndexOf("/"));
         ubicacionArchivoDestino = ubicacionArchivoDestino + nombreArchivo;
-        System.out.println("copiar archivo nombre archivo = " + nombreArchivo);
         try {
             ArchivoWebUtil.copiarArchivo(obra.getStrurlcronograma(), ubicacionArchivoDestino, true, false);
         } catch (FileNotFoundException ex) {
@@ -1340,7 +1336,6 @@ public class ModificarProyecto  implements Serializable{
      * existe y sobreescrivir = false
      */
     public void copiarArchivoCronogramaModificacion() throws FileNotFoundException, ArchivoExistenteException {
-        System.out.println("Debug - copiarArchivoCronogramaModificacion");
         String ubicacionCronogramaModificacion = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+obra.getIntcodigoobra());
         cargadorCronograma.guardarArchivosTemporales(ubicacionCronogramaModificacion,false);
         
