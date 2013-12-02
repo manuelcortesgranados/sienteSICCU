@@ -1,15 +1,85 @@
 body {
-	background: white;
+    background: white;
 }
 /*Centering the gauge*/
 #canvas {
-	display: block;
-	width: 300px;
-	margin: 100px auto;
-        
+    display: block;
+    width: 300px;
+    margin: 100px auto;
+
 }
 
 @font-face {
     font-family: "bebas";
     src: url("font/BEBAS___.TTF");
+}
+
+.ikont-reloj{
+    width: 480px;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+}
+.ikont-reloj .li_1 {
+    list-style-type: none;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    visibility: visible;
+}
+.ikont-reloj .li_2 {
+    list-style-type: none;
+    position: absolute;
+    left: 120px;
+    top: 0;
+    visibility: visible;
+}
+.ikont-reloj .li_3 {
+    list-style-type: none;
+    position: absolute;
+    left: 240px;
+    top: 0;
+    visibility: visible;
+}
+.ikont-reloj .li_4 {
+    list-style-type: none;
+    position: absolute;
+    left: 360px;
+    top: 0;
+    visibility: visible;
+}
+
+.label_d{
+    color: silver;
+    font-size: 13px;
+    position: absolute;
+    top: 80px;
+    left: 45px;
+    font-family: 'century';
+}
+.label_h {
+    color: silver;
+    font-size: 13px;
+    position: absolute;
+    top: 80px;
+    left: 40px;
+    font-family: 'century';
+}
+.label_m {
+    color: silver;
+    font-size: 13px;
+    position: absolute;
+    top: 80px;
+    left: 35px;
+    font-family: 'century';
+}
+.label_s {
+    color: silver;
+    font-size: 13px;
+    position: absolute;
+    top: 80px;
+    left: 25px;
+    font-family: 'century';
 }
