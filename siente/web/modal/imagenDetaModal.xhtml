@@ -16,7 +16,7 @@
                     <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" styleClass="ikont-rp-asiestaba" headerClass="font-header-panel">
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima2">
-                                <h:graphicImage  styleClass="ikont-hgi-imagenanterior" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
+                                <h:graphicImage  styleClass="ikont-hgi-imagenanterior" value="#{Supervisor$DetalleObra.strimagenAnterior}"
                                                 height="140" width="190"/>
                             </h:panelGroup>
                         </h:panelGrid>
@@ -27,10 +27,10 @@
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima1">
 
-                                <h:graphicImage  styleClass="ikont-hgi-conimagenactual" id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  styleClass="ikont-hgi-conimagenactual" id="con" value="#{Supervisor$DetalleObra.strimagenActual}"
                                                 height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="#{rich:component('modalImagenvermas')}.show();return true;" />
 
-                                <h:graphicImage  styleClass="ikont-hgi-sinimagenactual" id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  styleClass="ikont-hgi-sinimagenactual" id="sin" value="#{Supervisor$DetalleObra.strimagenActual}"
                                                  height="140" width="190" rendered="#{!Supervisor$DetalleObra.boolimg}"/>
                             </h:panelGroup>
                         </h:panelGrid>

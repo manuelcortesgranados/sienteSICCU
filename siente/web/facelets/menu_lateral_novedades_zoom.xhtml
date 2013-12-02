@@ -15,7 +15,7 @@
         <hr  class="ikont-hr-separador-usuario" />
         <h:panelGrid  rendered="true" columns="2"  styleClass="ikont-position-div-perfil-usuario">
             <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto!=null}">
-                <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
+                <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
             </rich:column>
             <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto==null}" >
                 <h:panelGroup styleClass="ikont-hpg-pgfotografia"   layout="block" id="pgfotografianueva">
