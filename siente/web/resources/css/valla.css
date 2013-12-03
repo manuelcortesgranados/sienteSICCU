@@ -377,7 +377,7 @@ img.circle-avance{
 
 .info-objeto-valla{
     position: absolute!important;
-    top: 95px!important;
+    top: 110px!important;
     color: white!important;
     text-align: center!important;
     width: 250px!important;
@@ -443,6 +443,10 @@ img.circle-avance{
 .stile-text-contrato-valla label{
     position: relative!important;
     top: 8px!important;
+    font-size: 9px !important;
+    font-weight: bold!important;
+    height: 36px!important;
+    overflow: hidden!important;
 }
 
 .stile-text-objeto-valla{
@@ -457,11 +461,13 @@ img.circle-avance{
 .stile-text-objeto-valla div{
     height: 65px !important;
     position: absolute;
-    top: 120px;
+    top: 130px;
+    overflow: hidden!important;
 }
 
 .stile-text-objeto-valla p{
-    margin-right: 5px;
+    font-size: 9px!important;
+    font-weight: bold !important;
 }
 
 .title-tool a:link {

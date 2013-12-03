@@ -885,6 +885,10 @@ body {
     border-right: solid 1px #C0C0C0;
 }
 
+.rf-dt-hdr-c span{
+    color:#FFF!important;
+}
+
 .rf-dt-hdr th{
     background-color:#F0F4F8;
     color : #FFF;

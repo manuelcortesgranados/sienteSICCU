@@ -1375,7 +1375,7 @@ public class Usuario implements Serializable {
                 listaentidad.add(key);
             }
         }
-        inhabilitarseleccionproyecto = true;
+        inhabilitarseleccionentidades = true;
         if (listaentidad.size() < 1) {
             FacesUtils.addErrorMessage(bundle.getString("debeeligirunentidad"));
         }
@@ -1589,14 +1589,14 @@ public class Usuario implements Serializable {
         inhabilitarseleccionproyecto = true;
         listacontratosproyecto.clear();
         if (listaproyecto.size() < 1) {
-            FacesUtils.addErrorMessage("debe elegir un proyecto");
+            FacesUtils.addErrorMessage("debe elegir un Proyecto");
         } else {
             for (Obra obra : listaproyecto) {
                 if (obra.getContrato() != null) {
                     habilitarGuardarContrato = true;
                     getPerfilCiudadano().setHabilitarguardarConvenio(true);
                 } else {
-                    getPerfilCiudadano().setHabilitarguardarConvenio(true);
+                    getPerfilCiudadano().setHabilitarguardarConvenio(false);
                 }
             }
         }

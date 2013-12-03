@@ -10,10 +10,11 @@
 
 
     <rich:popupPanel  id="panelFiltroAvanzadoCiud" autosized="true" resizeable="false" width="700" 
-                     headerClass="style-modal-dialog-head" styleClass="ikont-rpp-panelFiltroAvanzadoCiud">
+                     headerClass="style-modal-dialog-head" styleClass="ikont-rpp-panelFiltroAvanzadoCiud style-modal-dialog">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="2">
+                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
                     <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} "  />
                 </h:panelGrid>
             </h:panelGroup>
@@ -28,22 +29,22 @@
         </f:facet>
         <h:form>
                <h:panelGroup layout="block" styleClass="ikont-hpg-p1"  >
-                    <h:panelGroup layout="block" styleClass="ikont-hpg-p2"  >
+                    <h:panelGroup layout="block" styleClass="ikont-hpg-p2 serch-advanced-header"  >
                         <h:panelGrid >
-                            <h:panelGroup layout="block" styleClass="ikont-hpg-p3"   >
-                                <h:outputLabel  styleClass="ikont-hol-label_palabraclave"    value="#{var.label_palabraclave}"/>
+                            <h:panelGroup layout="block" styleClass="ikont-hpg-p3 "   >
+                                <h:outputLabel  styleClass="ikont-hol-label_palabraclave ikont-font-modal-search-ciu"    value="#{var.label_palabraclave}"/>
                                 <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
                                              onclick="this.value=''"/>
                             </h:panelGroup>
                         </h:panelGrid>
 
                     </h:panelGroup>
-                    <h:panelGroup layout="block" styleClass="ikont"  >
+                    <h:panelGroup layout="block" styleClass="ikont serch-advanced-footer"  >
                         <center>
                             <h:panelGrid columns="2" >
 
                                 <h:graphicImage  styleClass="ikont-hgi-1"   url="/resources/imgs/1.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont-hol-dondeestaubicado"   value="#{var.dondeestaubicado}" />
+                                <h:outputLabel  styleClass="ikont-hol-dondeestaubicado ikont-font-modal-search-ciu"   value="#{var.dondeestaubicado}" />
 
                                 <interkont:spacer/>
                                 <h:panelGrid columns="2" columnClasses="panelcenter"  styleClass="ikont-hpg-p4"  >
@@ -75,12 +76,12 @@
                                 </h:panelGrid>
 
                                 <h:graphicImage  styleClass="ikont-hgi-2"   url="/resources/imgs/2.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont-hol-quieneselcontratista"   value="#{var.quieneselcontratista}" />
+                                <h:outputLabel  styleClass="ikont-hol-quieneselcontratista ikont-font-modal-search-ciu"   value="#{var.quieneselcontratista}" />
                                 <interkont:spacer/>
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
                                 <h:graphicImage  styleClass="ikont-hgi-3"   url="/resources/imgs/3.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont-hol-quetipoproyectoes"   value="#{var.quetipoproyectoes}"  />
+                                <h:outputLabel  styleClass="ikont-hol-quetipoproyectoes ikont-font-modal-search-ciu"   value="#{var.quetipoproyectoes}"  />
                                 <interkont:spacer/>
                                 <h:panelGroup>
                                     <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}">
@@ -98,8 +99,8 @@
                                 <h:graphicImage  styleClass="ikont-hgi-4"   url="/resources/imgs/4.png" width="65" height="40" />
                                 <h:panelGrid columns="2">
 
-                                    <h:outputLabel  styleClass="ikont-hol-verproyectosterminados"   value="#{var.verproyectosterminados}" />
-                                    <h:selectOneRadio id="boolcomentario"  styleClass="ikont-hsor-boolcomentario" value="#{HomeGestion.filtro.boolobraterminada}"  >
+                                    <h:outputLabel  styleClass="ikont-hol-verproyectosterminados ikont-font-modal-search-ciu"  value="#{var.verproyectosterminados}" />
+                                    <h:selectOneRadio id="boolcomentario"   styleClass="ikont-hsor-boolcomentario " enabledClass="ikont-font-check-proyectos-ciu" value="#{HomeGestion.filtro.boolobraterminada}"  >
                                         <f:selectItem itemLabel="#{var.si}" itemValue="true"  />
                                         <f:selectItem itemLabel="#{var.no}" itemValue="false" />
                                     </h:selectOneRadio>

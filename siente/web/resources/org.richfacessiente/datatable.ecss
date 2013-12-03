@@ -98,6 +98,10 @@
     text-align: center;
 }
 
+.rf-dt-shdr-c span{
+    color: #FFFFFF!important;    
+}
+
 .rf-dt-sftr {
     
 }

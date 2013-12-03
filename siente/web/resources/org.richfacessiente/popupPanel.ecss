@@ -48,7 +48,7 @@
     padding: 2px;
     border-top-left-radius: '#{richSkin.borderadiuspanellateral}';
     border-top-right-radius: '#{richSkin.borderadiuspanellateral}';
-    width: 99.5%;
+    width: 99.3%;
     height : 50px;
 }
 
