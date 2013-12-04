@@ -4021,11 +4021,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         int i = 0;
         for (Localidad depto : queryDeptos) {
             SelectItem dep = new SelectItem(depto.getStrcodigolocalidad(), depto.getStrdepartamento());
-            if (i == 0) {
-                codDepartamento = depto.getStrcodigolocalidad();
-            }
+//            if (i == 0) {
+//                codDepartamento = depto.getStrcodigolocalidad();
+//            }
             Departamento[i++] = dep;
         }
+        codDepartamento="0";
         return null;
     }
 
@@ -5411,6 +5412,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
+        codDepartamento= "0";
+        llenarMunicipio();
         if (Propiedad.getValor("versioncobra").equals("cobracali")
                 || Propiedad.getValor("versioncobra").equals("cobramanizales")) {
 

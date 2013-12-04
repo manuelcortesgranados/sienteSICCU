@@ -203,7 +203,8 @@
                                                 <h:outputLabel  styleClass="ikont-hol-deptopry"   id="lbldepartamentoProyecto"  value="#{var.departamentoProyecto}" for="combodepartamentoproyecto">
                                                 </h:outputLabel>
 
-                                                <h:selectOneMenu id="combodepartamentoproyecto" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Supervisor$IngresarNuevaObra.codDepartamento}" >
+                                                <h:selectOneMenu id="combodepartamentoproyecto"  disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Supervisor$IngresarNuevaObra.codDepartamento}" >
+                                                    <f:selectItem itemValue="0" itemLabel="Seleccione"/>
                                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.departamento}" />
                                                     <a4j:ajax execute="@this, combodepartamentoproyecto" event="valueChange" listener="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
                                                               render="panelmunipioproyecto" />
@@ -217,6 +218,7 @@
                                                 <h:outputLabel  styleClass="ikont-hol-munipry"   id="lblmunicipioProyecto"  value="#{var.municipioProyecto}" for="combomunicipioproyecto">
                                                 </h:outputLabel>
                                                 <h:selectOneMenu id="combomunicipioproyecto" value="#{Supervisor$IngresarNuevaObra.codMunicipio}">
+                                                    <f:selectItem itemValue="0" itemLabel="Seleccione"/>
                                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.municipio}"/>
                                                 </h:selectOneMenu>
                                             </h:panelGrid>

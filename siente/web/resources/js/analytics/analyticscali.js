@@ -9,6 +9,6 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-17795889-29', 'interkont.co');
-  ga('send', 'pageview');
+  ga('send', 'pageview');  
 
 
