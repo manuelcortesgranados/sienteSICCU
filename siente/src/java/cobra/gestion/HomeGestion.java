@@ -1146,7 +1146,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 //                    "</td></tr>";
                 StringBuilder descripcion = new StringBuilder();
                 String version = bundle.getString("versioncobra");
-                String host = bundle.getString("ipserver");//"74.207.234.207";
                 descripcion.append("<div class=\"info_window\"><center><font color=\"#266085\"><b class=\"title_info_window\">");
                 String nombre = obra.getStrnombreobra().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " ");
 
@@ -1160,11 +1159,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<br>");
 
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
-                    descripcion.append("<img style=\"box-shadow: 2px 2px 5px #999;\" height=\"80\" width=\"120\" src=\"" + host + version);
+                    descripcion.append("<img style=\"box-shadow: 2px 2px 5px #999;\" height=\"80\" width=\"120\" src=\"/" + version);
                     descripcion.append(obra.getStrimagenobra());
                     descripcion.append("\">");
                 } else {
-                    descripcion.append("<img style=\"box-shadow: 2px 2px 5px #999;\" height=\"90\" width=\"120\" src=\"" + host + version + "/resources/imgs/noimagen_mapa.png\">");
+                    descripcion.append("<img style=\"box-shadow: 2px 2px 5px #999;\" height=\"90\" width=\"120\" src=\"/" + version + "/resources/imgs/noimagen_mapa.png\">");
                 }
 
                 descripcion.append("</center><br><b>" + bundle.getString("costodelaobra") + " </b>");
@@ -2422,7 +2421,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                 StringBuilder descripcion = new StringBuilder();
                 String version = bundle.getString("versioncobra");
-                String host = bundle.getString("ipserver");
 
                 Double asi_va = Double.parseDouble(porcentaje.setScale(2, RoundingMode.HALF_UP).toString());
                 //asi_va = (asi_va * 70) / 100;
@@ -2449,13 +2447,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                         _count++;
                         if (_count == 1) {
                             table_seguidores += "<tr>";
-                            table_seguidores += "<td><img src=\"" + host + version + _url_img + "\" /></td>";
+                            table_seguidores += "<td><img src=\"/" + version + _url_img + "\" /></td>";
                         } else if (_count == 3) {
-                            table_seguidores += "<td><img src=\"" + host + version + _url_img + "\" /></td>";
+                            table_seguidores += "<td><img src=\"/" + version + _url_img + "\" /></td>";
                             table_seguidores += "</tr>";
                             _count = 0;
                         } else {
-                            table_seguidores += "<td><img src=\"" + host + version + _url_img + "\" /></td>";
+                            table_seguidores += "<td><img src=\"/" + version + _url_img + "\" /></td>";
                         }
                     }
                     table_seguidores += "</table>";
@@ -2523,7 +2521,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<tr>");
                 descripcion.append("<td>");
                 if (obra.getSemaforo() != null && obra.getSemaforo().compareTo("") != 0) {
-                    descripcion.append("<img width=\"60\" height=\"60\" src=\"" + host + version + obra.getSemaforo() + "\" />");
+                    descripcion.append("<img width=\"60\" height=\"60\" src=\"/" + version + obra.getSemaforo() + "\" />");
                 }
                 descripcion.append("</td>");
                 descripcion.append("<td>");
@@ -2646,11 +2644,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<tr>");
                 descripcion.append("<td>");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
-                    descripcion.append("<img class=\"table-img-content\" src=\"").append(host).append(version);
+                    descripcion.append("<img class=\"table-img-content\" src=\"/").append(version);
                     descripcion.append(obra.getStrimagenobra());
                     descripcion.append("\">");
                 } else {
-                    descripcion.append("<img class=\"table-img-content\" src=\"").append(host).append(version).append("/resources/imgs/noimagen_mapa.png\">");
+                    descripcion.append("<img class=\"table-img-content\" src=\"/").append(version).append("/resources/imgs/noimagen_mapa.png\">");
                 }
                 descripcion.append("</td>");
                 descripcion.append("</tr>");
@@ -2759,7 +2757,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                 StringBuilder descripcion = new StringBuilder();
                 String version = bundle.getString("versioncobra");
-                String host = bundle.getString("ipserver");
 
                 Double asi_va = Double.parseDouble(porcentaje.setScale(2, RoundingMode.HALF_UP).toString());
 
@@ -2902,11 +2899,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna\">");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
-                    descripcion.append("<img class=\"imgvalla\" src=\"").append(host).append(version);
+                    descripcion.append("<img class=\"imgvalla\" src=\"/").append(version);
                     descripcion.append(obra.getStrimagenobra());
                     descripcion.append("\">");
                 } else {
-                    descripcion.append("<img class=\"imgvalla\" src=\"").append(host).append(version).append("/resources/imgs/noimagen_mapa.png\">");
+                    descripcion.append("<img class=\"imgvalla\" src=\"/").append(version).append("/resources/imgs/noimagen_mapa.png\">");
                 }
                 descripcion.append(" </div>");
                 descripcion.append("</p>");
