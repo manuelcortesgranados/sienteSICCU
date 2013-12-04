@@ -221,6 +221,9 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
             if (estilo.isDegradadohorizontal()) {
                 script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                 script.append(".gradientOrientation = 'horizontal';\n");
+            }else{
+                script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                script.append(".gradientOrientation = 'vertical';\n");
             }
 
             if (estilo.isAvancefisico()) {

@@ -233,6 +233,8 @@
                                     <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.intidcontrato}" />
                                 </h:commandLink>
                             </h:panelGrid>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="Objeto : "/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.textobjeto}"/>
                             <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
                             <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
                             <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechaini}:"/>
