@@ -2000,18 +2000,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtrosSeparacion() {
-        filtro.setPalabraclavefiltro("");
+       filtro.setPalabraclavefiltro("");
         primeroListProyectos();
-        return null;
+        return "filtronuevo";
     }
 
-    public String primeroListProyectos() {
+    public String primeroListProyectos() {        
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
         filtro.setIsciu(getSessionBeanCobra().getCobraService().isCiu());
-
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
@@ -2255,7 +2254,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         } else {
             cantidad = 5 - listComentarioObra.size();
         }
-        listaNovedadesFiltradas = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuarioFiltrada(getSessionBeanCobra().getUsuarioObra(), cantidad, filtro.isEsadministrador());
+        //listaNovedadesFiltradas = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuarioFiltrada(getSessionBeanCobra().getUsuarioObra(), cantidad, filtro.isEsadministrador());
         if (listaNovedadesFiltradas.isEmpty()) {
 
             if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
