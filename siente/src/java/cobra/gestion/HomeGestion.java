@@ -2254,7 +2254,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         } else {
             cantidad = 5 - listComentarioObra.size();
         }
-        //listaNovedadesFiltradas = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuarioFiltrada(getSessionBeanCobra().getUsuarioObra(), cantidad, filtro.isEsadministrador());
+        listaNovedadesFiltradas = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuarioFiltrada(getSessionBeanCobra().getUsuarioObra(), cantidad, filtro.isEsadministrador());
         if (listaNovedadesFiltradas.isEmpty()) {
 
             if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
