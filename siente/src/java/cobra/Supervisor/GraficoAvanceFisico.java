@@ -66,9 +66,9 @@ public class GraficoAvanceFisico implements Serializable{
         grafico.getEstilo().setColorTexto(Propiedad.getValor("graavafiscolortexto"));
         grafico.getEstilo().setTipoTexto(Propiedad.getValor("graavafisfamilytexto"));
         grafico.getEstilo().setTamanoTexto(Propiedad.getValor("graavafissizetexto"));
-        grafico.getEstilo().setTipoPila("none");
+        grafico.getEstilo().setTipoPila(Propiedad.getValor("graavafisstacktype"));
         grafico.getEstilo().setRotate(Boolean.valueOf(Propiedad.getValor("graavafisrotate")));
-        grafico.getEstilo().setGridalpha("0");
+        grafico.getEstilo().setGridalpha(Propiedad.getValor("graavafisfondogrid"));
         grafico.getEstilo().setColorlineasplano(Propiedad.getValor("graavafisbgfondo"));
         grafico.getEstilo().setDegradadohorizontal(Boolean.valueOf(Propiedad.getValor("graavafisdegradadohorizontal")));
         
@@ -78,7 +78,7 @@ public class GraficoAvanceFisico implements Serializable{
         EstiloGrafico estiloAvance = new EstiloGrafico();
         estiloAvance.setColorSerie(Propiedad.getValor("graevuproyecolor1"));
         estiloAvance.setColorSerie2(Propiedad.getValor("graevuproyecolor2"));
-        estiloAvance.setColorTexto("#000");
+        estiloAvance.setColorTexto(Propiedad.getValor("graavafiscolortextocolumna"));
         estiloAvance.setPorcentaje(true);
         conjuntoDatosAvanceFisico.setEstilo(estiloAvance);
 
