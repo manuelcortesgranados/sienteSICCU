@@ -61,14 +61,15 @@ public class GraficoAvanceFisico implements Serializable{
         grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setTresD(false);
         grafico.getEstilo().setOcultarEjeY(true);
-        grafico.getEstilo().setAvancefisico(true);
+        grafico.getEstilo().setAvancefisicosiente(Boolean.valueOf(Propiedad.getValor("graavafissiente")));
+        grafico.getEstilo().setAvancefisicozoom(Boolean.valueOf(Propiedad.getValor("graavafiszoom")));
         grafico.getEstilo().setColorTexto(Propiedad.getValor("graavafiscolortexto"));
         grafico.getEstilo().setTipoTexto(Propiedad.getValor("graavafisfamilytexto"));
         grafico.getEstilo().setTamanoTexto(Propiedad.getValor("graavafissizetexto"));
         grafico.getEstilo().setTipoPila("none");
         grafico.getEstilo().setRotate(Boolean.valueOf(Propiedad.getValor("graavafisrotate")));
         grafico.getEstilo().setGridalpha("0");
-        grafico.getEstilo().setColorlineasplano("transparent");
+        grafico.getEstilo().setColorlineasplano(Propiedad.getValor("graavafisbgfondo"));
         grafico.getEstilo().setDegradadohorizontal(Boolean.valueOf(Propiedad.getValor("graavafisdegradadohorizontal")));
         
 

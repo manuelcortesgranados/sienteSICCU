@@ -27,7 +27,8 @@ public class EstiloGrafico {
     private boolean animado;
     private boolean rotate;
     private boolean degradadohorizontal = false;
-    private boolean avancefisico = false;
+    private boolean avancefisicosiente = false;
+    private boolean avancefisicozoom = false;
     private boolean evolucionproyectociudadano = false;
     private boolean uselinealegenda = false;
     private boolean zoomcursor = true;
@@ -41,6 +42,22 @@ public class EstiloGrafico {
     private String colortextocursor = "";
     private String colorfondoocursor = "";
     private String rutaimages = "";
+
+    public boolean isAvancefisicosiente() {
+        return avancefisicosiente;
+    }
+
+    public void setAvancefisicosiente(boolean avancefisicosiente) {
+        this.avancefisicosiente = avancefisicosiente;
+    }
+
+    public boolean isAvancefisicozoom() {
+        return avancefisicozoom;
+    }
+
+    public void setAvancefisicozoom(boolean avancefisicozoom) {
+        this.avancefisicozoom = avancefisicozoom;
+    }
 
     public String getRutaimages() {
         return rutaimages;
@@ -104,14 +121,6 @@ public class EstiloGrafico {
 
     public void setNumcolumnaslegenda(String numcolumnaslegenda) {
         this.numcolumnaslegenda = numcolumnaslegenda;
-    }
-
-    public boolean isAvancefisico() {
-        return avancefisico;
-    }
-
-    public void setAvancefisico(boolean avancefisico) {
-        this.avancefisico = avancefisico;
     }
 
     public String getColorlineasplano() {

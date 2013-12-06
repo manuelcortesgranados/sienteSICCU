@@ -107,10 +107,13 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         if (tituloEjeX != null) {
             script.append("categoryAxis.title = '").append(tituloEjeX).append("';\n");
         }
-        if (estilo.isAvancefisico()) {
+        if (estilo.isAvancefisicozoom()) {
             script.append("categoryAxis.labelsEnabled = false;\n");
             script.append("categoryAxis.gridAlpha = 0;\n");
             script.append("categoryAxis.axisAlpha = 0;\n");
+        }
+        if (estilo.isAvancefisicosiente()) {
+            script.append("categoryAxis.gridAlpha = 0.15;\n");
         }
         if (estilo.isEvolucionproyectociudadano()) {
             script.append("categoryAxis.gridPosition = 'start';\n\n");
@@ -136,7 +139,7 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
         }
 
         if (valorYMaximo != null) {
-            if (!estilo.isAvancefisico()) {
+            if (!estilo.isAvancefisicozoom()) {
                 script.append("valueAxis.maximum = '").append(valorYMaximo).append("';\n");
             } else {
                 script.append("valueAxis.minimum = 0;\n");
@@ -226,13 +229,13 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
                 script.append(".gradientOrientation = 'vertical';\n");
             }
 
-            if (estilo.isAvancefisico()) {
+            if (estilo.isAvancefisicozoom()) {
                 script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                 script.append(".labelPosition = 'bottom';\n");
             }
 
             if (estilo.isPorcentaje()) {
-                if (estilo.isAvancefisico()) {
+                if (estilo.isAvancefisicozoom()) {
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
                     script.append(".labelText = '[[valorX]]");
                     script.append(" : [[");

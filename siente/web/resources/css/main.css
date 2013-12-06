@@ -1158,7 +1158,7 @@ body {
     margin-bottom: 0;
 }
 
-.ikont-hot-gestionar, .ikont-hot-administrador{
+.ikont-hot-gestionar, .ikont-hot-administrador, .ikont-hot-proyectos{
     background-image: url(../imgs/bt_gestionar.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
