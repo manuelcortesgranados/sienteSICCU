@@ -2000,18 +2000,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtrosSeparacion() {
-        filtro.setPalabraclavefiltro("");
+       filtro.setPalabraclavefiltro("");
         primeroListProyectos();
-        return null;
+        return "filtronuevo";
     }
 
-    public String primeroListProyectos() {
+    public String primeroListProyectos() {        
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
         filtro.setIsciu(getSessionBeanCobra().getCobraService().isCiu());
-
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
