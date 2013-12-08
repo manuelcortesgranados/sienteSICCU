@@ -62,7 +62,6 @@ import cobra.CargadorArchivosWeb;
 import cobra.Cobra.Download;
 import cobra.FiltroAvanzadoContrato;
 import cobra.FiltroAvanzadoObra;
-import cobra.Geocodeimplementacion;
 import cobra.Marcador;
 import cobra.SessionBeanCobra;
 import cobra.gestion.HomeGestion;
@@ -97,6 +96,8 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
+import com.googlecode.mashups.services.factory.GenericServicesFactory;
+import com.googlecode.mashups.services.generic.api.Location;
 
 /**
  * <p>
@@ -1500,8 +1501,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public List<Vereda> getListaVeredas() {
         return listaVeredas;
     }
-    // </editor-fold>
-    private Geocodeimplementacion geocode = new Geocodeimplementacion();
+    // </editor-fold>    
 
     public List<TerceroEntidadLista> getTemp() {
         return temp;
@@ -1509,15 +1509,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public void setTemp(List<TerceroEntidadLista> temp) {
         this.temp = temp;
-    }
-
-    public Geocodeimplementacion getGeocode() {
-        return geocode;
-    }
-
-    public void setGeocode(Geocodeimplementacion geocode) {
-        this.geocode = geocode;
-    }
+    }    
 
     public UIDataTable getTablaObrasPadres() {
         return tablaObrasPadres;
@@ -1812,8 +1804,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     if (fechaFinProyecto.before(fechaInicioConvenio)) {
                         FacesUtils.addErrorMessage(bundle.getString("lafechafinproyectomenorconvenio"));
                     }
-                    
-                    if((!fechaInicioProyecto.before(fechaInicioConvenio)) && (!fechaInicioProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.before(fechaInicioConvenio))){
+
+                    if ((!fechaInicioProyecto.before(fechaInicioConvenio)) && (!fechaInicioProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.after(fechaFinConvenio)) && (!fechaFinProyecto.before(fechaInicioConvenio))) {
                         fechasvalidas = true;
                     }
                 }
@@ -2233,7 +2225,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 ArchivoPath = theApplicationsServletContext.getRealPath("/resources/Plantilla/" + bundle.getString("plantillaobraxlsx"));
             }
 
-
             File archivo = new File(ArchivoPath);
 
             if (archivo.exists()) {
@@ -2308,7 +2299,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                 cell1.setCellValue("");
                             }
                         }
-
 
                     }
 
@@ -2676,9 +2666,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                                 cont.setObra(obranueva);
                                 cont.setNumvalorrelacion(obranueva.getNumvaltotobra());
                                 obranueva.getRelacioncontratoobras().add(cont);
-                    } else {
-                                FacesUtils.addErrorMessage("El convenio solo posee disponibilidad de recursos de $"+dispo);
-                                setMensaje("El convenio solo posee disponibilidad de recursos de $"+dispo);
+                            } else {
+                                FacesUtils.addErrorMessage("El convenio solo posee disponibilidad de recursos de $" + dispo);
+                                setMensaje("El convenio solo posee disponibilidad de recursos de $" + dispo);
                                 return null;
                             }
 
@@ -2790,8 +2780,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     guardarImagenesaobra(RutasWebArchivos.IMGS_OBRA);
                     getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), 1);
                     //Validamos si el proyecto es de marcológico para insertar los avances
-                    if(isProyectoestrategia())
-                    {
+                    if (isProyectoestrategia()) {
                         crearPeriodosAvanceMarcoLogico();
                     }
                     FacesUtils.addInfoMessage(bundle.getString("hasidoanadidaconexito"));
@@ -2825,15 +2814,16 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         /**
          * Verificando si pertenece a estrategia
          */
-        if(Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("aplicamarcologico"))){
-            
-        if (obranueva.getContrato() != null) {
-            if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obranueva.getIntcodigoobra()) != null) {
-                setProyectoestrategia(true);
-                disableCronograma = 1;
-                llenarTiposCosto();
+        if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("aplicamarcologico"))) {
+
+            if (obranueva.getContrato() != null) {
+                if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obranueva.getIntcodigoobra()) != null) {
+                    setProyectoestrategia(true);
+                    disableCronograma = 1;
+                    llenarTiposCosto();
+                }
             }
-        }}
+        }
 
         setObranueva(obra);
         getObranueva().setNumvaldeclarado(BigDecimal.ZERO);
@@ -3704,7 +3694,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 if (fechasvalidas) {
                     obranueva.setTipoestadobra(new Tipoestadobra(0));
                     guardarObraTemporal();
-                }else{
+                } else{
                     fechaCambio();
                     return "datosbasicosnuevoproyecto";
                 }
@@ -4026,7 +4016,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //            }
             Departamento[i++] = dep;
         }
-        codDepartamento="0";
+        codDepartamento = "0";
         return null;
     }
 
@@ -4634,19 +4624,19 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         verConfirmar = false;
         verNuevo = false;
         int i = listamarcadores.size();
-//        try {
-//            String lat = listamarcadores.get(i - 1).getLatitude();
-//            String longi = listamarcadores.get(i - 1).getLongitude();  
-//            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(lat,longi);
-//            listamarcadores.get(i - 1).setAddress(placeMarkNew.getAddress().toString());
-//            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
-//        } catch (Exception ex) {
-//            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
-//            listamarcadores.get(i - 1).setAddress("Faltante");
-//            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
-//        }
-        listamarcadores.get(i - 1).setAddress(getGeocode().obtenerDireccionxLatyLong(listamarcadores.get(i - 1).getLatitude(), listamarcadores.get(i - 1).getLongitude()));
-        listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+        try {
+            String lat = listamarcadores.get(i - 1).getLatitude();
+            String longi = listamarcadores.get(i - 1).getLongitude();  
+            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(lat,longi);
+            listamarcadores.get(i - 1).setAddress(placeMarkNew.getAddress().toString());
+            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+        } catch (Exception ex) {
+            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
+            listamarcadores.get(i - 1).setAddress("Faltante");
+            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+        }
+//        listamarcadores.get(i - 1).setAddress(getGeocode().obtenerDireccionxLatyLong(listamarcadores.get(i - 1).getLatitude(), listamarcadores.get(i - 1).getLongitude()));
+//        listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
 
         listamarcadores.get(i - 1).setDraggable("false");
         marli.add(listamarcadores.get(i - 1));
@@ -4683,7 +4673,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
 //        latNewmanu = nuevo.getLatitude();
 //        longNewmanu = nuevo.getLongitude().replaceAll(" ", "");
-
         latNewmanu = posmarker.getLatitude();
         longNewmanu = posmarker.getLongitude();
         try {
@@ -5134,10 +5123,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 obranueva.setNumvlrsumahijos(BigDecimal.ZERO);
                 validarCostos();
                 if (obranueva.getNumvaltotobra().compareTo(BigDecimal.ZERO) > 0) {
-            validacion.setPresupuesto(true);
+                    validacion.setPresupuesto(true);
                 } else {
                     validacion.setPresupuesto(false);
-        }
+                }
             } else {
 
                 validacion.setPresupuesto(true);
@@ -5412,7 +5401,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
-        codDepartamento= "0";
+        codDepartamento = "0";
         llenarMunicipio();
         if (Propiedad.getValor("versioncobra").equals("cobracali")
                 || Propiedad.getValor("versioncobra").equals("cobramanizales")) {
@@ -5628,59 +5617,88 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     public void obtenerPuntopordireccion() {
-        Marcador marke = geocode.obtenerMarcadorporDireccion(address);
-        if (marke != null) {
-            marke.setDraggable("true");
-            marke.setTipo(tiposelec);
-            marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
-            listamarcadores.add(marke);
-            redibujarmapa = false;
-            verConfirmar = true;
-        } else {
-            //mensaje no encontro con la direccion suministrada
+        //Marcador marke = geocode.obtenerMarcadorporDireccion(address);
+       
+        try {
+            Location loc=GenericServicesFactory.getLocationService().getLocationFromAddress(address);
+            System.out.println("loc = " + loc.getLatitude());
+            System.out.println("loc long = " + loc.getLongitude());
+            if(loc!=null)
+            {
+                 Marcador marke = new Marcador();
+                 marke.setDraggable("true");
+                marke.setTipo(tiposelec);
+                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
+                marke.setLongitude(loc.getLongitude().toString());
+                marke.setLatitude(loc.getLatitude().toString());
+                listamarcadores.add(marke);
+                redibujarmapa = false;
+                verConfirmar = true;
+            }
+            else {
+                //mensaje no encontro con la direccion suministrada
+                address = "";
+                verConfirmar = false;
+                FacesUtils.addInfoMessage("La búsqueda no arrojó ningun resultado");
+            }
+//            if (marke != null) {
+//                marke.setDraggable("true");
+//                marke.setTipo(tiposelec);
+//                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
+//                listamarcadores.add(marke);
+//                redibujarmapa = false;
+//                verConfirmar = true;
+//            } else {
+//                //mensaje no encontro con la direccion suministrada
+//                address = "";
+//                verConfirmar = false;
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             address = "";
             verConfirmar = false;
+            FacesUtils.addInfoMessage("La búsqueda no arrojó ningun resultado");
         }
+
     }
-    
+
     /**
-     * Método para verificar si el proyecto pertenece a una estrategia, y verficar si posee marcos logicos asociados
-     * y verificar si posee indicadores asociados a los marcos logicos crear los avances planificacion
+     * Método para verificar si el proyecto pertenece a una estrategia, y
+     * verficar si posee marcos logicos asociados y verificar si posee
+     * indicadores asociados a los marcos logicos crear los avances
+     * planificacion
      */
     private boolean tieneAvancesPlanificados() {
-        List<Avanceplanificacionrelacionmarcologicoindicador> listAvancPlani = getSessionBeanCobra().getMarcoLogicoService().encontrarAvancePlanificadosByObra(getObranueva().getIntcodigoobra()); 
-            
-        if(listAvancPlani.isEmpty()) {
+        List<Avanceplanificacionrelacionmarcologicoindicador> listAvancPlani = getSessionBeanCobra().getMarcoLogicoService().encontrarAvancePlanificadosByObra(getObranueva().getIntcodigoobra());
+
+        if (listAvancPlani.isEmpty()) {
             return false;
         } else {
             return true;
-}
+        }
     }
-    
-    public void crearPeriodosAvanceMarcoLogico()
-    {
-        List<Relacionmarcologicoindicador> lisrel= getSessionBeanCobra().getMarcoLogicoService().encontrarRelMarcoIndXcodigoObra(getObranueva().getIntcodigoobra());
-        
-        
-        if(tieneAvancesPlanificados() != true){
-            
-             for (Relacionmarcologicoindicador relac : lisrel) {
-            
-                 
-            int per = 1;
-            switch (relac.getIndicador().getFrecuenciaperiocidad().getIntidfrecuenciaperiocidad()) {
-                case 4:
-                    per = 30;
-                    break;
-                case 5:
-                    per = 60;
-                    break;
-                case 6:
-                    per = 90;
-                    break;
 
-            }           
-            
+    public void crearPeriodosAvanceMarcoLogico() {
+        List<Relacionmarcologicoindicador> lisrel = getSessionBeanCobra().getMarcoLogicoService().encontrarRelMarcoIndXcodigoObra(getObranueva().getIntcodigoobra());
+
+        if (tieneAvancesPlanificados() != true) {
+
+            for (Relacionmarcologicoindicador relac : lisrel) {
+
+                int per = 1;
+                switch (relac.getIndicador().getFrecuenciaperiocidad().getIntidfrecuenciaperiocidad()) {
+                    case 4:
+                        per = 30;
+                        break;
+                    case 5:
+                        per = 60;
+                        break;
+                    case 6:
+                        per = 90;
+                        break;
+
+                }
+
                 Calendar fecha = Calendar.getInstance();
                 fecha.setTime(getObranueva().getDatefeciniobra());
                 while (fecha.getTime().compareTo(getObranueva().getDatefecfinobra()) <= 0) {
@@ -5693,15 +5711,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         avanceplan.setDatefechaplanificada(getObranueva().getDatefecfinobra());
                     }
                     getSessionBeanCobra().getMarcoLogicoService().guardarAvancesByAsociaciones(avanceplan);
-                    
-                 
-                    }
-           
+
+                }
+
+            }
+
         }
-            
-            
-        }
-        
-       
+
     }
 }
