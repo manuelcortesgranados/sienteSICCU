@@ -5399,7 +5399,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         modificartipocontrato = true;
         habiitarmodificartipocontrato = false;
-
+        getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(false);
         return "consultarContratoConvenio";
     }
 
@@ -5439,6 +5439,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (getContrato().getTercero().getIntcodigo() != -1) {
             primeroDetcontratoContratista();
         }
+        getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(true);
+        
         return "consultarContratoConvenio";
     }
 
