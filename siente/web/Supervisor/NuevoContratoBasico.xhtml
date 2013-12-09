@@ -220,15 +220,18 @@
                                 </h:panelGrid>
                                 <h:panelGrid columns="2">
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
-
                                     </h:outputLabel>
-                                    <h:panelGrid columns="2">                                        
-                                        <h:inputText styleClass="ikont-hit-numcont" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" immediate="true"  rendered="#{!var.permisonuevodiseno}">
-                                            <f:validateLongRange minimum="0" />
+                                    <h:panelGrid columns="2">                                               
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="250" 
+                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio}">                                            
+                                            <rich:placeholder  value="contrato "  styleClass="input_num_convenio" />
                                         </h:inputText>
-                                        <h:inputText styleClass="ikont-hit-numcont" required="true" id="txtNumcontString" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" immediate="true"  rendered="#{var.permisonuevodiseno}">                                            
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio}">                                            
+                                            <f:validateLongRange minimum="0" />
+                                            <rich:placeholder  value="convenio "  styleClass="input_num_convenio" />
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
+                                        <rich:message for="txtNumcontString" styleClass="ikont-rm-numcont"  />
                                     </h:panelGrid>
 
                                     <h:outputLabel  styleClass="ikont-hol-lblcombenticontr" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
