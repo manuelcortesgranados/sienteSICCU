@@ -28,8 +28,8 @@
     <ui:define name="body" >
         <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
             <h:panelGroup layout="block" id="pgubicolo" >
-                <a4j:outputPanel id="panelMapa"   >
-                    <h:form id="fr">
+                <!--<a4j:outputPanel id="panelMapa"   >-->
+                    <h:form id="fr" prependId="false">
                         <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                         <rich:collapsiblePanel id="simpleToggleSelecMapa" header="#{var.ubicacionproyectogeogra}"  >
                             <h:panelGroup layout="block" id="gpDirMapa" >
@@ -88,7 +88,7 @@
 
                                                 <h:panelGrid columns="2" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}">
                                                     <h:outputText  styleClass="ikont-hot-txtbus"   id="txtbus"   value="#{var.ingresedir}"/>
-                                                    <h:inputText id="txtAddress" styleClass="ikont-hit-txtAddress"   value="#{Supervisor$IngresarNuevaObra.address}"/>
+                                                    <h:inputText id="txtAddress" styleClass="ikont-hit-txtAddress" size="100"   value="#{Supervisor$IngresarNuevaObra.address}"/>
                                                     <h:panelGroup  layout="block" >
                                                         <h:inputHidden value="#{Supervisor$IngresarNuevaObra.latNewmanu}"/>
                                                         <h:inputHidden id="txtlongitudAdress" value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
@@ -447,7 +447,7 @@
                         <a4j:jsFunction name="nuevoPunto" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}" render="gpDirMapa,layoutLugar" >
                         </a4j:jsFunction>
                     </h:form>
-                </a4j:outputPanel>
+                <!--</a4j:outputPanel>-->
             </h:panelGroup >
         </h:panelGrid>
     </ui:define> 

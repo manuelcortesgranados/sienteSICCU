@@ -4731,7 +4731,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return
      */
-    public String buscarContratista() {
+    public String buscarContratista() {        
         aplicafiltro = false;
         if (nombre.length() != 0) {
             //   listaContratista.clear();
@@ -5399,7 +5399,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         modificartipocontrato = true;
         habiitarmodificartipocontrato = false;
-
+        getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(false);
         return "consultarContratoConvenio";
     }
 
@@ -5439,6 +5439,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (getContrato().getTercero().getIntcodigo() != -1) {
             primeroDetcontratoContratista();
         }
+        getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(true);
+        
         return "consultarContratoConvenio";
     }
 
