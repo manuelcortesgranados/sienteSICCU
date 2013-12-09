@@ -4984,3 +4984,8 @@ label.textlittle2 {
 .ikont-rp-murociudadano .rf-p-b{
     border: solid 0px transparent;
 }
+
+.ikont-rp-menulateraladminis span{
+    font-family: Verdana, Arial, Helvetica, sans-serif !important;
+    font-size: 12px !important;
+}

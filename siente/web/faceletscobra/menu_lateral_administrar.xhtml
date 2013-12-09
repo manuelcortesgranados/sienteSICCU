@@ -120,69 +120,40 @@
 
     <interkont:spacer height="5px"/>
 
-    <rich:panel header="#{var.datosgenerales}" bodyClass="rich-panel-grid-body" rendered="#{!SessionBeanCobra.cobraService.ciu}">
-        <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
-            <interkont:spacer height="5"/>
-            <interkont:spacer height="5"/>
-            <interkont:spacer/><interkont:spacer />
-            <interkont:spacer width="5"/>
+    <rich:panel header="#{var.datosgenerales}" bodyClass="rich-panel-grid-body ikont-rp-menulateraladminis" rendered="#{!SessionBeanCobra.cobraService.ciu}">
+        <h:panelGrid columns="2"  cellpadding="1px"  >
             <h:outputText  styleClass="ikont-hot-estadodetalle"   id="stEstadoDetalle"  value="#{var.estado}"/>
-            <interkont:spacer width="10"/>
-            <h:outputText  styleClass="ikont-hot-stestado"   id="stEstado" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+            <h:outputText  styleClass=""   id="stEstado" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                 <f:convertNumber  maxFractionDigits="2" pattern="###.## %"/>
             </h:outputText>
-            <interkont:spacer width="5"/>            
             <h:outputText id="stContratistaDetalle" styleClass="ikont-hot-contratista"  value="#{var.houtcontratis}" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}"/>
             <h:outputText id="stSocioregionalDetalle"  styleClass="ikont-hot-contratista" value="#{var.houtsocioregional}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}"/>
-            
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-contratantedetalle"   id="stContratanteDetalle" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
-
-            <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-interventordatalle"   id="stInterventorDetalle"  value="#{var.houtsupervisor}"/>
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-interventordeta "   id="stInterventorDeta" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}"/>
-
-            <interkont:spacer width="5"/>
              <h:outputText styleClass="ikont-hot-numcontratodetalle" id="stNumContratoDetalle"  value="#{var.houtnrocontrato}" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}"/>
             <h:outputText  styleClass="ikont-hot-numcontratodetalle" id="stNumConvenioDetalle"  value="#{var.houtnroconvenio}" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}"/>            
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-numbcontratodeta"   id="stNumContratoDeta" value="#{Supervisor$DetalleObra.idcontratos}"/>
-
-            <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-plazodetalle"   id="stPlazoDetalle"  value="#{var.plazo}"/>
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-plazodeta"   id="stPlazoDeta" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}"/>
-
-            <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-stfechaini"   id="stFecIni"  value="#{var.fechadeinicio}"/>
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-fechainiobra"  value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
             </h:outputText>
-
-            <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-fechadefinilizacion"   id="stFecFin"  value="#{var.fechadefinalizacion}"/>
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-datefechafinobra"  value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
             </h:outputText>
-
-            <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-valordelproyecto"   id="stValorDetalle"  value="#{var.valor} del proyecto"/>
-            <interkont:spacer width="10"/>
             <h:outputText  styleClass="ikont-hot-valortotalproycto"   id="stValorTotalDeta" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                 <f:convertNumber pattern="$#,###"/>
             </h:outputText>
-
             <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
             <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
             <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
             <h:outputText  styleClass="ikont-hot-sectornombre"   value="#{Supervisor$AdministrarObraNew.obra.contrato.tercero.sector.strnombre}" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
-
             <interkont:spacer width="5" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
             <h:outputText  styleClass="ikont-hot-codigosolicitud"   id="stCodigoSolicitud"  value="#{var.totalobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
-
             <interkont:spacer width="10" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
             <h:outputText  styleClass="ikont-hot-stottextcodsol"   id="stOtTextcodsol" value="#{Supervisor$DetalleObra.valorinterventoria +Supervisor$AdministrarObraNew.obra.numvaltotobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}">
                 <f:convertNumber pattern="$#,###"/>
