@@ -4735,9 +4735,9 @@ a.closemodal{
 }
 
 .ikont-hot-stEstado{
-    font-size: 30px;
-    color: #336699;
-    font-weight: bold;    
+    font-size: 30px!important;
+    color: #336699!important;
+    font-weight: bold!important;    
 }
 
 .ikont-hot-veravance{
@@ -4989,3 +4989,4 @@ label.textlittle2 {
     font-family: Verdana, Arial, Helvetica, sans-serif !important;
     font-size: 12px !important;
 }
+
