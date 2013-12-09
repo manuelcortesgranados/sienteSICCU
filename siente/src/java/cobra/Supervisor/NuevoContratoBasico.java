@@ -4731,7 +4731,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return
      */
-    public String buscarContratista() {
+    public String buscarContratista() {        
         aplicafiltro = false;
         if (nombre.length() != 0) {
             //   listaContratista.clear();

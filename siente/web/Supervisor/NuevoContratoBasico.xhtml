@@ -222,8 +222,11 @@
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
 
                                     </h:outputLabel>
-                                    <h:panelGrid columns="2">
-                                        <h:inputText styleClass="ikont-hit-numcont" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" immediate="true" >
+                                    <h:panelGrid columns="2">                                        
+                                        <h:inputText styleClass="ikont-hit-numcont" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" immediate="true"  rendered="#{!var.permisonuevodiseno}">
+                                            <f:validateLongRange minimum="0" />
+                                        </h:inputText>
+                                        <h:inputText styleClass="ikont-hit-numcont" required="true" id="txtNumcontString" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" immediate="true"  rendered="#{var.permisonuevodiseno}">                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
                                     </h:panelGrid>
@@ -250,7 +253,7 @@
                                     </h:panelGroup>
                                     <h:outputText  styleClass="ikont-hot-nombreabre"   id="lblnombre"  value="#{var.nombreabre}:"/>
                                     <h:panelGrid columns="2">
-                                        <h:inputText styleClass="ikont-hit-nomcontconv" required="true" id="txtNomcont" size="55" maxlength="250" value="#{Supervisor$Contrato.contrato.strnombre}"  immediate="true">
+                                        <h:inputText styleClass="ikont-hit-nomcontconv" required="true" id="txtNomcont" size="55" maxlength="255" value="#{Supervisor$Contrato.contrato.strnombre}"  immediate="true">
                                         </h:inputText>
                                         <rich:message for="txtNomcont" styleClass="ikont-rm-nomcont"  />
                                     </h:panelGrid>
@@ -268,12 +271,12 @@
                                         </rich:calendar>
                                         <rich:message for="fecfinContrato" styleClass="ikont-rm-fecfincontrato"  />
                                     </h:panelGrid>
-                                    <h:outputText  styleClass="ikont-hot-duracioncont"   id="lblduracionContrato"  value="#{var.duracioncont} #{Supervisor$Contrato.tipoContCon}:"/>
-                                    <h:panelGroup id="gpDuracion">
-                                        <h:inputText styleClass="ikont-hit-duraciondias" id="txtdurcont" value="#{Supervisor$Contrato.contrato.intduraciondias/30}" size="3" readonly="true" >
+                                    <h:outputText  styleClass="ikont-hot-duracioncont"   id="lblduracionContrato"  value="#{var.duracioncont} #{Supervisor$Contrato.tipoContCon}:" rendered="#{!var.permisonuevodiseno}"/>
+                                    <h:panelGroup id="gpDuracion" rendered="#{!var.permisonuevodiseno}">
+                                        <h:inputText styleClass="ikont-hit-duraciondias" id="txtdurcont" value="#{Supervisor$Contrato.contrato.intduraciondias/30}" size="3" readonly="true" rendered="#{!var.permisonuevodiseno}" >
                                             <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
-                                        <h:outputText  styleClass="ikont-hot-meses" value="#{var.meses}"/>
+                                        <h:outputText  styleClass="ikont-hot-meses" value="#{var.meses}" rendered="#{!var.permisonuevodiseno}"/>
                                     </h:panelGroup>
 
                                     <h:outputText  styleClass="ikont-hot-datefecultprog" id="datefechainiC"  value="#{var.fechaUltProg}:" rendered="false"/>
@@ -297,7 +300,7 @@
                                         <h:inputText styleClass="ikont-hit-textcontratista" id="txtcontratista" size="25" maxlength="250" disabled="true" value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}">
                                         </h:inputText>                                            
                                         <a4j:commandButton styleClass="ikont-acb-buscarcontratista" id="btnBuscarcontratista" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarContratistaContrato}"
-                                                           render="mp-listado-contratistas,tablaContratistas,gpTotalContratistas" execute="@this, mp-listado-contratistas,tablaContratistas"
+                                                           render="gpTotalContratistas" execute="gpTotalContratistas" immediate="true"
                                                            oncomplete="#{rich:component('mp-listado-contratistas')}.show();">                                              
                                         </a4j:commandButton>
                                         <a4j:commandButton styleClass="ikont-acb-crearcontratista" id="btnCrearcontratista" value="#{var.crearcontratista}" 
