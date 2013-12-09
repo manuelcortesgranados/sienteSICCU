@@ -50,17 +50,17 @@ visibleInLegendField	String	Name of the field in chart's dataProvider which hold
         this.nombreDiv=nombreDiv;
         this.descriptionField=descriptionField;
 
-        scriptPie="<script type=\"text/javascript\">var chart;var chartData = [";
+        scriptPie="<script type=\"text/javascript\">var chart;\n\n var chartData = [\n";
         int i=0;
         while(i<listadatos.size())
         {
 
-            scriptPie=scriptPie+"{"+tituloCampo+": \""+listadatos.get(i).getEtiqueta() +"\",";
-            scriptPie=scriptPie+valorCampo+": "+listadatos.get(i).getValor()+", ";
-            scriptPie=scriptPie+"show: true, ";
+            scriptPie=scriptPie+"{\n"+tituloCampo+": \""+listadatos.get(i).getEtiqueta() +"\",\n";
+            scriptPie=scriptPie+valorCampo+": "+listadatos.get(i).getValor()+", \n";
+            scriptPie=scriptPie+"show: true, \n";
 
             scriptPie=scriptPie+descriptionField+": \""+listadatos.get(i).getDescripcion();
-            scriptPie=scriptPie+"\"}";
+            scriptPie=scriptPie+"\"}\n";
 
             i++;
             if(i<listadatos.size())
@@ -68,33 +68,33 @@ visibleInLegendField	String	Name of the field in chart's dataProvider which hold
                 scriptPie=scriptPie+",";
             }
         }
-        scriptPie=scriptPie+"];";
+        scriptPie=scriptPie+"];\n\n";
 
-        scriptPie=scriptPie+"AmCharts.ready(function () {";
-        scriptPie=scriptPie+"var legend = new AmCharts.AmLegend();"
-                + "legend.borderColor = \"black\";legend.align = \"center\";";
+        scriptPie=scriptPie+"AmCharts.ready(function () {\n";
+        scriptPie=scriptPie+"var legend = new AmCharts.AmLegend();\n"
+                + "legend.borderColor = \"black\";\nlegend.align = \"center\";\n\n";
                 //+ "legend.addListener(\"clickLabel\", function (event) {window.location.href = event.dataItem.url;}"
                 //+ ");";
 
-        scriptPie=scriptPie+"chart = new AmCharts.AmPieChart();";
-        scriptPie=scriptPie+"chart.dataProvider = chartData;";
-        scriptPie=scriptPie+"chart.titleField = \""+tituloCampo+"\";";
-        scriptPie=scriptPie+"chart.valueField = \""+valorCampo+"\";";
-        scriptPie=scriptPie+"chart.descriptionField = \""+descriptionField+"\";";
+        scriptPie=scriptPie+" chart = new AmCharts.AmPieChart();\n";
+        scriptPie=scriptPie+"chart.dataProvider = chartData;\n";
+        scriptPie=scriptPie+"chart.titleField = \""+tituloCampo+"\";\n";
+        scriptPie=scriptPie+"chart.valueField = \""+valorCampo+"\";\n";
+        scriptPie=scriptPie+"chart.descriptionField = \""+descriptionField+"\";\n";
 
 
-        scriptPie=scriptPie+"chart.outlineColor = \""+colorLinea+"\";";
-        scriptPie=scriptPie+"chart.outlineAlpha = "+lineaAlpha+";";
-        scriptPie=scriptPie+"chart.outlineThickness = "+puntosLinea+";";
-        scriptPie=scriptPie+"chart.depth3D = "+depth3D+";";
-        scriptPie=scriptPie+"chart.angle = "+angulo+";";
-        scriptPie=scriptPie+"chart.minRadius = "+200+";";
-        scriptPie=scriptPie+"chart.visibleInLegendField = \"show\";";
-         scriptPie=scriptPie+"chart.labelsEnabled = true;";
-         scriptPie=scriptPie+"chart.labelRadius = 5;";
-        scriptPie=scriptPie+"chart.addLegend(legend);";
+        scriptPie=scriptPie+"chart.outlineColor = \""+colorLinea+"\";\n";
+        scriptPie=scriptPie+"chart.outlineAlpha = "+lineaAlpha+";\n";
+        scriptPie=scriptPie+"chart.outlineThickness = "+puntosLinea+";\n";
+        scriptPie=scriptPie+"chart.depth3D = "+depth3D+";\n";
+        scriptPie=scriptPie+"chart.angle = "+angulo+";\n";
+        scriptPie=scriptPie+"chart.minRadius = "+200+";\n";
+        scriptPie=scriptPie+"chart.visibleInLegendField = \"show\";\n";
+         scriptPie=scriptPie+"chart.labelsEnabled = true;\n";
+         scriptPie=scriptPie+"chart.labelRadius = 5;\n";
+        scriptPie=scriptPie+"chart.addLegend(legend);\n\n";
 
-        scriptPie=scriptPie+"chart.write(\""+nombreDiv+"\");});</script>";
+        scriptPie=scriptPie+"chart.write(\""+nombreDiv+"\");\n});\n</script>";
 
 
     }

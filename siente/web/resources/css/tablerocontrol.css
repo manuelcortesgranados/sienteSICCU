@@ -183,7 +183,7 @@
 }
 
 
-.labelPersonasHogares {
+.ikont-hot-personashogares, .ikont-hot-Hogares {
     color:#000033;
     font-size:15px;
 }
@@ -213,4 +213,8 @@
     padding: 0em;
     margin: 0em;
     line-height: 2.55em;
+}
+
+.ikont-rp-bodytablerocontrol2, .ikont-rp-bodytablerocontrol3{
+    height: 300px !important;
 }

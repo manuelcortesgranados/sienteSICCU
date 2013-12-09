@@ -1475,7 +1475,7 @@
                                      columnClasses="pg_valores_financieros_col1,pg_valores_financieros_col2,pg_valores_financieros_col3,pg_valores_financieros_col4">
                             <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom" styleClass="totalwidth">
                                 <div id="sideline"><label class="textlittle2">¿CUÁNTO CUESTA #{vat.textobra9}?</label></div>
-                                <h:panelGrid  styleClass="ikont-hpg-griddetaob4 totalwidth"   >
+                                <h:panelGrid  styleClass="ikont-hpg-griddetaob4 totalwidth"  columnClasses="panelcenter" >
                                     <h:outputText  styleClass="ikont-hot-numvobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                                         <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputText>
@@ -1530,19 +1530,19 @@
 
                             </h:panelGrid>
 
-                            <h:panelGrid    styleClass="ikont-hpg-griddetaob"   >
+                            <h:panelGrid    styleClass="ikont-hpg-griddetaob totalwidth"   >
                                 <div id="sideline"><label class="textlittle2">AVANCE FÍSICO</label></div>
-                                <h:panelGrid columns="2" >
+                                <h:panelGrid columns="1" styleClass="totalwidth">
                                     <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
-                                    <div id="graficoAvanceFisico" style="overflow: hidden;position: relative;width: 150px;height: 180px;">
+                                    <div id="graficoAvanceFisico" style="overflow: hidden;position: relative;width: 100%;height: 180px;">
                                     </div>
 
                                 </h:panelGrid>
 
                             </h:panelGrid>
-                            <h:panelGrid   styleClass="ikont-"   >
-                                <h:panelGrid >
+                            <h:panelGrid   styleClass="ikont- totalwidth"   >
+                                <h:panelGrid  styleClass="totalwidth">
 
                                     <div id="sideline"><label class="textlittle2">TIPO</label></div>
                                 </h:panelGrid>
@@ -1562,7 +1562,7 @@
 
 
                         <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2"  columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2" styleClass="totalwidth">
-                            <h:panelGrid  >
+                            <h:panelGrid  styleClass="totalwidth">
 
                                 <div id="sideline"><label class="textlittle2">¿DÓNDE ESTÁ UBICADO DEL #{var.textobra8}?</label></div>
                                 <interkont:spacer height="5" />

@@ -68,7 +68,7 @@ public class GraficoPieDashboard {
 
         scriptPieDashboard = scriptPieDashboard + "AmCharts.ready(function () {\n";
         scriptPieDashboard = scriptPieDashboard + "var legend = new AmCharts.AmLegend();\n";
-        scriptPieDashboard = scriptPieDashboard + "legend.valueText = \"[[proyectospie]]\";\n";
+        scriptPieDashboard = scriptPieDashboard + "legend.valueText = \"\";\n";
         scriptPieDashboard = scriptPieDashboard + "chart = new AmCharts.AmPieChart();\n";
         scriptPieDashboard = scriptPieDashboard + "chart.dataProvider = chartData;\n";
         scriptPieDashboard = scriptPieDashboard + "chart.titleField = \"" + tituloCampo + "\";\n";
