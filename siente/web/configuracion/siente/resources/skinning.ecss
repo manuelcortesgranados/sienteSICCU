@@ -187,7 +187,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-
     -ms-border-radius: '#{richSkin.borderRadius}';
     border-radius: '#{richSkin.borderRadius}';
     border-color:  '#{richSkin.styleLoginBorderColorButonEntrar}'!important;
-    font-weight: '#{richSkin.styleLoginFontWidthLabelError}';
 }
 
 input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{

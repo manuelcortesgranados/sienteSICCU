@@ -18,8 +18,8 @@
     top: 0px;
     left: 0px;
     background-color: #FFF;
-    opacity: 0.6;
-    filter: 'alpha(opacity=60)';
+    opacity: 0.3;
+    filter: 'alpha(opacity=30)';
 }
 
 .rf-pp-shdw {
