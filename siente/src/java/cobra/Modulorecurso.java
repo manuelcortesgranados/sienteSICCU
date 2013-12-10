@@ -295,6 +295,22 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("btn_editarObjetoContrato")) {
                             renderrecurso.setBtn_editarObjetoContrato(false);
                         }
+                        
+                        if (temprecusro.getRecNmbre().equals("btn_editarEntidadConvenio")) {
+                            renderrecurso.setBtn_editarEntidadConvenio(false);
+                        }
+                        
+                        if (temprecusro.getRecNmbre().equals("btn_editarRecursosPropiosDeConvenio")) {
+                            renderrecurso.setBtn_editarRecursosPropiosDeConvenio(false);
+                        }
+                        
+                        if (temprecusro.getRecNmbre().equals("btn_editarRecursosTercerosDeConvenio")) {
+                            renderrecurso.setBtn_editarRecursosTercerosDeConvenio(false);
+                        }
+                        
+                        if (temprecusro.getRecNmbre().equals("btn_editarRecursosCHDeConvenio")) {
+                            renderrecurso.setBtn_editarRecursosCHDeConvenio(false);
+                        }
                         break;
                     
                     
