@@ -21,10 +21,6 @@
  */
 .rf-fu {
     background: '#{richSkin.generalBackgroundColor}';
-    border-color: '#{richSkin.panelBorderColor}';
-    border-style: solid;
-    border-width: 1px;
-    border-radius: '#{richSkin.panelBorderRadius}';
     width: 400px; /*TODO Remove it*/
 }
 
@@ -36,14 +32,20 @@
     border-width: 1px;
     border-top-left-radius: '#{richSkin.panelBorderRadius}';
     border-top-right-radius: '#{richSkin.panelBorderRadius}';
-    margin-left: 1px;
     margin-top: 1px;
     white-space: nowrap;
 }
 
 .rf-fu-lst {
+    border-color: '#{richSkin.headerBackgroundColor}';
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-left-radius: '#{richSkin.panelBorderRadius}';
+    border-bottom-right-radius: '#{richSkin.panelBorderRadius}';
+    border-top : 0px solid transparent;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color : #F0E7E8;
 }
 
 .rf-fu-cntr-hdn {
@@ -94,6 +96,7 @@
 .rf-fu-btn-cnt-add,.rf-fu-btn-cnt-add-dis,.rf-fu-btn-cnt-upl,.rf-fu-btn-cnt-clr,.rf-fu-itm-lbl,.rf-fu-itm-st,.rf-fu-itm-lnk {
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
+    color : #000!important;
 }
 
 .rf-fu-btn-cnt-add,.rf-fu-btn-cnt-upl,.rf-fu-btn-cnt-clr,.rf-fu-itm-lbl,.rf-fu-itm-st {
@@ -149,7 +152,7 @@
 }
 
 .rf-fu-itm {
-    border-bottom-color: '#{richSkin.panelBorderColor}';
+    border-bottom-color: '#{richSkin.headerBackgroundColor}';
     border-bottom-style: solid;
     border-bottom-width: 1px;
     padding: 12px;
@@ -165,11 +168,42 @@
 }
 
 .rf-fu-itm-rgh {
-    width: 14%;
+    color : #000!important;
+    width: 50px !important;
+    text-align: center !important;
+    line-height: inherit !important;
+    font-size: 10px !important;
+    font-family: "century"!important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px !important; 
+    border: solid 1px #F6A502 !important;
+    padding: 5px;
+}
+
+.rf-fu-itm-rgh {
+    background: '#{richSkin.styleLoginDegradadoMozButonEntrar}';
+}
+
+.rf-fu-itm-rgh {
+    background: '#{richSkin.styleLoginDegradadoWenkitButonEntrar}';
+}
+
+.rf-fu-itm-rgh {
+    background: '#{richSkin.styleLoginDegradadoMsButonEntrar}';
+}
+
+.rf-fu-itm-rgh {
+    background: '#{richSkin.styleLoginDegradadoOButonEntrar}';
 }
 
 .rf-fu-itm-lnk {
-    color: '#{richSkin.generalLinkColor}';
+    color : #000!important;
+}
+
+.rf-fu-itm-lnk:hover{
+    color : #FFF!important;
 }
 
 .rf-fu-itm-st {

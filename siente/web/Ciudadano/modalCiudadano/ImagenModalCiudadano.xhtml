@@ -47,7 +47,7 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <h:panelGroup layout="block" >
+                                <rich:panel bodyClass="ikont-rp-content-fileup" headerClass="ikont-rp-header-fileup" styleClass="ikont-rp-size-fileup">
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-headermodalimagenciu"   value="#{var.arcsub}"/>
                                     </f:facet>
@@ -64,7 +64,7 @@
                                             </h:panelGrid>
                                         </h:panelGroup>
                                     </rich:dataGrid>
-                                </h:panelGroup>
+                                </rich:panel>
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="layoutImagenDetalleCiu, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"

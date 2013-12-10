@@ -4990,3 +4990,14 @@ label.textlittle2 {
     font-size: 12px !important;
 }
 
+.ikont-rp-content-fileup span{
+    color : #000!important;
+}
+
+.ikont-rp-header-fileup span{
+    color : #FFF!important;
+}
+
+.ikont-rp-size-fileup.rf-p{
+    width: 500px!important;
+}
