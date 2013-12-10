@@ -28,7 +28,7 @@
                 divIngresoUsuario.stop().animate({height: '0px'});
             }
         </script>
-
+        
     </ui:define>
 
     <ui:define name="menu">
@@ -330,10 +330,10 @@
                                 <rich:columnGroup>
                                     <rich:column colspan="7" breakRowBefore="true" >
                                         <center>
-                                            <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="tablObrasVigentes" action="#{HomeGestion.primeroListProyectos}"/>
-                                            <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="tablObrasVigentes" action="#{HomeGestion.anterioresProyectos}"/>
-                                            <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!HomeGestion.verultimosobra}" render="tablObrasVigentes" action="#{HomeGestion.siguienteProyectos}"/>
-                                            <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!HomeGestion.verultimosobra}" render="tablObrasVigentes" action="#{HomeGestion.ultimoProyectos}"/>
+                                            <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.primeroListProyectos}"/>
+                                            <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.anterioresProyectos}"/>
+                                            <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!HomeGestion.verultimosobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.siguienteProyectos}"/>
+                                            <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!HomeGestion.verultimosobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.ultimoProyectos}"/>
                                         </center>
                                     </rich:column>
                                 </rich:columnGroup>
