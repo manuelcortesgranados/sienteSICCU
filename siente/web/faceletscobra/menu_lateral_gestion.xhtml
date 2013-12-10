@@ -7,7 +7,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     >
 
-    <rich:panel header="#{SessionBeanCobra.cobraService.headerNombre}" id="menuInicio" >
+    <rich:panel header="#{SessionBeanCobra.cobraService.headerNombre}" id="menuInicio" styleClass="ikont-rp-menulateralgestion">
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  styleClass="ikont-hpg-menulateralgestion"  >
             <h:panelGrid styleClass="ikont-hpg-nuevoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
                 <h:commandLink  styleClass="ikont-acl-crearnuevoproyecto img-button-panel"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true"   />

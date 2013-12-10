@@ -4988,3 +4988,7 @@ label.textlittle2 {
 .ikont-rp-size-fileup.rf-p{
     width: 500px!important;
 }
+
+.ikont-rp-menulateralgestion{
+    min-width: 280px;
+}
