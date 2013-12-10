@@ -160,7 +160,7 @@
                 </m:map>
             </h:panelGrid>
 
-            <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
+            <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}" styleClass="totalwidth">
 
                 <rich:dataGrid styleClass="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
                                rendered="#{HomeGestion.obrasEncontradas == null or HomeGestion.obrasEncontradas > 0 }">

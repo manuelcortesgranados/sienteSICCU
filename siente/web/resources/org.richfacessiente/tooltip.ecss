@@ -33,12 +33,14 @@
 }
 
 .rf-tt-cntr {
-    background-color: white;
+    background-color: #000;
+    opacity: 0.8;
+    filter: 'alpha(opacity=80)';
+    color : #FFF;
     padding: 7px;
-    border: 1px solid;
-    /*  color: generalFontColor; */
-    border-color: '#{richSkin.tipBorderColor}';
-    border-radius: '#{richSkin.panelBorderRadius}';
+    border: 0px solid;
+    border-color: transparent;
+    border-radius: 3px;
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
     display: inline-block;

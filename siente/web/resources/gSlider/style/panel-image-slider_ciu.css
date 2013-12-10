@@ -62,7 +62,7 @@
 }
 .panel-image-slider_ciu-contents
 {
-    width: 100%;/*100% espacio donde se corre los contenidos*/
+    width: 230px;
     height: 160px; /*160px*/
     float: left;
     position: relative;
