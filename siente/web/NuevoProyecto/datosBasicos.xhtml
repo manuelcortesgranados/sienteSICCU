@@ -52,7 +52,10 @@
                         <h:panelGrid  cellspacing="13" id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-nomabrev"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>
+                                <h:outputLabel  styleClass="ikont-hol-nomabrev"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>                               
+
+                                        <h:outputText  styleClass="ikont-hot-textoinicial"   id="lbllegendnombreproy"  value="#{var.legendnombreabre}"/>
+                                    
                                 <rich:message for="txtNombreAbrev" />
                             </h:panelGroup>
 

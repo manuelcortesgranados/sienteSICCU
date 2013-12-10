@@ -223,12 +223,10 @@
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
                                         <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="250" 
-                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio}">                                            
-                                            <rich:placeholder  value="contrato "  styleClass="input_num_convenio" />
+                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio}">                                                                                        
                                         </h:inputText>
                                         <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio}">                                            
-                                            <f:validateLongRange minimum="0" />
-                                            <rich:placeholder  value="convenio "  styleClass="input_num_convenio" />
+                                            <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
                                         <rich:message for="txtNumcontString" styleClass="ikont-rm-numcont"  />
@@ -254,7 +252,10 @@
                                         <h:inputText styleClass="ikont-hit-numencargo" id="txtNumencar" size="15" maxlength="250" disabled="true" value="#{Supervisor$Contrato.encargofiduciario.intnumencargofiduciario}" >
                                         </h:inputText>
                                     </h:panelGroup>
-                                    <h:outputText  styleClass="ikont-hot-nombreabre"   id="lblnombre"  value="#{var.nombreabre}:"/>
+                                    <h:panelGroup>
+                                        <h:outputText  styleClass="ikont-hot-nombreabre"   id="lblnombre"  value="#{var.nombreabre}:"/>
+                                        <h:outputText  styleClass="ikont-hot-textoinicial"   id="lbllegendnombre"  value="#{var.legendnombreabre}"/>
+                                    </h:panelGroup>
                                     <h:panelGrid columns="2">
                                         <h:inputText styleClass="ikont-hit-nomcontconv" required="true" id="txtNomcont" size="55" maxlength="255" value="#{Supervisor$Contrato.contrato.strnombre}"  immediate="true">
                                         </h:inputText>
