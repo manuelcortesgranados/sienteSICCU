@@ -1852,7 +1852,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtroObrasActionMapaAvanModal() {
-        filtro.setPalabraclave("");
+//        filtro.setPalabraclave("");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
                 filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -2002,6 +2002,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String filtrosSeparacion() {
        filtro.setPalabraclavefiltro("");
         primeroListProyectos();
+        return "filtronuevo";
+    }
+    
+    public String filtrosSeparacionlateral() {
+       filtro.setPalabraclave("");
+        filtroObrasActionMapaAvanModal();
         return "filtronuevo";
     }
 
