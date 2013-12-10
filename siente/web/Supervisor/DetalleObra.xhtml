@@ -260,8 +260,8 @@
                                         </h:panelGrid>
 
                                         <h:panelGrid styleClass="ikont-hpg-griddetaob3" >
-                                            <a4j:commandLink onclick=" #{rich:component('modalImagenvermas')}.show();
-                return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  >
+                                            <a4j:commandLink oncomplete=" #{rich:component('modalImagenvermas')}.show();
+                                                             return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  render="modalImagenvermas" >
                                                 <h:graphicImage  styleClass="ikont-hgi-imgactual" width="169" height="150" value="#{Supervisor$DetalleObra.strimagenActual}" />
                                             </a4j:commandLink>
 
