@@ -24,21 +24,22 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGroup styleClass="ikont-listado-contratoconvenio" layout="block" id="gpTotalCont" >
-            <center>
-                <h:form>
+        <h:form>
+            <h:panelGroup styleClass="ikont-listado-contratoconvenio" layout="block" id="gpTotalCont" >
+                <center>
+
                     <h:panelGrid columns="2" styleClass="ikont-panel-listadoconvenio-buscar" >
                         <h:outputText  styleClass="ikont-hot-consultarnombrecontrato" value="#{var.consultar} #{var.nombre} #{var.contrato}"  rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                         <h:outputText  styleClass="ikont-hot-consultarnombreconvenio" value="#{var.consultar} #{var.nombre} #{var.convenio}"  rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                         <h:panelGroup>
-                            <h:inputText styleClass="ikont-hit-palabraclave" value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" size="20" onfocus="clearText(this)" onblur="clearText(this)" />
-                            <a4j:commandButton styleClass="ikont-acb-buscarproyecto" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarContrato}" render="tabla-listado-contratospad,gpTotalCont"/>
+                            <h:inputText styleClass="ikont-hit-palabraclave" value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" size="20"  />
+                            <a4j:commandButton styleClass="ikont-acb-buscarproyecto" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarContrato}" render="tabla-listado-contratospad,gpTotalCont" execute="gpTotalCont"/>
                         </h:panelGroup>
                     </h:panelGrid>
-                </h:form>
-            </center>
 
-            <h:panelGrid styleClass="ikont-panel-listadoconvenio-consultar" >
+                </center>
+
+                <h:panelGrid styleClass="ikont-panel-listadoconvenio-consultar" >
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
                         <a4j:ajax event="click" render="tabla-listado-contratospa" execute="@this">
@@ -229,6 +230,7 @@
                         </rich:dataTable>
                     </h:panelGroup>             
                 </h:panelGrid>
-        </h:panelGroup>
+            </h:panelGroup>
+        </h:form>
     </rich:popupPanel>
 </ui:composition>

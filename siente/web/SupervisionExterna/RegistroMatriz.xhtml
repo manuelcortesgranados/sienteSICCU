@@ -44,9 +44,10 @@
                         <h:panelGrid id="panelInformacionArchivo" columns="2" columnClasses="panelizquierda, panelizquierda">
                             <h:outputText  styleClass="ikont-"   value="#{var.fechainforme}" />
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarInforme"
-                                           inputSize="20" immediate="true" value="#{Supervision$Externa.supervisionExterna.visita.datefechainforme}">
+                                           inputSize="20" value="#{Supervision$Externa.supervisionExterna.visita.datefechainforme}" required="true" requiredMessage="Fecha Necesaria">
                             </rich:calendar>
-
+                            <interkont:spacer />
+                            <rich:message for="calendarInforme"  />
                             <h:outputText  styleClass="ikont-"   id="txtoutnombreinforme" value="#{var.nombreinforme}" />
                             <h:inputText id="txtinnombreinforme" value="#{Supervision$Externa.supervisionExterna.visita.strnombreinforme}" required="true" requiredMessage="Nombre Necesario" />
                             <interkont:spacer />
@@ -59,10 +60,63 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="2">
-                            <a4j:commandLink id="subirRegistoMat" styleClass="ikont-"   title="#{var.subirarchivos}"
-                                             onclick="#{rich:component('panelUploadArchivoSuper')}.show();
-                                                     return true;" />
+                            <a4j:commandLink id="subirRegistoMat" styleClass="ikont-acl-subirmatrizauditoria subir"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz"
+                                             oncomplete="if (#{empty facesContext.messageList}) #{rich:component('panelUploadArchivoSuper')}.show(); else return false;" />
+                            <a4j:commandLink  styleClass="ikont-acl-limpiarvisitafallida"   value="#{var.limpiarvisita}" action="#{Supervision$Externa.limpiarVisita}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
                         </h:panelGrid>
+                    </rich:panel>
+                    <rich:panel header="#{var.titulovisitasfallidas}" rendered="#{var.versioncobra eq 'zoom'}">
+                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita}"/>
+                        <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
+                                rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
+                                value="#{Supervision$Externa.listavisitasfallidas}"
+                                var="actual" binding="#{Supervision$Externa.tablavisitasfallidas}">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column colspan="5">
+                                        <h:outputText  styleClass="ikont-hot-titulolistavisitasfallidas"   value="#{var.titulolistavisitasfallidas}"  />
+                                    </rich:column>
+                                    <rich:column breakRowBefore="true">
+                                        <h:outputText  styleClass="ikont-hot-titulodatefechainforme"   value="#{var.titulodatefechainforme}"  />
+                                    </rich:column>
+                                    <rich:column  >
+                                        <h:outputText  styleClass="ikont-hot-titulostrnombreinforme"   value="#{var.titulostrnombreinforme}" />
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText  styleClass="ikont-hot-titulodatefecharegistro"   value="#{var.titulodatefecharegistro}"  />
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText  styleClass="ikont-hot-titulocargarvisitafallida"   value="#{var.cargarvisitafallida}"  />
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText  styleClass="ikont-hot-titulodescargarerroresvisitafallida"   value="#{var.generarreporteerroresvisita}"  />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-datefechainforme"   value="#{actual.datefechainforme}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-strnombreinforme"   value="#{actual.strnombreinforme}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}"/>
+                            </rich:column>
+                            <rich:column>
+                                <a4j:commandLink  styleClass="ikont-acl-cargarvisitafallida"   value="#{var.cargarvisitafallida}" action="#{Supervision$Externa.cargarVisitaFallida}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
+                            </rich:column>
+                            <rich:column>
+                                <a4j:commandLink  styleClass="ikont-acl-descargarerroresvisitafallida"   value="#{var.generarreporteerroresvisita}" action="#{Supervision$Externa.generarReporteErroresVisita}" immediate="true" execute="@this"/>
+                            </rich:column>
+                        </rich:dataTable>
+                        <rich:dataScroller for="tablalistavisitasfallidas" maxPages="10">
+                            <f:facet name="first">
+                                <h:outputText  styleClass="ikont-hot-listavisitasfallidasprimero"   value="#{var.primeroCiu}"/>
+                            </f:facet>
+                            <f:facet name="last">
+                                <h:outputText  styleClass="ikont-hot-listavisitasfallidasultimo"   value="#{var.ultimoCiu}"/>
+                            </f:facet>
+                        </rich:dataScroller>
                     </rich:panel>
                 </h:panelGroup>
             </center>
@@ -71,5 +125,6 @@
         <ui:include src="../SupervisionExterna/modal/SubirArchivo.xhtml" />
 
         <ui:include src="../SupervisionExterna/modal/ConfirmarGuardarSupervisor.xhtml" />
+        <ui:include src="../SupervisionExterna/modal/panelResultadosValidacion.xhtml" />
     </ui:define>
 </ui:composition>

@@ -9,11 +9,14 @@ import co.com.interkont.cobra.to.Polizaseguimiento;
 import co.com.interkont.cobra.to.Seguimiento;
 import co.com.interkont.cobra.to.Tipodesarrollo;
 import co.com.interkont.cobra.to.Tipoobra;
+import co.com.interkont.cobra.to.Typeresultadovalidacion;
 import co.com.interkont.cobra.to.Visita;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
 import cobra.CargadorArchivosWeb;
 import cobra.Supervisor.FacesUtils;
+import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
@@ -22,10 +25,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
@@ -74,6 +82,46 @@ public class AdminSupervisionExterna implements Serializable{
     private UIDataTable tablaItemSeguimientoSeleccionado = new UIDataTable();
     public Seguimiento seguimientoSelec = new Seguimiento();
     public int varmostrarBotonexcelMatris = 0;
+    
+    /**
+     * Referencia a la tabla de visitas fallidas
+     */
+    private UIDataTable tablavisitasfallidas = new UIDataTable();
+
+    public UIDataTable getTablavisitasfallidas() {
+        return tablavisitasfallidas;
+    }
+
+    public void setTablavisitasfallidas(UIDataTable tablavisitasfallidas) {
+        this.tablavisitasfallidas = tablavisitasfallidas;
+    }
+    
+    /**
+     * Listado de visitas fallidas para el usuario actual
+     */
+    private List<Visita> listavisitasfallidas;
+
+    public List<Visita> getListavisitasfallidas() {
+        return listavisitasfallidas;
+    }
+
+    public void setListavisitasfallidas(List<Visita> listavisitasfallidas) {
+        this.listavisitasfallidas = listavisitasfallidas;
+    }
+    
+    /**
+     * Lista para almacenar los resultados de la validación de la matriz de 
+     * auditoría
+     */
+    private List<Typeresultadovalidacion> listaresultadosvalidacion;
+
+    public List<Typeresultadovalidacion> getListaresultadosvalidacion() {
+        return listaresultadosvalidacion;
+    }
+
+    public void setListaresultadosvalidacion(List<Typeresultadovalidacion> listaresultadosvalidacion) {
+        this.listaresultadosvalidacion = listaresultadosvalidacion;
+    }
 
     public int getVarmostrarBotonexcelMatris() {
         return varmostrarBotonexcelMatris;
@@ -364,6 +412,7 @@ public class AdminSupervisionExterna implements Serializable{
      */
     public AdminSupervisionExterna() throws IOException {
         registrarMatriz();
+        cargarVisitasAuditoriaFallidasUsuario();
 //        llenarVisitas();
 //        llenarlistadoSeguimientos();
     }
@@ -547,5 +596,73 @@ public class AdminSupervisionExterna implements Serializable{
         getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(subirListado.getArchivos().get(0).getRutaWeb());
         getValidadorSeguimiento().validarCronogramaSeguimiento(getSessionBeanCobra().getSupervisionExternaService().getVisita().getStrurlinforme());
         return null;
+    }
+    
+    /**
+     * Método encargado de cargar la la matriz de auditoría para la fecha 
+     * proporcionada y la ruta de archivo correspondiente, el cual debe esta 
+     * previamente cargado
+     */
+    public void validarMatrizAuditoria() {
+        subirListado.getArchivoWeb().cambiarNombre(null, true);
+        try {
+            subirListado.guardarArchivosTemporales(RutasWebArchivos.MATRIZ_AUDITORIA, true);
+            getSessionBeanCobra().getSupervisionExternaService().getVisita().setDatefecharegistro(new Date());
+            getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(ArchivoWebUtil.obtenerRutaAbsoluta(subirListado.getArchivos().get(0).getRutaWeb()));
+            getSessionBeanCobra().getSupervisionExternaService().getVisita().setJsfUsuarioVisita(getSessionBeanCobra().getUsuarioObra());
+            getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrdescvisita("");
+            listaresultadosvalidacion = getSessionBeanCobra().getCobraService().validarMatrizAuditoria(getSessionBeanCobra().getSupervisionExternaService().getVisita());
+            if (listaresultadosvalidacion.isEmpty()) {
+                FacesUtils.addInfoMessage(Propiedad.getValor("resultadosvalidacionok"));
+            } else {
+                FacesUtils.addErrorMessage(Propiedad.getValor("resultadosvalidacionfallo"));
+            }
+            cargarVisitasAuditoriaFallidasUsuario();
+            limpiarVisita();
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Consulta la visitas de auditoría fallidas, correspondientes al usuario actual del
+     * sistema
+     */
+    public void cargarVisitasAuditoriaFallidasUsuario() {
+        listavisitasfallidas = getSessionBeanCobra().getCobraService().encontrarVisitasAuditoriaUsuario(getSessionBeanCobra().getUsuarioObra().getUsuId(), Visita.ESTADO_FALLO);
+    }
+    
+    /**
+     * Carga la información de la visita fallida seleccionada para que esta sea
+     * ingresada nuevamente mediante el archivo de correspondiente
+     */
+    public void cargarVisitaFallida() {
+        Visita visita = (Visita) tablavisitasfallidas.getRowData();
+        System.out.println("visita = " + visita.getOidvisita());
+        getSessionBeanCobra().getSupervisionExternaService().setVisita(visita);
+        subirListado.borrarDatosSubidos();
+    }
+    
+    /**
+     * Descarga el reporte de errores de visita fallida
+     */
+    public void generarReporteErroresVisita() {
+        Visita visita = (Visita) tablavisitasfallidas.getRowData();
+        System.out.println("visita = " + visita.getOidvisita());
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reporteresultadosvalidacion") + visita.getOidvisita());
+
+        } catch (IOException ex) {
+            Logger.getLogger(AdminSupervisionExterna.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Limpia la información de la visita a ser cargada
+     */
+    public void limpiarVisita() {
+        getSessionBeanCobra().getSupervisionExternaService().setVisita(new Visita());
+        subirListado.borrarDatosSubidos();
     }
 }

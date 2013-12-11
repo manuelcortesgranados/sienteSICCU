@@ -71,6 +71,8 @@ public class RutasWebArchivos {
     
     public static String DOC_MATRIZ="/resources/Documentos/ValidadorE/";
     
+    public static String MATRIZ_AUDITORIA="/resources/Documentos/MatrizAuditoria/";
+    
     /**
      * Constante que corresponde a la ubicación web en la que se almacenan los
      * videos de alimentación de una obra. El parámetro {0} debe reemplazarse por el

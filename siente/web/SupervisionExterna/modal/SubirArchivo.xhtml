@@ -31,7 +31,7 @@
             <h:form id="formSubirSubirArchivoMatriz">
                 <h:panelGroup id="panelGroupSubirArchivoMatriz">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload id="uploadDocAt"
+                        <rich:fileUpload id="uploadDocAtsiente"
                                          acceptedTypes="xls"
                                          addLabel="#{var.adicionar}"
                                          clearAllLabel="#{var.borrartodo}"
@@ -39,13 +39,27 @@
                                          doneLabel="#{var.hecho}" 
                                          fileUploadListener="#{Supervision$Externa.subirListado.listener}"
                                          immediateUpload="true" listHeight="150" 
-                                         maxFilesQuantity="1" uploadLabel="#{var.subir}">
+                                         maxFilesQuantity="1" uploadLabel="#{var.subir}"
+                                         rendered="#{var.versioncobra eq 'siente'}">
+                            <a4j:ajax event="uploadcomplete" render="info_documentoSuper" />
+                        </rich:fileUpload>
+                        
+                        <rich:fileUpload id="uploadDocAtzoom"
+                                         acceptedTypes="csv"
+                                         addLabel="#{var.adicionar}"
+                                         clearAllLabel="#{var.borrartodo}"
+                                         clearLabel="#{var.eliminar}"
+                                         doneLabel="#{var.hecho}" 
+                                         fileUploadListener="#{Supervision$Externa.subirListado.listener}"
+                                         immediateUpload="true" listHeight="150" 
+                                         maxFilesQuantity="1" uploadLabel="#{var.subir}"
+                                         rendered="#{var.versioncobra eq 'zoom'}">
                             <a4j:ajax event="uploadcomplete" render="info_documentoSuper" />
                         </rich:fileUpload>
 
                         <h:panelGroup id="info_documentoSuper">
                             <center>
-                                <rich:panel bodyClass="ikont-rp-content-fileup" headerClass="ikont-rp-header-fileup" styleClass="ikont-rp-size-fileup">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont--hot-arcsub"   value="#{var.arcsub}" />
                                     </f:facet>
@@ -70,14 +84,20 @@
 
                                 <br/>
                                 <a4j:commandButton id="bt_borrarListadoSubido" action="#{Supervision$Externa.cambioListado}"
-                                                   render="info_documentoSuper, uploadDocAt, panelInformacionArchivo"
+                                                   render="info_documentoSuper, uploadDocAtsiente, uploadDocAtzoom, panelInformacionArchivo"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="ikontbt_borrarlistadosubido"    />
-                                <a4j:commandButton value="#{var.aceptar}" id="bt_aceptarListadoSubido"
-                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0}"
+                                <a4j:commandButton value="#{var.aceptar}"
+                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0 and var.versioncobra eq 'siente'}"
                                                    render="panelInformacionArchivo"
                                                    oncomplete="#{rich:component('panelUploadArchivoSuper')}.hide();"
                                                     action="#{Supervision$Externa.subirListadoSeg()}" />
+                                <a4j:commandButton value="#{var.aceptar}"
+                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0 and var.versioncobra eq 'zoom'}"
+                                                   render="panelInformacionArchivo, tablalistavisitasfallidas, panelResultadosValidacion"
+                                                   oncomplete="if (#{!empty Supervision$Externa.listaresultadosvalidacion})  #{rich:component('panelResultadosValidacion')}.show();
+                                                                else #{rich:component('panelUploadArchivoSuper')}.hide();"
+                                                    action="#{Supervision$Externa.validarMatrizAuditoria()}" />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

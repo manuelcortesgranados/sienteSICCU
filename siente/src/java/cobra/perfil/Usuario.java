@@ -1460,7 +1460,7 @@ public class Usuario implements Serializable {
                 break;
             //Relacion obra jsfusuario
             case 3:
-                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
+                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod,6);
                 listaobrasasociadas = getSessionBeanCobra().getCobraService().encontrarRelacionObrajsfUsuario(usuariomod);
                 cargarMaplistaEntidad();
                 boolpanellistaproyecto = true;
@@ -1484,7 +1484,7 @@ public class Usuario implements Serializable {
             case 4:
                 boolseleccionEntidad = true;
                 boolLocalidad = false;
-                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod);
+                listaEntidadUsuario = getSessionBeanCobra().getUsuarioService().encontrarEntidadUsuario(usuariomod,6);
                 if (usuariomod.isRelacioncontrato()) {
 
                     listarelacioncontratousuario = getSessionBeanCobra().getCobraService().buscarRelacionContratoUsuario(usuariomod);

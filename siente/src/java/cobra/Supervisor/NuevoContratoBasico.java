@@ -2682,7 +2682,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         llenarEntidades();
         llenarGerentes();
         this.listaxTipocontratoselect();
-        filtrocontrato.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador());
+        filtrocontrato.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador(6));
         // }
     }
 
