@@ -52,7 +52,7 @@
             <center>
                 <h:outputText  styleClass="ikont-txt-cd-contrato"    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
                 <h:panelGrid id="layoutdetalle"   rendered="true">
-                    <h:panelGrid id="detallecontrato" styleClass="ikont-"   columns="4"
+                    <h:panelGrid id="detallecontrato" styleClass="ikont-hpg-griddetacon"   columns="4"
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
                         <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-tipocontrato"   headerClass="font-header-panel" 
                                     rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
@@ -71,7 +71,7 @@
                             <h:panelGrid columns="1" style="height: 120px;"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
-                                        <h:outputText  styleClass="ikont-"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                        <h:outputText  styleClass="ikont-hot-vlrcc"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                             <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputText>
                                     </h:panelGrid>
@@ -81,7 +81,7 @@
 
                         <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-duracioncontrato"   headerClass="font-header-panel">
                             <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" >
-                                <h:outputText  styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}"  />
+                                <h:outputText  styleClass="ikont-hot-pnduracion-dias"   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}"  />
 
                                 <h:outputText  styleClass="ikont-"   value="desde"  />
 
@@ -104,7 +104,7 @@
                                         <tr>
                                             <td width="45"></td>
                                             <td width="49">
-                                                <h1 align="center"  id="refreshMeDias">0</h1>
+                                                <h1 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeDias">0</h1>
                                             </td>
                                             <td width="41">
                                             </td>
@@ -118,13 +118,13 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h2 align="center"  id="refreshMeHoras">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeHoras">00</h2>
                                             </td>
                                             <td>
-                                                <h2 align="center"  id="refreshMeMinutos">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeMinutos">00</h2>
                                             </td>
                                             <td>
-                                                <h2 align="center"  id="refreshMeSeg">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeSeg">00</h2>
                                             </td>
                                         </tr>
                                         <tr>
@@ -145,14 +145,14 @@
                     </h:panelGrid>
                 </h:panelGrid>
 
-                <interkont:spacer height="20px"  />
+                <br/><br/>
 
                 <rich:collapsiblePanel id="simpleToggleContrato" switchType="client" expanded="true"
                                        header="#{var.datoscontrato} #{Supervisor$Contrato.tipoContCon}">
                     <center>
                         <h:panelGrid style="width:100%;border-spacing: 7px;" columns="1" >
                             <h:form>
-                                <h:panelGrid cellspacing="5" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                                <h:panelGrid cellspacing="8" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda" styleClass="font-general">
                                     <h:panelGroup>
                                         <h:outputLabel  styleClass="ikont-"   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                     </h:panelGroup>
@@ -468,7 +468,7 @@
                         </h:panelGrid>
 
                         <h:form target="_blank">
-                            <h:panelGrid columns="3" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                            <h:panelGrid columns="3" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" styleClass="font-general">
                                 <h:panelGrid columnClasses="panelcenter">
                                     <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
                                     <h:outputText  styleClass="ikont-"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
@@ -596,7 +596,7 @@
                         <a4j:ajax event="switch" render="polizasContrato, notienepoliza"  />
 
                         <center>
-                            <h:panelGroup id="notienepoliza">
+                            <h:panelGroup id="notienepoliza" styleClass="font-general">
                                 <h:outputLabel  styleClass="ikont-"   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}"/>
                             </h:panelGroup>
 
@@ -688,7 +688,7 @@
 
                         <center>
                             <h:panelGroup id="tablaProyectosContrato">
-                                <h:panelGrid columns="3">
+                                <h:panelGrid columns="3" styleClass="font-general">
                                     <h:outputText  styleClass="ikont-"   value="#{var.consultar} #{var.proyectos} "  />
                                     <h:inputText value="#{Supervisor$Contrato.buscarproyecto}" size="20" />
 

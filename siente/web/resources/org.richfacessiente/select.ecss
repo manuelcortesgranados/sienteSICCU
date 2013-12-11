@@ -7,7 +7,7 @@
 .rf-sel-cntr {
     border-width: 1px;
     border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: '#{richSkin.headerBackgroundColor}';
     display: inline-block;
     font-size: 1px;
     white-space: nowrap;
@@ -15,9 +15,6 @@
 
 input.rf-sel-inp {
     background-color: '#{richSkin.controlBackgroundColor}';
-    background-image: url("#{resource['org.richfaces.images:inputBackgroundImage.png']}");
-    background-position: 1px 1px;
-    background-repeat: no-repeat;
     border: 0px;
     margin: 0px;
     padding: 0px;
@@ -37,10 +34,9 @@ input.rf-sel-inp {
     background-image: "url(#{resource['org.richfaces.images:autocompleteButtonGradient.png']})";
     background-repeat: repeat-x;
     background-position: top left;
+    width: 15px;
+    height: 25px;
     background-color: '#{richSkin.headerBackgroundColor}';
-    border-left-width: 1px;
-    border-left-style: solid;
-    border-left-color: '#{richSkin.panelBorderColor}';
     display: inline-block;
     vertical-align: top;
 }
@@ -51,7 +47,7 @@ input.rf-sel-inp {
     background-image: "url(#{resource['org.richfaces.images:comboDownButton.png']})";
     cursor: pointer;
     width: 15px;
-    height: 16px;
+    height: 23px;
     display: inline-block;
 }
 
@@ -96,8 +92,9 @@ input.rf-sel-inp {
     width: 100%;
     background-color: '#{richSkin.headerBackgroundColor}';
     border-width: 1px;
-    border-style: dotted;
-    border-color: '#{richSkin.generalTextColor}';
+    border-style: solid;
+    border-color: #FFF;
+    color : #FFF;
 }
 
 .rf-sel-shdw {
@@ -153,8 +150,4 @@ input.rf-sel-inp {
 .rf-sel-lst-ul {
     margin: 0px;
     padding: 0px;
-}
-
-input.rf-sel-dflt-lbl {
-    color: #b3b3b3;
 }

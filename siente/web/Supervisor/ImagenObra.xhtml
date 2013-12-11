@@ -47,12 +47,12 @@
 
     </ui:define>
     <ui:define name="menusuperior">
-        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}" id="gpMenusuperior">
+        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
         </h:panelGroup>
-    </ui:define>
-    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
-        <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:body >

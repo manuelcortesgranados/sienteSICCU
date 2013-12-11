@@ -22,17 +22,15 @@
 .rf-insp {
     border-width: 1px;
     border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: '#{richSkin.headerBackgroundColor}';
     display: inline-block;
     font-size: 1px;
     white-space: nowrap;
+    border-radius : 3px;
 }
 
 input.rf-insp-inp[type="text"] {
     background-color: '#{richSkin.controlBackgroundColor}';
-    background-image: url("#{resource['org.richfaces.images:inputBackgroundImage.png']}");
-    background-position: 1px 1px;
-    background-repeat: no-repeat;
     border: 0px;
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
@@ -43,15 +41,12 @@ input.rf-insp-inp[type="text"] {
 }
 
 .rf-insp-btns {
-    background-color: '#{richSkin.headerBackgroundColor}';
-    background-image: "url(#{resource['org.richfaces.images:buttonBackgroundImage.png']})";
-    background-position: top left;
-    background-repeat: repeat-x;
     border-left-width: 1px;
     border-left-style: solid;
-    border-left-color: '#{richSkin.panelBorderColor}';
+    border-left-color: '#{richSkin.headerBackgroundColor}';
     display: inline-block;
     vertical-align: top;
+    heigth : 25px;
 }
 
 .rf-insp-dec,.rf-insp-inc,.rf-insp-dec-dis,.rf-insp-inc-dis {
@@ -64,10 +59,15 @@ input.rf-insp-inp[type="text"] {
 
 .rf-insp-dec {
     background-image: url("#{resource['org.richfaces.images:spinnerArrowBottom.png']}");
+    width:50%;
 }
 
 .rf-insp-inc {
     background-image: url("#{resource['org.richfaces.images:spinnerArrowTop.png']}");
+    width:50%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: '#{richSkin.headerBackgroundColor}';
 }
 
 .rf-insp-dec-dis {

@@ -266,7 +266,7 @@
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="#{var.contrato}" icon="/resources/imgs/bt_consultoria.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
+            <rich:menuGroup label="#{var.contrato} Consultoria" icon="/resources/imgs/bt_consultoria.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
                 <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
                                 actionListener="#{Supervisor$Contrato.iniciarContrConsultoria}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontrato_consultoria}"/>
                 <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"

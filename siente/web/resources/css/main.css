@@ -31,6 +31,12 @@
     font-size: 18px!important;
 }
 
+.font-general{
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #666666;
+}
+
 body {
     margin:0;
     font-family: Verdana, Geneva, sans-serif;
@@ -891,7 +897,7 @@ body {
 
 .rf-dt-hdr th{
     background-color:#F0F4F8;
-    color : #FFF;
+    color : #266185;
 }
 
 .rf-dt-hdr-c th{
@@ -1554,12 +1560,13 @@ input[type="button"][disabled]{
 }
 
 select {
-    background-color: #F0F4F8;
+    background-color: #FFF;
     color: #003;
     font-family:Arial, Helvetica, sans-serif;
     font-size:11px;
     font-style:italic;
-    border: #C1D1E7 thin solid;
+    border: #266185 thin solid;
+    border-radius: 3px;
 } 
 option {
     background-color: #C1D1E7;
@@ -3014,7 +3021,7 @@ a.ikont-hcl-imgTacometro:hover {
 }
 .ikont-rp-sliderichcontentbluenovedades {
     background: #f2f7fa;
-    
+
 }
 .sliderichdatosnacionales {
     font-size: 15px;
@@ -4685,7 +4692,7 @@ a.closemodal{
     height: 160px;
 }
 
-.ikont-hpg-griddetaob .rf-p{
+.ikont-hpg-griddetaob .rf-p, .ikont-hpg-griddetacon .rf-p{
     width: 180px;
     height: 150px;
     margin: 6px;
@@ -4695,7 +4702,7 @@ a.closemodal{
     overflow-y: auto;
 }
 
-.ikont-hpg-griddetaob .rf-p .rf-p-b span, .ikont-hpg-griddetaob .rf-p .rf-p-b label{
+.ikont-hpg-griddetaob .rf-p .rf-p-b span, .ikont-hpg-griddetaob .rf-p .rf-p-b label, .ikont-hpg-griddetaob .rf-p .rf-p-b p, .ikont-hpg-griddetacon .rf-p span, .ikont-hpg-griddetacon .rf-p label, .ikont-hpg-griddetacon .rf-p p{
     font-size: 12px;
     color: #666666;
 }
@@ -4986,9 +4993,18 @@ label.textlittle2 {
 }
 
 .ikont-rp-size-fileup.rf-p{
+
     width: 500px!important;
 }
 
-.ikont-rp-menulateralgestion{
-    min-width: 200px;
+.ikont-hot-vlrcc{
+    font-size: 16px!important;
+    color: #336699!important;
+    font-weight: bold!important;
+}
+
+.ikont-hot-pnduracion-dias{
+    font-size: 30px!important;
+    color: #336699!important;
+    font-weight: bold !important;
 }
