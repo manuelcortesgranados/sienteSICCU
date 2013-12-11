@@ -22,7 +22,7 @@
     <ui:define name="title">
         <h:panelGroup id="layoutTitle">
             <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-"   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}" />
-            <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-"    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
+            <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont- ikont-hot-intcodobra"    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
         </h:panelGroup>
     </ui:define>
 
@@ -50,7 +50,7 @@
 
         <h:panelGroup layout="block" id="pgcontratoconvenio" >
             <center>
-                <h:outputText  styleClass="ikont-txt-cd-contrato"    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
+                <h:outputText  styleClass="ikont-txt-cd-contrato"  rendered="#{var.permisonuevodiseno}"  value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
                 <h:panelGrid id="layoutdetalle"   rendered="true">
                     <h:panelGrid id="detallecontrato" styleClass="ikont-hpg-griddetacon"   columns="4"
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
@@ -59,7 +59,7 @@
                             <h:panelGrid style="height: 120px;" columns="1" >
                                 <interkont:spacer height="30" />
                                 <center>
-                                    <h:outputText  styleClass="ikont-"   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
+                                    <h:outputText  styleClass="ikont- ikont-hot-pnduracion-dias"   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
                                 </center>
                                 <interkont:spacer height="20" />
                             </h:panelGrid>
@@ -471,17 +471,17 @@
                             <h:panelGrid columns="3" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" styleClass="font-general">
                                 <h:panelGrid columnClasses="panelcenter">
                                     <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
-                                    <h:outputText  styleClass="ikont-"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
+                                    <h:outputText  styleClass="ikont- font-general"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
                                 </h:panelGrid>
 
                                 <h:panelGrid columnClasses="panelcenter">
                                     <h:commandLink styleClass="excel" action="#{Supervisor$Contrato.ReporteConvenioExcel}" />
-                                    <h:outputText id="reporteconvenioexcel" value="#{var.reporte} #{var.convenio}"  />
+                                    <h:outputText id="reporteconvenioexcel" styleClass="font-general" value="#{var.reporte} #{var.convenio}"  />
                                 </h:panelGrid>
 
                                 <h:panelGrid columnClasses="panelcenter" rendered="#{Supervisor$Contrato.filtrocontrato.idestrategia != 1}">
                                     <h:commandLink styleClass="excel butonreport"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
-                                    <h:outputText  styleClass="ikont-"   id="reporteexcel" value="#{var.listadoproyectos}" />
+                                    <h:outputText  styleClass="ikont- font-general"   id="reporteexcel" value="#{var.listadoproyectos}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:form>

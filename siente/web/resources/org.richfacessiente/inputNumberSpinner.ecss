@@ -46,7 +46,7 @@ input.rf-insp-inp[type="text"] {
     border-left-color: '#{richSkin.headerBackgroundColor}';
     display: inline-block;
     vertical-align: top;
-    heigth : 25px;
+    height : 25px;
 }
 
 .rf-insp-dec,.rf-insp-inc,.rf-insp-dec-dis,.rf-insp-inc-dis {
@@ -59,12 +59,12 @@ input.rf-insp-inp[type="text"] {
 
 .rf-insp-dec {
     background-image: url("#{resource['org.richfaces.images:spinnerArrowBottom.png']}");
-    width:50%;
+    height:50%;
 }
 
 .rf-insp-inc {
     background-image: url("#{resource['org.richfaces.images:spinnerArrowTop.png']}");
-    width:50%;
+    height:50%;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: '#{richSkin.headerBackgroundColor}';
