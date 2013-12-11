@@ -932,7 +932,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
 //                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
 
-        filtro.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador());
+        filtro.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador(6));
 
         if (bundle.getString("nuevomapa").equals("false")) {
             if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
