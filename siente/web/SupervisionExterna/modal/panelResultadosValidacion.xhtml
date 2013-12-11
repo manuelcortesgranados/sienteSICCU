@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition   
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelResultadosValidacion" resizeable="false" trimOverlayedElements="false"  autosized="true" minWidth="400" minHeight="150">
+        <f:facet name="header"  >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-panelresultadosvalidacion"   value="#{var.titulopanelresultadosvalidacion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="ikont-acl-esconderpanelresultadosvalidacion closemodal"  
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('panelResultadosValidacion')}.hide();
+                                             return false;">
+                    </a4j:commandLink>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGrid id="panelMensajes" styleClass="ikont-hpg-panelmensajes"  >
+            <h:panelGroup layout="block">
+                <h:form>
+                    <rich:dataTable id="tablalistaerror" rows="5" 
+                                    rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablalistaerror"  
+                                    value="#{Supervision$Externa.listaresultadosvalidacion}"
+                                    var="actual">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column colspan="3">
+                                    <h:outputText  styleClass="ikont-hot-titulolistaerroresmodificar"   value="#{var.titulolistaerroresmodificar}"  />
+                                </rich:column>
+                                <rich:column breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-fila"   value="#{var.fila}" />
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-columna "   value="#{var.columna}"  />
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText  styleClass="ikont-hot-descripcion"   value="#{var.descripcion}"  />
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-mensajeexelfila"   value="#{actual.idfila}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-mensajeexeltitulocolumna"   value="#{actual.nombrecolumna}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-mensajeexeldatalle"   value="#{actual.descripcionerrores}"/>
+                        </rich:column>
+                    </rich:dataTable>
+                    <rich:dataScroller for="tablalistaerror" maxPages="10">
+                        <f:facet name="first">
+                            <h:outputText  styleClass="ikont-hot-tablalistaerrorprimero"   value="#{var.primeroCiu}"/>
+                        </f:facet>
+                        <f:facet name="last">
+                            <h:outputText  styleClass="ikont-hot-tablalistaerrorultimo"   value="#{var.ultimoCiu}"/>
+                        </f:facet>
+                    </rich:dataScroller>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGrid>
+        <rich:hotKey key="esc" onkeyup="#{rich:component('panelResultadosValidacion')}.hide();
+                                             return false;"  />
+    </rich:popupPanel>
+</ui:composition>
