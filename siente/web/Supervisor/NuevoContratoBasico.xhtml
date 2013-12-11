@@ -381,7 +381,7 @@
                                         <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
                                                                  rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
                                                                  minValue="0" maxValue="100" inputSize="10" >
-                                            <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
+                                            <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti" />
                                         </rich:inputNumberSpinner>
                                         <h:outputText  styleClass="ikont-hot-porcentaje" value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
                                     </h:panelGrid>
@@ -399,7 +399,7 @@
                                     <h:outputText  styleClass="ikont-hot-numactparc" id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 || var.fechaformapago and  Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
                                     <rich:inputNumberSpinner id="innumactasparciales"  minValue="0" maxValue="100" rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 ||var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==2}"
                                                              inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
-                                        <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
+                                        <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas" />
                                     </rich:inputNumberSpinner>                                       
                                 </h:panelGrid>
                                 <h:panelGrid id="gpCuotas"  rendered="#{var.fechaformapago}">
