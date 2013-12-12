@@ -60,8 +60,8 @@
                         </h:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="2"  styleClass="font-general">
-                        <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}"/>
-                        <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}">
+                        <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}"/>
+                        <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}">
                             <f:selectItem itemValue="false" itemLabel="No"/>
                             <f:selectItem itemValue="true" itemLabel="Si"/>
                         </h:selectOneMenu>
@@ -209,8 +209,8 @@
                                         <a4j:ajax event="valueChange" render="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon, ikont-hpg-tipocontrato" execute="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon,ikont-hpg-tipocontrato" />
                                     </h:selectOneMenu>   
 
-                                    <h:outputText  styleClass="ikont-hot-tipocontrcontraloria font-general"   id="lblcontrconsContraloria"  value="#{var.TipoContratoContralorias}"  rendered="#{var.aplicaContralorias or var.aplicafonade and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"/>                                    
-                                    <h:selectOneMenu styleClass="ikont-hsom-contrcontraloria" id="cmbcontconContraloria" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}" rendered="#{var.aplicaContralorias or var.aplicafonade and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"  >
+                                    <h:outputText  styleClass="ikont-hot-tipocontrcontraloria"   id="lblcontrconsContraloria"  value="#{var.TipoContratoContralorias}"  rendered="#{var.aplicaContralorias or var.aplicatipocontrato and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"/>                                    
+                                    <h:selectOneMenu styleClass="ikont-hsom-contrcontraloria" id="cmbcontconContraloria" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}" rendered="#{var.aplicaContralorias or var.aplicatipocontrato and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 0  and Supervisor$Contrato.tipoContCon != 'Convenio'}"  >
                                         <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
                                     </h:selectOneMenu>
                                     <h:outputText  styleClass="ikont-hot-contrconsultoria font-general" id="lblcontrcons"  value="#{var.contratosdeconsultoria}" rendered="#{Supervisor$Contrato.boolcontrconsultoria and !var.aplicaContralorias or Supervisor$Contrato.filtrocontrato.tipocontratoselect == 1 }" />

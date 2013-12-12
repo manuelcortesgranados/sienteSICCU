@@ -808,7 +808,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public boolean isEliminarPeriodosFueraRango() {
         return !periodoConveniosFueraRango.isEmpty();
     }
-
     /**
      * Variable para confirmar el guardado de borrador de convenio.
      */
@@ -854,6 +853,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private int entidades = 0;
     private int botonGuardado;
+    /*
+     * Variable para habilitar el mensaje y Registrar el contratista
+     */
+    public boolean confirmacioncedula = false;
 
     /**
      * Get the value of botonGuaradado
@@ -1072,6 +1075,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setLstentidades(List<Tercero> lstentidades) {
         this.lstentidades = lstentidades;
+    }
+
+    public boolean getConfirmacioncedula() {
+        return confirmacioncedula;
+    }
+
+    public void setConfirmacioncedula(boolean confirmacioncedula) {
+        this.confirmacioncedula = confirmacioncedula;
     }
     /*
      * variables para realizar la carga del tipo de aporte
@@ -3274,7 +3285,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.setEncargofiduciario(null);
             }
         }
-          
+
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
         if (Boolean.parseBoolean(bundle.getString("aplicamarcologico"))) {
             if (estrategia != 0 && booltipocontratoconvenio) {
@@ -3286,8 +3297,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 getSessionBeanCobra().getMarcoLogicoService().guardarContratoEstrategia(contratoestrategia);
             }
         }
-         estrategia = 0;
-     
+        estrategia = 0;
+
         for (Documentoobra docContrato : listadocumentos) {
             try {
                 String nuevaRutaWeb = ArchivoWebUtil.copiarArchivo(
@@ -3887,7 +3898,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = null;
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
-        
+
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
@@ -4731,7 +4742,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return
      */
-    public String buscarContratista() {        
+    public String buscarContratista() {
         aplicafiltro = false;
         if (nombre.length() != 0) {
             //   listaContratista.clear();
@@ -5440,7 +5451,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             primeroDetcontratoContratista();
         }
         getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(true);
-        
+
         return "consultarContratoConvenio";
     }
 
@@ -8245,5 +8256,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     protected MarcoLogicoBean getMarcoLogicoBean() {
         return (MarcoLogicoBean) FacesUtils.getManagedBean("MarcoLogico$MarcoLogico");
+    }
+
+    public void confirmarCedulaContratista() {
+        if (getSessionBeanCobra().getCobraService().encontrarContratistaCedula(getContratista().getIntcedula()) != null) {
+            setConfirmacioncedula(true);
+        } else {
+            setConfirmacioncedula(false);
+        }
+
     }
 }
