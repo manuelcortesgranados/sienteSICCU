@@ -150,9 +150,9 @@
                 <rich:collapsiblePanel id="simpleToggleContrato" switchType="client" expanded="true"
                                        header="#{var.datoscontrato} #{Supervisor$Contrato.tipoContCon}">
                     <center>
-                        <h:panelGrid style="width:100%;border-spacing: 7px;" columns="1" >
+                        <h:panelGrid style="width:100%;" columns="1" >
                             <h:form>
-                                <h:panelGrid cellspacing="8" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda" styleClass="font-general">
+                                <h:panelGrid cellspacing="2" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda" styleClass="font-general">
                                     <h:panelGroup>
                                         <h:outputLabel  styleClass="ikont-"   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                     </h:panelGroup>
@@ -421,8 +421,9 @@
                                     </a4j:commandLink>
                                     <h:outputLabel rendered="#{Supervisor$Contrato.contrato !=null and Supervisor$Contrato.tipoContCon!='Convenio' and Supervisor$Contrato.contrato.contrato!=null}" styleClass="ikont-hol-numconvenio"   value="#{var.numero} #{var.convenio}:"/>
                                     <interkont:spacer rendered="#{Supervisor$Contrato.contrato !=null and Supervisor$Contrato.tipoContCon!='Convenio' and Supervisor$Contrato.contrato.contrato!=null}" width="20"/>
-                                    <h:panelGrid rendered="#{Supervisor$Contrato.contrato !=null and Supervisor$Contrato.tipoContCon!='Convenio' and Supervisor$Contrato.contrato.contrato!=null}" columns="2">
-                                        <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$Contrato.contrato.contrato.strnumcontrato}"/>
+                                    <h:panelGrid rendered="#{Supervisor$Contrato.contrato !=null and Supervisor$Contrato.tipoContCon!='Convenio' and Supervisor$Contrato.contrato.contrato!=null}" columns="3">
+                                        <h:outputText  styleClass="ikont-hot-strnumcontrato font-general"   value="#{Supervisor$Contrato.contrato.contrato.strnumcontrato}"/>
+                                        <interkont:spacer width="20" />
                                         <h:commandLink title="#{var.verconvenios}" rendered="#{!SessionBeanCobra.cobraService.ciu}" immediate="true"  id="irdetalleconvenii" action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                             <h:graphicImage    value="/resources/imgs/bt_ver.png"/>
                                             <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$Contrato.contrato.contrato.intidcontrato}" />
@@ -430,10 +431,10 @@
                                     </h:panelGrid>
 
                                     <h:outputText rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" value="#{var.TipoContratoContralorias}:" />
-                                    <interkont:spacer width="20" />
+                                    
                                     <h:panelGrid rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" id="idtipocontrato" columns="1" >
-                                        <h:panelGrid  rendered="#{Supervisor$Contrato.modificartipocontrato}" columns="2" id="paneltipocontrato">
-                                            <h:outputText  styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.strdescripcion}"  />
+                                        <h:panelGrid cellspacing="0" rendered="#{Supervisor$Contrato.modificartipocontrato}" columns="3" id="paneltipocontrato">
+                                            <h:outputText  styleClass="ikont- font-general"   value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.strdescripcion}"  />
                                             <a4j:commandLink 
                                                 action="#{Supervisor$Contrato.habilitarModificacionTipoContrato}"
                                                 render="tipocontrato" execute="frmeditartipocontrato,paneltipocontrato"

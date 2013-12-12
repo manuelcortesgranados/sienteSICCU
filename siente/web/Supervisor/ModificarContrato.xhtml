@@ -57,10 +57,10 @@
                         <rich:panel  id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-tipo"   headerClass="font-header-panel"
                                      rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                             <h:panelGrid columns="1" >
-                                <interkont:spacer height="30"/>
+                                <br/><br/>
                                 <h:panelGroup>
                                     <center>
-                                        <h:outputText  styleClass="ikont-hot-tipocontrato"   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}" />
+                                        <h:outputText  styleClass="ikont-hot-tipocontrato ikont-hot-pnduracion-dias"   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}" />
                                     </center>
                                 </h:panelGroup>
                                 <interkont:spacer height="20"/>
@@ -68,8 +68,7 @@
                         </rich:panel>
 
                         <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-valor"   headerClass="font-header-panel">
-                            <interkont:spacer height="50"/>
-
+                            <br/><br/><br/><br/>
                             <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
@@ -103,7 +102,7 @@
                                         <tr>
                                             <td width="45"></td>
                                             <td width="49">
-                                                <h1 align="center"  id="refreshMeDias">0</h1>
+                                                <h1 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeDias">0</h1>
                                             </td>
                                             <td width="41">
                                             </td>
@@ -117,13 +116,13 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h2 align="center"  id="refreshMeHoras">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeHoras">00</h2>
                                             </td>
                                             <td>
-                                                <h2 align="center"  id="refreshMeMinutos">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeMinutos">00</h2>
                                             </td>
                                             <td>
-                                                <h2 align="center"  id="refreshMeSeg">00</h2>
+                                                <h2 align="center" class="ikont-hot-pnduracion-dias" id="refreshMeSeg">00</h2>
                                             </td>
                                         </tr>
                                         <tr>
@@ -143,7 +142,7 @@
                         </rich:panel>
                     </h:panelGrid>
                 </h:panelGrid>
-                <interkont:spacer height="20px" />
+                <br/><br/>
 
                 <rich:collapsiblePanel header="#{var.registrarmodificacion}" switchType="client">
                     <h:panelGroup id="pgprincipal">                            
@@ -153,7 +152,7 @@
                                     <h:outputText  styleClass="ikont-hot-prorrogascontrato"   value="1.#{var.prorrogascontrato}" />
                                 </h:panelGroup>
                             </f:facet>
-                            <h:panelGrid id="modificar1" columnClasses="aiu" columns="2" >
+                            <h:panelGrid id="modificar1" columnClasses=" panelizquierda,panelizquierda" columns="2" styleClass="font-general  panelizquierda">
                                 <h:outputLabel  styleClass="ikont-hol-lblFecmodi"   id="lblFecmodi"  value="#{var.fechamodificacion}:" for="fecmodifi"/>
                                 <h:panelGrid columns="5">
                                     <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecmodifi" inputSize="10"

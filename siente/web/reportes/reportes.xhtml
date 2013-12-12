@@ -45,14 +45,14 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 1}" styleClass="panelfontsize">
-                            <h:outputText value="Departamento: "/>
+                            <h:outputText value="Departamento: " styleClass="font-general"/>
                             <h:selectOneMenu value="#{Reportes.deptosah}" 
                                              onclick="this.style.width = 'auto;';" >
                                 <f:selectItem itemValue="-1" itemLabel="Todos" />
                                 <f:selectItems value="#{Reportes.sedeptosah}"/>
                                 <a4j:ajax execute="@this" event="change" render="panelMuni" listener="#{Reportes.llenarMuniciAh}"/>
                             </h:selectOneMenu>
-                            <h:outputText value="Municipio: "/>
+                            <h:outputText value="Municipio: " styleClass="font-general"/>
                             <h:panelGroup id="panelMuni">
                                 <h:selectOneMenu value="#{Reportes.muniah}" 
                                                  onclick="this.style.width = 'auto;';" >
@@ -64,7 +64,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 2}" styleClass="panelfontsize">
-                            <h:outputText value="Zona Especifica: "/>
+                            <h:outputText value="Zona Especifica: " styleClass="font-general"/>
                             <h:selectOneMenu value="#{Reportes.intzona}" 
                                              onclick="this.style.width = 'auto;';" >
                                 <f:selectItem itemValue="-1" itemLabel="Todos" />
@@ -74,7 +74,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 3}" styleClass="panelfontsize">
-                            <h:outputText value="#{var.region}: "/>
+                            <h:outputText value="#{var.region}: " styleClass="font-general"/>
                             <h:selectOneMenu value="#{Reportes.regionint}">
                                 <f:selectItems value="#{Reportes.regionselect}" />
                             </h:selectOneMenu>
@@ -90,7 +90,7 @@
                                     bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">
 
                             <h:panelGrid columns="1">
-                                <h:outputLabel value="Seleccione Parametros: "/>
+                                <h:outputLabel value="Seleccione Parametros: " styleClass="font-general"/>
 
                                 <!-- Las opciones de seleccion  son 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales -->
                                 <h:selectOneMenu value="#{Reportes.reporteselectlinea}" 
@@ -106,7 +106,7 @@
 
                             <!--Seleccion de entidades nacionales, dependen de la opcion 3 del combo anterior -->
                             <h:panelGrid columns="2" rendered="#{Reportes.reporteselectlinea == 3}">
-                                <h:outputLabel value="Entidades Nacionales:"/>
+                                <h:outputLabel value="Entidades Nacionales:" styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.inttercer}" style="width: 100px;"
                                                  onclick="this.style.width = 'auto;';" 
                                                  onblur="this.style.width = '100px;';" >                                            
@@ -117,7 +117,7 @@
 
                             <!--Seleccion convenio a partir de entidad nacional -->
                             <h:panelGrid columns="2"  rendered="#{Reportes.reporteselectlinea == 3 and Reportes.idConvenio!=-1}">
-                                <h:outputLabel value="Convenios Nacionales:"/>
+                                <h:outputLabel value="Convenios Nacionales:" styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.idConvenio}" 
                                                  style="width: 100px;"
                                                  onclick="this.style.width = 'auto;';" 
@@ -132,7 +132,7 @@
                             </h:panelGrid> 
 
                             <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 3}">
-                                <h:outputText value="Seleccione Reporte :"/>
+                                <h:outputText value="Seleccione Reporte :" styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.reporteSelectConveniosEntidadesNacionales}" 
                                                  style="width: 100px;"
                                                  onclick="this.style.width = 'auto;';" 
@@ -148,7 +148,7 @@
                             <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 2}">
 
                                 <h:panelGrid columns="1">
-                                    <h:outputLabel value="#{var.categoria}: "/>
+                                    <h:outputLabel value="#{var.categoria}: " styleClass="font-general"/>
                                     <h:selectOneMenu value="#{Reportes.tipoobint}" 
                                                      style="width: 150px;"
                                                      onclick="this.style.width = 'auto;';" 
@@ -158,7 +158,7 @@
                                         <a4j:ajax event="change" render="reportestodossoli" execute="@this"/>
                                     </h:selectOneMenu>
 
-                                    <h:outputLabel value="#{var.tipo} #{var.obra}: "/>
+                                    <h:outputLabel value="#{var.tipo} #{var.obra}: " styleClass="font-general"/>
                                     <h:selectOneMenu value="#{Reportes.inttipoproyecto}" 
                                                      style="width: 150px;"
                                                      onclick="this.style.width = 'auto;';" 
@@ -169,7 +169,7 @@
                                     </h:selectOneMenu>
 
 
-                                    <h:outputLabel value="#{var.tipo} Obra: " />
+                                    <h:outputLabel value="#{var.tipo} Obra: " styleClass="font-general"/>
                                     <h:panelGroup id="combotipoobra" >
                                         <h:selectOneMenu value="#{Reportes.inttipoobra}" 
                                                          style="width: 150px;"
@@ -187,7 +187,7 @@
 
 
                             <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 1}">
-                                <h:outputLabel value="Seleccione Reporte :"/>
+                                <h:outputLabel value="Seleccione Reporte :" styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.reporteselectaten}" 
                                                  style="width: 100px;"
                                                  onclick="this.style.width = 'auto;';" 
@@ -233,7 +233,7 @@
                             <rich:panel id="reporttiposoliah" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten == 5 or 
                                                                           Reportes.reporteselectaten == 7 or Reportes.reporteselectaten == 8 }">
                                 <h:panelGrid columns="2">
-                                    <h:outputText value="#{var.tipoAyudaHum}: "/>
+                                    <h:outputText value="#{var.tipoAyudaHum}: " styleClass="font-general"/>
                                     <h:selectOneMenu value="#{Reportes.tipoahint}">
                                         <f:selectItem itemValue="-1" itemLabel="Todos" />
                                         <f:selectItems value="#{Reportes.tipoahintselect}" />
@@ -245,7 +245,7 @@
                             <!-- ************************************************************-->
                             <rich:panel id="reportregilocali" rendered="#{Reportes.reporteselectaten == 11 or Reportes.reporteselectaten == 11}">
                                 <h:panelGrid columns="2">
-                                    <h:outputText value="#{var.tipo} Origen: "/>
+                                    <h:outputText value="#{var.tipo} Origen: " styleClass="font-general"/>
                                     <h:selectOneMenu value="#{Reportes.tipoorigenint}">
                                         <f:selectItem itemValue="4" itemLabel="Nacional" />
                                         <f:selectItem itemValue="3" itemLabel="Region" />
@@ -256,7 +256,7 @@
 
                                 <h:panelGrid columns="2" rendered="#{Reportes.tipoorigenint == 3}"
                                              columnClasses="panelizquierda, panelizquierda">
-                                    <h:outputText value="#{var.region}: "/>
+                                    <h:outputText value="#{var.region}: " styleClass="font-general"/>
                                     <h:selectOneMenu value="#{Reportes.regionint}">
                                         <f:selectItems value="#{Reportes.regionselect}" />
                                     </h:selectOneMenu>
@@ -266,11 +266,11 @@
 
                             <!--**************************************************************************************-->
                             <h:panelGrid columns="2" id="fechasAh" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten >= 5 }">
-                                <h:outputText value="#{var.fecha} Inicio: "/>
+                                <h:outputText value="#{var.fecha} Inicio: " styleClass="font-general"/>
                                 <rich:calendar  datePattern="#{var.formatofecha}" inputSize="10" value="#{Reportes.feciniah}" >
                                     <a4j:ajax event="change" render="fechasAh"/>
                                 </rich:calendar>
-                                <h:outputText value="#{var.fecha} Fin: "/>
+                                <h:outputText value="#{var.fecha} Fin: " styleClass="font-general"/>
                                 <rich:calendar  datePattern="#{var.formatofecha}" inputSize="10" value="#{Reportes.fecfinah}" >
                                     <a4j:ajax event="change" render="fechasAh"/>
                                 </rich:calendar>
@@ -306,7 +306,7 @@
                     <center>
                         <h:form>
                             <h:panelGrid id="selectcorte" columns="2">
-                                <h:outputText value="Fecha de Corte: "/>
+                                <h:outputText value="Fecha de Corte: " styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.idconsolidadoselec}">
                                     <f:selectItems value="#{Reportes.itemsCortes}" />
                                     <a4j:ajax event="change" render="selectcorte"/>
@@ -326,7 +326,7 @@
                     <center>
                         <h:form>
                             <h:panelGrid id="selectcortecontrol" columns="2">
-                                <h:outputText value="Fecha de Corte: "/>
+                                <h:outputText value="Fecha de Corte: " styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.idconsolidadoselec}">
                                     <f:selectItems value="#{Reportes.itemsCortes}" />
                                     <a4j:ajax event="change" render="selectcortecontrol"/>
@@ -351,7 +351,7 @@
 
                         <h:form>
                             <h:panelGrid columns="2" rendered="#{Reportes.consolida == 1}">
-                                <h:outputText value="#{var.reporte}: "/>
+                                <h:outputText value="#{var.reporte}: " styleClass="font-general"/>
                                 <h:selectOneMenu value="#{Reportes.reporteselec}">
                                     <f:selectItem itemValue="1" itemLabel="#{var.cifras1}" />
                                     <f:selectItem itemValue="2" itemLabel="#{var.cifras2}" />

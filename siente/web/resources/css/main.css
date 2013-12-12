@@ -4692,13 +4692,13 @@ a.closemodal{
     height: 160px;
 }
 
-.ikont-hpg-griddetaob .rf-p, .ikont-hpg-griddetacon .rf-p{
+.ikont-hpg-griddetaob .rf-p, .ikont-hpg-griddetacon .rf-p, .ikont-hpg-detallecontrato .rf-p{
     width: 180px;
     height: 150px;
     margin: 6px;
 }
 
-.ikont-hpg-griddetaob .rf-p .rf-p-b{
+.ikont-hpg-griddetaob .rf-p .rf-p-b, .ikont-hpg-griddetacon .rf-p .rf-p-b, .ikont-hpg-detallecontrato .rf-p .rf-p-b{
     overflow-y: auto;
 }
 
@@ -4706,6 +4706,12 @@ a.closemodal{
     font-size: 12px;
     color: #666666;
 }
+
+.ikont-hpg-detallecontrato .rf-p .rf-p-b span, .ikont-hpg-detallecontrato .rf-p .rf-p-b label, .ikont-hpg-detallecontrato .rf-p .rf-p-b p{
+    font-size: 12px;
+    color: #666666;
+}
+
 .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-numvaltotobra, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valorinterventoria, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valinter, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stclaseProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-sttipoProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stsubtipoProyecto {
     font-size: 14px;
     color: #336699;
