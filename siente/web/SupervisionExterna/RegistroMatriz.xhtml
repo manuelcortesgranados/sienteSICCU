@@ -106,7 +106,7 @@
                                 <a4j:commandLink  styleClass="ikont-acl-cargarvisitafallida"   value="#{var.cargarvisitafallida}" action="#{Supervision$Externa.cargarVisitaFallida}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
                             </rich:column>
                             <rich:column>
-                                <a4j:commandLink  styleClass="ikont-acl-descargarerroresvisitafallida"   value="#{var.generarreporteerroresvisita}" action="#{Supervision$Externa.generarReporteErroresVisita}" immediate="true" execute="@this"/>
+                                <h:commandLink value="#{var.generarreporteerroresvisita}" action="#{Supervision$Externa.generarReporteErroresVisita}" styleClass="ikont-acl-descargarerroresvisitafallida" type="submit" target="_blank" immediate="true" />
                             </rich:column>
                         </rich:dataTable>
                         <rich:dataScroller for="tablalistavisitasfallidas" maxPages="10">
