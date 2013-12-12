@@ -38,9 +38,10 @@
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}"
                             acceptedTypes="jpg,png,bmp,doc,docx,xls,xlsx,txt,ppt,pptx,bmp,pdf,odt,rtf"
-                            ontyperejected="alert('Solo acepta archivos con extension JPG, PNG, BMP, DOC,XLS,PDF,ODT,PPT ');"                            
+                            ontyperejected="alert('Solo acepta archivos con extension JPG, PNG, BMP, DOC,XLS,PDF,ODT,PPT ');"   
+                            
                             >
-                            <a4j:ajax event="uploadcomplete" render="info_documento"/>
+                            <a4j:ajax event="uploadcomplete" render="info_documento,uploadDocumento"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_documento">
                             <center>
