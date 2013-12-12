@@ -44,7 +44,7 @@
                         <h:panelGrid columns="2"  columnClasses="panelizquierda verticalalingtop,panelcenter" >
                             <h:panelGroup >
                                 <h:panelGrid id="valores" columns="2" >
-                                    <h:outputText  styleClass="ikont-hot-esteavanceposeeacta"   value="#{var.esteavanceposeeacta}" rendered="#{!var.obligaractaalimentar}"/>
+                                    <h:outputText  styleClass="ikont-hot-esteavanceposeeacta font-general"   value="#{var.esteavanceposeeacta}" rendered="#{!var.obligaractaalimentar}"/>
                                     <h:selectOneMenu id="cmbobligaacta" value="#{Supervisor$Alimentar.subiracta}" rendered="#{!var.obligaractaalimentar}">
                                         <f:selectItem itemValue="true" itemLabel="Si"/>
                                         <f:selectItem itemValue="false" itemLabel="No"/>
@@ -53,7 +53,7 @@
                                     </h:selectOneMenu>
 
 
-                                    <h:outputLabel  styleClass="ikont-hol-fechadelacta"    value="#{var.fechadelacta}" for="fechaalimentacion" />
+                                    <h:outputLabel  styleClass="ikont-hol-fechadelacta font-general"    value="#{var.fechadelacta}" for="fechaalimentacion" />
                                     <h:selectOneMenu id="fecInfo" value="#{Supervisor$Alimentar.fechaescogida}"  rendered="#{var.varalimentacionxperiodo}">
                                         <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
                                         <f:selectItems value="#{Supervisor$Alimentar.periodos}"/>
@@ -71,12 +71,12 @@
                                     <interkont:spacer width="10"/>
                                     <h:panelGroup id="gpErrorAlimentar">
                                         <blink>
-                                            <h:outputText  styleClass="ikont-hot-mensajefecha"   value="#{Supervisor$Alimentar.mensajefecha}" rendered="#{!Supervisor$Alimentar.fechavalida}" />
+                                            <h:outputText  styleClass="ikont-hot-mensajefecha font-general"   value="#{Supervisor$Alimentar.mensajefecha}" rendered="#{!Supervisor$Alimentar.fechavalida}" />
                                         </blink>
                                     </h:panelGroup>
 
-                                    <h:outputText  styleClass="ikont-hot-valorpry"    value="#{var.valorproyectado}:"/>
-                                    <h:outputText  styleClass="ikont-hot-lblvalorproyect"   id="labelValorProyectado" value="#{Supervisor$Alimentar.alimentacion.numtotalproyacu}">
+                                    <h:outputText  styleClass="ikont-hot-valorpry font-general"    value="#{var.valorproyectado}:"/>
+                                    <h:outputText  styleClass="ikont-hot-lblvalorproyect font-general"   id="labelValorProyectado" value="#{Supervisor$Alimentar.alimentacion.numtotalproyacu}">
                                         <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6" minFractionDigits="2"/>
                                     </h:outputText>
 
@@ -84,16 +84,16 @@
 
 
                                 <h:panelGrid cellspacing="10" id="layoutEjecutado" columns="3">
-                                    <h:outputText  styleClass="ikont-hot-valorejecu1"    value="#{var.valortotalejecutado}:"/>
+                                    <h:outputText  styleClass="ikont-hot-valorejecu1 font-general"    value="#{var.valortotalejecutado}:"/>
                                     <h:panelGroup id="valorEjecutado">
-                                        <h:outputText  styleClass="ikont-hot-valorejec2"   id="labelValorEjecutado"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
+                                        <h:outputText  styleClass="ikont-hot-valorejec2 font-general"   id="labelValorEjecutado"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
                                             <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6" minFractionDigits="2"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                     <interkont:spacer width="15"/>
-                                    <h:outputText  styleClass="ikont-hot-stDesviacion"   id="stDesviacion"
+                                    <h:outputText  styleClass="ikont-hot-stDesviacion font-general"   id="stDesviacion"
                                                    value="#{var.desviacion}"/>
-                                    <h:outputText  styleClass="ikont-hot-lblDesviacion"   id="lblDesviacion"
+                                    <h:outputText  styleClass="ikont-hot-lblDesviacion font-general"   id="lblDesviacion"
                                                    value="#{Supervisor$Alimentar.desviacion} %"/>
                                     <interkont:spacer width="10" rendered="#{!Supervisor$Alimentar.fechavalida}"/>
                                     <h:graphicImage  styleClass="ikont-hgi-imgDesviacion"   id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
@@ -357,7 +357,7 @@
                                     <interkont:spacer height="20"/>
                                     <h:panelGrid columns="3" id="Cualitativa"  >
                                         <h:panelGrid styleClass="ikont-hpg-gridali2"  />
-                                        <h:outputLabel  styleClass="ikont-hol-txtAspectoEvaluar"   id="txtAspectoEvaluar"  value="#{var.aspectoEvaluar}" for="txtAspectoEvaluar">
+                                        <h:outputLabel  styleClass="ikont-hol-txtAspectoEvaluar font-general"   id="txtAspectoEvaluar"  value="#{var.aspectoEvaluar}" for="txtAspectoEvaluar">
                                             <rich:message for="txtAspectoEvaluar" />
                                         </h:outputLabel>
                                         <h:selectOneMenu id="comboAspectoEvaluar" value="#{Supervisor$Alimentar.ali.tipocualitativa.intidtipocualificacion}" >
@@ -365,11 +365,11 @@
                                         </h:selectOneMenu>
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali3"  />
-                                        <h:outputLabel  styleClass="ikont-hol-lblLogroPry"   id="lblLogroProyecto"  value="#{var.logroProyecto}" />
+                                        <h:outputLabel  styleClass="ikont-hol-lblLogroPry font-general"   id="lblLogroProyecto"  value="#{var.logroProyecto}" />
                                         <h:inputTextarea style="width:  870px!important;" cols="55" id="txtLogroProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strlogro}"/>
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali4"  />
-                                        <h:outputLabel  styleClass="ikont-hol-difiPry"   id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
+                                        <h:outputLabel  styleClass="ikont-hol-difiPry font-general"   id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
                                         <h:inputTextarea style="width:  870px!important;" cols="55" id="txtDificultadProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strdificultad}"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
@@ -435,18 +435,18 @@
                                     <interkont:spacer height="20"/>
                                     <h:panelGrid columns="3" >
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
-                                        <h:outputLabel  styleClass="ikont-hol-numHabi"   id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                                        <h:outputLabel  styleClass="ikont-hol-poblaestu"   id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-numHabi font-general"   id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-poblaestu font-general"   id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
                                         <rich:inputNumberSpinner  id="numHabitantes" value="#{Supervisor$Alimentar.alimentacion.numhabafectados}" minValue="0" maxValue="50000000" />
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
-                                        <h:outputLabel  styleClass="ikont-hol-numEmpleoDirectogen"     value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                        <h:outputLabel  styleClass="ikont-hol-imp_inst"     value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-numEmpleoDirectogen font-general"     value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-imp_inst font-general"     value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                         <rich:inputNumberSpinner  id="numEmpleoDirecto" value="#{Supervisor$Alimentar.alimentacion.numempdirectos}" minValue="0" maxValue="50000000" />
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
-                                        <h:outputLabel  styleClass="ikont-hol-numEmpleoInDirectogen"    value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                        <h:outputLabel  styleClass="ikont-hol-imp_acto"     value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-numEmpleoInDirectogen font-general"    value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-imp_acto font-general"     value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                         <rich:inputNumberSpinner  id="numEmpleoInDirecto" value="#{Supervisor$Alimentar.alimentacion.numempindirectos}" minValue="0" maxValue="50000000" />
 
                                     </h:panelGrid>
@@ -454,7 +454,7 @@
                             </rich:collapsiblePanel>
                             <center>
                                 <h:panelGrid id="layoutError">
-                                    <h:outputText  styleClass="ikont-hot-msjMatrix"    value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
+                                    <h:outputText  styleClass="ikont-hot-msjMatrix font-general"    value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
                                     <a4j:commandButton id="BTaceptarMatrix" rendered="#{!Supervisor$Alimentar.validezalimentacion}" render="gpPrincipalAlimentar"
                                                        action="#{Supervisor$Alimentar.cambioMatrix}" value="#{var.aceptar}"                      />
 
@@ -467,7 +467,7 @@
 
                     <rich:collapsiblePanel header="#{var.atencion}" id="layoutFactores"  rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
 
-                        <h:outputText  styleClass="ikont-hot-factoresdeatraso"    value="#{var.factoresdeatraso}"/>
+                        <h:outputText  styleClass="ikont-hot-factoresdeatraso font-general"    value="#{var.factoresdeatraso}"/>
                         <h:panelGrid columns="3" columnClasses="labelsDatos,labelsDatos, labelsDatos ">
                             <h:outputText  styleClass="ikont-hot-tipodefactoratraso"    value="#{var.tipodefactoratraso}"/>
                             <h:selectOneMenu id="select_tipofactor" value="#{Supervisor$Alimentar.tipofactorselec}"  >
@@ -542,7 +542,7 @@
 
                     <center>
                         <h:panelGrid id="layoutActa" columns="6">
-                            <h:outputLabel  styleClass="ikont-hol-acta"   id="lblActa"  value="#{var.acta}:" for="txtActa">
+                            <h:outputLabel  styleClass="ikont-hol-acta font-general"   id="lblActa"  value="#{var.acta}:" for="txtActa">
 
                             </h:outputLabel>
                             <interkont:spacer width="42"/>
@@ -561,7 +561,7 @@
                     <center>
                         <h:panelGrid id="layoutVideoMemoria" columns="3">
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-video"   id="lblVideo"  value="#{var.video}:">
+                                <h:outputLabel  styleClass="ikont-hol-video font-general"   id="lblVideo"  value="#{var.video}:">
 
                                 </h:outputLabel>
                             </h:panelGroup>
