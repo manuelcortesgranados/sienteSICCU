@@ -60,8 +60,8 @@
                         </h:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="2"  styleClass="font-general">
-                        <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}"/>
-                        <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}">
+                        <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}"/>
+                        <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}">
                             <f:selectItem itemValue="false" itemLabel="No"/>
                             <f:selectItem itemValue="true" itemLabel="Si"/>
                         </h:selectOneMenu>
