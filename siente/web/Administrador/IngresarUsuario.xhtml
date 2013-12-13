@@ -34,13 +34,13 @@
             </div>
             <ui:define name="body">
                 <h:form>
-                    <rich:panel id="panelingresarusuario">
+                    <rich:panel id="panelingresarusuario" styleClass="noneborder">
                         <a4j:region id="form_">
-                            <h:panelGrid  columns="2" styleClass="ikont-panel-registro">
+                            <h:panelGrid  columns="2" styleClass="ikont-panel-registro font-general">
                                 <h:selectBooleanCheckbox title="#{var.enviar} #{var.Correo}" value="#{Ciudadano$PerfilCiudadano.habilitarEnvioCorreo}"/>
                                 <h:outputLabel value="Desea enviarle correo electrónico de bienvenida al usuario creado?"/>
                             </h:panelGrid>
-                            <h:panelGrid id="ingresarciudadanonuevo" columns="2" styleClass="ikont-panel-registro" >
+                            <h:panelGrid id="ingresarciudadanonuevo" columns="2" styleClass="ikont-panel-registro font-general" >
 
                                 <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  >
                                     <rich:placeholder value="Nombre" />
@@ -77,7 +77,7 @@
                             </h:panelGrid>
                             <rich:collapsiblePanel header="#{var.configurarusuario}"  id="configurarusuario" style="width: 1000px" >
                                 <h:panelGrid   cellspacing="10" id="ikont-panel-selects-conusu">
-                                    <h:panelGrid columns="2">
+                                    <h:panelGrid columns="2" styleClass="font-general">
                                         <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.grupo}"/>
                                         <h:selectOneMenu id="combocargargrupos" value="#{Ciudadano$PerfilCiudadano.intidgrupo}" style="position: relative;left: 184px;">
                                             <f:selectItems value="#{Perfil$Usuario.gruposoption}" />
@@ -85,7 +85,7 @@
                                                       render="combocargarModulos,configurarusuario,ikont-panel-localidad,ikont-panel-tipoUsuario,ikont-panel-entidad"/>
                                         </h:selectOneMenu>
                                     </h:panelGrid>
-                                    <h:panelGrid columns="2" id="selectmodulo" rendered="#{Ciudadano$PerfilCiudadano.habilitartablalistarusuario}">
+                                    <h:panelGrid columns="2" styleClass="font-general" id="selectmodulo" rendered="#{Ciudadano$PerfilCiudadano.habilitartablalistarusuario}">
                                         <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.seleccionmodulo}" />
                                         <h:selectOneMenu id="combocargarModulos" value="#{Ciudadano$PerfilCiudadano.intidmodulo}" style="position: relative;left: 110px;">
                                             <f:selectItems value="#{Ciudadano$PerfilCiudadano.modulosoption}" />

@@ -35,14 +35,14 @@
                         <interkont:spacer height="20" />
                         <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >
 
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" styleClass="font-general">
                                 <h:outputLabel  styleClass="ikont-hol-enticonvcontrato"   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
                                 <rich:select defaultLabel="Ingrese Entidad"  value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
                                     <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                     <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
                                 </rich:select>
                             </h:panelGrid>
-                            <h:panelGrid id="prueba" columns="3">
+                            <h:panelGrid id="prueba" columns="3" styleClass="font-general">
                                 <h:outputText  styleClass="ikont-hot-usu"   value="#{var.Usuario}"/>
                                 <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
                                 <rich:message for="txtusu_login" styleClass="ikont-rm-txtusu_login"  />

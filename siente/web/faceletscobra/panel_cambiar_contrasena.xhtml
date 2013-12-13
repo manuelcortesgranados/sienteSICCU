@@ -14,11 +14,11 @@
 
         <h:form id="form_cambiocontra">
 
-            1. la longitud de el campo contraseña es de 11 caracteres.
-            <h:panelGrid id="cambiocontra" columns="2" >
+            <h:outputText styleClass="font-general" value="1. la longitud de el campo contraseña es de 11 caracteres."></h:outputText>
+            <h:panelGrid id="cambiocontra" columns="2" styleClass="font-general">
 
                 <h:panelGroup>
-                    <h:outputLabel  styleClass="ikont-hot-usuario"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
+                    <h:outputLabel  styleClass="ikont-hot-usuario font-general"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
                     <rich:message for="txtusuario" />
                 </h:panelGroup>
 
@@ -28,7 +28,7 @@
 
 
                 <h:panelGroup>
-                    <h:outputLabel  styleClass="ikont-hot-contrasenaact"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
+                    <h:outputLabel  styleClass="ikont-hot-contrasenaact font-general"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
                     <rich:message for="txtcontrasenaact" />
                 </h:panelGroup>
 
@@ -37,7 +37,7 @@
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  styleClass="ikont-hol-contrasenanuev"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuev font-general"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
                     <rich:message for="txtcontrasenanuev" />
                 </h:panelGroup>
 
@@ -46,7 +46,7 @@
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  styleClass="ikont-hol-contrasenanuevcom"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuevcom font-general"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
                     <rich:message for="txtcontrasenanuevcom" />
                 </h:panelGroup>
 
