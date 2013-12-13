@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="ikont-acl-esconder"  
+                   <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="closemodal"  
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('panelFiltroAvanzado')}.hide(); return false;"/>
                     
                 </h:panelGroup>
@@ -33,8 +33,8 @@
                                      onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  />
 
                         <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" width="100%" >
-                            <h:outputLabel  styleClass="ikont-hol-lblevente"    id="lblevente" value="#{var.eventopertenece}"  />
-                            <h:outputLabel  styleClass="ikont-hol-label_tipo_proyectoge"    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}"  />
+                            <h:outputLabel  styleClass="ikont-hol-lblevente titulo3_filtro_busqueda"    id="lblevente" value="#{var.eventopertenece}"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_tipo_proyectoge titulo3_filtro_busqueda"    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}"  />
                             <h:panelGroup>
                                 <h:selectOneMenu  id="even" value="#{HomeGestion.filtro.intcodevento}" style="width:200px;">
                                     <f:selectItems value="#{HomeGestion.eventos}" />
@@ -58,20 +58,20 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="ikont-hol-label_fase "    id="label_fase" value="#{var.fasepertenece}:" />
-                            <h:outputLabel  styleClass="ikont -hol-label_cuanti"    id="label_cuanti"  value="#{var.cuantocuesta}" />
+                            <h:outputLabel  styleClass="ikont-hol-label_fase titulo3_filtro_busqueda"    id="label_fase" value="#{var.fasepertenece}:" />
+                            <h:outputLabel  styleClass="ikont -hol-label_cuanti titulo3_filtro_busqueda"    id="label_cuanti"  value="#{var.cuantocuesta}" />
                             <h:selectOneMenu style="width:200px;" id="fase" value="#{HomeGestion.filtro.intcodfase}">
                                 <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                 <f:selectItems value="#{HomeGestion.fases}" />
                             </h:selectOneMenu>
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-label_cuantias"    id="label_cuantias" value="#{var.entre} "/>
+                                <h:outputLabel  styleClass="ikont-hol-label_cuantias titulo3_filtro_busqueda"    id="label_cuantias" value="#{var.entre} "/>
                                 <h:inputText value="#{HomeGestion.filtro.cuantiaini}" size="13" id="txtCuantiaini" >
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="15"/>
                                 </h:inputText>
 
-                                <h:outputLabel  styleClass="ikont-hol-label8"    id="label8" value=" #{var.y} " />
+                                <h:outputLabel  styleClass="ikont-hol-label8 titulo3_filtro_busqueda"    id="label8" value=" #{var.y} " />
                                 <h:inputText value="#{HomeGestion.filtro.cuantiafin}" size="22" id="txtCuantiafin">
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="22"/>
@@ -79,9 +79,9 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="ikont-hol-label_donde"    id="label_donde" value="#{var.dondeestaubicado}:"/>
+                            <h:outputLabel  styleClass="ikont-hol-label_donde titulo3_filtro_busqueda"    id="label_donde" value="#{var.dondeestaubicado}:"/>
 
-                            <h:outputLabel  styleClass="ikont-hol-label_quetan"    id="label_quetan"  value="#{var.quetanavanzado}:" />
+                            <h:outputLabel  styleClass="ikont-hol-label_quetan titulo3_filtro_busqueda"    id="label_quetan"  value="#{var.quetanavanzado}:" />
                             <h:panelGrid columns="1" columnClasses="panelcenter" width="100%">
                                 <h:selectOneMenu style="width:200px;" value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
@@ -115,14 +115,14 @@
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.avance1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="ikont-hol-label10"   id="label10" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont-hol-label10 titulo3_filtro_busqueda"   id="label10" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner  maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.avance2}">
                                 </rich:inputNumberSpinner>
                             </h:panelGrid>
 
-                            <h:outputLabel  styleClass="ikont-hol-label_entidad"    id="label_entidad" value="#{var.queentidadcontrato}"  />
-                            <h:outputLabel  styleClass="ikont-hol-label_porcent"    id="label_porcent" value="#{var.queporcentajesehapagado}" />
+                            <h:outputLabel  styleClass="ikont-hol-label_entidad titulo3_filtro_busqueda"    id="label_entidad" value="#{var.queentidadcontrato}"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_porcent titulo3_filtro_busqueda"    id="label_porcent" value="#{var.queporcentajesehapagado}" />
 
                             <h:panelGrid  columnClasses="panelcenter" columns="2">
                                 <interkont:spacer width="10px"/>
@@ -139,7 +139,7 @@
                                 <rich:inputNumberSpinner inputSize="5" maxValue="100" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.pocentajepro1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="ikont-hol-label11"   id="label11" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont-hol-label11 titulo3_filtro_busqueda"   id="label11" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.pocentajepro2}">
                                 </rich:inputNumberSpinner>
@@ -150,11 +150,11 @@
 
                         <h:panelGrid columns="2"  columnClasses="panelcenter">
                             <h:panelGrid columns="1" >
-                                <h:outputLabel  styleClass="ikont-hol-label_contratista"    id="label_contratista" value="#{var.quieneselcontratista}" />
+                                <h:outputLabel  styleClass="ikont-hol-label_contratista titulo3_filtro_busqueda"    id="label_contratista" value="#{var.quieneselcontratista}" />
 
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
-                                <h:outputLabel style="width:200px;"  styleClass="ikont-hol-label_estado_obra"   id="label_estado_obra" value="#{var.enqueestadoseencuentra}"  />
+                                <h:outputLabel style="width:200px;"  styleClass="ikont-hol-label_estado_obra titulo3_filtro_busqueda"   id="label_estado_obra" value="#{var.enqueestadoseencuentra}"  />
 
 
                                 <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}">
@@ -166,7 +166,7 @@
                             <h:panelGroup>
                                 <h:panelGrid columns="1" columnClasses="panelcenter" >
                                     <h:panelGroup>
-                                        <h:outputLabel  styleClass="ikont-hol-label_tipointe"    id="label_tipointe" value="Tipo de intervención:"   />
+                                        <h:outputLabel  styleClass="ikont-hol-label_tipointe titulo3_filtro_busqueda"    id="label_tipointe" value="Tipo de intervención:"   />
                                         <h:selectOneMenu  id="tipoIntervencion" value="#{HomeGestion.filtro.tipointervencion}">
                                             <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                             <f:selectItem itemLabel="Atención humanitaria" itemValue="1"/>
@@ -177,7 +177,7 @@
                                     </h:panelGroup>
                                     <interkont:spacer height="5" />
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="ikont-hot-verproyectosterminados" value="#{var.verproyectosterminados}"/>
+                                        <h:outputText  styleClass="ikont-hot-verproyectosterminados titulo3_filtro_busqueda" value="#{var.verproyectosterminados}"/>
                                         <h:selectBooleanCheckbox value="#{HomeGestion.filtro.boolobraterminada}"  />
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -185,7 +185,7 @@
                             <h:panelGroup >
                                 <h:panelGrid columns="1" columnClasses="panelcenter"  id="panelfiltroencargo">
                                     <center>
-                                        <h:outputLabel  styleClass="ikont-label_encargofidu "    id="label_encargofidu" value="#{var.cualeselencargo}"  />
+                                        <h:outputLabel  styleClass="ikont-label_encargofidu titulo3_filtro_busqueda"    id="label_encargofidu" value="#{var.cualeselencargo}"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtencargofidu" value="#{HomeGestion.filtro.encargofidu}" disabled="#{HomeGestion.filtro.tipointervencion==-1}"/>
@@ -194,7 +194,7 @@
                                 <h:panelGrid id="coddane" >
                                     <h:panelGroup rendered="#{HomeGestion.filtro.vercodigosedeeducativa}">
                                     <center>
-                                        <h:outputLabel  styleClass="ikont-hol-codigodane"    id="label_codigodane" value="#{var.codigodane}"  />
+                                        <h:outputLabel  styleClass="ikont-hol-codigodane titulo3_filtro_busqueda"    id="label_codigodane" value="#{var.codigodane}"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtcodigodane" value="#{HomeGestion.filtro.coddanesedeeducativa}"/>
@@ -205,7 +205,7 @@
                             </h:panelGroup>
                             <h:panelGroup>
                                 <center>
-                                    <h:commandLink  type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar"  value="#{var.buscar}rrrr" 
+                                    <h:commandLink  type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar"  value="#{var.buscar}" 
                                                    styleClass="ikont-busquedavanzada"   
                                                    />
                                 </center>

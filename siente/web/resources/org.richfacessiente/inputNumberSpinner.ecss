@@ -72,8 +72,13 @@ input.rf-insp-inp[type="text"] {
 
 .rf-insp-dec-dis {
     background-image: url("#{resource['org.richfaces.images:spinnerDisabledArrowBottom.png']}");
+    height : 50%;
 }
 
 .rf-insp-inc-dis {
     background-image: url("#{resource['org.richfaces.images:spinnerDisabledArrowTop.png']}");
+    height : 50%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: '#{richSkin.headerBackgroundColor}';
 }

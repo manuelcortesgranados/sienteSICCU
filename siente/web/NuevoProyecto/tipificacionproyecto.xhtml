@@ -33,7 +33,7 @@
                 <h:form id="form_datos_tipificacion" >
                     <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
                         <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                        <rich:panel id="rpTipificacion">
+                        <rich:panel id="rpTipificacion" styleClass="noneborder">
                             <f:facet name="header" >
                                 <h:panelGroup >
                                     <h:outputText  styleClass="ikont-hot-pasosIniciales"   value="#{var.pasosIniciales}"  />
@@ -46,7 +46,7 @@
 
                                     <h:panelGrid >                                    
                                         <h:panelGroup id="panel-periodo-evento">
-                                            <h:panelGrid columns="2" >
+                                            <h:panelGrid columns="2" styleClass="font-general">
                                                 <h:outputText  styleClass="ikont-hot-escogerEvento"    value="#{var.escogerEvento} " rendered="#{!var.permisonuevodiseno}"/>
                                                 <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" rendered="#{!var.permisonuevodiseno}">
                                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
@@ -164,12 +164,12 @@
                                                 <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" rowKeyVar="faseele"
                                                                 columns="#{var.column}"   >
                                                     <center>
-                                                        <h:panelGrid columns="1" columnClasses="panelcenter">
+                                                        <h:panelGrid columns="1" columnClasses="panelcenter" styleClass="font-general">
                                                             <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
                                                                 <h:graphicImage  styleClass="ikont-hgi-fase"   url="/resources/imgs/#{fase.intidfase}fase.png"  />
                                                             </a4j:commandLink>
 
-                                                            <a4j:commandLink styleClass="ikont-hcl-fasestrnombre"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
+                                                            <a4j:commandLink styleClass="ikont-hcl-fasestrnombre font-general"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
 
                                                             </a4j:commandLink>
                                                             <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
@@ -180,7 +180,7 @@
                                                 </rich:dataGrid>
                                             </h:panelGroup>
                                             <h:panelGrid columns="2" id="tiposoli">
-                                                <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
+                                                <h:outputLabel  styleClass="ikont-hol- font-general"    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                 <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                     <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
                                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
@@ -197,15 +197,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText  styleClass="ikont-hot-escojatipo"   value="#{var.numsubtipo}#{var.escojatipo}"/>
                                                 </f:facet>
-                                                <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
+                                                <rich:dataGrid id="tablasubtipoah" styleClass="font-general" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
                                                                columns="4"  rowKeyVar="fila">
                                                     <center>                                                        
-                                                        <h:panelGrid columns="1" columnClasses="panelcenter">
+                                                        <h:panelGrid columns="1" columnClasses="panelcenter" >
                                                             <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
                                                                 <h:graphicImage     url="#{tipoproyecto.strurlimagen}" height="60px"/>
                                                             </a4j:commandLink>
 
-                                                            <a4j:commandLink styleClass="ikont-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
+                                                            <a4j:commandLink styleClass="ikont- font-general"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
                                                             </a4j:commandLink>
                                                             <h:selectBooleanCheckbox value="#{tipoproyecto.check}" >
                                                                 <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}" execute="@this" render="panelSubTipo, tablasubtipoah" />
@@ -235,7 +235,7 @@
                                                                     <h:graphicImage  styleClass="ikont-hgi-strurlimagen"   url="#{tipoobra.strurlimagen}"/>
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink styleClass="ikont-hcl-strnombremedio"   value="#{tipoobra.strnombremedio}"  execute="@this"  
+                                                                <a4j:commandLink styleClass="ikont-hcl-strnombremedio font-general"   value="#{tipoobra.strnombremedio}"  execute="@this"  
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                  render="tablatipoobra"  />
 

@@ -40,7 +40,7 @@
         <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
             <h:form>
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                <rich:panel id="mp-proyectosPadres">
+                <rich:panel id="mp-proyectosPadres" styleClass="noneborder">
                     <f:facet name="header" >
                         <h:panelGroup >
                             <h:outputText  styleClass="ikont-hot-pasosIniciales"  value="#{var.pasosIniciales}"   />
@@ -48,13 +48,13 @@
                     </f:facet>
 
                     <rich:collapsiblePanel switchType="client" header="3. #{var.datosbasicos}"  >
-                        <h:outputText  styleClass="ikont-hot-intcodigoobra"    value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
+                        <h:outputText  styleClass="ikont-hot-intcodigoobra font-general"    value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
                         <h:panelGrid  cellspacing="13" id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-nomabrev"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>                               
+                                <h:outputLabel  styleClass="ikont-hol-nomabrev  font-general"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>                               
 
-                                        <h:outputText  styleClass="ikont-hot-textoinicial"   id="lbllegendnombreproy"  value="#{var.legendnombreabre}"/>
+                                        <h:outputText  styleClass="ikont-hot-textoinicial  font-general"   id="lbllegendnombreproy"  value="#{var.legendnombreabre}"/>
                                     
                                 <rich:message for="txtNombreAbrev" />
                             </h:panelGroup>
@@ -64,7 +64,7 @@
 
                             </h:inputTextarea>
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-FecIni"   id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni"/>
+                                <h:outputLabel  styleClass="ikont-hol-FecIni font-general"   id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni"/>
                                 <rich:message for="fecIni" />
                             </h:panelGroup>
 
@@ -72,14 +72,14 @@
                                 <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
                             </rich:calendar>
 
-                            <h:outputLabel  styleClass="ikont-hol-FecFin"   id="lblFecFin"  value="#{var.fechaterminacion}"/>
+                            <h:outputLabel  styleClass="ikont-hol-FecFin font-general"   id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
                             <h:panelGroup id="layoutFechaFin" >
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
                                     <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
                                 </rich:calendar>
                             </h:panelGroup>
-                            <h:outputLabel  styleClass="ikont-hol-periodomedida"    value="#{var.periodomedida}"/>
+                            <h:outputLabel  styleClass="ikont-hol-periodomedida font-general"    value="#{var.periodomedida}"/>
                             <h:panelGroup id="layoutPeriodoMedi2">
                                 <h:selectOneMenu id="comboperiodomedida" value="#{Supervisor$IngresarNuevaObra.obranueva.periodomedida.intidperiomedida}"  >
                                     <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoMedida}" />
@@ -88,7 +88,7 @@
                             </h:panelGroup>
 
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-plazodias"   id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
+                                <h:outputLabel  styleClass="ikont-hol-plazodias font-general"   id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
                                 <rich:message for="plazodias" />
                             </h:panelGroup>
 
@@ -100,7 +100,7 @@
                                 </h:inputText>
                             </h:panelGroup>
 
-                            <h:outputLabel  styleClass="ikont-hol-entidadContratantec"   id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
+                            <h:outputLabel  styleClass="ikont-hol-entidadContratantec font-general"   id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
                             <h:panelGroup id="layoutenco">
                                 <h:selectOneMenu   id="cmbEntidadContratantec" 
                                                    label="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
@@ -111,23 +111,23 @@
                                 </h:selectOneMenu>
                             </h:panelGroup>
 
-                            <h:outputLabel  styleClass="ikont-hol-interventor"   id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
+                            <h:outputLabel  styleClass="ikont-hol-interventor font-general"   id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
                             <h:inputText  id="txtInterventor" value="#{Supervisor$IngresarNuevaObra.obranueva.strinterventor}" disabled="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}"
                                           maxlength="100" size="40"/>
 
-                            <h:outputLabel  styleClass="ikont-hol-solicitante"   id="lblsolicitante"  value="#{var.solicitante}:" for="txtSolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
+                            <h:outputLabel  styleClass="ikont-hol-solicitante font-general"   id="lblsolicitante"  value="#{var.solicitante}:" for="txtSolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
                             <h:panelGroup id="gpsolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
                                 <h:outputText  styleClass="ikont-hot-"   id="txtSolicitante" value="#{Supervisor$IngresarNuevaObra.solicitante.strnombrecompleto}"/>
                             </h:panelGroup>
 
-                            <h:outputLabel  styleClass="ikont-hol-cargo"   id="lblcargo"  value="#{var.cargo}" for="txtCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
+                            <h:outputLabel  styleClass="ikont-hol-cargo font-general"   id="lblcargo"  value="#{var.cargo}" for="txtCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
                             <h:panelGroup id="gpsolicitanteCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
                                 <h:outputText  styleClass="ikont-hot-cargo"    id="txtCargo" value="#{Supervisor$IngresarNuevaObra.solicitante.cargo.strdescripcion}"/>
                             </h:panelGroup>
 
                         </h:panelGrid>
                         <h:panelGrid columns="2" id="gpentidadministerios" >
-                            <h:outputLabel  styleClass="ikont-hol-ruta"   id="lblruta"  value="#{var.seleccionruta}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}" />
+                            <h:outputLabel  styleClass="ikont-hol-ruta font-general"   id="lblruta"  value="#{var.seleccionruta}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}" />
                             <h:panelGroup id="pginvias" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}">
                                 <h:inputText  id="txtruta" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.ruta.strcodigotramo} #{Supervisor$IngresarNuevaObra.obranueva.ruta.strnombretramo}" >
                                 </h:inputText>
@@ -139,7 +139,7 @@
                                 <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
                                 </a4j:commandButton>
                             </h:panelGroup>
-                            <h:outputLabel  styleClass="ikont-hol-sede"   id="lbsede"  value="#{var.seleccionar} Sede:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}"/>
+                            <h:outputLabel  styleClass="ikont-hol-sede font-general"   id="lbsede"  value="#{var.seleccionar} Sede:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}"/>
                             <h:panelGroup id="gpEducacion" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}">
 
                                 <h:inputText  id="txtsede" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa.strnombre}">
@@ -159,30 +159,30 @@
 
                         </h:panelGrid>
                         <h:panelGrid columns="1">
-                            <h:outputLabel  styleClass="ikont-hol-objetoObra"   id="lblObjetoObra"  value="#{var.objetodeobra}" />
+                            <h:outputLabel  styleClass="ikont-hol-objetoObra font-general"   id="lblObjetoObra"  value="#{var.objetodeobra}" />
                             <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObjetoObra" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strobjetoobra}" disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
-                            <h:outputLabel  styleClass="ikont-hol-logroObra"   id="lblLogroObra"  value="#{var.logroProyecto}" />
+                            <h:outputLabel  styleClass="ikont-hol-logroObra font-general"   id="lblLogroObra"  value="#{var.logroProyecto}" />
                             <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtLogroProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strlogros}"/>
-                            <h:outputLabel  styleClass="ikont-hol-obseroObra"   id="lblObseroObra"  value="#{var.observacionesProyecto}" />
+                            <h:outputLabel  styleClass="ikont-hol-obseroObra font-general"   id="lblObseroObra"  value="#{var.observacionesProyecto}" />
                             <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObserProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strconclucompro}"/>
                         </h:panelGrid>
                         <h:panelGroup layout="block">
                             <h:panelGrid  cellspacing="9" id="valores" columns="2" >
-                                 <h:outputText value="Familias participantes:" rendered="#{Supervisor$IngresarNuevaObra.proyectoestrategia}" />    
-                                <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
-                                <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
-                                <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
+                                <h:outputText value="Familias participantes:" rendered="#{Supervisor$IngresarNuevaObra.proyectoestrategia}" styleClass=" font-general"/>    
+                                <h:outputText  styleClass="ikont-hot-numbeneficiarios  font-general"   value="#{var.numbeneficiarios}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
+                                <h:outputText  styleClass="ikont-hot-poblacionestudiantil  font-general"   value="#{var.poblacionestudiantil}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
+                                <h:outputText  styleClass="ikont-hot-otrosactores font-general"   value="#{var.otrosactores}" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" >
                                     <rich:tooltip value="#{var.numbeneficiarios}" />
                                 </rich:inputNumberSpinner>
-                                <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosdirectos font-general"   value="#{var.numempleosdirectos}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-institucionesfortalecidas font-general"   value="#{var.institucionesfortalecidas}:" rendered="#{ !Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 <rich:inputNumberSpinner rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia }" styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20">
                                     <rich:tooltip value="#{var.numempleosdirectos}" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
                                     <rich:tooltip value="#{var.institucionesfortalecidas}" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 </rich:inputNumberSpinner>
-                                <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosindirectos font-general"   value="#{var.numempleosindirectos}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas font-general"   value="#{var.organizacionesfortalecidas}:" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                 <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
                                                          maxValue="50000000" inputSize="20" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia }" >
 
@@ -193,7 +193,7 @@
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGrid cellspacing="7" id="valores2" columns="2" rendered="#{!Supervisor$IngresarNuevaObra.proyectoestrategia and Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
-                            <h:outputLabel  styleClass="ikont-hol-numvaldeclarado"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
+                            <h:outputLabel  styleClass="ikont-hol-numvaldeclarado font-general"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
                                          size="20"  maxlength="20"
@@ -202,14 +202,14 @@
 
                             </h:inputText>
                             
-                            <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}  %" >
+                            <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado font-general"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}  %" >
                             </h:outputLabel>
                                 <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
                                              size="20"  maxlength="20">                                             
                                     <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                 </h:inputText>
                   
-                            <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
+                            <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado font-general"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
                                          size="20"  maxlength="20"
@@ -217,7 +217,7 @@
                                 <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
                             </h:inputText>
 
-                            <h:outputLabel  styleClass="ikont-hol-numvalprogramadoejecicion"   id="lblnumvalprogramadoejecicion"   value="#{var.numvalprogejecucion}" >
+                            <h:outputLabel  styleClass="ikont-hol-numvalprogramadoejecicion font-general"   id="lblnumvalprogramadoejecicion"   value="#{var.numvalprogejecucion}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalprogramejec}"
                                          size="20"  maxlength="20"
@@ -226,26 +226,26 @@
                             </h:inputText>
                         </h:panelGrid>
                         <h:panelGrid id="valores3" columns="2" cellspacing="9" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
-                            <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
-                            <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
-                            <h:outputLabel  styleClass="ikont-hol-numconvenio"   value="Número de Convenio:"/>
+                            <h:outputLabel  styleClass="ikont-hol-sector font-general"   value="Sector:"/>
+                            <h:outputText  styleClass="ikont-hot-nombresector font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
+                            <h:outputLabel  styleClass="ikont-hol-numconvenio font-general"   value="Número de Convenio:"/>
                             <h:panelGrid columns="2">
-                                <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
+                                <h:outputText  styleClass="ikont-hot-strnumcontrato font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
                                 <h:commandLink title="#{var.verconvenios}" rendered="#{!SessionBeanCobra.cobraService.ciu}" immediate="true"  id="irdetalleconvenii" action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                     <h:graphicImage    value="/resources/imgs/bt_ver.png"/>
                                     <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.intidcontrato}" />
                                 </h:commandLink>
                             </h:panelGrid>
-                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="Objeto : "/>
-                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.textobjeto}"/>
-                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
-                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
-                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechaini}:"/>
-                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechaini}">
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general"   value="Objeto : "/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.textobjeto}"/>
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general"   value="Contratista:"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general"   value="#{var.datefechaini}:"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechaini}">
                                 <f:convertDateTime pattern="#{var.formatofecha}" />
                             </h:outputText>
-                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="#{var.datefechafin}"/>
-                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechafin}">
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general"   value="#{var.datefechafin}"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista font-general"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.datefechafin}">
                                 <f:convertDateTime pattern="#{var.formatofecha}"/>
                             </h:outputText>
                         </h:panelGrid>

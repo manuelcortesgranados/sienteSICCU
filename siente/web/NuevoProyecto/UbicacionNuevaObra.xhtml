@@ -35,7 +35,7 @@
 
                 <h:panelGroup layout="block" id="gpDirMapa" >
 
-                    <h:outputText  styleClass="ikont-hot-gpDirMapa"   value="#{var.selevisu} "/>
+                    <h:outputText  styleClass="ikont-hot-gpDirMapa font-general"   value="#{var.selevisu} "/>
 
                     <h:form id="fr" prependId="false">
 
@@ -188,7 +188,7 @@
                 <h:form>
                     <rich:collapsiblePanel id="simpleToggleSelecLocalidad" header="#{var.relaccioneloca}" switchType="ajax" expanded="true">
                         <h:panelGroup layout="block" id="gpDirLocalidades3" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}">
-                            <h:panelGrid columns="4">
+                            <h:panelGrid columns="4" styleClass="font-general">
                                 <interkont:spacer width="385" height="5"/>
                                 <h:panelGrid styleClass="ikont-hpg-sin3"  />
                                 <h:outputLabel  styleClass="ikont-hol-lblclasificacionProyecto"   id="lblclasificacionProyecto"  value="#{var.clasificacionProyecto}" for="comboclasificacionproyecto">
@@ -204,7 +204,7 @@
                             <h:panelGroup    layout="block" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" >
                                 <h:panelGroup id="paneldeptomuniproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
                                     <h:panelGroup id="gpdeptomuniproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                        <h:panelGrid cellspacing="5" cellpadding="5" columns="2">
+                                        <h:panelGrid cellspacing="5" cellpadding="5" columns="2" styleClass="font-general">
                                             <interkont:spacer width="385" height="5"/>
                                             <h:panelGrid styleClass="ikont-hpg-sin4"  />
                                             <h:outputLabel  styleClass="ikont-hol-deptopry"   id="lbldepartamentoProyecto"  value="#{var.departamentoProyecto}" for="combodepartamentoproyecto">
@@ -219,7 +219,7 @@
                                         </h:panelGrid>
                                     </h:panelGroup>
                                     <a4j:outputPanel id="panelmunipioproyecto" ajaxRendered="true" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                        <h:panelGrid columns="2">
+                                        <h:panelGrid columns="2" styleClass="font-general">
                                             <h:panelGrid styleClass="ikont-hpg-sin5"/>
                                             <interkont:spacer width="385" height="15"/>
                                             <h:outputLabel  styleClass="ikont-hol-munipry"   id="lblmunicipioProyecto"  value="#{var.municipioProyecto}" for="combomunicipioproyecto">
@@ -231,7 +231,7 @@
                                         </h:panelGrid>
                                     </a4j:outputPanel >
                                     <h:panelGroup id="gpregionproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==3}">
-                                        <h:panelGrid columns="2">
+                                        <h:panelGrid columns="2" styleClass="font-general">
                                             <interkont:spacer width="385" height="5"/>
                                             <h:panelGrid styleClass="ikont-hpg-sin5"  />
                                             <h:outputLabel  styleClass="ikont-hol-regpry"   id="lblregionProyecto"  value="#{var.regionProyecto}" for="comboregion">
@@ -254,7 +254,7 @@
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="id_cobras_municipales" rendered="#{var.habilitacionLocalidadesBarrioVereda}">
 
-                                <h:panelGrid columns="3" >
+                                <h:panelGrid columns="3" styleClass="font-general">
                                     <interkont:spacer width="200" height="5"/>
                                     <h:outputLabel id="lbllugarproyecto"  value="#{var.zonaubi}"  for="combolugarproyecto" />
                                     <h:selectOneMenu id="combolugarproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
@@ -264,7 +264,7 @@
                                     </h:selectOneMenu>
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="6" id="panelcorregimiento" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==2}" >
+                                <h:panelGrid columns="6" styleClass="font-general" id="panelcorregimiento" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==2}" >
                                     <interkont:spacer width="200" height="5"/>
                                     <h:outputLabel id="lblcorregimientoproyecto"  value="#{var.corregimiento}" for="combocorregimiento" />
                                     <h:selectOneMenu id="combocorregimiento" value="#{Supervisor$IngresarNuevaObra.idcorregimiento}" >
@@ -281,7 +281,7 @@
                                     </h:panelGroup>
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="6" id="panelcomuna" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==1}" >
+                                <h:panelGrid columns="6" styleClass="font-general" id="panelcomuna" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==1}" >
                                     <interkont:spacer width="200" height="5"/>
                                     <h:outputLabel id="lblcomunaproyecto"  value="#{var.comuna}" for="combocomuna" />
                                     <h:selectOneMenu id="combocomuna" value="#{Supervisor$IngresarNuevaObra.idcomuna}"  >

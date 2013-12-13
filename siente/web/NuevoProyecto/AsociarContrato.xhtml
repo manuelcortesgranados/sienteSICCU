@@ -31,7 +31,7 @@
         <h:form>
             <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                <rich:panel id="pgcontrat1" header="#{var.asociacioncontrato}" >
+                <rich:panel id="pgcontrat1" header="#{var.asociacioncontrato}" styleClass="noneborder">
                     <center>
                         <interkont:spacer height="35" />
 
@@ -99,7 +99,7 @@
 
                         <h:panelGrid id="pgconveniocontrato" columns="2">
                             <a4j:commandLink value="Asociar contrato"
-                                             styleClass="ikont-hcl-asociarcontrato"  
+                                             styleClass="ikont-acl-asocontrato"  
                                              action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
                                              render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
                             </a4j:commandLink>

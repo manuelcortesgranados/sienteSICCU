@@ -895,9 +895,12 @@ body {
     color:#FFF!important;
 }
 
+.rf-p.noneborder .rf-p-b{
+    border: solid 0px transparent;
+}
+
 .rf-dt-hdr th{
     background-color:#F0F4F8;
-    color : #266185;
 }
 
 .rf-dt-hdr-c th{
@@ -1702,10 +1705,10 @@ a.busquedavanzada2:hover {
 
 .titulo3_filtro_busqueda
 {
-    color: #004670;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
+    color: #004670!important;
+    font-size: 12px!important;
+    font-weight: bold!important;
+    text-align: center!important;
 }
 
 
@@ -4839,13 +4842,6 @@ a.ikont-busquedavanzada:hover {
     text-align: center;
 }
 
-
-.panelFiltroAvanzadotxt{
-    background-color: #FFFFFF;
-    border: 7px solid #004670;
-    box-shadow: 1px 1px 10px #FFFFFF;
-    text-align: center;
-}
 
 #sideline {
     text-align: center;

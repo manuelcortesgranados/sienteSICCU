@@ -31,7 +31,7 @@
         <h:form id="formImagenesProy" >
             <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                <rich:panel>
+                <rich:panel styleClass="noneborder">
                     <f:facet name="header">
                         <h:outputText  styleClass="ikont-hot-subirimagenes"   value="#{var.subirimagenes}"/>
                     </f:facet>
@@ -41,7 +41,7 @@
 
                             <rich:panel styleClass="ikont-rp-imagenprincipal-body" id="imagenanterior" header="#{var.imagenanterior}" bodyClass="ikont-rp-imagenanterior-body"  >
                                 <center>
-                                    <h:panelGrid id="layoutImagen"  columnClasses="aiu">
+                                    <h:panelGrid id="layoutImagen"  columnClasses="aiu" styleClass="font-general">
                                         <center>
                                             <a4j:commandLink id="btAdjuntarImagen" styleClass="ikont-hcl-btAdjuntarImagen anadirimagen">
                                                 <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenActual')}.show();"/>
@@ -65,7 +65,7 @@
                             </rich:panel>
                             <rich:panel id="imagenprincipal" styleClass="ikont-rp-imagenprincipal-body" header="#{var.imagenprincipal}" bodyClass="ikont-rp-imagenprincipal-body"  >
                                 <center>
-                                    <h:panelGrid id="panel_subirImagen"  columns="1" >
+                                    <h:panelGrid id="panel_subirImagen"  columns="1" styleClass="font-general">
                                         <a4j:commandLink id="adjuntarImagen" styleClass="ikont-hcl-adjuntarImagen anadirimagenes">
                                             <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                         </a4j:commandLink>

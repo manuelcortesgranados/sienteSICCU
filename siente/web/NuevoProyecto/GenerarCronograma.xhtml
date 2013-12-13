@@ -28,7 +28,7 @@
         <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
             <h:form id="formCronograma">
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                <rich:panel id="pasoGenCron"  >
+                <rich:panel id="pasoGenCron"  styleClass="noneborder">
                     <f:facet name="header">
                         <h:outputText  styleClass="ikont-hot-generarcronograma"   value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
                         <h:outputText  styleClass="ikont-hot-booleantienehijos"   value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
