@@ -58,8 +58,13 @@
                                     <h:outputText  styleClass="ikont-hot-ver"   value="#{var.Ver}"/>
                                 </f:facet>
                                 <h:commandLink value="Ver" id="boton" immediate="true" styleClass="ikont-link-downdoc ikont-hpg-fcontrato"
-                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}"
+                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}" rendered="#{var.permisonuevodiseno}"
                                                  style="color: #9CFF00; background-color: #257500;"/>
+                                <h:commandLink value="Ver" id="boton3" immediate="true" styleClass="ikont-link-downdoc ikont-hpg-fcontrato"
+                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}" rendered="#{!var.permisonuevodiseno}"
+                                                 >
+                                    <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
+                                </h:commandLink>
                             </rich:column>
 
 
