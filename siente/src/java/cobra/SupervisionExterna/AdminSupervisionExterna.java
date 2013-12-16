@@ -638,7 +638,6 @@ public class AdminSupervisionExterna implements Serializable{
      */
     public void cargarVisitaFallida() {
         Visita visita = (Visita) tablavisitasfallidas.getRowData();
-        System.out.println("visita = " + visita.getOidvisita());
         getSessionBeanCobra().getSupervisionExternaService().setVisita(visita);
         subirListado.borrarDatosSubidos();
     }
