@@ -857,9 +857,6 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                     for (Contrato object : listacontratosproyecto) {
                         System.out.println("object = " + object.getStrnumcontrato());
                         relacioncontrato.setContrato(object);
-                        relacioncontrato.setEditar(true);
-                        relacioncontrato.setEliminar(true);
-                        relacioncontrato.setConsultar(true);
                         relacioncontrato.setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
                         relacioncontratojsfusuarios.add(relacioncontrato);
 
@@ -913,9 +910,6 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
                     for (Obra object : getUsuario().getListaproyecto()) {
                         relacioncontrato.setContrato(object.getContrato());
                         relacioncontrato.setUsuId(getUsuario().getUsuariomod());
-                        relacioncontrato.setEditar(true);
-                        relacioncontrato.setEliminar(true);
-                        relacioncontrato.setConsultar(true);
                         relacioncontrato.setUsuId(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
                         relacioncontratojsfusuarios.add(relacioncontrato);
                     }
