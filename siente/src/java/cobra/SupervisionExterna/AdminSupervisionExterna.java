@@ -649,7 +649,7 @@ public class AdminSupervisionExterna implements Serializable{
     public void generarReporteErroresVisita() {
         Visita visita = (Visita) tablavisitasfallidas.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reporteresultadosvalidacion") + visita.getOidvisita());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reporteresultadosvalidacion", Propiedad.getValor("nombrebd") ,visita.getOidvisita()));
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class

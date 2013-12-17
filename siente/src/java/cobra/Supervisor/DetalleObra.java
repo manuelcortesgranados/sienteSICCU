@@ -1835,7 +1835,7 @@ public class DetalleObra implements Serializable{
     public void generarReporteVisitaAuditoria() {
         Visita visita = (Visita) tablavisitasauditoria.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reporteresultadosvalidacion") + visita.getOidvisita());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,visita.getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
