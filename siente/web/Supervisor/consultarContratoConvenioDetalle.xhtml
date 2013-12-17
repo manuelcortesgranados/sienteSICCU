@@ -239,7 +239,7 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont-"   id="contratista" value="#{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
+                                    <h:outputLabel  styleClass="ikont-"   id="contratista" value="#{var.entidad} #{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
                                     <h:outputLabel  styleClass="ikont-"   id="enti" value="#{var.entidad}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
 
                                     <interkont:spacer width="20" />
@@ -431,7 +431,7 @@
                                     </h:panelGrid>
 
                                     <h:outputText rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" value="#{var.TipoContratoContralorias}:" />
-                                    
+                                      <interkont:spacer width="20" />
                                     <h:panelGrid rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" id="idtipocontrato" columns="1" >
                                         <h:panelGrid cellspacing="0" rendered="#{Supervisor$Contrato.modificartipocontrato}" columns="3" id="paneltipocontrato">
                                             <h:outputText  styleClass="ikont- font-general"   value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.strdescripcion}"  />

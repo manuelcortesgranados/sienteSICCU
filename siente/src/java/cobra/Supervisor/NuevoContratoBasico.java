@@ -239,11 +239,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Variable para activar el {@link contratoPadreSelec()}
      */
     private int varmostrarcontrpa = 0;
-    
     /*
      * Variable contrato seleccionado
      */
-    private String contratoselect ;
+    private String contratoselect;
     /**
      * Objeto para acceder a los atributos de planificación pago
      */
@@ -3835,6 +3834,24 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         varmostrarcontrpa = 1;
         //contrpadre = listacontratos.get(filaSeleccionada);
         contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
+        List<Tercero> listaentiddadcontratopadre = new ArrayList<Tercero>();
+
+        if (contrato.getTercero().getIntcodigo() == -1) {
+            if (contrpadre.getContratista() != null) {
+                listaentiddadcontratopadre = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(contrpadre.getContratista().getIntcodigocontratista());
+
+                if (!listaentiddadcontratopadre.isEmpty() && listaentiddadcontratopadre.size() == 1) {
+                    contrato.setTercero(listaentiddadcontratopadre.get(0));
+                    return null;
+                } else {
+                    FacesUtils.addErrorMessage(Propiedad.getValor("errorconfiguracionterceroconvenio"));
+                    return null;
+                }
+            } else {
+                FacesUtils.addErrorMessage(Propiedad.getValor("errorconfiguracionterceroconvenio"));
+                return null;
+            }
+        }
         return null;
 
     }
@@ -5689,12 +5706,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String cambiarContrPadre() {        
-     if (preguntacontrato == 1 ){
-         setContratoselect("Contrato");
-     }else{
-         setContratoselect("Convenio");
-     }
+    public String cambiarContrPadre() {
+        if (preguntacontrato == 1) {
+            setContratoselect("Contrato");
+        } else {
+            setContratoselect("Convenio");
+        }
         varmostrarcontrpa = 0;
         listacontratos.clear();
         listacontratoscontratista.clear();

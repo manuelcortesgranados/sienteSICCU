@@ -204,8 +204,8 @@
                                 <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
                                     <h:outputLabel styleClass="ikont-hot-tipocontrcontraloria font-general" id="lbltipocontratoselectselect1" value="#{var.selecciontipocontrato}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}"/>
                                     <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" >
-                                        <f:selectItem itemLabel="Contrato" itemValue="0"/>
-                                        <f:selectItem itemLabel="Consultoria" itemValue="1"/>
+                                        <f:selectItem itemLabel="Ejecución" itemValue="0"/>
+                                        <f:selectItem itemLabel="Consultoría" itemValue="1"/>
                                         <a4j:ajax event="valueChange" render="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon, ikont-hpg-tipocontrato" execute="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon,ikont-hpg-tipocontrato" />
                                     </h:selectOneMenu>   
 
@@ -234,7 +234,7 @@
 
                                     <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
                                     <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra"  >
-                                        <rich:select styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli}"
+                                        <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
                                                      defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                         </rich:select>
