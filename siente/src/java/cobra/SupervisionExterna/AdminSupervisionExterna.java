@@ -15,6 +15,7 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
 import cobra.CargadorArchivosWeb;
+import cobra.Cobra.Download;
 import cobra.Supervisor.FacesUtils;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
@@ -662,5 +663,30 @@ public class AdminSupervisionExterna implements Serializable{
     public void limpiarVisita() {
         getSessionBeanCobra().getSupervisionExternaService().setVisita(new Visita());
         subirListado.borrarDatosSubidos();
+    }
+    
+    /**
+     * Limpia la información del archivo de la visita a ser cargada
+     */
+    public void limpiarArchivoVisita() {
+        subirListado.borrarDatosSubidos();
+    }
+    
+    /**
+     * Obtiene una referencia del bean utilizado para descargar arcivos
+     * @return 
+     */
+    public Download getDownload() {
+        return (Download) FacesUtils.getManagedBean("Cobra$Download");
+    }
+    
+    /**
+     * Método utilizado para descargar la plantilla necesaria para realizar el 
+     * cargue del módulo de auditoría
+     * @return null
+     */
+    public void descargarPlantillaAuditoria() {
+        getSessionBeanCobra().setUrlAbri(RutasWebArchivos.PLANTILLA_MATRIZ_AUDITORIA);
+        getDownload().onDownload();
     }
 }

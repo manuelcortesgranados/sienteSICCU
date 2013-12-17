@@ -83,10 +83,14 @@
                                 <interkont:spacer height="3" />
 
                                 <br/>
-                                <a4j:commandButton id="bt_borrarListadoSubido" action="#{Supervision$Externa.cambioListado}"
+                                <a4j:commandButton action="#{Supervision$Externa.cambioListado}"
                                                    render="info_documentoSuper, uploadDocAtsiente, uploadDocAtzoom, panelInformacionArchivo"
-                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikontbt_borrarlistadosubido"    />
+                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0 and var.versioncobra eq 'siente'}" value="#{var.boarcsub}"
+                                                   styleClass="ikontbt_borrarlistadosubido"/>
+                                <a4j:commandButton action="#{Supervision$Externa.limpiarArchivoVisita}"
+                                                   render="info_documentoSuper, uploadDocAtsiente, uploadDocAtzoom, panelInformacionArchivo"
+                                                   rendered="#{Supervision$Externa.subirListado.numArchivos>0 and var.versioncobra eq 'zoom'}" value="#{var.boarcsub}"
+                                                   styleClass="ikontbt_borrarlistadosubido"/>
                                 <a4j:commandButton value="#{var.aceptar}"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0 and var.versioncobra eq 'siente'}"
                                                    render="panelInformacionArchivo"

@@ -40,6 +40,11 @@
                 <h:panelGroup layout="block" id="mp-regMatrizSupervision">
                     <rich:panel header="1. Datos Visita">
                         <interkont:spacer height="3" />
+                        
+                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita1}: "/>
+                        <interkont:spacer height="3" />
+                        <h:commandLink value="#{var.descargarformatomatrizauditoria}" styleClass="ikont-hcb-descargar-formato"  
+                                       action="#{Supervision$Externa.descargarPlantillaAuditoria}" immediate="true" target="_blank"/>
 
                         <h:panelGrid id="panelInformacionArchivo" columns="2" columnClasses="panelizquierda, panelizquierda">
                             <h:outputText  styleClass="ikont-"   value="#{var.fechainforme}" />
@@ -66,7 +71,7 @@
                         </h:panelGrid>
                     </rich:panel>
                     <rich:panel header="#{var.titulovisitasfallidas}" rendered="#{var.versioncobra eq 'zoom'}">
-                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita}"/>
+                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita2}"/>
                         <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
                                 rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
                                 value="#{Supervision$Externa.listavisitasfallidas}"

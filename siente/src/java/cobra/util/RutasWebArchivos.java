@@ -71,7 +71,16 @@ public class RutasWebArchivos {
     
     public static String DOC_MATRIZ="/resources/Documentos/ValidadorE/";
     
+    /**
+     * Ubicación en donde se almacenan los archivos cargados, corresppondientes
+     * a la matriz de auditoría
+     */
     public static String MATRIZ_AUDITORIA="/resources/Documentos/MatrizAuditoria/";
+    
+    /**
+     * Plantilla utilizada para realizar el cargue de la matriz de auditoría
+     */
+    public static String PLANTILLA_MATRIZ_AUDITORIA="/resources/Plantilla/formato-matriz-auditoria.xlsx";
     
     /**
      * Constante que corresponde a la ubicación web en la que se almacenan los
