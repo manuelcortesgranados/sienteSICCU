@@ -9,36 +9,35 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-        <h:head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>#{var.titulogeneral}</title>
-            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{var.titulogeneral}</title>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
 
-            <ui:insert name="head"/>
+        <ui:insert name="head"/>
 
-            <style type="text/css">
-                body,td,th {
-                    margin: 0px;
-                    font-family: Verdana, Geneva, sans-serif;
-                }
-            </style>
-        </h:head>
+        <style type="text/css">
+            body,td,th {
+                margin: 0px;
+                font-family: Verdana, Geneva, sans-serif;
+            }
+        </style>
+    </h:head>
 
-        <h:body>
-            <h:form id="form_menu">
-                <ui:include src="/facelets/menu_external.xhtml"/>
-            </h:form>
-            <table  border="0" cellspacing="0" cellpadding="0">
-                <interkont:spacer height="20px"/>
-                <tr>
-                    <td >
-                        <ui:insert name="body"/>
-                    </td>
-                </tr>
-            </table>
-        </h:body>
+    <h:body>
+        <h:form id="form_menu">
+            <ui:include src="/facelets/menu_external.xhtml"/>
+        </h:form>
+        <table  border="0" cellspacing="0" cellpadding="0" class="totalwidth">
+            <tr>
+                <td >
+                    <ui:insert name="body"/>
+                </td>
+            </tr>
+        </table>
+    </h:body>
 </ui:composition>
