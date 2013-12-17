@@ -414,6 +414,54 @@
                                 <h:commandLink id="word_infociu2" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="butonreport zoom-word" target="_blank" />
                             </h:panelGrid>
                         </rich:collapsiblePanel>
+                        <rich:collapsiblePanel switchType="ajax" toggleListener="#{Supervisor$DetalleObra.cargarVisitasAuditoriaObra}" header="#{var.tituloseccionmatrizauditoria}" expanded="false" rendered="false">
+                            <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
+                                    rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
+                                    value="#{Supervisor$DetalleObra.listavisitasauditoria}"
+                                    var="actual" binding="#{Supervisor$DetalleObra.tablavisitasauditoria}">
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="5">
+                                            <h:outputText  styleClass="ikont-hot-titulolistavisitasfallidas"   value="#{var.titulolistavisitasfallidas}"  />
+                                        </rich:column>
+                                        <rich:column breakRowBefore="true">
+                                            <h:outputText  styleClass="ikont-hot-titulodatefechainforme"   value="#{var.titulodatefechainforme}"  />
+                                        </rich:column>
+                        .                <rich:column  >
+                                            <h:outputText  styleClass="ikont-hot-titulostrnombreinforme"   value="#{var.titulostrnombreinforme}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText  styleClass="ikont-hot-titulodatefecharegistro"   value="#{var.titulodatefecharegistro}"  />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText  styleClass="ikont-hot-titulodescargarerroresvisitafallida"   value="#{var.generarreporteerroresvisita}"  />
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-datefechainforme"   value="#{actual.datefechainforme}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-strnombreinforme"   value="#{actual.strnombreinforme}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:commandLink value="#{var.generarreportevisitaauditoria}" action="#{Supervisor$DetalleObra.generarReporteVisitaAuditoria}" styleClass="ikont-acl-descargarerroresvisitafallida" type="submit" target="_blank" immediate="true" />
+                                </rich:column>
+                                <f:facet name="footer">
+                                    <rich:dataScroller maxPages="10">
+                                        <f:facet name="first">
+                                            <h:outputText  styleClass="ikont-hot-listavisitasfallidasprimero"   value="#{var.primeroCiu}"/>
+                                        </f:facet>
+                                        <f:facet name="last">
+                                            <h:outputText  styleClass="ikont-hot-listavisitasfallidasultimo"   value="#{var.ultimoCiu}"/>
+                                        </f:facet>
+                                    </rich:dataScroller>
+                                </f:facet>
+                            </rich:dataTable>
+                        </rich:collapsiblePanel>
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>

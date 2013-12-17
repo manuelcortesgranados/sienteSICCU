@@ -46,6 +46,8 @@ import co.com.interkont.cobra.to.Relacionobraseguidor;
 import co.com.interkont.cobra.to.Seguimiento;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Validacionalimentacion;
+import co.com.interkont.cobra.to.Visita;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
@@ -772,7 +774,33 @@ public class DetalleObra implements Serializable{
     public void setLstbeneficiario(List<Beneficiario> lstbeneficiario) {
         this.lstbeneficiario = lstbeneficiario;
     }
+    
+    /**
+     * Listado de visitas de auditoriía para el proyecto
+     */
+    private List<Visita> listavisitasauditoria;
 
+    public List<Visita> getListavisitasauditoria() {
+        return listavisitasauditoria;
+    }
+
+    public void setListavisitasauditoria(List<Visita> listavisitasauditoria) {
+        this.listavisitasauditoria = listavisitasauditoria;
+    }
+    
+     /**
+     * Referencia a la tabla de visitas de auditoría
+     */
+    private UIDataTable tablavisitasauditoria = new UIDataTable();
+
+    public UIDataTable getTablavisitasauditoria() {
+        return tablavisitasauditoria;
+    }
+
+    public void setTablavisitasauditoria(UIDataTable tablavisitasauditoria) {
+        this.tablavisitasauditoria = tablavisitasauditoria;
+    }
+    
     /**
      * <p>Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
@@ -1791,6 +1819,28 @@ public class DetalleObra implements Serializable{
      */
     public void setFilaSeleccionada(int filaSeleccionada) {
         this.filaSeleccionada = filaSeleccionada;
+    }
+    
+    /**
+     * Consulta la visitas de auditoría fallidas, correspondientes al usuario actual del
+     * sistema
+     */
+    public void cargarVisitasAuditoriaObra() {
+        listavisitasauditoria = getSessionBeanCobra().getCobraService().encontrarVisitasAuditoriaObra(getAdministrarObraNew().getObra().getIntcodigoobra(), Visita.ESTADO_CORRECTO);
+    }
+    
+    /**
+     * Descarga el reporte de errores de visita fallida
+     */
+    public void generarReporteVisitaAuditoria() {
+        Visita visita = (Visita) tablavisitasauditoria.getRowData();
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,visita.getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+
+        } catch (IOException ex) {
+            Logger.getLogger(AdminSupervisionExterna.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

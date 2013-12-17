@@ -239,6 +239,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Variable para activar el {@link contratoPadreSelec()}
      */
     private int varmostrarcontrpa = 0;
+    
+    /*
+     * Variable contrato seleccionado
+     */
+    private String contratoselect ;
     /**
      * Objeto para acceder a los atributos de planificación pago
      */
@@ -2235,6 +2240,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.varmostrarcontrpa = varmostrarcontrpa;
     }
 
+    public String getContratoselect() {
+        return contratoselect;
+    }
+
+    public void setContratoselect(String contratoselect) {
+        this.contratoselect = contratoselect;
+    }
+
     public List<Contrato> getListaContraPadreSele() {
         return listaContraPadreSele;
     }
@@ -3169,12 +3182,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     contrato.setContrato(contrpadre);
                                 } else {
                                     removerAnticipo();
-                                    FacesUtils.addErrorMessage("El valor del " + tipoContCon + " supera el valor del " + tipoContCon + " superior");
+                                    FacesUtils.addErrorMessage("El valor del " + tipoContCon + " supera el valor del " + contratoselect + " superior");
                                     return null;
                                 }
                             } else {
                                 removerAnticipo();
-                                FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + tipoContCon + " superior");
+                                FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + contratoselect + " superior");
                                 return null;
                             }
                         } else {
@@ -5383,6 +5396,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return la pagina detallecontrato
      */
     public String iniciarDetaContrato() {
+        //variable para que pueda buscar correctamente los contratos
+        enNuevoConvenio = false;
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
@@ -5674,7 +5689,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String cambiarContrPadre() {
+    public String cambiarContrPadre() {        
+     if (preguntacontrato == 1 ){
+         setContratoselect("Contrato");
+     }else{
+         setContratoselect("Convenio");
+     }
         varmostrarcontrpa = 0;
         listacontratos.clear();
         listacontratoscontratista.clear();
