@@ -876,7 +876,7 @@ public class ModificarProyecto  implements Serializable{
                 if (obra.getRelacionesContratoObraConsultoria().size() > 0) {
                     BigDecimal valorTotalObra = cronogramaExcel.getSumValorPlanificadoActividades().add(BigDecimal.valueOf(cronogramaExcel.getValorEjecutado()));
                     BigDecimal valorContratosObra = obra.obtenerSumValorContratosObra();
-                    if (valorTotalObra.compareTo(valorContratosObra) >= 0) {
+                    if (valorTotalObra.compareTo(valorContratosObra) > 0) {
                         FacesContext.getCurrentInstance().addMessage(
                                 null,
                                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -1337,6 +1337,7 @@ public class ModificarProyecto  implements Serializable{
      */
     public void copiarArchivoCronogramaModificacion() throws FileNotFoundException, ArchivoExistenteException {
         String ubicacionCronogramaModificacion = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+obra.getIntcodigoobra());
+        cargadorCronograma.getArchivoWeb().cambiarNombre(null, true);
         cargadorCronograma.guardarArchivosTemporales(ubicacionCronogramaModificacion,false);
         
         obra.setStrurlcronograma(cargadorCronograma.getArchivos().get(0).getRutaWeb());
