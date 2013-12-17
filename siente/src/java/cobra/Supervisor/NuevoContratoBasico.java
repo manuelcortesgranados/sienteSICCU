@@ -5396,6 +5396,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return la pagina detallecontrato
      */
     public String iniciarDetaContrato() {
+        //variable para que pueda buscar correctamente los contratos
+        enNuevoConvenio = false;
         if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
             filtrocontrato.setAplicaafonade(true);
         } else {
