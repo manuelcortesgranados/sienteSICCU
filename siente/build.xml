@@ -9,13 +9,14 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="siente" default="default" basedir=".">
     <description>Builds, tests, and runs the project siente.</description>
-    <property name="version" value="zoom"/> 
+    <property name="version" value="cobra"/> 
     <property name="dist.war" value="dist/${version}.war"/>    
-    <import file="nbproject/build-gwt.xml"/>
+    <!--<import file="nbproject/build-gwt.xml"/>-->
    <import file="nbproject/zoom-impl.xml"/>
    <import file="nbproject/siente-impl.xml"/>
    <import file="nbproject/manizales-impl.xml"/>
    <import file="nbproject/tolima-impl.xml"/>
+   <import file="nbproject/cobra-impl.xml"/>
     
    <import file="nbproject/build-impl.xml"/>
    
@@ -80,7 +81,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima">       
+    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra">       
     </target>
     
 
