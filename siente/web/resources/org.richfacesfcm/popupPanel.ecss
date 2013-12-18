@@ -35,7 +35,7 @@
 }
 
 .rf-pp-cntr {
-    background: transparent;
+    background: #FFF;
     box-shadow: 0px 0px 50px #000;
     -webkit-box-shadow: 0px 0px 50px #000;
     -moz-box-shadow: 0px 0px 50px #000;
@@ -58,10 +58,28 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: '#{richSkin.headerWeightFont}';
-    color: '#{richSkin.popuppanelheaderTextColor}';
+    color: '#{richSkin.headerTextColor}';
     font-family: '#{richSkin.headerFamilyFont}';
-    font-size: '#{richSkin.popuppanelheaderSizeFont}';
-    text-align: center;
+    font-size: '#{richSkin.headerSizeFont}';
+    padding: 2px;
+    padding-left: 10px;
+    text-align : center;
+}
+
+.rf-pp-cnt label, .rf-pp-cnt span {
+    font-size : 11px;
+    color : #666666;
+}
+
+.rf-pp-hdr-cnt label, .rf-pp-hdr-cnt span{
+    color: #FFF !important;
+    font-size: 16px;
+    line-height: 45px;
+    padding: 0px 60px;
+}
+
+.rf-pp-hdr-cnt table{
+    margin : 0px auto;
 }
 
 .rf-pp-hdr-cntrls {
