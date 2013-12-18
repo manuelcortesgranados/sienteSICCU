@@ -69,22 +69,38 @@
                     <h:form prependId="false">
                         <h:panelGroup layout="block">
                             <center>
-                                <h:outputText styleClass="ikont-hot-zoom-intcodobra" value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})" />
                                 <br/>
                                 <h:outputText styleClass="ikont-hot-zoom-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
                                 <br/>
                                 <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
-                                <br/>
+                                <br/><br/>
                                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
-                                    <h:commandLink  styleClass="ikont-hcb-seguirspry" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
-                                    </h:commandLink>
-                                    <h:commandLink  styleClass="ikont-hcb-seguirspry-label" value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
-                                    </h:commandLink>
-                                    <h:commandLink  styleClass="ikont-hcb-sinseguirpry" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
-                                    </h:commandLink>
-                                    <h:commandLink  styleClass="ikont-hcb-sinseguirpry-label" value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
-                                    </h:commandLink>
+                                    <h:commandButton  styleClass="ikont-hcb-seguirspry" value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
+                                    </h:commandButton>
+                                    <h:commandButton  styleClass="ikont-hcb-sinseguirpry" value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
+                                    </h:commandButton>
                                 </h:panelGroup>
+                                <br/><br/>
+                                <h:panelGrid columns="2">
+                                    <h:panelGrid columns="2">
+                                        <h:graphicImage />           
+                                        <h:panelGrid columns="1">
+                                            <h:outputLabel value="Potencial Energetico"></h:outputLabel>
+                                            <h:outputLabel value="Informe"></h:outputLabel>
+                                            <h:outputLink value="Descargar"></h:outputLink>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2">
+                                        <h:graphicImage />           
+                                        <h:panelGroup layout="block">
+                                            <h:outputLabel value="# de habitantes"></h:outputLabel>
+                                            <h:outputText value="645454"></h:outputText>
+                                            <br/>
+                                            <h:outputLabel value="# de encuestados"></h:outputLabel>
+                                            <h:outputText value="456456"></h:outputText>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </h:panelGrid>
                             </center>
                         </h:panelGroup>
                         <rich:collapsiblePanel switchType="client" header="Datos Básicos" expanded="true">
@@ -125,58 +141,58 @@
                                     <h:panelGroup>
                                         <div id="chartdiv" style="width: 250px; height: 200px;"></div>
                                         <script type="text/javascript">
-                    var chart;
-                    var arrow;
-                    var axisKM;
-                    var axisMiles;
+            var chart;
+            var arrow;
+            var axisKM;
+            var axisMiles;
 
-                    AmCharts.ready(function() {
+            AmCharts.ready(function() {
 
-                        // create angular gauge
-                        chart = new AmCharts.AmAngularGauge();
+                // create angular gauge
+                chart = new AmCharts.AmAngularGauge();
 
-                        // kilometers axis
-                        axisKM = new AmCharts.GaugeAxis();
-                        axisKM.startValue = 0;
-                        axisKM.endValue = 240;
-                        axisKM.radius = "100%";
-                        axisKM.inside = false;
-                        axisKM.gridInside = false;
-                        axisKM.axisColor = "#2EC1DB";
-                        axisKM.tickColor = "#2EC1DB";
-                        axisKM.axisThickness = 3;
-                        chart.addAxis(axisKM);
+                // kilometers axis
+                axisKM = new AmCharts.GaugeAxis();
+                axisKM.startValue = 0;
+                axisKM.endValue = 240;
+                axisKM.radius = "100%";
+                axisKM.inside = false;
+                axisKM.gridInside = false;
+                axisKM.axisColor = "#2EC1DB";
+                axisKM.tickColor = "#2EC1DB";
+                axisKM.axisThickness = 3;
+                chart.addAxis(axisKM);
 
-                        // miles axis
-                        axisMiles = new AmCharts.GaugeAxis();
-                        axisMiles.startValue = 0;
-                        axisMiles.endValue = 160;
-                        axisMiles.radius = "80%";
-                        axisMiles.axisColor = "#00B3DF";
-                        axisMiles.tickColor = "#00B3DF";
-                        axisMiles.axisThickness = 3;
-                        chart.addAxis(axisMiles);
+                // miles axis
+                axisMiles = new AmCharts.GaugeAxis();
+                axisMiles.startValue = 0;
+                axisMiles.endValue = 160;
+                axisMiles.radius = "80%";
+                axisMiles.axisColor = "#00B3DF";
+                axisMiles.tickColor = "#00B3DF";
+                axisMiles.axisThickness = 3;
+                chart.addAxis(axisMiles);
 
-                        // arrow
-                        arrow = new AmCharts.GaugeArrow();
-                        arrow.radius = "85%";
-                        arrow.color = "#00B3DF";
-                        arrow.innerRadius = 50;
-                        arrow.nailRadius = 0;
-                        chart.addArrow(arrow);
+                // arrow
+                arrow = new AmCharts.GaugeArrow();
+                arrow.radius = "85%";
+                arrow.color = "#00B3DF";
+                arrow.innerRadius = 50;
+                arrow.nailRadius = 0;
+                chart.addArrow(arrow);
 
-                        chart.write("chartdiv");
-                        // update value every 2 seconds
-                        randomValue();
-                    });
+                chart.write("chartdiv");
+                // update value every 2 seconds
+                randomValue();
+            });
 
-                    function randomValue() {
-                        var value = Math.round(Math.random() * 240);
-                        arrow.setValue(value);
-                    }
+            function randomValue() {
+                var value = Math.round(Math.random() * 240);
+                arrow.setValue(value);
+            }
                                         </script>
                                     </h:panelGroup>
-                                    <h:panelGrid columns="1">
+                                    <h:panelGrid columns="1" styleClass="totalwidth panelcenter" columnClasses="panelcenter,panelcenter">
                                         <h:outputLabel>Potencial Energetico</h:outputLabel>
                                         <h:outputLabel>35 W</h:outputLabel>
                                     </h:panelGrid>

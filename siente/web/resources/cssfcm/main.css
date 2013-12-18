@@ -2171,13 +2171,13 @@ input[type="text"], input[type="password"], select{
 /* detalle obra*/
 
 .ikont-hot-zoom-strnombremedio{
-    color: #00B3DF;
+    color: #9CFF00;
+    background-color: #00B3DF;
     text-decoration: none;
     font-family: open;
     font-size: 18px;
-    font-weight: 400;
     float: none;
-
+    padding: 5px 10px;
 }
 
 .ikont-hot-strDireccionProyectoOut{
@@ -2824,7 +2824,7 @@ css usuario modificacion
     float: left;
     color:#00B3DF!important;
     text-decoration: none;
-    font-family: 'Open Sans';
+    font-family: 'open';
     font-size: 15px!important;
     background-color: #ffffff!important; 
     border: 1px solid #00B3DF;
@@ -2842,7 +2842,7 @@ css usuario modificacion
     color: #9CFF00!important;
     background-color: #00B3DF!important;
     transition:background-color 1s ease 0s ;
-    font-family:'Open Sans';
+    font-family:'open';
 }
 .input_filtro{
     width: 234px !important;
@@ -4178,7 +4178,7 @@ a:hover {
     float: left;
     text-decoration: none;
     color: #A7A9AC;
-    font-family: 'Open Sans';
+    font-family: 'open';
     line-height: 95px;
     rgin: 0px auto;
     left: 50% !important;
@@ -4195,7 +4195,7 @@ a:hover {
     color: #9CFF00;
     background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
-    font-family: 'Open Sans';
+    font-family: 'open';
     line-height: 95px;
 
 
@@ -4209,7 +4209,7 @@ a:hover {
     float: right;
     text-decoration: none;
     color: #A7A9AC;
-    font-family: 'Open Sans';
+    font-family: 'open';
     line-height: 95px;
     rgin: 0px auto;
     left: 60% !important;
@@ -4226,7 +4226,7 @@ a:hover {
     color: #9CFF00;
     background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
-    font-family: 'Open Sans';
+    font-family: 'open';
     line-height: 95px;
 }
 .ikont-po-label{
@@ -4433,10 +4433,10 @@ a:hover {
     font-size:26px; 
     color: #666; 
     text-transform: uppercase; 
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'open', sans-serif;
 }
 #contenedor_error_texto p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'open', sans-serif;
     font-size: 15px;
 }
 #contenedor_error_texto p .ikont-link-error { 
@@ -4733,46 +4733,58 @@ a:hover {
 }
 
 .ikont-hcb-seguirspry{
-    height: 25px;
-    width: 148px;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 5px 10px;
-    background-image: url(../imgs/ojo_cerrado.png);
-    display: block;
+    display: block!important;
+    width: 230px!important;
+    height: 30px!important;
+    color:#00B3DF!important;
+    text-decoration: none;
+    font-family: 'open';
+    font-size: 15px!important;
+    background-color: #ffffff!important; 
+    border: 1px solid #00B3DF;
+    padding-left: 25px!important;
+    padding-top: 8px!important;
 }
 
 .ikont-hcb-seguirspry:hover{
-    background-image: url(../imgs/ojo_abierto.png);
-    transition: 1s all;
-    height: 25px;
-    width: 148px;
+    width: 230px;
+    height: 30px;
+    text-decoration: none;
+    color: #9CFF00!important;
+    background-color: #00B3DF!important;
+    transition:background-color 1s ease 0s ;
+    font-family:'open';
+    padding-left: 25px!important;
+    padding-top: 8px!important;
 }
 
-.ikont-hcb-seguirspry-label, .ikont-hcb-seguirspry-label:hover{
-    color: #00B3DF;
-    font-size: 0.8em;
-    cursor: pointer;
-}
 
 .ikont-hcb-sinseguirpry{
-    height: 25px;
-    width: 148px;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 5px 10px;
-    color: #00B3DF;
-    font-size: 12px;
-    background-image: url(../imgs/ojo_abierto.png);
-    display: block;
-    line-height: 80px;
+    display: block!important;
+    width: 230px!important;
+    height: 30px!important;
+    float: left;
+    color:#9CFF00!important;
+    text-decoration: none;
+    font-family: 'open';
+    font-size: 15px!important;
+    background-color: #00B3DF!important; 
+    border: 1px solid #00B3DF;
+    padding-left: 25px!important;
+    padding-top: 8px!important;
 }
 
 .ikont-hcb-sinseguirpry:hover{
-    background-image: url(../imgs/ojo_cerrado.png);
-    transition: 1s all;
-    height: 25px;
-    width: 148px;
+    width: 230px;
+    height: 30px;
+    float: left;
+    text-decoration: none;
+    color: #00B3DF!important;
+    background-color: #FFF!important;
+    transition:background-color 1s ease 0s ;
+    font-family:'open';
+    padding-left: 25px!important;
+    padding-top: 8px!important;
 }
 
 .ikont-hcb-sinseguirpry-label, .ikont-hcb-sinseguirpry-label:hover{
