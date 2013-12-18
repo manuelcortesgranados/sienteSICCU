@@ -67,7 +67,7 @@
                         </h:selectOneMenu>
 
                         <h:outputLabel  styleClass="ikont-hol-tipocontconv"   value="Un #{Supervisor$Contrato.tipoContCon} o convenio superior?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}" />
-                        <h:selectOneMenu styleClass="ikont-hsom-preguntacontconv" id="cmbcontrato1"  value="#{Supervisor$Contrato.preguntacontrato}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}">
+                        <h:selectOneMenu  disabled="#{Supervisor$Contrato.varmostrarseleccionconveniosuperior==1}" styleClass="ikont-hsom-preguntacontconv" id="cmbcontrato1"  value="#{Supervisor$Contrato.preguntacontrato}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}">
                             <f:selectItem itemValue="0" itemLabel="No"/>
                             <f:selectItem itemValue="1" itemLabel="Pertenece a Contrato Superior"/>
                             <f:selectItem itemValue="2" itemLabel="Pertenece a Convenio Superior"/>
@@ -97,7 +97,7 @@
                             </a4j:commandButton>
                         </h:panelGrid>
 
-                        <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==2}" styleClass="font-general">
+                        <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==2 and Supervisor$Contrato.varmostrarseleccionconveniosuperior!=1}" styleClass="font-general">
                             <h:outputText  styleClass="ikont-hot-selectconvsuperior" value="Seleccione el Convenio superior al que pertenece el Convenio:  " />
                             <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra"
                                                styleClass="ikont-"                                                      
@@ -187,7 +187,7 @@
                                         <rich:column id="Eliminar" width="50px" >
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-eliminarcontconvbasic" value="#{var.eliminar}"/>                                            </f:facet>
-                                            <a4j:commandButton styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
+                                            <a4j:commandButton disabled="#{Supervisor$Contrato.varmostrarseleccionconveniosuperior==1}" styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
                                                                render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar"/>
                                         </rich:column>
                                     </rich:dataTable>

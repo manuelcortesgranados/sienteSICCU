@@ -857,6 +857,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private int entidades = 0;
     private int botonGuardado;
+    /**
+     * Variable para activar el {@link contratoPadreSelec()}
+     */
+    private int varmostrarseleccionconveniosuperior = 0;
     /*
      * Variable para habilitar el mensaje y Registrar el contratista
      */
@@ -2576,6 +2580,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.estrategia = estrategia;
     }
 
+    public int getVarmostrarseleccionconveniosuperior() {
+        return varmostrarseleccionconveniosuperior;
+    }
+
+    public void setVarmostrarseleccionconveniosuperior(int varmostrarseleccionconveniosuperior) {
+        this.varmostrarseleccionconveniosuperior = varmostrarseleccionconveniosuperior;
+    }
+
     /**
      * <p>
      * Automatically managed component initialization.
@@ -3832,7 +3844,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String contratoPadreSelec() {
         varmostrarcontrpa = 1;
-        //contrpadre = listacontratos.get(filaSeleccionada);
         contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
         List<Tercero> listaentiddadcontratopadre = new ArrayList<Tercero>();
 
@@ -3845,10 +3856,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     return null;
                 } else {
                     FacesUtils.addErrorMessage(Propiedad.getValor("errorconfiguracionterceroconvenio"));
+                    limpiarContrato();
                     return null;
                 }
             } else {
                 FacesUtils.addErrorMessage(Propiedad.getValor("errorconfiguracionterceroconvenio"));
+                limpiarContrato();
                 return null;
             }
         }
@@ -3928,7 +3941,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = null;
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
-
+        varmostrarseleccionconveniosuperior = 0;
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
@@ -8302,5 +8315,38 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             setConfirmacioncedula(false);
         }
 
+    }
+
+    public void crearContratoConvenio() {
+
+        Contrato fk_contrato = new Contrato();
+        contrpadre = new Contrato();
+        fk_contrato = contrato;
+        limpiarContrato();
+        varmostrarcontrpa = 1;
+        varmostrarseleccionconveniosuperior = 1;
+        preguntacontrato = 2;
+        //limpiarContrato();
+        booltipocontratoconvenio = false;
+        tipoContCon = "Contrato";
+        boolcontrconsultoria = false;
+        getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
+        contrpadre = fk_contrato;
+       getContrato().setContrato(contrpadre);
+        System.out.println("Contratista" + fk_contrato.getIntidcontrato());
+        List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
+
+        if (fk_contrato.getContratista() != null) {
+            listaentiddadcontratoconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(fk_contrato.getContratista().getIntcodigocontratista());
+
+            if (!listaentiddadcontratoconvenio.isEmpty() && listaentiddadcontratoconvenio.size() == 1) {
+                contrato.setTercero(listaentiddadcontratoconvenio.get(0));
+            } else {
+                contrato.setTercero(fk_contrato.getTercero());
+            }
+        } else {
+            FacesUtils.addErrorMessage(Propiedad.getValor("errorconfiguracionterceroconvenio"));
+            limpiarContrato();
+        }
     }
 }
