@@ -71,10 +71,10 @@
                             <center>
                                 <br/>
                                 <h:outputText styleClass="ikont-hot-zoom-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
-                                <br/>
-                                <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
                                 <br/><br/>
+                                <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
                                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
+                                    <br/><br/>
                                     <h:commandButton  styleClass="ikont-hcb-seguirspry" value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
                                     </h:commandButton>
                                     <h:commandButton  styleClass="ikont-hcb-sinseguirpry" value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
@@ -83,20 +83,21 @@
                                 <br/><br/>
                                 <h:panelGrid columns="2">
                                     <h:panelGrid columns="2">
-                                        <h:graphicImage />           
+                                        <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />   
+
                                         <h:panelGrid columns="1">
-                                            <h:outputLabel value="Potencial Energetico"></h:outputLabel>
-                                            <h:outputLabel value="Informe"></h:outputLabel>
-                                            <h:outputLink value="Descargar"></h:outputLink>
+                                            <h:outputLabel value="Potencial Energetico" styleClass="font-general"></h:outputLabel>
+                                            <h:outputLabel value="Informe" styleClass="font-general"></h:outputLabel>
+                                            <h:outputLink value="" styleClass="ikont-hol-descargapoener">Descargar</h:outputLink>
                                         </h:panelGrid>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:graphicImage />           
+                                        <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />    
                                         <h:panelGroup layout="block">
-                                            <h:outputLabel value="# de habitantes"></h:outputLabel>
+                                            <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
                                             <h:outputText value="645454"></h:outputText>
                                             <br/>
-                                            <h:outputLabel value="# de encuestados"></h:outputLabel>
+                                            <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
                                             <h:outputText value="456456"></h:outputText>
                                         </h:panelGroup>
                                     </h:panelGrid>
@@ -109,31 +110,31 @@
                                     <h:panelGrid columns="2">
                                         <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="../resources/imgs/bt_user.png"/>           
                                         <h:panelGrid>
-                                            <h:outputLabel value="Victor Olaya"></h:outputLabel>
-                                            <h:outputLabel value="Alcalde"></h:outputLabel>
+                                            <h:outputLabel value="Victor Olaya"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
+                                            <h:outputLabel value="Alcalde"  styleClass="font-general"></h:outputLabel>
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGroup>                                
-                                <h:panelGrid columns="1" styleClass="ikont-hpg-datosrelevantes">
+                                <h:panelGrid columns="1" >
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Dirección:"></h:outputLabel>
-                                        <h:outputLabel value="Calle 32 "></h:outputLabel>
+                                        <h:outputLabel value="Dirección:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="Calle 32 " styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Sitio web:"></h:outputLabel>
-                                        <h:outputLabel value="http://www.amcharts.com/ "></h:outputLabel>
+                                        <h:outputLabel value="Sitio web:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="http://www.amcharts.com/ " styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Mail:"></h:outputLabel>
-                                        <h:outputLabel value="usuario@interkont.co "></h:outputLabel>
+                                        <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="usuario@interkont.co " styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Facebook:"></h:outputLabel>
-                                        <h:outputLabel value="Carlos Loaiza"></h:outputLabel>
+                                        <h:outputLabel value="Facebook:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="Carlos Loaiza" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Cuenta twitter:"></h:outputLabel>
-                                        <h:outputLabel value="@caloiaza"></h:outputLabel>
+                                        <h:outputLabel value="Cuenta twitter:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="@caloiaza" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
 
                                 </h:panelGrid>
@@ -193,8 +194,8 @@
                                         </script>
                                     </h:panelGroup>
                                     <h:panelGrid columns="1" styleClass="totalwidth panelcenter" columnClasses="panelcenter,panelcenter">
-                                        <h:outputLabel>Potencial Energetico</h:outputLabel>
-                                        <h:outputLabel>35 W</h:outputLabel>
+                                        <h:outputLabel styleClass="font-general">Potencial Energetico</h:outputLabel>
+                                        <h:outputLabel >35 W</h:outputLabel>
                                     </h:panelGrid>
                                 </h:panelGrid>
 
@@ -205,19 +206,19 @@
                             <h:panelGrid columns="4" class="ikont-hpg-datosrelevantes totalwidth" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" />
-                                    <h:outputLabel>NBI</h:outputLabel>
+                                    <h:outputLabel styleClass="font-general">NBI</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-pg_impactosocial">
                                     <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />
-                                    <h:outputLabel>NESIDADES ENERGÉTICAS</h:outputLabel>
+                                    <h:outputLabel styleClass="font-general">NESIDADES ENERGÉTICAS</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid  styleClass="ikont-hgi-imgestobra">
                                     <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}" />
-                                    <h:outputLabel>N. DE HABITANTES</h:outputLabel>
+                                    <h:outputLabel styleClass="font-general">N. DE HABITANTES</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
                                     <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.intidtipoproyecto} " />
-                                    <h:outputLabel>N. DE ENCUESTAS</h:outputLabel>
+                                    <h:outputLabel styleClass="font-general">N. DE ENCUESTAS</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <interkont:spacer height="15" />
@@ -265,15 +266,23 @@
                         <rich:collapsiblePanel id="rcp-mapa-detalle-obra" switchType="client" immediate="true" onswitch="true" header="Dónde está ubicada la localidad" expanded="true" >                         
                             <h:panelGroup layout="block" styleClass="ikont-hpg">
                                 <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
-                                    <h:panelGrid  columnClasses="textalingright" columns="2" styleClass="ikont-hpg-datosrelevantes">
-                                        <h:outputLabel styleClass="ikont-hol-strDireccionProyecto" value="Longitud : " />
-                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="valor longitud" />
-                                        <h:outputLabel styleClass="ikont-hol-strDireccionProyecto" value="Latidtud : " />
-                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="valor latitud" />
-                                        <h:outputLabel styleClass="ikont-hol-strDireccionProyecto" value="Dirección : " />
-                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="valor direccion" />
-                                        <h:outputLabel styleClass="ikont-hol-strDireccionProyecto" value="Clima : " />
-                                        <h:outputLabel styleClass="ikont-hol-strZonaOut" value="valor clima" />
+                                    <h:panelGrid  columnClasses="textalingright,textalingright" columns="2" styleClass="ikont-hpg-datosrelevantes">
+                                        <h:panelGroup>
+                                            <h:outputLabel styleClass="font-general" value="Longitud : " />
+                                            <h:outputLabel styleClass="font-general" value="valor longitud" />    
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <h:outputLabel styleClass="font-general" value="Latidtud : " />
+                                            <h:outputLabel styleClass="font-general" value="valor latitud" />
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <h:outputLabel styleClass="font-general" value="Dirección : " />
+                                            <h:outputLabel styleClass="font-general" value="valor direccion" />
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <h:outputLabel styleClass="font-general" value="Clima : " />
+                                            <h:outputLabel styleClass="font-general" value="valor clima" />    
+                                        </h:panelGroup>
                                     </h:panelGrid>
                                     <h:panelGrid id="vistaMapa" styleClass="totalwidth">
                                         <m:map  latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" enableScrollWheelZoom="true"  id="map12" 

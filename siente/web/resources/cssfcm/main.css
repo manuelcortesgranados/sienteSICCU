@@ -1514,7 +1514,7 @@ a.vtitle23:hover{
     width : 268px;
     height: 100%;
     border-right-color: #C0C0C0 !important;
-    
+
 }
 
 .form_menu_lateral_desplegable{
@@ -4860,4 +4860,28 @@ a:hover {
     width: 321px!important;
     height: 34px!important;
     padding-left: 3px!important;
+}
+
+.ikont-hol-strDireccionProyectoOut{
+    font-family: open;
+    font-size: 1.5em;
+    color: #58595B;
+}
+
+.font-general{
+    font-size: 14px;
+    font-family: 'open';
+    color: #58595B;
+}
+
+.ikont-hol-descargapoener{
+    font-size: 14px;
+    font-family: 'open';
+    font-style: italic;
+    color : #00B3DF!important;
+    font-weight: bolder;
+}
+
+.ikont-hol-nombreusuario{
+    font-weight: bolder;
 }
