@@ -14,55 +14,55 @@
             <h:panelGroup  >
                 
 
-                <rich:dataTable id="tablacontrato"  
+                <rich:dataTable styleClass="ikont-tabla-entidad-contratista" id="tablacontrato"  
                                 sortMode="single" 
                                 value="#{Supervisor$AdministrarObraNew.listaContrato}"
                                 var="_row" 
-                                rowKeyVar="filaSeleccionada">
+                                rowKeyVar="filaSeleccionada" rowClasses="cabezo_tabla01, cabezo_tabla02">
                     <rich:column id="tc_strnrocontrato"   styleClass="ikont-rc-tcstrnrocontrato">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-houtnrocontrato"   value="#{var.houtnrocontrato} "/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-ststrnrocontrato"   id="st_strnrocontrato" value="#{_row.contrato.strnumcontrato}"/>
                     </rich:column>
 
                     <rich:column  styleClass="ikont-rc-tcstrnrocontrato">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-objetocontrato"   value="#{var.objetocontrato} "/>
                         </f:facet>
                         <h:inputTextarea  value="#{_row.contrato.textobjeto}" readonly="true" cols="35" rows="3" />
                     </rich:column>
 
                     <rich:column id="tc_strnomcontratista" styleClass="ikont-rc-tcstrnomcontratista">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-houtcontratis"   value="#{var.houtcontratis}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contrato.contratista.strnombre} #{_row.contrato.contratista.strapellido1}"/>
                     </rich:column>
 
                     <rich:column id="tc_fechainic" styleClass="ikont-rc-tcfechainic">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-fechadeinicio"   value="#{var.fechadeinicio}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-datefechaini"    value="#{_row.contrato.datefechaini}"/>
                     </rich:column>
 
                     <rich:column id="tc_fechafina" styleClass="ikont-rc-tcfechafina">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-fechadefinalizacion"   value="#{var.fechadefinalizacion}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-datefechafin"   value="#{_row.contrato.datefechafin}"/>
                     </rich:column>
 
                     <rich:column id="tc_duracion" styleClass="ikont-rc-tcduracion">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-intduracion"   value="#{var.intduracion}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-intduraciondias"   value="#{_row.contrato.intduraciondias} Días"/>
                     </rich:column>
 
                     <rich:column id="tc_valor" styleClass="ikont-rc-tcvalor">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-vlrcontra"   value="#{var.vlrcontra}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="#{_row.contrato.numvlrcontrato}">
@@ -71,7 +71,7 @@
                     </rich:column>
                     
                     <rich:column id="tc_valor_asociado" styleClass="ikont-rc-tcvalorasociado">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-valorasociadoaproyecto"   value="#{var.valorasociadoaproyecto}"/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-numvalorrelacion"   value="#{_row.numvalorrelacion}">
@@ -79,7 +79,7 @@
                         </h:outputText>
                     </rich:column>
                     <rich:column id="tc_polizas" styleClass="ikont-rc-tcpolizas"  rendered="#{Supervisor$AdministrarObraNew.polizacontrato}">
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-varpolizas"   value="#{var.verpolizas}"/>
                         </f:facet>
                         <a4j:commandLink  value="X" id="verpoliza"  
@@ -92,7 +92,7 @@
                     </rich:column>
 
                     <rich:column id="tc_costos" styleClass="ikont-rc-tccostos" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto !=null}"  >
-                        <f:facet name="header">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-vercosto"   value="#{var.vercosto}"/>
                         </f:facet>
                         <a4j:commandLink  id="vercosto"  

@@ -1,0 +1,136 @@
+#navIndicadores {
+	margin: 0;
+	padding:0;
+	height: 400px;
+	width:100%;
+	text-align:left;
+	clear: both;
+	float: left;
+	position:relative;
+	z-index:9999;
+}
+#elipse {
+	width:28px;
+	height:323px;
+	background-repeat:no-repeat;
+	float:left;
+	position:absolute;
+	left:0px;
+	z-index:10000;
+
+}
+
+#navIndicadores ul {
+	margin:0;
+	padding:0;
+	vertical-align:left;
+}
+#navIndicadores li {
+	margin:0;
+	padding:0;
+	list-style: none;
+	float: left;
+	position:relative;
+}
+#navIndicadores ul li a {
+	width:200px;
+	height:33px;
+	float:left;
+	position:relative;
+	display:block;
+	padding-right:10px;
+	padding-left:10px;
+	padding-top: 3px;
+	padding-bottom:4px;
+	margin-top:10px;
+	font-size:12px;
+	vertical-align:middle;
+	line-height:13px;
+	text-indent:20px;
+	font-style:italic;
+	font-weight:500;
+	text-align:center;
+	margin-right: 0;
+	margin-bottom: 0;
+	border: #FFF thin solid;
+	-moz-box-shadow: 0.1em 3 0.1em #51819E;
+	-webkit-box-shadow: 0.1em 0.1em 0.1em #51819E;
+}
+
+
+/*-----------------------------------------------------------------------------------------------*/
+/*                                         MAIN MENU                                        */
+/*-----------------------------------------------------------------------------------------------*/
+#navIndicadores ul li a.presu {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#CDB80D;
+	}
+
+#navIndicadores ul li a.presu:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+}
+#navIndicadores ul li a.conso {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#006496;
+	}
+
+#navIndicadores ul li a.conso:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+}
+#navIndicadores ul li a.humani {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#F1AC04;
+	}
+
+#navIndicadores ul li a.humani:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+}
+#navIndicadores ul li a.aloja {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#329696;
+	}
+
+#navIndicadores ul li a.aloja:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+
+}
+#navIndicadores ul li a.terri {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#EF6703;
+	}
+
+#navIndicadores ul li a.terri:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+}
+#navIndicadores ul li a.nacio {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#fff;
+	background-color:#F63131;
+	}
+
+#navIndicadores ul li a.nacio:hover {
+	background-color:#949494;
+	-moz-opacity: 0.9;
+	filter:alpha (opacity=90);
+	width:195px;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<project name="compileCobra" default="-pre-compile" basedir="..">
+    <description>Archivo para compilar y generar Cobra</description>      
+   
+    
+    <condition property="iscobra">
+        <equals arg1="${version}" arg2="cobra" />        
+    </condition>  
+  
+    <target name="doCobra" if="iscobra" >
+        
+        <echo message="generando cobra" />       
+        <copy todir="${build.web.dir}/resources/imgs">
+            <fileset dir="web/resources/imgsfcm/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/css">
+            <fileset dir="web/resources/cssfcm/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/resources/js/login">
+            <fileset  dir="web/resources/js/loginfonade/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/facelets">
+            <fileset  dir="web/facelets/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/homes">
+            <fileset  dir="web/homes/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/org.richfaces">
+            <fileset  dir="web/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
+        </copy>
+        
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/cobrafcm/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/cobrafcm/resources/skinning.ecss"/>
+        <copy todir="${build.classes.dir}/" file="web/configuracion/cobrafcm/properties/log4j.properties"/>
+    </target> 
+</project>
+

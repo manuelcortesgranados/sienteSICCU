@@ -1,0 +1,35 @@
+.rf-p {
+    background-color: '#{richSkin.generalBackgroundColor}';
+    color: '#{richSkin.panelBorderColor}';
+    padding-bottom: 10px;
+}
+
+.rf-p-hdr {
+    background-color: '#{richSkin.headerBackgroundColor}';
+    border-color: '#{richSkin.borderColor}';
+    border-top-left-radius: '#{richSkin.borderRadius}';
+    border-top-right-radius: '#{richSkin.borderRadius}';
+    font-size: '#{richSkin.headerSizeFont}';
+    color: '#{richSkin.headerTextColor}';
+    font-weight: '#{richSkin.headerWeightFont}';
+    font-family: '#{richSkin.headerFamilyFont}';
+    padding: 8px;
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-image: "url(#{resource['org.richfaces.images:gradientA.png']})";
+}
+
+.rf-p-b {
+    font-size: '#{richSkin.generalSizeFont}';
+    color: '#{richSkin.generalTextColor}';
+    font-family: '#{richSkin.generalFamilyFont}';
+    padding: 10px;
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    padding: 1px;
+    border-bottom-left-radius: '#{richSkin.borderRadius}';
+    border-bottom-right-radius: '#{richSkin.borderRadius}';
+}

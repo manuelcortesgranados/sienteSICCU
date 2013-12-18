@@ -1,0 +1,287 @@
+
+.tab-login table, tr, td{
+    margin: 0  !important;
+    padding: 0  !important;
+    border: 0  !important;
+    outline: 0  !important;
+    font-size: 100%  !important;
+    background: transparent  !important;
+
+}
+
+body{
+    background-color: black;
+}
+
+.ikont-hpg-gpLogPrinci{
+    width: 400px !important;
+    position: relative !important;
+    float : right !important;
+    top: 50px;
+    left: -50px;
+    font-family: "open";
+}
+
+.ikont-hpg-gpLogPrinci .rf-p, .ikont-hpg-gpLogPrinci .rf-p-b{
+    border: solid 0px transparent !important;
+    background: transparent !important;
+}
+
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-brd {
+    display: none !important;
+}
+
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
+    background: transparent;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 0px;
+    padding-top: 0px;
+    overflow: visible;
+    height: 25px;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.content-tab-login .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
+    background: transparent !important;
+    border: solid 0px transparent !important;
+    padding-top: 0px !important;
+    overflow: visible!important;
+    height: 30px!important;
+}
+
+.tab-pestania-inactive, .tab-pestania-inactive-usu{
+    position: relative!important;
+    bottom: -1px !important;
+    width: 100px!important;  
+    height: 31px!important;
+    text-align: center!important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px!important; 
+    -moz-border-top-right-radius: 10px!important; 
+    -ms-border-top-left-radius: 10px!important; 
+    -ms-border-top-right-radius: 10px!important; 
+    -webkit-border-top-left-radius: 10px!important; 
+    -webkit-border-top-right-radius: 10px!important; 
+    border-top-left-radius: 10px!important; 
+    border-top-right-radius: 10px!important; 
+    cursor: pointer;
+}
+
+.tab-pestania-inactive, .tab-pestania-active {
+    padding: 8px 36px !important;
+}
+
+.tab-pestania-inactive-usu, .tab-pestania-active-usu {
+    padding: 8px 10px !important;
+}
+
+.tab-pestania-active, .tab-pestania-active-usu{
+    width: 100px !important;  
+    height: 31px !important;
+    text-align: center !important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px !important; 
+    -moz-border-top-right-radius: 10px !important; 
+    -ms-border-top-left-radius: 10px !important; 
+    -ms-border-top-right-radius: 10px !important; 
+    -webkit-border-top-left-radius: 10px !important; 
+    -webkit-border-top-right-radius: 10px !important; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    border : transparent!important;
+}
+ 
+.tab-login-label-error{
+    text-align: justify !important;
+    width: 200px;
+    margin: 0px auto;
+}   
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
+    height: 23px !important;
+    width: 50px !important;
+    text-align: center !important;
+    line-height: inherit !important;
+    border-style: solid;
+    border-width: 1px !important;
+    font-weight: bold;
+}
+
+.tab-login-input-button-register{
+    text-align: center !important;
+    line-height: inherit !important;
+    border-style: solid!important;
+    border-width: 1px!important;
+    margin-left: 10px;
+    padding: 3px 10px;
+    text-decoration: none;
+    position: relative;
+    top: 8px;
+}
+
+.tab-login-input-button-register:hover{
+    color: white !important;
+}
+
+.ikont-a4jcl-logintabregistratephoto:hover{
+    color: white !important;
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    position: relative;
+    left: 7px;
+    width: 80px !important;
+    height: 21px !important;
+    width: 50px !important;
+    text-align: center !important;
+    line-height: inherit !important;
+    border-style: solid;
+    border-width: 1px!important;
+    text-decoration: none;
+    padding: 3px 9px;
+}
+
+.tab-div{
+    border: solid transparent 0px !important;
+    -moz-border-top-right-radius: 10px !important; 
+    -ms-border-top-right-radius: 10px !important; 
+    -webkit-border-top-right-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    -moz-border-bottom-right-radius: 10px !important; 
+    -ms-border-bottom-right-radius: 10px !important; 
+    -webkit-bottom-right-radius: 10px !important; 
+    border-bottom-right-radius: 10px !important; 
+    -moz-border-bottom-left-radius: 10px !important; 
+    -ms-border-bottom-left-radius: 10px !important; 
+    -webkit-bottom-left-radius: 10px !important; 
+    border-bottom-left-radius: 10px !important; 
+    width: 320px !important;
+    height: 360px !important;
+    margin-top: 1px !important;
+    margin-left: 1px !important;
+}
+
+
+.tab-div table  tr td{
+    text-align: center!important;
+}
+
+
+
+.ikont-hpg-renderedlogologin{
+    position: relative;
+    top: 20px;
+    left: 70px;
+}
+
+.ikont-hpg-renderedlogologin img{
+    margin-left: 10px;
+}
+
+.ikont-hpg-loginheader{
+    position : fixed;
+    top : -0px;
+    left:-0px;
+    width : 100%;
+    height : 40px;
+    margin: 0px;
+    padding : 0px;
+    z-index : 100
+}
+
+.ikont-hot-loginheader{
+    position: relative;
+    text-align: left;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.ikont-hpg-loginfooter{
+    position : fixed;
+    bottom : -0px;
+    left:-0px;
+    width : 100%;
+    height : 40px;
+    margin: 0px;
+    padding: 0px;
+    z-index : 100;
+    font-family: "open";
+}
+
+.ikont-hot-loginfotercopy{
+    margin-left : 10px;
+    position: relative;
+    top: 10px;
+}
+.ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees{
+    margin-left : 10px;
+    position: relative;
+    top: 10px;
+    text-decoration: none;
+}
+
+.ikont-hgi-iconheaderpng{   
+    margin-left: 20px!important; 
+    float: left !important;
+    width:40px;
+    height:40px;
+
+}
+
+.ikont-hgi-iconfooterpng{   
+    margin-left: 20px!important; 
+    float: left !important;
+    width:40px;
+    height:40px;
+}
+
+.ikont-hgi-iconytpng, .ikont-hgi-iconfbpng, .ikont-hgi-icontwpng {
+    position: relative !important; 
+    float: right !important; 
+    margin-right: 20px;
+}
+
+.ikont-hpg-imagenciudadano{
+    position: relative;
+    top : -12px;
+    left: 7px;
+    width: 100px;
+    height: 120px;
+    -moz-border-radius: 10px; 
+    -ms-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px; 
+}
+
+.ikont-hpg-pgfotografia{
+    position: relative;
+    top: 10px;
+    width: 80px;
+    height: 100px;
+    -moz-border-radius: 10px; 
+    -ms-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    -o-border-radius: 10px; 
+    border-radius: 10px; 
+    background: url("../imgs/login/foto_perfil.jpg")no-repeat center center ;
+    background-size : cover;
+    -webkit-background-size : cover;
+    -o-background-size : cover;
+    -moz-background-size : cover;
+    -ms-background-size : cover;
+}
+
+
+.ikont-a4jcl-logintabentrarolvidocontrasenia{
+    text-decoration: none;
+    margin-left: 130px;
+}
+
+input[type="password"].ikont-hit-contrasenados, input[type="text"].ikont-hit-contrasenados{
+    width: 146px;
+}
