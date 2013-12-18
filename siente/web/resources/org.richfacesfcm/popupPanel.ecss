@@ -72,9 +72,8 @@
 }
 
 .rf-pp-hdr-cnt label, .rf-pp-hdr-cnt span{
-    color: #FFF !important;
-    font-size: 16px;
-    line-height: 45px;
+    color: #58595B !important;
+    font-size: 15px;
     padding: 0px 60px;
 }
 
