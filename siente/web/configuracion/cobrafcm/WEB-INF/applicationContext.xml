@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+    <!-- DataSource Definition -->
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName">
+            <value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:postgresql:cobrafcm</value>
+        </property>
+        <property name="username">
+            <value>cobra</value>
+        </property>
+        <property name="password">
+            <value>cobradatabase</value>
+        </property>
+    </bean>
+    <!-- Hibernate SessionFactory Definition -->
+       <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="mappingResources">
+            <list>
+                <value>co/com/interkont/cobra/to/Typeresultadovalidacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Fase.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Cargo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Localidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipotercero.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Opinionciudadano.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocontratoconsultoria.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Seguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Movimientocontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Subcuentaprincipal.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Comuna.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Novedad.hbm.xml</value>
+                
+                <value>co/com/interkont/cobra/to/NovedadFiltrada.hbm.xml</value>
+                
+                <value>co/com/interkont/cobra/to/Subestadosolicitudch.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoorigen.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipopolizaseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipomovimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Historicoobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Region.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Claseobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Solicitudmaestro.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipodocumento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Lugarobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Eventoscorreo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Cuentaprincipal.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Obra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Beneficiario.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Videoevolucionobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Formapago.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoah.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Alarma.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipofactoratraso.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Ordendepago.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Imagenevolucionobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Productoah.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Movimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Genero.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocuenta.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/SolicitudObrach.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Modificacioncontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoordendepago.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipobdpu.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Historicopolizacontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Documentoobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipodesarrollo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Evento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Modulo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Alimentacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionactividadobraperiodohisto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/RelacionsubcuentaprincipalEntrada.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Grupo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacioneventoscorreousuario.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoopinion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Estadodocumentacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocosto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tiposolicitudobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Mensaje.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Semaforo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Contrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocualitativa.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Periodomedida.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/EstadoCivil.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipopoliza.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipovisita.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/SolicitudObrachBackup.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Polizaseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Encargofiduciario.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Polizacontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Recurso.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Actividadseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionalimentacionactividad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Alimentacioncualificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tercero.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Bdpu.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Comentarioobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipomodificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/JsfUsuario.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipolocalidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tiponovedad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Factoratraso.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Actorseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Corregimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Puntoobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Periodohisto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Estadosolicitudch.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Periodoevento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoentidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoproyecto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Vereda.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/SolicitudObrachTemp.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoevento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Aseguradora.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Barrio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Actividadobrahist.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Solicituddetalle.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Actividadobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipodefamilia.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoestadobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Estadomovimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Contratista.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Periodo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Entrada.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Unidadmedida.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoidentificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionactividadobraperiodo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/AreaContratista.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionpago.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoimagen.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/JsfUsuarioGrupo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Urgencia.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Documentosolicitud.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Imagensolicitud.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipodocumentosolicitud.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionpagosolicitud.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Visita.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Rangocalificacionauditoriaobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Calificacionauditoriaobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Sector.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tiposolicitante.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Zonaespecifica.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value> 
+                <value>co/com/interkont/cobra/to/Relacioncontratojsfusuario.hbm.xml</value>               
+                
+                <value>co/com/interkont/cobra/to/Historicoplanificacionpago.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Registrovalidador.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Institucioneducativa.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Sedeeducativa.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Ruta.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Puntoreferencia.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ControlPanel.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/InversionFases.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/LogConsolidado.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/PresupuestoEjecucion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ProyectoConvenioFinan.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ProyectoConvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/SeguimientoObra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/FisicoObraRango.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ConvenioFisicoDpto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/AvanceSocial.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/AvanceConvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/InvesionFasesDpto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ObraFisicoDpto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/AvanceAtencionHumanitaria.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/AvanceObrasTerritoriales.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ConsolidadoGeneral.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacioncontratoobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/DashboardAtencionHum.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/DashboardAvanceFinanciero.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/Vista_recursividad_convenios.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/vista_movimientos_financieros_ah.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/vista_movimientos_financieros_convenios.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/vista_movimientos_financieros_infraestructura.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/vistahomezoom.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/DashboardInversion.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/Vista_familias_atender_atendidas.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/Vista_seguidores_obra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/MuniReunido.hbm.xml</value>
+
+                <value>co/com/interkont/cobra/to/Zonaseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Localidadzonaseguimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tercerozonaseguimiento.hbm.xml</value>
+
+                <value>co/com/interkont/cobra/to/Tipoinforme.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Validacionalimentacion.hbm.xml</value>
+
+                <value>co/com/interkont/cobra/to/Tipoverificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Resultadolistaverificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Listaverificacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionhistoobradocu.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionobraseguidor.hbm.xml</value>
+
+                <value>co/com/interkont/cobra/to/seguimientosah/AhGlobal.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/seguimientosah/MuniVivienda.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/seguimientosah/AsishumaMunicipal.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/seguimientosah/ArriendoMuni.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/seguimientosah/AlberguesMunicipal.hbm.xml</value>                             
+                             
+                <value>co/com/interkont/cobra/vista/VistaObraMapa.hbm.xml</value>
+                <value>co/com/interkont/cobra/tipo/dashboard.hbm.xml</value>
+                <value>co/com/interkont/cobra/tipo/dashboard_convenios.hbm.xml</value>
+                <value>co/com/interkont/cobra/tipo/dashboard_ah.hbm.xml</value>
+                <!-- restaurar contraseña -->
+                <value>co/com/interkont/cobra/to/RestaurarPassword.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Terceroentidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Modalidadcontratista.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipousuario.hbm.xml</value>
+                
+                <!-- plan operativo-->
+                
+                <value>co/com/interkont/cobra/to/Fuenterecursosconvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Itemflujocaja.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Estadoconvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Objetivos.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Obrafuenterecursosconvenios.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Periodoflujocaja.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovconvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovconvenioentidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovcuotagerencia.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovimientoproyecto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovimientocontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovimientopryotros.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Planificacionmovimientoprydirecto.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacionobrafuenterecursoscontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacioncontratoperiodoflujocaja.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Rolentidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Rubro.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Parametricaactividadesobligatorias.hbm.xml</value>
+                
+                <!-- Medios de Vida-->                
+                <value>co/com/interkont/cobra/marcologico/to/Frecuenciaperiocidad.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Planificacionrelacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Avanceplanificacionrelacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Tipomarcologico.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Unidadmedidamediosvida.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Estrategia.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Marcologico.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Contratoestrategia.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Tipoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Cronogramaobligacionesejecutada.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Relacionmarcologicoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Obligacion.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/to/Indicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>
+               
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.cglib.use_reflection_optimizer">false</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider
+                </prop>
+            </props>
+        </property>
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+    <!-- Spring Data Access Exception Translator Defintion -->
+    <bean id="jdbcExceptionTranslator"
+          class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+    </bean>
+
+    <!-- Hibernate Template Defintion -->
+    <bean id="hibernateTemplate"
+          class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+        <property name="jdbcExceptionTranslator">
+            <ref bean="jdbcExceptionTranslator" />
+        </property>
+    </bean>
+
+    <!-- Hibernate Transaction Manager Definition -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="sessionFactory" />
+        </property>
+    </bean>
+
+    <!-- ========================= Start of DAO DEFINITIONS ========================= -->
+
+        <!-- TODO DAO Definition: Hibernate implementation -->
+    <bean id="AbstractSpringDao" abstract="true" class="cobra.dao.AbstractSpringDao" scope="prototype">
+        <property name="hibernateTemplate">
+            <ref bean="hibernateTemplate" />
+        </property>
+    </bean>
+
+
+    <!-- TODO DAO Definition: Hibernate implementation -->
+    <bean id="usuarioDao" class="cobra.dao.UsuarioDaoImpl" parent="AbstractSpringDao" scope="prototype">
+
+    </bean>
+
+    <bean id="cobraDao" class="cobra.dao.CobraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="modificarProyectoDao" class="cobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <!--<bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
+    <bean id="supervisionExternaDao" class="supervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="ciudadanoDao" class="ciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <!--<bean id="marcoLogicoDao" class="cobra.MarcoLogico.dao.MarcoLogicoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
+    <!--
+    <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao"></bean>
+
+   <bean id="administrarDao" class="cobra.dao.AdministrarDaoImpl" parent="AbstractSpringDao"></bean>-->
+    <!-- ========================= Start of SERVICE DEFINITIONS ========================= -->
+
+        <!-- TODO Service Definition -->
+    <bean id="usuarioServiceTarget" scope="prototype"
+          class="cobra.service.UsuarioServiceImpl">
+        <property name="usuarioDao">
+            <ref local="usuarioDao" />
+        </property>
+    </bean>
+
+    <bean id="cobraServiceTarget" scope="prototype"
+          class="cobra.service.CobraServiceImpl">
+        <property name="cobraDao">
+            <ref local="cobraDao" />
+        </property>
+    </bean>
+
+    <bean id="modificarProyectoServiceTarget" scope="prototype"
+          class="cobra.service.ModificarProyectoServiceImpl">
+        <property name="modificarProyectoDao">
+            <ref local="modificarProyectoDao" />
+        </property>
+        <property name="cobraService">
+            <ref local="cobraService" />
+        </property>
+    </bean>
+
+    <bean id="financieraServiceTarget" scope="prototype"
+          class="financiera.service.FinancieraServiceImpl">
+        <property name="financieraDao">
+            <ref local="financieraDao" />
+        </property>
+    </bean>
+<!--
+    <bean id="atencionhumanitariaServiceTarget" scope="prototype"
+          class="atencionHumanitaria.service.AtencionHumanitariaServiceImpl">
+        <property name="atencionHumanitariaDao">
+            <ref local="atencionhumanitariaDao" />
+        </property>
+    </bean>
+    -->
+<!--
+    <bean id="solicitudServiceTarget" scope="prototype"
+          class="chsolicitud.dao.service.SolicitudServiceImpl">
+        <property name="solicitudDao">
+            <ref local="solicitudDao" />
+        </property>
+    </bean>
+-->
+    <bean id="supervisionExternaTarget" scope="prototype"
+          class="supervision.service.SupervisionExternaServiceImpl">
+        <property name="supervisionExternaDao">
+            <ref local="supervisionExternaDao"/>
+        </property>
+    </bean>
+
+    <bean id="indicadorServiceTarget" scope="prototype"
+          class="cobra.service.IndicadorServiceImpl">
+        <property name="indicadorDao">
+            <ref local="indicadorDao" />
+        </property>
+    </bean>
+
+    <bean id="ciudadanoServiceTarget" scope="prototype"
+          class="ciudadano.service.CiudadanoServiceImpl">
+        <property name="ciudadanoDao">
+            <ref local="ciudadanoDao" />
+        </property>
+    </bean>
+    
+    <bean id="gwtServiceTarget" scope="prototype"
+          class="co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl">
+        <property name="cobraDao">
+            <ref local="cobraDao" />
+        </property>
+    </bean>
+    <!--
+    <bean id="marcoLogicoServiceTarget" scope="prototype"
+          class="cobra.MarcoLogico.service.MarcoLogicoServiceImpl">
+        
+        <property name="marcoLogicoDao">
+            <ref local="marcoLogicoDao" />
+        </property>
+        
+    </bean>
+-->
+    <!--
+    <bean id="financieraServiceTarget"
+          class="financiera.service.FinancieraServiceImpl">
+        <property name="financieraDao">
+            <ref local="financieraDao" />
+        </property>
+    </bean>
+
+    <bean id="administrarServiceTarget"
+                class="cobra.service.AdministrarServiceImpl">
+        <property name="administrarDao">
+            <ref local="administrarDao" />
+        </property>
+    </bean>
+-->
+    <!-- Transactional proxy for the TODO Service -->
+    <bean id="usuarioService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="usuarioServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="cobraService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="cobraServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="financieraService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="financieraServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+    <bean id="financieraService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="financieraServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="administrarService" scope="prototype"
+                class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="administrarServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="atencionhumanitariaService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="atencionhumanitariaServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    -->
+<!--
+    <bean id="solicitudService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="solicitudServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+-->
+    <bean id="supervisionExternaService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="supervisionExternaTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="indicadorService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="indicadorServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="PIE">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="ciudadanoService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="ciudadanoServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="PIE">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="modificarProyectoService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="modificarProyectoServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="cobraGwtServiceAble" scope="session"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="gwtServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!--
+     <bean id="marcoLogicoService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="marcoLogicoServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+   -->
+</beans>
