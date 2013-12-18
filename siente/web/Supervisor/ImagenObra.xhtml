@@ -94,19 +94,19 @@
                                         </center>
                                     </rich:column>
                                     <rich:column 
-                                        sortBy="#{currentRow.strnombre}" styleClass="ikont-rc-rcstrnombre">
+                                        sortBy="#{currentRow.strnombre}" styleClass="ikont-imgs-proyecto">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-descripcion"   value="#{var.descripcion}"/>
                                         </f:facet>
                                         <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
                                     </rich:column>
-                                    <rich:column  styleClass="ikont-rc-rctipo">
+                                    <rich:column  styleClass="ikont-imgs-proyecto">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headertipo"   value="#{var.tipo}"/>
                                         </f:facet>
                                         <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
                                     </rich:column>
-                                    <rich:column sortBy="#{currentRow.datefecha}" styleClass="ikont-rc-rcfechadelaimagen">
+                                    <rich:column sortBy="#{currentRow.datefecha}" styleClass="ikont-imgs-proyecto">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-fechadelaimagenheader"   id="fechadelaimagen" value="#{var.fechadelaimagen}"/>
                                         </f:facet>
@@ -114,7 +114,7 @@
                                             <f:convertDateTime pattern="#{var.formatofecha}"/>
                                         </h:outputText>
                                     </rich:column>
-                                    <rich:column styleClass="ikont-rc-rcver">
+                                    <rich:column styleClass="ikont-imgs-proyecto">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-verheader"   value="#{var.Ver}"/>
                                         </f:facet>
@@ -123,7 +123,7 @@
                                             <h:graphicImage  styleClass="ikont-hgi-btver"    value="/resources/imgs/bt_ver.png"/>
                                         </h:commandLink>
                                     </rich:column>
-                                    <rich:column styleClass="ikont-rc-rceditar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
+                                    <rich:column styleClass="ikont-imgs-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headereditar"   value="#{var.editar}"/>
                                         </f:facet>
@@ -134,7 +134,7 @@
                                             <h:graphicImage  styleClass="ikont-hgi-bteditar"  value="/resources/imgs/bt_editar.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
-                                    <rich:column styleClass="ikont-rc-rcestablecervalla" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
+                                    <rich:column styleClass="ikont-imgs-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headerestablecervalla"   value="#{var.establecervalla}"/>
                                         </f:facet>
@@ -145,7 +145,7 @@
                                                       render="panelGridConfEstablecerValla" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
                                     </rich:column>
-                                    <rich:column  styleClass="ikont-rc-rcestablecerimagenactual" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
+                                    <rich:column  styleClass="ikont-imgs-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headerestablecerimagenactual"   value="#{var.establecerimagenactual}"/>
                                         </f:facet>
@@ -156,7 +156,7 @@
                                                       render="panelGridConfEstablecerImagenActual" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
                                     </rich:column>
-                                    <rich:column  styleClass="ikont-rc-rceliminar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_eliminarimagen}">
+                                    <rich:column  styleClass="ikont-imgs-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_eliminarimagen}">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headereliminar"   value="#{var.eliminar}"/>
                                         </f:facet>
