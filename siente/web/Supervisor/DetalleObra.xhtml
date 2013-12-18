@@ -414,7 +414,7 @@
                                 <h:commandLink id="word_infociu2" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="butonreport zoom-word" target="_blank" />
                             </h:panelGrid>
                         </rich:collapsiblePanel>
-                        <rich:collapsiblePanel switchType="ajax" toggleListener="#{Supervisor$DetalleObra.cargarVisitasAuditoriaObra}" header="#{var.tituloseccionmatrizauditoria}" expanded="false" rendered="false">
+                        <rich:collapsiblePanel switchType="ajax" toggleListener="#{Supervisor$DetalleObra.cargarVisitasAuditoriaObra}" header="#{var.tituloseccionmatrizauditoria}" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.permiso_auditoria}"                                         >
                             <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
                                     rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
                                     value="#{Supervisor$DetalleObra.listavisitasauditoria}"

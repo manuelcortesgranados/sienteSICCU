@@ -1511,6 +1511,7 @@ a.vtitle23:hover{
 .templatetablamenulateral{
     width : 268px;
     height: 100%;
+    border-right-color: #C0C0C0 !important;
 }
 
 .form_menu_lateral_desplegable{
@@ -2732,7 +2733,7 @@ css usuario modificacion
     border : transparent!important;
 }
 #ikont-rp-OpinionCiu1{
-    background-color: green;
+    background-color: #37C2D9;
     width:517px;
     height: 500px;
 }
@@ -4777,7 +4778,7 @@ a:hover {
     cursor: pointer;
 }
 .pikc-usuario-class{
-    background: green!important;
+    background: #37C2D9!important;
 }
 .ikont-txt-cd-contrato{
     font-size: 12px;
