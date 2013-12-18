@@ -81,18 +81,17 @@
                                     </h:commandButton>
                                 </h:panelGroup>
                                 <br/><br/>
-                                <h:panelGrid columns="2">
-                                    <h:panelGrid columns="2">
-                                        <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />   
-
+                                <h:panelGrid cellspacing="10" columns="2">
+                                    <h:panelGrid columns="2" cellspacing="5">
+                                        <h:commandLink styleClass="ikont-hcl-imgpontencialener img-detalle-proyecto" />   
                                         <h:panelGrid columns="1">
                                             <h:outputLabel value="Potencial Energetico" styleClass="font-general"></h:outputLabel>
                                             <h:outputLabel value="Informe" styleClass="font-general"></h:outputLabel>
                                             <h:outputLink value="" styleClass="ikont-hol-descargapoener">Descargar</h:outputLink>
                                         </h:panelGrid>
                                     </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />    
+                                    <h:panelGrid columns="2" cellspacing="5">
+                                        <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
                                         <h:panelGroup layout="block">
                                             <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
                                             <h:outputText value="645454"></h:outputText>
@@ -266,19 +265,22 @@
                         <rich:collapsiblePanel id="rcp-mapa-detalle-obra" switchType="client" immediate="true" onswitch="true" header="Dónde está ubicada la localidad" expanded="true" >                         
                             <h:panelGroup layout="block" styleClass="ikont-hpg">
                                 <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
-                                    <h:panelGrid  columnClasses="textalingright,textalingright" columns="2" styleClass="ikont-hpg-datosrelevantes">
+                                    <h:panelGrid  columnClasses="textalingright,textalingright" columns="1" styleClass="ikont-hpg-datosrelevantes">
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Longitud : " />
                                             <h:outputLabel styleClass="font-general" value="valor longitud" />    
                                         </h:panelGroup>
+                                        <br/>
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Latidtud : " />
                                             <h:outputLabel styleClass="font-general" value="valor latitud" />
                                         </h:panelGroup>
+                                        <br/>
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Dirección : " />
                                             <h:outputLabel styleClass="font-general" value="valor direccion" />
                                         </h:panelGroup>
+                                        <br/>
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Clima : " />
                                             <h:outputLabel styleClass="font-general" value="valor clima" />    
