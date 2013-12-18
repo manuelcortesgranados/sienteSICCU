@@ -1231,7 +1231,6 @@ a.ikont-acl-agregarcomentario:hover {
     font-family:open;
     font-size:13px;
     font-style:italic;
-    color:#FF9;
     line-height:13px;
     font-weight:500;
 }
@@ -1241,7 +1240,6 @@ a.ikont-acl-agregarcomentario:hover {
     font-size:30px;
     font-style:italic;
     font-weight:bold;
-    color:#F90;
     line-height:20px;
 }
 
@@ -2125,7 +2123,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-style-actividades-recientes{
-    color: green;
+    color: #37C2D9;
 }
 .ikont-hr-separador-inicio-registo{
     background-color: #C0C0C0;
@@ -4844,4 +4842,9 @@ a:hover {
     width: 321px!important;
     height: 34px!important;
     padding-left: 3px!important;
+}
+
+.ikont-imgs-proyecto{
+    border-right: solid 1px;
+    border-bottom: solid 1px
 }
