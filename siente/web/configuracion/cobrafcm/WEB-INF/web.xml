@@ -19,7 +19,7 @@
     <context-param>
         <param-name>org.richfaces.skin</param-name>
         <!--Skin fonade-->
-        <param-value>cobrafcm</param-value>
+        <param-value>cobra</param-value>
         
         <!--Skin general
         <param-value>general</param-value>-->

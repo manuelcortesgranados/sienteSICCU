@@ -16,10 +16,10 @@ and open the template in the editor.
         
         <echo message="generando cobra" />       
         <copy todir="${build.web.dir}/resources/imgs">
-            <fileset dir="web/resources/imgsepc/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/resources/imgsfcm/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/css">
-            <fileset dir="web/resources/cssepc/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/resources/cssfcm/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/resources/js/login">
@@ -33,15 +33,15 @@ and open the template in the editor.
             <fileset  dir="web/homes/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/org.richfaces">
-            <fileset  dir="web/resources/org.richfacesepc/" excludes="${build.web.excludes}"/>            
+            <fileset  dir="web/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
         </copy>
         
-        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
-        <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
-        <copy todir="${build.classes.dir}/" file="web/configuracion/${version}/properties/log4j.properties"/>
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/cobrafcm/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/cobrafcm/resources/skinning.ecss"/>
+        <copy todir="${build.classes.dir}/" file="web/configuracion/cobrafcm/properties/log4j.properties"/>
     </target> 
 </project>
 
