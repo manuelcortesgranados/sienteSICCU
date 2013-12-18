@@ -174,6 +174,7 @@ public class Login implements Serializable {
                         respuesta = "home";
                         if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
                         {    
+                            getSessionBeanCobra().cargarpermisosmodulo(6);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
                         }
                     }
@@ -188,6 +189,7 @@ public class Login implements Serializable {
                         getSessionBeanCobra().setLogueado(true);
                         if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
                         {    
+                            getSessionBeanCobra().cargarpermisosmodulo(6);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
                         }
                     } else {
@@ -200,6 +202,7 @@ public class Login implements Serializable {
                         getSessionBeanCobra().setLogueado(true);
                         if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
                         {    
+                            getSessionBeanCobra().cargarpermisosmodulo(6);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
                         }
                         

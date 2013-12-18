@@ -938,7 +938,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
                 iniciarSlider();
             }
-        } 
+        }
 
         //getPerfilControl().encontrarEtiqueta();
         //Debería utilizarse solo en ciudadano
@@ -1074,9 +1074,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the
-     * <code>activate()</code> method will be called to indicate that the
-     * transfer is complete.</p>
+     * instance, after which the <code>activate()</code> method will be called
+     * to indicate that the transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -2000,18 +1999,18 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String filtrosSeparacion() {
-       filtro.setPalabraclavefiltro("");
+        filtro.setPalabraclavefiltro("");
         primeroListProyectos();
         return "filtronuevo";
     }
-    
+
     public String filtrosSeparacionlateral() {
-       filtro.setPalabraclave("");
+        filtro.setPalabraclave("");
         filtroObrasActionMapaAvanModal();
         return "filtronuevo";
     }
 
-    public String primeroListProyectos() {        
+    public String primeroListProyectos() {
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
@@ -2931,11 +2930,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     descripcion.append("</div>");
                     descripcion.append("</p>");
                 } else if (obra.getTipoestadobra().getIntestadoobra() == 0 && !filtro.isIsciu()) {
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna\">");
-                    descripcion.append("<a class=\"imgaction button1\" href=\"").append(urlnuevo).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");
-                    descripcion.append("</a>");
-                    descripcion.append("</div>");
+                    if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnproyecto()) {
+                        descripcion.append("<p>");
+                        descripcion.append("<div class=\"columna\">");
+                        descripcion.append("<a class=\"imgaction button1\" href=\"").append(urlnuevo).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");
+                        descripcion.append("</a>");
+                        descripcion.append("</div>");
+                    }
                 }
 
                 descripcion.append("</div>");
