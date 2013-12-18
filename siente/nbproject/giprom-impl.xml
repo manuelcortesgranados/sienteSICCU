@@ -4,17 +4,17 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<project name="compileCobra" default="-pre-compile" basedir="..">
+<project name="compileGiprom" default="-pre-compile" basedir="..">
     <description>Archivo para compilar y generar Cobra</description>      
    
     
-    <condition property="iscobra">
-        <equals arg1="${version}" arg2="cobra" />        
+    <condition property="isgiprom">
+        <equals arg1="${version}" arg2="giprom" />        
     </condition>  
   
-    <target name="doCobra" if="iscobra" >
+    <target name="doGiprom" if="isgiprom" >
         
-        <echo message="generando cobra" />       
+        <echo message="generando giprom" />       
         <copy todir="${build.web.dir}/resources/imgs">
             <fileset dir="web/resources/imgsfcm/" excludes="${build.web.excludes}"/>
         </copy>
@@ -36,12 +36,13 @@ and open the template in the editor.
             <fileset  dir="web/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
         </copy>
         
-        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/cobrafcm/META-INF/context.xml"/>        
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/applicationContext.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/faces-config.xml"/>
-        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/cobrafcm/WEB-INF/web.xml"/>
-        <copy todir="${build.web.dir}/resources/" file="web/configuracion/cobrafcm/resources/skinning.ecss"/>
-        <copy todir="${build.classes.dir}/" file="web/configuracion/cobrafcm/properties/log4j.properties"/>
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
+        <copy todir="${build.classes.dir}/" file="web/configuracion/${version}/properties/log4j.properties"/>
+        <copy todir="${build.web.dir}/Supervisor/" file="web/configuracion/${version}/supervisor/DetalleObra.xhtml"/>
     </target> 
 </project>
 
