@@ -29,7 +29,7 @@
     clear: both;
     height: 40px;
     border-color: transparent;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
 }
 
 .modal-body-fonade{
@@ -84,7 +84,7 @@
 }
 
 .textvalla7{
-    color: #37C2D9;
+    color: #00B3DF;
     font-weight: bolder!important;
     font-family: open!important;
     margin-left: 20px;    
@@ -400,7 +400,7 @@ a.imgaction:hover:after{
 }
 
 .label-obj-proyecto{
-    border: 1px solid #37C2D9;
+    border: 1px solid #00B3DF;
     padding: 0px 10px;
     border-radius: 20px;
     font-family: 'open';
@@ -408,6 +408,6 @@ a.imgaction:hover:after{
 
 .label-obj-proyecto:hover {
     color: #9CFF00;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: background-color 0.5s ease 0s;
 }

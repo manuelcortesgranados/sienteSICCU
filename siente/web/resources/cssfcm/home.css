@@ -170,13 +170,13 @@ a.salir:hover {
     height: 170px;
     padding-top: 130px;
 
-    border: 1px solid #37C2D9; 
+    border: 1px solid #00B3DF; 
     float: left; 
     margin-left: 40px;
 
     border-radius: 50% 50% 50% 50%;
     text-align: center;
-    color: #37C2D9;
+    color: #00B3DF;
 
     text-decoration: none;
     font-family:  'Open Sans', sans-serif;
@@ -186,7 +186,7 @@ a.salir:hover {
 #contenedor_texto a.obra:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -200,7 +200,7 @@ a.salir:hover {
 #contenedor_texto a.atencion:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -215,7 +215,7 @@ a.salir:hover {
 #contenedor_texto a.gestionar:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -229,7 +229,7 @@ a.salir:hover {
 #contenedor_texto a.financiera:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -243,7 +243,7 @@ a.salir:hover {
 #contenedor_texto a.auditoria:hover {
     background-repeat: no-repeat;
     background-position: 71px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -257,7 +257,7 @@ a.salir:hover {
 #contenedor_texto a.alojamiento:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 
@@ -271,7 +271,7 @@ a.salir:hover {
 #contenedor_texto a.indicadores:hover {
     background-repeat: no-repeat;
     background-position: 86px 38px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: 1s all;
     color: #9CFF00;
 

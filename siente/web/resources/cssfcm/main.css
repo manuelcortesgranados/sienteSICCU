@@ -870,7 +870,7 @@ a.ikont-acl-interven:hover {
     font-size: 1.2em!important;
     font-style: normal!important;
     font-weight: 500!important;
-    color: #37C2D9!important;
+    color: #00B3DF!important;
     line-height: 20px!important;
 }
 
@@ -884,11 +884,11 @@ a.ikont-acl-interven:hover {
 }
 
 a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModificar{
-    background: #37C2D9;
+    background: #00B3DF;
     border-radius: 2px;
     font-family:open;
     font-size:0.75em;
-    color:#EB1D26;
+    color:#9CFF00;
     text-align:center;
     padding:5px 8px; 
     text-decoration: none;
@@ -896,7 +896,7 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModifica
 }
 a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesPasosModificar:hover {
     background: #1E4C00;
-    color:#EB1D26;
+    color:#9CFF00;
 }
 
 .marcocambioestado{
@@ -906,8 +906,8 @@ a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesP
 a.busquedavanzada {
     width:150px;
     height:25px;
-    background-color: #37C2D9;
-    color: #EB1D26;
+    background-color: #00B3DF;
+    color: #9CFF00;
     padding: 5px 8px 5px 30px;
     background-image:url(../imgs/bt_buscar.png);
     background-repeat:no-repeat;
@@ -923,7 +923,7 @@ a.busquedavanzada {
 
 a.busquedavanzada:hover {
     background-color:#1E4C00;
-    color: #EB1D26;
+    color: #9CFF00;
 }
 
 a.anadirimagen {
@@ -994,7 +994,7 @@ a.evo02:hover {
 }
 
 .TituloModificarProyecto {
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     font-size: 1.5em;
     font-weight: bold;
@@ -1002,7 +1002,7 @@ a.evo02:hover {
 }
 
 .NoFileModificar {
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     font-size: 9px;
     font-style: italic;
@@ -1351,7 +1351,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .ikont-hpg-menu-nuevo-convenio .ikont-menu-detalle-text:hover, .ikont-hpg-menu-nuevo-convenio .ikont-menu-detalle-text.buttonactive{
-    color: #EB1D26;
+    color: #9CFF00;
     font-weight: bold;
 }
 
@@ -1367,7 +1367,7 @@ a.ikont-hcl-modificarusuario:hover {
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -1397,7 +1397,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-menu-buttons-ext-finalizar{
     top: -32px;
-    border-bottom: 1px solid #EB1D26;
+    border-bottom: 1px solid #9CFF00;
     width: 60px;
     height: 17px;
     margin-left: 150px;
@@ -1405,7 +1405,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-menu-buttons-ext-guardar{
     top: -32px;
-    border-bottom: 1px solid #EB1D26;
+    border-bottom: 1px solid #9CFF00;
     width: 120px;
     height: 17px;
 }
@@ -1475,7 +1475,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .vtitle23{
-    color: #37C2D9;
+    color: #00B3DF;
     text-decoration: none;
     font-size: 1em;
 }
@@ -1547,7 +1547,7 @@ a.vtitle23:hover{
 .topbar_encabezado_1{
     width:100%;
     height: 12px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
 }
 .topbar_encabezado_2{
     width:25px;
@@ -1660,7 +1660,7 @@ input[type="text"], input[type="password"], select{
     border-spacing: 56px;
 }
 .ikont-outtext-titulo{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 22px;
 }
 .ikont-outtext-subtitulo{
@@ -1693,7 +1693,7 @@ input[type="text"], input[type="password"], select{
 .ikont-div-cerrar-panel{
     height:40px;  
     width:100%;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     bottom: 0px; position: absolute;
 }
 .ikont-imagenciudadano{
@@ -1775,13 +1775,13 @@ input[type="text"], input[type="password"], select{
     color:#58595B;
 }
 .ikont-bt-cerrar-login2:hover{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-bt-cerrar-login2:visited{
     color: #58595B !important;   
 }
 .ikont-bt-cerrar-login2:active{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-menu-inicio-zoom{
     background-image: url(../imgs/icons_menu_pr.png);
@@ -1811,13 +1811,13 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 .ikont-label-estructura-menu:hover{
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-estructura-menu:visited{
     color:  #58595B !important; 
 }
 .ikont-label-estructura-menu:active{
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-menu:link{ 
     width: 120px; 
@@ -1835,10 +1835,10 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 .ikont-label-menu-item:hover { 
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-menu-item:active { 
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-menu-item:visited { 
     color:  #58595B !important; 
@@ -1857,10 +1857,10 @@ input[type="text"], input[type="password"], select{
     line-height: 26px;
 }
 .ikont-label-menu-estr-sub-titulo:hover{
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-menu-estr-sub-titulo:active{
-    color:  #37C2D9!important; 
+    color:  #00B3DF!important; 
 }
 .ikont-label-menu-estr-sub-titulo:visited{
     color:  #58595B !important; 
@@ -1901,7 +1901,7 @@ input[type="text"], input[type="password"], select{
     width: 100%;
 }
 .ikont-place-holder{
-    color: #37C2D9;
+    color: #00B3DF;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto{
@@ -1979,7 +1979,7 @@ input[type="text"], input[type="password"], select{
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -1999,7 +1999,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
-    color: #EB1D26;
+    color: #9CFF00;
     font-weight: bold;
 }
 
@@ -2171,7 +2171,7 @@ input[type="text"], input[type="password"], select{
 /* detalle obra*/
 
 .ikont-hot-zoom-strnombremedio{
-    color: #37C2D9;
+    color: #00B3DF;
     text-decoration: none;
     font-family: open;
     font-size: 18px;
@@ -2181,7 +2181,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hot-strDireccionProyectoOut{
-    color: #37C2D9!important;
+    color: #00B3DF!important;
     text-decoration: none;
     font-family: open;
     font-size: 1.3em!important;
@@ -2514,7 +2514,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hpg-mpcronogramamod{
-    color: #37C2D9;
+    color: #00B3DF;
 }
 
 /*
@@ -2541,7 +2541,7 @@ css usuario modificacion
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -2567,7 +2567,7 @@ css usuario modificacion
 }
 
 .ikont-hpg-menu-contenido-administrar-convenio .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-administrar-convenio .ikont-menu-detalle-text.buttonactive{
-    color: #EB1D26;
+    color: #9CFF00;
     font-weight: bold;
 }
 
@@ -2794,7 +2794,7 @@ css usuario modificacion
     background-position: top;
     background-repeat: none !important;
     background-color:  transparent !important;
-    color:  #37C2D9!important ;
+    color:  #00B3DF!important ;
 }
 .rf-tab-hdr-inact.rf-tab-hdr-top {
     vertical-align: top !important;
@@ -2822,12 +2822,12 @@ css usuario modificacion
     width: 100px!important;
     height: 30px!important;
     float: left;
-    color:#37C2D9!important;
+    color:#00B3DF!important;
     text-decoration: none;
     font-family: 'Open Sans';
     font-size: 15px!important;
     background-color: #ffffff!important; 
-    border: 1px solid #37C2D9;
+    border: 1px solid #00B3DF;
     padding-left: 25px!important;
     padding-top: 8px!important;
     position: relative!important;
@@ -2839,8 +2839,8 @@ css usuario modificacion
     height: 30px;
     float: left;
     text-decoration: none;
-    color: #EB1D26!important;
-    background-color: #37C2D9!important;
+    color: #9CFF00!important;
+    background-color: #00B3DF!important;
     transition:background-color 1s ease 0s ;
     font-family:'Open Sans';
 }
@@ -2852,7 +2852,7 @@ css usuario modificacion
 .inputbienvenidahomezoom{
     width: 735px; 
     font-size: 1.5em; 
-    color: #37C2D9; 
+    color: #00B3DF; 
     font-family: open; 
     padding: 100px;
 }
@@ -2864,7 +2864,7 @@ css usuario modificacion
 .inputtitulohomezoomtexto{
     width: 735px; 
     font-size: 1.2em; 
-    color: #37C2D9; 
+    color: #00B3DF; 
     padding: 100px;
 }
 .inputtextshomezoom{
@@ -2875,7 +2875,7 @@ css usuario modificacion
     /*top: 61px;*/
 }
 .inputlinkhomezoom{
-    background-color: #37C2D9; 
+    background-color: #00B3DF; 
     width: 8px;
     height: 8px;
     border-radius: 100%;
@@ -2900,7 +2900,7 @@ css usuario modificacion
 }
 .inputlinkhomevermas{
     font-size: 0.5em; 
-    color: #37C2D9!important; 
+    color: #00B3DF!important; 
     padding: 10px;
 }
 #header_content {
@@ -2942,7 +2942,7 @@ css usuario modificacion
     height: 60px;
     position: fixed;
     left: 0px;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     -moz-transform: scaleY(1);-moz-transition: all 0.5s;
     -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
     -o-transform: scaleY(1);-o-transition: all 0.5s;
@@ -2970,7 +2970,7 @@ css usuario modificacion
 }
 
 .ikont-hpg-menu-nuevo-proestructuracion .ikont-menu-detalle-text:hover, .ikont-hpg-menu-nuevo-proestructuracion .ikont-menu-detalle-text.buttonactive{
-    color: #EB1D26;
+    color: #9CFF00;
     font-weight: bold;
 }
 
@@ -3114,9 +3114,9 @@ css usuario modificacion
 }
 .ikont-colum-superior-consulta{
     color: #FFF;
-    background-color: #37C2D9;
-    border-right: solid 1px #EB1D26;
-    border-bottom: solid 1px #EB1D26;
+    background-color: #00B3DF;
+    border-right: solid 1px #9CFF00;
+    border-bottom: solid 1px #9CFF00;
 }
 
 .ikont-table-sin-detalles-fila tbody:nth-child(odd){
@@ -3498,7 +3498,7 @@ css usuario modificacion
 
 .ikont-colum-superior-fuente-recurso{
     color: #FFF;
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     font-size: 0.8em;
     padding: 2px 5px;
 }
@@ -3592,23 +3592,23 @@ css usuario modificacion
     border: 0px none transparent;
     font-style: inherit;
     text-align: center;
-    color: #37C2D9;
+    color: #00B3DF;
 }
 
 .ikont-hot-value-participacion{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 2em;
     font-family: open;
 }
 
 .ikont-hot-text-participacion{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 0.8em;
     font-family: open;
 }
 
 .ikont-hot-textver-participacion{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 0.7em;
     font-family: open;
     text-decoration: none;
@@ -3628,7 +3628,7 @@ css usuario modificacion
 }
 
 .ikont-hot-paso-participacion{
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     font-weight: bolder;
 }
@@ -3655,13 +3655,13 @@ css usuario modificacion
     width: 370px!important;
     height: 120px;
     background: #FFF;
-    border: 1px solid #37C2D9!important;
+    border: 1px solid #00B3DF!important;
     margin-left: -35px;
 }
 
 .ikont-hot-idcontarmensaje2{
     font-size: 0.8em;
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     margin-left: 60%;
 }
@@ -3725,7 +3725,7 @@ css usuario modificacion
 .ikont-hot-desea{
     font-size: 0.9em;
     font-weight: bold;
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
 }
 
@@ -3899,13 +3899,13 @@ a:hover {
 
 
 .ikont-hot-conectate-zoom{
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     font-size: 1.2em;
 }
 
 .ikont-hot-derechos-reser{
-    color: #37C2D9;
+    color: #00B3DF;
     font-family: open;
     font-size: 0.8em;
 }
@@ -4192,8 +4192,8 @@ a:hover {
     border-radius: 50% 50% 50% 50%;
     float: left;
     text-decoration: none;
-    color: #EB1D26;
-    background-color:#37C2D9;
+    color: #9CFF00;
+    background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
     font-family: 'Open Sans';
     line-height: 95px;
@@ -4219,12 +4219,12 @@ a:hover {
 .ikont-po-img-finalizarGWTInferior:hover{
     width: 100px;
     height: 100px;
-    border: solid 1px #37C2D9;
+    border: solid 1px #00B3DF;
     border-radius: 50% 50% 50% 50%;
     float: right;
     text-decoration: none;
-    color: #EB1D26;
-    background-color:#37C2D9;
+    color: #9CFF00;
+    background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
     font-family: 'Open Sans';
     line-height: 95px;
@@ -4278,32 +4278,32 @@ a:hover {
 
 .boton-planificacion-gwt:hover{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-planificacion-gwt:disabled{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-flujocaja-gwt:disabled{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-reporte-gwt:disabled{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-flujocaja-gwt:hover{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-reporte-gwt:hover{
     background-color: #1E4C00;
-    color: #EB1D26 !important;
+    color: #9CFF00 !important;
 }
 
 .boton-flujocaja-gwt{
@@ -4441,11 +4441,11 @@ a:hover {
 }
 #contenedor_error_texto p .ikont-link-error { 
     text-decoration: none;
-    color:#37C2D9; 
+    color:#00B3DF; 
     font-style: italic;
 }
 #contenedor_error_texto p .ikont-link-error:hover { 
-    color: #EB1D26;
+    color: #9CFF00;
 }
 .ikont-hit-intxtnombrecc{
     text-align: center;
@@ -4469,13 +4469,13 @@ a:hover {
 }
 
 .ikont-enlace-cargar-imagen-registro:hover{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-enlace-cargar-imagen-registro:visited{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-enlace-cargar-imagen-registro:active{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 
 .ikont-hol-lblclasificacionProyecto{
@@ -4539,13 +4539,13 @@ a:hover {
 }
 
 .ikont-enlace-boton-administrar:hover{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-enlace-boton-administrar:visited{
     color:  #58595B !important;   
 }
 .ikont-enlace-cargar-imagen-registro:active{
-    color:  #37C2D9!important;   
+    color:  #00B3DF!important;   
 }
 .ikont-img-administrar{
     border:0px;border-style:none;
@@ -4727,9 +4727,9 @@ a:hover {
 }
 
 .ikont-hcb-ver_objeto:hover{
-    background-color: #37C2D9;
+    background-color: #00B3DF;
     transition: .5s all ease-out;
-    color: #EB1D26;
+    color: #9CFF00;
 }
 
 .ikont-hcb-seguirspry{
@@ -4750,7 +4750,7 @@ a:hover {
 }
 
 .ikont-hcb-seguirspry-label, .ikont-hcb-seguirspry-label:hover{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 0.8em;
     cursor: pointer;
 }
@@ -4761,7 +4761,7 @@ a:hover {
     cursor: pointer;
     border-radius: 8px;
     padding: 5px 10px;
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 12px;
     background-image: url(../imgs/ojo_abierto.png);
     display: block;
@@ -4776,7 +4776,7 @@ a:hover {
 }
 
 .ikont-hcb-sinseguirpry-label, .ikont-hcb-sinseguirpry-label:hover{
-    color: #37C2D9;
+    color: #00B3DF;
     font-size: 0.8em;
     cursor: pointer;
 }
@@ -4800,7 +4800,7 @@ a:hover {
 }
 
 .GGW1HCIDL1C {
-    background: #37C2D9!important;
+    background: #00B3DF!important;
 }
 
 .GGW1HCIDB2C{
@@ -4826,7 +4826,7 @@ a:hover {
 
 .button-plan-flujo-report:hover{
     background-color: #1E4C00;
-    color: #EB1D26 !important;   
+    color: #9CFF00 !important;   
 }
 
 .ikont-hpg-menu-plan-operativo{

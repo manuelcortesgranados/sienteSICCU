@@ -15,7 +15,7 @@
     background-position: top left;
     background-repeat: repeat-x;
     background-image: none;
-    border-bottom: 1px dashed #7E7E7E;
+    border-bottom: 1px solid #7E7E7E;
 }
 
 .rf-cp-hdr-exp {
