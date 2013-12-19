@@ -55,7 +55,7 @@
             <h:form prependId="false">               
 
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
-                <h:inputHidden class="ikont-hot-valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"/>
+                <h:inputHidden id="valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"/>
             </h:form>
 
             <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">                
@@ -167,8 +167,8 @@
                                                 chart.addArrow(arrow);
 
                                                 chart.write("chartdiv");
-                                                var _date = document.getElementsByClassName('ikont-hot-valuepotencialele');
-                                                var value = _date[0].value;
+                                                var _date = document.getElementById('valuepotencialele');
+                                                var value = _date.value;
                                                 arrow.setValue(value);
                                                 axis.setBottomText(value + " %");
                                             });
