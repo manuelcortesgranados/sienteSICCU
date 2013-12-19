@@ -569,14 +569,14 @@
                     <div  id="nuevobuscador" class="topbar_encabezado_3">
                         <h:panelGrid columns="6" style=""> 
                             <h:inputText id="txtPalabraClave2" styleClass="ikont-hit-palabraclave2"    value="#{HomeGestion.filtro.palabraclave}">
-                                <rich:placeholder value="¿Qué proyecto estás buscando?" /></h:inputText> 
+                                <rich:placeholder value="¿Qué #{var.obra} estás buscando?" /></h:inputText> 
                             <h:commandLink  type="button" styleClass="ikont-acb-btn_filtro_estatico"   action="#{HomeGestion.filtrosSeparacion}" id="filtrar"/>
                         </h:panelGrid>
                     </div>
                 </rich:column>
                 <rich:column>
                     <h:panelGroup>
-                        <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch" style="position: absolute;top: 47px;left: 1000px;"></a>
+                        <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch" style="position: absolute;top: 47px;left: 930px;"></a>
                     </h:panelGroup>
                 </rich:column>     
             </h:panelGrid>

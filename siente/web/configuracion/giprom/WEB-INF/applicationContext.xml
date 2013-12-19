@@ -15,7 +15,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrafonade</value>
+            <value>jdbc:postgresql:cobrafcm</value>
         </property>
         <property name="username">
             <value>cobra</value>
@@ -263,7 +263,7 @@
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
                 <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.cglib.use_reflection_optimizer">false</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider
                 </prop>
             </props>
@@ -554,27 +554,27 @@
         </property>
     </bean>
     -->
-<!--
-    <bean id="solicitudService" scope="prototype"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref local="transactionManager" />
-        </property>
-        <property name="target">
-            <ref local="solicitudServiceTarget" />
-        </property>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="save*">PROPAGATION_REQUIRED</prop>
-                <prop key="update*">PROPAGATION_REQUIRED</prop>
-                <prop key="delete*">PROPAGATION_REQUIRED</prop>
-                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
--->
+    <!--
+        <bean id="solicitudService" scope="prototype"
+              class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+            <property name="transactionManager">
+                <ref local="transactionManager" />
+            </property>
+            <property name="target">
+                <ref local="solicitudServiceTarget" />
+            </property>
+            <property name="transactionAttributes">
+                <props>
+                    <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                    <prop key="save*">PROPAGATION_REQUIRED</prop>
+                    <prop key="update*">PROPAGATION_REQUIRED</prop>
+                    <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                    <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                    <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                </props>
+            </property>
+        </bean>
+    -->
     <bean id="supervisionExternaService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
@@ -680,13 +680,140 @@
     </bean>
     
     <!--
-     <bean id="marcoLogicoService" scope="prototype"
+      <bean id="marcoLogicoService" scope="prototype"
+           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+         <property name="transactionManager">
+             <ref local="transactionManager" />
+         </property>
+         <property name="target">
+             <ref local="marcoLogicoServiceTarget" />
+         </property>
+         <property name="transactionAttributes">
+             <props>
+                 <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="save*">PROPAGATION_REQUIRED</prop>
+                 <prop key="update*">PROPAGATION_REQUIRED</prop>
+                 <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                 <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                 <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+             </props>
+         </property>
+     </bean>
+    -->
+    
+    <bean id="dataSourceOracle"
+         class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+            <value>oracle.jdbc.OracleDriver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:oracle:thin:@190.248.54.71:1521:SIGECOM</value>
+            <!--<value>jdbc:oracle:thin:@172.16.2.15:1521:SIGECOM</value>-->
+           
+        </property>
+        <property name="username">
+            <value>COBRA</value>
+        </property>
+        <property name="password">
+            <value>ji4cEonWk@QtD%3xgu87</value>
+        </property>
+    </bean>   
+   <!--
+   <bean id="dataSourceOracle"
+          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName">
+            <value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:postgresql:cobrafcm</value>
+        </property>
+        <property name="username">
+            <value>cobra</value>
+        </property>
+        <property name="password">
+            <value>cobradatabase</value>
+        </property>
+    </bean>
+    -->
+    <bean id="sessionFactoryOracle" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="mappingResources">
+            <list>
+                <value>co/com/interkont/giprom/vista/VwIndIndicadorMunicipal.hbm.xml</value>
+                <value>co/com/interkont/giprom/vista/VwInmInfoMunicipal.hbm.xml</value>
+                <value>co/com/interkont/giprom/vista/VwEncIncInfoConsolidada.hbm.xml</value>               
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider </prop>
+            </props>
+        </property>
+        <property name="dataSource">
+            <ref bean="dataSourceOracle" />
+        </property>
+    </bean>
+    
+    <bean id="jdbcExceptionTranslatorOracle"
+          class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+        <property name="dataSource">
+            <ref bean="dataSourceOracle" />
+        </property>
+    </bean>
+
+    <!-- Hibernate Template Defintion -->
+    <bean id="hibernateTemplateOracle"
+          class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactoryOracle" />
+        </property>
+        <property name="jdbcExceptionTranslator">
+            <ref bean="jdbcExceptionTranslatorOracle" />
+        </property>
+    </bean>
+
+    <!-- Hibernate Transaction Manager Definition -->
+    <bean id="transactionManagerOracle" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="sessionFactoryOracle" />
+        </property>
+    </bean>
+
+    <!-- ========================= Start of DAO DEFINITIONS ========================= -->
+
+        <!-- TODO DAO Definition: Hibernate implementation -->
+        
+     <!-- ========================= Start of DAO DEFINITIONS ========================= -->
+
+        <!-- TODO DAO Definition: Hibernate implementation -->
+    <bean id="AbstractSpringDaoOracle" abstract="true" class="cobra.dao.oracle.AbstractSpringDaoOracle" scope="prototype">
+        <property name="hibernateTemplate">
+            <ref bean="hibernateTemplateOracle" />
+        </property>
+    </bean>   
+   
+   <bean id="gipromDao" class="cobra.dao.oracle.GipromDaoImpl" parent="AbstractSpringDaoOracle" scope="prototype">
+    </bean>
+    
+    <bean id="gipromServiceTarget" scope="prototype"
+          class="cobra.service.oracle.GipromServiceImpl">
+        <property name="gipromDao">
+            <ref local="gipromDao" />
+        </property>
+    </bean>
+
+
+<bean id="gipromService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
-            <ref local="transactionManager" />
+            <ref local="transactionManagerOracle" />
         </property>
         <property name="target">
-            <ref local="marcoLogicoServiceTarget" />
+            <ref local="gipromServiceTarget" />
         </property>
         <property name="transactionAttributes">
             <props>
@@ -695,11 +822,7 @@
                 <prop key="update*">PROPAGATION_REQUIRED</prop>
                 <prop key="delete*">PROPAGATION_REQUIRED</prop>
                 <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
-                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
             </props>
         </property>
     </bean>
-   -->
 </beans>

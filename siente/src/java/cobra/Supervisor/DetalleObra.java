@@ -1103,6 +1103,7 @@ public class DetalleObra implements Serializable{
     }
 
     public void iniciardetalle() {
+        
         getAdministrarObraNew().setProyectoestrategia(false);
        
         imagenEvolucion();
@@ -1177,13 +1178,13 @@ public class DetalleObra implements Serializable{
         setAlimentacionultima(new Alimentacion());
         setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getAdministrarObraNew().getObra().getIntcodigoobra()));
 
-        if (obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_verde"))) {
+        if (obraMapa!=null &&obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_verde"))) {
             semaforo = "VERDE";
         }
-        if (obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_amarillo"))) {
+        if (obraMapa!=null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_amarillo"))) {
             semaforo = "AMARILLO";
         }
-        if (obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_rojo"))) {
+        if (obraMapa!=null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_rojo"))) {
             semaforo = "ROJO";
         }
 
@@ -1220,8 +1221,10 @@ public class DetalleObra implements Serializable{
             getAdministrarObraNew().mostrarGoogle();
         }
         getAdministrarObraNew().setOpcion(0);
-
+        if(getAdministrarObraNew().getObra().getDatefecfinobra() != null)
+        {    
         finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
+        }
     }
 
     protected AdministrarObraNew getAdministrarObraNew() {
