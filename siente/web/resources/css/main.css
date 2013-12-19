@@ -896,7 +896,11 @@ body {
 }
 
 .rf-p.noneborder .rf-p-b{
-    border: solid 0px transparent;
+    border: solid 0px transparent!important;
+}
+
+.rf-p.completeborder .rf-p-b{
+    border: #266185 thin solid;
 }
 
 .rf-dt-hdr th{

@@ -1511,7 +1511,7 @@ a.vtitle23:hover{
 }
 
 .templatetablamenulateral{
-    width : 268px;
+    width : 268px!important;
     height: 100%;
     border-right-color: #C0C0C0 !important;
 
