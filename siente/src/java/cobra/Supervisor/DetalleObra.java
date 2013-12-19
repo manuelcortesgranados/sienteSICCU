@@ -1221,8 +1221,10 @@ public class DetalleObra implements Serializable{
             getAdministrarObraNew().mostrarGoogle();
         }
         getAdministrarObraNew().setOpcion(0);
-
+        if(getAdministrarObraNew().getObra().getDatefecfinobra() != null)
+        {    
         finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
+        }
     }
 
     protected AdministrarObraNew getAdministrarObraNew() {

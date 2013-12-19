@@ -702,6 +702,7 @@
          </property>
      </bean>
     -->
+    
     <bean id="dataSourceOracle"
          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName">
@@ -710,6 +711,7 @@
         <property name="url">
             <value>jdbc:oracle:thin:@190.248.54.71:1521:SIGECOM</value>
             <!--<value>jdbc:oracle:thin:@172.16.2.15:1521:SIGECOM</value>-->
+           
         </property>
         <property name="username">
             <value>COBRA</value>
@@ -718,7 +720,23 @@
             <value>ji4cEonWk@QtD%3xgu87</value>
         </property>
     </bean>   
-   
+   <!--
+   <bean id="dataSourceOracle"
+          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <property name="driverClassName">
+            <value>org.postgresql.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:postgresql:cobrafcm</value>
+        </property>
+        <property name="username">
+            <value>cobra</value>
+        </property>
+        <property name="password">
+            <value>cobradatabase</value>
+        </property>
+    </bean>
+    -->
     <bean id="sessionFactoryOracle" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>

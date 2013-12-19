@@ -24,6 +24,7 @@ import co.com.interkont.cobra.to.RestaurarPassword;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import co.com.interkont.giprom.vista.VwEncIncInfoConsolidada;
 import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
@@ -1280,10 +1281,50 @@ public class SessionBeanCobra implements Serializable {
         {
             vista.setStrcorregimiento("Faltante");
         }    
+        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
         
-//        VwIndIndicadorMunicipal ind= getGipromService().obtenerInindicadorMunicipalxcodmunicipio(mun.getLclCodigo());
-//        
-//        System.out.println("ind = " + ind.getIndDtmValor());
+        System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
+        for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
+            System.out.println("valor = " + winccons.getEncIncValorIndicador());
+            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
+            {
+                vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("02")==0)
+            {
+                vista.setNumvalprogramejec(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("03")==0)
+            {
+                vista.setNumvaldeclarado(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
+            {
+              
+                vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
+            {
+                vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
+            }
+        }   
+        
+//        List<VwIndIndicadorMunicipal> listaindmun= getGipromService().obtenerIndicadorMunicipalxcodmunicipio(mun.getLclCodigo());
+//        for (VwIndIndicadorMunicipal wind : listaindmun) {
+//            
+//        }
+        VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
+        
+        if(vind !=null)
+        {
+            vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
+        }    
+        else
+        {
+             vista.setNumvlrsumahijos(BigDecimal.ZERO);
+        }    
+        
         return vista;
     }
 }

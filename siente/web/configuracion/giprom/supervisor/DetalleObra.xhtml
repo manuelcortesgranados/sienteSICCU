@@ -55,6 +55,7 @@
             <h:form prependId="false">               
 
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
+                <h:inputHidden class="ikont-hot-valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"/>
             </h:form>
 
             <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">                
@@ -90,10 +91,10 @@
                                         <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
                                         <h:panelGroup layout="block">
                                             <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
-                                            <h:outputText value="645454"></h:outputText>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
                                             <br/>
                                             <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
-                                            <h:outputText value="456456"></h:outputText>
+                                            <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
                                         </h:panelGroup>
                                     </h:panelGrid>
                                 </h:panelGrid>
@@ -139,58 +140,43 @@
                                         <script type="text/javascript">
                                             var chart;
                                             var arrow;
-                                            var axisKM;
-                                            var axisMiles;
+                                            var axis;
 
                                             AmCharts.ready(function() {
-
-                                                // create angular gauge
                                                 chart = new AmCharts.AmAngularGauge();
+                                                chart.color = "#00B3DF";
 
-                                                // kilometers axis
-                                                axisKM = new AmCharts.GaugeAxis();
-                                                axisKM.startValue = 0;
-                                                axisKM.endValue = 240;
-                                                axisKM.radius = "100%";
-                                                axisKM.inside = false;
-                                                axisKM.gridInside = false;
-                                                axisKM.axisColor = "#2EC1DB";
-                                                axisKM.tickColor = "#2EC1DB";
-                                                axisKM.axisThickness = 3;
-                                                chart.addAxis(axisKM);
+                                                axis = new AmCharts.GaugeAxis();
+                                                axis.startValue = 0;
+                                                axis.endValue = 100;
+                                                axis.axisColor = "#00B3DF";
+                                                axis.tickColor = "#00B3DF";
+                                                axis.axisThickness = 3;
 
-                                                // miles axis
-                                                axisMiles = new AmCharts.GaugeAxis();
-                                                axisMiles.startValue = 0;
-                                                axisMiles.endValue = 160;
-                                                axisMiles.radius = "80%";
-                                                axisMiles.axisColor = "#00B3DF";
-                                                axisMiles.tickColor = "#00B3DF";
-                                                axisMiles.axisThickness = 3;
-                                                chart.addAxis(axisMiles);
+                                                var band1 = new AmCharts.GaugeBand();
+                                                band1.startValue = 0;
+                                                band1.endValue = 100;
+                                                band1.color = "#FFFF0B";
 
-                                                // arrow
+                                                axis.bands = [band1];
+                                                axis.setBottomText("50 %");
+                                                chart.addAxis(axis);
+
                                                 arrow = new AmCharts.GaugeArrow();
-                                                arrow.radius = "85%";
                                                 arrow.color = "#00B3DF";
-                                                arrow.innerRadius = 50;
-                                                arrow.nailRadius = 0;
                                                 chart.addArrow(arrow);
 
                                                 chart.write("chartdiv");
-                                                // update value every 2 seconds
-                                                randomValue();
-                                            });
-
-                                            function randomValue() {
-                                                var value = Math.round(Math.random() * 240);
+                                                var _date = document.getElementsByClassName('ikont-hot-valuepotencialele');
+                                                var value = _date[0].value;
                                                 arrow.setValue(value);
-                                            }
+                                                axis.setBottomText(value + " %");
+                                            });
                                         </script>
                                     </h:panelGroup>
                                     <h:panelGrid columns="1" styleClass="totalwidth panelcenter" columnClasses="panelcenter,panelcenter">
                                         <h:outputLabel styleClass="font-general">Potencial Energetico</h:outputLabel>
-                                        <h:outputLabel >35 W</h:outputLabel>
+                                        <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} %"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
 
@@ -217,43 +203,23 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <interkont:spacer height="15" />
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.diasciu}"></h:outputText>
-
-                                    <h:panelGrid columns="2" styleClass="panelcenter">
-                                        <h:outputLabel styleClass="ikont-hot-desde" value="Desde:"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                            <f:convertDateTime pattern="#{var.formatofecha}" />
-                                        </h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-hasta" value="Hasta:" ></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                            <f:convertDateTime pattern="#{var.formatofecha}" />
-                                        </h:outputLabel>
-                                    </h:panelGrid>
+                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvaltotamorti} %"></h:outputText>
 
                                 </h:panelGrid>    
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <interkont:spacer height="15" />
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.diasciu}"></h:outputText>
-
-                                    <h:panelGrid columns="2" styleClass="panelcenter">
-                                        <h:outputLabel styleClass="ikont-hot-desde" value="Desde:"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
-                                            <f:convertDateTime pattern="#{var.formatofecha}" />
-                                        </h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-hasta" value="Hasta:" ></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-fecfiob" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
-                                            <f:convertDateTime pattern="#{var.formatofecha}" />
-                                        </h:outputLabel>
-                                    </h:panelGrid>
+                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalprogramejec} %"></h:outputText>                                    
 
                                 </h:panelGrid>    
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob" columns="1">
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="5424541"></h:outputText>
+                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvaldeclarado}"></h:outputText>
                                     <h:outputLabel styleClass="ikont-hot-desde" value="Población de la localidad"></h:outputLabel>
+                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
                                 </h:panelGrid>    
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob" columns="1">
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="5424541"></h:outputText>
+                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
                                     <h:outputLabel styleClass="ikont-hot-desde" value="Población de la localidad"></h:outputLabel>
+                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
                                 </h:panelGrid>    
                             </h:panelGrid>
                         </rich:collapsiblePanel>
@@ -287,7 +253,7 @@
                                                 jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="200px" width="600px">                                                                 
                                             <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
                                                       longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
-                                       
+
                                                       jsVariable="#{HomeGestion.marcador.jsVariable}"
                                                       draggable="false" >
                                                 <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
@@ -298,7 +264,7 @@
                                 </h:panelGrid> 
                             </h:panelGroup>
                         </rich:collapsiblePanel>
-                        
+
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>
