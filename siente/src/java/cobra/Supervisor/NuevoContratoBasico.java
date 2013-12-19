@@ -3932,7 +3932,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
         listadocumentos.clear();
-
+        listadocuContrato.clear();
         numdeactasparciales = 0;
         porcentapagoanticipo = new BigDecimal(BigInteger.ZERO);
         valorpagoanticipo = new BigDecimal(BigInteger.ZERO);
