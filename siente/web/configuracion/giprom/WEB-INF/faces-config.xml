@@ -344,6 +344,10 @@
             <value>#{marcoLogicoService}</value>
         </managed-property>
 -->
+<managed-property>
+            <property-name>gipromService</property-name>
+            <value>#{gipromService}</value>
+        </managed-property>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>SubirArchivoBean</managed-bean-name>

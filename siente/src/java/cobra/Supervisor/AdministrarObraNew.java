@@ -27,6 +27,8 @@ import co.com.interkont.cobra.to.Tiponovedad;
 import co.com.interkont.cobra.to.Vereda;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
+import co.com.interkont.cobra.vista.VistaObraMapa;
+import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.ArchivoWeb;
 import cobra.Marcador;
 import cobra.RedimensionarImagen;
@@ -58,10 +60,11 @@ import javax.servlet.ServletContext;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page. This class
- * contains component definitions (and initialization code) for all components
- * that you have defined on this page, as well as lifecycle methods and event
- * handlers where you may add behavior to respond to incoming events.</p>
+ * <p>
+ * Page bean that corresponds to a similarly named JSP page. This class contains
+ * component definitions (and initialization code) for all components that you
+ * have defined on this page, as well as lifecycle methods and event handlers
+ * where you may add behavior to respond to incoming events.</p>
  *
  * @version AdministrarObraNew.java
  * @version Created on 28-oct-2010, 1:04:30
@@ -176,8 +179,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * Objetos para almacenar avace fisico medios vida
      *
      */
-    private VistaCalculoIndicadorProyectos vproductomedios= new VistaCalculoIndicadorProyectos();
-    private VistaCalculoIndicadorProyectos vproductogestion= new VistaCalculoIndicadorProyectos();
+    private VistaCalculoIndicadorProyectos vproductomedios = new VistaCalculoIndicadorProyectos();
+    private VistaCalculoIndicadorProyectos vproductogestion = new VistaCalculoIndicadorProyectos();
 
     public VistaCalculoIndicadorProyectos getVproductomedios() {
         return vproductomedios;
@@ -604,7 +607,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     public void setOpcion(int opcion) {
 
-
         this.opcion = opcion;
     }
 
@@ -903,7 +905,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
      * user-specified code inserted here is subject to being replaced.</p>
      */
@@ -919,7 +922,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Construct a new Page bean instance.</p>
+     * <p>
+     * Construct a new Page bean instance.</p>
      */
     public AdministrarObraNew() {
 
@@ -928,7 +932,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
             id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
             if (id != null) {
-                getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
+                if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") != 0) {
+                    getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
+                }
             }
             mostrarGoogle();
             llenarSelectTipoDocumento();
@@ -938,9 +944,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             iniciarImagenes();
             llenarSelectTipoImagenes();
 
-            mostrarGoogle();
+            //mostrarGoogle();
             //obtenerTacometro();
-
 
         } else {
 
@@ -964,7 +969,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * <p>Callback method that is called just before rendering takes place. This
+     * <p>
+     * Callback method that is called just before rendering takes place. This
      * method will <strong>only</strong> be called for the page that will
      * actually be rendered (and not, for example, on a page that handled a
      * postback and then navigated to a different page). Customize this method
@@ -976,20 +982,28 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         int cual = opcion;
+        
         if (id != null) {
 
             if (getObra() != null && id != null) {
-
-                if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
-                    getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
-                    setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(Integer.parseInt(id)));
-                    //llenarContrato();
-                    obtenerTacometro();
-                }
-
-                getDetalleObra().iniciardetalle();
+                if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+                    
+                    VwInmInfoMunicipal municipal = getSessionBeanCobra().getGipromService().obtenerInformacionMunicipalGipromxId(BigDecimal.valueOf(Double.valueOf(id)));
+                    
+                    setObra(getSessionBeanCobra().castearVwInformacionMunicipaltoObra(municipal));
+                    
+                } else {
+                    if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
+                        getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
+                        setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(Integer.parseInt(id)));
+                        //llenarContrato();
+                        obtenerTacometro();
+                    }
+                    getDetalleObra().iniciardetalle();
                 getDetalleObra().setFinentrega(getObra().getDatefecfinobra().toString());
                 iniciarImagenes();
+                }
+                
                 opcion = cual;
             } else {
                 getDetalleObra().iniciardetalle();
@@ -1080,9 +1094,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     FacesUtils.addErrorMessage("No pudo crear carpeta ");
                 }
 
-
                 String cero = nomarch.substring(0, 1);
-
 
                 if (cero.compareTo("0") == 0) {
                     nomarch = getObra().getIntcodigoobra() + nomarch.substring(1, nomarch.length());
@@ -1244,7 +1256,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         getObra().setTipoestadobra(new Tipoestadobra(5));
         getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
 
-
         return null;
     }
 
@@ -1287,7 +1298,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         try {
             subirActaFin.guardarArchivosTemporales(realArchivoPath, false);
 
-
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(AdministrarObraNew.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -1306,7 +1316,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         urlactafin = "";
         subirActaFin = new CargadorArchivosWeb();
 
-
         return null;
     }
 
@@ -1314,8 +1323,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         if (subirActaRecFin.getArchivos().size() > 0) {
 
             for (ArchivoWeb nombreoriginal : subirActaRecFin.getArchivos()) {
-                urlactarecfin =
-                        nombreoriginal.getNombre();
+                urlactarecfin
+                        = nombreoriginal.getNombre();
             }
         } else {
             urlactarecfin = "";
@@ -1327,8 +1336,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public String pathDocumentoFin() {
         if (subirActaFin.getArchivos().size() > 0) {
             for (ArchivoWeb nombreoriginal : subirActaFin.getArchivos()) {
-                urlactafin =
-                        nombreoriginal.getNombre();
+                urlactafin
+                        = nombreoriginal.getNombre();
             }
 
         } else {
@@ -1371,13 +1380,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
 
-
         } catch (IOException ex) {
             Logger.getLogger(AdministrarObraNew.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-
-
 
         return null;
     }
@@ -1450,15 +1456,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             this.documentoobra.setDatefecha(new Date());
             this.cargadorDocumentos = new CargadorArchivosWeb();
 
-
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(ModificarProyecto.class
                     .getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance()
                     .addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -1509,7 +1514,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         Imagenevolucionobra doc = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + doc.getStrubicacion());
-
 
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class
@@ -1622,15 +1626,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             this.imagenevolucionobra.setDatefecha(new Date());
             this.cargadorImagenes = new CargadorArchivosWeb();
 
-
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(ModificarProyecto.class
                     .getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance()
                     .addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -1681,7 +1684,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             this.imagenevolucionobra.setStrubicacion(rutaWebImg);
             this.imagenevolucionobra.setStrnombrearchivo(nombreImg);
             RedimensionarImagen.scale(ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg), 640, 5, ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg));
-
 
         } catch (IOException ex) {
             Logger.getLogger(AdministrarObraNew.class
@@ -1740,13 +1742,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
 
-
         if (listaImagenesevolucionobra.isEmpty()) {
             iniima = false;
         }
         llenarSelectTipoImagenes();
         this.imagenevolucionobra.setTipoimagen(new Tipoimagen(1, "", false));
-
+        
         return "adminimaginobra";
     }
 
@@ -1879,12 +1880,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             ubicacionmapa = "http://maps.google.com/maps/api/staticmap?size=450x300&path=color:blue|weight:5|";
             while (i < listapuntosreferencia.size()) {
 
-
                 ubicacionmapa = ubicacionmapa + listapuntosreferencia.get(i).getFloatlatitud() + "," + listapuntosreferencia.get(i).getFloatlongitud();
 
                 //  "|"
-
-
                 i++;
                 if (i < listapuntosreferencia.size()) {
                     ubicacionmapa = ubicacionmapa + "|";
@@ -2093,7 +2091,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             getIngresarNuevaObra().cargarObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(getObra().getIntcodigoobra()));
             //return "datosbasicosnuevoproyecto";
 
-
         } catch (Exception ex) {
             Logger.getLogger(AdministrarObraNew.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -2146,7 +2143,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     public Contrato getPrimerContratoObra() {
 
-        if (!listaContratoObra.isEmpty() ) {
+        if (!listaContratoObra.isEmpty()) {
             return listaContratoObra.get(0).getContrato();
         } else {
             return null;
@@ -2306,7 +2303,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Metodo Utilizado para cancelar  La modificacion del impacto social del proyecto
+     * Metodo Utilizado para cancelar La modificacion del impacto social del
+     * proyecto
      *
      * @return void
      */
@@ -2314,12 +2312,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         habilitarModificarimpacto = true;
         habilitarGuardarimpacto = false;
     }
-    
+
     /**
      * Reporte historial de validaciones
-     * 
+     *
      */
-     public String reporteHistorialValidaciones() {
+    public String reporteHistorialValidaciones() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
         } catch (IOException ex) {
@@ -2328,5 +2326,5 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         return null;
     }
-    
+
 }

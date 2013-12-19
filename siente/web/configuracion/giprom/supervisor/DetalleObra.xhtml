@@ -51,19 +51,13 @@
     </ui:define>
 
     <ui:define name="body">
-        <h:body onload="cargarDetalle()">
-            <h:form prependId="false">
-                <a4j:jsFunction id="iniDetalle" name="cargarDetalle">
-                    <a4j:ajax event="complete" oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}" />
-                </a4j:jsFunction>
+        <h:body>
+            <h:form prependId="false">               
 
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
             </h:form>
 
-            <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">
-                <h:form prependId="false">
-                    <h:inputHidden id="estaen-zoom" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}" />
-                </h:form>
+            <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">                
                 <interkont:spacer height="10" />
                 <h:panelGrid  id="gpPrincipalInfCiudad-zoom" styleClass="totalwidth">
                     <h:form prependId="false">
@@ -74,7 +68,7 @@
                                 <br/>
                                 <h:outputText styleClass="ikont-hot-zoom-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
                                 <br/><br/>
-                                <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
+                                <h:outputLabel styleClass="ikont-hol-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strnumcuenta}" />
                                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
                                     <br/><br/>
                                     <h:commandButton  styleClass="ikont-hcb-seguirspry" value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
@@ -111,7 +105,7 @@
                                     <h:panelGrid columns="2">
                                         <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="../resources/imgs/bt_user.png"/>           
                                         <h:panelGrid>
-                                            <h:outputLabel value="Victor Olaya"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
+                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcontratista}"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
                                             <h:outputLabel value="Alcalde"  styleClass="font-general"></h:outputLabel>
                                         </h:panelGrid>
                                     </h:panelGrid>
@@ -119,23 +113,23 @@
                                 <h:panelGrid columns="1" >
                                     <h:panelGrid columns="2">
                                         <h:outputLabel value="Dirección:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="Calle 32 " styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
                                         <h:outputLabel value="Sitio web:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="http://www.amcharts.com/ " styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strestydis}" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
                                         <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="usuario@interkont.co " styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strlogros}" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Facebook:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="Carlos Loaiza" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="Actividad Económica:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2">
-                                        <h:outputLabel value="Cuenta twitter:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="@caloiaza" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="Temperatura:" styleClass="font-general"></h:outputLabel>
+                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento} °C" styleClass="font-general"></h:outputLabel>
                                     </h:panelGrid>
 
                                 </h:panelGrid>
@@ -143,55 +137,55 @@
                                     <h:panelGroup>
                                         <div id="chartdiv" style="width: 250px; height: 200px;"></div>
                                         <script type="text/javascript">
-            var chart;
-            var arrow;
-            var axisKM;
-            var axisMiles;
+                                            var chart;
+                                            var arrow;
+                                            var axisKM;
+                                            var axisMiles;
 
-            AmCharts.ready(function() {
+                                            AmCharts.ready(function() {
 
-                // create angular gauge
-                chart = new AmCharts.AmAngularGauge();
+                                                // create angular gauge
+                                                chart = new AmCharts.AmAngularGauge();
 
-                // kilometers axis
-                axisKM = new AmCharts.GaugeAxis();
-                axisKM.startValue = 0;
-                axisKM.endValue = 240;
-                axisKM.radius = "100%";
-                axisKM.inside = false;
-                axisKM.gridInside = false;
-                axisKM.axisColor = "#2EC1DB";
-                axisKM.tickColor = "#2EC1DB";
-                axisKM.axisThickness = 3;
-                chart.addAxis(axisKM);
+                                                // kilometers axis
+                                                axisKM = new AmCharts.GaugeAxis();
+                                                axisKM.startValue = 0;
+                                                axisKM.endValue = 240;
+                                                axisKM.radius = "100%";
+                                                axisKM.inside = false;
+                                                axisKM.gridInside = false;
+                                                axisKM.axisColor = "#2EC1DB";
+                                                axisKM.tickColor = "#2EC1DB";
+                                                axisKM.axisThickness = 3;
+                                                chart.addAxis(axisKM);
 
-                // miles axis
-                axisMiles = new AmCharts.GaugeAxis();
-                axisMiles.startValue = 0;
-                axisMiles.endValue = 160;
-                axisMiles.radius = "80%";
-                axisMiles.axisColor = "#00B3DF";
-                axisMiles.tickColor = "#00B3DF";
-                axisMiles.axisThickness = 3;
-                chart.addAxis(axisMiles);
+                                                // miles axis
+                                                axisMiles = new AmCharts.GaugeAxis();
+                                                axisMiles.startValue = 0;
+                                                axisMiles.endValue = 160;
+                                                axisMiles.radius = "80%";
+                                                axisMiles.axisColor = "#00B3DF";
+                                                axisMiles.tickColor = "#00B3DF";
+                                                axisMiles.axisThickness = 3;
+                                                chart.addAxis(axisMiles);
 
-                // arrow
-                arrow = new AmCharts.GaugeArrow();
-                arrow.radius = "85%";
-                arrow.color = "#00B3DF";
-                arrow.innerRadius = 50;
-                arrow.nailRadius = 0;
-                chart.addArrow(arrow);
+                                                // arrow
+                                                arrow = new AmCharts.GaugeArrow();
+                                                arrow.radius = "85%";
+                                                arrow.color = "#00B3DF";
+                                                arrow.innerRadius = 50;
+                                                arrow.nailRadius = 0;
+                                                chart.addArrow(arrow);
 
-                chart.write("chartdiv");
-                // update value every 2 seconds
-                randomValue();
-            });
+                                                chart.write("chartdiv");
+                                                // update value every 2 seconds
+                                                randomValue();
+                                            });
 
-            function randomValue() {
-                var value = Math.round(Math.random() * 240);
-                arrow.setValue(value);
-            }
+                                            function randomValue() {
+                                                var value = Math.round(Math.random() * 240);
+                                                arrow.setValue(value);
+                                            }
                                         </script>
                                     </h:panelGroup>
                                     <h:panelGrid columns="1" styleClass="totalwidth panelcenter" columnClasses="panelcenter,panelcenter">
@@ -203,7 +197,7 @@
                             </h:panelGrid>
                         </rich:collapsiblePanel>
 
-                        <rich:collapsiblePanel switchType="client" header="Datos relevantes" expanded="true">
+                        <rich:collapsiblePanel switchType="client" header="Datos Relevantes" expanded="true">
                             <h:panelGrid columns="4" class="ikont-hpg-datosrelevantes totalwidth" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
                                     <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" />
@@ -211,7 +205,7 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-pg_impactosocial">
                                     <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />
-                                    <h:outputLabel styleClass="font-general">NESIDADES ENERGÉTICAS</h:outputLabel>
+                                    <h:outputLabel styleClass="font-general">NECESIDADES ENERGÉTICAS</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid  styleClass="ikont-hgi-imgestobra">
                                     <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}" />
@@ -270,22 +264,22 @@
                                     <h:panelGrid  columnClasses="textalingright,textalingright" columns="1" styleClass="ikont-hpg-datosrelevantes">
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Longitud : " />
-                                            <h:outputLabel styleClass="font-general" value="valor longitud" />    
+                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" />    
                                         </h:panelGroup>
                                         <br/>
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Latidtud : " />
-                                            <h:outputLabel styleClass="font-general" value="valor latitud" />
+                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" />
                                         </h:panelGroup>
                                         <br/>
                                         <h:panelGroup>
                                             <h:outputLabel styleClass="font-general" value="Dirección : " />
-                                            <h:outputLabel styleClass="font-general" value="valor direccion" />
+                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
                                         </h:panelGroup>
                                         <br/>
-                                        <h:panelGroup>
+                                        <h:panelGroup rendered="false">
                                             <h:outputLabel styleClass="font-general" value="Clima : " />
-                                            <h:outputLabel styleClass="font-general" value="valor clima" />    
+                                            <h:outputLabel styleClass="font-general" value="" />    
                                         </h:panelGroup>
                                     </h:panelGrid>
                                     <h:panelGrid id="vistaMapa" styleClass="totalwidth">
@@ -293,7 +287,7 @@
                                                 jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="200px" width="600px">                                                                 
                                             <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
                                                       longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
-
+                                       
                                                       jsVariable="#{HomeGestion.marcador.jsVariable}"
                                                       draggable="false" >
                                                 <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
@@ -304,14 +298,7 @@
                                 </h:panelGrid> 
                             </h:panelGroup>
                         </rich:collapsiblePanel>
-
-                        <rich:collapsiblePanel switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
-                            <h:panelGrid columns="3" styleClass="panelcenter">
-                                <h:commandLink id="pdf_infociu2" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="butonreport zoom-pdf" target="_blank" />
-                                <h:commandLink id="excel_infociu2" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="butonreport zoom-excel" target="_blank" />
-                                <h:commandLink id="word_infociu2" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="butonreport zoom-word" target="_blank" />
-                            </h:panelGrid>
-                        </rich:collapsiblePanel>
+                        
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>
