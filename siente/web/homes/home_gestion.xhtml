@@ -67,12 +67,12 @@
             </div>
             <center>
                 <div id="ikont-div-bienvenida"  style="position: relative;top: -7px;left: -80px;" >
-                    <h:panelGroup id="tituloproyectocontrol">
+                    <h:panelGroup rendered="#{!var.vistasgiprom}" id="tituloproyectocontrol">
                         <h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom1}" rendered="#{HomeGestion.tituloproyectocontrol == 1}"/>     
                         <h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom2}" rendered="#{HomeGestion.tituloproyectocontrol == 2}"/>     
                         <h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom3}" rendered="#{HomeGestion.tituloproyectocontrol == 3}"/>         
                     </h:panelGroup>
-                    <h:panelGrid>
+                    <h:panelGrid rendered="#{!var.vistasgiprom}">
                         <rich:column>
                             <h:panelGroup style="alignment-adjust: central" id="panelinfo">
                                 <h:outputText  styleClass="inputtextshomezoom" id="prueba1" value="#{HomeGestion.numeroproyectoszoom}"  rendered="#{HomeGestion.mostrartotalproyectos}"/>     
@@ -121,7 +121,7 @@
 
                     <h:panelGrid columns="4" >
                         <h:outputText  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas} "  />
-                        <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyecto}s encontrados "  />
+                        <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectonovedades}"  />
                         <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista}" immediate="true" type="submit">
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
