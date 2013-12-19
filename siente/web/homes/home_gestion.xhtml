@@ -121,7 +121,7 @@
 
                     <h:panelGrid columns="4" >
                         <h:outputText  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas} "  />
-                        <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectonovedades}"  />
+                        <h:outputText  styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
                         <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista}" immediate="true" type="submit">
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
@@ -225,7 +225,7 @@
                                                 <a4j:param value="1" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
                                                 <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorNombreProyectoAsc}"/>
                                             </h:commandLink>
-                                            <h:outputText  styleClass="ikont-hot-nombreobra"  value="Nombre proyecto   " />
+                                            <h:outputText  styleClass="ikont-hot-nombreobra"  value="Nombre #{var.obra}   " />
                                         </h:panelGroup>
                                     </rich:column>
 
@@ -253,7 +253,7 @@
                                                 <a4j:param value="3" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
                                                 <a4j:param value="true" assignTo="#{HomeGestion.ordenandoPorTipoProyectoAsc}"/>
                                             </h:commandLink>
-                                            <h:outputText  styleClass="ikont-hot-tipoobra"   value="Tipo proyecto  " />
+                                            <h:outputText  styleClass="ikont-hot-tipoobra"   value="Tipo #{var.obra}  " />
                                         </h:panelGroup>
                                     </rich:column>
                                     <rich:column id="valorObra" styleClass="ikont-rdt-rc-valor" >
