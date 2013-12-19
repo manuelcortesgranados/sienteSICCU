@@ -5011,3 +5011,7 @@ label.textlittle2 {
     color: #336699!important;
     font-weight: bold !important;
 }
+
+.minwidthpanellateral{
+    min-width: 250px;
+}
