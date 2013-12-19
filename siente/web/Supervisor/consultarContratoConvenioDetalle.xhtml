@@ -405,7 +405,7 @@
 
                                     <a4j:commandLink id="btAdjuntarImagen" >
                                         <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelContratoDoc')}.show();"
-                                                  listener="#{Supervisor$Contrato.llenarDocumentosContrato}" render="tabladocumento" />
+                                                  listener="#{Supervisor$Contrato.llenarDocumentosContrato}" execute="panellistacontrato" render="tabladocumento,panellistacontrato" />
 
                                         <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
