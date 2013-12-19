@@ -615,11 +615,12 @@ public class AdminSupervisionExterna implements Serializable{
             listaresultadosvalidacion = getSessionBeanCobra().getCobraService().validarMatrizAuditoria(getSessionBeanCobra().getSupervisionExternaService().getVisita());
             if (listaresultadosvalidacion.isEmpty()) {
                 FacesUtils.addInfoMessage(Propiedad.getValor("resultadosvalidacionok"));
+                limpiarVisita();
             } else {
                 FacesUtils.addErrorMessage(Propiedad.getValor("resultadosvalidacionfallo"));
+                limpiarArchivoVisita();
             }
             cargarVisitasAuditoriaFallidasUsuario();
-            limpiarVisita();
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -49,6 +49,10 @@
     margin: 0px!important;
 }
 
+.style-modal-dialog-head .rf-pp-hdr-cnt label, .style-modal-dialog-head .rf-pp-hdr-cnt span {
+    padding: 0px!important;
+}
+
 .style-modal-dialog .rf-pp-cnt-scrlr{
     border-style: none!important;
     border-width: 0px!important;

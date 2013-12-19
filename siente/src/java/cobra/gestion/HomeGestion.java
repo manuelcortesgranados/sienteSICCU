@@ -1465,7 +1465,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         tiposProyectos = new SelectItem[listTiposProyectos.size() + 1];
 
         int j = 0;
-        SelectItem opt = new SelectItem(0, "Tipos de Proyecto");
+        SelectItem opt = new SelectItem(0, bundle.getString("tab_tipoobras"));
         tiposProyectos[j] = opt;
         j++;
         for (Iterator i = listTiposProyectos.iterator(); i.hasNext();) {
@@ -1482,7 +1482,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void llenarComboSubTiposProyecto(List listSubTiposProyectos) {
         SelectItem[] TempSubTipoProyecto = new SelectItem[listSubTiposProyectos.size() + 1];
 
-        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de Proyecto");
+        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
 
         int j = 1, k = 1;
         for (Iterator i = listSubTiposProyectos.iterator(); i.hasNext();) {
@@ -1496,7 +1496,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
         }
         subTiposProyecto = new SelectItem[j];
-        subTiposProyecto[0] = new SelectItem(0, "Subtipos de Proyecto");
+        subTiposProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
         while (k < j) {
             subTiposProyecto[k] = TempSubTipoProyecto[k];
             k++;
