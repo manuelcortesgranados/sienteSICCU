@@ -4820,10 +4820,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * del convenio
      */
     public boolean validarFechasProyectoInicio() {
+        if(obranueva.getContrato() !=null){
         if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
             FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
             datosbas = false;
             return false;
+        }
+        return  true;
         }
         return true;
     }
@@ -4836,10 +4839,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * convenio
      */
     public boolean validarFechasProyectoFin() {
+        if(obranueva.getContrato() != null){
         if (obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0) {
             FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));
             datosbas = false;
             return false;
+        }
+        return  true;
         }
         return true;
     }

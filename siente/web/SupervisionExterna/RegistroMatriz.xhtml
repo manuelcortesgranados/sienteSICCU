@@ -17,7 +17,8 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-"   value="Consulta de Solicitudes" />
+        <h:outputText  styleClass="ikont-hot-titulo-consulta-solicitudes"   value="Consulta de Solicitudes" rendered="#{var.versioncobra eq 'siente'}"/>
+        <h:outputText  styleClass="ikont-hot-titulo-matriz-auditoria"   value="#{var.tituloseccionmatrizauditoria}" rendered="#{var.versioncobra eq 'zoom'}"/>
     </ui:define>
 
     <ui:define name="menu">

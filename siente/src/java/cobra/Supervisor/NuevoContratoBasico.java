@@ -3198,7 +3198,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 }
                             } else {
                                 removerAnticipo();
-                                FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + contratoselect + " superior");
+                               // FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + contratoselect + " superior");
                                 return null;
                             }
                         } else {
@@ -3932,7 +3932,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
         listadocumentos.clear();
-
+        listadocuContrato.clear();
         numdeactasparciales = 0;
         porcentapagoanticipo = new BigDecimal(BigInteger.ZERO);
         valorpagoanticipo = new BigDecimal(BigInteger.ZERO);
@@ -5741,8 +5741,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if ((contrato.getDatefechafin().before(contrpadre.getDatefechafin()) || contrato.getDatefechafin().equals(contrpadre.getDatefechafin()))
                 && (contrpadre.getDatefechaini().before(contrato.getDatefechaini()) || contrpadre.getDatefechaini().equals(contrato.getDatefechaini()))) {
             return true;
+        } else {
+            if(contrato.getDatefechaini().before(contrpadre.getDatefechaini()) || contrato.getDatefechaini().after(contrpadre.getDatefechafin())){
+           FacesUtils.addErrorMessage("La Fecha de Inicio del " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
+            }else {
+            FacesUtils.addErrorMessage("La Fecha Fin del  " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
+            }
+            return false;   
         }
-        return false;
     }
 
     /**
@@ -8332,7 +8338,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         contrpadre = fk_contrato;
-       getContrato().setContrato(contrpadre);
+        getContrato().setContrato(contrpadre);
         System.out.println("Contratista" + fk_contrato.getIntidcontrato());
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
 
