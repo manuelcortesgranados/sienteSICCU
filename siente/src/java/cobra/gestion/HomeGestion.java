@@ -28,6 +28,7 @@ import co.com.interkont.cobra.to.Zonaespecifica;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
 import co.com.interkont.cobra.vista.vistahomezoom;
+import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.DatosGeneralesPerfilControl;
 import cobra.FiltroGerencial;
 import cobra.FiltroObra;
@@ -2010,6 +2011,21 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return "filtronuevo";
     }
 
+    public void cargarListaVistaObraMapa() {
+        if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+            List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom();
+           
+            listaobrasusu = new ArrayList<VistaObraMapa>();
+            for (VwInmInfoMunicipal mun : listagiprom) {
+                
+                listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
+            }
+
+        } else {
+            listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+        }
+    }
+
     public String primeroListProyectos() {
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
@@ -2022,7 +2038,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     filtro.setFactorpagina(100);
                     //filtro.setIntestadoobra(1);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    cargarListaVistaObraMapa();
                     if (bundle.getString("nuevomapa").equals("true")) {
                         cargarVallaFonade();
                     } else {
@@ -2031,7 +2047,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 } else {
                     filtro.setFactorpagina(100);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    cargarListaVistaObraMapa();
                     if (bundle.getString("nuevomapa").equals("true")) {
                         cargarVallaFonade();
                     } else {
@@ -2042,12 +2059,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             case 2:
                 filtro.setFactorpagina(9);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                cargarListaVistaObraMapa();
                 break;
             case 3:
                 filtro.setFactorpagina(10);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                cargarListaVistaObraMapa();
                 break;
         }
 

@@ -21,8 +21,12 @@ import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Relacionactividadobraperiodo;
 import co.com.interkont.cobra.to.RestaurarPassword;
+import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import co.com.interkont.giprom.vista.VwEncIncInfoConsolidada;
+import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
+import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
 import cobra.Supervisor.FacesUtils;
 import cobra.gestion.HomeGestion;
@@ -32,6 +36,7 @@ import cobra.service.IndicadorServiceAble;
 import cobra.service.ModificarProyectoServiceAble;
 import cobra.service.UsuarioServiceAble;
 import cobra.service.UsuarioServiceImpl;
+import cobra.service.oracle.GipromServiceAble;
 import financiera.service.FinancieraServiceAble;
 import java.io.File;
 import java.io.Serializable;
@@ -56,11 +61,13 @@ import javax.servlet.http.HttpSession;
 import supervision.service.SupervisionExternaServiceAble;
 
 /**
- * <p>Session scope data bean for your application. Create properties here to
+ * <p>
+ * Session scope data bean for your application. Create properties here to
  * represent cached data that should be made available across multiple HTTP
  * requests for an individual user.</p>
  *
- * <p>An instance of this class will be created for you automatically, the first
+ * <p>
+ * An instance of this class will be created for you automatically, the first
  * time your application evaluates a value binding expression or method binding
  * expression that references a managed bean using this class.</p>
  *
@@ -98,25 +105,30 @@ public class SessionBeanCobra implements Serializable {
     private boolean logueado = false;
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
+    private GipromServiceAble gipromService;
+
+    public GipromServiceAble getGipromService() {
+        return gipromService;
+    }
+
+    public void setGipromService(GipromServiceAble gipromService) {
+        this.gipromService = gipromService;
+    }
 
     public boolean isLogueadodesdemapa() {
-        return (
-                    getUsuarioObra() != null &&
-                    getUsuarioObra().getUsuLogin() != null &&
-                    !getUsuarioObra().getUsuLogin().equals("ciudadano") &&
-                    getTipologueo() != null &&
-                    (
-                        getTipologueo().getTipoerror() == 1 || 
-                        getTipologueo().getTipoerror() == 2
-                    )
-                );
-    } 
-   
-    public HomeGestion getHomeGestion (){
-    return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
-    
+        return (getUsuarioObra() != null
+                && getUsuarioObra().getUsuLogin() != null
+                && !getUsuarioObra().getUsuLogin().equals("ciudadano")
+                && getTipologueo() != null
+                && (getTipologueo().getTipoerror() == 1
+                || getTipologueo().getTipoerror() == 2));
     }
-    
+
+    public HomeGestion getHomeGestion() {
+        return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
+
+    }
+
     public boolean isLogueado() {
         return logueado;
     }
@@ -137,7 +149,7 @@ public class SessionBeanCobra implements Serializable {
      * gwt y jsf
      */
     private boolean cargarcontrato = false;
-    
+
     private boolean consulteContrato = false;
 
     public boolean isCargarcontrato() {
@@ -206,7 +218,7 @@ public class SessionBeanCobra implements Serializable {
         this.actualdash = actualdash;
     }
 
-    public boolean isActualcomentario() {        
+    public boolean isActualcomentario() {
         return actualcomentario;
     }
 
@@ -254,7 +266,7 @@ public class SessionBeanCobra implements Serializable {
         this.indicadorService = indicadorService;
     }
     private Integer idModulo;
-    private ResourceBundle bundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "var");    
+    private ResourceBundle bundle = FacesContext.getCurrentInstance().getApplication().getResourceBundle(FacesContext.getCurrentInstance(), "var");
     private int codinicial = 0;
     private int codfinal = 0;
 
@@ -341,6 +353,7 @@ public class SessionBeanCobra implements Serializable {
     public void setCobraService(CobraServiceAble cobraService) {
         this.cobraService = cobraService;
     }
+
     //Medios de vida
     public MarcoLogicoServiceAble getMarcoLogicoService() {
         return marcoLogicoService;
@@ -349,7 +362,7 @@ public class SessionBeanCobra implements Serializable {
     public void setMarcoLogicoService(MarcoLogicoServiceAble marcoLogicoService) {
         this.marcoLogicoService = marcoLogicoService;
     }
-    
+
     public ResourceBundle getBundle() {
 
         return bundle;
@@ -403,7 +416,8 @@ public class SessionBeanCobra implements Serializable {
         this.bandobrasfiltradas = bandobrasfiltradas;
     }
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
      * user-specified code inserted here is subject to being replaced.</p>
      */
@@ -459,10 +473,11 @@ public class SessionBeanCobra implements Serializable {
     // </editor-fold>
 
     /**
-     * <p>Construct a new session data bean instance.</p>
+     * <p>
+     * Construct a new session data bean instance.</p>
      */
     public SessionBeanCobra() {
-        verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));        
+        verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
     public void llenadodatos() {
@@ -550,7 +565,7 @@ public class SessionBeanCobra implements Serializable {
         return null;
     }
 
-    public void cargarpermisosmodulo(int modulo) {        
+    public void cargarpermisosmodulo(int modulo) {
 
         if (getUsuarioService().getUsuarioObra() != null) {
             Modulorecurso modulorecurso = new Modulorecurso();
@@ -904,7 +919,6 @@ public class SessionBeanCobra implements Serializable {
                         break;
                     case 3:
 
-
                         division = obranueva.getIntplazoobra() / 30;
 
                         if (obranueva.getIntplazoobra() % 30 != 0) {
@@ -1205,5 +1219,112 @@ public class SessionBeanCobra implements Serializable {
         this.consulteContrato = consulteContrato;
     }
 
+    public VistaObraMapa castearVwInformacionMunicipaltoVistaObraMapa(VwInmInfoMunicipal mun) {
+        VistaObraMapa vista = new VistaObraMapa();
+        vista.setStrnombreobra(mun.getLclNombre());
+        vista.setBoolobraterminada(false);
+        //vista.setClaseobra();
+        vista.setFloatlatitud(mun.getLclLatitud());
+        vista.setFloatlongitud(mun.getLclLongitud());
+        vista.setIntcodigoobra(mun.getId().intValueExact());
+        vista.setTipoestadobra(new Tipoestadobra(1));
+        vista.getTipoestadobra().setStrdesctipoestado("En Ejecución");
+        vista.setTipoobra(getCobraService().encontrarTipoObraPorId(1));
+        vista.setTercero(new Tercero());
+        vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
+        vista.setNumvaltotobra(BigDecimal.ZERO);
+        vista.setObra(new Obra());
+//                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
+//                vista.getObra().setStrobjetoobra(mun.getMncActividadEconomica());
+        if (mun.getMncActividadEconomica() != null) {
+            vista.setStrobjetoobra(mun.getMncActividadEconomica());
+        } else {
+            vista.setStrobjetoobra("");
+        }
+        vista.setStrdireccion(mun.getMncNombre()+" , "+mun.getDptNombre());
+        return vista;
+    }
     
+    public Obra castearVwInformacionMunicipaltoObra(VwInmInfoMunicipal mun) {
+        Obra vista = new Obra();
+        
+        vista.setStrnombreobra(mun.getLclNombre());
+        vista.setBoolobraterminada(false);
+        //vista.setClaseobra();
+        vista.setFloatlatitud(mun.getLclLatitud());
+        vista.setFloatlongitud(mun.getLclLongitud());
+        vista.setIntcodigoobra(mun.getId().intValueExact());
+        vista.setTipoestadobra(new Tipoestadobra(1));
+        vista.setTipoobra(getCobraService().encontrarTipoObraPorId(1));
+        vista.setTercero(new Tercero());
+        vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
+        vista.setNumvaltotobra(BigDecimal.ZERO);
+        
+//                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
+//                vista.getObra().setStrobjetoobra(mun.getMncActividadEconomica());
+        if (mun.getMncActividadEconomica() != null) {
+            vista.setStrobjetoobra(mun.getMncActividadEconomica());
+        } else {
+            vista.setStrobjetoobra("");
+        }
+        vista.setStrnumcuenta(mun.getMncNombre()+" , "+mun.getDptNombre());
+        vista.setStrdireccion(mun.getMncDireccion());
+        vista.setStrcontratista(mun.getAlcNombre());
+        vista.setStrlogros(mun.getMncEmail());
+        vista.setStrestydis(mun.getMncPaginaWeb());
+        vista.setStrcomuna(mun.getMncActividadEconomica());
+        if(mun.getMncTemperatura() !=null)
+        {    
+        vista.setStrcorregimiento(mun.getMncTemperatura().toString());
+        }
+        else
+        {
+            vista.setStrcorregimiento("Faltante");
+        }    
+        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
+        
+        System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
+        for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
+            System.out.println("valor = " + winccons.getEncIncValorIndicador());
+            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
+            {
+                vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("02")==0)
+            {
+                vista.setNumvalprogramejec(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("03")==0)
+            {
+                vista.setNumvaldeclarado(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
+            {
+              
+                vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
+            }
+            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
+            {
+                vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
+            }
+        }   
+        
+//        List<VwIndIndicadorMunicipal> listaindmun= getGipromService().obtenerIndicadorMunicipalxcodmunicipio(mun.getLclCodigo());
+//        for (VwIndIndicadorMunicipal wind : listaindmun) {
+//            
+//        }
+        VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
+        
+        if(vind !=null)
+        {
+            vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
+        }    
+        else
+        {
+             vista.setNumvlrsumahijos(BigDecimal.ZERO);
+        }    
+        
+        return vista;
+    }
 }

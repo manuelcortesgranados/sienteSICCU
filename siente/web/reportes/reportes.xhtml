@@ -225,12 +225,12 @@
             </h:form>
 
             <center>
-                <rich:panel id="reportatentodos" styleClass="rich-panel-grid-report"
+                <rich:panel id="reportatentodos" styleClass="rich-panel-grid-report completeborder"
                             bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                             rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten >= 5 }">
                     <center>
                         <h:form>
-                            <rich:panel id="reporttiposoliah" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten == 5 or 
+                            <rich:panel id="reporttiposoliah" styleClass="noneborder" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten == 5 or 
                                                                           Reportes.reporteselectaten == 7 or Reportes.reporteselectaten == 8 }">
                                 <h:panelGrid columns="2">
                                     <h:outputText value="#{var.tipoAyudaHum}: " styleClass="font-general"/>
@@ -281,7 +281,7 @@
 
 
                 <!--Inicio Botones reportes dinamicos -->
-                <rich:panel id="reportestodossoli" header="" rendered="#{(Reportes.consolida == 5 and Reportes.reporteselectlinea == 3 and Reportes.idConvenio!=-1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 2)}" styleClass="rich-panel-grid-report"
+                <rich:panel id="reportestodossoli" header=""  rendered="#{(Reportes.consolida == 5 and Reportes.reporteselectlinea == 3 and Reportes.idConvenio!=-1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 2)}" styleClass="rich-panel-grid-report completeborder"
                             bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">                            
                     <h:form  target="_blank">
                         Generar reporte en:
@@ -493,7 +493,7 @@
 
                 </h:form>
                 <!--Inicio Botones reportes administrativos -->
-                <rich:panel id="reportesAdministrativosBotones" header="" rendered="#{Reportes.consolida == 6}" styleClass="rich-panel-grid-report"
+                <rich:panel id="reportesAdministrativosBotones" header="" rendered="#{Reportes.consolida == 6}" styleClass="rich-panel-grid-report completeborder"
                             bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">                            
                     <h:form  target="_blank">
                         Generar reporte en:
