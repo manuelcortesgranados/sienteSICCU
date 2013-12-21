@@ -50,6 +50,10 @@
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-flujocaja-admconvenio"   action="#{Supervisor$Contrato.iraFuenteRecursos}"  />
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text" value="#{var.fuentesrecurso}"  action="#{Supervisor$Contrato.iraFuenteRecursos}"  />
                 </h:panelGroup>
+                <h:panelGroup layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
+                                                         and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}"> 
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.crearContratoConvenio}" action="nuevoContrato"   immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
+                </h:panelGroup>
             </h:panelGrid>
         </h:panelGroup>
     </h:form>
