@@ -183,6 +183,74 @@
             </h:panelGroup>
 
         </h:panelGrid>
-
+        <rich:collapsiblePanel switchType="client" header="Avance fisico del convenio" expanded="true" rendered="#{Supervisor$Contrato.boolavanceproyectoconvenio}">
+            <h:form>
+                <h:panelGrid width="80%">
+                    <rich:dataTable rows="12"  value="#{Supervisor$Contrato.listaavancefisico}" var="avancefisico" >
+                        <rich:column  width="100px" >
+                            <f:facet name="header">
+                                <h:outputText     value="Proyectos"/>
+                            </f:facet>
+                            <h:outputText value="#{avancefisico.nombreobra}"/>
+                            <f:facet name="footer">
+                                <h:outputText value="Valor convenio"/>
+                            </f:facet>
+                        </rich:column>
+                        <rich:column  width="100px" >
+                            <f:facet name="header">
+                                <h:outputText     value="Valor"/>
+                            </f:facet>
+                            <h:outputText value="#{avancefisico.valortotalobra}">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputText value="#{Supervisor$Contrato.valorconvenio}">
+                                    <f:convertNumber type="currency"/>
+                                </h:outputText>
+                            </f:facet>
+                        </rich:column>
+                        <rich:column  width="100px" >
+                            <f:facet name="header">
+                                <h:outputText  value="Avance proyecto"/>
+                            </f:facet>
+                            <h:outputText value="#{avancefisico.valorejecobra}">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputLabel value="Suma proyectos" />
+                            </f:facet>
+                        </rich:column>
+                        <rich:column  width="100px" >
+                            <f:facet name="header">
+                                <h:outputText    value="Avance proyecto porcentual"/>
+                            </f:facet>
+                            <h:outputText value="#{avancefisico.avanceobra} %">
+                                <f:convertNumber type="percent"/>
+                            </h:outputText>
+                            <f:facet name="footer">
+                                <h:outputLabel value="#{Supervisor$Contrato.sumaproyectosconvenio}">
+                                    <f:convertNumber type="currency"/>
+                                </h:outputLabel>                                    
+                            </f:facet>
+                        </rich:column>    
+                        
+                         <rich:column  width="100px" >
+                            <f:facet name="header">
+                                <h:outputText    value="Avance fisico convenio"/>
+                            </f:facet>
+                            <h:outputText value="#{avancefisico.avancefisico} %">
+                                <f:convertNumber type="percent"/>
+                            </h:outputText>  
+                             <f:facet name="footer">                                 
+                                 <h:outputText value="Suma avance fisico convenio: #{Supervisor$Contrato.avancefisicoconvenio}%">
+                                      <f:convertNumber type="percent"/>
+                                 </h:outputText>                                     
+                             </f:facet>
+                           
+                        </rich:column>                        
+                    </rich:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </rich:collapsiblePanel>
     </ui:define>
 </ui:composition>

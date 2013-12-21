@@ -90,6 +90,7 @@ import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.interkont.cobra.util.CobraUtil;
 
@@ -537,6 +538,30 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listado de las entidades contratantes
      */
     private List<Tercero> listaContrEnti;
+    
+    /**
+     * Listado de avance fisido del convenio
+     */
+    private List<VistaProyectoAvanceFisicoConvenio> listaavancefisico;
+    
+    /**
+     * Variable para mostrar el valor del convenio en la tabla avance fisico convenio
+     */
+    private BigDecimal valorconvenio;
+    /**
+     * Variable para la suma de los proyectos asociados al convenio
+     */
+    private BigDecimal sumaproyectosconvenio = BigDecimal.ZERO;
+    /**
+     * Variable para esconder la tabla avance fisico
+     */
+    private boolean  boolavanceproyectoconvenio = false;
+    
+    /**
+     * Variable para calcular el avance fisico de convenio 
+     */
+    private BigDecimal avancefisicoconvenio = BigDecimal.ZERO;
+    
     /**
      * Lista que almacena los contratos encontrados en el filtro avanzado
      */
@@ -1723,6 +1748,46 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.listaContrEnti = listaContrEnti;
     }
 
+    public List<VistaProyectoAvanceFisicoConvenio> getListaavancefisico() {
+        return listaavancefisico;
+    }
+
+    public void setListaavancefisico(List<VistaProyectoAvanceFisicoConvenio> listaavancefisico) {
+        this.listaavancefisico = listaavancefisico;
+    }
+
+    public BigDecimal getValorconvenio() {
+        return valorconvenio;
+    }
+
+    public void setValorconvenio(BigDecimal valorconvenio) {
+        this.valorconvenio = valorconvenio;
+    }
+
+    public BigDecimal getSumaproyectosconvenio() {
+        return sumaproyectosconvenio;
+    }
+
+    public void setSumaproyectosconvenio(BigDecimal sumaproyectosconvenio) {
+        this.sumaproyectosconvenio = sumaproyectosconvenio;
+    }
+
+    public boolean isBoolavanceproyectoconvenio() {
+        return boolavanceproyectoconvenio;
+    }
+
+    public void setBoolavanceproyectoconvenio(boolean boolavanceproyectoconvenio) {
+        this.boolavanceproyectoconvenio = boolavanceproyectoconvenio;
+    }
+
+    public BigDecimal getAvancefisicoconvenio() {
+        return avancefisicoconvenio;
+    }
+
+    public void setAvancefisicoconvenio(BigDecimal avancefisicoconvenio) {
+        this.avancefisicoconvenio = avancefisicoconvenio;
+    }
+    
     public SelectItem[] getTipoproyecto() {
         return tipoproyecto;
     }
@@ -4400,6 +4465,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         getSessionBeanCobra().setCargarcontrato(false);
         cargarContrato(contratotabla);
+        encontrarAvanceFisicoConvenio();
         if (contratotabla.getNumvlrcontrato() != null && contratotabla.getNumValorCuotaGerencia() != null) {
             puedeEditarValorFuentes = false;
         } else {
@@ -4438,7 +4504,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleContratoContratista() {
 //        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
 //        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
-
+        encontrarAvanceFisicoConvenio();
         Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
         cargarContrato(contratotabla);
         if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
@@ -4489,7 +4555,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleContratoPadre() {
 //        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
 //        Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
-
+        encontrarAvanceFisicoConvenio();
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         //limpiarContrato();
         //contratotabla.getContrato().setFormapago(new Formapago());
@@ -4522,7 +4588,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleContratoPadreContratista() {
 //        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
 //        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
-
+        encontrarAvanceFisicoConvenio();
         Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
         //contratotabla.getContrato().setFormapago(new Formapago());
         if (contratotabla.getContrato() != null) {
@@ -8355,4 +8421,25 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             limpiarContrato();
         }
     }
+    public List<VistaProyectoAvanceFisicoConvenio> encontrarAvanceFisicoConvenio (){
+        boolavanceproyectoconvenio = false;
+        sumaproyectosconvenio = BigDecimal.ZERO;
+        avancefisicoconvenio = BigDecimal.ZERO; 
+        valorconvenio = BigDecimal.ZERO;
+       listaavancefisico = getSessionBeanCobra().getCobraService().encontrarAvanceFisicoConvenio(getContrato().getIntidcontrato());        
+       if (!listaavancefisico.isEmpty()){
+           boolavanceproyectoconvenio = true;
+       for (VistaProyectoAvanceFisicoConvenio v : listaavancefisico){
+          v.setAvancefisico(v.getAvancefisico().setScale(2, RoundingMode.HALF_UP));
+          v.setAvanceobra(v.getAvanceobra().setScale(2, RoundingMode.HALF_UP));
+          setValorconvenio(v.getValorconvenio());
+          setSumaproyectosconvenio(sumaproyectosconvenio.add(v.getValortotalobra()));  
+          setAvancefisicoconvenio(avancefisicoconvenio.add(v.getAvancefisico()));
+          setAvancefisicoconvenio(avancefisicoconvenio.setScale(2, RoundingMode.HALF_UP));
+         } 
+       }
+       return listaavancefisico;
+    }
+    
 }
+
