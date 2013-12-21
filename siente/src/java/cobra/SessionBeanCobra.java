@@ -1283,10 +1283,10 @@ public class SessionBeanCobra implements Serializable {
         }    
         List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
         
-        System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
+        //System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
         for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
-            System.out.println("valor = " + winccons.getEncIncValorIndicador());
-            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
+//            System.out.println("valor = " + winccons.getEncIncValorIndicador());
+//            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
             if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
             {
                 vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
