@@ -19,49 +19,47 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink   id="esconder_mp-crear-PlanificacionMarcolIndicador" styleClass="cerrar"
-                                     title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.hide();
-                                              return false;"/>
+                    <a4j:commandLink   id="esconder_mp-crear-PlanificacionMarcolIndicador" styleClass="closemodal"
+                                       title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-PlanificacionMarcolIndicador')}.hide();
+                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpPlaneacionMarcolIndicador" >
-                <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
-                <rich:dataTable id="tablaavance" sortMode="single"
-                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaplanificacionRelacionMarcolIndicador}"
-                                binding="#{MarcoLogico$MarcoLogico.tablaPlanificacionRelacionMarcolIndicadorbin}"
-                                var="planificacionRelacionMlI" >
+            <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+            <rich:dataTable id="tablaavance" sortMode="single"
+                            style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaplanificacionRelacionMarcolIndicador}"
+                            binding="#{MarcoLogico$MarcoLogico.tablaPlanificacionRelacionMarcolIndicadorbin}"
+                            var="planificacionRelacionMlI" >
 
 
 
 
-                    <rich:column>
-                        <f:facet name="header">
-                            <h:outputText value="Fecha " />
-                        </f:facet>
-                        <h:outputText  id="datefechareporteplanificacion" value="#{planificacionRelacionMlI.datefechaplanificada}"  />
-                    </rich:column>
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha " />
+                    </f:facet>
+                    <h:outputText  id="datefechareporteplanificacion" value="#{planificacionRelacionMlI.datefechaplanificada}"  />
+                </rich:column>
 
-                    <rich:column >
-                        <f:facet name="header">
-                            <h:outputText value="Meta estimada"/>
-                        </f:facet>
-                        <h:outputText  id="strvariable1estimada" value="#{planificacionRelacionMlI.doublevariable1metaesperada}"  />
-                    </rich:column>
-                    <!--
-                    <rich:column  >
-                        <f:facet name="header">
-                            <h:outputText value="Cálculo Indicador"/>
-                        </f:facet>
-                        <h:outputText  id="strpocentajeestimado" value="# {planificacionRelacionMlI.doubleporcentajeavanceestimado}"  />
-                    </rich:column>
--->
-                </rich:dataTable>
+                <rich:column >
+                    <f:facet name="header">
+                        <h:outputText value="Meta estimada"/>
+                    </f:facet>
+                    <h:outputText  id="strvariable1estimada" value="#{planificacionRelacionMlI.doublevariable1metaesperada}"  />
+                </rich:column>
+                <!--
+                <rich:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Cálculo Indicador"/>
+                    </f:facet>
+                    <h:outputText  id="strpocentajeestimado" value="# {planificacionRelacionMlI.doubleporcentajeavanceestimado}"  />
+                </rich:column>
+                -->
+            </rich:dataTable>
 
-            </rich:panel>
-            </h:form>
-        
+        </h:form>
+
     </rich:popupPanel>   
 </ui:composition>
 

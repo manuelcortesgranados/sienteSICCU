@@ -20,75 +20,72 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp-crear-obligacion" styleClass="cerrar" style="color: #000000;"  action="#{MarcoLogico$MarcoLogico.limpiarModalAgredarObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-obligacion')}.hide();
-                                         return false;" render="pgSeguimientoConvenio"/> 
+                                             return false;" render="pgSeguimientoConvenio"/> 
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpnuevaobligacion1">
-                <center>
-                    <h:panelGrid columns="2"  width="100%" >
+            <center>
+                <h:panelGrid columns="2"  width="100%" >
 
-                        <h:outputText id="lblfechaInicioestimada"  value="(*)#{varMarcoLogico.fechaInicoEstimada}" />
-                        <h:panelGrid columns="2">
-                            <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioEstimada"
-                                           value="#{MarcoLogico$MarcoLogico.obligacion.datefechainiestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}"/>
-                        </h:panelGrid>
-                        
-                        <h:outputText id="lblfechafinestimada"  value="(*)#{varMarcoLogico.fechaFinEstimada}" />
-                        <h:panelGrid columns="2">
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinEstimada"
-                                           value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
-                        </h:panelGrid>
-                        
-                        <h:outputText id="lblfechaInicioreal"  value="(*)Fecha inicio real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" />
-                        <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" >
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioreal"
-                                           required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechainireal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicioreal == true}"/>
-                        </h:panelGrid>
-
-                        <h:outputText id="lblfechafinreal"  value="(*)Fecha fin real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
-                        <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}">
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinreal"
-                                           required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinreal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
-                        </h:panelGrid>
-
-                        <h:outputText id="outputtextobligacion"  value="#{varMarcoLogico.obligacion}" />
-                        <h:inputTextarea  id="textobligacion" style="width: 89%;" rows="4" value="#{MarcoLogico$MarcoLogico.obligacion.strdescripcion}" cols="80" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
-                        
+                    <h:outputText id="lblfechaInicioestimada"  value="(*)#{varMarcoLogico.fechaInicoEstimada}" />
+                    <h:panelGrid columns="2">
+                        <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioEstimada"
+                                        value="#{MarcoLogico$MarcoLogico.obligacion.datefechainiestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}"/>
                     </h:panelGrid>
 
-                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarObligacion}" render="pgSeguimientoConvenio, rpnuevaobligacion1"
-                                       disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}">                    
+                    <h:outputText id="lblfechafinestimada"  value="(*)#{varMarcoLogico.fechaFinEstimada}" />
+                    <h:panelGrid columns="2">
+                        <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinEstimada"
+                                       value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinestimada}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
+                    </h:panelGrid>
 
-                    </a4j:commandButton>
-                    
-                    <interkont:spacer height="10px" width="100%"/>
-                    <h:outputText id="outputtextmesaje"  value="La obligación se ha cumplido" 
-                                  rendered="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
-                    <interkont:spacer height="10px" width="100%"/>
-                    
-                </center>
-                <a4j:outputPanel id="panelErrorObligacion">
-                    <rich:messages id="messagesObligacion" globalOnly="true"
-                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true" >
-                        <f:facet name="infoMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
+                    <h:outputText id="lblfechaInicioreal"  value="(*)Fecha inicio real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" />
+                    <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechainicialestimada == true}" >
+                        <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaInicioreal"
+                                       required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechainireal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.habilitarfechainicioreal == true}"/>
+                    </h:panelGrid>
 
-                </a4j:outputPanel>
+                    <h:outputText id="lblfechafinreal"  value="(*)Fecha fin real" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}"/>
+                    <h:panelGrid columns="2" rendered="#{MarcoLogico$MarcoLogico.habilitarfechafinestimada == true}">
+                        <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaFinreal"
+                                       required="true" value="#{MarcoLogico$MarcoLogico.obligacion.datefechafinreal}" inputSize="10" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
+                    </h:panelGrid>
 
-            </rich:panel>
+                    <h:outputText id="outputtextobligacion"  value="#{varMarcoLogico.obligacion}" />
+                    <h:inputTextarea  id="textobligacion" style="width: 89%;" rows="4" value="#{MarcoLogico$MarcoLogico.obligacion.strdescripcion}" cols="80" disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
+
+                </h:panelGrid>
+
+                <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarObligacion}" render="pgSeguimientoConvenio, rpnuevaobligacion1"
+                                   disabled="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}">                    
+
+                </a4j:commandButton>
+
+                <interkont:spacer height="10px" width="100%"/>
+                <h:outputText id="outputtextmesaje"  value="La obligación se ha cumplido" 
+                              rendered="#{MarcoLogico$MarcoLogico.obligacion.boolestado == true}"/>
+                <interkont:spacer height="10px" width="100%"/>
+
+            </center>
+            <a4j:outputPanel id="panelErrorObligacion">
+                <rich:messages id="messagesObligacion" globalOnly="true"
+                               styleClass="mensajes_error_background mensajes_error" ajaxRendered="true" >
+                    <f:facet name="infoMarker">
+                        <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                    </f:facet>
+                    <f:facet name="warnMarker">
+                        <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                    </f:facet>
+                    <f:facet name="errorMarker">
+                        <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                    <f:facet name="fatalMarker">
+                        <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                </rich:messages>
+
+            </a4j:outputPanel>
 
         </h:form>
     </rich:popupPanel>   

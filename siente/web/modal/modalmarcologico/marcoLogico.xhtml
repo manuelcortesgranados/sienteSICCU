@@ -19,88 +19,65 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-marcoLogico" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-marcoLogico" styleClass="closemodal"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-marcoLogico')}.hide();
-                                              return false;"/>
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpMarcoLogico">
-                <h:outputText value="No tiene marcos lógicos asociados " rendered="#{fn:length(MarcoLogico$MarcoLogico.listaMarcoLogico)==0}"/>
-                <interkont:spacer height="10px" width="100%"/>
+            <h:outputText value="No tiene marcos lógicos asociados " rendered="#{fn:length(MarcoLogico$MarcoLogico.listaMarcoLogico)==0}"/>
+            <interkont:spacer height="10px" width="100%"/>
 
-                <rich:dataTable id="tablaListMarcoLogico"  sortMode="single"
-                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaMarcoLogico}"
-                                binding="#{MarcoLogico$MarcoLogico.tablaMarcoLogicobin}"
-                                rows="2"
-                                var="marcologico" >
+            <rich:dataTable id="tablaListMarcoLogico"  sortMode="single"
+                            style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaMarcoLogico}"
+                            binding="#{MarcoLogico$MarcoLogico.tablaMarcoLogicobin}"
+                            rows="2"
+                            var="marcologico" >
 
-                    <rich:column  width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="Nombre "/>
-                        </f:facet>
-                        <h:inputTextarea  id="outputTexttitulomarcol" value="#{marcologico.strtitulo}"  rows="3" disabled="true"/>
-                    </rich:column>
-
-                    <rich:column  width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="#{varMarcoLogico.descripcion} "/>
-                        </f:facet>
-                        <h:inputTextarea  id="outputTextstrdescripcionmarcol" value="#{marcologico.strdescripcion}" rows="3" disabled="true"/>
-                    </rich:column>
-
-                    <rich:column  width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="#{varMarcoLogico.tipomarcol} "/>
-                        </f:facet>
-                        <h:outputText  id="outputTexttipomarcol" value="#{marcologico.tipomarcologico.strdescripcion}"  />
-                    </rich:column>
-
-
-
-                    <rich:column width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="#{varMarcoLogico.opcion}" />
-                        </f:facet>
-                        <a4j:commandLink id="bt_selectMarcol" action="#{MarcoLogico$MarcoLogico.seleccionaMarcoLogico}" execute="@this"
-                                         title="#{varMarcoLogico.select}" render="rpasociarMarcologicoIndicador" onclick="#{rich:component('mp-marcoLogico')}.hide();
-                                              return false;">
-                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
-                        </a4j:commandLink>
-
-                    </rich:column>
-                    <f:facet name="footer">
-                        <rich:columnGroup>
-                            <rich:column colspan="11"  style="text-align: center;">
-                                <rich:dataScroller id="scrollMarcoLogico" for="tablaListMarcoLogico" render="tablaListMarcoLogico"/>
-                            </rich:column>
-                        </rich:columnGroup>
+                <rich:column  width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="Nombre "/>
                     </f:facet>
-                </rich:dataTable>
+                    <h:inputTextarea  id="outputTexttitulomarcol" value="#{marcologico.strtitulo}"  rows="3" disabled="true"/>
+                </rich:column>
+
+                <rich:column  width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="#{varMarcoLogico.descripcion} "/>
+                    </f:facet>
+                    <h:inputTextarea  id="outputTextstrdescripcionmarcol" value="#{marcologico.strdescripcion}" rows="3" disabled="true"/>
+                </rich:column>
+
+                <rich:column  width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="#{varMarcoLogico.tipomarcol} "/>
+                    </f:facet>
+                    <h:outputText  id="outputTexttipomarcol" value="#{marcologico.tipomarcologico.strdescripcion}"  />
+                </rich:column>
 
 
-                <a4j:outputPanel id="panelErrorMarcoLogico">
-                    <rich:messages id="messagesMarcoLogico" globalOnly="true"
-                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                   >
-                        <f:facet name="infoMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
 
-                </a4j:outputPanel>
+                <rich:column width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="#{varMarcoLogico.opcion}" />
+                    </f:facet>
+                    <a4j:commandLink id="bt_selectMarcol" action="#{MarcoLogico$MarcoLogico.seleccionaMarcoLogico}" execute="@this"
+                                     title="#{varMarcoLogico.select}" render="rpasociarMarcologicoIndicador" onclick="#{rich:component('mp-marcoLogico')}.hide();
+                                             return false;">
+                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
+                    </a4j:commandLink>
 
-            </rich:panel>
+                </rich:column>
+                <f:facet name="footer">
+                    <rich:columnGroup>
+                        <rich:column colspan="11"  style="text-align: center;">
+                            <rich:dataScroller id="scrollMarcoLogico" for="tablaListMarcoLogico" render="tablaListMarcoLogico"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+            </rich:dataTable>
+
         </h:form>
 
 

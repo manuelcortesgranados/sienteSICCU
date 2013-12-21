@@ -19,13 +19,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-guardarestado-obligacion" styleClass="cerrar"  style="color: black" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
+                    <a4j:commandLink id="esconder_mp-guardarestado-obligacion" styleClass="closemodal"  style="color: black" action="#{MarcoLogico$MarcoLogico.cancelarEliminarObligacion}"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-guardarestado-obligacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel id="rpcamibiarestadoobligacion" styleClass="rich-panel-body" style="padding:0px;">
             <a4j:region>
                 <h:panelGrid width="100%">
                     <interkont:spacer height="10"/>
@@ -38,6 +37,5 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </a4j:region>
-        </rich:panel>
     </rich:popupPanel>   
 </ui:composition>

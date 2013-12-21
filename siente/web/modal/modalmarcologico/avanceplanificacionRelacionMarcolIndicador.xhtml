@@ -18,79 +18,77 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink style="color: black;"  id="esconder_mp-crear-PlaneacionAvanceMarcolIndicador" styleClass="cerrar" action="#{MarcoLogico$MarcoLogico.limpiarModalCrearLineaBaseMeta}"
-                                      immediate="true" render="avancefisicomediosvida" onclick="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.hide();
-                                         return false;"/>
+                    <a4j:commandLink style="color: black;"  id="esconder_mp-crear-PlaneacionAvanceMarcolIndicador" styleClass="closemodal" action="#{MarcoLogico$MarcoLogico.limpiarModalCrearLineaBaseMeta}"
+                                     immediate="true" render="avancefisicomediosvida" onclick="#{rich:component('mp-crear-PlaneacionAvanceMarcolIndicador')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpPlaneacionAvanceMarcolIndicador" >
-                <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
-                <rich:dataTable id="tablaavanceplanificacion"  sortMode="single"
-                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaavanceplanificacionRelacionMarcolIndicador}"
-                                binding="#{MarcoLogico$MarcoLogico.tablaAvancePlanificacionRelacionMarcolIndicadorbin}"
-                                rows="4"
-                                var="avanceplanificacionRelacionMlI" >
+            <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+            <rich:dataTable id="tablaavanceplanificacion"  sortMode="single"
+                            style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaavanceplanificacionRelacionMarcolIndicador}"
+                            binding="#{MarcoLogico$MarcoLogico.tablaAvancePlanificacionRelacionMarcolIndicadorbin}"
+                            rows="4"
+                            var="avanceplanificacionRelacionMlI" >
 
-                    <rich:column>
-                        <f:facet name="header">
-                            <h:outputText value="Fecha Planificada" />
-                        </f:facet>
-                        <h:outputText  id="datefechareporteplanificacion" value="#{avanceplanificacionRelacionMlI.datefechaplanificada}" />
-                    </rich:column>
-                    <!--
-                    <rich:column >
-                        <f:facet name="header">
-                            <h:outputText value="Avance"/>
-                        </f:facet>
-                        <h:outputText  id="strvariable1avanceestimada" value="# {avanceplanificacionRelacionMlI.doubleavancevariablesperada1}"  />
-                    </rich:column>                    
-                    -->
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Planificada" />
+                    </f:facet>
+                    <h:outputText  id="datefechareporteplanificacion" value="#{avanceplanificacionRelacionMlI.datefechaplanificada}" />
+                </rich:column>
+                <!--
+                <rich:column >
+                    <f:facet name="header">
+                        <h:outputText value="Avance"/>
+                    </f:facet>
+                    <h:outputText  id="strvariable1avanceestimada" value="# {avanceplanificacionRelacionMlI.doubleavancevariablesperada1}"  />
+                </rich:column>                    
+                -->
 
-                    <rich:column  >
-                        <f:facet name="header">
-                            <h:outputText value="Cálculo Indicador"/>
-                        </f:facet>
-                        <h:outputText  id="strpocentajeavanceestimado" value="#{avanceplanificacionRelacionMlI.doubleporcentajeavance}"  />
-                    </rich:column>
+                <rich:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Cálculo Indicador"/>
+                    </f:facet>
+                    <h:outputText  id="strpocentajeavanceestimado" value="#{avanceplanificacionRelacionMlI.doubleporcentajeavance}"  />
+                </rich:column>
 
-                    <rich:column  >
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de Realización"/>
-                        </f:facet>
-                        <h:outputText  id="datefecharealizacion" value="#{avanceplanificacionRelacionMlI.datefecharealizacion}"  />
-                    </rich:column>
+                <rich:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Fecha de Realización"/>
+                    </f:facet>
+                    <h:outputText  id="datefecharealizacion" value="#{avanceplanificacionRelacionMlI.datefecharealizacion}"  />
+                </rich:column>
 
-                    <rich:column  width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="Observación"/>
-                        </f:facet>
-                        <h:inputTextarea disabled="true" id="strobservacionAvancePlanificacionMlI" value="#{avanceplanificacionRelacionMlI.strobservacion}" />
-                    </rich:column>
+                <rich:column  width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="Observación"/>
+                    </f:facet>
+                    <h:inputTextarea disabled="true" id="strobservacionAvancePlanificacionMlI" value="#{avanceplanificacionRelacionMlI.strobservacion}" />
+                </rich:column>
 
 
-                    <rich:column width="120px">
-                        <f:facet name="header">
-                            <h:outputText value="#{varMarcoLogico.registraravance}" />
-                        </f:facet>
-                        <a4j:commandLink id="bt_generanovedad" action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcoLogicoIndicador}" execute="@this" 
-                                         title="#{varMarcoLogico.registroavance}" render="pgavanceplanificacion" rendered="#{avanceplanificacionRelacionMlI.permitirAvance}">
-                            <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
-                              <a4j:ajax oncomplete="#{rich:component('mp-registro-avanceplanificacion')}.show();" />
-                        </a4j:commandLink>
+                <rich:column width="120px">
+                    <f:facet name="header">
+                        <h:outputText value="#{varMarcoLogico.registraravance}" />
+                    </f:facet>
+                    <a4j:commandLink id="bt_generanovedad" action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcoLogicoIndicador}" execute="@this" 
+                                     title="#{varMarcoLogico.registroavance}" render="pgavanceplanificacion" rendered="#{avanceplanificacionRelacionMlI.permitirAvance}">
+                        <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                        <a4j:ajax oncomplete="#{rich:component('mp-registro-avanceplanificacion')}.show();" />
+                    </a4j:commandLink>
 
-                    </rich:column>
+                </rich:column>
 
-                    <f:facet name="footer">
+                <f:facet name="footer">
                     <rich:columnGroup>
                         <rich:column colspan="5"  style="text-align: center;">
                             <rich:dataScroller id="iddatascrolltablaavanceplanificacion"  for="tablaavanceplanificacion" render="tablaavanceplanificacion"/>
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
-                </rich:dataTable>
-            </rich:panel>
+            </rich:dataTable>
         </h:form>
         <ui:include src="/modal/modalmarcologico/registrarAvancePlanificacion.xhtml"/>
 

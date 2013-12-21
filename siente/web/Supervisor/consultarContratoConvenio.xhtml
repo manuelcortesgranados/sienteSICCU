@@ -18,7 +18,12 @@
     </ui:define>
 
     <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion_zoom.xhtml" />
+        <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_gestion.xhtml" />
+        </h:panelGroup>  
+        <h:panelGroup rendered="false">
+            <ui:include src="/facelets/menu_gestion_zoom.xhtml" />
+        </h:panelGroup>  
     </ui:define>
 
     <ui:define name="menu_lateral">      

@@ -22,6 +22,10 @@
     text-align: left;
 }
 
+.verticalalingtop{
+    vertical-align: top;
+}
+
 .tablesinspace{
     border-collapse: collapse;
     border-spacing: 0px;

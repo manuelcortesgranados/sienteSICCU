@@ -32,19 +32,19 @@ public class GraficoBarrasComparativo implements Serializable {
         this.listadatos = listadatos;
         this.nombreDiv = nombreDiv;
 
-        scriptbarra3d = "<script type=\"text/javascript\">var chart" + nombreDiv + ";var chartData" + nombreDiv + " = [";
+        scriptbarra3d = "<script type=\"text/javascript\">var chart" + nombreDiv + ";\n var chartData" + nombreDiv + " = [";
         int i = 0;
         while (i < listadatos.size()) {
 
-            scriptbarra3d = scriptbarra3d + "{" + tituloCampo + ": \"" + listadatos.get(i).getEtiqueta() + "\",";
-            scriptbarra3d = scriptbarra3d + valorCampo + ": " + listadatos.get(i).getValor() + ",";
-            scriptbarra3d = scriptbarra3d + valorCampo2 + ": " + listadatos.get(i).getValor2() + "}";
+            scriptbarra3d = scriptbarra3d + "\n{\n" + tituloCampo + ": \"" + listadatos.get(i).getEtiqueta() + "\",\n";
+            scriptbarra3d = scriptbarra3d + valorCampo + ": " + listadatos.get(i).getValor() + ",\n";
+            scriptbarra3d = scriptbarra3d + valorCampo2 + ": " + listadatos.get(i).getValor2() + "\n}";
             i++;
             if (i < listadatos.size()) {
-                scriptbarra3d = scriptbarra3d + ",";
+                scriptbarra3d = scriptbarra3d + ",\n";
             }
         }
-        scriptbarra3d = scriptbarra3d + "];";
+        scriptbarra3d = scriptbarra3d + "];\n\n";
         
         int alto=30*listadatos.size();   
         if(listadatos.size()<=10)
@@ -52,28 +52,28 @@ public class GraficoBarrasComparativo implements Serializable {
             alto=400;
         }    
              
-        scriptbarra3d = scriptbarra3d + "AmCharts.ready(function () {"
-                + "chart" + nombreDiv + " = new AmCharts.AmSerialChart();"
-                + "chart" + nombreDiv + ".dataProvider = chartData" + nombreDiv + ";"
-                + "chart" + nombreDiv + ".categoryField = \"" + tituloCampo + "\";"
-                + "chart" + nombreDiv + ".rotate = "+rotate+";"
-                + "chart" + nombreDiv + ".depth3D = " + depth3D + ";"
-                + "chart" + nombreDiv + ".angle = " + angulo + ";"
+        scriptbarra3d = scriptbarra3d + "AmCharts.ready(function () {\n\n"
+                + "chart" + nombreDiv + " = new AmCharts.AmSerialChart();\n"
+                + "chart" + nombreDiv + ".dataProvider = chartData" + nombreDiv + ";\n"
+                + "chart" + nombreDiv + ".categoryField = \"" + tituloCampo + "\";\n"
+                + "chart" + nombreDiv + ".rotate = "+rotate+";\n"
+                + "chart" + nombreDiv + ".depth3D = " + depth3D + ";\n"
+                + "chart" + nombreDiv + ".angle = " + angulo + ";\n"
                 //+ "chart" + nombreDiv + ".columnWidth = " + 0.5 + ";"
-                + "chart" + nombreDiv + ".startDuration = 1;"            
-                + "chart" + nombreDiv + ".plotAreaBorderColor = \"#DADADA\";"  
-                + "chart" + nombreDiv + ".plotAreaBorderAlpha = 1;"
-                + "chart" + nombreDiv + ".marginBottom = 10;"
+                + "chart" + nombreDiv + ".startDuration = 1;\n"            
+                + "chart" + nombreDiv + ".plotAreaBorderColor = \"#DADADA\";\n"  
+                + "chart" + nombreDiv + ".plotAreaBorderAlpha = 1;\n"
+                + "chart" + nombreDiv + ".marginBottom = 10;\n"
                              
                 
-                + "var categoryAxis = chart" + nombreDiv + ".categoryAxis;"
-                + "categoryAxis.gridPosition = \"start\";"
+                + "var categoryAxis = chart" + nombreDiv + ".categoryAxis;\n"
+                + "categoryAxis.gridPosition = \"start\";\n"
                 //+ "categoryAxis.axisColor = \"#DADADA\";"
                 //+ "categoryAxis.fillAlpha = 1;"
-                + "categoryAxis.gridAlpha = 0.1;"
-                + "categoryAxis.gridAlpha = 0;"
-                + "categoryAxis.labelRotation = 45;"
-                + "categoryAxis.fontSize = 8;"
+                + "categoryAxis.gridAlpha = 0.1;\n"
+                + "categoryAxis.gridAlpha = 0;\n"
+                + "categoryAxis.labelRotation = 45;\n"
+                + "categoryAxis.fontSize = 8;\n\n"
                 
                 
                 //+ "categoryAxis.fillColor = \"#FAFAFA\";"
@@ -81,12 +81,12 @@ public class GraficoBarrasComparativo implements Serializable {
            
                 
                 
-                + "var valueAxis = new AmCharts.ValueAxis();"
+                + "var valueAxis = new AmCharts.ValueAxis();\n"
                 //+ "valueAxis.axisColor = \"#DADADA\";"
                 // //+"valueAxis.title = \"Aprobado miles de pesos, $\";"+
-                +"valueAxis.gridAlpha = 0.1;"
-                +"valueAxis.position = \"left\";"
-                +"valueAxis.tickLength = 0;"
+                +"valueAxis.gridAlpha = 0.1;\n"
+                +"valueAxis.position = \"left\";\n"
+                +"valueAxis.tickLength = 0;\n\n"
                 
                 
                 
@@ -94,38 +94,38 @@ public class GraficoBarrasComparativo implements Serializable {
                 //+ "valueAxis.minimum = 0;"
                 //+ "valueAxis.step = 20000000;"
                 //+ "valueAxis.maximum = 60000000;"
-                + "chart" + nombreDiv + ".addValueAxis(valueAxis);"
-                + "var graph = new AmCharts.AmGraph();"
-                + "graph.title = \"" + valorCampo + "\";"
-                + "graph.valueField = \"" + valorCampo + "\";"
-                + "graph.type = \"column\";"
-                + "graph.balloonText = \"" + valorCampo + " en [[category]]:[[value]]\";"
-                + "graph.lineAlpha = 0;"
-                + "graph.fillColors = \"#ADD981\";"
-                + "graph.fillAlphas = 1;"
-                +"graph.cornerRadiusTop = 22;"
+                + "chart" + nombreDiv + ".addValueAxis(valueAxis);\n"
+                + "var graph = new AmCharts.AmGraph();\n"
+                + "graph.title = \"" + valorCampo + "\";\n"
+                + "graph.valueField = \"" + valorCampo + "\";\n"
+                + "graph.type = \"column\";\n"
+                + "graph.balloonText = \"" + valorCampo + " en [[category]]:[[value]]\";\n"
+                + "graph.lineAlpha = 0;\n"
+                + "graph.fillColors = \"#ADD981\";\n"
+                + "graph.fillAlphas = 1;\n"
+                +"graph.cornerRadiusTop = 22;\n"
                 //+ "graph.colorField = \"color\";"
                 //+ "graph.fontSize = 4;"
                 
-                + "chart" + nombreDiv + ".addGraph(graph);"
+                + "chart" + nombreDiv + ".addGraph(graph);\n\n"
                 
-                + "var graph2 = new AmCharts.AmGraph();"
-                + "graph2.title = \"" + valorCampo2 + "\";"
+                + "var graph2 = new AmCharts.AmGraph();\n"
+                + "graph2.title = \"" + valorCampo2 + "\";\n"
                 + "graph2.valueField = \"" + valorCampo2 + "\";"
-                + "graph2.type = \"column\";"
-                + "graph2.balloonText = \"" + valorCampo2 + " en [[category]]:[[value]]\";"
-                + "graph2.lineAlpha = 0;"
-                + "graph2.fillColors = \"#81acd9\";"
+                + "graph2.type = \"column\";\n"
+                + "graph2.balloonText = \"" + valorCampo2 + " en [[category]]:[[value]]\";\n"
+                + "graph2.lineAlpha = 0;\n"
+                + "graph2.fillColors = \"#81acd9\";\n"
                 + "graph2.fillAlphas = 1;"
                 //+ "graph2.colorField = \"color\";"
                 //+ "graph2.fontSize = 4;"
-                + "chart" + nombreDiv + ".addGraph(graph2);"
+                + "chart" + nombreDiv + ".addGraph(graph2);\n"
                 
-                +"var legend = new AmCharts.AmLegend();"
-                +"chart" + nombreDiv + ".addLegend(legend);"
+                +"var legend = new AmCharts.AmLegend();\n"
+                +"chart" + nombreDiv + ".addLegend(legend);\n"
                 
-                + "chart" + nombreDiv + ".write(\"" + nombreDiv + "\");"
-                + "});"
+                + "chart" + nombreDiv + ".write(\"" + nombreDiv + "\");\n"
+                + "});\n"
                 + "</script><div id=\"" + nombreDiv + "\" style=\"width: 100%; height: "+alto+"px;\"></div>";
 
 

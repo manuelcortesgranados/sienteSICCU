@@ -19,14 +19,13 @@
         <f:facet name="controls">
             <a4j:region>
                 <h:panelGroup>
-                    <a4j:commandLink  id="esconder_mp-asociar-indicadormarcologico" styleClass="cerrar"
+                    <a4j:commandLink  id="esconder_mp-asociar-indicadormarcologico" styleClass="closemodal"
                                      title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-asociar-indicadormarcologico')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </a4j:region>
         </f:facet>
         <a4j:region>
-            <rich:panel id="rpasociarMarcologicoIndicador">
                 <center>
                     <h:panelGrid >
                         <h:outputText value="Definir Línea Base" styleClass="modal-indicador-head"/>
@@ -74,28 +73,6 @@
                     </center>
 
                 </center>
-                <a4j:outputPanel id="panelErrorAsociacionMarcolIndicador">
-                    <rich:messages id="messagesAsociacionMarcolIndicador" globalOnly="true"
-                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                  >
-                        <f:facet name="infoMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
-
-                </a4j:outputPanel>
-
-            </rich:panel>
-
         </a4j:region>
         <ui:include src="/modal/modalmarcologico/indicador.xhtml"/>
         <ui:include src="/modal/modalmarcologico/marcoLogico.xhtml"/>
