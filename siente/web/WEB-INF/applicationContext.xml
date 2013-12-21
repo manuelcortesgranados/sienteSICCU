@@ -15,7 +15,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrafonade</value>
+            <value>jdbc:postgresql:cobrafonadenuevo</value>
         </property>
         <property name="username">
             <value>cobra</value>
@@ -185,6 +185,7 @@
                 <value>co/com/interkont/cobra/vista/vista_movimientos_financieros_convenios.hbm.xml</value>
                 <value>co/com/interkont/cobra/vista/vista_movimientos_financieros_infraestructura.hbm.xml</value>
                 <value>co/com/interkont/cobra/vista/vistahomezoom.hbm.xml</value>
+                <value>co/com/interkont/cobra/vista/VistaProyectoAvanceFisicoConvenio.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/DashboardInversion.hbm.xml</value>
                 <value>co/com/interkont/cobra/vista/Vista_familias_atender_atendidas.hbm.xml</value>
                 <value>co/com/interkont/cobra/vista/Vista_seguidores_obra.hbm.xml</value>
