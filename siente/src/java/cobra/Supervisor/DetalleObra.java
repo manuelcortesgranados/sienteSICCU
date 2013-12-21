@@ -8,6 +8,7 @@ import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Alimentacioncualificacion;
 import co.com.interkont.cobra.to.Beneficiario;
+import co.com.interkont.cobra.to.Calificacionauditoriaobra;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Factoratraso;
@@ -776,31 +777,31 @@ public class DetalleObra implements Serializable{
     }
     
     /**
-     * Listado de visitas de auditoriía para el proyecto
+     * Listado de calificaciones de auditoría para la obra
      */
-    private List<Visita> listavisitasauditoria;
+    private List<Calificacionauditoriaobra> listacalificacionesauditoriaobra;
 
-    public List<Visita> getListavisitasauditoria() {
-        return listavisitasauditoria;
+    public List<Calificacionauditoriaobra> getListacalificacionesauditoriaobra() {
+        return listacalificacionesauditoriaobra;
     }
 
-    public void setListavisitasauditoria(List<Visita> listavisitasauditoria) {
-        this.listavisitasauditoria = listavisitasauditoria;
+    public void setListacalificacionesauditoriaobra(List<Calificacionauditoriaobra> listacalificacionesauditoriaobra) {
+        this.listacalificacionesauditoriaobra = listacalificacionesauditoriaobra;
     }
-    
+
      /**
      * Referencia a la tabla de visitas de auditoría
      */
-    private UIDataTable tablavisitasauditoria = new UIDataTable();
+    private UIDataTable tablacalificacionesauditoriaobra = new UIDataTable();
 
-    public UIDataTable getTablavisitasauditoria() {
-        return tablavisitasauditoria;
+    public UIDataTable getTablacalificacionesauditoriaobra() {
+        return tablacalificacionesauditoriaobra;
     }
 
-    public void setTablavisitasauditoria(UIDataTable tablavisitasauditoria) {
-        this.tablavisitasauditoria = tablavisitasauditoria;
+    public void setTablacalificacionesauditoriaobra(UIDataTable tablacalificacionesauditoriaobra) {
+        this.tablacalificacionesauditoriaobra = tablacalificacionesauditoriaobra;
     }
-    
+
     /**
      * <p>Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
@@ -1829,16 +1830,16 @@ public class DetalleObra implements Serializable{
      * sistema
      */
     public void cargarVisitasAuditoriaObra() {
-        listavisitasauditoria = getSessionBeanCobra().getCobraService().encontrarVisitasAuditoriaObra(getAdministrarObraNew().getObra().getIntcodigoobra(), Visita.ESTADO_CORRECTO);
+        listacalificacionesauditoriaobra = getSessionBeanCobra().getCobraService().encontrarCalificacionesAuditoriaObra(getAdministrarObraNew().getObra().getIntcodigoobra(), Visita.ESTADO_CORRECTO);
     }
     
     /**
      * Descarga el reporte de errores de visita fallida
      */
     public void generarReporteVisitaAuditoria() {
-        Visita visita = (Visita) tablavisitasauditoria.getRowData();
+        Calificacionauditoriaobra calificacionauditoriaobra = (Calificacionauditoriaobra) tablacalificacionesauditoriaobra.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,visita.getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getIdvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
