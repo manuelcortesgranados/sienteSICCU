@@ -4926,4 +4926,27 @@ a:hover {
 
 }
 
-
+.ikont-acl-subirmatrizauditoria{
+    width: 100px;
+    height: 100px;
+    display: block;
+    background-image: url(../imgs/btn_subir_borrar.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.ikont-acl-limpiarvisitafallida{
+    width: 100px;
+    height: 100px;
+    display: block;
+    background-image: url(../imgs/btn_subir_borrar.png);
+    background-repeat: no-repeat;
+    background-position: -100px 0px;
+}
+.ikont-acl-subirmatrizauditoria:hover{
+    background-position: 0px -100px;
+    transition: .5s all;
+}
+.ikont-acl-limpiarvisitafallida:hover{
+    background-position: -100px -100px;
+    transition: .5s all;
+}
