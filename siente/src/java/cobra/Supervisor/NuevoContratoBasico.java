@@ -4532,6 +4532,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipoContCon = "Contrato";
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
+         listaavancefisico.clear();
+        boolavanceproyectoconvenio = false;
         return "consultarContrato";
     }
 
@@ -4544,7 +4546,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleConvenioHijo() {
 
         Contrato contratoConvenioHijo = (Contrato) tablaSubconvenios.getRowData();
-
+        
         cargarContrato(contratoConvenioHijo);
 
         return "consultarContrato";
