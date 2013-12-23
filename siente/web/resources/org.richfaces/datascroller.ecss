@@ -9,10 +9,21 @@
 
 a.rf-ds-nmb-btn {
     color: '#{richSkin.generalTextColor}';
+    font-size: 14px;
+    font-family: '#{richSkin.generalFamilyFont}';
+    font-weight: bold;
 }
 
 a.rf-ds-btn {
     color: '#{richSkin.colorDataScroller}';
+    font-size: 14px;
+    font-family: '#{richSkin.generalFamilyFont}';
+    font-weight: bold;
+}
+
+a.rf-ds-btn:hover {
+    background : '#{richSkin.colorDataScroller}';
+    color: '#{richSkin.backGroudDataScroller}';
 }
 
 .rf-ds-cont {
@@ -52,6 +63,9 @@ a.rf-ds-btn {
 .rf-ds-dis:hover {
     color: '#{richSkin.botonBusquedaAvanzadaColor}';
     cursor: default;
+    font-size: 14px;
+    font-family: '#{richSkin.generalFamilyFont}';
+    font-weight: bold;
 }
 
 .rf-ds-btn-first,.rf-ds-btn-fastrwd,.rf-ds-btn-prev {
@@ -82,7 +96,7 @@ a.rf-ds-btn {
     font-size: '#{richSkin.generalSizeFont}';
     font-family: '#{richSkin.generalFamilyFont}';
     text-decoration: none;
-    color: '#{richSkin.colorDataScroller}';
+    color: '#{richSkin.backGroudDataScroller}';
     font-weight: normal;
 }
 
@@ -110,9 +124,15 @@ a.rf-ds-btn {
     border-bottom-style: solid;
     border-bottom-color: '#{richSkin.backGroudDataScroller}';
     background: '#{richSkin.colorDataScrollerDisable}';
+    font-size: 14px;
+    font-family: '#{richSkin.generalFamilyFont}';
+    font-weight: bold;
 }
 
 .rf-ds-dis {
     color: '#{richSkin.colorDataScrollerDisable}';
     cursor: default;
+    font-size: 14px;
+    font-family: '#{richSkin.generalFamilyFont}';
+    font-weight: bold;
 }
