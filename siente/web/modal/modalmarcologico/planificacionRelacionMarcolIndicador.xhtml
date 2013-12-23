@@ -26,38 +26,39 @@
             </h:form>
         </f:facet>
         <h:form>
-            <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
-            <rich:dataTable id="tablaavance" sortMode="single"
-                            style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaplanificacionRelacionMarcolIndicador}"
-                            binding="#{MarcoLogico$MarcoLogico.tablaPlanificacionRelacionMarcolIndicadorbin}"
-                            var="planificacionRelacionMlI" >
+            <h:panelGroup styleClass="totalwidth font-general panelcenter">
+                <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+                <rich:dataTable id="tablaavance" sortMode="single"
+                                style="text-align:left;" value="#{MarcoLogico$MarcoLogico.listaplanificacionRelacionMarcolIndicador}"
+                                binding="#{MarcoLogico$MarcoLogico.tablaPlanificacionRelacionMarcolIndicadorbin}"
+                                var="planificacionRelacionMlI" >
 
 
 
 
-                <rich:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha " />
-                    </f:facet>
-                    <h:outputText  id="datefechareporteplanificacion" value="#{planificacionRelacionMlI.datefechaplanificada}"  />
-                </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha " />
+                        </f:facet>
+                        <h:outputText  id="datefechareporteplanificacion" value="#{planificacionRelacionMlI.datefechaplanificada}"  />
+                    </rich:column>
 
-                <rich:column >
-                    <f:facet name="header">
-                        <h:outputText value="Meta estimada"/>
-                    </f:facet>
-                    <h:outputText  id="strvariable1estimada" value="#{planificacionRelacionMlI.doublevariable1metaesperada}"  />
-                </rich:column>
-                <!--
-                <rich:column  >
-                    <f:facet name="header">
-                        <h:outputText value="Cálculo Indicador"/>
-                    </f:facet>
-                    <h:outputText  id="strpocentajeestimado" value="# {planificacionRelacionMlI.doubleporcentajeavanceestimado}"  />
-                </rich:column>
-                -->
-            </rich:dataTable>
-
+                    <rich:column >
+                        <f:facet name="header">
+                            <h:outputText value="Meta estimada"/>
+                        </f:facet>
+                        <h:outputText  id="strvariable1estimada" value="#{planificacionRelacionMlI.doublevariable1metaesperada}"  />
+                    </rich:column>
+                    <!--
+                    <rich:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Cálculo Indicador"/>
+                        </f:facet>
+                        <h:outputText  id="strpocentajeestimado" value="# {planificacionRelacionMlI.doubleporcentajeavanceestimado}"  />
+                    </rich:column>
+                    -->
+                </rich:dataTable>    
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>   

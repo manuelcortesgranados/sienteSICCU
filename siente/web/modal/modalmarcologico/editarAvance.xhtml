@@ -10,7 +10,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="mp-crear-nuevoavance" moveable="true"   width="460" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel  id="mp-crear-nuevoavance" moveable="true" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.registraravance}" rendered="#{MarcoLogico$MarcoLogico.fechareal == 0}" />
@@ -28,41 +28,41 @@
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGroup id="pgguardaravance">
-                <rich:panel id="rpnuevaregistroavance" styleClass="" rendered="#{!MarcoLogico$MarcoLogico.guardoavance}">
-                    <center>
-                        <h:panelGrid columns="2"  width="100%"  >
+            <h:panelGroup styleClass="totalwidth font-general panelcenter">
+                <h:panelGroup id="pgguardaravance">
+                    <h:panelGroup id="rpnuevaregistroavance" styleClass="" rendered="#{!MarcoLogico$MarcoLogico.guardoavance}">
+                        <center>
+                            <h:panelGrid columns="2"  width="100%"  >
 
-                            <h:outputText id="lblfechaavance"  value="(*) Fecha avance:"  />
-                            <h:panelGrid >
-                                <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaavancemes" inputSize="10" 
-                                                required="true" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechacreacion}"
-                                                disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
-                                                />
+                                <h:outputText id="lblfechaavance"  value="(*) Fecha avance:"  />
+                                <h:panelGrid >
+                                    <rich:calendar  locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaavancemes" inputSize="10" 
+                                                    required="true" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechacreacion}"
+                                                    disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
+                                                    />
+                                </h:panelGrid>
+
+                                <h:outputText id="lbldescripcion"  value="Logros" />
+                                <h:panelGrid>
+                                    <h:inputTextarea  id="textdescripcion" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdescripcion}" 
+                                                      cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
+                                </h:panelGrid>
+
+                                <h:outputText id="lbldificultades"  value="#{varMarcoLogico.dificultades}" />
+                                <h:panelGrid>
+                                    <h:inputTextarea  id="textdificultad" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdificultades}" 
+                                                      cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
+                                </h:panelGrid>
+
                             </h:panelGrid>
 
-                            <h:outputText id="lbldescripcion"  value="Logros" />
-                            <h:panelGrid>
-                                <h:inputTextarea  id="textdescripcion" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdescripcion}" 
-                                                  cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
-                            </h:panelGrid>
+                        </center>
 
-                            <h:outputText id="lbldificultades"  value="#{varMarcoLogico.dificultades}" />
-                            <h:panelGrid>
-                                <h:inputTextarea  id="textdificultad" style="width: 80%" rows="4" value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.strdificultades}" 
-                                                  cols="80"  disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"   />
-                            </h:panelGrid>
-
-                        </h:panelGrid>
-
-                    </center>
-
-                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvanceObligacion}" disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
-                                       render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio" execute="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
-                    </a4j:commandButton>
-                </rich:panel>
-
-
+                        <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvanceObligacion}" disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravance}"
+                                           render="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio" execute="pgguardaravance,rpnuevoavance,pgSeguimientoConvenio">
+                        </a4j:commandButton>
+                    </h:panelGroup>
+                </h:panelGroup>
             </h:panelGroup>
         </h:form>
     </rich:popupPanel>   

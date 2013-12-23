@@ -10,7 +10,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-registro-avanceplanificacion" moveable="true" width="330" height="350"  autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-registro-avanceplanificacion" moveable="true" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.nuevoavance}"/>
@@ -26,43 +26,40 @@
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGroup id="pgavanceplanificacion">
-                <center>
-                    <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
-                    <h:panelGrid columns="2"  width="100%" >
+            <h:panelGroup id="pgavanceplanificacion" styleClass="totalwidth font-general panelcenter">
+                <h:outputText value="Meta (#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.strdescripcionvariables})" styleClass="modal-indicador-head"/>
+                <h:panelGrid columns="2"  width="100%" >
 
-                        <h:outputText id="lblditfechaavance"  value="(*)Fecha del reporte" />
-                        <h:panelGrid columns="2" >
-                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" inputSize="10" datePattern="yyyy-MM-dd" id="calendarfechaavan"
-                                           value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.datefecharealizacion}"/>
-
-                        </h:panelGrid>
-
-                        <h:outputText id="lbleditvariableavance"  value="Variable avance" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==1}"/>
-                        <h:outputText id="lbleditvarbEsperd1"  value="Variable 1 avance:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
-                        <h:inputText  id="texteditvariableesperada1" size="12"  value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada1}">
-                            <f:validateDoubleRange minimum="0" />
-                        </h:inputText>                            
-
-                        <h:outputText id="lblditvarbEsperd2"  value="Variable 2 avance:"  rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
-                        <h:inputText id="textditvariableesperada2" size="12" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada2}" 
-                                     rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}">
-                            <f:validateDoubleRange minimum="0" />
-                        </h:inputText>
-
-                        <h:outputText id="lblditobservacionAvanceplanificacion"  value="Observación avance:" />
-                        <h:panelGrid columns="1" >
-                            <h:inputTextarea id="textditobservacionAvanceplanificacion" style="width: 100%" rows="4" cols="40" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.strobservacion}"/>
-                        </h:panelGrid>
+                    <h:outputText id="lblditfechaavance"  value="(*)Fecha del reporte" />
+                    <h:panelGrid columns="2" >
+                        <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" inputSize="10" datePattern="yyyy-MM-dd" id="calendarfechaavan"
+                                       value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.datefecharealizacion}"/>
 
                     </h:panelGrid>
 
-                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
-                                       disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
-                                       render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida, rpnuevoavance" >
-                    </a4j:commandButton>
+                    <h:outputText id="lbleditvariableavance"  value="Variable avance" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==1}"/>
+                    <h:outputText id="lbleditvarbEsperd1"  value="Variable 1 avance:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
+                    <h:inputText  id="texteditvariableesperada1" size="12"  value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada1}">
+                        <f:validateDoubleRange minimum="0" />
+                    </h:inputText>                            
 
-                </center>
+                    <h:outputText id="lblditvarbEsperd2"  value="Variable 2 avance:"  rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}"/>
+                    <h:inputText id="textditvariableesperada2" size="12" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.doubleavancevariablesperada2}" 
+                                 rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables==2}">
+                        <f:validateDoubleRange minimum="0" />
+                    </h:inputText>
+
+                    <h:outputText id="lblditobservacionAvanceplanificacion"  value="Observación avance:" />
+                    <h:panelGrid columns="1" >
+                        <h:inputTextarea id="textditobservacionAvanceplanificacion" style="width: 100%" rows="4" cols="40" value="#{MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.strobservacion}"/>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+
+                <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
+                                   disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
+                                   render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida, rpnuevoavance" >
+                </a4j:commandButton>
             </h:panelGroup>
         </h:form>
 

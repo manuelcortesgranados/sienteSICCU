@@ -280,11 +280,9 @@
 
                                 <rich:panel header="#{var.socion}" bodyClass="rich-panel-grid-body"
                                             styleClass="rich-panel-grid" headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
-                                    <rich:panel  style="overflow-y: scroll;height:100px;" >
+                                    
                                         <h:outputLabel id="st_strnomsocio"
-                                                       style="font-size:13px; color:#666666;"
                                                        value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
-                                    </rich:panel>
                                 </rich:panel>
 
                                 <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
@@ -330,16 +328,16 @@
                                 </rich:panel>
                                 <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                     <interkont:spacer height="5"/>                                
-                                    <h:panelGrid id="empleos" columns="1" width="100%" style="vertical-align:middle;text-align:center;">
+                                    <h:panelGrid id="empleos" columns="1" styleClass="panelcenter totalwidth font-general">
                                         <center>
-                                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
+                                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto }" styleClass="txt_outtext ikont-hol-stclaseProyecto" 
                                                             value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
-                                            <h:inputText rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" id="numpersonasbeneficiadas" style="font-size:12px; color:#666666;width: 62px!important;" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
+                                            <h:inputText rendered="#{Supervisor$AdministrarObraNew.habilitarGuardarimpacto}" id="numpersonasbeneficiadas" styleClass="ikont-hol-stclaseProyecto" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:inputText>
 
-                                            <h:outputText value="Familias Participantes" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}"/>
-                                            <h:outputText value="#{var.otrosactores}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
-                                            <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
-                                            <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="Familias Participantes" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.otrosactores}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.imp_bene}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
+                                            <h:outputText value="#{var.poblacionestudiantil}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59 and !Supervisor$AdministrarObraNew.proyectoestrategia}"/>
                                         </center>
                                         <h:panelGroup id="layoutEmpleoGenerados" rendered="#{!Supervisor$AdministrarObraNew.proyectoestrategia}">
                                             <center>
@@ -496,12 +494,12 @@
                                     </f:facet>
                                     <interkont:spacer height="30"/>
                                     <center>
-                                        <h:panelGrid columnClasses="panelcenter">
-                                            <h:outputText value="Producto" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
+                                        <h:panelGrid columnClasses="panelcenter" styleClass="panelcenter totalwidth font-general">
+                                            <h:outputText value="Producto" styleClass="txt_outtext ikont-hol-sttipoProyecto "  />
                                             <h:outputText value="#{Supervisor$AdministrarObraNew.vproductomedios.avance}">
                                                 <f:convertNumber type="percent" pattern="##.## %"/>
                                             </h:outputText>
-                                            <h:outputText value="Gestión" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
+                                            <h:outputText value="Gestión" styleClass="txt_outtext ikont-hol-sttipoProyecto" />
                                             <h:outputText value="#{Supervisor$AdministrarObraNew.vproductogestion.avance}">
                                                 <f:convertNumber type="percent" pattern="##.## %"/>
                                             </h:outputText>
@@ -518,9 +516,9 @@
                                 <rich:panel header="#{var.nombreproyecto}" bodyClass="rich-panel-grid-body panelcenter " styleClass="rich-panel-grid" 
                                             headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
                                     <center>
-                                        <rich:panel  style="overflow-y: scroll;height:100px;">
-                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext" style="font-size:10px; color:#336699; font-weight: bold;" />
-                                        </rich:panel>
+                                        
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext ikont-hol-sttipoProyecto " />
+                                        
 
                                     </center>
                                 </rich:panel>

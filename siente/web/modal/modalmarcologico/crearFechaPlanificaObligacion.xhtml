@@ -8,7 +8,7 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
-    <rich:popupPanel id="mp-crear-fechaPlanificacion" moveable="true"   width="430" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-crear-fechaPlanificacion" moveable="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.nuevaFechaAvanceObligacion}" />
@@ -24,7 +24,7 @@
             </h:form>
         </f:facet>
         <h:form>
-            <center>
+            <h:panelGroup styleClass="totalwidth font-general panelcenter">
                 <h:panelGrid columns="2"  width="100%"  >
                     <h:outputText id="lbplanicicarfechaavance"  value="Fecha avance"/>
                     <h:panelGrid>
@@ -33,13 +33,10 @@
                                         value="#{MarcoLogico$MarcoLogico.cronogramaobligacionesejecutada.datefechaavance}"/>
                     </h:panelGrid>                     
                 </h:panelGrid>
-
-            </center>
-
-            <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarFechaAvanceAdicionalObligacion}"
-                               render="rpnuevoavance,rpnuevafechanuevaplanicion" execute="rpnuevoavance,rpnuevafechanuevaplanicion">
-            </a4j:commandButton>
-            
+                <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarFechaAvanceAdicionalObligacion}"
+                                   render="rpnuevoavance,rpnuevafechanuevaplanicion" execute="rpnuevoavance,rpnuevafechanuevaplanicion">
+                </a4j:commandButton>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>   
 </ui:composition>

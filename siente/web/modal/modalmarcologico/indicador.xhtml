@@ -10,7 +10,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-indicador" moveable="true" width="1040" height="200" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-indicador" moveable="true" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{varMarcoLogico.indicador}"/>
@@ -19,116 +19,117 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  style="color: black;"  id="esconder_mp-indicador" styleClass="closemodal"
+                    <a4j:commandLink  id="esconder_mp-indicador" styleClass="closemodal"
                                       title="#{varMarcoLogico.cerrar}" immediate="true" onclick="#{rich:component('mp-indicador')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <h:outputText value="No tiene indicadores asociados " rendered="#{fn:length(MarcoLogico$MarcoLogico.listaIndicador)==0}"/>
-            <interkont:spacer height="10px" width="100%"/>
-            <rich:dataTable id="tablaListIndicador"  sortMode="single" 
-                            styleClass="modal-indicador-txt" value="#{MarcoLogico$MarcoLogico.listaIndicador}"
-                            binding="#{MarcoLogico$MarcoLogico.tablaIndicadorbin}"
-                            rows="2"
-                            var="indicador" >
+            <h:panelGroup styleClass="totalwidth font-general panelcenter">
+                <h:outputText value="No tiene indicadores asociados " rendered="#{fn:length(MarcoLogico$MarcoLogico.listaIndicador)==0}"/>
+                <interkont:spacer height="10px" width="100%"/>
+                <rich:dataTable id="tablaListIndicador"  sortMode="single" 
+                                styleClass="modal-indicador-txt" value="#{MarcoLogico$MarcoLogico.listaIndicador}"
+                                binding="#{MarcoLogico$MarcoLogico.tablaIndicadorbin}"
+                                rows="2"
+                                var="indicador" >
 
 
-                <rich:column >
-                    <f:facet name="header" >
-                        <h:outputText value="Nombre Indicador"/>
+                    <rich:column >
+                        <f:facet name="header" >
+                            <h:outputText value="Nombre Indicador"/>
+                        </f:facet>
+                        <h:outputText  id="outputTextnombreindicador" value="#{indicador.strnombreindicador}"  />
+                    </rich:column>
+
+                    <rich:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Descripción"/>
+                        </f:facet>
+                        <h:inputTextarea  id="outputTextdescripcion" value="#{indicador.strdescripcionindicador}" disabled="true" />
+                    </rich:column>
+
+                    <rich:column  >
+                        <f:facet name="header">
+                            <h:outputText styleClass="obligacion-mediosvida-txt" value="Tipo Indicador"/>
+                        </f:facet>
+                        <h:outputText  id="tipomindicador" value="#{indicador.tipoindicador.strnombre}"  />
+                    </rich:column>
+
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText  value="Unidad de Medida"/>
+                        </f:facet>
+                        <h:outputText  id="unidadMedida" value="#{indicador.unidadmedidamediosvida.strdescripcion}"  />
+                    </rich:column>
+
+                    <rich:column >
+                        <f:facet name="header">
+                            <h:outputText value="Periodicidad del reporte"/>
+                        </f:facet>
+                        <h:outputText  id="frecuenciaperioc" value="#{indicador.frecuenciaperiocidad.strdescripcion}"  />
+                    </rich:column>
+
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText  value="Variables del indicador"/>
+                        </f:facet>
+                        <h:inputTextarea  id="strdescripvariables" value="#{indicador.strdescripcionvariables}" disabled="true" />
+                    </rich:column>
+
+                    <rich:column width="2px">
+                        <f:facet name="header">
+                            <h:outputText styleClass="obligacion-mediosvida-txt" value=" Número de Variables"/>
+                        </f:facet>
+                        <h:outputText  id="intnumvariables" value="#{indicador.numcantidadvariables}"  />
+                    </rich:column>
+
+
+                    <rich:column >
+                        <f:facet name="header">
+                            <h:outputText  value="Fórmula de Cálculo"/>
+                        </f:facet>
+                        <h:outputText  id="formulacalculo" value="#{indicador.strformulacalculo}"  />
+                    </rich:column>
+
+
+
+                    <rich:column >
+                        <f:facet name="header">
+                            <h:outputText  value="Forma de cálculo"/>
+                        </f:facet>
+                        <h:outputText  id="formacalculo" value="#{indicador.strformacalculo}"  />
+                    </rich:column>
+
+
+                    <rich:column  >
+                        <f:facet name="header">
+                            <h:outputText styleClass="obligacion-mediosvida-txt" value="Orientación esperada"/>
+                        </f:facet>
+                        <h:outputText  id="orientesperada" value="#{indicador.strorientacionesperada}"  />
+                    </rich:column>
+
+                    <rich:column >
+                        <f:facet name="header">
+                            <h:outputText  value="#{varMarcoLogico.seleccionar}" />
+                        </f:facet>
+                        <a4j:commandLink id="bt_selectIndicador" action="#{MarcoLogico$MarcoLogico.seleccionaIndicador}" execute="@this"
+                                         title="#{varMarcoLogico.seleccionar}" render="rpasociarMarcologicoIndicador">
+                            <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
+                            <a4j:ajax oncomplete="#{rich:component('mp-indicador')}.hide();" />
+                        </a4j:commandLink>
+
+                    </rich:column>
+                    <f:facet name="footer">
+                        <rich:columnGroup>
+                            <rich:column colspan="11"  style="text-align: center;">
+                                <rich:dataScroller id="scrollIndicador" for="tablaListIndicador" render="tablaListIndicador"/>
+                            </rich:column>
+                        </rich:columnGroup>
                     </f:facet>
-                    <h:outputText  id="outputTextnombreindicador" value="#{indicador.strnombreindicador}"  />
-                </rich:column>
-
-                <rich:column  >
-                    <f:facet name="header">
-                        <h:outputText value="Descripción"/>
-                    </f:facet>
-                    <h:inputTextarea  id="outputTextdescripcion" value="#{indicador.strdescripcionindicador}" disabled="true" />
-                </rich:column>
-
-                <rich:column  >
-                    <f:facet name="header">
-                        <h:outputText styleClass="obligacion-mediosvida-txt" value="Tipo Indicador"/>
-                    </f:facet>
-                    <h:outputText  id="tipomindicador" value="#{indicador.tipoindicador.strnombre}"  />
-                </rich:column>
-
-                <rich:column>
-                    <f:facet name="header">
-                        <h:outputText  value="Unidad de Medida"/>
-                    </f:facet>
-                    <h:outputText  id="unidadMedida" value="#{indicador.unidadmedidamediosvida.strdescripcion}"  />
-                </rich:column>
-
-                <rich:column >
-                    <f:facet name="header">
-                        <h:outputText value="Periodicidad del reporte"/>
-                    </f:facet>
-                    <h:outputText  id="frecuenciaperioc" value="#{indicador.frecuenciaperiocidad.strdescripcion}"  />
-                </rich:column>
-
-                <rich:column>
-                    <f:facet name="header">
-                        <h:outputText  value="Variables del indicador"/>
-                    </f:facet>
-                    <h:inputTextarea  id="strdescripvariables" value="#{indicador.strdescripcionvariables}" disabled="true" />
-                </rich:column>
-
-                <rich:column width="2px">
-                    <f:facet name="header">
-                        <h:outputText styleClass="obligacion-mediosvida-txt" value=" Número de Variables"/>
-                    </f:facet>
-                    <h:outputText  id="intnumvariables" value="#{indicador.numcantidadvariables}"  />
-                </rich:column>
-
-
-                <rich:column >
-                    <f:facet name="header">
-                        <h:outputText  value="Fórmula de Cálculo"/>
-                    </f:facet>
-                    <h:outputText  id="formulacalculo" value="#{indicador.strformulacalculo}"  />
-                </rich:column>
-
-
-
-                <rich:column >
-                    <f:facet name="header">
-                        <h:outputText  value="Forma de cálculo"/>
-                    </f:facet>
-                    <h:outputText  id="formacalculo" value="#{indicador.strformacalculo}"  />
-                </rich:column>
-
-
-                <rich:column  >
-                    <f:facet name="header">
-                        <h:outputText styleClass="obligacion-mediosvida-txt" value="Orientación esperada"/>
-                    </f:facet>
-                    <h:outputText  id="orientesperada" value="#{indicador.strorientacionesperada}"  />
-                </rich:column>
-
-                <rich:column >
-                    <f:facet name="header">
-                        <h:outputText  value="#{varMarcoLogico.seleccionar}" />
-                    </f:facet>
-                    <a4j:commandLink id="bt_selectIndicador" action="#{MarcoLogico$MarcoLogico.seleccionaIndicador}" execute="@this"
-                                     title="#{varMarcoLogico.seleccionar}" render="rpasociarMarcologicoIndicador">
-                        <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/add.png"/>
-                        <a4j:ajax oncomplete="#{rich:component('mp-indicador')}.hide();" />
-                    </a4j:commandLink>
-
-                </rich:column>
-                <f:facet name="footer">
-                    <rich:columnGroup>
-                        <rich:column colspan="11"  style="text-align: center;">
-                            <rich:dataScroller id="scrollIndicador" for="tablaListIndicador" render="tablaListIndicador"/>
-                        </rich:column>
-                    </rich:columnGroup>
-                </f:facet>
-            </rich:dataTable>
-
+                </rich:dataTable>    
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>   
 </ui:composition>
