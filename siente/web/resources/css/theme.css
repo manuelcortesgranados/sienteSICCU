@@ -830,7 +830,7 @@ blockquote{
 }
 
 
-a.subir {
+.ikont-acl-subirmatrizauditoria {
     /*float: left;*/
     height: 163px;
     width: 150px; /* for validator */
@@ -840,7 +840,7 @@ a.subir {
     background-image: url(../imgs/bt_subir.png);
     background-position: 0px 20px;
 }
-a.subir:hover {
+.ikont-acl-subirmatrizauditoria:hover {
     background-position: 0px -144px;
 }
 

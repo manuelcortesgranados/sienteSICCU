@@ -288,8 +288,13 @@ input, select{
     font-size: 12px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #666666;
-    margin: 10px 0px;
+    margin: 5px 0px;
     padding: 0px 5px;
+}
+
+input:focus, select:focus{
+    border: solid 1px #266185;
+    box-shadow: 0px 0px 10px 1px #266185;
 }
 
 textarea{
@@ -301,11 +306,11 @@ textarea{
     font-size: 12px;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #666666;
-    margin: 10px 0px;
+    margin: 5px 0px;
     padding: 0px 5px;
 }
 
 textarea:focus{
-    border: solid 1px #666;
-    box-shadow: 0px 0px 0px 0px transparent;
+    border: solid 1px #266185;
+    box-shadow: 0px 0px 10px 1px #266185;
 }

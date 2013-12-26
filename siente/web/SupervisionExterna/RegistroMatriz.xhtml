@@ -66,10 +66,14 @@
                             <interkont:spacer height="3" />
                         </h:panelGrid>
 
-                        <h:panelGrid columns="2">
-                            <a4j:commandLink id="subirRegistoMat" styleClass="ikont-acl-subirmatrizauditoria"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz"
+                        <h:panelGrid columns="2" rendered="#{var.versioncobra eq 'zoom'}">
+                            <a4j:commandLink  styleClass="ikont-acl-subirmatrizauditoria"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz"
                                              oncomplete="if (#{empty facesContext.messageList}) #{rich:component('panelUploadArchivoSuper')}.show(); else return false;" />
                             <a4j:commandLink  styleClass="ikont-acl-limpiarvisitafallida"  title="#{var.limpiarvisita}" action="#{Supervision$Externa.limpiarVisita}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" rendered="#{var.versioncobra eq 'siente'}">
+                            <a4j:commandLink styleClass="ikont-acl-subirmatrizauditoria"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz"
+                                             oncomplete="if (#{empty facesContext.messageList}) #{rich:component('panelUploadArchivoSuper')}.show(); else return false;" />
                         </h:panelGrid>
                     </rich:panel>
                     <rich:panel header="#{var.titulovisitasfallidas}" rendered="#{var.versioncobra eq 'zoom'}">
