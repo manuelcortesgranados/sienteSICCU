@@ -78,6 +78,7 @@
                     <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato" id="lbltipocontratoselectselect" value="#{var.selecciontipocontrato}"/>
                     <h:panelGrid rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato" columns="2">
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" >
+                            <f:selectItem itemLabel="Todos" itemValue="2"/>
                             <f:selectItem itemLabel="Contrato" itemValue="0"/>
                             <f:selectItem itemLabel="Consultoria" itemValue="1"/>
                             <a4j:ajax event="valueChange" render="ikont-hsom-listartipocontratos, @form" execute="ikont-hsom-listartipocontratos" listener="#{Supervisor$Contrato.listaxTipocontratoselect}"/>
