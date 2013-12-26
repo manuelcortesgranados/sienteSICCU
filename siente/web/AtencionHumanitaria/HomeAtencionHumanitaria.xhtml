@@ -30,12 +30,12 @@
                 <tr>
                     <td><div><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palclav" onfocus="clearText(this);"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
-                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-hcb-buscr"  />
+                                    <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave " onfocus="clearText(this);"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
+                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-acb-primerolistproyectos"  />
                                 </label>
                             </div></div></td>
                     <td>
-                        <a4j:commandLink styleClass="ikont-acl-busqavan"  
+                        <a4j:commandLink styleClass="ikont-a4jcl-houtbusquedaavanza"  
                                          render="tablaAtencionHumanitaria" value="#{var.houtbusquedaavanza}">
                             <rich:componentControl event="click" target="panelBusquedaAvanzadaAtencion" operation="show" />
                         </a4j:commandLink>

@@ -23,22 +23,22 @@
         <div  />
     </rich:panel>
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="ikont-rp-menusolicitudobra-body" >
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="ikont-rp-menusolicitudobra-body" styleClass="minwidthpanellateral">
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
             <h:panelGrid styleClass="ikont-hpg-crearSolicitud"   cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="ikont-hcl"   immediate="true"
+                <h:commandLink styleClass="ikont-hcl-crearSolicitud"   immediate="true"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
-                <h:commandLink styleClass="ikont-hcl-crearSolicitud1"   value="Registrar Solicitud"
+                <h:commandLink styleClass="ikont-hcl-crearSolicitud1 text-button-panel"   value="Registrar Solicitud"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-cancelarSolicitud"   cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="ikont-hcl-cancelarSolicitud"   immediate="true" action="cancelarSolicitud"/>
-                <a4j:commandLink styleClass="ikont-hcl-consultartotalsoli"   value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
+                <a4j:commandLink styleClass="ikont-hcl-consultartotalsoli text-button-panel"   value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
                                  render="panelBody"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="ikont-hcl-irreportesdetalle"   immediate="true" action="irreportesdetalle"/>
-                <a4j:commandLink styleClass="ikont-acl-irreportesdetalle1"   value="Reporte"  action="irreportesdetalle"/>
+                <h:commandLink styleClass="ikont-hcl-iniciarreporte"   immediate="true" action="irreportesdetalle"/>
+                <a4j:commandLink styleClass="ikont-acl-irreportesdetalle1 text-button-panel"   value="Reporte"  action="irreportesdetalle"/>
             </h:panelGrid>
 
 
@@ -46,7 +46,7 @@
     </rich:panel>
 
     <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="ikont-rp-menuNumSolicitudes-body" >
-        <h:panelGrid columns="2"  cellpadding="1px"  >
+        <h:panelGrid columns="2"  cellpadding="1px"  styleClass="font-general totalwidth panelizquierda">
             <h:outputText  styleClass="ikont-hot-textSolicitudes"   id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
             <h:outputText  styleClass="ikont-hot-numSolicitudes "   id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
 

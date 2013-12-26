@@ -12,8 +12,8 @@
 
 
     <rich:panel id="perfilSolicitante" header="Mi Perfil - #{SessionBeanCobra.usuarioObra.tercero.strnombre}  #{SessionBeanCobra.usuarioObra.tercero.strapellido1}  #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
-                bodyClass="tool" >
-        <h:panelGrid columns="4" cellpadding="1px"  >
+                 >
+        <h:panelGrid columns="4" cellpadding="1px"  styleClass="totalwidth panelizquierda font-general">
             <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-stSolicitudesTotales"   id="stSolicitudesTotales"  value="#{var.misolicitues}"/>
             <interkont:spacer width="10"/>

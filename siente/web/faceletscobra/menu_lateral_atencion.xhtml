@@ -12,7 +12,7 @@
     <rich:panel header="Atención Humanitaria" id="menuAtencion">
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
             <h:panelGrid styleClass="ikont-hpg-menuatencion"   cellpadding="0" cellspacing="0" > 
-                <h:commandLink styleClass="ikont-hcl-btnregistraratencionhumanitaria img-button-panel"   immediate="true"
+                <h:commandLink styleClass="ikont-hcl-crearSolicitud img-button-panel"   immediate="true"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}"                               
                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
                 <h:commandLink styleClass="ikont-hcl-registrarsolicitud text-button-panel"   value="Registrar Solicitud"
@@ -20,14 +20,14 @@
                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-homesolicitudes"   cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="ikont-hcl-homesolicitudes img-button-panel"   immediate="true"
+                <h:commandLink styleClass="ikont-hcl-cancelarSolicitud img-button-panel"   immediate="true"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
                 <h:commandLink styleClass="ikont-hcl-consultarsolicitudes text-button-panel"   value="Consultar Solicitudes"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
 
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >  
-                <h:commandLink styleClass="ikont-hcl-irreportesdetalle img-button-panel"   immediate="true" action="irreportesdetalle" />
+                <h:commandLink styleClass="ikont-hcl-iniciarreporte img-button-panel"   immediate="true" action="irreportesdetalle" />
                 <a4j:commandLink styleClass="ikont-a4j-irreportesdetalle text-button-panel"   value="Reporte"  action="irreportesdetalle"/>
             </h:panelGrid>
             
