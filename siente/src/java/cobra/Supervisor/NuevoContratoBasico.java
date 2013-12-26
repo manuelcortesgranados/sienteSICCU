@@ -4720,21 +4720,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String primerosreales() {
         if (aplicafiltro) {
 
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, 0, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, 0, 10);
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
             // }
         } else {
 
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(0, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(0, 10);
             totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
         }
 
         pagina = 1;
-        if (totalfilas <= 5) {
+        if (totalfilas <= 10) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
                 totalpaginas++;
             }
         }
@@ -4754,19 +4754,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String siguientesReales() {
 
-        int num = (pagina) * 5;
+        int num = (pagina) * 10;
         if (aplicafiltro) {
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 10);
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
 
         } else {
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 10);
             totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
         }
-        if (totalfilas <= 5) {
+        if (totalfilas <= 10) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
+            totalpaginas = totalfilas / 10;
             if (totalfilas % 5 > 0) {
                 totalpaginas++;
             }
@@ -4789,19 +4789,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String anterioresReales() {
 
         pagina = pagina - 1;
-        int num = (pagina - 1) * 5;
+        int num = (pagina - 1) * 10;
         if (aplicafiltro) {
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 10);
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
         } else {
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 5);
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 10);
             totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
         }
-        if (totalfilas <= 5) {
+        if (totalfilas <= 10) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
                 totalpaginas++;
             }
         }
@@ -4821,7 +4821,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String ultimoReales() {
-        int num = totalfilas % 5;
+        int num = totalfilas % 10;
 
         if (aplicafiltro) {
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
@@ -4831,11 +4831,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(totalfilas - num, totalfilas);
         }
 
-        if (totalfilas <= 5) {
+        if (totalfilas <= 10) {
             totalpaginas = 1;
         } else {
-            totalpaginas = totalfilas / 5;
-            if (totalfilas % 5 > 0) {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
                 totalpaginas++;
             }
         }

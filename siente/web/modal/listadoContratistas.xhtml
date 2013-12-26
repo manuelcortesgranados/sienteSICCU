@@ -22,13 +22,13 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-       
-            <h:form>
-                
+
+        <h:form>
 
 
-                <h:panelGroup layout="block" id="gpTotalContratistas">
-                    <h:panelGrid columns="2" >
+
+            <h:panelGroup layout="block" id="gpTotalContratistas">
+                <h:panelGrid columns="2" >
                     <h:outputText  styleClass="ikont-hot-consultarnombre" value="#{var.consultar} #{var.nombre}" />
                     <h:panelGroup>
                         <h:inputText id="hit_buscar_contratista" styleClass="ikont-hit-nombre" value="#{Supervisor$Contrato.nombre}" size="20" onfocus="clearText(this);" />
@@ -36,10 +36,11 @@
                                            execute="hit_buscar_contratista, gpTotalContratistas"  render="gpTotalContratistas"/>
                     </h:panelGroup>
                 </h:panelGrid>
-                    <h:panelGrid >
-                        <interkont:spacer height="5" />
+                <h:panelGrid >
+                    <interkont:spacer height="5" />
+                    
                         <rich:dataTable id="tablaContratistas"
-                                        rows="5"
+                                        rows="10"
                                         var ="Contratista"
                                         rowKeyVar="filaSeleccionada"                                  
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -98,7 +99,7 @@
                                                        oncomplete="#{rich:component('mp-crear-contratista')}.show();" execute="@this" immediate="true">                                    
                                     </a4j:commandButton>
                                 </rich:column>
-                            </rich:columnGroup>
+                            </rich:columnGroup>                               
                             <f:facet name="footer">
                                 <rich:columnGroup>
                                     <rich:column colspan="5" breakRowBefore="true">
@@ -114,8 +115,8 @@
                                 </rich:columnGroup>
                             </f:facet>
                         </rich:dataTable>
-                    </h:panelGrid>
-                </h:panelGroup>
-            </h:form>        
+                        </h:panelGrid>
+            </h:panelGroup>
+        </h:form>        
     </rich:popupPanel>
 </ui:composition>
