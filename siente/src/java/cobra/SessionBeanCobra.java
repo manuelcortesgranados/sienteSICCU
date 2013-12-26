@@ -41,6 +41,9 @@ import financiera.service.FinancieraServiceAble;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -103,6 +106,7 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
+    private Date fechaServidor;
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
     private GipromServiceAble gipromService;
@@ -472,6 +476,15 @@ public class SessionBeanCobra implements Serializable {
     }
     // </editor-fold>
 
+    public Date getFechaServidor() {
+        return fechaServidor;
+    }
+
+    public void setFechaServidor(Date fechaServidor) {
+        this.fechaServidor = fechaServidor;
+    }
+
+    // </editor-fold>
     /**
      * <p>
      * Construct a new session data bean instance.</p>
@@ -480,8 +493,21 @@ public class SessionBeanCobra implements Serializable {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
-    public void llenadodatos() {
+    public void ConvertirFechaServidor() {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String date = getFechaServer();
+            java.util.Date utilDate = formatter.parse(date);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            setFechaServidor(sqlDate);
+        } catch (ParseException e) {
+            System.out.println(e.toString());
+            e.printStackTrace();
 
+        }
+    }
+    
+    public void llenadodatos() {
         long lnMilisegundos = utilDate.getTime();
         java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
         String dat = "" + sqlDate;
@@ -1244,10 +1270,10 @@ public class SessionBeanCobra implements Serializable {
         vista.setStrdireccion(mun.getMncNombre()+" , "+mun.getDptNombre());
         return vista;
     }
-    
+
     public Obra castearVwInformacionMunicipaltoObra(VwInmInfoMunicipal mun) {
         Obra vista = new Obra();
-        
+
         vista.setStrnombreobra(mun.getLclNombre());
         vista.setBoolobraterminada(false);
         //vista.setClaseobra();
@@ -1259,7 +1285,7 @@ public class SessionBeanCobra implements Serializable {
         vista.setTercero(new Tercero());
         vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
         vista.setNumvaltotobra(BigDecimal.ZERO);
-        
+
 //                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
 //                vista.getObra().setStrobjetoobra(mun.getMncActividadEconomica());
         if (mun.getMncActividadEconomica() != null) {
@@ -1275,14 +1301,14 @@ public class SessionBeanCobra implements Serializable {
         vista.setStrcomuna(mun.getMncActividadEconomica());
         if(mun.getMncTemperatura() !=null)
         {    
-        vista.setStrcorregimiento(mun.getMncTemperatura().toString());
+            vista.setStrcorregimiento(mun.getMncTemperatura().toString());
         }
         else
         {
             vista.setStrcorregimiento("Faltante");
-        }    
+        }
         List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
-        
+
         //System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
         for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
 //            System.out.println("valor = " + winccons.getEncIncValorIndicador());
@@ -1301,30 +1327,30 @@ public class SessionBeanCobra implements Serializable {
             }
             if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
             {
-              
+
                 vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
             }
             if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
             {
                 vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
             }
-        }   
-        
+        }
+
 //        List<VwIndIndicadorMunicipal> listaindmun= getGipromService().obtenerIndicadorMunicipalxcodmunicipio(mun.getLclCodigo());
 //        for (VwIndIndicadorMunicipal wind : listaindmun) {
 //            
 //        }
         VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
-        
+
         if(vind !=null)
         {
             vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
         }    
         else
         {
-             vista.setNumvlrsumahijos(BigDecimal.ZERO);
-        }    
-        
+            vista.setNumvlrsumahijos(BigDecimal.ZERO);
+        }
+
         return vista;
     }
 }

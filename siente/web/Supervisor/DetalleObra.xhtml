@@ -61,6 +61,7 @@
                 </a4j:jsFunction>
 
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
+                <h:inputHidden id="hoyfecha" value="#{SessionBeanCobra.fechaServidor}" />
             </h:form>
 
             <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">
@@ -492,8 +493,9 @@
                 });
                 var timefalta = document.getElementById("finfecha").value;
                 var futuro = new Date(timefalta).getTime();
-
-                var ahora = new Date().getTime();
+              
+                var hoy = document.getElementById("hoyfecha").value;
+                var ahora = new Date(hoy).getTime();
                 var faltan = futuro - ahora;
                 if (faltan > 0) {
                     var segundos = Math.round(faltan / 1000);
