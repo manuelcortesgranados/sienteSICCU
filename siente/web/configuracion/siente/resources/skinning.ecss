@@ -282,10 +282,30 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-
 
 input, select{
     height: 25px;
+    border: solid 1px #666;
+    width: 200px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #666666;
+    margin: 10px 0px;
+    padding: 0px 5px;
 }
 
 textarea{
-    height: 60px;
-    width : 200px;
-    border : solid 1px #666666;
+    border: solid 1px #666;
+    width: 400px;
+    height: 100px;
+    border-radius: 3px;
+    resize: none;
+    font-size: 12px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #666666;
+    margin: 10px 0px;
+    padding: 0px 5px;
+}
+
+textarea:focus{
+    border: solid 1px #666;
+    box-shadow: 0px 0px 0px 0px transparent;
 }

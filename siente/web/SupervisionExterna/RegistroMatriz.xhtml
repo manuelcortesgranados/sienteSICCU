@@ -14,6 +14,7 @@
     <ui:define name="head">
         <title>Registro Matriz Supervisión Externa</title>
         <h:outputScript name="script_supervisor.js" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
     </ui:define>
 
     <ui:define name="title">
@@ -39,15 +40,15 @@
         <h:form>
             <center>
                 <h:panelGroup layout="block" id="mp-regMatrizSupervision">
-                    <rich:panel header="1. Datos Visita">
+                    <rich:panel header="1. Datos Visita" styleClass="noneborder">
                         <interkont:spacer height="3" />
                         
-                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita1}: "/>
+                        <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita " rendered="#{var.versioncobra eq 'zoom'}"  value="#{var.textoinformativocargarvisita1}: "/>
                         <interkont:spacer height="3" />
-                        <h:commandLink value="#{var.descargarformatomatrizauditoria}" styleClass="ikont-hcb-descargar-formato"  
+                        <h:commandLink value="#{var.descargarformatomatrizauditoria}" rendered="#{var.versioncobra eq 'zoom'}" styleClass="ikont-hcb-descargar-formato"  
                                        action="#{Supervision$Externa.descargarPlantillaAuditoria}" immediate="true" target="_blank"/>
 
-                        <h:panelGrid id="panelInformacionArchivo" columns="2" columnClasses="panelizquierda, panelizquierda">
+                        <h:panelGrid id="panelInformacionArchivo" columns="2" columnClasses="panelizquierda, panelizquierda" styleClass="font-general">
                             <h:outputText  styleClass="ikont-"   value="#{var.fechainforme}" />
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarInforme"
                                            inputSize="20" value="#{Supervision$Externa.supervisionExterna.visita.datefechainforme}" required="true" requiredMessage="Fecha Necesaria">

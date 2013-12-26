@@ -14,6 +14,7 @@
     <ui:define name="head">
         <title>Proyectos Supervisión Externa</title>
         <h:outputScript name="script_supervisor.js" />
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
     </ui:define>
     
     <ui:define name="title">
@@ -33,17 +34,17 @@
             <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <div styleClassbuscador">
+                        <div style="buscador">
                             <div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClaveProyecto" styleClass="ikont-"   onfocus="clearText(this);"  />
-                                    <h:commandButton type="button" id="filtrarVlaveProyecto"  value="#{var.buscar}" styleClass="ikont-"   />
+                                    <h:inputText id="txtPalabraClaveProyecto" styleClass="ikont-hit-palabraclave"   onfocus="clearText(this);"  />
+                                    <h:commandButton type="button" id="filtrarVlaveProyecto"  value="#{var.buscar}" styleClass="ikont-acb-primerolistproyectos"   />
                                 </label>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <a4j:commandLink styleClass="ikont-"   type="submit" value="Búsqueda avanzada" />
+                        <a4j:commandLink styleClass="ikont-acl-busquedaavanzada"   type="submit" value="Búsqueda avanzada" />
                     </td>
                 </tr>
             </table>

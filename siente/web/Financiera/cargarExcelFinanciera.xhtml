@@ -26,7 +26,7 @@
         <center>
             <h:form>
 
-                <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
+                <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" styleClass="font-general">
 
                     <h:panelGroup>
                         <h:outputLabel  styleClass="ikont-hol-lblFecdoc"   id="lblFecdoc"  value="#{var.fechadocumento}" for="fecIni"/>
@@ -42,7 +42,7 @@
                         <rich:message for="txtObserProyecto" />
                     </h:panelGroup>
 
-                    <h:inputTextarea cols="80" id="txtObserProyecto" rows="4" value="#{Financiera$CargarExcel.registro.observacion}"/>
+                    <h:inputTextarea cols="80" id="txtObserProyecto" rows="4" value="#{Financiera$CargarExcel.registro.observacion}" styleClass="font-general"/>
 
                 </h:panelGrid>
 

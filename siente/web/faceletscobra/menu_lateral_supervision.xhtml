@@ -11,19 +11,19 @@
 
 
     <rich:panel header="Supervision Externa" id="menuSupervisionExterna" bodyClass="ikont-rp-menuSupervisionExterna" >
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" styleClass="minwidthpanellateral">
             <h:panelGrid styleClass="ikont-hpg-registrarMatriz"   cellpadding="0" cellspacing="0" > 
                 <h:commandLink styleClass="ikont-hcl-registrarMatriz"   immediate="true" action="#{Supervision$Externa.registrarMatriz}"/>
-                <h:commandLink styleClass="ikont-hcl-registrarMatriz1"   value="Registrar Matriz"
+                <h:commandLink styleClass="ikont-hcl-registrarMatriz1 text-button-panel"   value="Registrar Matriz"
                                action="#{Supervision$Externa.registrarMatriz}"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-mispry"   cellpadding="0" cellspacing="0" > 
                 <h:commandLink styleClass="ikont-hcl-mispry"   immediate="true" action="#{Supervision$Externa.verRegistros}" />
-                <h:commandLink styleClass="ikont-hcl-mispry1"   value="Mis proyectos"
+                <h:commandLink styleClass="ikont-hcl-mispry1 text-button-panel"   value="Mis proyectos"
                                action="#{Supervision$Externa.verRegistros}"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-sin2"   cellpadding="0" cellspacing="0" rendered="false"> 
-                <h:commandLink styleClass="ikont-hcl-sin2"   immediate="true" disabled="false"/>
+                <h:commandLink styleClass="ikont-hcl-sin2 text-button-panel"   immediate="true" disabled="false"/>
                 <a4j:commandLink styleClass="ikont-hcl-sin3"   value="Reporte" disabled="false"/>
             </h:panelGrid>
         </h:panelGrid>
@@ -34,7 +34,7 @@
 
     <rich:panel id="perfilSolicitante" header="Mi Perfil - #{SessionBeanCobra.usuarioObra.tercero.strnombre}  #{SessionBeanCobra.usuarioObra.tercero.strapellido1}  #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
                 bodyClass="ikont-rp-perfilSolicitante" >
-        <h:panelGrid columns="4"  cellpadding="1px"  >
+        <h:panelGrid columns="4"  cellpadding="1px" styleClass="totalwidth font-general panelizquierda" >
             <interkont:spacer width="5"/>
             <h:outputText  styleClass="ikont-hot-"   id="stSolicitudesTotales"  value="#{var.proyectos}"/>
             <interkont:spacer width="10"/>

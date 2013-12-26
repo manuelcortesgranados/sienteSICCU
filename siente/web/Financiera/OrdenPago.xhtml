@@ -27,7 +27,7 @@
             <h:form>
                 <rich:collapsiblePanel id="PanelEncargo" header="#{var.ingresardatosordenpago}" switchType="ajax" expanded="true">
                     <center>
-                        <h:panelGrid columns="2" id="panelen">
+                        <h:panelGrid columns="2" id="panelen" styleClass="font-general">
 
                             <h:outputLabel  styleClass="ikont-hol-lblnumeroorden"   id="lblnumeroorden"  value="#{var.numeroorden}" for="txtNumeroorden"/>
                             <h:panelGroup>
@@ -89,7 +89,7 @@
             </h:form>
             <h:form>
                 <rich:collapsiblePanel id="ordenpago" header="Listado Ordenes De Pago" switchType="ajax" expanded="false">
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="3" styleClass="font-general">
                         <h:outputText  styleClass="ikont-hot-buscarpalabraclave"   value="#{var.buscarpalabraclave} " />
                         <h:inputText value="#{Financiera$FiduFinanciera.filtro}" size="100"/>
 
