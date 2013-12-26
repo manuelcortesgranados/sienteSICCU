@@ -46,10 +46,10 @@
                             <div id="buscador_space">
                                 <label>
                                     <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave"  
-                                                 
+
                                                  value="#{Supervisor$Contrato.filtrocontrato.palabraClave}"
                                                  onfocus="clearText(this);"
-                                                 
+
                                                  />                                        
 
                                     <a4j:commandButton id="filtrar" value="#{var.buscar}" execute="@this, txtPalabraClave"
@@ -60,9 +60,11 @@
                         </div>
                     </td>
                     <td>
-                        <a4j:commandLink styleClass="ikont-a4jcl-houtbusquedaavanza busquedavanzada"   render="panelFiltroContrato" value="#{var.houtbusquedaavanza}" execute="@this"
+                        <h:commandButton styleClass="ikont-a4jcl-houtbusquedaavanza busquedavanzada"   value="#{var.houtbusquedaavanza}" 
                                          action="#{Supervisor$Contrato.iniciarFiltroAvanzado}"
-                                         oncomplete="#{rich:component('panelFiltroContrato')}.show();" />
+                                         >
+                            <a4j:ajax oncomplete="#{rich:component('panelFiltroContrato')}.show();"/>
+                        </h:commandButton>
                     </td>
                 </tr>
             </table>
@@ -78,14 +80,14 @@
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" >
                             <f:selectItem itemLabel="Contrato" itemValue="0"/>
                             <f:selectItem itemLabel="Consultoria" itemValue="1"/>
-                            <a4j:ajax event="valueChange" render="ikont-hsom-listartipocontratos" execute="ikont-hsom-listartipocontratos" listener="#{Supervisor$Contrato.listaxTipocontratoselect}"/>
+                            <a4j:ajax event="valueChange" render="ikont-hsom-listartipocontratos, @form" execute="ikont-hsom-listartipocontratos" listener="#{Supervisor$Contrato.listaxTipocontratoselect}"/>
                         </h:selectOneMenu>                    
                     </h:panelGrid>
                     <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipocontratoselect" value="#{var.TipoContratoContralorias}: " />                   
                     <h:panelGrid  rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" columnClasses="inputsDetalle,inputsDetalle" columns="2"   >                                
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontrato}" id="ikont-hsom-listartipocontratos" >
                             <f:selectItem itemLabel="Todos" itemValue="0"/>
-                                <f:selectItems value="#{Supervisor$Contrato.tipocontratoselectitem}"/>                  
+                            <f:selectItems value="#{Supervisor$Contrato.tipocontratoselectitem}"/>                  
                             <a4j:ajax event="valueChange"
                                       listener="#{Supervisor$Contrato.listarPorTipoContrato}"
                                       render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
