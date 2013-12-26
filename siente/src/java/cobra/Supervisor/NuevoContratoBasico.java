@@ -7965,8 +7965,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void listaxTipocontratoselect() {
         if (filtrocontrato.getTipocontratoselect() == 0) {
             tipocontratoselectitem = tipocontrato;
+            filtrocontrato.setTipocontratoselect(0);
+            filtrocontrato.setTipocontrato(0);
+            listarPorTipoContrato();
         } else {
             tipocontratoselectitem = tipocontratoconsultoria;
+            filtrocontrato.setTipocontratoselect(1);
+            filtrocontrato.setTipocontrato(0);
+            listarPorTipoContrato();
         }
     }
 
