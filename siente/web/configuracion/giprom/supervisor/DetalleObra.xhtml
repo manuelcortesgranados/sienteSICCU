@@ -17,6 +17,7 @@
 
         <script src="/#{var.versioncobra}/resources/amcharts/amcharts.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/gauge.js" type="text/javascript"></script>
+        <script src="/#{var.versioncobra}/resources/amcharts/serial.js" type="text/javascript"></script>
         <script type="text/javascript">
             localStorage.setItem('accionDetalleProyecto', "ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto");
         </script>
@@ -58,11 +59,10 @@
                 <h:inputHidden id="valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"/>
             </h:form>
 
-            <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra">                
-                <interkont:spacer height="10" />
+            <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra totalwidth">                
                 <h:panelGrid  id="gpPrincipalInfCiudad-zoom" styleClass="totalwidth">
-                    <h:form prependId="false">
-                        <h:panelGroup layout="block">
+                    <h:form prependId="false" styleClass="totalwidth">
+                        <h:panelGroup layout="block" styleClass="totalwidth font-general">
                             <center>
                                 <br/>
                                 <h:graphicImage    url="../resources/imgs/proyecto/gota.png"/>           
@@ -78,192 +78,208 @@
                                     </h:commandButton>
                                 </h:panelGroup>
                                 <br/><br/>
-                                <h:panelGrid cellspacing="10" columns="2">
-                                    <h:panelGrid columns="2" cellspacing="5">
-                                        <h:commandLink styleClass="ikont-hcl-imgpontencialener img-detalle-proyecto" />   
-                                        <h:panelGrid columns="1">
-                                            <h:outputLabel value="Potencial Energetico" styleClass="font-general"></h:outputLabel>
-                                            <h:outputLabel value="Informe" styleClass="font-general"></h:outputLabel>
-                                            <h:outputLink value="" styleClass="ikont-hol-descargapoener">Descargar</h:outputLink>
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2" cellspacing="5">
-                                        <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
-                                        <h:panelGroup layout="block">
-                                            <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
-                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
-                                            <br/>
-                                            <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
-                                            <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
+
+                                <!--inicio nuevo disiño-->
+
+                                <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
+                                    <rich:column colspan="2">
+                                        <h:panelGroup layout="block" id="vistaMapa" styleClass="totalwidth">
+                                            <m:map  latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" enableScrollWheelZoom="true"  id="map12" 
+                                                    jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="200px" width="600px">                                                                 
+                                                <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
+                                                          longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
+
+                                                          jsVariable="#{HomeGestion.marcador.jsVariable}"
+                                                          draggable="false" >
+                                                    <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
+
+                                                </m:marker>
+                                            </m:map>
                                         </h:panelGroup>
-                                    </h:panelGrid>
+                                    </rich:column>
+                                    <rich:panel header="UBICACIÓN" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGrid  columns="1" styleClass="ikont-hpg-datosrelevantes">
+                                            <h:panelGroup>
+                                                <h:outputLabel styleClass="font-general" value="Longitud : " />
+                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" />    
+                                            </h:panelGroup>
+                                            <br/>
+                                            <h:panelGroup>
+                                                <h:outputLabel styleClass="font-general" value="Latidtud : " />
+                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" />
+                                            </h:panelGroup>
+                                            <br/>
+                                            <h:panelGroup>
+                                                <h:outputLabel styleClass="font-general" value="Dirección : " />
+                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
+                                            </h:panelGroup>
+                                            <br/>
+                                            <h:panelGroup rendered="false">
+                                                <h:outputLabel styleClass="font-general" value="Clima : " />
+                                                <h:outputLabel styleClass="font-general" value="" />    
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+                                    </rich:panel>
                                 </h:panelGrid>
+                                <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
+                                    <rich:panel header="DATOS BASICOS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGrid columns="1" >
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Localidad:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Departamento:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strestydis}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Dirección:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strlogros}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Sitio Web:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento} °C" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                    <rich:panel header="ALCALDE" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGrid columns="2">
+                                            <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="../resources/imgs/bt_user.png"/>           
+                                            <h:panelGrid>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcontratista}"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
+                                                <h:outputLabel value="Alcalde"  styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                    <rich:panel header="INFORES Y PERSONAS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGrid cellspacing="10" columns="1">
+                                            <h:panelGrid columns="2" cellspacing="5">
+                                                <h:commandLink styleClass="ikont-hcl-imgpontencialener img-detalle-proyecto" />   
+                                                <h:panelGrid columns="1">
+                                                    <h:outputLabel value="Potencial Energetico" styleClass="font-general"></h:outputLabel>
+                                                    <h:outputLabel value="Informe" styleClass="font-general"></h:outputLabel>
+                                                    <h:outputLink value="" styleClass="ikont-hol-descargapoener">Descargar</h:outputLink>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2" cellspacing="5">
+                                                <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
+                                                <h:panelGroup layout="block">
+                                                    <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
+                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
+                                                    <br/>
+                                                    <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
+                                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                </h:panelGrid>
+                                <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
+                                    <rich:column colspan="2">
+                                        <rich:panel header="NESESIDADES ENERGETICAS DE LA ZONA" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                            <h:panelGroup layout="block" styleClass="ikont-hpg-giprom-ne">
+                                                <h:panelGrid columns="1" >
+                                                    <h:outputText value="% NE"></h:outputText>
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputLink styleClass="ikont-hot-img-ne"></h:outputLink>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} %"/>
+                                                    </h:panelGrid>
+                                                </h:panelGrid>
+                                            </h:panelGroup>
+                                            <h:panelGroup layout="block" styleClass="ikont-hpg-giprom-pe">
+                                                <h:panelGrid columns="1" >
+                                                    <h:outputText value="% Potencial Energetico"></h:outputText>
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputLink styleClass="ikont-hot-img-pe"></h:outputLink>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} %"/>
+                                                    </h:panelGrid>
+                                                </h:panelGrid>
+                                            </h:panelGroup>
+                                        </rich:panel>    
+                                    </rich:column>
+                                    <rich:panel header="% NBI" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBI}" escape="false" />
+                                        <div id="graficoNBI" style="width: 300px; height: 150px;"></div>
+                                    </rich:panel>
+                                </h:panelGrid>
+                                <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
+                                    <rich:panel header="% NBI AL AÑO" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBIanual}" escape="false" />
+                                        <div id="graficoNBIanual" style="width: 300px; height: 150px;"></div>
+                                    </rich:panel>
+                                    <rich:panel header="% NBI POR LOCALIZACION (2005)" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBILocalizacion}" escape="false" />
+                                        <div id="graficoNBILocalizacion" style="width: 300px; height: 150px;"></div>
+                                    </rich:panel>
+                                    <rich:panel header="DESEMPEÑO INTEGRAL 2009" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGrid columns="2" cellspacing="0" styleClass="totalwidth font-general">
+                                            <h:outputText value="Eficacia : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Eficiencia"></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Requisitos legales : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Capacidad administrativa : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Indicador de desempeño fiscal : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Gestión : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Índice Integral : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Posición nacional : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Posición departamental : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                            <h:outputText value="Con la información completa y consistente : "></h:outputText>
+                                            <h:outputText value="ND"></h:outputText>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                </h:panelGrid>
+                                <h:panelGrid cellspacing="20" columns="1" styleClass="totalwidth font-general">
+                                    <rich:panel header="INICADOR MUNICIPAL" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGroup styleClass="totalwidth font-general">
+                                            <h:outputText styleClass="ikont-text-left" value="Según el censo 2005 la población del municipio es de "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" habitantes, la población proyectada para 2011 es de "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" habitantes. El "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" de la población vive en área rural y el "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" en el área urbana, en el municipio habitan en promedio "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" habitantes por Km cuadrado. El "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" corresponde a la población afrocolombiana, y el "></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value=" a la población indígena."></h:outputText>
+                                        </h:panelGroup>
+                                    </rich:panel>
+                                </h:panelGrid>
+
+                                <!--fin de nuevo diseño-->
+
+
                             </center>
                         </h:panelGroup>
-                        <rich:collapsiblePanel switchType="client" header="Datos Básicos" expanded="true">
-                            <h:panelGrid columns="3" styleClass="totalwidth">
-                                <h:panelGroup layout="block">
-                                    <h:panelGrid columns="2">
-                                        <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="../resources/imgs/bt_user.png"/>           
-                                        <h:panelGrid>
-                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcontratista}"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
-                                            <h:outputLabel value="Alcalde"  styleClass="font-general"></h:outputLabel>
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-                                </h:panelGroup>                                
-                                <h:panelGrid columns="1" >
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="Dirección:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" styleClass="font-general"></h:outputLabel>
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="Sitio web:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strestydis}" styleClass="font-general"></h:outputLabel>
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strlogros}" styleClass="font-general"></h:outputLabel>
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="Actividad Económica:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" styleClass="font-general"></h:outputLabel>
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel value="Temperatura:" styleClass="font-general"></h:outputLabel>
-                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento} °C" styleClass="font-general"></h:outputLabel>
-                                    </h:panelGrid>
 
-                                </h:panelGrid>
-                                <h:panelGrid columns="1" columnClasses="panelcenter">
-                                    <h:panelGroup>
-                                        <div id="chartdiv" style="width: 250px; height: 200px;"></div>
-                                        <script type="text/javascript">
-                                            var chart;
-                                            var arrow;
-                                            var axis;
 
-                                            AmCharts.ready(function() {
-                                                chart = new AmCharts.AmAngularGauge();
-                                                chart.color = "#00B3DF";
-
-                                                axis = new AmCharts.GaugeAxis();
-                                                axis.startValue = 0;
-                                                axis.endValue = 100;
-                                                axis.axisColor = "#00B3DF";
-                                                axis.tickColor = "#00B3DF";
-                                                axis.axisThickness = 3;
-
-                                                var band1 = new AmCharts.GaugeBand();
-                                                band1.startValue = 0;
-                                                band1.endValue = 100;
-                                                band1.color = "#FFFF0B";
-
-                                                axis.bands = [band1];
-                                                axis.setBottomText("50 %");
-                                                chart.addAxis(axis);
-
-                                                arrow = new AmCharts.GaugeArrow();
-                                                arrow.color = "#00B3DF";
-                                                chart.addArrow(arrow);
-
-                                                chart.write("chartdiv");
-                                                var _date = document.getElementById('valuepotencialele');
-                                                var value = _date.value;
-                                                arrow.setValue(value);
-                                                axis.setBottomText(value + " %");
-                                            });
-                                        </script>
-                                    </h:panelGroup>
-                                    <h:panelGrid columns="1" styleClass="totalwidth panelcenter" columnClasses="panelcenter,panelcenter">
-                                        <h:outputLabel styleClass="font-general">Potencial Energetico</h:outputLabel>
-                                        <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} %"/>
-                                    </h:panelGrid>
-                                </h:panelGrid>
-
-                            </h:panelGrid>
-                        </rich:collapsiblePanel>
-
-                        <rich:collapsiblePanel switchType="client" header="Datos Relevantes" expanded="true">
-                            <h:panelGrid columns="4" class="ikont-hpg-datosrelevantes totalwidth" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
-                                <h:panelGrid styleClass="ikont-hpg-griddetaob">
-                                    <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" />
-                                    <h:outputLabel styleClass="font-general">NBI</h:outputLabel>
-                                </h:panelGrid>
-                                <h:panelGrid styleClass="ikont-hpg-pg_impactosocial">
-                                    <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />
-                                    <h:outputLabel styleClass="font-general">NECESIDADES ENERGÉTICAS</h:outputLabel>
-                                </h:panelGrid>
-                                <h:panelGrid  styleClass="ikont-hgi-imgestobra">
-                                    <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}" />
-                                    <h:outputLabel styleClass="font-general">N. DE HABITANTES</h:outputLabel>
-                                </h:panelGrid>
-                                <h:panelGrid styleClass="ikont-hpg-tipo_obra">
-                                    <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.intidtipoproyecto} " />
-                                    <h:outputLabel styleClass="font-general">N. DE ENCUESTAS</h:outputLabel>
-                                </h:panelGrid>
-                                <h:panelGrid styleClass="ikont-hpg-griddetaob">
-                                    <interkont:spacer height="15" />
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvaltotamorti} %"></h:outputText>
-
-                                </h:panelGrid>    
-                                <h:panelGrid styleClass="ikont-hpg-griddetaob">
-                                    <interkont:spacer height="15" />
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalprogramejec} %"></h:outputText>                                    
-
-                                </h:panelGrid>    
-                                <h:panelGrid styleClass="ikont-hpg-griddetaob" columns="1">
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvaldeclarado}"></h:outputText>
-                                    <h:outputLabel styleClass="ikont-hot-desde" value="Población de la localidad"></h:outputLabel>
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
-                                </h:panelGrid>    
-                                <h:panelGrid styleClass="ikont-hpg-griddetaob" columns="1">
-                                    <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
-                                    <h:outputLabel styleClass="ikont-hot-desde" value="Población de la localidad"></h:outputLabel>
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
-                                </h:panelGrid>    
-                            </h:panelGrid>
-                        </rich:collapsiblePanel>
-
-                        <rich:collapsiblePanel id="rcp-mapa-detalle-obra" switchType="client" immediate="true" onswitch="true" header="Dónde está ubicada la localidad" expanded="true" >                         
-                            <h:panelGroup layout="block" styleClass="ikont-hpg">
-                                <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
-                                    <h:panelGrid  columnClasses="textalingright,textalingright" columns="1" styleClass="ikont-hpg-datosrelevantes">
-                                        <h:panelGroup>
-                                            <h:outputLabel styleClass="font-general" value="Longitud : " />
-                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" />    
-                                        </h:panelGroup>
-                                        <br/>
-                                        <h:panelGroup>
-                                            <h:outputLabel styleClass="font-general" value="Latidtud : " />
-                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" />
-                                        </h:panelGroup>
-                                        <br/>
-                                        <h:panelGroup>
-                                            <h:outputLabel styleClass="font-general" value="Dirección : " />
-                                            <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
-                                        </h:panelGroup>
-                                        <br/>
-                                        <h:panelGroup rendered="false">
-                                            <h:outputLabel styleClass="font-general" value="Clima : " />
-                                            <h:outputLabel styleClass="font-general" value="" />    
-                                        </h:panelGroup>
-                                    </h:panelGrid>
-                                    <h:panelGrid id="vistaMapa" styleClass="totalwidth">
-                                        <m:map  latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" enableScrollWheelZoom="true"  id="map12" 
-                                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="200px" width="600px">                                                                 
-                                            <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
-                                                      longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
-
-                                                      jsVariable="#{HomeGestion.marcador.jsVariable}"
-                                                      draggable="false" >
-                                                <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
-
-                                            </m:marker>
-                                        </m:map>
-                                    </h:panelGrid> 
-                                </h:panelGrid> 
-                            </h:panelGroup>
-                        </rich:collapsiblePanel>
+                        <!--                        
+                        
+                                                <rich:collapsiblePanel id="rcp-mapa-detalle-obra" switchType="client" immediate="true" onswitch="true" header="Dónde está ubicada la localidad" expanded="true" >                         
+                                                    <h:panelGroup layout="block" styleClass="ikont-hpg">
+                                                        <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
+                        
+                        
+                                                        </h:panelGrid> 
+                                                    </h:panelGroup>
+                                                </rich:collapsiblePanel>-->
 
                     </h:form>
                 </h:panelGrid>

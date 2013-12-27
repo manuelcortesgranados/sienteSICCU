@@ -4899,3 +4899,54 @@ a:hover {
 .ikont-hol-nombreusuario{
     font-weight: bolder;
 }
+
+.ikont-rf-p-hdr-giprom{
+    background: #FFF !important;
+    color: #00B3DF !important;
+    border-top: solid 1px #00B3DF !important;
+    border-bottom: solid 1px #00B3DF !important;
+    padding: 12px 0px !important;
+    font-family: 'open' !important;
+    font-size: 14px !important;
+}
+
+.ikont-rf-p-bd-giprom{
+    width: 300px;
+    height: 200px;
+}
+
+.ikont-hpg-giprom-ne{
+    width: 250px;
+    height: 150px;
+    background-color: #0071BC;
+}
+
+.ikont-hot-img-ne{
+    background-image: url("../imgs/icns_ne.png");
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+.ikont-hot-img-pe{
+    background-image: url("../imgs/icns_ne.png");
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+.ikont-hpg-giprom-pe{
+    width: 250px;
+    height: 150px;
+    background-color: #00A99D;
+}
+
+.ikont-text-left{
+    float: left;
+}
+
+.ikont-hot-value-ne-pe{
+    font-size: 35px;
+    font-family: 'open';
+    color: #FFF;
+}

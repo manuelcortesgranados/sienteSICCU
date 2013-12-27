@@ -9,11 +9,10 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelFiltroAvanzado" width="600" autosized="true"  styleClass="panelFiltroAvanzadotxt"  headerClass="header_filtro" >
+    <rich:popupPanel id="panelFiltroAvanzado" autosized="true"  styleClass="panelFiltroAvanzadotxt"  headerClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont-hot-filtbusqueda"   value="#{var.filtbusqueda} " />
-                <h:outputText  styleClass="ikont-hot-filtavanzada2"   value="#{var.filtavanzada}"   />
+                <h:outputText  styleClass="ikont-hot-filtbusqueda"   value="#{var.filtbusqueda} #{var.filtavanzada}" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -30,7 +29,9 @@
                 <h:panelGrid id="gppanelFiltroAvanzado"  columnClasses="panelcenter">
                     <center>
                         <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclavefiltro}"
-                                     onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  />
+                                     onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  >
+                            <rich:placeholder value="Ingrese palabra clave"/>
+                        </h:inputText>
 
                         <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" width="100%" >
                             <h:outputLabel  styleClass="ikont-hol-lblevente titulo3_filtro_busqueda"    id="lblevente" value="#{var.eventopertenece}"  />

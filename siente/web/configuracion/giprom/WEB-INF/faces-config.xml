@@ -26,7 +26,7 @@
     <application>
         <resource-bundle>
             <!--Bundle para siente-->
-            <base-name>cobra/properties/BundleCobra</base-name>
+            <base-name>cobra/properties/BundleGiprom</base-name>
             <!--Bundle para cali
             <base-name>cobra/properties/BundleCali</base-name>-->
             <!--Bundle para Fonade
@@ -128,6 +128,13 @@
         <managed-bean-class>cobra.AtencionHumanitaria.CrearSolicitudAtencion</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>-->
+
+    <!--Graficos para giprom-->
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficosGiprom</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficosGiprom</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <!-- Inicio de Managed Beans de Supervisor -->
     <managed-bean>
@@ -339,12 +346,12 @@
             <value>#{cobraGwtServiceAble}</value>
         </managed-property>
         <!--
+                <managed-property>
+                    <property-name>marcoLogicoService</property-name>
+                    <value>#{marcoLogicoService}</value>
+                </managed-property>
+        -->
         <managed-property>
-            <property-name>marcoLogicoService</property-name>
-            <value>#{marcoLogicoService}</value>
-        </managed-property>
--->
-<managed-property>
             <property-name>gipromService</property-name>
             <value>#{gipromService}</value>
         </managed-property>
