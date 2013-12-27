@@ -7734,7 +7734,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Metodo que valida las fechas registradas en el contrato las cuales debe estar dentro del rando de contrato
      */
 
-    public boolean validacionFechasContrato() {
+     public boolean validacionFechasContrato() {
         if (contrato.getFormapago().getIntidformapago() != 0) {
             switch (contrato.getFormapago().getIntidformapago()) {
 
@@ -7745,17 +7745,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         if (fechapagoanticipo.compareTo(contrato.getDatefechaini()) < 0) {
                             return false;
                         }
-                        if (fechapagoanticipo.compareTo(contrato.getDatefechafin()) > 0) {
-                            return false;
-                        }
+                        //Se Deshabilito solicitado 27 diciembre
+//                        if (fechapagoanticipo.compareTo(contrato.getDatefechafin()) > 0) {
+//                            return false;
+//                        }
                     }
                     while (i < lisplanifiactapar.size()) {
                         if (lisplanifiactapar.get(i).getDatefechapago().compareTo(contrato.getDatefechaini()) < 0) {
                             return false;
                         }
-                        if (lisplanifiactapar.get(i).getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
-                            return false;
-                        }
+                        //Se Deshabilito solicitado 27 diciembre
+//                        if (lisplanifiactapar.get(i).getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
+//                            return false;
+//                        }
                         i++;
                     }
                     break;
@@ -7764,9 +7766,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     if (planificacionpago.getDatefechapago().compareTo(contrato.getDatefechaini()) < 0) {
                         return false;
                     }
-                    if (planificacionpago.getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
-                        return false;
-                    }
+                    //Se Deshabilito solicitado 27 diciembre
+//                    if (planificacionpago.getDatefechapago().compareTo(contrato.getDatefechafin()) > 0) {
+//                        return false;
+//                    }
                     break;
             }
         }
