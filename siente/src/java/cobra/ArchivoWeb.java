@@ -1,6 +1,7 @@
 package cobra;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,6 +11,21 @@ import java.util.Date;
  * @author Jhon Eduard Ortiz S
  */
 public class ArchivoWeb {
+    
+    /**
+     * Formato de tiempo utilizado para el subfijo del nombre del archivo
+     */
+    public static final String FORMATO_TIEMPO = "yyyyMMddHHmmss";
+    
+    /**
+     * Formateador utilizado para el subfijo del nombre del archivo
+     */
+    private static final SimpleDateFormat subfijoTiempoDateFormat = new SimpleDateFormat(FORMATO_TIEMPO);
+    
+    /**
+     * Separador del subfijo de tiempo
+     */
+    public static final String SEPARADOR_TIEMPO = "_";
 
     /**
      * Ubicación del archivo relativa a la aplicación Web.
@@ -48,51 +64,100 @@ public class ArchivoWeb {
             this.nombre = nombre;
     }
     
+    static {
+        subfijoTiempoDateFormat.setLenient(false);
+    }
+    
     /**
-     * Cambia el nombre del archivo por el nuevo nombre proporcionado.
-     * @param nombreSinExt Nuevo nombre sin extensión. Si es null entonces solo
-     * adiciona el subfijo de tiempo
-     * @param subfijoTiempo Si true, se adiciona el sufijo de la fecha con el 
-     * siguiente formato yyyyMMddHHmmss, de esta manera se disminuye la 
-     * probabilidad de que los nombres se repitan
+     * Obtiene el nombre del archivo sin extensión
+     * @return nombre del archivo sin extensión
      */
-    public void cambiarNombre(String nombreSinExt, boolean subfijoTiempo) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-        if(this.nombre == null) {
-            if(nombreSinExt != null) {
-                if(subfijoTiempo) {
-                    this.nombre = nombreSinExt+"_"+df.format(new Date());
-                } else {
-                    this.nombre = nombreSinExt;
-                }
+    public String getNombreSinExtension() {
+        if(this.nombre != null) {
+            if(this.nombre.contains(".")) {
+                return this.nombre.substring(0, this.nombre.lastIndexOf("."));
             } else {
-                if(subfijoTiempo) {
-                    this.nombre = df.format(new Date());
-                }
-            }
-        } else if(!this.nombre.contains(".")) {
-            if (nombreSinExt != null) {
-                if(subfijoTiempo) {
-                    this.nombre = nombreSinExt+"_"+df.format(new Date());
-                } else {
-                    this.nombre = nombreSinExt;
-                }
-            } else {
-                if(subfijoTiempo) {
-                    this.nombre = this.nombre+"_"+df.format(new Date());
-                }
+                return this.nombre;
             }
         } else {
-            String ext = this.nombre.substring(this.nombre.lastIndexOf("."));
-            if (nombreSinExt != null) {
-                if(subfijoTiempo) {
-                    this.nombre = nombreSinExt+"_"+df.format(new Date())+ext;
+            return null;
+        }
+    }
+  
+    /**
+     * Verifica si el nombre del archivo contiene ya un subfijo de tiempo
+     * @return true si el nombre del archivo contiene ya un subfijo de tiempo
+     * de lo contrario false
+     */
+    private boolean tieneSubfijotiempo() {
+        if(this.nombre != null) {
+            if(getNombreSinExtension().length() >= FORMATO_TIEMPO.length() + SEPARADOR_TIEMPO.length()) {
+                int posSeparadorTiempo = getNombreSinExtension().length() - FORMATO_TIEMPO.length() - SEPARADOR_TIEMPO.length();
+                String separadorTiempo = getNombreSinExtension().substring(posSeparadorTiempo, posSeparadorTiempo + SEPARADOR_TIEMPO.length());
+                if(separadorTiempo.equals(SEPARADOR_TIEMPO)) {
+                    try {
+                        subfijoTiempoDateFormat.parse(getNombreSinExtension().substring(getNombreSinExtension().length() - FORMATO_TIEMPO.length()));
+                        return true;
+                    } catch (ParseException pe) {
+                        return false;
+                    } catch (Exception e) {
+                        return false;
+                    }
                 } else {
-                    this.nombre = nombreSinExt+ext;
+                    return false;
                 }
             } else {
-                if(subfijoTiempo) {
-                    this.nombre = this.nombre.substring(0, this.nombre.lastIndexOf(".")) +"_"+df.format(new Date())+ext;
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Cambia el nombre del archivo por el nuevo nombre proporcionado.
+     * @param nuevoNombreSinExt Nuevo nombre sin extensión. Si es null entonces solo
+     * adiciona el subfijo de tiempo
+     * @param subfijoTiempo Si true, se adiciona el sufijo de la fecha al nombre
+     * del archivo si este no lo tiene aún; de esta manera se disminuye la 
+     * probabilidad de que los nombres se repitan
+     */
+    public void cambiarNombre(String nuevoNombreSinExt, boolean subfijoTiempo) {
+        if(this.nombre == null) {
+            if(nuevoNombreSinExt != null) {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = nuevoNombreSinExt+SEPARADOR_TIEMPO+subfijoTiempoDateFormat.format(new Date());
+                } else {
+                    this.nombre = nuevoNombreSinExt;
+                }
+            } else {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = subfijoTiempoDateFormat.format(new Date());
+                }
+            }
+        } else if(!this.nombre.contains(".")) { // Si el nombre del archivo NO tiene extensión
+            if (nuevoNombreSinExt != null) {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = nuevoNombreSinExt+SEPARADOR_TIEMPO+subfijoTiempoDateFormat.format(new Date());
+                } else {
+                    this.nombre = nuevoNombreSinExt;
+                }
+            } else {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = this.nombre+SEPARADOR_TIEMPO+subfijoTiempoDateFormat.format(new Date());
+                }
+            }
+        } else { // Si el nombre del archivo tiene extensión
+            String extensionConPunto = this.nombre.substring(this.nombre.lastIndexOf("."));
+            if (nuevoNombreSinExt != null) {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = nuevoNombreSinExt+SEPARADOR_TIEMPO+subfijoTiempoDateFormat.format(new Date())+extensionConPunto;
+                } else {
+                    this.nombre = nuevoNombreSinExt+extensionConPunto;
+                }
+            } else {
+                if(subfijoTiempo && !tieneSubfijotiempo()) {
+                    this.nombre = getNombreSinExtension() +SEPARADOR_TIEMPO+subfijoTiempoDateFormat.format(new Date())+extensionConPunto;
                 }
             }
         }

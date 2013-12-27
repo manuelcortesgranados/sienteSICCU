@@ -31,7 +31,21 @@ public abstract class GraficoSeries extends Grafico {
      * Tipo de gráfico (1 = Columnas, 2 = Líneas)
      */
     protected int tipoGrafico;
+    
+    /**
+     * Variable que define si los valores del gráfico se presentarán en 
+     * unidades de millón
+     */
+    private boolean dividirValoresPorMillon;
 
+    public boolean isDividirValoresPorMillon() {
+        return dividirValoresPorMillon;
+    }
+
+    public void setDividirValoresPorMillon(boolean dividirValoresPorMillon) {
+        this.dividirValoresPorMillon = dividirValoresPorMillon;
+    }
+    
     /**
      * Conjunto de datos que se presentarán en el gráfico, cada elemento de la
      * lista corresponde a una de las series que se presentarán en el gráfico

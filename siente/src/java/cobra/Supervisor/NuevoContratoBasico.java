@@ -538,14 +538,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listado de las entidades contratantes
      */
     private List<Tercero> listaContrEnti;
-    
     /**
      * Listado de avance fisido del convenio
      */
     private List<VistaProyectoAvanceFisicoConvenio> listaavancefisico;
-    
     /**
-     * Variable para mostrar el valor del convenio en la tabla avance fisico convenio
+     * Variable para mostrar el valor del convenio en la tabla avance fisico
+     * convenio
      */
     private BigDecimal valorconvenio;
     /**
@@ -555,13 +554,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para esconder la tabla avance fisico
      */
-    private boolean  boolavanceproyectoconvenio = false;
-    
+    private boolean boolavanceproyectoconvenio = false;
     /**
-     * Variable para calcular el avance fisico de convenio 
+     * Variable para calcular el avance fisico de convenio
      */
     private BigDecimal avancefisicoconvenio = BigDecimal.ZERO;
-    
     /**
      * Lista que almacena los contratos encontrados en el filtro avanzado
      */
@@ -1127,6 +1124,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private int reportoption;
     private int subpantalla;
     private boolean puedeEditarValorFuentes = true;
+    /**
+     * Variable para cargar el tipo de documento ya sea para contrato o convenio
+     */
+    private  int controlvisualizaciondocumento =0;
     /**
      * variable para saber si el convenio tiene todas las validaciones ok
      */
@@ -1787,7 +1788,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setAvancefisicoconvenio(BigDecimal avancefisicoconvenio) {
         this.avancefisicoconvenio = avancefisicoconvenio;
     }
-    
+
     public SelectItem[] getTipoproyecto() {
         return tipoproyecto;
     }
@@ -2653,6 +2654,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.varmostrarseleccionconveniosuperior = varmostrarseleccionconveniosuperior;
     }
 
+    public int getControlvisualizaciondocumento() {
+        return controlvisualizaciondocumento;
+    }
+
+    public void setControlvisualizaciondocumento(int controlvisualizaciondocumento) {
+        this.controlvisualizaciondocumento = controlvisualizaciondocumento;
+    }
+    
+
     /**
      * <p>
      * Automatically managed component initialization.
@@ -3263,7 +3273,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 }
                             } else {
                                 removerAnticipo();
-                               // FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + contratoselect + " superior");
+                                // FacesUtils.addErrorMessage("las fechas del " + tipoContCon + " a crear deben estar dentro del rango del " + contratoselect + " superior");
                                 return null;
                             }
                         } else {
@@ -4338,7 +4348,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return
      */
     public String llenarTipodocumentos() {
-        List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
+        List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos(controlvisualizaciondocumento);
         tipodocumento = new SelectItem[listatipodocumento.size()];
         int i = 0;
         for (Tipodocumento tipodoc : listatipodocumento) {
@@ -4532,7 +4542,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipoContCon = "Contrato";
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
-         listaavancefisico.clear();
+        listaavancefisico.clear();
         boolavanceproyectoconvenio = false;
         return "consultarContrato";
     }
@@ -4546,7 +4556,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String detalleConvenioHijo() {
 
         Contrato contratoConvenioHijo = (Contrato) tablaSubconvenios.getRowData();
-        
+
         cargarContrato(contratoConvenioHijo);
 
         return "consultarContrato";
@@ -5519,6 +5529,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
+        controlvisualizaciondocumento = 2;
         limpiarContrato();
         primeroDetcontrato();
         if (getContrato().getTercero().getIntcodigo() != -1) {
@@ -5556,6 +5567,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);
         filtrocontrato.setIdestrategia(estrategia);
+        controlvisualizaciondocumento=1;
         if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
             contrato = new Contrato();
             limpiarContrato();
@@ -5813,12 +5825,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 && (contrpadre.getDatefechaini().before(contrato.getDatefechaini()) || contrpadre.getDatefechaini().equals(contrato.getDatefechaini()))) {
             return true;
         } else {
-            if(contrato.getDatefechaini().before(contrpadre.getDatefechaini()) || contrato.getDatefechaini().after(contrpadre.getDatefechafin())){
-           FacesUtils.addErrorMessage("La Fecha de Inicio del " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
-            }else {
-            FacesUtils.addErrorMessage("La Fecha Fin del  " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
+            if (contrato.getDatefechaini().before(contrpadre.getDatefechaini()) || contrato.getDatefechaini().after(contrpadre.getDatefechafin())) {
+                FacesUtils.addErrorMessage("La Fecha de Inicio del " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
+            } else {
+                FacesUtils.addErrorMessage("La Fecha Fin del  " + tipoContCon + " a crear debe estar dentro del rango del " + contratoselect + "\n Fecha Inicio " + contrpadre.getDatefechaini() + " Fecha Fin " + contrpadre.getDatefechafin());
             }
-            return false;   
+            return false;
         }
     }
 
@@ -7624,7 +7636,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                     break;
             }
-        } else {
+        } else if (filtrocontrato.getTipocontratoselect() == 0) {
             switch (filtrocontrato.getTipocontrato()) {
                 case 0:
                     iniciarDetaContrato();
@@ -7670,6 +7682,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     iniciarDetaContrato();
                     break;
             }
+        } else if (filtrocontrato.getTipocontratoselect() == 2) {
+            iniciarDetaContrato();
         }
 
         return "consultarContratoConvenio";
@@ -7963,15 +7977,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void listaxTipocontratoselect() {
-        if (filtrocontrato.getTipocontratoselect() == 0) {
-            tipocontratoselectitem = tipocontrato;
-            filtrocontrato.setTipocontratoselect(0);
-            filtrocontrato.setTipocontrato(0);
-            listarPorTipoContrato();
+        if (filtrocontrato.getTipocontratoselect() != 2) {
+            if (filtrocontrato.getTipocontratoselect() == 0) {
+                tipocontratoselectitem = tipocontrato;
+                filtrocontrato.setTipocontratoselect(0);
+                filtrocontrato.setTipocontrato(0);
+                listarPorTipoContrato();
+            } else {
+                tipocontratoselectitem = tipocontratoconsultoria;
+                filtrocontrato.setTipocontratoselect(1);
+                filtrocontrato.setTipocontrato(0);
+                listarPorTipoContrato();
+            }
         } else {
-            tipocontratoselectitem = tipocontratoconsultoria;
-            filtrocontrato.setTipocontratoselect(1);
-            filtrocontrato.setTipocontrato(0);
             listarPorTipoContrato();
         }
     }
@@ -8432,25 +8450,24 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             limpiarContrato();
         }
     }
-    public List<VistaProyectoAvanceFisicoConvenio> encontrarAvanceFisicoConvenio (){
+
+    public List<VistaProyectoAvanceFisicoConvenio> encontrarAvanceFisicoConvenio() {
         boolavanceproyectoconvenio = false;
         sumaproyectosconvenio = BigDecimal.ZERO;
-        avancefisicoconvenio = BigDecimal.ZERO; 
+        avancefisicoconvenio = BigDecimal.ZERO;
         valorconvenio = BigDecimal.ZERO;
-       listaavancefisico = getSessionBeanCobra().getCobraService().encontrarAvanceFisicoConvenio(getContrato().getIntidcontrato());        
-       if (!listaavancefisico.isEmpty()){
-           boolavanceproyectoconvenio = true;
-       for (VistaProyectoAvanceFisicoConvenio v : listaavancefisico){
-          v.setAvancefisico(v.getAvancefisico().setScale(2, RoundingMode.HALF_UP));
-          v.setAvanceobra(v.getAvanceobra().setScale(2, RoundingMode.HALF_UP));
-          setValorconvenio(v.getValorconvenio());
-          setSumaproyectosconvenio(sumaproyectosconvenio.add(v.getValortotalobra()));  
-          setAvancefisicoconvenio(avancefisicoconvenio.add(v.getAvancefisico()));
-          setAvancefisicoconvenio(avancefisicoconvenio.setScale(2, RoundingMode.HALF_UP));
-         } 
-       }
-       return listaavancefisico;
+        listaavancefisico = getSessionBeanCobra().getCobraService().encontrarAvanceFisicoConvenio(getContrato().getIntidcontrato());
+        if (!listaavancefisico.isEmpty()) {
+            boolavanceproyectoconvenio = true;
+            for (VistaProyectoAvanceFisicoConvenio v : listaavancefisico) {
+                v.setAvancefisico(v.getAvancefisico().setScale(2, RoundingMode.HALF_UP));
+                v.setAvanceobra(v.getAvanceobra().setScale(2, RoundingMode.HALF_UP));
+                setValorconvenio(v.getValorconvenio());
+                setSumaproyectosconvenio(sumaproyectosconvenio.add(v.getValortotalobra()));
+                setAvancefisicoconvenio(avancefisicoconvenio.add(v.getAvancefisico()));
+                setAvancefisicoconvenio(avancefisicoconvenio.setScale(2, RoundingMode.HALF_UP));
+            }
+        }
+        return listaavancefisico;
     }
-    
 }
-

@@ -1106,7 +1106,6 @@ public class DetalleObra implements Serializable{
     public void iniciardetalle() {
         
         getAdministrarObraNew().setProyectoestrategia(false);
-       
         imagenEvolucion();
         getAdministrarObraNew().cargarListas();
         llenarContratosInterventoria();
@@ -1114,6 +1113,7 @@ public class DetalleObra implements Serializable{
         getAdministrarObraNew().btn_habilitarModificarObjeto=true;
          getAdministrarObraNew().habilitarModificarimpacto = true;
         getAdministrarObraNew().habilitarGuardarimpacto = false;
+        getAdministrarObraNew().controltipodocumento = 3;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
         if (getSessionBeanCobra().getBundle().getString("versioncobra").compareTo("siente")==0 && obraMapa.getContrato() != null ) {
             if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obraMapa.getIntcodigoobra()) != null) {
