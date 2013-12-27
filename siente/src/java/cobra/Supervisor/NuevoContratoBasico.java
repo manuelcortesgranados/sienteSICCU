@@ -3250,6 +3250,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (band) {
 
             if (comboEntidadesContratoguardar()) {
+                if (filtrocontrato.getTipocontratoselect () != 0){
                 if (contrato.getIntduraciondias() > 0) {
                     if (contrato.getContratista() == null) {
                         FacesUtils.addErrorMessage("Debe seleccionar ó crear un contratista.");
@@ -3290,7 +3291,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         contrato.setJsfUsuarioByIntusumodificacion(getSessionBeanCobra().getUsuarioObra());
                         contrato.setJsfUsuarioByIntusucreacion(getSessionBeanCobra().getUsuarioObra());
                         contrato.setTipoestadobra(new Tipoestadobra(1));
-                        if (!boolcontrconsultoria && filtrocontrato.getTipocontratoselect() != 1) {
+                        if (!boolcontrconsultoria && filtrocontrato.getTipocontratoselect() != 2) {
                             contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
                         }
                         if (booltipocontratoconvenio) {
@@ -3357,6 +3358,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     removerAnticipo();
                     FacesUtils.addErrorMessage("La Fecha de Fin Debe ser mayor o igual a la fecha de inicio");
                 }
+                }else{
+                    removerAnticipo();
+                    FacesUtils.addErrorMessage("Debe seleccionar la modalidad del contrato");
+                }
             } else {
                 removerAnticipo();
                 FacesUtils.addErrorMessage("Debe diligenciar una entidad contratante válida.");
@@ -3379,7 +3384,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return no retorna nada
      */
     private void validadcionGuardarContrato() {
-        if (bundle.getString("boolencargofidu").equals("true") || bundle.getString("boolencargofidu").equals("false")) {
+        if (bundle.getString("boolencargofidu").equals("false") ) {
             if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
@@ -3613,6 +3618,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @param event
      */
     public void iniciarContrato(ActionEvent event) {//se invoca desde menu_lateral_gestion
+        enNuevoConvenio = true;
         booltipocontratoconvenio = false;
         tipoContCon = "Contrato";
         boolcontrconsultoria = false;
@@ -3739,6 +3745,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return No devuelve ningún valor
      */
     public String agregarPoliza() {
+        if (polizacontrato.getAseguradora().getIntnumnitentidad() != 0 && getTipointpoli() != 0){
         if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
 
             polizacontrato.setAseguradora(getSessionBeanCobra().getCobraService().encontrarAseguradoraPorId(polizacontrato.getAseguradora().getIntnumnitentidad()));
@@ -3774,6 +3781,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
         }
+        }else{
+              FacesUtils.addErrorMessage("Debe seleccionar el tipo de garantia y la entidad aseguradora");
+        }
+        
 
         return null;
     }
