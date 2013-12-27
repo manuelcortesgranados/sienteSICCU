@@ -162,6 +162,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
+    
+    public int controltipodocumento =0;
 
     /**
      * Variable para proyectos que pertenecen a Marco
@@ -877,6 +879,16 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         modificarObjetoObra = false;
     }
 
+    public int getControltipodocumento() {
+        return controltipodocumento;
+    }
+
+    public void setControltipodocumento(int controltipodocumento) {
+        this.controltipodocumento = controltipodocumento;
+    }
+    
+    
+
     public void guardarModificacionObjeto() {
         btn_habilitarModificarObjeto = true;
         modificarObjetoObra = false;
@@ -1360,8 +1372,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public void llenarSelectTipoDocumento() {
-
-        this.listaTipoDocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
+        controltipodocumento =3;
+        this.listaTipoDocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos(controltipodocumento);
         this.selectItemTipoDocumento = new SelectItem[this.listaTipoDocumento.size()];
         int i = 0;
         SelectItem selectItem = new SelectItem(0, bundle.getString("seleccioneuntipo"));//"Seleccione un tipo");
@@ -1693,7 +1705,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     public String iniciarDocumentos() {
         opcion = 3;
-
+        controltipodocumento = 3;
         listaDocumentosobra = getSessionBeanCobra().getCobraService().obtenerDocumentosObra(getObra().getIntcodigoobra());
         int i = 0;
         List<Documentoobra> listdoccontrato = new ArrayList<Documentoobra>();

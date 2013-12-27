@@ -1200,8 +1200,8 @@ public class ModificarProyecto  implements Serializable{
      * Carga los datos en selector de tipos de documentos
      */
     public void llenarSelectTipoDocumento() {
-
-        listaTipoDocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
+        int controltipodocumento=3;
+        listaTipoDocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos(controltipodocumento);
         selectItemTipoDocumentoModi = new SelectItem[listaTipoDocumento.size()];
         int i = 0;
         SelectItem selectItem = new SelectItem(0, Propiedad.getValor("seleccioneuntipo"));

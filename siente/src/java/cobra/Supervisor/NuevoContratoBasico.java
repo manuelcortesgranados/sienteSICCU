@@ -1125,6 +1125,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private int subpantalla;
     private boolean puedeEditarValorFuentes = true;
     /**
+     * Variable para cargar el tipo de documento ya sea para contrato o convenio
+     */
+    private  int controlvisualizaciondocumento =0;
+    /**
      * variable para saber si el convenio tiene todas las validaciones ok
      */
     private int guardadoconexito = 0;
@@ -2649,6 +2653,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setVarmostrarseleccionconveniosuperior(int varmostrarseleccionconveniosuperior) {
         this.varmostrarseleccionconveniosuperior = varmostrarseleccionconveniosuperior;
     }
+
+    public int getControlvisualizaciondocumento() {
+        return controlvisualizaciondocumento;
+    }
+
+    public void setControlvisualizaciondocumento(int controlvisualizaciondocumento) {
+        this.controlvisualizaciondocumento = controlvisualizaciondocumento;
+    }
+    
 
     /**
      * <p>
@@ -4335,7 +4348,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return
      */
     public String llenarTipodocumentos() {
-        List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
+        List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos(controlvisualizaciondocumento);
         tipodocumento = new SelectItem[listatipodocumento.size()];
         int i = 0;
         for (Tipodocumento tipodoc : listatipodocumento) {
@@ -5516,6 +5529,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
+        controlvisualizaciondocumento = 2;
         limpiarContrato();
         primeroDetcontrato();
         if (getContrato().getTercero().getIntcodigo() != -1) {
@@ -5553,6 +5567,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);
         filtrocontrato.setIdestrategia(estrategia);
+        controlvisualizaciondocumento=1;
         if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
             contrato = new Contrato();
             limpiarContrato();
