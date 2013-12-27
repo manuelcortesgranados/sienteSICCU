@@ -154,18 +154,19 @@
 
                                 <center>
                                     <h:panelGrid id="pgtipi" columns="1" styleClass="totalwidth tipificacionpro">
-                                        <rich:panel rendered="#{!var.aplicafonade}">
+                                        <rich:panel>
 
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont-hot-escojafase"   value="#{var.numfase} #{var.escojafase}" />
+                                                <h:outputText  styleClass="ikont-hot-escojafase"   value="#{var.numfase} #{var.escojafase}" rendered="#{var.aplicafaseenproyecto}" />
+                                                <h:outputText value="#{var.tiposolicitud}" styleClass="ikont-hot-escojafase" rendered="#{!var.aplicafaseenproyecto}" />
                                             </f:facet>
-                                            <h:panelGroup id="tablatipoah">
-
+                                            
+                                            <h:panelGroup id="tablatipoah" rendered="#{var.aplicafaseenproyecto}">
                                                 <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" rowKeyVar="faseele"
-                                                                columns="#{var.column}"   >
+                                                                columns="#{var.column}">
                                                     <center>
                                                         <h:panelGrid columns="1" columnClasses="panelcenter" styleClass="font-general">
-                                                            <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
+                                                            <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo">
                                                                 <h:graphicImage  styleClass="ikont-hgi-fase"   url="/resources/imgs/#{fase.intidfase}fase.png"  />
                                                             </a4j:commandLink>
 
@@ -183,19 +184,17 @@
                                                 <h:outputLabel  styleClass="ikont-hol- font-general"    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                 <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                     <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
-                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
+                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />
+                                                        <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.cambioClaseObra()}" render="panelTipo" rendered="#{var.tipoproyectoporsector}" />
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>
                                             </h:panelGrid>                                                                                
-
                                         </rich:panel>
 
-
-
                                         <h:panelGroup id="panelTipo">
-                                            <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0 or var.aplicafonade}">
+                                            <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0 or var.aplicafonade or !var.aplicafaseenproyecto}">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-escojatipo"   value="#{var.numsubtipo}#{var.escojatipo}"/>
+                                                    <h:outputText  styleClass="ikont-hot-escojatipo" value="#{var.numsubtipo} #{var.tipoProyecto}"/>
                                                 </f:facet>
                                                 <rich:dataGrid id="tablasubtipoah" styleClass="font-general" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
                                                                columns="4"  rowKeyVar="fila">
