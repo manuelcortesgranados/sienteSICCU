@@ -60,8 +60,15 @@ public abstract class GraficoEvolucionProyecto {
         BigDecimal acumuladoVlrPlanificadoIni = new BigDecimal(0);
         StringBuilder capitalPeriodoMedida= new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
         capitalPeriodoMedida.append(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(1).toLowerCase());
+        if(getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0 ) {
+            grafico.setDividirValoresPorMillon(true);
+        }
         grafico.setTituloEjeX(Propiedad.getValor("graevuproytituloEjeX")+": "+capitalPeriodoMedida);
-        grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
+        if(grafico.isDividirValoresPorMillon()) {
+            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
+        } else {
+            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
+        }
 
         grafico.setTipoGrafico(GraficoSeries.TIPO_LINEAS);
         grafico.getEstilo().setVerLeyenda(true);

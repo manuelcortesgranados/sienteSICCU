@@ -4,6 +4,8 @@
  */
 package cobra.graficos;
 
+import java.math.BigDecimal;
+
 /**
  * Clase que permite la generación de un gráfico de líneas de amcharts
  *
@@ -40,7 +42,13 @@ public class GraficoSeriesAmCharts extends GraficoSeries {
             for (ValorGraficoMultiple valorGraficoMultiple : datoGraficoMultiple.getValoresY()) {
                 if (valorGraficoMultiple.getValor() != null) {
                     script.append("etiqueta").append(valorGraficoMultiple.getCodigoConjuntoDatos()).append(":'").append(valorGraficoMultiple.getEtiqueta()).append("',\n");
-                    script.append("valor").append(valorGraficoMultiple.getCodigoConjuntoDatos()).append(":'").append(valorGraficoMultiple.getValor()).append("',\n");
+                    String valor;
+                    if(this.isDividirValoresPorMillon()) {
+                        valor = (new BigDecimal(valorGraficoMultiple.getValor())).divide(BigDecimal.valueOf(1000000)).toString();
+                    } else {
+                        valor = valorGraficoMultiple.getValor();
+                    }
+                    script.append("valor").append(valorGraficoMultiple.getCodigoConjuntoDatos()).append(":'").append(valor).append("',\n");
                 }
             }
             if (tipoDatoEjeX == Grafico.FECHA) {
