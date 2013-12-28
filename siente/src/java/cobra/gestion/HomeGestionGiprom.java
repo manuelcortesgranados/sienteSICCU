@@ -920,7 +920,6 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
-        getSessionBeanCobra().ConvertirFechaServidor();
         filtro.setIntvista(1);
         filtro.setIntcodfase(-1);
         filtro.setTipointervencion(-1);
@@ -1076,8 +1075,9 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the <code>activate()</code> method will be called
-     * to indicate that the transfer is complete.</p>
+     * instance, after which the
+     * <code>activate()</code> method will be called to indicate that the
+     * transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -1483,7 +1483,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public void llenarComboSubTiposProyecto(List listSubTiposProyectos) {
         SelectItem[] TempSubTipoProyecto = new SelectItem[listSubTiposProyectos.size() + 1];
 
-        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
+        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de " + bundle.getString("obra"));
 
         int j = 1, k = 1;
         for (Iterator i = listSubTiposProyectos.iterator(); i.hasNext();) {
@@ -1497,7 +1497,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
             }
         }
         subTiposProyecto = new SelectItem[j];
-        subTiposProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
+        subTiposProyecto[0] = new SelectItem(0, "Subtipos de " + bundle.getString("obra"));
         while (k < j) {
             subTiposProyecto[k] = TempSubTipoProyecto[k];
             k++;
@@ -2015,10 +2015,10 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public void cargarListaVistaObraMapa() {
         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
             List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom();
-           
+
             listaobrasusu = new ArrayList<VistaObraMapa>();
             for (VwInmInfoMunicipal mun : listagiprom) {
-                
+
                 listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
             }
 
@@ -2849,17 +2849,25 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 }
 
                 descripcion.append("<html>");
-                descripcion.append("<body >");
+                descripcion.append("<body>");
                 descripcion.append("<div class=\"modal-content-fonade\">");
                 descripcion.append("<div class=\"modal-header-fonade\">");
                 descripcion.append("<div class=\"tabla\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna \">");
-                descripcion.append("<span class=\"imagotipo\"></span>");
+                descripcion.append("<span class=\"imagotipo\">");
+                descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna\">");
                 descripcion.append("<label class=\"textvalla1\">");
-                descripcion.append(obra.getStrnombrecrot());
+                descripcion.append("nombre localidad");
+                descripcion.append("</label>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna sepate-title\">");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna\">");
+                descripcion.append("<label class=\"textvalla7\">");
+                descripcion.append("nombre depto");
                 descripcion.append("</label>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
@@ -2868,54 +2876,84 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"modal-body-fonade tabla\">");
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL GIPROM DEL PROYECTO?</div>");
-
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla5\">");
-                descripcion.append(money.format(obra.getNumvaltotobra()));
-                descripcion.append("</div>");
-                descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO");
-                descripcion.append("<div>");
-                descripcion.append("<p>");
-                descripcion.append(obra.getStrobjetoobra().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
-                descripcion.append("</p>");
-                descripcion.append("</div>");
-                descripcion.append("</label></div>");
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla3\"> Contratante : </div>");
-                descripcion.append("<div class=\"columna textvalla4\">");
-                descripcion.append(list_contratante);
-                descripcion.append("</div>");
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla3\"> Contratista : </div>");
-                descripcion.append("<div class=\"columna textvalla4\">");
-                descripcion.append(list_contratistas);
-                descripcion.append("</div>");
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4\">Semáforo</span>");
-                descripcion.append("<span class=\"imgsemaforo " + stylesemaforo + "\">");
-                descripcion.append("</span>");
-                descripcion.append("</div>");
-                descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4\">Avance</span>");
-                descripcion.append("<span class=\"textvalla6\">");
-                descripcion.append(asi_va_text + "%");
-                descripcion.append("</span>");
-                descripcion.append("</div>");
-                descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
-                descripcion.append("<a class=\"imgtipo tipo" + obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto() + "\" value=\"" + obra.getTipoobra().getTipoproyecto().getStrnombre() + "\">");
+                descripcion.append("<div class=\"columna colum-img-pes\">");
+                descripcion.append("<a class=\"img-informe-pe\">");
                 descripcion.append("</a>");
                 descripcion.append("</div>");
-                descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4 \">Estado </span>");
-                descripcion.append("<a class=\"imgestado estado" + obra.getTipoestadobra().getIntestadoobra() + "\" value=\"" + obra.getTipoestadobra().getStrdesctipoestado() + "\">");
+                descripcion.append("<div class=\"columna colum-potencialenergetico\">");
+                descripcion.append("<span class=\"textvalla2\">");
+                descripcion.append("POTENCIALES");
+                descripcion.append("</span>");
+                descripcion.append("<br/>");
+                descripcion.append("<span class=\"textvalla2\">");
+                descripcion.append("ENERGETICOS");
+                descripcion.append("</span>");
+                descripcion.append("<br/>");
+                descripcion.append("<span class=\"textvalla2\">");
+                descripcion.append("Informe");
+                descripcion.append("</span>");
+                descripcion.append("<br/>");
+                descripcion.append("<a class=\"textvalla4 textvalla8\">");
+                descripcion.append("Descargar");
                 descripcion.append("</a>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna colum-img-datos\">");
+                descripcion.append("<a class=\"img-datos-habitantes\">");
+                descripcion.append("</a>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna \">");
+                descripcion.append("<br/>");
+                descripcion.append("<span class=\"textvalla2\">");
+                descripcion.append("# de habiatantes: ");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla3\">");
+                descripcion.append("343.042");
+                descripcion.append("</span>");
+                descripcion.append("<br/>");
+                descripcion.append("<span class=\"textvalla2\">");
+                descripcion.append("# de encuestados: ");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla3\">");
+                descripcion.append("343.042");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
+                descripcion.append("</p>");
+                descripcion.append("<p>");
+                descripcion.append("<div class=\"columna vallacontentinfo info-ne\">");
+                descripcion.append("<span class=\"textvalla4\">");
+                descripcion.append("%NE");
+                descripcion.append("</span>");
+                descripcion.append("<div class=\"panelcenter\">");
+                descripcion.append("<span class=\"indicador-img-ne\">");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla5\">");
+                descripcion.append("35.03%");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna vallacontentinfo info-nbi\">");
+                descripcion.append("<span class=\"textvalla4\">");
+                descripcion.append("% NBI");
+                descripcion.append("</span>");
+                descripcion.append("<div class=\"panelcenter\">");
+                descripcion.append("<span class=\"indicador-img-nbi\">");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla5\">");
+                descripcion.append("35.02%");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna vallacontentinfo info-pe\">");
+                descripcion.append("<span class=\"textvalla4\">");
+                descripcion.append("% PE");
+                descripcion.append("</span>");
+                descripcion.append("<div class=\"panelcenter\">");
+                descripcion.append("<span class=\"indicador-img-pe\">");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla5\">");
+                descripcion.append("35.01%");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("</div>");

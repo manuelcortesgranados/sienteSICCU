@@ -60,16 +60,7 @@ public abstract class GraficoEvolucionProyecto {
         BigDecimal acumuladoVlrPlanificadoIni = new BigDecimal(0);
         StringBuilder capitalPeriodoMedida= new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
         capitalPeriodoMedida.append(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(1).toLowerCase());
-        if(getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0 ) {
-            grafico.setDividirValoresPorMillon(true);
-        }
         grafico.setTituloEjeX(Propiedad.getValor("graevuproytituloEjeX")+": "+capitalPeriodoMedida);
-        if(grafico.isDividirValoresPorMillon()) {
-            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
-        } else {
-            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
-        }
-
         grafico.setTipoGrafico(GraficoSeries.TIPO_LINEAS);
         grafico.getEstilo().setVerLeyenda(true);
         grafico.getEstilo().setVerCursor(true);
@@ -81,6 +72,12 @@ public abstract class GraficoEvolucionProyecto {
         grafico.getEstilo().setRutaimages(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/resources/amcharts/images/");
         grafico.getEstilo().setAnimado(true);
         grafico.setTipoDatoEjeX(Grafico.FECHA);
+        
+        if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
+        } else {
+            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
+        }
 
         /**
          * Se obtienen los periodos de la obra y se ordenan de acuerdo a la 
@@ -151,7 +148,11 @@ public abstract class GraficoEvolucionProyecto {
                 DatoGrafico datoPlaniIni = new DatoGrafico();
                 datoPlaniIni.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
                 acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(periodoObra.getNumvaltotplanif().divide(divisor));
-                datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                } else {
+                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                }
                 StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
                 stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoplanini")).append(periodoObra.getNumvaltotplanif().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                 datoPlaniIni.setEtiqueta(stringEtiDatoPlaniActual.toString());
@@ -189,7 +190,11 @@ public abstract class GraficoEvolucionProyecto {
             DatoGrafico datoPlaniActual = new DatoGrafico();
             datoPlaniActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
             acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(periodoObra.getNumvaltotplanif().divide(divisor));
-            datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+            if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                datoPlaniActual.setValorY(acumuladoVlrPlanificado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+            } else {
+                datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+            }
             StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
             stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato"))
                     .append(" ").append(periodoObra.getDatefeciniperiodo())
@@ -223,7 +228,11 @@ public abstract class GraficoEvolucionProyecto {
                         DatoGrafico datoEjeActual = new DatoGrafico();
                         datoEjeActual.setValorX("" + alimenta.getDatefecha().getTime());
                         acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
-                        datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                        if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                            datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                        } else {
+                            datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                        }
                         StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                         stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato"))
                                 .append(" ").append(periodoObra.getDatefeciniperiodo())
@@ -247,7 +256,11 @@ public abstract class GraficoEvolucionProyecto {
                     DatoGrafico datoEjeActual = new DatoGrafico();
                     datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
                     acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
-                    datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                        datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    } else {
+                        datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    }
                     StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                     stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoeje")).append(vlrEjecutado.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     datoEjeActual.setEtiqueta(stringEtiDatoEjeActual.toString());

@@ -106,7 +106,7 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
-    private Date fechaServidor;
+    
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
     private GipromServiceAble gipromService;
@@ -476,14 +476,11 @@ public class SessionBeanCobra implements Serializable {
     }
     // </editor-fold>
 
-    public Date getFechaServidor() {
-        return fechaServidor;
-    }
-
-    public void setFechaServidor(Date fechaServidor) {
-        this.fechaServidor = fechaServidor;
-    }
-
+    
+    public long getFechaMilisegundosServidor() {
+        return new Date().getTime();
+    } 
+    
     // </editor-fold>
     /**
      * <p>
@@ -493,19 +490,7 @@ public class SessionBeanCobra implements Serializable {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
-    public void ConvertirFechaServidor() {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String date = getFechaServer();
-            java.util.Date utilDate = formatter.parse(date);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            setFechaServidor(sqlDate);
-        } catch (ParseException e) {
-            System.out.println(e.toString());
-            e.printStackTrace();
-
-        }
-    }
+    
     
     public void llenadodatos() {
         long lnMilisegundos = utilDate.getTime();

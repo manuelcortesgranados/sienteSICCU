@@ -47,7 +47,7 @@
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
         </h:panelGroup>
-                <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and var.permisonuevodiseno}">
+        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and var.permisonuevodiseno}">
             <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml" />
         </h:panelGroup>
     </ui:define>
@@ -108,8 +108,8 @@
                 <hr class="ikont-hot-contentseparator"></hr>
             </h:panelGroup>
             <h:panelGrid columns="2" rowClasses="rowtop"  >
-                <h:form id="frmparticiapcioncomentario">
-                    <h:panelGrid columns="2">
+                <h:form id="frmparticiapcioncomentario" >
+                    <h:panelGrid columns="2" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlparticipacionciudadano}">
                         <h:panelGrid columns="1" styleClass="ikont-table-aling-pasos">
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 1" />
                             <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.aseguresedeelegir}" />
