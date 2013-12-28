@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "open";
+    src: url("font/OpenSans-Light.ttf");
+}
+
 .tabla {
     width: 100%;    
     font-family:arial,verdana,times;
@@ -19,20 +24,20 @@
     float:left;
 }
 
-.modal-content-fonade{
+.modal-content{
     width: 450px;
-    height: 200px;    
+    height: 150px;
 }
 
-.modal-header-fonade{
+.modal-header{
     width: 100%;
     clear: both;
     height: 40px;
     border-color: transparent;
-    background-color: #00B3DF;
+    background-color: #00B2E0;
 }
 
-.modal-body-fonade{
+.modal-body{
     width: 100%;
     height: 160px;    
     border-width: 0px;
@@ -46,53 +51,65 @@
 
 .textvalla1{
     color: #FFF;
-    font-size: 1em;
+    font-size: 1.3em;
     position: relative;
     top: 5px;
     left: 10px;
-    font-family: "open";
+    text-transform: uppercase;
+    font-weight: bolder;
 }
 .textvalla2{
-    font-size: 1.1em;
-    font-family: "open";
+    font-size: 10px;
+    color: #585858;
 }
 
 .textvalla3{
-    font-size: 1.1em;
-    font-weight: bolder;
-    font-family: "open";
+    font-size: 12px;
+    color: #000;
 }
 
 .textvalla4{
-    font-size: 1.1em;
-    width: 180px;
-    overflow: hidden;
-    float: left;
-    font-family: "open";
+    color: #FFF;
+    font-weight: bolder;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 15px;
 }
 
 .textvalla5{
-    font-size: 1.8em;
-    font-family: "open";
+    color: #FFF;
+    font-weight: bolder;
+    font-size: 17px;
+
 }
 
 .textvalla6{
-    font-size: 2em;
+    font-size: 1.5em;
     color: #585858;
-    margin: 5px;
-    font-family: "open";
 }
 
 .textvalla7{
-    color: #00B3DF;
-    font-weight: bolder!important;
-    font-family: open!important;
-    margin-left: 20px;    
+    color: #FFF;
+    font-size: 1.3em;
+    position: relative;
+    top: 5px;
+    left: 10px;
+    text-transform: uppercase;
+}
+
+.textvalla8{
+    font-size: 12px;
+    font-family: 'open';
+    font-style: italic;
+    color : #00B3DF!important;
+    font-weight: bolder;
+    text-decoration: none;
 }
 
 .content-left{
     width: 310px!important;
     float: left;
+    margin-left: 10px;
 }
 
 .content-rigth{
@@ -106,41 +123,18 @@
     height: 30px;
     margin-left: 10px;
     margin-top: 2px;
-    background-image: url("../imgs/valla/imagotipo.png");
+    background-image: url("img/imagotipo.png");
     background-repeat: no-repeat;
     background-position: 0px 0px;
     background-size: 30px 30px;
 }
 
 .vallacontentinfo{
-    border-width: 1px;
-    border-style: solid;
-    border-color: silver;
-    border-radius: 5px;
-    width: 68px;
-    height: 50px;
+    width: 95px;
+    height: 60px;
     margin-right: 3px;
-}
-
-.imgsemaforo{
-    background-image: url("../imgs/valla/semaforo_sprite.png");
-    background-repeat: no-repeat;
-    width: 65px;
-    height: 25px;
-    display: block !important;
-    margin-top: 17px;
-}
-
-.imgsemaforo.semaforoverde{
-    background-position: 0px 0px;
-}
-
-.imgsemaforo.semaforoamarillo{
-    background-position: 0px -30px;
-}
-
-.imgsemaforo.semafororojo{
-    background-position: 0px -60px;
+    color: #FFF;
+    margin-top: 5px;
 }
 
 .imgvalla{
@@ -148,122 +142,15 @@
     height: 100px;
 }
 
-.imgtipo{
-    background-image: url("../imgs/valla/tipo_sprite.png");
-    background-repeat: no-repeat;
-    background-size: 200px 120px;
-    width: 40px;
-    height: 40px;
-    display: block !important;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.imgtipo.tipo1{
-    background-position: -40px -40px;
-}
-
-.imgtipo.tipo2{
-    background-position: -120px 0px;
-}
-
-.imgtipo.tipo3{
-    background-position: -40px 0px;
-}
-
-.imgtipo.tipo4{
-    background-position: -160px -80px;
-}
-
-.imgtipo.tipo5{
-    background-position: 0px -40px;
-}
-
-.imgtipo.tipo6{
-    background-position: -160px -40px;
-}
-
-.imgtipo.tipo7{
-    background-position: -120px -40px;
-}
-
-.imgtipo.tipo8{
-    background-position: -80px -40px;
-}
-
-.imgtipo.tipo9{
-    background-position: -160px 0px;
-}
-
-.imgtipo.tipo10{
-    background-position: -80px 0px;
-}
-
-.imgtipo.tipo11{
-    background-position: 0px 0px;
-}
-
-.imgtipo.tipo12{
-    background-position: -120px -80px;
-}
-
-.imgtipo.tipo13{
-    background-position: -80px -40px;
-}
-
-.imgtipo.tipo14{
-    background-position: -0px -80px;
-}
-
-.imgtipo.tipo15{
-    background-position: -160px -40px;
-}
-
-.imgtipo.tipo16{
-    background-position: 0px -40px;
-}
-
-.imgestado{
-    background-image: url("../imgs/valla/estado_sprite.png");
-    background-repeat: no-repeat;
-    background-size: 105px 70px;
-    width: 35px;
-    height: 35px;
-    display: block !important;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.imgestado.estado0{
-    background-position: 0px 0px;
-}
-
-.imgestado.estado1{
-    background-position: -35px 0px;
-}
-
-.imgestado.estado2{
-    background-position: -35px -35px;
-}
-
-.imgestado.estado5{
-    background-position: 0px -35px;
-}
-
-.imgestado.estado6{
-    background-position: -70px 0px;
-}
 
 
 .imgaction{
-    background-image: url("../imgs/valla/btns_sprite.png");
+    background-image: url("img/btns_sprite.png");
     background-repeat: no-repeat;
     background-size: 75px 36px;
     width: 25px;
     height: 20px;
-    display: block!important;
+    display: block;
     cursor: pointer;
 }
 
@@ -295,7 +182,7 @@
 }
 
 .imgaction:after{
-    font-family: "open";
+    font-family: "century";
     content: attr(value);
     position: absolute;
     color: white;
@@ -311,8 +198,8 @@
     -ms-border-radius: 10px ; 
     -webkit-border-radius: 10px ; 
     border-radius: 10px; 
-    margin-left: -35px;
-    margin-top: -25px;
+    margin-left: -10px;
+    margin-top: 20px;
     z-index: 1;
 }
 a.imgaction:hover:after{
@@ -332,8 +219,7 @@ a.imgaction:hover:after{
     -ms-border-radius: 10px ; border-radius: 10px; 
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
     color: white!important;
-    font-size: 1em;
-    font-family: "open";
+    font-size: 10px;
     opacity: 0;
     padding: 5px;
     width: auto;
@@ -348,6 +234,7 @@ a.imgaction:hover:after{
     -moz-transform: scaleY(1);-webkit-transform: scaleY(1);-o-transform: scaleY(1);-ms-transform: scaleY(1);transform: scaleY(1);
     opacity: 1;
 }
+
 
 .imgestado:after{
     font-family: "century";
@@ -374,40 +261,82 @@ a.imgaction:hover:after{
     display: block;    
 }
 
-.imgtipo:after{
-    font-family: "century";
-    content: attr(value);
-    position: absolute;
-    color: white;
-    top: auto;
-    left: auto;
-    font-size: 1.2em;
-    background-color: rgba(0,0,0,0.8);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    padding: 5px 15px;
-    display: none;
-    -moz-border-radius: 10px ; 
-    -ms-border-radius: 10px ; 
-    -webkit-border-radius: 10px ; 
-    border-radius: 10px; 
-    margin-left: 35px;
-    margin-top: 10px;
-    z-index: 1;
+.sepate-title{
+    width: 20px;
+    height: 25px;
+    border-right: #F8F220 1px solid;
+    margin-top: 5px;
 }
-.imgtipo:hover:after{
+
+.info-ne{
+    background-color: #0071BD;
+}
+
+.info-nbi{
+    background-color: #2AABE4;
+}
+
+.info-pe{
+    background-color: #01A89E;
+}
+
+.img-informe-pe{
+    background-image: url("img/fcm_icons_personas.png");
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin-top: 15px;
+}
+
+.img-datos-habitantes{
+    background-image: url("img/fcm_icons_personas.png");
+    background-repeat: no-repeat;
+    background-position: -40px 0px;
+    width: 40px;
+    height: 40px;
     display: block;    
+    margin-top: 15px;
 }
 
-.label-obj-proyecto{
-    border: 1px solid #00B3DF;
-    padding: 0px 10px;
-    border-radius: 20px;
-    font-family: 'open';
+.colum-potencialenergetico{
+    width: 70px;
 }
 
-.label-obj-proyecto:hover {
-    color: #9CFF00;
-    background-color: #00B3DF;
-    transition: background-color 0.5s ease 0s;
+.colum-img-datos{
+    width: 35px;
+}
+
+.indicador-img-ne{
+    background-image: url("img/fcm_icons_indicadores.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 25px;
+    display: inline-block;    
+    position: relative;
+    top: 4px;
+}
+.indicador-img-nbi{
+    background-image: url("img/fcm_icons_indicadores.png");
+    background-repeat: no-repeat;
+    background-position: -23px 0px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;    
+    position: relative;
+    top: 4px;
+}
+.indicador-img-pe{
+    background-image: url("img/fcm_icons_indicadores.png");
+    background-repeat: no-repeat;
+    background-position: -53px 0px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;    
+    position: relative;
+    top: 4px;
+}
+
+.panelcenter{
+    text-align: center;
 }
