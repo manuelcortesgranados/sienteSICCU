@@ -83,9 +83,9 @@ and open the template in the editor.
         <delete file="${build.web.dir}/WEB-INF/lib/gxt-3.0.6.jar"/>
         <delete file="${build.web.dir}/WEB-INF/lib/gxt-chart-3.0.6.jar"/>
         <delete file="${build.web.dir}/WEB-INF/lib/gxt-legacy-3.0.6.jar"/>
-        -->
+        
         <delete file="${build.web.dir}/WEB-INF/lib/marcologicorepository_1.0.jar"/>
-       
+       -->
         <delete dir="${build.web.dir}/resources/video" />        
     </target>
 </project>

@@ -34,11 +34,7 @@
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
 
-    <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
-            <ui:include src="./../facelets/menu_lateral_gestion.xhtml" />
-            <ui:include src="./../facelets/menu_lateral_administrar.xhtml" />  
-        </h:panelGroup>
+    <ui:define name="menu_lateral">       
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml" />
         </h:panelGroup>
@@ -56,7 +52,7 @@
             <h:form prependId="false">               
 
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
-                <h:inputHidden id="valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"/>
+                <h:inputHidden id="valuepotencialele" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado}"/>
             </h:form>
 
             <h:panelGroup rendered="#{var.nuevomapa}" layout="block" styleClass="ikont-hpg-zoom-detalleobra totalwidth">                
@@ -103,63 +99,59 @@
                                             </h:panelGroup>
                                             <br/>
                                             <h:panelGroup>
-                                                <h:outputLabel styleClass="font-general" value="Latidtud : " />
+                                                <h:outputLabel styleClass="font-general" value="Latitud : " />
                                                 <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" />
                                             </h:panelGroup>
-                                            <br/>
-                                            <h:panelGroup>
-                                                <h:outputLabel styleClass="font-general" value="Dirección : " />
-                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
-                                            </h:panelGroup>
-                                            <br/>
-                                            <h:panelGroup rendered="false">
-                                                <h:outputLabel styleClass="font-general" value="Clima : " />
-                                                <h:outputLabel styleClass="font-general" value="" />    
+                                            <br/>                                           
+                                            <h:panelGroup >
+                                                <h:outputLabel styleClass="font-general" value="Clima promedio: " />
+                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento}" />    
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
-                                    <rich:panel header="DATOS BASICOS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="DATOS BÁSICOS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid columns="1" >
-                                            <h:panelGrid columns="2">
-                                                <h:outputLabel value="Localidad:" styleClass="font-general"></h:outputLabel>
-                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" styleClass="font-general"></h:outputLabel>
-                                            </h:panelGrid>
+                                            
                                             <h:panelGrid columns="2">
                                                 <h:outputLabel value="Departamento:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tercero.strapellido1}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Municipio:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" styleClass="font-general"></h:outputLabel>
+                                            </h:panelGrid>                                           
+                                            <h:panelGrid columns="2">
+                                                <h:outputLabel value="Sitio Web:" styleClass="font-general"></h:outputLabel>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strestydis}" styleClass="font-general"></h:outputLabel>
                                             </h:panelGrid>
                                             <h:panelGrid columns="2">
-                                                <h:outputLabel value="Dirección:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strlogros}" styleClass="font-general"></h:outputLabel>
                                             </h:panelGrid>
-                                            <h:panelGrid columns="2">
-                                                <h:outputLabel value="Sitio Web:" styleClass="font-general"></h:outputLabel>
-                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" styleClass="font-general"></h:outputLabel>
-                                            </h:panelGrid>
-                                            <h:panelGrid columns="2">
-                                                <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
-                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento} °C" styleClass="font-general"></h:outputLabel>
+                                             <h:panelGrid columns="2">
+                                                <h:outputLabel value="Actividad económica:" styleClass="font-general"></h:outputLabel>
+                                                <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" styleClass="font-general"></h:outputLabel>
                                             </h:panelGrid>
 
                                         </h:panelGrid>
                                     </rich:panel>
                                     <rich:panel header="ALCALDE" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid columns="2">
-                                            <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="../resources/imgs/bt_user.png"/>           
+                                            <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-perfil-usuario" url="#{Supervisor$AdministrarObraNew.obra.strimagenanterior}"/>           
                                             <h:panelGrid>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcontratista}"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
-                                                <h:outputLabel value="Alcalde"  styleClass="font-general"></h:outputLabel>
+                                                
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </rich:panel>
-                                    <rich:panel header="INFORES Y PERSONAS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="INFORMES Y PERSONAS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid cellspacing="10" columns="1">
                                             <h:panelGrid columns="2" cellspacing="5">
                                                 <h:commandLink styleClass="ikont-hcl-imgpontencialener img-detalle-proyecto" />   
                                                 <h:panelGrid columns="1">
-                                                    <h:outputLabel value="Potencial Energetico" styleClass="font-general"></h:outputLabel>
+                                                    <h:outputLabel value="Potencial Energético" styleClass="font-general"></h:outputLabel>
                                                     <h:outputLabel value="Informe" styleClass="font-general"></h:outputLabel>
                                                     <h:outputLink value="" styleClass="ikont-hol-descargapoener">Descargar</h:outputLink>
                                                 </h:panelGrid>
@@ -168,7 +160,7 @@
                                                 <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
                                                 <h:panelGroup layout="block">
                                                     <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvlrsumahijos}"></h:outputText>
+                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaldeclarado}"></h:outputText>
                                                     <br/>
                                                     <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
                                                     <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
@@ -178,7 +170,7 @@
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="2" styleClass="totalwidth font-general" columnClasses=",ikont-deta-rigth">
-                                    <rich:panel header="NESESIDADES ENERGETICAS DE LA ZONA" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="NECESIDADES ENERGÉTICAS DE LA ZONA" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid cellspacing="20" columns="2" styleClass="totalwidth font-general" columnClasses=",ikont-deta-rigth">
                                             <h:panelGroup layout="block" styleClass="ikont-hpg-giprom-ne">
                                                 <h:panelGrid columns="1" >
@@ -186,7 +178,7 @@
                                                     <h:outputText styleClass="ikont-hot-text-ne-pe" value="% NE"></h:outputText>
                                                     <h:panelGrid columns="2">
                                                         <h:outputLink styleClass="ikont-hot-img-ne"></h:outputLink>
-                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} %"/>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalprogramejec} %"/>
                                                     </h:panelGrid>
                                                 </h:panelGrid>
                                             </h:panelGroup>    
@@ -203,17 +195,17 @@
                                         </h:panelGrid>
                                     </rich:panel>    
                                     <rich:panel header="% NBI" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBI}" escape="false" />
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBI}" escape="false" />
                                         <div id="graficoNBI" style="width: 300px; height: 150px;"></div>
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
                                     <rich:panel header="% NBI AL AÑO" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBIanual}" escape="false" />
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBIanual}" escape="false" />
                                         <div id="graficoNBIanual" style="width: 300px; height: 150px;"></div>
                                     </rich:panel>
                                     <rich:panel header="% NBI POR LOCALIZACION (2005)" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficosGiprom.graficoNBILocalizacion}" escape="false" />
+                                        <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBILocalizacion}" escape="false" />
                                         <div id="graficoNBILocalizacion" style="width: 300px; height: 150px;"></div>
                                     </rich:panel>
                                     <rich:panel header="DESEMPEÑO INTEGRAL 2009" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
@@ -242,7 +234,7 @@
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="1" styleClass="totalwidth font-general">
-                                    <rich:panel header="INICADOR MUNICIPAL" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="INDICADOR MUNICIPAL" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGroup styleClass="totalwidth font-general">
                                             <h:outputText styleClass="ikont-text-left" value="Según el censo 2005 la población del municipio es de "></h:outputText>
                                             <h:outputText styleClass="ikont-text-left" value="ND"></h:outputText>

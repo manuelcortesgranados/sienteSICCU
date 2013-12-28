@@ -3048,4 +3048,9 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         //filtro.setIntvista(vista);
         filtroObrasActionMapaAvanModal();
     }
+    
+    public void pruebacarlos()
+    {
+        System.out.println("prueba = ");
+    }        
 }
