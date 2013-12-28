@@ -1287,10 +1287,12 @@
             function iniciarFunciones() {
                 var timefalta = document.getElementById("finfecha").value;
                 var futuro = new Date(timefalta);
-
+                var fechaNavegador = new Date();
+                var milisegundosNavegador = fechaNavegador.getTime();
+                var diferencia = #{SessionBeanCobra.fechaMilisegundosServidor} + (1000*60*60*24) - milisegundosNavegador;
                 setInterval(function() {
                     var ahora = new Date();
-                    var faltan = futuro - ahora;
+                    var faltan = futuro - (ahora - diferencia);
 
                     if (faltan > 0) {
                         var segundos = Math.round(faltan / 1000);
