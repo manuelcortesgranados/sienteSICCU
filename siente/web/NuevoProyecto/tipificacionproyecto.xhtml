@@ -184,7 +184,9 @@
                                                 <h:outputLabel  styleClass="ikont-hol- font-general"    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                 <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                     <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
+                                                        <f:selectItem itemLabel="Seleccione una opción" itemValue="0"/>
                                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />
+                                                        
                                                         <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.cambioClaseObra()}" render="panelTipo" rendered="#{var.tipoproyectoporsector}" />
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>

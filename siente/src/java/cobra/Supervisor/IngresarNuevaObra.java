@@ -1906,7 +1906,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         documentoseleccionado = 0;
         obranueva = new Obra();
         obranueva.setClaseobra(new Claseobra());
-        obranueva.getClaseobra().setIntidclaseobra(1);
+        obranueva.getClaseobra().setIntidclaseobra(0);
         obranueva.getClaseobra().setFase(new Fase());
         obranueva.setLugarobra(new Lugarobra(1, ""));
         obranueva.setTipoobra(new Tipoobra(0, null, ""));
@@ -1975,6 +1975,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 || getSessionBeanCobra().getBundle().getString("aplicafaseenproyecto").equals("false")) {
             tiahselect = 2;
             obtenerFaseSeleccionada(1);
+            
+            llenarTipoProyecto();
         }
 
         return "nuevoProyecto";
