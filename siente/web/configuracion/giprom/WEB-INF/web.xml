@@ -53,14 +53,7 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>GwtRemoteServiceServlet</servlet-name>
-        <servlet-class>org.spring4gwt.server.SpringGwtRemoteServiceServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GwtRemoteServiceServlet</servlet-name>
-        <url-pattern>/planoperativo/springGwtServices/*</url-pattern>
-    </servlet-mapping>
+    
     <session-config>
         <!-- Session timeout zoom-->
         <session-timeout>

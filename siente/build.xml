@@ -85,5 +85,6 @@
     <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra, doGiprom">       
     </target>
     
-
+    <target name="-post-compile" depends="doGipromPostCompile">       
+    </target>
 </project>

@@ -34,8 +34,8 @@ and open the template in the editor.
         </copy>
         <copy todir="${build.web.dir}/resources/org.richfaces">
             <fileset  dir="web/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
-        </copy>
-        
+        </copy>       
+       
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
@@ -43,6 +43,50 @@ and open the template in the editor.
         <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
         <copy todir="${build.classes.dir}/" file="web/configuracion/${version}/properties/log4j.properties"/>
         <copy todir="${build.web.dir}/Supervisor/" file="web/configuracion/${version}/supervisor/DetalleObra.xhtml"/>
+    
+
+
+        <!--    
+    <script language="javascript">
+          sProp = project.getProperty("source.encoding");
+          sProp = sProp.replace("UTF", "ly");
+          project.setProperty("source.encoding", sProp);
+          project.setNewProperty("source.encoding", "new value");
+        </script>
+        <property name="a" value="two" />
+        <echo>a=${source.encoding}</echo>
+        <script language="javascript">
+          sProp = project.getProperty("excludes");
+          sProp = sProp.concat("**/AdiministrarEntidad.class");
+          project.setProperty("excludes", sProp);
+          project.setNewProperty("excludes", "new value");
+        </script>-->
+    
     </target> 
+    
+    <target name="doGipromPostCompile" if="isgiprom" >
+        <delete dir="${build.web.dir}/AtencionHumanitaria"/>
+        <delete dir="${build.web.dir}/Administrador"/>
+        <delete dir="${build.web.dir}/ControlGerencial"/>
+        <delete dir="${build.web.dir}/Financiera"/>
+        <delete dir="${build.web.dir}/ModificarProyecto"/>
+        <delete dir="${build.web.dir}/NuevoProyecto"/>
+        <delete dir="${build.web.dir}/SolicitudObra"/>
+        <delete dir="${build.web.dir}/SupervisionExterna"/>
+        <delete dir="${build.web.dir}/mensajes"/>  
+
+        <delete dir="${build.web.dir}/WEB-INF/classes/cobra/Administrador" />
+        <!--
+        <delete file="${build.web.dir}/WEB-INF/lib/GxtGantt.jar"/>
+        <delete file="${build.web.dir}/WEB-INF/lib/gwt-servlet-deps.jar"/>
+        <delete file="${build.web.dir}/WEB-INF/lib/gwt-servlet.jar"/>
+        <delete file="${build.web.dir}/WEB-INF/lib/gxt-3.0.6.jar"/>
+        <delete file="${build.web.dir}/WEB-INF/lib/gxt-chart-3.0.6.jar"/>
+        <delete file="${build.web.dir}/WEB-INF/lib/gxt-legacy-3.0.6.jar"/>
+        -->
+        <delete file="${build.web.dir}/WEB-INF/lib/marcologicorepository_1.0.jar"/>
+       
+        <delete dir="${build.web.dir}/resources/video" />
+    </target>
 </project>
 

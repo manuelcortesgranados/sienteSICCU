@@ -241,21 +241,7 @@
                 <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Parametricaactividadesobligatorias.hbm.xml</value>
                 
-                <!-- Medios de Vida-->                
-                <value>co/com/interkont/cobra/marcologico/to/Frecuenciaperiocidad.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Planificacionrelacionmarcologicoindicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Avanceplanificacionrelacionmarcologicoindicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Tipomarcologico.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Unidadmedidamediosvida.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Estrategia.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Marcologico.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Contratoestrategia.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Tipoindicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Cronogramaobligacionesejecutada.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Relacionmarcologicoindicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Obligacion.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/to/Indicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>
+                <!-- Medios de Vida-->  
                
             </list>
         </property>
@@ -314,12 +300,12 @@
     </bean>
 
     <bean id="cobraDao" class="cobra.dao.CobraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="modificarProyectoDao" class="cobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <!--<bean id="modificarProyectoDao" class="cobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <!--<bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
+    <bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <bean id="supervisionExternaDao" class="supervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
     <bean id="ciudadanoDao" class="ciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <!--<bean id="marcoLogicoDao" class="cobra.MarcoLogico.dao.MarcoLogicoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>-->
     <!--
@@ -342,7 +328,7 @@
             <ref local="cobraDao" />
         </property>
     </bean>
-
+<!--
     <bean id="modificarProyectoServiceTarget" scope="prototype"
           class="cobra.service.ModificarProyectoServiceImpl">
         <property name="modificarProyectoDao">
@@ -359,7 +345,7 @@
             <ref local="financieraDao" />
         </property>
     </bean>
-<!--
+
     <bean id="atencionhumanitariaServiceTarget" scope="prototype"
           class="atencionHumanitaria.service.AtencionHumanitariaServiceImpl">
         <property name="atencionHumanitariaDao">
@@ -374,7 +360,7 @@
             <ref local="solicitudDao" />
         </property>
     </bean>
--->
+
     <bean id="supervisionExternaTarget" scope="prototype"
           class="supervision.service.SupervisionExternaServiceImpl">
         <property name="supervisionExternaDao">
@@ -388,21 +374,21 @@
             <ref local="indicadorDao" />
         </property>
     </bean>
-
+-->
     <bean id="ciudadanoServiceTarget" scope="prototype"
           class="ciudadano.service.CiudadanoServiceImpl">
         <property name="ciudadanoDao">
             <ref local="ciudadanoDao" />
         </property>
     </bean>
-    
+    <!--
     <bean id="gwtServiceTarget" scope="prototype"
           class="co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl">
         <property name="cobraDao">
             <ref local="cobraDao" />
         </property>
     </bean>
-    <!--
+    
     <bean id="marcoLogicoServiceTarget" scope="prototype"
           class="cobra.MarcoLogico.service.MarcoLogicoServiceImpl">
         
@@ -469,7 +455,7 @@
         </property>
     </bean>
 
-
+<!--
     <bean id="financieraService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -491,7 +477,7 @@
         </property>
     </bean>
 
-    <!--
+    
     <bean id="financieraService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -574,7 +560,7 @@
                 </props>
             </property>
         </bean>
-    -->
+    
     <bean id="supervisionExternaService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
@@ -615,7 +601,7 @@
             </props>
         </property>
     </bean>
-
+-->
     <bean id="ciudadanoService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -636,7 +622,7 @@
             </props>
         </property>
     </bean>
-    
+    <!--
     <bean id="modificarProyectoService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
@@ -679,7 +665,7 @@
         </property>
     </bean>
     
-    <!--
+    
       <bean id="marcoLogicoService" scope="prototype"
            class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
          <property name="transactionManager">
