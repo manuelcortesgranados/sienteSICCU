@@ -4292,7 +4292,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         setTiproyectoselec(0);
 
         if (bundle.getString("tipoproyectoporsector").equals("true")) {
-            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(1));
+            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(0));
         } else {
             getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
         }
