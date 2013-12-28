@@ -318,6 +318,9 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("permiso_auditoria")){
                             renderrecurso.setPermiso_auditoria(false);
                         }
+                        if (temprecusro.getRecNmbre().equals("pnlparticipacionciudadano")){
+                            renderrecurso.setPnlparticipacionciudadano(false);
+                        }
                         break;
                     
                     
