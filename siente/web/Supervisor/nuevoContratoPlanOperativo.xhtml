@@ -53,19 +53,17 @@
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >
-                <center>
+                <h:panelGroup layout="block" styleClass="totalwidth panelcenter">
                     <h:panelGrid columns="3" cellspacing="15" cellpadding="0" id="menu-plan-operativo" styleClass="ikont-hpg-menu-plan-operativo">
-                        <a4j:commandButton value="#{var.planificacion}" action="#{Supervisor$Contrato.planOperativo}"/>
-                        <a4j:commandButton value="#{var.flujocaja}"  immediate="true" execute="@this" render="frmpanelgeneral" action="#{PlanOperativo.iniciarFlujoCaja()}">
+                        <a4j:commandButton styleClass="ikont-buttons-planoperativo" value="#{var.planificacion}" action="#{Supervisor$Contrato.planOperativo}"/>
+                        <a4j:commandButton styleClass="ikont-buttons-planoperativo" value="#{var.flujocaja}"  immediate="true" execute="@this" render="frmpanelgeneral" action="#{PlanOperativo.iniciarFlujoCaja()}">
                             <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="2"/>
                         </a4j:commandButton>                    
-                        <a4j:commandButton value="#{var.reportes}" action="#{Supervisor$Contrato.guardarBorradorConvenio}"  render="frmpanelgeneral" immediate="true" execute="@this">
+                        <a4j:commandButton styleClass="ikont-buttons-planoperativo" value="#{var.reportes}" action="#{Supervisor$Contrato.guardarBorradorConvenio}"  render="frmpanelgeneral" immediate="true" execute="@this">
                             <a4j:param assignTo="#{Supervisor$Contrato.subpantalla}" value="3"/>
                         </a4j:commandButton>
                     </h:panelGrid>
-                </center>
-
-
+                </h:panelGroup>
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==2}"  id="reg-plan-operativo-flujocaja" >
                     <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-flujocaja">
                         <ui:include src="/Supervisor/Flujocaja.xhtml" />
