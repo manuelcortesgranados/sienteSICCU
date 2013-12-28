@@ -4022,6 +4022,14 @@ a:hover {
     height: 80px; 
     float: left; 
 }
+.ikont-img-detalle-alcalde{
+    -webkit-border-radius: 90px;
+    -moz-border-radius: 90px;
+    border-radius: 90px;
+    width:150px;
+    height: 135px; 
+    float: left; 
+}
 .ikont-position-div-perfil-usuario{
     position: relative;
     top: -64px;
@@ -4935,6 +4943,7 @@ a:hover {
     height: 85px;
     display: block;
     background-size: 180px;
+    background-position: -90px 0px;
 }
 
 .ikont-hpg-giprom-pe{

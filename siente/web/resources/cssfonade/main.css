@@ -12,6 +12,16 @@
     width: 100%;
 }
 
+.font-general{
+    font-size: 14px;
+    font-family: 'open';
+    color: #58595B;
+}
+
+.totalwidth{
+    width: 100%;
+}
+
 .alingtableproyecto{
     margin-top: -22px;
     margin-left: -6px;
@@ -2210,7 +2220,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hot-soliobra, .ikont-hot-numvaltotobra{
-    font-size: 1.3em;
+    font-size: 14em;
     color: #7E7E7E;
 }
 
@@ -2395,6 +2405,9 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hcl-imgtipoproyecto.tipo16{
     background-position: -270px -180px;
+}
+.ikont-hcl-imgtipoproyecto.tipo19{
+    background-position: -10px -180px;
 }
 
 .ikont-hpg-griddetaob, .ikont-hpg-pg_impactosocial, .ikont-hgi-imgestobra, .ikont-hpg-tipo_obra{
@@ -4950,4 +4963,23 @@ a:hover {
 .ikont-acl-limpiarvisitafallida:hover{
     background-position: -100px -100px;
     transition: .5s all;
+}
+
+.ikont-rt-tablaDocumentoscont{
+    margin-top: 40px;
+}
+
+.ikont-buttons-planoperativo{
+    display: block!important;
+    width: 120px!important;
+    height: 30px!important;
+    color: #257500!important;
+    text-decoration: none;
+    font-family: 'open';
+    font-size: 15px!important;
+    background-color: #FFF!important;
+    border: 1px solid #257500;
+    padding-top: 4px!important;
+    border-radius: 10px;
+    
 }
