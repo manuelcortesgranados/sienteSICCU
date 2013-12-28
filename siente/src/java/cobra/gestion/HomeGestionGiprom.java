@@ -63,7 +63,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo5
  */
-public class HomeGestion implements Serializable, ILifeCycleAware {
+public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -969,7 +969,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return (DatosGeneralesPerfilControl) FacesUtils.getManagedBean("perfilcontrol");
     }
 
-    public HomeGestion() {
+    public HomeGestionGiprom() {
         if (getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre() != null) {
             iniciarHome();
         } else {
@@ -977,7 +977,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../Vencimiento.xhtml");
 
             } catch (IOException ex) {
-                Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(HomeGestionGiprom.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -991,7 +991,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         try {
             getIngresarNuevaObra().cargarObra(obra);
         } catch (Exception ex) {
-            Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeGestionGiprom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "nuevaobra";
     }
@@ -2364,7 +2364,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeGestionGiprom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -2381,7 +2381,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeGestionGiprom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -2398,7 +2398,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(HomeGestion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HomeGestionGiprom.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -2867,7 +2867,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"modal-body-fonade tabla\">");
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
-                descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
+                descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL GIPROM DEL PROYECTO?</div>");
 
                 descripcion.append("</p>");
                 descripcion.append("<p>");

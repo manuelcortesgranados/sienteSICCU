@@ -51,8 +51,8 @@
                             <a4j:repeat id="repe"  var="marker" value="#{Supervisor$IngresarNuevaObra.listamarcadores}"  >
 
                                 <m:marker  immediate="true"  longitude="#{marker.longitude}" latitude="#{marker.latitude}"
-                                          draggable="#{marker.draggable}" id="mkObra"  submitOnValueChange="false"
-                                          valueChangeListener="#{Supervisor$IngresarNuevaObra.cambio}">                                                   
+                                           draggable="#{marker.draggable}" id="mkObra"  submitOnValueChange="false"
+                                           valueChangeListener="#{Supervisor$IngresarNuevaObra.cambio}">                                                   
                                     <m:icon  imageURL="/#{var.versioncobra}/resources/images/pin.png"/>
                                     <a4j:ajax immediate="true"/>
                                 </m:marker>
@@ -441,17 +441,19 @@
                         </h:panelGroup >
                     </rich:collapsiblePanel>
                 </h:form>
-                <h:panelGroup >
-                    <center>
-                        <h:commandButton id="btVolverDatosBas"  value="#{var.volver}" immediate="true"
-                                         action="datosbasicosnuevoproyecto" />
-                        <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" />
-                        <h:commandButton id="btCancelarUbica"  value="#{var.cancelar}" immediate="true"
-                                         action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                        </h:commandButton>
-                    </center>
+                <h:form>
+                    <h:panelGroup >
+                        <center>
+                            <h:commandButton id="btVolverDatosBas"  value="#{var.volver}" immediate="true"
+                                             action="datosbasicosnuevoproyecto" />
+                            <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" />
+                            <h:commandButton id="btCancelarUbica"  value="#{var.cancelar}" immediate="true"
+                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                            </h:commandButton>
+                        </center>
 
-                </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
                 <a4j:jsFunction name="nuevoPunto" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}" render="gpDirMapa,layoutLugar" >
                 </a4j:jsFunction>
                 <!--</a4j:outputPanel>-->

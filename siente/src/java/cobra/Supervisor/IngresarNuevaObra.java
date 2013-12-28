@@ -4839,11 +4839,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public boolean validarFechasProyectoInicio() {
         if (obranueva.getContrato() != null) {
-            if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
-                FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
+            if (obranueva.getDatefeciniobra() != null) {
+                if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
+                    FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
+                    datosbas = false;
+                    return false;
+                }
+            } else {
+                FacesUtils.addErrorMessage("Debe ingresar la fecha de inicio y fin del proyecto");
                 datosbas = false;
                 return false;
             }
+
             return true;
         }
         return true;
