@@ -73,7 +73,7 @@ public abstract class GraficoEvolucionProyecto {
         grafico.getEstilo().setAnimado(true);
         grafico.setTipoDatoEjeX(Grafico.FECHA);
         
-        if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+        if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
             grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
         } else {
             grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
@@ -148,7 +148,7 @@ public abstract class GraficoEvolucionProyecto {
                 DatoGrafico datoPlaniIni = new DatoGrafico();
                 datoPlaniIni.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
                 acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(periodoObra.getNumvaltotplanif().divide(divisor));
-                if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                     datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                 } else {
                     datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -190,7 +190,7 @@ public abstract class GraficoEvolucionProyecto {
             DatoGrafico datoPlaniActual = new DatoGrafico();
             datoPlaniActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
             acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(periodoObra.getNumvaltotplanif().divide(divisor));
-            if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+            if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                 datoPlaniActual.setValorY(acumuladoVlrPlanificado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
             } else {
                 datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -228,7 +228,7 @@ public abstract class GraficoEvolucionProyecto {
                         DatoGrafico datoEjeActual = new DatoGrafico();
                         datoEjeActual.setValorX("" + alimenta.getDatefecha().getTime());
                         acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
-                        if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                        if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                             datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                         } else {
                             datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -256,7 +256,7 @@ public abstract class GraficoEvolucionProyecto {
                     DatoGrafico datoEjeActual = new DatoGrafico();
                     datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
                     acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
-                    if(Propiedad.getValor("graevuproydividirXMillon").equals("true")) {
+                    if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                         datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     } else {
                         datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
