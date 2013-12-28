@@ -17,7 +17,7 @@ public class GraficosGiprom implements Serializable{
     private StringBuilder graficoNBILocalizacion = new StringBuilder();  
 
     public StringBuilder getGraficoNBI() {
-        pintarGraficoNBI();
+        
         return graficoNBI;
     }
 
@@ -44,7 +44,7 @@ public class GraficosGiprom implements Serializable{
     }
     
     
-    private void pintarGraficoNBI() {
+    public void pintarGraficoNBI(String valor) {
         
         this.graficoNBI.append("<script type=\"text/javascript\">\n");
         this.graficoNBI.append("var chart;\n");
@@ -69,8 +69,8 @@ public class GraficosGiprom implements Serializable{
         this.graficoNBI.append("chart.addArrow(arrow);\n");
         this.graficoNBI.append("chart.write(\"graficoNBI\");\n");
 
-        this.graficoNBI.append("arrow.setValue(60);\n");
-        this.graficoNBI.append("axis.setBottomText(60 + \" %\");\n");
+        this.graficoNBI.append("arrow.setValue(").append(valor).append(");\n");
+        this.graficoNBI.append("axis.setBottomText(").append(valor).append(" + \" %\");\n");
         this.graficoNBI.append("});\n");
         this.graficoNBI.append("</script>\n");
 
@@ -81,10 +81,10 @@ public class GraficosGiprom implements Serializable{
         StringBuilder datosNBIanual = new StringBuilder();
         
         datosNBIanual.append("var chartData = [{\n");
-        datosNBIanual.append("'anio': 2005,\n");
-        datosNBIanual.append("    'nbi': 23.5\n");
+        datosNBIanual.append("'anio':'2005',\n");
+        datosNBIanual.append("'nbi': 23.5\n");
         datosNBIanual.append("}, {\n");
-        datosNBIanual.append("'anio': 2006,\n");
+        datosNBIanual.append("'anio':'2006',\n");
         datosNBIanual.append("'nbi': 26.2\n");
         datosNBIanual.append("}];\n");
         

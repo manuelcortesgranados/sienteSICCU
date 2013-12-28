@@ -59,14 +59,8 @@
         <managed-bean-name>Restaurar$Password</managed-bean-name>
         <managed-bean-class>cobra.restaurarpassword.RestaurarPassword</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>   
-
-    <!--Graficos para giprom-->
-    <managed-bean>
-        <managed-bean-name>Supervisor$GraficosGiprom</managed-bean-name>
-        <managed-bean-class>cobra.Supervisor.GraficosGiprom</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+    </managed-bean>  
+    
 
     <!-- Inicio de Managed Beans de Supervisor -->   
 

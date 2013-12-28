@@ -1001,8 +1001,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
                     
                     VwInmInfoMunicipal municipal = getSessionBeanCobra().getGipromService().obtenerInformacionMunicipalGipromxId(BigDecimal.valueOf(Double.valueOf(id)));
-                    
                     setObra(getSessionBeanCobra().castearVwInformacionMunicipaltoObra(municipal));
+                    gragiprom = new GraficosGiprom();                    
+                    gragiprom.pintarGraficoNBI(getObra().getNumvaltotamorti().toString());
+                    
                     
                 } else {
                     if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
@@ -2338,5 +2340,17 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         return null;
     }
+    
+    private GraficosGiprom gragiprom;
+
+    public GraficosGiprom getGragiprom() {
+        return gragiprom;
+    }
+
+    public void setGragiprom(GraficosGiprom gragiprom) {
+        this.gragiprom = gragiprom;
+    }
+    
+    
 
 }

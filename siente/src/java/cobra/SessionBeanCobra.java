@@ -1269,6 +1269,7 @@ public class SessionBeanCobra implements Serializable {
         vista.setTipoobra(getCobraService().encontrarTipoObraPorId(1));
         vista.setTercero(new Tercero());
         vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
+        vista.getTercero().setStrapellido1(mun.getDptNombre());
         vista.setNumvaltotobra(BigDecimal.ZERO);
 
 //                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
@@ -1282,11 +1283,11 @@ public class SessionBeanCobra implements Serializable {
         vista.setStrdireccion(mun.getMncDireccion());
         vista.setStrcontratista(mun.getAlcNombre());
         vista.setStrlogros(mun.getMncEmail());
-        vista.setStrestydis(mun.getMncPaginaWeb());
-        vista.setStrcomuna(mun.getMncActividadEconomica());
+        vista.setStrestydis(mun.getMncPaginaWeb());        
+        vista.setStrimagenanterior(mun.getAlcFoto());
         if(mun.getMncTemperatura() !=null)
         {    
-            vista.setStrcorregimiento(mun.getMncTemperatura().toString());
+            vista.setStrcorregimiento(mun.getMncTemperatura().toString()+" °C");
         }
         else
         {
@@ -1325,16 +1326,16 @@ public class SessionBeanCobra implements Serializable {
 //        for (VwIndIndicadorMunicipal wind : listaindmun) {
 //            
 //        }
-        VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
-
-        if(vind !=null)
-        {
-            vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
-        }    
-        else
-        {
-            vista.setNumvlrsumahijos(BigDecimal.ZERO);
-        }
+//        VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
+//
+//        if(vind !=null)
+//        {
+//            vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
+//        }    
+//        else
+//        {
+//            vista.setNumvlrsumahijos(BigDecimal.ZERO);
+//        }
 
         return vista;
     }
