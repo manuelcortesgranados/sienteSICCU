@@ -15,7 +15,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrafonadenuevo</value>
+            <value>jdbc:postgresql:cobrafonade</value>
         </property>
         <property name="username">
             <value>cobra</value>
