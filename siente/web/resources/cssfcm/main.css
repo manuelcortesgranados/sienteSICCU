@@ -4916,28 +4916,30 @@ a:hover {
 }
 
 .ikont-hpg-giprom-ne{
-    width: 250px;
-    height: 150px;
+    width: 280px;
+    height: 180px;
     background-color: #0071BC;
 }
 
 .ikont-hot-img-ne{
     background-image: url("../imgs/icns_ne.png");
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 85px;
     display: block;
+    background-size: 180px;
 }
 
 .ikont-hot-img-pe{
     background-image: url("../imgs/icns_ne.png");
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 85px;
     display: block;
+    background-size: 180px;
 }
 
 .ikont-hpg-giprom-pe{
-    width: 250px;
-    height: 150px;
+    width: 280px;
+    height: 180px;
     background-color: #00A99D;
 }
 
@@ -4946,7 +4948,18 @@ a:hover {
 }
 
 .ikont-hot-value-ne-pe{
-    font-size: 35px;
+    font-size: 50px;
     font-family: 'open';
     color: #FFF;
+}
+
+.ikont-deta-rigth{
+    width: 300px;
+}
+
+.ikont-hot-text-ne-pe{
+    font-size: 13px;
+    color: #FFF;
+    font-weight: bolder;
+    margin-left: 21px;
 }
