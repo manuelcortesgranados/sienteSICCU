@@ -68,9 +68,9 @@ public class GraficoEvolucionContrato implements Serializable{
         grafico.getEstilo().setVerScroll(true);
         
         if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true") && getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-            grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeY"));
-        } else {
             grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeYMillones"));
+        } else {
+            grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeY"));
         }
 
         List<Planificacionpago> planificacionesPago = getSessionBeanCobra().getCobraService().encontrarPlanificacionpagoxContrato(getNuevoContratoBasico().getContrato());
