@@ -1,342 +1,362 @@
-@font-face {
-    font-family: "open";
-    src: url("font/OpenSans-Light.ttf");
-}
-
 .tabla {
-    width: 100%;    
-    font-family:arial,verdana,times;
-    font-size:12px;
+    width: 100%!important;    
+    font-family:arial,verdana,times!important;
+    font-size:12px!important;
 }
 .tabla p {
-    clear:both;
-    width: 100%;
-    margin: 0;
+    clear:both!important;
+    width: 100%!important;
+    margin: 0!important;
 }
 .tabla p > div{
-    padding: 1px;
-    float:left;
-    width:100px;
+    padding: 1px!important;
+    float:left!important;
+    width:100px!important;
 }
 
 .tabla .columna {
-    padding: 2px;
-    float:left;
+    padding: 2px!important;
+    float:left!important;
 }
 
-.modal-content{
-    width: 450px;
-    height: 150px;
+.modal-content-fonade{
+    width: 450px!important;
+    height: 200px!important;    
 }
 
-.modal-header{
-    width: 100%;
-    clear: both;
-    height: 40px;
-    border-color: transparent;
-    background-color: #00B2E0;
+.modal-header-fonade{
+    width: 100%!important;
+    clear: both!important;
+    height: 40px!important;
+    border-color: transparent!important;
+    background-color: #00B2E0!important;
 }
 
-.modal-body{
-    width: 100%;
-    height: 160px;    
-    border-width: 0px;
+.modal-body-fonade{
+    width: 100%!important;
+    height: 160px!important;    
+    border-width: 0px!important;
     border: transparent !important;
-    background-color: #FFF;
+    background-color: #FFF!important;
 }
 
 .modal-content label, .modal-content div, .modal-content p{
-    font-family: 'open';
+    font-family: 'open'!important;
 }
 
 .textvalla1{
-    color: #FFF;
-    font-size: 1.3em;
-    position: relative;
-    top: 5px;
-    left: 10px;
-    text-transform: uppercase;
-    font-weight: bolder;
+    color: #FFF!important;
+    font-size: 1.3em!important;
+    position: relative!important;
+    top: 5px!important;
+    left: 10px!important;
+    text-transform: uppercase!important;
+    font-weight: bolder!important;
 }
 .textvalla2{
-    font-size: 10px;
-    color: #585858;
+    font-size: 10px!important;
+    color: #585858!important;
 }
 
 .textvalla3{
-    font-size: 12px;
-    color: #000;
+    font-size: 12px!important;
+    color: #000!important;
 }
 
 .textvalla4{
-    color: #FFF;
-    font-weight: bolder;
-    font-size: 12px;
-    margin-left: 5px;
-    margin-top: 15px;
+    color: #FFF!important;
+    font-weight: bolder!important;
+    font-size: 12px!important;
+    margin-left: 5px!important;
+    margin-top: 15px!important;
 }
 
 .textvalla5{
-    color: #FFF;
-    font-weight: bolder;
-    font-size: 17px;
+    color: #FFF!important;
+    font-weight: bolder!important;
+    font-size: 17px!important;
 
 }
 
 .textvalla6{
-    font-size: 1.5em;
-    color: #585858;
+    font-size: 1.5em!important;
+    color: #585858!important;
 }
 
 .textvalla7{
-    color: #FFF;
-    font-size: 1.3em;
-    position: relative;
-    top: 5px;
-    left: 10px;
-    text-transform: uppercase;
+    color: #FFF!important;
+    font-size: 1.3em!important;
+    position: relative!important;
+    top: 5px!important;
+    left: 10px!important;
+    text-transform: uppercase!important;
 }
 
 .textvalla8{
-    font-size: 12px;
-    font-family: 'open';
-    font-style: italic;
+    font-size: 12px!important;
+    font-family: 'open'!important;
+    font-style: italic!important;
     color : #00B3DF!important;
-    font-weight: bolder;
-    text-decoration: none;
+    font-weight: bolder!important;
+    text-decoration: none!important;
 }
 
 .content-left{
     width: 310px!important;
-    float: left;
-    margin-left: 10px;
+    float: left!important;
 }
 
 .content-rigth{
     width: 130px!important;
-    float: left;
+    float: left!important;
 }
 
 .imagotipo{
-    float: left;
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
-    margin-top: 2px;
-    background-image: url("img/imagotipo.png");
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-size: 30px 30px;
+    float: left!important;
+    width: 30px!important;
+    height: 30px!important;
+    margin-left: 10px!important;
+    margin-top: 2px!important;
+    background-image: url("../imgs/valla/imagotipo.png")!important;
+    background-repeat: no-repeat!important;
+    background-position: 0px 0px!important;
+    background-size: 30px 30px!important;
 }
 
 .vallacontentinfo{
-    width: 95px;
-    height: 60px;
-    margin-right: 3px;
-    color: #FFF;
-    margin-top: 5px;
+    width: 95px!important;
+    height: 60px!important;
+    margin-right: 3px!important;
+    color: #FFF!important;
+    margin-top: 5px!important;
 }
 
 .imgvalla{
-    width: 120px;
-    height: 100px;
+    width: 120px!important;
+    height: 100px!important;
 }
 
 
 
 .imgaction{
-    background-image: url("img/btns_sprite.png");
-    background-repeat: no-repeat;
-    background-size: 75px 36px;
-    width: 25px;
-    height: 20px;
-    display: block;
-    cursor: pointer;
+    background-image: url("../imgs/valla/btns_sprite.png")!important;
+    background-repeat: no-repeat!important;
+    background-size: 75px 36px!important;
+    width: 25px!important;
+    height: 20px!important;
+    display: block!important;
+    cursor: pointer!important;
 }
 
 .imgaction.button1{
-    background-position: 0px 3px;
+    background-position: 0px 3px!important;
 }
 
 .imgaction.button2{
-    background-position: -25px 3px;
+    background-position: -25px 3px!important;
 }
 
 .imgaction.button3{
-    background-position: -50px 3px;
+    background-position: -50px 3px!important;
 }
 .imgaction.button1:hover{
-    background-position: 0px -16px;
+    background-position: 0px -16px!important;
 }
 
 .imgaction.button2:hover{
-    background-position: -25px -16px;
+    background-position: -25px -16px!important;
 }
 
 .imgaction.button3:hover{
-    background-position: -50px -16px;
+    background-position: -50px -16px!important;
 }
 
 .imgaction:link {
-    position: relative;
+    position: relative!important;
 }
 
 .imgaction:after{
-    font-family: "century";
-    content: attr(value);
-    position: absolute;
-    color: white;
-    top: auto;
-    left: auto;
-    font-size: 1.2em;
-    background-color: rgba(0,0,0,0.8);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    padding: 5px 15px;
-    display: none;
-    -moz-border-radius: 10px ; 
-    -ms-border-radius: 10px ; 
-    -webkit-border-radius: 10px ; 
-    border-radius: 10px; 
-    margin-left: -10px;
-    margin-top: 20px;
-    z-index: 1;
+    font-family: "open"!important;
+    content: attr(value)!important;
+    position: absolute!important;
+    color: white!important;
+    top: auto!important;
+    left: auto!important;
+    font-size: 1.2em!important;
+    background-color: rgba(0,0,0,0.8)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    padding: 5px 15px!important;
+    display: none!important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px!important; 
+    margin-left: -35px!important;
+    margin-top: -25px!important;
+    z-index: 1!important;
 }
 a.imgaction:hover:after{
-    display: block;    
+    display: block!important;    
 }
 
 .tool{
-    cursor: pointer;
+    cursor: pointer!important;
 }
 
 .tool div{
-    -moz-transform: scaleY(0);-moz-transform-origin: 50% 0;-moz-transition: all 0.5s ease 0s;
-    -webkit-transform: scaleY(0);-webkit-transform-origin: 50% 0;-webkit-transition: all 0.5s ease 0s;
-    -o-transform: scaleY(0);-o-transform-origin: 50% 0;-o-transition: all 0.5s ease 0s;
-    -ms-transform: scaleY(0);-ms-transform-origin: 50% 0;-ms-transition: all 0.5s ease 0s;
-    transform: scaleY(0);transform-origin: 50% 0;transition: all 0.5s ease 0s;
-    -ms-border-radius: 10px ; border-radius: 10px; 
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9);
+    -moz-transform: scaleY(0)!important;-moz-transform-origin: 50% 0!important;-moz-transition: all 0.5s ease 0s!important;
+    -webkit-transform: scaleY(0)!important;-webkit-transform-origin: 50% 0!important;-webkit-transition: all 0.5s ease 0s!important;
+    -o-transform: scaleY(0)!important;-o-transform-origin: 50% 0!important;-o-transition: all 0.5s ease 0s!important;
+    -ms-transform: scaleY(0)!important;-ms-transform-origin: 50% 0!important;-ms-transition: all 0.5s ease 0s!important;
+    transform: scaleY(0)!important;transform-origin: 50% 0!important;transition: all 0.5s ease 0s!important;
+    -ms-border-radius: 10px !important; border-radius: 10px!important; 
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.9)!important;
     color: white!important;
-    font-size: 10px;
-    opacity: 0;
-    padding: 5px;
-    width: auto;
-    position: absolute;
-    color: white;
-    top: auto;
-    left: auto;
-    z-index: 1000;
+    font-size: 1em!important;
+    font-family: "open"!important;
+    opacity: 0!important;
+    padding: 5px!important;
+    width: auto!important;
+    position: absolute!important;
+    color: white!important;
+    top: auto!important;
+    left: auto!important;
+    z-index: 1000!important;
 }
 
 .tool:hover div {
-    -moz-transform: scaleY(1);-webkit-transform: scaleY(1);-o-transform: scaleY(1);-ms-transform: scaleY(1);transform: scaleY(1);
-    opacity: 1;
+    -moz-transform: scaleY(1)!important;-webkit-transform: scaleY(1);-o-transform: scaleY(1);-ms-transform: scaleY(1);transform: scaleY(1);
+    opacity: 1!important;
 }
-
 
 .imgestado:after{
-    font-family: "century";
-    content: attr(value);
-    position: absolute;
-    color: white;
-    top: auto;
-    left: auto;
-    font-size: 1.2em;
-    background-color: rgba(0,0,0,0.8);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000');
-    padding: 5px 15px;
-    display: none;
-    -moz-border-radius: 10px ; 
-    -ms-border-radius: 10px ; 
-    -webkit-border-radius: 10px ; 
-    border-radius: 10px; 
-    margin-left: 35px;
-    margin-top: 10px;
-    z-index: 1;
+    font-family: "century"!important;
+    content: attr(value)!important;
+    position: absolute!important;
+    color: white!important;
+    top: auto!important;
+    left: auto!important;
+    font-size: 1.2em!important;
+    background-color: rgba(0,0,0,0.8)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    padding: 5px 15px!important;
+    display: none!important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px!important; 
+    margin-left: 35px!important;
+    margin-top: 10px!important;
+    z-index: 1!important;
 }
 .imgestado:hover:after{
-    display: block;    
+    display: block!important;    
 }
 
+.imgtipo:after{
+    font-family: "century"!important;
+    content: attr(value)!important;
+    position: absolute!important;
+    color: white!important;
+    top: auto!important;
+    left: auto!important;
+    font-size: 1.2em!important;
+    background-color: rgba(0,0,0,0.8)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0.8, StartColorstr='#000000', EndColorstr='#000000')!important;
+    padding: 5px 15px!important;
+    display: none!important;
+    -moz-border-radius: 10px !important; 
+    -ms-border-radius: 10px !important; 
+    -webkit-border-radius: 10px !important; 
+    border-radius: 10px!important; 
+    margin-left: 35px!important;
+    margin-top: 10px!important;
+    z-index: 1!important;
+}
+.imgtipo:hover:after{
+    display: block!important;    
+}
+
+
 .sepate-title{
-    width: 20px;
-    height: 25px;
-    border-right: #F8F220 1px solid;
-    margin-top: 5px;
+    width: 20px!important;
+    height: 25px!important;
+    border-right: #F8F220 1px solid!important;
+    margin-top: 5px!important;
 }
 
 .info-ne{
-    background-color: #0071BD;
+    background-color: #0071BD!important;
 }
 
 .info-nbi{
-    background-color: #2AABE4;
+    background-color: #2AABE4!important;
 }
 
 .info-pe{
-    background-color: #01A89E;
+    background-color: #01A89E!important;
 }
 
 .img-informe-pe{
-    background-image: url("img/fcm_icons_personas.png");
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-    display: block;
-    margin-top: 15px;
+    background-image: url("../imgs/valla/fcm_icons_personas.png")!important;
+    background-repeat: no-repeat!important;
+    width: 40px!important;
+    height: 40px!important;
+    display: block!important;
+    margin-top: 15px!important;
 }
 
 .img-datos-habitantes{
-    background-image: url("img/fcm_icons_personas.png");
-    background-repeat: no-repeat;
-    background-position: -40px 0px;
-    width: 40px;
-    height: 40px;
-    display: block;    
-    margin-top: 15px;
+    background-image: url("../imgs/valla/fcm_icons_personas.png")!important;
+    background-repeat: no-repeat!important;
+    background-position: -40px 0px!important;
+    width: 40px!important;
+    height: 40px!important;
+    display: block!important;    
+    margin-top: 15px!important;
 }
 
 .colum-potencialenergetico{
-    width: 70px;
+    width: 70px!important;
 }
 
-.colum-img-datos{
-    width: 35px;
+.colum-img-datos, .colum-img-pe{
+    width: 35px!important;
 }
 
 .indicador-img-ne{
-    background-image: url("img/fcm_icons_indicadores.png");
-    background-repeat: no-repeat;
-    width: 20px;
-    height: 25px;
-    display: inline-block;    
-    position: relative;
-    top: 4px;
+    background-image: url("../imgs/valla/fcm_icons_indicadores.png")!important;
+    background-repeat: no-repeat!important;
+    width: 20px!important;
+    height: 25px!important;
+    display: inline-block!important;    
+    position: relative!important;
+    top: 4px!important;
 }
 .indicador-img-nbi{
-    background-image: url("img/fcm_icons_indicadores.png");
-    background-repeat: no-repeat;
-    background-position: -23px 0px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;    
-    position: relative;
-    top: 4px;
+    background-image: url("../imgs/valla/fcm_icons_indicadores.png")!important;
+    background-repeat: no-repeat!important;
+    background-position: -23px 0px!important;
+    width: 25px!important;
+    height: 25px!important;
+    display: inline-block!important;    
+    position: relative!important;
+    top: 4px!important;
 }
 .indicador-img-pe{
-    background-image: url("img/fcm_icons_indicadores.png");
-    background-repeat: no-repeat;
-    background-position: -53px 0px;
-    width: 25px;
-    height: 25px;
-    display: inline-block;    
-    position: relative;
-    top: 4px;
+    background-image: url("../imgs/valla/fcm_icons_indicadores.png")!important;
+    background-repeat: no-repeat!important;
+    background-position: -58spx 0px!important;
+    width: 25px!important;
+    height: 25px!important;
+    display: inline-block!important;    
+    position: relative!important;
+    top: 4px!important;
 }
 
 .panelcenter{
-    text-align: center;
+    text-align: center!important;
 }
