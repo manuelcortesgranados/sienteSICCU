@@ -920,7 +920,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
-        getSessionBeanCobra().ConvertirFechaServidor();
         filtro.setIntvista(1);
         filtro.setIntcodfase(-1);
         filtro.setTipointervencion(-1);
