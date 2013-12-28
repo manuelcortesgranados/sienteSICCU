@@ -1509,7 +1509,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public void setTemp(List<TerceroEntidadLista> temp) {
         this.temp = temp;
-    }    
+    }
 
     public UIDataTable getTablaObrasPadres() {
         return tablaObrasPadres;
@@ -1610,6 +1610,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().llenadodatos();
             llenadoSelectItems();
             limpiarobra();
+
             if (getSessionBeanCobra().getCobraService().isSolibol()) {
 
                 cargarObra(getSessionBeanCobra().getCobraService().getProyectoSoli());
@@ -1970,7 +1971,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
         chequiarFase(0);
-        if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")) {
+        if (getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")
+                || getSessionBeanCobra().getBundle().getString("aplicafaseenproyecto").equals("false")) {
             tiahselect = 2;
             obtenerFaseSeleccionada(1);
         }
@@ -3694,7 +3696,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 if (fechasvalidas) {
                     obranueva.setTipoestadobra(new Tipoestadobra(0));
                     guardarObraTemporal();
-                } else{
+                } else {
                     fechaCambio();
                     return "datosbasicosnuevoproyecto";
                 }
@@ -4285,8 +4287,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return
      */
     public String llenarTipoProyecto() {
-        getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
         setTiproyectoselec(0);
+
+        if (bundle.getString("tipoproyectoporsector").equals("true")) {
+            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(1));
+        } else {
+            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
+        }
 
         return null;
     }
@@ -4310,6 +4317,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
         getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(getTiproyectoselec()));
 
+    }
+
+    /**
+     * Si aplica proyecto por sector en el cambio de clase de obra (sector) se
+     * consultan los tipos de proyecto asociados a esa clase de obra (sector).
+     */
+    public void cambioClaseObra() {
+        if (bundle.getString("tipoproyectoporsector").equals("true")) {
+            setTiproyectoselec(0);
+            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(obranueva.getClaseobra().getIntidclaseobra()));
+        }
     }
 
     /**
@@ -4626,8 +4644,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         int i = listamarcadores.size();
         try {
             String lat = listamarcadores.get(i - 1).getLatitude();
-            String longi = listamarcadores.get(i - 1).getLongitude();  
-            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(lat,longi);
+            String longi = listamarcadores.get(i - 1).getLongitude();
+            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(lat, longi);
             listamarcadores.get(i - 1).setAddress(placeMarkNew.getAddress().toString());
             listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
         } catch (Exception ex) {
@@ -4820,13 +4838,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * del convenio
      */
     public boolean validarFechasProyectoInicio() {
-        if(obranueva.getContrato() !=null){
-        if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
-            FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
-            datosbas = false;
-            return false;
-        }
-        return  true;
+        if (obranueva.getContrato() != null) {
+            if (obranueva.getDatefeciniobra().compareTo(obranueva.getContrato().getDatefechaini()) < 0) {
+                FacesUtils.addErrorMessage(bundle.getString("fechaerrorinicio"));
+                datosbas = false;
+                return false;
+            }
+            return true;
         }
         return true;
     }
@@ -4839,13 +4857,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * convenio
      */
     public boolean validarFechasProyectoFin() {
-        if(obranueva.getContrato() != null){
-        if (obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0) {
-            FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));
-            datosbas = false;
-            return false;
-        }
-        return  true;
+        if (obranueva.getContrato() != null) {
+            if (obranueva.getDatefecfinobra().compareTo(obranueva.getContrato().getDatefechafin()) > 0) {
+                FacesUtils.addErrorMessage(bundle.getString("fechaerrorfin"));
+                datosbas = false;
+                return false;
+            }
+            return true;
         }
         return true;
     }
@@ -5624,15 +5642,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public void obtenerPuntopordireccion() {
         //Marcador marke = geocode.obtenerMarcadorporDireccion(address);
-       
+
         try {
-            Location loc=GenericServicesFactory.getLocationService().getLocationFromAddress(address);
+            Location loc = GenericServicesFactory.getLocationService().getLocationFromAddress(address);
             System.out.println("loc = " + loc.getLatitude());
             System.out.println("loc long = " + loc.getLongitude());
-            if(loc!=null)
-            {
-                 Marcador marke = new Marcador();
-                 marke.setDraggable("true");
+            if (loc != null) {
+                Marcador marke = new Marcador();
+                marke.setDraggable("true");
                 marke.setTipo(tiposelec);
                 marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
                 marke.setLongitude(loc.getLongitude().toString());
@@ -5640,8 +5657,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 listamarcadores.add(marke);
                 redibujarmapa = false;
                 verConfirmar = true;
-            }
-            else {
+            } else {
                 //mensaje no encontro con la direccion suministrada
                 address = "";
                 verConfirmar = false;
