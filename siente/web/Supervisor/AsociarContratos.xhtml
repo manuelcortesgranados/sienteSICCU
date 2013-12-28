@@ -90,6 +90,9 @@
                                                 <h:outputText  styleClass="ikont-hot-tipocontrato"   value="Tipo Contrato"/>
                                             </rich:column>
                                             <rich:column styleClass="ikont-colum-superior-consulta">
+                                                <h:outputText  styleClass="ikont-hot-tipocontrato"   value="Valor asociado a proyecto"/>
+                                            </rich:column>
+                                            <rich:column styleClass="ikont-colum-superior-consulta">
                                                 <h:outputText  styleClass="ikont-hot-desaso"   value="Desasociar"/>
                                             </rich:column>
                                         </rich:columnGroup>
@@ -117,6 +120,11 @@
                                         <rich:column id="tipocontrato" >
                                             <h:outputText  styleClass="ikont-hot-obr"    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
                                             <h:outputText  styleClass="ikont-hot-interv "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText  styleClass="ikont-hot-datef"    value="#{contrarow.numvalorrelacion}">
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                            </h:outputText>
                                         </rich:column>
                                         <rich:column id="desasociar" >
                                             <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria}"
