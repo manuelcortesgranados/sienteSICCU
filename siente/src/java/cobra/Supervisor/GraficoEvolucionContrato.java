@@ -67,7 +67,7 @@ public class GraficoEvolucionContrato implements Serializable{
         grafico.getEstilo().setVerCursor(true);
         grafico.getEstilo().setVerScroll(true);
         
-        if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true")) {
+        if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true") && getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(BigDecimal.valueOf(1000000)) > 0) {
             grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeY"));
         } else {
             grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeYMillones"));
@@ -102,7 +102,7 @@ public class GraficoEvolucionContrato implements Serializable{
                 DatoGrafico datoPlani = new DatoGrafico();
                 datoPlani.setValorX("" + planificacionpago.getDatefechapago().getTime());
                 acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(planificacionpago.getNumvlrpago().divide(divisor));
-                if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true")) {
+                if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true") && getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                     datoPlani.setValorY(acumuladoVlrPlanificado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                 } else {
                     datoPlani.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -157,7 +157,7 @@ public class GraficoEvolucionContrato implements Serializable{
                         acumuladoVlrEjecutado = acumuladoVlrEjecutado.subtract(movimiento.getNumvlrreintegro().divide(divisor));
                         stringEtiDatoPlaniActual.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(movimiento.getDatefechainirecursos()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoEje")).append(datoPlani.getValorY()).append(" ").append(movimiento.getNumvlrreintegro().multiply(BigDecimal.valueOf(-1)).divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     }
-                    if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true")) {
+                    if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true") && getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                         datoPlani.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     } else {
                         datoPlani.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -172,7 +172,7 @@ public class GraficoEvolucionContrato implements Serializable{
                         acumuladoVlrEjecutado = acumuladoVlrEjecutado.subtract(movimiento.getNumvlrreintegro().divide(divisor));
                         stringEtiDatoPlaniActual.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(movimiento.getDatefechainirecursos()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoEje")).append(movimiento.getNumvlrreintegro().multiply(BigDecimal.valueOf(-1)).divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     }
-                    if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true")) {
+                    if(Propiedad.getValor("graEvuContratodividirXMillon").equals("true") && getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(BigDecimal.valueOf(1000000)) > 0) {
                         datoPlani.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     } else {
                         datoPlani.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
