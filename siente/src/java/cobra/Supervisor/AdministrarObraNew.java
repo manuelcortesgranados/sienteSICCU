@@ -28,6 +28,7 @@ import co.com.interkont.cobra.to.Vereda;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.ArchivoWeb;
 import cobra.Marcador;
@@ -162,8 +163,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
-    
-    public int controltipodocumento =0;
+
+    public int controltipodocumento = 0;
 
     /**
      * Variable para proyectos que pertenecen a Marco
@@ -886,8 +887,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setControltipodocumento(int controltipodocumento) {
         this.controltipodocumento = controltipodocumento;
     }
-    
-    
 
     public void guardarModificacionObjeto() {
         btn_habilitarModificarObjeto = true;
@@ -958,7 +957,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
             //mostrarGoogle();
             //obtenerTacometro();
-
         } else {
 
             try {
@@ -994,18 +992,32 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         int cual = opcion;
-        
+
         if (id != null) {
 
             if (getObra() != null && id != null) {
                 if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
-                    
+
                     VwInmInfoMunicipal municipal = getSessionBeanCobra().getGipromService().obtenerInformacionMunicipalGipromxId(BigDecimal.valueOf(Double.valueOf(id)));
                     setObra(getSessionBeanCobra().castearVwInformacionMunicipaltoObra(municipal));
-                    gragiprom = new GraficosGiprom();                    
+                    gragiprom = new GraficosGiprom();
                     gragiprom.pintarGraficoNBI(getObra().getNumvaltotamorti().toString());
-                    
-                    
+
+                    List<VwIndIndicadorMunicipal> listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040301", BigDecimal.ONE);
+                    gragiprom.pintarGraficoNBIanual(listindhabanual);
+
+                    listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040104", BigDecimal.valueOf(2));
+                    if (!listindhabanual.isEmpty()) {
+                        VwIndIndicadorMunicipal den = listindhabanual.get(0);
+                        listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorPoblacionMunicipalxcodmunicipio(municipal.getLclCodigo());
+                        if (!listindhabanual.isEmpty()) {
+                            gragiprom.pintarGraficoNBILocalidad(listindhabanual, den);
+                        }
+                       
+                    }
+                      gragiprom.setListadesempeno(getSessionBeanCobra().getGipromService().obtenerIndicadorDesempenoMunicipalxcodmunicipio(municipal.getLclCodigo()));
+                      gragiprom.llenarDistribucionEtnica(getSessionBeanCobra().getGipromService().obtenerIndicadorDistribucionEtnica(municipal.getLclCodigo()));
+
                 } else {
                     if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
                         getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
@@ -1014,10 +1026,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                         obtenerTacometro();
                     }
                     getDetalleObra().iniciardetalle();
-                getDetalleObra().setFinentrega(getObra().getDatefecfinobra().toString());
-                iniciarImagenes();
+                    getDetalleObra().setFinentrega(getObra().getDatefecfinobra().toString());
+                    iniciarImagenes();
                 }
-                
+
                 opcion = cual;
             } else {
                 getDetalleObra().iniciardetalle();
@@ -1374,7 +1386,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public void llenarSelectTipoDocumento() {
-        controltipodocumento =3;
+        controltipodocumento = 3;
         this.listaTipoDocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos(controltipodocumento);
         this.selectItemTipoDocumento = new SelectItem[this.listaTipoDocumento.size()];
         int i = 0;
@@ -1761,7 +1773,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         llenarSelectTipoImagenes();
         this.imagenevolucionobra.setTipoimagen(new Tipoimagen(1, "", false));
-        
+
         return "adminimaginobra";
     }
 
@@ -2340,7 +2352,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         return null;
     }
-    
+
     private GraficosGiprom gragiprom;
 
     public GraficosGiprom getGragiprom() {
@@ -2350,7 +2362,5 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setGragiprom(GraficosGiprom gragiprom) {
         this.gragiprom = gragiprom;
     }
-    
-    
 
 }
