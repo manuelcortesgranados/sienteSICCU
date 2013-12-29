@@ -124,8 +124,33 @@ public class Alimentar implements Serializable{
     private CargadorArchivosWeb cargadorActaPrecios = new CargadorArchivosWeb();
     private boolean vertodoalimentar = true;
     private Date fechaAlimentacion;
-   private  List<Periodo> lstAlimentacionxfecha;
+    private  List<Periodo> lstAlimentacionxfecha;
+   
+    /**
+     * Cantidad programada para la obra
+     */
+    private float cantidadProgramadaObra;
+    /**
+     * Cantidad programada para el periodo
+     */
+    private float cantidadProgramadaPeriodoSeleccionado;
 
+    public float getCantidadProgramadaPeriodoSeleccionado() {
+        return cantidadProgramadaPeriodoSeleccionado;
+    }
+
+    public void setCantidadProgramadaPeriodoSeleccionado(float cantidadProgramadaPeriodoSeleccionado) {
+        this.cantidadProgramadaPeriodoSeleccionado = cantidadProgramadaPeriodoSeleccionado;
+    }
+
+    public float getCantidadProgramadaObra() {
+        return cantidadProgramadaObra;
+    }
+
+    public void setCantidadProgramadaObra(int cantidadProgramadaObra) {
+        this.cantidadProgramadaObra = cantidadProgramadaObra;
+    }
+    
     public List<Periodo> getLstAlimentacionxfecha() {
         return lstAlimentacionxfecha;
     }
@@ -1665,6 +1690,8 @@ public class Alimentar implements Serializable{
 
     public String habilitarEdicionActividades() {
         editarActividades = true;
+        calcularCantidadProgramadaObra();
+        calcularCantidadProgramadaPeriodoSeleccionado();
         return null;
     }
 
@@ -1933,6 +1960,29 @@ public class Alimentar implements Serializable{
             }
         } else {
             return false;
+        }
+    }
+    
+    /**
+     * Calcula la cantidad planifcada de la obra
+     * @return 
+     */
+    public void calcularCantidadProgramadaObra() {
+        cantidadProgramadaObra = 0;
+        for (Relacionalimentacionactividad relacionalimentacionactividad : registrosmatrix) {
+            cantidadProgramadaObra += relacionalimentacionactividad.getActividadobra().getFloatcantplanifao();
+        }
+    }
+    
+    /**
+     * Calcula la cantidad planificada para el periodo seleccionado al cual se 
+     * le reportará avance
+     */
+    public void calcularCantidadProgramadaPeriodoSeleccionado() {
+        cantidadProgramadaPeriodoSeleccionado = 0;
+        List<Relacionactividadobraperiodo> relacionesactividadobraperiodo = getSessionBeanCobra().getCobraService().obtenerRelacionesactividadobraperiodo(getSessionBeanCobra().getCobraService().getPeriodo().getIntidperiodo());
+        for (Relacionactividadobraperiodo relacionactividadobraperiodo : relacionesactividadobraperiodo ) {
+            cantidadProgramadaPeriodoSeleccionado += relacionactividadobraperiodo.getFloatcantplanif();
         }
     }
 }

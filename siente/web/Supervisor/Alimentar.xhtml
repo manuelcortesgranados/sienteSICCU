@@ -138,12 +138,21 @@
 
                                         <f:facet name="header">
                                             <rich:columnGroup>
-                                                <rich:column    colspan="5">
+                                                <rich:column    colspan="8">
 
                                                 </rich:column>
 
-                                                <rich:column  breakRowBefore="true" width="160px">
+                                                <rich:column  breakRowBefore="true" width="150px">
                                                     <h:outputText  styleClass="ikont-hot-rc1"   value="#{var.valorproyecto}"/>
+                                                </rich:column>
+                                                <rich:column  width="70px">
+                                                    <h:outputText  styleClass="ikont-hot-titulocantprogramada"   value="#{var.cantidadprogramada}"/>
+                                                </rich:column>
+                                                <rich:column  width="100px">
+                                                    <h:outputText  styleClass="ikont-hot-titulovalorprogramadoperiodo"   value="#{var.valorprogramadoperiodo}"/>
+                                                </rich:column>
+                                                <rich:column  width="70px">
+                                                    <h:outputText  styleClass="ikont-hot-titulocantidadprogramadaperiodo"   value="#{var.cantidadprogramadaperiodo}"/>
                                                 </rich:column>
                                                 <rich:column  width="150px">
                                                     <h:outputText  styleClass="ikont-hot-rc2"   value="#{var.valorejecutadofecha}"/>
@@ -168,6 +177,19 @@
                                                 <rich:column >
                                                     <h:outputText  styleClass="ikont-hot-stvaltotal2"   id="stvaltotal2"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                         <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-cantprogramada"   id="ikont-hot-cantprogramada"   value="#{Supervisor$Alimentar.cantidadProgramadaObra}">
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-valorprogramadoperiodo"   id="valorprogramadoperiodo"   value="#{SessionBeanCobra.cobraService.periodo.numvaltotplanif}">
+                                                        <f:convertNumber pattern="#{var.formatomoneda}" maxFractionDigits="6" minFractionDigits="2"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText  styleClass="ikont-hot-cantidadprogramadaperiodo"   id="cantidadprogramadaperiodo"   value="#{Supervisor$Alimentar.cantidadProgramadaPeriodoSeleccionado}">
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >
