@@ -2852,9 +2852,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         getObranueva().setBoolincluyeaiu(false);
         listaBarrios = new ArrayList<Barrio>();
         listaVeredas = new ArrayList<Vereda>();
-        tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         tiahselect = getObranueva().getClaseobra().getFase().getIntidfase();
-        getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto() - 1);
+        cambioClaseObra(); // Llenar la lista de proyectos si filtra por clase obra, pues estaría vacía.
+        tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         seleccionarsubtipo();
         subtiposelec = getObranueva().getTipoobra().getInttipoobra();
         sumValorContrato = BigDecimal.ZERO;
@@ -4316,9 +4316,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      */
     public void seleccionarsubtipo() {
-
         getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(getTiproyectoselec()));
-
     }
 
     /**
