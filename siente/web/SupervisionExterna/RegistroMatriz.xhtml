@@ -111,7 +111,9 @@
                                 <h:outputText  styleClass="ikont-hot-strnombreinforme"   value="#{actual.strnombreinforme}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}"/>
+                                <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}">
+                                    <f:convertDateTime pattern="#{var.formatofechahora}"/>
+                                </h:outputText>    
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink  styleClass="ikont-acl-cargarvisitafallida"   value="#{var.cargarvisitafallida}" action="#{Supervision$Externa.cargarVisitaFallida}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
