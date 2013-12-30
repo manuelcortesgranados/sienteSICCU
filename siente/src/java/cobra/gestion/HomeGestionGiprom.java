@@ -2860,14 +2860,14 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna\">");
                 descripcion.append("<label class=\"textvalla1\">");
-                descripcion.append("nombre localidad");
+                descripcion.append(obra.getStrnombreobra());
                 descripcion.append("</label>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna sepate-title\">");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna\">");
                 descripcion.append("<label class=\"textvalla7\">");
-                descripcion.append("nombre depto");
+                descripcion.append(obra.getStrdireccion());
                 descripcion.append("</label>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
@@ -2904,17 +2904,17 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"columna \">");
                 descripcion.append("<br/>");
                 descripcion.append("<span class=\"textvalla2\">");
-                descripcion.append("# de habiatantes: ");
+                descripcion.append("# de habitantes: ");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla3\">");
-                descripcion.append("343.042");
+                descripcion.append(obra.getObra().getNumvaldeclarado());
                 descripcion.append("</span>");
                 descripcion.append("<br/>");
                 descripcion.append("<span class=\"textvalla2\">");
                 descripcion.append("# de encuestados: ");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla3\">");
-                descripcion.append("343.042");
+                descripcion.append(obra.getObra().getNumvalavanfisicodeclarado());
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
@@ -2927,7 +2927,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<span class=\"indicador-img-ne\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append("35.03%");
+                descripcion.append(obra.getObra().getNumvalprogramejec()).append(" %");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
@@ -2939,7 +2939,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<span class=\"indicador-img-nbi\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append("35.02%");
+                descripcion.append(obra.getObra().getNumvaltotamorti()).append("%");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
@@ -2951,7 +2951,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<span class=\"indicador-img-pe\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append("35.01%");
+                descripcion.append(obra.getObra().getNumvalavanfinanciaerodeclarado()+"%");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
@@ -2982,10 +2982,10 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                         descripcion.append("</a>");
                         descripcion.append("</div>");
                     }
-                    descripcion.append("<div class=\"columna\">");
-                    descripcion.append("<a class=\"imgaction button3\" href=\"").append(urlImages).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Fotos\" >");
-                    descripcion.append("</a>");
-                    descripcion.append("</div>");
+//                    descripcion.append("<div class=\"columna\">");
+//                    descripcion.append("<a class=\"imgaction button3\" href=\"").append(urlImages).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Fotos\" >");
+//                    descripcion.append("</a>");
+//                    descripcion.append("</div>");
                     descripcion.append("</p>");
                 } else if (obra.getTipoestadobra().getIntestadoobra() == 0 && !filtro.isIsciu()) {
                     if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnproyecto()) {

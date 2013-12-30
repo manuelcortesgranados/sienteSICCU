@@ -1253,6 +1253,9 @@ public class SessionBeanCobra implements Serializable {
             vista.setStrobjetoobra("");
         }
         vista.setStrdireccion(mun.getMncNombre()+" , "+mun.getDptNombre());
+        
+        vista.setObra(castearVwInformacionMunicipaltoObra(mun));
+        
         return vista;
     }
 
