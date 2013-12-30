@@ -888,15 +888,15 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModifica
     border-radius: 2px;
     font-family:open;
     font-size:0.75em;
-    color:#9CFF00;
+    color:#FFFF0B;
     text-align:center;
     padding:5px 8px; 
     text-decoration: none;
     margin-right: 5px;
 }
 a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesPasosModificar:hover {
-    background: #1E4C00;
-    color:#9CFF00;
+    background: #00B3DF;
+    color:#FFFF0B;
 }
 
 .marcocambioestado{
@@ -907,7 +907,7 @@ a.busquedavanzada {
     width:150px;
     height:25px;
     background-color: #00B3DF;
-    color: #9CFF00;
+    color: #FFFF0B;
     padding: 5px 8px 5px 30px;
     background-image:url(../imgs/bt_buscar.png);
     background-repeat:no-repeat;
@@ -922,8 +922,8 @@ a.busquedavanzada {
 }
 
 a.busquedavanzada:hover {
-    background-color:#1E4C00;
-    color: #9CFF00;
+    background-color:#00B3DF;
+    color: #FFFF0B;
 }
 
 a.anadirimagen {
@@ -1351,7 +1351,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .ikont-hpg-menu-nuevo-convenio .ikont-menu-detalle-text:hover, .ikont-hpg-menu-nuevo-convenio .ikont-menu-detalle-text.buttonactive{
-    color: #9CFF00;
+    color: #FFFF0B;
     font-weight: bold;
 }
 
@@ -1397,7 +1397,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-menu-buttons-ext-finalizar{
     top: -32px;
-    border-bottom: 1px solid #9CFF00;
+    border-bottom: 1px solid #FFFF0B;
     width: 60px;
     height: 17px;
     margin-left: 150px;
@@ -1405,7 +1405,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-menu-buttons-ext-guardar{
     top: -32px;
-    border-bottom: 1px solid #9CFF00;
+    border-bottom: 1px solid #FFFF0B;
     width: 120px;
     height: 17px;
 }
@@ -2001,7 +2001,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
-    color: #9CFF00;
+    color: #FFFF0B;
     font-weight: bold;
 }
 
@@ -2173,7 +2173,7 @@ input[type="text"], input[type="password"], select{
 /* detalle obra*/
 
 .ikont-hot-zoom-strnombremedio{
-    color: #9CFF00;
+    color: #FFFF0B;
     background-color: #00B3DF;
     text-decoration: none;
     font-family: open;
@@ -2583,7 +2583,7 @@ css usuario modificacion
 }
 
 .ikont-hpg-menu-contenido-administrar-convenio .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-administrar-convenio .ikont-menu-detalle-text.buttonactive{
-    color: #9CFF00;
+    color: #FFFF0B;
     font-weight: bold;
 }
 
@@ -2855,7 +2855,7 @@ css usuario modificacion
     height: 30px;
     float: left;
     text-decoration: none;
-    color: #9CFF00!important;
+    color: #FFFF0B!important;
     background-color: #00B3DF!important;
     transition:background-color 1s ease 0s ;
     font-family:'open';
@@ -2986,7 +2986,7 @@ css usuario modificacion
 }
 
 .ikont-hpg-menu-nuevo-proestructuracion .ikont-menu-detalle-text:hover, .ikont-hpg-menu-nuevo-proestructuracion .ikont-menu-detalle-text.buttonactive{
-    color: #9CFF00;
+    color: #FFFF0B;
     font-weight: bold;
 }
 
@@ -3131,8 +3131,8 @@ css usuario modificacion
 .ikont-colum-superior-consulta{
     color: #FFF;
     background-color: #00B3DF;
-    border-right: solid 1px #9CFF00;
-    border-bottom: solid 1px #9CFF00;
+    border-right: solid 1px #FFFF0B;
+    border-bottom: solid 1px #FFFF0B;
 }
 
 .ikont-table-sin-detalles-fila tbody:nth-child(odd){
@@ -4216,7 +4216,7 @@ a:hover {
     border-radius: 50% 50% 50% 50%;
     float: left;
     text-decoration: none;
-    color: #9CFF00;
+    color: #FFFF0B;
     background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
     font-family: 'open';
@@ -4247,7 +4247,7 @@ a:hover {
     border-radius: 50% 50% 50% 50%;
     float: right;
     text-decoration: none;
-    color: #9CFF00;
+    color: #FFFF0B;
     background-color:#00B3DF;
     transition: background-color 1s ease-in-out 0s;
     font-family: 'open';
@@ -4301,33 +4301,33 @@ a:hover {
 }
 
 .boton-planificacion-gwt:hover{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-planificacion-gwt:disabled{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-flujocaja-gwt:disabled{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-reporte-gwt:disabled{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-flujocaja-gwt:hover{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-reporte-gwt:hover{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;
+    background-color: #00B3DF;
+    color: #FFFF0B !important;
 }
 
 .boton-flujocaja-gwt{
@@ -4469,7 +4469,7 @@ a:hover {
     font-style: italic;
 }
 #contenedor_error_texto p .ikont-link-error:hover { 
-    color: #9CFF00;
+    color: #FFFF0B;
 }
 .ikont-hit-intxtnombrecc{
     text-align: center;
@@ -4530,7 +4530,7 @@ a:hover {
 }
 
 .ikont-link-downdoc:hover{ 
-    background-color: #1E4C00 !important;
+    background-color: #00B3DF !important;
 }
 .ikont-menu-inicio-zoom-administrador{
     background-image: url(../imgs/bt_herramientas.png);
@@ -4753,7 +4753,7 @@ a:hover {
 .ikont-hcb-ver_objeto:hover{
     background-color: #00B3DF;
     transition: .5s all ease-out;
-    color: #9CFF00;
+    color: #FFFF0B;
 }
 
 .ikont-hcb-seguirspry{
@@ -4774,7 +4774,7 @@ a:hover {
     width: 230px;
     height: 30px;
     text-decoration: none;
-    color: #9CFF00!important;
+    color: #FFFF0B!important;
     background-color: #00B3DF!important;
     transition:background-color 1s ease 0s ;
     font-family:'open';
@@ -4788,7 +4788,7 @@ a:hover {
     width: 230px!important;
     height: 30px!important;
     float: left;
-    color:#9CFF00!important;
+    color:#FFFF0B!important;
     text-decoration: none;
     font-family: 'open';
     font-size: 15px!important;
@@ -4861,8 +4861,8 @@ a:hover {
 }
 
 .button-plan-flujo-report:hover{
-    background-color: #1E4C00;
-    color: #9CFF00 !important;   
+    background-color: #00B3DF;
+    color: #FFFF0B !important;   
 }
 
 .ikont-hpg-menu-plan-operativo{

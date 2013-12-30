@@ -358,7 +358,7 @@ button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padd
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default:hover{background-color: #00B3DF;}
+.ui-state-default, .ui-widget-content .ui-state-default:hover{background-color: #FFFF0B;}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #FFF/*{borderColorDefault}*/; background:#2EC1DB/*{bgColorDefault}*/ /*{bgImgUrlDefault}*/ 50%/*{bgDefaultXPos}*/ 50%/*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/;
 	/*background-image:url(../imgs/bt_tooltip1.png); background-position:left; background-repeat:no-repeat; height:30px; line-height:30px; font-size:15px; font-style:italic;*/
 }
