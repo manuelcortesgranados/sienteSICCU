@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import org.richfaces.component.UIDataTable;
 
 /**
@@ -47,6 +48,8 @@ public class AsociarContratos implements Serializable {
     private UIDataTable tablacontratos = new UIDataTable();
     private BigDecimal sumValorContrato = BigDecimal.ZERO;
     private Relacioncontratoobra relacioncontratointer = new Relacioncontratoobra();
+    private BigDecimal valorfaltanteasociarcontrato = BigDecimal.ZERO;
+    private ResourceBundle bundle = getSessionBeanCobra().getBundle();
 
     public Relacioncontratoobra getRelacioncontratointer() {
         return relacioncontratointer;
@@ -184,6 +187,14 @@ public class AsociarContratos implements Serializable {
         this.listacontratosobra = listacontratosobra;
     }
 
+    public BigDecimal getValorfaltanteasociarcontrato() {
+        return valorfaltanteasociarcontrato;
+    }
+
+    public void setValorfaltanteasociarcontrato(BigDecimal valorfaltanteasociarcontrato) {
+        this.valorfaltanteasociarcontrato = valorfaltanteasociarcontrato;
+    }
+
     /**
      * <p>
      * Automatically managed component initialization. <strong>WARNING:</strong>
@@ -207,8 +218,8 @@ public class AsociarContratos implements Serializable {
 
     public String primeroContratos() {
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), 0, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), 0, 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -232,8 +243,8 @@ public class AsociarContratos implements Serializable {
 
         int num = (pagina) * 5;
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -259,8 +270,8 @@ public class AsociarContratos implements Serializable {
         pagina = pagina - 1;
         int num = (pagina - 1) * 5;
 
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -284,8 +295,8 @@ public class AsociarContratos implements Serializable {
 
         int num = totalfilas % 5;
 
-        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato,getSessionBeanCobra().getUsuarioObra());
-        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato,getSessionBeanCobra().getUsuarioObra());
+        totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato, getSessionBeanCobra().getUsuarioObra());
+        listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato, getSessionBeanCobra().getUsuarioObra());
 
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -414,7 +425,7 @@ public class AsociarContratos implements Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
-       FacesUtils.addInfoMessage("Los datos se han guardado");
+        FacesUtils.addInfoMessage("Los datos se han guardado");
         listacontratosobra = new ArrayList<Relacioncontratoobra>();
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
@@ -434,8 +445,15 @@ public class AsociarContratos implements Serializable {
     }
 
     public String agregarContratoInterventoria() {
+        BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
+        relacioncontratointer.setNumvalordisponible(BigDecimal.ZERO); 
+        valorfaltanteasociarcontrato = BigDecimal.ZERO;
         //AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
         //Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
+        for (Relacioncontratoobra contratoobta : listacontratosobra) {
+            valorlistacontratoobra = valorlistacontratoobra.add(contratoobta.getNumvalorrelacion());
+        }
+        valorfaltanteasociarcontrato = getAdministrarObraNew().getObra().getNumvaltotobra().subtract(valorlistacontratoobra);
         Contrato contselec = (Contrato) tablacontratosasoc.getRowData();
         relacioncontratointer = new Relacioncontratoobra();
         relacioncontratointer.setContrato(contselec);
@@ -443,11 +461,13 @@ public class AsociarContratos implements Serializable {
         relacioncontratointer.setNumvalordisponible(contselec.getNumvlrcontrato().subtract(contselec.getNumvlrsumahijos().add(contselec.getNumvlrsumaproyectos())));
 
         if (getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.ZERO) == 0) {
-            relacioncontratointer.setMensaje("El proyecto no posee valor. Debe diligenciar el cronograma del proyecto.");
+            relacioncontratointer.setMensaje(bundle.getString("proyectonotienecronograma"));
+            FacesUtils.addErrorMessage(bundle.getString("proyectonotienecronograma"));
             return null;
         }
         if (relacioncontratointer.getNumvalordisponible().compareTo(BigDecimal.ZERO) <= 0) {
-            relacioncontratointer.setMensaje("El contrato no posee disponibilidad presupuestal.");
+            FacesUtils.addErrorMessage(bundle.getString("contratonotienedisponibilidad"));
+            relacioncontratointer.setMensaje(bundle.getString("contratonotienedisponibilidad"));
             return null;
         }
 
@@ -464,7 +484,8 @@ public class AsociarContratos implements Serializable {
             }
 
         } else {
-            relacioncontratointer.setMensaje("El contrato seleccionado ya está relacionado. ");
+            relacioncontratointer.setMensaje(bundle.getString("contratoestarelacionado"));
+            FacesUtils.addErrorMessage(bundle.getString("contratoestarelacionado"));
             relacioncontratointer.setNumvalormaximo(BigDecimal.ZERO);
         }
 
@@ -478,5 +499,4 @@ public class AsociarContratos implements Serializable {
         guardarasociacion();
         return null;
     }
-
 }

@@ -695,7 +695,7 @@
             <value>oracle.jdbc.OracleDriver</value>
         </property>
         <property name="url">
-            <value>jdbc:oracle:thin:@190.248.54.71:1521:SIGECOM</value>
+           <value>jdbc:oracle:thin:@190.248.54.71:1521:SIGECOM</value>
             <!--<value>jdbc:oracle:thin:@172.16.2.15:1521:SIGECOM</value>-->
            
         </property>

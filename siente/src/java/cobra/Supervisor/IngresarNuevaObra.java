@@ -312,6 +312,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private String longitudmapa = getSessionBeanCobra().getBundle().getString("longitudmapa");
     private boolean redibujarmapa = false;
     private boolean tipoOrigenSoloLectura;
+    private  BigDecimal valorfaltanteasociarcontrato = BigDecimal.ZERO;
 
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
@@ -1519,6 +1520,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.tablaObrasPadres = tablaObrasPadres;
     }
 
+    public BigDecimal getValorfaltanteasociarcontrato() {
+        return valorfaltanteasociarcontrato;
+    }
+
+    public void setValorfaltanteasociarcontrato(BigDecimal valorfaltanteasociarcontrato) {
+        this.valorfaltanteasociarcontrato = valorfaltanteasociarcontrato;
+    }
+    
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -1975,7 +1984,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 || getSessionBeanCobra().getBundle().getString("aplicafaseenproyecto").equals("false")) {
             tiahselect = 2;
             obtenerFaseSeleccionada(1);
-            
+
             llenarTipoProyecto();
         }
 
@@ -3873,6 +3882,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String agregarContrato() {
+        relacioncontrato.setNumvalordisponible(BigDecimal.ZERO); 
+        BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
+        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
+        for (Relacioncontratoobra contratoobta : listacontratosobra) {
+            valorlistacontratoobra = valorlistacontratoobra.add(contratoobta.getNumvalorrelacion());
+        }
+        valorfaltanteasociarcontrato = obranueva.getNumvaltotobra().subtract(valorlistacontratoobra);
         Contrato contselec = (Contrato) tablacontratos.getRowData();
 //        Contrato contselec = listacontratos.get(filaSeleccionada);
         relacioncontrato = new Relacioncontratoobra();
@@ -3880,11 +3896,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         relacioncontrato.setObra(obranueva);
         relacioncontrato.setNumvalordisponible(contselec.getNumvlrcontrato().subtract(contselec.getNumvlrsumahijos().add(contselec.getNumvlrsumaproyectos())));
         if (valortotalobra.compareTo(BigDecimal.ZERO) == 0) {
-            relacioncontrato.setMensaje("El proyecto no posee valor. Debe diligenciar el cronograma del proyecto.");
+            relacioncontrato.setMensaje(bundle.getString("proyectonotienecronograma"));
+            FacesUtils.addErrorMessage(bundle.getString("proyectonotienecronograma"));
             return null;
         }
         if (relacioncontrato.getNumvalordisponible().compareTo(BigDecimal.ZERO) <= 0) {
-            relacioncontrato.setMensaje("El contrato no posee disponibilidad presupuestal.");
+             FacesUtils.addErrorMessage(bundle.getString("contratonotienedisponibilidad"));
+            relacioncontrato.setMensaje(bundle.getString("contratonotienedisponibilidad"));
             return null;
         }
         if (verificarContrato(contselec.getStrnumcontrato())) {
@@ -3897,7 +3915,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 relacioncontrato.setNumvalormaximo(relacioncontrato.getNumvalordisponible());
             }
         } else {
-            relacioncontrato.setMensaje("El contrato seleccionado ya está relacionado. ");
+            relacioncontrato.setMensaje(bundle.getString("contratoestarelacionado"));
+            FacesUtils.addErrorMessage(bundle.getString("contratoestarelacionado"));
             relacioncontrato.setNumvalormaximo(BigDecimal.ZERO);
         }
         return null;
