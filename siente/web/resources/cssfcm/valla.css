@@ -46,7 +46,7 @@
 
 .textvalla1{
     color: #FFF!important;
-    font-size: 1.3em!important;
+    font-size: 13px!important;
     position: relative!important;
     top: 5px!important;
     left: 10px!important;
@@ -85,7 +85,8 @@
 
 .textvalla7{
     color: #FFF!important;
-    font-size: 1.3em!important;
+    font-size: 13px!important;
+    font-weight: bolder!important;
     position: relative!important;
     top: 5px!important;
     left: 10px!important;
@@ -104,11 +105,13 @@
 .content-left{
     width: 310px!important;
     float: left!important;
+    margin-top: 8px;
 }
 
 .content-rigth{
     width: 130px!important;
     float: left!important;
+    margin-top: 8px;
 }
 
 .imagotipo{
@@ -128,7 +131,7 @@
     height: 60px!important;
     margin-right: 3px!important;
     color: #FFF!important;
-    margin-top: 5px!important;
+    margin-top: 15px!important;
 }
 
 .imgvalla{
