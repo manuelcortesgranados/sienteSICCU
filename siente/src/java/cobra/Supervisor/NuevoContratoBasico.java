@@ -3284,11 +3284,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     }
                     //getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                     if (!booltipocontratoconvenio) {
-                        if (filtrocontrato.getTipocontratoselect() != 0) {
-                        } else {
+                        if (filtrocontrato.getTipocontratoselect() == 0) {
                             removerAnticipo();
                             FacesUtils.addErrorMessage("Debe seleccionar la modalidad del contrato");
                             return null;
+                        }
+                        if (contrato.getTipocontrato().getInttipocontrato() == 0) {
+                            removerAnticipo();
+                            FacesUtils.addErrorMessage("Debe seleccionar el tipo de contrato");
+                            return null;
+                        }
+                        if (filtrocontrato.getTipocontratoselect() == 2) {
+                            if (contrato.getTipocontrato().getInttipocontrato() == 1 && contrato.getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 0) {
+                                removerAnticipo();
+                                FacesUtils.addErrorMessage("Debe seleccionar el tipo de contrato");
+                                return null;
+                            }
                         }
                     }
                     if (validarDiligenciamientoFormadePago()) {
