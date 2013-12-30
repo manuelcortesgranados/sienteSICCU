@@ -202,19 +202,19 @@
                                 <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
                                     <rich:panel header="% NBI AL AÑO" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBIanual}" escape="false" />
-                                        <div id="graficoNBIanual" style="width: 300px; height: 150px;"></div>
+                                        <div id="graficoNBIanual" style="width: 350px; height: 150px; margin-left: -20px;"></div>
                                     </rich:panel>
                                     <rich:panel header="% NBI POR LOCALIZACION (2005)" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBILocalizacion}" escape="false" />
-                                        <div id="graficoNBILocalizacion" style="width: 300px; height: 150px;"></div>
+                                        <div id="graficoNBILocalizacion" style="width: 350px; height: 150px; margin-left: -20px;"></div>
                                     </rich:panel>
                                     <rich:panel header="DESEMPEÑO INTEGRAL 2009" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <rich:dataTable id="tabladesempenolocalida" 
-                                                        rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
+                                                        rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas totalwidth font-general"  
                                                         value="#{Supervisor$AdministrarObraNew.gragiprom.listadesempeno}"
                                                         var="actual" >
                                            
-                                            <rich:column>
+                                            <rich:column styleClass="panelizquierda">
                                                 <h:outputText  styleClass="ikont-hot-idvisita"   value="#{actual.indMtdNombre}"/>
                                             </rich:column>
                                             <rich:column>

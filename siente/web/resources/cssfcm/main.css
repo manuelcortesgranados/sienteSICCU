@@ -4972,3 +4972,11 @@ a:hover {
     font-weight: bolder;
     margin-left: 21px;
 }
+
+.ikont-rdt-tablavisitasfallidas tr:nth-child(odd) {
+    background-color: #F4F4F4 ;
+}
+
+.ikont-rdt-tablavisitasfallidas tr td{
+    text-align: left!important;
+}
