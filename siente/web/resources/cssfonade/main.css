@@ -4973,13 +4973,17 @@ a:hover {
     display: block!important;
     width: 120px!important;
     height: 30px!important;
-    color: #257500!important;
+    color: #585858 !important;
     text-decoration: none;
     font-family: 'open';
     font-size: 15px!important;
     background-color: #FFF!important;
-    border: 1px solid #257500;
+    border: 1px solid #585858;
     padding-top: 4px!important;
-    border-radius: 10px;
-    
+    border-radius: 10px!important;
+}
+
+.ikont-buttons-planoperativo:hover{
+    background-color: #1E4C00!important;
+    color: #9CFF00 !important;
 }
