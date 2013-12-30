@@ -2012,18 +2012,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void cargarListaVistaObraMapa() {
-        if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
-            List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom();
-           
-            listaobrasusu = new ArrayList<VistaObraMapa>();
-            for (VwInmInfoMunicipal mun : listagiprom) {
-                
-                listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
-            }
-
-        } else {
-            listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-        }
+        
+        listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+        
     }
 
     public String primeroListProyectos() {
