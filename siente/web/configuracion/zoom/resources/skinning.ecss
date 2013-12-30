@@ -65,10 +65,10 @@ hr {
 }
 
 a {
-	color: #0078D0;
+	color: #58595B;
 }
 a:hover {
-	color: #0090FF;
+	color: #9CFF00;
 }
 
 input, select, textarea, button, keygen, isindex {

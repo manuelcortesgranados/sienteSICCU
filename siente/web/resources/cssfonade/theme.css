@@ -510,6 +510,7 @@ a.contrato:hover {
     border-radius: 12px;
     -moz-box-shadow: 0.1em 0.1em 0.1em #51819E;
     -webkit-box-shadow: 0.1em 0.1em 0.1em #51819E;
+    padding: 0px !important;
 }
 
 .editaravanzada {

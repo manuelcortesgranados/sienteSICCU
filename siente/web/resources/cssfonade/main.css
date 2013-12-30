@@ -4987,3 +4987,50 @@ a:hover {
     background-color: #1E4C00!important;
     color: #9CFF00 !important;
 }
+
+.ikont-hot-vlrcc{
+    font-size: 16px!important;
+    color: #257500!important;
+    font-weight: bold!important;
+}
+
+.ikont-hot-pnduracion-dias{
+    font-size: 30px!important;
+    color: #257500!important;
+    font-weight: bold !important;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b, .ikont-hpg-griddetacon .rf-p .rf-p-b, .ikont-hpg-detallecontrato .rf-p .rf-p-b{
+    overflow-y: auto;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b span, .ikont-hpg-griddetaob .rf-p .rf-p-b label, .ikont-hpg-griddetaob .rf-p .rf-p-b p, .ikont-hpg-griddetacon .rf-p span, .ikont-hpg-griddetacon .rf-p label, .ikont-hpg-griddetacon .rf-p p{
+    font-size: 12px;
+    color: #666666;
+}
+
+.ikont-hpg-detallecontrato .rf-p .rf-p-b span, .ikont-hpg-detallecontrato .rf-p .rf-p-b label, .ikont-hpg-detallecontrato .rf-p .rf-p-b p{
+    font-size: 12px;
+    color: #666666;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-numvaltotobra, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valorinterventoria, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hot-valinter, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stclaseProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-sttipoProyecto, .ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-stsubtipoProyecto {
+    font-size: 14px;
+    color: #257500;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+.ikont-hpg-griddetaob .rf-p .rf-p-b .ikont-hol-numhabbeneficiados, .ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hol-numempdirectos, .ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hol-numempindirectos{
+    font-size: 14px;
+    color: #257500;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.ikont-hpg-griddetaob .rf-p .rf-p-b  .ikont-hot-dias{
+    font-size: 30px;
+    color: #257500;
+    font-weight: bold;
+}

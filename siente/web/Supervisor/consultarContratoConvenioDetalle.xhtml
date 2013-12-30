@@ -56,7 +56,7 @@
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
                         <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-tipocontrato"   headerClass="font-header-panel" 
                                     rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                            <h:panelGrid style="height: 120px;" columns="1" >
+                            <h:panelGrid style="height: 120px;" columns="1" styleClass="font-general">
                                 <interkont:spacer height="30" />
                                 <center>
                                     <h:outputText  styleClass="ikont- ikont-hot-pnduracion-dias"   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
