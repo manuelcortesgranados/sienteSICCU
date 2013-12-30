@@ -250,72 +250,69 @@ public class GraficosGiprom implements Serializable{
     
     public void llenarDistribucionEtnica(List<VwIndIndicadorMunicipal> listind)
     {
-//        HashMap global = new HashMap();
+        String var1="";String var2="";String var3="";String var4="";String var5="";String var6="";String var7="";String var8="";
+        String var9="";
+        
+        for(VwIndIndicadorMunicipal ind:listind)        {
+            if(ind.getIndMtdCodigo().compareTo("040104")==0)
+            {
+                var1= ind.getIndDtmAnio().toString();
+                var2=ind.getIndDtmValor().toString();
+                
+            }            
+        }
+        
+        for(VwIndIndicadorMunicipal ind:listind) {    
+            
+            if(ind.getIndMtdCodigo().compareTo("040201")==0)
+            {
+                 var3=ind.getIndDtmAnio().toString();
+                 var4=ind.getIndDtmValor().toString();                
+            }
+            if(ind.getIndMtdCodigo().compareTo("040162")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);                
+                var5=val2.toString()+" %";
+            }
+            if(ind.getIndMtdCodigo().compareTo("040161")==0)
+            {
+                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var6=val2.toString()+" %";
+            }
+            if(ind.getIndMtdCodigo().compareTo("030001")==0)
+            {
+                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var7=val2.toString()+" %";
+            }
+            if(ind.getIndMtdCodigo().compareTo("040165")==0)
+            {
+                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var8=val2.toString()+" %";
+            }
+            if(ind.getIndMtdCodigo().compareTo("040166")==0)
+            {
+                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+               var9=val2.toString()+" %";
+            }
 //
-//        for(VwIndIndicadorMunicipal ind:listind)        {
-//            System.out.println("codigo = " + ind.getIndMtdCodigo());
-//            System.out.println("anio = " + ind.getIndDtmAnio().toString());
-//            System.out.println("valor = " + ind.getIndDtmValor().toString());
-//            System.out.println("nombre = " + ind.getIndMtdNombre());
-//            
-//            if(ind.getIndMtdCodigo().compareTo("040104")==0)
-//            {
-//                global.put("var1", ind.getIndDtmAnio().toString());
-//                global.put("var2", ind.getIndDtmValor().toString());
-//                //listadatos.add(ind.getIndDtmAnio().toString());
-//                //listadatos.add(ind.getIndDtmValor().toString());
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("040201")==0)
-//            {
-//                 global.put("var3", ind.getIndDtmAnio().toString());
-//                 global.put("var4", ind.getIndDtmValor().toString());
-//                //listadatos.add(ind.getIndDtmAnio().toString());
-//                //listadatos.add(ind.getIndDtmValor().toString());
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("040162")==0)
-//            {
-//                Double val=(ind.getIndDtmValor()/Double.valueOf(global.get("var1").toString()))*100;
-//                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-//                //listadatos.add(val2.toString()+" %");
-//                global.put("var5", val2.toString()+" %");
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("040161")==0)
-//            {
-//                Double val=(ind.getIndDtmValor()/Double.valueOf(global.get("var1").toString()))*100;
-//                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-//                global.put("var6", val2.toString()+" %");
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("030001")==0)
-//            {
-//                Double val=(ind.getIndDtmValor()/Double.valueOf(global.get("var1").toString()))*100;
-//                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-//                global.put("var7", val2.toString()+" %");
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("040165")==0)
-//            {
-//                Double val=(ind.getIndDtmValor()/Double.valueOf(global.get("var1").toString()))*100;
-//                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-//                global.put("var8", val2.toString()+" %");
-//            }
-//            if(ind.getIndMtdCodigo().compareTo("040166")==0)
-//            {
-//                Double val=(ind.getIndDtmValor()/Double.valueOf(global.get("var1").toString()))*100;
-//                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-//                global.put("var9", val2.toString()+" %");
-//            }
-//
-//        }
-//        this.distribucionetnica="Según el censo "+global.get("var1").toString()+
-//                " la población del municipio es de "+global.get("var2").toString()+
-//                " habitantes, la población proyectada para "+global.get("var3").toString()+
-//                " es de "+global.get("var4").toString()+
-//                " habitantes. El "+global.get("var5").toString()+
-//                " de la población vive en área rural y el "+global.get("var6").toString()+
-//                " en el área urbana, en el municipio habitan en promedio "+global.get("var7").toString()+
-//                " habitantes por Km cuadrado. El "+global.get("var8").toString()+
-//                "  corresponde a la población afrocolombiana, y el "+global.get("var9").toString()+
-//                "  a la población indígena.";
+        }
+        this.distribucionetnica="Según el censo "+var1+
+                " la población del municipio es de "+var2+
+                " habitantes, la población proyectada para "+var3+
+                " es de "+var4+
+                " habitantes. El "+var5+
+                " de la población vive en área rural y el "+var6+
+                " en el área urbana, en el municipio habitan en promedio "+var7+
+                " habitantes por Km cuadrado. El "+var8+
+                "  corresponde a la población afrocolombiana, y el "+var9+
+                "  a la población indígena.";
 
-    }      
+    }     
+    
     
 }
