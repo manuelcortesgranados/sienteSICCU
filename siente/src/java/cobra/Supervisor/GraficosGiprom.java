@@ -301,16 +301,16 @@ public class GraficosGiprom implements Serializable{
             }
 //
         }
-        this.distribucionetnica="Según el censo "+var1+
-                " la población del municipio es de "+var2+
-                " habitantes, la población proyectada para "+var3+
-                " es de "+var4+
-                " habitantes. El "+var5+
-                " de la población vive en área rural y el "+var6+
-                " en el área urbana, en el municipio habitan en promedio "+var7+
-                " habitantes por Km cuadrado. El "+var8+
-                "  corresponde a la población afrocolombiana, y el "+var9+
-                "  a la población indígena.";
+        this.distribucionetnica="<p>Según el censo <b>"+var1+
+                "</b> la población del municipio es de <b>"+var2+
+                "</b> habitantes, la población proyectada para <b>"+var3+
+                "</b> es de <b>"+var4+
+                "</b> habitantes. El <b>"+var5+
+                "</b> de la población vive en área rural y el <b>"+var6+
+                "</b> en el área urbana, en el municipio habitan en promedio <b>"+var7+
+                "</b> habitantes por Km cuadrado. El <b>"+var8+
+                "</b> corresponde a la población afrocolombiana, y el <b>"+var9+
+                "</b> a la población indígena.</p>";
 
     }     
     

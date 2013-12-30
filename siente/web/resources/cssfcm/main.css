@@ -4980,3 +4980,7 @@ a:hover {
 .ikont-rdt-tablavisitasfallidas tr td{
     text-align: left!important;
 }
+
+.ikont-rf-body-indicador{
+    width: 100% !important;
+}
