@@ -19,6 +19,7 @@
         <script src="/#{var.versioncobra}/resources/js/analytics/#{var.srcanalytics}" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
+        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
         <script type="text/javascript">
             function esconderbienvenida() {
                 var jj = jQuery.noConflict();
@@ -27,8 +28,85 @@
                 var divIngresoUsuario = jj('.ikont-div-bienvenida');
                 divIngresoUsuario.stop().animate({height: '0px'});
             }
+
+            jjquery = jQuery;
+            $(function() {
+                // escondermostrar();
+            });
+            function escondermostrarErrorNavegador() {
+                var divmostrarmensaje = jjquery('.ikont-div-ingreso-mostrar-error-pagina');
+                divmostrarmensaje.hide();
+                jjquery('.ikon-panel-contenido-error-navegador').css('display','none');
+                
+            }
+            function mostrarActualizacionnavegador() {
+                var ingre = jjquery('.ikont-div-ingreso-mostrar-error-pagina');
+                ingre.stop().animate({height: '1150px'});
+            }
+
+            var informacionavegador = navigator.userAgent;
+            var versionavegador = '' + parseFloat(navigator.appVersion);
+            var navegador;
+
+            if ((navegador = informacionavegador.indexOf("Opera")) != -1) {
+                versionavegador = informacionavegador.substring(navegador + 6);
+                $(function() {
+                    escondermostrarErrorNavegador();
+                });
+            }
+            else if ((navegador = informacionavegador.indexOf("MSIE")) != -1) {
+                versionavegador = informacionavegador.substring(navegador + 5);
+                if (parseInt(versionavegador) >= 10) {
+                    $(function() {
+                        escondermostrarErrorNavegador();
+                    });
+                } else {
+                    $(function() {
+                        mostrarActualizacionnavegador();
+                    });
+                }
+            }
+            else if ((navegador = informacionavegador.indexOf("Chrome")) != -1) {
+                versionavegador = informacionavegador.substring(navegador + 7);
+                if (parseInt(versionavegador) >= 22) {
+                    $(function() {
+                        escondermostrarErrorNavegador();
+                    });
+                } else {
+                    $(function() {
+                        mostrarActualizacionnavegador();
+                    });
+                }
+            }
+            else if ((navegador = informacionavegador.indexOf("Safari")) != -1) {
+                versionavegador = informacionavegador.substring(navegador + 7);
+                if (parseInt(versionavegador) >= 6) {
+                    $(function() {
+                        escondermostrarErrorNavegador();
+                    });
+                } else {
+
+                    $(function() {
+                        mostrarActualizacionnavegador();
+                    });
+                }
+            }
+            else if ((navegador = informacionavegador.indexOf("Firefox")) != -1) {
+                versionavegador = informacionavegador.substring(navegador + 8);
+                if (parseInt(versionavegador) >= 21) {
+                    $(function() {
+                        escondermostrarErrorNavegador();
+                    });
+                } else {
+
+                    $(function() {
+                        mostrarActualizacionnavegador();
+                    });
+                }
+            }
         </script>
-        
+
+
     </ui:define>
 
     <ui:define name="menu">
@@ -54,7 +132,7 @@
     <ui:define name="body">  
         <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;position: relative;">            
             <h:commandLink  immediate="true"  value="X" styleClass="x_bienvenida" onclick="esconderbienvenida();
-                    return  false;"/>         
+                return  false;"/>         
             <div id="ingreso-bienvenida" style="" class="ikont-div-ingreso-bienvenida">
                 <h:panelGrid  styleClass="panelzoomhome1">
                     <rich:column>
@@ -105,7 +183,7 @@
                 </div>
             </center>
             <h:form prependId="false">               
-            <ui:include src="/Supervisor/filtrozoom.xhtml"/>                
+                <ui:include src="/Supervisor/filtrozoom.xhtml"/>                
             </h:form>
 
 
@@ -141,7 +219,7 @@
 
                 <h:panelGroup id="ikont-hpg-vistas">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" rendered="#{HomeGestion.filtro.intvista == 1}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
-                        
+
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
@@ -344,7 +422,19 @@
                 </h:panelGroup>
             </h:panelGrid>
         </h:form>
-
+        <div id="mostrar-error-pagina"  class="ikont-div-ingreso-mostrar-error-pagina">
+         
+                
+            <h:panelGroup id="panel_error_navegador"  styleClass="ikon-panel-contenido-error-navegador" rendered="#{var.permisonuevodiseno}">
+                <h:graphicImage  url="resources/imgsfonade/icon_lading_errorpage.png"  /><br/>
+                <h:outputText value="Tu navegador no soporta los últimos estandares web:"/><br/>
+                <h:outputText value="Por favor actualiza la versión de tu navegador."/><br/><br/>
+                <h:outputText value="Para una mejor experiencia en zoom te "/><br/>
+                <h:outputText value="recomendamos que utilices "/>
+                <h:outputText style="color: #000!important;" value="Firefox."/>
+            </h:panelGroup>
+          
+        </div>
 
 
         <f:subview id="murocomentarios" rendered="#{!var.permisonuevodiseno}">
