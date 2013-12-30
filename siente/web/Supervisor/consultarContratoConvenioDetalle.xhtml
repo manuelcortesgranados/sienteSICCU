@@ -431,7 +431,7 @@
                                     </h:panelGrid>
 
                                     <h:outputText rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" value="#{var.TipoContratoContralorias}:" />
-                                      <interkont:spacer width="20" />
+                                    <interkont:spacer width="20" />
                                     <h:panelGrid rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" id="idtipocontrato" columns="1" >
                                         <h:panelGrid cellspacing="0" rendered="#{Supervisor$Contrato.modificartipocontrato}" columns="3" id="paneltipocontrato">
                                             <h:outputText  styleClass="ikont- font-general"   value="#{Supervisor$Contrato.contrato.tipocontratoconsultoria.strdescripcion}"  />
@@ -918,7 +918,14 @@
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
-                                <rich:dataScroller maxPages="5" for="tablacontratohijo" render="tablacontratohijo" />
+                                <a4j:commandButton value="primero" onclick="#{rich:component('scrollertabalcontrato')}.first()" />
+                                <a4j:commandButton value="Volver" onclick="#{rich:component('scrollertabalcontrato')}.previous()" />
+                                <rich:dataScroller  for="tablacontratohijo" render="tablacontratohijo" id="scrollertabalcontrato" fastControls="hide" 
+                                                    boundaryControls="hide" stepControls="hide" maxPages="1"  style="color: transparent; 
+                                                    background-color: transparent; border-bottom-color: transparent;"/>
+                                <a4j:commandButton value="Continuar" onclick="#{rich:component('scrollertabalcontrato')}.next()" />
+                                <a4j:commandButton value="último" onclick="#{rich:component('scrollertabalcontrato')}.last()" />
+
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
@@ -1289,7 +1296,7 @@
                 var futuro = new Date(timefalta);
                 var fechaNavegador = new Date();
                 var milisegundosNavegador = fechaNavegador.getTime();
-                var diferencia = #{SessionBeanCobra.fechaMilisegundosServidor} + (1000*60*60*24) - milisegundosNavegador;
+                var diferencia = #{SessionBeanCobra.fechaMilisegundosServidor} + (1000 * 60 * 60 * 24) - milisegundosNavegador;
                 setInterval(function() {
                     var ahora = new Date();
                     var faltan = futuro - (ahora - diferencia);

@@ -74,9 +74,9 @@ public abstract class GraficoEvolucionProyecto {
         grafico.setTipoDatoEjeX(Grafico.FECHA);
         
         if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
-        } else {
             grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
+        } else {
+            grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
         }
 
         /**

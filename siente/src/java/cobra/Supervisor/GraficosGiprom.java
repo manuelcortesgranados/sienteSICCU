@@ -4,7 +4,12 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,7 +19,28 @@ public class GraficosGiprom implements Serializable{
     
     private StringBuilder graficoNBI = new StringBuilder();
     private StringBuilder graficoNBIanual = new StringBuilder();
-    private StringBuilder graficoNBILocalizacion = new StringBuilder();  
+    private StringBuilder graficoNBILocalizacion = new StringBuilder(); 
+    private List<VwIndIndicadorMunicipal> listadesempeno= new ArrayList<VwIndIndicadorMunicipal>();
+    private String distribucionetnica="";
+
+    public String getDistribucionetnica() {
+        return distribucionetnica;
+    }
+
+    public void setDistribucionetnica(String distribucionetnica) {
+        this.distribucionetnica = distribucionetnica;
+    }
+    
+    
+
+    public List<VwIndIndicadorMunicipal> getListadesempeno() {
+        return listadesempeno;
+    }
+
+    public void setListadesempeno(List<VwIndIndicadorMunicipal> listadesempeno) {
+        this.listadesempeno = listadesempeno;
+    }   
+    
 
     public StringBuilder getGraficoNBI() {
         
@@ -26,7 +52,7 @@ public class GraficosGiprom implements Serializable{
     }
 
     public StringBuilder getGraficoNBIanual() {
-        pintarGraficoNBIanual();
+        
         return graficoNBIanual;
     }
 
@@ -35,7 +61,7 @@ public class GraficosGiprom implements Serializable{
     }
 
     public StringBuilder getGraficoNBILocalizacion() {
-        pintarGraficoNBILocalidad();
+        
         return graficoNBILocalizacion;
     }
 
@@ -77,18 +103,26 @@ public class GraficosGiprom implements Serializable{
         
     }
 
-    private void pintarGraficoNBIanual() {
+    public void pintarGraficoNBIanual(List<VwIndIndicadorMunicipal> listindhabanual) {
         StringBuilder datosNBIanual = new StringBuilder();
         datosNBIanual.append("<script type=\"text/javascript\">\n");
         datosNBIanual.append("var chart;\n");
-        datosNBIanual.append("var chartData = [{\n");
-        datosNBIanual.append("'year': '2006',\n");
-        datosNBIanual.append("    'nbi': 23.5\n");
-        datosNBIanual.append("}, {\n");
-        datosNBIanual.append("'year': '2005',\n");
-        datosNBIanual.append("'nbi': 26.2\n");
-        datosNBIanual.append("}];\n");
-
+        datosNBIanual.append("var chartData = [");
+        int i=0;
+        for(VwIndIndicadorMunicipal ind:listindhabanual)
+        {
+            if(i>0)
+            {
+               datosNBIanual.append(","); 
+            }    
+            datosNBIanual.append("{\n");
+            
+            datosNBIanual.append("'year': '").append(ind.getIndDtmAnio().toString()).append("',\n");
+        datosNBIanual.append("    'nbi': ").append(ind.getIndDtmValor().toString()).append("\n");
+            datosNBIanual.append("}");
+            i++;
+        }  
+        datosNBIanual.append("];\n");        
         datosNBIanual.append("AmCharts.ready(function () {\n");
 
         datosNBIanual.append("chart = new AmCharts.AmSerialChart();\n");
@@ -135,17 +169,30 @@ public class GraficosGiprom implements Serializable{
         this.graficoNBIanual.append(datosNBIanual);
     }
 
-    private void pintarGraficoNBILocalidad() {
+    public void pintarGraficoNBILocalidad(List<VwIndIndicadorMunicipal> listindhabanual, VwIndIndicadorMunicipal denominador ) {
         StringBuilder datosNBILocalidad = new StringBuilder();
         
         datosNBILocalidad.append("<script type=\"text/javascript\">\n");
-        datosNBILocalidad.append("var chartDataLocal = [{\n");
-        datosNBILocalidad.append("'area': 'Urbano',\n");
-        datosNBILocalidad.append("    'nbi': 23.5\n");
-        datosNBILocalidad.append("}, {\n");
-        datosNBILocalidad.append("'area': 'Rural',\n");
-        datosNBILocalidad.append("'nbi': 26.2\n");
-        datosNBILocalidad.append("}];\n");
+        
+        datosNBILocalidad.append("var chartDataLocal = [");
+        int i=0;
+        for(VwIndIndicadorMunicipal ind:listindhabanual)
+        {
+            if(i>0)
+            {
+               datosNBILocalidad.append(","); 
+            }    
+            datosNBILocalidad.append("{\n");
+            Double val=(ind.getIndDtmValor()/denominador.getIndDtmValor())*100;
+            BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+            datosNBILocalidad.append("'area': '").append(ind.getIndMtdNombre()).append("',\n");
+        datosNBILocalidad.append("    'nbi': ").append(val2.toString()).append("\n");
+            datosNBILocalidad.append("}");
+            i++;
+        }  
+        datosNBILocalidad.append("];\n");      
+        
+        
 
         datosNBILocalidad.append("AmCharts.ready(function () {\n");
 
@@ -199,5 +246,68 @@ public class GraficosGiprom implements Serializable{
 
         return grafico;
     }
+    
+    public void llenarDistribucionEtnica(List<VwIndIndicadorMunicipal> listind)
+    {
+        List<String> listadatos= new ArrayList<String>();
+        
+        
+        
+        for(VwIndIndicadorMunicipal ind:listind)        {
+           
+            if(ind.getIndMtdCodigo().compareTo("040104")==0)
+            {
+                    listadatos.add(ind.getIndDtmAnio().toString());
+                listadatos.add(ind.getIndDtmValor().toString());
+            }
+            if(ind.getIndMtdCodigo().compareTo("040201")==0)
+            {
+                listadatos.add(ind.getIndDtmAnio().toString());
+                listadatos.add(ind.getIndDtmValor().toString());
+            }
+            if(ind.getIndMtdCodigo().compareTo("040162")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(listadatos.get(1)))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                listadatos.add(val2.toString()+" %");
+            }
+            if(ind.getIndMtdCodigo().compareTo("040161")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(listadatos.get(1)))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                listadatos.add(val2.toString()+" %");
+            }
+            if(ind.getIndMtdCodigo().compareTo("030001")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(listadatos.get(1)))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                listadatos.add(val2.toString());
+            }
+            if(ind.getIndMtdCodigo().compareTo("040165")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(listadatos.get(1)))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                listadatos.add(val2.toString());
+            }
+            if(ind.getIndMtdCodigo().compareTo("040166")==0)
+            {
+                Double val=(ind.getIndDtmValor()/Double.valueOf(listadatos.get(1)))*100;
+                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                listadatos.add(val2.toString());
+            }           
+            
+        }
+        this.distribucionetnica="Según el censo "+listadatos.get(1)+
+                " la población del municipio es de "+listadatos.get(2)+
+                " habitantes, la población proyectada para "+listadatos.get(3)+
+                " es de "+listadatos.get(4)+
+                " habitantes. El "+listadatos.get(5)+
+                " de la población vive en área rural y el "+listadatos.get(6)+
+                " en el área urbana, en el municipio habitan en promedio "+listadatos.get(7)+
+                " habitantes por Km cuadrado. El "+listadatos.get(8)+
+                "  corresponde a la población afrocolombiana, y el "+listadatos.get(9)+
+                "  a la población indígena.";
+        
+    }        
     
 }

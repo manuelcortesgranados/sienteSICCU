@@ -113,7 +113,7 @@
                                 <h:panelGrid cellspacing="20" columns="3" styleClass="totalwidth font-general">
                                     <rich:panel header="DATOS BÁSICOS" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid columns="1" >
-                                            
+
                                             <h:panelGrid columns="2">
                                                 <h:outputLabel value="Departamento:" styleClass="font-general"></h:outputLabel>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tercero.strapellido1}" styleClass="font-general"></h:outputLabel>
@@ -130,7 +130,7 @@
                                                 <h:outputLabel value="Mail:" styleClass="font-general"></h:outputLabel>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strlogros}" styleClass="font-general"></h:outputLabel>
                                             </h:panelGrid>
-                                             <h:panelGrid columns="2">
+                                            <h:panelGrid columns="2">
                                                 <h:outputLabel value="Actividad económica:" styleClass="font-general"></h:outputLabel>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" styleClass="font-general"></h:outputLabel>
                                             </h:panelGrid>
@@ -142,7 +142,7 @@
                                             <h:graphicImage   styleClass="ikont-hgi-strfoto ikont-img-detalle-alcalde" url="#{Supervisor$AdministrarObraNew.obra.strimagenanterior}"/>           
                                             <h:panelGrid>
                                                 <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strcontratista}"  styleClass="font-general ikont-hol-nombreusuario"></h:outputLabel>
-                                                
+
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </rich:panel>
@@ -209,34 +209,28 @@
                                         <div id="graficoNBILocalizacion" style="width: 300px; height: 150px;"></div>
                                     </rich:panel>
                                     <rich:panel header="DESEMPEÑO INTEGRAL 2009" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:panelGrid columns="2" cellspacing="0" styleClass="totalwidth font-general">
-                                            <h:outputText value="Eficacia : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Eficiencia"></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Requisitos legales : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Capacidad administrativa : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Indicador de desempeño fiscal : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Gestión : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Índice Integral : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Posición nacional : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Posición departamental : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                            <h:outputText value="Con la información completa y consistente : "></h:outputText>
-                                            <h:outputText value="ND"></h:outputText>
-                                        </h:panelGrid>
+                                        <rich:dataTable id="tabladesempenolocalida" 
+                                                        rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
+                                                        value="#{Supervisor$AdministrarObraNew.gragiprom.listadesempeno}"
+                                                        var="actual" >
+                                           
+                                            <rich:column>
+                                                <h:outputText  styleClass="ikont-hot-idvisita"   value="#{actual.indMtdNombre}"/>
+                                            </rich:column>
+                                            <rich:column>
+                                                <h:outputText  styleClass="ikont-hot-datefechainforme"   value="#{actual.indDtmValor}">
+                                                    <f:convertNumber maxFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                                                                      
+                                        </rich:dataTable>
+
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="1" styleClass="totalwidth font-general">
-                                    <rich:panel header="INICADOR MUNICIPAL" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="INDICADOR MUNICIPAL" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGroup styleClass="totalwidth font-general" layout="block">
-                                            <h:outputText styleClass="ikont-text-left" value="Según el censo 2005 la población del municipio es de ND habitantes, la población proyectada para 2011 es de ND habitantes. El ND de la población vive en área rural y el ND en el área urbana, en el municipio habitan en promedio ND habitantes por Km cuadrado. El ND  corresponde a la población afrocolombiana, y el ND  a la población indígena."></h:outputText>
+                                            <h:outputText styleClass="ikont-text-left" value="#{Supervisor$AdministrarObraNew.gragiprom.distribucionetnica}"></h:outputText>
                                         </h:panelGroup>
                                     </rich:panel>
                                 </h:panelGrid>

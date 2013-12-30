@@ -1906,7 +1906,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         documentoseleccionado = 0;
         obranueva = new Obra();
         obranueva.setClaseobra(new Claseobra());
-        obranueva.getClaseobra().setIntidclaseobra(1);
+        obranueva.getClaseobra().setIntidclaseobra(0);
         obranueva.getClaseobra().setFase(new Fase());
         obranueva.setLugarobra(new Lugarobra(1, ""));
         obranueva.setTipoobra(new Tipoobra(0, null, ""));
@@ -1975,6 +1975,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 || getSessionBeanCobra().getBundle().getString("aplicafaseenproyecto").equals("false")) {
             tiahselect = 2;
             obtenerFaseSeleccionada(1);
+            
+            llenarTipoProyecto();
         }
 
         return "nuevoProyecto";
@@ -2850,9 +2852,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         getObranueva().setBoolincluyeaiu(false);
         listaBarrios = new ArrayList<Barrio>();
         listaVeredas = new ArrayList<Vereda>();
-        tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         tiahselect = getObranueva().getClaseobra().getFase().getIntidfase();
-        getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto() - 1);
+        cambioClaseObra(); // Llenar la lista de proyectos si filtra por clase obra, pues estaría vacía.
+        tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         seleccionarsubtipo();
         subtiposelec = getObranueva().getTipoobra().getInttipoobra();
         sumValorContrato = BigDecimal.ZERO;
@@ -4290,7 +4292,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         setTiproyectoselec(0);
 
         if (bundle.getString("tipoproyectoporsector").equals("true")) {
-            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(1));
+            getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(0));
         } else {
             getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
         }
@@ -4314,9 +4316,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      */
     public void seleccionarsubtipo() {
-
         getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(getTiproyectoselec()));
-
     }
 
     /**
