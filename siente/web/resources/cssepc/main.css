@@ -2667,6 +2667,13 @@ css usuario modificacion
     background-position:-905px -110px;
     width: 120px;
 }
+.ikont-posicion-nuevocontrato-admconvenio{
+    background-position:-1042px -10px;
+}
+
+.ikont-posicion-nuevocontrato-admconvenio:hover, .ikont-posicion-nuevocontrato-admconvenio.buttonactive{
+    background-position:-1042px -110px;
+}
 .tab-pestania-active, tab-pestania-active-tres{
     width: 100px !important;  
     height: 290px !important;
