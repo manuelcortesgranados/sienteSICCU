@@ -171,6 +171,16 @@
                 <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>
                 <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
             </h:panelGrid>
+            <h:panelGrid styleClass="ikont-hpg-menumodulos" rendered="#{SessionBeanCobra.modulos.size() gt 1}">
+                <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
+                    <div style=""  id="contenedor_texto">
+                        <h:outputLink styleClass="#{modulo.strestilo} a"
+                                      value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
+                            <h:outputText   value="#{modulo.strmodNmbre}" />
+                        </h:outputLink>
+                    </div>
+                </a4j:repeat>
+            </h:panelGrid>
             <br/>
             <br/>
             <h:panelGrid columns="2" styleClass="ikont-panel-spacing-menu">
