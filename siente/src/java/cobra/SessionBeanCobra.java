@@ -1254,8 +1254,13 @@ public class SessionBeanCobra implements Serializable {
         }
         vista.setStrdireccion(mun.getMncNombre()+" , "+mun.getDptNombre());
         
-        vista.setObra(castearVwInformacionMunicipaltoObra(mun));
-        
+        //vista.setObra(castearVwInformacionMunicipaltoObra(mun));
+        vista.setObra(new Obra());
+        vista.getObra().setNumvalavanfisicodeclarado(mun.getNumencuestas());
+        vista.getObra().setNumvaldeclarado(mun.getNumhabitantes());
+        vista.getObra().setNumvalprogramejec(mun.getNecesidadesenergeticas());        
+        vista.getObra().setNumvaltotamorti(mun.getNecesidadesbasicas());
+        vista.getObra().setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
         return vista;
     }
 
@@ -1296,49 +1301,39 @@ public class SessionBeanCobra implements Serializable {
         {
             vista.setStrcorregimiento("Faltante");
         }
-        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
-
-        //System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
-        for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
-//            System.out.println("valor = " + winccons.getEncIncValorIndicador());
-//            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
-            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
-            {
-                vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
-            }
-            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("02")==0)
-            {
-                vista.setNumvalprogramejec(winccons.getEncIncValorIndicador());
-            }
-            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("03")==0)
-            {
-                vista.setNumvaldeclarado(winccons.getEncIncValorIndicador());
-            }
-            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
-            {
-
-                vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
-            }
-            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
-            {
-                vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
-            }
-        }
-
-//        List<VwIndIndicadorMunicipal> listaindmun= getGipromService().obtenerIndicadorMunicipalxcodmunicipio(mun.getLclCodigo());
-//        for (VwIndIndicadorMunicipal wind : listaindmun) {
-//            
-//        }
-//        VwIndIndicadorMunicipal vind= getGipromService().obtenerPoblacionTotalxcodmunicipio(mun.getLclCodigo());
+//        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
 //
-//        if(vind !=null)
-//        {
-//            vista.setNumvlrsumahijos(BigDecimal.valueOf(vind.getIndDtmValor()));
-//        }    
-//        else
-//        {
-//            vista.setNumvlrsumahijos(BigDecimal.ZERO);
+//        //System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
+//        for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
+////            System.out.println("valor = " + winccons.getEncIncValorIndicador());
+////            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
+//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
+//            {
+//                vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
+//            }
+//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("02")==0)
+//            {
+//                vista.setNumvalprogramejec(winccons.getEncIncValorIndicador());
+//            }
+//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("03")==0)
+//            {
+//                vista.setNumvaldeclarado(winccons.getEncIncValorIndicador());
+//            }
+//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
+//            {
+//
+//                vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
+//            }
+//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
+//            {
+//                vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
+//            }
 //        }
+        vista.setNumvalavanfisicodeclarado(mun.getNumencuestas());
+        vista.setNumvaldeclarado(mun.getNumhabitantes());
+        vista.setNumvalprogramejec(mun.getNecesidadesenergeticas());        
+        vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
+        vista.setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
 
         return vista;
     }
