@@ -867,7 +867,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         //Version cobra para saber que bundle esta apuntando para el conteo de los proyectos en cobrafonade
         filtro.setCuantiaini(null);
         filtro.setCuantiafin(null);
-        filtro.setFactorpagina(100);
+        filtro.setFactorpagina(200);
         filtro.setIntcodespecifico(0);
         filtro.setIntcodevento(1);
         filtro.setIntpagini(0);
@@ -2014,7 +2014,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
     public void cargarListaVistaObraMapa() {
         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
-            List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom();
+            List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom(filtro);
 
             listaobrasusu = new ArrayList<VistaObraMapa>();
             for (VwInmInfoMunicipal mun : listagiprom) {
@@ -2036,7 +2036,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    filtro.setFactorpagina(100);
+                    filtro.setFactorpagina(200);
                     //filtro.setIntestadoobra(1);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     cargarListaVistaObraMapa();
@@ -2046,7 +2046,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                         cargarMapaCiudadano();
                     }
                 } else {
-                    filtro.setFactorpagina(100);
+                    filtro.setFactorpagina(200);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     cargarListaVistaObraMapa();
@@ -2071,7 +2071,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 break;
         }
 
-        totalfilas = getSessionBeanCobra().getCobraService().encontrarNumeroObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
+        totalfilas = getSessionBeanCobra().getGipromService().encontrarNumeroLocalidades(filtro);
 
         pagina = 1;
         totalpaginas = 0;
@@ -2126,7 +2126,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 break;
         }
 
-        totalfilas = getSessionBeanCobra().getCobraService().encontrarNumeroObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
+        totalfilas = getSessionBeanCobra().getGipromService().encontrarNumeroLocalidades(filtro);
 
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
@@ -2786,57 +2786,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
                 int asi_va_text = (int) Math.floor(asi_va);
 
-                contratistas = (getSessionBeanCobra().getCobraService().obtenerContratistaporobra(obra.getIntcodigoobra()));
-                String list_contratistas = "";
-                String list_contratante = "";
-                if (contratistas != null) {
-                    if (!contratistas.isEmpty()) {
-                        if (contratistas.size() == 1) {
-                            if (contratistas.get(0).getStrnombre().length() > 25) {
-                                list_contratistas += "<label class=\"tool\">";
-                                list_contratistas += contratistas.get(0).getStrnombre().substring(0, 22);
-                                list_contratistas += "...";
-                                list_contratistas += "<div>";
-                                list_contratistas += "<p>";
-                                list_contratistas += contratistas.get(0).getStrnombre();
-                                list_contratistas += "</p>";
-                                list_contratistas += "</div>";
-                                list_contratistas += "</label>";
-                            } else {
-                                list_contratistas += "<label>";
-                                list_contratistas += contratistas.get(0).getStrnombre();
-                                list_contratistas += "</label>";
-                            }
-                        } else {
-                            list_contratistas += "<label class=\"tool\">";
-                            list_contratistas += "Ver contratistas";
-                            list_contratistas += "<div>";
-                            for (Contratista cont : contratistas) {
-                                if (cont.getStrnombre() != null) {
-                                    list_contratistas += "<p>";
-                                    list_contratistas += cont.getStrnombre();
-                                    list_contratistas += "</p>";
-                                }
-                            }
-                            list_contratistas += "</div>";
-                            list_contratistas += "</label>";
-                        }
-                    }
-                }
-
-                if (obra.getTercero().getStrnombrecompleto().length() > 25) {
-                    list_contratante += "<label class=\"tool\">";
-                    list_contratante += obra.getTercero().getStrnombrecompleto().substring(0, 22);
-                    list_contratante += "...";
-                    list_contratante += "<div>";
-                    list_contratante += "<p>";
-                    list_contratante += obra.getTercero().getStrnombrecompleto();
-                    list_contratante += "</p>";
-                    list_contratante += "</div>";
-                    list_contratante += "</label>";
-                } else {
-                    list_contratante += obra.getTercero().getStrnombrecompleto();
-                }
+                
                 String stylesemaforo = "";
                 if (obra.getSemaforo() != null && obra.getSemaforo().compareTo("") != 0) {
                     if (obra.getSemaforo().equals("/resources/botones/rojo.png")) {
@@ -2951,7 +2901,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<span class=\"indicador-img-pe\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append(obra.getObra().getNumvalavanfinanciaerodeclarado()+"%");
+                descripcion.append(obra.getObra().getNumvalavanfinanciaerodeclarado()).append("%");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");

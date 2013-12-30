@@ -49,7 +49,7 @@ public class GraficoAvanceFisico implements Serializable{
         VistaObraMapa vistaObraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
         
         BigDecimal porcentajePlanificado = vistaObraMapa.getDeberiaestar().setScale(2, RoundingMode.HALF_UP);
-        BigDecimal porcentajeEjecutado = vistaObraMapa.getNumvalejecobra().divide(vistaObraMapa.getNumvaltotobra() ,2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
+        BigDecimal porcentajeEjecutado = vistaObraMapa.getNumvalejecobra().multiply(BigDecimal.valueOf(100)).divide(vistaObraMapa.getNumvaltotobra() ,2, RoundingMode.HALF_UP);
         
         if(new Date().after(getAdministrarObraNew().getObra().getDatefecfinobra())) {
             porcentajePlanificado = BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP);
