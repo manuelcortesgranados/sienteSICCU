@@ -5067,3 +5067,16 @@ a:hover {
     text-align: center;
     color: #999;
 }
+
+#contenedor_texto{
+    margin-top : 5px;
+    margin-bottom : 10px;
+}
+
+#contenedor_texto a{
+    color : #000;
+    font-family : 'open';
+    font-size : 15px;
+    margin-left: 40px;
+    margin-top: 10px;
+}

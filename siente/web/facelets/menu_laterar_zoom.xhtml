@@ -171,16 +171,6 @@
                 <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>
                 <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
             </h:panelGrid>
-            <h:panelGrid styleClass="ikont-hpg-menumodulos" rendered="#{SessionBeanCobra.modulos.size() gt 1}">
-                <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                    <div style=""  id="contenedor_texto">
-                        <h:outputLink styleClass="#{modulo.strestilo} a"
-                                      value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
-                            <h:outputText   value="#{modulo.strmodNmbre}" />
-                        </h:outputLink>
-                    </div>
-                </a4j:repeat>
-            </h:panelGrid>
             <br/>
             <br/>
             <h:panelGrid columns="2" styleClass="ikont-panel-spacing-menu">
@@ -189,6 +179,18 @@
             </h:panelGrid>
             <h:commandLink styleClass="ikont-label-estructura-menu ikont-label-menu-buscar-proyecto ikont-espacio-sub-menu" action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuBuscarProyecto}"/>
             <hr class="ikont-hr-separador-menu "/>
+            <h:panelGrid styleClass="ikont-hpg-menumodulos" rendered="#{SessionBeanCobra.modulos.size() gt 1}">
+                <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
+                    <div style=""  id="contenedor_texto">
+                        <h:outputLink styleClass="#{modulo.strestilo} a"
+                                      value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
+                            <h:outputText   value="#{modulo.strmodNmbre}" />
+                        </h:outputLink>
+                    </div>
+                    <hr class="ikont-hr-separador-menu "/>
+                </a4j:repeat>
+            </h:panelGrid>
+            
             <h:panelGrid  columns="2" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-crear-proyecto"/>
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuCrearProyecto}"/>    
