@@ -4939,19 +4939,20 @@ a:hover {
 
 .ikont-hot-img-ne{
     background-image: url("../imgs/icns_ne.png");
-    width: 70px;
+    width: 60px;
     height: 85px;
     display: block;
-    background-size: 180px;
+    background-size: 120px;
+    background-position: 0px 10px;
 }
 
 .ikont-hot-img-pe{
     background-image: url("../imgs/icns_ne.png");
-    width: 70px;
+    width: 60px;
     height: 85px;
     display: block;
-    background-size: 180px;
-    background-position: -90px 0px;
+    background-size: 120px;
+    background-position: -50px 5px;
 }
 
 .ikont-hpg-giprom-pe{
@@ -4968,6 +4969,7 @@ a:hover {
     font-size: 50px;
     font-family: 'open';
     color: #FFF;
+    letter-spacing: -4px;
 }
 
 .ikont-deta-rigth{
