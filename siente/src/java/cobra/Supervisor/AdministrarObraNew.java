@@ -5,6 +5,7 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.marcologico.vista.VistaCalculoIndicadorProyectos;
+import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Barrio;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
@@ -48,10 +49,12 @@ import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -1767,10 +1770,16 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         iniima = true;
 
         listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
-
+        for (Imagenevolucionobra imagenevolucionobra1 : listaImagenesevolucionobra) {
+            System.out.println("lista imagen =" + getSessionBeanCobra().getCobraService().obtenerAlimentacionXImagen(imagenevolucionobra1.getIntidimagen()));
+            Set<Alimentacion> setalimenta = new HashSet<Alimentacion>(getSessionBeanCobra().getCobraService().obtenerAlimentacionXImagen(imagenevolucionobra1.getIntidimagen()));
+            imagenevolucionobra1.setAlimentacions(setalimenta);
+           
+        }
         if (listaImagenesevolucionobra.isEmpty()) {
             iniima = false;
-        }
+        }       
+       
         llenarSelectTipoImagenes();
         this.imagenevolucionobra.setTipoimagen(new Tipoimagen(1, "", false));
 
