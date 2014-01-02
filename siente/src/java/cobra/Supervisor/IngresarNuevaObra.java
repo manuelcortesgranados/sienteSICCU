@@ -4483,7 +4483,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     cargadorImagenAnterior.guardarArchivosTemporales(carpetaDoc, true);
                     getSessionBeanCobra().getCobraService().getImagen().setStrnombre(nombreimg);
                     getSessionBeanCobra().getCobraService().getImagen().setTipoimagen(new Tipoimagen(1, "Anterior", true));
-                    getSessionBeanCobra().getCobraService().getImagen().setDatefecha(new Date());
+                    getSessionBeanCobra().getCobraService().getImagen().setDatefecha(obranueva.getDatefeciniobra());
                     String rutaWebImg = cargadorImagenAnterior.getArchivos().get(0).getRutaWeb();
                     getSessionBeanCobra().getCobraService().getImagen().setStrubicacion(rutaWebImg);
                     getSessionBeanCobra().getCobraService().getImagen().setObra(obranueva);
