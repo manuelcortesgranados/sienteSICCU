@@ -181,12 +181,12 @@
             <hr class="ikont-hr-separador-menu "/>
             <h:panelGrid styleClass="ikont-hpg-menumodulos">
                 <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                    <div style=""  id="contenedor_texto">
+                    <h:panelGroup layout="block" styleClass="hpg-contenedor-modulos-menu"  rendered="#{!(modulo.intmodulo eq 6)}">
                         <h:outputLink styleClass="#{modulo.strestilo} a"
                                       value="#{facesContext.externalContext.requestContextPath}#{modulo.strurlMdloRuta}">
                             <h:outputText   value="#{modulo.strmodNmbre}" />
                         </h:outputLink>
-                    </div>
+                    </h:panelGroup>
                     <hr class="ikont-hr-separador-menu "/>
                 </a4j:repeat>
             </h:panelGrid>

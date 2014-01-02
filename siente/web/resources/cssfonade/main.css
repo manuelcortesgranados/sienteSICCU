@@ -5067,12 +5067,12 @@ a:hover {
     color: #999;
 }
 
-#contenedor_texto{
+.hpg-contenedor-modulos-menu{
     margin-top : 5px;
     margin-bottom : 10px;
 }
 
-#contenedor_texto a{
+.hpg-contenedor-modulos-menu a{
     color : #000;
     font-family : 'open';
     font-size : 15px;
