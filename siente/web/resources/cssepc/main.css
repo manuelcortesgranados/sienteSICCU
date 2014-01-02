@@ -4874,9 +4874,9 @@ a:hover {
     z-index: 76;
 }
 .ikon-panel-contenido-error-navegador {
-    width: 948px;
+    right: 210px;
     position: absolute;
-    top: 313px;
+    top: 100px;
     z-index: 200;
     text-align: center;
     color: #999;

@@ -36,7 +36,7 @@
             function escondermostrarErrorNavegador() {
                 var divmostrarmensaje = jjquery('.ikont-div-ingreso-mostrar-error-pagina');
                 divmostrarmensaje.hide();
-                jjquery('.ikon-panel-contenido-error-navegador').css('display', 'none');
+                //  jjquery('.ikon-panel-contenido-error-navegador').css('display', 'none');
 
             }
             function mostrarActualizacionnavegador() {
@@ -421,24 +421,22 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
+            <div id="mostrar-error-pagina"  class="ikont-div-ingreso-mostrar-error-pagina">
+
+                <center>
+                    <h:panelGroup id="panel_error_navegador"  styleClass="ikon-panel-contenido-error-navegador" rendered="#{var.permisonuevodiseno}">
+                        <h:graphicImage   url="/resources/imgs/icon_lading_errorpage.png"  /><br/>
+                        <h:outputText value="Tu navegador no soporta los últimos estandares web:"/><br/>
+                        <h:outputText value="Por favor actualiza la versión de tu navegador."/><br/><br/>
+                        <h:outputText value="Para una mejor experiencia en zoom te "/><br/>
+                        <h:outputText value="recomendamos que utilices "/><br/>
+                        <h:outputText style="color: #000!important;" value="Firefox apartir de la versión 21.0 "/> 
+                        <h:outputText value=" ó "/>
+                        <h:outputText style="color: #000!important;" value="Chrome apartir de la versión 22.0"/>
+                    </h:panelGroup>
+                </center>  
+            </div>
         </h:form>
-        <div id="mostrar-error-pagina"  class="ikont-div-ingreso-mostrar-error-pagina">
-
-            <center>
-                <h:panelGroup id="panel_error_navegador"  styleClass="ikon-panel-contenido-error-navegador" rendered="#{var.permisonuevodiseno}">
-                    <h:graphicImage   url="/resources/imgs/icon_lading_errorpage.png"  /><br/>
-                    <h:outputText value="Tu navegador no soporta los últimos estandares web:"/><br/>
-                    <h:outputText value="Por favor actualiza la versión de tu navegador."/><br/><br/>
-                    <h:outputText value="Para una mejor experiencia en zoom te "/><br/>
-                    <h:outputText value="recomendamos que utilices "/><br/>
-                    <h:outputText style="color: #000!important;" value="Firefox apartir de la versión 21.0 "/> 
-                    <h:outputText value=" ó "/>
-                    <h:outputText style="color: #000!important;" value="Chrome apartir de la versión 22.0"/>
-                </h:panelGroup>
-            </center>  
-        </div>
-
-
         <f:subview id="murocomentarios" rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
         </f:subview>
