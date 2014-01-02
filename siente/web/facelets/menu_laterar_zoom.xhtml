@@ -179,7 +179,7 @@
             </h:panelGrid>
             <h:commandLink styleClass="ikont-label-estructura-menu ikont-label-menu-buscar-proyecto ikont-espacio-sub-menu" action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuBuscarProyecto}"/>
             <hr class="ikont-hr-separador-menu "/>
-            <h:panelGrid styleClass="ikont-hpg-menumodulos" rendered="#{SessionBeanCobra.modulos.size() gt 1}">
+            <h:panelGrid styleClass="ikont-hpg-menumodulos">
                 <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
                     <div style=""  id="contenedor_texto">
                         <h:outputLink styleClass="#{modulo.strestilo} a"
