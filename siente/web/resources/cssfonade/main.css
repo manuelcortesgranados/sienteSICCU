@@ -5067,15 +5067,27 @@ a:hover {
     color: #999;
 }
 
-#contenedor_texto{
+.hpg-contenedor-modulos-menu{
     margin-top : 5px;
     margin-bottom : 10px;
 }
 
-#contenedor_texto a{
+.hpg-contenedor-modulos-menu a{
     color : #000;
     font-family : 'open';
     font-size : 15px;
     margin-left: 40px;
     margin-top: 10px;
+}
+
+.icon-inicio-auditoria-menu{
+    background-image: url(../imgs/icons_menu_pr_auditoria.png);
+    background-repeat: no-repeat;
+    width: 21px;
+    height: 19px;
+    position: relative;
+    left: -35;
+    top: 21;
+    display: block;
+    cursor: pointer;
 }

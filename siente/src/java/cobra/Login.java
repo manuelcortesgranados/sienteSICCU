@@ -167,16 +167,11 @@ public class Login implements Serializable {
                 case 2:
                     getSessionBeanCobra().getCiudadanoservice().setUsuariomostrar(getSessionBeanCobra().getUsuarioObra());
                     getSessionBeanCobra().llenadodatos();
-                    String respuesta = "";
-                    if (getSessionBeanCobra().getModulos().size() == 1) {
-                        respuesta = getSessionBeanCobra().getModulos().get(0).getStraction();
-                    } else {
-                        respuesta = "home";
-                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
-                        {    
-                            getSessionBeanCobra().cargarpermisosmodulo(6);
+                    String respuesta = "gestion";
+                    if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
+                    {    
+                        getSessionBeanCobra().cargarpermisosmodulo(6);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
-                        }
                     }
 
                     if (verificarGrupo(getSessionBeanCobra().getUsuarioObra())) {
