@@ -5019,3 +5019,11 @@ a:hover {
     text-align: center;
     color: #999;
 }
+
+.content-restaurar-password{
+    height: 0px!important;
+    position: relative;
+    top: 149px;
+    left: 200px;
+
+}

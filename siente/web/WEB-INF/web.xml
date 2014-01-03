@@ -80,7 +80,7 @@
         <welcome-file>Inicio.xhtml</welcome-file>
     </welcome-file-list>-->
     
-   <error-page>
+    <error-page>
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/sesion_vencida.xhtml</location>
     </error-page>    
@@ -103,5 +103,13 @@
         <filter-name>FiltroUsuario</filter-name>
         <url-pattern>/resources/Documentos/*</url-pattern>
     </filter-mapping>
-    
+        <!--Servlet para restaurar la contraseña-->
+    <servlet> 
+        <servlet-name>Repass</servlet-name> 
+        <servlet-class>Repass</servlet-class> 
+    </servlet> 
+    <servlet-mapping> 
+        <servlet-name>Repass</servlet-name> 
+        <url-pattern>/Repass</url-pattern> 
+    </servlet-mapping> 
 </web-app>
