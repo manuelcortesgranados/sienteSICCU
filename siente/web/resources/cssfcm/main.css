@@ -409,7 +409,7 @@ a.closemodal{
     background-image:url(../imgs/bt_vista_lista.png);
     width: 25px;
     height: 25px;
-    background-position: 0px -30px;
+    background-position: 0px -2px;
     display: block;
 }
 
@@ -417,19 +417,19 @@ a.closemodal{
     background-image: url(../imgs/bt_vista_icono.png);
     width: 25px;
     height: 25px;
-    background-position: 0px -30px;
+    background-position: 0px -2px;
     display: block;
 }
 .ikont-hcl-activarmapabutton{
     background-image:url(../imgs/bt_vista_mapa.png);
     width: 25px;
     height: 25px;
-    background-position: 0px -30px;
+    background-position: 0px -2px;
     display: block;
 }
 
 .ikont-acl-activarlista:hover, .ikont-acl-activarimgs:hover, .ikont-hcl-activarmapabutton:hover{
-    background-position: 0px -0px;
+    background-position: 0px -30px;
 }
 
 

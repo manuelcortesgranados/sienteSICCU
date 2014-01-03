@@ -182,52 +182,43 @@
 
                     <interkont:spacer height="30" />
                     <center>
-                        <h:panelGrid columns="7" styleClass="ikont-hpg-logrosdificultad"  >
+                        <h:panelGrid columns="8" styleClass="ikont-hpg-logrosdificultad"  >
                             <a4j:commandLink id="btlogros" styleClass="ikont-a4jcl-btlogros"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
                                              oncomplete="#{rich:component('modalLogros')}.show();"
 
                                              render="tablaLogrosProyecto"/>
-                            <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosx" styleClass="ikont-a4jcl-btlogrosx"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
 
                                              oncomplete="#{rich:component('modalDificultad')}.show();" render="modalDificultad"/>
-                            <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosxx" styleClass="ikont-a4jcl-btlogrosxx"  
                                              action="#{Supervisor$DetalleObra.llenarFactoratraso}"
 
                                              oncomplete="#{rich:component('modalFactoresAtraso')}.show();" render="tablaFactores"/>
 
-                            <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosxxx" styleClass="ikont-a4jcl-btlogrosxxx"  
                                              action="#{Supervisor$DetalleObra.llenaractividadesAlimentacion}"
 
                                              oncomplete="#{rich:component('modalactividades')}.show();" render="listaractividades" />
-                        </h:panelGrid>
-                        <h:panelGrid columns="1" id="panelVali" styleClass="ikont-hpg-panelVali"    >
-                            <h:panelGrid columns="7" >
-                                <a4j:commandLink id="btlogros1" styleClass="ikont-a4jcl-btlogros1"  
+                            <a4j:commandLink id="btlogros1" styleClass="ikont-a4jcl-btlogros1"  
 
                                                  oncomplete="#{rich:component('modalImpacto')}.show();" render="tablaaliperim" />
-                                <interkont:spacer width="5"/>
-                                <a4j:commandLink id="btlogrosx2" styleClass="ikont-a4jcl-btlogrosx2"  
+                            <a4j:commandLink id="btlogrosx2" styleClass="ikont-a4jcl-btlogrosx2"  
                                                  action="#{Supervisor$DetalleObra.LlenarDocumentos}"
 
                                                  oncomplete="#{rich:component('modalDocumento')}.show();" render="tablaDocsAlim"/>
-                                <interkont:spacer width="5"/>
-                                <a4j:commandLink id="btlogrosx3" styleClass="ikont-a4jcl-btlogrosx3"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
+                            <a4j:commandLink id="btlogrosx3" styleClass="ikont-a4jcl-btlogrosx3"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
                                                                                                                    supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
                                                  action="#{Supervisor$DetalleObra.llenarmodalvalidacion}"
 
                                                  oncomplete="#{rich:component('modalValidarAlimentacion')}.show();" render="frmValidarAlimentacion"/>
-                                <interkont:spacer width="5"/>
-                                <a4j:commandLink id="pruebamodal" value="prueba" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"
+                            <a4j:commandLink id="pruebamodal" styleClass="ikont-a4jcl-solicitumaestro" value="prueba" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"
                                                  action="#{Supervisor$DetalleObra.llenarBeneficiariosxavance}">
                                     <a4j:ajax event="complete" onbeforesubmit="#{rich:component('beneficiarioxperiodo')}.show();" render="rpListaBeneficiarios"/>
                                 </a4j:commandLink>
-
-                            </h:panelGrid>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" id="panelVali" styleClass="ikont-hpg-panelVali"    >
                             <h:outputText  styleClass="ikont-hot-validacionultimaalimentacion"   value="La última alimentación no ha sido validada aún por el funcionario de Colombia Humanitaria"
                                            rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
                         </h:panelGrid>

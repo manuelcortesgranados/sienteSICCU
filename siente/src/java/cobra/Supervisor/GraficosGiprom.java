@@ -130,7 +130,6 @@ public class GraficosGiprom implements Serializable{
         datosNBIanual.append("chart.dataProvider = chartData;\n");
         datosNBIanual.append("chart.categoryField = 'year';\n");
         datosNBIanual.append("chart.rotate = true;\n");
-        datosNBIanual.append("chart.depth3D = 10;\n");
         datosNBIanual.append("chart.angle = 30;\n");
         datosNBIanual.append("chart.startDuration = 4;\n");
         datosNBIanual.append("chart.color = '#58595B';\n");
@@ -201,7 +200,6 @@ public class GraficosGiprom implements Serializable{
         datosNBILocalidad.append("chartLocal.dataProvider = chartDataLocal;\n");
         datosNBILocalidad.append("chartLocal.categoryField = 'area';\n");
         datosNBILocalidad.append("chartLocal.rotate = true;\n");
-        datosNBILocalidad.append("chartLocal.depth3D = 10;\n");
         datosNBILocalidad.append("chartLocal.angle = 30;\n");
         datosNBILocalidad.append("chartLocal.startDuration = 4;\n");
         datosNBILocalidad.append("chartLocal.color = '#58595B';\n");

@@ -84,8 +84,8 @@ a.buttontxt2:hover {
 }
 
 
-a.evo01 {
-    background-image: url("../imgs/evo01.png");
+a.ikont-a4jcl-btlogros {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -96,11 +96,11 @@ a.evo01 {
     border-radius:5px;
     border-color:#51809A;
 }
-a.evo01:hover {
+a.ikont-a4jcl-btlogros:hover {
     background-position: 0 -42px;
 }
-a.evo02 {
-    background-image: url("../imgs/evo02.png");
+a.ikont-a4jcl-btlogrosx{
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -109,11 +109,11 @@ a.evo02 {
     margin: 5px;
     width: 168px;
 }
-a.evo02:hover {
+a.ikont-a4jcl-btlogrosx:hover {
     background-position: 0 -42px;
 }
-a.evo03 {
-    background-image: url("../imgs/evo03.png");
+a.ikont-a4jcl-btlogrosxx {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -122,11 +122,11 @@ a.evo03 {
     margin: 5px;
     width: 168px;
 }
-a.evo03:hover {
+a.ikont-a4jcl-btlogrosxx:hover {
     background-position: 0 -42px;
 }
-a.evo04 {
-    background-image: url("../imgs/evo04.png");
+a.ikont-a4jcl-btlogrosxxx {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -135,11 +135,11 @@ a.evo04 {
     margin: 5px;
     width: 168px;
 }
-a.evo04:hover {
+a.ikont-a4jcl-btlogrosxxx:hover {
     background-position: 0 -42px;
 }
-a.evo05 {
-    background-image: url("../imgs/evo05.png");
+a.ikont-a4jcl-btlogros1 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -148,11 +148,11 @@ a.evo05 {
     margin: 5px;
     width: 168px;
 }
-a.evo05:hover {
+a.ikont-a4jcl-btlogros1:hover {
     background-position: 0 -42px;
 }
-a.evo06 {
-    background-image: url("../imgs/evo06.png");
+a.ikont-a4jcl-btlogrosx2 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -161,11 +161,11 @@ a.evo06 {
     margin: 5px;
     width: 168px;
 }
-a.evo06:hover {
+a.ikont-a4jcl-btlogrosx2:hover {
     background-position: 0 -42px;
 }
-a.evo07 {
-    background-image: url("../imgs/evo07.png");
+a.ikont-a4jcl-btlogrosx3 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -174,12 +174,12 @@ a.evo07 {
     margin: 5px;
     width: 168px;
 }
-a.evo07:hover {
+a.ikont-a4jcl-btlogrosx3:hover {
     background-position: 0 -42px;
 }
 
-a.evo08 {
-    background-image: url("../imgs/evo08.png");
+a.ikont-a4jcl-solicitumaestro {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     display: block;
@@ -188,7 +188,7 @@ a.evo08 {
     margin: 5px;
     width: 168px;
 }
-a.evo08:hover {
+a.ikont-a4jcl-solicitumaestro:hover {
     background-position: 0 -42px;
 }
 

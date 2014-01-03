@@ -2220,7 +2220,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hot-soliobra, .ikont-hot-numvaltotobra{
-    font-size: 1.4em;
+    font-size: 15px;
     color: #7E7E7E;
 }
 
@@ -5078,4 +5078,102 @@ a:hover {
     font-size : 15px;
     margin-left: 40px;
     margin-top: 10px;
+}
+
+a.ikont-a4jcl-btlogros {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogros:hover {
+    background-position: 0px  -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogrosx{
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -113px 0px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogrosx:hover {
+    background-position: -113px  -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogrosxx {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -230px 0px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogrosxx:hover {
+    background-position: -230px  -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogrosxxx {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -340px 0px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogrosxxx:hover {
+    background-position: -340px  -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogros1 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -450px 0px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogros1:hover {
+    background-position: -450px -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogrosx2 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -563px 0px;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogrosx2:hover {
+    background-position: -563px  -86px;
+    transition: .5s all;
+}
+a.ikont-a4jcl-btlogrosx3 {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-btlogrosx3:hover {
+    background-position: 0px  -86px;
+    transition: .5s all;
+}
+
+a.ikont-a4jcl-solicitumaestro {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-solicitumaestro:hover {
+    background-position: 0px  -86px;
+    transition: .5s all;
 }
