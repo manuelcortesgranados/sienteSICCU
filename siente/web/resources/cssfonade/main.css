@@ -5059,7 +5059,7 @@ a:hover {
     z-index: 76;
 }
 .ikon-panel-contenido-error-navegador {
-    right: 210px;
+    right: 455px;
     position: absolute;
     top: 100px;
     z-index: 200;
@@ -5067,12 +5067,12 @@ a:hover {
     color: #999;
 }
 
-#contenedor_texto{
+.hpg-contenedor-modulos-menu{
     margin-top : 5px;
     margin-bottom : 10px;
 }
 
-#contenedor_texto a{
+.hpg-contenedor-modulos-menu a{
     color : #000;
     font-family : 'open';
     font-size : 15px;
@@ -5080,100 +5080,14 @@ a:hover {
     margin-top: 10px;
 }
 
-a.ikont-a4jcl-btlogros {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: 0 0;
+.icon-inicio-auditoria-menu{
+    background-image: url(../imgs/icons_menu_pr_auditoria.png);
     background-repeat: no-repeat;
+    width: 21px;
+    height: 19px;
+    position: relative;
+    left: -35;
+    top: 21;
     display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogros:hover {
-    background-position: 0px  -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogrosx{
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: -113px 0px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogrosx:hover {
-    background-position: -113px  -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogrosxx {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: -230px 0px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogrosxx:hover {
-    background-position: -230px  -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogrosxxx {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: -340px 0px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogrosxxx:hover {
-    background-position: -340px  -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogros1 {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: -450px 0px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogros1:hover {
-    background-position: -450px -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogrosx2 {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: -563px 0px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogrosx2:hover {
-    background-position: -563px  -86px;
-    transition: .5s all;
-}
-a.ikont-a4jcl-btlogrosx3 {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-btlogrosx3:hover {
-    background-position: 0px  -86px;
-    transition: .5s all;
-}
-
-a.ikont-a4jcl-solicitumaestro {
-    background-image: url("../imgs/detalle_reporte_sprite.png");
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    display: block;
-    height: 90px;
-    width: 110px;
-}
-a.ikont-a4jcl-solicitumaestro:hover {
-    background-position: 0px  -86px;
-    transition: .5s all;
+    cursor: pointer;
 }

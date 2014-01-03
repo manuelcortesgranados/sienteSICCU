@@ -631,7 +631,7 @@ public class AdminSupervisionExterna implements Serializable{
      * sistema
      */
     public void cargarVisitasAuditoriaFallidasUsuario() {
-        listavisitasfallidas = getSessionBeanCobra().getCobraService().encontrarVisitasAuditoriaUsuario(getSessionBeanCobra().getUsuarioObra().getUsuId(), Visita.ESTADO_FALLO);
+        listavisitasfallidas = getSessionBeanCobra().getCobraService().encontrarVisitasAuditoriaUsuario(null, Visita.ESTADO_FALLO);
     }
     
     /**

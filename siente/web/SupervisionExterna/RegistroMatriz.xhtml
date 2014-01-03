@@ -84,7 +84,7 @@
                                 var="actual" binding="#{Supervision$Externa.tablavisitasfallidas}">
                             <f:facet name="header">
                                 <rich:columnGroup>
-                                    <rich:column colspan="5">
+                                    <rich:column colspan="6">
                                         <h:outputText  styleClass="ikont-hot-titulolistavisitasfallidas"   value="#{var.titulolistavisitasfallidas}"  />
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
@@ -95,6 +95,9 @@
                                     </rich:column>
                                     <rich:column>
                                         <h:outputText  styleClass="ikont-hot-titulodatefecharegistro"   value="#{var.titulodatefecharegistro}"  />
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText  styleClass="ikont-hot-titulousuarioauditoria"   value="#{var.titulousuarioauditoria}"  />
                                     </rich:column>
                                     <rich:column>
                                         <h:outputText  styleClass="ikont-hot-titulocargarvisitafallida"   value="#{var.cargarvisitafallida}"  />
@@ -113,6 +116,10 @@
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}">
                                     <f:convertDateTime pattern="#{var.formatofechahora}"/>
+                                </h:outputText>    
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-usuarioauditoria"   value="#{actual.jsfUsuarioVisita.usuLogin}">
                                 </h:outputText>    
                             </rich:column>
                             <rich:column>
