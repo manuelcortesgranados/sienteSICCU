@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="panelVallaMapa" autosized="true" resizeable="false" width="700" 
+                      headerClass="style-modal-dialog-head" styleClass="ikont-rpp-panelFiltroAvanzadoCiud style-modal-dialog">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:panelGrid columns="2">
+                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
+                    <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "  value="#{HomeGestion.obra.strnombrecrot}" />
+                </h:panelGrid>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" styleClass="ikont-hcl-esconder closemodal"  
+                                   title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelVallaMapa')}.hide();
+                                           return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <h:outputLabel value="VALOR GLOBAL DEL PROYECTO?"/>
+            <br/>
+            <h:outputLabel value="$#{HomeGestion.obra.numvaltotobra}"/>
+            <br/>            
+
+        </h:form>
+    </rich:popupPanel>
+
+</ui:composition>

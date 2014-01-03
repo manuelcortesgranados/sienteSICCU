@@ -87,7 +87,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private SelectItem[] UbicacionObra;
     private SelectItem[] TipoObraUsuario;
     private HashMap<Integer, Double> porcentajes = new HashMap<Integer, Double>();
-    private List<Localidad> lslocalidad = new ArrayList<Localidad>();
+    private List<Localidad> lslocalidad = new ArrayList<Localidad>();   
+    private VistaObraMapa obra;   
 
     /**
      * Listados de grupos al que pertenece el usuario
@@ -115,8 +116,16 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //    }
     public void setLslocalidad(List<Localidad> lslocalidad) {
         this.lslocalidad = lslocalidad;
+    } 
+
+       public VistaObraMapa getObra() {
+        return obra;
     }
 
+    public void setObra(VistaObraMapa obra) {
+        this.obra = obra;
+    }
+  
     /**
      * Set the value of datos_mapa
      *
@@ -1117,8 +1126,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 //marker.setVistaobra(obra);
                 marker.setLatitude(obra.getFloatlatitud().doubleValue() + "");
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
-                marker.setJsVariable("marker_" + (contador++));
-
+                marker.setJsVariable("marker_" + (contador++));        
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
@@ -2406,7 +2414,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
                 //Obra obra = listaobrasusu.get(i);
-                VistaObraMapa obra = listaobrasusu.get(i);
+                obra = listaobrasusu.get(i);
                 Marcador marker = new Marcador();
                 //setAlimentacionultima(new Alimentacion());
                 //setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra()));
@@ -2741,8 +2749,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
                 //Obra obra = listaobrasusu.get(i);
-                VistaObraMapa obra = listaobrasusu.get(i);
-                Marcador marker = new Marcador();
+                obra = listaobrasusu.get(i);
+               Marcador marker = new Marcador();
                 //setAlimentacionultima(new Alimentacion());
                 //setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra()));
 
@@ -2751,7 +2759,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 marker.setLatitude(obra.getFloatlatitud().doubleValue() + "");
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
                 marker.setJsVariable("marker_" + (contador++));
-
+                marker.setObra(obra.getObra());
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
@@ -2956,7 +2964,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</html>");
 
                 marker.setInformationWindow(descripcion.toString());
-
+                
                 if (obra.getRuta() != null) {
 
                     marker.setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(obra.getRuta().getStrcodigotramo()));
@@ -3034,8 +3042,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      *
      */
     public void cambiarVista() {
-
+ 
         //filtro.setIntvista(vista);
         filtroObrasActionMapaAvanModal();
+    }
+    
+    public void marcadorSeleccion () {       
+//        System.out.println("codigo obra = " + marker.getObra().getIntcodigoobra());
+        System.out.println("ide de la obra = " + getObra().getIntcodigoobra());
     }
 }
