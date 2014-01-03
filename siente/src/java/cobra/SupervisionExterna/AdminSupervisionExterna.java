@@ -607,6 +607,11 @@ public class AdminSupervisionExterna implements Serializable{
     public void validarMatrizAuditoria() {
         subirListado.getArchivoWeb().cambiarNombre(null, true);
         try {
+            subirListado.getArchivoWeb().convertirUTF8();
+        } catch (IOException ex) {
+            FacesUtils.addErrorMessage("No fue posible convertir a UTF8");
+        }
+        try {
             subirListado.guardarArchivosTemporales(RutasWebArchivos.MATRIZ_AUDITORIA, true);
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setDatefecharegistro(new Date());
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(ArchivoWebUtil.obtenerRutaAbsoluta(subirListado.getArchivos().get(0).getRutaWeb()));

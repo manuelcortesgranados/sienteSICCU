@@ -1,9 +1,13 @@
 package cobra;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 
 /**
  * Objeto que contiene los datos correspondientes a los archivos pertenecientes
@@ -161,6 +165,16 @@ public class ArchivoWeb {
                 }
             }
         }
+    }
+    
+    /**
+     * Convierte el archivo al formato UTF8
+     * @throws IOException 
+     */
+    public void convertirUTF8() throws IOException {
+        String contenido;
+        contenido = FileUtils.readFileToString(this.archivoTmp);
+        FileUtils.writeStringToFile(this.archivoTmp, contenido, "UTF-8");
     }
 
     public String getRutaWeb() {
