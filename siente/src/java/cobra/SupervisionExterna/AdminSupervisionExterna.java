@@ -606,7 +606,6 @@ public class AdminSupervisionExterna implements Serializable{
      */
     public void validarMatrizAuditoria() {
         listaresultadosvalidacion = new ArrayList<Typeresultadovalidacion>();
-        subirListado.getArchivoWeb().cambiarNombre(null, true);
         try {
             subirListado.getArchivoWeb().convertirUTF8();
             LineIterator lineIterator = FileUtils.lineIterator(subirListado.getArchivoWeb().getArchivoTmp());
@@ -621,6 +620,7 @@ public class AdminSupervisionExterna implements Serializable{
                 }
                 fila++;
             }
+            subirListado.getArchivoWeb().cambiarNombre(null, true);
             subirListado.guardarArchivosTemporales(RutasWebArchivos.MATRIZ_AUDITORIA, true);
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setDatefecharegistro(new Date());
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(ArchivoWebUtil.obtenerRutaAbsoluta(subirListado.getArchivos().get(0).getRutaWeb()));
