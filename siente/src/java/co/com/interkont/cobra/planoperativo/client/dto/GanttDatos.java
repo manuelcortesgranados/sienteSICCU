@@ -17,7 +17,6 @@ import com.google.gwt.i18n.client.impl.CurrencyDataImpl;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
-import com.interkont.cobra.dto.ActividadObraDTO;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.math.BigDecimal;
