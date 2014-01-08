@@ -296,19 +296,19 @@
                         <rich:collapsiblePanel switchType="client" header="Datos relevantes" expanded="true">
                             <h:panelGrid columns="4" class="ikont-hpg-datosrelevantes" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">
-                                    <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" />
+                                    <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto" onclick="return false;"/>
                                     <h:outputLabel>Duración</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-pg_impactosocial">
-                                    <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" />
+                                    <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto" onclick="return false;"/>
                                     <h:outputLabel>Impacto social</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid  styleClass="ikont-hgi-imgestobra">
-                                    <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}" />
+                                    <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}" onclick="return false;"/>
                                     <h:outputLabel>Estado</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
-                                    <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.intidtipoproyecto} " />
+                                    <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.intidtipoproyecto} " onclick="return false;"/>
                                     <h:outputLabel>Tipo</h:outputLabel>
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-griddetaob">

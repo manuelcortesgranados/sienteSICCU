@@ -2293,6 +2293,7 @@ input[type="text"], input[type="password"], select{
     background-image: url("../imgs/proyecto/detalle_sprite.png");
     background-repeat: no-repeat;
     display: block !important;
+    cursor: alias !important;
 }
 
 .ikont-hcl-imgduracion{
