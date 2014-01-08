@@ -1,5 +1,6 @@
 package cobra;
 
+import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Puntoreferencia;
 import com.googlecode.gmaps4jsf.component.marker.Marker;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class Marcador extends Marker implements Serializable
 {
-        //private Obra obra;
+        private Obra obra;
         private int tipo;
         public String icon="";
         private List<Puntoreferencia> listapuntosruta = new ArrayList<Puntoreferencia>();
@@ -69,13 +70,13 @@ public class Marcador extends Marker implements Serializable
         this.informationWindow = informationWindow;
     }
 
-//    public Obra getObra() {
-//        return obra;
-//    }
-//
-//    public void setObra(Obra obra) {
-//        this.obra = obra;
-//    }
+    public Obra getObra() {
+        return obra;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
+    }
 
     public static String stringToHTMLString(String string) {
         StringBuffer sb = new StringBuffer(string.length());
@@ -165,15 +166,15 @@ public class Marcador extends Marker implements Serializable
         this.verlinea = verlinea;
     }
 
-//    public VistaObraMapa getVistaobra() {
-//        return vistaobra;
-//    }
-//
-//    public void setVistaobra(VistaObraMapa vistaobra) {
-//        this.vistaobra = vistaobra;
-//    }
-    
-    
+    //    public VistaObraMapa getVistaobra() {
+    //        return vistaobra;
+    //    }
+    //
+    //    public void setVistaobra(VistaObraMapa vistaobra) {
+    //        this.vistaobra = vistaobra;
+    //    }
+   
+
     
     
     

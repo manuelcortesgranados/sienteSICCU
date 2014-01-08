@@ -26,9 +26,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +37,8 @@ import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import supervision.service.SupervisionExternaServiceAble;
 
@@ -605,8 +605,22 @@ public class AdminSupervisionExterna implements Serializable{
      * previamente cargado
      */
     public void validarMatrizAuditoria() {
-        subirListado.getArchivoWeb().cambiarNombre(null, true);
+        listaresultadosvalidacion = new ArrayList<Typeresultadovalidacion>();
         try {
+            subirListado.getArchivoWeb().convertirUTF8();
+            LineIterator lineIterator = FileUtils.lineIterator(subirListado.getArchivoWeb().getArchivoTmp());
+            int fila = 1;
+            int numeroColumnasEsperado = Integer.valueOf(Propiedad.getValor("numerocolumnasmatrizauditoria"));
+            while (lineIterator.hasNext()) {
+                String linea = lineIterator.nextLine();
+                int numeroColumnas = linea.split("\\t").length;
+                if (numeroColumnas != numeroColumnasEsperado) {
+                    FacesUtils.addErrorMessage(Propiedad.getValor("numerocolumnasmatrizauditoriaerror", fila, numeroColumnas, numeroColumnasEsperado));
+                    return;
+                }
+                fila++;
+            }
+            subirListado.getArchivoWeb().cambiarNombre(null, true);
             subirListado.guardarArchivosTemporales(RutasWebArchivos.MATRIZ_AUDITORIA, true);
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setDatefecharegistro(new Date());
             getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(ArchivoWebUtil.obtenerRutaAbsoluta(subirListado.getArchivos().get(0).getRutaWeb()));
@@ -623,6 +637,8 @@ public class AdminSupervisionExterna implements Serializable{
             cargarVisitasAuditoriaFallidasUsuario();
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            FacesUtils.addErrorMessage("No fue posible convertir a UTF8");
         }
     }
     

@@ -238,12 +238,14 @@
                                           longitude="#{marker.longitude}"
                                           jsVariable="#{marker.jsVariable}"
                                           draggable="false" >
+                                    <m:eventListener eventName="click" jsFunction="mapavalla" /> 
                                     <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
                                     <m:htmlInformationWindow htmlText="#{marker.informationWindow}" />
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
-                    </h:panelGrid>            
+                    </h:panelGrid> 
+                    <a4j:jsFunction name="mapavalla" actionListener="#{HomeGestion.marcadorSeleccion}" oncomplete="#{rich:component('panelVallaMapa')}.hide();" />
                     <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
 
                         <rich:dataGrid styleClass="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
@@ -451,6 +453,7 @@
 
         <!--ui:include src="/modal/modalFiltroAvanzado.xhtml"/-->
         <ui:include src="/modal/modalFiltroAvanzadoCiud.xhtml"/>
+        <ui:include src="/modal/modalVallaMapa.xhtml"/>
 
         <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.xhtml"/>
         <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.xhtml"/>

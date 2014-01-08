@@ -103,4 +103,14 @@
         <filter-name>FiltroUsuario</filter-name>
         <url-pattern>/resources/Documentos/*</url-pattern>
     </filter-mapping>-->
+    
+        <!--Servlet para restaurar la contraseña-->
+    <servlet> 
+        <servlet-name>Repass</servlet-name> 
+        <servlet-class>Repass</servlet-class> 
+    </servlet> 
+    <servlet-mapping> 
+        <servlet-name>Repass</servlet-name> 
+        <url-pattern>/Repass</url-pattern> 
+    </servlet-mapping> 
 </web-app>

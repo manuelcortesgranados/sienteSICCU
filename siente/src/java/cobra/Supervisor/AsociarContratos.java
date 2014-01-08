@@ -446,20 +446,19 @@ public class AsociarContratos implements Serializable {
 
     public String agregarContratoInterventoria() {
         BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
-        relacioncontratointer.setNumvalordisponible(BigDecimal.ZERO); 
+        relacioncontratointer.setNumvalordisponible(BigDecimal.ZERO);
         valorfaltanteasociarcontrato = BigDecimal.ZERO;
         //AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
         //Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
         for (Relacioncontratoobra contratoobta : listacontratosobra) {
             valorlistacontratoobra = valorlistacontratoobra.add(contratoobta.getNumvalorrelacion());
         }
-        valorfaltanteasociarcontrato = getAdministrarObraNew().getObra().getNumvaltotobra().subtract(valorlistacontratoobra);
+
         Contrato contselec = (Contrato) tablacontratosasoc.getRowData();
         relacioncontratointer = new Relacioncontratoobra();
         relacioncontratointer.setContrato(contselec);
         relacioncontratointer.setObra(getAdministrarObraNew().getObra());
         relacioncontratointer.setNumvalordisponible(contselec.getNumvlrcontrato().subtract(contselec.getNumvlrsumahijos().add(contselec.getNumvlrsumaproyectos())));
-
         if (getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.ZERO) == 0) {
             relacioncontratointer.setMensaje(bundle.getString("proyectonotienecronograma"));
             FacesUtils.addErrorMessage(bundle.getString("proyectonotienecronograma"));
@@ -488,7 +487,14 @@ public class AsociarContratos implements Serializable {
             FacesUtils.addErrorMessage(bundle.getString("contratoestarelacionado"));
             relacioncontratointer.setNumvalormaximo(BigDecimal.ZERO);
         }
-
+        valorfaltanteasociarcontrato = getAdministrarObraNew().getObra().getNumvaltotobra().subtract(valorlistacontratoobra);
+        if(filtrocontrato.getBoolcontrconsultoria() ==false){
+        if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 1) {
+            relacioncontratointer.setNumvalordisponible(valorfaltanteasociarcontrato);
+        }// else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == -1) {
+        //   } else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 0) {
+        //  }
+        } 
         return null;
     }
 

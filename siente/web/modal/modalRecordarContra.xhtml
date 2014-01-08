@@ -29,6 +29,7 @@
         </f:facet>
         <h:form>
             <a4j:region>
+                <center>
                 <h:panelGroup layout="block" styleClass="ikont-hpg-principalrecordarcontra"  >
                     <h:panelGroup layout="block" >
                         <h:panelGrid >
@@ -36,11 +37,6 @@
                                 <h:outputLabel  styleClass="ikont-hol-ingresarcorreo"    value="#{var.ingresarcorreo}"/><br/><br/>
                                 <h:inputText   id="txtolvidocontra"  required="true"
                                                onclick="this.value=''"  value="#{SessionBeanCobra.usuarioCorreo}"/><br/><br/>
-                                <h:panelGrid width="40%" >
-                                    <rich:messages id="messagerepass" globalOnly="true" 
-                                                   styleClass="ikont-rm-messagerepass"   ajaxRendered="true" >                                                    
-                                    </rich:messages> 
-                                </h:panelGrid>
 
                                 <a4j:commandButton value="#{var.enviar}" styleClass="ikont-acb-enviar"   action="#{SessionBeanCobra.cambiarContrasenaUsuario}" execute="@this txtolvidocontra" render="messagerepass"/>
                                 <h:commandButton value="#{var.cancelar}" styleClass="ikont-acb-cancelar"    />
@@ -51,6 +47,7 @@
 
                     </h:panelGroup>
                 </h:panelGroup>
+                </center>
             </a4j:region>
         </h:form>
     </rich:popupPanel>

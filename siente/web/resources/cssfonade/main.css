@@ -5189,3 +5189,11 @@ a.ikont-a4jcl-solicitumaestro:hover {
     background-position: 0px  -86px;
     transition: .5s all;
 }
+
+.content-restaurar-password{
+    height: 0px!important;
+    position: relative;
+    top: 149px;
+    left: 200px;
+
+}
