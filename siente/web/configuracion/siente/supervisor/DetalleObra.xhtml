@@ -280,9 +280,9 @@
 
                                 <rich:panel header="#{var.socion}" bodyClass="rich-panel-grid-body"
                                             styleClass="rich-panel-grid" headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
-                                    
-                                        <h:outputLabel id="st_strnomsocio"
-                                                       value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+
+                                    <h:outputLabel id="st_strnomsocio"
+                                                   value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
                                 </rich:panel>
 
                                 <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
@@ -516,9 +516,9 @@
                                 <rich:panel header="#{var.nombreproyecto}" bodyClass="rich-panel-grid-body panelcenter " styleClass="rich-panel-grid" 
                                             headerClass="font-header-panel" rendered="#{Supervisor$AdministrarObraNew.proyectoestrategia}">
                                     <center>
-                                        
-                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext ikont-hol-sttipoProyecto " />
-                                        
+
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext ikont-hol-sttipoProyecto " />
+
 
                                     </center>
                                 </rich:panel>
@@ -761,7 +761,7 @@
                                             >
                                 <f:facet name="header">
                                     <rich:columnGroup>
-                                        <rich:column colspan="8">
+                                        <rich:column colspan="9">
                                             <h:outputText  styleClass="ikont-hot-invo"   value="#{var.contrato} #{var.interventorObra}ia" />
                                         </rich:column>
                                         <rich:column breakRowBefore="true">
@@ -787,6 +787,9 @@
                                         </rich:column>
                                         <rich:column>
                                             <h:outputText  styleClass="ikont-hot-valasocon"   value="#{var.valorasociadoaproyecto}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.consultar}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
@@ -822,6 +825,12 @@
                                         <h:outputText  styleClass="ikont-hot-numvalrel"   value="#{contraInterven.numvalorrelacion}">
                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
+                                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{contraInterven.contrato.intidcontrato}" />
+                                        </h:commandLink>
                                     </rich:column>
                                 </rich:columnGroup>
                                 <f:facet name="footer">

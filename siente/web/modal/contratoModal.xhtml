@@ -2,17 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:panelGroup id="panelContrato" >
         <center>
 
             <h:panelGroup  >
-                
+
 
                 <rich:dataTable styleClass="ikont-tabla-entidad-contratista" id="tablacontrato"  
                                 sortMode="single" 
@@ -69,7 +69,7 @@
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </rich:column>
-                    
+
                     <rich:column id="tc_valor_asociado" styleClass="ikont-rc-tcvalorasociado">
                         <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-valorasociadoaproyecto"   value="#{var.valorasociadoaproyecto}"/>
@@ -83,8 +83,9 @@
                             <h:outputText  styleClass="ikont-hot-varpolizas"   value="#{var.verpolizas}"/>
                         </f:facet>
                         <a4j:commandLink  value="X" id="verpoliza"  
-                                         action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
-                                         onclick="#{rich:component('panelVerPolizaModal')}.hide();return false;">
+                                          action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
+                                          onclick="#{rich:component('panelVerPolizaModal')}.hide();
+                                                  return false;">
                             <h:graphicImage  styleClass="ikont-hgi-verpoliza"    value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
@@ -97,12 +98,21 @@
                         </f:facet>
                         <a4j:commandLink  id="vercosto"  
                                           render="panelContrato"
-                                         onclick="#{rich:component('panelCostoContrato')}.show();return true;">
+                                          onclick="#{rich:component('panelCostoContrato')}.show();
+                                                  return true;">
                             <h:graphicImage  styleClass="ikont-hgi-vercosto"    value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
                     </rich:column>
-
+                    <rich:column id="tc_consultar_contrato" >
+                        <f:facet name="header">
+                            <h:outputText value="#{var.consultar}"/>
+                        </f:facet>
+                        <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
+                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                              <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.contrato.intidcontrato}" />
+                        </h:commandLink>
+                    </rich:column>
 
                 </rich:dataTable>
 

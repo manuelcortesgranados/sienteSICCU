@@ -166,7 +166,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
-
+    
     public int controltipodocumento = 0;
 
     /**
@@ -187,6 +187,18 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      */
     private VistaCalculoIndicadorProyectos vproductomedios = new VistaCalculoIndicadorProyectos();
     private VistaCalculoIndicadorProyectos vproductogestion = new VistaCalculoIndicadorProyectos();
+    /*
+     * Varible que tiene el codigo del contrato para buscar la informacion del contrato
+     */
+    private int mostrarContratoConvenio = 0;
+
+    public int getMostrarContratoConvenio() {
+        return mostrarContratoConvenio;
+    }
+
+    public void setMostrarContratoConvenio(int mostrarContratoConvenio) {
+        this.mostrarContratoConvenio = mostrarContratoConvenio;
+    }
 
     public VistaCalculoIndicadorProyectos getVproductomedios() {
         return vproductomedios;
@@ -2370,6 +2382,22 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     public void setGragiprom(GraficosGiprom gragiprom) {
         this.gragiprom = gragiprom;
+    }
+    
+    /**
+     * <p>
+     * Return a reference to the scoped data bean.</p>
+     *
+     * @return reference to the scoped data bean
+     */
+    protected NuevoContratoBasico getNuevoContratoBasico() {
+        return (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+    }
+    
+    public String detalleContrato() {
+        Contrato contratotabla = (Contrato) getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio);
+        getNuevoContratoBasico().cargarContrato(contratotabla);
+        return "consultarContrato";
     }
 
 }
