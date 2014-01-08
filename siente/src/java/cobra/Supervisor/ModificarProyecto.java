@@ -721,9 +721,9 @@ public class ModificarProyecto  implements Serializable{
             }
             Iterator<Relacioncontratoobra> itRelacionesContratoObra = obra.getRelacioncontratoobras().iterator();
             while (itRelacionesContratoObra.hasNext()) {
-                Relacioncontratoobra relacioncontratoobra = itRelacionesContratoObra.next();
-                if (relacioncontratoobra.getIntidserial() == contselec.getIntidserial()) {
-                    relacioncontratoobra.setNumvalorrelacion(contselec.getNumvalorrelacion());
+                 relacioncontratoobraModificada = itRelacionesContratoObra.next();
+                if (relacioncontratoobraModificada.getIntidserial() == contselec.getIntidserial()) {
+                    relacioncontratoobraModificada.setNumvalorrelacion(contselec.getNumvalorrelacion());
                 }
             }
             valorAdicionAsociadoAContrato = true;
