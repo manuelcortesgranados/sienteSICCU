@@ -30,6 +30,7 @@ import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
 import cobra.Supervisor.FacesUtils;
 import cobra.gestion.HomeGestion;
+import cobra.gestion.HomeGestionGiprom;
 import cobra.reportes.ReporteUsuariosXls;
 import cobra.service.CobraServiceAble;
 import cobra.service.IndicadorServiceAble;
@@ -106,7 +107,7 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
-    
+
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
     private GipromServiceAble gipromService;
@@ -129,10 +130,15 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public HomeGestion getHomeGestion() {
-        return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
-
+            return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
+        
     }
 
+    public HomeGestionGiprom getHomeGestionGiprom() {
+            return (HomeGestionGiprom) FacesUtils.getManagedBean("HomeGestion");
+        
+    }
+    
     public boolean isLogueado() {
         return logueado;
     }
@@ -476,11 +482,10 @@ public class SessionBeanCobra implements Serializable {
     }
     // </editor-fold>
 
-    
     public long getFechaMilisegundosServidor() {
         return new Date().getTime();
-    } 
-    
+    }
+
     // </editor-fold>
     /**
      * <p>
@@ -490,8 +495,6 @@ public class SessionBeanCobra implements Serializable {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
-    
-    
     public void llenadodatos() {
         long lnMilisegundos = utilDate.getTime();
         java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
@@ -1177,7 +1180,7 @@ public class SessionBeanCobra implements Serializable {
 
     public void logueardesdemapa() {
         Login bean = (Login) FacesUtils.getManagedBean("login");
-        System.out.println("entre a loguear desde m = ");
+        
         bean.usuarioSinRegistro();
 
     }
@@ -1252,13 +1255,13 @@ public class SessionBeanCobra implements Serializable {
         } else {
             vista.setStrobjetoobra("");
         }
-        vista.setStrdireccion(mun.getMncNombre()+" , "+mun.getDptNombre());
-        
+        vista.setStrdireccion(mun.getMncNombre() + " , " + mun.getDptNombre());
+
         //vista.setObra(castearVwInformacionMunicipaltoObra(mun));
         vista.setObra(new Obra());
         vista.getObra().setNumvalavanfisicodeclarado(mun.getNumencuestas());
         vista.getObra().setNumvaldeclarado(mun.getNumhabitantes());
-        vista.getObra().setNumvalprogramejec(mun.getNecesidadesenergeticas());        
+        vista.getObra().setNumvalprogramejec(mun.getNecesidadesenergeticas());
         vista.getObra().setNumvaltotamorti(mun.getNecesidadesbasicas());
         vista.getObra().setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
         return vista;
@@ -1287,18 +1290,15 @@ public class SessionBeanCobra implements Serializable {
         } else {
             vista.setStrobjetoobra("");
         }
-        vista.setStrnumcuenta(mun.getMncNombre()+" , "+mun.getDptNombre());
+        vista.setStrnumcuenta(mun.getMncNombre() + " , " + mun.getDptNombre());
         vista.setStrdireccion(mun.getMncDireccion());
         vista.setStrcontratista(mun.getAlcNombre());
         vista.setStrlogros(mun.getMncEmail());
-        vista.setStrestydis(mun.getMncPaginaWeb());        
+        vista.setStrestydis(mun.getMncPaginaWeb());
         vista.setStrimagenanterior(mun.getAlcFoto());
-        if(mun.getMncTemperatura() !=null)
-        {    
-            vista.setStrcorregimiento(mun.getMncTemperatura().toString()+" °C");
-        }
-        else
-        {
+        if (mun.getMncTemperatura() != null) {
+            vista.setStrcorregimiento(mun.getMncTemperatura().toString() + " °C");
+        } else {
             vista.setStrcorregimiento("Faltante");
         }
 //        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
@@ -1331,10 +1331,10 @@ public class SessionBeanCobra implements Serializable {
 //        }
         vista.setNumvalavanfisicodeclarado(mun.getNumencuestas());
         vista.setNumvaldeclarado(mun.getNumhabitantes());
-        vista.setNumvalprogramejec(mun.getNecesidadesenergeticas());        
+        vista.setNumvalprogramejec(mun.getNecesidadesenergeticas());
         vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
         vista.setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
 
         return vista;
-    }
+    }   
 }

@@ -8461,8 +8461,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         contrpadre = fk_contrato;
-        getContrato().setContrato(contrpadre);
-        System.out.println("Contratista" + fk_contrato.getIntidcontrato());
+        getContrato().setContrato(contrpadre);        
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
 
         if (fk_contrato.getContratista() != null) {

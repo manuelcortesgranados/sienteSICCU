@@ -132,6 +132,13 @@
                             <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="combos_ubicacion"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
                                 <f:selectItems value="#{HomeGestion.municipios}" />
+                                <a4j:ajax event="change" listener="#{HomeGestion.cargarLocalidadesGiprom}" execute="@this"
+                                          render="localidadgiprom"/>
+                            </h:selectOneMenu>
+                            <div style="width: 20px;height:10px;"></div>
+                            <h:selectOneMenu  id="localidadgiprom" value="#{HomeGestion.filtro.strinterventor}"  styleClass="combos_ubicacion"
+                                              rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
+                                <f:selectItems value="#{HomeGestion.vwlocalidades}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
                     </h:panelGrid>

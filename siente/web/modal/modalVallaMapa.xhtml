@@ -15,7 +15,7 @@
             <h:panelGroup >
                 <h:panelGrid columns="2">
                     <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
-                    <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "  value="#{HomeGestion.obra.strnombrecrot}" />
+                    <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "  value="#{HomeGestion.obraseleccionada.strnombrecrot}" />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
@@ -23,15 +23,14 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" styleClass="ikont-hcl-esconder closemodal"  
-                                   title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelVallaMapa')}.hide();
-                                           return false;"/>
+                                   title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelVallaMapa')}.hide();return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <h:outputLabel value="VALOR GLOBAL DEL PROYECTO?"/>
             <br/>
-            <h:outputLabel value="$#{HomeGestion.obra.numvaltotobra}"/>
+            <h:outputLabel value="$#{HomeGestion.obraseleccionada.numvaltotobra}"/>
             <br/>            
 
         </h:form>

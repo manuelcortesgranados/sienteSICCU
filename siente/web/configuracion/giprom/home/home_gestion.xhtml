@@ -125,7 +125,7 @@
                         <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista}" immediate="true" type="submit">
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
-                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista}" immediate="true">
+                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista}" rendered="#{!var.vistasgiprom}" immediate="true">
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
                     </h:panelGrid>
@@ -321,7 +321,7 @@
                                     <a4j:commandLink type="submit" execute="@this" rendered="#{obra.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto}" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{obra.intcodigoobra}';">
                                         <h:graphicImage  styleClass="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
                                     </a4j:commandLink>
-                                    <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obra.intcodigoobra}';">
+                                    <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0}" id="irDetallebt" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obra.intcodigoobra}';">
                                         <h:graphicImage  styleClass="ikont-hgi-bnverdetalle"    value="/resources/imgs/bt_ver.png"/>
                                     </a4j:commandLink>
                                 </rich:column>

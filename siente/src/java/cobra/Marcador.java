@@ -14,12 +14,13 @@ import java.util.List;
  */
 public class Marcador extends Marker implements Serializable
 {
-        private Obra obra;
+        //private Obra obra;
         private int tipo;
         public String icon="";
         private List<Puntoreferencia> listapuntosruta = new ArrayList<Puntoreferencia>();
         private String informationWindow;
         private boolean verlinea=false;
+        private int intcodobra;
         //private VistaObraMapa vistaobra;
         /*
         public void update(ValueChangeEvent event) throws AbortProcessingException {
@@ -70,13 +71,13 @@ public class Marcador extends Marker implements Serializable
         this.informationWindow = informationWindow;
     }
 
-    public Obra getObra() {
-        return obra;
-    }
-
-    public void setObra(Obra obra) {
-        this.obra = obra;
-    }
+//    public Obra getObra() {
+//        return obra;
+//    }
+//
+//    public void setObra(Obra obra) {
+//        this.obra = obra;
+//    }
 
     public static String stringToHTMLString(String string) {
         StringBuffer sb = new StringBuffer(string.length());
@@ -173,6 +174,13 @@ public class Marcador extends Marker implements Serializable
     //    public void setVistaobra(VistaObraMapa vistaobra) {
     //        this.vistaobra = vistaobra;
     //    }
+    public int getIntcodobra() {
+        return intcodobra;
+    }
+
+    public void setIntcodobra(int intcodobra) {
+        this.intcodobra = intcodobra;
+    }
    
 
     

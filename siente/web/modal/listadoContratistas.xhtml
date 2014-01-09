@@ -71,7 +71,7 @@
                                     <rich:column width="150px">
                                         <h:outputText  styleClass="ikont-hot-txtseleccionar" value="#{var.seleccionar}" />
                                     </rich:column>
-                                    <rich:column width="150px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarcontratista}">
+                                    <rich:column width="150px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarcontratista and false}">
                                         <h:outputText  styleClass="ikont-hot-editar" value="#{var.editar}" />
                                     </rich:column>
                                 </rich:columnGroup>
@@ -93,8 +93,9 @@
                                     <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas}"
                                                        render="gpcontratistaseleccionado, @form" execute="gpcontratistaseleccionado, @this" immediate="true"
                                                        oncomplete="#{rich:component('mp-listado-contratistas')}.hide()"/>                                
-                                </rich:column>                            
-                                <rich:column rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarcontratista}">
+                                </rich:column>   
+                                
+                                <rich:column rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarcontratista and false}">
                                     <a4j:commandButton styleClass="ikont-acb-editar" value="Editar" action="#{Supervisor$Contrato.editarContratistas}" render="mp-crear-contratista"
                                                        oncomplete="#{rich:component('mp-crear-contratista')}.show();" execute="@this" immediate="true">                                    
                                     </a4j:commandButton>

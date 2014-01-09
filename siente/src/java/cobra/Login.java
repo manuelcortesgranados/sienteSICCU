@@ -31,10 +31,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page. This class
- * contains component definitions (and initialization code) for all components
- * that you have defined on this page, as well as lifecycle methods and event
- * handlers where you may add behavior to respond to incoming events.</p>
+ * <p>
+ * Page bean that corresponds to a similarly named JSP page. This class contains
+ * component definitions (and initialization code) for all components that you
+ * have defined on this page, as well as lifecycle methods and event handlers
+ * where you may add behavior to respond to incoming events.</p>
  *
  * @author Christian
  */
@@ -42,7 +43,8 @@ public class Login implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code
      * inserted here is subject to being replaced.</p>
@@ -52,13 +54,15 @@ public class Login implements Serializable {
 
     // </editor-fold>
     /**
-     * <p>Construct a new Page bean instance.</p>
+     * <p>
+     * Construct a new Page bean instance.</p>
      */
     public Login() {
     }
 
     /**
-     * <p>Return a reference to the scoped data bean.</p>
+     * <p>
+     * Return a reference to the scoped data bean.</p>
      *
      * @return reference to the scoped data bean
      */
@@ -84,7 +88,6 @@ public class Login implements Serializable {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
 
-
         return verificarUsuario();
 
     }
@@ -93,15 +96,12 @@ public class Login implements Serializable {
         Usuario usuarioExterno = null;
         try {
             getSessionBeanCobra().setMensajelogueo("");
-            
-
 
             getSessionBeanCobra().setTipologueo(getSessionBeanCobra().getUsuarioService().
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
             //Si el sistema está paramatrizado para autenticarse mediante LDAP
-            if (Propiedad.getValor("autenticacionLDAP").equals("true") && !getSessionBeanCobra().getTipologueo().isUsuarioEncontrado()) 
-            {
+            if (Propiedad.getValor("autenticacionLDAP").equals("true") && !getSessionBeanCobra().getTipologueo().isUsuarioEncontrado()) {
                 if (getSessionBeanCobra().getTipologueo().getTipoerror() == 0) {
                     try {
                         usuarioExterno = getSessionBeanCobra().getUsuarioService().solicitarAccesoLDAP(getSessionBeanCobra().getUsuarioObra().getUsuLogin(), getSessionBeanCobra().getUsuarioObra().getUsuPasswd());
@@ -162,16 +162,15 @@ public class Login implements Serializable {
                     getSessionBeanCobra().setMensajelogueo(getSessionBeanCobra().getTipologueo().getMensajeerror());
                     FacesUtils.addErrorMessage(getSessionBeanCobra().getTipologueo().getMensajeerror());
                     return "fallo";
-                   
+
                 case 1:
                 case 2:
                     getSessionBeanCobra().getCiudadanoservice().setUsuariomostrar(getSessionBeanCobra().getUsuarioObra());
                     getSessionBeanCobra().llenadodatos();
                     String respuesta = "gestion";
-                    if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
-                    {    
+                    if (getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true") == 0) {
                         getSessionBeanCobra().cargarpermisosmodulo(6);
-                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        iniciarHome();
                     }
 
                     if (verificarGrupo(getSessionBeanCobra().getUsuarioObra())) {
@@ -182,10 +181,10 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Herramientas");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
                         getSessionBeanCobra().setLogueado(true);
-                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
-                        {    
+                        if (getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true") == 0) {
                             getSessionBeanCobra().cargarpermisosmodulo(6);
-                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                            iniciarHome();
+
                         }
                     } else {
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_" + getSessionBeanCobra().getBundle().getString("versioncobra") + "(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
@@ -195,24 +194,23 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setHeaderStyle("headertool");
                         getSessionBeanCobra().getCobraService().setCiu(false);
                         getSessionBeanCobra().setLogueado(true);
-                        if(getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true")==0)
-                        {    
+                        if (getSessionBeanCobra().getBundle().getString("iniciaenmapa").compareTo("true") == 0) {
                             getSessionBeanCobra().cargarpermisosmodulo(6);
-                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                            iniciarHome();
+
                         }
-                        
+
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {
-                        if(!getSessionBeanCobra().getCiudadanoservice().getCiudadano().isLdap()) {
-                        getSessionBeanCobra().getUsuarioObra().setUsuEstado(Boolean.TRUE);
-                        getSessionBeanCobra().getUsuarioService().guardarOrActualizarUsuario(getSessionBeanCobra().getUsuarioObra());
-                    }
+                        if (!getSessionBeanCobra().getCiudadanoservice().getCiudadano().isLdap()) {
+                            getSessionBeanCobra().getUsuarioObra().setUsuEstado(Boolean.TRUE);
+                            getSessionBeanCobra().getUsuarioService().guardarOrActualizarUsuario(getSessionBeanCobra().getUsuarioObra());
+                        }
                     }
                     return respuesta;
 
             }
-
 
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,7 +225,14 @@ public class Login implements Serializable {
 
         getSessionBeanCobra().getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
 
-
         return enviar_action();
+    }
+
+    public void iniciarHome() {
+        if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("vistasgiprom"))) {
+            getSessionBeanCobra().getHomeGestionGiprom().iniciarHome();
+        } else {
+            getSessionBeanCobra().getHomeGestion().iniciarHome();
+        }
     }
 }
