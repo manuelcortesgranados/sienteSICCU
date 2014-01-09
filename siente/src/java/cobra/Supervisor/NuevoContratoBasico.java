@@ -8438,9 +8438,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void confirmarCedulaContratista() {
-        if (getSessionBeanCobra().getCobraService().encontrarContratistaCedula(getContratista().getIntcedula()) != null) {
-            setConfirmacioncedula(true);
+        if (getContratista().getIntcedula().compareTo(BigInteger.ZERO) != 0) {
+            if (getSessionBeanCobra().getCobraService().encontrarContratistaCedula(getContratista().getIntcedula()) != null) {
+                setConfirmacioncedula(true);
+            } else {
+                setConfirmacioncedula(false);
+            }
         } else {
+           // FacesUtils.addErrorMessage("El Número de Identificación debe ser diferente a 0");
+            setBoolcrearcontratista(false);
             setConfirmacioncedula(false);
         }
 
@@ -8461,7 +8467,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         contrpadre = fk_contrato;
-        getContrato().setContrato(contrpadre);        
+        getContrato().setContrato(contrpadre);
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
 
         if (fk_contrato.getContratista() != null) {

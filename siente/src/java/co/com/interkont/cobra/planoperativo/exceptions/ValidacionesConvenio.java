@@ -106,7 +106,7 @@ public class ValidacionesConvenio {
 //       fechatemppoliza.setTime(fechafincontrato);
 //       fechatemppoliza.add(Calendar.DATE, -(30));
         if (fechapoliza.compareTo(fechafincontrato) <= 0) {
-            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del convenio");
+            throw new ConvenioException("La fecha de la poliza debe ser mayor o igual a la fecha fin del  Convenio");
         }
     }
 
@@ -115,7 +115,7 @@ public class ValidacionesConvenio {
         fechatemppoliza.setTime(fechafincontrato);
         fechatemppoliza.add(Calendar.DATE, -(1));
         if (fechapoliza.compareTo(fechatemppoliza.getTime()) <= 0) {
-            throw new ConvenioException("La fecha debe ser mayor o igual a la fecha fin del convenio");
+            throw new ConvenioException("La fecha de la poliza debe ser mayor o igual a la fecha fin del Convenio" );
         }
     }
 

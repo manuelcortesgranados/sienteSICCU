@@ -1839,7 +1839,7 @@ public class DetalleObra implements Serializable{
     public void generarReporteVisitaAuditoria() {
         Calificacionauditoriaobra calificacionauditoriaobra = (Calificacionauditoriaobra) tablacalificacionesauditoriaobra.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getIdvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getVisita().getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
