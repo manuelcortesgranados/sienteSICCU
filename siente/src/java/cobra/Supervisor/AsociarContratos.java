@@ -445,12 +445,14 @@ public class AsociarContratos implements Serializable {
     }
 
     public String agregarContratoInterventoria() {
+        List<Relacioncontratoobra>listarelacioncontratosobra = new ArrayList<Relacioncontratoobra>();
+         listarelacioncontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
         relacioncontratointer.setNumvalordisponible(BigDecimal.ZERO);
         valorfaltanteasociarcontrato = BigDecimal.ZERO;
         //AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
         //Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
-        for (Relacioncontratoobra contratoobta : listacontratosobra) {
+        for (Relacioncontratoobra contratoobta : listarelacioncontratosobra) {
             valorlistacontratoobra = valorlistacontratoobra.add(contratoobta.getNumvalorrelacion());
         }
 

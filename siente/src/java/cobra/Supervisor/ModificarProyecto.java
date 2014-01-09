@@ -206,6 +206,7 @@ public class ModificarProyecto  implements Serializable{
      * Última alimentación del proyecto
      */
     private Alimentacion ultimaAlimentacion;
+    private Relacioncontratoobra relacioncontratoobraModificada;
 
     public CargadorArchivosWeb getCargadorDocumentos() {
         return cargadorDocumentos;
@@ -720,9 +721,9 @@ public class ModificarProyecto  implements Serializable{
             }
             Iterator<Relacioncontratoobra> itRelacionesContratoObra = obra.getRelacioncontratoobras().iterator();
             while (itRelacionesContratoObra.hasNext()) {
-                Relacioncontratoobra relacioncontratoobra = itRelacionesContratoObra.next();
-                if (relacioncontratoobra.getIntidserial() == contselec.getIntidserial()) {
-                    relacioncontratoobra.setNumvalorrelacion(contselec.getNumvalorrelacion());
+                 relacioncontratoobraModificada = itRelacionesContratoObra.next();
+                if (relacioncontratoobraModificada.getIntidserial() == contselec.getIntidserial()) {
+                    relacioncontratoobraModificada.setNumvalorrelacion(contselec.getNumvalorrelacion());
                 }
             }
             valorAdicionAsociadoAContrato = true;
@@ -1127,6 +1128,12 @@ public class ModificarProyecto  implements Serializable{
                 copiarArchivoCronogramaModificacion();
             }
             getSessionBeanCobra().getModificarProyectoService().guardarModificacion(obra, historicoobra, ultimaAlimentacion, getSessionBeanCobra().getUsuarioObra());
+          
+          //se verifica que el objeto relacioncontratoobraModificada contenga Relación
+            if(relacioncontratoobraModificada != null) {
+                //Se Modifica el valor de la relación (Relacioncontratoobra) manualmente ya que al guardar la obra no se esta guardando el nuevo valor de la relación 
+                getSessionBeanCobra().getCobraService().guardarRelacionContratoObra(relacioncontratoobraModificada);
+            }
             registroExitoso = true;
             FacesContext.getCurrentInstance().addMessage(
                 null,

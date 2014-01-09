@@ -27,8 +27,9 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Zonaespecifica;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
-import co.com.interkont.cobra.vista.vistahomezoom;
+import co.com.interkont.cobra.vista.Vistahomezoom;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
+import co.com.interkont.giprom.vista.VwLocalidad;
 import cobra.DatosGeneralesPerfilControl;
 import cobra.FiltroGerencial;
 import cobra.FiltroObra;
@@ -217,6 +218,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     private SelectItem[] departamentos = new SelectItem[0];
     private SelectItem[] zonaespe;
     private SelectItem[] municipios = new SelectItem[0];
+    private SelectItem[] vwlocalidades = new SelectItem[0];
     private SelectItem[] subTiposProyecto = new SelectItem[0];
     private Tipoproyecto tipoProyecto = new Tipoproyecto();
     private Tipoorigen tipoOrigenUsuario = new Tipoorigen();
@@ -253,7 +255,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     private BigDecimal numo;
     private int cero = 0;
     private int cien = 100;
-    private List<vistahomezoom> listavistahomezoom = new ArrayList<vistahomezoom>();
+    private List<Vistahomezoom> listavistahomezoom = new ArrayList<Vistahomezoom>();
     //CONTRATISTAS
     private List<Contratista> contratistas = new ArrayList<Contratista>();
     private List<Contratista> contratistas1 = new ArrayList<Contratista>();
@@ -792,11 +794,11 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         this.numeroconvenioszoom = numeroconvenioszoom;
     }
 
-    public List<vistahomezoom> getListavistahomezoom() {
+    public List<Vistahomezoom> getListavistahomezoom() {
         return listavistahomezoom;
     }
 
-    public void setListavistahomezoom(List<vistahomezoom> listavistahomezoom) {
+    public void setListavistahomezoom(List<Vistahomezoom> listavistahomezoom) {
         this.listavistahomezoom = listavistahomezoom;
     }
 
@@ -865,8 +867,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
          * @param FiltroObra Version cobra
          */
         //Version cobra para saber que bundle esta apuntando para el conteo de los proyectos en cobrafonade
-        filtro.setCuantiaini(null);
-        filtro.setCuantiafin(null);
+        filtro.setCuantiaini(BigDecimal.ZERO);
+        filtro.setCuantiafin(BigDecimal.valueOf(100));
         filtro.setFactorpagina(200);
         filtro.setIntcodespecifico(0);
         filtro.setIntcodevento(1);
@@ -883,7 +885,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         filtro.setVercodigosedeeducativa(false);
         //filtro.setIntcodigoentidad(0);
         filtro.setCoddanesedeeducativa("");
-        filtro.setCuantiafin(proyectovalormayor);
+        //filtro.setCuantiafin(proyectovalormayor);
 
         if (listTercerosUsuario.size() == 1) {
             filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -930,6 +932,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
+        llenarComboLocalidadesGiprom("0");
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
 //                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
 
@@ -1052,7 +1055,10 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     }
 
     public void cargarMunicipios() {
-        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(filtro.getStrcoddepto());
+        List<Localidad> listaMunicipios = new ArrayList<Localidad>();
+        if (filtro.getStrcoddepto().compareTo("0") != 0) {
+            listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(filtro.getStrcoddepto());
+        }
         llenarComboMunicipio(listaMunicipios);
     }
 
@@ -1075,9 +1081,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the
-     * <code>activate()</code> method will be called to indicate that the
-     * transfer is complete.</p>
+     * instance, after which the <code>activate()</code> method will be called
+     * to indicate that the transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -1256,6 +1261,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     }
 
     public void llenarComboMunicipio(List listaMunicipios) {
+
         SelectItem[] TempMunicipios = new SelectItem[listaMunicipios.size() + 1];
 
         TempMunicipios[0] = new SelectItem(0, "Municipio");
@@ -1277,6 +1283,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
             municipios[k] = TempMunicipios[k];
             k++;
         }
+        filtro.setStrmunicipio("0");
+        cargarLocalidadesGiprom();
     }
 
     public boolean verificarMunicipio(Localidad local, int cant, SelectItem[] temporal) {
@@ -2017,9 +2025,41 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
             List<VwInmInfoMunicipal> listagiprom = getSessionBeanCobra().getGipromService().getInformacionMunicipalGiprom(filtro);
 
             listaobrasusu = new ArrayList<VistaObraMapa>();
-            for (VwInmInfoMunicipal mun : listagiprom) {
+            boolean agregarpornbi = false;
+            boolean agregarpornener = false;
 
-                listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
+           
+            for (VwInmInfoMunicipal mun : listagiprom) {
+                // Filtrar por avance
+                agregarpornbi = false;
+                agregarpornener = false;
+                if (filtro.getAvance1() != 0 || filtro.getAvance2() != 100) {
+                    if (filtro.getAvance2() != 0) {
+                        if (mun.getNecesidadesenergeticas().compareTo(BigDecimal.valueOf(filtro.getAvance1())) >= 0
+                                && mun.getNecesidadesenergeticas().compareTo(BigDecimal.valueOf(filtro.getAvance2())) <= 0) {
+                            agregarpornener = true;
+
+                        }
+                    }
+                } else {
+                    agregarpornener = true;
+                }
+
+                if (filtro.getCuantiaini().compareTo(BigDecimal.ZERO) > 0 || filtro.getCuantiafin().compareTo(BigDecimal.valueOf(100)) < 0) {
+                    if (filtro.getCuantiafin().compareTo(BigDecimal.ZERO) != 0) {
+                        if (mun.getNecesidadesbasicas().compareTo(filtro.getCuantiaini()) >= 0
+                                && mun.getNecesidadesbasicas().compareTo(filtro.getCuantiafin()) <= 0) {
+                            agregarpornbi = true;
+
+                        }
+                    }
+                } else {
+                    agregarpornbi = true;
+                }
+
+                if (agregarpornbi && agregarpornener) {
+                    listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
+                }           
             }
 
         } else {
@@ -2071,8 +2111,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 break;
         }
 
-        totalfilas = getSessionBeanCobra().getGipromService().encontrarNumeroLocalidades(filtro);
-
+        //totalfilas = getSessionBeanCobra().getGipromService().encontrarNumeroLocalidades(filtro);
+        totalfilas = listaobrasusu.size();
         pagina = 1;
         totalpaginas = 0;
         if (totalfilas <= filtro.getFactorpagina()) {
@@ -2126,7 +2166,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 break;
         }
 
-        totalfilas = getSessionBeanCobra().getGipromService().encontrarNumeroLocalidades(filtro);
+        totalfilas = listaobrasusu.size();
 
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
@@ -2184,6 +2224,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
         }
+        totalfilas = listaobrasusu.size();
 
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
@@ -2237,7 +2278,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
         }
-
+        totalfilas = listaobrasusu.size();
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
         } else {
@@ -2786,7 +2827,6 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
                 int asi_va_text = (int) Math.floor(asi_va);
 
-                
                 String stylesemaforo = "";
                 if (obra.getSemaforo() != null && obra.getSemaforo().compareTo("") != 0) {
                     if (obra.getSemaforo().equals("/resources/botones/rojo.png")) {
@@ -2986,7 +3026,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
     public void mostrarCantidadProyectos() {
         listavistahomezoom = getSessionBeanCobra().getCobraService().encontrarvistahomezoom();
-        for (vistahomezoom selectItem : listavistahomezoom) {
+        for (Vistahomezoom selectItem : listavistahomezoom) {
             valortotalproyectoszoom = selectItem.getTotalvalorobras();
             numeroproyectoszoom = selectItem.getCantidadobras();
             numeroconvenioszoom = selectItem.getCantidadconvenios();
@@ -3035,5 +3075,33 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
         //filtro.setIntvista(vista);
         filtroObrasActionMapaAvanModal();
+    }
+
+    public SelectItem[] getVwlocalidades() {
+        return vwlocalidades;
+    }
+
+    public void setVwlocalidades(SelectItem[] vwlocalidades) {
+        this.vwlocalidades = vwlocalidades;
+    }
+
+    public void llenarComboLocalidadesGiprom(String mnccdigo) {
+
+        List<VwLocalidad> listalocalidades = new ArrayList<VwLocalidad>();
+
+        listalocalidades = getSessionBeanCobra().getGipromService().encontrarLocalidadesxCodMunicipio(mnccdigo);
+        vwlocalidades = new SelectItem[listalocalidades.size() + 1];
+        vwlocalidades[0] = new SelectItem(0, "Localidad");
+        int j = 1;
+        for (VwLocalidad loc : listalocalidades) {
+            SelectItem opt = new SelectItem(loc.getLclCodigo(), loc.getLclNombre());
+            vwlocalidades[j] = opt;
+            j++;
+        }
+    }
+
+    public void cargarLocalidadesGiprom() {
+
+        llenarComboLocalidadesGiprom(filtro.getStrmunicipio());
     }
 }

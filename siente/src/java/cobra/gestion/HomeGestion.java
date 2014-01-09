@@ -27,7 +27,7 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Zonaespecifica;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
-import co.com.interkont.cobra.vista.vistahomezoom;
+import co.com.interkont.cobra.vista.Vistahomezoom;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.DatosGeneralesPerfilControl;
 import cobra.FiltroGerencial;
@@ -58,6 +58,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import org.richfaces.component.UIDataTable;
+import com.googlecode.gmaps4jsf.component.marker.Marker;
 
 /**
  *
@@ -65,7 +66,7 @@ import org.richfaces.component.UIDataTable;
  */
 public class HomeGestion implements Serializable, ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-
+ 
     /**
      * <p>
      * Automatically managed component initialization.
@@ -88,7 +89,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private SelectItem[] TipoObraUsuario;
     private HashMap<Integer, Double> porcentajes = new HashMap<Integer, Double>();
     private List<Localidad> lslocalidad = new ArrayList<Localidad>();   
-    private VistaObraMapa obra;   
+    private VistaObraMapa obraseleccionada;   
 
     /**
      * Listados de grupos al que pertenece el usuario
@@ -118,14 +119,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.lslocalidad = lslocalidad;
     } 
 
-       public VistaObraMapa getObra() {
-        return obra;
+    public VistaObraMapa getObraseleccionada() {
+        return obraseleccionada;
     }
 
-    public void setObra(VistaObraMapa obra) {
-        this.obra = obra;
+    public void setObraseleccionada(VistaObraMapa obraseleccionada) {
+        this.obraseleccionada = obraseleccionada;
     }
-  
+
+    
     /**
      * Set the value of datos_mapa
      *
@@ -262,7 +264,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private BigDecimal numo;
     private int cero = 0;
     private int cien = 100;
-    private List<vistahomezoom> listavistahomezoom = new ArrayList<vistahomezoom>();
+    private List<Vistahomezoom> listavistahomezoom = new ArrayList<Vistahomezoom>();
     //CONTRATISTAS
     private List<Contratista> contratistas = new ArrayList<Contratista>();
     private List<Contratista> contratistas1 = new ArrayList<Contratista>();
@@ -801,11 +803,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.numeroconvenioszoom = numeroconvenioszoom;
     }
 
-    public List<vistahomezoom> getListavistahomezoom() {
+    public List<Vistahomezoom> getListavistahomezoom() {
         return listavistahomezoom;
     }
 
-    public void setListavistahomezoom(List<vistahomezoom> listavistahomezoom) {
+    public void setListavistahomezoom(List<Vistahomezoom> listavistahomezoom) {
         this.listavistahomezoom = listavistahomezoom;
     }
 
@@ -2414,7 +2416,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
                 //Obra obra = listaobrasusu.get(i);
-                obra = listaobrasusu.get(i);
+                VistaObraMapa obra = listaobrasusu.get(i);
                 Marcador marker = new Marcador();
                 //setAlimentacionultima(new Alimentacion());
                 //setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra()));
@@ -2749,7 +2751,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
                 //Obra obra = listaobrasusu.get(i);
-                obra = listaobrasusu.get(i);
+               VistaObraMapa obra = listaobrasusu.get(i);
                Marcador marker = new Marcador();
                 //setAlimentacionultima(new Alimentacion());
                 //setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra()));
@@ -2759,7 +2761,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 marker.setLatitude(obra.getFloatlatitud().doubleValue() + "");
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
                 marker.setJsVariable("marker_" + (contador++));
-                marker.setObra(obra.getObra());
+                marker.setIntcodobra(obra.getIntcodigoobra());
+                marker.setJsVariable("js_"+obra.getIntcodigoobra());
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
@@ -2996,7 +2999,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public void mostrarCantidadProyectos() {
         listavistahomezoom = getSessionBeanCobra().getCobraService().encontrarvistahomezoom();
-        for (vistahomezoom selectItem : listavistahomezoom) {
+        for (Vistahomezoom selectItem : listavistahomezoom) {
             valortotalproyectoszoom = selectItem.getTotalvalorobras();
             numeroproyectoszoom = selectItem.getCantidadobras();
             numeroconvenioszoom = selectItem.getCantidadconvenios();
@@ -3049,6 +3052,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     
     public void marcadorSeleccion () {       
 //        System.out.println("codigo obra = " + marker.getObra().getIntcodigoobra());
-        System.out.println("ide de la obra = " + getObra().getIntcodigoobra());
+        System.out.println("ide de la obra = " + prueba);
+        //System.out.println("marca = " + marca.getLatitude());
     }
+    
+    private String prueba="0";
+
+    public String getPrueba() {
+        return prueba;
+    }
+
+    public void setPrueba(String prueba) {
+        this.prueba = prueba;
+    }
+    
+    
 }
