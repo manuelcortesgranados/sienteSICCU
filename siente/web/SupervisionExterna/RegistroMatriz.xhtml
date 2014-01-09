@@ -78,7 +78,7 @@
                     </rich:panel>
                     <rich:panel header="#{var.titulovisitasfallidas}" rendered="#{var.versioncobra eq 'zoom'}">
                         <h:outputText  styleClass="ikont-hot-textoinformativocargarvisita"   value="#{var.textoinformativocargarvisita2}"/>
-                        <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
+                        <rich:dataTable id="tablalistavisitasfallidas" rows="25" 
                                 rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
                                 value="#{Supervision$Externa.listavisitasfallidas}"
                                 var="actual" binding="#{Supervision$Externa.tablavisitasfallidas}">

@@ -428,13 +428,13 @@
                             </h:panelGrid>
                         </rich:collapsiblePanel>
                         <rich:collapsiblePanel switchType="ajax" toggleListener="#{Supervisor$DetalleObra.cargarVisitasAuditoriaObra}" header="#{var.tituloseccionmatrizauditoria}" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.permiso_auditoria}"                                         >
-                            <rich:dataTable id="tablalistavisitasfallidas" rows="5" 
+                            <rich:dataTable id="tablalistavisitasfallidas" rows="25" 
                                     rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
                                     value="#{Supervisor$DetalleObra.listacalificacionesauditoriaobra}"
                                     var="actual" binding="#{Supervisor$DetalleObra.tablacalificacionesauditoriaobra}">
                                 <f:facet name="header">
                                     <rich:columnGroup>
-                                        <rich:column colspan="5">
+                                        <rich:column colspan="6">
                                             <h:outputText  styleClass="ikont-hot-titulolistavisitasfallidas"   value="#{var.titulolistavisitasauditoria}"  />
                                         </rich:column>
                                         <rich:column breakRowBefore="true">
@@ -448,6 +448,9 @@
                                         </rich:column>
                                         <rich:column>
                                             <h:outputText  styleClass="ikont-hot-titulodatefecharegistro"   value="#{var.titulodatefecharegistro}"  />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText  styleClass="ikont-hot-titulousuarioauditoria"   value="#{var.titulousuarioauditoria}"  />
                                         </rich:column>
                                         <rich:column>
                                             <h:outputText  styleClass="ikont-hot-titulodescargarerroresvisitafallida"   value="#{var.generarreporteerroresvisita}"  />
@@ -465,6 +468,10 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.visita.datefecharegistro}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-usuarioauditoria"   value="#{actual.visita.jsfUsuarioVisita.usuLogin}">
+                                    </h:outputText>    
                                 </rich:column>
                                 <rich:column>
                                     <h:commandLink value="#{var.generarreportevisitaauditoria}" action="#{Supervisor$DetalleObra.generarReporteVisitaAuditoria}" styleClass="ikont-acl-descargarerroresvisitafallida" type="submit" target="_blank" immediate="true" />
