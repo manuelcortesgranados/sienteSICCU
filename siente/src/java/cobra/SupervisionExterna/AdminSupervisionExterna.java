@@ -607,7 +607,7 @@ public class AdminSupervisionExterna implements Serializable{
     public void validarMatrizAuditoria() {
         listaresultadosvalidacion = new ArrayList<Typeresultadovalidacion>();
         if (getSessionBeanCobra().getSupervisionExternaService().getVisita().getDatefechainforme().after(new Date())) {
-            FacesUtils.addErrorMessage(Propiedad.getValor("resultadosvalidacionfallo"));
+            FacesUtils.addErrorMessage(Propiedad.getValor("fechainformemayoractualeror"));
             return;
         }
         try {
