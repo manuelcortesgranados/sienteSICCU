@@ -3007,7 +3007,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Llenar los tipos de contrato (Obra,Bienes y Servicios)
      */
     public void llenarTipoContrato() {
-        List<Tipocontrato> listipcon = getSessionBeanCobra().getCobraService().encontrarTiposContrato();
+        List<Tipocontrato> listipcon = getSessionBeanCobra().getCobraService().encontrarTipocontratos();
         tipocontrato = new SelectItem[listipcon.size()];
         int i = 0;
         for (Tipocontrato tconcon : listipcon) {
