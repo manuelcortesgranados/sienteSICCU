@@ -1296,7 +1296,9 @@
                 var futuro = new Date(timefalta);
                 var fechaNavegador = new Date();
                 var milisegundosNavegador = fechaNavegador.getTime();
-                var diferencia = #{SessionBeanCobra.fechaMilisegundosServidor} + (1000 * 60 * 60 * 24) - milisegundosNavegador;
+                var fechaSever =#{SessionBeanCobra.fechaMilisegundosServidor1} + (1000 * 60 * 60 * 24);
+                var diferencia = fechaSever - milisegundosNavegador;
+
                 setInterval(function() {
                     var ahora = new Date();
                     var faltan = futuro - (ahora - diferencia);
