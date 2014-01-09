@@ -1783,7 +1783,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
         for (Imagenevolucionobra imagenevolucionobra1 : listaImagenesevolucionobra) {
-            System.out.println("lista imagen =" + getSessionBeanCobra().getCobraService().obtenerAlimentacionXImagen(imagenevolucionobra1.getIntidimagen()));
+            
             Set<Alimentacion> setalimenta = new HashSet<Alimentacion>(getSessionBeanCobra().getCobraService().obtenerAlimentacionXImagen(imagenevolucionobra1.getIntidimagen()));
             imagenevolucionobra1.setAlimentacions(setalimenta);
            

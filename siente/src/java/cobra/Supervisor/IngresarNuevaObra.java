@@ -3704,12 +3704,29 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         if (comboEntidadesObraguardar()) {
             if (validarTipificacion()) {
-                if (fechasvalidas) {
+                if(obranueva.getDatefeciniobra()==null && obranueva.getDatefecfinobra()==null)
+                {
+//                    fechas
+//                }    
+//                if (fechasvalidas) {
                     obranueva.setTipoestadobra(new Tipoestadobra(0));
                     guardarObraTemporal();
                 } else {
-                    fechaCambio();
-                    return "datosbasicosnuevoproyecto";
+                    if(obranueva.getDatefeciniobra()==null || obranueva.getDatefecfinobra()==null)
+                    {
+                        obranueva.setTipoestadobra(new Tipoestadobra(0));
+                        guardarObraTemporal();
+                    }
+                    else
+                    {    
+                        fechaCambio();
+                        if(fechasvalidas)
+                        {
+                            obranueva.setTipoestadobra(new Tipoestadobra(0));
+                            guardarObraTemporal();
+                        }
+                    }    
+                    //return "nu";
                 }
             } else {
                 //"Debe dar un nombre a la obra";
@@ -5671,8 +5688,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
         try {
             Location loc = GenericServicesFactory.getLocationService().getLocationFromAddress(address);
-            System.out.println("loc = " + loc.getLatitude());
-            System.out.println("loc long = " + loc.getLongitude());
+//            System.out.println("loc = " + loc.getLatitude());
+//            System.out.println("loc long = " + loc.getLongitude());
             if (loc != null) {
                 Marcador marke = new Marcador();
                 marke.setDraggable("true");
