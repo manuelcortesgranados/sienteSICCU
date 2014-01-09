@@ -321,6 +321,9 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("pnlparticipacionciudadano")){
                             renderrecurso.setPnlparticipacionciudadano(false);
                         }
+                        if (temprecusro.getRecNmbre().equals("btn_terminarobra")){
+                            renderrecurso.setBtn_terminarobra(false);
+                        }
                         break;
                     
                     

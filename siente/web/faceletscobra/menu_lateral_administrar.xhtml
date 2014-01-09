@@ -114,7 +114,12 @@
                 <a4j:commandLink  execute="@this" styleClass="ikont-acl-crearsubproyecto img-button-panel"   action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true"  />
                 <a4j:commandLink  styleClass="ikont-acl-nuevosubproyecto text-button-panel"   value="#{var.nuevosubproyecto}" action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true" />
             </h:panelGrid>
-
+            <h:panelGrid styleClass="ikont-hpg-iniciaraliment"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_terminarobra}"> 
+                <h:commandLink styleClass="ikont-hcl-terminarobra img-button-panel"   action="#{Supervisor$AdministrarObraNew.iniciarTerminarObra}"
+                               immediate="true"/>
+                <a4j:commandLink styleClass="ikont-acl-reporteavance text-button-panel"   value="#{var.menudeclararobra}" action="#{Supervisor$AdministrarObraNew.iniciarTerminarObra}"
+                                 immediate="true" />                
+            </h:panelGrid>
         </h:panelGrid>
     </rich:panel>
 
