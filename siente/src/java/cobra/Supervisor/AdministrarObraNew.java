@@ -2160,7 +2160,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 getObra().setBoolobraterminada(true);
                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
                 FacesUtils.addInfoMessage("La Obra ha sido terminada exitosamente");
-                iniciardeta();
+                opcion = 0;
+                getDetalleObra().iniciardetalle();
+                return "admindetalleObra";
             } else {
                 FacesUtils.addErrorMessage("La obra esta declarada como terminada");
             }

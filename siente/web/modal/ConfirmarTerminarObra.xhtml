@@ -38,7 +38,7 @@
                     <br/>
                     
                         <h:panelGroup styleClass="totalwidth panelcenter">
-                            <a4j:commandButton id="BTaceptarRevision" value="SI " styleClass="ikont-acb-btaceptarrevision"   action="#{Supervisor$AdministrarObraNew.declararTerminarObra}" oncomplete="#{rich:component('confirmarTerminarObra')}.hide();"/>
+                            <h:commandButton id="BTaceptarRevision" value="SI " styleClass="ikont-acb-btaceptarrevision"   action="#{Supervisor$AdministrarObraNew.declararTerminarObra}" />
                             <interkont:spacer width="10"/>
                             <a4j:commandButton id="BTnoaceptarRevision" value="NO" styleClass="ikont-acb-btnoceptarrevision"   onclick="#{rich:component('confirmarTerminarObra')}.hide(); return false;"/>
                         </h:panelGroup>
