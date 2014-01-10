@@ -467,7 +467,9 @@
                                     <h:outputText  styleClass="ikont-hot-strnombreinforme"   value="#{actual.visita.strnombreinforme}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.visita.datefecharegistro}"/>
+                                    <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.visita.datefecharegistro}">
+                                        <f:convertDateTime type="both" locale="es_CO" timeZone="America/Bogota"/>
+                                    </h:outputText>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-usuarioauditoria"   value="#{actual.visita.jsfUsuarioVisita.usuLogin}">

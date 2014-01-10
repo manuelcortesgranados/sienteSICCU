@@ -3799,7 +3799,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage("Debe seleccionar el tipo de garantia y la entidad aseguradora");
         }
 
-
         return null;
     }
 
@@ -4017,8 +4016,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.getPeriodoevento().setEvento(new Evento());
         contrato.setModalidadcontratista(new Modalidadcontratista());
         contrato.setTipoestadobra(new Tipoestadobra(1));//
-        contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria());
-        contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
+
         contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
 
         // contrato.setTercero(new Tercero());
@@ -4062,6 +4060,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.getTercero().setStrnombrecompleto("TODOS");
             }
         }
+        contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
+        contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
+    }
+
+    public void iniciarTiposContrato() {
+        if (filtrocontrato.getTipocontratoselect() == 1) {
+
+            contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
+            contrato.setTipocontrato(new Tipocontrato());
+        } else {
+            contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria());
+            contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
+        }
+
     }
 
     /**
@@ -6712,7 +6724,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -8445,7 +8457,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 setConfirmacioncedula(false);
             }
         } else {
-           // FacesUtils.addErrorMessage("El Número de Identificación debe ser diferente a 0");
+            // FacesUtils.addErrorMessage("El Número de Identificación debe ser diferente a 0");
             setBoolcrearcontratista(false);
             setConfirmacioncedula(false);
         }

@@ -67,7 +67,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid columns="2" rendered="#{var.versioncobra eq 'zoom'}">
-                            <a4j:commandLink  styleClass="ikont-acl-subirmatrizauditoria"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz"
+                            <a4j:commandLink  styleClass="ikont-acl-subirmatrizauditoria"   title="#{var.subirarchivos}" render="panelGroupSubirArchivoMatriz" action="#{Supervision$Externa.validarFechaInforme}"
                                              oncomplete="if (#{empty facesContext.messageList}) #{rich:component('panelUploadArchivoSuper')}.show(); else return false;" />
                             <a4j:commandLink  styleClass="ikont-acl-limpiarvisitafallida"  title="#{var.limpiarvisita}" action="#{Supervision$Externa.limpiarVisita}" render="panelInformacionArchivo" immediate="true" execute="@this"/>
                         </h:panelGrid>
@@ -115,7 +115,7 @@
                             </rich:column>
                             <rich:column>
                                 <h:outputText  styleClass="ikont-hot-datefecharegistro"   value="#{actual.datefecharegistro}">
-                                    <f:convertDateTime pattern="#{var.formatofechahora}"/>
+                                    <f:convertDateTime type="both" locale="es_CO" timeZone="America/Bogota"/>
                                 </h:outputText>    
                             </rich:column>
                             <rich:column>
