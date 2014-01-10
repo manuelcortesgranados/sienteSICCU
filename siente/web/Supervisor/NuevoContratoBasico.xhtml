@@ -207,7 +207,7 @@
                                         <f:selectItem itemLabel="Seleccione la opción" itemValue="0"/>
                                         <f:selectItem itemLabel="Ejecución" itemValue="1"/>
                                         <f:selectItem itemLabel="Consultoría" itemValue="2"/>
-                                        <a4j:ajax event="valueChange" render="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon, ikont-hpg-tipocontrato" execute="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon,ikont-hpg-tipocontrato" />
+                                        <a4j:ajax event="valueChange" render="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon, ikont-hpg-tipocontrato" execute="lblcontrconsContraloria,cmbcontconContraloria,lblcontrcons,cmbcontcon,ikont-hpg-tipocontrato"  listener="#{Supervisor$Contrato.iniciarTiposContrato()}"/>
                                     </h:selectOneMenu>   
 
                                     <h:outputText  styleClass="ikont-hot-tipocontrcontraloria font-general"   id="lblcontrconsContraloria"  value="#{var.TipoContratoContralorias}"  rendered="#{var.aplicaContralorias or var.aplicatipocontrato and Supervisor$Contrato.filtrocontrato.tipocontratoselect == 1  and Supervisor$Contrato.tipoContCon != 'Convenio'}"/>                                    
