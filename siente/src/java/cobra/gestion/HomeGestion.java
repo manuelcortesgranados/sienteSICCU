@@ -3052,7 +3052,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     
     public void marcadorSeleccion () {       
 //        System.out.println("codigo obra = " + marker.getObra().getIntcodigoobra());
-        System.out.println("ide de la obra = " + prueba);
+        //System.out.println("ide de la obra = " + prueba);
         //System.out.println("marca = " + marca.getLatitude());
     }
     
