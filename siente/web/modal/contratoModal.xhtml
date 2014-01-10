@@ -109,7 +109,6 @@
                             <h:outputText value="#{var.consultar}"/>
                         </f:facet>
                         <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
-                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                               <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.contrato.intidcontrato}" />
                         </h:commandLink>
                     </rich:column>

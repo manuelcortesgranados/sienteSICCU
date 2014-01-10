@@ -2430,6 +2430,14 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 
+.content-info-contrato .contrato-convenio{
+    padding-bottom: 10px;
+}
+
+.content-info-contrato .contrato-convenio .columna-detalle-convenio{
+    overflow-y: auto;
+}
+
 .ikont-hcl-zoom-contrante{
     background-image: url("../imgs/icn_1.png");
     background-repeat: no-repeat;
