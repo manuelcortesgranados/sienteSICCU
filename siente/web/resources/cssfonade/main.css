@@ -1358,6 +1358,7 @@ a.ikont-hcl-modificarusuario:hover {
     display: none;
     position: relative;
     top: -36px;
+    height: 40px;
 }
 
 .scrollactive .ikont-hpg-menu-nuevo-convenio {
@@ -1952,7 +1953,7 @@ input[type="text"], input[type="password"], select{
     display: block;
     background-size: 70px 70px;
     margin-left: 20px;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 .ikont-hcl-menu-icon-inicio{
@@ -1962,6 +1963,7 @@ input[type="text"], input[type="password"], select{
     width: 24px;
     height: 24px;
     display: block;
+    margin-top: 20px;
 }
 
 .ikont-hcl-menu-rigth-inicio{
@@ -1971,6 +1973,7 @@ input[type="text"], input[type="password"], select{
     width: 24px;
     height: 24px;
     display: block;
+    margin-top: 20px;
 }
 
 .ikont-hpg-content-menuinicio{
@@ -1983,6 +1986,8 @@ input[type="text"], input[type="password"], select{
     color: #FFF;
     font-family: open;
     font-size: 1.5em;
+    position: relative;
+    top: 10px;
 }
 
 .scrollactive .ikont-menu-principal{
@@ -2009,6 +2014,7 @@ input[type="text"], input[type="password"], select{
     position: relative;
     top: -48px;
     width: 50px;
+    height: 40px;
     float: left;
 }
 
@@ -2430,13 +2436,11 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 
-.content-info-contrato .contrato-convenio{
+.contrato-convenio{
     padding-bottom: 10px;
-}
-
-.content-info-contrato .contrato-convenio .columna-detalle-convenio{
     overflow-y: auto;
 }
+
 
 .ikont-hcl-zoom-contrante{
     background-image: url("../imgs/icn_1.png");
@@ -2585,6 +2589,7 @@ css usuario modificacion
     display: none;
     position: relative;
     top: -46px;
+    height: 40px;
 }
 
 .scrollactive .ikont-hpg-menu-contenido-administrar-convenio {
@@ -2995,6 +3000,7 @@ css usuario modificacion
     display: none;
     position: relative;
     top: -44px;
+    height: 40px;
 }
 
 .scrollactive .ikont-hpg-menu-nuevo-proestructuracion {

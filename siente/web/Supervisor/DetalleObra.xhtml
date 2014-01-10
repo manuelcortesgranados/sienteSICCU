@@ -217,7 +217,7 @@
                                     </h:panelGroup>
                                     
                                     <h:panelGroup  styleClass="content-info-contrato" layout="block">
-                                        <h:panelGrid columns="2" columnClasses="verticalalingtop, columna-detalle-convenio">
+                                        <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.vercontrato}"  immediate="true"   action="#{Supervisor$Contrato.cargarContratoConvenio}">
                                                 <a4j:param assignTo="#{Supervisor$Contrato.mostrarContratoConvenio}" value="#{Supervisor$AdministrarObraNew.primerContratoObra.intidcontrato}" />
                                             </h:commandLink>
