@@ -581,6 +581,10 @@
             <to-view-id>/Supervisor/SolicitarValidarInformacion.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>terminarobra</from-outcome>
+            <to-view-id>/Supervisor/DeclararObraTerminada.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>cambiarestado</from-outcome>
             <to-view-id>/Supervisor/SolicitarCambioEstado.xhtml</to-view-id>
         </navigation-case>
