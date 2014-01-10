@@ -606,10 +606,6 @@ public class AdminSupervisionExterna implements Serializable{
      */
     public void validarMatrizAuditoria() {
         listaresultadosvalidacion = new ArrayList<Typeresultadovalidacion>();
-        if (getSessionBeanCobra().getSupervisionExternaService().getVisita().getDatefechainforme().after(new Date())) {
-            FacesUtils.addErrorMessage(Propiedad.getValor("fechainformemayoractualeror"));
-            return;
-        }
         try {
             subirListado.getArchivoWeb().convertirUTF8();
             LineIterator lineIterator = FileUtils.lineIterator(subirListado.getArchivoWeb().getArchivoTmp());
@@ -709,5 +705,14 @@ public class AdminSupervisionExterna implements Serializable{
     public void descargarPlantillaAuditoria() {
         getSessionBeanCobra().setUrlAbri(RutasWebArchivos.PLANTILLA_MATRIZ_AUDITORIA);
         getDownload().onDownload();
+    }
+    
+    /**
+     * Valida que la fecha del informe no sea posterior a la fecha actual
+     */
+    public void validarFechaInforme() {
+        if (getSessionBeanCobra().getSupervisionExternaService().getVisita().getDatefechainforme().after(new Date())) {
+            FacesUtils.addErrorMessage(Propiedad.getValor("fechainformemayoractualeror"));
+        }
     }
 }
