@@ -1836,10 +1836,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 getAlimentar().cargaListaPeridos();
                 return "adminalimentar";
             } else {
-                FacesUtils.addErrorMessage("La obra esta declarada como terminada");
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info("Problemas para reportar avance: " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -1850,10 +1850,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 opcion = 2;
                 return "adminmodificarObra";
             } else {
-                FacesUtils.addErrorMessage("La obra esta declarada como terminada");
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info("Se presento un error para modificar la obra: " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje6declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -2137,13 +2137,13 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 if (!getObra().isBoolobraterminada()) {
                     return "terminarobra";
                 } else {
-                    FacesUtils.addErrorMessage("La obra esta declarada como terminada");
+                    FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
                 }
             } else {
-                FacesUtils.addErrorMessage("La obra no se encuentra en ejecución");
+                FacesUtils.addErrorMessage(bundle.getString("mensaje4declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info("Se presento un error para terminar la obra: " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -2159,15 +2159,15 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             if (!getObra().isBoolobraterminada()) {
                 getObra().setBoolobraterminada(true);
                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
-                FacesUtils.addInfoMessage("La Obra ha sido terminada exitosamente");
+                FacesUtils.addInfoMessage(bundle.getString("mensaje1declararobra"));
                 opcion = 0;
                 getDetalleObra().iniciardetalle();
                 return "admindetalleObra";
             } else {
-                FacesUtils.addErrorMessage("La obra esta declarada como terminada");
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info("Se presento un error para terminar la obra: " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra")+" "+ e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
