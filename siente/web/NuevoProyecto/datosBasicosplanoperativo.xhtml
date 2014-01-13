@@ -23,6 +23,7 @@
                                 <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important; width: 320px!important;" required="true" >
                                     <rich:placeholder value="Ej: 442D5" styleClass="input_num_convenio"/>
                                     <f:validateLength maximum="255"/>
+                                    <a4j:ajax event="valueChange" execute="hit-nom-convenio"/>
                                 </h:inputText>     
                                 <rich:message for="hit-nro-convenio" />
                             </rich:column>

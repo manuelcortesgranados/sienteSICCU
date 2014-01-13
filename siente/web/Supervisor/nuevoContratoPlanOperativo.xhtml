@@ -104,12 +104,12 @@
             <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0" rendered="#{!Supervisor$Contrato.contrato.modolecturaplanop}">                
 
                 <a4j:commandLink styleClass="ikont-po-img-posicion-borrador-finalizar ikont-po-img-borrador"  title="Guardar borrador"  action="#{Supervisor$Contrato.preValidarGuardarBorrador}" render="@form,ikont-hpg-botones-eliminar-periodos"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio" 
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio" 
                                  oncomplete="if (#{Supervisor$Contrato.eliminarPeriodosFueraRango})  #{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.show();" >
                 </a4j:commandLink>
 
                 <a4j:commandLink styleClass="ikont-po-img-posicion-borrador-finalizar ikont-po-img-finalizar" title="Finalizar" action="#{Supervisor$Contrato.preValidarFinalizarConvenio}" render="@form, ikont-hpg-botones-eliminar-periodos"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"
                                  oncomplete=" if (#{Supervisor$Contrato.eliminarPeriodosFueraRango}){ #{rich:component('panelConfirmarEliminarPeriodosFueraRango')}.show();}
                                  if (#{Supervisor$Contrato.confirmacionGuardado and !Supervisor$Contrato.eliminarPeriodosFueraRango}){#{rich:component('panelConfirmarGuardadoConvenio')}.show();}" >
                 </a4j:commandLink>
