@@ -101,8 +101,8 @@
                             <a4j:commandLink value="Asociar contrato"
                                              styleClass="ikont-acl-asocontrato"  
                                              action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
-                                             render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
-                            </a4j:commandLink>
+                                             render="gpTotalCont" >
+                            </a4j:commandLink>                             
                             <a4j:commandLink value="Crear contrato" rendered="false"
                                              styleClass="ikont-hcl-crearcontrato"  
                                              action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
@@ -188,7 +188,7 @@
 
             </h:panelGrid>
         </h:form>
-        <ui:include src="../NuevoProyecto/modal/listadoContratoModal.xhtml"/>
+         <ui:include src="../NuevoProyecto/modal/listadoContratoModal.xhtml"/>      
         <ui:include src="../NuevoProyecto/modal/modalRelacionContrato.xhtml"/>
 
     </ui:define>
