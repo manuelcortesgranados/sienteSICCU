@@ -58,7 +58,7 @@
                     </h:selectOneMenu>
                 </h:panelGroup> 
 
-                <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
+                <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano and SessionBeanCobra.logueadodesdemapa}">
                     <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
                         <f:selectItem itemLabel="Fase" itemValue="-1"/>
                         <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
