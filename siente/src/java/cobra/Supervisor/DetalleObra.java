@@ -1839,7 +1839,8 @@ public class DetalleObra implements Serializable{
     public void generarReporteVisitaAuditoria() {
         Calificacionauditoriaobra calificacionauditoriaobra = (Calificacionauditoriaobra) tablacalificacionesauditoriaobra.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getVisita().getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getVisita().getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
