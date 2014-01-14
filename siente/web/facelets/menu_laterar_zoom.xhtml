@@ -175,8 +175,10 @@
             <br/>
             <h:panelGrid columns="2" styleClass="ikont-panel-spacing-menu">
                 <h:commandLink action="#{HomeGestion.activarvistamapa}"  immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-inicio"/>
-                    <h:commandLink action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuInicio}" styleClass="ikont-label-estructura-menu ikont-label-menu-item"/>              
+                <h:commandLink action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuInicio}" styleClass="ikont-label-estructura-menu ikont-label-menu-item"/>              
             </h:panelGrid>
+            <h:commandLink styleClass="ikont-label-estructura-menu ikont-label-menu-buscar-proyecto ikont-espacio-sub-menu" action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuBuscarProyecto}"/>
+            <hr class="ikont-hr-separador-menu "/>
         </h:panelGroup>
         <h:panelGroup   rendered="#{SessionBeanCobra.logueadodesdemapa}" styleClass="kont-contenedor-menu">
             <h:panelGrid styleClass="ikont-panel-spacing-menu" columns="3">
