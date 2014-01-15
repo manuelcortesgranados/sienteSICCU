@@ -5212,3 +5212,16 @@ a.ikont-a4jcl-solicitumaestro:hover {
     left: 200px;
 
 }
+
+.ikont-enlace-boton-restaurar-passwd:link{
+    background-color: #FFF;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;
+}
+
+.ikont-enlace-boton-restaurar-passwd:hover{
+    color:  #21992F !important;   
+}
+.ikont-enlace-boton-restaurar-passwd:visited{
+    color:  #58595B !important;   
+}
