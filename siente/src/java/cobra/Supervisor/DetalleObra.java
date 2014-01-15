@@ -945,7 +945,8 @@ public class DetalleObra implements Serializable{
          Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();
        
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+"/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1234,7 +1235,8 @@ public class DetalleObra implements Serializable{
 
     public String reportePdf() {
         try {            
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1243,7 +1245,8 @@ public class DetalleObra implements Serializable{
 
     public String reportePdfSeguimiento() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtpdfseguimiento") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtpdfseguimiento") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1252,7 +1255,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteExcel() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtexceldetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtexceldetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1263,7 +1267,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteWord() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtworddetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtworddetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1566,7 +1571,8 @@ public class DetalleObra implements Serializable{
     public String seguimientoreport() {
         Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfseguimiento") + segui.getIntidseguimiento());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimiento") + segui.getIntidseguimiento());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1642,7 +1648,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteInterventoriaSeguimiento() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfseguimientointerventoria") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimientointerventoria") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1722,7 +1729,8 @@ public class DetalleObra implements Serializable{
     public String reporteHistorialValidaciones() {
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportehistorialvalidaciones") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportehistorialvalidaciones") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,6 +22,7 @@ import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Tiposolicitudobra;
 import co.com.interkont.cobra.to.Zonaespecifica;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
@@ -902,11 +903,13 @@ public class Reporte implements ILifeCycleAware, Serializable {
             try {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 if (getTipoahint() == -1) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport
                             + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport + "&TipoAtencion=" + getTipoahint()
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport + "&TipoAtencion=" + getTipoahint()
                             + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -917,20 +920,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 switch (getTipoorigenint()) {
                     case 1:
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport + "&Localidad=" + getMuniah()
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport + "&Localidad=" + getMuniah()
                                 + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         break;
                     case 2:
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport + "&Localidad=" + getDeptosah()
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport + "&Localidad=" + getDeptosah()
                                 + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         break;
                     case 3:
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport + "&Region=" + getRegionint()
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport + "&Region=" + getRegionint()
                                 + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         break;
                     case 4:
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport + "&Localidad=169"
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport + "&Localidad=169"
                                 + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         break;
                 }
             } catch (IOException ex) {
@@ -940,8 +947,9 @@ public class Reporte implements ILifeCycleAware, Serializable {
         if (getReporteselectaten() == 6) {
             try {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(nombrereport
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+nombrereport
                         + "&fechaini=" + URLEncoder.encode(df.format(feciniah)) + "&fechafin=" + URLEncoder.encode(df.format(fecfinah)));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } catch (IOException ex) {
                 Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1058,21 +1066,25 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     if (getFechainiconpro() != null) {
                         if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                             if (getIntentidad() != -1) {
-                                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                         + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=" + URLEncoder.encode(df.format(fechainiconpro)) + "&fecha_fin=" + URLEncoder.encode(df.format(fechafinconpro)));
+                                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             } else {
                                 if (getIntestadoobra() != -1) {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                             + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=" + URLEncoder.encode(df.format(fechainiconpro)) + "&fecha_fin=" + URLEncoder.encode(df.format(fechafinconpro)));
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 } else {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                             + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio="
                                             + URLEncoder.encode(df.format(fechainiconpro)) + "&fecha_fin=" + URLEncoder.encode(df.format(fechafinconpro)));
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 }
                             }
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                           getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                     + "&localidad=169&fecha_inicio=" + URLEncoder.encode(df.format(fechainiconpro)) + "&fecha_fin=" + URLEncoder.encode(df.format(fechafinconpro)));
+                           FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
@@ -1083,20 +1095,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
             } else {
                 if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                     if (getIntentidad() != -1) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                 + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         if (getIntestadoobra() != -1) {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                     + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                                     + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotal")
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotal")
                             + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1112,20 +1128,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     if (getFechainiconpro() != null) {
                         if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                             if (getIntentidad() != -1) {
-                                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                         + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             } else {
                                 if (getIntestadoobra() != -1) {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                             + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 } else {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                             + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 }
                             }
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                     + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
@@ -1136,20 +1156,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
             } else {
                 if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                     if (getIntentidad() != -1) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                 + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         if (getIntestadoobra() != -1) {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                     + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                                     + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotal")
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotal")
                             + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1165,20 +1189,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     if (getFechainiconpro() != null) {
                         if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                             if (getIntentidad() != -1) {
-                                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                         + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             } else {
                                 if (getIntestadoobra() != -1) {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                             + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 } else {
-                                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                             + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                                 }
                             }
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                     + "&localidad=169&fecha_inicio=" + fechainiconpro + "&fecha_fin=" + fechafinconpro);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
@@ -1189,20 +1217,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
             } else {
                 if (getIntestadoobra() != -1 || getIntentidad() != -1) {
                     if (getIntentidad() != -1) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                 + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         if (getIntestadoobra() != -1) {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                     + "&estado_obra=" + intestadoobra + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         } else {
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                                     + "&estado_obra=" + intestadoobra + "&entidad=" + intentidad + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                         }
                     }
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotal")
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotal")
                             + "&localidad=169&fecha_inicio=1996-01-01&fecha_fin=3000-01-01");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1216,7 +1248,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
             if (getFechafinconso() != null || getFechainiconso() != null) {
                 if (getFechafinconso() != null) {
                     if (getFechainiconso() != null) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
                     }
@@ -1224,7 +1257,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     FacesUtils.addErrorMessage(bundle.getString("lafechafinalesuncampoobli"));
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1237,7 +1271,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
             if (getFechafinconso() != null || getFechainiconso() != null) {
                 if (getFechafinconso() != null) {
                     if (getFechainiconso() != null) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
                     }
@@ -1245,7 +1280,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     FacesUtils.addErrorMessage(bundle.getString("lafechafinalesuncampoobli"));
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1258,7 +1294,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
             if (getFechafinconso() != null || getFechainiconso() != null) {
                 if (getFechafinconso() != null) {
                     if (getFechainiconso() != null) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalSolicitud") + "&fechaini=" + fechainiconso + "&fechafin=" + fechafinconso);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("lafechainicialesuncampoobli"));
                     }
@@ -1266,7 +1303,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                     FacesUtils.addErrorMessage(bundle.getString("lafechafinalesuncampoobli"));
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1305,13 +1343,15 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
                 if (inttipoobra != -1) {
                     cadena = cadena + "&tipoobra=" + inttipoobra;
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadena);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadena);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     FacesUtils.addErrorMessage(bundle.getString("seleccionar") + " " + bundle.getString("tipoobraob"));
                 }
             }
 
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadena);
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadena);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1322,7 +1362,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reportePdfFondo() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1332,7 +1373,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reporteExcelFondo() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1342,7 +1384,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reporteWordFondo() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalSolicitud") + "&fechaini=1996-01-01&fechafin=3000-01-01");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1354,17 +1397,21 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vista == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichasinobras") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichasinobras") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichasinobras") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichasinobras") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichasinobras") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichasinobras") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
 
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichasinobras") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichasinobras") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
 
             }
         } catch (IOException ex) {
@@ -1559,22 +1606,27 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (reporteselectregionali == 1) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
 
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
                 if (intzona == -1) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacortozona") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacortozona") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1588,19 +1640,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
             if (reporteselectregionali == 1) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&localidad=169");//select
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&localidad=169");//select
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&localidad=" + deptosah);//select
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&localidad=" + deptosah);//select
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&localidad=" + muniah);//select
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&localidad=" + muniah);//select
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
                 if (intzona == -1) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&localidad=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&localidad=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&zona=" + intzona);//select
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&zona=" + intzona);//select
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1613,19 +1670,24 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (reporteselectregionali == 1) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&localidad=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&localidad=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&localidad=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&localidad=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&localidad=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&localidad=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
                 if (intzona == -1) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&localidad=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&localidad=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1638,16 +1700,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vista == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalfichasinobras") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalfichasinobras") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalfichasinobras") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalfichasinobras") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalfichasinobras") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalfichasinobras") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexceltotalfichasinobras") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexceltotalfichasinobras") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1659,16 +1725,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vista == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalfichasinobras") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalfichasinobras") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalfichasinobras") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalfichasinobras") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalfichasinobras") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalfichasinobras") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordtotalfichasinobras") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordtotalfichasinobras") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1680,16 +1750,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vistaicom == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfimcompletos") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfimcompletos") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfimcompletos") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfimcompletos") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfimcompletos") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfimcompletos") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfimcompletos") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfimcompletos") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1701,16 +1775,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vistaicom == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelimcompletos") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelimcompletos") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelimcompletos") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelimcompletos") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelimcompletos") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelimcompletos") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelimcompletos") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelimcompletos") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1722,16 +1800,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             if (vistaicom == 0) {
                 if (deptosah.equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordimcompletos") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordimcompletos") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
                     if (muniah.equals("-1")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordimcompletos") + "&munici=" + deptosah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordimcompletos") + "&munici=" + deptosah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordimcompletos") + "&munici=" + muniah);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordimcompletos") + "&munici=" + muniah);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordimcompletos") + "&zona=" + intzona);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordimcompletos") + "&zona=" + intzona);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
@@ -1872,7 +1954,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reportepdfcontrol1() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol1") + idconsolidadoselec);
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol1") + idconsolidadoselec);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1881,7 +1964,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reportepdfcontrol2() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol2") + idconsolidadoselec);
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol2") + idconsolidadoselec);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1890,7 +1974,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
     public String reportepdfcontrol3() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol3") + idconsolidadoselec);
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol3") + idconsolidadoselec);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1901,16 +1986,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             switch (reporteselectcontrol) {
                 case 4:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol4") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol4") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 5:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol5") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol5") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 6:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol6") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol6") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 7:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol7") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol7") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
             }
         } catch (IOException ex) {
@@ -1923,25 +2012,32 @@ public class Reporte implements ILifeCycleAware, Serializable {
         try {
             switch (reporteselec) {
                 case 4:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol1") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol1") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 5:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol2") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol2") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 6:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol3") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol3") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 7:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol8") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol8") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 8:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol9") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol9") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 9:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol10") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol10") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 10:
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfcontrol11") + idconsolidadoselec);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfcontrol11") + idconsolidadoselec);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
             }
         } catch (IOException ex) {
@@ -2205,41 +2301,50 @@ public class Reporte implements ILifeCycleAware, Serializable {
         // parametros categoria = todos, tipo Proyecto = todos, Tipo Obra = todos
         if (getTipoobint() == (-1) && getInttipoproyecto() == (-1) && getInttipoobra() == (-1)) {
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria = todos, tipo Proyecto = todos, Tipo Obra != todos 
         if (getTipoobint() == (-1) && getInttipoproyecto() == (-1) && getInttipoobra() != (-1)) {
             //Funciona igual que el primero. 
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
 
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria = todos, tipo Proyecto != todos, Tipo Obra = todos
         if (getTipoobint() == (-1) && getInttipoproyecto() != (-1) && getInttipoobra() == (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&tipoproyecto=" + inttipoproyecto;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
 
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
 
         }
@@ -2247,65 +2352,80 @@ public class Reporte implements ILifeCycleAware, Serializable {
         if (getTipoobint() != (-1) && getInttipoproyecto() == (-1) && getInttipoobra() == (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&claseobra=" + tipoobint;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria = todos, tipo Proyecto != todos, Tipo Obra != todos
         if (getTipoobint() == (-1) && getInttipoproyecto() != (-1) && getInttipoobra() != (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&tipoobra=" + inttipoobra;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria != todos, tipo Proyecto != todos, Tipo Obra = todos
         if (getTipoobint() != (-1) && getInttipoproyecto() != (-1) && getInttipoobra() == (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&claseobra=" + tipoobint + "&tipoproyecto=" + inttipoproyecto;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria != todos, tipo Proyecto = todos, Tipo Obra != todos
         if (getTipoobint() != (-1) && getInttipoproyecto() == (-1) && getInttipoobra() != (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&claseobra=" + tipoobint + "&tipoobra" + inttipoobra;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
         // parametros categoria != todos, tipo Proyecto != todos, Tipo Obra != todos
         if (getTipoobint() != (-1) && getInttipoproyecto() != (-1) && getInttipoobra() != (-1)) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&claseobra=" + tipoobint + "&tipoobra" + inttipoobra;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordsolicitud") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2319,39 +2439,48 @@ public class Reporte implements ILifeCycleAware, Serializable {
 
         if (getReporteSelectConveniosEntidadesNacionales() == -1) {
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteSelectConveniosEntidadesNacionales() == REPORTE_CONVENIO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&convenio=" + _idConvenio;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteSelectConveniosEntidadesNacionales() == REPORTE_PROYECTO_X_CONVENIO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&convenio=" + _idConvenio;
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfproyectosconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfproyectosconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcelproyectosconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelproyectosconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportewordproyectosconvenio") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportewordproyectosconvenio") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2368,62 +2497,77 @@ public class Reporte implements ILifeCycleAware, Serializable {
         if (getReporteselectaten() == REPORTE_RESUMEN_SOLICITUDES_ASISTENCIA_HUMANITARIA) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_resumen_solicitudes_asistencia_humanitaria") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteselectaten() == REPORTE_SEGUIMIENTO_ATENCION_HUMANITARIA_MUNICIPAL) {
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_seguimiento_atencion_humanitaria_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_seguimiento_atencion_humanitaria_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_seguimiento_atencion_humanitaria_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_seguimiento_atencion_humanitaria_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_seguimiento_atencion_humanitaria_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_seguimiento_atencion_humanitaria_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteselectaten() == REPORTE_SEGUIMIENTOS_ARRIENDOS_MUNICIPAL) {
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_seguimientos_arriendos_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_seguimientos_arriendos_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_seguimientos_arriendos_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_seguimientos_arriendos_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_seguimientos_arriendos_municipal"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_seguimientos_arriendos_municipal"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteselectaten() == REPORTE_SEGUIMIENTOS_ATENCION_HUMANITARIA_GLOBAL) {
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_seguimientos_atencion_humanitaria_global"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_seguimientos_atencion_humanitaria_global"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_seguimientos_atencion_humanitaria_global"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_seguimientos_atencion_humanitaria_global"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_seguimientos_atencion_humanitaria_global"));
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_seguimientos_atencion_humanitaria_global"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteselectaten() == REPORTE_SOLICITUDES_APROBADAS_POR_DEPARTAMENTO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_solicitudes_aprobadas_por_departamento") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2432,13 +2576,16 @@ public class Reporte implements ILifeCycleAware, Serializable {
             cadenaPeticionReporte = cadenaPeticionReporte + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
 
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_solicitudes_aprobadas_por_region") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2446,13 +2593,16 @@ public class Reporte implements ILifeCycleAware, Serializable {
         if (getReporteselectaten() == REPORTE_SOLICITUDES_PRESENTADAS_VS_APROBADAS) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2460,26 +2610,32 @@ public class Reporte implements ILifeCycleAware, Serializable {
         if (getReporteselectaten() == REPORTE_TOTAL_APROBADO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_total_aprobado") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_total_aprobado") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_total_aprobado") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_total_aprobado") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_total_aprobado") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_total_aprobado") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
         if (getReporteselectaten() == REPORTE_TOTAL_APROBADO_ATENCION_HUMANITARIA_ALOJAMIENTOS_TEMPORALES) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2489,13 +2645,16 @@ public class Reporte implements ILifeCycleAware, Serializable {
             cadenaPeticionReporte = cadenaPeticionReporte + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
 
             if (getReporteFormato() == PDF_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == XLS_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
             if (getReporteFormato() == DOC_FORMATO) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_total_aprobado_atencion_humanitaria_alojamientos_temporales") + cadenaPeticionReporte);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             }
         }
 
@@ -2622,12 +2781,14 @@ public class Reporte implements ILifeCycleAware, Serializable {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
@@ -2643,7 +2804,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
@@ -2656,17 +2818,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
                 case 3:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 4:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
             }
 
@@ -2692,12 +2857,14 @@ public class Reporte implements ILifeCycleAware, Serializable {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
@@ -2713,7 +2880,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
@@ -2726,17 +2894,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
                 case 3:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 4:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
             }
         } catch (IOException ex) {
@@ -2761,12 +2932,14 @@ public class Reporte implements ILifeCycleAware, Serializable {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
                             configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
@@ -2783,7 +2956,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
@@ -2795,17 +2969,20 @@ public class Reporte implements ILifeCycleAware, Serializable {
                             if (getInttercer() != -1) {
                                 cadenaPeticionReporte += "&entidad=" + getInttercer();
                             }
-                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                             break;
                     }
                     break;
                 case 3:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
                 case 4:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     break;
             }
         } catch (IOException ex) {

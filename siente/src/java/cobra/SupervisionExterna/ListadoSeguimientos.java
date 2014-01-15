@@ -7,6 +7,7 @@ package cobra.SupervisionExterna;
 
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Seguimiento;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
@@ -129,7 +130,8 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
 //       Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
 //        
        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfseguimiento") + getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimiento") + getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -138,7 +140,8 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
 
     public String reporteInterventoriaSeguimiento() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfseguimientointerventoria") + getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimientointerventoria") + getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }

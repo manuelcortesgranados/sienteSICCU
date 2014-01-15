@@ -906,22 +906,26 @@ public class ControlGerencial  implements Serializable{
         try {
             if (vistaicom == 0) {
                 if (deptos.equals("0")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
 
                     if (muni.equals("0")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=" + deptos);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=" + deptos);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=" + muni);
                     }
                 }
             } else {
                 if (intzona == 0) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashrehabilitacion") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashrehabilitacionzona") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashrehabilitacionzona") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -941,23 +945,28 @@ public class ControlGerencial  implements Serializable{
         try {
             if (vistaicom == 0) {
                 if (deptos.equals("0")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=169");//select
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=169");//select
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
                     if (muni.equals("0")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=" + deptos);//select
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=" + deptos);//select
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=" + muni);//select
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=" + muni);//select
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
 
 
             } else {
                 if (intzona == 0) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaconvenio") + "&localidad=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaconvenio") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaconvenio") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -972,20 +981,24 @@ public class ControlGerencial  implements Serializable{
             if (vistaicom == 0) {
 
                 if (deptos.equals("0")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=169");//select
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=169");//select
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
                     if (muni.equals("0")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=" + deptos);//select
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=" + deptos);//select
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
                         FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=" + muni);//select
                     }
                 }
             } else {
                 if (intzona == 0) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaobras") + "&localidad=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdftotalfichaobras") + "&zona=" + intzona);//select
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdftotalfichaobras") + "&zona=" + intzona);//select
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1003,22 +1016,27 @@ public class ControlGerencial  implements Serializable{
         try {
             if (vistaicom == 0) {
                 if (deptos.equals("0")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
 
                     if (muni.equals("0")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=" + deptos);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=" + deptos);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=" + muni);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=" + muni);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
                 if (intzona == 0) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashconvenios") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashconvenioszona") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashconvenioszona") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -1036,22 +1054,27 @@ public class ControlGerencial  implements Serializable{
         try {
             if (vistaicom == 0) {
                 if (deptos.equals("0")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashah") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashah") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
 
                     if (muni.equals("0")) {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashah") + "&munici=" + deptos);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashah") + "&munici=" + deptos);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     } else {
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashah") + "&munici=" + muni);
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashah") + "&munici=" + muni);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                     }
                 }
             } else {
                 if (intzona == 0) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashah") + "&munici=169");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashah") + "&munici=169");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reportepdfbalancedashahzona") + "&zona=" + intzona);
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportepdfbalancedashahzona") + "&zona=" + intzona);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
