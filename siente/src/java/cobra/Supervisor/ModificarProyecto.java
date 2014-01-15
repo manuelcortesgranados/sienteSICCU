@@ -1426,7 +1426,7 @@ public class ModificarProyecto  implements Serializable{
         obra = getSessionBeanCobra().getCobraService().getObra();
         Tipoestadobra tipoestadobra = new Tipoestadobra(Tipoestadobra.EN_EJECUCION);
         obra.setTipoestadobra(tipoestadobra);
-        getSessionBeanCobra().getCobraService().guardarObra(obra, getSessionBeanCobra().getUsuarioObra(), -1);
+       getSessionBeanCobra().getModificarProyectoService().cancelarModificacion(obra, getSessionBeanCobra().getUsuarioObra());
         getSessionBeanCobra().getCobraService().borrarHistorico(historicoobra);
         FacesContext.getCurrentInstance().addMessage(
                 null,
