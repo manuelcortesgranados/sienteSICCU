@@ -7046,13 +7046,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public boolean validarNumeroContrato() {
         if (getContrato().getIntidcontrato() == 0) {
             if (getSessionBeanCobra().getCobraService().encontrarContratoPorNumero(getContrato().getStrnumcontrato()) != null) {
-                return false;
+                throw new ConvenioException("El número del convenio ya existe.");
             }
         } else {
             ///Revisar si cambio el numero de contrato
             if (getNumcontratotemporal().compareTo(getContrato().getStrnumcontrato()) != 0) {
                 if (getSessionBeanCobra().getCobraService().encontrarContratoPorNumero(getContrato().getStrnumcontrato()) != null) {
-                    return false;
+                    throw new ConvenioException("El número del convenio ya existe.");
                 }
             }
         }
@@ -7134,7 +7134,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
-        try {
             ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
             if (!contrato.getActividadobras().isEmpty()) {
                 List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
@@ -7148,11 +7147,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     eliminarPeriodosFueraRango();
                 }
             }
-        } catch (ConvenioException e) {
-            FacesUtils.addErrorMessage(e.getMessage());
-            setMensajePlanOperativo(true, true, e.getMessage());
-        }
-
     }
 
     /*
@@ -8095,23 +8089,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             validarModificacionFechasPO(mapaValidacionFechasPO);
             return false;
         } else {
-            if (!validarNumeroContrato()) {
-                FacesUtils.addErrorMessage("El número del convenio ya existe.");
-                return false;
-            } else if (isBorrador) {
+            validarNumeroContrato();
+            if (isBorrador) {
 
                 if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
                     if (contrato.getIntduraciondias() <= 0) {
                         validardatosbasicosplano = 3;
-                        FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
-                        return false;
+                        throw new ConvenioException(bundle.getString("validarfechafin"));
                     }
 
                     if (contrato.getFechaactaini() != null) {
                         if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
                             validardatosbasicosplano = 1;
-                            FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
-                            return false;
+                            throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
                         }
                     }
 
@@ -8119,23 +8109,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             } else {
                 if (contrato.getDatefechaini() == null) {
-                    FacesUtils.addErrorMessage(bundle.getString("fechaInicioNotNull"));
-                    return false;
+                    throw new ConvenioException(bundle.getString("fechaInicioNotNull"));
                 } else if (contrato.getDatefechafin() == null) {
-                    FacesUtils.addErrorMessage(bundle.getString("fechaFinalizacionNotNull"));
-                    return false;
+                    throw new ConvenioException(bundle.getString("fechaFinalizacionNotNull"));
                 } else if (contrato.getIntduraciondias() <= 0) {
                     validardatosbasicosplano = 3;
-                    FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
-                    return false;
+                    throw new ConvenioException(bundle.getString("validarfechafin"));
                 } else if (contrato.getFechaactaini() == null) {
                     validardatosbasicosplano = 2;
-                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionvalida"));
-                    return false;
+                    throw new ConvenioException(bundle.getString("fechadesuscripcionvalida"));
                 } else if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
                     validardatosbasicosplano = 1;
-                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
-                    return false;
+                    throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
                 }
             }
         }
