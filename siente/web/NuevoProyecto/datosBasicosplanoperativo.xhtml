@@ -37,6 +37,7 @@
                                 <h:inputText id="hit-nom-convenio"  value="#{Supervisor$Contrato.contrato.strnombre}" required="true" style="width: 320px!important;height: 32px!important;">
                                     <rich:placeholder  value="#{var.nombreabreviadoconvenio}"  styleClass="input_num_convenio" />
                                     <f:validateLength maximum="255"/>
+                                    <a4j:ajax event="valueChange" execute="hit-nom-convenio"/>
                                 </h:inputText>
                                 <rich:message for="hit-nom-convenio"/>
                             </rich:column>
