@@ -147,8 +147,11 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
         DateWrapper dw = new DateWrapper(start).clearTime();
+        System.out.println("dw = " + dw.asDate());
         this.startDateTime = dw.asDate();
-        this.endDateTime = dw.addDays(duration).asDate();
+        System.out.println("duration = " + duration);
+        this.endDateTime = dw.addDays(duration-1).asDate();
+        System.out.println("endDateTime = " + endDateTime);
 
     }
 

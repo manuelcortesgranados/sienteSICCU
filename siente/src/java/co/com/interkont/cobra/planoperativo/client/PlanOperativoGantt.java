@@ -279,7 +279,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyContextMenuEnabled = !isModolectura();
         config.eventContextMenuEnabled = false;
         config.showTaskLabel = true;
-        config.useEndDate = true;
+        //Gantt trabajando por duración
+        config.useEndDate = false;
         config.clickCreateEnabled = false;
         config.cascadeChanges = false;
 
@@ -1815,31 +1816,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             // if (actividadAnterior.getDuration() < ac.getDuration()) {
             //modificarFechaFin
             Date fechaCopia = CalendarUtil.copyDate(ac.getStartDateTime());
-            CalendarUtil.addDaysToDate(fechaCopia, ac.getDuration());
+            CalendarUtil.addDaysToDate(fechaCopia, ac.getDuration()-1);
             ac.setEndDateTime(fechaCopia);
             Date fechaModificada = CalendarUtil.copyDate(fechaCopia);
             modificarFechaFin(ac);
             if (ac.getEndDateTime().compareTo(fechaModificada) != 0) {
                 props.duration().setValue(ac, actividadAnterior.getDuration());
-                getGantt().getGanttPanel().getContainer().refresh();
+               
 
             } else {
                 GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
             }
-//            } else {
-//                ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
-//                Date copiaFechaModificada = CalendarUtil.copyDate(ac.getEndDateTime());
-//                modificarFechaFin(ac);
-//                if (ac.getEndDateTime().compareTo(copiaFechaModificada) != 0) {
-//                    props.duration().setValue(ac, actividadAnterior.getDuration());
-//                    getGantt().getGanttPanel().getContainer().refresh();
-//
-//                } else {
-//                    GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props, convenioDTO);
-//                }
-//
-//            }
-
+             getGantt().getGanttPanel().getContainer().refresh();
         } else {
             alertaMensajes("Por favor ingrese valores positivos");
             props.duration().setValue(ac, actividadAnterior.getDuration());

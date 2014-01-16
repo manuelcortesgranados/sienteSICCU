@@ -181,18 +181,21 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
             if (par.getParametricaactividadesobligatorias() == null) {
                 ActividadobraDTO actdto = null;
                 if (par.getIdparametrica() == 3) {
-                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechafin, 1, 0);
+                     DateWrapper dw = new DateWrapper(contratoDto.getDatefechafin()).clearTime();                
+                             
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par,  dw.asDate(), 1, 0);
                     actdto.setEsNoEditable(true);
                     actdto.setNumeracion(numeracion);
                     numeracion++;
                 } else if (par.getIdparametrica() == 1) {
-                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
-                    actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
+                     DateWrapper dw = new DateWrapper(contratoDto.getDatefechaactaini()).clearTime(); 
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, dw.asDate(), 1, 0);
+                    //actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
                     actdto.setEsNoEditable(true);
                     actdto.setNumeracion(numeracion);
                     numeracion++;
-                    CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
-                    fechaPlaneacion = CalendarUtil.copyDate(actdto.getEndDateTime());
+                    //CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
+                    fechaPlaneacion = dw.addDays(1).asDate();
 
 
                 } else if (par.getIdparametrica() == 2) {
@@ -220,7 +223,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                             actdto.addChild(actiHija);
                         } else if (parhija.getIdparametrica() == 7) {                            
                             DateWrapper dw = new DateWrapper(contratoDto.getDatefechafin()).clearTime();                
-                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, dw.addDays(-1).asDate(), 1, 0);
+                            ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, dw.asDate(), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
                             actdto.addChild(actiHija);

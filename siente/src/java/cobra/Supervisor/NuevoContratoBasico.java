@@ -2726,10 +2726,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void guardarBorradorConvenioPO() {
-        //this.guardarBorradorConvenio();
+        
         planOperativo();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/zoom/Supervisor/PlanO.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/"+Propiedad.getValor("versioncobra")+"/Supervisor/PlanO.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
