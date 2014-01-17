@@ -4,7 +4,9 @@
  */
 package cobra.reportes;
 
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
+import cobra.util.ArchivoWebUtil;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -42,20 +44,16 @@ public class ReportesBirtServlet extends HttpServlet {
             request.getRequestDispatcher("/AccesoDenegado.xhtml").forward(request, response);
         } else {
             URL url = new URL(sessionBeanCobra.getUrlAbri());
-            System.out.println("sessionBeanCobra.getUrlAbri() = " + sessionBeanCobra.getUrlAbri());
             HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
             httpConnection.connect();
-            int indiceIniFormato = sessionBeanCobra.getUrlAbri().indexOf("__format=") + 9;
-            System.out.println("indiceIniFormato = " + indiceIniFormato);
-            int indiceFinFormato = sessionBeanCobra.getUrlAbri().substring(indiceIniFormato).indexOf("&");
-            System.out.println("indiceFinFormato = " + indiceFinFormato);
-            String tipoArchivo = sessionBeanCobra.getUrlAbri().substring(indiceIniFormato, indiceIniFormato+indiceFinFormato);
-            System.out.println("tipoArchivo = " + tipoArchivo);
+            
             int responseCode = httpConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
+                String tipoArchivo = ArchivoWebUtil.obtenerTipoReporteBirt(sessionBeanCobra.getUrlAbri());
                 response.setContentType("application/"+tipoArchivo);
-                response.setHeader("Content-Disposition", "inline; filename=test.pdf");
+                String nombreReporte = ArchivoWebUtil.obtenerNombreReporteBirt(sessionBeanCobra.getUrlAbri());
+                response.setHeader("Content-Disposition", "inline; filename="+Propiedad.getValor("versioncobra")+nombreReporte+"."+tipoArchivo);
 
                 OutputStream outputStream = response.getOutputStream();
                 IOUtils.copy(httpConnection.getInputStream(), outputStream);
