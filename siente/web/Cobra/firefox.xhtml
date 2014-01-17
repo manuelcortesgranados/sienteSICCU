@@ -1,14 +1,57 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <style type="text/css">
+	
+	    body{
+		overflow : hidden;
+	    }
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_firefox.xhtml">
-      
-            <ui:define name="head">
-                <title>Cobra - Control de Obra Colombia Humanitaria</title>
-            </ui:define>   
-</ui:composition>
+            .ikont-div-ingreso-mostrar-error-pagina {
+                background: #FFF;
+                width: 95%;
+                height: 0px;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                overflow: hidden;
+                top: 100px;
+            }
+            .ikon-panel-contenido-error-navegador {
+                right: 455px;
+                position: absolute;
+                top: 100px;
+                z-index: 200;
+                text-align: center;
+                color: #999;
+		font-family: Verdana, Geneva, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mostrar-error-pagina" class="ikont-div-ingreso-mostrar-error-pagina" style="height: 100%;">
+            <center>
+                <span id="panel_error_navegador" class="ikon-panel-contenido-error-navegador">
+                    <img src="../resources/imgs/icon_lading_errorpage.png"/>
+                    <br/>
+                    Tu navegador no soporta los últimos estandares web:
+                    <br/>
+                    Por favor actualiza la versión de tu navegador.
+                    <br/><br/>
+                    Para una mejor experiencia en zoom te 
+                    <br/>recomendamos que utilices <br/>
+                    <span style="color: #000!important;">
+                        Firefox apartir de la versión 21.0 </span>
+                    ó 
+                    <span style="color: #000!important;">Chrome apartir de la versión 22.0</span>
+                </span>
+            </center>  
+        </div>
+    </body>
+</html>

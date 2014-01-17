@@ -12,6 +12,41 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
+        <script type="text/javascript">
+            var _iformacionavegador = navigator.userAgent;
+            var _versionavegador = '' + parseFloat(navigator.appVersion);
+            var _navegador;
+            var _url = ("#{facesContext.externalContext.requestContextPath}/Cobra/firefox.xhtml");
+
+            if ((_navegador = _iformacionavegador.indexOf("Opera")) != -1) {
+                _versionavegador = _iformacionavegador.substring(_navegador + 6);
+                location.href = _url;
+            }
+            else if ((_navegador = _iformacionavegador.indexOf("MSIE")) != -1) {
+                _versionavegador = _iformacionavegador.substring(_navegador + 5);
+                if (!(parseInt(_versionavegador) > 9)) {
+                    location.href = _url;
+                }
+            }
+            else if ((_navegador = _iformacionavegador.indexOf("Chrome")) != -1) {
+                _versionavegador = _iformacionavegador.substring(_navegador + 7);
+                if (!(parseInt(_versionavegador) > 22)) {
+                    location.href = _url;
+                }
+            }
+            else if ((_navegador = _iformacionavegador.indexOf("Safari")) != -1) {
+                _versionavegador = _iformacionavegador.substring(_navegador + 7);
+                if (!(parseInt(_versionavegador) > 5)) {
+                    location.href = _url;
+                }
+            }
+            else if ((_navegador = _iformacionavegador.indexOf("Firefox")) != -1) {
+                _versionavegador = _iformacionavegador.substring(_navegador + 8);
+                if (!(parseInt(_versionavegador) > 20)) {
+                    location.href = _url;
+                }
+            }
+        </script>
         <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
         <script  src="/#{var.versioncobra}/resources/js/zopim/#{var.srczopim}" type="text/javascript"></script>
         </h:panelGroup>
