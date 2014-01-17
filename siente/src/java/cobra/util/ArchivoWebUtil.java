@@ -114,4 +114,32 @@ public class ArchivoWebUtil {
     public static File obtenerArchivo(String ubicacion) throws ArchivoNoExistenteException {
         return ArchivoUtil.obtenerArchivo(obtenerRutaAbsoluta(ubicacion));
     }
+    
+    
+    /**
+     * Obtiene el tipo del reporte dada la URL del mismo (pdf, xls, html...)
+     * @param url Url del reporte
+     * @return 
+     */
+    public static String obtenerTipoReporteBirt(String url) {
+        int indiceIniFormato = url.indexOf("__format=") + 9;
+        int indiceFinFormato = url.substring(indiceIniFormato).indexOf("&");
+        return url.substring(indiceIniFormato, indiceIniFormato+indiceFinFormato);
+    }
+    
+    /**
+     * Obtiene el nombre del reporte dada la URL del mismo
+     * @param url Url del reporte
+     * @return 
+     */
+    public static String obtenerNombreReporteBirt(String url) {
+        int indiceIniNombreReporte = url.lastIndexOf("/")+1;
+        int indiceFinNombreReporte = url.indexOf(".rptdesign");
+        return url.substring(indiceIniNombreReporte, indiceFinNombreReporte);
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(obtenerNombreReporteBirt("birt/run?__report=report/Fonade/Auditoria/ResultadosValidacion.rptdesign&__format=pdf&bd={0}&codigoVisita=9"));
+        System.out.println(obtenerTipoReporteBirt("birt/run?__report=report/Fonade/Auditoria/ResultadosValidacion.rptdesign&__format=pdf&bd={0}&codigoVisita=9"));
+    }
 }
