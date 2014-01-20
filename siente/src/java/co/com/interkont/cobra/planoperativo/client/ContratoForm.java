@@ -764,7 +764,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         
         //ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaInicioPre, CalendarUtil.getDaysBetween(fechaInicioPre, fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
-        actividadObraContrato.setEsNoEditable(true);
+        actividadObraContrato.setEditable(false);
         actividadObraContrato.setNumeracion(numeracionActividad);
         numeracionActividad++;
 
@@ -773,8 +773,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         
 
-        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaInicioPre, 4, 0, TaskType.PARENT, 5, true);
-        precontractual.setEsNoEditable(true);
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaInicioPre, 1, 0, TaskType.PARENT, 5, true);
+        precontractual.setEditable(false);
         precontractual.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijos.add(precontractual);
@@ -819,7 +819,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1);
 
         ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaCopiaPrecontractual, duracionContractual, 0, TaskType.PARENT, 5, true);
-        contractua.setEsNoEditable(true);
+        contractua.setEditable(false);
         contractua.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijos.add(contractua);
@@ -843,7 +843,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
 
         ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
-        Liquidaciones.setEsNoEditable(true);
+        Liquidaciones.setEditable(false);
         Liquidaciones.setNumeracion(numeracionActividad);
         lstHijos.add(Liquidaciones);
 

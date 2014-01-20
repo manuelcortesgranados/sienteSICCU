@@ -17,6 +17,7 @@ import com.google.gwt.i18n.client.impl.CurrencyDataImpl;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.math.BigDecimal;
@@ -69,7 +70,6 @@ public class GanttDatos {
 //        
 //        list.add(t);
         //list.get(0).addChild(new ActividadobraDTO("M2", list.get(0).getStartDateTime(), 0,0, TaskType.MILESTONE,5,true));
-
         ActividadobraDTO root = new ActividadobraDTO(list);
 
         return root;
@@ -120,7 +120,6 @@ public class GanttDatos {
 
                     }
 
-
                 }
             }
 
@@ -135,99 +134,114 @@ public class GanttDatos {
 
     }
 
-    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
+    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ListStore<DependenciaDTO> depsStore,ActividadobraDTOProps props, ContratoDTO contrato) {
+
         if (actividadPadre != null) {
-            if (actividadPadre.getTipoActividad() != 1) {
+            //if (actividadPadre.getTipoActividad() != 1) {
                 List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-                Date menor = obtenerMenorFechaInicio(listaHijas);
-                service.setLog("menor:" + menor, null);
-                Date mayor = obtenerMayorFechaFin(listaHijas);
-                service.setLog("mayor:" + mayor, null);
-                if (menor != null && mayor != null) {
-                    int duracion = CalendarUtil.getDaysBetween(menor, mayor);
-                    service.setLog("en duracion:" + duracion, null);
-                    props.duration().setValue(actividadPadre, duracion);
-                    //props.endDateTime().setValue(actividadPadre, copiaFecha);
-                    if (actividadPadre.getName().equals("Planeación del Convenio")) {
-                        fechaComparar = actividadPadre.getEndDateTime();
-                        buscarActividad(contrato, 1, taskStore, props);
-                    } else if (actividadPadre.getName().equals("Ejecución del Convenio")) {
-                        fechaComparar = actividadPadre.getEndDateTime();
-                        buscarActividad(contrato, 2, taskStore, props);
+                if (!listaHijas.isEmpty()) {
+                    Date menor = obtenerMenorFechaInicio(listaHijas);
+                    Date mayor = obtenerMayorFechaFin(listaHijas);
+                    if (menor != null && mayor != null) {
+                        int duracion = CalendarUtil.getDaysBetween(menor, mayor) + 1;
+                        props.duration().setValue(actividadPadre, duracion);
+                        DateWrapper dw = new DateWrapper(actividadPadre.getStartDateTime()).clearTime();
+//                       int diferenciaduracion=0;
+//                        if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
+//                            diferenciaduracion = CalendarUtil.getDaysBetween(actividadPadre.getEndDateTime(),mayor);
+//                        }
+//                        service.setLog("Diferencia "+diferenciaduracion, null);
+                        props.endDateTime().setValue(actividadPadre, dw.addDays(actividadPadre.getDuration() - 1).asDate());
+                        
+                        
+                                   
+                        //if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
+                            //Obtener hermanos
+                        
+                            //List<ActividadobraDTO> listaact = taskStore.getParent(actividadPadre).getChildren();
+//                        if(diferenciaduracion>0)
+//                        {    
+//                        List<ActividadobraDTO> listaact = encontrarActividadDestinoDependeciaFinInicio(depsStore, actividadPadre.getId(), diferenciaduracion);
+//                            for (ActividadobraDTO acto : listaact) {
+//                                service.setLog("Actividadpadre " + acto.getName(), null);
+//                                service.setLog("Inicio " + acto.getStartDateTime(), null);
+//                                service.setLog("Fin " + acto.getEndDateTime(), null);
+//                                if(acto.getChildren().isEmpty())
+//                                {
+//                                     modificarFechaFin(acto, taskStore, depsStore, props, contrato);
+//                                }
+////                                List<ActividadobraDTO> listaHijashermanos = taskStore.getChildren(acto);
+////                                if (listaHijas.isEmpty()) {
+////
+////                                }
+//                            }
+//                        }
+                        modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, depsStore, props, contrato);
                     }
-                    service.setLog("al final:" + actividadPadre.getName() + "duracion:" + actividadPadre.getDuration(), null);
-
-                    modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, props, contrato);
                 }
-            }
-        } else {
-            service.setLog("entre en gant datos Con padre convenio", null);
+            //}
         }
 
     }
 
-    public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
-        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
-        if (tipo == 1) {
-            service.setLog("En buscar actividad 1:" + lstActividades.get(0).getChildren().get(1).getName(), null);
-            odifi(lstActividades.get(0).getChildren().get(1), taskStore, props, contrato);
-            fechaComparar = lstActividades.get(0).getChildren().get(1).endDateTime;
-            service.setLog("En buscar actividad liquidacion:", null);
-            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
-        } else {
-            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
-        }
-    }
-
-    public static void odifi(ActividadobraDTO act, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
-        m(act, taskStore, props, contrato);
-
-        if (!act.getChildren().isEmpty()) {
-            for (ActividadobraDTO actiHija : act.getChildren()) {
-                odifi(actiHija, taskStore, props, contrato);
-            }
-        }
-    }
-
-    public static void m(ActividadobraDTO actiHija, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
-
-        /*verifico el sentido en que tengo que hacer el movimiento de las
-         * actividades si necesito aumentar la fecha de inicio o disminuirla*/
-        if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
-
-            int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaComparar);
-            Date fecha = CalendarUtil.copyDate(actiHija.getStartDateTime());
-            CalendarUtil.addDaysToDate(fecha, duracion);
-
-            Date asigFin = CalendarUtil.copyDate(fecha);
-            actiHija.setEndDateTime(asigFin);
-
-            CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
-
-            if (actiHija.getName().equals("Suscripción acta de inicio")) {
-                actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
-
-            }
-            if (actiHija.getName().equals("Suscripción del contrato")) {
-                actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
-            }
-            if (actiHija.getTipoActividad() == 2) {
-                actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
-                actiHija.getObra().setFechaFin(actiHija.startDateTime);
-            } else if (actiHija.getTipoActividad() == 3) {
-                actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
-            }
-            props.startDateTime().setValue(actiHija, fecha);
-
-            taskStore.update(actiHija);
-
-        }
-    }
-
-    public static void modifi(ActividadobraDTO actiObraInicial, ActividadobraDTO actividadObraFinal, int etapaModificar, TreeStore<ActividadobraDTO> taskStore) {
-        taskStore.getChildren(actiObraInicial);
-    }
-
+    //    public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
+    //        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
+    //        if (tipo == 1) {
+    //            service.setLog("En buscar actividad 1:" + lstActividades.get(0).getChildren().get(1).getName(), null);
+    //            odifi(lstActividades.get(0).getChildren().get(1), taskStore, props, contrato);
+    //            fechaComparar = lstActividades.get(0).getChildren().get(1).endDateTime;
+    //            service.setLog("En buscar actividad liquidacion:", null);
+    //            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
+    //        } else {
+    //            odifi(lstActividades.get(0).getChildren().get(2), taskStore, props, contrato);
+    //        }
+    //    }
+    //    public static void odifi(ActividadobraDTO act, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
+    //        m(act, taskStore, props, contrato);
+    //
+    //        if (!act.getChildren().isEmpty()) {
+    //            for (ActividadobraDTO actiHija : act.getChildren()) {
+    //                odifi(actiHija, taskStore, props, contrato);
+    //            }
+    //        }
+    //    }
+    //    public static void m(ActividadobraDTO actiHija, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props, ContratoDTO contrato) {
+    //
+    //        /*verifico el sentido en que tengo que hacer el movimiento de las
+    //         * actividades si necesito aumentar la fecha de inicio o disminuirla*/
+    //        if (fechaComparar.compareTo(actiHija.getStartDateTime()) > 0) {
+    //
+    //            int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaComparar);
+    //            Date fecha = CalendarUtil.copyDate(actiHija.getStartDateTime());
+    //            CalendarUtil.addDaysToDate(fecha, duracion);
+    //
+    //            Date asigFin = CalendarUtil.copyDate(fecha);
+    //            actiHija.setEndDateTime(asigFin);
+    //
+    //            CalendarUtil.addDaysToDate(actiHija.getEndDateTime(), actiHija.getDuration());
+    //
+    //            if (actiHija.getName().equals("Suscripción acta de inicio")) {
+    //                actiHija.getContrato().setDatefechaactaini(actiHija.getStartDateTime());
+    //
+    //            }
+    //            if (actiHija.getName().equals("Suscripción del contrato")) {
+    //                actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
+    //            }
+    //            if (actiHija.getTipoActividad() == 2) {
+    //                actiHija.getObra().setFechaInicio(actiHija.getStartDateTime());
+    //                actiHija.getObra().setFechaFin(actiHija.startDateTime);
+    //            } else if (actiHija.getTipoActividad() == 3) {
+    //                actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
+    //            }
+    //            props.startDateTime().setValue(actiHija, fecha);
+    //
+    //            taskStore.update(actiHija);
+    //
+    //        }
+    //    }
+    //    public static void modifi(ActividadobraDTO actiObraInicial, ActividadobraDTO actividadObraFinal, int etapaModificar, TreeStore<ActividadobraDTO> taskStore) {
+    //        taskStore.getChildren(actiObraInicial);
+    //    }
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
         if (!listaHijas.isEmpty()) {
             Date menor = listaHijas.get(0).getStartDateTime();
@@ -278,13 +292,12 @@ public class GanttDatos {
         return actiRaiz.getChildren().get(i);
     }
 
-    public static void modificarFechaInicioConvenio(ContratoDTO convenioDTO, Date fechaInicio, Date fechaFin) {
-        Iterator it = convenioDTO.getActividadobras().iterator();
-        ActividadobraDTO ac = (ActividadobraDTO) it.next();
-        ac.setStartDateTime(fechaInicio);
-        ac.setEndDateTime(fechaFin);
-    }
-
+//    public static void modificarFechaInicioConvenio(ContratoDTO convenioDTO, Date fechaInicio, Date fechaFin) {
+//        Iterator it = convenioDTO.getActividadobras().iterator();
+//        ActividadobraDTO ac = (ActividadobraDTO) it.next();
+//        ac.setStartDateTime(fechaInicio);
+//        ac.setEndDateTime(fechaFin);
+//    }
     public static DependenciaDTO crearDependencia(ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
         DependenciaDTO dep = new DependenciaDTO();
         dep.setId("" + dep.hashCode());
@@ -402,24 +415,24 @@ public class GanttDatos {
                     if (!actiLiquidacion.getChildren().isEmpty()) {
                         Date menorHijosLiquidacion = obtenerMenorFechaInicio(actiLiquidacion.getChildren());
                         service.setLog("en suscripcion", null);
-                       
-                            if (actividadSeleccionada.getStartDateTime().compareTo(menorHijosLiquidacion) > 0) {
-                                error = true;
-                                String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
-                                setMsg(getMsg() + "La fecha inicio de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
-                            }
 
-                            if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
-                                error = true;
-                                String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
-                                setMsg(getMsg() + "La fecha fin de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
-                            }
-                    
-                    } else {
-                            service.setLog("entre en el elsee de aca", null);
-                            error=true;
-                            validarModificacionFechasEtapaContractual(actividadSeleccionada, actividadSConvenio);
+                        if (actividadSeleccionada.getStartDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha inicio de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                         }
+
+                        if (actividadSeleccionada.getEndDateTime().compareTo(menorHijosLiquidacion) > 0) {
+                            error = true;
+                            String df1 = DateTimeFormat.getShortDateFormat().format(menorHijosLiquidacion);
+                            setMsg(getMsg() + "La fecha fin de la Suscripción del acta no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
+                        }
+
+                    } else {
+                        service.setLog("entre en el elsee de aca", null);
+                        error = true;
+                        validarModificacionFechasEtapaContractual(actividadSeleccionada, actividadSConvenio);
+                    }
                 } else {
                     ActividadobraDTO actiLiquidacion = taskStore.getParent(taskStore.getParent(actividadSeleccionada)).getChildren().get(2);
                     if (!actiLiquidacion.getChildren().isEmpty()) {
@@ -436,9 +449,8 @@ public class GanttDatos {
                             setMsg(getMsg() + "La fecha inicio no puede ser mayor que el menor de los hijos de la etapa de liquidación:" + df1);
                         }
                     } else {
-                        error=true;
+                        error = true;
                         validarModificacionFechasEtapaContractual(actividadSeleccionada, actividadSConvenio);
-
 
                     }
                 }
@@ -476,15 +488,15 @@ public class GanttDatos {
         return error;
     }
 
-    public static boolean validacionParaTodasLasActividades(ActividadobraDTO ac, ContratoDTO convenioDTO) {
-        if (ac.getStartDateTime().compareTo(convenioDTO.getDatefechaini()) < 0) {
-            return false;
-        }
-        if (ac.getEndDateTime().compareTo(convenioDTO.getDatefechafin()) > 0) {
-            return false;
-        }
-        return true;
-    }
+//    public static boolean validacionParaTodasLasActividades(ActividadobraDTO ac, ContratoDTO convenioDTO) {
+//        if (ac.getStartDateTime().compareTo(convenioDTO.getDatefechaini()) < 0) {
+//            return false;
+//        }
+//        if (ac.getEndDateTime().compareTo(convenioDTO.getDatefechafin()) > 0) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     public static Boolean verificacionModificacionFechaFin(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
         if (actividadSeleccionada.getTipoActividad() == 2) {
@@ -816,33 +828,32 @@ public class GanttDatos {
 
     }
 
-    public static boolean validarActividadaEstaDentroConvenio(ActividadobraDTO acti, ContratoDTO convenioDto, ActividadobraDTO actividadAnterior) {
-        service.setLog("entre aca en vvalida General", null);
-        if (acti.getStartDateTime().compareTo(convenioDto.getDatefechaini()) < 0) {
-            service.setLog("entre aca en vvalida General 1", null);
-            return true;
-        }
-        if (acti.getStartDateTime().compareTo(convenioDto.getDatefechafin()) >= 0) {
-            return true;
-        }
-        if (acti.getEndDateTime().compareTo(actividadAnterior.getEndDateTime()) != 0) {
-            if (acti.getEndDateTime().compareTo(convenioDto.getDatefechafin()) > 0) {
-                service.setLog("entre aca en vvalida General 2", null);
-                return true;
-            }
-        } else {
-            service.setLog("entre aca en vvalida General 4", null);
-            Date copiaFechaInicio = CalendarUtil.copyDate(acti.getStartDateTime());
-            CalendarUtil.addDaysToDate(copiaFechaInicio, acti.getDuration());
-            if (copiaFechaInicio.compareTo(convenioDto.getDatefechafin()) > 0) {
-                return true;
-            }
-        }
-        service.setLog("entre aca en vvalida General 3", null);
-        return false;
-
-    }
-
+//    public static boolean validarActividadaEstaDentroConvenio(ActividadobraDTO acti, ContratoDTO convenioDto, ActividadobraDTO actividadAnterior) {
+//        service.setLog("entre aca en vvalida General", null);
+//        if (acti.getStartDateTime().compareTo(convenioDto.getDatefechaini()) < 0) {
+//            service.setLog("entre aca en vvalida General 1", null);
+//            return true;
+//        }
+//        if (acti.getStartDateTime().compareTo(convenioDto.getDatefechafin()) >= 0) {
+//            return true;
+//        }
+//        if (acti.getEndDateTime().compareTo(actividadAnterior.getEndDateTime()) != 0) {
+//            if (acti.getEndDateTime().compareTo(convenioDto.getDatefechafin()) > 0) {
+//                service.setLog("entre aca en vvalida General 2", null);
+//                return true;
+//            }
+//        } else {
+//            service.setLog("entre aca en vvalida General 4", null);
+//            Date copiaFechaInicio = CalendarUtil.copyDate(acti.getStartDateTime());
+//            CalendarUtil.addDaysToDate(copiaFechaInicio, acti.getDuration());
+//            if (copiaFechaInicio.compareTo(convenioDto.getDatefechafin()) > 0) {
+//                return true;
+//            }
+//        }
+//        service.setLog("entre aca en vvalida General 3", null);
+//        return false;
+//
+//    }
     public static void validarModificacionFechasEtapaContractual(ActividadobraDTO actividadSeleccionada, ActividadobraDTO actividadSConvenio) {
         if (actividadSeleccionada.getStartDateTime().compareTo(actividadSConvenio.getChildren().get(2).getStartDateTime()) >= 0) {
             service.setLog("entre en el elsee de aca 1", null);
@@ -854,13 +865,13 @@ public class GanttDatos {
             String df1 = DateTimeFormat.getShortDateFormat().format(actividadSConvenio.getChildren().get(2).getStartDateTime());
             setMsg(getMsg() + "La fecha fin no puede ser mayor que la fecha inicio de la etapa de liquidación:" + df1);
         }
-    
-}
-    
-        public static FuenterecursosconvenioDTO buscarFuenteRecursos(String nombreEntidad, int vigencia,ContratoDTO convenio) {
+
+    }
+
+    public static FuenterecursosconvenioDTO buscarFuenteRecursos(String nombreEntidad, int vigencia, ContratoDTO convenio) {
         for (Iterator it = convenio.getFuenterecursosconvenios().iterator(); it.hasNext();) {
             FuenterecursosconvenioDTO fuente = (FuenterecursosconvenioDTO) it.next();
-            service.setLog("en buscar"+fuente.getTercero().getStrnombrecompleto()+"vigencia:"+fuente.getVigencia(), null);
+            service.setLog("en buscar" + fuente.getTercero().getStrnombrecompleto() + "vigencia:" + fuente.getVigencia(), null);
             if (fuente.getTercero().getStrnombrecompleto().equals(nombreEntidad) && fuente.getVigencia() == vigencia) {
                 return fuente;
             }
@@ -869,20 +880,41 @@ public class GanttDatos {
         return null;
 
     }
-        
-     public static String parserCurrencyLocale(Double number) {        
-        CurrencyData cu= new CurrencyDataImpl("COP", "$", 0);           
-                 
+
+    public static String parserCurrencyLocale(Double number) {
+        CurrencyData cu = new CurrencyDataImpl("COP", "$", 0);
+
         String format = NumberFormat.getCurrencyFormat(cu).format(number);
-        
+
         return format;
     }
-     
-     public static String parserCurrencyLocale(BigDecimal number) {  
-        CurrencyData cu= new CurrencyDataImpl("COP", "$", 0);
-           
-                 
+
+    public static String parserCurrencyLocale(BigDecimal number) {
+        CurrencyData cu = new CurrencyDataImpl("COP", "$", 0);
+
         String format = NumberFormat.getCurrencyFormat(cu).format(number);
         return format;
     }
+
+    public static List<ActividadobraDTO> encontrarActividadDestinoDependeciaFinInicio(ListStore<DependenciaDTO> depsStore, String id, int difduracion)
+    {
+        List<ActividadobraDTO> lista=new ArrayList<ActividadobraDTO>();
+        for(DependenciaDTO dep:depsStore.getAll())
+        {
+            if(dep.getActividadFrom().getId().compareTo(id)==0 && dep.getType()==DependencyType.ENDtoSTART)
+            {
+                int dur=CalendarUtil.getDaysBetween(dep.getActividadFrom().getEndDateTime(), dep.getActividadTo().getStartDateTime());
+                service.setLog("dur "+dur, null);
+                if(dur<difduracion)
+                {    
+                lista.add(dep.getActividadTo());
+                }
+                else
+                {
+                    service.setLog("Hay espacio", null);
+                }    
+            }    
+        }    
+        return lista;
+    }        
 }

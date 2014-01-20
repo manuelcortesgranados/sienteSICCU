@@ -13,11 +13,13 @@
     <inherits name='com.gantt.GxtGantt'/>
   
      
-    <inherits name='co.com.interkont.cobra.planoperativo.client.dto'/>   
+    <inherits name='co.com.interkont.cobra.planoperativo.client.dto'/>
+    <inherits name='co.com.interkont.cobra.planoperativo.exceptionspo'/>   
     <collapse-all-properties/>
     <set-property name="user.agent" value="gecko1_8"></set-property>
     
     <entry-point class="co.com.interkont.cobra.planoperativo.client.PlanOperativoGantt"/>
+    
     <source path="client"/>
     
     <extend-property name="locale" values="es_CO" />

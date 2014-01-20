@@ -6,7 +6,7 @@ package cobra.Supervisor;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.exceptions.ConvenioException;
+import co.com.interkont.cobra.planoperativo.exceptionspo.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.AreaContratista;
@@ -2726,10 +2726,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void guardarBorradorConvenioPO() {
-        
+
         planOperativo();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/"+Propiedad.getValor("versioncobra")+"/Supervisor/PlanO.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + Propiedad.getValor("versioncobra") + "/Supervisor/PlanO.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -5627,8 +5627,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String ReporteConvenio() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
-           FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -5637,8 +5637,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String ReporteConvenioExcel() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelconvenio") + "&convenio=" + contrato.getIntidcontrato());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteexcelconvenio") + "&convenio=" + contrato.getIntidcontrato());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -6743,19 +6743,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (contrato.getContratista().getIntcodigocontratista() != 3120) {
 
                     if (contrato.getContratista().getIntcodigocontratista() != 7860) {
-                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelproyectosconvenio") + contrato.getIntidcontrato());
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteexcelproyectosconvenio") + contrato.getIntidcontrato());
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                     } else {
-                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelproyectosconvenioambiente") + contrato.getIntidcontrato());
-                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                        getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteexcelproyectosconvenioambiente") + contrato.getIntidcontrato());
+                        FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                     }
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelproyectosconvenioeducacion") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteexcelproyectosconvenioeducacion") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             } else {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteexcelproyectosconvenio") + contrato.getIntidcontrato());
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteexcelproyectosconvenio") + contrato.getIntidcontrato());
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             }
         } catch (IOException ex) {
             Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
@@ -7134,19 +7134,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
-            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-            if (!contrato.getActividadobras().isEmpty()) {
-                List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
-                Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-                encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
-                ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+        ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+        if (!contrato.getActividadobras().isEmpty()) {
+            List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
+            Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+            encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
+            ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
+        }
+        if (validacionesBasicasConvenioPO(true)) {
+            configuracionGuardadoPo(1, true);
+            if (isEliminarPeriodosFueraRango()) {
+                eliminarPeriodosFueraRango();
             }
-            if (validacionesBasicasConvenioPO(true)) {
-                configuracionGuardadoPo(1, true);
-                if (isEliminarPeriodosFueraRango()) {
-                    eliminarPeriodosFueraRango();
-                }
-            }
+        }
     }
 
     /*
@@ -7291,8 +7291,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7302,8 +7302,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7313,8 +7313,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7324,8 +7324,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7335,8 +7335,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7346,8 +7346,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7368,8 +7368,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoconsolidadoxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoconsolidadoxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7379,8 +7379,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativocronogramaxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativocronogramaxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7390,8 +7390,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativopresupuestoxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativopresupuestoxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7401,8 +7401,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoflujocajaxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoflujocajaxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7412,8 +7412,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoseccionplanoperativoxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoseccionplanoperativoxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7423,8 +7423,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativoplancontratacionxls") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativoplancontratacionxls") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7446,8 +7446,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reporteplanoperativocronogramampp") + contrato.getIntidcontrato());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reporteplanoperativocronogramampp") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class
@@ -7974,8 +7974,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         Map<Integer, String> mapaValidacionRangoPo = new HashMap<Integer, String>();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         if (!contrato.getActividadobras().isEmpty()) {
+
             Iterator it = contrato.getActividadobras().iterator();
             Actividadobra actiRaiz = (Actividadobra) it.next();
+
             Date menorFechaInicio = obtenerMenorFechaInicio(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
             Date mayorFechaFin = obtenerMayorFechaFin(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
             if (contrato.getDatefechaini().compareTo(menorFechaInicio) > 0) {
@@ -7984,6 +7986,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (contrato.getDatefechafin().compareTo(mayorFechaFin) < 0) {
                 mapaValidacionRangoPo.put(2, "La fecha de fin no puede ser inferior a " + sdf.format(mayorFechaFin));
             }
+//            if (!mapaValidacionRangoPo.isEmpty()) {
+//                //Borramos las param{etricas para que se ecalculen con las nuevas fechas
+//                List<ActividadobraDTO> listaactdto = new ArrayList<ActividadobraDTO>();
+//                ActividadobraDTO activdadRaiz = (ActividadobraDTO) getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().iterator().next();
+//                encontrarActividadContratoDTO(activdadRaiz, listaactdto);
+//                if (listaactdto.size() == 7) {
+//                    mapaValidacionRangoPo.clear();
+//                    contrato.getActividadobras().clear();
+//                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().clear();
+//                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().clear();
+//                    lstActividadesEliminar.add(actiRaiz);
+//                    getSessionBeanCobra().getCobraGwtService().setElimino(true);
+//                }
+//            }
         }
 
         return mapaValidacionRangoPo;
@@ -8224,7 +8240,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (!getContrato().getActividadobras().isEmpty()) {
             List<Actividadobra> lstactguardar = new ArrayList<Actividadobra>(getContrato().getActividadobras());
             lstactguardar.get(0).setContrato(getContrato());
-
+            
             getSessionBeanCobra().getCobraService().guardarActividadObra(lstactguardar);
 
         }
@@ -8235,6 +8251,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (!lstActividadesEliminar.isEmpty()) {
                     getSessionBeanCobra().getCobraService().borrarActividadesPlanOperativo(lstActividadesEliminar);
                     getSessionBeanCobra().getCobraGwtService().setElimino(false);
+                    System.out.println("activi = " + lstActividadesEliminar.size());
                     mapaReembolsoConvenio.clear();
                 }
 

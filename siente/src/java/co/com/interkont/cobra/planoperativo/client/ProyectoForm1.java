@@ -619,9 +619,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
             }
 
-            ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
+            //ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
 
-            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
+            //GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
 
         } else {
 
@@ -649,7 +649,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
             ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
 
-            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
+            //GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes, contratoDto);
 
 
         }
