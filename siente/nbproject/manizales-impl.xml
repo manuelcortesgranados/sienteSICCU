@@ -22,7 +22,7 @@ and open the template in the editor.
         </copy>
        
         <copy todir="${build.web.dir}/resources/js/login">
-            <fileset  dir="web/configuracion/${version}/resources/js/loginmanizales/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/configuracion/${version}/resources/loginmanizales/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/facelets">
