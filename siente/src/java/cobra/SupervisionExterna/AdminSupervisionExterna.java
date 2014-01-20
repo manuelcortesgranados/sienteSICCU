@@ -666,8 +666,8 @@ public class AdminSupervisionExterna implements Serializable{
     public void generarReporteErroresVisita() {
         Visita visita = (Visita) tablavisitasfallidas.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(Propiedad.getValor("reporteresultadosvalidacion", Propiedad.getValor("nombrebd") ,visita.getOidvisita()));
-
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reporteresultadosvalidacion", Propiedad.getValor("nombrebd") ,visita.getOidvisita()));
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
                     .getName()).log(Level.SEVERE, null, ex);

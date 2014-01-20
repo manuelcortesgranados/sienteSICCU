@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.com.interkont.cobra.planoperativo.exceptions;
+package co.com.interkont.cobra.planoperativo.exceptionspo;
 
 /**
  *

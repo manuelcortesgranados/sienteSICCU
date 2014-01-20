@@ -2428,7 +2428,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      */
     public String reporteHistorialValidaciones() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }

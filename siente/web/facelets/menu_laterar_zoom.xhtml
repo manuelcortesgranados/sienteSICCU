@@ -14,7 +14,7 @@
             <center>
 
                 <h:commandLink  immediate="true" styleClass="ikont-bt-cerrar-login2" value="X"  onclick="esconderIngresoAnimado();
-                            return  false;"/>
+                        return  false;"/>
             </center>
         </div>
         <hr class="ikont-hr-separador-inicio-registo"/>
@@ -36,14 +36,14 @@
 
                     <center>
 
-                        <a4j:commandLink rendered="false" value="#{var.logintabentrarolvidocontrasenia}"   
-                                         oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
+                        <a4j:commandLink styleClass="ikont-enlace-boton-restaurar-passwd" value="#{var.logintabentrarolvidocontrasenia}"   
+                                          oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
                         <br/>
                         <h:panelGrid columns="3">
                             <h:commandButton id="enviardosnuevo" value="Ingresar" action="#{login.enviar_action}"                              
                                              type="submit"  
                                              onclick="#{rich:component('ajaxLoadingModalBox')}.show();
-                            return true;"
+                        return true;"
                                              /> 
                             <h:outputLabel rendered="false" value="o"/>
                             <h:commandLink rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
@@ -135,7 +135,7 @@
 
         <div  class="ikont-div-cerrar-panel">
             <h:commandLink styleClass="ikont-btn-cerrar-flecha-session"   onclick="esconderIngresoAnimado();
-                            return  false;"/>
+                        return  false;"/>
         </div>
     </div>
 
@@ -146,7 +146,7 @@
 
     <div class="ikont-div-scroll-menu" >
         <h:panelGrid rendered="#{var.permisonuevodiseno}" onmouseover="mostrarMenuAnimado();
-                            return  false;" styleClass="ikont-panel-spacing-menu" columns="3">        
+                        return  false;" styleClass="ikont-panel-spacing-menu" columns="3">        
             <h:commandLink styleClass="ikont-menu-inicio-zoom_1 ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="INICIO" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>  
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
@@ -164,8 +164,23 @@
 
         </h:panelGroup>
     </div>
-    <div id="menuprincipal" class="ikont-div-menu-principal">              
-        <h:panelGroup styleClass="kont-contenedor-menu">
+    <div id="menuprincipal" class="ikont-div-menu-principal">   
+        <h:panelGroup  rendered="#{!SessionBeanCobra.logueadodesdemapa}" styleClass="kont-contenedor-menu">
+            <h:panelGrid styleClass="ikont-panel-spacing-menu" columns="3">
+                <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
+                <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>
+                <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
+            </h:panelGrid>
+            <br/>
+            <br/>
+            <h:panelGrid columns="2" styleClass="ikont-panel-spacing-menu">
+                <h:commandLink action="#{HomeGestion.activarvistamapa}"  immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-inicio"/>
+                <h:commandLink action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuInicio}" styleClass="ikont-label-estructura-menu ikont-label-menu-item"/>              
+            </h:panelGrid>
+            <h:commandLink styleClass="ikont-label-estructura-menu ikont-label-menu-buscar-proyecto ikont-espacio-sub-menu" action="#{HomeGestion.activarvistamapa}"  immediate="true" value="#{var.menuBuscarProyecto}"/>
+            <hr class="ikont-hr-separador-menu "/>
+        </h:panelGroup>
+        <h:panelGroup   rendered="#{SessionBeanCobra.logueadodesdemapa}" styleClass="kont-contenedor-menu">
             <h:panelGrid styleClass="ikont-panel-spacing-menu" columns="3">
                 <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
                 <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>
@@ -192,7 +207,7 @@
                     <hr class="ikont-hr-separador-menu "/>
                 </a4j:repeat>
             </h:panelGrid>
-            
+
             <h:panelGrid  columns="2" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-crear-proyecto"/>
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuCrearProyecto}"/>    
@@ -265,8 +280,8 @@
     <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
                     j = jQuery;
-                    
-                    $(function(){
+
+                    $(function() {
                         inicializar();
                     })
                     function  inicializar() {

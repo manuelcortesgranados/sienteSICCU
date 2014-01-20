@@ -127,8 +127,7 @@
 
                                     <h:selectOneMenu id="combotipocosto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto}"  >
                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoCostoOption}" />
-                                        <a4j:ajax event="change"  listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" >
-
+                                        <a4j:ajax event="change"  listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos"  >
                                         </a4j:ajax>     
                                     </h:selectOneMenu>
                                 </h:panelGrid>

@@ -104,11 +104,11 @@
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
                     </rich:column>
-                    <rich:column id="tc_consultar_contrato" >
-                        <f:facet name="header">
+                    <rich:column id="tc_consultar_contrato"  >
+                        <f:facet name="header" >
                             <h:outputText value="#{var.consultar}"/>
                         </f:facet>
-                        <h:commandLink styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
+                        <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
                               <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.contrato.intidcontrato}" />
                         </h:commandLink>
                     </rich:column>

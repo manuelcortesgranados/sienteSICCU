@@ -5,6 +5,7 @@
 package cobra.gestion;
 
 import co.com.interkont.cobra.to.ActividadReciente;
+import co.com.interkont.cobra.to.Claseobra;
 import co.com.interkont.cobra.to.Comentarioobra;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.ControlPanel;
@@ -25,6 +26,7 @@ import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Zonaespecifica;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
 import co.com.interkont.cobra.vista.Vistahomezoom;
@@ -66,7 +68,7 @@ import com.googlecode.gmaps4jsf.component.marker.Marker;
  */
 public class HomeGestion implements Serializable, ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
- 
+
     /**
      * <p>
      * Automatically managed component initialization.
@@ -76,6 +78,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      */
     private Integer ubicaciondetalle = 0;
     //private Alimentacion alimentacionultima = new Alimentacion();
+    private SelectItem[] ClaseObra;
 
     public Integer getUbicaciondetalle() {
         return ubicaciondetalle;
@@ -88,8 +91,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private SelectItem[] UbicacionObra;
     private SelectItem[] TipoObraUsuario;
     private HashMap<Integer, Double> porcentajes = new HashMap<Integer, Double>();
-    private List<Localidad> lslocalidad = new ArrayList<Localidad>();   
-    private VistaObraMapa obraseleccionada;   
+    private List<Localidad> lslocalidad = new ArrayList<Localidad>();
+    private VistaObraMapa obraseleccionada;
 
     /**
      * Listados de grupos al que pertenece el usuario
@@ -117,7 +120,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //    }
     public void setLslocalidad(List<Localidad> lslocalidad) {
         this.lslocalidad = lslocalidad;
-    } 
+    }
 
     public VistaObraMapa getObraseleccionada() {
         return obraseleccionada;
@@ -127,7 +130,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.obraseleccionada = obraseleccionada;
     }
 
-    
     /**
      * Set the value of datos_mapa
      *
@@ -867,6 +869,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.listaNovedadesFiltradas = listaNovedadesFiltradas;
     }
 
+    public SelectItem[] getClaseObra() {
+        return ClaseObra;
+    }
+
+    public void setClaseObra(SelectItem[] ClaseObra) {
+        this.ClaseObra = ClaseObra;
+    }
+
     public void iniciarfiltro() {
 
         /**
@@ -911,6 +921,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             setInttipoorigen(1);
             getFiltro().setStrcoddepto(getSessionBeanCobra().getBundle().getString("codigoDepartamentoCobra"));
             cargarMunicipios();
+        }
+        if (bundle.getString("tipoproyectoporsector").equals("true")) {
+            filtro.setIntsectorproyecto(0);
         }
 
     }
@@ -1036,11 +1049,18 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
             llenarComboMunicipio(listaMunicipios);
         }
+        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
+            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
 
-        List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
-
-        if (listaTiposProyecto != null) {
-            llenarComboTiposProyecto(listaTiposProyecto);
+            if (listaTiposProyecto != null) {
+                llenarComboTiposProyecto(listaTiposProyecto);
+            }
+        } else {
+            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+            if (listaclase != null) {
+                llenarClaseSectorObra(listaclase);
+            }
+            cambioSectorProyecto();
         }
 
         List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
@@ -1068,8 +1088,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void cargarSubtiposProyecto() {
-        int idTipoProyecto = filtro.getInttipoproyecto();
-        List<Tipoobra> subtiposProyecto = getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(idTipoProyecto);
+        List<Tipoobra> subtiposProyecto = getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(filtro.getInttipoproyecto());
         llenarComboSubTiposProyecto(subtiposProyecto);
     }
 
@@ -1086,8 +1105,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the <code>activate()</code> method will be called
-     * to indicate that the transfer is complete.</p>
+     * instance, after which the
+     * <code>activate()</code> method will be called to indicate that the
+     * transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -1128,7 +1148,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 //marker.setVistaobra(obra);
                 marker.setLatitude(obra.getFloatlatitud().doubleValue() + "");
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
-                marker.setJsVariable("marker_" + (contador++));        
+                marker.setJsVariable("marker_" + (contador++));
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
@@ -2022,9 +2042,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void cargarListaVistaObraMapa() {
-        
+
         listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-        
+
     }
 
     public String primeroListProyectos() {
@@ -2356,12 +2376,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaCorto() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrcoddepto());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrmunicipio());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2373,12 +2396,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaObras() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2390,12 +2416,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaConvenio() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2751,8 +2780,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
                 //Obra obra = listaobrasusu.get(i);
-               VistaObraMapa obra = listaobrasusu.get(i);
-               Marcador marker = new Marcador();
+                VistaObraMapa obra = listaobrasusu.get(i);
+                Marcador marker = new Marcador();
                 //setAlimentacionultima(new Alimentacion());
                 //setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra()));
 
@@ -2762,7 +2791,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
                 marker.setJsVariable("marker_" + (contador++));
                 marker.setIntcodobra(obra.getIntcodigoobra());
-                marker.setJsVariable("js_"+obra.getIntcodigoobra());
+                marker.setJsVariable("js_" + obra.getIntcodigoobra());
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
@@ -2967,7 +2996,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</html>");
 
                 marker.setInformationWindow(descripcion.toString());
-                
+
                 if (obra.getRuta() != null) {
 
                     marker.setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(obra.getRuta().getStrcodigotramo()));
@@ -3045,18 +3074,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      *
      */
     public void cambiarVista() {
- 
+
         //filtro.setIntvista(vista);
         filtroObrasActionMapaAvanModal();
     }
-    
-    public void marcadorSeleccion () {       
+
+    public void marcadorSeleccion() {
 //        System.out.println("codigo obra = " + marker.getObra().getIntcodigoobra());
         //System.out.println("ide de la obra = " + prueba);
         //System.out.println("marca = " + marca.getLatitude());
     }
-    
-    private String prueba="0";
+    private String prueba = "0";
 
     public String getPrueba() {
         return prueba;
@@ -3065,6 +3093,42 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setPrueba(String prueba) {
         this.prueba = prueba;
     }
-    
-    
+
+    /**
+     * Metodo Utilizado para  Llenar el sector Filtro mapa
+     * @param listaclaseobra 
+     */
+    public void llenarClaseSectorObra(List<Claseobra> listaclaseobra) {
+        ClaseObra = new SelectItem[listaclaseobra.size() + 1];
+        int i = 0;
+        SelectItem clap = new SelectItem(0, "Sector");
+        ClaseObra[i] = clap;
+        i++;
+        for (Claseobra clase : listaclaseobra) {
+            SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
+            ClaseObra[i++] = opt;
+        }
+        getIngresarNuevaObra().getFaseelegida().setIntidfase(getIngresarNuevaObra().getTiahselect());
+        getIngresarNuevaObra().setTiposelec(0);
+
+    }
+
+    /**
+     *Metodo Utilizado para Listar el Tipo de proyecto segun el Sector 
+     */
+    public void cambioSectorProyecto() {
+
+        if (Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
+            getIngresarNuevaObra().setTiposelec(0);
+
+            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyectoPorClaseObra(filtro.getIntsectorproyecto());
+
+            if (listaTiposProyecto != null) {
+                llenarComboTiposProyecto(listaTiposProyecto);
+            }
+            setSubTiposProyecto(new SelectItem[0]);
+            filtro.setInttipoproyecto(0);
+            cargarSubtiposProyecto();
+        }
+    }
 }

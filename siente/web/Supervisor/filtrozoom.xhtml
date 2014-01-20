@@ -40,19 +40,25 @@
                               onclick="this.value = ''"  styleClass="input_filtro">
                     <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
-                <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
-                    <f:selectItems value="#{HomeGestion.tiposProyectos}"/>
-                    <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
-                              render="subtiposProyecto"/>
-                </h:selectOneMenu>
-
+                <h:selectOneMenu rendered="#{var.tipoproyectoporsector}" style="" id="sectorProyecto" value="#{HomeGestion.filtro.intsectorproyecto}"  styleClass="input_filtro_select" >
+                    <f:selectItems value="#{HomeGestion.claseObra}" />
+                    <a4j:ajax event="valueChange" listener="#{HomeGestion.cambioSectorProyecto}" 
+                              render="tiposProyecto,subtiposProyecto" execute="tiposProyecto,tipoProyecto,subtiposProyecto,subtipoProyecto" rendered="#{var.tipoproyectoporsector}" />
+                </h:selectOneMenu>    
+                <h:panelGroup id="tiposProyecto"  styleClass="input_filtro" >
+                    <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
+                        <f:selectItems value="#{HomeGestion.tiposProyectos}"/>
+                        <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="subtiposProyecto,subtipoProyecto"
+                                  render="subtiposProyecto"/>
+                    </h:selectOneMenu>
+                </h:panelGroup>
                 <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
                     <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
                         <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
                     </h:selectOneMenu>
                 </h:panelGroup> 
 
-                <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
+                <h:panelGroup id="ikont-estados-obra"  styleClass="input_filtro" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano and SessionBeanCobra.logueadodesdemapa}">
                     <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}"  styleClass="input_filtro_select">
                         <f:selectItem itemLabel="Fase" itemValue="-1"/>
                         <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
@@ -66,26 +72,26 @@
                 <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
                 <script type="text/javascript">
 
-                    $(function() {
-                        $("#slider-range").slider({
-                            range: true,
-                            min: 0,
-                            max: 32002183952,
-                            values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
-                            slide: function(event, ui) {
-                                var numero1 = ui.values[ 0 ];
-                                var numero2 = ui.values[ 1 ];
-                                //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
-                                $("#numero1").val(numero1);
-                                $("#numero2").val(numero2);
-                                $("#numero3").val(numero1.formatMoney());
-                                $("#numero4").val(numero2.formatMoney());
-                                $("#amount").val("$" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
-                            }
-                        });
-                        $("#amount").val("$ " + $("#slider-range").slider("values", 0) +
-                                " a $ " + $("#slider-range").slider("values", 1));
-                    });
+            $(function() {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 32002183952,
+                    values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                    slide: function(event, ui) {
+                        var numero1 = ui.values[ 0 ];
+                        var numero2 = ui.values[ 1 ];
+                        //alert("numero2 " + numero1.formatMoney() + "numero2 " + numero2.formatMoney());
+                        $("#numero1").val(numero1);
+                        $("#numero2").val(numero2);
+                        $("#numero3").val(numero1.formatMoney());
+                        $("#numero4").val(numero2.formatMoney());
+                        $("#amount").val("$" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
+                    }
+                });
+                $("#amount").val("$ " + $("#slider-range").slider("values", 0) +
+                        " a $ " + $("#slider-range").slider("values", 1));
+            });
 
                 </script>
 

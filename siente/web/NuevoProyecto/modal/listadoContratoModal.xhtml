@@ -2,14 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-listado-contratos" moveable="true"   headerClass="rich-panel-header" autosized="true">
+    <rich:popupPanel id="mp-listado-contratos" moveable="true"   headerClass="rich-panel-header" autosized="true">   
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-listarcontratos"   value="#{var.listarcontratos}" />
@@ -19,11 +19,12 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-contratos" immediate="true"
-                                       styleClass="ikont-hcl-listadocontratos closemodal"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
+                                     styleClass="ikont-hcl-listadocontratos closemodal"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
+            <h:form>
                 <h:panelGroup id="gpTotalCont">
                     <h:panelGrid columns="2" >
                         <h:outputText  styleClass="ikont-hot-buscar"   value="#{var.buscar} " />
@@ -32,8 +33,8 @@
                             <a4j:commandButton value="#{var.buscar}" action="#{Supervisor$IngresarNuevaObra.buscarContrato}" render="tablacontratos,gpTotalCont"/>
 
                         </h:panelGroup>
-                        
-                    </h:panelGrid>
+
+                    </h:panelGrid>   
 
                     <h:panelGroup layout="block" >
                         <h:panelGrid >
@@ -104,7 +105,7 @@
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato}"                                                           
                                                            oncomplete="#{rich:component('panelRelacionContrato')}.show();" render="layoutpanelRelacionContrato"
                                                            execute="@this" immediate="true">
-                                    </a4j:commandButton>
+                                        </a4j:commandButton>
                                     </rich:column>
                                 </rich:columnGroup>
                                 <f:facet name="footer">
@@ -129,6 +130,7 @@
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGroup>
+            </h:form>
         </center>
     </rich:popupPanel>
 </ui:composition>

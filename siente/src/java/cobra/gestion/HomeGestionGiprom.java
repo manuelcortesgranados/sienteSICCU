@@ -25,6 +25,7 @@ import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Zonaespecifica;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
 import co.com.interkont.cobra.vista.Vistahomezoom;
@@ -2414,12 +2415,15 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public String reportePdfFichaObras() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2431,12 +2435,15 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public String reportePdfFichaConvenio() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 } else {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
                 }
             }
         } catch (IOException ex) {

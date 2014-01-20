@@ -32,7 +32,7 @@ public class ActividadobraDTO implements IsSerializable {
     int percentDone;
     private int tipoActividad;
     private boolean seEdito;
-    private boolean esNoEditable;
+    private boolean editable;
     private int numeracion;
     private String predecesor;
     private Set<Integer> lstPredecesores = new HashSet<Integer>();
@@ -146,10 +146,10 @@ public class ActividadobraDTO implements IsSerializable {
         this.taskType = taskType;
         this.tipoActividad = tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        DateWrapper dw = new DateWrapper(start).clearTime();
-        this.startDateTime = dw.asDate();
-        this.endDateTime = dw.addDays(duration).asDate();
-
+        DateWrapper dw = new DateWrapper(start).clearTime();        
+        this.startDateTime = dw.asDate();        
+        this.endDateTime = dw.addDays(duration-1).asDate();
+        
     }
 
     public ActividadobraDTO(String name, Date start, int duration, int percentDone,
@@ -277,12 +277,14 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public int calcularDuracion() {
-        if (this.getStartDateTime() != null && this.getEndDateTime() != null) {
-
-            long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
+        if (this.getStartDateTime() != null && this.getEndDateTime() != null) {                   
+            
             if (this.getStartDateTime().compareTo(this.getEndDateTime()) != 0) {
-                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-                return ((int) dias);
+                //long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
+                //double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                int dias=CalendarUtil.getDaysBetween(getStartDateTime(),getEndDateTime()); 
+               
+                return (dias+1);
             } else {
                 return 1;
             }
@@ -415,15 +417,15 @@ public class ActividadobraDTO implements IsSerializable {
     /**
      * @return the esNoEditable
      */
-    public boolean isEsNoEditable() {
-        return esNoEditable;
+    public boolean isEditable() {
+        return editable;
     }
 
     /**
      * @param esNoEditable the esNoEditable to set
      */
-    public void setEsNoEditable(boolean esNoEditable) {
-        this.esNoEditable = esNoEditable;
+    public void setEditable(boolean editable) {
+        this.editable = editable;
 
     }
 

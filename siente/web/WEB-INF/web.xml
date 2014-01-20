@@ -40,6 +40,10 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>ReportesBirtServlet</servlet-name>
+        <servlet-class>cobra.reportes.ReportesBirtServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>GwtRemoteServiceServlet</servlet-name>
         <url-pattern>/planoperativo/springGwtServices/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportesBirtServlet</servlet-name>
+        <url-pattern>/Reportes</url-pattern>
     </servlet-mapping>
     <session-config>
         <!-- Session timeout zoom-->

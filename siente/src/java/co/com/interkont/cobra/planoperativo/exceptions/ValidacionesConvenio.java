@@ -5,17 +5,16 @@
  */
 package co.com.interkont.cobra.planoperativo.exceptions;
 
+import co.com.interkont.cobra.planoperativo.exceptionspo.ConvenioException;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
-import co.com.interkont.cobra.to.Obra;
 import cobra.PlanOperativo.ProyectoPlanOperativo;
 import com.interkont.cobra.util.CobraUtil;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

@@ -104,7 +104,7 @@
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headertipo"   value="#{var.tipo}"/>
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{(!currentRow.booleanactual)? ((!empty currentRow.alimentacions)? 'Avance' :  currentRow.tipoimagen.strdesctipoimagen) :  currentRow.tipoimagen.strdesctipoimagen}" />
+                                        <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}" />
                                     </rich:column>
                                     <rich:column sortBy="#{currentRow.datefecha}" styleClass="ikont-imgs-proyecto">
                                         <f:facet name="header">

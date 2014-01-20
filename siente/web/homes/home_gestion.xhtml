@@ -41,68 +41,7 @@
             }
             function mostrarActualizacionnavegador() {
                 var ingre = jjquery('.ikont-div-ingreso-mostrar-error-pagina');
-                ingre.stop().animate({height: '1012px'});
-            }
-
-            var informacionavegador = navigator.userAgent;
-            var versionavegador = '' + parseFloat(navigator.appVersion);
-            var navegador;
-
-            if ((navegador = informacionavegador.indexOf("Opera")) != -1) {
-                versionavegador = informacionavegador.substring(navegador + 6);
-                $(function() {
-                    escondermostrarErrorNavegador();
-                });
-            }
-            else if ((navegador = informacionavegador.indexOf("MSIE")) != -1) {
-                versionavegador = informacionavegador.substring(navegador + 5);
-                if (parseInt(versionavegador) >= 10) {
-                    $(function() {
-                        escondermostrarErrorNavegador();
-                    });
-                } else {
-                    $(function() {
-                        mostrarActualizacionnavegador();
-                    });
-                }
-            }
-            else if ((navegador = informacionavegador.indexOf("Chrome")) != -1) {
-                versionavegador = informacionavegador.substring(navegador + 7);
-                if (parseInt(versionavegador) >= 22) {
-                    $(function() {
-                        escondermostrarErrorNavegador();
-                    });
-                } else {
-                    $(function() {
-                        mostrarActualizacionnavegador();
-                    });
-                }
-            }
-            else if ((navegador = informacionavegador.indexOf("Safari")) != -1) {
-                versionavegador = informacionavegador.substring(navegador + 7);
-                if (parseInt(versionavegador) >= 6) {
-                    $(function() {
-                        escondermostrarErrorNavegador();
-                    });
-                } else {
-
-                    $(function() {
-                        mostrarActualizacionnavegador();
-                    });
-                }
-            }
-            else if ((navegador = informacionavegador.indexOf("Firefox")) != -1) {
-                versionavegador = informacionavegador.substring(navegador + 8);
-                if (parseInt(versionavegador) >= 21) {
-                    $(function() {
-                        escondermostrarErrorNavegador();
-                    });
-                } else {
-
-                    $(function() {
-                        mostrarActualizacionnavegador();
-                    });
-                }
+                ingre.stop().animate({height: '150%'});
             }
         </script>
 
@@ -239,9 +178,9 @@
                                           jsVariable="#{marker.jsVariable}" 
                                           draggable="false" >
                                     <m:eventListener eventName="click" jsFunction="mapavalla" />                                      
-                                    
-                                    
-                                    
+
+
+
                                     <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
                                     <m:htmlInformationWindow htmlText="#{marker.informationWindow}" />
                                 </m:marker>
@@ -249,18 +188,18 @@
                         </m:map>
                     </h:panelGrid> 
                     <script type="text/javascript">
-                 function marker1DragHandler(event) {
-                     
-                     alert("Current markerA latlng is: " + document.getElementById('js_58').valueOf());
-                    
-                 }
-                 function marker2DragHandler(event) {
-                     alert("Current markerB latlng is: " + event.latLng);
-                 }
-                 function marker3DragHandler(event) {
-                     alert("Current markerC latlng is: " + event.latLng);
-                 }
-             </script>
+            function marker1DragHandler(event) {
+
+                alert("Current markerA latlng is: " + document.getElementById('js_58').valueOf());
+
+            }
+            function marker2DragHandler(event) {
+                alert("Current markerB latlng is: " + event.latLng);
+            }
+            function marker3DragHandler(event) {
+                alert("Current markerC latlng is: " + event.latLng);
+            }
+                    </script>
                     <a4j:jsFunction name="mapavalla" actionListener="#{HomeGestion.marcadorSeleccion}" oncomplete="#{rich:component('panelVallaMapa')}.hide();" />
                     <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
 
@@ -439,21 +378,6 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
-            <div id="mostrar-error-pagina"  class="ikont-div-ingreso-mostrar-error-pagina">
-
-                <center>
-                    <h:panelGroup id="panel_error_navegador"  styleClass="ikon-panel-contenido-error-navegador" rendered="#{var.permisonuevodiseno}">
-                        <h:graphicImage   url="/resources/imgs/icon_lading_errorpage.png"  /><br/>
-                        <h:outputText value="Tu navegador no soporta los últimos estandares web:"/><br/>
-                        <h:outputText value="Por favor actualiza la versión de tu navegador."/><br/><br/>
-                        <h:outputText value="Para una mejor experiencia en zoom te "/><br/>
-                        <h:outputText value="recomendamos que utilices "/><br/>
-                        <h:outputText style="color: #000!important;" value="Firefox apartir de la versión 21.0 "/> 
-                        <h:outputText value=" ó "/>
-                        <h:outputText style="color: #000!important;" value="Chrome apartir de la versión 22.0"/>
-                    </h:panelGroup>
-                </center>  
-            </div>
         </h:form>
         <f:subview id="murocomentarios" rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>

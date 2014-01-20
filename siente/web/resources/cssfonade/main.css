@@ -2869,8 +2869,8 @@ css usuario modificacion
     padding-left: 25px!important;
     padding-top: 8px!important;
     position: relative!important;
-    top: 4px!important;
-    left: 73px!important
+    top: -19px!important;
+    left: 73px!important;
 }
 .boton1:hover{
     width: 100px;
@@ -4609,7 +4609,7 @@ a:hover {
 .ikont-hpg-slider-valor1{
     width: 239px!important;
     position: relative;
-    top: -6px;
+    top: -2px;
 }
 .ikont-hit-valor{
     font-size: 15px !important;
@@ -5211,4 +5211,17 @@ a.ikont-a4jcl-solicitumaestro:hover {
     top: 149px;
     left: 200px;
 
+}
+
+.ikont-enlace-boton-restaurar-passwd:link{
+    background-color: #FFF;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    color:#58595B;
+}
+
+.ikont-enlace-boton-restaurar-passwd:hover{
+    color:  #21992F !important;   
+}
+.ikont-enlace-boton-restaurar-passwd:visited{
+    color:  #58595B !important;   
 }
