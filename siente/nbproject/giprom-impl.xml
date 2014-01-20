@@ -16,14 +16,14 @@ and open the template in the editor.
         
         <echo message="generando giprom" />       
         <copy todir="${build.web.dir}/resources/imgs">
-            <fileset dir="web/resources/imgsfcm/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/configuracion/${version}/resources/imgsfcm/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/css">
-            <fileset dir="web/resources/cssfcm/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/configuracion/${version}/resources/cssfcm/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/resources/js/login">
-            <fileset  dir="web/resources/js/loginfonade/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/configuracion/${version}/resources/js/loginfcm/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/facelets">
@@ -33,9 +33,11 @@ and open the template in the editor.
             <fileset  dir="web/configuracion/${version}/home/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/org.richfaces">
-            <fileset  dir="web/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
+            <fileset  dir="web/configuracion/${version}/resources/org.richfacesfcm/" excludes="${build.web.excludes}"/>            
         </copy>       
-       
+       <copy todir="${build.web.dir}/resources/js/analytics">
+            <fileset  dir="web/configuracion/${version}/analytics/" excludes="${build.web.excludes}"/>
+        </copy>
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
@@ -85,8 +87,8 @@ and open the template in the editor.
         <delete file="${build.web.dir}/WEB-INF/lib/gxt-chart-3.0.6.jar"/>
         <delete file="${build.web.dir}/WEB-INF/lib/gxt-legacy-3.0.6.jar"/>
         
-        <delete file="${build.web.dir}/WEB-INF/lib/marcologicorepository_1.0.jar"/>
-       -->
+         <delete file="${build.web.dir}/WEB-INF/lib/marcologicorepository_1.0.jar"/>
+        -->
         <delete dir="${build.web.dir}/resources/video" />        
     </target>
 </project>

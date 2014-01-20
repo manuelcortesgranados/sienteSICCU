@@ -15,14 +15,14 @@ and open the template in the editor.
     <target name="doTolima" if="istolima" >
         <echo message="generando tolima" />       
         <copy todir="${build.web.dir}/resources/imgs">
-            <fileset dir="web/resources/imgstolima/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/configuracion/${version}/resources/imgstolima/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/css">
-            <fileset dir="web/resources/csstolima/" excludes="${build.web.excludes}"/>
+            <fileset dir="web/configuracion/${version}/resources/csstolima/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/resources/js/login">
-            <fileset  dir="web/resources/js/logintolima/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/configuracion/${version}/resources/js/logintolima/" excludes="${build.web.excludes}"/>
         </copy>
        
         <copy todir="${build.web.dir}/facelets">
@@ -32,7 +32,10 @@ and open the template in the editor.
             <fileset  dir="web/homescobra/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/org.richfaces">
-            <fileset  dir="web/resources/org.richfacessiente/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/configuracion/${version}/resources/org.richfacestolima/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/js/analytics">
+            <fileset  dir="web/configuracion/${version}/analytics/" excludes="${build.web.excludes}"/>
         </copy>
         <!-- Archivos de configuracion-->        
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
