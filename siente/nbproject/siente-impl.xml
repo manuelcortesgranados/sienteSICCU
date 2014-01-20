@@ -39,7 +39,7 @@ and open the template in the editor.
             <fileset  dir="web/configuracion/${version}/analytics/" excludes="${build.web.excludes}"/>
         </copy>
         <copy todir="${build.web.dir}/resources/js/zopim">
-            <fileset  dir="web/configuracion/${version}/zopim/" excludes="${build.web.excludes}"/>
+            <fileset  dir="web/configuracion/${version}/resources/zopim/" excludes="${build.web.excludes}"/>
         </copy>
         <!-- Archivos de configuracion-->        
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
