@@ -4440,9 +4440,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         // si es padre deshabilitrar cronograma
         disableCronograma = 0;
         disableAiu = 0;
+        obranueva.setNumvaltotobra(BigDecimal.ZERO);
+            valortotalobra= BigDecimal.ZERO;
         if (obranueva.isBooleantienehijos() || isProyectoestrategia()) {
             disableCronograma = 1;
             disableAiu = 1;
+            
             llenarTiposCosto();
         }
     }
@@ -5167,7 +5170,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String validarFinalizar() {
+    public String validarFinalizar() {        
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
@@ -5195,10 +5198,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     validacion.setPresupuesto(false);
                 }
             } else {
-
-                validacion.setPresupuesto(true);
-            }
-        }
+                    System.out.println("valortotalobra = " + valortotalobra);
+                    if (obranueva.getNumvaltotobra().compareTo(BigDecimal.ZERO) > 0) {
+                    validacion.setPresupuesto(true);
+                } else {
+                    validacion.setPresupuesto(false);
+                }
+                } 
+            }         
         if (validarTipificacion()) {
             validacion.setTipificacion(true);
         } else {
@@ -5268,9 +5275,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             i++;
         }
 
-        if (!obranueva.isBooleantienehijos()) {
-            validacion.setPresupuesto(true);
-        }
+//        if (!obranueva.isBooleantienehijos()) {
+//            validacion.setPresupuesto(true);
+//        }
 
         //if (validacion.isTipificacion() && validacion.isDatosbasicos()) {
         //guardarObraTemporal();
