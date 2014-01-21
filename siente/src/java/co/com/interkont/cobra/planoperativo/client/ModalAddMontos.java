@@ -98,7 +98,7 @@ public class ModalAddMontos implements IsWidget {
         valorDisponibleFuente.setValue(obraFrDto.getValorDisponible());
         entidadSeleccionada = obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto();
         mapaRelacionEntidadVigencias = new HashMap<String, List<Integer>>();
-
+        
 
     }
 
@@ -161,6 +161,7 @@ public class ModalAddMontos implements IsWidget {
         setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         getValorRubros().setEmptyText("Valor");
         getValorRubros().setWidth(cw);
+        getValorRubros().setAllowNegative(false);
         con.add(new FieldLabel(getValorRubros(), "Valor"), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
 
 

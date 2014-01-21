@@ -93,6 +93,7 @@ public class ModalRubrosProyecto implements IsWidget {
         lstFormaP.setEnabled(true);
         montoAportado = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat()));
         montoAportado.setEnabled(true);
+        montoAportado.setAllowNegative(false);
         lstVigen = new ListBox(false);
         rubro = new TextField();
         tipoAporte = 0;

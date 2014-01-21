@@ -2729,7 +2729,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         planOperativo();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + Propiedad.getValor("versioncobra") + "/Supervisor/PlanO.xhtml");
+            String pagina="/Supervisor/PlanO.xhtml";
+            if(getSessionBeanCobra().getCobraGwtService().isFullScreen())
+            {
+                pagina="/Supervisor/PlanOFullScreen.xhtml";
+            }
+            else
+            {
+                pagina="/Supervisor/PlanO.xhtml";
+            }   
+            System.out.println("pagina = " + pagina);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + Propiedad.getValor("versioncobra") + pagina);
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
