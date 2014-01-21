@@ -1074,8 +1074,11 @@ public class FlujoCaja implements Serializable {
                 }
             }
         }
-
-        if (this.totalEgresos > this.totalIngresos) {
+        /**
+         * Se validad que el total de egresos sea igual al total de ingresos,
+         * permitiendo una diferencia de 1
+         */
+        if (this.totalEgresos > this.totalIngresos + 1) {
             cumpleRequisitos = false;
 
             FacesUtils.addErrorMessage(bundle.getString("errorTotalEgresosMayorATotalIngresos"));

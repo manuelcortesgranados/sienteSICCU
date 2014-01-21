@@ -7179,7 +7179,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
                 if (getFlujoCaja().validarFlujoCaja()) {
                     if (getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalItemFlujoIngreso(Itemflujocaja.ID_RENDIMIENTOS_FINANCIEROS).doubleValue() == getContrato().getNumvlrcontrato().doubleValue()) {
-                        if (getFlujoCaja().getTotalEgresos() == getFlujoCaja().getTotalIngresos()) {
+                        /**
+                        * Se validad que el total de egresos sea igual al total de ingresos,
+                        * permitiendo una diferencia de 1 peso
+                        */
+                        double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos(); 
+                        if (Math.abs(diferenciaIngresosEgresos) < 1) {
                             configuracionGuardadoPo(2, true);
                             contrato.setTercero(new Tercero());
                             setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
