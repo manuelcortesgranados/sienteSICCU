@@ -75,8 +75,8 @@
                 <br/>
                 <br/>
                 <h:panelGrid  cellspacing="12" columns="2"  id="panel-filtro-novedades">
-                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato" id="lbltipocontratoselectselect" value="#{var.selecciontipocontrato}"/>
-                    <h:panelGrid rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato" columns="2">
+                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio' and var.tipocontratos}" styleClass="ikont-hol-lblEntidadconveniocontrato" id="lbltipocontratoselectselect" value="#{var.selecciontipocontrato}"/>
+                    <h:panelGrid rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio' and var.tipocontratos}" styleClass="ikont-hol-lblEntidadconveniocontrato" columns="2">
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" >
                             <f:selectItem itemLabel="Todos" itemValue="2"/>
                             <f:selectItem itemLabel="Ejecución" itemValue="0"/>
@@ -84,8 +84,8 @@
                             <a4j:ajax event="valueChange" render="ikont-hsom-listartipocontratos, @form" execute="ikont-hsom-listartipocontratos" listener="#{Supervisor$Contrato.listaxTipocontratoselect}"/>
                         </h:selectOneMenu>                    
                     </h:panelGrid>
-                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipocontratoselect" value="#{var.TipoContratoContralorias}: " />                   
-                    <h:panelGrid  rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" columnClasses="inputsDetalle,inputsDetalle" columns="2"   >                                
+                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio' and var.tipocontratos}" styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipocontratoselect" value="#{var.TipoContratoContralorias}: " />                   
+                    <h:panelGrid  rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio' and var.tipocontratos}" columnClasses="inputsDetalle,inputsDetalle" columns="2"   >                                
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontrato}" id="ikont-hsom-listartipocontratos" >
                             <f:selectItem itemLabel="Todos" itemValue="0"/>
                             <f:selectItems value="#{Supervisor$Contrato.tipocontratoselectitem}"/>                  
