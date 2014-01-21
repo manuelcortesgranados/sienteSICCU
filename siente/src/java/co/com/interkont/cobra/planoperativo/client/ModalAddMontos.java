@@ -157,7 +157,7 @@ public class ModalAddMontos implements IsWidget {
         });
 
         this.vigencia = Integer.parseInt(lstVigen.getItemText(0));
-
+        
         setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor(NumberFormat.getDecimalFormat())));
         getValorRubros().setEmptyText("Valor");
         getValorRubros().setWidth(cw);

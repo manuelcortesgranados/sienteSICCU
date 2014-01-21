@@ -231,8 +231,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
         getNombrePry().setEmptyText("Nombre del proyecto");
-        getNombrePry().setWidth(500);
+        getNombrePry().setWidth(600);
         getNombrePry().setAutoValidate(true);
+        getNombrePry().setAllowBlank(false);
         con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
 
@@ -427,7 +428,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         }
                     }
                     if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
-                        if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) <= 0) {
+                        if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) < 0) {
                             varErrorres = true;
                             fechasmostrar = DateTimeFormat.getShortDateFormat().format(proyectoDTO.getFechaInicio());
                             msgerrores += "*La fecha de finalizacion del proyecto no puede ser inferior a  " + fechasmostrar + "<br/>";
@@ -718,29 +719,45 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void crearActividadPry() {
         ActividadobraDTO tareaNueva = null;
         proyectoDTO.setValorDisponible(proyectoDTO.getValor().subtract(proyectoDTO.getOtrospagos().add(proyectoDTO.getPagodirecto())));
-        if (fechaFin.getValue() == null) {
-            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
+        
+        int dias=CalendarUtil.getDaysBetween(proyectoDTO.getFechaInicio(),proyectoDTO.getFechaFin())+1;
+        
+        //if (fechaFin.getValue() == null) {
+            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), dias,
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
             tareaNueva.setNumeracion(numeracionActividad);
+            
+            ActividadobraDTO hitofin = new ActividadobraDTO("Finalización proyecto", proyectoDTO.getFechaFin(), 1, 0, GanttConfig.TaskType.MILESTONE, 6, false);
+        hitofin.setNumeracion(numeracionActividad);
+            
+        
 
+        ActividadobraDTO hitoini = new ActividadobraDTO("Inicio proyecto", proyectoDTO.getFechaInicio(), dias, 0, GanttConfig.TaskType.MILESTONE, 6, false);
+        hitofin.setNumeracion(numeracionActividad);
+            
+        tareaNueva.addChild(hitoini);
+       // tareaNueva.addChild(hitofin);
 
-        } else {
-            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
-                    0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-            tareaNueva.setNumeracion(numeracionActividad);
-        }
+        
+        //} 
+        
+          //  else {
+//            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
+//                    0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+//            tareaNueva.setNumeracion(numeracionActividad);
+//        }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
                      enlazaractividadesHijas(act, tareaNueva);
-                  
+                     
                 }
             }
 
         } else {
              enlazaractividadesHijas(actividadObraPadre, tareaNueva);
            
-        }
+        }       
 
     }
 

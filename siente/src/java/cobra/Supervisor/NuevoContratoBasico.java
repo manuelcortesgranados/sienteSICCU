@@ -3544,9 +3544,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //     if (seleccionopadre == 1) {//es un proyecto hijo toes valida fiobra hijo contra fipadre
         // if (contrato.getDatefechafin().before(contrpadre.getDatefechafin()) || contrato.getDatefechafin().equals(contrpadre.getDatefechafin())) {
         Calendar hoy = Calendar.getInstance();
-        if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
-            if (contrato.getDatefechafin().compareTo(contrato.getDatefechaini()) >= 0) {
-                long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getDatefechaini().getTime();
+        if (contrato.getFechaactaini() != null && contrato.getDatefechafin() != null) {
+            if (contrato.getDatefechafin().compareTo(contrato.getFechaactaini()) >= 0) {
+                long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getFechaactaini().getTime();
                 diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
                 contrato.setIntduraciondias(Integer.parseInt(String.valueOf(diferenciaFecha)));
                 //int plazo = Integer.parseInt(String.valueOf(diferenciaFecha));

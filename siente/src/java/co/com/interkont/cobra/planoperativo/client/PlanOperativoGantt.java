@@ -30,9 +30,7 @@ import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
-import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
-import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -67,13 +65,11 @@ import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BeforeStartEditEvent;
-import com.sencha.gxt.widget.core.client.event.CancelEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
-import com.sencha.gxt.widget.core.client.event.StartEditEvent;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -740,7 +736,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
 
             editing.addEditor(config.leftColumns.getColumn(1), new DateField());
-            editing.addEditor(config.leftColumns.getColumn(2), new DateField());
+            /*editing.addEditor(config.leftColumns.getColumn(2), new DateField());*/
             SpinnerField<Integer> spinnerduracion = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
             spinnerduracion.setMinValue(0);
             spinnerduracion.setIncrement(1);
@@ -761,7 +757,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
                             ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                             ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                            if (ac.isEditable()) {
+                            if (ac.getEditable()) {
                                 if (ac.getTipoActividad() == 6) {
                                     switch (event.getEditCell().getCol()) {
                                         case 2:
@@ -778,7 +774,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 }
                             } else {
                                 event.setCancelled(true);
-                                alertaMensajes("Esta Actividad no se puede editar /iniciando");
+                                alertaMensajes("Esta Actividad no se puede editar");
                             }
                         }
                     });
@@ -790,7 +786,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                             ActividadobraDTO ac = store.get(event.getEditCell().getRow());
                             
-                            if (ac.isEditable()) {
+                            if (ac.getEditable()) {
                                 try {
                                     
                                     
@@ -864,7 +860,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                     ac.setDuration(actividadAnterior.getDuration());
                                 }
                             } else {
-                                alertaMensajes("Esta Actividad no se puede editar /complete");
+                                alertaMensajes("Esta Actividad no se puede editar");
                             }
 
                         }

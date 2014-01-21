@@ -46,6 +46,7 @@ public class ContratoDTO implements IsSerializable {
     private String mensajeguardado;
     private boolean vermensajeerror;
     private boolean modolecturaplanop;
+    private Date fec_ini_precontractual;
     
     public ContratoDTO() {       
     }
@@ -411,4 +412,14 @@ public class ContratoDTO implements IsSerializable {
     public void setModolecturaplanop(boolean modolecturaplanop) {
         this.modolecturaplanop = modolecturaplanop;
     }
+
+    public Date getFec_ini_precontractual() {
+        return fec_ini_precontractual;
+    }
+
+    public void setFec_ini_precontractual(Date fec_ini_precontractual) {
+        this.fec_ini_precontractual = fec_ini_precontractual;
+    }
+    
+    
 }

@@ -132,18 +132,16 @@ public class WidgetTablaMontos implements IsWidget {
                 BigDecimal valor = valorContrato.getValue();
                 obraFuenteRecursos.setValorDisponible(obraFuenteRecursos.getValorDisponible().add(store.get(row).getValor()));
                 BigDecimal valorArestar = store.get(row).getValor();
-                 if (valorArestar.compareTo(valor) == 0) {
-                    service.setLog("son iguales", null);
+                 if (valorArestar.compareTo(valor) == 0) {                    
                     valor = BigDecimal.ZERO;
                 } else {
                     valor = valor.subtract(valorArestar);
                    
-                }
-                lstFuentesRecursosEliminar.add(store.get(row));
-                valorContrato.setValue(valor);
-                contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
-                getStore().remove(store.get(row));
-
+                }                
+                lstFuentesRecursosEliminar.add(store.get(row));                
+                valorContrato.setValue(valor);                
+                contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));                
+                getStore().remove(store.get(row));                
             }
         });
         if (!sololectura) {

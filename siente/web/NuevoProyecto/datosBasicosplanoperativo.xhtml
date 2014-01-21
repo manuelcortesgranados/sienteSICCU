@@ -106,7 +106,7 @@
                                 </h:selectOneMenu>  
                             </rich:column>
                         </h:panelGrid> 
-
+                        
                         <h:panelGrid columns="2" styleClass="panel_fec_suscripcion">
                             <rich:column>
                                 <h:outputText value="*" styleClass="input_asterisco_convenio label_texto_convenio"/>
@@ -114,9 +114,20 @@
                             </rich:column>
                             <rich:column>
                                 <rich:calendar id="id-fechasuscripcion"  datePattern="#{var.formatofecha}" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" style="width: 320px !important;">                                                  
-                                    <rich:message for="id-fechasuscripcion"  />
-                                    <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
+                                    <rich:message for="id-fechasuscripcion"  />                                    
                                     <rich:tooltip  value="#{var.fechasuscripcion}"/>
+                                </rich:calendar>
+                            </rich:column>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" styleClass="panel_fec_inicio">
+                            <rich:column>
+                                <h:outputText value="Fecha acta de inicio" styleClass="input_fec_convenio label_texto_convenio"/>
+                            </rich:column>
+                            <rich:column>
+                                <rich:calendar  id="id-datefechaini" datePattern="#{var.formatofecha}" direction="bottomRight" value="#{Supervisor$Contrato.contrato.fechaactaini}">
+                                    <rich:message for="id-datefechaini"  /> 
+                                    <rich:tooltip  value="#{var.fechaactainicio}"/>
+                                    <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-datefechaini,id-datefechafin" render="h-ol-duraciondias"/>
                                 </rich:calendar>
                             </rich:column>
                         </h:panelGrid>
@@ -124,28 +135,19 @@
                         <h:panelGrid columns="2" styleClass="panel_fec_final">
                             <rich:column>
                                 <h:outputText value="*" styleClass="input_asterisco_convenio label_texto_convenio"/>
-                                <h:outputText value="Fecha finalización" styleClass="input_fec_convenio label_texto_convenio"/>
+                                <h:outputText value="Fecha finalización " styleClass="input_fec_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
                                 <rich:calendar id="id-datefechafin" datePattern="#{var.formatofecha}" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" >                    
                                     <rich:message for="id-datefechafin"  />
-                                    <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
+                                    <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-datefechaini,id-datefechafin" render="h-ol-duraciondias"/>
                                     <rich:tooltip  value="#{var.fechafinalizacion}"/>
                                 </rich:calendar>   
-                                <h:outputLabel value="Plazo en dias #{Supervisor$Contrato.contrato.intduraciondias}" id="h-ol-duraciondias"/>
+                                <h:outputLabel value="Plazo en dias #{Supervisor$Contrato.contrato.intduraciondias} (A razón del Acta de inicio)" id="h-ol-duraciondias"/>
                             </rich:column>
                         </h:panelGrid>  
 
-                        <h:panelGrid columns="2" styleClass="panel_fec_inicio">
-                            <rich:column>
-                                <h:outputText value="Fecha acta de inicio" styleClass="input_fec_convenio label_texto_convenio"/>
-                            </rich:column>
-                            <rich:column>
-                                <rich:calendar  id="id-datefechaini" datePattern="#{var.formatofecha}" direction="bottomRight" value="#{Supervisor$Contrato.contrato.fechaactaini}">
-                                    <rich:tooltip  value="#{var.fechaactainicio}"/>
-                                </rich:calendar>
-                            </rich:column>
-                        </h:panelGrid>
+                        
                     </h:panelGrid>
                 </a4j:region>                
                 <br/>                

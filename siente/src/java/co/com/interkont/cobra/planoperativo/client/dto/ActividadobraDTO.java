@@ -237,6 +237,11 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public Date getEndDateTime() {
+        
+        DateWrapper dw = new DateWrapper(getStartDateTime()).clearTime();
+        
+        endDateTime =dw.addDays(getDuration() - 1).asDate();
+        
         return endDateTime;
     }
 
@@ -417,12 +422,12 @@ public class ActividadobraDTO implements IsSerializable {
     /**
      * @return the esNoEditable
      */
-    public boolean isEditable() {
+    public boolean getEditable() {
         return editable;
     }
 
     /**
-     * @param esNoEditable the esNoEditable to set
+     * @param editable
      */
     public void setEditable(boolean editable) {
         this.editable = editable;

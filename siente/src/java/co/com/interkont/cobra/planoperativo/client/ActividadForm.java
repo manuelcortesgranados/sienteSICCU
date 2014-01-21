@@ -11,6 +11,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.EntryPoint;
@@ -24,6 +25,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Window;
@@ -181,25 +183,24 @@ public class ActividadForm implements IsWidget, EntryPoint {
                     error = true;
                     msg = msg + "Ingrese la fecha de finalización" + "<br/>";                   
                 }                
-                if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
-                    service.setLog("entre 8", null);
-                    if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) >= 0) {
+                if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {                    
+                    if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) > 0) {
                         error = true;
-                        msg = msg + "La fecha de inicio de la actividad debe ser inferior a la fecha de finalización: " + obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
+                        msg = msg + "La fecha de inicio de la actividad debe ser inferior a la fecha de finalización: " + ValidacionesPO.obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
                     }                    
                     if (!error) {
-                        if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) <= 0) {
+                        if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) < 0) {
                             error = true;
                             msg = msg + "La fecha de finalización de la actividad no puede ser inferior  a la fecha de inicio" + "<br/>";                            
                         }
                     }
                     if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
                         error = true;
-                        msg = msg + "La fecha de inicio de la actividad no puede ser inferior a: " + obtenerFecha(actividadObraPadre.getStartDateTime()) + "<br/>";
+                        msg = msg + "La fecha de inicio de la actividad no puede ser inferior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getStartDateTime()) + "<br/>";
                     }
                     if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
                         error = true;
-                        msg = msg + "La fecha fin de la actividad no puede ser superior a: " + obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
+                        msg = msg + "La fecha fin de la actividad no puede ser superior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
                         
                     }
                     
@@ -257,7 +258,10 @@ public class ActividadForm implements IsWidget, EntryPoint {
     public void cargarDatosActividad() {
         actividacreada.setName(getDescripcionActividad().getValue());
         actividacreada.setStartDateTime(getFechainicioActividad().getValue());
+        int dias=CalendarUtil.getDaysBetween(actividacreada.getStartDateTime(),getFechafinActividad().getValue())+1; 
+        actividacreada.setDuration(dias);
         actividacreada.setEndDateTime(getFechafinActividad().getValue());
+        
         //actividacreada.setPeso(getPeso();
 
     }
@@ -265,7 +269,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     public void crearActividad() {
         //numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
         cargarDatosActividad();        
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.getDuration(), 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
@@ -277,11 +281,5 @@ public class ActividadForm implements IsWidget, EntryPoint {
         
        // GanttDatos.asignarNumeracion(taskStore, numeracionActual,4);
         GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
-    }
-
-    public String obtenerFecha(Date fecha) {
-        DateWrapper dw = new DateWrapper(fecha).clearTime();
-
-        return String.valueOf(dw.getFullYear()) + "-" + String.valueOf(dw.getMonth() + 1) + "-" + String.valueOf(dw.getDate());
     }
 }

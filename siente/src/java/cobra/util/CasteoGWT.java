@@ -705,7 +705,7 @@ public class CasteoGWT implements Serializable {
         actividadObra.setNumeracion(actdto.getNumeracion());
         actividadObra.setLstPredecesores(obtenerListaPredecesores(actividadObra.getPredecesor()));
         actividadObra.setBoolaiu(false);
-        actividadObra.setEditable(actdto.isEditable());
+        actividadObra.setEditable(actdto.getEditable());
 
         actividadObra.setActividadobra(actividadpadre);
 
