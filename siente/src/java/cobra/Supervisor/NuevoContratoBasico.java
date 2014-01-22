@@ -2729,15 +2729,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         planOperativo();
         try {
-            String pagina="/Supervisor/PlanO.xhtml";
-            if(getSessionBeanCobra().getCobraGwtService().isFullScreen())
-            {
-                pagina="/Supervisor/PlanOFullScreen.xhtml";
+            String pagina = "/Supervisor/PlanO.xhtml";
+            if (getSessionBeanCobra().getCobraGwtService().isFullScreen()) {
+                pagina = "/Supervisor/PlanOFullScreen.xhtml";
+            } else {
+                pagina = "/Supervisor/PlanO.xhtml";
             }
-            else
-            {
-                pagina="/Supervisor/PlanO.xhtml";
-            }   
             System.out.println("pagina = " + pagina);
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + Propiedad.getValor("versioncobra") + pagina);
         } catch (IOException ex) {
@@ -3554,7 +3551,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //     if (seleccionopadre == 1) {//es un proyecto hijo toes valida fiobra hijo contra fipadre
         // if (contrato.getDatefechafin().before(contrpadre.getDatefechafin()) || contrato.getDatefechafin().equals(contrpadre.getDatefechafin())) {
         Calendar hoy = Calendar.getInstance();
-        if (contrato.getFechaactaini() != null && contrato.getDatefechafin() != null) {
+        if (bundle.getString("conplanoperativo").compareTo("false") == 0) {
+            if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
+                if (contrato.getDatefechafin().compareTo(contrato.getDatefechaini()) >= 0) {
+                    long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getDatefechaini().getTime();
+                    diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
+                    contrato.setIntduraciondias(Integer.parseInt(String.valueOf(diferenciaFecha)));
+                    //int plazo = Integer.parseInt(String.valueOf(diferenciaFecha));
+                } else {
+                    contrato.setDatefechafin(null);
+                    contrato.setIntduraciondias(0);
+                    //mensaje = bundle.getString("lafechadefinalizaciondebeser");//"La fecha de finalización debe ser mayor o igual a la fecha de inicio";
+                    FacesUtils.addErrorMessage(bundle.getString("lafechadefinalizaciondebeser"));
+                }
+            }
+        } else if (contrato.getFechaactaini() != null && contrato.getDatefechafin() != null) {
             if (contrato.getDatefechafin().compareTo(contrato.getFechaactaini()) >= 0) {
                 long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getFechaactaini().getTime();
                 diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
@@ -7193,10 +7204,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (getFlujoCaja().validarFlujoCaja()) {
                     if (getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalItemFlujoIngreso(Itemflujocaja.ID_RENDIMIENTOS_FINANCIEROS).doubleValue() == getContrato().getNumvlrcontrato().doubleValue()) {
                         /**
-                        * Se validad que el total de egresos sea igual al total de ingresos,
-                        * permitiendo una diferencia de 1 peso
-                        */
-                        double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos(); 
+                         * Se validad que el total de egresos sea igual al total
+                         * de ingresos, permitiendo una diferencia de 1 peso
+                         */
+                        double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos();
                         if (Math.abs(diferenciaIngresosEgresos) < 1) {
                             configuracionGuardadoPo(2, true);
                             contrato.setTercero(new Tercero());
@@ -8258,7 +8269,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (!getContrato().getActividadobras().isEmpty()) {
             List<Actividadobra> lstactguardar = new ArrayList<Actividadobra>(getContrato().getActividadobras());
             lstactguardar.get(0).setContrato(getContrato());
-            
+
             getSessionBeanCobra().getCobraService().guardarActividadObra(lstactguardar);
 
         }

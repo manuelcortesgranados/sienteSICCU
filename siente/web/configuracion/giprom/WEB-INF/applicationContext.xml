@@ -729,7 +729,9 @@
                 <value>co/com/interkont/giprom/vista/VwIndIndicadorMunicipal.hbm.xml</value>
                 <value>co/com/interkont/giprom/vista/VwInmInfoMunicipal.hbm.xml</value>
                 <value>co/com/interkont/giprom/vista/VwEncIncInfoConsolidada.hbm.xml</value>               
-                <value>co/com/interkont/giprom/vista/VwLocalidad.hbm.xml</value>               
+                <value>co/com/interkont/giprom/vista/VwLocalidad.hbm.xml</value>        
+                <value>co/com/interkont/giprom/vista/VwDepartamento.hbm.xml</value>
+                <value>co/com/interkont/giprom/vista/VwMunicipio.hbm.xml</value>        
             </list>
         </property>
         <property name="hibernateProperties">
