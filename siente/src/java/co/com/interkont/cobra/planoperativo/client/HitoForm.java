@@ -11,6 +11,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.core.client.EntryPoint;
@@ -167,7 +168,7 @@ public class HitoForm implements IsWidget, EntryPoint {
                            }
                         } else {
                             d = new AlertMessageBox("Alerta", "La fecha de inicio no puede ser inferior a "
-                                    + obtenerFecha(actividadObraPadre.getStartDateTime()));
+                                    + ValidacionesPO.obtenerFecha(actividadObraPadre.getStartDateTime()));
                             d.show();
                         }
 
@@ -220,6 +221,7 @@ public class HitoForm implements IsWidget, EntryPoint {
     public void cargarDatosActividad() {
         actividacreada.setName(getDescripcionActividad().getValue());
         actividacreada.setStartDateTime(getFechainicioActividad().getValue());
+        actividacreada.setDuration(1);
         actividacreada.setEndDateTime(getFechainicioActividad().getValue());
         //actividacreada.setPeso(getPeso();
 
@@ -228,7 +230,7 @@ public class HitoForm implements IsWidget, EntryPoint {
     public void crearActividad() {
        // numeracionActual=GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
         cargarDatosActividad();
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), 0, 0, tipo, tipoactividad, false);
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), 1, 0, tipo, tipoactividad, false);
         tareaNueva.setNumeracion(numeracionActividad);
         
         /*Se cargan el Panel del Gantt con la actividad Creada*/
@@ -239,12 +241,6 @@ public class HitoForm implements IsWidget, EntryPoint {
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
        // GanttDatos.asignarNumeracion(taskStore, numeracionActual,6);
         GanttDatos.guardarBorradorConvenio(contratoDto, service, gantt);
-    }
-
-    public String obtenerFecha(Date fecha) {
-        DateWrapper dw = new DateWrapper(fecha).clearTime();
-
-        return String.valueOf(dw.getFullYear()) + "-" + String.valueOf(dw.getMonth() + 1) + "-" + String.valueOf(dw.getDate());
     }
 
     public boolean validarHito() {

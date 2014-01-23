@@ -8,6 +8,7 @@ import co.com.interkont.cobra.to.Actividadseguimiento;
 import co.com.interkont.cobra.to.Actorseguimiento;
 import co.com.interkont.cobra.to.Clasificaciontipodesarrollo;
 import co.com.interkont.cobra.to.Polizaseguimiento;
+import co.com.interkont.cobra.to.Relacioneventoscorreousuario;
 import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Seguimiento;
 import co.com.interkont.cobra.to.SolicitudObrach;
@@ -16,6 +17,7 @@ import co.com.interkont.cobra.to.Tipopolizaseguimiento;
 import co.com.interkont.cobra.to.Tiposolicitudobra;
 import co.com.interkont.cobra.to.Tipovisita;
 import co.com.interkont.cobra.to.Visita;
+import cobra.EnvioCorreosCobra;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -3274,6 +3276,9 @@ public class ValidadorSeguimiento  implements Serializable{
                     getSessionBeanCobra().getSupervisionExternaService().actualizarSeguimientosxVisita((int)getSessionBeanCobra().getSupervisionExternaService().
                             getVisita().getOidvisita(), getSessionBeanCobra().getUsuarioObra());
                     getSessionBeanCobra().getCobraService().getLog().info("Finalizó validar");
+                    List<Relacioneventoscorreousuario> listausuarioscorreoauditoria = getSessionBeanCobra().getCobraService().obtenerUsuarioxEvento(10);
+                    EnvioCorreosCobra envio = new EnvioCorreosCobra(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra());
+                    envio.enviarCorreoVisitaAuditoria(getSessionBeanCobra().getUsuarioObra(), listausuarioscorreoauditoria, getSessionBeanCobra().getSupervisionExternaService().getVisita(), numFilasLlenas);
                     getSessionBeanCobra().getSupervisionExternaService().setVisita(new Visita());
                     String x = getAdminSupervisionExterna().cambioListado();
                     getAdminSupervisionExterna().setVarmostrarBotonexcelMatris(0);

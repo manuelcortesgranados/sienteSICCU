@@ -74,6 +74,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     private NumberField<BigDecimal> valorRubros;
     private NumberField<BigDecimal> valorFuenteRecurso;
     private TextField nombreAbre = new TextField();
+    private DateField fechaInicioPrecontractual = new DateField();
     private DateField fechaSuscripcionContrato = new DateField();
     private DateField fechaSuscripcionActaInicio = new DateField();
     private DateField fechaFinalizacion = new DateField();
@@ -157,7 +158,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.convenioDto = convenio;
         valorContrato.setEnabled(false);
         this.numeracionActividad = taskStore.getAllItemsCount() + 1;
-
+        lstFuentesRecursosEliminar = new ArrayList<RelacionobrafuenterecursoscontratoDTO>();
     }
 
     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
@@ -227,6 +228,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
         this.fechaFinalizacion.setValue(contrato.getDatefechafin());
         this.valorContrato.setValue(contrato.getNumvlrcontrato());
+        this.fechaInicioPrecontractual.setValue(contrato.getFec_ini_precontractual());
     }
 
     @Override
@@ -296,7 +298,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 }
             }
         });
-        getObjetoContrato().setHeight("" + 80);
+        getObjetoContrato().setHeight("" + 60);
         objetoContrato.setReadOnly(sololectura);
 
         Label lblObj = new Label("*Objetivos");
@@ -335,6 +337,20 @@ public class ContratoForm implements IsWidget, EntryPoint {
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
 
 
+        getFechaInicioPrecontractual().setWidth(cw);
+        getFechaInicioPrecontractual().setReadOnly(sololectura);
+        getFechaInicioPrecontractual().addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (getFechaInicioPrecontractual().getValue() != null) {
+                   
+                }
+            }
+        });
+        Label lblFechaInicioPre = new Label("Fecha inicio etapa precontractual:");
+        con.add(lblFechaInicioPre, new HtmlData(".tfechainipre"));
+        con.add(getFechaInicioPrecontractual(), new HtmlData(".fechainipre"));
+         
         getFechaSuscripcionContrato().setWidth(cw);
         getFechaSuscripcionContrato().setReadOnly(sololectura);
         fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
@@ -342,7 +358,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             public void onKeyDown(KeyDownEvent event) {
                 if (fechaSuscripcionActaInicio.getValue() != null) {
                     if (fechaSuscripcionContrato.getValue().compareTo(fechaSuscripcionActaInicio.getValue()) > 0) {
-                        AlertMessageBox d = new AlertMessageBox("Error", "La fecha de suscripcion no puede ser mayor a la fecha del acta de inicio");
+                        AlertMessageBox d = new AlertMessageBox("Error", "La fecha de suscripción no puede ser mayor a la fecha del acta de inicio");
                         d.show();
                     }
                 }
@@ -396,6 +412,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             getValorContrato().setEmptyText("Valor estimado");
             getLstTipoContrato().setEmptyText("Tipo contratación");
             getNombreAbre().setEmptyText("Nombre Abreviado");
+            getFechaInicioPrecontractual().setEmptyText("Fecha de inicio etapa precontractual");
             getFechaSuscripcionContrato().setEmptyText("Fecha de suscripción");
             getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripción acta inicio");
             getFechaFinalizacion().setEmptyText("Fecha finalización");
@@ -684,16 +701,18 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     private native String getTableMarkup() /*-{
      return [ '<table width=100% cellpadding=0 cellspacing=10>',
-     '<tr><td class=tobjetoC></td><td class=tvalor></td></tr>',
-     '<tr><td class=objetoC width=50%></td><td class=valor></td></tr>',
+     '<tr><td class=tobjetoC></td></tr>',
+     '<tr><td class=objetoC width=100%></td></tr>',
      '<tr><td class=ttipocontrato></td><td class=tnomabreviado></td></tr>',
      '<tr><td class=tipocontrato></td><td class=nomabreviado></td></tr>',
-     '<tr><td class=tfechasuscont></td><td class=tfechasusacta></td></tr>',
-     '<tr><td class=fechasuscont></td><td class=fechasusacta></td></tr>',
-     '<tr><td class=tfechafin></td></tr>',
-     '<tr><td class=fechafin></td></tr>',
+     '<tr><td class=tfechainipre></td><td class=tfechasuscont></td></tr>',
+     '<tr><td class=fechainipre></td><td class=fechasuscont></td></tr>',
+     '<tr><td class=tfechasusacta></td><td class=tfechafin></td></tr>',       
+     '<tr><td class=fechasusacta></td><td class=fechafin></td></tr>',            
      '<tr><td class=tblmontos colspan=2></td><td></td></tr>',
-     '<tr><td class=addr></td></tr>',
+     '<tr><td class=addr></td></tr>',       
+     '<tr><td class=tvalor></td></tr>',
+     '<tr><td class=valor></td></tr>',            
      '</table>'
      ].join("");
      }-*/;
@@ -731,6 +750,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contrato.setTipocontrato(tipocontrato);
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
+        contrato.setFec_ini_precontractual(getFechaInicioPrecontractual().getValue());
         validaTieneFechaFin();
 
     }
@@ -744,8 +764,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public void validaTieneFechaFin() {
         if (contrato.getDatefechaini() != null) {
             if (getFechaFinalizacion().getValue() == null) {
-                int duracionContrato = CalendarUtil.getDaysBetween(contrato.getDatefechaini(), actividadObraPadre.getEndDateTime());
-                Date copiaFechaInicioContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
+                int duracionContrato = CalendarUtil.getDaysBetween(contrato.getFec_ini_precontractual(), actividadObraPadre.getEndDateTime());
+                Date copiaFechaInicioContrato = CalendarUtil.copyDate(contrato.getFec_ini_precontractual());
                 CalendarUtil.addDaysToDate(copiaFechaInicioContrato, duracionContrato);
                 contrato.setDatefechafin(copiaFechaInicioContrato);
             } else {
@@ -759,8 +779,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO actividadEjecucion = taskStore.getParent(actividadObraPadre);
 
         //numeracionActual = GanttDatos.modificarEnCascadaNumeracion(actividadObraPadre);
-        Date fechaInicioPre = CalendarUtil.copyDate(fechaSuscripcionContrato.getValue());
-        fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
+        Date fechaInicioPre = CalendarUtil.copyDate(fechaInicioPrecontractual.getValue());
+        //fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
         
         //ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaInicioPre, CalendarUtil.getDaysBetween(fechaInicioPre, fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
@@ -788,7 +808,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date copiFechaRevTecnica = CalendarUtil.copyDate(revTecnica.getEndDateTime());
         //CalendarUtil.addDaysToDate(copiFechaRevTecnica, 1);
 
-        ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", copiFechaRevTecnica, 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", fechaInicioPre, 1, 0, TaskType.LEAF, 4, true);
         elaboPliegos.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosPrecontra.add(elaboPliegos);
@@ -796,7 +816,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date copiFechaElaboPliegos = CalendarUtil.copyDate(elaboPliegos.getEndDateTime());
         // CalendarUtil.addDaysToDate(copiFechaElaboPliegos, 1);
 
-        ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", copiFechaElaboPliegos, 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", fechaInicioPre, 1, 0, TaskType.LEAF, 4, true);
         evaPropuestas.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosPrecontra.add(evaPropuestas);
@@ -804,7 +824,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date copiFechaEvaPropuestas = CalendarUtil.copyDate(evaPropuestas.getEndDateTime());
         //CalendarUtil.addDaysToDate(copiFechaEvaPropuestas, 1);
 
-        ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", copiFechaEvaPropuestas, 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", fechaInicioPre, 1, 0, TaskType.LEAF, 4, true);
         elaContrato.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosPrecontra.add(elaContrato);
@@ -814,11 +834,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
 
 
-        Date fechaCopiaPrecontractual = CalendarUtil.copyDate(precontractual.getEndDateTime());
+        Date fechaCopiaPrecontractual = CalendarUtil.copyDate(copiFechaEvaPropuestas);
 
         int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1);
 
-        ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaCopiaPrecontractual, duracionContractual, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaSuscripcionContrato.getValue(), duracionContractual, 0, TaskType.PARENT, 5, true);
         contractua.setEditable(false);
         contractua.setNumeracion(numeracionActividad);
         numeracionActividad++;
@@ -859,25 +879,28 @@ public class ContratoForm implements IsWidget, EntryPoint {
         actividadObraContrato.setDuration(duracionContrato);
 
 
-        DependenciaDTO dependenciaRevTecnica = GanttDatos.crearDependencia(revTecnica, elaboPliegos);
-        DependenciaDTO dependenciaRevPliego = GanttDatos.crearDependencia(elaboPliegos, evaPropuestas);
-        DependenciaDTO dependenciaEvaPropuestas = GanttDatos.crearDependencia(evaPropuestas, elaContrato);
+        //DependenciaDTO dependenciaRevTecnica = GanttDatos.crearDependencia(revTecnica, elaboPliegos);
+        //DependenciaDTO dependenciaRevPliego = GanttDatos.crearDependencia(elaboPliegos, evaPropuestas);
+        //DependenciaDTO dependenciaEvaPropuestas = GanttDatos.crearDependencia(evaPropuestas, elaContrato);
         DependenciaDTO dependenciaPrecontra = GanttDatos.crearDependencia(precontractual, contractua);
         DependenciaDTO dependenciaLiqui = GanttDatos.crearDependencia(contractua, Liquidaciones);
         contractua.getDependenciasForFkActividadOrigen().add(dependenciaPrecontra);
         Liquidaciones.getDependenciasForFkActividadOrigen().add(dependenciaLiqui);
-        revTecnica.getDependenciasForFkActividadOrigen().add(dependenciaRevTecnica);
-        elaboPliegos.getDependenciasForFkActividadOrigen().add(dependenciaRevPliego);
-        evaPropuestas.getDependenciasForFkActividadOrigen().add(dependenciaEvaPropuestas);
+        //revTecnica.getDependenciasForFkActividadOrigen().add(dependenciaRevTecnica);
+        //elaboPliegos.getDependenciasForFkActividadOrigen().add(dependenciaRevPliego);
+        //evaPropuestas.getDependenciasForFkActividadOrigen().add(dependenciaEvaPropuestas);
         gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaPrecontra);
         gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaLiqui);
-        gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaRevTecnica);
-        gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaRevPliego);
-        gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaEvaPropuestas);
+        //gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaRevTecnica);
+        //gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaRevPliego);
+        //gantt.getGanttPanel().getContainer().getDependencyStore().add(dependenciaEvaPropuestas);
 
         if (lstHijosPadreObra.isEmpty()) {
-            actividadObraPadre.setDuration(duracionContrato);
-            actividadEjecucion.setDuration(duracionContrato);
+//            actividadObraPadre.setDuration(duracionContrato);
+//            actividadEjecucion.setDuration(duracionContrato);
+            
+            
+        //
         }
 
         taskStore.add(actividadObraPadre, actividadObraContrato);
@@ -886,19 +909,19 @@ public class ContratoForm implements IsWidget, EntryPoint {
             processFolder(taskStore, actividadObraContrato);
         }
 
-        if (!lstHijosPadreObra.isEmpty()) {
-            List lstInfo = GanttDatos.calcularDuracionActividad(actividadObraPadre, precontractual.getStartDateTime(), actividadObraContrato.getEndDateTime());
-            int duracionObra = (Integer) lstInfo.get(0);
-            actividadObraPadre.setDuration(duracionObra);
-
-            Date fechaInicioObra = (Date) lstInfo.get(1);
-            Date fechaFinObra = (Date) lstInfo.get(2);
-
-            List infoEje = GanttDatos.calcularDuracionActividad(actividadEjecucion, fechaInicioObra, fechaFinObra);
-            int duracionEjecucion = (Integer) infoEje.get(0);
-            service.setLog("duracion ejecucion" + duracionEjecucion, null);
-            actividadEjecucion.setDuration(duracionEjecucion);
-        }
+//        if (!lstHijosPadreObra.isEmpty()) {
+//            List lstInfo = GanttDatos.calcularDuracionActividad(actividadObraPadre, precontractual.getStartDateTime(), actividadObraContrato.getEndDateTime());
+//            int duracionObra = (Integer) lstInfo.get(0);
+//            actividadObraPadre.setDuration(duracionObra);
+//
+//            Date fechaInicioObra = (Date) lstInfo.get(1);
+//            Date fechaFinObra = (Date) lstInfo.get(2);
+//
+//            List infoEje = GanttDatos.calcularDuracionActividad(actividadEjecucion, fechaInicioObra, fechaFinObra);
+//            int duracionEjecucion = (Integer) infoEje.get(0);
+//            service.setLog("duracion ejecucion" + duracionEjecucion, null);
+//            actividadEjecucion.setDuration(duracionEjecucion);
+//        }
 
 
 
@@ -928,9 +951,22 @@ public class ContratoForm implements IsWidget, EntryPoint {
             hayError = true;
             msgValidacion += "*Por favor verifique el nombre del contrato, ya se encuentra en el plan operativo." + "<br/>";
         }
+        if (contrato.getFec_ini_precontractual() == null) {
+            hayError = true;
+            msgValidacion += "*Por favor ingrese la fecha de inicio de la etapa precontractual" + "<br/>";
+        }
+        else
+        {
+            if (contrato.getFec_ini_precontractual().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
+                hayError = true;
+                msgValidacion += "*La fecha de inicio de la etapa precontractual no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
+            }
+            
+        }    
+        
         if (contrato.getDatefechaini() == null) {
             hayError = true;
-            msgValidacion += "*por favor ingrese la fecha de suscripcion" + "<br/>";
+            msgValidacion += "*Por favor ingrese la fecha de suscripcion" + "<br/>";
         } else {
 
             if (contrato.getDatefechaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
@@ -940,7 +976,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         if (contrato.getDatefechaactaini() == null) {
             hayError = true;
-            msgValidacion += "*por favor ingrese la fecha de suscripcion del acta de inicio" + "<br/>";
+            msgValidacion += "*Por favor ingrese la fecha de suscripcion del acta de inicio" + "<br/>";
         } else {
 
             if (contrato.getDatefechaactaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
@@ -950,17 +986,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         if (contrato.getTextobjeto().equals("Objeto")) {
             hayError = true;
-            msgValidacion += "*por favor ingrese el objeto del contrato" + "<br/>";
+            msgValidacion += "*Por favor ingrese el objeto del contrato" + "<br/>";
         }
 
         if (nombreAbre.getValue() == null) {
             hayError = true;
-            msgValidacion += "*por favor ingrese nombre abreviado del contrato" + "<br/>";
+            msgValidacion += "*Por favor ingrese nombre abreviado del contrato" + "<br/>";
         }
 
         if (contrato.getTipocontrato() == null) {
             hayError = true;
-            msgValidacion += "*por favor seleccione un tipo de contrato" + "<br/>";
+            msgValidacion += "*Por favor seleccione un tipo de contrato" + "<br/>";
         }
 
         if (contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
@@ -1325,4 +1361,13 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         return false;
     }
+
+    public DateField getFechaInicioPrecontractual() {
+        return fechaInicioPrecontractual;
+    }
+
+    public void setFechaInicioPrecontractual(DateField fechaInicioPrecontractual) {
+        this.fechaInicioPrecontractual = fechaInicioPrecontractual;
+    }
+    
 }

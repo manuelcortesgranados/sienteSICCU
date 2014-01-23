@@ -1002,7 +1002,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
     public void iniciarFiltroAvanzado() {
         //filtro.setPalabraClave(new String());
-        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+        List<Localidad> listaMunicipios = getSessionBeanCobra().getGipromService().encontrarMunicipios(depto.getStrcodigolocalidad());
         llenarComboMunicipio(listaMunicipios);
         List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
 
@@ -1012,7 +1012,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
         if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
             tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-            List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+            //List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+            List<Localidad> deptos = getSessionBeanCobra().getGipromService().encontrarDepartamentos();
             llenarComboDeptos(deptos);
 
         } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 1) {
@@ -1058,7 +1059,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public void cargarMunicipios() {
         List<Localidad> listaMunicipios = new ArrayList<Localidad>();
         if (filtro.getStrcoddepto().compareTo("0") != 0) {
-            listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(filtro.getStrcoddepto());
+            listaMunicipios = getSessionBeanCobra().getGipromService().encontrarMunicipios(filtro.getStrcoddepto());
         }
         llenarComboMunicipio(listaMunicipios);
     }
@@ -2105,7 +2106,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 cargarListaVistaObraMapa();
                 break;
             case 3:
-                filtro.setFactorpagina(10);
+                filtro.setFactorpagina(200);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 cargarListaVistaObraMapa();

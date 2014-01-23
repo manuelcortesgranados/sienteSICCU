@@ -30,9 +30,7 @@ import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
-import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
-import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -67,13 +65,11 @@ import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BeforeStartEditEvent;
-import com.sencha.gxt.widget.core.client.event.CancelEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
-import com.sencha.gxt.widget.core.client.event.StartEditEvent;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -740,7 +736,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(getGantt().getLeftGrid());
 
             editing.addEditor(config.leftColumns.getColumn(1), new DateField());
-            editing.addEditor(config.leftColumns.getColumn(2), new DateField());
+            /*editing.addEditor(config.leftColumns.getColumn(2), new DateField());*/
             SpinnerField<Integer> spinnerduracion = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
             spinnerduracion.setMinValue(0);
             spinnerduracion.setIncrement(1);
@@ -761,7 +757,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
                             ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                             ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                            if (ac.isEditable()) {
+                            if (ac.getEditable()) {
                                 if (ac.getTipoActividad() == 6) {
                                     switch (event.getEditCell().getCol()) {
                                         case 2:
@@ -778,7 +774,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 }
                             } else {
                                 event.setCancelled(true);
-                                alertaMensajes("Esta Actividad no se puede editar /iniciando");
+                                alertaMensajes("Esta Actividad no se puede editar");
                             }
                         }
                     });
@@ -790,7 +786,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                             ActividadobraDTO ac = store.get(event.getEditCell().getRow());
                             
-                            if (ac.isEditable()) {
+                            if (ac.getEditable()) {
                                 try {
                                     
                                     
@@ -864,7 +860,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                     ac.setDuration(actividadAnterior.getDuration());
                                 }
                             } else {
-                                alertaMensajes("Esta Actividad no se puede editar /complete");
+                                alertaMensajes("Esta Actividad no se puede editar");
                             }
 
                         }
@@ -890,7 +886,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         getGantt().setStartEnd(new DateWrapper(convenioDTO.getDatefechaactaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
 
         FlowLayoutContainer main;
-        if (!fullScreen) {
+        //if (!fullScreen) {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
             main.setWidth(980);
@@ -898,13 +894,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 main.setStyleName("main-contenedor-gwt");
             } else {
                 main.setStyleName("main-contenedor-gwt-en-ejecucion");
-            }
+            }            
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
             cp.setPixelSize(980, 460);
             cp.getElement().setMargins(new Margins(0));
-
+                                   
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
             vc1.setWidth("400");
             vc1.setPosition(140, 0);
@@ -926,6 +922,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 HorizontalPanel linea = new HorizontalPanel();
                 linea.addStyleName("ikont-hr-separador-convenio");
             }
+            
+            if (fullScreen)
+            {    
+               main.setStyleName("main-contenedor-gwt-fullscreen");
+               main.getElement().setMargins(new Margins(-50, 0, 0, 0));
+               main.setWidth(1300);
+               main.setHeight(600);
+               cp.setPixelSize(1280, 650);
+               vc1.setPosition(400, 0);
+               main.setPagePosition(0, 0);               
+            }
             VerticalLayoutContainer vc = new VerticalLayoutContainer();
             cp.setWidget(vc);
 
@@ -933,69 +940,26 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
             vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
 
-            if (!isModolectura()) {
+            if (!isModolectura() && !fullScreen) {
                 Menu_superior_gwt menuSupe = new Menu_superior_gwt(service, taskStore, convenioDTO, depStore);
                 main.add(menuSupe.asWidget());
             }
             main.add(vc1);
-
+            if (!isModolectura() && !fullScreen) {
             Sub_menu_gwt submenu = new Sub_menu_gwt(service, taskStore, convenioDTO, depStore);
             main.add(submenu.asWidget());
+            }
+            
             if (!isModolectura()) {
-                ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO));
+                ToolBarSuperior toolBar = new ToolBarSuperior(service, taskStore, convenioDTO, depStore, new PlanOperativoGantt(convenioDTO), fullScreen);
                 main.add(toolBar.asWidget());
             }
             //main.add(tablaNumeracion.asWidget());
             main.add(cp);
-            if (!isModolectura()) {
+            if (!isModolectura() && !fullScreen) {
                 ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
                 main.add(toolinferior);
-            }
-
-        } else {
-            main = new FlowLayoutContainer();
-            main.setStyleName("main-contenedor-gwt-fullscreen");
-            main.getElement().setMargins(new Margins(-50, 0, 0, 0));
-            main.setWidth(1300);
-            main.setHeight(600);
-            ContentPanel cp = new ContentPanel();
-            cp.setHeadingText("Plan Operativo");
-            cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-            cp.setPixelSize(1480, 650);
-            cp.getElement().setMargins(new Margins(0));
-
-            VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
-            vc1.setWidth("400");
-            vc1.setPosition(400, 0);
-
-            Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
-            tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
-            Label subTituloPrincipal = new Label(msgs.subtituloPlanOperativo());
-            subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
-            Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
-            mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
-            Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
-            mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
-
-            vc1.add(tituloPrincipal);
-            vc1.add(subTituloPrincipal);
-            vc1.add(mensajeG1);
-            vc1.add(mensajeG2);
-
-            HorizontalPanel linea = new HorizontalPanel();
-            linea.addStyleName("ikont-hr-separador-convenio");
-
-            main.add(vc1);
-
-            VerticalLayoutContainer vc = new VerticalLayoutContainer();
-            cp.setWidget(vc);
-            vc.add(createToolBarPeriodo());
-            vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
-            vc.add(getGantt(), new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-            main.setPagePosition(0, 0);
-            main.add(cp);
-
-        }
+            }       
         return main;
     }
 

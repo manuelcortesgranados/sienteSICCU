@@ -52,6 +52,7 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
+import java.math.RoundingMode;
 import javax.faces.context.FacesContext;
 
 /**
@@ -65,7 +66,7 @@ import javax.faces.context.FacesContext;
  * @version Created on 13-oct-2010, 13:53:10
  * @author carlosalbertoloaizaguerrero
  */
-public class DetalleObra implements Serializable{
+public class DetalleObra implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String strimagenobraproyectada = "";
@@ -132,13 +133,11 @@ public class DetalleObra implements Serializable{
     private boolean veralimenta = false;
     private int listasegudires;
     private List<Beneficiario> lstbeneficiario;
-    private int totalben=0;
+    private int totalben = 0;
     private List<Actividadobra> listactividades = new ArrayList<Actividadobra>();
     private BigDecimal totalprogramado;
     private BigDecimal totalejecutado;
-
-    private boolean permitirvalidar=true;
-    
+    private boolean permitirvalidar = true;
     /**
      * Lista de proyectos hijos de este proyecto cuando se trata de un proyecto
      * padre
@@ -148,11 +147,28 @@ public class DetalleObra implements Serializable{
      * Objeto que contiene los datos básicos de una obra
      */
     private VistaObraMapa obraMapa;
-    
     /**
      * Si true se renderiza la modal modalImagenvermas de lo contrario no
      */
     private boolean verModalImagenvermas;
+    private String strlocalidadlogitud;
+    private String strlocalidadlatitud;
+
+    public String getStrlocalidadlogitud() {
+        return strlocalidadlogitud;
+    }
+
+    public void setStrlocalidadlogitud(String strlocalidadlogitud) {
+        this.strlocalidadlogitud = strlocalidadlogitud;
+    }
+
+    public String getStrlocalidadlatitud() {
+        return strlocalidadlatitud;
+    }
+
+    public void setStrlocalidadlatitud(String strlocalidadlatitud) {
+        this.strlocalidadlatitud = strlocalidadlatitud;
+    }
 
     public boolean isVerModalImagenvermas() {
         return verModalImagenvermas;
@@ -257,7 +273,7 @@ public class DetalleObra implements Serializable{
         this.listasegudires = listasegudires;
     }
 
-    public boolean isVeralimenta() {        
+    public boolean isVeralimenta() {
         return veralimenta;
     }
 
@@ -465,7 +481,6 @@ public class DetalleObra implements Serializable{
     public String getFinentrega() {
         return finentrega;
     }
-    
 
     public void setFinentrega(String finentrega) {
         this.finentrega = finentrega;
@@ -775,7 +790,6 @@ public class DetalleObra implements Serializable{
     public void setLstbeneficiario(List<Beneficiario> lstbeneficiario) {
         this.lstbeneficiario = lstbeneficiario;
     }
-    
     /**
      * Listado de calificaciones de auditoría para la obra
      */
@@ -788,8 +802,7 @@ public class DetalleObra implements Serializable{
     public void setListacalificacionesauditoriaobra(List<Calificacionauditoriaobra> listacalificacionesauditoriaobra) {
         this.listacalificacionesauditoriaobra = listacalificacionesauditoriaobra;
     }
-
-     /**
+    /**
      * Referencia a la tabla de visitas de auditoría
      */
     private UIDataTable tablacalificacionesauditoriaobra = new UIDataTable();
@@ -810,7 +823,6 @@ public class DetalleObra implements Serializable{
     private void _init() throws Exception {
     }
     // </editor-fold>
-
     private UIDataTable tablalistaavances = new UIDataTable();
 
     public UIDataTable getTablalistaavances() {
@@ -819,16 +831,17 @@ public class DetalleObra implements Serializable{
 
     public void setTablalistaavances(UIDataTable tablalistaavances) {
         this.tablalistaavances = tablalistaavances;
-    }    
-    
-  
+    }
     private int filaSeleccionada;
+
     public DetalleObra() {
 //        if (getSessionBeanCobra().getCobraService().isVerproy()) {
 //            getAdministrarObraNew().setObra(getSessionBeanCobra().getCobraService().getProyectoSoli());
 //            iniciardetalle();
         llenarSelectPeriodoCorto();
-        //}
+        if (Boolean.parseBoolean(getBundle().getString("vistasgiprom"))) {
+            calcularUbicacionGradosMinutosSegundo();
+        }
     }
 
     public void setimagenObra(String imagen) {
@@ -875,7 +888,7 @@ public class DetalleObra implements Serializable{
             // alimentacionmostrar = getSessionBeanCobra().getCobraService().encontrarAlimentacionxPeriodo(periodoevo.getIntidperiodo(), getAdministrarObraNew().getObra().getIntcodigoobra());
 
             alimentacionmostrar = (Alimentacion) tablalistaavances.getRowData();
-           
+
             if (getAlimentacionmostrar() != null && getAlimentacionmostrar().getSemaforo().getStrimagen().equals(bundle.getString("semafo_verde"))) {
                 semaforo = "VERDE";
             }
@@ -942,11 +955,11 @@ public class DetalleObra implements Serializable{
     public String bt_downloadAlimen_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-         Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();
-       
+        Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();
+
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+"/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + "/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1105,32 +1118,33 @@ public class DetalleObra implements Serializable{
     }
 
     public void iniciardetalle() {
-        
+
         getAdministrarObraNew().setProyectoestrategia(false);
         imagenEvolucion();
         getAdministrarObraNew().cargarListas();
         llenarContratosInterventoria();
-        getAdministrarObraNew().modificarObjetoObra =false;
-        getAdministrarObraNew().btn_habilitarModificarObjeto=true;
-         getAdministrarObraNew().habilitarModificarimpacto = true;
+        getAdministrarObraNew().modificarObjetoObra = false;
+        getAdministrarObraNew().btn_habilitarModificarObjeto = true;
+        getAdministrarObraNew().habilitarModificarimpacto = true;
         getAdministrarObraNew().habilitarGuardarimpacto = false;
         getAdministrarObraNew().controltipodocumento = 3;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
-        if (getSessionBeanCobra().getBundle().getString("versioncobra").compareTo("siente")==0 && obraMapa.getContrato() != null ) {
+        if (getSessionBeanCobra().getBundle().getString("versioncobra").compareTo("siente") == 0 && obraMapa.getContrato() != null) {
             if (getSessionBeanCobra().getMarcoLogicoService().encontrarEstrategiaProyectoMarcoLogico(obraMapa.getIntcodigoobra()) != null) {
-                getAdministrarObraNew().setProyectoestrategia(true);  
+                getAdministrarObraNew().setProyectoestrategia(true);
                 //Llenamos objetos de avance                
                 getAdministrarObraNew().setVproductomedios(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(2, obraMapa.getIntcodigoobra()));
                 getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));
-                
+
             }
-        }     
+        }
         limpiardetalle();
         if (getSessionBeanCobra().getCobraService().isCiu()) {
             llenarseguidores();
             ConozcaProyecto();
             obtenerSeguidorporObra();
         }
+
         semaforo = "";
         //llenarContratosInterventoria();
         idcontratos = "";
@@ -1140,8 +1154,8 @@ public class DetalleObra implements Serializable{
 //        }
         contratistanombrecomple = "";
         setContrat(getSessionBeanCobra().getCobraService().obtenerContratista(getAdministrarObraNew().getObra()));
-      
-       // getAdministrarObraNew().llenarContratoInterventoria();
+
+        // getAdministrarObraNew().llenarContratoInterventoria();
         //getAdministrarObraNew().llenarContratoObra();
         if (getAdministrarObraNew().getListaContrato() != null) {
             int i = 0;
@@ -1180,13 +1194,13 @@ public class DetalleObra implements Serializable{
         setAlimentacionultima(new Alimentacion());
         setAlimentacionultima(getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getAdministrarObraNew().getObra().getIntcodigoobra()));
 
-        if (obraMapa!=null &&obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_verde"))) {
+        if (obraMapa != null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_verde"))) {
             semaforo = "VERDE";
         }
-        if (obraMapa!=null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_amarillo"))) {
+        if (obraMapa != null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_amarillo"))) {
             semaforo = "AMARILLO";
         }
-        if (obraMapa!=null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_rojo"))) {
+        if (obraMapa != null && obraMapa.getSemaforo() != null && obraMapa.getSemaforo().equals(bundle.getString("semafo_rojo"))) {
             semaforo = "ROJO";
         }
 
@@ -1212,7 +1226,7 @@ public class DetalleObra implements Serializable{
         }
         //cargarGrafico();
         llenarSelectPeriodoCorto();
-
+        calcularUbicacionGradosMinutosSegundo();
 
 
 //        } catch (Exception e) {
@@ -1223,9 +1237,8 @@ public class DetalleObra implements Serializable{
             getAdministrarObraNew().mostrarGoogle();
         }
         getAdministrarObraNew().setOpcion(0);
-        if(getAdministrarObraNew().getObra().getDatefecfinobra() != null)
-        {    
-        finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
+        if (getAdministrarObraNew().getObra().getDatefecfinobra() != null) {
+            finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
         }
     }
 
@@ -1234,9 +1247,9 @@ public class DetalleObra implements Serializable{
     }
 
     public String reportePdf() {
-        try {            
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+        try {
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1245,8 +1258,8 @@ public class DetalleObra implements Serializable{
 
     public String reportePdfSeguimiento() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtpdfseguimiento") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfseguimiento") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1255,8 +1268,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteExcel() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtexceldetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtexceldetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1267,8 +1280,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteWord() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("birtworddetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtworddetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1331,7 +1344,7 @@ public class DetalleObra implements Serializable{
         }
         if (getStrimagenActual().compareTo("") != 0 && getStrimagenActual() != null) {
             getStrimagenActual();
-            boolimg=true;
+            boolimg = true;
         } else {
             setStrimagenActual(bundle.getString("noimagen"));
             boolimg = false;
@@ -1368,6 +1381,7 @@ public class DetalleObra implements Serializable{
     }
 
     public void llenarSelectPeriodoCorto() {
+        System.out.println("ingresa a este metodo");
         listaperiodo = getSessionBeanCobra().getCobraService().encontrarPeriodosObra(getAdministrarObraNew().getObra());
         selectItemPeriodoCorte = new SelectItem[listaperiodo.size()];//asigno tamaño al selecitem
         int i = 0;
@@ -1435,7 +1449,7 @@ public class DetalleObra implements Serializable{
     }
 
     public String mostrarUltimasAlimentacionCualitativa() {
-        getSessionBeanCobra().getCobraService().setListAlimetCualitativa(getSessionBeanCobra().getCobraService().encontrarUltimasAlimentacionesCualitativa(getAdministrarObraNew().getObra().getIntcodigoobra(), 0, 10));        
+        getSessionBeanCobra().getCobraService().setListAlimetCualitativa(getSessionBeanCobra().getCobraService().encontrarUltimasAlimentacionesCualitativa(getAdministrarObraNew().getObra().getIntcodigoobra(), 0, 10));
         System.out.println("entre aca = ");
         return null;
     }
@@ -1571,8 +1585,8 @@ public class DetalleObra implements Serializable{
     public String seguimientoreport() {
         Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimiento") + segui.getIntidseguimiento());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdfseguimiento") + segui.getIntidseguimiento());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1648,8 +1662,8 @@ public class DetalleObra implements Serializable{
 
     public String reporteInterventoriaSeguimiento() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdfseguimientointerventoria") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdfseguimientointerventoria") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1729,8 +1743,8 @@ public class DetalleObra implements Serializable{
     public String reporteHistorialValidaciones() {
 
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportehistorialvalidaciones") + getAdministrarObraNew().getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportehistorialvalidaciones") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1807,6 +1821,7 @@ public class DetalleObra implements Serializable{
 
     /**
      * Carga el listado de proyectos hijos del proyecto actual
+     *
      * @return
      */
     public String cargarSubProyectos() {
@@ -1832,28 +1847,60 @@ public class DetalleObra implements Serializable{
     public void setFilaSeleccionada(int filaSeleccionada) {
         this.filaSeleccionada = filaSeleccionada;
     }
-    
+
     /**
-     * Consulta la visitas de auditoría fallidas, correspondientes al usuario actual del
-     * sistema
+     * Consulta la visitas de auditoría fallidas, correspondientes al usuario
+     * actual del sistema
      */
     public void cargarVisitasAuditoriaObra() {
         listacalificacionesauditoriaobra = getSessionBeanCobra().getCobraService().encontrarCalificacionesAuditoriaObra(getAdministrarObraNew().getObra().getIntcodigoobra(), Visita.ESTADO_CORRECTO);
     }
-    
+
     /**
      * Descarga el reporte de errores de visita fallida
      */
     public void generarReporteVisitaAuditoria() {
         Calificacionauditoriaobra calificacionauditoriaobra = (Calificacionauditoriaobra) tablacalificacionesauditoriaobra.getRowData();
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd") ,calificacionauditoriaobra.getVisita().getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + Propiedad.getValor("reportematrizauditoria", Propiedad.getValor("nombrebd"), calificacionauditoriaobra.getVisita().getOidvisita(), getAdministrarObraNew().getObra().getIntcodigoobra()));
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
 
         } catch (IOException ex) {
             Logger.getLogger(AdminSupervisionExterna.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+/**
+ * Metodo utilizado para calcular La localidad por Grados, Minutos y Segundos.
+ */
+    public void calcularUbicacionGradosMinutosSegundo() {
+        BigDecimal minseg = new BigDecimal(60);
+        BigDecimal longitud = getAdministrarObraNew().getObra().getFloatlongitud();
+        BigDecimal latitud = getAdministrarObraNew().getObra().getFloatlatitud();
+        BigDecimal grados_longitud, grados_latitud;
+        BigDecimal minutos_longitud, minutos_latitud;
+        BigDecimal seg_longitud, seg_latitud;
+
+        grados_longitud = longitud.setScale(0, RoundingMode.DOWN);
+        minutos_longitud = ((longitud.subtract(grados_longitud)).multiply(minseg)).setScale(0, RoundingMode.DOWN);
+        seg_longitud = minseg.multiply((longitud.subtract(grados_longitud).subtract(((latitud.subtract(grados_longitud)).multiply(minseg)).divide(minseg)))).multiply(minseg).setScale(0, RoundingMode.DOWN);
+        grados_latitud = latitud.setScale(0, RoundingMode.DOWN);
+        minutos_latitud = ((latitud.subtract(grados_latitud)).multiply(minseg)).setScale(0, RoundingMode.DOWN);
+        seg_latitud = minseg.multiply((latitud.subtract(grados_latitud).subtract(((latitud.subtract(grados_latitud)).multiply(minseg)).divide(minseg)))).multiply(minseg).setScale(0, RoundingMode.DOWN);
+
+        if (grados_longitud.compareTo(BigDecimal.ONE) < 0) {
+            strlocalidadlogitud = "W  " + grados_longitud.multiply(new BigDecimal(-1)) + "°  " + minutos_longitud.multiply(new BigDecimal(-1)) + "'  " + seg_longitud.multiply(new BigDecimal(-1)) + "''";
+
+        } else {
+            strlocalidadlogitud = "E  " + grados_longitud + "° " + minutos_longitud + "'  " + seg_longitud + "'' ";
+        }
+
+        if (grados_latitud.compareTo(BigDecimal.ONE) < 0) {
+            strlocalidadlatitud = "S " + grados_latitud.multiply(new BigDecimal(-1)) + "°  " + minutos_longitud.multiply(new BigDecimal(-1)) + "'  " + seg_latitud.multiply(new BigDecimal(-1)) + " ''";
+
+        } else {
+            strlocalidadlatitud = "N " + grados_latitud + "° " + minutos_latitud + "'  " + seg_latitud + "''";
+        }
+
+    }
 }

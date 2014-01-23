@@ -177,23 +177,23 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         Iterator itparametricas = listapar.iterator();
         ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
         while (itparametricas.hasNext()) {
-            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();
+            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();           
+           
             if (par.getParametricaactividadesobligatorias() == null) {
                 ActividadobraDTO actdto = null;
                 if (par.getIdparametrica() == 3) {
                      DateWrapper dw = new DateWrapper(contratoDto.getDatefechafin()).clearTime();                
                              
-                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par,  dw.asDate(), 1, 0);
-                    actdto.setEditable(par.isEditable());
-                    System.out.println("par ed = " + par.isEditable());
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par,  dw.asDate(), 1, 0);                    
+                    actdto.setEditable(par.getEditable());    
+                    
                     actdto.setNumeracion(numeracion);
                     numeracion++;
                 } else if (par.getIdparametrica() == 1) {
                      DateWrapper dw = new DateWrapper(contratoDto.getDatefechaactaini()).clearTime(); 
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, dw.asDate(), 1, 0);
                     //actdto.setEndDateTime(CalendarUtil.copyDate(actdto.getStartDateTime()));
-                    actdto.setEditable(par.isEditable());
-                    System.out.println("par ed = " + par.isEditable());
+                    actdto.setEditable(par.getEditable());                    
                     actdto.setNumeracion(numeracion);
                     numeracion++;
                     //CalendarUtil.addDaysToDate(actdto.getEndDateTime(), 1);
@@ -204,15 +204,15 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                     
                     int dur=CalendarUtil.getDaysBetween(fechaPlaneacion,fechafin);                    
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechaPlaneacion, dur, 0);
-                    System.out.println("par ed = " + par.isEditable());
-                    actdto.setEditable(par.isEditable());
+                    
+                    actdto.setEditable(par.getEditable());
                     actdto.setNumeracion(numeracion);
                     numeracion++;
                     
                 } else {
                     actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
                     actdto.setNumeracion(numeracion);
-                    actdto.setEditable(par.isEditable());
+                    actdto.setEditable(par.getEditable());
                     numeracion++;
                 }
                 for (Parametricaactividadesobligatorias parhija : listapar) {
@@ -223,23 +223,20 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                             ActividadobraDTO actiHija = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, CalendarUtil.copyDate(contratoDto.getDatefechaactaini()), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
-                            actiHija.setEditable(par.isEditable());
-                            System.out.println("actiHija = " + actiHija.isEditable());
+                            actiHija.setEditable(parhija.getEditable());                            
                             actdto.addChild(actiHija);
                         } else if (parhija.getIdparametrica() == 7) {                            
                             DateWrapper dw = new DateWrapper(contratoDto.getDatefechafin()).clearTime();                
                             ActividadobraDTO actiHija=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, dw.asDate(), 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
-                            actiHija.setEditable(par.isEditable());
-                            System.out.println("actiHija = " + actiHija.isEditable());
+                            actiHija.setEditable(parhija.getEditable());                            
                             actdto.addChild(actiHija);
                         } else {
                             ActividadobraDTO actiHija = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0);
                             actiHija.setNumeracion(numeracion);
                             numeracion++;
-                            actiHija.setEditable(par.isEditable());
-                            System.out.println("actiHija = " + actiHija.isEditable());
+                            actiHija.setEditable(parhija.getEditable());                            
                             actdto.addChild(actiHija);
                         }
                     }

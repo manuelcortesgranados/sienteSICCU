@@ -136,51 +136,52 @@ public class GanttDatos {
 
     public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ListStore<DependenciaDTO> depsStore,ActividadobraDTOProps props, ContratoDTO contrato) {
 
-        if (actividadPadre != null) {
-            //if (actividadPadre.getTipoActividad() != 1) {
-                List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-                if (!listaHijas.isEmpty()) {
-                    Date menor = obtenerMenorFechaInicio(listaHijas);
-                    Date mayor = obtenerMayorFechaFin(listaHijas);
-                    if (menor != null && mayor != null) {
-                        int duracion = CalendarUtil.getDaysBetween(menor, mayor) + 1;
-                        props.duration().setValue(actividadPadre, duracion);
-                        DateWrapper dw = new DateWrapper(actividadPadre.getStartDateTime()).clearTime();
-//                       int diferenciaduracion=0;
-//                        if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
-//                            diferenciaduracion = CalendarUtil.getDaysBetween(actividadPadre.getEndDateTime(),mayor);
-//                        }
-//                        service.setLog("Diferencia "+diferenciaduracion, null);
-                        props.endDateTime().setValue(actividadPadre, dw.addDays(actividadPadre.getDuration() - 1).asDate());
-                        
-                        
-                                   
-                        //if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
-                            //Obtener hermanos
-                        
-                            //List<ActividadobraDTO> listaact = taskStore.getParent(actividadPadre).getChildren();
-//                        if(diferenciaduracion>0)
-//                        {    
-//                        List<ActividadobraDTO> listaact = encontrarActividadDestinoDependeciaFinInicio(depsStore, actividadPadre.getId(), diferenciaduracion);
-//                            for (ActividadobraDTO acto : listaact) {
-//                                service.setLog("Actividadpadre " + acto.getName(), null);
-//                                service.setLog("Inicio " + acto.getStartDateTime(), null);
-//                                service.setLog("Fin " + acto.getEndDateTime(), null);
-//                                if(acto.getChildren().isEmpty())
-//                                {
-//                                     modificarFechaFin(acto, taskStore, depsStore, props, contrato);
-//                                }
-////                                List<ActividadobraDTO> listaHijashermanos = taskStore.getChildren(acto);
-////                                if (listaHijas.isEmpty()) {
-////
+//        if (actividadPadre != null) {
+//            //if (actividadPadre.getTipoActividad() != 1) {
+//            service.setLog(" modificando "+actividadPadre.getName(), null);
+//                List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
+//                if (!listaHijas.isEmpty()) {
+//                    Date menor = obtenerMenorFechaInicio(listaHijas);
+//                    Date mayor = obtenerMayorFechaFin(listaHijas);
+//                    if (menor != null && mayor != null) {
+//                        int duracion = CalendarUtil.getDaysBetween(menor, mayor) + 1;
+//                        props.duration().setValue(actividadPadre, duracion);
+//                        DateWrapper dw = new DateWrapper(actividadPadre.getStartDateTime()).clearTime();
+////                       int diferenciaduracion=0;
+////                        if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
+////                            diferenciaduracion = CalendarUtil.getDaysBetween(actividadPadre.getEndDateTime(),mayor);
+////                        }
+////                        service.setLog("Diferencia "+diferenciaduracion, null);
+//                        props.endDateTime().setValue(actividadPadre, dw.addDays(actividadPadre.getDuration() - 1).asDate());
+//                        
+//                        
+//                                   
+//                        //if (mayor.compareTo(actividadPadre.getEndDateTime()) > 0) {
+//                            //Obtener hermanos
+//                        
+//                            //List<ActividadobraDTO> listaact = taskStore.getParent(actividadPadre).getChildren();
+////                        if(diferenciaduracion>0)
+////                        {    
+////                        List<ActividadobraDTO> listaact = encontrarActividadDestinoDependeciaFinInicio(depsStore, actividadPadre.getId(), diferenciaduracion);
+////                            for (ActividadobraDTO acto : listaact) {
+////                                service.setLog("Actividadpadre " + acto.getName(), null);
+////                                service.setLog("Inicio " + acto.getStartDateTime(), null);
+////                                service.setLog("Fin " + acto.getEndDateTime(), null);
+////                                if(acto.getChildren().isEmpty())
+////                                {
+////                                     modificarFechaFin(acto, taskStore, depsStore, props, contrato);
 ////                                }
-//                            }
-//                        }
-                        modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, depsStore, props, contrato);
-                    }
-                }
-            //}
-        }
+//////                                List<ActividadobraDTO> listaHijashermanos = taskStore.getChildren(acto);
+//////                                if (listaHijas.isEmpty()) {
+//////
+//////                                }
+////                            }
+////                        }
+//                        modificarFechaFin(taskStore.getParent(actividadPadre), taskStore, depsStore, props, contrato);
+//                    }
+//                }
+//            //}
+//        }
 
     }
 

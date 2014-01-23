@@ -137,9 +137,4 @@ public class ArchivoWebUtil {
         int indiceFinNombreReporte = url.indexOf(".rptdesign");
         return url.substring(indiceIniNombreReporte, indiceFinNombreReporte);
     }
-    
-    public static void main(String[] args) {
-        System.out.println(obtenerNombreReporteBirt("birt/run?__report=report/Fonade/Auditoria/ResultadosValidacion.rptdesign&__format=pdf&bd={0}&codigoVisita=9"));
-        System.out.println(obtenerTipoReporteBirt("birt/run?__report=report/Fonade/Auditoria/ResultadosValidacion.rptdesign&__format=pdf&bd={0}&codigoVisita=9"));
-    }
 }

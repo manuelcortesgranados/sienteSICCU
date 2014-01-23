@@ -36,13 +36,14 @@ public class ToolBarSuperior implements IsWidget {
     protected ContratoDTO convenio;
     protected ListStore<DependenciaDTO> depStore;
     protected PlanOperativoGantt planOperativo;
+    protected boolean fullscreen;
 
-    public ToolBarSuperior(CobraGwtServiceAbleAsync service, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, ListStore<DependenciaDTO> depStore, PlanOperativoGantt planOperativo) {
+    public ToolBarSuperior(CobraGwtServiceAbleAsync service, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio, ListStore<DependenciaDTO> depStore, PlanOperativoGantt planOperativo, boolean fullscreen) {
         this.service = service;
         this.taskStore = taskStore;
         this.convenio = convenio;
         this.depStore = depStore;
-
+        this.fullscreen = fullscreen;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ToolBarSuperior implements IsWidget {
         Button finalizarbasicos = new Button();
         Button guardarborrador = new Button();
         Button fullScreen = new Button();
-       
+
         finalizarbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -87,7 +88,6 @@ public class ToolBarSuperior implements IsWidget {
                         });
                     }
                 });
-
 
             }
         });
@@ -129,7 +129,7 @@ public class ToolBarSuperior implements IsWidget {
 
             }
         });
-       
+
         fullScreen.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -149,14 +149,39 @@ public class ToolBarSuperior implements IsWidget {
 
                             @Override
                             public void onSuccess(Boolean result) {
+                                if (fullscreen) {
+                                    service.setFullScreen(false, null);
+                                    service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                                        @Override
+                                        public void onFailure(Throwable caught) {
+                                            service.setLog(caught.getMessage(), null);
+                                        }
+
+                                        @Override
+                                        public void onSuccess(Boolean result) {
+                                            service.setGuardarconvenio(1, new AsyncCallback<Boolean>() {
+                                                @Override
+                                                public void onFailure(Throwable caught) {
+                                                    service.setLog(caught.getMessage(), null);
+                                                }
+
+                                                @Override
+                                                public void onSuccess(Boolean result) {
+                                                    Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                                                }
+                                            });
+                                        }
+                                    });
+                                } else {
+                                    
+                                     Window.open(retornarPOFullScreen(), "_parent", retornarConfiguracionPagina());
+                                }
                                
-                                Window.open(retornarPOFullScreen(), "_parent", retornarConfiguracionPagina());
-                              
+
                             }
                         });
                     }
                 });
-
 
             }
         });
@@ -168,7 +193,14 @@ public class ToolBarSuperior implements IsWidget {
         toolBarSuperior.add(guardarborrador);
         toolBarSuperior.add(fullScreen);
         toolBarSuperior.setStyleName("ikont-po-tb");
-        toolBarSuperior.setWidth(980);
+        if(fullscreen)
+        {    
+        toolBarSuperior.setWidth(1280);
+        }
+        else
+        {
+            toolBarSuperior.setWidth(980);
+        }    
         return toolBarSuperior;
     }
 
@@ -177,8 +209,8 @@ public class ToolBarSuperior implements IsWidget {
         return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
 
     }
-    
-     public String retornarPOFullScreen() {
+
+    public String retornarPOFullScreen() {
 
         return "/zoom/Supervisor/PlanOFullScreen.xhtml";
 
