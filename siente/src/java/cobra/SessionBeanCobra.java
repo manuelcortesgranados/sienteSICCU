@@ -24,8 +24,6 @@ import co.com.interkont.cobra.to.RestaurarPassword;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.vista.VistaObraMapa;
-import co.com.interkont.giprom.vista.VwEncIncInfoConsolidada;
-import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
 import cobra.Supervisor.FacesUtils;
@@ -42,9 +40,6 @@ import financiera.service.FinancieraServiceAble;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1342,6 +1337,16 @@ public class SessionBeanCobra implements Serializable {
         vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
         vista.setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
 
+        int x=40;
+        
+        
+        System.out.println(x^=3);
+        x=45;
+        
+        System.out.println(x|=3);
+          x=50;        
+        System.out.println( x<<=3);   
+        
         return vista;
     }   
 }
