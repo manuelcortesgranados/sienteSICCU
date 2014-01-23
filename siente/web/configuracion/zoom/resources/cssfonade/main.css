@@ -1498,7 +1498,6 @@ a.ikont-hcl-modificarusuario:hover {
 a.vtitle23:hover{
     color: #231F20;
     text-decoration: none;
-    font-size: 0.9em;
 }
 
 .img-button-plao.ikont-hcl-img-rptconsolidado{
@@ -5224,4 +5223,8 @@ a.ikont-a4jcl-solicitumaestro:hover {
 }
 .ikont-enlace-boton-restaurar-passwd:visited{
     color:  #58595B !important;   
+}
+
+.ikont-hpg-rpt-planoperativo{
+    margin-left: 25%;
 }
