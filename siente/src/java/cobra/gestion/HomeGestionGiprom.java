@@ -2106,7 +2106,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 cargarListaVistaObraMapa();
                 break;
             case 3:
-                filtro.setFactorpagina(10);
+                filtro.setFactorpagina(200);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 cargarListaVistaObraMapa();
