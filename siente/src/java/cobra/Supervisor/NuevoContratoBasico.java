@@ -5587,8 +5587,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
-        controlvisualizaciondocumento = 2;
-        filtrocontrato.setTipocontratoselect(0);
+        controlvisualizaciondocumento = 2;        
         limpiarContrato();
         primeroDetcontrato();
         if (getContrato().getTercero().getIntcodigo() != -1) {
@@ -7676,11 +7675,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 case 0:
                     iniciarDetaContrato();
                     break;
-                case 1:
-                    tipoContCon = "Obra";
-                    iniciarDetaContrato();
-
-                    break;
+//                case 1:
+//                    tipoContCon = "Obra";
+//                    iniciarDetaContrato();
+//
+//                    break;
                 case 2:
                     tipoContCon = "Estudios y Diseños";
                     contrConsultoria();
@@ -7758,6 +7757,26 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     break;
                 case 10:
                     tipoContCon = "Cooperación";
+                    iniciarDetaContrato();
+                    break;
+                case 11 :
+                    tipoContCon = "Arrendamiento";
+                    iniciarDetaContrato();
+                    break;
+                case 12 :
+                    tipoContCon ="Comodato" ;
+                    iniciarDetaContrato();
+                    break;
+                case 13 :
+                    tipoContCon = "Aporte";
+                    iniciarDetaContrato();
+                    break;
+                case 14 :
+                    tipoContCon = "Apoyo financiero";
+                    iniciarDetaContrato();
+                    break;
+                case 15 :
+                    tipoContCon = "Cesión de derechos de autor";
                     iniciarDetaContrato();
                     break;
             }
