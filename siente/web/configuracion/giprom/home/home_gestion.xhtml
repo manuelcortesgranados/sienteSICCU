@@ -125,7 +125,7 @@
                         <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.cambiarVista}" immediate="true" type="submit">
                             <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
-                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista}" rendered="#{!var.vistasgiprom}" immediate="true">
+                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.cambiarVista}"  immediate="true">
                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
                         </h:commandLink>
                     </h:panelGrid>
@@ -207,7 +207,6 @@
                                         var="obra" 
                                         rowKeyVar="filaSeleccionada"
                                         rendered="#{HomeGestion.obrasEncontradas == null or HomeGestion.obrasEncontradas > 0 }"
-                                        rows="#{HomeGestion.filtro.factorpagina}"
                                         >
                             <f:facet name="header">
                                 <rich:columnGroup>
@@ -327,7 +326,7 @@
                                 </rich:column>
                             </rich:columnGroup>
                             <f:facet name="footer">
-                                <rich:columnGroup>
+                                <rich:columnGroup rendered="#{!var.vistasgiprom}">
                                     <rich:column colspan="7" breakRowBefore="true" >
                                         <center>
                                             <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.primeroListProyectos}"/>
