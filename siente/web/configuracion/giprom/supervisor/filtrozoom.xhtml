@@ -11,13 +11,9 @@
                  >
     <h:head>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
-        <link href="#{facesContext.externalContext.requestContextPath}/resources/cssfonade/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
 
     </h:head>
@@ -33,26 +29,7 @@
 
                 <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
                 <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-                <script type="text/javascript">
-                                  $(function() {
-                                      $("#slider-range").slider({
-                                          range: true,
-                                          min: 0,
-                                          max: 100,
-                                          values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
-                                          slide: function(event, ui) {
-                                              var numero1 = ui.values[ 0 ];
-                                              var numero2 = ui.values[ 1 ];
-                                              $("#numero1").val(numero1);
-                                              $("#numero2").val(numero2);
-                                              $("#por_nbi").val(numero1 + "% a " + numero2 + "%");
-                                          }
-                                      });
-                                      $("#por_nbi").val($("#slider-range").slider("values", 0) +
-                                              "%  a  " + $("#slider-range").slider("values", 1) + "%");
-                                  });
 
-                </script>
 
                 <h:panelGrid styleClass="ikont-hpg-slider-valor">           
                     <h:panelGrid id="numeros_la" columns="1" styleClass="ikont-hpg-slider-valor1">
@@ -67,27 +44,7 @@
                 <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                 <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
 
-                <script type="text/javascript">
-                    $(function() {
-                        $("#slider-range-avance").slider({
-                            range: true,
-                            min: 0,
-                            max: 100,
-                            values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
-                            slide: function(event, ui) {
-                                var avance1 = ui.values[ 0 ];
-                                var avance2 = ui.values[ 1 ];
-                                $("#ava1").val(avance1);
-                                $("#ava2").val(avance2);
-                                $("#avance").val(avance1 + "% a " + avance2 + "%");
-                            }
-                        });
-                        $("#avance").val($("#slider-range-avance").slider("values", 0) +
-                                "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
 
-
-                    });
-                </script>
                 <h:panelGrid styleClass="ikont-hpg-slider-avance">
 
                     <rich:column>

@@ -38,6 +38,9 @@ and open the template in the editor.
        <copy todir="${build.web.dir}/resources/js/analytics">
             <fileset  dir="web/configuracion/${version}/resources/analytics/" excludes="${build.web.excludes}"/>
         </copy>
+        <copy todir="${build.web.dir}/resources/reloj">
+            <fileset  dir="web/configuracion/${version}/resources/reloj/" excludes="${build.web.excludes}"/>
+        </copy>
         <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
         <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>

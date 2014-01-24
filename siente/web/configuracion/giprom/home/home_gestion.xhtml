@@ -367,7 +367,49 @@
         <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.xhtml"/>
         <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.xhtml"/>
         <ui:include src="/reportes/modalreporte/modalreportehome.xhtml"/>
+        
+        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js?#{var.version}" type="text/javascript"/>
+        <script src="/#{var.versioncobra}/resources/reloj/js/jqueryui.js?#{var.version}" type="text/javascript"/>
 
+        <script type="text/javascript">
+
+                                  $(function() {
+
+                                      $("#slider-range").slider({
+                                          range: true,
+                                          min: 0,
+                                          max: 100,
+                                          values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                                          slide: function(event, ui) {
+                                              var numero1 = ui.values[ 0 ];
+                                              var numero2 = ui.values[ 1 ];
+                                              $("#numero1").val(numero1);
+                                              $("#numero2").val(numero2);
+                                              $("#por_nbi").val(numero1 + "% a " + numero2 + "%");
+                                          }
+                                      });
+                                      $("#por_nbi").val($("#slider-range").slider("values", 0) +
+                                              "%  a  " + $("#slider-range").slider("values", 1) + "%");
+
+                                      $("#slider-range-avance").slider({
+                                          range: true,
+                                          min: 0,
+                                          max: 100,
+                                          values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
+                                          slide: function(event, ui) {
+                                              var avance1 = ui.values[ 0 ];
+                                              var avance2 = ui.values[ 1 ];
+                                              $("#ava1").val(avance1);
+                                              $("#ava2").val(avance2);
+                                              $("#avance").val(avance1 + "% a " + avance2 + "%");
+                                          }
+                                      });
+                                      $("#avance").val($("#slider-range-avance").slider("values", 0) +
+                                              "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
+
+
+                                  });
+        </script>
     </ui:define>
 
 </ui:composition>
