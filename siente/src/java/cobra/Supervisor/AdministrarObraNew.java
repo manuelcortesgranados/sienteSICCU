@@ -166,9 +166,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public boolean modificarObjetoObra = false;
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
-    
     public int controltipodocumento = 0;
-
     /**
      * Variable para proyectos que pertenecen a Marco
      */
@@ -1364,8 +1362,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         if (subirActaRecFin.getArchivos().size() > 0) {
 
             for (ArchivoWeb nombreoriginal : subirActaRecFin.getArchivos()) {
-                urlactarecfin
-                        = nombreoriginal.getNombre();
+                urlactarecfin = nombreoriginal.getNombre();
             }
         } else {
             urlactarecfin = "";
@@ -1377,8 +1374,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public String pathDocumentoFin() {
         if (subirActaFin.getArchivos().size() > 0) {
             for (ArchivoWeb nombreoriginal : subirActaFin.getArchivos()) {
-                urlactafin
-                        = nombreoriginal.getNombre();
+                urlactafin = nombreoriginal.getNombre();
             }
 
         } else {
@@ -1783,7 +1779,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
         listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
         for (Imagenevolucionobra imagenevolucionobra1 : listaImagenesevolucionobra) {
-            
+
             Set<Alimentacion> setalimenta = new HashSet<Alimentacion>(getSessionBeanCobra().getCobraService().obtenerAlimentacionXImagen(imagenevolucionobra1.getIntidimagen()));
             imagenevolucionobra1.setAlimentacions(setalimenta);
 
@@ -1839,7 +1835,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -1853,7 +1849,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje6declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje6declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -2127,9 +2123,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * iniciarTerminarObra
-     * Metodo que llama la página de DeclarTerminarObra
-     * @return 
+     * iniciarTerminarObra Metodo que llama la página de DeclarTerminarObra
+     *
+     * @return
      */
     public String iniciarTerminarObra() {
         try {
@@ -2143,7 +2139,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage(bundle.getString("mensaje4declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra")+" " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -2167,7 +2163,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
             }
         } catch (Exception e) {
-            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra")+" "+ e.getMessage() + ". Fecha =  " + new Date() + ");");
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje3declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
     }
@@ -2428,15 +2424,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      */
     public String reporteHistorialValidaciones() {
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportehistorialvalidaciones") + getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
     }
-
     private GraficosGiprom gragiprom;
 
     public GraficosGiprom getGragiprom() {
@@ -2463,4 +2458,27 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return "consultarContrato";
     }
 
+    /**
+     * informecircularTolima Envia un correo del contratista a la contraloria
+     * del tolima
+     *
+     * @return
+     */
+    public String informecircularTolima() {
+        System.out.println("ingreso al metodo");
+        try {
+            
+            Tercero entidad = getNuevoContratoBasico().getContrato().getTercero();
+            System.out.println("entidad = " + entidad);
+            boolean respuesta = getSessionBeanCobra().getCobraService().enviarcorreoinformecircular(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra(), entidad);
+            if (respuesta) {
+                FacesUtils.addInfoMessage(bundle.getString("mensaje2informecircular"));
+            } else {
+                FacesUtils.addInfoMessage(bundle.getString("mensaje3informecircular"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje1informecircular") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+        }
+        return null;
+    }
 }
