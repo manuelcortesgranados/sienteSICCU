@@ -1873,6 +1873,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         contratistanombre = "";
         contratistapellido = "";
         listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), false));
+        listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), true));
         return null;
     }
 
@@ -2467,7 +2468,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public String informecircularTolima() {
         System.out.println("ingreso al metodo");
         try {
-            
+
             Tercero entidad = getNuevoContratoBasico().getContrato().getTercero();
             System.out.println("entidad = " + entidad);
             boolean respuesta = getSessionBeanCobra().getCobraService().enviarcorreoinformecircular(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra(), entidad);
