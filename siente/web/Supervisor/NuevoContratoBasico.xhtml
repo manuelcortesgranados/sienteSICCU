@@ -56,6 +56,15 @@
                             <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
                         </h:selectOneMenu>
                     </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante1"  value="(*)#{var.entidadcontratante}" rendered="#{var.boolentidadcontratante}"/>
+                                        <h:panelGroup id="cmbEntContra1" styleClass="ikont-hpg-entcontra"  >
+                                            <rich:select id="selectentidadcontrato1" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" rendered="#{var.boolentidadcontratante}"
+                                                         defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
+                                                <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
+                                            </rich:select>
+                                        </h:panelGroup>
+                    </h:panelGrid>
                     <h:panelGrid columns="2"  styleClass="font-general">
                         <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}"/>
                         <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}">
@@ -72,7 +81,7 @@
                                       render="pgconveniocontrato" execute="@this, pgconveniocontrato" >
                             </a4j:ajax>
                         </h:selectOneMenu>
-                    </h:panelGrid>
+                    </h:panelGrid>                    
                     <h:panelGrid columns="2" styleClass="font-general" rendered="#{Supervisor$Contrato.booltipocontratoconvenio}">
                         <h:outputLabel  styleClass="ikont-hol-convsuperior" value="Este  Convenio pertenece a un  Convenio superior?" />
                         <h:selectOneMenu styleClass="ikont-hsom-preguntaconv" id="cmbcontrato2" value="#{Supervisor$Contrato.preguntacontrato}" immediate="true">
@@ -87,7 +96,7 @@
                     <h:panelGroup id="pgconveniocontrato" >
                         <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==1}" styleClass="font-general">
                             <h:outputText  styleClass="ikont-hot-tipocontconvsuperior" value="Seleccione el #{Supervisor$Contrato.tipoContCon} superior al que pertenece el #{Supervisor$Contrato.tipoContCon}:  " />
-                            <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra"
+                            <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra, cmbEntContra1"
                                                styleClass="ikont-acb-tipocontconv"                                                      
                                                action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
                                                oncomplete="#{rich:component('mp-listado-contratos')}.show();">
@@ -96,7 +105,7 @@
 
                         <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==2 and Supervisor$Contrato.varmostrarseleccionconveniosuperior!=1}" styleClass="font-general">
                             <h:outputText  styleClass="ikont-hot-selectconvsuperior" value="Seleccione el Convenio superior al que pertenece el Convenio:  " />
-                            <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra"
+                            <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra, cmbEntContra1"
                                                styleClass="ikont-"                                                      
                                                action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
                                                oncomplete="#{rich:component('mp-listado-contratos')}.show();">
@@ -232,9 +241,9 @@
                                         <rich:message  for="txtNumcontString" styleClass="ikont-rm-numcont"  />
                                     </h:panelGrid>
 
-                                    <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
-                                    <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra"  >
-                                        <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
+                                    <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}" rendered="#{!var.boolentidadcontratante}"/>
+                                    <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra" rendered="#{!var.boolentidadcontratante}">
+                                        <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" 
                                                      defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                         </rich:select>
