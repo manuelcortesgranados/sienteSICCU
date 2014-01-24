@@ -5228,3 +5228,9 @@ a.ikont-a4jcl-solicitumaestro:hover {
 .ikont-hpg-rpt-planoperativo{
     margin-left: 25%;
 }
+
+.ikont-a-linkcliente {
+    position: absolute;
+    top: 47px;
+    left: 930px;
+}
