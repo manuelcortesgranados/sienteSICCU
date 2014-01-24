@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="informecirculartolima" autosized="true"
+                      headerClass="sliderich" styleClass="ikont-"   >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-informecirculartolima"    value="#{var.titulomodalinformecircular}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder_informecirculartolima" styleClass="ikont-acl-informecirculartolima closemodal"  
+                                      title="#{var.cerrar}" onclick="#{rich:component('informecirculartolima')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form>
+            <center>
+                <h:panelGrid id="pgconfirmarSolicituRevision" styleClass="ikont-hpg-pgconfirmarsoliciturevision totalwidth panelcenter" columnClasses="panelcenter"  cellpadding="0" cellspacing="0" >
+                    <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalinformecircular}" />
+                    <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalinformecircularentidad}" />
+
+                    <h:panelGroup id="cmbEntInfEnt" styleClass="ikont-hpg-entcontra"  >
+                        <rich:select id="selectentidadinformecircular" styleClass="ikont-rs-ingresarenti" 
+                                     defaultLabel="Seleccione Entidad" value="#{Supervisor$AdministrarObraNew.soli}" >
+                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
+                        </rich:select>
+                    </h:panelGroup>
+                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechasus}:" for="fecIniInfCir"/>
+                    <h:panelGrid columns="2">
+                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniInfCir" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                        </rich:calendar>
+                    </h:panelGrid>
+                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechasus}:" for="fecIniContrato"/>
+                    <h:panelGrid columns="2">
+                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecFinInfCir" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                        </rich:calendar>
+                    </h:panelGrid>
+
+                    <h:panelGroup styleClass="totalwidth panelcenter">
+                        <a4j:commandButton id="BTaceptarRevision" value="Enviar Correo" styleClass="ikont-acb-btaceptarrevision"  execute="@this, selectentidadinformecircular" immediate="true" action="#{Supervisor$AdministrarObraNew.informecircularTolima}" oncomplete="#{rich:component('informecirculartolima')}.hide(); return false;"/>
+
+                        <a4j:commandButton id="BTnoaceptarRevision" value="Cancelar" styleClass="ikont-acb-btnoceptarrevision"   onclick="#{rich:component('informecirculartolima')}.hide();
+                                              return false;"/>
+                    </h:panelGroup>
+
+                </h:panelGrid>
+            </center>
+
+        </h:form>
+    </rich:popupPanel>
+
+</ui:composition>

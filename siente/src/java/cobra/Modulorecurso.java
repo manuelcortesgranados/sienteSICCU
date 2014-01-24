@@ -324,6 +324,9 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("btn_terminarobra")){
                             renderrecurso.setBtn_terminarobra(false);
                         }
+                        if (temprecusro.getRecNmbre().equals("btn_informecircular")){
+                            renderrecurso.setBtn_terminarobra(false);
+                        }
                         break;
                     
                     
