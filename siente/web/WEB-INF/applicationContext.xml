@@ -241,6 +241,7 @@
                 <value>co/com/interkont/cobra/to/Rubro.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Parametricaactividadesobligatorias.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipoimpactosocial.hbm.xml</value>
                 
                 <!-- Medios de Vida-->                
                 <value>co/com/interkont/cobra/marcologico/to/Frecuenciaperiocidad.hbm.xml</value>
@@ -256,8 +257,8 @@
                 <value>co/com/interkont/cobra/marcologico/to/Relacionmarcologicoindicador.hbm.xml</value>
                 <value>co/com/interkont/cobra/marcologico/to/Obligacion.hbm.xml</value>
                 <value>co/com/interkont/cobra/marcologico/to/Indicador.hbm.xml</value>
-                <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>
-               
+                <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>               
+                
             </list>
         </property>
         <property name="hibernateProperties">

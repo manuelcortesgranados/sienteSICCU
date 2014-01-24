@@ -43,6 +43,7 @@ import co.com.interkont.cobra.to.Relacioncontratoobra;
 import co.com.interkont.cobra.to.Ruta;
 import co.com.interkont.cobra.to.Sedeeducativa;
 import co.com.interkont.cobra.to.Tipoimagen;
+import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.ValidacionNuevoProyecto;
 import co.com.interkont.cobra.to.Vereda;
@@ -313,6 +314,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private boolean redibujarmapa = false;
     private boolean tipoOrigenSoloLectura;
     private  BigDecimal valorfaltanteasociarcontrato = BigDecimal.ZERO;
+    private String strempleosdirectos = bundle.getString("numempleosdirectos");
+    private String strempleosindirectos = bundle.getString("numempleosindirectos");
+    private String strbeneficiarios = bundle.getString("numbeneficiarios");
 
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
@@ -1526,6 +1530,30 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public void setValorfaltanteasociarcontrato(BigDecimal valorfaltanteasociarcontrato) {
         this.valorfaltanteasociarcontrato = valorfaltanteasociarcontrato;
+    }
+
+    public String getStrempleosdirectos() {
+        return strempleosdirectos;
+    }
+
+    public void setStrempleosdirectos(String strempleosdirectos) {
+        this.strempleosdirectos = strempleosdirectos;
+    }
+
+    public String getStrempleosindirectos() {
+        return strempleosindirectos;
+    }
+
+    public void setStrempleosindirectos(String strempleosindirectos) {
+        this.strempleosindirectos = strempleosindirectos;
+    }
+
+    public String getStrbeneficiarios() {
+        return strbeneficiarios;
+    }
+
+    public void setStrbeneficiarios(String strbeneficiarios) {
+        this.strbeneficiarios = strbeneficiarios;
     }
     
     public String habilitarNuevo() {
@@ -5792,4 +5820,25 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 
     }
+    public void tipoImpactoSocial (){      
+       
+        if (!getNuevoContratoBasico().getListimpactosocial().isEmpty()){
+            for (Tipoimpactosocial imp : getNuevoContratoBasico().getListimpactosocial()){
+                if (imp.getStrnombrecolumna().equals("empleos directos")){                    
+                    setStrempleosdirectos(imp.getStrdescripcionimpacto());
+            }else if (imp.getStrnombrecolumna().equals("empleos indirectos")){
+                setStrempleosindirectos(imp.getStrdescripcionimpacto());
+            }else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")){
+                setStrbeneficiarios(imp.getStrdescripcionimpacto());
+            }
+                
+            }
+        } else {
+            setStrbeneficiarios(bundle.getString("numbeneficiarios"));
+            setStrempleosdirectos(bundle.getString("numempleosdirectos"));
+            setStrempleosindirectos(bundle.getString("numempleosindirectos"));
+        }
+        
+    }
+    
 }

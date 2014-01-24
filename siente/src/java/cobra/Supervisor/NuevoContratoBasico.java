@@ -90,6 +90,7 @@ import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.interkont.cobra.util.CobraUtil;
@@ -1124,6 +1125,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private int reportoption;
     private int subpantalla;
     private boolean puedeEditarValorFuentes = true;
+    private List<Tipoimpactosocial> listimpactosocial;
     /**
      * Variable para cargar el tipo de documento ya sea para contrato o convenio
      */
@@ -1165,6 +1167,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setValidardatosbasicosplano(int validardatosbasicosplano) {
         this.validardatosbasicosplano = validardatosbasicosplano;
+    }
+
+    public List<Tipoimpactosocial> getListimpactosocial() {
+        return listimpactosocial;
+    }
+
+    public void setListimpactosocial(List<Tipoimpactosocial> listimpactosocial) {
+        this.listimpactosocial = listimpactosocial;
     }
 
     /**
@@ -5587,7 +5597,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
-        controlvisualizaciondocumento = 2;        
+        controlvisualizaciondocumento = 2;
         limpiarContrato();
         primeroDetcontrato();
         if (getContrato().getTercero().getIntcodigo() != -1) {
@@ -6645,7 +6655,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getIngresarNuevaObra().fnEsProyectoPadre();
         }
         List<Tercero> listentcontxcontratistaconvenio = new ArrayList<Tercero>();
-
+        if (contrato.getIntidcontrato() != 0) {
+            listimpactosocial = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(contrato.getIntidcontrato());           
+        }
+         getIngresarNuevaObra().tipoImpactoSocial();
         if (contrato.getContratista() != null) {
 
             listentcontxcontratistaconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(contrato.getContratista().getIntcodigocontratista());
@@ -6653,7 +6666,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (!listentcontxcontratistaconvenio.isEmpty() && listentcontxcontratistaconvenio.size() == 1) {
                 getIngresarNuevaObra().getObranueva().setContrato(contrato);
                 getIngresarNuevaObra().getObranueva().setTercero(listentcontxcontratistaconvenio.get(0));
-                getIngresarNuevaObra().setDesdeconvenio(true);
+                getIngresarNuevaObra().setDesdeconvenio(true);                
                 if (listentcontxcontratistaconvenio.get(0).getIntcodigo() == 5212) {
                     getIngresarNuevaObra().getEntidadConvenio().setIntentidadconvenio(1);
 
@@ -6749,7 +6762,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -7759,23 +7772,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     tipoContCon = "Cooperación";
                     iniciarDetaContrato();
                     break;
-                case 11 :
+                case 11:
                     tipoContCon = "Arrendamiento";
                     iniciarDetaContrato();
                     break;
-                case 12 :
-                    tipoContCon ="Comodato" ;
+                case 12:
+                    tipoContCon = "Comodato";
                     iniciarDetaContrato();
                     break;
-                case 13 :
+                case 13:
                     tipoContCon = "Aporte";
                     iniciarDetaContrato();
                     break;
-                case 14 :
+                case 14:
                     tipoContCon = "Apoyo financiero";
                     iniciarDetaContrato();
                     break;
-                case 15 :
+                case 15:
                     tipoContCon = "Cesión de derechos de autor";
                     iniciarDetaContrato();
                     break;
