@@ -9,7 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="siente" default="default" basedir=".">
     <description>Builds, tests, and runs the project siente.</description>
-    <property name="version" value="giprom"/> 
+    <property name="version" value="aquacun"/> 
     <property name="dist.war" value="dist/${version}.war"/>    
     <!--<import file="nbproject/build-gwt.xml"/>-->
    <import file="nbproject/zoom-impl.xml"/>
@@ -18,7 +18,7 @@
    <import file="nbproject/tolima-impl.xml"/>
    <import file="nbproject/cobra-impl.xml"/>
    <import file="nbproject/giprom-impl.xml"/>
-    
+   <import file="nbproject/aquacun-impl.xml"/> 
    <import file="nbproject/build-impl.xml"/>
    
     
@@ -82,7 +82,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra, doGiprom">       
+    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra, doGiprom, doAquacun">       
     </target>
     
     <target name="-post-compile" depends="doGipromPostCompile">       
