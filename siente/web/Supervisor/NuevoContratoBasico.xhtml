@@ -229,7 +229,7 @@
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
-                                        <rich:message for="txtNumcontString" styleClass="ikont-rm-numcont"  />
+                                        <rich:message  for="txtNumcontString" styleClass="ikont-rm-numcont"  />
                                     </h:panelGrid>
 
                                     <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
@@ -468,9 +468,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                                <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,pgcontrato"
-                                                   styleClass="ikont-acb-addpoliza">
-                                    <a4j:ajax event="click" render="gpPolizaSelec,pgpolis" immediate="true"/>
+                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,rsgtpoliz"
+                                                   styleClass="ikont-acb-addpoliza" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas">
+                                    <!--<a4j:ajax event="click" render="gpPolizaSelec,pgpolis" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas" immediate="true"/>-->
                                 </a4j:commandButton>
                             </h:panelGrid>
                         </h:panelGrid>
@@ -530,7 +530,7 @@
                 <rich:collapsiblePanel id="stpdocuemntos" header="4. #{var.documento}"  switchType="ajax" expanded="false" immediate="true">
                     <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
 
-                        <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
+                        <a4j:commandButton execute="gpUploadDocAt" styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
                                            onclick="#{rich:component('panelUploadDocumentocc')}.show();">
                         </a4j:commandButton>
                         <h:outputText  styleClass="ikont-hot-descdocumento font-general " id="Documentocc" value="#{var.descipcionDocumento}:"/>
@@ -542,8 +542,8 @@
                             <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>
                         </h:selectOneMenu>
 
-                        <a4j:commandLink id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}"
-                                         action="#{Supervisor$Contrato.subirDocContrato}" 
+                        <a4j:commandLink  id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}"
+                                         action="#{Supervisor$Contrato.subirDocContrato}"  execute="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato,stpdocuemntos"
                                          render="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato">
                         </a4j:commandLink>                          
 
