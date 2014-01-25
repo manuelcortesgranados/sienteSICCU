@@ -78,6 +78,14 @@
                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                         </h:outputText>
                     </rich:column>
+
+                    <rich:column  styleClass="ikont-rc-tcvalorasociado">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
+                            <h:outputText  styleClass="ikont-hot-tipocontrato"   value="Tipo Contrato"/>
+                        </f:facet>
+                        <h:outputText  styleClass="ikont-hot-obr"    value="Obra" rendered="#{_row.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
+                        <h:outputText  styleClass="ikont-hot-interv "    value="Interventoria" rendered="#{_row.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                    </rich:column>
                     <rich:column id="tc_polizas" styleClass="ikont-rc-tcpolizas"  rendered="#{Supervisor$AdministrarObraNew.polizacontrato}">
                         <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-varpolizas"   value="#{var.verpolizas}"/>
@@ -109,7 +117,7 @@
                             <h:outputText value="#{var.consultar}"/>
                         </f:facet>
                         <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
-                              <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.contrato.intidcontrato}" />
+                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.contrato.intidcontrato}" />
                         </h:commandLink>
                     </rich:column>
 

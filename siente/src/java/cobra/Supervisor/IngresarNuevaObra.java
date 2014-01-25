@@ -1555,7 +1555,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setStrbeneficiarios(String strbeneficiarios) {
         this.strbeneficiarios = strbeneficiarios;
     }
-    
+
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -2033,8 +2033,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         int i = 0;
         for (Claseobra clase : lista) {
             SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
-            ClaseObra[i++] = opt;
-        }
+                ClaseObra[i++] = opt;
+            }
         faseelegida.setIntidfase(tiahselect);
         tiproyectoselec = 0;
 
@@ -3753,7 +3753,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                             obranueva.setTipoestadobra(new Tipoestadobra(0));
                             guardarObraTemporal();
                         }
-                    }    
+                    }
                     //return "nu";
                 }
             } else {
@@ -3927,7 +3927,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String agregarContrato() {
-        relacioncontrato.setNumvalordisponible(BigDecimal.ZERO); 
+        relacioncontrato.setNumvalordisponible(BigDecimal.ZERO);
         BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         for (Relacioncontratoobra contratoobta : listacontratosobra) {
@@ -3946,7 +3946,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             return null;
         }
         if (relacioncontrato.getNumvalordisponible().compareTo(BigDecimal.ZERO) <= 0) {
-             FacesUtils.addErrorMessage(bundle.getString("contratonotienedisponibilidad"));
+            FacesUtils.addErrorMessage(bundle.getString("contratonotienedisponibilidad"));
             relacioncontrato.setMensaje(bundle.getString("contratonotienedisponibilidad"));
             return null;
         }
@@ -4473,7 +4473,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         if (obranueva.isBooleantienehijos() || isProyectoestrategia()) {
             disableCronograma = 1;
             disableAiu = 1;
-            
+
             llenarTiposCosto();
         }
     }
@@ -5016,13 +5016,20 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     public boolean validarTipificacion() {
+        boolean valido = true;
+        if (obranueva.getClaseobra().getIntidclaseobra()==0) {
+            FacesUtils.addErrorMessage("Debe seleccionar un sector para la obra.");
+            valido= false;
+        }
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         if (tiahselect == 0 || subtiposelec == 0 || tiproyectoselec == 0) {
-            return false;
+             FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
+            valido= false;
         } else {
-            return true;
+            valido= true;
         }
+        return valido;
     }
 
     /**
@@ -5198,7 +5205,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String validarFinalizar() {        
+    public String validarFinalizar() {
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
@@ -5226,14 +5233,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     validacion.setPresupuesto(false);
                 }
             } else {
-                    System.out.println("valortotalobra = " + valortotalobra);
-                    if (obranueva.getNumvaltotobra().compareTo(BigDecimal.ZERO) > 0) {
+                System.out.println("valortotalobra = " + valortotalobra);
+                if (obranueva.getNumvaltotobra().compareTo(BigDecimal.ZERO) > 0) {
                     validacion.setPresupuesto(true);
                 } else {
                     validacion.setPresupuesto(false);
                 }
-                } 
-            }         
+            }
+        }
         if (validarTipificacion()) {
             validacion.setTipificacion(true);
         } else {
