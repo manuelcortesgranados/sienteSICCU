@@ -836,7 +836,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         Date fechaCopiaPrecontractual = CalendarUtil.copyDate(copiFechaEvaPropuestas);
 
-        int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1);
+        int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaFinalizacion.getValue()));
 
         ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaSuscripcionContrato.getValue(), duracionContractual, 0, TaskType.PARENT, 5, true);
         contractua.setEditable(false);
@@ -845,12 +845,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijos.add(contractua);
 
         List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripción del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripción del contrato", fechaSuscripcionContrato.getValue(), duracionContractual, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcion);
 
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripción acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripción acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcionActa);
@@ -860,9 +860,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contractua.setDuration(duracionContractual);
 
         Date fechaCopiaContractual = CalendarUtil.copyDate(contractua.getEndDateTime());
-
-
-        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
+        
+        
+        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidación", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
         Liquidaciones.setEditable(false);
         Liquidaciones.setNumeracion(numeracionActividad);
         lstHijos.add(Liquidaciones);
