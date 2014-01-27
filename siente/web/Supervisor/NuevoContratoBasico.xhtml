@@ -270,9 +270,16 @@
                                         </h:inputText>
                                         <rich:message for="txtNomcont" styleClass="ikont-rm-nomcont"  />
                                     </h:panelGrid>
-                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecsusc"  value="#{var.fechasus}:" for="fecIniContrato"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecsusc"  value="#{var.fechasus}:" for="fecsusContrato"/>
                                     <h:panelGrid columns="2">
-                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecsusContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">                                           
+                                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                                        </rich:calendar>
+                                        <rich:message for="fecIniContrato" styleClass="ikont-"  />
+                                    </h:panelGrid>
+                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecini"  value="(*)#{var.fechadeinicio}:" for="fecIniContrato" rendered="#{var.plazoconacta == true}" />
+                                    <h:panelGrid columns="2" rendered="#{var.plazoconacta == true}" >
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.fechaactaini}">
                                             <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
                                         </rich:calendar>
                                         <rich:message for="fecIniContrato" styleClass="ikont-"  />
