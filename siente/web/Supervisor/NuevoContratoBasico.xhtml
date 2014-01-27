@@ -147,7 +147,7 @@
                                             <h:outputText  styleClass="ikont-hot-datefecinicontconvbasico" id="iddatefechainic" value="#{currentRow.datefechaini}"/>
                                         </rich:column>
                                         <rich:column  id="datefechafin"  width="60px">
-                                            <f:facet name="header">
+                                            <f:facet name="header">           
                                                 <h:outputText  styleClass="ikont-hot-fechfincontconvbasico" value="#{var.fechadefinalizacion}"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-datefecfincontconvbasico" id="iddatefechafin" value="#{currentRow.datefechafin}"/>
@@ -277,7 +277,8 @@
                                         </rich:calendar>
                                         <rich:message for="fecIniContrato" styleClass="ikont-"  />
                                     </h:panelGrid>
-                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato" rendered="#{!var.fechafincambionombre}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecTerminacion"  value="(*)#{var.fechadeterminacion}:" for="fecfinContrato" rendered="#{var.fechafincambionombre}"/>
                                     <h:panelGrid columns="2">
                                         <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
                                             <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" render="gpDuracion" execute="@this" />
