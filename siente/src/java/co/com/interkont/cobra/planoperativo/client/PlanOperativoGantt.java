@@ -945,7 +945,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 main.add(menuSupe.asWidget());
             }
             main.add(vc1);
-            if (!isModolectura() && !fullScreen) {
+            if (!fullScreen) {
             Sub_menu_gwt submenu = new Sub_menu_gwt(service, taskStore, convenioDTO, depStore);
             main.add(submenu.asWidget());
             }
