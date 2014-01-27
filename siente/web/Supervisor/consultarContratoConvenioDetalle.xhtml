@@ -251,7 +251,8 @@
 
                                     <h:outputLabel    id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
 
-                                    <h:outputLabel  styleClass="ikont-"   id="fecfin"  value="#{var.fechafinalizacion}:" />
+                                    <h:outputLabel  styleClass="ikont-"   id="fecfin"  value="#{var.fechafinalizacion}:" rendered="#{!var.fechafincambionombre}"/>
+                                    <h:outputLabel  styleClass="ikont-"   id="fecterminar"  value="#{var.fechadeterminacion}:" rendered="#{var.fechafincambionombre}"/>
 
                                     <interkont:spacer width="20" />
 
