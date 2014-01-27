@@ -250,7 +250,13 @@
                                     <interkont:spacer width="20" />
 
                                     <h:outputLabel    id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
-
+                                    
+                                    <h:outputLabel id="lblfechainicioconvenio" value="Fecha de inicio:" rendered="#{var.plazoconacta == true}"/>
+                                    <h:panelGrid rendered="#{var.plazoconacta == true}">
+                                    <interkont:spacer width="20" />                                     
+                                    </h:panelGrid>
+                                    <h:outputLabel id="feini" value="#{Supervisor$Contrato.contrato.fechaactaini}" rendered="#{var.plazoconacta == true}"/>
+                                    
                                     <h:outputLabel  styleClass="ikont-"   id="fecfin"  value="#{var.fechafinalizacion}:" rendered="#{!var.fechafincambionombre}"/>
                                     <h:outputLabel  styleClass="ikont-"   id="fecterminar"  value="#{var.fechadeterminacion}:" rendered="#{var.fechafincambionombre}"/>
 
