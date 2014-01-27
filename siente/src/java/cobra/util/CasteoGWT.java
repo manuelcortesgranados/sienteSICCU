@@ -508,8 +508,7 @@ public class CasteoGWT implements Serializable {
     public static ObrafuenterecursosconveniosDTO encontrarObraFuenteRecursosDTO(int vigencia, String entidad, Set setObrasFuentesRecursos) {
         for (Iterator it = setObrasFuentesRecursos.iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO fuenteRecursoObra = (ObrafuenterecursosconveniosDTO) it.next();
-            if (fuenteRecursoObra.getVigencia() == vigencia && fuenteRecursoObra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(entidad)) {
-                System.out.println("fuenteRecursoObra aqui = "+fuenteRecursoObra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto());
+            if (fuenteRecursoObra.getVigencia() == vigencia && fuenteRecursoObra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto().equals(entidad)) {               
                 return fuenteRecursoObra;
             }
         }

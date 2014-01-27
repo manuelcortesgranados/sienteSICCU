@@ -6656,9 +6656,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         List<Tercero> listentcontxcontratistaconvenio = new ArrayList<Tercero>();
         if (contrato.getIntidcontrato() != 0) {
-            listimpactosocial = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(contrato.getIntidcontrato());           
+            listimpactosocial = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(contrato.getIntidcontrato());
         }
-         getIngresarNuevaObra().tipoImpactoSocial();
+        getIngresarNuevaObra().tipoImpactoSocial();
         if (contrato.getContratista() != null) {
 
             listentcontxcontratistaconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(contrato.getContratista().getIntcodigocontratista());
@@ -6666,7 +6666,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (!listentcontxcontratistaconvenio.isEmpty() && listentcontxcontratistaconvenio.size() == 1) {
                 getIngresarNuevaObra().getObranueva().setContrato(contrato);
                 getIngresarNuevaObra().getObranueva().setTercero(listentcontxcontratistaconvenio.get(0));
-                getIngresarNuevaObra().setDesdeconvenio(true);                
+                getIngresarNuevaObra().setDesdeconvenio(true);
                 if (listentcontxcontratistaconvenio.get(0).getIntcodigo() == 5212) {
                     getIngresarNuevaObra().getEntidadConvenio().setIntentidadconvenio(1);
 
@@ -6762,7 +6762,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -7178,7 +7178,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
         }
         if (validacionesBasicasConvenioPO(true)) {
-            configuracionGuardadoPo(1, true);
+            if (!getContrato().isModolecturaplanop()) {
+                configuracionGuardadoPo(1, true);
+            }
+
             if (isEliminarPeriodosFueraRango()) {
                 eliminarPeriodosFueraRango();
             }
