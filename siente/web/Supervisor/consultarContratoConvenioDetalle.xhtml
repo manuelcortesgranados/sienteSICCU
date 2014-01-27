@@ -255,7 +255,7 @@
                                     <h:panelGrid rendered="#{var.plazoconacta == true}">
                                     <interkont:spacer width="20" />                                     
                                     </h:panelGrid>
-                                    <h:outputLabel id="feini" value="#{Supervisor$Contrato.contrato.fechaactaini}" rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio' and var.plazoconacta == true}"/>
+                                    <h:outputLabel id="feini" value="#{Supervisor$Contrato.contrato.fechaactaini}" rendered="#{var.plazoconacta == true}"/>
                                     
                                     <h:outputLabel  styleClass="ikont-"   id="fecfin"  value="#{var.fechafinalizacion}:" rendered="#{!var.fechafincambionombre}"/>
                                     <h:outputLabel  styleClass="ikont-"   id="fecterminar"  value="#{var.fechadeterminacion}:" rendered="#{var.fechafincambionombre}"/>
