@@ -3720,6 +3720,29 @@ css usuario modificacion
     display: block;
 }
 
+.ikont-img-posicion-actividad-reporte-global{
+    background-image: url(../imgs/iconos_reporte_home.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height:30px;
+    display: block;
+}
+
+.ikont-img-posicion-actividad-reporte-gerencia{
+    background-image: url(../imgs/iconos_reporte_home.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height:30px;
+    display: block;
+}
+
+.ikont-posicion-reporte-global{
+    background-position: 3px 2px;
+}
+
+.ikont-posicion-reporte-gerencia{
+   background-position: -21px 2px;
+}
 .ikont-posicion-ayuda{
     background-position: 1px -5px;  
 }

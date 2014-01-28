@@ -49,7 +49,16 @@
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.contactenos}" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-
+            
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reporte-global ikont-posicion-reporte-global"   immediate="true"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/INFORME_GLOBAL.xls', '_blank');"/>
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Global"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/INFORME_GLOBAL.xls', '_blank');"/>
+            
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reporte-gerencia ikont-posicion-reporte-gerencia"   immediate="true"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"/>
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Gerencial" 
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"/>
         </h:panelGrid>
 
     </h:panelGroup>
