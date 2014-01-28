@@ -8142,7 +8142,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     if (tieneproyectos) {
                         mapaValidacionRangoPo.put(1, "El Plan Operativo ya posee proyectos que podrían verse afectados con esta modificación.\n"
                                 + "Las fechas deben mantenerse en: Fecha Acta de Inicio: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaInicio())+"\n"+
-                                   " Fecha Finalización:"+ValidacionesPO.obtenerFecha(actiRaiz.getFechaInicio()));
+                                   " Fecha Finalización: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaFin()));
 //                        contrato.setFechaactaini(actiRaiz.getFechaInicio());
 //                        contrato.setDatefechafin(actiRaiz.getFechaFin());
 //                        contrato.setIntduraciondias(actiRaiz.getDuracion());
