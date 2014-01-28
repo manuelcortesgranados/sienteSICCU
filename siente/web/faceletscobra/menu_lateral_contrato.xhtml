@@ -34,7 +34,7 @@
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-detallecontrato"   cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="ikont-hcl-iniciardetallecontrato img-button-panel"   immediate="true" action="detalleContrato"/>
-                <h:commandLink styleClass="ikont-hcl-detallecontrato text-button-panel"   value="Detalle Contrato" action="detalleContrato"/>
+                <h:commandLink styleClass="ikont-hcl-detallecontrato text-button-panel"   value="Detalle #{Supervisor$Contrato.tipoContCon}" action="detalleContrato"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-documentocontrato"   cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="ikont-hcl-documentocontrato img-button-panel"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
@@ -42,7 +42,7 @@
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-modificarcontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
                 <h:commandLink styleClass="ikont-hcl-iniciarmodificarcontrato img-button-panel"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
-                <h:commandLink styleClass="ikont-hcl-modificarcontrato text-button-panel"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
+                <h:commandLink styleClass="ikont-hcl-modificarcontrato text-button-panel"   value="#{var.modificar} #{Supervisor$Contrato.tipoContCon}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
             </h:panelGrid>
 
             <h:panelGrid styleClass="ikont-hpg-iniciarevolucioncontrato"   cellpadding="0" cellspacing="0" >
