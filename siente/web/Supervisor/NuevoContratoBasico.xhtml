@@ -56,6 +56,15 @@
                             <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
                         </h:selectOneMenu>
                     </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante1"  value="(*)#{var.entidadcontratante}" rendered="#{var.boolentidadcontratante}"/>
+                                        <h:panelGroup id="cmbEntContra1" styleClass="ikont-hpg-entcontra"  >
+                                            <rich:select id="selectentidadcontrato1" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" rendered="#{var.boolentidadcontratante}"
+                                                         defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
+                                                <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
+                                            </rich:select>
+                                        </h:panelGroup>
+                    </h:panelGrid>
                     <h:panelGrid columns="2"  styleClass="font-general">
                         <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}"/>
                         <h:selectOneMenu styleClass="ikont-hsom-booltienehijo" id="cmbcontincluye" immediate="true" value="#{Supervisor$Contrato.contrato.booleantienehijos}" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio and var.otroscontratoszoom}">
@@ -72,7 +81,7 @@
                                       render="pgconveniocontrato" execute="@this, pgconveniocontrato" >
                             </a4j:ajax>
                         </h:selectOneMenu>
-                    </h:panelGrid>
+                    </h:panelGrid>                    
                     <h:panelGrid columns="2" styleClass="font-general" rendered="#{Supervisor$Contrato.booltipocontratoconvenio}">
                         <h:outputLabel  styleClass="ikont-hol-convsuperior" value="Este  Convenio pertenece a un  Convenio superior?" />
                         <h:selectOneMenu styleClass="ikont-hsom-preguntaconv" id="cmbcontrato2" value="#{Supervisor$Contrato.preguntacontrato}" immediate="true">
@@ -87,7 +96,7 @@
                     <h:panelGroup id="pgconveniocontrato" >
                         <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==1}" styleClass="font-general">
                             <h:outputText  styleClass="ikont-hot-tipocontconvsuperior" value="Seleccione el #{Supervisor$Contrato.tipoContCon} superior al que pertenece el #{Supervisor$Contrato.tipoContCon}:  " />
-                            <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra"
+                            <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra, cmbEntContra1"
                                                styleClass="ikont-acb-tipocontconv"                                                      
                                                action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
                                                oncomplete="#{rich:component('mp-listado-contratos')}.show();">
@@ -96,7 +105,7 @@
 
                         <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==2 and Supervisor$Contrato.varmostrarseleccionconveniosuperior!=1}" styleClass="font-general">
                             <h:outputText  styleClass="ikont-hot-selectconvsuperior" value="Seleccione el Convenio superior al que pertenece el Convenio:  " />
-                            <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra"
+                            <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra, cmbEntContra1"
                                                styleClass="ikont-"                                                      
                                                action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
                                                oncomplete="#{rich:component('mp-listado-contratos')}.show();">
@@ -138,7 +147,7 @@
                                             <h:outputText  styleClass="ikont-hot-datefecinicontconvbasico" id="iddatefechainic" value="#{currentRow.datefechaini}"/>
                                         </rich:column>
                                         <rich:column  id="datefechafin"  width="60px">
-                                            <f:facet name="header">
+                                            <f:facet name="header">           
                                                 <h:outputText  styleClass="ikont-hot-fechfincontconvbasico" value="#{var.fechadefinalizacion}"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-datefecfincontconvbasico" id="iddatefechafin" value="#{currentRow.datefechafin}"/>
@@ -229,12 +238,12 @@
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
-                                        <rich:message for="txtNumcontString" styleClass="ikont-rm-numcont"  />
+                                        <rich:message  for="txtNumcontString" styleClass="ikont-rm-numcont"  />
                                     </h:panelGrid>
 
-                                    <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
-                                    <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra"  >
-                                        <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
+                                    <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}" rendered="#{!var.boolentidadcontratante}"/>
+                                    <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra" rendered="#{!var.boolentidadcontratante}">
+                                        <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" 
                                                      defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                         </rich:select>
@@ -261,14 +270,22 @@
                                         </h:inputText>
                                         <rich:message for="txtNomcont" styleClass="ikont-rm-nomcont"  />
                                     </h:panelGrid>
-                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecsusc"  value="#{var.fechasus}:" for="fecIniContrato"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecsusc"  value="#{var.fechasus}:" for="fecsusContrato"/>
                                     <h:panelGrid columns="2">
-                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecsusContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">                                           
                                             <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
                                         </rich:calendar>
                                         <rich:message for="fecIniContrato" styleClass="ikont-"  />
                                     </h:panelGrid>
-                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" id="lblFecini"  value="(*)#{var.fechadeinicio}:" for="fecIniContrato" rendered="#{var.plazoconacta == true}" />
+                                    <h:panelGrid columns="2" rendered="#{var.plazoconacta == true}" >
+                                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.fechaactaini}">
+                                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                                        </rich:calendar>
+                                        <rich:message for="fecIniContrato" styleClass="ikont-"  />
+                                    </h:panelGrid>
+                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato" rendered="#{!var.fechafincambionombre}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-fecfinal font-general" id="lblFecTerminacion"  value="(*)#{var.fechadeterminacion}:" for="fecfinContrato" rendered="#{var.fechafincambionombre}"/>
                                     <h:panelGrid columns="2">
                                         <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
                                             <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" render="gpDuracion" execute="@this" />
@@ -468,9 +485,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                                <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,pgcontrato"
-                                                   styleClass="ikont-acb-addpoliza">
-                                    <a4j:ajax event="click" render="gpPolizaSelec,pgpolis" immediate="true"/>
+                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,rsgtpoliz"
+                                                   styleClass="ikont-acb-addpoliza" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas">
+                                    <!--<a4j:ajax event="click" render="gpPolizaSelec,pgpolis" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas" immediate="true"/>-->
                                 </a4j:commandButton>
                             </h:panelGrid>
                         </h:panelGrid>
@@ -530,7 +547,7 @@
                 <rich:collapsiblePanel id="stpdocuemntos" header="4. #{var.documento}"  switchType="ajax" expanded="false" immediate="true">
                     <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
 
-                        <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
+                        <a4j:commandButton execute="gpUploadDocAt" styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
                                            onclick="#{rich:component('panelUploadDocumentocc')}.show();">
                         </a4j:commandButton>
                         <h:outputText  styleClass="ikont-hot-descdocumento font-general " id="Documentocc" value="#{var.descipcionDocumento}:"/>
@@ -542,8 +559,8 @@
                             <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>
                         </h:selectOneMenu>
 
-                        <a4j:commandLink id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}"
-                                         action="#{Supervisor$Contrato.subirDocContrato}" 
+                        <a4j:commandLink  id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}"
+                                         action="#{Supervisor$Contrato.subirDocContrato}"  execute="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato,stpdocuemntos"
                                          render="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato">
                         </a4j:commandLink>                          
 

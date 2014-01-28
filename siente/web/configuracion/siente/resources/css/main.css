@@ -5063,3 +5063,9 @@ label.textlittle2 {
 .minwidthpanellateral{
     min-width: 250px;
 }
+
+.ikont-a-linkcliente {
+	position: absolute;
+	top: 47px;
+	left: 930px;
+}

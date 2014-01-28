@@ -90,6 +90,7 @@ import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.interkont.cobra.util.CobraUtil;
@@ -1124,6 +1125,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private int reportoption;
     private int subpantalla;
     private boolean puedeEditarValorFuentes = true;
+    private List<Tipoimpactosocial> listimpactosocial;
     /**
      * Variable para cargar el tipo de documento ya sea para contrato o convenio
      */
@@ -1165,6 +1167,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setValidardatosbasicosplano(int validardatosbasicosplano) {
         this.validardatosbasicosplano = validardatosbasicosplano;
+    }
+
+    public List<Tipoimpactosocial> getListimpactosocial() {
+        return listimpactosocial;
+    }
+
+    public void setListimpactosocial(List<Tipoimpactosocial> listimpactosocial) {
+        this.listimpactosocial = listimpactosocial;
     }
 
     /**
@@ -3256,7 +3266,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (band) {
 
             if (comboEntidadesContratoguardar()) {
-
+                if (bundle.getString("plazoconacta").compareTo("true") == 0) {
+                    if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) >= 0) {
+                    } else {
+                        removerAnticipo();
+                        FacesUtils.addErrorMessage("La Fecha de suscripción debe ser anterior o igual de la fecha de inicio");
+                        return null;
+                    }
+                }
                 if (contrato.getIntduraciondias() > 0) {
                     if (contrato.getContratista() == null) {
                         FacesUtils.addErrorMessage("Debe seleccionar ó crear un contratista.");
@@ -3382,7 +3399,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } else {
                     removerAnticipo();
                     FacesUtils.addErrorMessage("La Fecha de Fin Debe ser mayor o igual a la fecha de inicio");
-                }
+                }               
             } else {
                 removerAnticipo();
                 FacesUtils.addErrorMessage("Debe diligenciar una entidad contratante válida.");
@@ -3510,18 +3527,32 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        if (seleccionopadre == 1) {//es un contrato hijo se valida fipadre hijo contra fipadre
 //            if (contrato.getDatefechaini().after(contrpadre.getDatefechaini()) || contrato.getDatefechaini().equals(contrpadre.getDatefechaini())) {
         //Calendar hoy = Calendar.getInstance();
-        if (contrato.getDatefechaini() != null) {
-
-            if (contrato.getDatefechafin() != null) {
-                fechaCambio();
+        if (bundle.getString("conplanoperativo").compareTo("false") == 0) {
+            if (contrato.getDatefechaini() != null) {
+                
+                if (contrato.getDatefechafin() != null) {
+                    fechaCambio();
+                } else {
+                    contrato.setIntduraciondias(0);
+                }
             } else {
                 contrato.setIntduraciondias(0);
+                contrato.setDatefechafin(null);
             }
-        } else {
-            contrato.setIntduraciondias(0);
-            contrato.setDatefechafin(null);
-        }
+            }else{
+                if (contrato.getFechaactaini() != null) {
 
+                if (contrato.getFechaactaini() != null) {
+                    fechaCambio();
+                } else {
+                    contrato.setIntduraciondias(0);
+                }
+            } else {
+                contrato.setIntduraciondias(0);
+                contrato.setDatefechafin(null);
+            }
+        }
+        
 //                if (booltipocontratoconvenio == true) {
 //                    FacesUtils.addErrorMessage("La Fecha de Inicio del Contrato Actual es Inferior a la Fecha Inicial de su contrato Padre");
 //                } else {
@@ -3550,8 +3581,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         //     if (seleccionopadre == 1) {//es un proyecto hijo toes valida fiobra hijo contra fipadre
         // if (contrato.getDatefechafin().before(contrpadre.getDatefechafin()) || contrato.getDatefechafin().equals(contrpadre.getDatefechafin())) {
-        Calendar hoy = Calendar.getInstance();
-        if (bundle.getString("conplanoperativo").compareTo("false") == 0) {
+        Calendar hoy = Calendar.getInstance();       
+        if (bundle.getString("plazoconacta").compareTo("false") == 0) {            
             if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
                 if (contrato.getDatefechafin().compareTo(contrato.getDatefechaini()) >= 0) {
                     long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getDatefechaini().getTime();
@@ -3566,7 +3597,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
             }
         } else if (contrato.getFechaactaini() != null && contrato.getDatefechafin() != null) {
-            if (contrato.getDatefechafin().compareTo(contrato.getFechaactaini()) >= 0) {
+            if (contrato.getDatefechafin().compareTo(contrato.getFechaactaini()) >= 0) {                
                 long diferenciaFecha = contrato.getDatefechafin().getTime() - contrato.getFechaactaini().getTime();
                 diferenciaFecha = diferenciaFecha / (36000 * 24 * 100) + 1;
                 contrato.setIntduraciondias(Integer.parseInt(String.valueOf(diferenciaFecha)));
@@ -3576,8 +3607,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.setIntduraciondias(0);
                 //mensaje = bundle.getString("lafechadefinalizaciondebeser");//"La fecha de finalización debe ser mayor o igual a la fecha de inicio";
                 FacesUtils.addErrorMessage(bundle.getString("lafechadefinalizaciondebeser"));
+            } 
             }
-        }
 
         return null;
     }
@@ -5587,7 +5618,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
-        controlvisualizaciondocumento = 2;        
+        controlvisualizaciondocumento = 2;
         limpiarContrato();
         primeroDetcontrato();
         if (getContrato().getTercero().getIntcodigo() != -1) {
@@ -6645,7 +6676,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getIngresarNuevaObra().fnEsProyectoPadre();
         }
         List<Tercero> listentcontxcontratistaconvenio = new ArrayList<Tercero>();
-
+        if (contrato.getIntidcontrato() != 0) {
+            listimpactosocial = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(contrato.getIntidcontrato());           
+        }
+         getIngresarNuevaObra().tipoImpactoSocial();
         if (contrato.getContratista() != null) {
 
             listentcontxcontratistaconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(contrato.getContratista().getIntcodigocontratista());
@@ -6653,7 +6687,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (!listentcontxcontratistaconvenio.isEmpty() && listentcontxcontratistaconvenio.size() == 1) {
                 getIngresarNuevaObra().getObranueva().setContrato(contrato);
                 getIngresarNuevaObra().getObranueva().setTercero(listentcontxcontratistaconvenio.get(0));
-                getIngresarNuevaObra().setDesdeconvenio(true);
+                getIngresarNuevaObra().setDesdeconvenio(true);                
                 if (listentcontxcontratistaconvenio.get(0).getIntcodigo() == 5212) {
                     getIngresarNuevaObra().getEntidadConvenio().setIntentidadconvenio(1);
 
@@ -6749,7 +6783,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            Propiedad.getValor("docexistenteerror"), ""));
+                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -7165,7 +7199,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
         }
         if (validacionesBasicasConvenioPO(true)) {
+            if (!getContrato().isModolecturaplanop()) {
             configuracionGuardadoPo(1, true);
+            }
+
             if (isEliminarPeriodosFueraRango()) {
                 eliminarPeriodosFueraRango();
             }
@@ -7759,23 +7796,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     tipoContCon = "Cooperación";
                     iniciarDetaContrato();
                     break;
-                case 11 :
+                case 11:
                     tipoContCon = "Arrendamiento";
                     iniciarDetaContrato();
                     break;
-                case 12 :
-                    tipoContCon ="Comodato" ;
+                case 12:
+                    tipoContCon = "Comodato";
                     iniciarDetaContrato();
                     break;
-                case 13 :
+                case 13:
                     tipoContCon = "Aporte";
                     iniciarDetaContrato();
                     break;
-                case 14 :
+                case 14:
                     tipoContCon = "Apoyo financiero";
                     iniciarDetaContrato();
                     break;
-                case 15 :
+                case 15:
                     tipoContCon = "Cesión de derechos de autor";
                     iniciarDetaContrato();
                     break;

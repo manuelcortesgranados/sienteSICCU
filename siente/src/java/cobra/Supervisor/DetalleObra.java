@@ -45,6 +45,7 @@ import co.com.interkont.cobra.to.Relacionalimentacionactividad;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
 import co.com.interkont.cobra.to.Relacionobraseguidor;
 import co.com.interkont.cobra.to.Seguimiento;
+import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.to.Visita;
@@ -138,6 +139,11 @@ public class DetalleObra implements Serializable {
     private BigDecimal totalprogramado;
     private BigDecimal totalejecutado;
     private boolean permitirvalidar = true;
+    private List<Tipoimpactosocial> listimpactosocialdetalle;
+    private String strbeneficiariosdetalle;
+    private String strempleosdirectosdetalle;
+    private String strempleosindirectosdetalle;
+    
     /**
      * Lista de proyectos hijos de este proyecto cuando se trata de un proyecto
      * padre
@@ -211,6 +217,38 @@ public class DetalleObra implements Serializable {
         return permitirvalidar;
     }
 
+    public List<Tipoimpactosocial> getListimpactosocialdetalle() {
+        return listimpactosocialdetalle;
+    }
+
+    public void setListimpactosocialdetalle(List<Tipoimpactosocial> listimpactosocialdetalle) {
+        this.listimpactosocialdetalle = listimpactosocialdetalle;
+    }
+
+    public String getStrbeneficiariosdetalle() {
+        return strbeneficiariosdetalle;
+    }
+
+    public void setStrbeneficiariosdetalle(String strbeneficiariosdetalle) {
+        this.strbeneficiariosdetalle = strbeneficiariosdetalle;
+    }
+
+    public String getStrempleosdirectosdetalle() {
+        return strempleosdirectosdetalle;
+    }
+
+    public void setStrempleosdirectosdetalle(String strempleosdirectosdetalle) {
+        this.strempleosdirectosdetalle = strempleosdirectosdetalle;
+    }
+
+    public String getStrempleosindirectosdetalle() {
+        return strempleosindirectosdetalle;
+    }
+
+    public void setStrempleosindirectosdetalle(String strempleosindirectosdetalle) {
+        this.strempleosindirectosdetalle = strempleosindirectosdetalle;
+    }   
+   
     public void setPermitirvalidar(boolean permitirvalidar) {
         this.permitirvalidar = permitirvalidar;
     }
@@ -1118,7 +1156,7 @@ public class DetalleObra implements Serializable {
     }
 
     public void iniciardetalle() {
-
+        System.out.println("ingreso al detalle de la obra");
         getAdministrarObraNew().setProyectoestrategia(false);
         imagenEvolucion();
         getAdministrarObraNew().cargarListas();
@@ -1134,10 +1172,16 @@ public class DetalleObra implements Serializable {
                 getAdministrarObraNew().setProyectoestrategia(true);
                 //Llenamos objetos de avance                
                 getAdministrarObraNew().setVproductomedios(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(2, obraMapa.getIntcodigoobra()));
-                getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));
+                getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));                
 
             }
         }
+        System.out.println("obramapa");
+        if (obraMapa.getContrato() != null){
+            listimpactosocialdetalle = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(obraMapa.getContrato().getIntidcontrato());
+            System.out.println("lista obra mapa");
+        }
+        tipoImpactoSocialDetalle();
         limpiardetalle();
         if (getSessionBeanCobra().getCobraService().isCiu()) {
             llenarseguidores();
@@ -1902,5 +1946,26 @@ public class DetalleObra implements Serializable {
             strlocalidadlatitud = "N " + grados_latitud + "° " + minutos_latitud + "'  " + seg_latitud + "''";
         }
 
+    }
+    
+    public void tipoImpactoSocialDetalle (){       
+        
+        if (!listimpactosocialdetalle.isEmpty()){
+            for (Tipoimpactosocial imp : listimpactosocialdetalle){
+                if (imp.getStrnombrecolumna().equals("empleos directos")){                    
+                    setStrempleosdirectosdetalle(imp.getStrdescripcionimpacto());
+            }else if (imp.getStrnombrecolumna().equals("empleos indirectos")){
+                setStrempleosindirectosdetalle(imp.getStrdescripcionimpacto());
+            }else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")){
+                setStrbeneficiariosdetalle(imp.getStrdescripcionimpacto());
+            }
+                
+            }
+        } else {
+            setStrbeneficiariosdetalle(bundle.getString("personasbeneficiadas"));
+            setStrempleosdirectosdetalle(bundle.getString("empleosdirectos"));
+            setStrempleosindirectosdetalle(bundle.getString("empleosindirectos"));
+        }
+        
     }
 }

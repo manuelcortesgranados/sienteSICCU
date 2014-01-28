@@ -1895,6 +1895,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         contratistanombre = "";
         contratistapellido = "";
         listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), false));
+        listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), true));
         return null;
     }
 

@@ -329,11 +329,11 @@
                                 </h:panelGrid>    
                                 <h:panelGrid id="form_editarImpactosocial" styleClass="ikont-hpg-pg_impactosocial">
                                     <h:panelGrid  id="habilitarModificacionImpacto" columns="2" rendered="#{Supervisor$AdministrarObraNew.habilitarModificarimpacto}" >
-                                        <h:outputLabel styleClass="ikont-hot-personasbeneficiadas" value="#{var.personasbeneficiadas}"></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-personasbeneficiadas" value="#{Supervisor$DetalleObra.strbeneficiariosdetalle}"></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numhabbeneficiados" value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-empleosdirectos" value="#{var.empleosdirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosdirectos" value="#{Supervisor$DetalleObra.strempleosdirectosdetalle}:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numempdirectos" value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputLabel>
-                                        <h:outputLabel styleClass="ikont-hot-empleosindirectos" value="#{var.empleosindirectos}:" ></h:outputLabel>
+                                        <h:outputLabel styleClass="ikont-hot-empleosindirectos" value="#{Supervisor$DetalleObra.strempleosindirectosdetalle}:" ></h:outputLabel>
                                         <h:outputLabel styleClass="ikont-hol-numempindirectos" value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}"></h:outputLabel>
 
                                         <rich:column  colspan="2">

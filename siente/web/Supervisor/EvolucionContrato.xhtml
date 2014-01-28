@@ -16,7 +16,7 @@
         <script src="/#{var.versioncobra}/resources/amcharts/serial.js" type="text/javascript"></script>        
     </ui:define>
     <ui:define rendered="#{!var.permisonuevodiseno}" name="title">
-        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato} #{Supervisor$Contrato.tipoContCon}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>

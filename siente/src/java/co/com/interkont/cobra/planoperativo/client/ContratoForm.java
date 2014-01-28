@@ -45,6 +45,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Window;
@@ -711,8 +712,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
      '<tr><td class=fechasusacta></td><td class=fechafin></td></tr>',            
      '<tr><td class=tblmontos colspan=2></td><td></td></tr>',
      '<tr><td class=addr></td></tr>',       
-     '<tr><td class=tvalor></td></tr>',
-     '<tr><td class=valor></td></tr>',            
+     '<tr><td class=tvalor></td><td class=valor></td></tr>',            
      '</table>'
      ].join("");
      }-*/;
@@ -836,7 +836,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         Date fechaCopiaPrecontractual = CalendarUtil.copyDate(copiFechaEvaPropuestas);
 
-        int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()) + 1);
+        int duracionContractual = (CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaFinalizacion.getValue()));
 
         ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaSuscripcionContrato.getValue(), duracionContractual, 0, TaskType.PARENT, 5, true);
         contractua.setEditable(false);
@@ -845,12 +845,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijos.add(contractua);
 
         List<ActividadobraDTO> lstHijosContra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripción del contrato", fechaSuscripcionContrato.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripción del contrato", fechaSuscripcionContrato.getValue(), duracionContractual, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcion.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcion);
 
-        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripción acta de inicio", fechaSuscripcionActaInicio.getValue(), 0, 0, TaskType.MILESTONE, 6, true);
+        ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripción acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         hitoFechaSuscripcionActa.setNumeracion(numeracionActividad);
         numeracionActividad++;
         lstHijosContra.add(hitoFechaSuscripcionActa);
@@ -858,25 +858,29 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Date copiaFechaUltimoHijoContrac = CalendarUtil.copyDate(hitoFechaSuscripcionActa.getEndDateTime());
         contractua.setEndDateTime(copiaFechaUltimoHijoContrac);
         contractua.setDuration(duracionContractual);
-
+        
+        service.setLog("fin contractual"+contractua.getEndDateTime(), null);
+        
+        DateWrapper dw = new DateWrapper(contractua.getEndDateTime()).clearTime().addDays(1);                
+        
         Date fechaCopiaContractual = CalendarUtil.copyDate(contractua.getEndDateTime());
-
-
-        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaCopiaContractual, 1, 0, TaskType.PARENT, 5, true);
+        
+        service.setLog("Fecha inicio liquidaciones"+dw.asDate(), null);
+        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidación", dw.asDate(), 1, 0, TaskType.PARENT, 5, true);
         Liquidaciones.setEditable(false);
         Liquidaciones.setNumeracion(numeracionActividad);
         lstHijos.add(Liquidaciones);
 
-        Date fechaCopiaLiquidacion = CalendarUtil.copyDate(Liquidaciones.getEndDateTime());
-        actividadObraContrato.setEndDateTime(fechaCopiaLiquidacion);
+//        Date fechaCopiaLiquidacion = CalendarUtil.copyDate(Liquidaciones.getEndDateTime());
+//        actividadObraContrato.setEndDateTime(fechaCopiaLiquidacion);
 
         actividadObraContrato.setChildren(lstHijos);
         precontractual.setChildren(lstHijosPrecontra);
         contractua.setChildren(lstHijosContra);
 
 
-        int duracionContrato = CalendarUtil.getDaysBetween(GanttDatos.obtenerMenorFechaInicio(actividadObraContrato.getChildren()), GanttDatos.obtenerMayorFechaFin(actividadObraContrato.getChildren()));
-        actividadObraContrato.setDuration(duracionContrato);
+//        int duracionContrato = CalendarUtil.getDaysBetween(GanttDatos.obtenerMenorFechaInicio(actividadObraContrato.getChildren()), GanttDatos.obtenerMayorFechaFin(actividadObraContrato.getChildren()));
+//        actividadObraContrato.setDuration(duracionContrato);
 
 
         //DependenciaDTO dependenciaRevTecnica = GanttDatos.crearDependencia(revTecnica, elaboPliegos);
