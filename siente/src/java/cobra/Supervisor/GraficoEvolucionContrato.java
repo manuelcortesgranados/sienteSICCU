@@ -60,7 +60,7 @@ public class GraficoEvolucionContrato implements Serializable{
          * Generación del conjunto de datos ejecutados
          */
         grafico.setTipoDatoEjeX(Grafico.FECHA);
-        grafico.setTitulo(Propiedad.getValor("graEvuContratoTitulo"));
+        grafico.setTitulo(Propiedad.getValor("graEvuContratoTitulo")+" "+getNuevoContratoBasico().getTipoContCon());
         grafico.setTituloEjeX(Propiedad.getValor("graEvuContratoTituloEjeX"));
         grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeY"));
         grafico.getEstilo().setVerLeyenda(true);
