@@ -64,7 +64,7 @@
     <session-config>
         <!-- Session timeout zoom-->
         <session-timeout>
-            30
+            1
         </session-timeout>
         <!-- Session timeout cobras
         <session-timeout>
@@ -84,10 +84,15 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/sesion_vencida.xhtml</location>
     </error-page>    
-    <error-page>
+<!--    <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/Errores.xhtml</location>
-    </error-page> 
+    </error-page> -->
+    
+     <error-page>
+        <error-code>408</error-code>
+        <location>/sesion_vencida.xhtml</location>
+    </error-page>
     
     <error-page>
         <error-code>500</error-code>
