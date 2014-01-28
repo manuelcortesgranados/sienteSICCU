@@ -64,7 +64,7 @@
     <session-config>
         <!-- Session timeout zoom-->
         <session-timeout>
-            1
+            30
         </session-timeout>
         <!-- Session timeout cobras
         <session-timeout>
