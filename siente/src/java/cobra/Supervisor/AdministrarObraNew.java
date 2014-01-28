@@ -167,6 +167,28 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
     public int controltipodocumento = 0;
+    
+    /**
+     * variables para las fechas de informe circular tolima
+     */
+    private Date fechaInicioCircular;
+    private Date fechaFinCircular;
+
+    public Date getFechaInicioCircular() {
+        return fechaInicioCircular;
+    }
+
+    public void setFechaInicioCircular(Date fechaInicioCircular) {
+        this.fechaInicioCircular = fechaInicioCircular;
+    }
+
+    public Date getFechaFinCircular() {
+        return fechaFinCircular;
+    }
+
+    public void setFechaFinCircular(Date fechaFinCircular) {
+        this.fechaFinCircular = fechaFinCircular;
+    }
     /**
      * Variable para proyectos que pertenecen a Marco
      */
@@ -2465,16 +2487,25 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * @return
      */
     public String informecircularTolima() {
-        System.out.println("ingreso al metodo");
         try {
-            
-            Tercero entidad = getNuevoContratoBasico().getContrato().getTercero();
-            System.out.println("entidad = " + entidad);
-            boolean respuesta = getSessionBeanCobra().getCobraService().enviarcorreoinformecircular(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra(), entidad);
-            if (respuesta) {
-                FacesUtils.addInfoMessage(bundle.getString("mensaje2informecircular"));
+            if ((fechaInicioCircular != null) || (fechaFinCircular != null)) {
+                if (fechaInicioCircular.before(fechaFinCircular)) {
+                    if (getNuevoContratoBasico().comboEntidadesContratoguardar()) {
+                        Tercero entidad = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(getNuevoContratoBasico().getContrato().getTercero().getIntcodigo());
+                        boolean respuesta = getSessionBeanCobra().getCobraService().enviarcorreoinformecircular(getSessionBeanCobra().getCobraService(), getSessionBeanCobra().getUsuarioObra(), entidad, fechaInicioCircular, fechaFinCircular);
+                        if (respuesta) {
+                            FacesUtils.addInfoMessage(bundle.getString("mensaje2informecircular"));
+                        } else {
+                            FacesUtils.addErrorMessage(bundle.getString("mensaje3informecircular"));
+                        }
+                    } else {
+                        FacesUtils.addErrorMessage(bundle.getString("mensaje4informecircular"));
+                    }
+                } else {
+                    FacesUtils.addErrorMessage(bundle.getString("mensaje5informecircular"));
+                }
             } else {
-                FacesUtils.addInfoMessage(bundle.getString("mensaje3informecircular"));
+                FacesUtils.addErrorMessage(bundle.getString("mensaje6informecircular"));
             }
         } catch (Exception e) {
             getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje1informecircular") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");

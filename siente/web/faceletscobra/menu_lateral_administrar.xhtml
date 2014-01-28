@@ -177,5 +177,7 @@
     <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
         <ui:include src="/Ciudadano/Slider_informacion_general_ciud.xhtml"/>
     </h:panelGroup>
-    <ui:include src="/modal/modalinformecirculartolima.xhtml"/>
+    <h:panelGroup rendered="#{var.versioncobra eq 'cobratolima'}">
+        <ui:include src="/modal/modalinformecirculartolima.xhtml"/>
+    </h:panelGroup>
 </ui:composition>

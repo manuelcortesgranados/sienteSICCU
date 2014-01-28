@@ -29,35 +29,36 @@
 
         <h:form>
             <center>
-                <h:panelGrid id="pgconfirmarSolicituRevision" styleClass="ikont-hpg-pgconfirmarsoliciturevision totalwidth panelcenter" columnClasses="panelcenter"  cellpadding="0" cellspacing="0" >
-                    <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalinformecircular}" />
+                <br/>
+                <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalinformecircular}" />
+                <br/>
+                <br/>
+                <h:panelGrid id="pgconfirmarSolicituRevision" styleClass="ikont-hpg-pgconfirmarsoliciturevision totalwidth panelcenter" columnClasses="panelcenter, panelcenter"  cellpadding="0" cellspacing="0" columns="2">
                     <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalinformecircularentidad}" />
-
-                    <h:panelGroup id="cmbEntInfEnt" styleClass="ikont-hpg-entcontra"  >
+                    <h:panelGroup id="cmbEntInfCir" styleClass="ikont-hpg-entcontra"  >
                         <rich:select id="selectentidadinformecircular" styleClass="ikont-rs-ingresarenti" 
-                                     defaultLabel="Seleccione Entidad" value="#{Supervisor$AdministrarObraNew.soli}" >
+                                     defaultLabel="Seleccione Entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
+                            <a4j:ajax event="change" execute="@this"/>
                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                         </rich:select>
                     </h:panelGroup>
-                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechasus}:" for="fecIniInfCir"/>
+                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechainicioinformecircular}:" for="fecIniInfCir"/>
                     <h:panelGrid columns="2">
-                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniInfCir" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
-                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecIniInfCir" inputSize="10" value="#{Supervisor$AdministrarObraNew.fechaInicioCircular}">
+                            <a4j:ajax event="change" execute="@this"/>
                         </rich:calendar>
                     </h:panelGrid>
-                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechasus}:" for="fecIniContrato"/>
+                    <h:outputLabel  styleClass="ikont-hol-fechasusc font-general" value="#{var.fechafininformecircular}:" for="fecFinInfCir"/>
                     <h:panelGrid columns="2">
-                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecFinInfCir" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
-                            <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="change" render="gpDuracion" execute="@this, gpDuracion"/>
+                        <rich:calendar required="true" datePattern="#{var.formatofecha}" direction="topRight" id="fecFinInfCir" inputSize="10" value="#{Supervisor$AdministrarObraNew.fechaFinCircular}">
+                            <a4j:ajax event="change" execute="@this"/>
                         </rich:calendar>
                     </h:panelGrid>
+                    <a4j:commandButton id="BTaceptarRevision" value="Enviar Correo" styleClass="ikont-acb-btaceptarrevision"  execute="@form, fecIniInfCir,fecFinInfCir" immediate="true" action="#{Supervisor$AdministrarObraNew.informecircularTolima}" oncomplete="#{rich:component('informecirculartolima')}.hide(); return false;"/>
 
-                    <h:panelGroup styleClass="totalwidth panelcenter">
-                        <a4j:commandButton id="BTaceptarRevision" value="Enviar Correo" styleClass="ikont-acb-btaceptarrevision"  execute="@this, selectentidadinformecircular" immediate="true" action="#{Supervisor$AdministrarObraNew.informecircularTolima}" oncomplete="#{rich:component('informecirculartolima')}.hide(); return false;"/>
-
-                        <a4j:commandButton id="BTnoaceptarRevision" value="Cancelar" styleClass="ikont-acb-btnoceptarrevision"   onclick="#{rich:component('informecirculartolima')}.hide();
+                    <a4j:commandButton id="BTnoaceptarRevision" value="Cancelar" styleClass="ikont-acb-btnoceptarrevision"   onclick="#{rich:component('informecirculartolima')}.hide();
                                               return false;"/>
-                    </h:panelGroup>
+
 
                 </h:panelGrid>
             </center>
