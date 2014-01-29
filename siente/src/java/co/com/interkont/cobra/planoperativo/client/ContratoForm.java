@@ -783,7 +783,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         //fechaInicioPre.setDate(fechaInicioPre.getDate() - 4);
         
         //ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaSuscripcionActaInicio.getValue()), 0, TaskType.PARENT, 3, false, contrato);
-        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaInicioPre, CalendarUtil.getDaysBetween(fechaInicioPre, fechaFinalizacion.getValue()), 0, TaskType.PARENT, 3, false, contrato);
+        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaInicioPre, CalendarUtil.getDaysBetween(fechaInicioPre, fechaFinalizacion.getValue())+1, 0, TaskType.PARENT, 3, false, contrato);
         actividadObraContrato.setEditable(false);
         actividadObraContrato.setNumeracion(numeracionActividad);
         numeracionActividad++;

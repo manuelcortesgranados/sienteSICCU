@@ -191,17 +191,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         this.gantt = gantt;
     }
 
-    public interface GanttExampleStyle extends CssResource {
-
-        @ClassName("gwt-label")
-        String estiloLabel();
-    }
-
-    public interface GanttExampleResources extends ClientBundle {
-
-        @Source({"Gantt.css"})
-        GanttExampleStyle css();
-    }
+//    public interface GanttExampleStyle extends CssResource {
+//
+//        @ClassName("gwt-label")
+//        String estiloLabel();
+//    }
+//
+//    public interface GanttExampleResources extends ClientBundle {
+//
+//        @Source({"Gantt.css"})
+//        GanttExampleStyle css();
+//    }
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);
@@ -255,8 +255,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyDnDEnabled = !isModolectura();
         config.dragCreateEnabled = !isModolectura();
         // Enable task DnD        
-        config.taskDnDEnabled = false;
-        //config.taskDnDEnabled = !isModolectura();
+//        config.taskDnDEnabled = false;
+        config.taskDnDEnabled = !isModolectura();
         // Define "snap to" resolution
         config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;

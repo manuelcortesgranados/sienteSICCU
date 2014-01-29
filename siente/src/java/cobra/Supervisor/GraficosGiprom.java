@@ -251,7 +251,7 @@ public class GraficosGiprom implements Serializable {
 
         for (VwIndIndicadorMunicipal ind : listind) {
             if (ind.getIndMtdCodigo().compareTo("040104") == 0) {
-                var1 = ind.getIndDtmAnio().toString();
+                var1 = ind.getIndDtmAnio().toString();                
                 if (var1 == null) {
                     var1 = "N.D";
                 }

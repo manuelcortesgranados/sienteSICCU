@@ -1337,16 +1337,7 @@ public class SessionBeanCobra implements Serializable {
         vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
         vista.setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
 
-        int x=40;
-        
-        
-        System.out.println(x^=3);
-        x=45;
-        
-        System.out.println(x|=3);
-          x=50;        
-        System.out.println( x<<=3);   
-        
+          
         return vista;
     }   
 }
