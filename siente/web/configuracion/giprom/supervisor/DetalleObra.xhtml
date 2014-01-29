@@ -160,13 +160,13 @@
                                             </h:panelGrid>
                                             <h:panelGrid columns="2" cellspacing="5">
                                                 <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
-                                                <h:panelGroup layout="block">
+                                                <h:panelGrid columns="2">
                                                     <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
                                                     <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaldeclarado}"></h:outputText>
-                                                    <br/>
+                                                    
                                                     <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
                                                     <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
-                                                </h:panelGroup>
+                                                </h:panelGrid>
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </rich:panel>
