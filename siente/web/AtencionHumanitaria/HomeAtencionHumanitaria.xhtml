@@ -31,7 +31,7 @@
                     <td><div><div id="buscador_space">
                                 <label>
                                     <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave " onfocus="clearText(this);"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
-                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-acb-primerolistproyectos"  />
+                                    <a4j:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-acb-primerolistproyectos" render="tablaAtencionHumanitaria" />
                                 </label>
                             </div></div></td>
                     <td>
