@@ -3736,6 +3736,11 @@ css usuario modificacion
     display: block;
 }
 
+.kont-label-menu-estr-reporte-general{
+    font-size: 15px; 
+    color: #58595B;
+}
+
 .ikont-posicion-reporte-global{
     background-position: 3px 2px;
 }

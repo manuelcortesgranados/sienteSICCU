@@ -98,6 +98,7 @@
             </rich:column>
             <rich:column>
                 <h:inputText id="hit-cuotagerencia-convenio"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valorcuotagerencia}" required="true" style="width: 222px;position: relative;left: 11px;" readonly="#{Supervisor$Contrato.puedeEditarValorFuentes}" >
+                    <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                     <rich:placeholder value="#{var.cuotagerencia}" />
                     <f:validateDoubleRange  minimum="0"  />                            
                     <f:validateLength maximum="26" minimum="1" />
