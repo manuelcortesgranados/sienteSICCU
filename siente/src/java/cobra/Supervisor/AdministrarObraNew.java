@@ -1040,7 +1040,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
                     List<VwIndIndicadorMunicipal> listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040301", BigDecimal.ONE);
                     gragiprom.pintarGraficoNBIanual(listindhabanual);
-
+                    for (VwIndIndicadorMunicipal vwIndIndicadorMunicipal : listindhabanual) {
+                            getObra().setStrvereda(vwIndIndicadorMunicipal.getIndFntNombre()); 
+                    }
+                  
+                    
                     listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040104", BigDecimal.valueOf(2));
                     if (!listindhabanual.isEmpty()) {
                         VwIndIndicadorMunicipal den = listindhabanual.get(0);

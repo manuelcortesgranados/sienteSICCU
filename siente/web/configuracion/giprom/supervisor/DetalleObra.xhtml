@@ -163,7 +163,7 @@
                                                 <h:panelGrid columns="2">
                                                     <h:outputLabel value="# de habitantes :  " styleClass="font-general"></h:outputLabel>
                                                     <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaldeclarado}"></h:outputText>
-                                                    
+
                                                     <h:outputLabel value="# de encuestados :  " styleClass="font-general"></h:outputLabel>
                                                     <h:outputText styleClass="ikont-hot-intplazoo" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfisicodeclarado}"></h:outputText>
                                                 </h:panelGrid>
@@ -194,7 +194,10 @@
                                                     </h:panelGrid>
                                                 </h:panelGrid>
                                             </h:panelGroup>
+
                                         </h:panelGrid>
+                                        <h:outputText styleClass="font-general" value="Fuente: "/>
+                                        <h:outputLabel  value="#{Supervisor$AdministrarObraNew.obra.strvereda}"/>
                                     </rich:panel>    
                                     <rich:panel header="% NBI" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBI}" escape="false" />
@@ -215,7 +218,7 @@
                                                         rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas totalwidth font-general"  
                                                         value="#{Supervisor$AdministrarObraNew.gragiprom.listadesempeno}"
                                                         var="actual" >
-                                           
+
                                             <rich:column styleClass="panelizquierda">
                                                 <h:outputText  styleClass="ikont-hot-idvisita"   value="#{actual.indMtdNombre}"/>
                                             </rich:column>
@@ -224,7 +227,7 @@
                                                     <f:convertNumber maxFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
-                                                                                      
+
                                         </rich:dataTable>
 
                                     </rich:panel>
