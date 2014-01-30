@@ -120,12 +120,12 @@
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.editar}" 
+                            <h:commandLink  title="#{var.editar}" 
                                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneditar_solicitud_ah}"
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.identificados_Modif}"
-                                              render="DatosBasicosSolicitud">
+                                             >
                                 <h:graphicImage  styleClass="ikont-hgi-bteditar" value="/resources/imgs/bt_editar.png"/>
-                            </a4j:commandLink>
+                            </h:commandLink>
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud==4}" >
                             <a4j:commandButton  title="#{var.eliminar}" 

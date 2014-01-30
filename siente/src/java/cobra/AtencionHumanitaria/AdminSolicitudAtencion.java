@@ -1674,8 +1674,8 @@ public class AdminSolicitudAtencion  implements Serializable{
                 strmunicipio = solicitud.getLocalidad().getStrcodigolocalidad();
             }
             getAtencionHumanitaria().setListadosolicitudDetalle(getSessionBeanCobra().getAtencionhumanitariaService().encontrarSolicitudDetalle(solicitud));
-            getAtencionHumanitaria().setListadocumentosolicitud(getAtencionHumanitaria().encontrarDocumentosSolicitud(solicitud.getOidcodigosolicitudmaestro()));
-            getAtencionHumanitaria().setListadoimagensolicitud(getAtencionHumanitaria().encontrarImagenSolicitud(solicitud.getOidcodigosolicitudmaestro()));
+            getAtencionHumanitaria().setListadocumentosolicitud(getAtencionHumanitaria().encontrarDocumentosSolicitud(getAtencionHumanitaria().getSolicitudmaestro().getOidcodigosolicitudmaestro()));
+            getAtencionHumanitaria().setListadoimagensolicitud(getAtencionHumanitaria().encontrarImagenSolicitud(getAtencionHumanitaria().getSolicitudmaestro().getOidcodigosolicitudmaestro()));
             getAtencionHumanitaria().setCodigosol(true);
             
             calcularValorSolicitudDetalle();
@@ -2161,6 +2161,7 @@ public class AdminSolicitudAtencion  implements Serializable{
      * @return No retorna ningun valor.
      */
     public String guardarSolicitud() {
+        System.out.println("Ingresa al metodo");
         
         if(getAtencionHumanitaria().getSolicitudmaestro().getTercero().getIntcodigo()==0){
             getAtencionHumanitaria().setMensaje(bundle.getString("solicitanteat"));
