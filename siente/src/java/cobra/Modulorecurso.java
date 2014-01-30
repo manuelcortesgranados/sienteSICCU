@@ -336,6 +336,10 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("btn_regresarobra")){
                             renderrecurso.setBtn_visualizar_reporte_global(false);
                         }
+                        if (temprecusro.getRecNmbre().equals("btn_editarInfoMediosVida")){
+                            renderrecurso.setBtn_editarInfoMediosVida(false);
+                        }
+                        
                         break;
                     
                     

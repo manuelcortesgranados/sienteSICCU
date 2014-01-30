@@ -36,7 +36,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo10
  */
-public class FiduFinanciera implements Serializable{
+public class FiduFinanciera implements Serializable {
 
     private List<Encargofiduciario> listaencargofiducario = new ArrayList<Encargofiduciario>();
     private CargadorArchivosWeb subirDocumento = new CargadorArchivosWeb();
@@ -55,6 +55,7 @@ public class FiduFinanciera implements Serializable{
     private boolean editarorden;
     private SelectItem[] seTipoorden;
     private String filtro = "";
+    private List<Ordendepago> listaOrdenPago;
     private int intencargofidu = 0;
     private int filtroint;
 
@@ -196,6 +197,20 @@ public class FiduFinanciera implements Serializable{
 
     public void setListaencargofiducario(List<Encargofiduciario> listaencargofiducario) {
         this.listaencargofiducario = listaencargofiducario;
+    }
+    
+        /**
+     * @return the listaOrdenPago
+     */
+    public List<Ordendepago> getListaOrdenPago() {
+        return listaOrdenPago;
+    }
+
+    /**
+     * @param listaOrdenPago the listaOrdenPago to set
+     */
+    public void setListaOrdenPago(List<Ordendepago> listaOrdenPago) {
+        this.listaOrdenPago = listaOrdenPago;
     }
 
     public FiduFinanciera() throws Exception {
@@ -400,7 +415,7 @@ public class FiduFinanciera implements Serializable{
         Tercero ter = (Tercero) tablaTerceroListado.getRowData();
 //        FiduFinanciera fiduFinanciera = (FiduFinanciera) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
 //        Tercero tercero = fiduFinanciera.getFinancieraService().getListaTercero().get(filaSeleccionada);
-        
+
         getFinancieraService().getOrdendepago().setTercero(ter);
 
         return null;
@@ -602,7 +617,7 @@ public class FiduFinanciera implements Serializable{
 
         if (aplicafiltro) {
             getFinancieraService().setListaencargo(getSessionBeanCobra().getCobraService().filtroAvanzadoEncargo(intencargofidu, num, num + 5));
-            totalfilasencargo =getSessionBeanCobra().getCobraService().numFiltrarEncargo(intencargofidu);
+            totalfilasencargo = getSessionBeanCobra().getCobraService().numFiltrarEncargo(intencargofidu);
         } else {
             getFinancieraService().setListaencargo(getSessionBeanCobra().getCobraService().encontrarEncargo(num, num + 5));
             totalfilasencargo = getSessionBeanCobra().getCobraService().getNumEncargo();
@@ -886,6 +901,19 @@ public class FiduFinanciera implements Serializable{
         return null;
     }
 
+    public String verEncargoGestionar() {
+        intencargofidu = 0;
+        primerosrealesEncargo();
+        return "gestionarencargo";
+    }
+
+    public String llenarOrdenPago() {
+        primerosrealesOrden();
+        setListaOrdenPago(getFinancieraService().getListaordenpago());
+        System.out.println("Orden pago:" + getListaOrdenPago().size());
+        return null;
+    }
+
     public String limpiarEncargo() {
         getFinancieraService().setEncargofidu(new Encargofiduciario());
         return null;
@@ -923,4 +951,6 @@ public class FiduFinanciera implements Serializable{
 
         return "generarorden";
     }
+
+
 }
