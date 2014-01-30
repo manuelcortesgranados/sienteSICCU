@@ -75,7 +75,7 @@
                             <h:outputText value="#{varMarcoLogico.registraravance}" />
                         </f:facet>
                         <a4j:commandLink id="bt_generanovedad" action="#{MarcoLogico$MarcoLogico.llenarPlanificacionRelacionMarcoLogicoIndicador}" execute="@this" 
-                                         title="#{varMarcoLogico.registroavance}" render="pgavanceplanificacion" rendered="#{avanceplanificacionRelacionMlI.permitirAvance}">
+                                         title="#{varMarcoLogico.registroavance}" render="pgavanceplanificacion" rendered="#{avanceplanificacionRelacionMlI.permitirAvance || SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">
                             <h:graphicImage style="border:0px;border-style:none"  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                             <a4j:ajax oncomplete="#{rich:component('mp-registro-avanceplanificacion')}.show();" />
                         </a4j:commandLink>
