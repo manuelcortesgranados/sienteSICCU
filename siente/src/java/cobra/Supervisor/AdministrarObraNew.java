@@ -2194,6 +2194,52 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return null;
     }
 
+    /**
+     * iniciarTerminarObra
+     * Metodo que llama la página de RegresarObraTerminada
+     * @return
+     */
+    public String iniciarRegresarObra() {
+        try {
+            if (getObra().getTipoestadobra().getIntestadoobra() == 1) {
+                if (getObra().isBoolobraterminada()) {
+                    return "regresarobraterminada";
+                } else {
+                    FacesUtils.addErrorMessage(bundle.getString("mensaje1regresarrobra"));
+                }
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("mensaje4declararobra"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje2regresarrobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+        }
+        return null;
+    }
+    
+    /**
+     * declararRegresarTermindarObra
+     * Metodo que cambia el estado de Boolobraterminada a
+     * false en la base de datos
+     * @return
+     */
+    public String declararRegresarTermindarObra() {
+        try {
+            if (getObra().isBoolobraterminada()) {
+                getObra().setBoolobraterminada(false);
+                getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+                FacesUtils.addInfoMessage(bundle.getString("mensaje3regresarrobra"));
+                opcion = 0;
+                getDetalleObra().iniciardetalle();
+                return "admindetalleObra";
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("mensaje1regresarrobra"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje4regresarrobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+        }
+        return null;
+    }
+    
     public boolean cargarInformeavalidar() {
 
         informeavalidar = getSessionBeanCobra().getCobraService().obtenerUltimaValidacionInformacionxObra(getObra().getIntcodigoobra());

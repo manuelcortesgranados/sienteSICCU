@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="confirmarRegredarObraTerminada" autosized="true"
+                      headerClass="sliderich" styleClass="ikont-"   >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-confirmarsolicitudrevision"    value="#{var.terminarregresarobra}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder_confirmarRegredarObraTerminada" styleClass="ikont-acl-confirmarRegredarObraTerminada closemodal"  
+                                     title="#{var.cerrar}" onclick="#{rich:component('confirmarRegredarObraTerminada')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form>
+            <center>
+                <h:panelGrid id="pgconfirmarSolicituRevision" styleClass="ikont-hpg-pgconfirmarsoliciturevision totalwidth panelcenter" columnClasses="panelcenter"  cellpadding="0" cellspacing="0" >
+                    <h:panelGroup styleClass="totalwidth panelcenter">
+                        
+                            <h:outputText  styleClass="ikont-hot-pgconfirmarsoliciturevision"   value="#{var.mensajemodalregresarobra}" />
+                        
+                    </h:panelGroup>
+                    <br/>
+                    <br/>
+                    
+                        <h:panelGroup styleClass="totalwidth panelcenter">
+                            <h:commandButton id="BTaceptarRevision" value="SI " styleClass="ikont-acb-btaceptarrevision"   action="#{Supervisor$AdministrarObraNew.declararRegresarTermindarObra}" />
+                            <interkont:spacer width="10"/>
+                            <a4j:commandButton id="BTnoaceptarRevision" value="NO" styleClass="ikont-acb-btnoceptarrevision"   onclick="#{rich:component('confirmarRegredarObraTerminada')}.hide(); return false;"/>
+                        </h:panelGroup>
+                    
+                </h:panelGrid>
+            </center>
+
+        </h:form>
+    </rich:popupPanel>
+
+</ui:composition>

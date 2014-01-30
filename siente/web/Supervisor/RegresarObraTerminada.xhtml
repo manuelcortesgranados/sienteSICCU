@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+        <link rel="stylesheet" type="text/css" href="/#{var.tituloregresarobra}/resources/css/estilos.css" media="all" />
+        <h:outputScript library="css" name="/resources/css/Supervisor/SolicitarValidarInformacion.css"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText  styleClass="ikont-hot-solicirevision" value="#{var.declararobra}"/>
+        <h:outputText  styleClass="ikont-hot-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
+    </ui:define>
+    <ui:define name="body">
+
+
+        <center>
+            <h:panelGroup id="validarinfo">
+                <interkont:spacer  height="120"/>
+                <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" styleClass="marcocambioestado">
+
+                    <h:panelGrid  columnClasses="panelcenter" styleClass="totalwidth panelcenter">
+                        <h:outputText  styleClass="ikont-hot-solicitrevisioninfome vtitle02" value="#{var.tituloregresarobra}"/>
+                        <br/>
+                        <br/>
+                        <h:panelGroup >
+                            <h:outputText  styleClass="ikont-hot-estemomento vtitle03" value="#{var.contenidoregresarobra}"/>
+                            <br/><br/>
+                        </h:panelGroup>
+                        <br/><br/>
+                        <h:panelGrid columnClasses="panelcenter" styleClass="totalwidth panelcenter" >
+                            <h:form  id="form_validarinfo" styleClass="totalwidth panelcenter">
+                                <a4j:commandLink value="#{var.terminardeclararobra}" 
+                                                 styleClass="ikont-acl-cambioestado" onclick="#{rich:component('confirmarRegredarObraTerminada')}.show();">
+                                </a4j:commandLink>  
+                            </h:form>
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid columnClasses="panelcenter" styleClass="totalwidth panelcenter" >
+                            <h:form styleClass="totalwidth panelcenter">
+                                <h:commandLink  styleClass="ikont-hcl-historevinfo ikont-acl-cambioestado"  
+                                                value="#{var.regresardetadeclararobra}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />                                    
+                            </h:form>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+            </h:panelGroup>
+        </center>
+
+
+        <ui:include src="/modal/ConfirmarRegresarObraTerminda.xhtml"/>
+    </ui:define>
+</ui:composition>
+
