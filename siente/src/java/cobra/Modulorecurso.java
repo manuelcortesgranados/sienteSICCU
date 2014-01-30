@@ -327,6 +327,12 @@ public class Modulorecurso implements Serializable {
                         if (temprecusro.getRecNmbre().equals("btn_informecircular")){
                             renderrecurso.setBtn_terminarobra(false);
                         }
+                        if (temprecusro.getRecNmbre().equals("btn_visualizar_reporte_gerencial")){
+                            renderrecurso.setBtn_visualizar_reporte_gerencial(false);
+                        }
+                        if (temprecusro.getRecNmbre().equals("btn_visualizar_reporte_global")){
+                            renderrecurso.setBtn_visualizar_reporte_global(false);
+                        }
                         break;
                     
                     

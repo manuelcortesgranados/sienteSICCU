@@ -48,9 +48,27 @@
             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
             <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu}" styleClass="ikont-label-menu-estr-sub-titulo" value="#{var.contactenos}" immediate="true"
-                           onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-
+                           onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />   
+            
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reporte-global ikont-posicion-reporte-global"   immediate="true"  rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/INFORME_GLOBAL.xls', '_blank');"/>
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Global" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/INFORME_GLOBAL.xls', '_blank');"
+                           />
+            <br/>
+            <h:outputLabel value="#{var.textoreporteglobal}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}" styleClass="kont-label-menu-estr-reporte-general"/>
+            
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reporte-gerencia ikont-posicion-reporte-gerencia"   immediate="true" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}"
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"/>
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Gerencial" 
+                           onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"
+                           rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}"/>   
+        <br/>
+        <h:outputLabel value="#{var.textoreportegerencial}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}" styleClass="kont-label-menu-estr-reporte-general"/>
+            
         </h:panelGrid>
+        
+        
 
     </h:panelGroup>
     <interkont:spacer  height="10"/>

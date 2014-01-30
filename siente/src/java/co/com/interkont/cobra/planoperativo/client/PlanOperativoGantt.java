@@ -191,17 +191,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         this.gantt = gantt;
     }
 
-    public interface GanttExampleStyle extends CssResource {
-
-        @ClassName("gwt-label")
-        String estiloLabel();
-    }
-
-    public interface GanttExampleResources extends ClientBundle {
-
-        @Source({"Gantt.css"})
-        GanttExampleStyle css();
-    }
+//    public interface GanttExampleStyle extends CssResource {
+//
+//        @ClassName("gwt-label")
+//        String estiloLabel();
+//    }
+//
+//    public interface GanttExampleResources extends ClientBundle {
+//
+//        @Source({"Gantt.css"})
+//        GanttExampleStyle css();
+//    }
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);

@@ -16,13 +16,13 @@ import java.util.List;
  *
  * @author desarrollo3
  */
-public class GraficosGiprom implements Serializable{
-    
+public class GraficosGiprom implements Serializable {
+
     private StringBuilder graficoNBI = new StringBuilder();
     private StringBuilder graficoNBIanual = new StringBuilder();
-    private StringBuilder graficoNBILocalizacion = new StringBuilder(); 
-    private List<VwIndIndicadorMunicipal> listadesempeno= new ArrayList<VwIndIndicadorMunicipal>();
-    private String distribucionetnica="";
+    private StringBuilder graficoNBILocalizacion = new StringBuilder();
+    private List<VwIndIndicadorMunicipal> listadesempeno = new ArrayList<VwIndIndicadorMunicipal>();
+    private String distribucionetnica = "";
 
     public String getDistribucionetnica() {
         return distribucionetnica;
@@ -31,8 +31,6 @@ public class GraficosGiprom implements Serializable{
     public void setDistribucionetnica(String distribucionetnica) {
         this.distribucionetnica = distribucionetnica;
     }
-    
-    
 
     public List<VwIndIndicadorMunicipal> getListadesempeno() {
         return listadesempeno;
@@ -40,11 +38,10 @@ public class GraficosGiprom implements Serializable{
 
     public void setListadesempeno(List<VwIndIndicadorMunicipal> listadesempeno) {
         this.listadesempeno = listadesempeno;
-    }   
-    
+    }
 
     public StringBuilder getGraficoNBI() {
-        
+
         return graficoNBI;
     }
 
@@ -53,7 +50,7 @@ public class GraficosGiprom implements Serializable{
     }
 
     public StringBuilder getGraficoNBIanual() {
-        
+
         return graficoNBIanual;
     }
 
@@ -62,17 +59,16 @@ public class GraficosGiprom implements Serializable{
     }
 
     public StringBuilder getGraficoNBILocalizacion() {
-        
+
         return graficoNBILocalizacion;
     }
 
     public void setGraficoNBILocalizacion(StringBuilder graficoNBILocalizacion) {
         this.graficoNBILocalizacion = graficoNBILocalizacion;
     }
-    
-    
+
     public void pintarGraficoNBI(String valor) {
-        
+
         this.graficoNBI.append("<script type=\"text/javascript\">\n");
         this.graficoNBI.append("var chart;\n");
         this.graficoNBI.append("var arrow;\n");
@@ -101,7 +97,7 @@ public class GraficosGiprom implements Serializable{
         this.graficoNBI.append("});\n");
         this.graficoNBI.append("</script>\n");
 
-        
+
     }
 
     public void pintarGraficoNBIanual(List<VwIndIndicadorMunicipal> listindhabanual) {
@@ -109,21 +105,19 @@ public class GraficosGiprom implements Serializable{
         datosNBIanual.append("<script type=\"text/javascript\">\n");
         datosNBIanual.append("var chart;\n");
         datosNBIanual.append("var chartData = [");
-        int i=0;
-        for(VwIndIndicadorMunicipal ind:listindhabanual)
-        {
-            if(i>0)
-            {
-               datosNBIanual.append(","); 
-            }    
+        int i = 0;
+        for (VwIndIndicadorMunicipal ind : listindhabanual) {
+            if (i > 0) {
+                datosNBIanual.append(",");
+            }
             datosNBIanual.append("{\n");
-            
+
             datosNBIanual.append("'year': '").append(ind.getIndDtmAnio().toString()).append("',\n");
-        datosNBIanual.append("    'nbi': ").append(ind.getIndDtmValor().toString()).append("\n");
+            datosNBIanual.append("    'nbi': ").append(ind.getIndDtmValor().toString()).append("\n");
             datosNBIanual.append("}");
             i++;
-        }  
-        datosNBIanual.append("];\n");        
+        }
+        datosNBIanual.append("];\n");
         datosNBIanual.append("AmCharts.ready(function () {\n");
 
         datosNBIanual.append("chart = new AmCharts.AmSerialChart();\n");
@@ -165,34 +159,32 @@ public class GraficosGiprom implements Serializable{
         datosNBIanual.append("});\n");
 
         datosNBIanual.append("</script>\n");
-        
+
         this.graficoNBIanual.append(datosNBIanual);
     }
 
-    public void pintarGraficoNBILocalidad(List<VwIndIndicadorMunicipal> listindhabanual, VwIndIndicadorMunicipal denominador ) {
+    public void pintarGraficoNBILocalidad(List<VwIndIndicadorMunicipal> listindhabanual, VwIndIndicadorMunicipal denominador) {
         StringBuilder datosNBILocalidad = new StringBuilder();
-        
+
         datosNBILocalidad.append("<script type=\"text/javascript\">\n");
-        
+
         datosNBILocalidad.append("var chartDataLocal = [");
-        int i=0;
-        for(VwIndIndicadorMunicipal ind:listindhabanual)
-        {
-            if(i>0)
-            {
-               datosNBILocalidad.append(","); 
-            }    
+        int i = 0;
+        for (VwIndIndicadorMunicipal ind : listindhabanual) {
+            if (i > 0) {
+                datosNBILocalidad.append(",");
+            }
             datosNBILocalidad.append("{\n");
-            Double val=(ind.getIndDtmValor()/denominador.getIndDtmValor())*100;
-            BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+            Double val = (ind.getIndDtmValor() / denominador.getIndDtmValor()) * 100;
+            BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
             datosNBILocalidad.append("'area': '").append(ind.getIndMtdNombre()).append("',\n");
-        datosNBILocalidad.append("    'nbi': ").append(val2.toString()).append("\n");
+            datosNBILocalidad.append("    'nbi': ").append(val2.toString()).append("\n");
             datosNBILocalidad.append("}");
             i++;
-        }  
-        datosNBILocalidad.append("];\n");      
-        
-        
+        }
+        datosNBILocalidad.append("];\n");
+
+
 
         datosNBILocalidad.append("AmCharts.ready(function () {\n");
 
@@ -235,82 +227,114 @@ public class GraficosGiprom implements Serializable{
         datosNBILocalidad.append("});\n");
 
         datosNBILocalidad.append("</script>\n");
-        
+
         this.graficoNBILocalizacion.append(datosNBILocalidad);
     }
-    
+
     private StringBuilder pintarGraficoBarras(StringBuilder datos, String ejex, String ejey, String id, String tool) {
         StringBuilder grafico = new StringBuilder();
-        
+
 
         return grafico;
     }
-    
-    public void llenarDistribucionEtnica(List<VwIndIndicadorMunicipal> listind)
-    {
-        String var1="";String var2="";String var3="";String var4="";String var5="";String var6="";String var7="";String var8="";
-        String var9="";
-        
-        for(VwIndIndicadorMunicipal ind:listind)        {
-            if(ind.getIndMtdCodigo().compareTo("040104")==0)
-            {
-                var1= ind.getIndDtmAnio().toString();
-                var2=ind.getIndDtmValor().toString();
-                
-            }            
+
+    public void llenarDistribucionEtnica(List<VwIndIndicadorMunicipal> listind) {
+        String var1 = "";
+        String var2 = "";
+        String var3 = "";
+        String var4 = "";
+        String var5 = "";
+        String var6 = "";
+        String var7 = "";
+        String var8 = "";
+        String var9 = "";
+
+        for (VwIndIndicadorMunicipal ind : listind) {
+            if (ind.getIndMtdCodigo().compareTo("040104") == 0) {
+                var1 = ind.getIndDtmAnio().toString();                
+                if (var1 == null) {
+                    var1 = "N.D";
+                }
+                var2 = ind.getIndDtmValor().toString();
+                if (var2 == null) {
+                    var2 = "N.D";
+                }
+            }
         }
-        
-        for(VwIndIndicadorMunicipal ind:listind) {    
-            
-            if(ind.getIndMtdCodigo().compareTo("040201")==0)
-            {
-                 var3=ind.getIndDtmAnio().toString();
-                 var4=ind.getIndDtmValor().toString();                
+
+        for (VwIndIndicadorMunicipal ind : listind) {
+
+            if (ind.getIndMtdCodigo().compareTo("040201") == 0) {
+                var3 = ind.getIndDtmAnio().toString();
+                var4 = ind.getIndDtmValor().toString();
+                if (var3 == null) {
+                    var3 = "N.D";
+                }
+                if (var4 == null) {
+                    var4 = "N.D";
+                }
             }
-            if(ind.getIndMtdCodigo().compareTo("040162")==0)
-            {
-                Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
-                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);                
-                var5=val2.toString()+" %";
+            if (ind.getIndMtdCodigo().compareTo("040162") == 0) {
+                Double val = (ind.getIndDtmValor() / Double.valueOf(var1)) * 100;
+                BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var5 = val2.toString() + " %";
+                if (var5 == null) {
+                    var5 = "N.D";
+                }
             }
-            if(ind.getIndMtdCodigo().compareTo("040161")==0)
-            {
-                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
-                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-                var6=val2.toString()+" %";
+            if (ind.getIndMtdCodigo().compareTo("040161") == 0) {
+                Double val = (ind.getIndDtmValor() / Double.valueOf(var1)) * 100;
+                BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var6 = val2.toString() + " %";
+                if (var6 == null) {
+                    var6 = "N.D";
+                }
             }
-            if(ind.getIndMtdCodigo().compareTo("030001")==0)
-            {
-                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
-                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-                var7=val2.toString()+" %";
+            if (ind.getIndMtdCodigo().compareTo("030001") == 0) {
+                Double val = (ind.getIndDtmValor() / Double.valueOf(var1)) * 100;
+                BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var7 = val2.toString() + " %";
+                if (var7 == null) {
+                    var7 = "N.D";
+                }
             }
-            if(ind.getIndMtdCodigo().compareTo("040165")==0)
-            {
-                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
-                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-                var8=val2.toString()+" %";
+            if (ind.getIndMtdCodigo().compareTo("040165") == 0) {
+                Double val = (ind.getIndDtmValor() / Double.valueOf(var1)) * 100;
+                BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var8 = val2.toString() + " %";
+                if (var8 == null) {
+                    var8 = "N.D";
+                }
             }
-            if(ind.getIndMtdCodigo().compareTo("040166")==0)
-            {
-                 Double val=(ind.getIndDtmValor()/Double.valueOf(var1))*100;
-                BigDecimal val2=BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
-               var9=val2.toString()+" %";
+            if (ind.getIndMtdCodigo().compareTo("040166") == 0) {
+                Double val = (ind.getIndDtmValor() / Double.valueOf(var1)) * 100;
+                BigDecimal val2 = BigDecimal.valueOf(val).setScale(2, RoundingMode.HALF_UP);
+                var9 = val2.toString() + " %";
+                if (var9 == null) {
+                    var9 = "N.D";
+                }
             }
 //
         }
-        this.distribucionetnica="<p>Según el censo <b>"+var1+
-                "</b> la población del municipio es de <b>"+var2+
-                "</b> habitantes, la población proyectada para <b>"+var3+
-                "</b> es de <b>"+var4+
-                "</b> habitantes. El <b>"+var5+
-                "</b> de la población vive en área rural y el <b>"+var6+
-                "</b> en el área urbana, en el municipio habitan en promedio <b>"+var7+
-                "</b> habitantes por Km cuadrado. El <b>"+var8+
-                "</b> corresponde a la población afrocolombiana, y el <b>"+var9+
-                "</b> a la población indígena.</p>";
 
-    }     
-    
-    
+        this.distribucionetnica = "<p>Según el censo <b>" + var1
+                + "</b> la población del municipio es de <b>" + var2
+                + "</b> habitantes, la población proyectada para <b>" + var3
+                + "</b> es de <b>" + var4
+                + "</b> habitantes. El <b>" + var5
+                + "</b> de la población vive en área rural y el <b>" + var6
+                + "</b> en el área urbana, en el municipio habitan en promedio <b>" + var7
+                + "</b> habitantes por Km cuadrado. El <b>" + var8
+                + "</b> corresponde a la población afrocolombiana, y el <b>" + var9
+                + "</b> a la población indígena.</p>";
+
+    }
+
+    private void isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void or(boolean empty) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

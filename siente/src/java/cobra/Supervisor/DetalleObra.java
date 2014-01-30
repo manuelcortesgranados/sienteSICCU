@@ -1156,7 +1156,6 @@ public class DetalleObra implements Serializable {
     }
 
     public void iniciardetalle() {
-        System.out.println("ingreso al detalle de la obra");
         getAdministrarObraNew().setProyectoestrategia(false);
         imagenEvolucion();
         getAdministrarObraNew().cargarListas();
@@ -1425,7 +1424,6 @@ public class DetalleObra implements Serializable {
     }
 
     public void llenarSelectPeriodoCorto() {
-        System.out.println("ingresa a este metodo");
         listaperiodo = getSessionBeanCobra().getCobraService().encontrarPeriodosObra(getAdministrarObraNew().getObra());
         selectItemPeriodoCorte = new SelectItem[listaperiodo.size()];//asigno tamaño al selecitem
         int i = 0;

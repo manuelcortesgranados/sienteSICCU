@@ -1,45 +1,100 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                template="./../facelets/template_main.xhtml"
-                >
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>#{var.titulogeneral}</title>        
+        <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
+            <script  src="/#{var.versioncobra}/resources/js/zopim/#{var.srczopim}" type="text/javascript"></script>
+        </h:panelGroup>
+        <script src="/#{var.versioncobra}/resources/script_supervisor.js" type="text/javascript"></script>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
-        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
-        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
         <h:outputStylesheet name="reset.css" library="cssfonade"/>
-        <h:outputStylesheet name="planoperativo.css" library="cssfonade"/>
+        <!--<h:outputStylesheet name="planoperativo.css" library="cssfonade"/>-->
     </h:head>
-   <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion.xhtml"/>
-    </ui:define>
-    <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
-            <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>            
-        </h:panelGroup>
-        <h:panelGroup rendered="#{var.permisonuevodiseno}">
-            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-        </h:panelGroup> 
-    </ui:define>
-    <ui:define name="body">
-        <h:panelGroup rendered="#{var.permisonuevodiseno  and Supervisor$Contrato.contrato.modolecturaplanop}" >
-            <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
-        </h:panelGroup>       
-                    <h:form>
-                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
-                        <tr>                            
-                            <td>  
-        <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
-                                    <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+    <h:body  >
+        <h:form id="form_menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </h:form>
+
+        <table  align="center" border="0" cellpadding="0" >
+            <tr>
+                <td valign="top" class="templatetablamenulateral">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
+                        <tr>
+                            <td  >
+                                <h:form id="form_menu_lateral" >
+                                    <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+                                        <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>            
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{var.permisonuevodiseno}">
+                                        <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+                                    </h:panelGroup> 
+                                </h:form>                                    
                             </td>
                         </tr>
-                    </table>                   
-                    </h:form> 
-    </ui:define>
-    
-</ui:composition>
+                    </table>
+                </td>
+                <td class="templatetablacontent" valign="top">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
+                        <tr>
+                            <td>
+
+                                <!--div id="header_content"-->
+                                <div class="ubicacion">                                    
+                                    <!--/div-->
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" height="35">
+                                <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                                    <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
+                                        <tr>
+                                            <td>                                               
+                                                <h:panelGroup rendered="#{var.permisonuevodiseno  and Supervisor$Contrato.contrato.modolecturaplanop}" >
+                                                    <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
+                                                </h:panelGroup>
+                                                <h:form>
+                                                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="templatetablamenulateral">
+                                                        <tr>                            
+                                                            <td>  
+                                                                <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+                                                                <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0; position: absolute; left: 350px;"></iframe>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </h:form>                                                                                   
+                                                <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     
+                                                <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:panelGrid>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table  border="0" cellspacing="0" cellpadding="0" id="tablafooter" class="templatetablafooter">
+            <tr />
+            <tr>
+                <td>
+                    <h:form id="form_footer">
+                        <ui:include src="/facelets/footer.xhtml"/>
+                    </h:form>
+                </td>
+            </tr>
+        </table>                  
+    </h:body>
+
+</html>
+
