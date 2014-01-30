@@ -10,11 +10,13 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelBusquedaAvanzadaAtencion" autosized="true"     headerClass="header_filtro" >
+    <rich:popupPanel id="panelBusquedaAvanzadaAtencion" autosized="true"   styleClass="style-modal-dialog" headerClass="header_filtro style-modal-dialog-head" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont-hot-filtbusqueda" value="#{var.filtbusqueda} " />
-                <h:outputText  styleClass="ikont-hot-filtavanzada" value="#{var.filtavanzada}" />
+                <h:panelGrid columns="2">
+                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
+                    <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} "  />
+                </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         
@@ -32,11 +34,20 @@
         <h:form id="form_filtro">
             <center>
                 <h:panelGrid id="gppanelBusquedaAvanzadaAtencion"  columnClasses="panelcenter">
-                    <h:inputText size="35"  id="txtPalabraClave" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"
+                    <h:panelGroup layout="block" styleClass="ikont-hpg-p2 serch-advanced-header"  >
+                        <h:panelGrid >
+                            <h:panelGroup layout="block" styleClass="ikont-hpg-p3 "   >
+                                <h:outputLabel  styleClass="ikont-hol-label_palabraclave ikont-font-modal-search-ciu"    value="#{var.label_palabraclave}"/><br/>
+                                <h:inputText size="35"  id="txtPalabraClave" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"
                                   styleClass="ikont-hit-txtpalabraclave" />
+                            </h:panelGroup>
+                        </h:panelGrid>
 
-                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda" >
-                        <h:outputLabel  styleClass="ikont-hol-tipoproyect" id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" />
+                    </h:panelGroup>
+                    
+
+                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda" styleClass="serch-advanced-footer">
+                        <h:outputLabel  styleClass="ikont-hol-tipoproyect ikont-font-modal-search-ciu" id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" />
                         <h:selectOneMenu id="estadosolicitudAH" 
                                          value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intestadoSolicitud}"
                                          >
@@ -44,7 +55,7 @@
                             <a4j:ajax event="change" execute="@this, estadosolicitudAH" />
                         </h:selectOneMenu>
                         
-                        <h:outputLabel  styleClass="ikont-hol-tipayudahum" id="label_fase" value="#{var.tipoAyudaHum}" />
+                        <h:outputLabel  styleClass="ikont-hol-tipayudahum ikont-font-modal-search-ciu" id="label_fase" value="#{var.tipoAyudaHum}" />
                         <h:panelGroup>
                             <h:panelGrid>
                                 <h:selectOneMenu id="combotipoah1"
@@ -63,7 +74,7 @@
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <h:outputLabel  styleClass="ikont-hol-regionalizacion" id="label_regionalizacion" value="#{var.region}alización"/>
+                        <h:outputLabel  styleClass="ikont-hol-regionalizacion ikont-font-modal-search-ciu" id="label_regionalizacion" value="#{var.region}alización"/>
                         <h:panelGroup>
                             <h:selectOneMenu value="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas}" >
                                 <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1" />
@@ -72,7 +83,7 @@
                             </h:selectOneMenu>
                         </h:panelGroup>
                         
-                        <h:outputLabel  styleClass="ikont-hol-ubicacionsol" id="label_donde" value="#{var.ubicacionsolicitud}"/>
+                        <h:outputLabel  styleClass="ikont-hol-ubicacionsol ikont-font-modal-search-ciu" id="label_donde" value="#{var.ubicacionsolicitud}"/>
                         <h:panelGrid id="pgorigen">
                             <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas == 1}" 
                                          >
@@ -96,7 +107,7 @@
                             </h:panelGroup>
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont-hot-nmgiro" id="outpago" value="N° de Giro" />
+                        <h:outputText  styleClass="ikont-hot-nmgiro ikont-font-modal-search-ciu" id="outpago" value="N° de Giro" />
                         <rich:inputNumberSpinner id="spago" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intordensolicitud}"
                                                  minValue="0" maxValue="5" inputSize="5" />
 
@@ -110,9 +121,9 @@
 
                         <interkont:spacer height="5" />
 
-                        <h:panelGroup >
-                            <h:commandLink type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" styleClass="ikont-hcl-buscar"/>
-                        </h:panelGroup>
+                        
+                            <h:commandButton type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" styleClass="ikont-hcl-buscar"/>
+                        
                     </h:panelGrid>
                 </h:panelGrid>
             </center>
