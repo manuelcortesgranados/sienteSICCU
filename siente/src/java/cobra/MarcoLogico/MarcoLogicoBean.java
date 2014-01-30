@@ -654,6 +654,24 @@ public class MarcoLogicoBean implements Serializable{
         }
         return false;
     }
+    
+    public String eliminarAvancePlanificacion() {
+        
+        avanceplanificacionrelacionmarcologicoindicador.setDoubleavancevariablesperada1(null);
+        avanceplanificacionrelacionmarcologicoindicador.setDoubleavancevariablesperada2(null);
+        avanceplanificacionrelacionmarcologicoindicador.setStrobservacion(null);
+        avanceplanificacionrelacionmarcologicoindicador.setDatefechacreacion(null);
+        avanceplanificacionrelacionmarcologicoindicador.setDoubleporcentajeavance(null);
+        avanceplanificacionrelacionmarcologicoindicador.setDatefecharealizacion(null);
+        avanceplanificacionrelacionmarcologicoindicador.setFkUsureporta(null);
+        
+        getSessionBeanCobra().getMarcoLogicoService().guardarAvancePlanificacionRelacionMarcolIndicador(avanceplanificacionrelacionmarcologicoindicador, getSessionBeanCobra().getUsuarioObra().getUsuLogin());
+        //avanceplanificacionrelacionmarcologicoindicador = new Avanceplanificacionrelacionmarcologicoindicador();
+        actualizarIndicador();
+        FacesUtils.addInfoMessage("El avance se ha eliminado.");
+
+        return null;
+    }
 
     public String guardarAvancePlanificacion() {
         if (avanceplanificacionrelacionmarcologicoindicador.getDatefecharealizacion() != null) {
@@ -1434,6 +1452,29 @@ public class MarcoLogicoBean implements Serializable{
 //        }
 //
 //    }
+    
+    
+     public String eliminarMetaLinesBase() {
+
+        relacionmarcologicoindicador.setDoublevalor1lineabase(null);
+        relacionmarcologicoindicador.setDoublevalor2lineabase(null);
+        relacionmarcologicoindicador.setDoubleporcentajelinebase(null);
+        relacionmarcologicoindicador.setDoublevalor1meta(null);
+        relacionmarcologicoindicador.setStrobservacionmeta(null);
+        relacionmarcologicoindicador.setDatefechalineabase(null);
+        
+      
+        getSessionBeanCobra().getMarcoLogicoService().guardarAsociacionMarcoLogicoIndicador(relacionmarcologicoindicador);
+        //relacionmarcologicoindicador = new Relacionmarcologicoindicador();
+
+        llenarRelacionmarcologicoindicador();
+
+        FacesUtils.addInfoMessage("Se ha eliminado la linea base");
+
+        return null;
+    }
+     
+     
     public String guardarMetaLineabaseAsociacionMarcoLogicoIndicador() {
         if (relacionmarcologicoindicador.getDoublevalor1lineabase() != null) {
             if (relacionmarcologicoindicador.getStrobservacionmeta() != null) {

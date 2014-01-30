@@ -32,20 +32,39 @@
                     <h:panelGrid  width="100%" columns="2" cellspacing="10">
 
                         <h:outputText id="lblfechalineabase"  value="(*) Fecha linea base"  />
-                        <h:panelGrid >
+                        <h:panelGrid rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">
                             <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechal" inputSize="10" 
                                            required="true" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase != null}" />
                         </h:panelGrid>
+                        <h:panelGrid rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">
+                            <rich:calendar locale="#{varMarcoLogico.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechaledit" inputSize="10" 
+                                           required="true" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase}"/>
+
+                        </h:panelGrid>
+
 
                         <h:outputText id="outputTextvalor1lineabase"  value="Variable 1 línea base:" />
                         <h:inputText  id="inputTextvalor1lineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
+                                      rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}"
                                       value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" >
+                            <f:validateDoubleRange minimum="0" />
+                        </h:inputText>
+
+                        <h:inputText  id="inputTextvalor1lineabasedit" style="width: 100%"
+                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1lineabase}" required="true"
+                                      rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">
                             <f:validateDoubleRange minimum="0" />
                         </h:inputText>
 
                         <h:outputText id="outputTextlineabase"  value="Variable 2 línea base:" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables== 2}" />
                         <h:inputText  id="inputTextlineabase" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
-                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables == 2}" >
+                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables == 2 and !SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}" >
+                            <f:validateDoubleRange minimum="0" />
+                        </h:inputText>
+
+                        <h:inputText  id="inputTextlineabaseedit" style="width: 100%" required="true"
+                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor2lineabase}" 
+                                      rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.indicador.numcantidadvariables == 2 and SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}" >
                             <f:validateDoubleRange minimum="0" />
                         </h:inputText>
                     </h:panelGrid>
@@ -56,20 +75,39 @@
                     <h:panelGrid   columns="2" cellspacing="6">
                         <h:outputText id="outputTextvariable1"  value="Meta esperada al final del proyecto:" />
                         <h:inputText  id="inputTextvariable1" style="width: 100%" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta!=null}"
-                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" >                                                       
+                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" 
+                                      rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">                                                       
+                            <f:validateDoubleRange minimum="0" />
+                        </h:inputText>
+                        <h:inputText  id="inputTextvariable1edt" style="width: 100%" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}"
+                                      value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta}" required="true" >                                                       
                             <f:validateDoubleRange minimum="0" />
                         </h:inputText>
 
                         <h:outputText id="lbldescripcionmeta"  value="#{varMarcoLogico.descripcion}" />
-                        <h:inputTextarea  id="textdescripcionmeta" style="width: 100%" rows="4" value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta}" disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta!=null}">
+                        <h:inputTextarea  id="textdescripcionmeta" style="width: 100%" rows="4"
+                                          value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta}" 
+                                          rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}"
+                                          disabled="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta!=null}">
+                        </h:inputTextarea>
+                        <h:inputTextarea  id="textdescripcionmetaedt" style="width: 100%" rows="4" 
+                                          value="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.strobservacionmeta}" 
+                                          rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida}">
                         </h:inputTextarea>
                     </h:panelGrid>
                 </h:panelGrid>
                 <center>
-                    <a4j:commandButton value="#{varMarcoLogico.guardar}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta==null}"
-                                       action="#{MarcoLogico$MarcoLogico.guardarMetaLineabaseAsociacionMarcoLogicoIndicador}" 
-                                       render="rpasociarMarcologicoIndicador,pgMarcolIndicadorAsociado">
-                    </a4j:commandButton>
+                    <h:panelGrid columns="2">
+                        <a4j:commandButton value="#{varMarcoLogico.guardar}" rendered="#{MarcoLogico$MarcoLogico.relacionmarcologicoindicador.doublevalor1meta==null}"
+                                           action="#{MarcoLogico$MarcoLogico.guardarMetaLineabaseAsociacionMarcoLogicoIndicador}" 
+                                           render="rpasociarMarcologicoIndicador,pgMarcolIndicadorAsociado">
+                        </a4j:commandButton>
+
+                        <a4j:commandButton value="Eliminar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida and MarcoLogico$MarcoLogico.relacionmarcologicoindicador.datefechalineabase != null}"
+                                           render="rpasociarMarcologicoIndicador,rpeliminarMetaLineabase"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-metaLineaBase')">
+                        </a4j:commandButton>
+                    </h:panelGrid>
                 </center>    
             </h:panelGroup>
 
@@ -77,5 +115,6 @@
         </a4j:region>
         <ui:include src="/modal/modalmarcologico/indicador.xhtml"/>
         <ui:include src="/modal/modalmarcologico/marcoLogico.xhtml"/>
+        <ui:include src="/modal/modalmarcologico/eliminarMetaLineabase.xhtml"/>
     </rich:popupPanel>   
 </ui:composition>

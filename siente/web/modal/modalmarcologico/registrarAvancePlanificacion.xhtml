@@ -56,13 +56,19 @@
 
                 </h:panelGrid>
 
-                <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
-                                   disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
-                                   render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida, rpnuevoavance" >
-                </a4j:commandButton>
+                <h:panelGrid columns="2">
+                    <a4j:commandButton value="#{varMarcoLogico.registrar}" action="#{MarcoLogico$MarcoLogico.guardarAvancePlanificacion}"
+                                       disabled="#{!MarcoLogico$MarcoLogico.habilitarguardaravancePlanificacion}"
+                                       render="pgavanceplanificacion,rpPlaneacionAvanceMarcolIndicador, avancefisicomediosvida, rpnuevoavance" >
+                    </a4j:commandButton>
+
+                    <a4j:commandButton value="Eliminar" 
+                                       rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarInfoMediosVida and MarcoLogico$MarcoLogico.avanceplanificacionrelacionmarcologicoindicador.fkUsureporta != null}"
+                                       render="rpeliminaravace" oncomplete="javascript:Richfaces.hideModalPanel('mp-eliminar-avance')">
+                    </a4j:commandButton>
+                </h:panelGrid>
             </h:panelGroup>
         </h:form>
-
-
+        <ui:include src="/modal/modalmarcologico/eliminarAvances.xhtml"/>
     </rich:popupPanel>   
 </ui:composition>
