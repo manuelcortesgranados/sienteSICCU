@@ -33,8 +33,8 @@
                         <rich:message for="fecIni" />
                     </h:panelGroup>
 
-                    <rich:calendar locale="#{var.fechadocumento}"  datePattern="#{var.formatomoneda}" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
-                        <a4j:ajax event="change" render="hpCargar"/>
+                    <rich:calendar locale="#{var.fechadocumento}"  datePattern="#{var.formatofecha}" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
+                        <a4j:ajax execute="hpCargar" event="change" render="hpCargar"/>
                     </rich:calendar>
 
                     <h:panelGroup>
@@ -47,7 +47,7 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="1" id="hpCargar">
-                    <a4j:commandLink execute="@this" styleClass="ikont-a4jcl-hpCargar"   rendered="#{Financiera$CargarExcel.registro.fechaarchivo!=null}"
+                    <a4j:commandLink execute="@this" styleClass="ikont-acl-subirmatrizauditoria"    rendered="#{Financiera$CargarExcel.registro.fechaarchivo!=null}"
                                      oncomplete="#{rich:component('mp_subirexcelgiros')}.show();" render="mp_subirexcelgiros"/>
                 </h:panelGrid>
 

@@ -1484,10 +1484,9 @@ a.superv10:hover {
     color:#333;
 }
 .vtitle21 {
-    font-family:Verdana, Geneva, sans-serif;
-    font-size:13px;
+    font-family:'open';
+    font-size:17px;
     line-height:14px;
-    font-style:italic;
     color:#58595B;
     text-align:justify;
     cursor: pointer;
