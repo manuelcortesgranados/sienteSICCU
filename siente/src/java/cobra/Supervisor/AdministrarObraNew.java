@@ -167,7 +167,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
     public int controltipodocumento = 0;
-    
     /**
      * variables para las fechas de informe circular tolima
      */
@@ -2226,15 +2225,36 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return "datosbasicosnuevoproyecto";
     }
 
-    public String iniciarEliminarUltimoAvance() {
-
-        if (getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getObra().getIntcodigoobra()) != null) {
-
-            return "eliminarultimoavance";
-        } else {
-            FacesUtils.addErrorMessage(bundle.getString("esteproyectonosehaalimentado"));
-            return null;
+    public String iniciarCambioEstado() {
+        try {
+            if (!getObra().isBoolobraterminada()) {
+                return "cambiarestado";
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
+        return null;
+    }
+
+    public String iniciarEliminarUltimoAvance() {
+        try {
+            if (!getObra().isBoolobraterminada()) {
+                if (getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getObra().getIntcodigoobra()) != null) {
+
+                    return "eliminarultimoavance";
+                } else {
+                    FacesUtils.addErrorMessage(bundle.getString("esteproyectonosehaalimentado"));
+                    return null;
+                }
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+        }
+        return null;
     }
 
     public String solicitarEliminarUltimoAvance() {

@@ -11,6 +11,7 @@ import cobra.SessionBeanCobra;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -433,20 +434,25 @@ public class AsociarContratos implements Serializable {
     }
 
     public String llenarlistacontratosProyecto() {
-
-        listacontratosobra = new ArrayList<Relacioncontratoobra>();
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
-
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
-
-        listacontratos = getSessionBeanCobra().getCobraService().encontrarContratosxObra(getAdministrarObraNew().getObra().getIntcodigoobra());
-
-        return "asociarcontratos";
+        try {
+            if (!getAdministrarObraNew().getObra().isBoolobraterminada()) {
+                listacontratosobra = new ArrayList<Relacioncontratoobra>();
+                listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
+                listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
+                listacontratos = getSessionBeanCobra().getCobraService().encontrarContratosxObra(getAdministrarObraNew().getObra().getIntcodigoobra());
+                return "asociarcontratos";
+            } else {
+                FacesUtils.addErrorMessage(bundle.getString("mensaje2declararobra"));
+            }
+        } catch (Exception e) {
+            getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje5declararobra") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
+        }
+        return null;
     }
 
     public String agregarContratoInterventoria() {
-        List<Relacioncontratoobra>listarelacioncontratosobra = new ArrayList<Relacioncontratoobra>();
-         listarelacioncontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
+        List<Relacioncontratoobra> listarelacioncontratosobra = new ArrayList<Relacioncontratoobra>();
+        listarelacioncontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         BigDecimal valorlistacontratoobra = BigDecimal.ZERO;
         relacioncontratointer.setNumvalordisponible(BigDecimal.ZERO);
         valorfaltanteasociarcontrato = BigDecimal.ZERO;
@@ -490,13 +496,13 @@ public class AsociarContratos implements Serializable {
             relacioncontratointer.setNumvalormaximo(BigDecimal.ZERO);
         }
         valorfaltanteasociarcontrato = getAdministrarObraNew().getObra().getNumvaltotobra().subtract(valorlistacontratoobra);
-        if(filtrocontrato.getBoolcontrconsultoria() ==false){
-        if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 1) {
-            relacioncontratointer.setNumvalordisponible(valorfaltanteasociarcontrato);
-        }// else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == -1) {
-        //   } else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 0) {
-        //  }
-        } 
+        if (filtrocontrato.getBoolcontrconsultoria() == false) {
+            if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 1) {
+                relacioncontratointer.setNumvalordisponible(valorfaltanteasociarcontrato);
+            }// else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == -1) {
+            //   } else if (relacioncontratointer.getNumvalordisponible().compareTo(valorfaltanteasociarcontrato) == 0) {
+            //  }
+        }
         return null;
     }
 
