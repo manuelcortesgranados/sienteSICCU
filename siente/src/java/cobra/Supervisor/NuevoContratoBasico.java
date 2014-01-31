@@ -5619,6 +5619,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
         filtrocontrato.getEstadoConvenio();
+        filtrocontrato.setPalabraClave("");
+        filtrocontrato.setRaiz(false);
         controlvisualizaciondocumento = 2;
         limpiarContrato();
         primeroDetcontrato();
@@ -5656,8 +5658,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);
-        filtrocontrato.setIdestrategia(estrategia);
+        filtrocontrato.setIdestrategia(estrategia);        
         filtrocontrato.setTipocontratoselect(0);
+        filtrocontrato.setPalabraClave("");
         controlvisualizaciondocumento = 1;
         if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
             contrato = new Contrato();
