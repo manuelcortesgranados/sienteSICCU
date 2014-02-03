@@ -119,7 +119,7 @@ public class SessionBeanCobra implements Serializable {
         return (getUsuarioObra() != null
                 && getUsuarioObra().getUsuLogin() != null
                 && !getUsuarioObra().getUsuLogin().equals("ciudadano")
-                && getTipologueo() != null
+                && getTipologueo() != null && !getUsuarioObra().getUsuLogin().equals("")
                 && (getTipologueo().getTipoerror() == 1
                 || getTipologueo().getTipoerror() == 2));
     }

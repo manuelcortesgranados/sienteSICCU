@@ -100,6 +100,7 @@
                     <interkont:spacer height="5"/>
                     <h:panelGrid styleClass="bcg-tb-per-ciu totalwidth"   rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
                         <h:commandLink styleClass="ikont-hcl-modificarusuario perfil01 "    action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" immediate="true"/>
+                        <h:commandLink styleClass="ikont-enlace-boton-administrar" value="#{var.modificarContrasena}"   action="#{Perfil$Usuario.initusu}" immediate="true"/>
                     </h:panelGrid>
                     
                 </h:panelGrid>
