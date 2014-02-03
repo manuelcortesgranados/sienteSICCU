@@ -3746,7 +3746,7 @@ css usuario modificacion
 }
 
 .ikont-posicion-reporte-gerencia{
-   background-position: -21px 2px;
+    background-position: -21px 2px;
 }
 .ikont-posicion-ayuda{
     background-position: 1px -5px;  
@@ -4604,10 +4604,11 @@ a:hover {
     color: #424040!important;
 }
 .ikont-enlace-boton-administrar:link{
+    text-align: center;
     display: block;
-    height: 22px;
+    height: 19px;
     text-decoration: none;
-    width: 128px;
+    width: 160px;
     border: 1px solid #D0D0D0;
     border-radius: 7px;
     background-color: #FFF;
