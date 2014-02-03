@@ -65,7 +65,7 @@
                            rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}"/>   
         <br/>
         <h:outputLabel value="#{var.textoreportegerencial}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}" styleClass="kont-label-menu-estr-reporte-general"/>
-            
+        
         </h:panelGrid>
         
         
@@ -81,18 +81,14 @@
                 <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
-                    <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink styleClass="ikont-style-actividades-recientes"  value="#{item.nombreobra}"   
-                                     onclick="if (#{item.puedeVerDetalleObraActividadReciente}) {
-                               document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';
-                               }
-                               else ({#{rich:component('NoPuedeVerDetalleActividadReciente')}.show());
-                               }" rendered="#{item.intestadoobra==0}" />
+                    <h:outputText  styleClass="ikont-hot-textloinicial "   value="#{item.textoinicial}"/>                    
                     <a4j:commandLink styleClass="ikont-style-actividades-recientes"  value="#{item.nombreobra}"  
                                      onclick="if (#{item.puedeVerDetalleObraActividadReciente})
                                        {document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}'; }
                                        else
-                                       {(#{rich:component('NoPuedeVerDetalleActividadReciente')}.show()); }" rendered="#{item.intestadoobra!=0}" />                 
+                                       {(#{rich:component('NoPuedeVerDetalleActividadReciente')}.show()); }" rendered="#{item.puedeVerDetalleObraActividadReciente}" />                 
+                    
+                    <h:outputLabel styleClass="ikont-style-actividades-recientes"  value="#{item.nombreobra}" rendered="#{!item.puedeVerDetalleObraActividadReciente}"/>
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
 
                 </h:panelGroup>
