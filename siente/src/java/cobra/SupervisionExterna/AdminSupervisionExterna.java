@@ -611,10 +611,18 @@ public class AdminSupervisionExterna implements Serializable{
             LineIterator lineIterator = FileUtils.lineIterator(subirListado.getArchivoWeb().getArchivoTmp());
             int fila = 1;
             int numeroColumnasEsperado = Integer.valueOf(Propiedad.getValor("numerocolumnasmatrizauditoria"));
+            boolean primeraFila = true;
             while (lineIterator.hasNext()) {
                 String linea = lineIterator.nextLine();
                 int numeroColumnas = linea.split("\\t").length;
-                if (numeroColumnas != numeroColumnasEsperado) {
+                if(primeraFila) {
+                    if (numeroColumnas != numeroColumnasEsperado) {
+                        FacesUtils.addErrorMessage(Propiedad.getValor("numerocolumnasmatrizauditoriaerror", fila, numeroColumnas, numeroColumnasEsperado));
+                        return;
+                    }
+                    primeraFila = false;
+                }
+                if (numeroColumnas > numeroColumnasEsperado) {
                     FacesUtils.addErrorMessage(Propiedad.getValor("numerocolumnasmatrizauditoriaerror", fila, numeroColumnas, numeroColumnasEsperado));
                     return;
                 }
