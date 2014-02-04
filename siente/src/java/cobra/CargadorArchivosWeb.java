@@ -1,6 +1,7 @@
 package cobra;
 
 import cobra.util.ArchivoWebUtil;
+import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
 import java.io.File;
@@ -112,7 +113,7 @@ public class CargadorArchivosWeb implements Serializable {
     public synchronized void listener(FileUploadEvent event) throws Exception {  
         final UploadedFile item = event.getUploadedFile();
         ArchivoWeb archivoWeb = new ArchivoWeb();
-        archivoWeb.setArchivoTmp(ArchivoWebUtil.obtenerFile(item.getName(), item.getInputStream()));
+        archivoWeb.setArchivoTmp(ArchivoWebUtil.obtenerFile(ArchivoWebUtil.obtenerRutaAbsoluta(RutasWebArchivos.TMP+item.getName()), item.getInputStream()));
         archivoWeb.setNombre(normalizarNombreArchivo(item.getName()));
         archivoWeb.setData(item.getData());
         archivos.add(archivoWeb);
