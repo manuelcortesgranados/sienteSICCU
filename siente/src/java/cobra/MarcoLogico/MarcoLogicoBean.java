@@ -12,6 +12,7 @@ import co.com.interkont.cobra.marcologico.to.Obligacion;
 import co.com.interkont.cobra.marcologico.to.Planificacionrelacionmarcologicoindicador;
 import co.com.interkont.cobra.marcologico.to.Relacionmarcologicoindicador;
 import co.com.interkont.cobra.to.Obra;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
@@ -1617,7 +1618,8 @@ public class MarcoLogicoBean implements Serializable{
 
     public String reportePdf() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtpdfobligacion") + getNuevoContratoBasico().getContrato().getIntidcontrato());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtpdfobligacion") + getNuevoContratoBasico().getContrato().getIntidcontrato());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(MarcoLogicoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1626,7 +1628,8 @@ public class MarcoLogicoBean implements Serializable{
 
     public String reporteExcel() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelobligacion") + getNuevoContratoBasico().getContrato().getIntidcontrato());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelobligacion") + getNuevoContratoBasico().getContrato().getIntidcontrato());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(MarcoLogicoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1636,7 +1639,8 @@ public class MarcoLogicoBean implements Serializable{
 
     public String reporteMarcoLogicoPdf() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtpdfmarcologico") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtpdfmarcologico") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(MarcoLogicoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1645,7 +1649,8 @@ public class MarcoLogicoBean implements Serializable{
 
     public String reporteMarcoLogicoExcel() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelmarcologico") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelmarcologico") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(MarcoLogicoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1655,7 +1660,8 @@ public class MarcoLogicoBean implements Serializable{
 
     public String reporteConsolidadoMarcoLogicoExcel() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect(ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelmarcologicoconsolidado") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+ResourceBundle.getBundle("cobra.properties.BundleMarcoLogico").getString("birtexcelmarcologicoconsolidado") + getAdministrarObraNew().getObra().getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(MarcoLogicoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
