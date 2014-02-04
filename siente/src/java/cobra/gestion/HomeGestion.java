@@ -2903,7 +2903,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</p>");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla5\">");
-                descripcion.append(money.format(obra.getNumvaltotobra()));
+                descripcion.append(money.format((obra.getNumvaltotobra().add(getDetalleObra().getValorinterventoria()))));
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO");
                 descripcion.append("<div>");
