@@ -60,9 +60,10 @@
                 <div id="contenedor_error_texto">
                     <h2>#{var.whoops}</h2><br/>
                     <p>#{var.seVencioLaSesion}<br/>
-                        #{var.puedesVolver} <h:commandLink  styleClass="ikont-link-error"  
-                            value="#{var.paginaInicio}" action="#{SessionBeanCobra.cerrarSession_action}"/>                             
+                        #{var.puedesVolver}    
+                         <a class="ikont-link-error" href="#{var.ipserver}#{var.versioncobra}">#{var.paginaInicio}</a>
                     </p>
+                   
                 </div>
             </div>
 
