@@ -210,7 +210,7 @@
                             </f:facet>
                             <center>
                                 <h:panelGrid columns="1">
-                                    <a4j:commandLink id="irNuevaObra"  onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra==0}" disabled="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
+                                    <a4j:commandLink id="irNuevaObra"  onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra==0}" disabled="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
                                         <h:graphicImage  styleClass="ikont-" value="#{obras.strimagenobra}" />
                                     </a4j:commandLink>
                                     <a4j:commandLink id="irDetalle"  onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra>0}">
@@ -353,7 +353,7 @@
                                     <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclaradoporcentaje"   value=" %"/>
                                 </rich:column>
                                 <rich:column id="verDetalles">
-                                    <a4j:commandLink type="submit" execute="@this" rendered="#{obra.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto}" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{obra.intcodigoobra}';">
+                                    <a4j:commandLink type="submit" execute="@this" rendered="#{obra.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto}" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{obra.intcodigoobra}';">
                                         <h:graphicImage  styleClass="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
                                     </a4j:commandLink>
                                     <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obra.intcodigoobra}';">
