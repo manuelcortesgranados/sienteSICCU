@@ -8,6 +8,7 @@ package co.com.interkont.cobra.planoperativo.exceptions;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ConvenioException;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import static co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO.obtenerFecha;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
@@ -105,7 +106,7 @@ public class ValidacionesConvenio {
 //       fechatemppoliza.setTime(fechafincontrato);
 //       fechatemppoliza.add(Calendar.DATE, -(30));
         if (fechapoliza.compareTo(fechafincontrato) <= 0) {
-            throw new ConvenioException("La fecha de la poliza debe ser mayor o igual a la fecha fin del  " + tipocontrato  + ".");
+            throw new ConvenioException("La fecha de la póliza debe ser mayor o igual a la fecha  fin del " +tipocontrato +   obtenerFecha(fechafincontrato) +".");
         }
     }
 
@@ -114,8 +115,8 @@ public class ValidacionesConvenio {
         fechatemppoliza.setTime(fechafincontrato);
         fechatemppoliza.add(Calendar.DATE, -(1));
         if (fechapoliza.compareTo(fechatemppoliza.getTime()) <= 0) {
-            throw new ConvenioException("La fecha de la poliza debe ser mayor o igual a la fecha fin del " +tipocontrato + ".");
-        }
+            throw new ConvenioException("La fecha de la póliza debe ser mayor o igual a la fecha  fin del " +tipocontrato +   obtenerFecha(fechafincontrato) +".");
+        } 
     }
 
     public static void validarDistribucionFinalFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes) {
