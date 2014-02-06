@@ -3504,6 +3504,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         if (unidad.length() > 10) {
             mensaje = "La Unidad de medida en la fila " + fila + " posee más de 10 caracteres";
+            FacesUtils.addErrorMessage(mensaje);
             return false;
         }
         if (valoruni <= 0) {
