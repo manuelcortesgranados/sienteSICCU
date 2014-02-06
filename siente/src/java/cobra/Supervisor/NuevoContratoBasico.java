@@ -3669,7 +3669,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
         contrato = new Contrato();
         limpiarContrato();
-
+        
 //        } else {
 //            limpiarContrato();
 //        }
@@ -3752,7 +3752,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
             if (bundle.getString("conplanoperativo").equals("true")) {
                 try {
-                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
                     if (!listaPolizacontratos.isEmpty()) {
                         for (Polizacontrato p : listaPolizacontratos) {
                             if (polizacontrato.getTipopoliza().getInttipopoliza() == p.getTipopoliza().getInttipopoliza()) {
@@ -3823,7 +3823,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (getContrato().getBooltipocontratoconvenio() == true && getContrato().getBooltipocontratoconvenio() != null) {
                     if (bundle.getString("conplanoperativo").equals("true")) {
                         try {
-                            ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                            ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
                         } catch (Exception e) {
                             FacesUtils.addErrorMessage(e.getMessage());
                             return null;
@@ -3831,7 +3831,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     }
                 } else {
                     try {
-                        ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento());
+                        ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
                     } catch (Exception e) {
                         FacesUtils.addErrorMessage(e.getMessage());
                         return null;
