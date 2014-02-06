@@ -2895,7 +2895,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         seleccionarsubtipo();
         subtiposelec = getObranueva().getTipoobra().getInttipoobra();
         sumValorContrato = BigDecimal.ZERO;
-        navegacion = 1;
+        navegacion = 0;
         llenarClaseObra(getObranueva().getClaseobra().getFase().getIntidfase());
         EncontrarSolicitante();
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -3042,6 +3042,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         chequiarFase(getTiahselect());
         chequiarTipoProyecto(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto());
         chequiarTipoObra(getObranueva().getTipoobra().getInttipoobra());
+        volverTipificacion();
     }
 
     /**
@@ -5474,7 +5475,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return
      */
-    public String navegarNuevaObra() {
+     public String navegarNuevaObra() {
         String regla = null;
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
 
