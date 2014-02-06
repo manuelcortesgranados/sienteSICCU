@@ -2797,7 +2797,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
                 String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DetalleObra.xhtml";
-                String urlnuevo = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/NuevoProyecto/datosBasicos.xhtml";
+                String urlnuevo = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/NuevoProyecto/tipificacionproyecto.xhtml";
                 //String urlDocumento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DocumentoObra.xhtml";
                 String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/ImagenObra.xhtml";
                 String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Ciudadano/ParticipacionCiudadano.xhtml";

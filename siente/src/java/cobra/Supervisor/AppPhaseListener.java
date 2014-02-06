@@ -65,7 +65,7 @@ public class AppPhaseListener implements PhaseListener {
                         ManagedBeanName = "Ciudadano$PerfilCiudadano";
                     }
 
-                    if (ManagedBeanName.compareTo("datosBasicos") == 0) {
+                    if (ManagedBeanName.compareTo("tipificacionproyecto") == 0) {
                         ManagedBeanName = "Supervisor$IngresarNuevaObra";
                     }
 
