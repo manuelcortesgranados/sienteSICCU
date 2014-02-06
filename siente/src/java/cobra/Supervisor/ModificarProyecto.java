@@ -1320,7 +1320,7 @@ public class ModificarProyecto implements Serializable {
         obra = getSessionBeanCobra().getCobraService().cargarProgramacionAlimentacion(obra);
         ultimaAlimentacion = getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(obra.getIntcodigoobra());
         if (ultimaAlimentacion != null) {
-            obra.setDateFechaFinPeriodoUltimaAlimentacion(ultimaAlimentacion.getDatefecha());
+            obra.setDateFechaFinPeriodoUltimaAlimentacion(obra.obtenerFechaFinPeriodoAlimentacion(ultimaAlimentacion.getDatefecha()));
         }
         obra.obtenerNumPeriodosEjecutados();
     }

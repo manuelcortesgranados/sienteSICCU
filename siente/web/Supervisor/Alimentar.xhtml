@@ -63,7 +63,7 @@
                                     </h:selectOneMenu>
                                     <h:panelGrid columns="2" rendered="#{var.varalimentacionxfecha}">
                                         <rich:calendar  required="true" datePattern="#{var.formatofecha}"  id="fechaalimentacion" inputSize="10" value="#{Supervisor$Alimentar.fechaAlimentacion}"
-                                                        onchange="#{Supervisor$Alimentar.fechaCambio}" direction="topRight" >
+                                                        direction="topRight" >
                                         </rich:calendar>
                                         <rich:message for="fechaalimentacion" styleClass="ikont-rm-fechaalimentacion"  />
                                     </h:panelGrid>
