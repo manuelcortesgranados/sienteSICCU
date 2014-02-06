@@ -276,12 +276,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
             }
         });
-        btnAdicionarMonto.setWidth("" + 20);
+        btnAdicionarMonto.setWidth("20");
         con.add(btnAdicionarMonto, new HtmlData(".btnaddmonto"));
 
 
         txtObjeG.setWidth(cw);
-        txtObjeG.setHeight("" + 150);
+        txtObjeG.setHeight("150");
         con.add(new FieldLabel(txtObjeG, "Objetivo General"), new HtmlData(".tblobjge"));
         //con.add(txtObjeG, new HtmlData(".tblobjge"));
 
@@ -513,7 +513,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
 
-        btnAdicionarPry.setWidth("" + 150);
+        btnAdicionarPry.setWidth("150");
         con.add(btnAdicionarPry);
        
         // need to call after everything is constructed
