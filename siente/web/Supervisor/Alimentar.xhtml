@@ -64,6 +64,7 @@
                                     <h:panelGrid columns="2" rendered="#{var.varalimentacionxfecha}">
                                         <rich:calendar  required="true" datePattern="#{var.formatofecha}"  id="fechaalimentacion" inputSize="10" value="#{Supervisor$Alimentar.fechaAlimentacion}"
                                                         direction="topRight" >
+                                            <a4j:ajax listener="#{Supervisor$Alimentar.fechaCambio}" event="change" render="alimentaravance,valores,layoutComentario, layoutEjecutado, layoutComentafactor, layoutFactores, gpErrorAlimentar, pnActividades" execute="@this, layoutComentario"/>
                                         </rich:calendar>
                                         <rich:message for="fechaalimentacion" styleClass="ikont-rm-fechaalimentacion"  />
                                     </h:panelGrid>
