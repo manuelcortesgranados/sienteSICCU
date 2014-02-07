@@ -828,6 +828,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
     private Tercero tercero = new Tercero();
 
+    /*Variable para almancenar el tipo de Aporte para el la planificacion de pagos.
+     * Esta puede ser en valor o en porcentaje.
+     * 
+     */
+    private int tipoAporte;
+    
     /**
      * Get the value of eliminarPeriodosFueraRango
      *
@@ -1116,6 +1122,24 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setConfirmacioncedula(boolean confirmacioncedula) {
         this.confirmacioncedula = confirmacioncedula;
     }
+    
+    public int getTipoAporte() {
+        return tipoAporte;
+    }
+
+    public void setTipoAporte(int tipoAporte) {
+        this.tipoAporte = tipoAporte;
+    }
+    private boolean booltipoaporte;
+
+    public boolean isBooltipoaporte() {
+        return booltipoaporte;
+    }
+
+    public void setBooltipoaporte(boolean booltipoaporte) {
+        this.booltipoaporte = booltipoaporte;
+    }
+
     /*
      * variables para realizar la carga del tipo de aporte
      */
@@ -4232,7 +4256,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * registros
      */
     public void calcuArraPorcenPago() {
-
+     
+        //Se compara si la el tipo de aporte es en porcentaje.
+        if (getTipoAporte() == 1 || getTipoAporte() == 0) {
         List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
 
         lisplanifiactapar = new ArrayList<Planificacionpago>();
@@ -4302,6 +4328,84 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         }
     }
+        //Se compara si la el tipo de aporte es en valor.
+        if (getTipoAporte() == 2) {
+
+            List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
+
+            lisplanifiactapar = new ArrayList<Planificacionpago>();
+            BigDecimal numdeactasparcialesB = new BigDecimal(numdeactasparciales);
+            BigDecimal cienporciento = new BigDecimal(100);
+
+            if (contrato.getFormapago().getIntidformapago() == 1) {
+//              valorpagoanticipo = valorpagoanticipo;
+                BigDecimal cien = new BigDecimal(100);
+                setPorcentapagoanticipo(valorpagoanticipo.multiply(cien).divide(contrato.getNumvlrcontrato(), RoundingMode.HALF_UP));
+                //porcentapagoanticipo = valorpagoanticipo.multiply(cien).divide(contrato.getNumvlrcontrato().setScale(2, RoundingMode.HALF_UP));
+                BigDecimal sma = new BigDecimal(0);
+                BigDecimal suma = sma.add(contrato.getNumrecursosch()).add(contrato.getNumrecursospropios()).add(contrato.getNumrecursostercero());
+                cienporciento = cienporciento.subtract(porcentapagoanticipo);
+            }
+            if (numdeactasparciales > 0) {
+                BigDecimal sumaarraB = new BigDecimal(BigInteger.ZERO);
+                BigDecimal ceroB = new BigDecimal(BigInteger.ZERO);
+                BigDecimal porcuoptB = new BigDecimal(BigInteger.ZERO);
+                porcuoptB = cienporciento.divide(numdeactasparcialesB, 0, RoundingMode.HALF_UP);
+                for (int vi = 0; vi < numdeactasparciales; vi++) {//hallo el valor del porcentaje y guardo en lista
+                    lsBigporcecuo.add(porcuoptB);
+                    sumaarraB = sumaarraB.add(porcuoptB);
+                }
+
+//            BigDecimal vlcu = new BigDecimal(BigInteger.ONE);
+//            vlcu = contrato.getNumvlrcontrato().divide(new BigDecimal(numdeactasparciales), RoundingMode.HALF_EVEN);
+//            for (int vxi = 0; vxi < numdeactasparciales; vxi++) {//hallo el total de valor de procentajes
+//                sumaarraB = sumaarraB.add(lsBigporcecuo.get(vxi));
+//
+//                //if (vxi == numdeactasparciales - 1) {
+//                    BigDecimal diB = new BigDecimal(BigInteger.ZERO);
+//                    if (sumaarraB != cienporciento) {//si hay diferencia tonces sobra y toca sumarla algun campo de la lista
+//                        diB = cienporciento.subtract(sumaarraB);//calculo difere
+//                        if (diB != ceroB) {//si entra acaes por q toca meterle a algun campo de la lista la diferenc
+//                            lsBigporcecuo.remove(vxi);
+//                            lsBigporcecuo.add(vxi, lsBigporcecuo.get(vxi - 1).add(diB));
+//                        }
+//                    }
+//                //}
+//            }
+                //se halla el valor de la cuota y se crea un objeto que sera el q se la pasa a la lista q se muestra
+                for (int c = 0; c < lsBigporcecuo.size(); c++) {//hallo el valor dela cuota
+                    Planificacionpago plp = new Planificacionpago();
+                    plp.setNumvlrporcentage(lsBigporcecuo.get(c));
+                    plp.setNumvlrpago(contrato.getNumvlrcontrato().multiply(lsBigporcecuo.get(c).divide(cienporciento, 0, RoundingMode.HALF_UP)));
+                    BigDecimal cien = new BigDecimal(100);
+                    plp.setValorcuota(contrato.getNumvlrcontrato().multiply(lsBigporcecuo.get(c)).divide(cien));
+                    lisplanifiactapar.add(plp);
+                }
+
+                if (sumaarraB.compareTo(cienporciento) != 0) {
+
+                    BigDecimal diferencia = BigDecimal.ZERO;
+                    if (sumaarraB.compareTo(cienporciento) > 1) {
+                        diferencia = cienporciento.subtract(sumaarraB);
+
+                    } else {
+                        diferencia = sumaarraB.subtract(cienporciento);
+                    }
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().subtract(diferencia));
+                    if (lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().compareTo(BigDecimal.ZERO) < 0) {
+
+                        lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(BigDecimal.ZERO);
+                    }
+
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrpago(contrato.getNumvlrcontrato().multiply(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().divide(cienporciento, 0, RoundingMode.HALF_UP)));
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage();
+                }
+
+            }
+
+        }
+    }
+
 
 //    public void recalculoporcentageactaanti() {
 //        List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
@@ -4350,6 +4454,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void calculoActasParciales() {// 2;"ACTAS PARCIALES"Si en forma de pago se selecciona actas parciales se debe preguntar cuantos y se distribuye el valor del contrato en ese numero de pagos o registros
 
         calcuArraPorcenPago();
+           porcentaje();
 
     }
 
@@ -8734,5 +8839,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         return listaavancefisico;
+    }
+     public void porcentaje() {
+        if (getTipoAporte() == 1) {
+            setBooltipoaporte(true);
+        }
+        if (getTipoAporte() == 2) {
+            setBooltipoaporte(false);
+        }
+
     }
 }

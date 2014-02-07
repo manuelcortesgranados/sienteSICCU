@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                >
+
+
+
+    <center>
+        <h:outputLabel  styleClass="ikont-hol-diligenciarvlrcont"   rendered="#{Supervisor$Contrato.contrato.numvlrcontrato==0}" value="#{var.debediligenciarvalorcontrato}" />
+    </center>
+    <h:panelGroup id="gpPrincipalFormaPago1" rendered="#{Supervisor$Contrato.contrato.numvlrcontrato!=0}">
+        <center> 
+            <h:panelGrid columns="2" style="position: relative;left: -50px;">
+                <h:panelGrid columns="2">
+                    <h:outputText  styleClass="ikont-hot-formapago font-general" id="lblformaPagoC1"  value="(*)#{var.formadepago}:"/>
+                    <h:selectOneMenu styleClass="ikont-hsom-formapago" id="cmbformaPagoC1"  value="#{Supervisor$Contrato.contrato.formapago.intidformapago}" >
+                        <f:selectItems value="#{Supervisor$Contrato.formaPago}" />
+                        <a4j:ajax event="valueChange" render="gpFormas1,gpCuotas2,gpCuotas1, pgformapago,stpformadepago" listener="#{Supervisor$Contrato.validacionFormadePago}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" id="tipoPago" rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 ||var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==2}">
+                    <h:outputText value="Tipo de pago:" styleClass="ikont-hot-formapago font-general" />
+                    <rich:select styleClass="ikont-hsom-formapago" id="rs-tipoaporte" defaultLabel="Seleccione Tipo de pago"  value="#{Supervisor$Contrato.tipoAporte}" >
+                        <f:selectItem itemValue="1" itemLabel="Porcentaje"/>
+                        <f:selectItem itemValue="2" itemLabel="Valor"/>
+                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.porcentaje}" execute="gpCuotas1,pruebadr5,pruebadr55,panelPorcentaje,panelValor,todoqqq" render="gpCuotas1,pruebadr5,pruebadr55,panelPorcentaje,panelValor,todoqqq" />
+                    </rich:select> 
+                    <rich:message for="rs-tipoaporte"  />
+                </h:panelGrid>
+
+            </h:panelGrid>
+            <h:panelGroup id="pgformapago1">                                     
+                <h:panelGrid cellspacing="6" columns="2" id="gpFormas1">
+                    <h:panelGrid rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==3}">
+                        <h:outputText  styleClass="ikont-hot-fechaformadepa font-general" id="lbfechaformadepa1"  value="Fecha de Pago: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"/>
+
+                        <rich:calendar  datePattern="#{var.formatofecha}" id="fecpagoactaunica1"
+                                        rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"
+                                        inputSize="10" value="#{Supervisor$Contrato.planificacionpago.datefechapago}" >
+                        </rich:calendar>
+                    </h:panelGrid>
+
+                    <!--pago por Porcentaje-->
+                    <h:panelGroup id="todoqqq" style="position: relative;left: -213px;" >
+
+                        <h:panelGrid columns="2" id="panelPorcentaje" rendered="#{Supervisor$Contrato.tipoAporte ==1}" >
+
+                            <h:outputText  styleClass="ikont-hot-porcanticipo font-general" value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                            <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
+                                <rich:inputNumberSpinner id = "poranti1" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
+                                                         rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
+                                                         minValue="0" maxValue="100" inputSize="10" >
+                                    <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti1,vlranti11" />
+                                </rich:inputNumberSpinner>
+                                <h:outputText  styleClass="ikont-hot-porcentaje" value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
+                            </h:panelGrid>
+
+                            <h:outputText  styleClass="ikont-hot-vlranticipo font-general" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                            <h:outputText  styleClass="ikont-hot-vlranti font-general" id = "vlranti11" value = "#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
+                                <f:convertNumber pattern="#{var.formatomoneda}"/>
+                            </h:outputText>
+
+                        </h:panelGrid>
+
+                        <!-- pago valor -->
+                        <h:panelGrid columns="2"  id="panelValor" rendered="#{Supervisor$Contrato.tipoAporte ==2}" >
+
+                            <h:outputText  styleClass="ikont-hot-porcanticipo font-general" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                            <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" >
+                                <h:outputText  styleClass="ikont-hot-porcentaje" value="$" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
+                                <rich:inputNumberSpinner id = "valoranti1" value = "#{Supervisor$Contrato.valorpagoanticipo}"
+                                                         rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
+                                                         minValue="0" maxValue="#{Supervisor$Contrato.contrato.numvlrcontrato}" inputSize="10" >
+                                    <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti1" />
+                                </rich:inputNumberSpinner>   
+                            </h:panelGrid>
+                            <h:panelGrid columns="3"> 
+                                <h:outputText  styleClass="ikont-hot-vlranticipo font-general" value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                                <h:outputText styleClass="ikont-hot-vlranti font-general" id = "vlranti1" value = "#{Supervisor$Contrato.porcentapagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
+                                <h:outputText styleClass="ikont-hot-porcentaje" value="%" rendered="#{Supervisor$Contrato.tipoAporte==2 and Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+                    <h:outputText  styleClass="ikont-hot-fecanticipo font-general" value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
+
+                    <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecpagoantic1" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
+                                    inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"   />
+
+                    <h:outputText  styleClass="ikont-hot-numactparc font-general" id="lbnumactasparciales1"  value="Número de Actas Parciales: " rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 || var.fechaformapago and  Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
+                    <rich:inputNumberSpinner id="innumactasparciales1"  minValue="0" maxValue="100" rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 ||var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==2}"
+                                             inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
+                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.calculoActasParciales}" execute="gpCuotas1,pruebadr5,pruebadr55" render="gpCuotas1,pruebadr5,pruebadr55" />
+                        <!--                        <a4j:ajax event="change" execute="gpCuotas1,gpCuotas2,prueba2"  listener="# { Supervisor$Contrato.calculoActasParciales}" render="gpCuotas1,gpCuotas2,prueba2" />-->
+                    </rich:inputNumberSpinner>                                       
+                </h:panelGrid>
+
+                <h:panelGrid id="gpCuotas1"   rendered="#{var.fechaformapago}">
+                    <rich:dataTable id="pruebadr5"  rendered="#{Supervisor$Contrato.tipoAporte==1}" value="#{Supervisor$Contrato.lisplanifiactapar}" var="arr"
+                                    >
+                        <rich:column id="porcub" width="40px">
+                            <f:facet name="header">
+                                <h:outputText  styleClass="ikont-hot-vlrporcentaje" value="#{var.valorporcentaje}:" />
+                            </f:facet>
+                            <h:panelGrid columns="2">
+                                <rich:inputNumberSpinner id ="otxt-strTipoPolizab" value = "#{arr.numvlrporcentage}"
+                                                         minValue="0" maxValue="100" inputSize="4" >
+                                </rich:inputNumberSpinner>
+                                <h:outputText  styleClass="ikont-hot-txtporcentaje" value=" %"/>
+                            </h:panelGrid>
+                        </rich:column>
+
+                        <rich:column id="fecuo" >
+                            <f:facet name="header">
+                                <h:outputText  styleClass="ikont-hot-fechagiro" value="#{var.fechagiro}:" />
+                            </f:facet>
+                            <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecpagoactapargir"
+                                            inputSize="10" value="#{arr.datefechapago}" >
+                            </rich:calendar>
+                        </rich:column>
+
+                    </rich:dataTable>
+                    <rich:dataTable id="pruebadr55"  rendered="#{Supervisor$Contrato.tipoAporte==2}" value="#{Supervisor$Contrato.lisplanifiactapar}" var="arr"
+                                    >
+                        <rich:column id="porcub" width="40px">
+                            <f:facet name="header">
+                                <h:outputText  styleClass="ikont-hot-vlrporcentaje" value="#{var.valor}:" />
+                            </f:facet>
+                            <h:panelGrid columns="2">
+                                <h:outputText  styleClass="ikont-hot-txtporcentaje" value="$ "/>
+                                <rich:inputNumberSpinner id ="otxt-strTipoPolizab" value = "#{arr.valorcuota}"
+                                                         minValue="0" maxValue="100000000000000" inputSize="4" >
+                                </rich:inputNumberSpinner>
+
+                            </h:panelGrid>
+                        </rich:column>
+
+                        <rich:column id="fecuo" >
+                            <f:facet name="header">
+                                <h:outputText  styleClass="ikont-hot-fechagiro" value="#{var.fechagiro}:" />
+                            </f:facet>
+                            <rich:calendar  datePattern="#{var.formatofecha}" direction="topRight" id="fecpagoactapargir"
+                                            inputSize="10" value="#{arr.datefechapago}" >
+                            </rich:calendar>
+                        </rich:column>
+
+                    </rich:dataTable>
+
+
+                </h:panelGrid>
+
+            </h:panelGroup> 
+        </center>
+    </h:panelGroup>
+</ui:composition>

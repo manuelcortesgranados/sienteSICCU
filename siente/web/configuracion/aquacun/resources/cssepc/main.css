@@ -4097,6 +4097,11 @@ a:hover {
     right: -82px;
     top: -24px;
 }
+.panel_act_parciales{
+    position: relative;
+    right: -114px;
+    top: 4px;
+}
 .panel_val_porcentaje{
     position: relative;
     right: -138px;
@@ -4849,7 +4854,7 @@ a:hover {
 }
 
 .ikont-a-linkcliente {
-	position: absolute;
-	top: 14px;
-	left: 1095px;
+    position: absolute;
+    top: 14px;
+    left: 1095px;
 }

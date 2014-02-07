@@ -418,6 +418,7 @@ public class AsociarContratos implements Serializable {
 
     public String guardarasociacion() {
 
+        try{
         getAdministrarObraNew().getObra().setRelacioncontratoobras(new LinkedHashSet());
         getAdministrarObraNew().getObra().getRelacioncontratoobras().clear();
 
@@ -430,6 +431,10 @@ public class AsociarContratos implements Serializable {
         listacontratosobra = new ArrayList<Relacioncontratoobra>();
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
         listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
+        }
+        catch(Exception e){
+        
+        }
         return null;
     }
 
