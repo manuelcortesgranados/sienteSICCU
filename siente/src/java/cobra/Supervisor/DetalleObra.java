@@ -1176,6 +1176,7 @@ public class DetalleObra implements Serializable {
             }
         }
         System.out.println("obramapa");
+        listimpactosocialdetalle = new  ArrayList<Tipoimpactosocial>() {};
         if (obraMapa.getContrato() != null){
             listimpactosocialdetalle = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(obraMapa.getContrato().getIntidcontrato());
             System.out.println("lista obra mapa");
