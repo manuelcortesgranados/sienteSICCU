@@ -3184,9 +3184,16 @@ css usuario modificacion
     background-color: #1C8F14;
 }
 .ikont-table-lugar-datosbasicos{
-    background-color: #F2F2F2;
-    width: 100%;
+    font-size: 13px!important;
     text-align: center;
+    width: 100%;
+    border-collapse:collapse; border: none;
+}
+.ikont-table-lugar-datosbasicos tbody tr:nth-child(odd){
+    background-color: #F1F3F2;
+}
+.ikont-table-lugar-datosbasicos tbody tr td{
+    vertical-align: top;
 }
 .ikont-hot-imagen, .ikont-hgi-strubicacion{
     width: 150px;
