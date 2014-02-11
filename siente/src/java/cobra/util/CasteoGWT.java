@@ -95,6 +95,7 @@ public class CasteoGWT implements Serializable {
         contratoDTO.setMensajeguardado(contrato.getMensajeguardado());
         contratoDTO.setVermensajeerror(contrato.isVermensajeerror());
         contratoDTO.setModolecturaplanop(contrato.isModolecturaplanop());
+        contratoDTO.setFec_ini_precontractual(contrato.getFec_ini_precontractual());
         if (!contrato.getFuenterecursosconvenios().isEmpty()) {
             contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
         }
@@ -439,6 +440,7 @@ public class CasteoGWT implements Serializable {
                 contrato.getFechaactaini(), contrato.getStrnumcontrato(), contrato.getNumvlrcontrato(),
                 contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(), contrato.getIntduraciondias(),
                 castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()), contrato.getStrnombre());
+        contratodto.setFec_ini_precontractual(contrato.getFec_ini_precontractual());
 
         if (contrato.getRelacionobrafuenterecursoscontratos() != null && !contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
             contratodto.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), contratodto, actividadPadre));
@@ -978,6 +980,7 @@ public class CasteoGWT implements Serializable {
         contrato.setTipoestadobra(new Tipoestadobra(1));
         contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
         contrato.setPeriodoevento(new Periodoevento(1));
+        contrato.setFec_ini_precontractual(contratoDto.getFec_ini_precontractual());
         contrato.setTipocontrato(castearTipoContratoDTOToTipoContratoD(contratoDto.getTipocontrato()));
         contrato.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontrato(contratoDto.getRelacionobrafuenterecursoscontratos(), contrato, intusuario, actividadObra.getObra()));
         return contrato;
