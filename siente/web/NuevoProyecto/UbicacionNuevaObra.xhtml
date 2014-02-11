@@ -126,54 +126,40 @@
                             </h:panelGroup>
                         </h:panelGrid>
                         <h:panelGroup  id="layoutLugar" >
-                            <rich:dataTable>
-                                <rich:column id="co1">
-                                    <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-co1longitud"   value="#{var.longitud}" />
-                                    </f:facet>
-                                </rich:column>
-                                <rich:column id="co2">
-                                    <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-co2latitud"   value="#{var.latitud}" />
-                                    </f:facet>
-                                </rich:column>
-                                <rich:column id="co3">       
-                                    <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-direccion"   value="#{var.direccion}" />
-                                    </f:facet>
-                                </rich:column>
-                                <rich:column id="co5">
-                                    <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-Tipo"   value="#{var.tipo}" />
-                                    </f:facet>
-                                    <h:outputText  styleClass="ikont-hot-primario "    value="Primario" rendered="#{lalo.tipo==0}"/>
-                                </rich:column>
-                                <rich:column id="co4" 
-                                             >
-                                    <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}" />
-                                    </f:facet>
-                                </rich:column>
-                            </rich:dataTable>
                             <rich:dataTable styleClass="ikont-table-lugar-datosbasicos"  id="datamarkers" 
                                             rows="4" 
                                             binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
                                             rowKeyVar="filaSeleccionada"
                                             var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
                                 <rich:column id="co1">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-co1longitud"   value="#{var.longitud}" />
+                                    </f:facet>
                                     <h:outputText  styleClass="ikont-hot-co1longitude"   id="otxt-la" value="#{lalo.longitude}"/>
                                 </rich:column>
                                 <rich:column id="co2">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-co2latitud"   value="#{var.latitud}" />
+                                    </f:facet>
                                     <h:outputText  styleClass="ikont-hot-co2latitude"   id="otxt-lo" value="#{lalo.latitude}"/>
                                 </rich:column>
-                                <rich:column id="co3">       
+                                <rich:column id="co3">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-direccion"   value="#{var.direccion}" />
+                                    </f:facet>
                                     <h:outputText  styleClass="ikont-hot-address"   id="otxt-di" value="#{lalo.address}"/>
                                 </rich:column>
                                 <rich:column id="co5">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-Tipo"   value="#{var.tipo}" />
+                                    </f:facet>
                                     <h:outputText  styleClass="ikont-hot-primario "    value="Primario" rendered="#{lalo.tipo==0}"/>
                                     <h:outputText  styleClass="ikont-hot-secundario"    value="Secundario" rendered="#{lalo.tipo==1}"/>
                                 </rich:column>
                                 <rich:column id="co4">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}" />
+                                    </f:facet>
                                     <h:commandButton value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker}" immediate="true"/>
                                 </rich:column>
                             </rich:dataTable>
