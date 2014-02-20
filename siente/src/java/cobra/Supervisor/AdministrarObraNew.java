@@ -1040,10 +1040,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     List<VwIndIndicadorMunicipal> listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040301", BigDecimal.ONE);
                     gragiprom.pintarGraficoNBIanual(listindhabanual);
                     for (VwIndIndicadorMunicipal vwIndIndicadorMunicipal : listindhabanual) {
-                            getObra().setStrvereda(vwIndIndicadorMunicipal.getIndFntNombre()); 
+                        getObra().setStrvereda(vwIndIndicadorMunicipal.getIndFntNombre());
                     }
-                  
-                    
+
+
                     listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040104", BigDecimal.valueOf(2));
                     if (!listindhabanual.isEmpty()) {
                         VwIndIndicadorMunicipal den = listindhabanual.get(0);
@@ -1898,7 +1898,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         contratistanombre = "";
         contratistapellido = "";
         listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), false));
-        listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), true));
+        if (Boolean.parseBoolean(bundle.getString("iniciaenmapa"))) {
+            listaContrato.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getObra().getIntcodigoobra(), true));
+        }
         return null;
     }
 
@@ -2195,8 +2197,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * iniciarTerminarObra
-     * Metodo que llama la página de RegresarObraTerminada
+     * iniciarTerminarObra Metodo que llama la página de RegresarObraTerminada
+     *
      * @return
      */
     public String iniciarRegresarObra() {
@@ -2215,11 +2217,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         return null;
     }
-    
+
     /**
-     * declararRegresarTermindarObra
-     * Metodo que cambia el estado de Boolobraterminada a
-     * false en la base de datos
+     * declararRegresarTermindarObra Metodo que cambia el estado de
+     * Boolobraterminada a false en la base de datos
+     *
      * @return
      */
     public String declararRegresarTermindarObra() {
@@ -2239,7 +2241,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         return null;
     }
-    
+
     public boolean cargarInformeavalidar() {
 
         informeavalidar = getSessionBeanCobra().getCobraService().obtenerUltimaValidacionInformacionxObra(getObra().getIntcodigoobra());
