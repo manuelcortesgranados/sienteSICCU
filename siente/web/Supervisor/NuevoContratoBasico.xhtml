@@ -232,9 +232,9 @@
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
                                         <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="250" 
-                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio}">                                                                                        
+                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
                                         </h:inputText>
-                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio}">                                            
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
