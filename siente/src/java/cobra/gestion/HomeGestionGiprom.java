@@ -1083,8 +1083,9 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the <code>activate()</code> method will be called
-     * to indicate that the transfer is complete.</p>
+     * instance, after which the
+     * <code>activate()</code> method will be called to indicate that the
+     * transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -2030,7 +2031,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
             boolean agregarpornbi = false;
             boolean agregarpornener = false;
 
-           
+
             for (VwInmInfoMunicipal mun : listagiprom) {
                 // Filtrar por avance
                 agregarpornbi = false;
@@ -2061,7 +2062,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
                 if (agregarpornbi && agregarpornener) {
                     listaobrasusu.add(getSessionBeanCobra().castearVwInformacionMunicipaltoVistaObraMapa(mun));
-                }           
+                }
             }
 
         } else {
@@ -2416,15 +2417,15 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public String reportePdfFichaObras() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=169");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2436,15 +2437,15 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
     public String reportePdfFichaConvenio() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2901,19 +2902,32 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna \">");
                 descripcion.append("<br/>");
+                descripcion.append("<table>");
+                descripcion.append("<tr>");
+                descripcion.append("<td>");
                 descripcion.append("<span class=\"textvalla2\">");
                 descripcion.append("# de habitantes: ");
                 descripcion.append("</span>");
+                descripcion.append("</td>");
+                descripcion.append("<td>");
                 descripcion.append("<span class=\"textvalla3\">");
                 descripcion.append(obra.getObra().getNumvaldeclarado());
                 descripcion.append("</span>");
-                descripcion.append("<br/>");
+                descripcion.append("</td>");
+                descripcion.append("</tr>");
+                descripcion.append("<tr>");
+                descripcion.append("<td>");
                 descripcion.append("<span class=\"textvalla2\">");
                 descripcion.append("# de encuestados: ");
                 descripcion.append("</span>");
+                descripcion.append("</td>");
+                descripcion.append("<td>");
                 descripcion.append("<span class=\"textvalla3\">");
                 descripcion.append(obra.getObra().getNumvalavanfisicodeclarado());
                 descripcion.append("</span>");
+                descripcion.append("</td>");
+                descripcion.append("</tr>");
+                descripcion.append("</table>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("<p>");
