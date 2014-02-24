@@ -61,6 +61,7 @@
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}"
                                              onfocus="borrar_campo1(this);" onkeydown="return maximaLongitud(this, 400);"
                                              styleClass="ikont-hit-iacomentario commentframe">
+                                 <f:validateLength maximum="400"/>
                                 <a4j:ajax event="keyup" listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" render="idcontarmensaje" status="idstatuscomentario" />
                             </h:inputTextarea>
 
