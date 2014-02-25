@@ -62,7 +62,7 @@
                         <h:outputLabel  styleClass="ikont-hol-lblcedulacontratistacrea "   id="lblcedulaContratistaCrea"  value="(*)#{var.cedulaContratista}" />
                         <h:panelGrid id="panelcedulacontratista" columns="2" >
                             <rich:inputNumberSpinner id="txtcedulaContratistaCrea" value="#{Supervisor$Contrato.contratista.intcedula}" minValue="0" maxValue="4000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
-                                <a4j:ajax event="change" listener="#{Supervisor$Contrato.confirmarCedulaContratista}" render="panelcedulacontratista,guardarcontratista,rpContratista,mensajerepecedula" execute="panelcedulacontratista,guardarcontratista,mensajerepecedula"></a4j:ajax>
+                                <a4j:ajax event="change" listener="#{Supervisor$Contrato.confirmarCedulaContratista}" render="panelcedulacontratista,guardarcontratista,panelregistrarcontratista,mensajerepecedula" execute="panelcedulacontratista,guardarcontratista,mensajerepecedula,panelregistrarcontratista"></a4j:ajax>
                             <rich:tooltip rendered="#{Supervisor$Contrato.confirmacioncedula}" value="El contratista con cedula #{Supervisor$Contrato.contratista.intcedula} ya se encuentra Registrado" />
                             </rich:inputNumberSpinner>
                             <h:outputLabel rendered="#{Supervisor$Contrato.confirmacioncedula}" value="X" style="color: red;"/>
@@ -124,7 +124,8 @@
                         <h:inputText  size="25" maxlength="15" id="txtelefonoFijoCrea" value="#{Supervisor$Contrato.contratista.strtelefono1}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
                     </h:panelGrid>
-
+                    <h:panelGroup id="panelregistrarcontratista">
+                        
                     <a4j:commandButton id="guardarcontratista" disabled="#{Supervisor$Contrato.confirmacioncedula or Supervisor$Contrato.contratista.intcedula==0}" value="#{var.registrar}" action="#{Supervisor$Contrato.guardarContratista}"
                                        render="rpContratista"
                                        rendered="#{!Supervisor$Contrato.boolcrearcontratista}"
@@ -143,6 +144,7 @@
                                        rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
                     </a4j:commandButton>    
                     <h:outputText id="mensajerepecedula" rendered="#{Supervisor$Contrato.confirmacioncedula}" value="El contratista con cedula #{Supervisor$Contrato.contratista.intcedula} ya se encuentra Registrado" style="color: red;" />
+                    </h:panelGroup>
                 </center>
 
             </h:panelGroup>
