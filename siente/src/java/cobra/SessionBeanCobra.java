@@ -481,13 +481,11 @@ public class SessionBeanCobra implements Serializable {
         return new Date().getTime();
     }
     
-    public Date getFechaMilisegundosServidor1() {
-        long lnMilisegundos = utilDate.getTime();
-        java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
-        String dat = "" + sqlDate;
-        return sqlDate;
+    public long getFechaMilisegundosServidor1() {
+        long lnMilisegundos = utilDate.getTime();       
+        return lnMilisegundos;
     } 
-
+    
     // </editor-fold>
     /**
      * <p>
