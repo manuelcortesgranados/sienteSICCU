@@ -12,7 +12,10 @@
     template="/facelets/template_main.xhtml">
 
     <ui:define name="head">
-        <title>Modificar Contrato</title>
+        <title>
+            <h:outputText value="#{var.modificarcontrato}"  rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}"/>
+            <h:outputText value="#{var.modificarconvenio}"  rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"/>
+        </title>
         <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
         <h:outputScript name="script_supervisor.js"/>
         <h:outputScript name="/js/csspopup.js"/>
@@ -22,7 +25,8 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-modificarcontrato"   value="#{var.modificarcontrato}"/>
+       <h:outputText value="#{var.modificarcontrato}"  rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}"/>
+       <h:outputText value="#{var.modificarconvenio}"  rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -44,7 +48,8 @@
         <rich:panel id="modificar">
             <f:facet name="header" >
                 <h:panelGroup >
-                    <h:outputText  styleClass="ikont-hot-modificarcontrato"   value="#{var.modificarcontrato}"   />
+                    <h:outputText  styleClass="ikont-hot-modificarcontrato"   value="#{var.modificarcontrato}" rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}"  />
+                    <h:outputText  styleClass="ikont-hot-modificarcontrato"   value="#{var.modificarconvenio}" rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"  />
                 </h:panelGroup>
             </f:facet>
             <h:form prependId="false" >

@@ -3552,7 +3552,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        if (seleccionopadre == 1) {//es un contrato hijo se valida fipadre hijo contra fipadre
 //            if (contrato.getDatefechaini().after(contrpadre.getDatefechaini()) || contrato.getDatefechaini().equals(contrpadre.getDatefechaini())) {
         //Calendar hoy = Calendar.getInstance();
-        if (bundle.getString("conplanoperativo").compareTo("false") == 0) {
+        if (bundle.getString("plazoconacta").compareTo("false") == 0) {
             if (contrato.getDatefechaini() != null) {
 
                 if (contrato.getDatefechafin() != null) {
