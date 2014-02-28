@@ -199,7 +199,7 @@ public class ToolBarSuperior implements IsWidget {
         }
         else
         {
-            toolBarSuperior.setWidth(980);
+            toolBarSuperior.setWidth(900);
         }    
         return toolBarSuperior;
     }

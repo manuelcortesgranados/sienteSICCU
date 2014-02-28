@@ -60,6 +60,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     /**
      * @param dependenciasEliminar the dependenciasEliminar to set
      */
+    @Override
     public void setDependenciasEliminar(Set dependenciasEliminar) {
         this.dependenciasEliminar = dependenciasEliminar;
     }

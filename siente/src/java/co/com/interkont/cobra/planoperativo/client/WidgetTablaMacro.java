@@ -113,7 +113,7 @@ public class WidgetTablaMacro implements IsWidget {
         cp.setCollapsible(true);
         cp.setExpanded(true);
         cp.setAnimCollapse(true);
-        cp.setPixelSize(215, 150);
+        cp.setPixelSize(600, 130);
         cp.addStyleName("margin-10");
 
         return cp;

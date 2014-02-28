@@ -81,8 +81,8 @@ public class WidgetTablaObjetivos implements IsWidget {
     public Widget asWidget() {
         
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
-        SafeStyles cellStyles = SafeStylesUtils.fromTrustedString("width:136px;");
-        SafeStyles cellStylesDelete = SafeStylesUtils.fromTrustedString("width:50px;");
+        SafeStyles cellStyles = SafeStylesUtils.fromTrustedString("width:556px;");
+        SafeStyles cellStylesDelete = SafeStylesUtils.fromTrustedString("width:40px;");
         //SafeStyles cellStyles = SafeStylesUtils.forHeight(50, Style.Unit.PX);
 
         ColumnConfig<ObjetivosDTO, String> nameColumn = new ColumnConfig<ObjetivosDTO, String>(properties.descripcion(), 157, "Descripción");
@@ -147,7 +147,7 @@ public class WidgetTablaObjetivos implements IsWidget {
         cp.setCollapsible(true);
         cp.setExpanded(true);
         cp.setAnimCollapse(true);
-        cp.setPixelSize(215, 150);
+        cp.setPixelSize(600, 130);
         cp.addStyleName("margin-10");
         
         return cp;

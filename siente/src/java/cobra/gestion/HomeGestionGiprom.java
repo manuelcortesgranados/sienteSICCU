@@ -870,7 +870,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         //Version cobra para saber que bundle esta apuntando para el conteo de los proyectos en cobrafonade
         filtro.setCuantiaini(BigDecimal.ZERO);
         filtro.setCuantiafin(BigDecimal.valueOf(100));
-        filtro.setFactorpagina(200);
+        filtro.setFactorpagina(500);
         filtro.setIntcodespecifico(0);
         filtro.setIntcodevento(1);
         filtro.setIntpagini(0);
@@ -2079,7 +2079,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    filtro.setFactorpagina(200);
+                    filtro.setFactorpagina(500);
                     //filtro.setIntestadoobra(1);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     cargarListaVistaObraMapa();
@@ -2089,7 +2089,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                         cargarMapaCiudadano();
                     }
                 } else {
-                    filtro.setFactorpagina(200);
+                    filtro.setFactorpagina(500);
                     //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                     cargarListaVistaObraMapa();
@@ -2107,7 +2107,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 cargarListaVistaObraMapa();
                 break;
             case 3:
-                filtro.setFactorpagina(200);
+                filtro.setFactorpagina(500);
                 //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 //listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 cargarListaVistaObraMapa();

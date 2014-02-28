@@ -35,8 +35,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.resources.client.ClientBundle;
-import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -268,7 +266,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.fitColumns = false;
 
         // Define column width
-        config.columnWidth = 60;
+        config.columnWidth = 40;
         // Enable task contextMenu
         config.taskContextMenuEnabled = !isModolectura();
         // Enable dependency contextMenu
@@ -337,7 +335,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearProyectoDialog = new Window();
                 crearProyectoDialog.setBlinkModal(true);
                 crearProyectoDialog.setModal(true);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, getGantt(), crearProyectoDialog, convenioDTO, props, taskStore);
+                final ProyectoForm proyectoForm1 = new ProyectoForm(tareaSeleccionada, getGantt(), crearProyectoDialog, convenioDTO, props, taskStore);
                 crearProyectoDialog.add(proyectoForm1);
                 crearProyectoDialog.show();
             }
@@ -370,7 +368,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
                 //editarProyDialog.setClosable(false);
-                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
+                ProyectoForm proyectoForm = new ProyectoForm(tareaSeleccionada, getGantt(), editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore, convenioDTO);
                 editarProyDialog.add(proyectoForm);
                 editarProyDialog.show();
 
@@ -607,7 +605,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         menuItemEliminarPry.setVisible(false);
                         //Se deshabilitó la edición de contrato, mientras se soluciona el borrado y actualizado en cascada
                         // de obra fuente recurso contrato
-                        //menuItemEditarContrato.setVisible(true);
+                        menuItemEditarContrato.setVisible(false);
                         menuItemConsultarContrato.setVisible(true);
                         menuItemEliminarContrato.setVisible(true);
                         menuItemEliminarHito.setVisible(false);
@@ -889,7 +887,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         //if (!fullScreen) {
             main = new FlowLayoutContainer();
             //main.getElement().setMargins(new Margins(-780, 0, 0, -10));
-            main.setWidth(980);
+            main.setWidth(900);
             if (!isModolectura()) {
                 main.setStyleName("main-contenedor-gwt");
             } else {
@@ -898,12 +896,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ContentPanel cp = new ContentPanel();
             cp.setHeadingText("Plan Operativo");
             cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-            cp.setPixelSize(980, 460);
+            cp.setPixelSize(900, 460);
             cp.getElement().setMargins(new Margins(0));
                                    
             VerticalLayoutContainer vc1 = new VerticalLayoutContainer();
-            vc1.setWidth("400");
-            vc1.setPosition(140, 0);
+            vc1.setWidth("500");
+            vc1.setPosition(40, 0);
             if (!isModolectura()) {
                 Label tituloPrincipal = new Label(msgs.tituloPlanOperativo());
                 tituloPrincipal.setStyleName("ikont-title-1-convenio-gwt");
@@ -911,13 +909,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 subTituloPrincipal.setStyleName("ikont-title2-convenio-gwt");
                 Label mensajeG1 = new Label(msgs.msgGeneralPlanOperativo1());
                 mensajeG1.setStyleName("ikont-title-3-convenio-gwt label_texto_convenio");
-                Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
-                mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
+                //Label mensajeG2 = new Label(msgs.msgGeneralPlanOperativo2());
+//                mensajeG2.setStyleName("ikont-title-3-convenio-gwt2 label_texto_convenio");
 
                 vc1.add(tituloPrincipal);
                 vc1.add(subTituloPrincipal);
                 vc1.add(mensajeG1);
-                vc1.add(mensajeG2);
+//                vc1.add(mensajeG2);
 
                 HorizontalPanel linea = new HorizontalPanel();
                 linea.addStyleName("ikont-hr-separador-convenio");
@@ -999,7 +997,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public ToolBar createToolBarPeriodo() {
         ToolBar tbar = new ToolBar();
-        TextButton days = new TextButton("Dias");
+        TextButton days = new TextButton("Días");
 
         days.addSelectHandler(new SelectHandler() {
             @Override

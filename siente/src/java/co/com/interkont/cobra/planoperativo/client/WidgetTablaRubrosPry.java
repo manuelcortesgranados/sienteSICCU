@@ -179,7 +179,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         final Grid<ObrafuenterecursosconveniosDTO> grid = new Grid<ObrafuenterecursosconveniosDTO>(getStore(), cm);
         grid.setBorders(true);
         grid.getView().setTrackMouseOver(false);
-        grid.getView().setEmptyText("Por favor ingrese los roles y enidades");
+        grid.getView().setEmptyText("Por favor ingrese los roles y entidades");
         grid.getView().setColumnLines(true);
         grid.getView().setAdjustForHScroll(true);
 
@@ -189,7 +189,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
         cp.setExpanded(true);
-        cp.setPixelSize(550, 150);
+        cp.setPixelSize(600, 130);
         cp.addStyleName("margin-10");
 
 
@@ -197,7 +197,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     }
 
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
-        service.setLog("entre estaContrato", null);
+        
         boolean estaRelacionado = false;
         List<ActividadobraDTO> lstHijas = taskStore.getChildren(actividadObraEditar);
         for (ActividadobraDTO act : lstHijas) {
