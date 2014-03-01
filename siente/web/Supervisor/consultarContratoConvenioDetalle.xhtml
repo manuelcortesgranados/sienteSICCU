@@ -250,13 +250,13 @@
                                     <interkont:spacer width="20" />
 
                                     <h:outputLabel    id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
-                                    
+
                                     <h:outputLabel id="lblfechainicioconvenio" value="Fecha de inicio:" rendered="#{var.plazoconacta == true}"/>
                                     <h:panelGrid rendered="#{var.plazoconacta == true}">
-                                    <interkont:spacer width="20" />                                     
+                                        <interkont:spacer width="20" />                                     
                                     </h:panelGrid>
                                     <h:outputLabel id="feini" value="#{Supervisor$Contrato.contrato.fechaactaini}" rendered="#{var.plazoconacta == true}"/>
-                                    
+
                                     <h:outputLabel  styleClass="ikont-"   id="fecfin"  value="#{var.fechafinalizacion}:" rendered="#{!var.fechafincambionombre}"/>
                                     <h:outputLabel  styleClass="ikont-"   id="fecterminar"  value="#{var.fechadeterminacion}:" rendered="#{var.fechafincambionombre}"/>
 
@@ -918,11 +918,10 @@
                                             <h:outputText  styleClass="ikont-"   value="#{var.consultar}" />
                                         </f:facet>
 
-                                        <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo}"
-                                                         render="pgcontratoconvenio, pgtablaContratoHijo,@all"
+                                        <h:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo}"                                                        
                                                          immediate="true" >
                                             <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
                                 <a4j:commandButton value="primero" onclick="#{rich:component('scrollertabalcontrato')}.first()" />
@@ -1254,7 +1253,7 @@
                                     <a4j:commandLink id="bt_consultafechaavance"  action="#{MarcoLogico$MarcoLogico.llenarCronogramaObligacionesAvance}" 
                                                      oncomplete="#{rich:component('mp-crear-avance')}.show();" render="rpnuevoavance">
                                         <h:graphicImage style="border:0px;border-style:none" width="25" height="25" value="/resources/imgs/bt_avance.png"/>
-                                    </a4j:commandLink>
+                                     </a4j:commandLink>
 
                                 </rich:column>
 
@@ -1304,12 +1303,12 @@
                 var fechaNavegador = new Date();
                 var milisegundosNavegador = fechaNavegador.getTime();
                 var fechaSever =#{SessionBeanCobra.fechaMilisegundosServidor1} + (1000 * 60 * 60 * 24);
-                var diferencia = fechaSever - milisegundosNavegador;
-
+                var diferencia = new Date(fechaSever);
+                
                 setInterval(function() {
                     var ahora = new Date();
-                    var faltan = futuro - (ahora - diferencia);
-
+                    var faltan = futuro -  diferencia;
+                    
                     if (faltan > 0) {
                         var segundos = Math.round(faltan / 1000);
                         var minutos = Math.floor(segundos / 60);
