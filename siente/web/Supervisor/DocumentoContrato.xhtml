@@ -28,7 +28,7 @@
 
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-tipoContCon"   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
+        <h:outputText  styleClass="ikont-hot-resumen"   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
     </ui:define>
     <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
         <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
