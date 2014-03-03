@@ -192,14 +192,14 @@ public class ToolBarSuperior implements IsWidget {
         toolBarSuperior.add(finalizarbasicos);
         toolBarSuperior.add(guardarborrador);
         toolBarSuperior.add(fullScreen);
-        toolBarSuperior.setStyleName("ikont-po-tb");
+        //toolBarSuperior.setStyleName("ikont-po-tb");
         if(fullscreen)
         {    
-        toolBarSuperior.setWidth(1280);
+        toolBarSuperior.setWidth(680);
         }
         else
         {
-            toolBarSuperior.setWidth(900);
+            toolBarSuperior.setWidth(680);
         }    
         return toolBarSuperior;
     }

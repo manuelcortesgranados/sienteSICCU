@@ -134,7 +134,7 @@ public class GanttDatos {
 
     }
 
-    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ListStore<DependenciaDTO> depsStore,ActividadobraDTOProps props, ContratoDTO contrato) {
+    //public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ListStore<DependenciaDTO> depsStore,ActividadobraDTOProps props, ContratoDTO contrato) {
 
 //        if (actividadPadre != null) {
 //            //if (actividadPadre.getTipoActividad() != 1) {
@@ -183,7 +183,7 @@ public class GanttDatos {
 //            //}
 //        }
 
-    }
+    //}
 
     //    public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
     //        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
@@ -758,6 +758,8 @@ public class GanttDatos {
     }
 
     public static void guardarBorradorConvenio(final ContratoDTO convenio, final CobraGwtServiceAbleAsync service, Gantt<ActividadobraDTO, DependenciaDTO> gantt) {
+        convenio.setDatefechaini(gantt.getFirstTask());
+                            convenio.setDatefechafin(gantt.getLastTask());
         service.setContratoDto(estructurarDatosConvenio(convenio, gantt.getTreeStore(), service, gantt.getDependencyStore()), new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -897,25 +899,27 @@ public class GanttDatos {
         return format;
     }
 
-    public static List<ActividadobraDTO> encontrarActividadDestinoDependeciaFinInicio(ListStore<DependenciaDTO> depsStore, String id, int difduracion)
-    {
-        List<ActividadobraDTO> lista=new ArrayList<ActividadobraDTO>();
-        for(DependenciaDTO dep:depsStore.getAll())
-        {
-            if(dep.getActividadFrom().getId().compareTo(id)==0 && dep.getType()==DependencyType.ENDtoSTART)
-            {
-                int dur=CalendarUtil.getDaysBetween(dep.getActividadFrom().getEndDateTime(), dep.getActividadTo().getStartDateTime());
-                service.setLog("dur "+dur, null);
-                if(dur<difduracion)
-                {    
-                lista.add(dep.getActividadTo());
-                }
-                else
-                {
-                    service.setLog("Hay espacio", null);
-                }    
-            }    
-        }    
-        return lista;
-    }        
+//    public static List<ActividadobraDTO> encontrarActividadDestinoDependeciaFinInicio(ListStore<DependenciaDTO> depsStore, String id, int difduracion)
+//    {
+//        List<ActividadobraDTO> lista=new ArrayList<ActividadobraDTO>();
+//        for(DependenciaDTO dep:depsStore.getAll())
+//        {
+//            if(dep.getActividadFrom().getId().compareTo(id)==0 && dep.getType()==DependencyType.ENDtoSTART)
+//            {
+//                int dur=CalendarUtil.getDaysBetween(dep.getActividadFrom().getEndDateTime(), dep.getActividadTo().getStartDateTime());
+//                service.setLog("dur "+dur, null);
+//                if(dur<difduracion)
+//                {    
+//                lista.add(dep.getActividadTo());
+//                }
+//                else
+//                {
+//                    service.setLog("Hay espacio", null);
+//                }    
+//            }    
+//        }    
+//        return lista;
+//    }   
+    
+    
 }

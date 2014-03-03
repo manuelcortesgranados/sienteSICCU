@@ -142,8 +142,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     boolean estaEnbotonAddModificar = false;
     protected List<RelacionobrafuenterecursoscontratoDTO> lstFuentesRecursosEliminar;
 
-    public ContratoForm() {
-    }
+    
 
     public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
         this.actividadObraPadre = actividadobrapadre;
@@ -160,6 +159,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
         valorContrato.setEnabled(false);
         this.numeracionActividad = taskStore.getAllItemsCount() + 1;
         lstFuentesRecursosEliminar = new ArrayList<RelacionobrafuenterecursoscontratoDTO>();
+       
+        this.valorContrato.setValue(contrato.getNumvlrcontrato());
+        this.fechaInicioPrecontractual.setValue(actividadobrapadre.getStartDateTime());
+        DateWrapper dw = new DateWrapper(actividadobrapadre.getStartDateTime()).clearTime().addDays(1);                
+        this.fechaSuscripcionContrato.setValue(dw.asDate());
+        this.fechaSuscripcionActaInicio.setValue(dw.asDate());
+        this.fechaFinalizacion.setValue(dw.addDays(1).asDate());
+        
     }
 
     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore, ContratoDTO convenio) {
@@ -280,8 +287,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         getObjetoContrato().setWidth("" + cw);
         objetoContrato.addBlurHandler(new BlurHandler() {
             @Override
-            public void onBlur(BlurEvent event) {
-                service.setLog("en onblur", null);
+            public void onBlur(BlurEvent event) {               
                 if (objetoContrato.getText().isEmpty()) {
                     objetoContrato.setText("Objeto");
                 }
@@ -291,7 +297,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         objetoContrato.addFocusHandler(new FocusHandler() {
             @Override
             public void onFocus(FocusEvent event) {
-                service.setLog("en on focus", null);
+                
                 if (!sololectura) {
                     if (objetoContrato.getText().equals("Objeto")) {
                         objetoContrato.setText("");
@@ -338,48 +344,48 @@ public class ContratoForm implements IsWidget, EntryPoint {
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
 
 
-        getFechaInicioPrecontractual().setWidth(cw);
-        getFechaInicioPrecontractual().setReadOnly(sololectura);
-        getFechaInicioPrecontractual().addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (getFechaInicioPrecontractual().getValue() != null) {
-                   
-                }
-            }
-        });
-        Label lblFechaInicioPre = new Label("Fecha inicio etapa precontractual:");
-        con.add(lblFechaInicioPre, new HtmlData(".tfechainipre"));
-        con.add(getFechaInicioPrecontractual(), new HtmlData(".fechainipre"));
-         
-        getFechaSuscripcionContrato().setWidth(cw);
-        getFechaSuscripcionContrato().setReadOnly(sololectura);
-        fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (fechaSuscripcionActaInicio.getValue() != null) {
-                    if (fechaSuscripcionContrato.getValue().compareTo(fechaSuscripcionActaInicio.getValue()) > 0) {
-                        AlertMessageBox d = new AlertMessageBox("Error", "La fecha de suscripción no puede ser mayor a la fecha del acta de inicio");
-                        d.show();
-                    }
-                }
-            }
-        });
-        Label lblFechaSuscripcion = new Label("Fecha suscripción:");
-        con.add(lblFechaSuscripcion, new HtmlData(".tfechasuscont"));
-        con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
-
-        Label lblFechaSuscripcionActa = new Label("Fecha de suscripción acta inicio:");
-        con.add(lblFechaSuscripcionActa, new HtmlData(".tfechasusacta"));
-        getFechaSuscripcionActaInicio().setWidth(cw);
-        getFechaSuscripcionActaInicio().setReadOnly(sololectura);
-        con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
-
-        getFechaFinalizacion().setWidth(cw);
-        getFechaFinalizacion().setReadOnly(sololectura);
-        Label lblFechaFin = new Label("Fecha finalización:");
-        con.add(lblFechaFin, new HtmlData(".tfechafin"));
-        con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
+//        getFechaInicioPrecontractual().setWidth(cw);
+//        getFechaInicioPrecontractual().setReadOnly(sololectura);
+//        getFechaInicioPrecontractual().addKeyDownHandler(new KeyDownHandler() {
+//            @Override
+//            public void onKeyDown(KeyDownEvent event) {
+//                if (getFechaInicioPrecontractual().getValue() != null) {
+//                   
+//                }
+//            }
+//        });
+//        Label lblFechaInicioPre = new Label("Fecha inicio etapa precontractual:");
+//        con.add(lblFechaInicioPre, new HtmlData(".tfechainipre"));
+//        con.add(getFechaInicioPrecontractual(), new HtmlData(".fechainipre"));
+//         
+//        getFechaSuscripcionContrato().setWidth(cw);
+//        getFechaSuscripcionContrato().setReadOnly(sololectura);
+//        fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
+//            @Override
+//            public void onKeyDown(KeyDownEvent event) {
+//                if (fechaSuscripcionActaInicio.getValue() != null) {
+//                    if (fechaSuscripcionContrato.getValue().compareTo(fechaSuscripcionActaInicio.getValue()) > 0) {
+//                        AlertMessageBox d = new AlertMessageBox("Error", "La fecha de suscripción no puede ser mayor a la fecha del acta de inicio");
+//                        d.show();
+//                    }
+//                }
+//            }
+//        });
+//        Label lblFechaSuscripcion = new Label("Fecha suscripción:");
+//        con.add(lblFechaSuscripcion, new HtmlData(".tfechasuscont"));
+//        con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
+//
+//        Label lblFechaSuscripcionActa = new Label("Fecha de suscripción acta inicio:");
+//        con.add(lblFechaSuscripcionActa, new HtmlData(".tfechasusacta"));
+//        getFechaSuscripcionActaInicio().setWidth(cw);
+//        getFechaSuscripcionActaInicio().setReadOnly(sololectura);
+//        con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
+//
+//        getFechaFinalizacion().setWidth(cw);
+//        getFechaFinalizacion().setReadOnly(sololectura);
+//        Label lblFechaFin = new Label("Fecha finalización:");
+//        con.add(lblFechaFin, new HtmlData(".tfechafin"));
+//        con.add(getFechaFinalizacion(), new HtmlData(".fechafin"));
         final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato, editar, valorContrato, sololectura, lstFuentesRecursosEliminar);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
@@ -424,9 +430,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         if (!tblMontos.getStore().getAll().isEmpty()) {
                     devolverValorFuenteObra(tblMontos.getStore().getAll());
                         }
-                    } else {
-                        service.setLog("estoy aca en edlse de crear", null);
-                }
+                    } 
                 }
             });
 
@@ -729,8 +733,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
             @Override
             public void onSuccess(List result) {
-                tiposContrato.addAll(result);
-                service.setLog("Cargue tipos Contrato" + tiposContrato.size(), null);
+                tiposContrato.addAll(result);               
 
             }
         });

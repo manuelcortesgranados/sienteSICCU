@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -28,13 +27,17 @@ import java.util.List;
 public class ValidacionesConvenio {
 
     public static void validarFechasConvenio(Date fechaini, Date fechafin) {
-        if (fechaini == null || fechafin == null) {
-            throw new ConvenioException("Debe Ingresar las fechas del convenio");
-        }
-
-        if (fechafin.compareTo(fechaini) < 0) {
-            throw new ConvenioException("La fecha de finalización debe ser mayor a la fecha inicial");
-        }
+//        if(fechaini==null)
+//        {
+//            throw new ConvenioException("Debe Ingresar la fecha de inicio del convenio");
+//        }    
+//        if (fechaini == null || fechafin == null) {
+//            throw new ConvenioException("Debe Ingresar las fechas del convenio");
+//        }
+//
+//        if (fechafin.compareTo(fechaini) < 0) {
+//            throw new ConvenioException("La fecha de finalización debe ser mayor a la fecha inicial");
+//        }
 
     }
 
@@ -65,17 +68,17 @@ public class ValidacionesConvenio {
     
 
     public static void validarFechasPlanOperativo(Date fechaactaini, Date fechaini, Date fechafin) {
-        validarFechasConvenio(fechaini, fechafin);
-        if (fechaactaini == null) {
-            throw new ConvenioException("Debe Ingresar la fecha del acta de inicio");
+        //validarFechasConvenio(fechaini, fechafin);
+        if (fechaini == null) {
+            throw new ConvenioException("Debe Ingresar la fecha de inicio del convenio");
         }
 
-        if (fechaactaini.compareTo(fechaini) < 0) {
-            throw new ConvenioException("La fecha del acta de inicio debe ser mayor o igual a la fecha inicial");
-        }
-        if (fechaactaini.compareTo(fechafin) >= 0) {
-            throw new ConvenioException("La fecha del acta de inicio debe ser menor o igual a la fecha final");
-        }
+//        if (fechaactaini.compareTo(fechaini) < 0) {
+//            throw new ConvenioException("La fecha del acta de inicio debe ser mayor o igual a la fecha inicial");
+//        }
+//        if (fechaactaini.compareTo(fechafin) >= 0) {
+//            throw new ConvenioException("La fecha del acta de inicio debe ser menor o igual a la fecha final");
+//        }
         //Acta de inicio superior al final
 
     }

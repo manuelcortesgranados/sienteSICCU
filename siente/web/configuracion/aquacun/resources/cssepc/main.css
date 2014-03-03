@@ -3930,7 +3930,7 @@ a:hover {
 .ikont-po-img-posicion-borrador-finalizarGWT{
     background-image: url(../imgs/btn_borrador_finalizar.png);
     background-repeat: no-repeat;
-    background-color: #ffffff;
+    background-color: transparent;
     width: 35px;
     height: 30px;
     display: block;
@@ -3939,7 +3939,7 @@ a:hover {
 
 .ikont-po-img-borradorGWT{
     background-position: -35px 1px; 
-    margin: 0px; left: 92% !important; top: 2px;
+    margin: 0px; left: 82% !important; top: 2px;
 }
 .ikont-po-img-finalizarGWT{
     background-position: 1px 1px;

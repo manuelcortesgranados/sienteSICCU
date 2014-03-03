@@ -7659,11 +7659,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String planOperativo() {
         try {
             validarPuedeEditarValorFuente();
-            Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
-            if (!mapaValidacionFechasPO.isEmpty()) {
-                validarModificacionFechasPO(mapaValidacionFechasPO);
-                return null;
-            } else {
+//            Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
+//            if (!mapaValidacionFechasPO.isEmpty()) {
+//                validarModificacionFechasPO(mapaValidacionFechasPO);
+//                return null;
+//            } else {
+            
                 ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
                 ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
                 ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
@@ -7706,7 +7707,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 //}
 
                 return "PlanOperativo";
-            }
+            //}
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
         }
@@ -7741,8 +7742,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         /**
          * Datos Generales
          */
-        // contrato.setDatefechaini(contratodto.getDatefechaini());
-        // contrato.setDatefechafin(contratodto.getDatefechafin());
+        contrato.setDatefechaini(contratodto.getDatefechaini());
+        contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
         contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
@@ -8164,150 +8165,150 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
     }
 
-    public Map<Integer, String> validarFechasConvenioEnRangoPO(Contrato contrato) {
-        Map<Integer, String> mapaValidacionRangoPo = new HashMap<Integer, String>();
-//
-        //Borramos las paramétricas para que se ecalculen con las nuevas fechas
-        if (!contrato.getActividadobras().isEmpty()) {
-
-
-            /*
-             Solo debo permitir reducir fecha acta de inicio o ampliar fecha de finalización
-             de lo contrario sacar mensaje 
-            
-             Actualmente posee actividades programadas por fuera del rango de fechas especificado, por favor elimine 
-             o modifique las mismas para poder realizar el cambio de las fechas previamente establecidas
-            
-             */
-            Iterator it = contrato.getActividadobras().iterator();
-            Actividadobra actiRaiz = (Actividadobra) it.next();
-
-            if (contrato.getFechaactaini().compareTo(actiRaiz.getFechaInicio()) == 0
-                    && contrato.getDatefechafin().compareTo(actiRaiz.getFechaFin()) == 0) {
-
-            } else {
-                if (contrato.getFechaactaini().compareTo(actiRaiz.getFechaInicio()) < 0
-                        || contrato.getDatefechafin().compareTo(actiRaiz.getFechaFin()) > 0) //Acta de inicio antes yuy fecha fin quieta o superior
-                {
-
-                    Iterator itpadres = actiRaiz.getActividadobras().iterator();
-
-                    actiRaiz.setFechaInicio(contrato.getFechaactaini());
-                    actiRaiz.setFechaFin(contrato.getDatefechafin());
-                    actiRaiz.setDuracion(contrato.getIntduraciondias());
-                    while (itpadres.hasNext()) {
-                        Actividadobra actpad = (Actividadobra) itpadres.next();
-
-                        if (actpad.getStrdescactividad().compareTo("Planeación del Convenio") == 0) {
-                            actpad.setFechaInicio(contrato.getFechaactaini());
-                            actpad.setDuracion(CalendarUtil.getDaysBetween(actpad.getFechaInicio(), actpad.getFechaFin()) + 1);
-                            Iterator ithijos = actpad.getActividadobras().iterator();
-                            while (ithijos.hasNext()) {
-                                Actividadobra actacta = (Actividadobra) ithijos.next();
-                                if (actacta.getStrdescactividad().compareTo("Acta de Inicio del Convenio") == 0) {
-                                    actacta.setFechaInicio(contrato.getFechaactaini());
-                                    actacta.setDuracion(CalendarUtil.getDaysBetween(actacta.getFechaInicio(), actacta.getFechaFin()) + 1);
-                                }
-                            }
-                        }
-                        if (actpad.getStrdescactividad().compareTo("Liquidación del Convenio Marco") == 0) {
-                            actpad.setFechaFin(contrato.getDatefechafin());
-                            actpad.setDuracion(CalendarUtil.getDaysBetween(actpad.getFechaInicio(), actpad.getFechaFin()) + 1);
-                            Iterator ithijos = actpad.getActividadobras().iterator();
-                            while (ithijos.hasNext()) {
-                                Actividadobra actacta = (Actividadobra) ithijos.next();
-                                if (actacta.getStrdescactividad().compareTo("Liquidación Convenio Marco") == 0) {
-                                    actacta.setFechaFin(contrato.getDatefechafin());
-                                    actacta.setDuracion(CalendarUtil.getDaysBetween(actacta.getFechaInicio(), actacta.getFechaFin()) + 1);
-                                }
-                            }
-                        }
-                    }
-
-                } else {
-
-                    Iterator itpadres = actiRaiz.getActividadobras().iterator();
-                    List listaeli= new ArrayList<Actividadobra>();
-                        listaeli.add(actiRaiz);
-                    boolean tieneproyectos = false;
-                    while (itpadres.hasNext()) {
-                        Actividadobra actpad = (Actividadobra) itpadres.next();
-                        listaeli.add(actpad);
-                        
-                        if (actpad.getStrdescactividad().compareTo("Ejecución del Convenio") == 0) {
-                            if (actpad.getActividadobras().size() > 0) {
-                                tieneproyectos = true;
-                                
-                            }
-                        }
-                        Iterator ithijos = actpad.getActividadobras().iterator();
-                            while (ithijos.hasNext()) {
-                                 Actividadobra acthija = (Actividadobra) ithijos.next();
-                                 listaeli.add(acthija);
-                            }
-                    }
-
-                    if (tieneproyectos) {
-                        mapaValidacionRangoPo.put(1, "El Plan Operativo ya posee proyectos que podrían verse afectados con esta modificación.\n"
-                                + "Las fechas deben mantenerse en: Fecha Acta de Inicio: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaInicio())+"\n"+
-                                   " Fecha Finalización: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaFin()));
-//                        contrato.setFechaactaini(actiRaiz.getFechaInicio());
-//                        contrato.setDatefechafin(actiRaiz.getFechaFin());
-//                        contrato.setIntduraciondias(actiRaiz.getDuracion());
-                    } else {
-                       
-                        if(getSessionBeanCobra().getCobraGwtService().getContratoDto()!=null)
-                        {
-                            getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().clear();
-                            getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().clear();
-                        }
-                        
-                        
-                        
-                        getSessionBeanCobra().getCobraService().borrarActividadesParametricasPO(listaeli);
-                        
-                        contrato.getActividadobras().clear();
-
-                    }
-
-                }
-            }
-        }
-
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//    public Map<Integer, String> validarFechasConvenioEnRangoPO(Contrato contrato) {
+//        Map<Integer, String> mapaValidacionRangoPo = new HashMap<Integer, String>();
+////
+//        //Borramos las paramétricas para que se ecalculen con las nuevas fechas
 //        if (!contrato.getActividadobras().isEmpty()) {
 //
+//
+//            /*
+//             Solo debo permitir reducir fecha acta de inicio o ampliar fecha de finalización
+//             de lo contrario sacar mensaje 
+//            
+//             Actualmente posee actividades programadas por fuera del rango de fechas especificado, por favor elimine 
+//             o modifique las mismas para poder realizar el cambio de las fechas previamente establecidas
+//            
+//             */
 //            Iterator it = contrato.getActividadobras().iterator();
 //            Actividadobra actiRaiz = (Actividadobra) it.next();
 //
-//            Date menorFechaInicio = obtenerMenorFechaInicio(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
-//            Date mayorFechaFin = obtenerMayorFechaFin(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
-//            if (contrato.getDatefechaini().compareTo(menorFechaInicio) > 0) {
-//                mapaValidacionRangoPo.put(1, "La fecha de inicio no puede ser superior a " + sdf.format(menorFechaInicio));
-//            }
-//            if (contrato.getDatefechafin().compareTo(mayorFechaFin) < 0) {
-//                mapaValidacionRangoPo.put(2, "La fecha de fin no puede ser inferior a " + sdf.format(mayorFechaFin));
-//            }
-//            if (!mapaValidacionRangoPo.isEmpty()) {
-//                //Borramos las paramétricas para que se ecalculen con las nuevas fechas
-//                List<ActividadobraDTO> listaactdto = new ArrayList<ActividadobraDTO>();
-//                ActividadobraDTO activdadRaiz = (ActividadobraDTO) getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().iterator().next();
-//                encontrarActividadContratoDTO(activdadRaiz, listaactdto);
-//                System.out.println("listaac = " + listaactdto.size());
-//                
-//                if (listaactdto.size() == 7) {
-//                    mapaValidacionRangoPo.clear();
-//                    contrato.getActividadobras().clear();
-//                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().clear();
-//                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().clear();
-//                    lstActividadesEliminar.add(actiRaiz);
-//                    getSessionBeanCobra().getCobraGwtService().setElimino(true);
+//            if (contrato.getFechaactaini().compareTo(actiRaiz.getFechaInicio()) == 0
+//                    && contrato.getDatefechafin().compareTo(actiRaiz.getFechaFin()) == 0) {
+//
+//            } else {
+//                if (contrato.getFechaactaini().compareTo(actiRaiz.getFechaInicio()) < 0
+//                        || contrato.getDatefechafin().compareTo(actiRaiz.getFechaFin()) > 0) //Acta de inicio antes yuy fecha fin quieta o superior
+//                {
+//
+//                    Iterator itpadres = actiRaiz.getActividadobras().iterator();
+//
+//                    actiRaiz.setFechaInicio(contrato.getFechaactaini());
+//                    actiRaiz.setFechaFin(contrato.getDatefechafin());
+//                    actiRaiz.setDuracion(contrato.getIntduraciondias());
+//                    while (itpadres.hasNext()) {
+//                        Actividadobra actpad = (Actividadobra) itpadres.next();
+//
+//                        if (actpad.getStrdescactividad().compareTo("Planeación del Convenio") == 0) {
+//                            actpad.setFechaInicio(contrato.getFechaactaini());
+//                            actpad.setDuracion(CalendarUtil.getDaysBetween(actpad.getFechaInicio(), actpad.getFechaFin()) + 1);
+//                            Iterator ithijos = actpad.getActividadobras().iterator();
+//                            while (ithijos.hasNext()) {
+//                                Actividadobra actacta = (Actividadobra) ithijos.next();
+//                                if (actacta.getStrdescactividad().compareTo("Acta de Inicio del Convenio") == 0) {
+//                                    actacta.setFechaInicio(contrato.getFechaactaini());
+//                                    actacta.setDuracion(CalendarUtil.getDaysBetween(actacta.getFechaInicio(), actacta.getFechaFin()) + 1);
+//                                }
+//                            }
+//                        }
+//                        if (actpad.getStrdescactividad().compareTo("Liquidación del Convenio Marco") == 0) {
+//                            actpad.setFechaFin(contrato.getDatefechafin());
+//                            actpad.setDuracion(CalendarUtil.getDaysBetween(actpad.getFechaInicio(), actpad.getFechaFin()) + 1);
+//                            Iterator ithijos = actpad.getActividadobras().iterator();
+//                            while (ithijos.hasNext()) {
+//                                Actividadobra actacta = (Actividadobra) ithijos.next();
+//                                if (actacta.getStrdescactividad().compareTo("Liquidación Convenio Marco") == 0) {
+//                                    actacta.setFechaFin(contrato.getDatefechafin());
+//                                    actacta.setDuracion(CalendarUtil.getDaysBetween(actacta.getFechaInicio(), actacta.getFechaFin()) + 1);
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                } else {
+//
+//                    Iterator itpadres = actiRaiz.getActividadobras().iterator();
+//                    List listaeli= new ArrayList<Actividadobra>();
+//                        listaeli.add(actiRaiz);
+//                    boolean tieneproyectos = false;
+//                    while (itpadres.hasNext()) {
+//                        Actividadobra actpad = (Actividadobra) itpadres.next();
+//                        listaeli.add(actpad);
+//                        
+//                        if (actpad.getStrdescactividad().compareTo("Ejecución del Convenio") == 0) {
+//                            if (actpad.getActividadobras().size() > 0) {
+//                                tieneproyectos = true;
+//                                
+//                            }
+//                        }
+//                        Iterator ithijos = actpad.getActividadobras().iterator();
+//                            while (ithijos.hasNext()) {
+//                                 Actividadobra acthija = (Actividadobra) ithijos.next();
+//                                 listaeli.add(acthija);
+//                            }
+//                    }
+//
+//                    if (tieneproyectos) {
+//                        mapaValidacionRangoPo.put(1, "El Plan Operativo ya posee proyectos que podrían verse afectados con esta modificación.\n"
+//                                + "Las fechas deben mantenerse en: Fecha Acta de Inicio: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaInicio())+"\n"+
+//                                   " Fecha Finalización: "+ValidacionesPO.obtenerFecha(actiRaiz.getFechaFin()));
+////                        contrato.setFechaactaini(actiRaiz.getFechaInicio());
+////                        contrato.setDatefechafin(actiRaiz.getFechaFin());
+////                        contrato.setIntduraciondias(actiRaiz.getDuracion());
+//                    } else {
+//                       
+//                        if(getSessionBeanCobra().getCobraGwtService().getContratoDto()!=null)
+//                        {
+//                            getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().clear();
+//                            getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().clear();
+//                        }
+//                        
+//                        
+//                        
+//                        getSessionBeanCobra().getCobraService().borrarActividadesParametricasPO(listaeli);
+//                        
+//                        contrato.getActividadobras().clear();
+//
+//                    }
+//
 //                }
 //            }
 //        }
 //
-        return mapaValidacionRangoPo;
-    }
+////        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+////        if (!contrato.getActividadobras().isEmpty()) {
+////
+////            Iterator it = contrato.getActividadobras().iterator();
+////            Actividadobra actiRaiz = (Actividadobra) it.next();
+////
+////            Date menorFechaInicio = obtenerMenorFechaInicio(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
+////            Date mayorFechaFin = obtenerMayorFechaFin(new ArrayList<Actividadobra>(actiRaiz.getActividadobras()));
+////            if (contrato.getDatefechaini().compareTo(menorFechaInicio) > 0) {
+////                mapaValidacionRangoPo.put(1, "La fecha de inicio no puede ser superior a " + sdf.format(menorFechaInicio));
+////            }
+////            if (contrato.getDatefechafin().compareTo(mayorFechaFin) < 0) {
+////                mapaValidacionRangoPo.put(2, "La fecha de fin no puede ser inferior a " + sdf.format(mayorFechaFin));
+////            }
+////            if (!mapaValidacionRangoPo.isEmpty()) {
+////                //Borramos las paramétricas para que se ecalculen con las nuevas fechas
+////                List<ActividadobraDTO> listaactdto = new ArrayList<ActividadobraDTO>();
+////                ActividadobraDTO activdadRaiz = (ActividadobraDTO) getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().iterator().next();
+////                encontrarActividadContratoDTO(activdadRaiz, listaactdto);
+////                System.out.println("listaac = " + listaactdto.size());
+////                
+////                if (listaactdto.size() == 7) {
+////                    mapaValidacionRangoPo.clear();
+////                    contrato.getActividadobras().clear();
+////                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales().clear();
+////                    getSessionBeanCobra().getCobraGwtService().getContratoDto().getActividadobras().clear();
+////                    lstActividadesEliminar.add(actiRaiz);
+////                    getSessionBeanCobra().getCobraGwtService().setElimino(true);
+////                }
+////            }
+////        }
+////
+//        return mapaValidacionRangoPo;
+//    }
 
     public static Date obtenerMenorFechaInicio(List<Actividadobra> listaHijas) {
         if (!listaHijas.isEmpty()) {
@@ -8404,11 +8405,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public boolean validacionesBasicasConvenioPO(boolean isBorrador) {
-        Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
-        if (!mapaValidacionFechasPO.isEmpty()) {
-            validarModificacionFechasPO(mapaValidacionFechasPO);
-            return false;
-        } else {
+////        Map<Integer, String> mapaValidacionFechasPO = validarFechasConvenioEnRangoPO(contrato);
+////        if (!mapaValidacionFechasPO.isEmpty()) {
+////            validarModificacionFechasPO(mapaValidacionFechasPO);
+////            return false;
+////        } else {
             validarNumeroContrato();
             if (isBorrador) {
 
@@ -8443,7 +8444,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
                 }
             }
-        }
+        //}
 
         return true;
     }
