@@ -231,10 +231,10 @@
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato font-general" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
-                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="250" 
+                                        <h:inputText   styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="25" 
                                                      value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
                                         </h:inputText>
-                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="250" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
@@ -249,7 +249,7 @@
                                         </rich:select>
                                     </h:panelGroup>
                                     <h:outputLabel  styleClass="ikont-hol-numencargo font-general" id="lblnumerocencar" value="#{var.numeroencargo}:"
-                                                    rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
+                                       rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
                                                                 SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}"/>
                                     <h:panelGroup id="gpencargoseleecionado" rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
                                                                                          SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}">
