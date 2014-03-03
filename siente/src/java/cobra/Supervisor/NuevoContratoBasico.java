@@ -4123,6 +4123,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         subirDocPol = new CargadorArchivosWeb();
 
         llenarEntidadesContratantes();
+        getFiltrocontrato().setTipocontratoselect(0);
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();

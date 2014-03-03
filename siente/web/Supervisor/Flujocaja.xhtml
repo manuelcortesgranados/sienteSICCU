@@ -12,9 +12,9 @@
     <h:panelGroup id="formFlujoCaja" layout="block" styleClass="ikont-rp-fc"> 
 
         <rich:extendedDataTable id="extendedDataTableIngresos" value="#{PlanOperativo.flujoIngresos}"
-                                var="fuenteIngresos" frozenColumns="3" style="width: 100%;"
+                                var="fuenteIngresos" frozenColumns="4" style="width: 100%;"
                                 binding="#{PlanOperativo.tablaFuentesIngresos}">
-            <rich:column width="300px">
+            <rich:column width="200px">
                 <f:facet name="header">
                     <h:outputLabel value="Recursos que ingresas a la cuenta del convenio" />
                 </f:facet>
@@ -29,7 +29,7 @@
                 </f:facet>
             </rich:column>
             
-            <rich:column width="60px" style="text-align: right; font-weight: bold;">
+            <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Vigencia" />
                 </f:facet>
@@ -60,7 +60,7 @@
             </rich:column>
 
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
-                <rich:column>
+                <rich:column width="100px">
                     <f:facet name="header">
                         <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                     </f:facet>
@@ -153,7 +153,7 @@
                 </f:facet>
             </rich:column>
 
-            <rich:column width="100px">
+            <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Contrapartidas" />
                 </f:facet>
@@ -205,7 +205,7 @@
 
 
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
-                <rich:column style="text-align: right;">                    
+                <rich:column style="text-align: right;" width="100px">                    
                     <f:facet name="header">                        
                         <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                     </f:facet>                   

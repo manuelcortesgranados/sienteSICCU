@@ -114,3 +114,7 @@ blockquote									{ padding: 0 20px; margin-left: 20px; border-left: 20px solid
 .style-valla-font > div{
     display: block;
 }
+.ikont-hot-resumen{
+    position: relative!important;
+    top: -12px!important;
+}

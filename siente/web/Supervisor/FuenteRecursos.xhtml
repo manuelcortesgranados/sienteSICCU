@@ -75,7 +75,7 @@
                         <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
                         <f:validateDoubleRange minimum="0"/>
                         <f:validateLength maximum="26" minimum="1"/>
-                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor,hpg-fuenter-valoraportado"/>
+                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,rs-tipoaporte" render="hpg-valor,hpg-fuenter-valoraportado"/>
                     </h:inputText>
                     <rich:message for="hit-valoraportado-convenio"  />
                 </rich:column>                          
@@ -136,7 +136,6 @@
                 <rich:placeholder value="Ej: $74,784.0"  />
                 <f:validateDoubleRange minimum="0"/>
                 <f:validateLength maximum="26" minimum="1"/>
-                <a4j:ajax event="change" render="hpg-fuenter-reservaiva"/>
             </h:inputText>
         </rich:column>
     </h:panelGrid>
@@ -150,7 +149,6 @@
                 <rich:placeholder value="Ej: $975.356.00" />
                 <f:validateDoubleRange minimum="0"/>
                 <f:validateLength maximum="26" minimum="1"/>
-                <a4j:ajax event="change" render="hpg-fuenter-otrasreservas"/>
             </h:inputText>
         </rich:column>
     </h:panelGrid>
@@ -162,7 +160,7 @@
         <a4j:commandButton value="#{var.adicionar}" 
                            action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos}" 
                            render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas, ,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso, ikont-hpg-valorestimado" 
-                           execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso,hit-valorglobal-convenio,hit-valorglobal-gerencia"/>
+                           execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso,hit-valorglobal-convenio,hit-valorglobal-gerencia, hit-cuotagerencia-convenio"/>
 
     </h:panelGrid>        
     <!--/rich:collapsiblePanel-->
