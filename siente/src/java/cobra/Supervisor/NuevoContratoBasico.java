@@ -7670,6 +7670,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
                 ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
                 ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+                ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
 
                 contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
                 //Guardando antes de pasar a plan operativo                
