@@ -3691,8 +3691,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         getSessionBeanCobra().setCargarcontrato(false);
         //if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
-        contrato = new Contrato();
+        contrato = new Contrato(); 
         limpiarContrato();
+        getFiltrocontrato().setTipocontratoselect(0);
 
 //        } else {
 //            limpiarContrato();
@@ -4123,7 +4124,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         subirDocPol = new CargadorArchivosWeb();
 
         llenarEntidadesContratantes();
-        getFiltrocontrato().setTipocontratoselect(0);
+       // getFiltrocontrato().setTipocontratoselect(0);
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
