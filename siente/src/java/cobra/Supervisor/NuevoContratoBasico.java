@@ -833,7 +833,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      */
     private int tipoAporte;
-    
+
     /**
      * Get the value of eliminarPeriodosFueraRango
      *
@@ -1122,7 +1122,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setConfirmacioncedula(boolean confirmacioncedula) {
         this.confirmacioncedula = confirmacioncedula;
     }
-    
+
     public int getTipoAporte() {
         return tipoAporte;
     }
@@ -2770,7 +2770,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             } else {
                 pagina = "/Supervisor/PlanO.xhtml";
             }
-            
+
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + Propiedad.getValor("versioncobra") + pagina);
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
@@ -3693,7 +3693,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
         contrato = new Contrato();
         limpiarContrato();
-        
+
 //        } else {
 //            limpiarContrato();
 //        }
@@ -3776,7 +3776,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (polizacontrato.getStrnumpoliza() != null && polizacontrato.getStrnumpoliza().compareTo("") != 0 && polizacontrato.getDatefechavecimiento() != null) {
             if (bundle.getString("conplanoperativo").equals("true")) {
                 try {
-                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
+                    ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(), tipoContCon);
                     if (!listaPolizacontratos.isEmpty()) {
                         for (Polizacontrato p : listaPolizacontratos) {
                             if (polizacontrato.getTipopoliza().getInttipopoliza() == p.getTipopoliza().getInttipopoliza()) {
@@ -3847,7 +3847,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 if (getContrato().getBooltipocontratoconvenio() == true && getContrato().getBooltipocontratoconvenio() != null) {
                     if (bundle.getString("conplanoperativo").equals("true")) {
                         try {
-                            ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
+                            ValidacionesConvenio.validarAgregarPolizas(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(), tipoContCon);
                         } catch (Exception e) {
                             FacesUtils.addErrorMessage(e.getMessage());
                             return null;
@@ -3855,7 +3855,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     }
                 } else {
                     try {
-                        ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(),tipoContCon);
+                        ValidacionesConvenio.validarAgregarPolizasContrato(getContrato().getDatefechaini(), getContrato().getDatefechafin(), polizacontrato.getDatefechavecimiento(), tipoContCon);
                     } catch (Exception e) {
                         FacesUtils.addErrorMessage(e.getMessage());
                         return null;
@@ -4257,30 +4257,30 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * registros
      */
     public void calcuArraPorcenPago() {
-     
+
         //Se compara si la el tipo de aporte es en porcentaje.
         if (getTipoAporte() == 1 || getTipoAporte() == 0) {
-        List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
+            List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
 
-        lisplanifiactapar = new ArrayList<Planificacionpago>();
-        BigDecimal numdeactasparcialesB = new BigDecimal(numdeactasparciales);
-        BigDecimal cienporciento = new BigDecimal(100);
+            lisplanifiactapar = new ArrayList<Planificacionpago>();
+            BigDecimal numdeactasparcialesB = new BigDecimal(numdeactasparciales);
+            BigDecimal cienporciento = new BigDecimal(100);
 
-        if (contrato.getFormapago().getIntidformapago() == 1) {
-            valorpagoanticipo = contrato.getNumvlrcontrato().multiply(porcentapagoanticipo.divide(cienporciento));
-            BigDecimal sma = new BigDecimal(0);
-            BigDecimal suma = sma.add(contrato.getNumrecursosch()).add(contrato.getNumrecursospropios()).add(contrato.getNumrecursostercero());
-            cienporciento = cienporciento.subtract(porcentapagoanticipo);
-        }
-        if (numdeactasparciales > 0) {
-            BigDecimal sumaarraB = new BigDecimal(BigInteger.ZERO);
-            BigDecimal ceroB = new BigDecimal(BigInteger.ZERO);
-            BigDecimal porcuoptB = new BigDecimal(BigInteger.ZERO);
-            porcuoptB = cienporciento.divide(numdeactasparcialesB, 0, RoundingMode.HALF_UP);
-            for (int vi = 0; vi < numdeactasparciales; vi++) {//hallo el valor del porcentaje y guardo en lista
-                lsBigporcecuo.add(porcuoptB);
-                sumaarraB = sumaarraB.add(porcuoptB);
+            if (contrato.getFormapago().getIntidformapago() == 1) {
+                valorpagoanticipo = contrato.getNumvlrcontrato().multiply(porcentapagoanticipo.divide(cienporciento));
+                BigDecimal sma = new BigDecimal(0);
+                BigDecimal suma = sma.add(contrato.getNumrecursosch()).add(contrato.getNumrecursospropios()).add(contrato.getNumrecursostercero());
+                cienporciento = cienporciento.subtract(porcentapagoanticipo);
             }
+            if (numdeactasparciales > 0) {
+                BigDecimal sumaarraB = new BigDecimal(BigInteger.ZERO);
+                BigDecimal ceroB = new BigDecimal(BigInteger.ZERO);
+                BigDecimal porcuoptB = new BigDecimal(BigInteger.ZERO);
+                porcuoptB = cienporciento.divide(numdeactasparcialesB, 0, RoundingMode.HALF_UP);
+                for (int vi = 0; vi < numdeactasparciales; vi++) {//hallo el valor del porcentaje y guardo en lista
+                    lsBigporcecuo.add(porcuoptB);
+                    sumaarraB = sumaarraB.add(porcuoptB);
+                }
 
 //            BigDecimal vlcu = new BigDecimal(BigInteger.ONE);
 //            vlcu = contrato.getNumvlrcontrato().divide(new BigDecimal(numdeactasparciales), RoundingMode.HALF_EVEN);
@@ -4298,37 +4298,37 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                    }
 //                //}
 //            }
-            //se halla el valor de la cuota y se crea un objeto que sera el q se la pasa a la lista q se muestra
-            for (int c = 0; c < lsBigporcecuo.size(); c++) {//hallo el valor dela cuota
-                Planificacionpago plp = new Planificacionpago();
-                plp.setNumvlrporcentage(lsBigporcecuo.get(c));
-                plp.setNumvlrpago(contrato.getNumvlrcontrato().multiply(lsBigporcecuo.get(c).divide(cienporciento, 0, RoundingMode.HALF_UP)));
-                lisplanifiactapar.add(plp);
-            }
-
-            if (sumaarraB.compareTo(cienporciento) != 0) {
-
-                BigDecimal diferencia = BigDecimal.ZERO;
-                if (sumaarraB.compareTo(cienporciento) > 1) {
-                    diferencia = cienporciento.subtract(sumaarraB);
-
-                } else {
-                    diferencia = sumaarraB.subtract(cienporciento);
-                }
-                lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().subtract(diferencia));
-                if (lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().compareTo(BigDecimal.ZERO) < 0) {
-
-                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(BigDecimal.ZERO);
+                //se halla el valor de la cuota y se crea un objeto que sera el q se la pasa a la lista q se muestra
+                for (int c = 0; c < lsBigporcecuo.size(); c++) {//hallo el valor dela cuota
+                    Planificacionpago plp = new Planificacionpago();
+                    plp.setNumvlrporcentage(lsBigporcecuo.get(c));
+                    plp.setNumvlrpago(contrato.getNumvlrcontrato().multiply(lsBigporcecuo.get(c).divide(cienporciento, 0, RoundingMode.HALF_UP)));
+                    lisplanifiactapar.add(plp);
                 }
 
-                lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrpago(contrato.getNumvlrcontrato().multiply(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().divide(cienporciento, 0, RoundingMode.HALF_UP)));
+                if (sumaarraB.compareTo(cienporciento) != 0) {
 
-                lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage();
+                    BigDecimal diferencia = BigDecimal.ZERO;
+                    if (sumaarraB.compareTo(cienporciento) > 1) {
+                        diferencia = cienporciento.subtract(sumaarraB);
+
+                    } else {
+                        diferencia = sumaarraB.subtract(cienporciento);
+                    }
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().subtract(diferencia));
+                    if (lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().compareTo(BigDecimal.ZERO) < 0) {
+
+                        lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrporcentage(BigDecimal.ZERO);
+                    }
+
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).setNumvlrpago(contrato.getNumvlrcontrato().multiply(lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage().divide(cienporciento, 0, RoundingMode.HALF_UP)));
+
+                    lisplanifiactapar.get(lsBigporcecuo.size() - 1).getNumvlrporcentage();
+
+                }
 
             }
-
         }
-    }
         //Se compara si la el tipo de aporte es en valor.
         if (getTipoAporte() == 2) {
 
@@ -4407,7 +4407,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
     }
 
-
 //    public void recalculoporcentageactaanti() {
 //        List<BigDecimal> lsBigporcecuo = new ArrayList<BigDecimal>();
 //
@@ -4455,7 +4454,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void calculoActasParciales() {// 2;"ACTAS PARCIALES"Si en forma de pago se selecciona actas parciales se debe preguntar cuantos y se distribuye el valor del contrato en ese numero de pagos o registros
 
         calcuArraPorcenPago();
-           porcentaje();
+        porcentaje();
 
     }
 
@@ -5764,7 +5763,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);
-        filtrocontrato.setIdestrategia(estrategia);        
+        filtrocontrato.setIdestrategia(estrategia);
         filtrocontrato.setTipocontratoselect(0);
         filtrocontrato.setPalabraClave("");
         controlvisualizaciondocumento = 1;
@@ -7665,50 +7664,50 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //                validarModificacionFechasPO(mapaValidacionFechasPO);
 //                return null;
 //            } else {
-            
-                ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
-                ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
-                ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
-                ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
-                ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
 
-                contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
-                //Guardando antes de pasar a plan operativo                
-                if (!getContrato().isModolecturaplanop()) {
-                    guardarBorradorConvenio();
-                }
+            ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
+            ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
+            ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
+            ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
+            ValidacionesConvenio.validarDistribucionFinalCuotaGerencia(getContrato().getNumValorCuotaGerencia(), recursosconvenio.getCuotaGerencia());
 
-                if (!contrato.getActividadobras().isEmpty()) {
-                    if (!getSessionBeanCobra().isConsulteContrato()) {
-                        Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
-                        lstTodasActividades.clear();
-                        limpiarPredecesoresActividad(actiRaiz);
-                        cargarActividadesConsultadas(actiRaiz);
-                        asignarNumeracionActividadesConsultadas(lstTodasActividades);
-                        if (!contrato.getDependenciasGenerales().isEmpty()) {
-                            asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
-                        }
+            contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
+            //Guardando antes de pasar a plan operativo                
+            if (!getContrato().isModolecturaplanop()) {
+                guardarBorradorConvenio();
+            }
+
+            if (!contrato.getActividadobras().isEmpty()) {
+                if (!getSessionBeanCobra().isConsulteContrato()) {
+                    Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                    lstTodasActividades.clear();
+                    limpiarPredecesoresActividad(actiRaiz);
+                    cargarActividadesConsultadas(actiRaiz);
+                    asignarNumeracionActividadesConsultadas(lstTodasActividades);
+                    if (!contrato.getDependenciasGenerales().isEmpty()) {
+                        asignarPredecesorActividadesConsultadas(contrato.getDependenciasGenerales());
                     }
                 }
+            }
 
-                ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
+            ContratoDTO cont = CasteoGWT.castearConvenioToConvenioDTO(contrato);
 
-                if (!cont.getActividadobras().isEmpty()) {
-                    ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
-                    List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
-                    lstTodasActividadesDTO.add(actiRaiz);
-                    encontrarActividadContratoDTO(actiRaiz, lstTodasActividadesDTO);
-                    ValidacionesConvenio.validarFechaActaInicio(lstTodasActividadesDTO, cont);
-                }
-                getSessionBeanCobra().setConsulteContrato(false);
+            if (!cont.getActividadobras().isEmpty()) {
+                ActividadobraDTO actiRaiz = (ActividadobraDTO) cont.getActividadobras().iterator().next();
+                List<ActividadobraDTO> lstTodasActividadesDTO = new ArrayList<ActividadobraDTO>();
+                lstTodasActividadesDTO.add(actiRaiz);
+                encontrarActividadContratoDTO(actiRaiz, lstTodasActividadesDTO);
+                ValidacionesConvenio.validarFechaActaInicio(lstTodasActividadesDTO, cont);
+            }
+            getSessionBeanCobra().setConsulteContrato(false);
 
-                getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
                 //} else {
-                //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
-                // getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
-                //}
+            //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
+            // getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
+            //}
 
-                return "PlanOperativo";
+            return "PlanOperativo";
             //}
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
@@ -8311,7 +8310,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 ////
 //        return mapaValidacionRangoPo;
 //    }
-
     public static Date obtenerMenorFechaInicio(List<Actividadobra> listaHijas) {
         if (!listaHijas.isEmpty()) {
             Date menor = listaHijas.get(0).getFechaInicio();
@@ -8412,40 +8410,40 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 ////            validarModificacionFechasPO(mapaValidacionFechasPO);
 ////            return false;
 ////        } else {
-            validarNumeroContrato();
-            if (isBorrador) {
+        validarNumeroContrato();
+        if (isBorrador) {
 
-                if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
-                    if (contrato.getIntduraciondias() <= 0) {
-                        validardatosbasicosplano = 3;
-                        throw new ConvenioException(bundle.getString("validarfechafin"));
-                    }
-
-                    if (contrato.getFechaactaini() != null) {
-                        if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
-                            validardatosbasicosplano = 1;
-                            throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
-                        }
-                    }
-
-                }
-
-            } else {
-                if (contrato.getDatefechaini() == null) {
-                    throw new ConvenioException(bundle.getString("fechaInicioNotNull"));
-                } else if (contrato.getDatefechafin() == null) {
-                    throw new ConvenioException(bundle.getString("fechaFinalizacionNotNull"));
-                } else if (contrato.getIntduraciondias() <= 0) {
+            if (contrato.getDatefechaini() != null && contrato.getDatefechafin() != null) {
+                if (contrato.getIntduraciondias() <= 0) {
                     validardatosbasicosplano = 3;
                     throw new ConvenioException(bundle.getString("validarfechafin"));
-                } else if (contrato.getFechaactaini() == null) {
-                    validardatosbasicosplano = 2;
-                    throw new ConvenioException(bundle.getString("fechadesuscripcionvalida"));
-                } else if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
-                    validardatosbasicosplano = 1;
-                    throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
                 }
+
+                if (contrato.getFechaactaini() != null) {
+                    if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
+                        validardatosbasicosplano = 1;
+                        throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
+                    }
+                }
+
             }
+
+        } else {
+            if (contrato.getDatefechaini() == null) {
+                throw new ConvenioException(bundle.getString("fechaInicioNotNull"));
+            } else if (contrato.getDatefechafin() == null) {
+                throw new ConvenioException(bundle.getString("fechaFinalizacionNotNull"));
+            } else if (contrato.getIntduraciondias() <= 0) {
+                validardatosbasicosplano = 3;
+                throw new ConvenioException(bundle.getString("validarfechafin"));
+            } else if (contrato.getFechaactaini() == null) {
+                validardatosbasicosplano = 2;
+                throw new ConvenioException(bundle.getString("fechadesuscripcionvalida"));
+            } else if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) < 0 || contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) > 0) {
+                validardatosbasicosplano = 1;
+                throw new ConvenioException(bundle.getString("fechadesuscripcionplano"));
+            }
+        }
         //}
 
         return true;
@@ -8577,9 +8575,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
 
             if (getFlujoCaja().isFlujoCajaIniciado()) {
-                if (getFlujoCaja().validarFlujoCaja()) {
-                    getFlujoCaja().guardarFlujoCaja();
-                }
+                getFlujoCaja().guardarFlujoCaja();
             }
         }
         if (vermensaje) {
@@ -8843,7 +8839,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return listaavancefisico;
     }
-     public void porcentaje() {
+
+    public void porcentaje() {
         if (getTipoAporte() == 1) {
             setBooltipoaporte(true);
         }
