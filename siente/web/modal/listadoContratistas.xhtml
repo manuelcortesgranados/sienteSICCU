@@ -29,7 +29,7 @@
 
             <h:panelGroup layout="block" id="gpTotalContratistas">
                 <h:panelGrid columns="2" >
-                    <h:outputText  styleClass="ikont-hot-consultarnombre" value="#{var.consultar} #{var.nombre}" />
+                    <h:outputText  styleClass="ikont-hot-consultarnombre" value="#{var.nombrecedulaonit}" />
                     <h:panelGroup>
                         <h:inputText id="hit_buscar_contratista" styleClass="ikont-hit-nombre" value="#{Supervisor$Contrato.nombre}" size="20" onfocus="clearText(this);" />
                         <a4j:commandButton styleClass="ikont-acb-buscarproyecto" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarContratista}" 
