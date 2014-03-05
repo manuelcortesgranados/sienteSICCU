@@ -36,7 +36,7 @@
                 </h:selectOneMenu>
 
                 <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                    <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas"
+                    <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizasPO"
                                        styleClass="ikont-acb-addpoliza" execute="@this" >
                         <a4j:ajax event="click" render="pgpolis,  gpPolizaSelec" immediate="true"/>
                     </a4j:commandButton>
@@ -44,7 +44,7 @@
             </h:panelGrid>
             <interkont:spacer height="14"/>
             <h:panelGrid id="pgpolis" cellspacing="25" columns="1">
-                <rich:dataTable id="dtPolizas" 
+                <rich:dataTable id="dtPolizasPO" 
                                 rows="4"  
                                 value="#{Supervisor$Contrato.listapolizas}"
                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"
