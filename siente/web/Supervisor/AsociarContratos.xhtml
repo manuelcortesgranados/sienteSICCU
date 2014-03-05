@@ -65,8 +65,9 @@
 
                         <h:panelGroup id="pgdatacontratos">
                             <center>
-                                <rich:dataTable  styleClass="ikont-tabla-entidad-contratista" var="contrarow"  value="#{Supervisor$AsociarContratos.listacontratosobra}"
-                                                 rowKeyVar="filaSeleccionada"
+                                <rich:dataTable styleClass="ikont-tabla-entidad-contratista" var="contrarow"  value="#{Supervisor$AsociarContratos.listacontratosobra}"
+                                                 rowKeyVar="filaSeleccionada"  sortMode="single" 
+                                     rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                  binding="#{Supervisor$AsociarContratos.tablacontratos}"
                                                  rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}" rows="10"   >
                                     <f:facet name="header">
@@ -97,7 +98,7 @@
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
-                                    <rich:columnGroup >
+                                   
                                         <rich:column id="cocontr1">
                                             <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
                                         </rich:column>
@@ -132,7 +133,7 @@
 
                                             </a4j:commandButton>
                                         </rich:column>
-                                    </rich:columnGroup>
+                                 
                                     <f:facet name="footer">
                                         <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
                                     </f:facet>

@@ -379,41 +379,41 @@
                             <center>
                                 <rich:panel id="layoutLocalidades" header="#{var.localidades}" styleClass="ikont-"    rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
                                     <h:panelGroup >
-                                        <rich:dataTable styleClass="ikont-table-lugar-datosbasicos" id="tablaLocalidades" rows="4" var ="_localidad" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}"
+                                        <rich:dataTable styleClass="ikont-tabla-entidad-contratista" id="tablaLocalidades" rows="4" var ="_localidad" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}"
                                                         onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"   binding="#{Supervisor$IngresarNuevaObra.tablalocalidades}"
+                                                        rowClasses="cabezo_tabla01, cabezo_tabla02" 
                                                         value="#{Supervisor$IngresarNuevaObra.listaLocalidades}" >
                                             <f:facet name="header">
                                                 <rich:columnGroup>
-                                                    <rich:column styleClass="ikont-colum-datosbasicos" width="150px">
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
                                                         <h:outputText  styleClass="ikont-hot-codigoLocalidad"   value="#{var.codigoLocalidad}"/>
                                                     </rich:column>
-                                                    <rich:column styleClass="ikont-colum-datosbasicos" width="150px">
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
                                                         <h:outputText  styleClass="ikont-hot-depto "   value="#{var.departamento}" />
                                                     </rich:column>
-                                                    <rich:column styleClass="ikont-colum-datosbasicos" width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
                                                         <h:outputText  styleClass="ikont-hot-muni"   value="#{var.municipio}"/>
                                                     </rich:column>
-                                                    <rich:column styleClass="ikont-colum-datosbasicos" width="100px">
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="100px">
                                                         <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                                     </rich:column>
                                                 </rich:columnGroup>
                                             </f:facet>
-                                            <rich:columnGroup id="Cuerpo">
-                                                <rich:column  width="150px" >
-                                                    <h:outputText  styleClass="ikont-hot-strcodigolocalidad"   value="#{_localidad.strcodigolocalidad}"/>
-                                                </rich:column>
-                                                <rich:column  width="150px" >
-                                                    <h:outputText  styleClass="ikont-hot-strdepartamento"   value="#{_localidad.strdepartamento}"/>
-                                                </rich:column>
-                                                <rich:column  width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                                    <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{_localidad.strmunicipio}"/>
-                                                </rich:column>
 
-                                                <rich:column id="Eliminar" width="100">
-                                                    <a4j:commandButton id="btEliminar1" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" disabled="#{Supervisor$IngresarNuevaObra.objeto}" value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarLocalidad}" render="layoutLocalidades"/>
-                                                </rich:column>
-                                            </rich:columnGroup>
+                                            <rich:column  width="150px" >
+                                                <h:outputText  styleClass="ikont-hot-strcodigolocalidad"   value="#{_localidad.strcodigolocalidad}"/>
+                                            </rich:column>
+                                            <rich:column  width="150px" >
+                                                <h:outputText  styleClass="ikont-hot-strdepartamento"   value="#{_localidad.strdepartamento}"/>
+                                            </rich:column>
+                                            <rich:column  width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
+                                                <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{_localidad.strmunicipio}"/>
+                                            </rich:column>
+
+                                            <rich:column id="Eliminar" width="100">
+                                                <a4j:commandButton id="btEliminar1" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" disabled="#{Supervisor$IngresarNuevaObra.objeto}" value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarLocalidad}" render="layoutLocalidades"/>
+                                            </rich:column>
                                             <f:facet  name="footer">
                                                 <rich:columnGroup >
 
