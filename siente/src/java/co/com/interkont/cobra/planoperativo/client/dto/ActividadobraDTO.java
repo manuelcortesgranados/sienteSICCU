@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import sun.management.VMManagement;
 
 /**
  *
@@ -452,6 +451,7 @@ public class ActividadobraDTO implements IsSerializable {
      * @return the predecesor
      */
     public String getPredecesor() {
+         
         return predecesor;
     }
 

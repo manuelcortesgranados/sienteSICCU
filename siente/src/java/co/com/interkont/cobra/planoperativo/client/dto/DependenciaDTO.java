@@ -13,156 +13,73 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  */
 public class DependenciaDTO implements IsSerializable {
 
-        String id;
-	String fromId;
-	String toId;
-	DependencyType type;
-	String css;
-        private int idDependencia;
-        boolean isobligatoria = false;
-         private ActividadobraDTO actividadTo;
-        private ActividadobraDTO actividadFrom;
-        
-        
+    String id;
+    String fromId;
+    String toId;
+    DependencyType type;
+    String css;
+    private int idDependencia;
+    boolean isobligatoria = false;
+    private ActividadobraDTO actividadTo;
+    private ActividadobraDTO actividadFrom;
 
     public DependenciaDTO() {
     }
 
-        
-        public DependenciaDTO(String id, String fromId, String toId, DependencyType type,ActividadobraDTO actividadFrom,ActividadobraDTO actividadTo) {
-		this(id, fromId, toId, type, "",actividadFrom,actividadTo);
-        }
+    public DependenciaDTO(String id, String fromId, String toId, DependencyType type, ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
+        this(id, fromId, toId, type, "", actividadFrom, actividadTo);
+    }
 
-	public DependenciaDTO(String id, String fromId, String toId,
-			DependencyType type, String css,ActividadobraDTO actividadFrom,ActividadobraDTO actividadTo) {
-		this.id = id;
-		this.fromId = fromId;
-		this.toId = toId;
-		this.type = type;
-		this.css = css;
-                this.actividadFrom=actividadFrom;
-                this.actividadTo=actividadTo;
-	}
+    public DependenciaDTO(String id, String fromId, String toId,
+            DependencyType type, String css, ActividadobraDTO actividadFrom, ActividadobraDTO actividadTo) {
+        this.id = id;
+        this.fromId = fromId;
+        this.toId = toId;
+        this.type = type;
+        this.css = css;
+        this.actividadFrom = actividadFrom;
+        this.actividadTo = actividadTo;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getFromId() {
-		return fromId;
-	}
+    public String getFromId() {
+        return fromId;
+    }
 
-	public void setFromId(String fromId) {
-		this.fromId = fromId;
-	}
+    public void setFromId(String fromId) {
+        this.fromId = fromId;
+    }
 
-	public String getToId() {
-		return toId;
-	}
+    public String getToId() {
+        return toId;
+    }
 
-	public void setToId(String toId) {
-		this.toId = toId;
-	}
+    public void setToId(String toId) {
+        this.toId = toId;
+    }
 
-	public DependencyType getType() {
-		return type;
-	}
+    public DependencyType getType() {
+        return type;
+    }
 
-	public void setType(DependencyType type) {
-		this.type = type;
-	}
+    public void setType(DependencyType type) {
+        this.type = type;
+    }
 
-	public String getCss() {
-		return css;
-	}
+    public String getCss() {
+        return css;
+    }
 
-	public void setCss(String css) {
-		this.css = css;
-	}
-//    
-//        private int idDependencia;
-//    private ActividadobraDTO actividadobraByFkActividadDestino;
-//    private ActividadobraDTO actividadobraByFkActividadOrigen;
-//    private int tipoDepencia;
-//
-//    public DependenciaDTO() {
-//    }
-//
-//    public DependenciaDTO(Dependencia dependencia) {
-//        this.idDependencia = dependencia.getIdDependencia();
-//        this.actividadobraByFkActividadDestino =new ActividadobraDTO(dependencia.getActividadobraByFkActividadDestino());
-//        this.actividadobraByFkActividadOrigen =new ActividadobraDTO(dependencia.getActividadobraByFkActividadOrigen());
-//        this.tipoDepencia = dependencia.getTipoDepencia();
-//
-//    }
-//
-//    public DependenciaDTO(int idDependencia, ActividadobraDTO actividadobraByFkActividadDestino, ActividadobraDTO actividadobraByFkActividadOrigen, int tipoDepencia) {
-//        this.idDependencia =idDependencia;
-//        this.actividadobraByFkActividadDestino = actividadobraByFkActividadDestino;
-//        this.actividadobraByFkActividadOrigen = actividadobraByFkActividadOrigen;
-//        this.tipoDepencia = tipoDepencia;
-//    }
-//
-//    /**
-//     * @return the idDependencia
-//     */
-//    public int getIdDependencia() {
-//        return idDependencia;
-//    }
-//
-//    /**
-//     * @param idDependencia the idDependencia to set
-//     */
-//    public void setIdDependencia(int idDependencia) {
-//        this.idDependencia = idDependencia;
-//    }
-//
-//    /**
-//     * @return the actividadobraByFkActividadDestino
-//     */
-//    public ActividadobraDTO getActividadobraByFkActividadDestino() {
-//        return actividadobraByFkActividadDestino;
-//    }
-//
-//    /**
-//     * @param actividadobraByFkActividadDestino the actividadobraByFkActividadDestino to set
-//     */
-//    public void setActividadobraByFkActividadDestino(ActividadobraDTO actividadobraByFkActividadDestino) {
-//        this.actividadobraByFkActividadDestino = actividadobraByFkActividadDestino;
-//    }
-//
-//    /**
-//     * @return the actividadobraByFkActividadOrigen
-//     */
-//    public ActividadobraDTO getActividadobraByFkActividadOrigen() {
-//        return actividadobraByFkActividadOrigen;
-//    }
-//
-//    /**
-//     * @param actividadobraByFkActividadOrigen the actividadobraByFkActividadOrigen to set
-//     */
-//    public void setActividadobraByFkActividadOrigen(ActividadobraDTO actividadobraByFkActividadOrigen) {
-//        this.actividadobraByFkActividadOrigen = actividadobraByFkActividadOrigen;
-//    }
-//
-//    /**
-//     * @return the tipoDepencia
-//     */
-//    public int getTipoDepencia() {
-//        return tipoDepencia;
-//    }
-//
-//    /**
-//     * @param tipoDepencia the tipoDepencia to set
-//     */
-//    public void setTipoDepencia(int tipoDepencia) {
-//        this.tipoDepencia = tipoDepencia;
-//    }
-//        
+    public void setCss(String css) {
+        this.css = css;
+    }
 
     public boolean isIsobligatoria() {
         return isobligatoria;
@@ -172,7 +89,6 @@ public class DependenciaDTO implements IsSerializable {
         this.isobligatoria = isobligatoria;
     }
 
-    
     /**
      * @return the idDependencia
      */
@@ -214,4 +130,6 @@ public class DependenciaDTO implements IsSerializable {
     public void setActividadFrom(ActividadobraDTO actividadFrom) {
         this.actividadFrom = actividadFrom;
     }
+    
+    
 }

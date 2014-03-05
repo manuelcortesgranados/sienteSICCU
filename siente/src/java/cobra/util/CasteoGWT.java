@@ -80,19 +80,17 @@ public class CasteoGWT implements Serializable {
             DateWrapper dw = new DateWrapper(contrato.getDatefechaini()).clearTime();
 
             contratoDTO.setDatefechaactaini(dw.asDate());
-            contratoDTO.setDatefechafin(dw.addDays(2).asDate());            
+            contratoDTO.setDatefechafin(dw.addDays(2).asDate());
             contratoDTO.setIntduraciondias(3);
-            
+
             contrato.setDatefechafin(contratoDTO.getDatefechafin());
             contrato.setIntduraciondias(3);
-            
-        }
-        else
-        {
+
+        } else {
             contratoDTO.setDatefechaactaini(contrato.getFechaactaini());
-            contratoDTO.setDatefechafin(contrato.getDatefechafin());            
+            contratoDTO.setDatefechafin(contrato.getDatefechafin());
             contratoDTO.setIntduraciondias(contrato.getIntduraciondias());
-        }    
+        }
         contratoDTO.setDatefechaini(contrato.getDatefechaini());
         contratoDTO.setEstadoConvenio(contrato.getEstadoconvenio().getIdestadoconvenio());
 
@@ -1216,23 +1214,26 @@ public class CasteoGWT implements Serializable {
         LinkedHashSet<Dependencia> lstdependencia = new LinkedHashSet<Dependencia>();
         for (DependenciaDTO dp : deps) {
             Dependencia dep = new Dependencia();
-
-            dep.setActividadobraByFkActividadOrigen(CasteoGWT.encontrarActividaObraPorIdGwt(dp.getActividadFrom().getId(), act));
-            dep.setActividadobraByFkActividadDestino(CasteoGWT.encontrarActividaObraPorIdGwt(dp.getActividadTo().getId(), act));
-            int tipoDependencia = 0;
-            if (dp.getType().equals(GanttConfig.DependencyType.ENDtoEND)) {
-                tipoDependencia = 1;
-            } else if (dp.getType().equals(GanttConfig.DependencyType.ENDtoSTART)) {
-                tipoDependencia = 2;
-            } else if (dp.getType().equals(GanttConfig.DependencyType.STARTtoEND)) {
-                tipoDependencia = 3;
-            } else if (dp.getType().equals(GanttConfig.DependencyType.STARTtoSTART)) {
-                tipoDependencia = 4;
+            try {
+                dep.setActividadobraByFkActividadOrigen(CasteoGWT.encontrarActividaObraPorIdGwt(dp.getActividadFrom().getId(), act));
+                dep.setActividadobraByFkActividadDestino(CasteoGWT.encontrarActividaObraPorIdGwt(dp.getActividadTo().getId(), act));
+                int tipoDependencia = 0;
+                if (dp.getType().equals(GanttConfig.DependencyType.ENDtoEND)) {
+                    tipoDependencia = 1;
+                } else if (dp.getType().equals(GanttConfig.DependencyType.ENDtoSTART)) {
+                    tipoDependencia = 2;
+                } else if (dp.getType().equals(GanttConfig.DependencyType.STARTtoEND)) {
+                    tipoDependencia = 3;
+                } else if (dp.getType().equals(GanttConfig.DependencyType.STARTtoSTART)) {
+                    tipoDependencia = 4;
+                }
+                dep.setTipoDepencia(tipoDependencia);
+                dep.setBoolobligatoria(dp.isIsobligatoria());
+                dep.setIdDependencia(dp.getIdDependencia());
+                lstdependencia.add(dep);
+            } catch (NullPointerException n) {
+                //Se ingreso una dependencia inválida en po
             }
-            dep.setTipoDepencia(tipoDependencia);
-            dep.setBoolobligatoria(dp.isIsobligatoria());
-            dep.setIdDependencia(dp.getIdDependencia());
-            lstdependencia.add(dep);
         }
         return lstdependencia;
     }

@@ -102,28 +102,33 @@ public class GanttDatos {
         convenio.setIntduraciondias(lista.get(0).duration);
         convenio.getActividadobras().clear();
         convenio.getActividadobras().add(lista.get(0));
+        Set<DependenciaDTO> lstdepenc= new HashSet<DependenciaDTO>();
         for (DependenciaDTO d : lstDependencias) {
             DependenciaDTO dep = new DependenciaDTO();
-            dep.setId("" + d.getId());
-            dep.setFromId(d.fromId);
-            dep.setToId(d.toId);
-            dep.setType(d.type);
-            dep.setActividadFrom(d.getActividadFrom());
-            dep.setActividadTo(d.getActividadTo());
-            boolean encontro = false;
-            for (int i = 0; i < lista.size() && !encontro; i++) {
-                ActividadobraDTO act = lista.get(i);
-                if (act.getId().equals(d.getFromId())) {
-                    if (act.getDependenciasForFkActividadOrigen() != null) {
-                        act.getDependenciasForFkActividadOrigen().add(dep);
-                        encontro = true;
+            //if (dep.getActividadFrom() != null) {
+                dep.setId("" + d.getId());
+                dep.setFromId(d.fromId);
+                dep.setToId(d.toId);
+                dep.setType(d.type);
+                dep.setActividadFrom(d.getActividadFrom());
+                dep.setActividadTo(d.getActividadTo());
+                boolean encontro = false;
+                for (int i = 0; i < lista.size() && !encontro; i++) {
+                    ActividadobraDTO act = lista.get(i);
+                    if (act.getId().equals(d.getFromId())) {
+                        if (act.getDependenciasForFkActividadOrigen() != null) {
+                            act.getDependenciasForFkActividadOrigen().add(dep);
+                            encontro = true;
+
+                        }
 
                     }
-
                 }
-            }
+                //lstdepenc.add(dep);
+           // }
 
         }
+        
         return convenio;
     }
 
@@ -135,7 +140,6 @@ public class GanttDatos {
     }
 
     //public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ListStore<DependenciaDTO> depsStore,ActividadobraDTOProps props, ContratoDTO contrato) {
-
 //        if (actividadPadre != null) {
 //            //if (actividadPadre.getTipoActividad() != 1) {
 //            service.setLog(" modificando "+actividadPadre.getName(), null);
@@ -182,9 +186,7 @@ public class GanttDatos {
 //                }
 //            //}
 //        }
-
     //}
-
     //    public static void buscarActividad(ContratoDTO contrato, int tipo, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
     //        List<ActividadobraDTO> lstActividades = new ArrayList<ActividadobraDTO>(contrato.getActividadobras());
     //        if (tipo == 1) {
@@ -498,7 +500,6 @@ public class GanttDatos {
 //        }
 //        return true;
 //    }
-
     public static Boolean verificacionModificacionFechaFin(TreeStore<ActividadobraDTO> taskStore, ActividadobraDTO actividadSeleccionada) {
         if (actividadSeleccionada.getTipoActividad() == 2) {
         } else if (actividadSeleccionada.getTipoActividad() == 3) {
@@ -568,6 +569,7 @@ public class GanttDatos {
             boolean boolEstaPredecesor = false;
             for (int i = 0; i < temp.length; i++) {
                 Integer predecesor = Integer.parseInt(temp[i]);
+                
                 if (!acti.getLstPredecesores().contains(predecesor)) {
                     lstTemporalPredecesores.add(predecesor);
                 } else {
@@ -759,7 +761,7 @@ public class GanttDatos {
 
     public static void guardarBorradorConvenio(final ContratoDTO convenio, final CobraGwtServiceAbleAsync service, Gantt<ActividadobraDTO, DependenciaDTO> gantt) {
         convenio.setDatefechaini(gantt.getFirstTask());
-                            convenio.setDatefechafin(gantt.getLastTask());
+        convenio.setDatefechafin(gantt.getLastTask());
         service.setContratoDto(estructurarDatosConvenio(convenio, gantt.getTreeStore(), service, gantt.getDependencyStore()), new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -920,6 +922,4 @@ public class GanttDatos {
 //        }    
 //        return lista;
 //    }   
-    
-    
 }

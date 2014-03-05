@@ -87,6 +87,7 @@ import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
 import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
@@ -95,6 +96,7 @@ import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.util.CobraUtil;
+import java.util.HashSet;
 
 /**
  * <p>
@@ -8567,6 +8569,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     Actividadobra act = (Actividadobra) getContrato().getActividadobras().iterator().next();
                     getContrato().setDependenciasGenerales(CasteoGWT.castearSetDependenciasaListaDependenciasDto(getSessionBeanCobra().getCobraGwtService().getContratoDto().getDependenciasGenerales(), act));
                     getSessionBeanCobra().getCobraService().guardarDependencias(new ArrayList<Dependencia>(getContrato().getDependenciasGenerales()));
+                    getSessionBeanCobra().getCobraGwtService().getContratoDto().setDependenciasGenerales(new HashSet<DependenciaDTO>());
                 }
             }
             if (!getSessionBeanCobra().getCobraGwtService().getDependenciasEliminar().isEmpty()) {
