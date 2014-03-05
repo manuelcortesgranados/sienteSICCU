@@ -208,7 +208,7 @@
 
                                 <rich:column>
                                     <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelecContratista}"
-                                                       render="rpconpasel,tpDatosBasicos" execute="@this"
+                                                        render="rpconpasel,tpDatosBasicos,panel_entidad_contrato" execute="@this"
                                                        oncomplete="#{rich:component('mp-listado-contratos')}.hide();" />
                                 </rich:column>
                             </rich:columnGroup>

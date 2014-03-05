@@ -56,7 +56,7 @@
                             <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
                         </h:selectOneMenu>
                     </h:panelGrid>
-                    <h:panelGrid columns="2">
+                    <h:panelGrid id="panel_entidad_contrato" columns="2">
                         <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante1"  value="(*)#{var.entidadcontratante}" rendered="#{var.boolentidadcontratante}"/>
                         <h:panelGroup id="cmbEntContra1" styleClass="ikont-hpg-entcontra"  >
                             <rich:select id="selectentidadcontrato1" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" rendered="#{var.boolentidadcontratante}"
