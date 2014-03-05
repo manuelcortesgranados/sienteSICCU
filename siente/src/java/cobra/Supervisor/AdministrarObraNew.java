@@ -1523,9 +1523,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     .getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance()
                     .addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
@@ -1656,9 +1656,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         // case name where null will return to the same page.
 //        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
 //        this.imagenevolucionobraEl = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
-        this.imagenevolucionobraEl = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
-        listaImagenesevolucionobra.remove(this.imagenevolucionobraEl);
-        getSessionBeanCobra().getCobraService().borrarImagen(this.imagenevolucionobraEl);
+        try {
+            this.imagenevolucionobraEl = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+            listaImagenesevolucionobra.remove(this.imagenevolucionobraEl);
+            getSessionBeanCobra().getCobraService().borrarImagen(this.imagenevolucionobraEl);
+
+        } catch (Exception e) {
+            FacesUtils.addErrorMessage(bundle.getString("erroreliminariamgen"));
+        }
         return null;
     }
 
@@ -1693,9 +1698,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     .getName()).log(Level.SEVERE, null, ex);
             FacesContext.getCurrentInstance()
                     .addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    Propiedad.getValor("docexistenteerror"), ""));
         }
         return null;
     }
