@@ -103,7 +103,7 @@
                     <f:validateDoubleRange  minimum="0"  />                            
                     <f:validateLength maximum="26" minimum="1" />
                     <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" 
-                              execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte,panel_res_iva,panel_otr_reserva,hit-reservaiva-convenio,hit-otrasreservas-convenio" render="hpg-valor"/>
+                              execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte,panel_res_iva,panel_otr_reserva,hit-reservaiva-convenio,hit-otrasreservas-convenio" render="hpg-valor,hpg-fuenter-cuotag"/>
                 </h:inputText>
                 <rich:message for="hit-cuotagerencia-convenio"  />
             </rich:column>

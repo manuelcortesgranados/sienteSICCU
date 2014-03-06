@@ -333,7 +333,9 @@ public class RecursosConvenio implements Serializable {
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {
-                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() <= 100) {
+                    if (getFuenteRecursoConvenio().getValorcuotagerencia() != null && 
+                            getFuenteRecursoConvenio().getValoraportado() != null &&
+                            getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() <= 100) {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(
                                 getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
                         BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
@@ -348,7 +350,9 @@ public class RecursosConvenio implements Serializable {
                 break;
             case 2://Valor
                 try {
-                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
+                    if (getFuenteRecursoConvenio().getValorcuotagerencia() != null && 
+                            getFuenteRecursoConvenio().getValoraportado() != null && 
+                            getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
                         getFuenteRecursoConvenio().setStrporcentajecuotagerencia(BigDecimal.valueOf(getFuenteRecursoConvenio().getPorcentajecuotagerencia()).setScale(2,RoundingMode.HALF_UP) + " %");
                     } else {
