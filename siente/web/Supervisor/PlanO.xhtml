@@ -9,14 +9,16 @@
         <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
             <script  src="/#{var.versioncobra}/resources/js/zopim/#{var.srczopim}" type="text/javascript"></script>
         </h:panelGroup>
-        <script src="/#{var.versioncobra}/resources/script_supervisor.js" type="text/javascript"></script>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <h:outputStylesheet name="reset.css" library="cssfonade"/>
         <!--<h:outputStylesheet name="planoperativo.css" library="cssfonade"/>-->
+        <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
+        <link href="resources/css/gantt.css" rel="stylesheet" type="text/css"/>
     </h:head>
     <h:body  >
         <h:form id="form_menu">

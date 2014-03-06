@@ -312,7 +312,7 @@ public class ProyectoForm implements IsWidget, EntryPoint {
         PushButton btnAdicionarMetas = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                WidgetAddObjetivos modalAddMetas = new WidgetAddObjetivos(tblMetas, proyectoDTO, "Metas o producto", "Por favor ingrese la meta o porducto", false, idTempObj);
+                WidgetAddObjetivos modalAddMetas = new WidgetAddObjetivos(tblMetas, proyectoDTO, "Metas o producto", "Por favor ingrese la meta o producto", false, idTempObj);
                 MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddMetas.asWidget();
                 modal.show();
             }
