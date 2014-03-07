@@ -312,9 +312,7 @@ public class FlujoCaja implements Serializable {
      */
     public void iniciarFlujoCaja() {
         String userAgent = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getHeader("User-Agent").toLowerCase();
-        System.out.println("userAgent = " + userAgent);
         if(userAgent.contains("mac")) {
-            System.out.println("Ingreso 1");
             notificarConfiguracionScrollOSX();
         }
         
