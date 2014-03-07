@@ -14,6 +14,7 @@ import co.com.interkont.cobra.to.Planificacionmovimientoprydirecto;
 import co.com.interkont.cobra.to.Planificacionmovimientopryotros;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
 import co.com.interkont.cobra.to.Tercero;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.NuevoContratoBasico;
@@ -27,6 +28,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.richfaces.component.UIExtendedDataTable;
 
 /**
@@ -307,6 +311,13 @@ public class FlujoCaja implements Serializable {
      *
      */
     public void iniciarFlujoCaja() {
+        String userAgent = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getHeader("User-Agent").toLowerCase();
+        System.out.println("userAgent = " + userAgent);
+        if(userAgent.contains("mac")) {
+            System.out.println("Ingreso 1");
+            notificarConfiguracionScrollOSX();
+        }
+        
         nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         convenio = nuevoContratoBasico.getContrato();
 
@@ -1430,4 +1441,17 @@ public class FlujoCaja implements Serializable {
         }
         return null;
     }
+    
+    /**
+     * Presenta el mensaje de notificación para la configuración del 
+     * scroll de los dispositivos con sistema operativo OS X, necesario para el
+     * correcto funcionamiento del scroll del flujo de caja
+     */
+    public void notificarConfiguracionScrollOSX() {
+               FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            Propiedad.getValor("notificarConfiguracionScrollOSX"), ""));
+    }
+    
 }
