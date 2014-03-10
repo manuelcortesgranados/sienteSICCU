@@ -2561,7 +2561,7 @@ css usuario modificacion
     border-color: #6B6B6B;
     position: relative;
     top: 0px;
-    z-index: 1;
+    z-index: 100;
     border-bottom: solid 1px #F2F2F2;
 }
 
@@ -4424,7 +4424,7 @@ a:hover {
 
 .main-contenedor-gwt-en-ejecucion{
     position: absolute;
-    top: 230px;
+    top: 290px;
     left: 300px;
 
 }
