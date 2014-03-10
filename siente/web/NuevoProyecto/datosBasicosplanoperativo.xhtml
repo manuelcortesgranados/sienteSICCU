@@ -20,7 +20,7 @@
                                 <h:outputText value="Número del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important; width: 320px!important;" required="true" >
+                                <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important; width: 320px!important;" maxlength="25" required="true" >
                                     <rich:placeholder value="Ej: 442D5" styleClass="input_num_convenio"/>
                                     <f:validateLength maximum="255"/>
                                     <a4j:ajax event="valueChange" execute="hit-nro-convenio"/>
