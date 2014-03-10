@@ -7941,8 +7941,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Metodo para modificar el tipo de contrato 
      */
 
-    public void modificarTipocontrato() {
-        getContrato().setTipocontratoconsultoria(getSessionBeanCobra().getCobraService().encontrarTipoContratoConsultoriaxId(getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria()));
+   public void modificarTipocontrato() {
+        if (filtrocontrato.getTipocontratoselect() == 0) {
+            getContrato().setTipocontrato(getSessionBeanCobra().getCobraService().encontrarTipoContratoPorId(filtrocontrato.getTipocontrato()));
+        } else if (filtrocontrato.getTipocontratoselect() == 1) {
+            getContrato().setTipocontratoconsultoria(getSessionBeanCobra().getCobraService().encontrarTipoContratoConsultoriaxId(filtrocontrato.getTipocontrato()));
+        }
+        getContrato().setFormapago(new Formapago(1, null, true));
         getSessionBeanCobra().getCobraService().guardarContrato(getContrato(), getSessionBeanCobra().getUsuarioObra());
         FacesUtils.addInfoMessage("Se actualizo correctamente el contrato");
         if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
@@ -8852,5 +8857,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             setBooltipoaporte(false);
         }
 
+    }
+    
+    
+ public void listarxTipocontrato() {
+        if (filtrocontrato.getTipocontratoselect() != 2) {
+            if (filtrocontrato.getTipocontratoselect() == 0) {
+                tipocontratoselectitem = tipocontrato;
+                filtrocontrato.setTipocontratoselect(0);
+                filtrocontrato.setTipocontrato(0);
+                habilitarModificacionTipoContrato();
+            } else {
+                tipocontratoselectitem = tipocontratoconsultoria;
+                filtrocontrato.setTipocontratoselect(1);
+                filtrocontrato.setTipocontrato(0);
+                habilitarModificacionTipoContrato();
+            }
+        }
     }
 }
