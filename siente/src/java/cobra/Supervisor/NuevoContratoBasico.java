@@ -3118,7 +3118,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                             return false;
                                         }
                                     }
-                                    if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
+                                   if  (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
                                         removerAnticipo();
                                         FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                         return false;
@@ -3148,7 +3148,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
                                     removerAnticipo();
                                     if (bundle.getString("fechaformapago").equals("true")) {
-                                        removerAnticipo();
+                                        //removerAnticipo();
                                         FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
                                         return false;
                                     }
@@ -3185,7 +3185,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     lisplanifiactapar.get(i).setDatefechapago(new Date());
                                 }
                             }
-                            if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
+                             if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
 
                                 FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                 return false;
