@@ -8540,14 +8540,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
 //                        } 
         }
-        if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
-            getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
-
-        }
-
+        
         if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
             getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
             getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
+        }
+        
+        if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
+            getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
+
         }
 
         if (!getContrato().getActividadobras().isEmpty()) {
