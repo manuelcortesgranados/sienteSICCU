@@ -35,12 +35,16 @@
                         </rich:calendar>
                     </h:panelGrid>
                     <h:outputText  styleClass="ikont-hot-porcanticipo font-general" value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
-                    <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
-                        <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
+                    <h:panelGrid columns="3" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
+                        <h:inputText id ="poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
                                                  rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
-                                                 minValue="0" maxValue="100" inputSize="10" >
-                            <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti" />
-                        </rich:inputNumberSpinner>
+                                             maxlength="9" >
+                                    <f:convertNumber maxFractionDigits="6"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.000000"/>
+                                    <f:validateDoubleRange maximum="99.999999" minimum="0" />
+                                    <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti" />
+                                </h:inputText>
+                                <rich:message for="poranti" style="color: red;"/>                       
+                       
                         <h:outputText  styleClass="ikont-hot-porcentaje" value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
                     </h:panelGrid>
                     <h:outputText  styleClass="ikont-hot-vlranticipo font-general" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
@@ -68,10 +72,14 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-vlrporcentaje" value="#{var.valorporcentaje}:" />
                             </f:facet>
-                            <h:panelGrid columns="2">
-                                <rich:inputNumberSpinner id ="otxt-strTipoPolizab" value = "#{arr.numvlrporcentage}"
-                                                         minValue="0" maxValue="100" inputSize="4" >
-                                </rich:inputNumberSpinner>
+                            <h:panelGrid columns="3">
+                                
+                                <h:inputText id ="otxt-strTipoPolizab" value = "#{arr.numvlrporcentage}" 
+                                             maxlength="9" >
+                                    <f:convertNumber maxFractionDigits="6"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.000000"/>
+                                    <f:validateDoubleRange maximum="99.999999" minimum="0" />
+                                </h:inputText>
+                                <rich:message for="otxt-strTipoPolizab" style="color: red;"/>
                                 <h:outputText  styleClass="ikont-hot-txtporcentaje" value=" %"/>
                             </h:panelGrid>
                         </rich:column>
