@@ -49,6 +49,7 @@
             <h:form>
                 <h:panelGrid  rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
                     <interkont:spacer height="5" />
+                    <rich:dataScroller for="tablaPlanificacion" maxPages="10"/>
                     <rich:dataTable id="tablaPlanificacion"
                                     rows="5"
                                     var ="planificacion"

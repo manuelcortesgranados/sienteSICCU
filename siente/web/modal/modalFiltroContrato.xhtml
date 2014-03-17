@@ -66,11 +66,28 @@
 
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"   id="fec"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMin}">
+                            
+                            <f:facet name="footer">  
+                                <h:panelGrid columns="1">  
+                                    <h:outputLabel  
+                                        value="{cleanControl}"  
+                                        onclick="$('#form\\:calendarID').component.resetSelectedDate()" />  
+                                </h:panelGrid>
+                            </f:facet> 
 
                         </rich:calendar>
                         <h:outputLabel  styleClass="ikont-hol-labely"    id="labely" value=" #{var.y} "  />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  id="fech"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMax}">
+                        
+                            <f:facet name="footer">  
+                                <h:panelGrid columns="1">  
+                                    <h:outputLabel  
+                                        value="{cleanControl}"  
+                                        onclick="$('#form\\:labely').component.resetSelectedDate()" />  
+                                </h:panelGrid>
+                            </f:facet> 
+                        
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="10" /><interkont:spacer height="10" />

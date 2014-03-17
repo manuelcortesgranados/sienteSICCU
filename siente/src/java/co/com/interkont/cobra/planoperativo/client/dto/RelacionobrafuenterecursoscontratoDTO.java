@@ -2,7 +2,6 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 // Generated Jul 12, 2013 4:10:17 PM by Hibernate Tools 3.2.1.GA
 
 
-import co.com.interkont.cobra.to.Rubro;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 

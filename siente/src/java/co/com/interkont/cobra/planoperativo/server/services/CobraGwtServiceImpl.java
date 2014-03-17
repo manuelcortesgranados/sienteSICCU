@@ -324,7 +324,10 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public void adicionarDepenciatoEliminar(DependenciaDTO dep) {
+        System.out.println("dep = " + getDependenciasEliminar().size());
+        
         getDependenciasEliminar().add(dep);
+        System.out.println("dep = " + getDependenciasEliminar().size());
     }
 
     /**

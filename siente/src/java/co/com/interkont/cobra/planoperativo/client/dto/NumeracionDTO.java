@@ -4,11 +4,13 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  *
  * @author Daniela
  */
-public class NumeracionDTO {
+public class NumeracionDTO implements IsSerializable {
     private int numeracion;
     
     

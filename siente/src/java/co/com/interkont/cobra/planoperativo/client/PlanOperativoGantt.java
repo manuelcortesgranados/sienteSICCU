@@ -482,17 +482,22 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEliminarDependencia.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
+                
+                
                 if (dependenciaSeleccionada.isIsobligatoria() == false) {
 
                     encontrarActividadDependenciaAEliminar(dependenciaSeleccionada.getActividadFrom().getNumeracion(), dependenciaSeleccionada.getActividadTo().getNumeracion());
 //                    dependenciaSeleccionada.getActividadTo().setPredecesor("");
+//                   
 //                    
-//                    
-                    depStore.remove(dependenciaSeleccionada);
-
+                                       
                     if (dependenciaSeleccionada.getIdDependencia() != 0) {
+                       
+                        dependenciaSeleccionada.getActividadFrom().setObra(null);
+                        dependenciaSeleccionada.getActividadTo().setObra(null);
                         getService().adicionarDepenciatoEliminar(dependenciaSeleccionada, null);
                     }
+                    depStore.remove(dependenciaSeleccionada);
                 } else {
                     d.show();
                 }
@@ -523,6 +528,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
                                 band = true;
                             }
+                            band=true;
                         } else {
                             toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
                             band = true;
@@ -659,7 +665,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         getGantt().addDependencyContextMenuHandler(new DependencyContextMenuEvent.DependencyContextMenuHandler<DependenciaDTO>() {
             @Override
             public void onDependencyContextMenu(DependencyContextMenuEvent<DependenciaDTO> event) {
-                dependenciaSeleccionada = event.getDependency();
+                dependenciaSeleccionada = event.getDependency();               
             }
         });
 //        getGantt().addDependencyDnDHandler(new DependencyDnDEvent.DependencyDnDHandler<ActividadobraDTO>() {
@@ -669,13 +675,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                
 //            }
 //        });
-        getGantt().getGanttPanel().getDependencyStore().addStoreUpdateHandler(new StoreUpdateEvent.StoreUpdateHandler<DependenciaDTO>() {
-
-            @Override
-            public void onUpdate(StoreUpdateEvent<DependenciaDTO> event) {
-                service.setLog("cambio arbol de deps", null);
-            }
-        });
+        
 
 
 //        gantt.addBeforeTaskResizeHandler(new BeforeTaskResizeEvent.BeforeTaskResizeHandler<ActividadobraDTO>() {
@@ -963,6 +963,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         days.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
+                redimensionarGantt();
                 configurarDias();
             }
         });
@@ -972,6 +973,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         weeks.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
+                redimensionarGantt();
                 configurarSemanas();
             }
         });
@@ -981,6 +983,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         months.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
+                redimensionarGantt();
                 configurarMeses();
             }
         });
@@ -991,6 +994,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         critical.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
+                redimensionarGantt();
                 gantt.getConfig().showCriticalPath = critical.getValue();
                 getGantt().reconfigure(true);
             }
@@ -1876,7 +1880,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             if (temp1.compareTo(String.valueOf(num)) == 0) {
                 return true;
             }
-        }
+        }       
+        
         return false;
     }
 
@@ -1989,8 +1994,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         {
             getGantt().setStartEnd(new DateWrapper(getGantt().getFirstTask()).clearTime().addDays(-2).asDate(),
                 new DateWrapper(getGantt().getLastTask()).addDays(2).asDate());
-            getGantt().getGanttPanel().getContainer().reconfigure(true);
-            service.setLog("Redimensione el area", null);
+            getGantt().getGanttPanel().getContainer().reconfigure(true);           
         }
     }
 }
