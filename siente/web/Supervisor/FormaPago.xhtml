@@ -38,9 +38,9 @@
                     <h:panelGrid columns="3" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                         <h:inputText id ="poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
                                                  rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
-                                             maxlength="9" >
-                                    <f:convertNumber maxFractionDigits="6"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.000000"/>
-                                    <f:validateDoubleRange maximum="99.999999" minimum="0" />
+                                             maxlength="15" >
+                                    <f:convertNumber maxFractionDigits="15"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.00"/>
+                                    <f:validateDoubleRange maximum="99.999999999999" minimum="0" />
                                     <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="vlranti" />
                                 </h:inputText>
                                 <rich:message for="poranti" style="color: red;"/>                       
@@ -75,9 +75,9 @@
                             <h:panelGrid columns="3">
                                 
                                 <h:inputText id ="otxt-strTipoPolizab" value = "#{arr.numvlrporcentage}" 
-                                             maxlength="9" >
-                                    <f:convertNumber maxFractionDigits="6"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.000000"/>
-                                    <f:validateDoubleRange maximum="99.999999" minimum="0" />
+                                             maxlength="15" >
+                                    <f:convertNumber maxFractionDigits="15"  minIntegerDigits="1" maxIntegerDigits="2" pattern="##.00"/>
+                                    <f:validateDoubleRange maximum="99.999999999999" minimum="0" />
                                 </h:inputText>
                                 <rich:message for="otxt-strTipoPolizab" style="color: red;"/>
                                 <h:outputText  styleClass="ikont-hot-txtporcentaje" value=" %"/>
