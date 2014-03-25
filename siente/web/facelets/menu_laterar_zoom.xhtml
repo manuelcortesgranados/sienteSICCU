@@ -41,12 +41,8 @@
                         <br/>
                         <h:panelGrid columns="3">
                             <h:commandButton id="enviardosnuevo" value="Ingresar" action="#{login.enviar_action}"                              
-                                             type="submit"  
-                                             onclick="#{rich:component('ajaxLoadingModalBox')}.show();
-                        return true;"
-                                             /> 
-                            <h:outputLabel rendered="false" value="o"/>
-                            <h:commandLink rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
+                                             type="submit"  /> 
+                            
 
                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                 <rich:message for="usuarionuevo" />

@@ -4861,7 +4861,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         setNumcontratotemporal(cont.getStrnumcontrato());
-
+        
+        //contrato.setNumeroContratosAsociados(getSessionBeanCobra().getC);
+        
     }
 
     /**

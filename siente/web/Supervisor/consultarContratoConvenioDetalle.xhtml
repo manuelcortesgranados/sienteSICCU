@@ -783,7 +783,7 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleSubConvenios" switchType="ajax" header="Subconvenios" 
+                    <rich:collapsiblePanel id="simpleToggleSubConvenios" switchType="ajax" header="Subconvenios #{SessionBeanCobra.cobraService.encontrarNumContratosHijos(Supervisor$Contrato.contrato,true,SessionBeanCobra.usuarioObra)}"
                                            expanded="#{Supervisor$Contrato.boolsubconvenios}"
                                            rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}"
                                            toggleListener="#{Supervisor$Contrato.llenarSubconvenios}">
@@ -865,7 +865,8 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" header="Contratos asociados directamente"
+                    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" 
+                                           header="Contratos asociados directamente #{SessionBeanCobra.cobraService.encontrarNumContratosHijos(Supervisor$Contrato.contrato,false,SessionBeanCobra.usuarioObra)}"
                                            expanded="#{Supervisor$Contrato.boolconthijo}" 
                                            rendered="#{Supervisor$Contrato.contrato.booleantienehijos}"
                                            toggleListener="#{Supervisor$Contrato.llenarContrConvHijo}">
