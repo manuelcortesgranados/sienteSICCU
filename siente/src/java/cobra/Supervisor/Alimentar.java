@@ -1074,7 +1074,7 @@ public class Alimentar implements Serializable{
      * borra la imagen de la alimentación y asigna la de no disponible
      */
     public String borrarImagenAlimenta() {
-        if (cargadorImagen.getArchivoWeb() != null) {
+         if (cargadorImagen.getArchivoWeb() != null && cargadorImagen.getArchivoWeb().getRutaWeb()!=null) {
             ArchivoWebUtil.eliminarArchivo(cargadorImagen.getArchivoWeb().getRutaWeb());
         }
         cargadorImagen.borrarDatosSubidos();
