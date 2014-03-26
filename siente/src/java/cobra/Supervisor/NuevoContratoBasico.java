@@ -5440,6 +5440,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), 0, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
+            //Condicion para que la loista de contratos salga en tipo obra
+            for(Contrato con:listacontratos){
+            
+                if(con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria()==1){    
+                        con.getTipocontratoconsultoria().setStrdescripcion("Obra");
+                }
+            }
+            
             pagina = 1;
             if (totalfilas <= 20) {
                 totalpaginas = 1;
@@ -5460,7 +5468,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //FacesUtils.addErrorMessage("Debe diligenciar el campo Entidad Contratante");
             getContrato().getTercero().setIntcodigo(0);
         }
-
+    
         return null;
     }
 
