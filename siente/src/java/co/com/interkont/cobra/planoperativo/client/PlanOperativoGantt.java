@@ -27,6 +27,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.Relacionobrafuenterecurso
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.event.CascadeChangesEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.DependencyDnDEvent;
 import com.gantt.client.event.TaskDnDEvent;
@@ -261,7 +262,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.fitColumns = false;
 
         // Define column width
-        config.columnWidth = 40;
+        config.columnWidth = 60;
         // Enable task contextMenu
         config.taskContextMenuEnabled = !isModolectura();
         // Enable dependency contextMenu
@@ -867,7 +868,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         @Override
                         public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {//                           
                             validarDependencias();
-                            redimensionarGantt();                            
+                            //redimensionarGantt();                            
                         }
                     });
         }
@@ -877,7 +878,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onTaskDnD(TaskDnDEvent<ActividadobraDTO> event) {
                
                 validarDependencias();
-               redimensionarGantt();      
+               //redimensionarGantt();      
             }
         });
         
@@ -888,10 +889,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                
                 service.setLog("Dependendia dnd", null);
                validarDependencias();
-               redimensionarGantt();     
+               //redimensionarGantt();     
             }
         });
         
+        getGantt().addCascadeChangesHandler(new CascadeChangesEvent.CascadeChangesHandler() {
+
+            @Override
+            public void onCascadeChanges(CascadeChangesEvent event) {
+                service.setLog("cascada changess ", null);
+                //validarDependencias();
+                redimensionarGantt();  
+            }
+        });
         getGantt().getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
             public void onViewReady(ViewReadyEvent event) {
