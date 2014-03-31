@@ -1,0 +1,76 @@
+<ui:composition
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    >
+    
+    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="ajax" 
+                  header="#{var.proyectosAsociados}"
+                  expanded="#{Supervisor$Contrato.boolproyectos}" 
+                  toggleListener="#{Supervisor$Contrato.llenarObraAsociada}">
+        <a4j:ajax event="switch" render="tablaProyectosContrato" />
+        <center>
+
+            <h:panelGroup id="tablaProyectosContrato">
+                
+                <h:panelGrid columns="3" styleClass="font-general">
+                           <h:outputText  styleClass="ikont-"   value="#{var.consultar} #{var.proyectos} "  />
+                           <h:inputText value="#{Supervisor$Contrato.buscarproyecto}" size="20" />
+                           <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarObraAsociada}" render="tablacontratoconv" />
+                </h:panelGrid >
+                
+                <rich:dataGrid columns="1" elements="3"
+                               value="#{Supervisor$Contrato.listaObraContrato}"
+                               var="row" styleClass="dataGrid">
+
+                    <fieldset class="dg-fieldset-interkont">
+                        <rich:panel bodyClass="pbody">
+                            <h:panelGrid columns="4">
+                                <h:panelGrid>
+                                    <h:graphicImage styleClass="ikont-hgi-imganterior " width="69" height="50" value="#{row.strimagenanterior}" />
+                                </h:panelGrid>
+                                <h:panelGrid>
+                                    <div class="ikont-dg-hr">#{row.strnombreobra}</div>
+                                    <div class="ikont-dg-tr">#{row.tercero.strnombrecompleto}</div>
+                                    <div class="ikont-dg-tr">#{row.strdireccion}</div>
+                                </h:panelGrid>
+                                <rich:column>
+                                    <a class="imgtipo tipo#{row.tipoobra.inttipoobra}"  />
+                                </rich:column>
+                                <rich:column>
+                                    <!--<a class="imgestado estado#{row.tipoestadobra.intestadoobra}" value=""/>-->
+                                    <h:panelGroup rendered="#{row.semaforo == '/resources/botones/rojo.png'}">
+                                        <span class="imgsemaforo semafororojo"/>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{row.semaforo == '/resources/botones/amarillo.png'}">
+                                        <span class="imgsemaforo semaforoamarillo"/>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{row.semaforo == '/resources/botones/verde.png'}">
+                                        <span class="imgsemaforo semaforoverde"/>
+                                    </h:panelGroup>
+                                </rich:column>
+                                <rich:column>
+                                    <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btn_consultaproyecenconvenio}"
+                                       id="irDatosBasicos"  onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{row.intcodigoobra}';">
+                                       <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
+                                    </a4j:commandLink>
+                                    <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
+                                       onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
+                                       <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
+                                    </a4j:commandLink>
+                                </rich:column>
+                            </h:panelGrid>
+                        </rich:panel>
+                    </fieldset>
+                    <f:facet name="footer">
+                        <rich:dataScroller styleClass="dataGrid" />
+                    </f:facet>
+                </rich:dataGrid>
+            </h:panelGroup>
+        </center>
+    </rich:collapsiblePanel>
+
+</ui:composition>
+

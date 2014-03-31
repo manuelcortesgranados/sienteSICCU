@@ -4872,7 +4872,7 @@ a:hover {
 .ikont-txt-cd-contrato{
     font-size: 12px;
     position: relative;
-    left: 45%;
+    left: 0%;
 }
 
 .ikont-hpg-content-modal-cronograma span{
@@ -5274,4 +5274,103 @@ a.ikont-a4jcl-solicitumaestro:hover {
 .ikont-rp-po{
     width:800px;
     height:400px;
+}
+
+.ikont-label-title{
+    width: 735px; 
+    font-size: 1.5em; 
+    color: #257500; 
+    font-family: open; 
+    padding: 0px;
+    margin-left: 30px;
+}
+
+.ikont-label-title2{
+    width: 735px; 
+    font-size: 1.0em; 
+    color: #257500; 
+    font-family: open; 
+    padding: 0px;
+}
+
+.ikont-hr{
+    border: 0; 
+    border-top: 1px dashed #999; 
+    height:0;
+}
+
+.ikont-colum-tablero-convenio{
+    
+    width: 20%;
+    
+}
+
+.ikont-col1{
+    width: 20%;
+}
+.ikont-col2{
+    width: 20%
+}
+.ikont-col3{
+    width: 40%;
+}
+
+.dataGrid .rf-dg {
+background-color: #FFFFFF;
+border-collapse: collapse;
+border-left-width: 1px;
+border-left-style: hidden;
+border-left-color: #1D629F;
+border-top-width: 1px;
+border-top-style: hidden;
+border-top-color: #1D629F;
+empty-cells: show;
+}
+
+.dataGrid .rf-dg-c {
+border-bottom-width: 1px;
+border-bottom-style: hidden;
+border-bottom-color: #1D629F;
+border-right-width: 1px;
+border-right-style: hidden;
+border-right-color: #1D629F;
+color: #58595B;
+font-family: open;
+font-size: 11px;
+padding: 4px;
+background-color: #FFFFFF;
+border-collapse: collapse;
+border-left-width: 1px;
+border-left-style: hidden;
+border-left-color: #1D629F;
+border-top-width: 1px;
+border-top-style: hidden;
+border-top-color: #1D629F;
+empty-cells: show;
+}
+
+.dataGrid .rf-dg-f-c{
+    padding: 4px;
+    background-color: white;
+}
+
+.ikont-dg-tr {
+left: 16px !important;
+position: relative !important;
+color: grey !important;
+font-size: 12px;
+width: 320px; 
+white-space: nowrap; 
+overflow: hidden;
+}
+
+.ikont-dg-hr {
+left: 16px !important;
+font-weight: bold !important;
+position: relative !important;
+color: grey !important;
+font-size: 12px;
+width: 302px; 
+white-space: nowrap; 
+overflow: hidden;
 }

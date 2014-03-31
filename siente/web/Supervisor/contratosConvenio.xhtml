@@ -1,0 +1,68 @@
+<ui:composition
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    >
+
+    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" header="#{var.contratosAsociados}"
+                           expanded="#{Supervisor$Contrato.boolconthijo}" 
+                           rendered="#{Supervisor$Contrato.contrato.booleantienehijos}"
+                           toggleListener="#{Supervisor$Contrato.llenarContrMacroConvHijo}" >
+        <a4j:ajax event="switch" render="tContHijo" />
+        
+        <h:selectOneRadio id="ccRadio" value="Macro">
+            <f:selectItem itemValue="Macro" itemLabel="Macro"/>
+            <f:selectItem itemValue="Derivado" itemLabel="Derivado" />
+            <f:ajax event="valueChange" render="tContHijo" listener="#{Supervisor$Contrato.llenarContrMacroConvHijo}" />
+        </h:selectOneRadio>
+        
+        <center>
+            <h:panelGroup id="notieneContrato">
+                <h:outputLabel  styleClass="ikont-"   rendered="#{Supervisor$Contrato.listaContrConvHijo.size()==0}" value="#{var.notienehijos}" />
+            </h:panelGroup>
+            <h:panelGroup id="pgtablaContratoHijo">
+                
+                <rich:dataTable id="tContHijo" styleClass="ikont-tabla-entidad-contratista"
+                                    rowKeyVar="filaSeleccionada"
+                                    value="#{Supervisor$Contrato.listaContrConvHijo}"
+                                    sortMode="single" var="row"  rows="3"
+                                    binding="#{Supervisor$Contrato.tablaContratoHijo}">
+                    
+                    
+                    <rich:column >
+                        <fieldset class="dg-fieldset-interkont">
+                            <rich:panel bodyClass="pbody">
+                                <h:panelGrid columns="3">
+                                    <rich:column width="80%">
+                                        <h:panelGrid columns="1">
+                                            <div class="ikont-dg-hr" >#{row.strnombre}</div>
+                                            <div class="ikont-dg-tr" >#{row.contratista.strnombre} #{row.contratista.strapellido1}</div>
+                                        </h:panelGrid>
+                                    </rich:column>
+                                    <rich:column width="10%">
+                                        <a class="imgtipo tipo#{row.intidcontrato}"  />
+                                    </rich:column>
+                                    <rich:column width="10%">
+                                        <h:commandLink immediate="true"  action="#{Supervisor$Contrato.detalleContratoHijo}">
+                                            <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                </h:panelGrid>
+                            </rich:panel>
+                        </fieldset>
+                    </rich:column>
+                    
+                    <f:facet name="footer">
+                        <rich:dataScroller styleClass="dataGrid" />
+                    </f:facet>
+                
+                </rich:dataTable>
+               
+            </h:panelGroup>
+        </center>
+    </rich:collapsiblePanel>
+
+</ui:composition>
+

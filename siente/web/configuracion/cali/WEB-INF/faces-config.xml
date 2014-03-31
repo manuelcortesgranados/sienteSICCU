@@ -154,6 +154,24 @@
     </managed-bean>
 
     <managed-bean>
+        <managed-bean-name>Supervisor$GraficoAvanceFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoAvanceFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoAvanceFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoAvanceFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+	
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>    
+
+    <managed-bean>
         <managed-bean-name>Supervisor$GraficoEvolucionContrato</managed-bean-name>
         <managed-bean-class>cobra.Supervisor.GraficoEvolucionContrato</managed-bean-class>
 

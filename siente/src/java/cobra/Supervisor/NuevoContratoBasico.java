@@ -346,6 +346,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private UIDataTable tablacontratoconvenio = new UIDataTable();
     /**
+     * Binding creado para acceder a los datos de las filas de la tabla creada
+     */
+    private UIDataTable tablaContratoHijo = new UIDataTable();
+    /**
      * Fecha del fin del contrato para mostrar el tiempo de terminación del
      * contrato
      */
@@ -2154,6 +2158,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tablacontratoconvenio = tablacontratoconvenio;
     }
 
+    public UIDataTable getTablaContratoHijo() {
+        return tablaContratoHijo;
+    }
+
+    public void setTablaContratoHijo(UIDataTable tablaContratoHijo) {
+        this.tablaContratoHijo = tablaContratoHijo;
+    }
+    
     public String getRealArchivoPath() {
         return realArchivoPath;
     }
@@ -4661,16 +4673,38 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
+     * Seleccionar el contrato desde la tabla Contratos de Convenio
+     *
+     * @return
+     */
+    public String detalleContratoHijo() {
+        
+        Contrato contratotabla = (Contrato) tablaContratoHijo.getRowData();
+        return detalleContratoGeneric(contratotabla);
+    }
+    
+    /**
      * Seleccionar el contrato desde la tabla detalle
      *
      * @return
      */
     public String detalleContrato() {
+        
+        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
+        return detalleContratoGeneric(contratotabla);
+        
+    }
+    /**
+     * Seleccionar el contrato desde la tabla detalle
+     * @param contratotabla 
+     *
+     * @return
+     */
+    public String detalleContratoGeneric(Contrato contratotabla) {
 
         //NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         //Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
         getSessionBeanCobra().setConsulteContrato(true);
-        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         getSessionBeanCobra().setCargarcontrato(false);
         cargarContrato(contratotabla);
         encontrarAvanceFisicoConvenio();
@@ -4861,9 +4895,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         setNumcontratotemporal(cont.getStrnumcontrato());
-        
-        //contrato.setNumeroContratosAsociados(getSessionBeanCobra().getC);
-        
+
     }
 
     /**
@@ -5468,7 +5500,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //FacesUtils.addErrorMessage("Debe diligenciar el campo Entidad Contratante");
             getContrato().getTercero().setIntcodigo(0);
         }
-    
+
         return null;
     }
 
@@ -5995,6 +6027,40 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String llenarContrConvHijo() {
         boolconthijo = true;
         listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijos(getContrato(), false, getSessionBeanCobra().getUsuarioObra());
+
+        return null;
+    }
+
+    /**
+     * Obtiene los contratos o subconvenios hijos a partir de un contrato.
+     *
+     * @throws DataAccessLayerException
+     */
+    public String llenarContrMacroConvHijo() {
+        
+        boolean first = listaContrConvHijo.isEmpty();
+        List<Contrato> listaContr = new ArrayList<Contrato>();
+        llenarContrConvHijo();
+        
+        if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
+            
+            for (Contrato cMacro : listaContrConvHijo) {
+                
+                if(cMacro.getContrato().getBooltipocontratoconvenio()){
+                    listaContr.add(cMacro);
+                }
+            }
+        }else{
+            
+            for (Contrato cDerivado : listaContrConvHijo) {
+                
+                if(!cDerivado.getContrato().getBooltipocontratoconvenio()){
+                    listaContr.add(cDerivado);
+                }
+            }
+        }
+        
+        listaContrConvHijo = listaContr;
 
         return null;
     }
@@ -7360,17 +7426,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     getFlujoCaja().iniciarFlujoCaja();
                 }
                 if (getFlujoCaja().validarFlujoCaja()) {
-                    double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos();
-                    if (Math.abs(diferenciaIngresosEgresos) < 1) {
-                        configuracionGuardadoPo(2, true);
-                        contrato.setTercero(new Tercero());
-                        setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
-                    } else {
-                        FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
-                        setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                        double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos();
+                        if (Math.abs(diferenciaIngresosEgresos) < 1) {
+                            configuracionGuardadoPo(2, true);
+                            contrato.setTercero(new Tercero());
+                            setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
+                        } else {
+                            FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                            setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                        }
                     }
                 }
-            }
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
             setMensajePlanOperativo(false, true, e.getMessage());

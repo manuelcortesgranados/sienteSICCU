@@ -63,6 +63,18 @@
     
 
     <!-- Inicio de Managed Beans de Supervisor -->   
+    
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoAvanceFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoAvanceFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+	
+	<managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>Supervisor$AdministrarObraNew</managed-bean-name>

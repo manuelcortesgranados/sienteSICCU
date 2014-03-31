@@ -64,3 +64,25 @@ ESTILOS PROPIOS DEL POPUP 20090323@JCP
         background-color:#000;
 }
 
+.fieldset-interkont {
+    border-width: 1px;
+    border-style: solid;
+    padding: 54px;
+    border-color: #CECECE;
+}
+
+.fieldset-interkont2 {
+    border-width: 1px;
+    border-style: solid;
+    padding: 10px;
+    border-color: #CECECE;
+    margin-bottom: 5px;
+}
+
+.dg-fieldset-interkont {
+    border-width: 1px;
+    border-style: solid;
+    padding: 0px;
+    border-color: #CECECE;
+    margin-bottom: 5px;
+}
