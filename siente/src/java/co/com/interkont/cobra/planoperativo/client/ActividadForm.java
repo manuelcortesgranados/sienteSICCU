@@ -48,8 +48,8 @@ public class ActividadForm implements IsWidget, EntryPoint {
     // <editor-fold defaultstate="collapsed" desc="Elementos visuales">
     private VerticalPanel vp;
     private TextArea descripcionActividad;
-    private DateField fechainicioActividad;
-    private DateField fechafinActividad;
+    //private DateField fechainicioActividad;
+    //private DateField fechafinActividad;
     private TextField peso;
     private TaskType tipo;
     private int tipoactividad;
@@ -83,21 +83,21 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.descripcionActividad = descripcionActividad;
     }
 
-    public DateField getFechainicioActividad() {
-        return fechainicioActividad;
-    }
-
-    public void setFechainicioActividad(DateField fechainicioActividad) {
-        this.fechainicioActividad = fechainicioActividad;
-    }
-
-    public DateField getFechafinActividad() {
-        return fechafinActividad;
-    }
-
-    public void setFechafinActividad(DateField fechafinActividad) {
-        this.fechafinActividad = fechafinActividad;
-    }
+//    public DateField getFechainicioActividad() {
+//        return fechainicioActividad;
+//    }
+//
+//    public void setFechainicioActividad(DateField fechainicioActividad) {
+//        this.fechainicioActividad = fechainicioActividad;
+//    }
+//
+//    public DateField getFechafinActividad() {
+//        return fechafinActividad;
+//    }
+//
+//    public void setFechafinActividad(DateField fechafinActividad) {
+//        this.fechafinActividad = fechafinActividad;
+//    }
 
     public ActividadobraDTO getActividadObraPadre() {
         return actividadObraPadre;
@@ -151,19 +151,19 @@ public class ActividadForm implements IsWidget, EntryPoint {
         getDescripcionActividad().setWidth("200px");
         con.add(new FieldLabel(getDescripcionActividad(), "Descripción"), new HtmlData(".descrip"));
 
-        setFechainicioActividad(new DateField());
-        getFechainicioActividad().setWidth(cw);
-        getFechainicioActividad().addValidator(new EmptyValidator<Date>());
-        getFechainicioActividad().setAutoValidate(true);
-
-        getFechainicioActividad().setEmptyText("Fecha de Inicio");
-        con.add(new FieldLabel(getFechainicioActividad(), "Fecha de Inicio"), new HtmlData(".fechaini"));
-        setFechafinActividad(new DateField());
-        getFechafinActividad().setWidth(cw);
-        getFechafinActividad().setEmptyText("Fecha de Finalización");
-        getFechafinActividad().addValidator(new EmptyValidator<Date>());
-        getFechafinActividad().setAutoValidate(true);
-        con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización"), new HtmlData(".fechafin"));
+//        setFechainicioActividad(new DateField());
+//        getFechainicioActividad().setWidth(cw);
+//        getFechainicioActividad().addValidator(new EmptyValidator<Date>());
+//        getFechainicioActividad().setAutoValidate(true);
+//
+//        getFechainicioActividad().setEmptyText("Fecha de Inicio");
+//        con.add(new FieldLabel(getFechainicioActividad(), "Fecha de Inicio"), new HtmlData(".fechaini"));
+//        setFechafinActividad(new DateField());
+//        getFechafinActividad().setWidth(cw);
+//        getFechafinActividad().setEmptyText("Fecha de Finalización");
+//        getFechafinActividad().addValidator(new EmptyValidator<Date>());
+//        getFechafinActividad().setAutoValidate(true);
+//        con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización"), new HtmlData(".fechafin"));
 
         Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
             @Override
@@ -175,36 +175,36 @@ public class ActividadForm implements IsWidget, EntryPoint {
                     error = true;
                     msg = msg + "Ingrese la descripción de la actividad" + "<br/>";                    
                 }                
-                if (getFechainicioActividad().getValue() == null) {
-                    error = true;
-                    msg = msg + "Ingrese la fecha de inicio" + "<br/>";                    
-                }                
-                if (getFechafinActividad().getValue() == null) {
-                    error = true;
-                    msg = msg + "Ingrese la fecha de finalización" + "<br/>";                   
-                }                
-                if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {                    
-                    if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) > 0) {
-                        error = true;
-                        msg = msg + "La fecha de inicio de la actividad debe ser inferior a la fecha de finalización: " + ValidacionesPO.obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
-                    }                    
-                    if (!error) {
-                        if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) < 0) {
-                            error = true;
-                            msg = msg + "La fecha de finalización de la actividad no puede ser inferior  a la fecha de inicio" + "<br/>";                            
-                        }
-                    }
-                    if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
-                        error = true;
-                        msg = msg + "La fecha de inicio de la actividad no puede ser inferior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getStartDateTime()) + "<br/>";
-                    }
-                    if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
-                        error = true;
-                        msg = msg + "La fecha fin de la actividad no puede ser superior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
-                        
-                    }
+//                if (getFechainicioActividad().getValue() == null) {
+//                    error = true;
+//                    msg = msg + "Ingrese la fecha de inicio" + "<br/>";                    
+//                }                
+//                if (getFechafinActividad().getValue() == null) {
+//                    error = true;
+//                    msg = msg + "Ingrese la fecha de finalización" + "<br/>";                   
+//                }                
+//                if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {                    
+//                    if (getFechainicioActividad().getValue().compareTo(getFechafinActividad().getValue()) > 0) {
+//                        error = true;
+//                        msg = msg + "La fecha de inicio de la actividad debe ser inferior a la fecha de finalización: " + ValidacionesPO.obtenerFecha(getFechafinActividad().getValue()) + "<br/>";
+//                    }                    
+//                    if (!error) {
+//                        if (getFechafinActividad().getValue().compareTo(getFechainicioActividad().getValue()) < 0) {
+//                            error = true;
+//                            msg = msg + "La fecha de finalización de la actividad no puede ser inferior  a la fecha de inicio" + "<br/>";                            
+//                        }
+//                    }
+//                    if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) < 0) {
+//                        error = true;
+//                        msg = msg + "La fecha de inicio de la actividad no puede ser inferior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getStartDateTime()) + "<br/>";
+//                    }
+//                    if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) > 0) {
+//                        error = true;
+//                        msg = msg + "La fecha fin de la actividad no puede ser superior a: " + ValidacionesPO.obtenerFecha(actividadObraPadre.getEndDateTime()) + "<br/>";
+//                        
+//                    }
                     
-                }
+                //}
                  if (!GanttDatos.validarNombreActividad(getDescripcionActividad().getValue(), taskStore)) {
                         error = true;
                         msg += "*Por favor verifique el nombre de la actividad, ya se encuentra en el plan operativo." + "<br/>";
@@ -257,10 +257,13 @@ public class ActividadForm implements IsWidget, EntryPoint {
 
     public void cargarDatosActividad() {
         actividacreada.setName(getDescripcionActividad().getValue());
-        actividacreada.setStartDateTime(getFechainicioActividad().getValue());
-        int dias=CalendarUtil.getDaysBetween(actividacreada.getStartDateTime(),getFechafinActividad().getValue())+1; 
-        actividacreada.setDuration(dias);
-        actividacreada.setEndDateTime(getFechafinActividad().getValue());
+        actividacreada.setStartDateTime(actividadObraPadre.getStartDateTime());
+        actividacreada.setEndDateTime(actividadObraPadre.getEndDateTime());
+        actividacreada.setDuration(actividadObraPadre.getDuration());
+//actividacreada.setStartDateTime(getFechainicioActividad().getValue());
+        //int dias=CalendarUtil.getDaysBetween(actividacreada.getStartDateTime(),getFechafinActividad().getValue())+1; 
+        //actividacreada.setDuration(dias);
+        //actividacreada.setEndDateTime(getFechafinActividad().getValue());
         
         //actividacreada.setPeso(getPeso();
 
