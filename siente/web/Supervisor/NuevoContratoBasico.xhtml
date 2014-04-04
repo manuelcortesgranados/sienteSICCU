@@ -232,7 +232,7 @@
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
                                         <h:inputText   styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="25" 
-                                                     value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
+                                                       value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
                                         </h:inputText>
                                         <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
                                             <f:validateLongRange minimum="0" />                                            
@@ -249,7 +249,7 @@
                                         </rich:select>
                                     </h:panelGroup>
                                     <h:outputLabel  styleClass="ikont-hol-numencargo font-general" id="lblnumerocencar" value="#{var.numeroencargo}:"
-                                       rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
+                                                    rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
                                                                 SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}"/>
                                     <h:panelGroup id="gpencargoseleecionado" rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
                                                                                          SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}">
@@ -363,6 +363,8 @@
                                             <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
+                                    <h:outputText id="outputTextEnlaceProceso" styleClass="ikont-hot-strenlaceproceso font-general" value="Enlace a proceso en SECOP" rendered="#{var.aplicaepc and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
+                                    <h:inputTextarea id="inputTextAreaEnlaceProceso" styleClass="ikont-hit-strenlaceproceso" rows="4"  value="#{Supervisor$Contrato.contrato.strenlaceproceso}" rendered="#{var.aplicaepc and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
                                 </h:panelGrid>
                             </h:panelGroup>
                         </h:panelGrid>
@@ -536,6 +538,75 @@
                         </f:facet>
                     </rich:dataTable>
                 </rich:collapsiblePanel>
+
+                <rich:collapsiblePanel id="collapsiblePanelImpactoComponentes" header="5. Impacto de componentes"
+                                       switchType="ajax" expanded="false" immediate="true"
+                                       toggleListener="#{Supervisor$Contrato.llenarListaComponentes}"
+                                       rendered="#{var.aplicacomponentescontrato and !Supervisor$Contrato.booltipocontratoconvenio}">
+                    <a4j:ajax event="click" render="collapsiblePanelImpactoComponentes" execute="@this" immediate="true" />
+
+                    <h:panelGrid id="panelGridAgregarComponentes" columns="3" style="width: 100%;">
+                        <h:panelGrid id="panelGridComponentes" columns="1">
+                            <h:outputLabel for="selectOneMenuComponentes" value="Componente" />
+                            <h:selectOneMenu id="selectOneMenuComponentes" value="#{Supervisor$Contrato.componenteImpactado.intidcomponente}">
+                                <f:selectItem itemValue="" itemLabel="Seleccione" />
+                                <f:selectItems value="#{Supervisor$Contrato.listacomponentes}" var="componente" itemValue="#{componente.intidcomponente}" itemLabel="#{componente.strnombrecomponente}" />
+
+                                <a4j:ajax event="valueChange" listener="#{Supervisor$Contrato.encontrarComponentesHijos}" render="collapsiblePanelImpactoComponentes" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+
+                        <h:panelGrid id="panelGridSubcomponentes" columns="1">
+                            <h:outputLabel for="selectOneMenuSubcomponentes" value="Subcomponente" />
+                            <h:outputLabel id="outputLabelNoAplicaSubcomponentes" value="No aplica."
+                                           rendered="#{Supervisor$Contrato.listasubcomponentes.size() == 0}" />
+                            <h:selectOneMenu id="selectOneMenuSubcomponentes" value="#{Supervisor$Contrato.subcomponenteImpactado.intidcomponente}"
+                                             rendered="#{Supervisor$Contrato.listasubcomponentes.size() > 0}">
+                                <f:selectItem itemValue="0" itemLabel="Todos" />
+                                <f:selectItems value="#{Supervisor$Contrato.listasubcomponentes}" var="subcomponente" itemValue="#{subcomponente.intidcomponente}" itemLabel="#{subcomponente.strnombrecomponente}" />
+
+                                <a4j:ajax event="valueChange" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+
+                        <a4j:commandButton id="commandButtonAgregarComponente" value="Agregar"
+                                           action="#{Supervisor$Contrato.agregarComponenteImpactado}"
+                                           immediate="true" execute="@this"
+                                           render="collapsiblePanelImpactoComponentes"
+                                           rendered="#{Supervisor$Contrato.listacomponentes.size() > 0}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid id="panelGridComponentesImpactados" styleClass="totalwidth">
+                        <rich:dataTable id="dataTableComponentesImpactados" noDataLabel="No se han agregado componentes."
+                                        value="#{Supervisor$Contrato.listacomponentesimpactados}" var="contratoComponenteImpactado"
+                                        binding="#{Supervisor$Contrato.tablaComponentesImpactados}">
+                            <rich:column id="columnComponente" sortBy="#{contratoComponenteImpactado.componente.strnombrecomponente}">
+                                <f:facet name="header">
+                                    <h:outputLabel value="Componente" />
+                                </f:facet>
+
+                                <h:outputText value="#{contratoComponenteImpactado.componente.strnombrecomponente}" rendered="#{contratoComponenteImpactado.componente.componente.strnombrecomponente == null}" />
+                                <h:outputText value="#{contratoComponenteImpactado.componente.componente.strnombrecomponente}" rendered="#{contratoComponenteImpactado.componente.componente.strnombrecomponente != null}" />
+                            </rich:column>
+
+                            <rich:column id="columnSubcomponente">
+                                <f:facet name="header">
+                                    <h:outputLabel value="Subcomponente" />
+                                </f:facet>
+
+                                <h:outputLabel value="No aplica." rendered="#{contratoComponenteImpactado.componente.componente.strnombrecomponente == null}" />
+                                <h:outputText value="#{contratoComponenteImpactado.componente.strnombrecomponente}" rendered="#{contratoComponenteImpactado.componente.componente.strnombrecomponente != null}" />
+                            </rich:column>
+
+                            <rich:column>
+                                <a4j:commandButton id="commandButtonQuitarComponente" value="#{var.eliminar}"
+                                                   action="#{Supervisor$Contrato.eliminarComponenteImpactado}" execute="@this"
+                                                   render="collapsiblePanelImpactoComponentes" />
+                            </rich:column>
+                        </rich:dataTable>
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
+
                 <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
                     <a4j:commandButton styleClass="ikont-acb-guardarcontratos" id="guardar_contrato"  action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
                                        render="pgcontrato,gpValContrato" execute="@form">
@@ -548,13 +619,13 @@
                 </h:panelGrid>              
 
             </rich:panel>         
-        </h:form>        
+        </h:form>
+
         <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <ui:include src="/modal/subirDocPoliza.xhtml"/>
         <ui:include src="/modal/listadoNumeroEncargo.xhtml"/>
         <ui:include src="/modal/listadoContratistas.xhtml"/>
         <ui:include src="/modal/crearcontratista.xhtml"/>
-
     </ui:define>    
 </ui:composition>

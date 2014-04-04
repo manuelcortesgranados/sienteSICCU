@@ -89,6 +89,8 @@ import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
+import co.com.interkont.cobra.to.Componente;
+import co.com.interkont.cobra.to.Contratocomponente;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
@@ -96,6 +98,7 @@ import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.util.CobraUtil;
+import java.security.SecureRandom;
 import java.util.HashSet;
 
 /**
@@ -902,6 +905,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public boolean confirmacioncedula = false;
 
+    private List<Componente> listacomponentes;
+
+    private List<Componente> listasubcomponentes;
+
+    private List<Contratocomponente> listacomponentesimpactados;
+
+    private UIDataTable tablaComponentesImpactados = new UIDataTable();
+
+    private Componente componenteImpactado = new Componente();
+
+    private Componente subcomponenteImpactado = new Componente();
+
     /**
      * Get the value of botonGuaradado
      *
@@ -1144,6 +1159,54 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setBooltipoaporte(boolean booltipoaporte) {
         this.booltipoaporte = booltipoaporte;
+    }
+
+    public List<Componente> getListacomponentes() {
+        return listacomponentes;
+    }
+
+    public void setListacomponentes(List<Componente> listacomponentes) {
+        this.listacomponentes = listacomponentes;
+    }
+
+    public List<Componente> getListasubcomponentes() {
+        return listasubcomponentes;
+    }
+
+    public void setListasubcomponentes(List<Componente> listasubcomponentes) {
+        this.listasubcomponentes = listasubcomponentes;
+    }
+
+    public List<Contratocomponente> getListacomponentesimpactados() {
+        return listacomponentesimpactados;
+    }
+
+    public void setListacomponentesimpactados(List<Contratocomponente> listacomponentesimpactados) {
+        this.listacomponentesimpactados = listacomponentesimpactados;
+    }
+
+    public UIDataTable getTablaComponentesImpactados() {
+        return tablaComponentesImpactados;
+    }
+
+    public void setTablaComponentesImpactados(UIDataTable tablaComponentesImpactados) {
+        this.tablaComponentesImpactados = tablaComponentesImpactados;
+    }
+
+    public Componente getComponenteImpactado() {
+        return componenteImpactado;
+    }
+
+    public void setComponenteImpactado(Componente componenteImpactado) {
+        this.componenteImpactado = componenteImpactado;
+    }
+
+    public Componente getSubcomponenteImpactado() {
+        return subcomponenteImpactado;
+    }
+
+    public void setSubcomponenteImpactado(Componente subcomponenteImpactado) {
+        this.subcomponenteImpactado = subcomponenteImpactado;
     }
 
     /*
@@ -2165,7 +2228,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTablaContratoHijo(UIDataTable tablaContratoHijo) {
         this.tablaContratoHijo = tablaContratoHijo;
     }
-    
+
     public String getRealArchivoPath() {
         return realArchivoPath;
     }
@@ -2849,6 +2912,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.listaxTipocontratoselect();
         filtrocontrato.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador(6));
         // }
+        
+        encontrarComponentesImpactados();
+        
     }
 
     public String instanciarPolizar() {
@@ -3130,7 +3196,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                             return false;
                                         }
                                     }
-                                   if  (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
+                                    if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
                                         removerAnticipo();
                                         FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                         return false;
@@ -3197,7 +3263,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                                     lisplanifiactapar.get(i).setDatefechapago(new Date());
                                 }
                             }
-                             if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
+                            if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.valueOf(0.000001)) < 0) {
 
                                 FacesUtils.addErrorMessage("Debe establecer un porcentaje para el pago del acta parcial.");
                                 return false;
@@ -3468,6 +3534,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        
+        if (!listacomponentesimpactados.isEmpty()) {
+            getSessionBeanCobra().getCobraService().guardarComponentesImpactados(listacomponentesimpactados);
+        }
+        
         if (Boolean.parseBoolean(bundle.getString("aplicamarcologico"))) {
             if (estrategia != 0 && booltipocontratoconvenio) {
                 Contratoestrategia contratoestrategia = new Contratoestrategia();
@@ -3705,7 +3776,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         getSessionBeanCobra().setCargarcontrato(false);
         //if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
-        contrato = new Contrato(); 
+        contrato = new Contrato();
         limpiarContrato();
         getFiltrocontrato().setTipocontratoselect(0);
 
@@ -4138,7 +4209,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         subirDocPol = new CargadorArchivosWeb();
 
         llenarEntidadesContratantes();
-       // getFiltrocontrato().setTipocontratoselect(0);
+        // getFiltrocontrato().setTipocontratoselect(0);
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
@@ -4155,6 +4226,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
         contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
+
+        listacomponentesimpactados = new ArrayList<Contratocomponente>();
     }
 
     public void iniciarTiposContrato() {
@@ -4678,25 +4751,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return
      */
     public String detalleContratoHijo() {
-        
+
         Contrato contratotabla = (Contrato) tablaContratoHijo.getRowData();
         return detalleContratoGeneric(contratotabla);
     }
-    
+
     /**
      * Seleccionar el contrato desde la tabla detalle
      *
      * @return
      */
     public String detalleContrato() {
-        
+
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         return detalleContratoGeneric(contratotabla);
-        
+
     }
+
     /**
      * Seleccionar el contrato desde la tabla detalle
-     * @param contratotabla 
+     *
+     * @param contratotabla
      *
      * @return
      */
@@ -5473,13 +5548,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
             //Condicion para que la loista de contratos salga en tipo obra
-            for(Contrato con:listacontratos){
-            
-                if(con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria()==1){    
-                        con.getTipocontratoconsultoria().setStrdescripcion("Obra");
+            for (Contrato con : listacontratos) {
+
+                if (con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
+                    con.getTipocontratoconsultoria().setStrdescripcion("Obra");
                 }
             }
-            
+
             pagina = 1;
             if (totalfilas <= 20) {
                 totalpaginas = 1;
@@ -6037,29 +6112,29 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @throws DataAccessLayerException
      */
     public String llenarContrMacroConvHijo() {
-        
+
         boolean first = listaContrConvHijo.isEmpty();
         List<Contrato> listaContr = new ArrayList<Contrato>();
         llenarContrConvHijo();
-        
+
         if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
-            
+
             for (Contrato cMacro : listaContrConvHijo) {
-                
-                if(cMacro.getContrato().getBooltipocontratoconvenio()){
+
+                if (cMacro.getContrato().getBooltipocontratoconvenio()) {
                     listaContr.add(cMacro);
                 }
             }
-        }else{
-            
+        } else {
+
             for (Contrato cDerivado : listaContrConvHijo) {
-                
-                if(!cDerivado.getContrato().getBooltipocontratoconvenio()){
+
+                if (!cDerivado.getContrato().getBooltipocontratoconvenio()) {
                     listaContr.add(cDerivado);
                 }
             }
         }
-        
+
         listaContrConvHijo = listaContr;
 
         return null;
@@ -7426,17 +7501,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     getFlujoCaja().iniciarFlujoCaja();
                 }
                 if (getFlujoCaja().validarFlujoCaja()) {
-                        double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos();
-                        if (Math.abs(diferenciaIngresosEgresos) < 1) {
-                            configuracionGuardadoPo(2, true);
-                            contrato.setTercero(new Tercero());
-                            setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
-                        } else {
-                            FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
-                            setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
-                        }
+                    double diferenciaIngresosEgresos = getFlujoCaja().getTotalIngresos() - getFlujoCaja().getTotalEgresos();
+                    if (Math.abs(diferenciaIngresosEgresos) < 1) {
+                        configuracionGuardadoPo(2, true);
+                        contrato.setTercero(new Tercero());
+                        setConfirmacionGuardado(true); // Se pone en true si fue un guardado exitoso. 
+                    } else {
+                        FacesUtils.addErrorMessage("El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
+                        setMensajePlanOperativo(false, true, "El valor total de los ingresos (" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalIngresos()) + ") , debe ser igual al valor total de los egresos ($" + CobraUtil.getInstance().parserCurrencyLocale(getFlujoCaja().getTotalEgresos()) + "), en el flujo de caja.");
                     }
                 }
+            }
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
             setMensajePlanOperativo(false, true, e.getMessage());
@@ -7772,7 +7847,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().setConsulteContrato(false);
 
             getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
-                //} else {
+            //} else {
             //  ContratoDTO cont = CasteoGWT.castearContratoSencillo(getSessionBeanCobra().getCobraGwtService().getContratoDto(), contrato);
             // getSessionBeanCobra().getCobraGwtService().setContratoDto(cont);
             //}
@@ -8008,7 +8083,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Metodo para modificar el tipo de contrato 
      */
 
-   public void modificarTipocontrato() {
+    public void modificarTipocontrato() {
         if (filtrocontrato.getTipocontratoselect() == 0) {
             getContrato().setTipocontrato(getSessionBeanCobra().getCobraService().encontrarTipoContratoPorId(filtrocontrato.getTipocontrato()));
         } else if (filtrocontrato.getTipocontratoselect() == 1) {
@@ -8607,12 +8682,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
 //                        } 
         }
-        
+
         if (!recursosconvenio.getLstFuentesRecursosEliminar().isEmpty()) {
             getSessionBeanCobra().getCobraService().borrarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursosEliminar());
             getRecursosconvenio().setLstFuentesRecursosEliminar(new ArrayList<Fuenterecursosconvenio>());
         }
-        
+
         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
             getSessionBeanCobra().getCobraService().guardarFuentesRecursosConvenios(recursosconvenio.getLstFuentesRecursos());
 
@@ -8926,9 +9001,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
     }
-    
-    
- public void listarxTipocontrato() {
+
+    public void listarxTipocontrato() {
         if (filtrocontrato.getTipocontratoselect() != 2) {
             if (filtrocontrato.getTipocontratoselect() == 0) {
                 tipocontratoselectitem = tipocontrato;
@@ -8943,4 +9017,87 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
     }
+
+    public void llenarListaComponentes() {
+        listacomponentes = new ArrayList<Componente>();
+        listacomponentes = getSessionBeanCobra().getCobraService().encontrarComponentesPadre();
+
+        quitarComponentesAgregados();
+
+        listasubcomponentes = new ArrayList<Componente>();
+    }
+
+    public void encontrarComponentesImpactados() {
+        listacomponentesimpactados = new ArrayList<Contratocomponente>();
+        
+        listacomponentesimpactados = getSessionBeanCobra().getCobraService().encontrarComponentesImpactados(contrato);
+    }
+
+    public void encontrarComponentesHijos() {
+        listasubcomponentes = new ArrayList<Componente>();
+        listasubcomponentes = getSessionBeanCobra().getCobraService().encontrarComponentesHijos(componenteImpactado);
+
+        quitarComponentesAgregados();
+
+        subcomponenteImpactado = new Componente();
+    }
+
+    private void quitarComponentesAgregados() {
+        for (Contratocomponente contratoComponente : listacomponentesimpactados) {
+            listacomponentes.remove(contratoComponente.getComponente());
+
+            if (listasubcomponentes.size() > 0) {
+                listasubcomponentes.remove(contratoComponente.getComponente());
+
+                if (listasubcomponentes.isEmpty()) {
+                    listacomponentes.remove(componenteImpactado);
+                }
+            }
+        }
+    }
+
+    public void agregarComponenteImpactado() {
+        Contratocomponente contratocomponente = new Contratocomponente();
+        Componente componenteAdicionar = new Componente();
+
+        if (listasubcomponentes.size() > 0) {
+            if (subcomponenteImpactado.getIntidcomponente() == 0) {
+                for (Componente subcomponenteAdicionar : listasubcomponentes) {
+                    contratocomponente = new Contratocomponente();
+
+                    contratocomponente.setContrato(contrato);
+                    contratocomponente.setComponente(subcomponenteAdicionar);
+
+                    listacomponentesimpactados.add(contratocomponente);
+                }
+            } else {
+                componenteAdicionar = getSessionBeanCobra().getCobraService().encontrarComponentePorId(subcomponenteImpactado);
+
+                contratocomponente.setContrato(contrato);
+                contratocomponente.setComponente(componenteAdicionar);
+
+                listacomponentesimpactados.add(contratocomponente);
+            }
+        } else {
+            componenteAdicionar = getSessionBeanCobra().getCobraService().encontrarComponentePorId(componenteImpactado);
+            
+            contratocomponente.setContrato(contrato);
+            contratocomponente.setComponente(componenteAdicionar);
+
+            listacomponentesimpactados.add(contratocomponente);
+        }
+
+        quitarComponentesAgregados();
+
+        componenteImpactado = new Componente();
+        subcomponenteImpactado = new Componente();
+        listasubcomponentes = new ArrayList<Componente>();
+    }
+
+    public void eliminarComponenteImpactado() {
+        listacomponentesimpactados.remove(tablaComponentesImpactados.getRowIndex());
+
+        llenarListaComponentes();
+    }
+   
 }
