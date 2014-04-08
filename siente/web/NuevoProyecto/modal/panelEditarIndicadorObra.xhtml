@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:interkont="http://www.interkont.com/jsf">
+
+    <rich:popupPanel id="ikont-rpp-editarindicadorobra" moveable="false" width="500" height="290"  headerClass="rich-panel-header">
+        <f:facet name="controls">
+            <!--<h:form>-->
+                <h:panelGroup>
+                    <a4j:commandLink  id="ikont-acl-escondereditarindicadorobra" styleClass="ikont-acl-escondereditarindicadorobra closemodal"  
+                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('ikont-rpp-editarindicadorobra')}.hide();
+                                                  return false;"/>
+                </h:panelGroup>
+            <!--</h:form>-->
+        </f:facet>
+
+        <h:form id="ikont-hf-editarindicadorobra"> 
+            <h:panelGroup layout="block" >         
+
+                <h:panelGrid styleClass="ikont-hpg-editarindicadorobra" id="ikont-hpg-editarindicadorobra" width="100%">
+                    <interkont:spacer height="70px"/>
+                    <h:panelGrid id="ikont-hpg-editarindicadorobraencabezados" styleClass="ikont-hpg-editarindicadorobraencabezados" columnClasses="rf-dt-shdr-c" width="100%">
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.indicador.clasificacionindicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador}" rendered="#{not empty Supervisor$IngresarNuevaObra.indicador.clasificacionindicador.clasificacionindicador.clasificacionindicador}"/>
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.indicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador}" rendered="#{not empty Supervisor$IngresarNuevaObra.indicador.clasificacionindicador.clasificacionindicador}"/>
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.indicador.clasificacionindicador.strnombreclasificacionindicador}" rendered="#{not empty Supervisor$IngresarNuevaObra.indicador.clasificacionindicador}"/>
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.indicador.strnombreindicador}"/>
+                    </h:panelGrid>
+                    <h:panelGrid id="ikont-hpg-editarindicadorobracampos" width="100%" rowClasses="rf-dt-shdr-c, centrado, centrado" columnClasses="rf-dt-shdr-c"
+                                 columns="#{(
+                                            (Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienelineabase 
+                                            and Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienemeta) ? 3 : 2
+                                            )}" 
+                                            styleClass="ikont-hpg-editarindicadorobracampos" 
+                                            rendered="#{(Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienelineabase 
+                                            or Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienemeta)}">
+                        <interkont:spacer width="60px"/>
+                        <h:outputLabel  styleClass="ikont-hol-lineabase"   value="#{var.lineabase}" 
+                                        rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienelineabase}"/>
+                        <h:outputLabel  styleClass="ikont-hol-meta"   value="#{var.meta}"
+                                        rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienemeta}"/>
+                        <h:outputLabel  styleClass="ikont-hol-objetourbano"   value="#{var.objetourbano}" rendered="#{Supervisor$IngresarNuevaObra.verSeccionUrbano}"/>
+                        <h:inputText id="ikont-hit-lineabaseurbano" styleClass="ikont-hit-lineabaseurbano" required="true" requiredMessage="#{var.lineabaserequerida}"
+                                     rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienelineabase and Supervisor$IngresarNuevaObra.verSeccionUrbano}"
+                                     value="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.numlineabase}"/>
+                        <h:inputText id="ikont-hit-metaurbano" styleClass="ikont-hit-metaurbano" required="true" requiredMessage="#{var.metarequerida}"
+                                     value="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.nummeta}" 
+                                     rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienemeta and Supervisor$IngresarNuevaObra.verSeccionUrbano}"/>
+                        <h:outputLabel  styleClass="ikont-hol-objetorural"   value="#{var.objetorural}" rendered="#{Supervisor$IngresarNuevaObra.verSeccionRural}"/>
+                        <h:inputText id="ikont-hit-lineabaserural" styleClass="ikont-hit-lineabaserural" required="true" requiredMessage="#{var.lineabaserequerida}"
+                                     rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienelineabase and Supervisor$IngresarNuevaObra.verSeccionRural}"
+                                     value="#{Supervisor$IngresarNuevaObra.indicadorobraobjetorural.numlineabase}" />
+                        <h:inputText id="ikont-hit-metarural" styleClass="ikont-hit-metarural" required="true" requiredMessage="#{var.lineabaserequerida}"
+                                     rendered="#{Supervisor$IngresarNuevaObra.indicadorobraobjetourbano.indicador.booltienemeta and Supervisor$IngresarNuevaObra.verSeccionRural}"
+                                     value="#{Supervisor$IngresarNuevaObra.indicadorobraobjetorural.nummeta}" />
+                    </h:panelGrid>
+                    <interkont:spacer height="80px"/>
+                    <h:panelGrid columns="2" width="100%" >
+                        <a4j:commandButton id="ikont-acb-aceptareditarindicadorobra" styleClass="ikont-acb-aceptareditarindicadorobra"
+                            action="#{Supervisor$IngresarNuevaObra.ingresarIndicadorAction}" 
+                                           title="#{var.aceptar}"
+                                           value="#{var.aceptar}" 
+                                           execute="ikont-hpg-editarindicadorobra" 
+                                           render="ikont-hpg-rp-indicadoresproyecto"
+                                           oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('ikont-rpp-editarindicadorobra')}.hide();"/>
+                        <a4j:commandButton id="ikont-acb-cancelareditarindicadorobra" styleClass="ikont-acb-cancelareditarindicadorobra" onclick="#{rich:component('ikont-rpp-editarindicadorobra')}.hide();
+                                            return false;" value="#{var.cancelar}"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+
+            </h:panelGroup>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

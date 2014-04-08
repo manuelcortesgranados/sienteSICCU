@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:interkont="http://www.interkont.com/jsf">
+
+    <rich:popupPanel id="ikont-rpp-eliminarindicadorobra" moveable="false" width="330" height="180"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-eliminarindicadorobra"   value="#{var.eliminarindicadorobra}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <!--<h:form>-->
+                <h:panelGroup>
+                    <a4j:commandLink  id="ikont-acl-escondereliminarindicadorobra" styleClass="ikont-acl-escondereliminarindicadorobra closemodal"  
+                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('ikont-rpp-eliminarindicadorobra')}.hide();
+                                                  return false;"/>
+                </h:panelGroup>
+            <!--</h:form>-->
+        </f:facet>
+        <h:form id="ikont-hf-eliminarindicadorobra"> 
+            <interkont:spacer height="80px"/>
+            <h:panelGrid id="ikont-hpg-eliminarindicaorobra">         
+                <h:outputText  styleClass="ikont-hot-eliminarindicadorobra"   value="#{var.eliminarindicadorobratexto}"/>
+                <h:panelGrid columns="2" width="100%" >
+                    <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.aceptarEliminarIndicadorObraAction}" 
+                                       styleClass="ikont-acb-eliminarindicadorobraaceptar" title="#{var.aceptar}"
+                                       value="#{var.aceptar}" style="position: relative;left: 79px;"
+                                       execute="@this" immediate="true" render="ikont-hpg-rp-indicadoresproyecto"
+                                       oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('ikont-rpp-eliminarindicadorobra')}.hide();"/>
+                    <a4j:commandButton onclick="#{rich:component('ikont-rpp-eliminarindicadorobra')}.hide();
+                                        return false;" styleClass="ikont-acb-eliminarindicadorobracancelar" 
+                                       style="position: relative;left: 12px;"  value="#{var.cancelar}"/>
+
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

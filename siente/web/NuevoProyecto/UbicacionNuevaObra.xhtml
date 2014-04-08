@@ -242,7 +242,79 @@
                                                             value="#{var.agregar}" execute=" @this, combodepartamentoproyecto,combomunicipioproyecto,comboregion"
                                                             disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                     </h:panelGrid>
-                                </h:panelGroup>  
+                                    <rich:collapsiblePanel id="ikont-rcp-nuevalocalidad" header="#{var.nuevalocalidad}" switchType="ajax" immediate="true"
+                                                           toggleListener="#{Supervisor$IngresarNuevaObra.mostrarNuevalocalidadAction}" expanded="false">
+                                        <h:panelGrid id="ikont-hpg-nuevalocalidad" styleClass="ikont-hpg-nuevalocalidad" columns="4">
+                                            <h:selectOneMenu id="ikont-hsom-tipolocalidad" 
+                                                        value="#{Supervisor$IngresarNuevaObra.oidcodigotipolocalidad}" label="#{var.tipolocalidad}">
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.tiposLocalidadSelectItem}"/>
+                                             </h:selectOneMenu>
+                                             <h:inputText id="ikont-hit-nombrelocalidad" value="#{Supervisor$IngresarNuevaObra.localidad.strnombrelocalidad}" title="#{var.nombrelocalidad}" maxlength="100" required="true" requiredMessage="#{var.nombrelocalidadrequerido}">
+                                                 <rich:placeholder value="#{var.nombrelocalidad}"/>
+                                                 <f:validateLength maximum="100"/>
+                                             </h:inputText>
+                                             <h:inputText id="ikont-hit-codigolocalidad" value="#{Supervisor$IngresarNuevaObra.localidad.strcodigolocalidad}" title="#{var.codigolocalidad}" maxlength="10" required="true" requiredMessage="#{var.codigolocalidadrequerido}">
+                                                 <rich:placeholder value="#{var.codigolocalidad}"/>
+                                                 <f:validateLength maximum="10"/>
+                                             </h:inputText>
+                                             <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.crearNuevaLocalidad}" render="ikont-hpg-otraslocalidades, ikont-hpg-nuevalocalidad" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
+                                                             value="#{var.agregar}" execute="ikont-hpg-nuevalocalidad"
+                                                             disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                         </h:panelGrid>
+                                    </rich:collapsiblePanel>
+                                    <rich:collapsiblePanel id="ikont-rcp-localidadesespecificas" header="#{var.localidadesespecificas}" 
+                                                           immediate="true" switchType="client" expanded="true">
+                                        <h:panelGrid columns="4" id="ikont-hpg-otraslocalidades" rendered="#{var.verotrostiposdelocalidad}">
+                                            
+                                            <h:outputLabel id="ikont-hol-seleccionarobjeto"  value="#{var.zonaubi}"  for="combolugarproyecto" />
+                                            <h:selectOneMenu id="ikont-hsom-seleccionarobjeto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
+                                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.lugarObra}" />
+                                            </h:selectOneMenu>
+                                            <h:panelGroup></h:panelGroup>
+                                            <h:panelGroup></h:panelGroup>
+                                            
+                                            <h:outputLabel  styleClass="ikont-hol-provincia"   id="ikont-hol-provincia"  value="#{var.provincia}" for="ikont-hsom-provincia"/>
+                                            <h:selectOneMenu id="ikont-hsom-provincia" value="#{Supervisor$IngresarNuevaObra.codProvincia}">
+                                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.provinciasSelectItem}"/>
+                                            </h:selectOneMenu>
+                                            <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarProvincia}" render="layoutLocalidades,ikont-hsom-provincia" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
+                                                                value="#{var.agregar}" execute=" @this, ikont-hsom-provincia"
+                                                                disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                            <h:panelGroup></h:panelGroup>
+
+                                            <h:outputLabel  styleClass="ikont-hol-corregimient"   id="ikont-hol-corregimient"  value="#{var.corregimiento}" for="ikont-hsom-corregimient"/>
+                                            <h:selectOneMenu id="ikont-hsom-corregimient" value="#{Supervisor$IngresarNuevaObra.codCorregimient}">
+                                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.corregimientsSelectItem}"/>
+                                            </h:selectOneMenu>
+                                            <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarCorregimient}" render="layoutLocalidades,ikont-hsom-corregimient" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
+                                                                value="#{var.agregar}" execute=" @this, ikont-hsom-corregimient"
+                                                                disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                            <h:panelGroup></h:panelGroup>
+
+                                            <h:outputLabel  styleClass="ikont-hol-car"   id="ikont-hol-car"  value="#{var.car}" for="ikont-hsom-car"/>
+                                            <h:selectOneMenu id="ikont-hsom-car" value="#{Supervisor$IngresarNuevaObra.codCar}">
+                                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.carsSelectItem}"/>
+                                            </h:selectOneMenu>
+                                            <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarCar}" render="layoutLocalidades,ikont-hsom-car" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
+                                                                value="#{var.agregar}" execute=" @this, ikont-hsom-car"
+                                                                disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                            <h:panelGroup></h:panelGroup>
+
+                                            <h:outputLabel  styleClass="ikont-hol-cuenca"   id="ikont-hol-cuenca"  value="#{var.cuenca}" for="ikont-hsom-cuenca"/>
+                                            <h:selectOneMenu id="ikont-hsom-cuenca" value="#{Supervisor$IngresarNuevaObra.codCuenca}">
+                                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.cuencasSelectItem}"/>
+                                            </h:selectOneMenu>
+                                            <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarCuenca}" render="layoutLocalidades,ikont-hsom-cuenca" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
+                                                                value="#{var.agregar}" execute=" @this, ikont-hsom-cuenca"
+                                                                disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                        </h:panelGrid>
+                                    </rich:collapsiblePanel>
+                               </h:panelGroup>  
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="id_cobras_municipales" rendered="#{var.habilitacionLocalidadesBarrioVereda}">
 
@@ -395,6 +467,12 @@
                                                     <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
                                                         <h:outputText  styleClass="ikont-hot-muni"   value="#{var.municipio}"/>
                                                     </rich:column>
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{var.verotrostiposdelocalidad}">
+                                                        <h:outputText  styleClass="ikont-hot-muni"   value="#{var.otrostiposdelocalidad}"/>
+                                                    </rich:column>
+                                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{var.verotrostiposdelocalidad}">
+                                                        <h:outputText  styleClass="ikont-hot-muni"   value="#{var.tipolocalidad}"/>
+                                                    </rich:column>
                                                     <rich:column styleClass="ikont-colum-superior-consulta" width="100px">
                                                         <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                                     </rich:column>
@@ -410,9 +488,16 @@
                                             <rich:column  width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
                                                 <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{_localidad.strmunicipio}"/>
                                             </rich:column>
-
+                                            <rich:column  width="150px" rendered="#{var.verotrostiposdelocalidad}">
+                                                <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{_localidad.strnombrelocalidad}"/>
+                                            </rich:column>
+                                            <rich:column  width="150px" rendered="#{var.verotrostiposdelocalidad}">
+                                                <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{_localidad.tipolocalidad.strnombretipolocalidad}" rendered="#{_localidad.tipolocalidad.oidcodigotipolocalidad gt 3}"/>
+                                            </rich:column>
                                             <rich:column id="Eliminar" width="100">
-                                                <a4j:commandButton id="btEliminar1" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" disabled="#{Supervisor$IngresarNuevaObra.objeto}" value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarLocalidad}" render="layoutLocalidades"/>
+                                                <a4j:commandButton id="btEliminar1" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}" disabled="#{Supervisor$IngresarNuevaObra.objeto}" 
+                                                                   value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarLocalidad}" 
+                                                                   render="layoutLocalidades, ikont-hpg-otraslocalidades" immediate="true" execute="@this, tablaLocalidades"/>
                                             </rich:column>
                                             <f:facet  name="footer">
                                                 <rich:columnGroup >

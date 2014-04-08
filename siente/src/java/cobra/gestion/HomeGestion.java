@@ -22,6 +22,7 @@ import co.com.interkont.cobra.to.Opinionciudadano;
 import co.com.interkont.cobra.to.Region;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoestadobra;
+import co.com.interkont.cobra.to.Tipolocalidad;
 import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipoproyecto;
@@ -1079,7 +1080,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         getSessionBeanCobra().llenarPeriodoEvento();
         cargarSubtiposProyecto();
-
+        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+            llenarProvincias();
+            llenarCorregimients();
+            llenarCars();
+            llenarCuencas();
+        }
     }
 
     public void cargarMunicipios() {
@@ -3130,5 +3136,184 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             filtro.setInttipoproyecto(0);
             cargarSubtiposProyecto();
         }
+    }
+    
+    /**
+     * Selector de provincias
+     */
+    private SelectItem[] provinciasSelectItem;
+
+    public SelectItem[] getProvinciasSelectItem() {
+        return provinciasSelectItem;
+    }
+
+    public void setProvinciasSelectItem(SelectItem[] provinciasSelectItem) {
+        this.provinciasSelectItem = provinciasSelectItem;
+    }
+
+        /**
+     * Listado de provincias parametrizadas en el sistema
+     */
+    private List<Localidad> provincias;
+
+    public List<Localidad> getProvincias() {
+        return provincias;
+    }
+
+    public void setProvincias(List<Localidad> provincias) {
+        this.provincias = provincias;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de provincias
+     * @return 
+     */
+    public String llenarProvincias() {
+        provincias = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_PROVINCIA);
+        provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
+        return null;
+    }
+    
+    /**
+     * Selector de corregimients
+     */
+    private SelectItem[] corregimientsSelectItem;
+
+    public SelectItem[] getCorregimientsSelectItem() {
+        return corregimientsSelectItem;
+    }
+
+    public void setCorregimientsSelectItem(SelectItem[] corregimientsSelectItem) {
+        this.corregimientsSelectItem = corregimientsSelectItem;
+    }
+
+    /**
+     * Listado de corregimients parametrizadas en el sistema
+     */
+    private List<Localidad> corregimients;
+
+    public List<Localidad> getCorregimients() {
+        return corregimients;
+    }
+
+    public void setCorregimients(List<Localidad> corregimients) {
+        this.corregimients = corregimients;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de corregimients
+     * @return 
+     */
+    public String llenarCorregimients() {
+        corregimients = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CORREGIMIENTO);
+        corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
+        return null;
+    }
+    
+    /**
+     * Selector de cars
+     */
+    private SelectItem[] carsSelectItem;
+
+    public SelectItem[] getCarsSelectItem() {
+        return carsSelectItem;
+    }
+
+    public void setCarsSelectItem(SelectItem[] carsSelectItem) {
+        this.carsSelectItem = carsSelectItem;
+    }
+
+    /**
+     * Listado de cars parametrizadas en el sistema
+     */
+    private List<Localidad> cars;
+
+    public List<Localidad> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Localidad> cars) {
+        this.cars = cars;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de cars
+     * @return 
+     */
+    public String llenarCars() {
+        cars = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CAR);
+        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
+        return null;
+    }
+    
+    /**
+     * Selector de cuencas
+     */
+    private SelectItem[] cuencasSelectItem;
+
+    public SelectItem[] getCuencasSelectItem() {
+        return cuencasSelectItem;
+    }
+
+    public void setCuencasSelectItem(SelectItem[] cuencasSelectItem) {
+        this.cuencasSelectItem = cuencasSelectItem;
+    }
+
+        /**
+     * Listado de cuencas parametrizadas en el sistema
+     */
+    private List<Localidad> cuencas;
+
+    public List<Localidad> getCuencas() {
+        return cuencas;
+    }
+
+    public void setCuencas(List<Localidad> cuencas) {
+        this.cuencas = cuencas;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de cuencas
+     * @return 
+     */
+    public String llenarCuencas() {
+        cuencas = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CUENCA);
+        cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
+        return null;
+    }
+    
+    /**
+     * Carga la lista de selección proporcionada con la lista de localidades
+     * proporcionada
+     * @param localidadesSelectItem Lista de selección
+     * @param localidadesEsp Localidades a cargar en la lista
+     * @return Lista de selección cargada
+     */
+    public SelectItem[] cargarSelectItemLocalidad(SelectItem[] localidadesSelectItem, List<Localidad> localidadesEsp) {
+        localidadesSelectItem = new SelectItem[localidadesEsp.size()];
+        int i = 0;
+        for (Localidad localidad : localidadesEsp) {
+            SelectItem selectItem = new SelectItem(localidad.getStrcodigolocalidad(), localidad.getStrnombrelocalidad());
+            localidadesSelectItem[i++] = selectItem;
+        }
+        return localidadesSelectItem;
+    }
+    
+    /**
+     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de 
+     * ubicación de la obra;
+     * @return 
+     */
+    public String pasarUbicacionObra() {
+        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+            llenarProvincias();
+            llenarCorregimients();
+            llenarCars();
+        }
+        return "datosubicaciondelaObra";
     }
 }

@@ -168,8 +168,8 @@
                         </h:panelGroup>
                         <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
                             <center>
-                                <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
-                                                   action="datosGenerarImagenes" />
+                                <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                                 action="#{Supervisor$IngresarNuevaObra.pasoVolverAIndicadores()}" />
 
                                 <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
                                                  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"

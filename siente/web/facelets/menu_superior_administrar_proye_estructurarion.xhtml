@@ -54,6 +54,14 @@
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>   
             </h:panelGroup>
+            <h:panelGroup layout="block" rendered="#{var.vermoduloindicadores}"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-indicadores-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="6"/>
+                </h:commandLink>   
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="#{var.ingresarindicadores}" style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="6"/>
+                </h:commandLink>   
+            </h:panelGroup>
             <h:panelGroup layout="block" > 
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-contrato-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>

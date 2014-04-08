@@ -19,9 +19,12 @@ import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
 import co.com.interkont.cobra.to.Formapago;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
+import co.com.interkont.cobra.to.Indicador;
+import co.com.interkont.cobra.to.Indicadorobra;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Lugarobra;
 import co.com.interkont.cobra.to.Novedad;
+import co.com.interkont.cobra.to.Objetoindicador;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Periodoevento;
@@ -44,6 +47,7 @@ import co.com.interkont.cobra.to.Ruta;
 import co.com.interkont.cobra.to.Sedeeducativa;
 import co.com.interkont.cobra.to.Tipoimagen;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
+import co.com.interkont.cobra.to.Tipolocalidad;
 import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.ValidacionNuevoProyecto;
 import co.com.interkont.cobra.to.Vereda;
@@ -99,6 +103,9 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import com.googlecode.mashups.services.factory.GenericServicesFactory;
 import com.googlecode.mashups.services.generic.api.Location;
+import java.util.AbstractList;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * <p>
@@ -317,7 +324,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private String strempleosdirectos = bundle.getString("numempleosdirectos");
     private String strempleosindirectos = bundle.getString("numempleosindirectos");
     private String strbeneficiarios = bundle.getString("numbeneficiarios");
-
+    
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
     }
@@ -1555,7 +1562,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setStrbeneficiarios(String strbeneficiarios) {
         this.strbeneficiarios = strbeneficiarios;
     }
-
+    
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -4105,7 +4112,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         return null;
     }
-
+    
     /**
      * Llenado de selectitem Region.
      */
@@ -4130,7 +4137,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         validarDatosBasicos();
     }
-
+    
     public void agregarLocalidad() {
         switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
             case 1:
@@ -4208,6 +4215,22 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String eliminarLocalidad() {
         Localidad local = (Localidad) tablalocalidades.getRowData();
+        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_PROVINCIA) {
+            provincias.add(local);
+//            cargarSelectItemLocalidad(provinciasSelectItem, provincias);
+        }
+        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CORREGIMIENTO) {
+            corregimients.add(local);
+//            cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
+        }
+        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CAR) {
+            cars.add(local);
+//            cargarSelectItemLocalidad(carsSelectItem, cars);
+        }
+        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CUENCA) {
+            cuencas.add(local);
+//            cargarSelectItemLocalidad(carsSelectItem, cars);
+        }
         listaLocalidades.remove(local);
         return null;
     }
@@ -4968,20 +4991,11 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Validar si el Paso de Asociar Contrato esta bien diligenciado
-     *
-     * @return null
+     * Realiza la redirección al paso de asociar contrato
+     * @return 
      */
     public String pasoAsociarContrato() {
-        int i = 0;
-        while (i < listaImagenesevolucionobra.size()) {
-            if (listaImagenesevolucionobra.get(i).getTipoimagen().getIntidtipoimagen() == 1) {
-                return "datosAsociarContrato";
-            }
-            i++;
-        }
-        FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagenppal"));
-        return null;
+        return "datosAsociarContrato";
     }
 
     /**
@@ -5481,7 +5495,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
 
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
-
+        
         switch (navegacion) {
             case 0:
                 regla = volverTipificacion();
@@ -5490,7 +5504,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 regla = pasarDatosBasicos();
                 break;
             case 2:
-                regla = "datosubicaciondelaObra";
+                regla = pasarUbicacionObra();
                 break;
             case 3:
                 regla = pasoGenerarCronograma();
@@ -5501,7 +5515,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             case 5:
                 regla = "datosAsociarContrato";
                 break;
-
+            case 6:
+                regla = pasoIngresarIndicadores();
+                break;
         }
         return regla;
     }
@@ -5850,4 +5866,787 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         
     }
     
+    /**
+     * Listado de indicadores parametrizados en el sistema
+     */
+    private List<Indicador> listaIndicadores = new ArrayList<Indicador>();
+
+    public List<Indicador> getListaIndicadores() {
+        return listaIndicadores;
+    }
+
+    public void setListaIndicadores(List<Indicador> listaIndicadores) {
+        this.listaIndicadores = listaIndicadores;
+    }
+    
+    /**
+     * Listado de indicadores asociados a la obra
+     */
+    private List<Indicadorobra> listaIndicadoresObra = new ArrayList<Indicadorobra>();
+
+    public List<Indicadorobra> getListaIndicadoresObra() {
+        return listaIndicadoresObra;
+    }
+
+    public void setListaIndicadoresObra(List<Indicadorobra> listaIndicadoresObra) {
+        this.listaIndicadoresObra = listaIndicadoresObra;
+    }
+    
+    /**
+     * Variable temporal para gestionar el indicador
+     */
+    private Indicador indicador = new Indicador();
+
+    public Indicador getIndicador() {
+        return indicador;
+    }
+
+    public void setIndicador(Indicador indicador) {
+        this.indicador = indicador;
+    }
+    
+    /**
+     * Indicador de obra para el objeto urbano
+     */
+    private Indicadorobra indicadorobraobjetourbano = new Indicadorobra();
+
+    public Indicadorobra getIndicadorobraobjetourbano() {
+        return indicadorobraobjetourbano;
+    }
+
+    public void setIndicadorobraobjetourbano(Indicadorobra indicadorobraobjetourbano) {
+        this.indicadorobraobjetourbano = indicadorobraobjetourbano;
+    }
+
+    /**
+     * Indicador de obra para el objeto rural
+     */
+    private Indicadorobra indicadorobraobjetorural = new Indicadorobra();
+    
+    public Indicadorobra getIndicadorobraobjetorural() {
+        return indicadorobraobjetorural;
+    }
+
+    public void setIndicadorobraobjetorural(Indicadorobra indicadorobraobjetorural) {
+        this.indicadorobraobjetorural = indicadorobraobjetorural;
+    }
+    
+    /**
+     * Objeto temporal para gestionar el indicador asociado a una obra
+     */
+    private Indicadorobra indicadorobra;
+
+    public Indicadorobra getIndicadorobra() {
+        return indicadorobra;
+    }
+
+    public void setIndicadorobra(Indicadorobra indicadorobra) {
+        this.indicadorobra = indicadorobra;
+    }
+    
+    /**
+     * De acuerdo a esta variable se visualiza o no la sección urbano en la 
+     * ventana de editar indicador
+     */
+    private boolean verSeccionUrbano;
+
+    public boolean isVerSeccionUrbano() {
+        return verSeccionUrbano;
+    }
+
+    public void setVerSeccionUrbano(boolean verSeccionUrbano) {
+        this.verSeccionUrbano = verSeccionUrbano;
+    }
+
+    /**
+     * De acuerdo a esta variable se visualiza o no la sección rural en la 
+     * ventana de editar indicador
+     */
+    private boolean verSeccionRural;
+    
+    public boolean isVerSeccionRural() {
+        return verSeccionRural;
+    }
+
+    public void setVerSeccionRural(boolean verSeccionRural) {
+        this.verSeccionRural = verSeccionRural;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * indicador de la tabla de indicadores disponibles
+     */
+    private String indicadorFilter;
+
+    public String getIndicadorFilter() {
+        return indicadorFilter;
+    }
+
+    public void setIndicadorFilter(String indicadorFilter) {
+        this.indicadorFilter = indicadorFilter;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores disponibles
+     */
+    private String clasificacion1Filter;
+
+    public String getClasificacion1Filter() {
+        return clasificacion1Filter;
+    }
+
+    public void setClasificacion1Filter(String clasificacion1Filter) {
+        this.clasificacion1Filter = clasificacion1Filter;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores disponibles
+     */
+    private String clasificacion2Filter;
+
+    public String getClasificacion2Filter() {
+        return clasificacion2Filter;
+    }
+
+    public void setClasificacion2Filter(String clasificacion2Filter) {
+        this.clasificacion2Filter = clasificacion2Filter;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * indicador de la tabla de indicadores asociados
+     */
+    private String indicadorAsociadoFilter;
+
+    public String getIndicadorAsociadoFilter() {
+        return indicadorAsociadoFilter;
+    }
+
+    public void setIndicadorAsociadoFilter(String indicadorAsociadoFilter) {
+        this.indicadorAsociadoFilter = indicadorAsociadoFilter;
+    }
+
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores asociados
+     */
+    private String clasificacion1AsociadoFilter;
+
+    public String getClasificacion1AsociadoFilter() {
+        return clasificacion1AsociadoFilter;
+    }
+
+    public void setClasificacion1AsociadoFilter(String clasificacion1AsociadoFilter) {
+        this.clasificacion1AsociadoFilter = clasificacion1AsociadoFilter;
+    }
+
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores asociados
+     */
+    private String clasificacion2AsociadoFilter;
+
+    public String getClasificacion2AsociadoFilter() {
+        return clasificacion2AsociadoFilter;
+    }
+
+    public void setClasificacion2AsociadoFilter(String clasificacion2AsociadoFilter) {
+        this.clasificacion2AsociadoFilter = clasificacion2AsociadoFilter;
+    }
+    
+    /**
+     * Constante que representa un objeto urbano
+     */
+    private final Objetoindicador objetoUrbano = new Objetoindicador(1, "Urbano");
+    /**
+     * Constante que representa un objeto rural
+     */
+    private final Objetoindicador objetoRural = new Objetoindicador(2, "Rural");
+    
+    /**
+     * Ordena las listas de indicadores disponibles e indicadores asociados
+     * presentada en las tablas de la vista
+     */
+    public void ordenarListas() {
+        Collections.sort(listaIndicadores);
+        Collections.sort(listaIndicadoresObra);
+    }
+    
+    /**
+     * Método ejecutado cuando se selecciona el paso Ingresar Indicadores
+     * @return 
+     */
+    public String pasoIngresarIndicadores() {
+        listaIndicadores = getSessionBeanCobra().getCobraService().encontrarIndicadores();
+        listaIndicadoresObra = getSessionBeanCobra().getCobraService().encontrarIndicadoresObra(obranueva.getIntcodigoobra());
+        for(Indicadorobra ind : listaIndicadoresObra) {
+            listaIndicadores.remove(ind.getIndicador());
+            ind.setObra(obranueva);
+        }
+        ordenarListas();
+        return "IndicadoresProyecto";
+    }
+    
+    /**
+     * Validar si el Paso de Asociar Contrato esta bien diligenciado
+     *
+     * @return null
+     */
+    public String pasoIndicadores() {
+        int i = 0;
+        while (i < listaImagenesevolucionobra.size()) {
+            if (listaImagenesevolucionobra.get(i).getTipoimagen().getIntidtipoimagen() == 1) {
+                if(Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+                    return pasoIngresarIndicadores();
+                } else {
+                    return "datosAsociarContrato";
+                }
+            }
+            i++;
+        }
+        FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagenppal"));
+        return null;
+    }
+    
+    /**
+     * Metodo que devuelve la regla de navegación para regresar al módulo de 
+     * indicadores
+     * @return Regla de navegación evaluada por el faces-config
+     */
+    public String pasoVolverAIndicadores() {
+        if(Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+            return pasoIngresarIndicadores();
+        } else {
+            return "datosGenerarImagenes";
+        }
+    }
+    
+    /**
+     * Acción ejecutada cuando se selecciona un registro de la tabla de 
+     * indicadores
+     * @param indicador Indicador seleccionado de la tabla
+     */
+    public void seleccionarIndicadorAction(Indicador indicador) {
+        this.indicador = indicador;
+        indicadorobraobjetourbano = new Indicadorobra();
+        indicadorobraobjetourbano.setObjetoindicador(objetoUrbano);
+        indicadorobraobjetourbano.setIndicador(indicador);
+        indicadorobraobjetourbano.setObra(obranueva);
+        
+        indicadorobraobjetorural = new Indicadorobra();
+        indicadorobraobjetorural.setObjetoindicador(objetoRural);
+        indicadorobraobjetorural.setIndicador(indicador);
+        indicadorobraobjetorural.setObra(obranueva);
+        
+        establecerVerSeccionUrbano();
+        establecerVerSeccionRural();
+    }
+    
+    /**
+     * Establece si el indicador de la obra de objeto urbano ya se encuentra 
+     * asociado al proyecto
+     */
+    public void establecerVerSeccionUrbano() {
+        verSeccionUrbano = true;
+        for (Indicadorobra indobra : listaIndicadoresObra) {
+            if(indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 1) {
+                verSeccionUrbano = false;
+            }
+        }
+    }
+    
+    /**
+     * Estblece si el indicador de la obra de objeto urbano ya se encuentra 
+     * asociado al proyecto
+     */
+    public void establecerVerSeccionRural() {
+        verSeccionRural = true;
+        for (Indicadorobra indobra : listaIndicadoresObra) {
+            if(indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 2) {
+                verSeccionRural = false;
+            }
+        }
+    }
+    
+    /**
+     * Ingresa el indicador a la lista de indicadores del proyecto
+     */
+    public void ingresarIndicadorAction() {
+        if(verSeccionUrbano) {
+            ingresarIndicador(indicadorobraobjetourbano);
+        }
+        if(verSeccionRural) {
+            ingresarIndicador(indicadorobraobjetorural);
+        }
+        ordenarListas();
+    }
+    public void ingresarIndicador(Indicadorobra indicadorobra) {
+        listaIndicadoresObra.add(indicadorobra);
+        listaIndicadores.remove(indicadorobra.getIndicador());
+        getSessionBeanCobra().getCobraService().guardarIndicadorObra(indicadorobra);
+    }
+    
+    /**
+     * Establece la referencia del indicador seleccionado para eliminar
+     * @param indicadorobra Indicador seleccionado de la tabla
+     */
+    public void eliminarIndicadorObraAction(Indicadorobra indicadorobra) {
+        this.indicadorobra = indicadorobra;
+    }
+    
+    /**
+     * Realiza la eliminación del indicador
+     */
+    public void aceptarEliminarIndicadorObraAction() {
+        if(!listaIndicadores.contains(indicadorobra.getIndicador())) {
+            listaIndicadores.add(indicadorobra.getIndicador());
+        }
+        listaIndicadoresObra.remove(indicadorobra);
+        getSessionBeanCobra().getCobraService().eliminarIndicadorObra(indicadorobra);
+        Collections.sort(listaIndicadores);
+        Collections.sort(listaIndicadoresObra);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Selector de provincias
+     */
+    private SelectItem[] provinciasSelectItem;
+
+    public SelectItem[] getProvinciasSelectItem() {
+        return provinciasSelectItem;
+    }
+
+    public void setProvinciasSelectItem(SelectItem[] provinciasSelectItem) {
+        this.provinciasSelectItem = provinciasSelectItem;
+    }
+
+    /**
+     * Código de la provincia
+     */
+    private String codProvincia;
+
+    public String getCodProvincia() {
+        return codProvincia;
+    }
+
+    public void setCodProvincia(String codProvincia) {
+        this.codProvincia = codProvincia;
+    }
+
+    /**
+     * Listado de provincias parametrizadas en el sistema
+     */
+    private List<Localidad> provincias;
+
+    public List<Localidad> getProvincias() {
+        return provincias;
+    }
+
+    public void setProvincias(List<Localidad> provincias) {
+        this.provincias = provincias;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de provincias
+     * @return 
+     */
+    public String llenarProvincias() {
+        provincias = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_PROVINCIA);
+        provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
+        return null;
+    }
+    
+    /**
+     * Agrega la provincia a la lista de localidades a adicionar
+     */
+    public void agregarProvincia() {
+        for (Localidad localidad : provincias) {
+            if (localidad.getStrcodigolocalidad().compareTo(codProvincia) == 0) {
+                for (Localidad localidadAsociada : listaLocalidades) {
+                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                        FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
+                        return;
+                    }
+                }
+                listaLocalidades.add(localidad);
+            }
+        }
+//        provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem,provincias);
+    }
+    
+    /**
+     * Selector de corregimients
+     */
+    private SelectItem[] corregimientsSelectItem;
+
+    public SelectItem[] getCorregimientsSelectItem() {
+        return corregimientsSelectItem;
+    }
+
+    public void setCorregimientsSelectItem(SelectItem[] corregimientsSelectItem) {
+        this.corregimientsSelectItem = corregimientsSelectItem;
+    }
+
+    /**
+     * Código de la corregimient
+     */
+    private String codCorregimient;
+
+    public String getCodCorregimient() {
+        return codCorregimient;
+    }
+
+    public void setCodCorregimient(String codCorregimient) {
+        this.codCorregimient = codCorregimient;
+    }
+
+    /**
+     * Listado de corregimients parametrizadas en el sistema
+     */
+    private List<Localidad> corregimients;
+
+    public List<Localidad> getCorregimients() {
+        return corregimients;
+    }
+
+    public void setCorregimients(List<Localidad> corregimients) {
+        this.corregimients = corregimients;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de corregimients
+     * @return 
+     */
+    public String llenarCorregimients() {
+        corregimients = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CORREGIMIENTO);
+        corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
+        return null;
+    }
+    
+    /**
+     * Agrega la corregimient a la lista de localidades a adicionar
+     */
+    public void agregarCorregimient() {
+        for (Localidad localidad : corregimients) {
+            if (localidad.getStrcodigolocalidad().compareTo(codCorregimient) == 0) {
+                for (Localidad localidadAsociada : listaLocalidades) {
+                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                        FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
+                        return;
+                    }
+                }
+                listaLocalidades.add(localidad);
+            }
+        }
+//        corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem,corregimients);
+    }
+    
+    /**
+     * Selector de cars
+     */
+    private SelectItem[] carsSelectItem;
+
+    public SelectItem[] getCarsSelectItem() {
+        return carsSelectItem;
+    }
+
+    public void setCarsSelectItem(SelectItem[] carsSelectItem) {
+        this.carsSelectItem = carsSelectItem;
+    }
+
+    /**
+     * Código de la car
+     */
+    private String codCar;
+
+    public String getCodCar() {
+        return codCar;
+    }
+
+    public void setCodCar(String codCar) {
+        this.codCar = codCar;
+    }
+
+    /**
+     * Listado de cars parametrizadas en el sistema
+     */
+    private List<Localidad> cars;
+
+    public List<Localidad> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Localidad> cars) {
+        this.cars = cars;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de cars
+     * @return 
+     */
+    public String llenarCars() {
+        cars = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CAR);
+        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
+        return null;
+    }
+    
+    /**
+     * Agrega la car a la lista de localidades a adicionar
+     */
+    public void agregarCar() {
+        for (Localidad localidad : cars) {
+            if (localidad.getStrcodigolocalidad().compareTo(codCar) == 0) {
+                for (Localidad localidadAsociada : listaLocalidades) {
+                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                        FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
+                        return;
+                    }
+                }
+                listaLocalidades.add(localidad);
+            }
+        }
+//        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem,cars);
+    }
+    
+    /**
+     * Selector de cuencas
+     */
+    private SelectItem[] cuencasSelectItem;
+
+    public SelectItem[] getCuencasSelectItem() {
+        return cuencasSelectItem;
+    }
+
+    public void setCuencasSelectItem(SelectItem[] cuencasSelectItem) {
+        this.cuencasSelectItem = cuencasSelectItem;
+    }
+
+    /**
+     * Código de la cuenca
+     */
+    private String codCuenca;
+
+    public String getCodCuenca() {
+        return codCuenca;
+    }
+
+    public void setCodCuenca(String codCuenca) {
+        this.codCuenca = codCuenca;
+    }
+
+    /**
+     * Listado de cuencas parametrizadas en el sistema
+     */
+    private List<Localidad> cuencas;
+
+    public List<Localidad> getCuencas() {
+        return cuencas;
+    }
+
+    public void setCuencas(List<Localidad> cuencas) {
+        this.cuencas = cuencas;
+    }
+
+    
+    /**
+     * Metodo encargado de llenar los datos para el selector de cuencas
+     * @return 
+     */
+    public String llenarCuencas() {
+        cuencas = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CUENCA);
+        cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
+        return null;
+    }
+    
+    /**
+     * Agrega la cuenca a la lista de localidades a adicionar
+     */
+    public void agregarCuenca() {
+        for (Localidad localidad : cuencas) {
+            if (localidad.getStrcodigolocalidad().compareTo(codCuenca) == 0) {
+                for (Localidad localidadAsociada : listaLocalidades) {
+                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                        FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
+                        return;
+                    }
+                }
+                listaLocalidades.add(localidad);
+            }
+        }
+//        cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem,cuencas);
+    }
+    
+    /**
+     * Actualiza la lista de localidades específicas disponibles teniendo en 
+     * cuenta aquellas que ya han sido asociadas al proyecto
+     * @param localidadesEsp Lista de localidades específicas
+     */
+    public void actualizarLocalidadesEspDisponibles(List<Localidad> localidadesEsp) {
+        List<Localidad> localidadesAEliminar = new ArrayList<Localidad>();
+        for (Localidad localidad : listaLocalidades) {
+            for (Localidad localidadEsp : localidadesEsp) {
+                if(localidadEsp.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                    localidadesAEliminar.add(localidadEsp);
+                }
+            }
+        }
+        localidadesEsp.removeAll(localidadesAEliminar);
+    }
+    
+    /**
+     * Carga la lista de selección proporcionada con la lista de localidades
+     * proporcionada
+     * @param localidadesSelectItem Lista de selección
+     * @param localidadesEsp Localidades a cargar en la lista
+     * @return Lista de selección cargada
+     */
+    public SelectItem[] cargarSelectItemLocalidad(SelectItem[] localidadesSelectItem, List<Localidad> localidadesEsp) {
+        actualizarLocalidadesEspDisponibles(localidadesEsp);
+        localidadesSelectItem = new SelectItem[localidadesEsp.size()];
+        int i = 0;
+        for (Localidad localidad : localidadesEsp) {
+            SelectItem selectItem = new SelectItem(localidad.getStrcodigolocalidad(), localidad.getStrnombrelocalidad());
+            localidadesSelectItem[i++] = selectItem;
+        }
+        return localidadesSelectItem;
+    }
+    
+    /**
+     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de 
+     * ubicación de la obra;
+     * @return 
+     */
+    public String pasarUbicacionObra() {
+        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+            llenarProvincias();
+            llenarCorregimients();
+            llenarCars();
+            llenarCuencas();
+        }
+        return "datosubicaciondelaObra";
+    }
+    
+    /**
+     * Variable para la gestión de una localidad
+     */
+    public Localidad localidad = new Localidad();
+
+    public Localidad getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
+    }
+    
+    public long oidcodigotipolocalidad;
+
+    public long getOidcodigotipolocalidad() {
+        return oidcodigotipolocalidad;
+    }
+
+    public void setOidcodigotipolocalidad(long oidcodigotipolocalidad) {
+        this.oidcodigotipolocalidad = oidcodigotipolocalidad;
+    }
+    
+    /**
+     * Método para crear una nueva localidad Específica
+     */
+    public void crearNuevaLocalidad() {
+        localidad.setTipolocalidad(new Tipolocalidad(oidcodigotipolocalidad));
+        getSessionBeanCobra().getCobraService().guardarLocalidad(localidad);
+        switch ((int)localidad.getTipolocalidad().getOidcodigotipolocalidad()) {
+            case (int)Tipolocalidad.ID_CAR :    
+                codCar = localidad.getStrcodigolocalidad();
+                cars.add(localidad);
+                carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
+                break;
+            case (int)Tipolocalidad.ID_CORREGIMIENTO :    
+                codCorregimient = localidad.getStrcodigolocalidad();
+                corregimients.add(localidad);
+                corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
+                break;
+            case (int)Tipolocalidad.ID_CUENCA :    
+                codCuenca = localidad.getStrcodigolocalidad();
+                cuencas.add(localidad);
+                cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
+                break;
+            case (int)Tipolocalidad.ID_PROVINCIA :    
+                codProvincia = localidad.getStrcodigolocalidad();
+                provincias.add(localidad);
+                provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
+                break;
+        }
+        localidad = new Localidad();
+    }
+    
+    /**
+     * Lista de tipos de localidad
+     */
+    public List<Tipolocalidad> tiposLocalidad = new ArrayList<Tipolocalidad>();
+
+    public List<Tipolocalidad> getTiposLocalidad() {
+        return tiposLocalidad;
+    }
+
+    public void setTiposLocalidad(List<Tipolocalidad> tiposLocalidad) {
+        this.tiposLocalidad = tiposLocalidad;
+    }
+    
+    /**
+     * Selector de tipos de localidad
+     */
+    private SelectItem[] tiposLocalidadSelectItem;
+
+    public SelectItem[] getTiposLocalidadSelectItem() {
+        return tiposLocalidadSelectItem;
+    }
+
+    public void setTiposLocalidadSelectItem(SelectItem[] tiposLocalidadSelectItem) {
+        this.tiposLocalidadSelectItem = tiposLocalidadSelectItem;
+    }
+    
+    /**
+     * Método ejecutado cuando se activa la sección de ingresar nueva localidad
+     * en ubicación de nuevo proyecto
+     */
+    public void mostrarNuevalocalidadAction() {
+        localidad = new Localidad();
+        llenarTiposLocalidad();
+    }
+    
+    /**
+     * Carga la lista de selección de os codigos de localidad
+     */
+    public void llenarTiposLocalidad() {
+        tiposLocalidad = getSessionBeanCobra().getCobraService().encontrarTiposLocalidad();
+        tiposLocalidadSelectItem = new SelectItem[tiposLocalidad.size()];
+        int i = 0;
+        for (Tipolocalidad tipolocalidad : tiposLocalidad) {
+            SelectItem selectItem = new SelectItem(tipolocalidad.getOidcodigotipolocalidad(), tipolocalidad.getStrnombretipolocalidad());
+            tiposLocalidadSelectItem[i++] = selectItem;
+        }
+    }
 }

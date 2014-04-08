@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadores" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  styleClass="ikont-hot-ingresarindicadores"   value="#{var.ingresarindicadores}"/>
+                    </f:facet>
+                    <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
+                        <rich:collapsiblePanel switchType="client" header="#{var.indicadoresdisponibles}" expanded="true" id="ikont-rcp-indicadoresdisponibles">
+                            <rich:extendedDataTable id="ikont-rdt-indicadoresdisponibles" styleClass="ikont-rdt-indicadoresdisponibles" 
+                                                    value="#{Supervisor$IngresarNuevaObra.listaIndicadores}"
+                                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                    var="objeto">
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.clasificacion2Filter}" width="18em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador,Supervisor$IngresarNuevaObra.clasificacion2Filter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador"   value="1a. #{var.clasificacionindicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.clasificacion2Filter}" label="#{var.clasificacionindicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresdisponibles" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText  value="#{objeto.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                   rendered="#{not empty objeto.clasificacionindicador.clasificacionindicador}"/>
+                                </rich:column>
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.clasificacion1Filter}" width="20em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.clasificacionindicador.strnombreclasificacionindicador,Supervisor$IngresarNuevaObra.clasificacion1Filter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador" value="2a. #{var.clasificacionindicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.clasificacion1Filter}" label="#{var.clasificacionindicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresdisponibles" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                  rendered="#{not empty objeto.clasificacionindicador}"/>
+                                </rich:column>
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.indicadorFilter}" width="18em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.strnombreindicador,Supervisor$IngresarNuevaObra.indicadorFilter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador"   value="#{var.indicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.indicadorFilter}" label="#{var.indicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresdisponibles" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.strnombreindicador}"/>
+                                </rich:column>
+                                <rich:column width="10em">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-unidadmedida"   value="#{var.unidadmedida}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.unidadmedida.strnombre}"/>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.seleccionarindicador}"/>
+                                    </f:facet>
+                                    <a4j:commandButton value="#{var.asociarindicador}" 
+                                                       action="#{Supervisor$IngresarNuevaObra.seleccionarIndicadorAction(objeto)}"
+                                                       oncomplete="#{rich:component('ikont-rpp-editarindicadorobra')}.show();" 
+                                                       execute="@this" immediate="true" render="ikont-hpg-editarindicadorobra">
+                                    </a4j:commandButton>   
+                                </rich:column>
+                            </rich:extendedDataTable>
+                        </rich:collapsiblePanel>
+                        <rich:collapsiblePanel switchType="client" header="#{var.indicadoresobra}" expanded="true" id="ikont-rcp-indicadoresobra">
+                            <rich:extendedDataTable id="ikont-rdt-indicadoresobra" styleClass="ikont-rdt-indicadoresobra" 
+                                                    value="#{Supervisor$IngresarNuevaObra.listaIndicadoresObra}"
+                                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                    var="objeto">
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.clasificacion2AsociadoFilter}" width="12em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.indicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador,Supervisor$IngresarNuevaObra.clasificacion2AsociadoFilter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador"   value="1a. #{var.clasificacionindicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.clasificacion2AsociadoFilter}" label="#{var.clasificacionindicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresobra" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText  value="#{objeto.indicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                   rendered="#{not empty objeto.indicador.clasificacionindicador.clasificacionindicador}"/>
+                                </rich:column>
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.clasificacion1AsociadoFilter}" width="15em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.indicador.clasificacionindicador.strnombreclasificacionindicador,Supervisor$IngresarNuevaObra.clasificacion1AsociadoFilter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador" value="2a. #{var.clasificacionindicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.clasificacion1AsociadoFilter}" label="#{var.clasificacionindicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresobra" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.indicador.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                  rendered="#{not empty objeto.indicador.clasificacionindicador}"/>
+                                </rich:column>
+                                <rich:column filterValue="#{Supervisor$IngresarNuevaObra.indicadorAsociadoFilter}" width="12em"
+                                             filterExpression="#{fn:containsIgnoreCase(objeto.indicador.strnombreindicador,Supervisor$IngresarNuevaObra.indicadorAsociadoFilter)}"
+                                             filterType="custom">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-indicador"   value="#{var.indicador}"/>
+                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.indicadorAsociadoFilter}" label="#{var.indicador}">
+                                            <a4j:ajax event="blur" render="ikont-rdt-indicadoresobra" execute="@this"/>
+                                        </h:inputText>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.indicador.strnombreindicador}"/>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-unidadmedida"   value="#{var.unidadmedida}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.indicador.unidadmedida.strnombre}"/>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-objetoindicador"   value="#{var.objetoindicador}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.objetoindicador.strnombreobjetoindicador}"/>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-lineabase"   value="#{var.lineabase}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.numlineabase}">
+                                        <f:convertNumber pattern="#{var.formatodecimal}" maxFractionDigits="6" minFractionDigits="2"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-meta"   value="#{var.meta}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{objeto.nummeta}">
+                                        <f:convertNumber pattern="#{var.formatodecimal}" maxFractionDigits="6" minFractionDigits="2"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column width="7em">
+                                    <f:facet name="header">
+                                        <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
+                                    </f:facet>
+                                    <a4j:commandButton value="#{var.eliminar}" 
+                                                       action="#{Supervisor$IngresarNuevaObra.eliminarIndicadorObraAction(objeto)}"
+                                                       oncomplete="#{rich:component('ikont-rpp-eliminarindicadorobra')}.show();" 
+                                                       execute="@this" immediate="true" render="ikont-hpg-eliminarindicaorobra"/>
+                                </rich:column>
+                            </rich:extendedDataTable>
+                        </rich:collapsiblePanel>
+                    </h:panelGroup>
+                    <center>
+                        <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                         action="datosGenerarImagenes" />
+                        <h:commandButton   value="#{var.continuar}"
+                                           action="#{Supervisor$IngresarNuevaObra.pasoAsociarContrato}">
+                        </h:commandButton>
+
+                        <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                         action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                        </h:commandButton>
+                    </center>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+        <ui:include src="modal/panelEditarIndicadorObra.xhtml"/>
+        <ui:include src="modal/panelEliminarIndicadorObra.xhtml"/>
+
+    </ui:define>   
+</ui:composition>

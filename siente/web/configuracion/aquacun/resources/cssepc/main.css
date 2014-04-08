@@ -3027,6 +3027,13 @@ css usuario modificacion
 .ikont-posicion-nuevo-fotos-proestructuracion:hover, .ikont-posicion-nuevo-fotos-proestructuracion.scroll.buttonactive{
     background-position:-510px -96px;
 }
+.ikont-posicion-nuevo-indicadores-proestructuracion{
+    background-position:-1290px -21px;
+}
+
+.ikont-posicion-nuevo-indicadores-proestructuracion:hover, .ikont-posicion-nuevo-indicadores-proestructuracion.scroll.buttonactive{
+    background-position:-1290px -96px;
+}
 .ikont-posicion-nuevo-contrato-proestructuracion{
     background-position:-619px -21px;
 }
@@ -4865,3 +4872,38 @@ a:hover {
     top: 14px;
     left: 1095px;
 }
+
+/*
+Indicadores de proyecto
+-----------------------
+*/
+.ikont-acb-cancelareditarindicadorobra {
+    position: relative;
+    left: 100px;
+    top: 15px;
+}
+.ikont-acb-aceptareditarindicadorobra {
+    position: relative;
+    left: 125px;
+    top: 15px;
+}
+.centrado {
+    text-align: center;
+}
+.ikont-rdt-alimentarindicadoresobra {
+    height: 400px;
+}
+.ikont-rdt-indicadoresdisponibles {
+    height: 400px;
+}
+.ikont-rdt-indicadoresobra {
+    height: 400px;
+}
+
+.ikont-hpg-filtrolocalidades {
+    padding-top: 4em;
+}
+/*
+---------------------------
+Fin Indicadores de proyecto
+*/

@@ -257,6 +257,13 @@
                 <value>co/com/interkont/cobra/marcologico/to/Indicador.hbm.xml</value>
                 <value>co/com/interkont/cobra/marcologico/vista/VistaCalculoIndicadorProyectos.hbm.xml</value>
                
+                <!-- Indicadores de Proyecto -->
+                <value>co/com/interkont/cobra/to/Clasificacionindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Objetoindicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Indicador.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Indicadorobra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Alimentacionindicador.hbm.xml</value>
+               
             </list>
         </property>
         <property name="hibernateProperties">

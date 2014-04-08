@@ -7,6 +7,7 @@ package cobra.Supervisor;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Alimentacioncualificacion;
+import co.com.interkont.cobra.to.Alimentacionindicador;
 import co.com.interkont.cobra.to.Beneficiario;
 import co.com.interkont.cobra.to.Calificacionauditoriaobra;
 import co.com.interkont.cobra.to.Contratista;
@@ -14,6 +15,7 @@ import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Factoratraso;
 import co.com.interkont.cobra.to.Historicoobra;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
+import co.com.interkont.cobra.to.Indicadorobra;
 import co.com.interkont.cobra.to.Listaverificacion;
 import co.com.interkont.cobra.to.Movimiento;
 import co.com.interkont.cobra.to.Obra;
@@ -54,6 +56,7 @@ import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
 import java.math.RoundingMode;
+import java.util.Collections;
 import javax.faces.context.FacesContext;
 
 /**
@@ -851,6 +854,63 @@ public class DetalleObra implements Serializable {
 
     public void setTablacalificacionesauditoriaobra(UIDataTable tablacalificacionesauditoriaobra) {
         this.tablacalificacionesauditoriaobra = tablacalificacionesauditoriaobra;
+    }
+    
+    /**
+     * Listado de indicadores asociados a la obra
+     */
+    private List<Indicadorobra> listaIndicadoresObra = new ArrayList<Indicadorobra>();
+
+    public List<Indicadorobra> getListaIndicadoresObra() {
+        return listaIndicadoresObra;
+    }
+
+    public void setListaIndicadoresObra(List<Indicadorobra> listaIndicadoresObra) {
+        this.listaIndicadoresObra = listaIndicadoresObra;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * indicador de la tabla de indicadores asociados
+     */
+    private String indicadorAsociadoFilter;
+
+    public String getIndicadorAsociadoFilter() {
+        return indicadorAsociadoFilter;
+    }
+
+    public void setIndicadorAsociadoFilter(String indicadorAsociadoFilter) {
+        this.indicadorAsociadoFilter = indicadorAsociadoFilter;
+    }
+
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores asociados
+     */
+    private String clasificacion1AsociadoFilter;
+
+    public String getClasificacion1AsociadoFilter() {
+        return clasificacion1AsociadoFilter;
+    }
+
+    public void setClasificacion1AsociadoFilter(String clasificacion1AsociadoFilter) {
+        this.clasificacion1AsociadoFilter = clasificacion1AsociadoFilter;
+    }
+
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     * de la tabla de indicadores asociados
+     */
+    private String clasificacion2AsociadoFilter;
+
+    public String getClasificacion2AsociadoFilter() {
+        return clasificacion2AsociadoFilter;
+    }
+
+    public void setClasificacion2AsociadoFilter(String clasificacion2AsociadoFilter) {
+        this.clasificacion2AsociadoFilter = clasificacion2AsociadoFilter;
     }
 
     /**
@@ -1966,5 +2026,21 @@ public class DetalleObra implements Serializable {
             setStrempleosindirectosdetalle(bundle.getString("empleosindirectos"));
         }
         
+    }
+    
+    /**
+     * Metodo ejecutado al activar la sección de alimentar indicadores.
+     * Realiza la carga inicial de los indicadores por alimentar
+     */
+    public void cargarIndicadoresObra() {
+        listaIndicadoresObra = getSessionBeanCobra().getCobraService().encontrarIndicadoresObra(getAdministrarObraNew().getObra().getIntcodigoobra());
+        Collections.sort(listaIndicadoresObra);
+        for (Indicadorobra indicadorobra : listaIndicadoresObra) {
+            List<Alimentacionindicador> listaAlimentacionesIndicador = getSessionBeanCobra().getCobraService().encontrarAlimentacionesIndicador(indicadorobra.getIntidindicadorobra());
+            indicadorobra.setNumvalortotalalimentaciones(BigDecimal.ZERO);
+            for (Alimentacionindicador alimentacionindicador : listaAlimentacionesIndicador) {
+                indicadorobra.setNumvalortotalalimentaciones(indicadorobra.getNumvalortotalalimentaciones().add(alimentacionindicador.getNumvalor()));
+            }
+        }
     }
 }

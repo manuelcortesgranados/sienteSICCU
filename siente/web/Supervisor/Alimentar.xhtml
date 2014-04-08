@@ -8,7 +8,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/facelets/template_main.xhtml">
+                template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 
     <ui:define name="head">
@@ -449,7 +450,7 @@
                                     </h:panelGroup>
                                 </center>
                             </rich:collapsiblePanel>
-                            <rich:collapsiblePanel header="#{var.impactoSocial}"  switchType="ajax">
+                            <rich:collapsiblePanel header="#{var.impactoSocial}"  switchType="ajax" rendered="#{not var.vermoduloindicadores}">
 
                                 <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" width="60%">
                                     <interkont:spacer width="17" height="14"/>
@@ -474,6 +475,87 @@
 
                                     </h:panelGrid>
                                 </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel switchType="ajax" header="#{var.alimentarindicador}" 
+                                                   expanded="false" id="ikont-rcp-indicadoresobra" 
+                                                   rendered="#{var.vermoduloindicadores}" immediate="true" 
+                                                   toggleListener="#{Supervisor$Alimentar.cargarIndicadoresObra()}">
+                                <rich:extendedDataTable id="ikont-rdt-alimentarindicadoresobra" styleClass="ikont-rdt-alimentarindicadoresobra" 
+                                                        value="#{Supervisor$Alimentar.listaAlimentacionesIndicadores}"
+                                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                        var="objeto">
+                                    <rich:column filterValue="#{Supervisor$Alimentar.clasificacion2Filter}" width="12em"
+                                                 filterExpression="#{fn:containsIgnoreCase(objeto.indicadorobra.indicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador,Supervisor$Alimentar.clasificacion2Filter)}"
+                                                 filterType="custom">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-indicador"   value="1a. #{var.clasificacionindicador}"/>
+                                            <h:inputText value="#{Supervisor$Alimentar.clasificacion2Filter}" label="#{var.clasificacionindicador}">
+                                                <a4j:ajax event="blur" render="ikont-rdt-alimentarindicadoresobra" execute="@this"/>
+                                            </h:inputText>
+                                        </f:facet>
+                                        <h:outputText  value="#{objeto.indicadorobra.indicador.clasificacionindicador.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                       rendered="#{not empty objeto.indicadorobra.indicador.clasificacionindicador.clasificacionindicador}"/>
+                                    </rich:column>
+                                    <rich:column filterValue="#{Supervisor$Alimentar.clasificacion1Filter}" width="15em"
+                                                 filterExpression="#{fn:containsIgnoreCase(objeto.indicadorobra.indicador.clasificacionindicador.strnombreclasificacionindicador,Supervisor$Alimentar.clasificacion1Filter)}"
+                                                 filterType="custom">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-indicador" value="2a. #{var.clasificacionindicador}"/>
+                                            <h:inputText value="#{Supervisor$Alimentar.clasificacion1Filter}" label="#{var.clasificacionindicador}">
+                                                <a4j:ajax event="blur" render="ikont-rdt-alimentarindicadoresobra" execute="@this"/>
+                                            </h:inputText>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.indicador.clasificacionindicador.strnombreclasificacionindicador}" 
+                                                      rendered="#{not empty objeto.indicadorobra.indicador.clasificacionindicador}"/>
+                                    </rich:column>
+                                    <rich:column filterValue="#{Supervisor$Alimentar.indicadorFilter}" width="12em"
+                                                 filterExpression="#{fn:containsIgnoreCase(objeto.indicadorobra.indicador.strnombreindicador,Supervisor$Alimentar.indicadorFilter)}"
+                                                 filterType="custom">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-indicador"   value="#{var.indicador}"/>
+                                            <h:inputText value="#{Supervisor$Alimentar.indicadorFilter}" label="#{var.indicador}">
+                                                <a4j:ajax event="blur" render="ikont-rdt-alimentarindicadoresobra" execute="@this"/>
+                                            </h:inputText>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.indicador.strnombreindicador}"/>
+                                    </rich:column>
+                                    <rich:column width="7em">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-unidadmedida"   value="#{var.unidadmedida}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.indicador.unidadmedida.strnombre}"/>
+                                    </rich:column>
+                                    <rich:column width="7em">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-objetoindicador"   value="#{var.objetoindicador}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.objetoindicador.strnombreobjetoindicador}"/>
+                                    </rich:column>
+                                    <rich:column width="7em">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-lineabase"   value="#{var.lineabase}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.numlineabase}">
+                                            <f:convertNumber pattern="#{var.formatodecimal}" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column width="7em">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-meta"   value="#{var.meta}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{objeto.indicadorobra.nummeta}">
+                                            <f:convertNumber pattern="#{var.formatodecimal}" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column width="7em">
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-valoralimentacionindicador"   value="#{var.valoralimentacionindicador}"/>
+                                        </f:facet>
+                                        <h:inputText value="#{objeto.numvalor}" required="true">
+                                            <f:convertNumber pattern="#{var.formatodecimal}" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:inputText>
+                                    </rich:column>
+                                </rich:extendedDataTable>
                             </rich:collapsiblePanel>
                             <center>
                                 <h:panelGrid id="layoutError">
@@ -556,7 +638,7 @@
                             <h:graphicImage  styleClass="ikont-hgi-imgPeriodo"   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                             <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
                                                onclick="#{rich:component('modalImagen')}.show();
-                                                       return true;"
+                                                           return true;"
                                                styleClass="ikont-acb-adjunimg" />
                         </h:panelGrid>
                     </center>
@@ -573,7 +655,7 @@
                             <h:inputText size="40" id="txtActa" readonly="true" value="#{Supervisor$Alimentar.urlacta}" />
                             <a4j:commandButton id="btActa" value="#{var.examinar}" immediate="true"
                                                onclick="#{rich:component('panelActa')}.show();
-                                                       return true;"
+                                                                   return true;"
                                                />
                         </h:panelGrid>
                     </center>

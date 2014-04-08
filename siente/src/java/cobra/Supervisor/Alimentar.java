@@ -7,10 +7,12 @@ package cobra.Supervisor;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Alimentacioncualificacion;
+import co.com.interkont.cobra.to.Alimentacionindicador;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Factoratraso;
 import co.com.interkont.cobra.to.Historicoobra;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
+import co.com.interkont.cobra.to.Indicadorobra;
 import co.com.interkont.cobra.to.Novedad;
 import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Relacionactividadobraperiodo;
@@ -41,6 +43,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -55,7 +58,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import org.hibernate.mapping.Collection;
 import org.richfaces.component.UIDataTable;
+import org.richfaces.model.Filter;
 
 /**
  * <p>Fragment bean that corresponds to a similarly named JSP page
@@ -600,6 +605,74 @@ public class Alimentar implements Serializable{
         this.mensajefecha = mensajefecha;
     }
 
+    /**
+     * Listado de indicadores asociados a la obra
+     */
+    private List<Indicadorobra> listaIndicadoresObra = new ArrayList<Indicadorobra>();
+
+    public List<Indicadorobra> getListaIndicadoresObra() {
+        return listaIndicadoresObra;
+    }
+
+    public void setListaIndicadoresObra(List<Indicadorobra> listaIndicadoresObra) {
+        this.listaIndicadoresObra = listaIndicadoresObra;
+    }
+    
+    /**
+     * Listado de las alimentaciones de los indicadores de la obra
+     */
+    private List<Alimentacionindicador> listaAlimentacionesIndicadores = new ArrayList<Alimentacionindicador>();
+
+    public List<Alimentacionindicador> getListaAlimentacionesIndicadores() {
+        return listaAlimentacionesIndicadores;
+    }
+
+    public void setListaAlimentacionesIndicadores(List<Alimentacionindicador> listaAlimentacionesIndicadores) {
+        this.listaAlimentacionesIndicadores = listaAlimentacionesIndicadores;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * indicador
+     */
+    private String indicadorFilter;
+
+    public String getIndicadorFilter() {
+        return indicadorFilter;
+    }
+
+    public void setIndicadorFilter(String indicadorFilter) {
+        this.indicadorFilter = indicadorFilter;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     */
+    private String clasificacion1Filter;
+
+    public String getClasificacion1Filter() {
+        return clasificacion1Filter;
+    }
+
+    public void setClasificacion1Filter(String clasificacion1Filter) {
+        this.clasificacion1Filter = clasificacion1Filter;
+    }
+    
+    /**
+     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
+     */
+    private String clasificacion2Filter;
+
+    public String getClasificacion2Filter() {
+        return clasificacion2Filter;
+    }
+
+    public void setClasificacion2Filter(String clasificacion2Filter) {
+        this.clasificacion2Filter = clasificacion2Filter;
+    }
+    
     /**
      * <p>Automatically managed component initialization. <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code inserted
@@ -1584,6 +1657,10 @@ public class Alimentar implements Serializable{
 
         getSessionBeanCobra().getCobraService().guardarAlimentacion(alimentacion, getSessionBeanCobra().getUsuarioObra());
 
+        if(Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+            getSessionBeanCobra().getCobraService().guardarAlimentacionesIndicador(listaAlimentacionesIndicadores);
+        }
+
         getAdministrarObraNew().getObra().setStrimagenobra(alimentacion.getImagenevolucionobra().getStrubicacion());
         getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
         getSessionBeanCobra().getCobraService().funcion_EstablecerImagenActual(im.getIntidimagen());
@@ -1984,5 +2061,22 @@ public class Alimentar implements Serializable{
         for (Relacionactividadobraperiodo relacionactividadobraperiodo : relacionesactividadobraperiodo ) {
             cantidadProgramadaPeriodoSeleccionado += relacionactividadobraperiodo.getFloatcantplanif();
         }
+    }
+    
+    /**
+     * Metodo ejecutado al activar la sección de alimentar indicadores.
+     * Realiza la carga inicial de los indicadores por alimentar
+     */
+    public void cargarIndicadoresObra() {
+        listaAlimentacionesIndicadores = new ArrayList<Alimentacionindicador>();
+        listaIndicadoresObra = getSessionBeanCobra().getCobraService().encontrarIndicadoresObra(getAdministrarObraNew().getObra().getIntcodigoobra());
+        Collections.sort(listaIndicadoresObra);
+        for (Indicadorobra indicadorobra : listaIndicadoresObra) {
+            Alimentacionindicador alimentacionindicadorNuevo = new Alimentacionindicador();
+            alimentacionindicadorNuevo.setIndicadorobra(indicadorobra);
+            alimentacionindicadorNuevo.setAlimentacion(getAlimentacion());
+            alimentacionindicadorNuevo.setNumvalor(BigDecimal.ZERO);
+            listaAlimentacionesIndicadores.add(alimentacionindicadorNuevo);
+}
     }
 }
