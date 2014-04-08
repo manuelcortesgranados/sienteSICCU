@@ -1,0 +1,1158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <lifecycle>
+        <phase-listener>cobra.Supervisor.AppPhaseListener</phase-listener>
+    </lifecycle>
+
+    <!-- Inicio de configuración de JSF -->
+    <application>
+        <message-bundle>cobra.errores</message-bundle>
+    </application>
+   
+    <application>
+        <resource-bundle>
+            <base-name>cobra/errores</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+
+    <application>
+        <resource-bundle>
+            <!--Bundle para siente-->
+            <base-name>cobra/properties/BundleSiccu</base-name>
+            <!--Bundle para cali
+            <base-name>cobra/properties/BundleCali</base-name>-->
+            <!--Bundle para Fonade
+            <base-name>cobra/properties/BundleFonade</base-name>-->
+            <!--Bundle para Manizales
+            <base-name>cobra/properties/BundleManizales</base-name>-->
+            <var>var</var>
+        </resource-bundle>        
+        <resource-bundle>
+            <!--Bundle para siente-->
+            <base-name>cobra/properties/BundleMarcoLogico</base-name>
+            <var>varMarcoLogico</var>
+        </resource-bundle>
+    </application>
+    <application>
+
+        <locale-config>
+
+            <default-locale>es_CO</default-locale>
+
+        </locale-config>
+
+    </application>
+
+    <!-- Inicio de Managed Beans Supervisión Externa -->
+    <managed-bean>
+        <managed-bean-name>Supervision$Externa</managed-bean-name>
+        <managed-bean-class>cobra.SupervisionExterna.AdminSupervisionExterna</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>        
+        <managed-bean-name>Perfil$Usuario</managed-bean-name>
+        <managed-bean-class>cobra.perfil.Usuario</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Inicio de Managed Beans de Financiera -->
+    <managed-bean>
+        <managed-bean-name>Financiera$FiduFinanciera</managed-bean-name>
+        <managed-bean-class>cobra.Financiera.FiduFinanciera</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Financiera$CargarExcel</managed-bean-name>
+        <managed-bean-class>cobra.Financiera.CargarArchivoFinanciera</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Inicio de Managed Beans de Restaurar Password -->
+    <managed-bean>
+        <managed-bean-name>Restaurar$Password</managed-bean-name>
+        <managed-bean-class>cobra.restaurarpassword.RestaurarPassword</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!-- Inicio de Managed Beans de Atencion Humanitaria -->
+    <managed-bean>
+        <managed-bean-name>AtencionHumanitaria$AdminSolicitudAtencion</managed-bean-name>
+        <managed-bean-class>cobra.AtencionHumanitaria.AdminSolicitudAtencion</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>SessionChsolicitud</managed-bean-name>
+        <managed-bean-class>cobra.SolicitudObra.SessionChsolicitud</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>solicitudService</property-name>
+            <value>#{solicitudService}</value>
+        </managed-property>
+
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>makeList</managed-bean-name>
+        <managed-bean-class>cobra.ListFromCollection
+        </managed-bean-class>
+        <managed-bean-scope>
+            request
+        </managed-bean-scope>
+    </managed-bean>
+
+    <!--  <managed-bean>
+        <managed-bean-name>AtencionHumanitaria$CrearSolicitudAtencion</managed-bean-name>
+        <managed-bean-class>cobra.AtencionHumanitaria.CrearSolicitudAtencion</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>-->
+
+    <!-- Inicio de Managed Beans de Solicitud Obra -->
+    <managed-bean>
+        <managed-bean-name>SolicitudObra$GestionarSolicitudObra</managed-bean-name>
+        <managed-bean-class>cobra.SolicitudObra.GestionarSolicitudObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!--  <managed-bean>
+        <managed-bean-name>AtencionHumanitaria$CrearSolicitudAtencion</managed-bean-name>
+        <managed-bean-class>cobra.AtencionHumanitaria.CrearSolicitudAtencion</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>-->
+
+    <!-- Inicio de Managed Beans de Supervisor -->
+    <managed-bean>
+        <managed-bean-name>Supervisor$Graficos</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.Graficos</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficosEvolucion</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficosEvolucion</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionProyectoSupervisor</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionProyectoSupervisor</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionProyectoCiudadano</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionProyectoCiudadano</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoAvanceFisico</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoAvanceFisico</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoAvanceFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoAvanceFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+	
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionFisicoConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionFisicoConvenio</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionContrato</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionContrato</managed-bean-class>
+
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$AdministrarObraNew</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.AdministrarObraNew</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>SupervisionExterna$ListadoSeguimientos</managed-bean-name>
+        <managed-bean-class>cobra.SupervisionExterna.ListadoSeguimientos</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$FinalizarObraPaso1</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.FinalizarObraPaso1</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$IngresarNuevaObra</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.IngresarNuevaObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Mensajes</managed-bean-name>
+        <managed-bean-class>cobra.mensajes.Mensajes</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$SuspenderObra</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.SuspenderObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$DetalleObra</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.DetalleObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$DepurarImagen</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.DepurarImagen</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$AsociarContratos</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.AsociarContratos</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$Alimentar</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.Alimentar</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$SeguimientosAh</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.SeguimientosAh</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>Supervisor$ModificarProyecto</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.ModificarProyecto</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$ModificarObra</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.ModificarObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>HomeGestion</managed-bean-name>
+        <managed-bean-class>cobra.gestion.HomeGestion</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$Contrato</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.NuevoContratoBasico</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>MarcoLogico$MarcoLogico</managed-bean-name>
+        <managed-bean-class>cobra.MarcoLogico.MarcoLogicoBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$ModificarContrato</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.ModificarContrato</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>SolicitudObra$Validador</managed-bean-name>
+        <managed-bean-class>cobra.SolicitudObra.ValidadorSeguimiento</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$EntidadConvenio</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.EntidadConvenio</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!-- Fin de Managed Beans de Supervisor -->
+
+    <!-- Inicio de Managed Beans generales para Cobra -->
+    <managed-bean>
+        <managed-bean-name>login</managed-bean-name>
+        <managed-bean-class>cobra.Login</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>perfilcontrol</managed-bean-name>
+        <managed-bean-class>cobra.DatosGeneralesPerfilControl</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!--Inicio de Managed Bean Plan Operativo-->
+    <managed-bean>
+        <managed-bean-name>PlanOperativo</managed-bean-name>
+        <managed-bean-class>cobra.PlanOperativo.FlujoCaja</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>SessionBeanCobra</managed-bean-name>
+        <managed-bean-class>cobra.SessionBeanCobra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>usuarioService</property-name>
+            <value>#{usuarioService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>cobraService</property-name>
+            <value>#{cobraService}</value>
+        </managed-property>
+        <!--
+        <managed-property>
+            <property-name>financieraService</property-name>
+            <value>#{financieraService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>atencionhumanitariaService</property-name>
+            <value>#{atencionhumanitariaService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>solicitudService</property-name>
+            <value>#{solicitudService}</value>
+        </managed-property>
+        -->
+        <managed-property>
+            <property-name>supervisionExternaService</property-name>
+            <value>#{supervisionExternaService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>indicadorService</property-name>
+            <value>#{indicadorService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>ciudadanoservice</property-name>
+            <value>#{ciudadanoService}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>modificarProyectoService</property-name>
+            <value>#{modificarProyectoService}</value>
+        </managed-property>
+        <!--
+        <managed-property>
+            <property-name>cobraGwtService</property-name>
+            <value>#{cobraGwtServiceAble}</value>
+        </managed-property>
+        -->
+        <!--
+        <managed-property>
+            <property-name>marcoLogicoService</property-name>
+            <value>#{marcoLogicoService}</value>
+        </managed-property>
+-->
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>SubirArchivoBean</managed-bean-name>
+        <managed-bean-class>cobra.SubirArchivoBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>GraficarIndicadores</managed-bean-name>
+        <managed-bean-class>cobra.indicadores.GraficarIndicadores</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>ControlGerencial</managed-bean-name>
+        <managed-bean-class>cobra.ControlGerencial.ControlGerencial</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>Cobra$Download</managed-bean-name>
+        <managed-bean-class>cobra.Cobra.Download</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>Reportes</managed-bean-name>
+        <managed-bean-class>cobra.reportes.Reporte</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>solicitudService</property-name>
+            <value>#{solicitudService}</value>
+        </managed-property>
+
+    </managed-bean>
+
+
+    <!-- Inicio de Managed Beans de Perfil Ciudadano -->
+    <managed-bean>
+        <managed-bean-name>Ciudadano$PerfilCiudadano</managed-bean-name>
+        <managed-bean-class>cobra.Ciudadano.PerfilCiudadano</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!-- Beans de Administrar entidad -->
+    <managed-bean>
+        <managed-bean-name>Administrador$AdministrarEntidad</managed-bean-name>
+        <managed-bean-class>cobra.Administrador.AdiministrarEntidad</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!-- Fin de Managed Beans generales para Cobra -->
+    <!-- Fin de Managed Beans -->
+
+
+    <!-- Inicio de Reglas de Navegacion de Supervisor -->
+
+
+
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarContrato</from-outcome>
+            <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>  
+    <navigation-rule>
+        <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarContrato</from-outcome>
+            <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/ModificarProyecto/ModificarProyecto.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarContratoModificar</from-outcome>
+            <to-view-id>/Supervisor/ModificarContrato.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/EvolucionContrato.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultarContrato</from-outcome>
+            <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>crearatencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/GenerarAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>gestionusuario</from-outcome>
+            <to-view-id>/Usuario/ConsultarUsuario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>perfilusuario</from-outcome>
+            <to-view-id>/Usuario/PerfilUsuario.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>filtronuevo</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>restaurar_password</from-outcome>
+            <to-view-id>/Cobra/password/restaurarPassword.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>FlujoCaja</from-outcome>
+            <to-view-id>/Supervisor/Flujocaja.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>PlanOperativo</from-outcome>
+            <to-view-id>/Supervisor/PlanO.xhtml</to-view-id>
+            <redirect/>            
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>ingresarEntidad</from-outcome>
+            <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>ingresarUsuario</from-outcome>
+            <to-view-id>/Administrador/IngresarUsuario.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>asociarEntidad</from-outcome>
+            <to-view-id>/Administrador/AsociarEntidadUsuario.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>video_atencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/VideoAh.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>img_atencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/ImagenesAtencion_hum.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>participacionciu</from-outcome>
+            <to-view-id>/Ciudadano/ParticipacionCiudadano.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>doc_atencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/DocumentosAh.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosb_atencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/GenerarAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultar_atencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/ConsultarSolicitud.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>fuenteRecursos</from-outcome>
+            <to-view-id>/Supervisor/FuenteRecursosConvenio.xhtml</to-view-id>
+            <redirect/>            
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>versolicitud</from-outcome>
+            <to-view-id>/AtencionHumanitaria/GenerarAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>verproyecto</from-outcome>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>versolicitud_obra</from-outcome>
+            <to-view-id>/SolicitudObra/GestionarSolicitudObraObraCH.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>tablero</from-outcome>
+            <to-view-id>/ControlGerencial/ControlGerencial.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>indicadores</from-outcome>
+            <to-view-id>/homes/home_indicadores.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>detalleContrato</from-outcome>
+            <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consolidado</from-outcome>
+            <to-view-id>/Administrador/Consolidar_Indicadores.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Download</from-outcome>
+            <to-view-id>/Cobra/Download.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cerrarSession</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cambiocontra</from-outcome>
+            <to-view-id>/Usuario/Cambiarcontrasena.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>homesolicitud</from-outcome>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelarSolicitudAtencion</from-outcome>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>seguimientosah</from-outcome>
+            <to-view-id>/Supervisor/SeguimientosAh.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>solicitarvalidacion</from-outcome>
+            <to-view-id>/Supervisor/SolicitarValidarInformacion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>terminarobra</from-outcome>
+            <to-view-id>/Supervisor/DeclararObraTerminada.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cambiarestado</from-outcome>
+            <to-view-id>/Supervisor/SolicitarCambioEstado.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>eliminarultimoavance</from-outcome>
+            <to-view-id>/Supervisor/SolicitarEliminarUltimoAvance.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>asociarcontratos</from-outcome>
+            <to-view-id>/Supervisor/AsociarContratos.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>documentocontrato</from-outcome>
+            <to-view-id>/Supervisor/DocumentoContrato.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosubicaciondelaObra</from-outcome>
+            <to-view-id>/NuevoProyecto/UbicacionNuevaObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volvertipificacion</from-outcome>
+            <to-view-id>/NuevoProyecto/tipificacionproyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosbasicosnuevoproyecto</from-outcome>
+            <to-view-id>/NuevoProyecto/datosBasicos.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosgenerarCrono</from-outcome>
+            <to-view-id>/NuevoProyecto/GenerarCronograma.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosGenerarImagenes</from-outcome>
+            <to-view-id>/NuevoProyecto/ImagenesProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosAsociarContrato</from-outcome>
+            <to-view-id>/NuevoProyecto/AsociarContrato.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>datosAsociarFinalizar</from-outcome>
+            <to-view-id>/NuevoProyecto/FinalizarProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admindocumentobra</from-outcome>
+            <to-view-id>/Supervisor/DocumentoObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>irreportesdetalle</from-outcome>
+            <to-view-id>/reportes/reportes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminimaginobra</from-outcome>
+            <to-view-id>/Supervisor/ImagenObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminvideoobra</from-outcome>
+            <to-view-id>/Supervisor/Viewvideo.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminmodificarObra</from-outcome>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminalimentar</from-outcome>
+            <to-view-id>/Supervisor/Alimentar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>admindetalleObra</from-outcome>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminfinalizar</from-outcome>
+            <to-view-id>/Supervisor/FinalizarObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>nuevoProyecto</from-outcome>
+            <to-view-id>/NuevoProyecto/tipificacionproyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>nuevoContrato</from-outcome>
+            <to-view-id>/Supervisor/NuevoContratoBasico.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>nuevoConvenioPo</from-outcome>
+            <to-view-id>/Supervisor/nuevoContratoPlanOperativo.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>modificarContrato</from-outcome>
+            <to-view-id>/Supervisor/ModificarContrato.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gestion</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manual</from-outcome>
+            <to-view-id>/ayuda/manual.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>pregfrecuentes</from-outcome>
+            <to-view-id>/ayuda/pregfrecuentes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mensajesEnviados</from-outcome>
+            <to-view-id>/mensajes/mensajesEnviados.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>mensajesRecibidos</from-outcome>
+            <to-view-id>/mensajes/mensajesRecibidos.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>redactarMensaje</from-outcome>
+            <to-view-id>/mensajes/redactarMensaje.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>evolucion</from-outcome>
+            <to-view-id>/Supervisor/Evolucion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>moduloNoDisponible</from-outcome>
+            <to-view-id>/Cobra/ModuloNoDisponible.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultarContratoConvenio</from-outcome>
+            <to-view-id>/Supervisor/consultarContratoConvenio.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>evoluvionContrato</from-outcome>
+            <to-view-id>/Supervisor/EvolucionContrato.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reportes</from-outcome>
+            <to-view-id>/reportes/reportes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cargarExcelFinanciera</from-outcome>
+            <to-view-id>/Financiera/cargarExcelFinanciera.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>generarorden</from-outcome>
+            <to-view-id>/Financiera/OrdenPago.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>admindetalleObra</from-outcome>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>nuevaobra</from-outcome>
+            <to-view-id>/NuevoProyecto/tipificacionproyecto.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/FinalizarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>finalizarhomeObra</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>suspenderObra</from-outcome>
+            <to-view-id>/Supervisor/SuspenderObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/SuspenderObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>menumodificar</from-outcome>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/Supervisor/ReiniciarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volveriniciomodificar</from-outcome>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/ReiniciarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>reiniciarproyecto</from-outcome>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>menumodificarbutton</from-outcome>
+            <to-view-id>/ModificarProyecto/ModificarProyecto.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>modificarProyecto</from-outcome>
+            <to-view-id>/ModificarProyecto/ModificarProyecto.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>reiniciarObra</from-outcome>
+            <to-view-id>/Supervisor/ReiniciarObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <!-- Fin de Reglas de Navegacion de Supervisor -->
+
+
+    <!--Inicio de reglas de Navegación Supervisión Externa -->
+    <navigation-rule>
+        <from-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registrarMatriz</from-outcome>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proyectosSupervision</from-outcome>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>detalleSeguimiento</from-outcome>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SupervisionExterna/RegistroMatriz.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>proyectosSupervision</from-outcome>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/DetalleObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consuldetaseguimi</from-outcome>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SupervisionExterna/ListadoSeguimientos.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consuldetaseguimi</from-outcome>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registrarMatriz</from-outcome>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>proyectosSupervision</from-outcome>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volverdetalle</from-outcome>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <!--Fin reglas de Navegación Supervisión Externa  -->
+
+
+    <!-- Inicio de Reglas de Navegacion generales para Cobra -->
+    <navigation-rule>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>fallo</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>gestion</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>atencionhumanitaria</from-outcome>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>obrach</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>solicitudah</from-outcome>
+            <to-view-id>/SolicitudObra/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>seguimiento</from-outcome>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtmll</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/home.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>gestion</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>obrach</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>atencionhumanitaria</from-outcome>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>financiera</from-outcome>
+            <to-view-id>/homes/home_financiera.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reportes</from-outcome>
+            <to-view-id>/reportes/reportes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>crearSolicitud</from-outcome>
+            <to-view-id>/SolicitudObra/GestionarSolicitudObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>consultardirec</from-outcome>
+            <to-view-id>/SolicitudObra/GestionarSolicitudObraObraCH.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>asociarproyectoasolici</from-outcome>
+            <to-view-id>/NuevoProyecto/datosBasicos.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>depuracioimagen</from-outcome>
+            <to-view-id>/Supervisor/depurarImagenes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>asociarproyectoaatenci</from-outcome>
+            <to-view-id>/NuevoProyecto/datosBasicos.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>verproyectoimcomple</from-outcome>
+            <to-view-id>/NuevoProyecto/datosBasicos.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>verproyectocomple</from-outcome>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/SolicitudObra/GestionarSolicitudObra.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>guardo</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancelarSolicitud</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>obrach</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/NuevoProyecto/datosBasicos.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/NuevoProyecto/GenerarCronograma.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volvergenerarcrono</from-outcome>
+            <to-view-id>/NuevoProyecto/UbicacionNuevaObra.xhtml</to-view-id>
+        </navigation-case>
+
+
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/NuevoProyecto/*</from-view-id>
+        <navigation-case>
+            <from-outcome>cancelar</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>modificarperfil</from-outcome>
+            <to-view-id>/Ciudadano/ModificarUsuario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>miperfil</from-outcome>
+            <to-view-id>/Ciudadano/MiPerfilCiudadano.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>ingresarciudadano</from-outcome>
+            <to-view-id>/Ciudadano/IngresarCiudadano.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>Solicitud de Atención Humanitaria</from-outcome>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Solicitud de Obra</from-outcome>
+            <to-view-id>/SolicitudObra/HomeSolicitudesObra.xhtml</to-view-id>
+        </navigation-case>      
+        <navigation-case>
+            <from-outcome>Seguimiento y Control</from-outcome>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Seguimiento a Solicitudes Aprobadas</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Gestión Financiera</from-outcome>
+            <to-view-id>/homes/home_financiera.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Indicadores</from-outcome>
+            <to-view-id>/homes/home_indicadores.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/NuevoProyecto/AsociarContrato.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>volveraimag</from-outcome>
+            <to-view-id>/NuevoProyecto/ImagenesProyecto.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/Supervisor/NuevoContratoBasico.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volveraproyecto</from-outcome>
+            <to-view-id>/NuevoProyecto/AsociarContrato.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/NuevoProyecto/ImagenesProyecto.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volveragenerar</from-outcome>
+            <to-view-id>/NuevoProyecto/GenerarCronograma.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>volveragenerar</from-outcome>
+            <to-view-id>/NuevoProyecto/GenerarCronograma.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>graficoscontrol</from-outcome>
+            <to-view-id>/ControlGerencial/ControlGerencial.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <application>
+        <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver
+        </variable-resolver>
+        <locale-config />
+    </application>
+   
+</faces-config>

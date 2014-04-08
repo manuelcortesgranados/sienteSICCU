@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<project name="compileSiccu" default="-pre-compile" basedir="..">
+    <description>Archivo para compilar y generar Siccu</description>      
+   
+    
+    <condition property="issiccu">
+        <equals arg1="${version}" arg2="siccu" />        
+    </condition>  
+  
+    <target name="doSiccu" if="issiccu" >
+        
+        <echo message="generando siccu" />       
+        <copy todir="${build.web.dir}/resources/imgs">
+            <fileset dir="web/configuracion/${version}/resources/imgssiccu/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/css">
+            <fileset dir="web/configuracion/${version}/resources/csssiccu/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/resources/js/login">
+            <fileset  dir="web/configuracion/${version}/resources/loginsiccu/" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/facelets">
+            <fileset  dir="web/facelets/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/homes">
+            <fileset  dir="web/homes/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/org.richfaces">
+            <fileset  dir="web/configuracion/${version}/resources/org.richfacessiccu/" excludes="${build.web.excludes}"/>            
+        </copy>
+        <copy todir="${build.web.dir}/resources/js/analytics">
+            <fileset  dir="web/configuracion/${version}/resources/analytics/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/resources/reloj">
+            <fileset  dir="web/configuracion/${version}/resources/reloj/" excludes="${build.web.excludes}"/>
+        </copy>
+        <copy todir="${build.web.dir}/META-INF/" file="web/configuracion/${version}/META-INF/context.xml"/>        
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/applicationContext.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/faces-config.xml"/>
+        <copy todir="${build.web.dir}/WEB-INF/" file="web/configuracion/${version}/WEB-INF/web.xml"/>
+        <copy todir="${build.web.dir}/resources/" file="web/configuracion/${version}/resources/skinning.ecss"/>
+        <copy todir="${build.classes.dir}/" file="web/configuracion/${version}/properties/log4j.properties"/>
+    </target> 
+</project>
+

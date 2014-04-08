@@ -11,7 +11,7 @@
     <description>Builds, tests, and runs the project siente.</description>
     <property name="version" value="zoom"/> 
     <property name="dist.war" value="dist/${version}.war"/>    
-    <import file="nbproject/build-gwt.xml"/>
+    <!--<import file="nbproject/build-gwt.xml"/>-->
    <import file="nbproject/zoom-impl.xml"/>
    <import file="nbproject/siente-impl.xml"/>
    <import file="nbproject/manizales-impl.xml"/>
@@ -19,6 +19,7 @@
    <import file="nbproject/cobra-impl.xml"/>
    <import file="nbproject/giprom-impl.xml"/>
    <import file="nbproject/aquacun-impl.xml"/> 
+   <import file="nbproject/siccu-impl.xml"/> 
    <import file="nbproject/build-impl.xml"/>
    
     
@@ -82,7 +83,7 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra, doGiprom, doAquacun">       
+    <target name="-pre-compile" depends="doZoom, doSiente, doManizales, doTolima, doCobra, doGiprom, doAquacun, doSiccu">       
     </target>
     
     <target name="-post-compile" depends="doGipromPostCompile">       
