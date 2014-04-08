@@ -153,7 +153,9 @@
                 <value>co/com/interkont/cobra/to/Tiposolicitante.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Zonaespecifica.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value> 
-                <value>co/com/interkont/cobra/to/Relacioncontratojsfusuario.hbm.xml</value>               
+                <value>co/com/interkont/cobra/to/Relacioncontratojsfusuario.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Componente.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Contratocomponente.hbm.xml</value>               
                 
                 <value>co/com/interkont/cobra/to/Historicoplanificacionpago.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Registrovalidador.hbm.xml</value>
