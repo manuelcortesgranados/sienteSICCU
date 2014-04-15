@@ -243,7 +243,7 @@
                                                             disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                     </h:panelGrid>
                                     <rich:collapsiblePanel id="ikont-rcp-nuevalocalidad" header="#{var.nuevalocalidad}" switchType="ajax" immediate="true"
-                                                           toggleListener="#{Supervisor$IngresarNuevaObra.mostrarNuevalocalidadAction}" expanded="false">
+                                                           toggleListener="#{Supervisor$IngresarNuevaObra.mostrarNuevalocalidadAction}" expanded="false" rendered="#{var.verotrostiposdelocalidad}">
                                         <h:panelGrid id="ikont-hpg-nuevalocalidad" styleClass="ikont-hpg-nuevalocalidad" columns="4">
                                             <h:selectOneMenu id="ikont-hsom-tipolocalidad" 
                                                         value="#{Supervisor$IngresarNuevaObra.oidcodigotipolocalidad}" label="#{var.tipolocalidad}">
@@ -262,9 +262,9 @@
                                                              disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                          </h:panelGrid>
                                     </rich:collapsiblePanel>
-                                    <rich:collapsiblePanel id="ikont-rcp-localidadesespecificas" header="#{var.localidadesespecificas}" 
+                                    <rich:collapsiblePanel id="ikont-rcp-localidadesespecificas" header="#{var.localidadesespecificas}" rendered="#{var.verotrostiposdelocalidad}"
                                                            immediate="true" switchType="client" expanded="true">
-                                        <h:panelGrid columns="4" id="ikont-hpg-otraslocalidades" rendered="#{var.verotrostiposdelocalidad}">
+                                        <h:panelGrid columns="4" id="ikont-hpg-otraslocalidades">
                                             
                                             <h:outputLabel id="ikont-hol-seleccionarobjeto"  value="#{var.zonaubi}"  for="combolugarproyecto" />
                                             <h:selectOneMenu id="ikont-hsom-seleccionarobjeto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
