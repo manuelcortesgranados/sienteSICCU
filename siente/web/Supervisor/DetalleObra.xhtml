@@ -391,7 +391,7 @@
                         
                         <rich:collapsiblePanel switchType="ajax" header="#{var.indicadoresobra}" 
                                                expanded="false" id="ikont-rcp-indicadoresobra"
-                                               toggleListener="#{Supervisor$DetalleObra.cargarIndicadoresObra()}">
+                                               toggleListener="#{Supervisor$DetalleObra.cargarIndicadoresObra()}" rendered="#{var.vermoduloindicadores}">
                             <rich:extendedDataTable id="ikont-rdt-indicadoresobra" styleClass="ikont-rdt-indicadoresobra" 
                                                     value="#{Supervisor$DetalleObra.listaIndicadoresObra}"
                                                     rowClasses="cabezo_tabla01, cabezo_tabla02"
