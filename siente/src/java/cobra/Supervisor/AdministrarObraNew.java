@@ -36,6 +36,7 @@ import cobra.Marcador;
 import cobra.RedimensionarImagen;
 import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
+import cobra.Utilidades;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
@@ -1827,6 +1828,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public String iniciarVideos() {
         opcion = 6;
         listaVideoObra = getSessionBeanCobra().getCobraService().obtenerVideoxObra(getObra().getIntcodigoobra());
+        videoEnlace = new Videoevolucionobra();
+        videoEnlace.setObra(getObra());
+        lstVideosEnlazados = getSessionBeanCobra().getCobraService().obtenerEnlacesVideoxObra(getObra().getIntcodigoobra());
         if (listaVideoObra.size() <= 0) {
             mostrarvideo = true;
         } else {
@@ -2589,5 +2593,55 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCobraService().getLog().info(bundle.getString("mensaje1informecircular") + " " + e.getMessage() + ". Fecha =  " + new Date() + ");");
         }
         return null;
+    }
+    
+    
+    /*
+     Adicionar enlace de video a la obra
+     */
+    private Videoevolucionobra videoEnlace;
+    private List<Videoevolucionobra> lstVideosEnlazados;
+
+    public List<Videoevolucionobra> getLstVideosEnlazados() {
+        return lstVideosEnlazados;
+    }
+
+    public void setLstVideosEnlazados(List<Videoevolucionobra> lstVideosEnlazados) {
+        this.lstVideosEnlazados = lstVideosEnlazados;
+    }
+
+    public Videoevolucionobra getVideoEnlace() {
+        return videoEnlace;
+    }
+
+    public void setVideoEnlace(Videoevolucionobra videoEnlace) {
+        this.videoEnlace = videoEnlace;
+    }
+
+    public void guardarEnlaceVideo() {
+        if (Utilidades.isUrl(videoEnlace.getStrurlvideo())) {
+            if(!videoEnlace.getStrurlvideo().contains("http"))
+            {
+                videoEnlace.setStrurlvideo("http://"+videoEnlace.getStrurlvideo());
+            }
+            
+            videoEnlace.setBoolubicacionlocal(false);
+            videoEnlace.setDatefecha(new Date());
+
+            getSessionBeanCobra().getCobraService().guardarVideoObra(videoEnlace);
+            lstVideosEnlazados.add(videoEnlace);
+            limpiarVideo();
+
+            
+            FacesUtils.addInfoMessage("El enlace de video se ha almacenado con éxito.");
+        } else {
+            FacesUtils.addErrorMessage("Debe ingresar un enlace de video válido.");
+        }
+
+    }
+
+    public void limpiarVideo() {
+        videoEnlace = new Videoevolucionobra();
+        videoEnlace.setObra(getObra());
     }
 }

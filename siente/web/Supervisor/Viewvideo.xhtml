@@ -39,30 +39,91 @@
     </ui:define>
 
     <ui:define name="body">
-        <h:form prependId="false" id="form_vervideo">
-            <h:inputHidden id="sourceogg" value="#{Supervisor$AdministrarObraNew.urlvideo}" />
+        <center>
+            <h:form style="text-align:center;">
 
-            <center>
-                <h:panelGroup layout="block" id="pgvideo">
-                    <h:panelGroup id="pgvidomostra">
-                        <h:outputLabel  styleClass="ikont-hol-pgvidomostra"   rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
-                    </h:panelGroup>
+                <h:inputHidden id="sourceogg" value="#{Supervisor$AdministrarObraNew.urlvideo}"></h:inputHidden>
 
-                    <h:panelGroup layout="block" id="idpanel" >
-                        <a4j:region>
-                            <rich:dataGrid value="#{Supervisor$AdministrarObraNew.listaVideoObra}"  var="videoRow" columns="#{Supervisor$AdministrarObraNew.cantidadColumnas}">
-                                <h:panelGroup layout="block">
+                    
+                    <rich:panel id="pgvideo">
+                        <h:panelGroup id="pgvidomostra">
+                            <h:outputLabel rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
+                        </h:panelGroup>
+                        <rich:panel id="idpanel" style="text-align:center;">
+
+                            <rich:dataGrid value="#{Supervisor$AdministrarObraNew.listaVideoObra}" style="text-align:center; background: #FFFFFF;" var="videoRow" columns="#{Supervisor$AdministrarObraNew.cantidadColumnas}" >
+                                <rich:panel >
                                     <h:panelGrid>
-                                        <h:outputText  styleClass="ikont-hot-videoHtml "   escape="false" value="#{videoRow.videoHtml}" />
-                                        <h:outputText  styleClass="ikont-hot-df "   id="otxt-strfechavideo"  value="#{videoRow.datefecha}" />
-                                        <h:outputText  styleClass="ikont-hot-strnomvid "   id="otxt-strnomvideo"    value="#{videoRow.strnombre}" />
+                                        <h:outputText escape="false" value="#{videoRow.videoHtml}"/>
+                                        <h:outputText id="otxt-strfechavideo" style="text-align:center;" value="#{videoRow.datefecha}"/>
+                                        <h:outputText id="otxt-strnomvideo" style="text-align:center;" styleClass="txt_outtext" value="#{videoRow.strnombre}" />
                                     </h:panelGrid>
-                                </h:panelGroup>
+                                </rich:panel>
                             </rich:dataGrid>
-                        </a4j:region>
-                    </h:panelGroup>
-                </h:panelGroup>
+
+                        </rich:panel>
+
+                    </rich:panel>
+                </h:form>
+                <rich:panel header="Asociar videos" id="rpAsociarVideo">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{var.nombre}:"/>
+                            <h:inputText id="hitNombreVideo" value="#{Supervisor$AdministrarObraNew.videoEnlace.strnombre}" required="true">
+                                <rich:message for="hitNombreVideo" style="color: red;"/>
+                            </h:inputText>
+                            <h:outputText value="Enlace:"/>
+                            <h:inputText id="hitUrlVideo" value="#{Supervisor$AdministrarObraNew.videoEnlace.strurlvideo}" required="true">
+                                <rich:message for="hitUrlVideo" style="color: red;"/>
+                            </h:inputText>
+                            <a4j:commandButton value="#{var.guardar}" action="#{Supervisor$AdministrarObraNew.guardarEnlaceVideo}" render="rpAsociarVideo"/>
+                            <a4j:commandButton value="#{var.cancelar}" action="#{Supervisor$AdministrarObraNew.limpiarVideo}" render="rpAsociarVideo" immediate="true"/>
+                        </h:panelGrid>
+                    </h:form>
+                    <rich:panel id="idpanelasociados" style="text-align:center;" header="Videos asociados" >
+                        <h:form target="_blank">
+                            <center>
+                                <rich:dataTable id="dtEnlacesAsociados" value="#{Supervisor$AdministrarObraNew.lstVideosEnlazados}" var="row" rows="5">
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+
+                                            <h:outputText value="#{var.fecha}"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{row.datefecha}">
+                                            <f:convertDateTime pattern="#{var.formatofecha}"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+
+                                            <h:outputText value="#{var.nombre}"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{row.strnombre}"/>
+                                    </rich:column>
+
+                                    <rich:column  width="200px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Enlace"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{row.strurlvideo}"  />
+                                    </rich:column>
+                                    <rich:column  width="120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.ver}"/>
+                                        </f:facet>
+                                        <h:outputLink   target="_blank" value="#{row.strurlvideo}" >
+                                            <h:outputText value="#{var.ver}"/>
+                                        </h:outputLink>
+
+                                    </rich:column>
+                                </rich:dataTable>
+                                <rich:dataScroller for="dtEnlacesAsociados" render="dtEnlacesAsociados"/>
+                            </center>
+                        </h:form>
+                    </rich:panel>
+                </rich:panel>    
+
+
             </center>
-        </h:form>
     </ui:define>
 </ui:composition>
