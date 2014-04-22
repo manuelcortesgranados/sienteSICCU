@@ -58,6 +58,10 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
         BigDecimal acumuladoVlrEjecutado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificadoIni = new BigDecimal(0);
+        BigDecimal vlrTotalProyecto = getAdministrarObraNew().getObra().getNumvaltotobra();
+        BigDecimal cien = new BigDecimal(100);
+        BigDecimal percentage = new BigDecimal(0);
+        
         StringBuilder capitalPeriodoMedida= new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
         capitalPeriodoMedida.append(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(1).toLowerCase());
         
@@ -72,6 +76,7 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
         grafico.getEstilo().setColorfondoocursor(Propiedad.getValor("graevuproyecolorcursor"));
         grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setEvolucionproyectociudadano(true);
+        grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
         
 
         /**
@@ -144,7 +149,8 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
                 }
                 DatoGrafico datoPlaniIni = new DatoGrafico();
                 datoPlaniIni.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-                acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(periodoObra.getNumvaltotplanif().divide(divisor));
+                percentage = periodoObra.getNumvaltotplanif().divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
+                acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(percentage);
                 datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
                 StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
                 stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoplanini")).append(periodoObra.getNumvaltotplanif().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
@@ -182,7 +188,8 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
             }
             DatoGrafico datoPlaniActual = new DatoGrafico();
             datoPlaniActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-            acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(periodoObra.getNumvaltotplanif().divide(divisor));
+             percentage = periodoObra.getNumvaltotplanif().divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
+            acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(percentage);
             datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
             StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
             stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato"))
@@ -216,7 +223,8 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
                          */
                         DatoGrafico datoEjeActual = new DatoGrafico();
                         datoEjeActual.setValorX("" + alimenta.getDatefecha().getTime());
-                        acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
+                        percentage = vlrEjecutado.divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
+                        acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(percentage);
                         datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
                         StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                         stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato"))
@@ -240,7 +248,8 @@ public class GraficoEvolucionProyectoCiudadano  implements Serializable{
                 if(existeAlimentacion) {
                     DatoGrafico datoEjeActual = new DatoGrafico();
                     datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
+                    percentage = vlrEjecutado.divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
+                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(percentage);
                     datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
                     StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                     stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoeje")).append(vlrEjecutado.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());

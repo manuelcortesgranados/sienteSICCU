@@ -784,7 +784,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable utilizada para saber si un contrato tiene hijos
      */
-    private boolean boolconthijo = false;
+    private boolean boolconthijo = true;
     /**
      * Listado de los subconvenios
      */
@@ -804,7 +804,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para saber si el dato es un proyecto
      */
-    private boolean boolproyectos = false;
+    private boolean boolproyectos = true;
     /**
      * Variable para saber si el dato es un giro
      */
@@ -2832,7 +2832,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     break;
 
             }
-
+//            primeroObra();
         }
 
     }
@@ -4938,7 +4938,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void cargarContrato(Contrato cont) {
         contrato = new Contrato();
         contrato = cont;
-        boolconthijo = false;
+        boolconthijo = true;
         boolsubconvenios = false;
         listaContrConvHijo.clear();
         listaSubconvenios.clear();
@@ -4950,7 +4950,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         listaGirodirecto.clear();
         listaModificarContrato.clear();
         boolpolizas = false;
-        boolproyectos = false;
+        boolproyectos = true;
         boolgiros = false;
         boolmodifca = false;
         if (filtrocontrato.getIdestrategia() != 0) {
@@ -4970,7 +4970,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         setNumcontratotemporal(cont.getStrnumcontrato());
-
+        if(booltipocontratoconvenio){
+             llenarContrMacroConvHijo();
+        }else{
+            llenarObraAsociada();
+        }
+        
+       
     }
 
     /**
@@ -6381,11 +6387,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         if (buscarproyecto.length() != 0) {
             listaObraContrato.clear();
-        } else {
-            if (boolproyectos != false) {
-                FacesUtils.addInfoMessage("La Busqueda produjo resultados");
-            }
-        }
+        } 
         primeroObra();
         return null;
     }

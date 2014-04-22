@@ -940,6 +940,7 @@ public class DetalleObra implements Serializable {
         if (Boolean.parseBoolean(getBundle().getString("vistasgiprom"))) {
             calcularUbicacionGradosMinutosSegundo();
         }
+        listaSubProyectos = getSessionBeanCobra().getCobraService().obtenerSubProyectos(getAdministrarObraNew().getObra().getIntcodigoobra());
     }
 
     public void setimagenObra(String imagen) {
