@@ -20,7 +20,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 
 /**
- * MBean encargado de gestionar la presentación del gráfico de evolución del
+ * MBean encargado de gestionar la presentaciÃ³n del grÃ¡fico de evoluciÃ³n del
  * proyecto
  *
  * @author Jhon Eduard Ortiz S
@@ -49,8 +49,8 @@ public abstract class GraficoEvolucionProyecto {
     }
 
     /**
-     * Genera el grácico de evolución del proyecto estableciendo el código de la
-     * gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
+     * Genera el grÃ¡cico de evoluciÃ³n del proyecto estableciendo el cÃ³digo de la
+     * grÃ¡fica en atributo codigoGrafico del objeto graficoEvolucionproyecto
      */
     protected void preGraficar() {
         BigDecimal divisor = new BigDecimal(1);
@@ -81,7 +81,7 @@ public abstract class GraficoEvolucionProyecto {
 
         /**
          * Se obtienen los periodos de la obra y se ordenan de acuerdo a la 
-         * fecha de finalización del periodo
+         * fecha de finalizaciÃ³n del periodo
          */
         int intcodigoobra = getAdministrarObraNew().getObra().getIntcodigoobra();
         List<Periodo> periodosActuales = getSessionBeanCobra().getCobraService().obtenerPeriodosObra(intcodigoobra);
@@ -102,8 +102,8 @@ public abstract class GraficoEvolucionProyecto {
         });
         
         /**
-         * Se obtienen los periodos de la primera planificación del proyecto y 
-         * si existen, se genera la línea correspondiente al planificado inicial
+         * Se obtienen los periodos de la primera planificaciÃ³n del proyecto y 
+         * si existen, se genera la lÃ­nea correspondiente al planificado inicial
          */
        
         List<Periodohisto> periodoshisto = getSessionBeanCobra().getModificarProyectoService().obtenerPeriodosPrimerHistoricoObra(intcodigoobra);
@@ -218,11 +218,11 @@ public abstract class GraficoEvolucionProyecto {
                 
                 if (!alimenta.getDatefecha().equals(periodoObra.getDatefecfinperiodo())) {
                     /**
-                     * Si el sistema está configurado para alimentar por fecha
+                     * Si el sistema estÃ¡ configurado para alimentar por fecha
                      */
                     if (Boolean.valueOf(Propiedad.getValor("varalimentacionxfecha"))) {
                         /**
-                         * Se construye el dato correspondiente a la línea del valor
+                         * Se construye el dato correspondiente a la lÃ­nea del valor
                          * ejecutado actual del proyecto
                          */
                         DatoGrafico datoEjeActual = new DatoGrafico();
@@ -249,7 +249,7 @@ public abstract class GraficoEvolucionProyecto {
 
             if (!Boolean.valueOf(Propiedad.getValor("varalimentacionxfecha"))) {
                 /**
-                 * Se construye el dato correspondiente a la línea del valor 
+                 * Se construye el dato correspondiente a la lÃ­nea del valor 
                  * ejecutado actual del proyecto
                  */
                 if(existeAlimentacion) {
