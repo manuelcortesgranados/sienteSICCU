@@ -1090,7 +1090,7 @@
                 </h:form>
 
                 <h:form id="formSubProyectos" rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" header="#{var.detsubproyectos}" expanded="true" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
+                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" header="#{var.detsubproyectos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
                         <a4j:ajax event="click" render="panelSubProyectos"/>
                         <center>
                             <h:panelGroup id="panelSubProyectos">

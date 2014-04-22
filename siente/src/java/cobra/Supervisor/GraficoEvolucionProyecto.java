@@ -58,10 +58,6 @@ public abstract class GraficoEvolucionProyecto {
         BigDecimal acumuladoVlrEjecutado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificadoIni = new BigDecimal(0);
-        BigDecimal vlrTotalProyecto = getAdministrarObraNew().getObra().getNumvaltotobra();
-        BigDecimal cien = new BigDecimal(100);
-        BigDecimal percentage = new BigDecimal(0);
-        
         StringBuilder capitalPeriodoMedida= new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
         capitalPeriodoMedida.append(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(1).toLowerCase());
         grafico.setTituloEjeX(Propiedad.getValor("graevuproytituloEjeX")+": "+capitalPeriodoMedida);
@@ -151,15 +147,12 @@ public abstract class GraficoEvolucionProyecto {
                 }
                 DatoGrafico datoPlaniIni = new DatoGrafico();
                 datoPlaniIni.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-                percentage = periodoObra.getNumvaltotplanif().divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
-
-                acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(percentage);
-                datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-//                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                } else {
-//                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                }
+                acumuladoVlrPlanificadoIni = acumuladoVlrPlanificadoIni.add(periodoObra.getNumvaltotplanif().divide(divisor));
+                if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
+                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                } else {
+                    datoPlaniIni.setValorY(acumuladoVlrPlanificadoIni.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                }
                 StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
                 stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoplanini")).append(periodoObra.getNumvaltotplanif().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                 datoPlaniIni.setEtiqueta(stringEtiDatoPlaniActual.toString());
@@ -196,15 +189,12 @@ public abstract class GraficoEvolucionProyecto {
             }
             DatoGrafico datoPlaniActual = new DatoGrafico();
             datoPlaniActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-            percentage = periodoObra.getNumvaltotplanif().divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
-            
-            acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(percentage);
-            datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//            if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-//                datoPlaniActual.setValorY(acumuladoVlrPlanificado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
-//            } else {
-//                datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//            }
+            acumuladoVlrPlanificado = acumuladoVlrPlanificado.add(periodoObra.getNumvaltotplanif().divide(divisor));
+            if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
+                datoPlaniActual.setValorY(acumuladoVlrPlanificado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+            } else {
+                datoPlaniActual.setValorY(acumuladoVlrPlanificado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+            }
             StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
             stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato"))
                     .append(" ").append(periodoObra.getDatefeciniperiodo())
@@ -237,15 +227,12 @@ public abstract class GraficoEvolucionProyecto {
                          */
                         DatoGrafico datoEjeActual = new DatoGrafico();
                         datoEjeActual.setValorX("" + alimenta.getDatefecha().getTime());
-                        percentage = vlrEjecutado.divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
-                        
-                        acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(percentage);
-                        datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                        if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-//                            datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                        } else {
-//                            datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                        }
+                        acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
+                        if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
+                            datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                        } else {
+                            datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                        }
                         StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                         stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato"))
                                 .append(" ").append(periodoObra.getDatefeciniperiodo())
@@ -268,16 +255,12 @@ public abstract class GraficoEvolucionProyecto {
                 if(existeAlimentacion) {
                     DatoGrafico datoEjeActual = new DatoGrafico();
                     datoEjeActual.setValorX("" + periodoObra.getDatefecfinperiodo().getTime());
-                    percentage = vlrEjecutado.divide(divisor).multiply(cien).divide(vlrTotalProyecto, 2, RoundingMode.HALF_UP);
-                    
-                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(percentage);
-                    
-                    datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                    if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
-//                        datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                    } else {
-//                        datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
-//                    }
+                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(vlrEjecutado.divide(divisor));
+                    if(Propiedad.getValor("graevuproydividirXMillon").equals("true") && getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.valueOf(1000000)) > 0) {
+                        datoEjeActual.setValorY(acumuladoVlrEjecutado.divide(BigDecimal.valueOf(1000000)).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    } else {
+                        datoEjeActual.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    }
                     StringBuilder stringEtiDatoEjeActual = new StringBuilder();
                     stringEtiDatoEjeActual.append(Propiedad.getValor("graevuproyeti1dato")).append(" ").append(periodoObra.getDatefeciniperiodo()).append(" ").append(Propiedad.getValor("graevuproyeti2dato")).append(" ").append(periodoObra.getDatefecfinperiodo()).append(" ").append(Propiedad.getValor("graevuproyetidatoeje")).append(vlrEjecutado.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
                     datoEjeActual.setEtiqueta(stringEtiDatoEjeActual.toString());

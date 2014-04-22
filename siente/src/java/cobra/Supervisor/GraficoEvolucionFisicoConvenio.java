@@ -257,7 +257,6 @@ public class GraficoEvolucionFisicoConvenio implements Serializable {
         grafico.getEstilo().setColorfondoocursor(Propiedad.getValor("graevuproyecolorcursor"));
         grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setEvolucionproyectociudadano(true);
-        grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeYMillones"));
 
     }
 
