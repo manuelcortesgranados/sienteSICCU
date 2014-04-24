@@ -5846,6 +5846,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipoContCon = "Contrato";
         booltipocontratoconvenio = false;
         boolcontrconsultoria = false;
+        filtrocontrato.setStrnumcontrato("");
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
@@ -5886,6 +5887,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipoContCon = "Convenio";
         booltipocontratoconvenio = true;
         boolcontrconsultoria = false;
+        filtrocontrato.setStrnumcontrato("");
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(true);

@@ -50,17 +50,13 @@
         </h:form>
         <h:panelGroup layout="block" id="pgcontratoconvenio" >
 
-            <center>
-                <h:outputText  styleClass="ikont-txt-cd-contrato"  rendered="#{var.permisonuevodiseno}"  value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
-            </center>
-            <br/><br/>
-
-
             <h:form id="ccForm">
                 <center>
                     <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}">
                         <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
-                            <h:outputText   id="txtObjeto" styleClass="ikont-label-title"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
+                            <h:outputText  styleClass="ikont-txt-cd-contrato"  rendered="#{var.permisonuevodiseno}"  value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
+                            <br/>
+                            <h:outputText   id="txtObjeto" styleClass="ikont-hot-zoom-strnombremedio"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                             <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
                                            title="#{var.editar}">
                                 <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
@@ -85,46 +81,43 @@
                 </center>
                 <br/><br/>
                 <fieldset class="fieldset-interkont2" style="width: 87%;">
-                    <h:outputText class="ikont-label-title" value="#{var.informeFisico}" />
+                    <center>
+                        <h:outputText class="ikont-hot-zoom-strnombremedio" value="#{var.informeFisico}" />
+                    </center>
                     <hr class="ikont-hr-separador-inicial"/>
                     <br/><br/>
                     <h:panelGrid style="width:100%;" columns="1">
                         <h:panelGroup style="alignment-adjust: central">
-                            <h:outputText styleClass="ikont-" value="#{var.tiempoentrega}" />
                             <center>
+                                <h:outputText styleClass="ikont-" value="#{var.tiempoentrega}" />
+                                <br/><br/>
                                 <div class="your-clock"></div>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
                     <br/><br/>
                     <h:panelGrid columnClasses="ikont-col1, ikont-col2, ikont-col3" columns="3">
+                        <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.estado}"/>
+                        <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.deberiaIrEn}"/>
+                        <h:outputLabel>#{var.evolucionFisica}</h:outputLabel>
                         <h:panelGrid  columns="1">
-                            <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.estado}"/>
-                            <br/><br/>
                             <h:outputText styleClass="ikont-hcl-#{Supervisor$GraficoAvanceFisicoConvenio.semaforo} ikont-hot-semaforo dtsemafomoro" >
                                 <f:convertNumber pattern="###.## %" />
                             </h:outputText>
                         </h:panelGrid>
-                        <h:panelGrid  columns="1">
-                            <h:panelGrid columns="1">
-                                <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.deberiaIrEn}"/>
-                                <br/><br/>
-                                <div id="grafAvaFiConvenio" style="width: 350px; height: 80px; margin-top: -50px; margin-left: -15px;">
-                                </div>
-                                <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisicoConvenio.grafico.scriptGrafico}" escape="false" >
-                                </h:outputText>
-                            </h:panelGrid>
+                        <h:panelGrid columns="1">
+                            <div id="grafAvaFiConvenio" style="width: 350px; height: 80px; margin-top: -50px; margin-left: -15px;">
+                            </div>
+                            <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisicoConvenio.grafico.scriptGrafico}" escape="false" >
+                            </h:outputText>
                         </h:panelGrid>
-                        <h:panelGrid  columns="1">
-                            <h:panelGrid id="pg_ubicacion_evolucion"  columns="1" >
-                                <h:outputLabel>#{var.evolucionFisica}</h:outputLabel>
-                                <h:panelGroup layout="block" styleClass="panelcenter">
-                                    <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionFisicoConvenio.grafico.scriptGrafico}" escape="false"/>
-                                    <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
-                                    <div id="grafEvoFisConvenio" style="width: 550px; height: 200px; text-align: left;">
-                                    </div>
-                                </h:panelGroup>
-                            </h:panelGrid>
+                        <h:panelGrid id="pg_ubicacion_evolucion"  columns="1" >
+                            <h:panelGroup layout="block" styleClass="panelcenter">
+                                <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionFisicoConvenio.grafico.scriptGrafico}" escape="false"/>
+                                <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
+                                <div id="grafEvoFisConvenio" style="width: 550px; height: 200px; text-align: left;">
+                                </div>
+                            </h:panelGroup>
                         </h:panelGrid>
                     </h:panelGrid>
 
@@ -134,7 +127,7 @@
 
                 <fieldset class="fieldset-interkont2" style="width: 87%;">
 
-                    <h:outputText class="ikont-label-title" value="#{var.informeFinanciero}" />
+                    <h:outputText class="ikont-hot-zoom-strnombremedio" value="#{var.informeFinanciero}" />
                     <hr class="ikont-hr-separador-inicial"/>
                     <br/><br/>
 
@@ -142,8 +135,10 @@
                         <h:panelGroup>
                             <fieldset class="fieldset-interkont2" style="width: 50%;">
                                 <h:panelGrid  columns="1">
-                                    <h:outputLabel class="ikont-label-title2"  >#{var.valorConvenio}</h:outputLabel>
-                                    <h:outputText  styleClass="ikont-hot-vlrcc"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                    <center>
+                                    <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.valorConvenio}</h:outputLabel>
+                                    </center>
+                                    <h:outputText  styleClass="ikont-hot-zoom-numvobra"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="#{var.formatomoneda}" />
                                     </h:outputText>    
                                 </h:panelGrid>
@@ -413,7 +408,7 @@
                         </h:panelGroup>
                     </center>
                 </rich:collapsiblePanel>
-                
+
                 <rich:collapsiblePanel id="collapsiblePanelComponentesImpactados" header="Componentes impactados"
                                        switchType="ajax" expanded="false" immediate="true"
                                        onclick="#{Supervisor$Contrato.encontrarComponentesImpactados()}"
