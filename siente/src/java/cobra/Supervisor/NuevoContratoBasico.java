@@ -3027,6 +3027,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
 
                 TerceroOption[i++] = itemTercero;
+                if(Boolean.valueOf(Propiedad.getValor("preselenticontratanteppal"))) {
+                    if (ter.getIntcodigo() == Tercero.COD_ENTIDAD_PRINCIPAL) {
+                        contrato.setTercero(ter);
+                    }
+                }
             }
         } catch (Exception e) {
         }
