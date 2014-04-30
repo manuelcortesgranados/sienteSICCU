@@ -2893,7 +2893,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         // if (!Propiedad.getValor("conplanoperativo").equals("true")) {
         //limpiarContrato();
         llenarTipoContratoconsultoria();
-        llenarTipoContrato();
 
         llenarFormaPago();
         llenarComboContratista();
@@ -3129,7 +3128,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Llenar los tipos de contrato (Obra,Bienes y Servicios)
      */
     public void llenarTipoContrato() {
-        List<Tipocontrato> listipcon = getSessionBeanCobra().getCobraService().encontrarTipocontratos();
+        System.out.println("tipoContCon 1 = " + tipoContCon);
+        System.out.println("Propiedad.getValor(\"versioncobra\") = " + Propiedad.getValor("versioncobra"));
+        List<Tipocontrato> listipcon;
+        if(Propiedad.getValor("versioncobra").equals("siccu") 
+                && tipoContCon.equals("Convenio")) {
+            System.out.println("Ingreso!!!");
+            listipcon = getSessionBeanCobra().getCobraService().encontrarTiposConvenio();
+        } else {
+            listipcon = getSessionBeanCobra().getCobraService().encontrarTipocontratos();
+        }
         tipocontrato = new SelectItem[listipcon.size()];
         int i = 0;
         for (Tipocontrato tconcon : listipcon) {
@@ -3786,6 +3794,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        mensaje = bundle.getString("incluyeconvenios");
 //        mensajeout = bundle.getString("incluyeconveniosuperior");
 //        mensajeseleccion = bundle.getString("conveniosuperior");
+        llenarTipoContrato();
     }
 
     /**
@@ -3805,6 +3814,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        mensaje = bundle.getString("incluyecontratos");
 //        mensajeout = bundle.getString("incluyecontratosuperior");
 //        mensajeseleccion = bundle.getString("contratosuperior");
+        llenarTipoContrato();
     }
 
     /**

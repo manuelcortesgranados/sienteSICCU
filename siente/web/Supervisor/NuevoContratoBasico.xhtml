@@ -228,6 +228,15 @@
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <h:panelGrid columns="2">
+                                    
+                                    <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="#{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
+                                    <h:panelGroup id="ikont-hpg-tipoconvenio" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                                        <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
+                                            <f:selectItem itemLabel="Seleccione la opción" itemValue="0"/>
+                                            <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
+                                        </h:selectOneMenu>
+                                    </h:panelGroup>
+                                    
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato font-general" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
