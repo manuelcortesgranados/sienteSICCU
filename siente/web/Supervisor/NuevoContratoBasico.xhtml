@@ -243,7 +243,8 @@
                                         <h:inputText   styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="25" 
                                                        value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
                                         </h:inputText>
-                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">
+                                            <rich:placeholder value="ICCU-XXX-20XX" rendered="#{var.versioncobra eq 'siccu'}"/>
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
