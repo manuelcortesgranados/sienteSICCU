@@ -423,10 +423,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,rsgtpoliz"
-                                                    styleClass="ikont-acb-addpoliza" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas">
-                                    <!--<a4j:ajax event="click" render="gpPolizaSelec,pgpolis" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas" immediate="true"/>-->
-                                </a4j:commandButton>
+                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}"
+                                                    styleClass="ikont-acb-addpoliza" render="gpPolizaSelec,pgpolis" 
+                                                    execute="@this, fecfinContrato, comboTipoPoliza, numPolizaContrato, calendarVenciPoliza, comboentidadPoliza"/>
                             </h:panelGrid>
                         </h:panelGrid>
                         <br/><br/>
