@@ -6,60 +6,98 @@
     xmlns:f="http://java.sun.com/jsf/core"
     >
 
-    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" header="#{var.contratosAsociados}"
+    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" header="Contratos Asociados"
                            expanded="#{Supervisor$Contrato.boolconthijo}" 
                            rendered="#{Supervisor$Contrato.contrato.booleantienehijos}"
-                           toggleListener="#{Supervisor$Contrato.llenarContrMacroConvHijo}" >
+                           toggleListener="#{Supervisor$Contrato.llenarContrMacroConvHijo}" style="width: 87%">
         <a4j:ajax event="switch" render="tContHijo" />
-        
+
         <h:selectOneRadio id="ccRadio" value="Macro">
-            <f:selectItem itemValue="Macro" itemLabel="Macro"/>
+            <f:selectItem itemValue="Macro" itemLabel="Marco"/>
             <f:selectItem itemValue="Derivado" itemLabel="Derivado" />
             <f:ajax event="valueChange" render="tContHijo" listener="#{Supervisor$Contrato.llenarContrMacroConvHijo}" />
         </h:selectOneRadio>
-        
+
         <center>
+            <h:panelGrid columns="3" styleClass="font-general">
+                <h:outputText  styleClass="ikont-"   value="#{var.consultar} #{var.contrato} "  />
+                <h:inputText value="#{Supervisor$Contrato.buscarproyecto}" size="20" />
+                <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarContrConvHijoPorNombre}" render="tContHijo"  />
+            </h:panelGrid >
+
             <h:panelGroup id="notieneContrato">
                 <h:outputLabel  styleClass="ikont-"   rendered="#{Supervisor$Contrato.listaContrConvHijo.size()==0}" value="#{var.notienehijos}" />
             </h:panelGroup>
             <h:panelGroup id="pgtablaContratoHijo">
-                
+
                 <rich:dataTable id="tContHijo" styleClass="ikont-tabla-entidad-contratista"
-                                    rowKeyVar="filaSeleccionada"
-                                    value="#{Supervisor$Contrato.listaContrConvHijo}"
-                                    sortMode="single" var="row"  rows="3"
-                                    binding="#{Supervisor$Contrato.tablaContratoHijo}">
-                    
-                    
-                    <rich:column >
-                        <fieldset class="dg-fieldset-interkont">
-                            <rich:panel bodyClass="pbody">
-                                <h:panelGrid columns="3">
-                                    <rich:column width="80%">
-                                        <h:panelGrid columns="1">
-                                            <div class="ikont-dg-hr" >#{row.strnombre}</div>
-                                            <div class="ikont-dg-tr" >#{row.contratista.strnombre} #{row.contratista.strapellido1}</div>
-                                        </h:panelGrid>
-                                    </rich:column>
-                                    <rich:column width="10%">
-                                        <a class="imgtipo tipo#{row.intidcontrato}"  />
-                                    </rich:column>
-                                    <rich:column width="10%">
-                                        <h:commandLink immediate="true"  action="#{Supervisor$Contrato.detalleContratoHijo}">
-                                            <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                                        </h:commandLink>
-                                    </rich:column>
-                                </h:panelGrid>
-                            </rich:panel>
-                        </fieldset>
+                                rowKeyVar="filaSeleccionada"
+                                value="#{Supervisor$Contrato.listaContrConvHijo}"
+                                sortMode="single" var="_row"  rows="20"
+                                rowClasses="cabezo_tabla01, cabezo_tabla02" style="width: 87%;">
+
+                    <rich:column id="tc_strnrocontrato"   styleClass="ikont-rc-tcstrnrocontrato">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
+                            <h:outputText  styleClass="ikont-hot-houtnrocontrato"   value="#{var.noContrato} "/>
+                        </f:facet>
+                        <h:outputText  styleClass="ikont-hot-ststrnrocontrato"   id="st_strnrocontrato" value="#{_row.strnumcontrato}"/>
                     </rich:column>
-                    
+                    <rich:column  styleClass="ikont-rc-tcstrnrocontrato">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
+                            <h:outputText  styleClass="ikont-hot-objetocontrato"   value="#{var.nombre} "/>
+                        </f:facet>
+                        <h:inputTextarea  value="#{_row.strnombre}" readonly="true" cols="35" rows="3" />
+                    </rich:column>
+                    <rich:column id="tc_strnomcontratista" styleClass="ikont-rc-tcstrnomcontratista">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
+                            <h:outputText  styleClass="ikont-hot-houtcontratis"   value="#{var.houtcontratis}"/>
+                        </f:facet>
+                        <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contratista.strnombre} #{row.contratista.strapellido1}"/>
+                    </rich:column>
+                    <rich:column id="tc_valor" styleClass="ikont-rc-tcvalor">
+                        <f:facet class="ikont-colum-superior-consulta" name="header">
+                            <h:outputText  styleClass="ikont-hot-vlrcontra"   value="#{var.vlrcontra}"/>
+                        </f:facet>
+                        <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="#{_row.numvlrcontrato}">
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column id="tc_consultar_contrato"  >
+                        <f:facet name="header" >
+                            <h:outputText value="#{var.consultar}"/>
+                        </f:facet>
+                        <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
+                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.intidcontrato}" />
+                        </h:commandLink>
+                    </rich:column>
                     <f:facet name="footer">
-                        <rich:dataScroller styleClass="dataGrid" />
+
+                        <rich:column colspan="10" breakRowBefore="true">
+                            <center>
+                                <h:panelGrid columns="4">
+                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.primeraPagina}" action="#{Supervisor$Contrato.getFirstContracts}"
+                                                       render="tContHijo">
+                                    </a4j:commandButton>
+
+                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.anteriorPagina}" action="#{Supervisor$Contrato.getBackContracts}"
+                                                       render="tContHijo">
+                                    </a4j:commandButton>
+
+                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.siguientePagina}" action="#{Supervisor$Contrato.getNextContracts}"
+                                                       render="tContHijo">
+                                    </a4j:commandButton>
+
+                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.ultimoPagina}" action="#{Supervisor$Contrato.getLastContracts}"
+                                                       render="tContHijo">
+                                    </a4j:commandButton>
+                                </h:panelGrid>
+                            </center>
+                        </rich:column>
+
                     </f:facet>
-                
+
                 </rich:dataTable>
-               
+
             </h:panelGroup>
         </center>
     </rich:collapsiblePanel>

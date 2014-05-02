@@ -837,6 +837,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
     private Tercero tercero = new Tercero();
 
+    private List<Contrato> contAsociados = new ArrayList<Contrato>();
+    
+    private List<Obra> proyAsociados = new ArrayList<Obra>();
     /*Variable para almancenar el tipo de Aporte para el la planificacion de pagos.
      * Esta puede ser en valor o en porcentaje.
      * 
@@ -916,6 +919,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private Componente componenteImpactado = new Componente();
 
     private Componente subcomponenteImpactado = new Componente();
+    
+    private String objetoSub = "";
 
     /**
      * Get the value of botonGuaradado
@@ -1234,6 +1239,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private int validardatosbasicosplano = 0;
 
+    private boolean primeraPagina;
+    private boolean anteriorPagina;
+    private boolean siguientePagina;
+    private boolean ultimoPagina;
+    
+    
+    
     /**
      * Variable para ver los reportes de plan operativo
      *
@@ -2912,9 +2924,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.listaxTipocontratoselect();
         filtrocontrato.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador(6));
         // }
-        
+
         encontrarComponentesImpactados();
-        
+
     }
 
     public String instanciarPolizar() {
@@ -3534,11 +3546,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
-        
+
         if (!listacomponentesimpactados.isEmpty()) {
             getSessionBeanCobra().getCobraService().guardarComponentesImpactados(listacomponentesimpactados);
         }
-        
+
         if (Boolean.parseBoolean(bundle.getString("aplicamarcologico"))) {
             if (estrategia != 0 && booltipocontratoconvenio) {
                 Contratoestrategia contratoestrategia = new Contratoestrategia();
@@ -4970,13 +4982,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
         setNumcontratotemporal(cont.getStrnumcontrato());
-        if(booltipocontratoconvenio){
-             llenarContrMacroConvHijo();
-        }else{
+        if (booltipocontratoconvenio) {
+            llenarContrMacroConvHijo();
+        } else {
             llenarObraAsociada();
         }
+
+        if(contrato.getTextobjeto().length()>100){
+            objetoSub = contrato.getTextobjeto().substring(0, 100);
+        }else{
+            objetoSub = contrato.getTextobjeto();
+        }
         
-       
     }
 
     /**
@@ -6113,6 +6130,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         return null;
     }
+    
+    public String llenarContrConvHijoPorNombre() {
+        boolconthijo = true;
+        listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijosPorNombre(getContrato(), false, getSessionBeanCobra().getUsuarioObra(), buscarproyecto);
+
+        return null;
+    }
 
     /**
      * Obtiene los contratos o subconvenios hijos a partir de un contrato.
@@ -6126,7 +6150,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         llenarContrConvHijo();
 
         if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
-
+            buscarproyecto = "";
             for (Contrato cMacro : listaContrConvHijo) {
 
                 if (cMacro.getContrato().getBooltipocontratoconvenio()) {
@@ -6143,9 +6167,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 
-        listaContrConvHijo = listaContr;
-
+        contAsociados = listaContr;
+        getFirstContracts();
+        
         return null;
+    }
+    
+    public void siguientesConvenios(){
+        
     }
 
     /**
@@ -6389,24 +6418,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         if (buscarproyecto.length() != 0) {
             listaObraContrato.clear();
-        } 
+        }
         primeroObra();
         return null;
     }
+    
 
-    /**
-     * Muestra los primeros 20 proyectos cuando se inicia el simpletooglepanel ,
-     * si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
-     * esta buscando
-     *
-     * @return null
-     */
-    public String primeroObra() {
+    public void primeroDetProyectosAsociados() {
         listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
 
         pagina = 1;
-
         if (totalfilas > 0) {
             if (totalfilas <= 20) {
                 totalpaginas = 1;
@@ -6423,11 +6445,98 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 verultimoobra = false;
             }
             buscarproyecto = "";
-            return null;
         } else {
             buscarproyecto = "";
-            FacesUtils.addInfoMessage("No se encontrarÃ³n proyectos");
+            FacesUtils.addInfoMessage("No se encontraron proyectos");
         }
+    }
+
+    public void anterioresDetProyectosAsociados() {
+        pagina = pagina - 1;
+        int num = (pagina - 1) * 20;
+
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+
+        if (totalfilas <= 20) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
+                totalpaginas++;
+            }
+        }
+
+        if (pagina > 1) {
+            veranteriorcontrato = true;
+        } else {
+            veranteriorcontrato = false;
+        }
+        verultimoscontrato = true;
+    }
+
+    public void siguienteDetProyectosAsociados() {
+        int num = (pagina) * 20;
+
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, num, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+
+        if (totalfilas <= 20) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = pagina + 1;
+        if (pagina < totalpaginas) {
+            verultimoscontrato = true;
+        } else {
+            verultimoscontrato = false;
+        }
+        veranteriorcontrato = true;
+    }
+
+    public void ultimoDetProyectoAsociados() {
+
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        int num = totalfilas % 20;
+        if (num == 0) {
+            num = 20;
+        }
+        listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, totalfilas, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+
+        if (totalfilas <= 20) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = totalpaginas;
+        if (pagina < totalpaginas) {
+            verultimoscontrato = true;
+        } else {
+            verultimoscontrato = false;
+        }
+        veranteriorcontrato = true;
+
+    }
+
+    /**
+     * Muestra los primeros 20 proyectos cuando se inicia el simpletooglepanel ,
+     * si la búsqueda lleva algún parámetro se trae la obra o proyecto que se
+     * esta buscando
+     *
+     * @return null
+     */
+    public String primeroObra() {
+        totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        proyAsociados = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, totalfilas, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
+        
+       getFirstProjects();
         return null;
     }
 
@@ -9033,7 +9142,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void encontrarComponentesImpactados() {
         listacomponentesimpactados = new ArrayList<Contratocomponente>();
-        
+
         listacomponentesimpactados = getSessionBeanCobra().getCobraService().encontrarComponentesImpactados(contrato);
     }
 
@@ -9084,7 +9193,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         } else {
             componenteAdicionar = getSessionBeanCobra().getCobraService().encontrarComponentePorId(componenteImpactado);
-            
+
             contratocomponente.setContrato(contrato);
             contratocomponente.setComponente(componenteAdicionar);
 
@@ -9103,5 +9212,299 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         llenarListaComponentes();
     }
-   
+
+    /**
+     * @return the contAsociados
+     */
+    public List<Contrato> getContAsociados() {
+        return contAsociados;
+    }
+
+    /**
+     * @param contAsociados the contAsociados to set
+     */
+    public void setContAsociados(List<Contrato> contAsociados) {
+        this.contAsociados = contAsociados;
+    }
+
+    /**
+     * @return the objetoSub
+     */
+    public String getObjetoSub() {
+        return objetoSub;
+    }
+
+    /**
+     * @param objetoSub the objetoSub to set
+     */
+    public void setObjetoSub(String objetoSub) {
+        this.objetoSub = objetoSub;
+    }
+
+    private List<Contrato> rangoConvenios(List<Contrato> lista, int inicio, int fin) {
+        List<Contrato> primeros = new ArrayList<Contrato>();
+        for(int i = inicio; i<=fin; i++){
+            primeros.add(lista.get(i));
+        }
+        return primeros;
+    }
+    
+    private List<Obra> rangoProyectos(List<Obra> lista, int inicio, int fin) {
+        List<Obra> primeros = new ArrayList<Obra>();
+        for(int i = inicio; i<=fin; i++){
+            primeros.add(lista.get(i));
+        }
+        return primeros;
+    }
+
+    /**
+     * @return the primeraPagina
+     */
+    public boolean isPrimeraPagina() {
+        return primeraPagina;
+    }
+
+    /**
+     * @param primeraPagina the primeraPagina to set
+     */
+    public void setPrimeraPagina(boolean primeraPagina) {
+        this.primeraPagina = primeraPagina;
+    }
+
+    /**
+     * @return the anteriorPagina
+     */
+    public boolean isAnteriorPagina() {
+        return anteriorPagina;
+    }
+
+    /**
+     * @param anteriorPagina the anteriorPagina to set
+     */
+    public void setAnteriorPagina(boolean anteriorPagina) {
+        this.anteriorPagina = anteriorPagina;
+    }
+
+    /**
+     * @return the siguientePagina
+     */
+    public boolean isSiguientePagina() {
+        return siguientePagina;
+    }
+
+    /**
+     * @param siguientePagina the siguientePagina to set
+     */
+    public void setSiguientePagina(boolean siguientePagina) {
+        this.siguientePagina = siguientePagina;
+    }
+
+    /**
+     * @return the ultimoPagina
+     */
+    public boolean isUltimoPagina() {
+        return ultimoPagina;
+    }
+
+    /**
+     * @param ultimoPagina the ultimoPagina to set
+     */
+    public void setUltimoPagina(boolean ultimoPagina) {
+        this.ultimoPagina = ultimoPagina;
+    }
+
+    public void getFirstContracts() {
+        int fin = contAsociados.size()>=20 ? 19 : contAsociados.size()-1;
+            
+        
+        listaContrConvHijo = rangoConvenios(contAsociados, 0, fin);
+        primeraPagina = false;
+        anteriorPagina = false;
+        pagina = 1;
+        int round = Math.round(contAsociados.size()/20);
+        if(round*20<contAsociados.size()){
+            round++;
+        }
+        totalpaginas = round;
+        if(contAsociados.size()<=20){
+            siguientePagina = false;
+            ultimoPagina = false;
+        }else{
+            siguientePagina = true;
+            ultimoPagina = true;
+        }
+    }
+    
+    public void getBackContracts() {
+        pagina--;
+        int fin = pagina*20-1;
+        int ini = (pagina-1)*20;
+        
+        listaContrConvHijo = rangoConvenios(contAsociados, ini, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+    public void getNextContracts() {
+        pagina++;
+        int fin = pagina*20 > contAsociados.size() ? contAsociados.size()-1 : pagina*20-1;
+        int ini = (pagina-1)*20;
+        
+        listaContrConvHijo = rangoConvenios(contAsociados, ini, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+    
+    public void getLastContracts() {
+        pagina = totalpaginas;
+        int fin = contAsociados.size()-1;
+        
+        
+        listaContrConvHijo = rangoConvenios(contAsociados, fin-20 < 0 ? 0 : fin-20, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+    
+     public void getFirstProjects() {
+        int fin = proyAsociados.size()>=20 ? 19 : proyAsociados.size()-1;
+            
+        
+        listaObraContrato = rangoProyectos(proyAsociados, 0, fin);
+        primeraPagina = false;
+        anteriorPagina = false;
+        pagina = 1;
+        int round = Math.round(proyAsociados.size()/20);
+        if(round*20<proyAsociados.size()){
+            round++;
+        }
+        totalpaginas = round;
+        if(proyAsociados.size()<=20){
+            siguientePagina = false;
+            ultimoPagina = false;
+        }else{
+            siguientePagina = true;
+            ultimoPagina = true;
+        }
+    }
+    
+    public void getBackProyects() {
+        pagina--;
+        int fin = pagina*20-1;
+        int ini = (pagina-1)*20;
+        
+        listaObraContrato = rangoProyectos(proyAsociados, ini, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+    public void getNextProyects() {
+        pagina++;
+        int fin = pagina*20 > proyAsociados.size() ? proyAsociados.size()-1 : pagina*20-1;
+        int ini = (pagina-1)*20;
+        
+        listaObraContrato = rangoProyectos(proyAsociados, ini, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+    
+    public void getLastProjects() {
+        pagina = totalpaginas;
+        int fin = proyAsociados.size()-1;
+        
+        
+        listaObraContrato = rangoProyectos(proyAsociados, fin-20 < 0 ? 0 : fin-20, fin);
+        if(pagina == 1){
+            primeraPagina = false;
+            anteriorPagina = false;
+        }else{
+            primeraPagina = true;
+            anteriorPagina = true;
+        }
+        
+        if(pagina<totalpaginas){
+            siguientePagina = true;
+            ultimoPagina = true;
+        }else{
+            siguientePagina = false;
+            ultimoPagina = false;
+        }
+    }
+
+    /**
+     * @return the proyAsociados
+     */
+    public List<Obra> getProyAsociados() {
+        return proyAsociados;
+    }
+
+    /**
+     * @param proyAsociados the proyAsociados to set
+     */
+    public void setProyAsociados(List<Obra> proyAsociados) {
+        this.proyAsociados = proyAsociados;
+    }
+
 }

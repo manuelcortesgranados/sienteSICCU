@@ -20,8 +20,7 @@
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript">
-            localStorage.setItem('accionAdminConvenio', "ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admconvenio");
-        </script>
+            localStorage.setItem('accionAdminConvenio', "ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admconvenio");</script>
     </ui:define>
     <ui:define name="title">
         <h:panelGroup id="layoutTitle">
@@ -51,92 +50,110 @@
         <h:panelGroup layout="block" id="pgcontratoconvenio" >
 
             <h:form id="ccForm">
-                <center>
-                    <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarObjetoContrato}">
-                        <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
-                            <h:outputText  styleClass="ikont-txt-cd-contrato"  rendered="#{var.permisonuevodiseno}"  value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
-                            <br/>
-                            <h:outputText   id="txtObjeto" styleClass="ikont-hot-zoom-strnombremedio"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
-                            <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
-                                           title="#{var.editar}">
-                                <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
-                                <h:graphicImage  styleClass="ikont-"    width="25" height="25" value="/resources/imgs/bt_editar.png" />
-                            </h:commandLink>
-                        </h:panelGroup>
-                        <h:panelGroup id="txthabilitarModificar" rendered="#{Supervisor$Contrato.modificartxt}">
-                            <h:inputTextarea required="true" styleClass="ikont-editar-hit" id="habilitarObjeto" cols="60" value="#{Supervisor$Contrato.contrato.textobjeto}" />
-                            <a4j:commandLink id="btn_modificarObjeto" render="form_editar"
-                                             action="#{Supervisor$Contrato.guardarModficiacionObjetoContrato}"
-                                             execute="txthabilitarModificar,txthabilitarObjeto" title="#{var.editar}">
-                                <h:graphicImage  styleClass="ikont-"    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
-                            </a4j:commandLink>
-                            <a4j:commandLink id="bt_cancelar" immediate="true" render="form_editar"
-                                             action="#{Supervisor$Contrato.cancelarModificacionObjeto}"
-                                             execute="@this,txthabilitarModificar,txthabilitarObjeto">
-                                <h:graphicImage  styleClass="ikont-"    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
-                            </a4j:commandLink>
-                            <rich:message for="habilitarObjeto"  />
-                        </h:panelGroup>
-                    </h:panelGroup>
-                </center>
-                <br/><br/>
-                <fieldset class="fieldset-interkont2" style="width: 87%;">
-                    <center>
-                        <h:outputText class="ikont-hot-zoom-strnombremedio" value="#{var.informeFisico}" />
-                    </center>
-                    <hr class="ikont-hr-separador-inicial"/>
-                    <br/><br/>
-                    <h:panelGrid style="width:100%;" columns="1">
-                        <h:panelGroup style="alignment-adjust: central">
+                <rich:collapsiblePanel switchType="client" header="#{var.infoGeneral}" style="width: 87%;" expanded="true">
+                    <h:panelGrid columns="2" style="width: 100%;">
+                        <h:panelGrid style="width: 400px; border-spacing: 4px">
+                            <h:panelGroup >
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratanteCliente}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <B>
+                                    <h:outputLabel id="entiodadcontratantevalue" styleClass="ikont-" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
+                                    </h:outputLabel>
+                                </B>
+                            </h:panelGroup>
+                            <hr class="ikont-hr" />
+                            <h:panelGroup>
+                                <h:outputLabel rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.nroConvenio}</h:outputLabel>
+                                <h:outputLabel rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.noContrato}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <B>
+                                    <h:outputText  styleClass="ikont-"   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" /> 
+                                </B>
+                            </h:panelGroup>
+                            <hr class="ikont-hr" />
+                            <h:panelGroup>
+                                <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.vigenciaConvenio}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <h:outputLabel class="ikont-" style="font-weight: bold;">#{Supervisor$Contrato.contrato.datefechaini} #{Supervisor$Contrato.contrato.datefechafin} </h:outputLabel>
+                                <hr class="ikont-hr" />
+                            </h:panelGroup>
+                            <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.objetoMay}</h:outputLabel>
+                            <interkont:spacer width="20" />
+                            <div id = "objetoId">
+                                <h:outputLabel id ="objetoId" class="ikont-" style="font-weight: bold;" >#{Supervisor$Contrato.objetoSub}
+                                    <rich:tooltip followMouse="true" direction="bottomRight" styleClass="ikont-rtt-btndetalleproyecto" >
+                                        <h:outputText styleClass="ikont-hol-strnombreobra" value="#{Supervisor$Contrato.contrato.textobjeto}"></h:outputText> <br/>
+                                    </rich:tooltip>
+                                </h:outputLabel>
+                            </div>
+                            <br/><br/>
+                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <B>
+                                    <h:outputLabel class="ikont-hol-detalle-proyecto" style="color: grey"  >Plan nacional de desarrollo</h:outputLabel>    
+                                </B>
+                                <hr class="ikont-hr-separador-inicial" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Sector Económico</h:outputLabel> 
+                                <hr class="ikont-hr" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Objetivos PDN</h:outputLabel>   
+                                <hr class="ikont-hr" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Estrategia</h:outputLabel>  
+                                <hr class="ikont-hr" />
+                            </h:panelGroup>
+
+                        </h:panelGrid>
+                        <h:panelGrid style="width: 100%;">
                             <center>
-                                <h:outputText styleClass="ikont-" value="#{var.tiempoentrega}" />
-                                <br/><br/>
-                                <div class="your-clock"></div>
+                                <h:panelGrid style="width:100%;" columns="1">
+                                    <h:panelGroup style="alignment-adjust: central">
+                                        <center>
+                                            <h:outputText styleClass="ikont-" value="#{var.tiempoentrega}" />
+                                            <br/><br/>
+                                            <div class="your-clock"></div>
+                                        </center>
+                                    </h:panelGroup>
+                                </h:panelGrid>
                             </center>
-                        </h:panelGroup>
+                        </h:panelGrid>
                     </h:panelGrid>
-                    <br/><br/>
-                    <h:panelGrid columnClasses="ikont-col1, ikont-col2, ikont-col3" columns="3">
-                        <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.estado}"/>
-                        <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.deberiaIrEn}"/>
-                        <h:outputLabel>#{var.evolucionFisica}</h:outputLabel>
+                </rich:collapsiblePanel>
+                <rich:collapsiblePanel switchType="client" header="#{var.informeFisico}" style="width: 87%;" expanded="true">
+                    <h:panelGrid columns="2">
                         <h:panelGrid  columns="1">
+                            <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.estado}"/>
+                            <br/><br/>
                             <h:outputText styleClass="ikont-hcl-#{Supervisor$GraficoAvanceFisicoConvenio.semaforo} ikont-hot-semaforo dtsemafomoro" >
                                 <f:convertNumber pattern="###.## %" />
                             </h:outputText>
-                        </h:panelGrid>
-                        <h:panelGrid columns="1">
-                            <div id="grafAvaFiConvenio" style="width: 350px; height: 80px; margin-top: -50px; margin-left: -15px;">
+                            <br/><br/><br/>
+                            <div id="grafAvaFiConvenio" style="width: 350px; height: 100px; margin-top: -50px; margin-left: -15px; font-weight: 600; font-size: 20px">
                             </div>
                             <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisicoConvenio.grafico.scriptGrafico}" escape="false" >
                             </h:outputText>
                         </h:panelGrid>
                         <h:panelGrid id="pg_ubicacion_evolucion"  columns="1" >
+                            <h:outputLabel>#{var.evolucionFisica}</h:outputLabel>
                             <h:panelGroup layout="block" styleClass="panelcenter">
                                 <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionFisicoConvenio.grafico.scriptGrafico}" escape="false"/>
                                 <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
-                                <div id="grafEvoFisConvenio" style="width: 550px; height: 200px; text-align: left;">
+                                <div id="grafEvoFisConvenio" style="width: 550px; height: 300px; text-align: left;">
                                 </div>
                             </h:panelGroup>
                         </h:panelGrid>
                     </h:panelGrid>
-
-                </fieldset>
-
-                <br/>
-
-                <fieldset class="fieldset-interkont2" style="width: 87%;">
-
-                    <h:outputText class="ikont-hot-zoom-strnombremedio" value="#{var.informeFinanciero}" />
-                    <hr class="ikont-hr-separador-inicial"/>
-                    <br/><br/>
-
+                </rich:collapsiblePanel>
+                <rich:collapsiblePanel switchType="client" header="#{var.informeFinanciero}" style="width: 87%;" expanded="true">
                     <h:panelGrid  style="width: 100%;" columns="2">
                         <h:panelGroup>
                             <fieldset class="fieldset-interkont2" style="width: 50%;">
                                 <h:panelGrid  columns="1">
                                     <center>
-                                    <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.valorConvenio}</h:outputLabel>
+                                        <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.valorConvenio}</h:outputLabel>
                                     </center>
                                     <h:outputText  styleClass="ikont-hot-zoom-numvobra"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="#{var.formatomoneda}" />
@@ -198,114 +215,28 @@
                         <h:panelGroup style="width:60%;">
 
                             <h:outputLabel>#{var.evolucionFinanciera}</h:outputLabel>
-                            <h:panelGroup layout="block" styleClass="panelcenter">
-<!--                                <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
+<!--                            <h:panelGroup layout="block" styleClass="panelcenter">
+                                <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
                                  al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style 
                                 <div id="graficoEvolucionContrato" style="width: 550px; height: 200px; text-align: left;">
-                                </div>-->
+                                </div>
+                            </h:panelGroup>-->
+                            <h:panelGroup layout="block" styleClass="panelcenter">
+                                <div id="imagenId" style="width: 550px; height: 400px; text-align: left;">
+                                    <h:graphicImage value="/resources/imgs/TABLASINDATOS.png"></h:graphicImage>
+                                </div>
                             </h:panelGroup>
 
                         </h:panelGroup>
                     </h:panelGrid>
 
-                </fieldset>
-
-                <br/>
-
-                <fieldset class="fieldset-interkont2" style="width: 87%;">
-
-
-                    <h:panelGrid columns="2">
-
-                        <h:panelGrid style="width: 400px;">
-
-                            <h:outputText class="ikont-label-title" value="#{var.infoGeneral}" />
-                            <hr class="ikont-hr-separador-inicial" />
-                            <br/><br/>
-
-                            <h:panelGroup >
-                                <h:outputLabel class="ikont-"  >#{var.contratanteCliente}</h:outputLabel>
-                                <interkont:spacer width="20" />
-                                <h:outputLabel id="entiodadcontratantevalue" styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
-                                </h:outputLabel>
-                            </h:panelGroup>
-                            <hr class="ikont-hr" />
-                            <h:panelGroup>
-                                <h:outputLabel rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.nroConvenio}</h:outputLabel>
-                                <h:outputLabel rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.noContrato}</h:outputLabel>
-                                <interkont:spacer width="20" />
-                                <h:outputText  styleClass="ikont-"   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />    
-                            </h:panelGroup>
-                            <hr class="ikont-hr" />
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-"  >#{var.gerente}</h:outputLabel>
-                                <interkont:spacer width="20" />
-                                <h:outputText  styleClass="ikont-" value="#{Supervisor$Contrato.contrato.gerenteconvenio.strnombre}" />
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-"  >#{var.supervisorciu}</h:outputLabel>
-                                <interkont:spacer width="20" />
-                                <h:outputText  styleClass="ikont-" value="" />
-                            </h:panelGroup>
-                            <hr class="ikont-hr" />
-                            <h:panelGroup >
-                                <h:outputLabel class="ikont-"  >#{var.contratista}</h:outputLabel>    
-                                <interkont:spacer width="20" />
-                                <h:outputLabel class="ikont-"  >#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}</h:outputLabel>    
-                                <hr class="ikont-hr" />
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-"  >#{var.noConvenioMarco}</h:outputLabel>    
-                                <interkont:spacer width="20" />
-                                <h:outputLabel class="ikont-"  >#{Supervisor$Contrato.contrato.contrato.strnumcontrato}</h:outputLabel>    
-                                <hr class="ikont-hr" />
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{var.aplicaepc and !Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel value="Enlace proceso SECOP" class="ikont-" />    
-                                <interkont:spacer width="20" />
-                                <h:outputLink id="outputLinkEnlaceProceso" value="#{Supervisor$Contrato.contrato.strenlaceproceso}" target="_blank"
-                                              rendered="#{Supervisor$Contrato.contrato.strenlaceproceso != null}">
-                                    <h:outputLabel id="outputLabelNombreEnlace" value="Seguir enlace" />
-                                </h:outputLink>
-                                <h:outputLabel id="outputLabelEnlaceProceso" value="No definido." rendered="#{Supervisor$Contrato.contrato.strenlaceproceso == null}" styleClass="ikont-hol-strenlaceproceso" />
-                                <hr class="ikont-hr" />
-                            </h:panelGroup>
-                            <br/>
-
-                            <h:outputText class="ikont-label-title" value="#{var.vigenciaConvenio}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}"/>
-                            <h:outputText class="ikont-label-title" value="#{Supervisor$Contrato.contrato.datefechaini} #{Supervisor$Contrato.contrato.datefechafin}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}"/>
-                            <br/>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="hol_info_convenio_zoom"  >Plan nacional de desarrollo</h:outputLabel>    
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="hol_info_convenio_zoom"  >Sector Económico</h:outputLabel>    
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="hol_info_convenio_zoom"  >Objetivos PDN</h:outputLabel>    
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="hol_info_convenio_zoom"  >Estrategia</h:outputLabel>    
-                            </h:panelGroup>
-
-                        </h:panelGrid>
-                        <h:panelGrid style="width: 100%;">
-
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <ui:include src="contratosConvenio.xhtml" />
-                            </h:panelGroup>
-                            <h:panelGroup rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <ui:include src="proyectosContrato.xhtml" />
-                            </h:panelGroup>
-
-                        </h:panelGrid>
-                    </h:panelGrid>
-
-
-                    <br/>
-
-                </fieldset>
-
+                </rich:collapsiblePanel>
+                <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" style="width: 87%">
+                    <ui:include src="contratosConvenio.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                    <ui:include src="proyectosContrato.xhtml" />
+                </h:panelGroup>                        
                 <rich:collapsiblePanel switchType="client" header="Datos relevantes" expanded="true">
                     <h:panelGrid columns="2" class="ikont-hpg-datosrelevantes" columnClasses="verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop,verticalalingtop">
                         <h:panelGrid styleClass="ikont-hpg-griddetaob">
@@ -550,7 +481,6 @@
                 });
                 var timefalta = document.getElementById("finfecha").value;
                 var futuro = new Date(timefalta).getTime();
-
                 var ahora = #{SessionBeanCobra.fechaMilisegundosServidor} - (1000 * 60 * 60 * 24);
                 var faltan = futuro - ahora;
                 if (faltan > 0) {
@@ -561,15 +491,12 @@
                 }
                 clock.setTime(segundos);
                 clock.start();
-            });
-
-        </script>
+            });</script>
 
         <h:outputScript name="csspopup.js" library="js" />
         <h:outputScript name="jquery.timers-1.0.0.js" library="js" />
         <script type="text/javascript" language="JavaScript">
             window.onload = iniciarFunciones();
-
             function iniciarFunciones() {
                 var timefalta = document.getElementById("finfecha").value;
                 var futuro = new Date(timefalta);
@@ -577,11 +504,9 @@
                 var milisegundosNavegador = fechaNavegador.getTime();
                 var fechaSever =#{SessionBeanCobra.fechaMilisegundosServidor1} + (1000 * 60 * 60 * 24);
                 var diferencia = new Date(fechaSever);
-
                 setInterval(function() {
                     var ahora = new Date();
                     var faltan = futuro - diferencia;
-
                     if (faltan > 0) {
                         var segundos = Math.round(faltan / 1000);
                         var minutos = Math.floor(segundos / 60);
