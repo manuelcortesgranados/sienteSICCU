@@ -228,13 +228,23 @@
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <h:panelGrid columns="2">
+                                    
+                                    <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="#{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
+                                    <h:panelGroup id="ikont-hpg-tipoconvenio" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                                        <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
+                                            <f:selectItem itemLabel="Seleccione la opción" itemValue="0"/>
+                                            <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
+                                        </h:selectOneMenu>
+                                    </h:panelGroup>
+                                    
                                     <h:outputLabel  styleClass="ikont-hol-numcontrato font-general" id="lblnumerocontrato"  value="(*) #{var.numero} #{Supervisor$Contrato.tipoContCon}:" for="txtNumcont">
                                     </h:outputLabel>
                                     <h:panelGrid columns="2">                                               
                                         <h:inputText   styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcontString" size="25" maxlength="25" 
                                                        value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!var.permisonuevodiseno  or !Supervisor$Contrato.booltipocontratoconvenio or  var.aplicaepc}">                                                                                        
                                         </h:inputText>
-                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">                                            
+                                        <h:inputText styleClass="ikont-hit-numcont" immediate="true" required="true" id="txtNumcont" size="25" maxlength="25" value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{var.permisonuevodiseno and Supervisor$Contrato.booltipocontratoconvenio and !var.aplicaepc}">
+                                            <rich:placeholder value="ICCU-XXX-20XX" rendered="#{var.versioncobra eq 'siccu'}"/>
                                             <f:validateLongRange minimum="0" />                                            
                                         </h:inputText>
                                         <rich:message for="txtNumcont" styleClass="ikont-rm-numcont"  />
@@ -413,10 +423,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
-                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas,rsgtpoliz"
-                                                    styleClass="ikont-acb-addpoliza" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas">
-                                    <!--<a4j:ajax event="click" render="gpPolizaSelec,pgpolis" execute="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas" immediate="true"/>-->
-                                </a4j:commandButton>
+                                <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}"
+                                                    styleClass="ikont-acb-addpoliza" render="gpPolizaSelec,pgpolis" 
+                                                    execute="@this, fecfinContrato, comboTipoPoliza, numPolizaContrato, calendarVenciPoliza, comboentidadPoliza"/>
                             </h:panelGrid>
                         </h:panelGrid>
                         <br/><br/>
