@@ -36,6 +36,12 @@
                                 sortMode="single" var="_row"  rows="20"
                                 rowClasses="cabezo_tabla01, cabezo_tabla02" style="width: 87%;">
 
+                    <f:facet name="header">
+
+                            <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
+                                <h:outputText  styleClass="ikont-hot-contratoencontrados"   value="#{var.contrato}s encontrados #{Supervisor$Contrato.contAsociados.size()} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                            </rich:column>
+                    </f:facet>
                     <rich:column id="tc_strnrocontrato"   styleClass="ikont-rc-tcstrnrocontrato">
                         <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-houtnrocontrato"   value="#{var.noContrato} "/>
