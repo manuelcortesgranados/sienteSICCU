@@ -25,45 +25,55 @@
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGrid id="gpPolizaSelec" cellspacing="8" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
+            <h:panelGrid id="gpPolizaSelec" cellspacing="8" columns="3"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
                 <h:outputLabel  styleClass="ikont-hol-lblTipoPoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
                 </h:outputLabel>
-                <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.polizacontrato.tipopoliza.inttipopoliza}"  >
+                <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.polizacontrato.tipopoliza.inttipopoliza}" required="true" >
+                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione la opción" itemValue="0" />
                     <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}" var="poliza" itemValue="#{poliza.inttipopoliza}" itemLabel="#{poliza.strdesctipopoliza}"/>
-
                 </h:selectOneMenu>
+                <rich:message for="comboTipoPoliza" styleClass="ikont-rm-tipopoliza"/>
 
-                <h:outputLabel  styleClass="ikont-hol-lblnumPolizaContrato"    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato" >
+                <h:outputLabel  styleClass="ikont-hol-lblnumPolizaContrato"    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato"/>
+                <h:inputText id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}" required="true"/>
+                <rich:message for="numPolizaContrato" styleClass="ikont-rm-numpoliza"/>
 
-                </h:outputLabel>
-                <h:inputText id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}" />
+                <h:outputLabel  styleClass="ikont-hol-numvalorasegurado font-general" id="ikont-hol-numvalorasegurado"  value=" #{var.valor}:" for="ikont-hit-numvalorasegurado" rendered="#{var.polizaconvalor}"/>
+                <h:inputText  styleClass="ikont-hit-numvalorasegurado" id="ikont-hit-numvalorasegurado" rendered="#{var.polizaconvalor}"
+                              value="#{Supervisor$Contrato.polizacontrato.numvalorasegurado}" required="true">
+                    <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
+                </h:inputText>
+                <rich:message for="ikont-hit-numvalorasegurado" styleClass="ikont-rm-numvalorasegurado" rendered="#{var.polizaconvalor}"/>
 
-                <h:outputLabel  styleClass="ikont-hol-lblVencimientoPoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
-
-                </h:outputLabel>
+                <h:outputLabel  styleClass="ikont-hol-lblVencimientoPoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza"/>
                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
-                               value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
+                               value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" required="true"/>
+                <rich:message for="calendarVenciPoliza" styleClass="ikont-rm-fechavencimientopoliza"/>
 
-
-                <h:outputLabel  styleClass="ikont-hol-lblEntidadPoliza"   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
-                </h:outputLabel>
-                <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
-                    <f:selectItems value="#{Supervisor$Contrato.companias}"/>
+                <h:outputLabel  styleClass="ikont-hol-lblEntidadPoliza"   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza"/>
+                <h:selectOneMenu  id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}" required="true">
+                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione la opción" itemValue="0"/>
+                    <f:selectItems value="#{Supervisor$Contrato.companias}" var="aseguradora" itemLabel="#{aseguradora.strnombreentidad}" itemValue="#{aseguradora.intnumnitentidad}"/>
                 </h:selectOneMenu>
-               
-                    <center>
-                <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.boolPoliza}" 
-                                   rendered="#{Supervisor$Contrato.boolcrearpoliza==false}" 
-                                   render="polizasContrato, gpPolizaSelec, notienepoliza"> 
-                </a4j:commandButton>
 
-                <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.insertarPoliza}" 
-                                   rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
-                                   oncomplete="#{rich:component('mp_nueva_poliza')}.hide()" render="polizasContrato">
-                </a4j:commandButton>
-                    </center>
+                <center>
+                    <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.boolPoliza}" 
+                                       rendered="#{Supervisor$Contrato.boolcrearpoliza==false}" 
+                                       execute="@this, comboTipoPoliza, numPolizaContrato, 
+                                       ikont-hit-numvalorasegurado, calendarVenciPoliza, comboentidadPoliza"
+                                       oncomplete="#{rich:component('mp_nueva_poliza')}.hide()"
+                                       render="polizasContrato, gpPolizaSelec, notienepoliza"> 
+                    </a4j:commandButton>
+
+                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.insertarPoliza}" 
+                                       rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
+                                       execute="@this, comboTipoPoliza, numPolizaContrato, 
+                                       ikont-hit-numvalorasegurado, calendarVenciPoliza, comboentidadPoliza"
+                                       oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('mp_nueva_poliza')}.hide();"
+                                       render="polizasContrato"/>
+                </center>
             </h:panelGrid>
         </h:form>
     </rich:popupPanel>   
