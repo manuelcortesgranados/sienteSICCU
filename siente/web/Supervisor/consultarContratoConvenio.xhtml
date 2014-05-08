@@ -243,6 +243,7 @@
                         <rich:column width="120px">
                             <h:commandLink immediate="true"  action="#{Supervisor$Contrato.detalleContrato}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="true" />
                             </h:commandLink>
                         </rich:column>
 

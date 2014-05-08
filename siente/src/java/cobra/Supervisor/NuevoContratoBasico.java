@@ -845,7 +845,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      */
     private int tipoAporte;
-
+    
+    private int contratoPadre;
+    private boolean isFromContracts;
     /**
      * Get the value of eliminarPeriodosFueraRango
      *
@@ -921,6 +923,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private Componente subcomponenteImpactado = new Componente();
     
     private String objetoSub = "";
+    
+    private Boolean boolBack = false;
 
     /**
      * Get the value of botonGuaradado
@@ -5006,6 +5010,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             objetoSub = contrato.getTextobjeto();
         }
         
+        if(contrato.getContrato()!= null){
+            boolBack = true;
+            if(isFromContracts){
+                boolBack = false;
+            }
+        }else{
+            boolBack = false;
+        }
     }
 
     /**
@@ -9517,6 +9529,48 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setProyAsociados(List<Obra> proyAsociados) {
         this.proyAsociados = proyAsociados;
+    }
+
+    /**
+     * @return the contratoPadre
+     */
+    public int getContratoPadre() {
+        return contratoPadre;
+    }
+
+    /**
+     * @param contratoPadre the contratoPadre to set
+     */
+    public void setContratoPadre(int contratoPadre) {
+        this.contratoPadre = contratoPadre;
+    }
+
+    /**
+     * @return the boolBack
+     */
+    public Boolean getBoolBack() {
+        return boolBack;
+    }
+
+    /**
+     * @param boolBack the boolBack to set
+     */
+    public void setBoolBack(Boolean boolBack) {
+        this.boolBack = boolBack;
+    }
+
+    /**
+     * @return the isFromContracts
+     */
+    public boolean isIsFromContracts() {
+        return isFromContracts;
+    }
+
+    /**
+     * @param isFromContracts the isFromContracts to set
+     */
+    public void setIsFromContracts(boolean isFromContracts) {
+        this.isFromContracts = isFromContracts;
     }
 
 }

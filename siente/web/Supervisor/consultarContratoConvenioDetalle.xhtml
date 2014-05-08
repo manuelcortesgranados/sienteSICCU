@@ -50,10 +50,15 @@
         <h:panelGroup layout="block" id="pgcontratoconvenio" >
 
             <h:form id="ccForm">
+                <h:commandLink value="#{var.volver}" action="#{Supervisor$AdministrarObraNew.detalleContrato}"  disabled="#{!Supervisor$Contrato.boolBack}" >
+                    <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{Supervisor$Contrato.contrato.contrato.intidcontrato}" />
+                    <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="true" />
+                </h:commandLink>
                 <rich:collapsiblePanel switchType="client" header="#{var.infoGeneral}" style="width: 87%;" expanded="true">
                     <h:panelGrid columns="2" style="width: 100%;">
                         <h:panelGrid style="width: 400px; border-spacing: 4px">
                             <h:panelGroup >
+
                                 <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratanteCliente}</h:outputLabel>
                                 <interkont:spacer width="20" />
                                 <B>
@@ -153,7 +158,8 @@
                             <fieldset class="fieldset-interkont2" style="width: 50%;">
                                 <h:panelGrid  columns="1">
                                     <center>
-                                        <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.valorConvenio}</h:outputLabel>
+                                        <h:outputLabel rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-hol-detalle-proyecto"  >#{var.valorConvenio}</h:outputLabel>
+                                        <h:outputLabel rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-hol-detalle-proyecto"  >#{var.valorGContrato}</h:outputLabel>
                                     </center>
                                     <h:outputText  styleClass="ikont-hot-zoom-numvobra"   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="#{var.formatomoneda}" />
@@ -215,12 +221,12 @@
                         <h:panelGroup style="width:60%;">
 
                             <h:outputLabel>#{var.evolucionFinanciera}</h:outputLabel>
-<!--                            <h:panelGroup layout="block" styleClass="panelcenter">
-                                <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
-                                 al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style 
-                                <div id="graficoEvolucionContrato" style="width: 550px; height: 200px; text-align: left;">
-                                </div>
-                            </h:panelGroup>-->
+                            <!--                            <h:panelGroup layout="block" styleClass="panelcenter">
+                                                            <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
+                                                             al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style 
+                                                            <div id="graficoEvolucionContrato" style="width: 550px; height: 200px; text-align: left;">
+                                                            </div>
+                                                        </h:panelGroup>-->
                             <h:panelGroup layout="block" styleClass="panelcenter">
                                 <div id="imagenId" style="width: 550px; height: 400px; text-align: left;">
                                     <h:graphicImage value="/resources/imgs/TABLASINDATOS.png"></h:graphicImage>

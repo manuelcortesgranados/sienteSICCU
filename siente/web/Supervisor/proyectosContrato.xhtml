@@ -58,6 +58,9 @@
                         <a4j:commandLink id="irDetalle"
                                          onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{_row.intcodigoobra}';">
                             <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
+                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.contratoId}" value="#{Supervisor$Contrato.contrato.intidcontrato}"/>
+                            <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="false" />
+                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.isFromContracts}" value="false" />    
                         </a4j:commandLink>
                     </rich:column>
                      <f:facet name="footer">
