@@ -461,17 +461,17 @@
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
                                         <h:outputLabel  styleClass="ikont-hol-numHabi font-general"   id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
                                         <h:outputLabel  styleClass="ikont-hol-poblaestu font-general"   id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
-                                        <rich:inplaceInput  id="numHabitantes" value="#{Supervisor$Alimentar.alimentacion.numhabafectados}" showControls="false" style="width: 100px; alignment-adjust: mathematical;" />
+                                        <rich:inplaceInput  id="numHabitantes" value="#{Supervisor$Alimentar.numhabafectados}" showControls="false" style="width: 100px;" />
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
                                         <h:outputLabel  styleClass="ikont-hol-numEmpleoDirectogen font-general"     value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
                                         <h:outputLabel  styleClass="ikont-hol-imp_inst font-general"     value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                        <rich:inplaceInput  id="numEmpleoDirecto" value="#{Supervisor$Alimentar.alimentacion.numempdirectos}" showControls="false" style="width: 100px;" />
+                                        <rich:inplaceInput  id="numEmpleoDirecto" value="#{Supervisor$Alimentar.numempdirectos}" showControls="false" style="width: 100px;" />
 
                                         <h:panelGrid styleClass="ikont-hpg-gridali5"  />
                                         <h:outputLabel  styleClass="ikont-hol-numEmpleoInDirectogen font-general"    value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
                                         <h:outputLabel  styleClass="ikont-hol-imp_acto font-general"     value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                        <rich:inplaceInput  id="numEmpleoInDirecto" value="#{Supervisor$Alimentar.alimentacion.numempindirectos}" showControls="false" style="width: 100px;" />
+                                        <rich:inplaceInput  id="numEmpleoInDirecto" value="#{Supervisor$Alimentar.numempindirectos}" showControls="false" style="width: 100px;" />
 
                                     </h:panelGrid>
                                 </h:panelGrid>

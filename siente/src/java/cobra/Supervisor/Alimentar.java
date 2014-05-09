@@ -133,6 +133,10 @@ public class Alimentar implements Serializable {
     private Date fechaAlimentacion;
     private List<Periodo> lstAlimentacionxfecha;
 
+    private String numhabafectados;
+    private String numempdirectos;
+    private String numempindirectos;
+
     /**
      * Cantidad programada para la obra
      */
@@ -826,9 +830,9 @@ public class Alimentar implements Serializable {
             FacesUtils.addErrorMessage(bundle.getString("laobraestasiendofinalizadamodi"));
             vertodoalimentar = false;
         }
-        alimentacion.setNumempdirectos(null);
-        alimentacion.setNumempindirectos(null);
-        alimentacion.setNumhabafectados(null);
+        numempdirectos = "";
+        numempindirectos = "";
+        numhabafectados = "";
 
     }
 
@@ -1006,27 +1010,49 @@ public class Alimentar implements Serializable {
     public String cambioMatrix() {
         // La parte de impacto social debe ser obligatoria
 
-        if (alimentacion.getNumhabafectados() != null && alimentacion.getNumempdirectos() !=null && alimentacion.getNumempindirectos() != null) {
+        if (numhabafectados.trim().length() > 0 && numempdirectos.trim().length() > 0 && numempindirectos.trim().length() > 0) {
+            boolean isNumber = true;
+            try {
+                alimentacion.setNumhabafectados(Integer.parseInt(numhabafectados));
+            } catch (Exception ex) {
+                isNumber = false;
+                FacesUtils.addErrorMessage(bundle.getString("numhabafectadosDebeserNumero"));
+            }
+            try {
+                alimentacion.setNumempdirectos(Integer.parseInt(numempdirectos));
+            } catch (Exception ex) {
+                isNumber = false;
+                FacesUtils.addErrorMessage(bundle.getString("numempdirectosDebeserNumero"));
+            }
 
-            String cual = calcularTodaMatrix();
+            try {
+                alimentacion.setNumempindirectos(Integer.parseInt(numempindirectos));
+            } catch (Exception ex) {
+                isNumber = false;
+                FacesUtils.addErrorMessage(bundle.getString("numhabafectadosDebeserNumero"));
+            }
+            if (isNumber) {
 
-            if (!validezalimentacion) {
-                if (fechavalida) {
+                String cual = calcularTodaMatrix();
+
+                if (!validezalimentacion) {
+                    if (fechavalida) {
                     //getAlimentacion().setNumtotalproyacu(getAdministrarObraNew().getObra().getValorProyectadoenFecha(getAlimentacion().getDatefecha()));
-                    //desviado=validar
-                    if (getAlimentacion().getNumtotalproyacu().compareTo(BigDecimal.valueOf(0)) != 0) {
-                        //getAlimentacion().setSemaforo(getAdministrarObraNew().getObra().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
-                        getAlimentacion().setSemaforo(getSessionBeanCobra().getCobraService().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]),
-                                getAlimentacion().getNumtotalproyacu(), getAdministrarObraNew().getObra().getTipoobra(), getAdministrarObraNew().getObra().getNumvaltotobra()));
+                        //desviado=validar
+                        if (getAlimentacion().getNumtotalproyacu().compareTo(BigDecimal.valueOf(0)) != 0) {
+                            //getAlimentacion().setSemaforo(getAdministrarObraNew().getObra().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
+                            getAlimentacion().setSemaforo(getSessionBeanCobra().getCobraService().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]),
+                                    getAlimentacion().getNumtotalproyacu(), getAdministrarObraNew().getObra().getTipoobra(), getAdministrarObraNew().getObra().getNumvaltotobra()));
 
-                        setDesviacion(getAdministrarObraNew().getObra().getCalcularPorcentajeDesviacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
-                        setDesviado(getAlimentacion().getSemaforo().isBooleanatraso());
-                    } else {
-                        getAlimentacion().setSemaforo(new Semaforo(1, null, 0, 0, "/resources/botones/verde.png", false));
-                        setDesviado(false);
-                        setDesviacion(0);
+                            setDesviacion(getAdministrarObraNew().getObra().getCalcularPorcentajeDesviacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
+                            setDesviado(getAlimentacion().getSemaforo().isBooleanatraso());
+                        } else {
+                            getAlimentacion().setSemaforo(new Semaforo(1, null, 0, 0, "/resources/botones/verde.png", false));
+                            setDesviado(false);
+                            setDesviacion(0);
+                        }
+                        editarActividades = false;
                     }
-                    editarActividades = false;
                 }
             }
         } else {
@@ -2060,5 +2086,47 @@ public class Alimentar implements Serializable {
             alimentacionindicadorNuevo.setNumvalor(BigDecimal.ZERO);
             listaAlimentacionesIndicadores.add(alimentacionindicadorNuevo);
         }
+    }
+
+    /**
+     * @return the numhabafectados
+     */
+    public String getNumhabafectados() {
+        return numhabafectados;
+    }
+
+    /**
+     * @param numhabafectados the numhabafectados to set
+     */
+    public void setNumhabafectados(String numhabafectados) {
+        this.numhabafectados = numhabafectados;
+    }
+
+    /**
+     * @return the numempdirectos
+     */
+    public String getNumempdirectos() {
+        return numempdirectos;
+    }
+
+    /**
+     * @param numempdirectos the numempdirectos to set
+     */
+    public void setNumempdirectos(String numempdirectos) {
+        this.numempdirectos = numempdirectos;
+    }
+
+    /**
+     * @return the numempindirectos
+     */
+    public String getNumempindirectos() {
+        return numempindirectos;
+    }
+
+    /**
+     * @param numempindirectos the numempindirectos to set
+     */
+    public void setNumempindirectos(String numempindirectos) {
+        this.numempindirectos = numempindirectos;
     }
 }
