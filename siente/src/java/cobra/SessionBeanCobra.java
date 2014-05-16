@@ -1331,9 +1331,10 @@ public class SessionBeanCobra implements Serializable {
 //        }
         vista.setNumvalavanfisicodeclarado(mun.getNumencuestas());
         vista.setNumvaldeclarado(mun.getNumhabitantes());
-        vista.setNumvalprogramejec(mun.getNecesidadesenergeticas());
+        vista.setNumvalprogramejec(mun.getConsumoenergeticohabitante());
         vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
-        vista.setNumvalavanfinanciaerodeclarado(mun.getPotencialenergetico());
+        vista.setNumvalavanfinanciaerodeclarado(mun.getConsumoenergeticolocalidad());
+        vista.setNumvaloranticipo(mun.getConsumoenergeticoarea());
 
           
         return vista;

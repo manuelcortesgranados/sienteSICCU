@@ -2783,7 +2783,7 @@ css usuario modificacion
 .rf-tab-cnt{
     border: 1px solid rgb(204, 201, 201) !important;
     border-radius: 17px !important;
-    height: 153%;
+    height: 185%;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
     background: none !important;
@@ -3514,16 +3514,11 @@ css usuario modificacion
     padding-left: 3px !important;
 }
 .input_filtro_2{
-    width: 234px !important;
-    height: 34px !important;
     background-color: rgb(255, 255, 255) !important; 
     border-width: 0px !important;
     color: rgb(79, 82, 77)!important;
     cursor: default !important;
     border-color: rgb(255, 253, 253)!important;
-    position: relative !important;
-    top: -16px !important;
-    font-size: 19px !important;
 }
 
 
@@ -4641,8 +4636,9 @@ a:hover {
     width: 100px!important;
 }
 .ikont-hit-avance2{
-    position: relative!important;
-    top: -130px!important;
+    font-size: 15px!important;
+}
+.ikont-hit-labelNumeroHabitantes-filtro{
     font-size: 15px!important;
 }
 .ikont-estilo-modificacion-impacto{

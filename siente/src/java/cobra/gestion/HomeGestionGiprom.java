@@ -2038,8 +2038,8 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 agregarpornener = false;
                 if (filtro.getAvance1() != 0 || filtro.getAvance2() != 100) {
                     if (filtro.getAvance2() != 0) {
-                        if (mun.getNecesidadesenergeticas().compareTo(BigDecimal.valueOf(filtro.getAvance1())) >= 0
-                                && mun.getNecesidadesenergeticas().compareTo(BigDecimal.valueOf(filtro.getAvance2())) <= 0) {
+                        if (mun.getNumhabitantes().compareTo(BigDecimal.valueOf(filtro.getAvance1())) >= 0
+                                && mun.getNumhabitantes().compareTo(BigDecimal.valueOf(filtro.getAvance2())) <= 0) {
                             agregarpornener = true;
 
                         }

@@ -10,10 +10,10 @@
                  xmlns:composite="http://java.sun.com/jsf/composite"
                  >
     <h:head>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui-smoothness.css?#{var.version}" rel="stylesheet" type="text/css"/>
 
 
     </h:head>
@@ -24,41 +24,51 @@
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
                               onclick="this.value = ''"  styleClass="input_filtro">
-                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
+                <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
-
-                <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-
-
-                <h:panelGrid styleClass="ikont-hpg-slider-valor">           
-                    <h:panelGrid id="numeros_la" columns="1" styleClass="ikont-hpg-slider-valor1">
-                        <h:inputText   styleClass="input_filtro_2 ikont-hit-valor" value="NBI " disabled="true"/>
+                <!--Slider de NBI-->
+                <h:inputHidden id="ikont-hih-nbi1-filtro"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                <h:inputHidden id="ikont-hih-nbi2-filtro"   value="#{HomeGestion.filtro.cuantiafin}"/>
+                <h:panelGrid>           
+                    <h:panelGrid>
+                        <h:outputLabel value="NBI" styleClass="ikont-hol-nbi-filtro" /> 
                         <rich:column>
-                            <h:inputText styleClass="input_filtro_2 ikont-hit-avance1" id="por_nbi"  disabled="true" />
+                            <h:inputText id="ikont-hit-nbi-filtro" styleClass="ikont-hit-nbi-filtro input_filtro_2" disabled="true"/> 
                         </rich:column>
                     </h:panelGrid>
                 </h:panelGrid>
-                <div id="slider-range" class="ikont-filtro-slider-range" ></div>
+                <div id="ikont-slider-range-nbi-filtro" class="ikont-slider-range-nb-filtro"></div>
                 <br/>
-                <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
-                <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
-
-
-                <h:panelGrid styleClass="ikont-hpg-slider-avance">
-
+                
+                <!--Slider de CONSUMO ENERGÉTICO POR LOCALIDAD-->
+                <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadIni-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadIni}" />
+                <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadFin-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadFin}" />
+                <h:panelGrid>
+                    <h:outputLabel value="CONSUMO ENERGÉTICO" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro" /> 
+                    <h:outputLabel value="POR LOCALIDAD (KwH)" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro" /> 
                     <rich:column>
-                        <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1 " disabled="true"/> 
+                        <h:inputText id="ikont-hit-consumoEnergeticoLocalidad-filtro" styleClass="ikont-hit-consumoEnergeticoLocalidad-filtro input_filtro_2" disabled="true"/> 
                     </rich:column>
-
                 </h:panelGrid>
-                <div id="slider-range-avance" class="ikont-filtro-slider-range-avance"></div>
+                <div id="ikont-slider-range-consumoEnergeticoLocalidad-filtro" class="ikont-slider-range-consumoEnergeticoLocalidad-filtro"></div>
+                <br/>
+                
+                <!--Slider de HABITANTES-->
+                <h:inputHidden id="ikont-hih-numeroHabitantesIni-filtro" value="#{HomeGestion.filtro.numeroHabitantesIni}" />
+                <h:inputHidden id="ikont-hih-numeroHabitantesFin-filtro" value="#{HomeGestion.filtro.numeroHabitantesFin}" />
+                <h:panelGrid>
+                    <h:outputLabel value="HABITANTES " styleClass="ikont-hol-labelNumeroHabitantes-filtro" /> 
+                    <rich:column>
+                        <h:inputText id="ikont-hit-numeroHabitantes-filtro" styleClass="ikont-hit-numeroHabitantes-filtro input_filtro_2" disabled="true"/> 
+                    </rich:column>
+                </h:panelGrid>
+                <div id="ikont-slider-range-numeroHabitantes-filtro" class="ikont-filtro-slider-range-avance"></div>
+                
             </h:panelGrid>
             <center>
                 <h:commandButton type="submit" action="#{HomeGestion.filtrosSeparacionlateral}" id="filtrar_nuevo1"  value="#{var.buscar}"
                                  styleClass="boton1 ikont-filtro-filtrar_btn"    />
             </center>
-            <h:inputText value="NE " styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
         </rich:tab>              
         <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />

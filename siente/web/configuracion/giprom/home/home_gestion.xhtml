@@ -58,7 +58,13 @@
             <div id="ingreso-bienvenida" style="" class="ikont-div-ingreso-bienvenida">
                 <h:panelGrid  styleClass="panelzoomhome1">
                     <rich:column>
-                        <center><h:outputText styleClass="inputbienvenidahomezoom" value="Bienvenido a Giprom!"/></center><br/>      
+                        <center><h:outputText styleClass="inputbienvenidahomezoom" value="Bienvenido a GIPROM!"/></center><br/>      
+                    </rich:column>
+                    <rich:column>
+                        <center>
+                            <h:commandLink styleClass="ikont-hol-acercadelproyecto-home ikont-hol-acercadelproyecto-home" id="ikont-hol-acercadelproyecto-home" 
+                           value="ACERCA DEL PROYECTO" onclick="window.open(document.location.href = 'http://giprom.municipios.org.co/giprom/resources/acerca/index.html', '_blank') return false;"/>
+                        </center>
                     </rich:column>
                     <rich:column>
                         <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.titulohomezoom}"/></center> 
@@ -375,40 +381,62 @@
 
                                   $(function() {
 
-                                      $("#slider-range").slider({
+                                      $("#ikont-slider-range-nbi-filtro").slider({
                                           range: true,
                                           min: 0,
                                           max: 100,
-                                          values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                                          values: [document.getElementById("ikont-hih-nbi1-filtro").value, document.getElementById("ikont-hih-nbi2-filtro").value],
                                           slide: function(event, ui) {
-                                              var numero1 = ui.values[ 0 ];
-                                              var numero2 = ui.values[ 1 ];
-                                              $("#numero1").val(numero1);
-                                              $("#numero2").val(numero2);
-                                              $("#por_nbi").val(numero1 + "% a " + numero2 + "%");
+                                              var nbi1 = ui.values[ 0 ];
+                                              var nbi2 = ui.values[ 1 ];
+                                              $("#ikont-hih-nbi1-filtro").val(nbi1);
+                                              $("#ikont-hih-nbi2-filtro").val(nbi2);
+                                              $("#ikont-hit-nbi-filtro").val(nbi1 + "% a " + nbi2 + "%");
                                           }
                                       });
-                                      $("#por_nbi").val($("#slider-range").slider("values", 0) +
-                                              "%  a  " + $("#slider-range").slider("values", 1) + "%");
-
-                                      $("#slider-range-avance").slider({
+                                      $("#ikont-hit-nbi-filtro").val($("#ikont-slider-range-nbi-filtro").slider("values", 0) +
+                                              "%  a  " + $("#ikont-slider-range-nbi-filtro").slider("values", 1) + "%");
+                                      
+                                      
+                                      //Implementación del slider para el rango del consumo energético promedio del filtro de búsqueda
+                                      $("#ikont-slider-range-consumoEnergeticoLocalidad-filtro").slider({
                                           range: true,
                                           min: 0,
                                           max: 100,
-                                          values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
+                                          values: [document.getElementById("ikont-hih-consumoEnergeticoLocalidadIni-filtro").value, document.getElementById("ikont-hih-consumoEnergeticoLocalidadFin-filtro").value],
                                           slide: function(event, ui) {
-                                              var avance1 = ui.values[ 0 ];
-                                              var avance2 = ui.values[ 1 ];
-                                              $("#ava1").val(avance1);
-                                              $("#ava2").val(avance2);
-                                              $("#avance").val(avance1 + "% a " + avance2 + "%");
+                                              var consumoEnergeticoLocalidadIni = ui.values[ 0 ];
+                                              var consumoEnergeticoLocalidadFin = ui.values[ 1 ];
+                                              $("#ikont-hih-consumoEnergeticoLocalidadIni-filtro").val(consumoEnergeticoLocalidadIni);
+                                              $("#ikont-hih-consumoEnergeticoLocalidadFin-filtro").val(consumoEnergeticoLocalidadFin);
+                                              $("#ikont-hit-consumoEnergeticoLocalidad-filtro").val(consumoEnergeticoLocalidadIni + " a " + consumoEnergeticoLocalidadFin + " KwH");
                                           }
                                       });
-                                      $("#avance").val($("#slider-range-avance").slider("values", 0) +
-                                              "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
+                                      $("#ikont-hit-consumoEnergeticoLocalidad-filtro").val($("#ikont-slider-range-consumoEnergeticoLocalidad-filtro").slider("values", 0) +
+                                              " a " + $("#ikont-slider-range-consumoEnergeticoLocalidad-filtro").slider("values", 1) + " KwH");
+                                      
+                                      
+                                      //Implementación del slider para el rando de número de habitantes del filtro de búsqueda
+                                      $("#ikont-slider-range-numeroHabitantes-filtro").slider({
+                                          range: true,
+                                          min: 0,
+                                          max: 1000,
+                                          values: [document.getElementById("ikont-hih-numeroHabitantesIni-filtro").value, 
+                                              document.getElementById("ikont-hih-numeroHabitantesFin-filtro").value],
+                                          slide: function(event, ui) {
+                                              var numeroHabitantesIni = ui.values[ 0 ];
+                                              var numeroHabitantesFin = ui.values[ 1 ];
+                                              $("#ikont-hih-numeroHabitantesIni-filtro").val(numeroHabitantesIni);
+                                              $("#ikont-hih-numeroHabitantesFin-filtro").val(numeroHabitantesFin);
+                                              $("#ikont-hit-numeroHabitantes-filtro").val(numeroHabitantesIni + " a " + numeroHabitantesFin + " Habitantes");
+                                          }
+                                      });
+                                      $("#ikont-hit-numeroHabitantes-filtro").val($("#ikont-slider-range-numeroHabitantes-filtro").slider("values", 0) +
+                                              " a " + $("#ikont-slider-range-numeroHabitantes-filtro").slider("values", 1) + " Habitantes");
 
 
                                   });
+                                  
         </script>
     </ui:define>
 
