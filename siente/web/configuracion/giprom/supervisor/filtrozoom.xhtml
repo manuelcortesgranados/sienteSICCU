@@ -18,52 +18,37 @@
 
     </h:head>
 
-    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
+    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos" onitemchange="cargarSliedersFiltroDeBusqueda();">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos"  > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
-            <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
+            <h:panelGrid columns="1" styleClass="ikont-hpg-filtrobusquedaavanzadohome">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
                               onclick="this.value = ''"  styleClass="input_filtro">
                 <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
-
                 <!--Slider de NBI-->
-                <h:inputHidden id="ikont-hih-nbi1-filtro"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                <h:inputHidden id="ikont-hih-nbi2-filtro"   value="#{HomeGestion.filtro.cuantiafin}"/>
-                <h:panelGrid>           
-                    <h:panelGrid>
-                        <h:outputLabel value="NBI" styleClass="ikont-hol-nbi-filtro" /> 
-                        <rich:column>
-                            <h:inputText id="ikont-hit-nbi-filtro" styleClass="ikont-hit-nbi-filtro input_filtro_2" disabled="true"/> 
-                        </rich:column>
-                    </h:panelGrid>
+                <h:outputLabel value="NBI" styleClass="ikont-hol-nbi-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-nbe" styleClass="ikont-hpg-slider-nbe ikont-hpg-filtrobusquedaavanzada">           
+                    <h:inputHidden id="ikont-hih-nbi1-filtro"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                    <h:inputHidden id="ikont-hih-nbi2-filtro"   value="#{HomeGestion.filtro.cuantiafin}"/>
+                    <h:outputText id="ikont-hot-nbi-filtro" styleClass="ikont-hot-nbi-filtro label-valor-slider-filtro-busqueda"/> 
+                    <div id="ikont-slider-range-nbi-filtro" class="ikont-slider-range-nb-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
                 </h:panelGrid>
-                <div id="ikont-slider-range-nbi-filtro" class="ikont-slider-range-nb-filtro"></div>
-                <br/>
-                
                 <!--Slider de CONSUMO ENERGÉTICO POR LOCALIDAD-->
-                <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadIni-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadIni}" />
-                <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadFin-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadFin}" />
-                <h:panelGrid>
-                    <h:outputLabel value="CONSUMO ENERGÉTICO" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro" /> 
-                    <h:outputLabel value="POR LOCALIDAD (KwH)" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro" /> 
-                    <rich:column>
-                        <h:inputText id="ikont-hit-consumoEnergeticoLocalidad-filtro" styleClass="ikont-hit-consumoEnergeticoLocalidad-filtro input_filtro_2" disabled="true"/> 
-                    </rich:column>
+                <h:outputLabel value="CONSUMO ENERGÉTICO POR LOCALIDAD (KwH)" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-consumoEnergeticoLocalidad" styleClass="ikont-hpg-slider-consumoEnergeticoLocalidad ikont-hpg-filtrobusquedaavanzada">
+                    <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadIni-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadIni}" />
+                    <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadFin-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadFin}" />
+                    <h:outputText id="ikont-hot-consumoEnergeticoLocalidad-filtro" styleClass="ikont-hot-consumoEnergeticoLocalidad-filtro label-valor-slider-filtro-busqueda"/> 
+                    <div id="ikont-slider-range-consumoEnergeticoLocalidad-filtro" class="ikont-slider-range-consumoEnergeticoLocalidad-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
                 </h:panelGrid>
-                <div id="ikont-slider-range-consumoEnergeticoLocalidad-filtro" class="ikont-slider-range-consumoEnergeticoLocalidad-filtro"></div>
-                <br/>
-                
                 <!--Slider de HABITANTES-->
-                <h:inputHidden id="ikont-hih-numeroHabitantesIni-filtro" value="#{HomeGestion.filtro.numeroHabitantesIni}" />
-                <h:inputHidden id="ikont-hih-numeroHabitantesFin-filtro" value="#{HomeGestion.filtro.numeroHabitantesFin}" />
-                <h:panelGrid>
-                    <h:outputLabel value="HABITANTES " styleClass="ikont-hol-labelNumeroHabitantes-filtro" /> 
-                    <rich:column>
-                        <h:inputText id="ikont-hit-numeroHabitantes-filtro" styleClass="ikont-hit-numeroHabitantes-filtro input_filtro_2" disabled="true"/> 
-                    </rich:column>
+                <h:outputLabel value="HABITANTES " styleClass="ikont-hol-labelNumeroHabitantes-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-numeroHabitantes" styleClass="ikont-hpg-slider-numeroHabitantes ikont-hpg-filtrobusquedaavanzada">
+                    <h:inputHidden id="ikont-hih-numeroHabitantesIni-filtro" value="#{HomeGestion.filtro.numeroHabitantesIni}" />
+                    <h:inputHidden id="ikont-hih-numeroHabitantesFin-filtro" value="#{HomeGestion.filtro.numeroHabitantesFin}" />
+                    <h:outputText id="ikont-hot-numeroHabitantes-filtro" styleClass="ikont-hot-numeroHabitantes-filtro label-valor-slider-filtro-busqueda" /> 
+                    <div id="ikont-slider-range-numeroHabitantes-filtro" class="ikont-slider-range-numeroHabitantes-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
                 </h:panelGrid>
-                <div id="ikont-slider-range-numeroHabitantes-filtro" class="ikont-filtro-slider-range-avance"></div>
-                
             </h:panelGrid>
             <center>
                 <h:commandButton type="submit" action="#{HomeGestion.filtrosSeparacionlateral}" id="filtrar_nuevo1"  value="#{var.buscar}"

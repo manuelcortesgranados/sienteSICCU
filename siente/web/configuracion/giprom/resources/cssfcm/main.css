@@ -2783,7 +2783,7 @@ css usuario modificacion
 .rf-tab-cnt{
     border: 1px solid rgb(204, 201, 201) !important;
     border-radius: 17px !important;
-    height: 185%;
+    height: 155%;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
     background: none !important;
@@ -2871,6 +2871,7 @@ css usuario modificacion
 .input_filtro{
     width: 234px !important;
     height: 27px !important;
+    margin-bottom: 0.8em;
 }
 
 .inputbienvenidahomezoom{
@@ -3716,7 +3717,7 @@ css usuario modificacion
 }
 .ikont-panel-ayuda{
     position: relative;
-    top: -68px;
+    top: -25px;
 }
 
 .ikont-po-img-posicion-borrador-finalizar{
@@ -5035,4 +5036,54 @@ a:hover {
     position: absolute;
     top: 47px;
     left: 930px;
+}
+
+.label-slider-filtro-busqueda {
+    font-size: 0.9em;
+}
+
+.label-valor-slider-filtro-busqueda {
+    font-size: 0.6em;
+    color: #00B3DF;
+}
+
+.ikont-div-slider-filtrobusquedaavanzada {
+    width: 235px;
+    margin-bottom: 0.8em;
+}
+
+.ikont-hpg-filtrobusquedaavanzada {
+    width: 100%;
+    text-align: center;
+}
+
+.ikont-hpg-ikont-hot-consumoenergeticoarea {
+    margin-left: 30px;
+}
+
+.ikont-hol-acercadelproyecto {
+    border: 1px solid #46c7e5;
+    border-radius: 45px;
+    color: #46c7e5;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    padding: 13px;
+    text-decoration: none;
+}
+
+.superindice {
+    vertical-align:super;
+}
+.suberindice {
+    vertical-align:sub;
+}
+
+.ikont-hol-acercadelproyecto-menulateral {
+    position: relative;
+    top: -45px;
+    left: 10px;
+}
+
+.ikont-hpg-consumoenergeticoarea {
+    margin-left: 25px;
 }
