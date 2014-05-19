@@ -2875,27 +2875,6 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"modal-body-fonade tabla\">");
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
-                descripcion.append("<div class=\"columna colum-img-pes\">");
-                descripcion.append("<a class=\"img-informe-pe\">");
-                descripcion.append("</a>");
-                descripcion.append("</div>");
-                descripcion.append("<div class=\"columna colum-potencialenergetico\">");
-                descripcion.append("<span class=\"textvalla2\">");
-                descripcion.append("POTENCIALES");
-                descripcion.append("</span>");
-                descripcion.append("<br/>");
-                descripcion.append("<span class=\"textvalla2\">");
-                descripcion.append("ENERGETICOS");
-                descripcion.append("</span>");
-                descripcion.append("<br/>");
-                descripcion.append("<span class=\"textvalla2\">");
-                descripcion.append("Informe");
-                descripcion.append("</span>");
-                descripcion.append("<br/>");
-                descripcion.append("<a class=\"textvalla4 textvalla8\">");
-                descripcion.append("Descargar");
-                descripcion.append("</a>");
-                descripcion.append("</div>");
                 descripcion.append("<div class=\"columna colum-img-datos\">");
                 descripcion.append("<a class=\"img-datos-habitantes\">");
                 descripcion.append("</a>");
@@ -2929,21 +2908,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("</tr>");
                 descripcion.append("</table>");
                 descripcion.append("</div>");
-                descripcion.append("</p>");
-                descripcion.append("<p>");
-                descripcion.append("<div class=\"columna vallacontentinfo info-ne\">");
-                descripcion.append("<span class=\"textvalla4\">");
-                descripcion.append("%NE");
-                descripcion.append("</span>");
-                descripcion.append("<div class=\"panelcenter\">");
-                descripcion.append("<span class=\"indicador-img-ne\">");
-                descripcion.append("</span>");
-                descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append(obra.getObra().getNumvalprogramejec()).append(" %");
-                descripcion.append("</span>");
-                descripcion.append("</div>");
-                descripcion.append("</div>");
-                descripcion.append("<div class=\"columna vallacontentinfo info-nbi\">");
+                descripcion.append("<div class=\"columna vallacontentinfo info-nbi ikont-div-nbi-valla\">");
                 descripcion.append("<span class=\"textvalla4\">");
                 descripcion.append("% NBI");
                 descripcion.append("</span>");
@@ -2951,19 +2916,61 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("<span class=\"indicador-img-nbi\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append(obra.getObra().getNumvaltotamorti()).append("%");
+                if(obra.getObra().getNumvaltotamorti() != null && obra.getObra().getNumvaltotamorti().compareTo(BigDecimal.ZERO) > 0)
+                    descripcion.append(obra.getObra().getNumvaltotamorti()).append("%");
+                else
+                    descripcion.append("N/A");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
+                descripcion.append("</div>");
+                descripcion.append("</p>");
+                descripcion.append("<p>");
+                descripcion.append("<div class=\"columna vallacontentinfo info-ne\">");
+                descripcion.append("<span class=\"textvalla4\">");
+                descripcion.append("C.E. por habitante");
+                descripcion.append("</span>");
+                descripcion.append("<div class=\"panelcenter\">");
+                descripcion.append("<span class=\"indicador-img-ne\">");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla5\">");
+                if(obra.getObra().getNumvalprogramejec() != null && obra.getObra().getNumvalprogramejec().compareTo(BigDecimal.ZERO) > 0)
+                    descripcion.append(obra.getObra().getNumvalprogramejec()).append(" KwH");
+                else
+                    descripcion.append("N/A");
+                descripcion.append("</span>");
+                descripcion.append("</div>");
+                descripcion.append("</div>");
+                descripcion.append("<div class=\"columna vallacontentinfo info-nbi\">");
+                descripcion.append("<span class=\"textvalla4\">");
+                descripcion.append("C.E. por localidad");
+                descripcion.append("</span>");
+                descripcion.append("<div class=\"panelcenter\">");
+                descripcion.append("<span class=\"indicador-img-nbi\">");
+                descripcion.append("</span>");
+                descripcion.append("<span class=\"textvalla5\">");
+                if(obra.getObra().getNumvalavanfinanciaerodeclarado() != null && obra.getObra().getNumvalavanfinanciaerodeclarado().compareTo(BigDecimal.ZERO) > 0)
+                    descripcion.append(obra.getObra().getNumvalavanfinanciaerodeclarado()).append(" KwH");
+                else
+                    descripcion.append("N/A");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo info-pe\">");
                 descripcion.append("<span class=\"textvalla4\">");
-                descripcion.append("% PE");
+                descripcion.append("C.E. por Área");
                 descripcion.append("</span>");
                 descripcion.append("<div class=\"panelcenter\">");
                 descripcion.append("<span class=\"indicador-img-pe\">");
                 descripcion.append("</span>");
                 descripcion.append("<span class=\"textvalla5\">");
-                descripcion.append(obra.getObra().getNumvalavanfinanciaerodeclarado()).append("%");
+                if(obra.getObra().getNumvaloranticipo() != null && obra.getObra().getNumvaloranticipo().compareTo(BigDecimal.ZERO) > 0) {
+                    descripcion.append(obra.getObra().getNumvaloranticipo()).append(" KwH/m");
+                    descripcion.append("<span class=\"superindice\">");
+                    descripcion.append("2");
+                }
+                else
+                    descripcion.append("N/A");
+                descripcion.append("</span>");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
