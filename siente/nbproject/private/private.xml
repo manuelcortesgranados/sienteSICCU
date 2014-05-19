@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="41">
+        <file>
+            <url>web/Supervisor/NuevoContratoBasico.xhtml</url>
+            <bookmark id="12">
+                <name/>
+                <line>632</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>src/java/co/com/interkont/cobra/planoperativo/shared/services/CobraGwtService.java</url>
             <bookmark id="1">
@@ -26,6 +34,17 @@
             <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/nbproject/private/private.properties</file>
             <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/editarpolizaContratoModal.xhtml</file>
             <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/Cobra/Download.xhtml</file>
+        </group>
+        <group name="git">
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/faceletscobra/template_main.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/Supervisor/FormaPago.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/src/java/cobra/Supervisor/NuevoContratoBasico.java</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/NuevoProyecto/datosBasicosplanoperativo.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/Supervisor/NuevoContratoBasico.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/facelets/menu_lateral_novedades_zoom.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/Supervisor/FormaPagoValor.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/facelets/menu_laterar_zoom.xhtml</file>
+            <file>file:/home/desarrollo10/desarrollo/netBeansProjects/SICCU/git/siente/siente/web/modal/listadoContratistas.xhtml</file>
         </group>
     </open-files>
 </project-private>
