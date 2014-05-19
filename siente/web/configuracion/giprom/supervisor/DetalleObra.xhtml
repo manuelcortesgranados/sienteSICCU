@@ -147,13 +147,7 @@
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </rich:panel>
-                                    <rich:panel header="Ficha Resumen" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:commandLink styleClass="ikont-hcl-ficha-resumen-detalle img-button-panel"  immediate="true"/>
-                                    </rich:panel>
-                                    <rich:panel header="Mapa del Municipio - Comunidad" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:commandLink styleClass="ikont-hcl-mapa-municipio-detalle img-button-panel"  immediate="true"/>
-                                    </rich:panel>
-                                    <rich:panel header="INFORMES Y PERSONAS DE LA LOCALIDAD" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                    <rich:panel header="INFORMES Y PERSONAS DE LA LOCALIDAD" styleClass="ikont-rf-p-hdr-giprom-personaslocalidad" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:panelGrid cellspacing="10" columns="1">
                                             <h:panelGrid columns="2" cellspacing="5">
                                                 <h:commandLink styleClass="ikont-hcl-imgidatosgenerales img-detalle-proyecto" />    
@@ -201,8 +195,8 @@
                                                     <h:outputText styleClass="ikont-hot-consumoenergeticohabitante2" value="por Habitante"></h:outputText>
                                                     <h:panelGrid columns="2">
                                                         <h:outputLink styleClass="ikont-hot-img-ne"></h:outputLink>
-                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalprogramejec} KwH" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvalprogramejec and Supervisor$AdministrarObraNew.obra.numvalprogramejec ne 0}"/>
-                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{empty Supervisor$AdministrarObraNew.obra.numvalprogramejec or Supervisor$AdministrarObraNew.obra.numvalprogramejec eq 0}"/>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalprogramejec} KwH" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvalprogramejec and Supervisor$AdministrarObraNew.obra.numvalprogramejec gt 0}"/>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{not (not empty Supervisor$AdministrarObraNew.obra.numvalprogramejec and Supervisor$AdministrarObraNew.obra.numvalprogramejec gt 0)}"/>
                                                     </h:panelGrid>
                                                 </h:panelGrid>
                                             </h:panelGroup>    
@@ -218,8 +212,8 @@
                                                     <h:outputText styleClass="ikont-hot-consumoenergeticolocalidad2" value="por Localidad"></h:outputText>
                                                     <h:panelGrid columns="2" styleClass="totalwidth panelcenter">
                                                         <h:outputLink styleClass="ikont-hot-img-pe"></h:outputLink>
-                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} KwH" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado and Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado ne 0}"/>
-                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{empty Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado or Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado eq 0}"/>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado} KwH" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado and Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado gt 0}"/>
+                                                        <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{not (not empty Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado and Supervisor$AdministrarObraNew.obra.numvalavanfinanciaerodeclarado gt 0)}"/>
                                                     </h:panelGrid>
                                                 </h:panelGrid>
                                             </h:panelGroup>
@@ -242,11 +236,11 @@
                                             <h:outputText styleClass="ikont-hot-consumoenergeticoarea2" value="por Área"></h:outputText>
                                             <h:panelGrid columns="2">
                                                 <h:outputLink styleClass="ikont-hot-img-ne"></h:outputLink>
-                                                <h:panelGroup>
-                                                    <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvaloranticipo} KwH/m" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvaloranticipo and Supervisor$AdministrarObraNew.obra.numvaloranticipo ne 0}"/>
-                                                    <h:outputLabel styleClass="ikont-hot-value-ne-pe superindice" value="#{Supervisor$AdministrarObraNew.obra.numvaloranticipo} 2" rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvaloranticipo and Supervisor$AdministrarObraNew.obra.numvaloranticipo ne 0}"/>
+                                                <h:panelGroup rendered="#{not empty Supervisor$AdministrarObraNew.obra.numvaloranticipo and Supervisor$AdministrarObraNew.obra.numvaloranticipo gt 0}">
+                                                    <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="#{Supervisor$AdministrarObraNew.obra.numvaloranticipo} KwH/m"/>
+                                                    <h:outputLabel styleClass="ikont-hot-value-ne-pe superindice" value="2"/>
                                                 </h:panelGroup>
-                                                <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{empty Supervisor$AdministrarObraNew.obra.numvaloranticipo or Supervisor$AdministrarObraNew.obra.numvaloranticipo eq 0}"/>
+                                                <h:outputLabel styleClass="ikont-hot-value-ne-pe" value="N/A" rendered="#{not (not empty Supervisor$AdministrarObraNew.obra.numvaloranticipo and Supervisor$AdministrarObraNew.obra.numvaloranticipo gt 0)}"/>
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -255,14 +249,10 @@
                                     <rich:panel header="% NBI AL AÑO" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBIanual}" escape="false" />
                                         <div id="graficoNBIanual" style="width: 350px; height: 150px; margin-left: -20px;"></div>
-                                        <h:outputText style="font-size: 10px;"  value="Fuente de Información: "/>
-                                        <h:outputLabel style="font-size: 10px;font-weight: bolder;"  value="#{Supervisor$AdministrarObraNew.obra.strvereda}"/>
                                     </rich:panel>
                                     <rich:panel header="% NBI POR LOCALIZACION (2005)" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <h:outputText  styleClass="ikont-hot-scriptGraf"   value="#{Supervisor$AdministrarObraNew.gragiprom.graficoNBILocalizacion}" escape="false" />
                                         <div id="graficoNBILocalizacion" style="width: 350px; height: 150px; margin-left: -20px;"></div>
-                                        <h:outputText style="font-size: 11px;"  value="Fuente de Información: "/>
-                                        <h:outputLabel style="font-size: 10px;font-weight: bolder;" value="#{Supervisor$AdministrarObraNew.obra.strvereda}"/>
                                     </rich:panel>
                                     <rich:panel header="DESEMPEÑO INTEGRAL 2009" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
                                         <rich:dataTable id="tabladesempenolocalida" 
@@ -280,8 +270,6 @@
                                             </rich:column>
 
                                         </rich:dataTable>
-                                        <h:outputText style="font-size: 11px;" value="Fuente de Información: "/>
-                                        <h:outputLabel style="font-size: 10px;font-weight: bolder;" value="#{Supervisor$AdministrarObraNew.obra.strvereda}"/>
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="1" styleClass="totalwidth font-general">
