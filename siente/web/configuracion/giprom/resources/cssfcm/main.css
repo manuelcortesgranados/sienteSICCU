@@ -2880,6 +2880,8 @@ css usuario modificacion
     color: #00B3DF; 
     font-family: open; 
     padding: 100px;
+    position: relative;
+    top: -10px;
 }
 
 .inputbienvenidahomezoomtexto{
@@ -5086,4 +5088,13 @@ a:hover {
 
 .ikont-hpg-consumoenergeticoarea {
     margin-left: 25px;
+}
+
+.ikont-hol-acercadelproyecto-home {
+    position: relative;
+    top: -15px;
+}
+
+.ikont-rf-p-hdr-giprom-personaslocalidad {
+    height: 100px !important;
 }
