@@ -5099,10 +5099,7 @@ a:hover {
     height: 100px !important;
 }
 
-.ikont-div-datos-habitantes-valla {
-    text-align: left;
-}
-
-.ikont-div-nbi-valla {
-    margin-left: 60px;
+.ikont-rp-ubicacion-detalle {
+    margin-left: 15px;
+    margin-top: 20px;
 }
