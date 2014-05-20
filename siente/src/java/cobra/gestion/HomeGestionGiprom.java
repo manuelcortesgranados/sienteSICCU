@@ -2881,7 +2881,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna \">");
                 descripcion.append("<br/>");
-                descripcion.append("<table>");
+                descripcion.append("<table class=\"ikont-table-habitantes-valla\">");
                 descripcion.append("<tr>");
                 descripcion.append("<td>");
                 descripcion.append("<span class=\"textvalla2\">");

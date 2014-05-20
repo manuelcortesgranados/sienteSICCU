@@ -5104,5 +5104,15 @@ a:hover {
 }
 
 .ikont-div-nbi-valla {
-    margin-left: 60px;
+    position: relative;
+    left: 52px;
+}
+
+.ikont-table-habitantes-valla {
+    text-align: right;
+}
+
+.ikont-rp-ubicacion-detalle {
+    margin-left: 15px;
+    margin-top: 20px;
 }
