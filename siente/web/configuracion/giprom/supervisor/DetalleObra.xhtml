@@ -14,7 +14,7 @@
     <ui:define name="head">
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/main.css" rel="stylesheet" type="text/css" />
-
+        <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css" />
         <script src="/#{var.versioncobra}/resources/amcharts/amcharts.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/gauge.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/amcharts/serial.js" type="text/javascript"></script>
@@ -78,39 +78,66 @@
                                 <!--inicio nuevo disiño-->
 
                                 <h:panelGrid cellspacing="20" columns="2" styleClass="totalwidth font-general" columnClasses=",ikont-deta-rigth">
-                                    <h:panelGroup layout="block" id="vistaMapa" styleClass="totalwidth">
-                                        <m:map  latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" enableScrollWheelZoom="true"  id="map12" 
-                                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="250px" width="600px">                                                                 
-                                            <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
-                                                      longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
+                                    <h:panelGrid id="ikont-hpg-ubicacion-detalle" styleClass="ikont-hpg-ubicacion-detalle" columns="2">
+                                        <h:panelGroup layout="block" id="vistaMapa" styleClass="totalwidth">
+                                            <m:map  latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" enableScrollWheelZoom="true"  id="map12" 
+                                                    jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="250px" width="300px">                                                                 
+                                                <m:marker latitude="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"
+                                                          longitude="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"
 
-                                                      jsVariable="#{HomeGestion.marcador.jsVariable}"
-                                                      draggable="false" >
-                                                <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
+                                                          jsVariable="#{HomeGestion.marcador.jsVariable}"
+                                                          draggable="false" >
+                                                    <m:icon imageURL="/#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.obtenerPin()}" width="20" height="34" shadowHeight="25"  shadowWidth="40"/>
 
-                                            </m:marker>
-                                        </m:map>
+                                                </m:marker>
+                                            </m:map>
+                                        </h:panelGroup>
+                                        <rich:panel header="UBICACIÓN" styleClass="ikont-rp-ubicacion-detalle" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                            <h:panelGrid  columns="1" styleClass="ikont-hpg-datosrelevantes">
+                                                <h:panelGroup>
+                                                    <h:outputLabel styleClass="font-general" value="Longitud : " />
+                                                    <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"   />   <br/> 
+                                                    <h:outputLabel styleClass="font-general" value=" #{Supervisor$DetalleObra.strlocalidadlogitud}"   />    
+                                                </h:panelGroup>
+                                                <br/>
+                                                <h:panelGroup>
+                                                    <h:outputLabel styleClass="font-general" value="Latitud : " />
+                                                    <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" /><br/>
+                                                    <h:outputLabel styleClass="font-general" value=" #{Supervisor$DetalleObra.strlocalidadlatitud}" />
+                                                </h:panelGroup>
+                                                <br/>                                           
+                                                <h:panelGroup >
+                                                    <h:outputLabel styleClass="font-general" value="Clima promedio: " />
+                                                    <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento}" />    
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </h:panelGrid>
+                                    <h:panelGroup id="ikont-hpg-slider-imagenes-detalle" styleClass="ikont-hpg-slider-imagenes-detalle">
+                                        <div>
+                                            <div id="SliderName_2" styleClass="SliderName_2">
+                                                <a4j:repeat value="#{Supervisor$DetalleObra.listaImagenesevolucionobra}" var="item" >
+                                                    <h:graphicImage  styleClass="ikont-hgi-demo2"   width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{item.strubicacion}" />
+                                                    <div styleClass="SliderName_2Description"><h:outputText  styleClass="ikont-hot-nomfec"   value="#{item.strnombre} - #{item.datefecha}"/></div>
+                                                </a4j:repeat>
+                                            </div>
+                                            <div styleClass="c"></div>
+                                            <div id="SliderNameNavigation_2"></div>
+                                            <div styleClass="c"></div>
+                                        </div>
+                                        <script type="text/javascript">
+                                                                effectsDemo2 = 'fade';
+                                                                var demoSlider_2 = Sliderman.slider({container: 'SliderName_2', width: 700, height: 450, effects: effectsDemo2,
+                                                                    display: {
+                                                                        autoplay: 5000,
+                                                                        loading: {background: '#000000', opacity: 0.5, image: '/#{var.versioncobra}/resources/images/loading.gif'},
+                                                                        buttons: {hide: true, opacity: 1, prev: {className: 'SliderNamePrev_2', label: ''}, next: {className: 'SliderNameNext_2', label: ''}},
+                                                                        description: {hide: true, background: '#000000', opacity: 0.4, height: 50, position: 'bottom'},
+                                                                        navigation: {container: 'SliderNameNavigation_2', label: '<img src="/#{var.versioncobra}/resources/images/clear.gif" />'}
+                                                                    }
+                                                                });
+                                        </script>
                                     </h:panelGroup>
-                                    <rich:panel header="UBICACIÓN" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <h:panelGrid  columns="1" styleClass="ikont-hpg-datosrelevantes">
-                                            <h:panelGroup>
-                                                <h:outputLabel styleClass="font-general" value="Longitud : " />
-                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"   />   <br/> 
-                                                <h:outputLabel styleClass="font-general" value=" #{Supervisor$DetalleObra.strlocalidadlogitud}"   />    
-                                            </h:panelGroup>
-                                            <br/>
-                                            <h:panelGroup>
-                                                <h:outputLabel styleClass="font-general" value="Latitud : " />
-                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" /><br/>
-                                                <h:outputLabel styleClass="font-general" value=" #{Supervisor$DetalleObra.strlocalidadlatitud}" />
-                                            </h:panelGroup>
-                                            <br/>                                           
-                                            <h:panelGroup >
-                                                <h:outputLabel styleClass="font-general" value="Clima promedio: " />
-                                                <h:outputLabel styleClass="font-general" value="#{Supervisor$AdministrarObraNew.obra.strcorregimiento}" />    
-                                            </h:panelGroup>
-                                        </h:panelGrid>
-                                    </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="2" styleClass="totalwidth font-general">
                                     <rich:panel header="DATOS BÁSICOS DEL MUNICIPIO" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
