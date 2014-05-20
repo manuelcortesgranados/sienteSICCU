@@ -369,8 +369,9 @@ a.imgaction:hover:after{
 }
 
 .ikont-div-nbi-valla {
-    position: relative;
-    left: 60px;
+    position: absolute;
+    left: 204px;
+    top: 36px;
 }
 
 .ikont-table-habitantes-valla {
