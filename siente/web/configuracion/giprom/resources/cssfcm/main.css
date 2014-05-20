@@ -5098,3 +5098,11 @@ a:hover {
 .ikont-rf-p-hdr-giprom-personaslocalidad {
     height: 100px !important;
 }
+
+.ikont-div-datos-habitantes-valla {
+    text-align: left;
+}
+
+.ikont-div-nbi-valla {
+    margin-left: 60px;
+}
