@@ -1067,6 +1067,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     }
                     gragiprom.setListadesempeno(getSessionBeanCobra().getGipromService().obtenerIndicadorDesempenoMunicipalxcodmunicipio(municipal.getLclCodigo()));
                     gragiprom.llenarDistribucionEtnica(getSessionBeanCobra().getGipromService().obtenerIndicadorDistribucionEtnica(municipal.getLclCodigo()));
+                    listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
 
                 } else {
                     if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
