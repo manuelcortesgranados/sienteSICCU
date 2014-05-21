@@ -32,7 +32,7 @@
                 <h:outputLabel  styleClass="ikont-hol-entipoliza" id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
                 </h:outputLabel>
                 <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
-                    <f:selectItems value="#{Supervisor$Contrato.companias}"/>
+                    <f:selectItems value="#{Supervisor$Contrato.companias}" var="row" itemLabel="#{row.strnombreentidad}" itemValue="#{row.intnumnitentidad}"/>
                 </h:selectOneMenu>
 
                 <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">

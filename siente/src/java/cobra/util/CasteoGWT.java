@@ -806,8 +806,8 @@ public class CasteoGWT implements Serializable {
         obra.setPeriodomedida(new Periodomedida());
         obra.getPeriodomedida().setIntidperiomedida(1);
         obra.setTipoobra(new Tipoobra());
-        obra.getTipoobra().setInttipoobra(1);
-        obra.setJsfUsuario(new JsfUsuario());
+        obra.getTipoobra().setInttipoobra(13);//Tipoobra no definido en nueva bds zoom
+         obra.setJsfUsuario(new JsfUsuario());
         obra.getJsfUsuario().setUsuId(intusuario);
         obra.setTipoestadobra(new Tipoestadobra(0));
         obra.setTipocosto(new Tipocosto(1, null));

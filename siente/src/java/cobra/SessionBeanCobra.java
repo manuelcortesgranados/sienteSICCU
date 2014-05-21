@@ -11,18 +11,24 @@ import ciudadano.service.CiudadanoServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
+import co.com.interkont.cobra.to.Claseobra;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
 import co.com.interkont.cobra.to.JsfUsuario;
+import co.com.interkont.cobra.to.Lugarobra;
 import co.com.interkont.cobra.to.Modulo;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Opinionciudadano;
 import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Periodoevento;
+import co.com.interkont.cobra.to.Periodomedida;
 import co.com.interkont.cobra.to.Relacionactividadobraperiodo;
 import co.com.interkont.cobra.to.RestaurarPassword;
 import co.com.interkont.cobra.to.Tercero;
+import co.com.interkont.cobra.to.Tipocosto;
 import co.com.interkont.cobra.to.Tipoestadobra;
+import co.com.interkont.cobra.to.Tipoobra;
+import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
@@ -1268,6 +1274,9 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public Obra castearVwInformacionMunicipaltoObra(VwInmInfoMunicipal mun) {
+        
+        
+        
         Obra vista = new Obra();
 
         vista.setStrnombreobra(mun.getLclNombre());
@@ -1281,6 +1290,7 @@ public class SessionBeanCobra implements Serializable {
         vista.setTercero(new Tercero());
         vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
         vista.getTercero().setStrapellido1(mun.getDptNombre());
+        
         vista.setNumvaltotobra(BigDecimal.ZERO);
 
 //                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
@@ -1301,42 +1311,29 @@ public class SessionBeanCobra implements Serializable {
         } else {
             vista.setStrcorregimiento("Faltante");
         }
-//        List<VwEncIncInfoConsolidada> listaindconsolidadofcm = getGipromService().obtenerIndicadorConsolidadoxcodmunicipio(mun.getLclCodigo());
-//
-//        //System.out.println("listaindconsolidadofcm = " + listaindconsolidadofcm.size());
-//        for (VwEncIncInfoConsolidada winccons : listaindconsolidadofcm) {
-////            System.out.println("valor = " + winccons.getEncIncValorIndicador());
-////            System.out.println("tipo = " + winccons.getVlcCodigoTipoInfoConsol());
-//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("01")==0)
-//            {
-//                vista.setNumvaltotamorti(winccons.getEncIncValorIndicador());
-//            }
-//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("02")==0)
-//            {
-//                vista.setNumvalprogramejec(winccons.getEncIncValorIndicador());
-//            }
-//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("03")==0)
-//            {
-//                vista.setNumvaldeclarado(winccons.getEncIncValorIndicador());
-//            }
-//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("04")==0)
-//            {
-//
-//                vista.setNumvalavanfisicodeclarado(winccons.getEncIncValorIndicador());
-//            }
-//            if(winccons.getVlcCodigoTipoInfoConsol().compareTo("05")==0)
-//            {
-//                vista.setNumvalavanfinanciaerodeclarado(winccons.getEncIncValorIndicador());
-//            }
-//        }
+      
         vista.setNumvalavanfisicodeclarado(mun.getNumencuestas());
         vista.setNumvaldeclarado(mun.getNumhabitantes());
         vista.setNumvalprogramejec(mun.getConsumoenergeticohabitante());
         vista.setNumvaltotamorti(mun.getNecesidadesbasicas());
         vista.setNumvalavanfinanciaerodeclarado(mun.getConsumoenergeticolocalidad());
         vista.setNumvaloranticipo(mun.getConsumoenergeticoarea());
-
-          
+        vista.setClaseobra(new Claseobra());
+        vista.getClaseobra().setIntidclaseobra(1);
+        vista.setLugarobra(new Lugarobra());
+        vista.getLugarobra().setIntidlugarobra(1);       
+        vista.setTipocosto(new Tipocosto(1,""));
+        vista.setPeriodomedida(new Periodomedida());
+        vista.getPeriodomedida().setIntidperiomedida(1);
+        vista.setTipoorigen(new Tipoorigen(1, ""));
+        vista.setTipocosto(new Tipocosto(1, ""));
+        vista.setPeriodoevento(new Periodoevento(1));
+        vista.setJsfUsuario(getUsuarioObra());
+        vista.getTercero().setIntcodigo(getUsuarioObra().getTercero().getIntcodigo());
+        vista.setStrcodigopropio(mun.getId().toString());
+        
+        
+        
         return vista;
     }   
 }

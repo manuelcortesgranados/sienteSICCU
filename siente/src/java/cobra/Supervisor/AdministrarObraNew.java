@@ -1521,8 +1521,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 break;
             }
         }
+         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+            
+                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            
+         }
         this.documentoobra.setObra(getObra());
         try {
+            
             subirDocumento();
             getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobra);
             listaDocumentosobra.add(documentoobra);
@@ -1689,10 +1695,18 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String bt_agregar_imagenevolucion_action() {
+         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+            
+                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            
+         }
+        
         this.imagenevolucionobra.setObra(getObra());
         try {
             subirImagenevolucion();
             imagenevolucionobra.setTipoimagen(getSessionBeanCobra().getCobraService().obtenerTipoimagenporId(imagenevolucionobra.getTipoimagen().getIntidtipoimagen()));
+            
+            
             getSessionBeanCobra().getCobraService().guardarImagen(this.imagenevolucionobra);
             if (imagenevolucionobra.getTipoimagen().getIntidtipoimagen() == 2) {
                 getSessionBeanCobra().getCobraService().funcion_EstablecerImagenActual(imagenevolucionobra.getIntidimagen());
