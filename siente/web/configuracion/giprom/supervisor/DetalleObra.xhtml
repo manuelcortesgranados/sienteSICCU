@@ -133,18 +133,25 @@
                                             </h:panelGrid>
                                         </rich:panel>
                                     </h:panelGrid>
-                                    <rich:panel header="GALERÍA FOTOGRÁFICA" id="slider-imagenes-detalle" styleClass="ikont-rp-slider-imagenes-detalle" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
-                                        <div>
+                                    <rich:panel header="GALERÍA FOTOGRÁFICA" id="ikont-rp-slider-imagenes-detalle" styleClass="ikont-rp-slider-imagenes-detalle" headerClass="ikont-rf-p-hdr-giprom" bodyClass="ikont-rf-p-bd-giprom">
+                                        <h:panelGroup id="ikont-hpg-slider-imagenes-detalle" styleClass="ikont-hpg-slider-imagenes-detalle">
                                             <div id="SliderName_2" styleClass="SliderName_2">
                                                 <a4j:repeat value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}" var="item" >
-                                                    <h:graphicImage  styleClass="ikont-hgi-demo2"   width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{item.strubicacion}" />
+                                                    <h:graphicImage  styleClass="ikont-hgi-demo2"   width="300" height="200"  alt="Demo2 first" title="Demo2 first" value="#{item.strubicacion}" />
                                                     <div styleClass="SliderName_2Description"><h:outputText  styleClass="ikont-hot-nomfec"   value="#{item.strnombre} - #{item.datefecha}"/></div>
                                                 </a4j:repeat>
+                                                <h:graphicImage id="ikont-hgi-slider-sinimagenes-detalle"  styleClass="ikont-hgi-demo2"   width="300" height="200"  rendered="#{empty Supervisor$AdministrarObraNew.listaImagenesevolucionobra}"
+                                                                 alt="Demo2 first" title="Demo2 first" value="/resources/imgs/bt_nodisponible.jpg" >
+                                                    <rich:tooltip id="ikont-rtt-slider-sinimagenes-detalle" styleClass="ikont-rtt-slider-sinimagenes-detalle">
+                                                        <h:outputText  value="La localidad no posee imágenes"/>
+                                                    </rich:tooltip>
+                                                        
+                                                </h:graphicImage>
                                             </div>
                                             <div styleClass="c"></div>
                                             <div id="SliderNameNavigation_2"></div>
                                             <div styleClass="c"></div>
-                                        </div>
+                                        </h:panelGroup>
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGrid cellspacing="20" columns="2" styleClass="totalwidth font-general">
