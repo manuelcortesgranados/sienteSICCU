@@ -233,12 +233,12 @@
                                             <h:outputText styleClass="ikont-hcl-zoom-supervosor " />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont-hot-contraticiu" value="#{var.contratistaciu}: " />
-                                                <h:outputLabel styleClass="ikont-hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
+                                                <h:outputLabel styleClass="ikont-hot-nbre" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.tercero.strnombre}" />
                                                 <h:outputLabel styleClass="ikont-hot-otContratistas" id="otContratistas" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas">
                                                     <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5" styleClass="ikont-rtt-tool">
                                                         <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                            <h:outputText styleClass="ikont-hot-nbre1" value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
+                                                            <h:outputText styleClass="ikont-hot-nbre1" value="- #{relacionContrato.contrato.contratista.tercero.strnombre}"></h:outputText> <br/>
                                                         </a4j:repeat>
                                                     </rich:tooltip>
                                                 </h:outputLabel>

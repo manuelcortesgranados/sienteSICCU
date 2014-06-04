@@ -52,7 +52,7 @@
                         <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-houtcontratis"   value="#{var.houtcontratis}"/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contratista.strnombre} #{row.contratista.strapellido1}"/>
+                        <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contratista.tercero.strnombre} #{row.contratista.tercero.strapellido1}"/>
                     </rich:column>
                     <rich:column id="tc_valor" styleClass="ikont-rc-tcvalor">
                         <f:facet class="ikont-colum-superior-consulta" name="header">

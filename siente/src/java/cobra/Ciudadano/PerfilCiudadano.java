@@ -1780,13 +1780,13 @@ public class PerfilCiudadano implements ILifeCycleAware, Serializable {
         if (contratistas_slider != null) {
             if (!contratistas_slider.isEmpty()) {
                 if (contratistas_slider.size() == 1) {
-                    unoContratista = contratistas_slider.get(0).getStrnombre();
+                    unoContratista = contratistas_slider.get(0).getTercero().getStrnombre();
                     numeroContratistas = 1;
                 } else {
                     for (Contratista cont : contratistas_slider) {
-                        if (cont.getStrnombre() != null) {
+                        if (cont.getTercero().getStrnombre() != null) {
                             numeroContratistas++;
-                            list_contratistas_slider.add(cont.getStrnombre());
+                            list_contratistas_slider.add(cont.getTercero().getStrnombre());
                         }
                     }
                 }

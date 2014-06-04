@@ -2524,16 +2524,16 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     if (!contratistas.isEmpty()) {
                         if (contratistas.size() == 1) {
                             list_contratistas += "<label>";
-                            list_contratistas += contratistas.get(0).getStrnombre();
+                            list_contratistas += contratistas.get(0).getTercero().getStrnombre();
                             list_contratistas += "</label>";
                         } else {
                             list_contratistas += "<label class=\"tool-valla\">";
                             list_contratistas += "Ver contratistas";
                             list_contratistas += "<div>";
                             for (Contratista cont : contratistas) {
-                                if (cont.getStrnombre() != null) {
+                                if (cont.getTercero().getStrnombre() != null) {
                                     list_contratistas += "<p>";
-                                    list_contratistas += cont.getStrnombre();
+                                    list_contratistas += cont.getTercero().getStrnombre();
                                     list_contratistas += "</p>";
                                 }
                             }
@@ -2828,19 +2828,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 if (contratistas != null) {
                     if (!contratistas.isEmpty()) {
                         if (contratistas.size() == 1) {
-                            if (contratistas.get(0).getStrnombre().length() > 25) {
+                            if (contratistas.get(0).getTercero().getStrnombre().length() > 25) {
                                 list_contratistas += "<label class=\"tool\">";
-                                list_contratistas += contratistas.get(0).getStrnombre().substring(0, 22);
+                                list_contratistas += contratistas.get(0).getTercero().getStrnombre().substring(0, 22);
                                 list_contratistas += "...";
                                 list_contratistas += "<div>";
                                 list_contratistas += "<p>";
-                                list_contratistas += contratistas.get(0).getStrnombre();
+                                list_contratistas += contratistas.get(0).getTercero().getStrnombre();
                                 list_contratistas += "</p>";
                                 list_contratistas += "</div>";
                                 list_contratistas += "</label>";
                             } else {
                                 list_contratistas += "<label>";
-                                list_contratistas += contratistas.get(0).getStrnombre();
+                                list_contratistas += contratistas.get(0).getTercero().getStrnombre();
                                 list_contratistas += "</label>";
                             }
                         } else {
@@ -2848,9 +2848,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                             list_contratistas += "Ver contratistas";
                             list_contratistas += "<div>";
                             for (Contratista cont : contratistas) {
-                                if (cont.getStrnombre() != null) {
+                                if (cont.getTercero().getStrnombre() != null) {
                                     list_contratistas += "<p>";
-                                    list_contratistas += cont.getStrnombre();
+                                    list_contratistas += cont.getTercero().getStrnombre();
                                     list_contratistas += "</p>";
                                 }
                             }
@@ -3068,7 +3068,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     //Metodo para cargar las listas para el autocomplete del filtro
     public void mostrarContratistas() {
-        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratista();
+        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratistas();
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();

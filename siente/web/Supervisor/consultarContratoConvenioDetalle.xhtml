@@ -122,6 +122,29 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
+                <rich:collapsiblePanel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}" 
+                                       expanded="false" immediate="true"
+                                       rendered="#{var.multiplescontratistas and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                    <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
+                        <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
+                                                value="#{Supervisor$Contrato.contrato.listaContratistas}"
+                                                rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                var="objeto">
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
+                                </f:facet>
+                                <h:outputText  value="#{objeto.tercero.intcedula}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
+                                </f:facet>
+                                <h:outputText value="#{objeto.tercero.strnombre}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
                 <rich:collapsiblePanel switchType="client" header="#{var.informeFisico}" style="width: 87%;" expanded="true">
                     <h:panelGrid columns="2">
                         <h:panelGrid  columns="1">

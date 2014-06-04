@@ -37,7 +37,7 @@
                         <f:facet class="ikont-colum-superior-consulta" name="header">
                             <h:outputText  styleClass="ikont-hot-houtcontratis"   value="#{var.houtcontratis}"/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contrato.contratista.strnombre} #{_row.contrato.contratista.strapellido1}"/>
+                        <h:outputText  styleClass="ikont-hot-ststrnomcontratista"   id="st_strnomcontratista" value="#{_row.contrato.contratista.tercero.strnombre} #{_row.contrato.contratista.tercero.strapellido1}"/>
                     </rich:column>
 
                     <rich:column id="tc_fechainic" styleClass="ikont-rc-tcfechainic">

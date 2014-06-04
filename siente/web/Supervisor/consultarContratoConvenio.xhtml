@@ -224,7 +224,7 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" />
                         </rich:column>
 
                         <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
@@ -377,7 +377,7 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" />
                         </rich:column>
 
                         <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">

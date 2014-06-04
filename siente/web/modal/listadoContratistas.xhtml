@@ -78,21 +78,24 @@
                             </f:facet>
                             <rich:columnGroup id="CuerpoObraPadres">
                                 <rich:column  width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-intcedula" value="#{Contratista.intcedula}"/>
+                                    <h:outputText  styleClass="ikont-hot-intcedula" value="#{Contratista.tercero.intcedula}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-nombreapellido" value="#{Contratista.strnombre} #{Contratista.strapellido1}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombreapellido" value="#{Contratista.tercero.strnombre} #{Contratista.tercero.strapellido1}"/>
                                 </rich:column>
                                 <!--<rich:column>
-                                    <h:outputText  styleClass="ikont "   value="#{Contratista.strapellido1}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{Contratista.tercero.strapellido1}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont "   value="#{Contratista.strapellido2}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{Contratista.tercero.strapellido2}"/>
                                 </rich:column>-->
                                 <rich:column >
                                     <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas}"
-                                                       render="gpcontratistaseleccionado, @form" execute="gpcontratistaseleccionado, @this" immediate="true"
-                                                       oncomplete="#{rich:component('mp-listado-contratistas')}.hide()"/>                                
+                                                       render="gpcontratistaseleccionado, @form" immediate="true"
+                                                       oncomplete="#{rich:component('mp-listado-contratistas')}.hide()" rendered="#{not var.multiplescontratistas}"/>
+                                    <a4j:commandButton id="ikont-acb-adicionarmultiplecontratista" styleClass="ikont-acb-adicionarmultiplecontratista" value="Seleccionar" action="#{Supervisor$Contrato.adicionarContratistaAction}"
+                                                       render="ikont-hpg-multiplescontratistas" immediate="true"
+                                                       oncomplete="#{rich:component('mp-listado-contratistas')}.hide()" rendered="#{var.multiplescontratistas}"/>
                                 </rich:column>   
                                 
                                 <rich:column rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarcontratista and false}">

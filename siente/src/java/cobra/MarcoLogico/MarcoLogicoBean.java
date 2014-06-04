@@ -818,7 +818,7 @@ public class MarcoLogicoBean implements Serializable{
 
                     obligacion.setFkIntidcontrato(getNuevoContratoBasico().getContrato().getIntidcontrato());
 
-                    obligacion.setStrresponsable(getNuevoContratoBasico().getContrato().getContratista().getStrnombre());
+                    obligacion.setStrresponsable(getNuevoContratoBasico().getContrato().getContratista().getTercero().getStrnombre());
                     obligacion.setFkIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                     obligacion.setDatefechacreacion(new Date());
 

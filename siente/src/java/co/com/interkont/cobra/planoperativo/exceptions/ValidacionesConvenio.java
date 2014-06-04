@@ -10,6 +10,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import static co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO.obtenerFecha;
 import co.com.interkont.cobra.to.Actividadobra;
+import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import cobra.PlanOperativo.ProyectoPlanOperativo;
@@ -248,5 +249,15 @@ public class ValidacionesConvenio {
 //                }
 //            }
 //        }
+    }
+    
+    /**
+     * Valida que el convenio tenga por lo menos un contratista asociado
+     * @param contrato Convenio
+     */
+    public static void validarContratistasRequerido(Contrato contrato) {
+        if (contrato.getContratistas() == null || contrato.getContratistas().isEmpty() ) {
+            throw new ConvenioException("El convenio debe tener por lo menos un contratista asociado");
+        }
     }
 }

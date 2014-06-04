@@ -1279,15 +1279,15 @@ public class DetalleObra implements Serializable {
                 if (getContrat().get(i) != null) {
                     //validar que haya mas de un contratista
                     if (contratistanombrecomple.equals("")) {
-                        contratistanombrecomple = getContrat().get(i).getStrnombre() + " ";
-                        if (getContrat().get(i).getStrapellido1() != null) {
-                            contratistanombrecomple = contratistanombrecomple + getContrat().get(i).getStrapellido1();
+                        contratistanombrecomple = getContrat().get(i).getTercero().getStrnombre() + " ";
+                        if (getContrat().get(i).getTercero().getStrapellido1() != null) {
+                            contratistanombrecomple = contratistanombrecomple + getContrat().get(i).getTercero().getStrapellido1();
                         }
                     } else {
                         contratistanombrecomple = contratistanombrecomple + " - "
-                                + getContrat().get(i).getStrnombre() + " ";
-                        if (getContrat().get(i).getStrapellido1() != null) {
-                            contratistanombrecomple = contratistanombrecomple + getContrat().get(i).getStrapellido1();
+                                + getContrat().get(i).getTercero().getStrnombre() + " ";
+                        if (getContrat().get(i).getTercero().getStrapellido1() != null) {
+                            contratistanombrecomple = contratistanombrecomple + getContrat().get(i).getTercero().getStrapellido1();
                         }
                     }
                 }

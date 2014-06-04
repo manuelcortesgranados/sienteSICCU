@@ -2539,16 +2539,16 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
                     if (!contratistas.isEmpty()) {
                         if (contratistas.size() == 1) {
                             list_contratistas += "<label>";
-                            list_contratistas += contratistas.get(0).getStrnombre();
+                            list_contratistas += contratistas.get(0).getTercero().getStrnombre();
                             list_contratistas += "</label>";
                         } else {
                             list_contratistas += "<label class=\"tool-valla\">";
                             list_contratistas += "Ver contratistas";
                             list_contratistas += "<div>";
                             for (Contratista cont : contratistas) {
-                                if (cont.getStrnombre() != null) {
+                                if (cont.getTercero().getStrnombre() != null) {
                                     list_contratistas += "<p>";
-                                    list_contratistas += cont.getStrnombre();
+                                    list_contratistas += cont.getTercero().getStrnombre();
                                     list_contratistas += "</p>";
                                 }
                             }
@@ -3082,7 +3082,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
     //Metodo para cargar las listas para el autocomplete del filtro
     public void mostrarContratistas() {
-        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratista();
+        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratistas();
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();

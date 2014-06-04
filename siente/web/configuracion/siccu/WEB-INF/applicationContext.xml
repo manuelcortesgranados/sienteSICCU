@@ -131,7 +131,9 @@
                 <value>co/com/interkont/cobra/to/Tipodefamilia.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Tipoestadobra.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Estadomovimiento.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Tipocontratista.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Contratista.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Contratante.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Periodo.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Entrada.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Unidadmedida.hbm.xml</value>
