@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich">
+
+    <ui:define name="head">
+        <title>Reportes</title>
+    </ui:define>
+
+    <ui:define name="menu">
+        <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_gestion.xhtml" />
+        </h:panelGroup>  
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_gestion_zoom.xhtml" />
+        </h:panelGroup>  
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+
+    <ui:define name="title">
+        <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.reportes}"/></center><br/>   
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <h:panelGrid columns="3" width="100%">
+                <h:panelGroup>
+                    <h:panelGrid columns="1">
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" id="btnRepGlobal" value="#{var.reporteGlobal}"
+                                           render="gpPopUpGbal" execute="gpPopUpGbal" immediate="true"
+                                           oncomplete="#{rich:component('popUprepGbal')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1">
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" id="btnRepGcial" value="#{var.reporteGlobal}"
+                                           render="gpPopUpGcial" execute="gpPopUpGcial" immediate="true"
+                                           oncomplete="#{rich:component('popUprepGcial')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1">
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" id="btnRepGeo" value="CONSOLIDACION GEOGRAFICA DE PROYECTOS"
+                                           render="gpPopUpGcial" execute="gpPopUpGcial" immediate="true"
+                                           oncomplete="#{rich:component('popUprepGcial')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1">
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" id="btnRepCuentas" value="REPORTE DE RENDICION DE CUENTAS"
+                                           render="gpPopUpGcial" execute="gpPopUpGcial" immediate="true"
+                                           oncomplete="#{rich:component('popUprepGcial')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1">
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" id="btnTest" value="Test"
+                                           render="oTest" execute="oTest" immediate="true" />
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:panelGrid>
+            
+            <h:outputText  id="oTest" style="display: none;" value="#{var.reporteGlobal}"   />
+            
+            <!--PopUP Reporte Global-->
+            <rich:popupPanel id="popUprepGbal" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteGlobal}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepGbal')}.hide();
+                                                      return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form>
+                    <h:panelGroup layout="block" id="gpPopUpGbal">
+
+                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Global" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                       onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/INFORME_GLOBAL.xls', '_blank');"/>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+            
+            
+            <!-- PopUP Reporte Gerencial -->
+            
+            <rich:popupPanel id="popUprepGcial" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteGlobal}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepGcial')}.hide();
+                                                      return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form>
+                    <h:panelGroup layout="block" id="gpPopUpGcial">
+
+                        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Gerencial" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                       onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"/>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+
+
+
+        </h:form>
+
+        <iframe src="http://localhost:8080/ReportesFonade/" width="100%" height="200px" scrolling="no"/>
+
+    </ui:define>
+
+</ui:composition>
