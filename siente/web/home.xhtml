@@ -12,6 +12,26 @@
 
     <ui:define name="body">
         <h:form prependId="false">
+            
+            <h:panelGrid columns="2" rendered="#{SessionBeanCobra.usuarioObra.usuId==1}">
+                    <h:outputText value="Código JsfUsuario Inicial:"/>
+                    <h:inputText value="#{SessionBeanCobra.codinicial}"/>
+                    <h:outputText value="Código JsfUsuario Final:"/>
+                    <h:inputText value="#{SessionBeanCobra.codfinal}"/>
+
+                    <a4j:commandButton value="Actualizar Contraseñas"  action="#{SessionBeanCobra.actualizarPasswords}" />
+                    <h:commandButton value="Imprimir Usuarios activos" action="#{SessionBeanCobra.usuarioService.imprimirUsuarios}"/>
+                    <h:commandButton value="Verificar Logueos" action="#{SessionBeanCobra.usuarioService.verificarLogueos}"/>
+                    <h:commandButton value="Mirar Imagenes" action="#{SessionBeanCobra.mirarImagenes}"/>
+                    <h:commandButton value="caracter especial img" action="#{SessionBeanCobra.mirarImg}"/>
+                    <h:commandButton value="caracter especial doc" action="#{SessionBeanCobra.mirardoc}"/>
+                    <h:commandButton value="borrar lo en" action="#{SessionBeanCobra.mirarDocnosrv}"/>
+                    <h:commandButton value="Arreglar alimentaciones" action="#{SessionBeanCobra.arreglarsumasAlimentaciones}"/>
+                    <h:commandButton value="Periodos educación" action="#{SessionBeanCobra.crearPeriodosEducacion}"/>
+                    <h:commandButton value="relación Periodos educación" action="#{SessionBeanCobra.crearRelacionPeriodosEducacion}"/>
+                    <h:commandButton value="Generar Usuarios Obra" action="#{SessionBeanCobra.generarUsuariosObra}"/>
+                    <h:commandButton value="caracter especial documento Imagen" action="#{SessionBeanCobra.mostrarImagenesDocumentos}"/>
+                </h:panelGrid>
 
             <h:panelGroup layout="block" styleClass="sliderpanel_element" id="product_gallery">
                 <h:panelGroup layout="block"  id="sliderpanel_outer">

@@ -2584,9 +2584,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String detalleContrato() {
-        if(contratoId!=0){
-            mostrarContratoConvenio = contratoId;
-        }
+//        if(contratoId!=0){
+//            mostrarContratoConvenio = contratoId;
+//        }    
         Contrato contratotabla = (Contrato) getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio);
         getNuevoContratoBasico().cargarContrato(contratotabla);
         return "consultarContrato";
