@@ -4038,19 +4038,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Llena el combo con las compañias aseguradoras de las polizas
      */
     public void llenarCompanias() {
-
-        List<Aseguradora> lista = getSessionBeanCobra().getCobraService().encontrarCompaniasSeguro();
-
-        Companias = new SelectItem[lista.size()];
-        int i = 0;
-        for (Aseguradora asegura : lista) {
-            SelectItem tpo = new SelectItem(asegura.getIntnumnitentidad(), asegura.getStrnombreentidad());
-            if (i == 0) {
-                polizacontrato.getAseguradora().setIntnumnitentidad(asegura.getIntnumnitentidad());
-    }
-            Companias[i++] = tpo;
-        }
-
+        Companias = getSessionBeanCobra().getCobraService().encontrarCompaniasSeguro();
     }
 
     /**
