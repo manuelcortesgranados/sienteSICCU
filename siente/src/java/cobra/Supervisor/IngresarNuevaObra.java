@@ -12,6 +12,7 @@ import co.com.interkont.cobra.to.Barrio;
 import co.com.interkont.cobra.to.Bdpu;
 import co.com.interkont.cobra.to.Claseobra;
 import co.com.interkont.cobra.to.Comuna;
+import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Corregimiento;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -222,6 +223,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
     private UIDataTable tablaObrasPadres = new UIDataTable();
+    private UIDataTable tablainterventores = new UIDataTable();
+    private UIDataTable tablasupervisores = new UIDataTable();
     // </editor-fold>
     /**
      * Variables Int.
@@ -357,6 +360,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.longitudmapa = longitudmapa;
     }
     // </editor-fold>
+    
+    private String nombre = "";
+    private boolean aplicaFiltroInterventor;
+    private List<Tercero> listaInterventores;
+    private String nombreSupervisor = "";
+    private boolean aplicaFiltroSupervisor;
+    private List<Tercero> listaSupervisores;
     /**
      * Medios de vida
      */
@@ -1642,6 +1652,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarVeredas();
         llenarComunas();
         llenarCorregimientos();
+        buscarInterventor();
+        buscarSupervisor();
+        
     }
 
     /**
@@ -1672,6 +1685,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        nombre = "";
     }
 
     @Override
@@ -6430,6 +6444,254 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem,cars);
     }
     
+    public void buscarInterventor(){
+        aplicaFiltroInterventor = false;
+        if (nombre.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroInterventor = true;
+        }
+        primerosInterventores();
+    }
+    public void primerosInterventores() {
+        if (aplicaFiltroInterventor) {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, 0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarInterventores(nombre);
+        } else {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, 0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarInterventores(null);
+        }
+        pagina = 1;
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        veranteriorreales = false;
+        if (totalpaginas > 1) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+    }
+    public String siguientesInterventores() {
+        int num = (pagina) * 10;
+        if (aplicaFiltroInterventor) {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num +10);
+            
+        } else {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, num, num + 10);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = pagina + 1;
+        if (pagina < totalpaginas) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+        veranteriorreales = true;
+        return null;
+    }
+
+    /**
+     * Metodo que se utiliza para paginar, Trae los 5 anteriores proyectos
+     *
+     * @return null
+     */
+    public String anterioresInterventores() {
+        pagina = pagina - 1;
+        int num = (pagina - 1) * 10;
+        if (aplicaFiltroInterventor) {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num + 10);
+        } else {
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num + 10);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+
+        if (pagina > 1) {
+            veranteriorreales = true;
+        } else {
+            veranteriorreales = false;
+        }
+        verultimosreales = true;
+        return null;
+    }
+
+    /**
+     * Metodo que se utiliza para paginar, Trae los ultimos 5 proyectos
+     *
+     * @return null
+     */
+    public String ultimoIntervetores() {
+        int num = totalfilas % 10;
+        if (aplicaFiltroInterventor) {
+            List<Tercero> list = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, 0, 0);
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, totalfilas - num, totalfilas);
+        } else {
+            List<Tercero> list = getSessionBeanCobra().getCobraService().filtrarInterventores(null, 0, 0);
+            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, totalfilas - num, totalfilas);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = totalpaginas;
+        if (pagina < totalpaginas) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+        veranteriorreales = true;
+        return null;
+    }
+    public String seleccionarInterventor() {
+        obranueva.setInterventor((Tercero) tablainterventores.getRowData());
+        return null;
+    }
+    
+    public void buscarSupervisor(){
+        aplicaFiltroSupervisor = false;
+        if (nombreSupervisor.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroSupervisor = true;
+        }
+        primerosSupervisores();
+    }
+    public void primerosSupervisores() {
+        if (aplicaFiltroInterventor) {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, 0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarSupervisores(nombreSupervisor);
+        } else {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, 0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarSupervisores(null);
+        }
+        pagina = 1;
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        veranteriorreales = false;
+        if (totalpaginas > 1) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+    }
+    public String siguientesSupervisores() {
+        int num = (pagina) * 10;
+        if (aplicaFiltroSupervisor) {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num +10);
+            
+        } else {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, num, num + 10);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = pagina + 1;
+        if (pagina < totalpaginas) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+        veranteriorreales = true;
+        return null;
+    }
+
+    /**
+     * Metodo que se utiliza para paginar, Trae los 5 anteriores proyectos
+     *
+     * @return null
+     */
+    public String anterioresSupervisores() {
+        pagina = pagina - 1;
+        int num = (pagina - 1) * 10;
+        if (aplicaFiltroSupervisor) {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num + 10);
+        } else {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num + 10);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+
+        if (pagina > 1) {
+            veranteriorreales = true;
+        } else {
+            veranteriorreales = false;
+        }
+        verultimosreales = true;
+        return null;
+    }
+
+    /**
+     * Metodo que se utiliza para paginar, Trae los ultimos 5 proyectos
+     *
+     * @return null
+     */
+    public String ultimoSupervisores() {
+        int num = totalfilas % 10;
+        if (aplicaFiltroSupervisor) {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, totalfilas - num, totalfilas);
+        } else {
+            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, totalfilas - num, totalfilas);
+        }
+        if (totalfilas <= 10) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 10;
+            if (totalfilas % 10 > 0) {
+                totalpaginas++;
+            }
+        }
+        pagina = totalpaginas;
+        if (pagina < totalpaginas) {
+            verultimosreales = true;
+        } else {
+            verultimosreales = false;
+        }
+        veranteriorreales = true;
+        return null;
+    }
+    public String seleccionarSupervisor() {
+        obranueva.setSupervisor((Tercero) tablasupervisores.getRowData());
+        return null;
+    }
+            
     /**
      * Selector de cuencas
      */
@@ -6648,5 +6910,103 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem selectItem = new SelectItem(tipolocalidad.getOidcodigotipolocalidad(), tipolocalidad.getStrnombretipolocalidad());
             tiposLocalidadSelectItem[i++] = selectItem;
         }
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the listaInterventores
+     */
+    public List<Tercero> getListaInterventores() {
+        return listaInterventores;
+    }
+
+    /**
+     * @param listaInterventores the listaInterventores to set
+     */
+    public void setListaInterventores(List<Tercero> listaInterventores) {
+        this.listaInterventores = listaInterventores;
+    }
+
+    /**
+     * @return the tablainterventores
+     */
+    public UIDataTable getTablainterventores() {
+        return tablainterventores;
+    }
+
+    /**
+     * @param tablainterventores the tablainterventores to set
+     */
+    public void setTablainterventores(UIDataTable tablainterventores) {
+        this.tablainterventores = tablainterventores;
+    }
+
+    /**
+     * @return the tablasupervisores
+     */
+    public UIDataTable getTablasupervisores() {
+        return tablasupervisores;
+    }
+
+    /**
+     * @param tablasupervisores the tablasupervisores to set
+     */
+    public void setTablasupervisores(UIDataTable tablasupervisores) {
+        this.tablasupervisores = tablasupervisores;
+    }
+
+    /**
+     * @return the nombreSupervisor
+     */
+    public String getNombreSupervisor() {
+        return nombreSupervisor;
+    }
+
+    /**
+     * @param nombreSupervisor the nombreSupervisor to set
+     */
+    public void setNombreSupervisor(String nombreSupervisor) {
+        this.nombreSupervisor = nombreSupervisor;
+    }
+
+    /**
+     * @return the aplicaFiltroSupervisor
+     */
+    public boolean isAplicaFiltroSupervisor() {
+        return aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @param aplicaFiltroSupervisor the aplicaFiltroSupervisor to set
+     */
+    public void setAplicaFiltroSupervisor(boolean aplicaFiltroSupervisor) {
+        this.aplicaFiltroSupervisor = aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @return the listaSupervisores
+     */
+    public List<Tercero> getListaSupervisores() {
+        return listaSupervisores;
+    }
+
+    /**
+     * @param listaSupervisores the listaSupervisores to set
+     */
+    public void setListaSupervisores(List<Tercero> listaSupervisores) {
+        this.listaSupervisores = listaSupervisores;
     }
 }
