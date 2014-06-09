@@ -749,6 +749,10 @@
             <to-view-id>/reportes/reportes.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>reportesZoom</from-outcome>
+            <to-view-id>/reportes/reportesZoom/reportes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>cargarExcelFinanciera</from-outcome>
             <to-view-id>/Financiera/cargarExcelFinanciera.xhtml</to-view-id>
         </navigation-case>

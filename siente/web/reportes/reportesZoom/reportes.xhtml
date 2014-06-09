@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich">
+
+    <ui:define name="head">
+        <title>Reportes</title>
+    </ui:define>
+
+    <ui:define name="menu">
+        <h:panelGroup rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_gestion.xhtml" />
+        </h:panelGroup>  
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_gestion_zoom.xhtml" />
+        </h:panelGroup>  
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="formRepBody">
+
+            <div class="titulos">
+
+                <div class="titulo"><h1 class="titulo_r">#{var.reportes}</h1></div>
+                <div class="subtitulo"><p class="subtitulo_t">#{var.reporteSubTile}</p></div>
+
+            </div>
+
+            <h:panelGrid columns="5" width="100%" class="cont_top">
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl1">
+                        <div class="icon_bl1"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteGeo}</p>
+                        </div>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepGlobal" value="Generar"
+                                           render="gpPopUpGbal" execute="gpPopUpGbal" immediate="true"
+                                           oncomplete="#{rich:component('popUprepGeo')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl2">
+                        <div class="icon_bl2"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteImpl}</p></div>
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepGcial" value="No disponible"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl3">
+                        <div class="icon_bl3"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteMetas}</p></div>
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepGeo" value="No disponible"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl4">
+                        <div class="icon_bl4"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteAuditoria}</p></div>
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepCuentas" value="No disponible"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl5">
+                        <div class="icon_bl5"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteCtas}</p></div>
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 46px;" id="btnRepCtas" value="Generar"
+                                           render="gpPopUpGcial" execute="gpPopUpGcial" immediate="true"
+                                           oncomplete="#{rich:component('popUprepCtas')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <!--PopUP Reporte rendición de cuentas-->
+            <rich:popupPanel id="popUprepGeo" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteGeo}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepGeo')}.hide();
+                                                      return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form id="formRepGeo">
+                    <h:panelGroup layout="block" id="gpPopUpGbal">
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+                                <div class="seleccione">
+                                    <p class="select_texto">#{var.reporteDtpo}</p>
+                                </div>
+
+                                <div class="dropdown">
+
+                                    <h:selectOneMenu id="listDpto" value="#{Reportes.dptoSelected}" 
+                                                     onclick="this.style.width = 'auto;';">
+                                        <f:selectItem itemValue="ALL" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.sedeptosah}"/>
+                                        <a4j:ajax execute="@this" event="change" render="gpPopUpGbal" listener="#{Reportes.llenarMuniciAh}"/>
+                                    </h:selectOneMenu>
+
+                                </div>
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = 'http://localhost:8080/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+
+
+            <!-- PopUP Reporte Rendición de Cuentas -->
+
+            <rich:popupPanel id="popUprepCtas" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteCtas}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepCtas')}.hide();
+                                                           return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form>
+                    <h:panelGroup layout="block" id="gpPopUpGcial">
+
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = 'http://localhost:8080/ReportesFonade/Servlet_Reportes?identificador_reporte=2', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
