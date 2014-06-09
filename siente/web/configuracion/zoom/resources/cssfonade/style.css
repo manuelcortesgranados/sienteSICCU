@@ -118,3 +118,235 @@ blockquote									{ padding: 0 20px; margin-left: 20px; border-left: 20px solid
     position: relative!important;
     top: -12px!important;
 }
+
+
+.contendor_gral
+{
+    width:859px;
+    height:610px;
+}
+.cont_top
+{
+    width:859px;
+    height:274px;
+    float:left;
+}
+.titulos
+{
+    width:859px;
+    height:127px;
+    float:left;
+}
+.titulo
+{
+    width:162px;
+    height:39px;
+    border-bottom:solid 1px #C1C1C1;
+    margin:0px 0px 0px 347px;
+}
+.titulo_r{
+    color:#257500;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    text-align:center;
+    line-height:27px;
+    font-size:20px;
+    text-transform:uppercase;
+
+}
+.subtitulo
+
+{
+    width:307px;
+    height:39px;
+
+    margin:0px 0px 0px 280px;
+}
+
+.subtitulo_t{
+    color:#257500;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    text-align:center;
+    line-height:27px;
+    font-size:15px;
+
+}
+.bloques
+
+{
+    width:859px;
+    height:147px;
+    float:left;
+}
+.bl1
+{
+    width:153px;
+    height:124px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+
+
+
+}
+
+.icon_bl1{
+    background-image:url(../imgs/descargar_reportes_sprite.png);
+    background-position:9px 0px;
+    position:absolute;
+    margin:9px 0px 0px 51px;
+    width:49px;
+    height:38px;
+}
+
+.bl1_texto_div{
+    width:153px;
+    height:42px;
+    float:left;
+    margin:46px 0px 0px 0px;
+}
+
+.bl1_texto{
+    color:#257500;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    text-align:center;
+    line-height:17px;
+    font-size:12px;
+}
+
+.radiobutton{
+    margin:11px 0px 0px 67px;
+}
+.bl2
+{
+    width:153px;
+    height:124px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+    margin-left:21px;
+}
+
+.icon_bl2{
+    background-image:url(../imgs/descargar_reportes_sprite.png);
+    background-position:7px -69px;
+    position:absolute;
+    margin:9px 0px 0px 51px;
+    width:49px;
+    height:38px;
+}
+.bl3
+{
+    width:153px;
+    height:124px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+    margin-left:21px;
+}
+
+.icon_bl3{
+    background-image:url(../imgs/descargar_reportes_sprite.png);
+    background-position:7px -150px;
+    position:absolute;
+    margin:9px 0px 0px 51px;
+    width:49px;
+    height:38px;
+}
+.bl4
+{
+    width:153px;
+    height:124px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+    margin-left:21px;
+}
+
+.icon_bl4{
+    background-image:url(../imgs/descargar_reportes_sprite.png);
+    background-position:7px -234px;
+    position:absolute;
+    margin:9px 0px 0px 51px;
+    width:49px;
+    height:38px;
+}
+.bl5
+{
+    width:153px;
+    height:124px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+    margin-left:21px;
+}
+
+.icon_bl5{
+    background-image:url(../imgs/descargar_reportes_sprite.png);
+    background-position:7px -326px;
+    position:absolute;
+    margin:9px 0px 0px 51px;
+    width:49px;
+    height:38px;
+}
+
+.icon_bot{
+    background-image: url(../imgs/descargar_reportes_sprite.png);
+    background-position: 2px -418px;
+
+    margin: 56px 0px 0px 382px;
+    width: 89px;
+    height: 79px;
+}
+.cont_bottom
+{
+    width:859px;
+    height:340px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+}
+.cont_central
+{
+    width:308px;
+    height:149px;
+    float:left;
+    margin:0px 0px 0px 276px;
+}
+.seleccione{
+    width:308px;
+    height:30px;
+    float:left;
+}
+
+.dropdown{
+    width:308px;
+    height:30px;
+    float:left;
+    margin-top:20px;
+}
+
+.select_texto{
+    color:#8D8D8D;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    text-align:center;
+    line-height:17px;
+    font-size:15px;
+}
+
+.descargarbtn{
+    width:104px;
+    height:27px;
+    float:left;
+    margin-top:20px;
+    margin-left:96px;
+    border:solid 1px #257500;
+}
+
+.descargarbtn_texto{
+    color:#257500;
+    font-family:Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+    text-align:center;
+    font-size:15px;
+    text-transform:uppercase;
+    line-height: 1px;
+}

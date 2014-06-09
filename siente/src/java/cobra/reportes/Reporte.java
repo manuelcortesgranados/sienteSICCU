@@ -52,6 +52,7 @@ public class Reporte implements ILifeCycleAware, Serializable {
     private String tiposoliresumen;
     private String tiposolitodossolivsapro;
     private String deptosah;
+    private String dptoSelected;
     private String muniah;
     private String deptoselec = "";
     private String loc;
@@ -1015,6 +1016,8 @@ public class Reporte implements ILifeCycleAware, Serializable {
             SelectItem dep = new SelectItem(dept.getStrcodigolocalidad(), dept.getStrdepartamento());
             if (i == 0) {
                 deptosah = "-1";
+                //variable utilizada en los reportes de zoom
+                dptoSelected = "ALL";
             }
             sedeptosah[i++] = dep;
         }
@@ -2988,5 +2991,13 @@ public class Reporte implements ILifeCycleAware, Serializable {
         } catch (IOException ex) {
             Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String getDptoSelected() {
+        return dptoSelected;
+    }
+
+    public void setDptoSelected(String dptoSelected) {
+        this.dptoSelected = dptoSelected;
     }
 }
