@@ -8,9 +8,9 @@
 }
 
 .SliderNamePrev_2 {
-	background: url(/zoom/resources/images/left.png) no-repeat left center;
+	background: url(../images/left.png) no-repeat left center;
 	width: 50px;
-	height: 450px;
+	height: 200px;
 	display: block;
 	position: absolute;
 	top: 0;
@@ -19,9 +19,9 @@
 }
 
 .SliderNameNext_2 {
-	background: url(/zoom/resources/images/right.png) no-repeat right center;
+	background: url(../images/right.png) no-repeat right center;
 	width: 50px;
-	height: 450px;
+	height: 200px;
 	display: block;
 	position: absolute;
 	top: 0;
@@ -55,12 +55,12 @@
 	border: none;
 	width: 16px;
 	height: 16px;
-	background: url(/zoom/resources/images/bullet.png) no-repeat center center;
+	background: url(../images/bullet.png) no-repeat center center;
 }
 
 #SliderNameNavigation_2 a.active img
 {
-	background: url(/zoom/resources/images/bullet_active.png) no-repeat center center;
+	background: url(../images/bullet_active.png) no-repeat center center;
 }
 
 .c { clear: both; }

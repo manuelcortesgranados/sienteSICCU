@@ -1067,6 +1067,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     }
                     gragiprom.setListadesempeno(getSessionBeanCobra().getGipromService().obtenerIndicadorDesempenoMunicipalxcodmunicipio(municipal.getLclCodigo()));
                     gragiprom.llenarDistribucionEtnica(getSessionBeanCobra().getGipromService().obtenerIndicadorDistribucionEtnica(municipal.getLclCodigo()));
+                    listaImagenesevolucionobra = getSessionBeanCobra().getCobraService().obtenerImagenesEvolucionxObra(getObra().getIntcodigoobra());
 
                 } else {
                     if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
@@ -1521,8 +1522,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 break;
             }
         }
+         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+            
+                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            
+         }
         this.documentoobra.setObra(getObra());
         try {
+            
             subirDocumento();
             getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobra);
             listaDocumentosobra.add(documentoobra);
@@ -1689,10 +1696,18 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String bt_agregar_imagenevolucion_action() {
+         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+            
+                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            
+         }
+        
         this.imagenevolucionobra.setObra(getObra());
         try {
             subirImagenevolucion();
             imagenevolucionobra.setTipoimagen(getSessionBeanCobra().getCobraService().obtenerTipoimagenporId(imagenevolucionobra.getTipoimagen().getIntidtipoimagen()));
+            
+            
             getSessionBeanCobra().getCobraService().guardarImagen(this.imagenevolucionobra);
             if (imagenevolucionobra.getTipoimagen().getIntidtipoimagen() == 2) {
                 getSessionBeanCobra().getCobraService().funcion_EstablecerImagenActual(imagenevolucionobra.getIntidimagen());
@@ -2569,9 +2584,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String detalleContrato() {
-        if(contratoId!=0){
-            mostrarContratoConvenio = contratoId;
-        }
+//        if(contratoId!=0){
+//            mostrarContratoConvenio = contratoId;
+//        }    
         Contrato contratotabla = (Contrato) getSessionBeanCobra().getCobraService().encontrarContratoxId(mostrarContratoConvenio);
         getNuevoContratoBasico().cargarContrato(contratotabla);
         return "consultarContrato";

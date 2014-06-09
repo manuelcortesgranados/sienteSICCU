@@ -10,55 +10,50 @@
                  xmlns:composite="http://java.sun.com/jsf/composite"
                  >
     <h:head>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui-smoothness.css?#{var.version}" rel="stylesheet" type="text/css"/>
 
 
     </h:head>
 
-    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
+    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos" onitemchange="cargarSliedersFiltroDeBusqueda();">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos"  > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
-            <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
+            <h:panelGrid columns="1" styleClass="ikont-hpg-filtrobusquedaavanzadohome">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
                               onclick="this.value = ''"  styleClass="input_filtro">
-                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
-
-
-                <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
-                <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-
-
-                <h:panelGrid styleClass="ikont-hpg-slider-valor">           
-                    <h:panelGrid id="numeros_la" columns="1" styleClass="ikont-hpg-slider-valor1">
-                        <h:inputText   styleClass="input_filtro_2 ikont-hit-valor" value="NBI " disabled="true"/>
-                        <rich:column>
-                            <h:inputText styleClass="input_filtro_2 ikont-hit-avance1" id="por_nbi"  disabled="true" />
-                        </rich:column>
-                    </h:panelGrid>
+                <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
+                <!--Slider de NBI-->
+                <h:outputLabel value="NBI" styleClass="ikont-hol-nbi-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-nbe" styleClass="ikont-hpg-slider-nbe ikont-hpg-filtrobusquedaavanzada">           
+                    <h:inputHidden id="ikont-hih-nbi1-filtro"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                    <h:inputHidden id="ikont-hih-nbi2-filtro"   value="#{HomeGestion.filtro.cuantiafin}"/>
+                    <h:outputText id="ikont-hot-nbi-filtro" styleClass="ikont-hot-nbi-filtro label-valor-slider-filtro-busqueda"/> 
+                    <div id="ikont-slider-range-nbi-filtro" class="ikont-slider-range-nb-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
                 </h:panelGrid>
-                <div id="slider-range" class="ikont-filtro-slider-range" ></div>
-                <br/>
-                <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
-                <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
-
-
-                <h:panelGrid styleClass="ikont-hpg-slider-avance">
-
-                    <rich:column>
-                        <h:inputText id="avance" styleClass="input_filtro_2 ikont-hit-avance1 " disabled="true"/> 
-                    </rich:column>
-
+                <!--Slider de CONSUMO ENERGÉTICO POR LOCALIDAD-->
+                <h:outputLabel value="CONSUMO ENERGÉTICO POR LOCALIDAD (KwH)" styleClass="ikont-hol-consumoEnergeticoLocalidad-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-consumoEnergeticoLocalidad" styleClass="ikont-hpg-slider-consumoEnergeticoLocalidad ikont-hpg-filtrobusquedaavanzada">
+                    <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadIni-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadIni}" />
+                    <h:inputHidden id="ikont-hih-consumoEnergeticoLocalidadFin-filtro" value="#{HomeGestion.filtro.consumoenergeticolocalidadFin}" />
+                    <h:outputText id="ikont-hot-consumoEnergeticoLocalidad-filtro" styleClass="ikont-hot-consumoEnergeticoLocalidad-filtro label-valor-slider-filtro-busqueda"/> 
+                    <div id="ikont-slider-range-consumoEnergeticoLocalidad-filtro" class="ikont-slider-range-consumoEnergeticoLocalidad-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
                 </h:panelGrid>
-                <div id="slider-range-avance" class="ikont-filtro-slider-range-avance"></div>
+                <!--Slider de HABITANTES-->
+                <h:outputLabel value="HABITANTES " styleClass="ikont-hol-labelNumeroHabitantes-filtro label-slider-filtro-busqueda" /> 
+                <h:panelGrid id="ikont-hpg-slider-numeroHabitantes" styleClass="ikont-hpg-slider-numeroHabitantes ikont-hpg-filtrobusquedaavanzada">
+                    <h:inputHidden id="ikont-hih-numeroHabitantesIni-filtro" value="#{HomeGestion.filtro.numeroHabitantesIni}" />
+                    <h:inputHidden id="ikont-hih-numeroHabitantesFin-filtro" value="#{HomeGestion.filtro.numeroHabitantesFin}" />
+                    <h:outputText id="ikont-hot-numeroHabitantes-filtro" styleClass="ikont-hot-numeroHabitantes-filtro label-valor-slider-filtro-busqueda" /> 
+                    <div id="ikont-slider-range-numeroHabitantes-filtro" class="ikont-slider-range-numeroHabitantes-filtro ikont-div-slider-filtrobusquedaavanzada"></div>
+                </h:panelGrid>
             </h:panelGrid>
             <center>
                 <h:commandButton type="submit" action="#{HomeGestion.filtrosSeparacionlateral}" id="filtrar_nuevo1"  value="#{var.buscar}"
                                  styleClass="boton1 ikont-filtro-filtrar_btn"    />
             </center>
-            <h:inputText value="NE " styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
         </rich:tab>              
         <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />

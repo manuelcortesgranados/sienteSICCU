@@ -56,7 +56,7 @@
                 <value>co/com/interkont/cobra/to/Lugarobra.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Eventoscorreo.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Cuentaprincipal.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/Obra.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/ObraGiprom.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Beneficiario.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Videoevolucionobra.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Formapago.hbm.xml</value>
@@ -697,16 +697,14 @@
          </property>
      </bean>
     -->
-    
+    <!--
     <bean id="dataSourceOracle"
          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName">
             <value>oracle.jdbc.OracleDriver</value>
         </property>
-        <property name="url">
-           <value>jdbc:oracle:thin:@190.248.54.71:1521:SIGECOM</value>
-            <!--<value>jdbc:oracle:thin:@172.16.2.15:1521:SIGECOM</value>-->
-           
+        <property name="url">           
+            <value>jdbc:oracle:thin:@172.16.2.15:1521:SIGECOM</value>           
         </property>
         <property name="username">
             <value>COBRA</value>
@@ -715,7 +713,8 @@
             <value>ji4cEonWk@QtD%3xgu87</value>
         </property>
     </bean>   
-   <!--
+    -->
+   
    <bean id="dataSourceOracle"
           class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName">
@@ -731,7 +730,7 @@
             <value>cobradatabase</value>
         </property>
     </bean>
-    -->
+    
     <bean id="sessionFactoryOracle" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>

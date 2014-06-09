@@ -39,7 +39,9 @@
         </h:panelGrid>
         <br/>
         <hr  class="ikont-hr-separador-usuario" />
-
+        <h:commandLink styleClass="ikont-hol-acercadelproyecto-menulateral ikont-hol-acercadelproyecto" id="ikont-hol-acercadelproyecto-menulateral" rendered="#{var.versioncobra eq 'giprom'}"
+                       value="ACERCA DEL PROYECTO" onclick="window.open(document.location.href = 'http://giprom.municipios.org.co/giprom/resources/acerca/index.html'); return false;"/>
+        <br/>
         <h:panelGrid cellpadding="3" cellspacing="5" columns="2" styleClass="ikont-panel-ayuda">
 
             <h:commandLink  styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda"   immediate="true" action="pregfrecuentes"/>

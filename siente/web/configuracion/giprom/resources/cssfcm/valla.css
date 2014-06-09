@@ -21,7 +21,7 @@
 
 .modal-content-fonade{
     width: 450px!important;
-    height: 200px!important;    
+    height: 225px!important;    
 }
 
 .modal-header-fonade{
@@ -362,4 +362,18 @@ a.imgaction:hover:after{
 
 .panelcenter{
     text-align: center!important;
+}
+
+.ikont-div-datos-habitantes-valla {
+    text-align: left;
+}
+
+.ikont-div-nbi-valla {
+    position: absolute;
+    left: 204px;
+    top: 36px;
+}
+
+.ikont-table-habitantes-valla {
+    text-align: right;
 }
