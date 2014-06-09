@@ -4999,6 +4999,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             tipoContCon = "Contrato";
             booltipocontratoconvenio = false;
         }
+        if(booltipocontratoconvenio){
+            contrato.setUnidad(getSessionBeanCobra().getCobraService().obtenerUnidadXConvenioId(contrato.getIntidcontrato()));
+        }
         if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
             getContrato().getTipocontratoconsultoria().setStrdescripcion("Obra");
         }
