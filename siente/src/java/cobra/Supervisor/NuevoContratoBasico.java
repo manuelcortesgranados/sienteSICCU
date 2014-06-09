@@ -194,7 +194,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Variable para mostrar las entidades aseguradoras
      */
-    private SelectItem[] Companias;
+    private List<Aseguradora> Companias;
     private String valorFiltroContratos = "";
     /**
      * Lista que se llena con los contratos o convenios padres
@@ -2569,11 +2569,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.polizacontrato = polizacontrato;
     }
 
-    public SelectItem[] getCompanias() {
+    public List<Aseguradora> getCompanias() {
         return Companias;
     }
 
-    public void setCompanias(SelectItem[] Companias) {
+    public void setCompanias(List<Aseguradora> Companias) {
         this.Companias = Companias;
     }
 
@@ -3412,7 +3412,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     }
                 }
                 if (contrato.getIntduraciondias() > 0) {
-                    if (contrato.getContratista() == null) {
+                    if (!Boolean.valueOf(Propiedad.getValor("multiplescontratistas")) && contrato.getContratista() == null) {
                         FacesUtils.addErrorMessage("Debe seleccionar ó crear un contratista.");
                         return null;
                     }
@@ -5101,7 +5101,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(0, 10);
             totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
         }
-
+        System.out.println("listaContratista = " + listaContratista.size());
         pagina = 1;
         if (totalfilas <= 10) {
             totalpaginas = 1;
