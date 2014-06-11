@@ -20,6 +20,7 @@ import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Opinionciudadano;
 import co.com.interkont.cobra.to.Region;
 import co.com.interkont.cobra.to.Tercero;
+import co.com.interkont.cobra.to.Tipocontratista;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Tipoorigen;
@@ -3082,7 +3083,7 @@ public class HomeGestionGiprom implements Serializable, ILifeCycleAware {
 
     //Metodo para cargar las listas para el autocomplete del filtro
     public void mostrarContratistas() {
-        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratistas();
+        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratistas(Tipocontratista.ID_TIPO_TERCERO);
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();

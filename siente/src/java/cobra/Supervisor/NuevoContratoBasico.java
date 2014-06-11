@@ -90,7 +90,10 @@ import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
 import co.com.interkont.cobra.to.Componente;
+import co.com.interkont.cobra.to.Contratante;
 import co.com.interkont.cobra.to.Contratocomponente;
+import co.com.interkont.cobra.to.Contratocontratante;
+import co.com.interkont.cobra.to.ContratocontratanteId;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Tipocontratista;
@@ -3147,7 +3150,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void llenarTipoContrato() {
         List<Tipocontrato> listipcon;
-        if(Propiedad.getValor("versioncobra").equals("siccu") 
+        if(Boolean.valueOf(Propiedad.getValor("conveniocontipo"))
                 && tipoContCon.equals("Convenio")) {
             listipcon = getSessionBeanCobra().getCobraService().encontrarTiposConvenio();
         } else {
@@ -3376,7 +3379,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
 
     public String guardarContrato() {
-        ValidacionesConvenio.validarContratistasRequerido(contrato);
+        ValidacionesConvenio.validarContratistaRequerido(contrato);
+        ValidacionesConvenio.validarContratanteRequerido(contrato);
 //        if (validarContrato()) {        
         boolean band = true;
         if (getContrato().getIntidcontrato() == 0) {
@@ -3404,10 +3408,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     }
                 }
                 if (contrato.getIntduraciondias() > 0) {
-                    if (!Boolean.valueOf(Propiedad.getValor("multiplescontratistas")) && contrato.getContratista() == null) {
-                        FacesUtils.addErrorMessage("Debe seleccionar ó crear un contratista.");
-                        return null;
-                    }
                     if (contrato.getNumvlrcontrato().compareTo(BigDecimal.ZERO) <= 0) {
                         removerAnticipo();
                         FacesUtils.addErrorMessage("Debe distribuir los recursos económicos del contrato adecuadamente.");
@@ -3797,6 +3797,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
         boolcontrconsultoria = false;
+        consultarContratantes();
+        instanciarPolizar();
+        llenarListaComponentes();
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         getSessionBeanCobra().setCargarcontrato(false);
         //if (contrato != null && bundle.getString("conplanoperativo").equals("true")) {
@@ -4164,6 +4167,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
 
     public void limpiarContrato() {
+        nombreCedulaNitContratante = "";
         boolnumencargosoli = false;
         if (getSessionBeanCobra().getCobraService().isAsoContratoCrear()) {
             booltipocontratoconvenio = false;
@@ -5053,7 +5057,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String llenarContratistaContrato() {
         nombre = "";
         aplicafiltro = false;
-        primerosreales();
+        consultarPrimerosContratistas();
         return null;
     }
 
@@ -5062,18 +5066,25 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String primerosreales() {
+    public String consultarPrimerosContratistas() {
+        Integer intidtipocontratista;
+        
+        if(tipoContCon.equals("Convenio") && Boolean.valueOf(Propiedad.getValor("contratistaconvenioenteterritorial"))) {
+            intidtipocontratista = Tipocontratista.ID_TIPO_ENTE_TERRITORIAL;
+        } else {
+            intidtipocontratista = Tipocontratista.ID_TIPO_TERCERO;
+        }
+        
         if (aplicafiltro) {
-
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, 0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
+            
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, intidtipocontratista, 0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre, intidtipocontratista);
             // }
         } else {
 
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(intidtipocontratista,0, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas(intidtipocontratista);
         }
-        System.out.println("listaContratista = " + listaContratista.size());
         pagina = 1;
         if (totalfilas <= 10) {
             totalpaginas = 1;
@@ -5098,15 +5109,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String siguientesReales() {
+        Integer intidtipocontratista;
+        if(tipoContCon.equals("Convenio") && Boolean.valueOf(Propiedad.getValor("contratistaconvenioenteterritorial"))) {
+            intidtipocontratista = Tipocontratista.ID_TIPO_ENTE_TERRITORIAL;
+        } else {
+            intidtipocontratista = Tipocontratista.ID_TIPO_TERCERO;
+        }
 
         int num = (pagina) * 10;
         if (aplicafiltro) {
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, intidtipocontratista, num, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre, intidtipocontratista);
 
         } else {
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(intidtipocontratista, num, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas(intidtipocontratista);
         }
         if (totalfilas <= 10) {
             totalpaginas = 1;
@@ -5132,15 +5149,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String anterioresReales() {
-
+        Integer intidtipocontratista;
+        if(tipoContCon.equals("Convenio") && Boolean.valueOf(Propiedad.getValor("contratistaconvenioenteterritorial"))) {
+            intidtipocontratista = Tipocontratista.ID_TIPO_ENTE_TERRITORIAL;
+        } else {
+            intidtipocontratista = Tipocontratista.ID_TIPO_TERCERO;
+        }
+        
         pagina = pagina - 1;
         int num = (pagina - 1) * 10;
         if (aplicafiltro) {
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, num, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, intidtipocontratista, num, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre, intidtipocontratista);
         } else {
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(num, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(intidtipocontratista, num, 10);
+            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas(intidtipocontratista);
         }
         if (totalfilas <= 10) {
             totalpaginas = 1;
@@ -5166,14 +5189,21 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String ultimoReales() {
+        Integer intidtipocontratista;
+        if(tipoContCon.equals("Convenio") && Boolean.valueOf(Propiedad.getValor("contratistaconvenioenteterritorial"))) {
+            intidtipocontratista = Tipocontratista.ID_TIPO_ENTE_TERRITORIAL;
+        } else {
+            intidtipocontratista = Tipocontratista.ID_TIPO_TERCERO;
+        }
+        
         int num = totalfilas % 10;
 
         if (aplicafiltro) {
-            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
-            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, totalfilas - num, totalfilas);
+            totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre, intidtipocontratista);
+            listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, intidtipocontratista, totalfilas - num, totalfilas);
         } else {
-            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
-            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(totalfilas - num, totalfilas);
+            totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas(intidtipocontratista);
+            listaContratista = getSessionBeanCobra().getCobraService().encontrarContratistas(intidtipocontratista, totalfilas - num, totalfilas);
         }
 
         if (totalfilas <= 10) {
@@ -5207,7 +5237,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //   listaContratista.clear();
             aplicafiltro = true;
         }
-        primerosreales();
+        consultarPrimerosContratistas();
         return null;
     }
 
@@ -7377,6 +7407,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setListModalidadContratista(List<Modalidadcontratista> listModalidadContratista) {
         this.listModalidadContratista = listModalidadContratista;
     }
+    
 
     public void llenarModalidadContratista() {
         listModalidadContratista = getSessionBeanCobra().getCobraService().encontrarModalidadContratista();
@@ -9528,6 +9559,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
     
     /**
+     * Elimina un contratista de la lista de contratistas del convenio
+     * @param contratocontratante Contratante a eliminar
+     */
+    public void eliminarCotratanteConvenioAction(Contratocontratante contratocontratante) {
+        contrato.getContratocontratantes().remove(contratocontratante);
+    }
+    
+    /**
      * Adiciona el contratista seleccionado a la lista de contratistas
      */
     public void adicionarContratistaAction() {
@@ -9537,5 +9576,85 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         System.out.println("Nuevo numero de contratistas = " + contrato.getListaContratistas().size());
         System.out.println("contrato.getContratistas() = " + contrato.getContratistas().size());
     }
+    
+    /**
+     * Listado de contratantes del sistema
+     */
+    private List<Contratante> contratantes;
 
+    public List<Contratante> getContratantes() {
+        return contratantes;
+    }
+
+    public void setContratantes(List<Contratante> contratantes) {
+        this.contratantes = contratantes;
+    }
+    
+    /**
+     * Variable utilizada para filtrar las entidadescontratantes
+     */
+    private String nombreCedulaNitContratante = "";
+
+    public String getNombreCedulaNitContratante() {
+        return nombreCedulaNitContratante;
+    }
+
+    public void setNombreCedulaNitContratante(String nombreCedulaNitContratante) {
+        this.nombreCedulaNitContratante = nombreCedulaNitContratante;
+    }
+    
+    /**
+     * Consulta las entidades contratantes;
+     */
+    public void consultarContratantes() {
+        System.out.println("nombreCedulaNitContratante = " + nombreCedulaNitContratante);
+        contratantes = getSessionBeanCobra().getCobraService().consultarContratantes(nombreCedulaNitContratante);
+    }
+    
+    /**
+     * Adiciona el contratante a la lista de contratantes del conenio
+     * @param contratante Nuevo contratante
+     */
+    public void adicionarContratanteConvenioAction(Contratante contratante) {
+        System.out.println("contrato.getContratocontratantes().size() = " + contrato.getContratocontratantes().size());
+        Contratocontratante contratocontratante = new Contratocontratante(new ContratocontratanteId(contrato.getIntidcontrato(), contratante.getIntcodigo()), contrato, contratante, contratante.getNumvaloraportado());
+        contrato.getContratocontratantes().add(contratocontratante);
+        contrato.setNumvlrcontrato(contrato.getNumvlrcontrato().add(contratante.getNumvaloraportado()));
+        System.out.println("contrato.getContratocontratantes().size() = " + contrato.getContratocontratantes().size());
+    }
+    
+    /**
+     * Elimina el contratante a la lista de contratantes del convenio
+     * @param contratocontratante Contratante a eliminar
+     */
+    public void eliminarContratanteConvenioAction(Contratocontratante contratocontratante) {
+        contrato.getContratocontratantes().remove(contratocontratante);
+        contrato.setNumvlrcontrato(contrato.getNumvlrcontrato().subtract(contratocontratante.getNumvaloraportado()));
+    }
+    
+    /**
+     * Determina si el contrato e interadministrativo o no
+     * @return 
+     */
+    public boolean isInteradministrativo() {
+        if(contrato != null && contrato.getTipocontrato() != null && contrato.getTipocontrato().getInttipocontrato() == Tipocontrato.ID_TIPO_CONVENIO_INTERADMINISTRATIVO) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Determina si el contrato e interadministrativo o no
+     * @return 
+     */
+    public boolean isCooperacion() {
+        if(contrato != null && contrato.getTipocontrato() != null && contrato.getTipocontrato().getInttipocontrato() == Tipocontrato.ID_TIPO_CONVENIO_COOPERACION) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
 }

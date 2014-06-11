@@ -122,6 +122,39 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
+                <rich:collapsiblePanel id="ikont-rcp-multiplescontratantes" styleClass="ikont-rcp-multiplescontratantes" header="#{var.tituloadicionarmultilescontratantes}" 
+                                       expanded="false" immediate="true" switchType="server" toggleListener="#{Supervisor$Contrato.consultarContratantes()}" 
+                                       rendered="#{var.multiplescontratantes and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                    <h:panelGrid id="ikont-hpg-multiplescontratantes" styleClass="ikont-hpg-multiplescontratantes">
+                        <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
+                                        value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
+                                                rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                var="objeto">
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-identificacioncontratante"   value="#{var.identificacioncontratante}"/>
+                                </f:facet>
+                                <h:outputText  value="#{objeto.tercero.intcedula}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-nombrecontratante" value="#{var.nombrecontratante}"/>
+                                </f:facet>
+                                <h:outputText value="#{objeto.tercero.strnombre}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratante}"/>
+                                </f:facet>
+                                <a4j:commandButton value="#{var.eliminarcontratante}" 
+                                                   action="#{Supervisor$Contrato.eliminarContratanteConvenioAction(objeto)}" 
+                                                   execute="@this" immediate="true" render="ikont-hpg-multiplescontratantes gpValContrato">
+                                </a4j:commandButton>   
+                            </rich:column>
+                        </rich:dataTable>
+                        <rich:dataScroller id="ikont-rds-multiplescontratantes" for="ikont-rdt-multiplescontratantes" styleClass="ikont-rds-multiplescontratantes"/>
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}" 
                                        expanded="false" immediate="true"
                                        rendered="#{var.multiplescontratistas and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
