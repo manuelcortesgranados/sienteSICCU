@@ -175,7 +175,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
     private int selectedUnit;
+    
+     /**
+     * VARIABLES TIPIFICACION CONVENIO
+     */
+    private List<TipificacionConvenioSector> listaTipificacionSectores;
+    private List<TipificacionConvenioObjetivo> listaTipificacionObjetivos;
+    private List<TipificacionConvenioEstrategia> listaTipificacionEstrategias;
+    private TipificacionConvenioSector tipificacionSector;
+    private TipificacionConvenioObjetivo tipificacionObjetivo;
+    private TipificacionConvenioEstrategia tipificacionEstrategia;
+    private TipificacionConvenio tipificacionConvenio;
 
+    
     public List<Polizacontrato> getListaPolizasEliminar() {
         return listaPolizasEliminar;
     }
@@ -852,7 +864,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private int contratoPadre;
     private boolean isFromContracts;
     
-    private int selectedUnit;
     /**
      * Get the value of eliminarPeriodosFueraRango
      *
@@ -9699,41 +9710,5 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setSelectedUnit(int selectedUnit) {
         this.selectedUnit = selectedUnit;
     }
-
-   
-
-    /**
-     * @return the lstUnidades
-     */
-    public List<Unidad> getLstUnidades() {
-        return lstUnidades;
-    }
-
-    /**
-     * @param lstUnidades the lstUnidades to set
-     */
-    public void setLstUnidades(List<Unidad> lstUnidades) {
-        this.lstUnidades = lstUnidades;
-    }
-
-    private void llenarUnidades() {
-        lstUnidades = getSessionBeanCobra().getCobraService().encontrarUnidades();
-    }
-
-    /**
-     * @return the selectedUnit
-     */
-    public int getSelectedUnit() {
-        return selectedUnit;
-    }
-
-    /**
-     * @param selectedUnit the selectedUnit to set
-     */
-    public void setSelectedUnit(int selectedUnit) {
-        this.selectedUnit = selectedUnit;
-    }
-
-   
 
 }
