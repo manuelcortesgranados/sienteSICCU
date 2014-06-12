@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-listado-Supervisor" modal="false" autosized="true" resizeable="false" headerClass="rich-panel-header">
+                    <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-seleccionSupervisor" value="#{var.seleccionar}"   />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder-mp-listado-Supervisor" styleClass="ikont-acl-cerrar closemodal"  
+                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-Supervisor')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form>
+            <h:panelGroup layout="block" id="gpTotalSupervisor">
+                <h:panelGrid columns="2" >
+                    <h:outputText  styleClass="ikont-hot-consultarnombre" value="#{var.nombrecedulaonit}" />
+                    <h:panelGroup>
+                        <h:inputText id="hit_buscar_Supervisor" styleClass="ikont-hit-nombre" value="#{Supervisor$IngresarNuevaObra.nombreSupervisor}" size="20" onfocus="clearText(this);" />
+                        <a4j:commandButton styleClass="ikont-acb-buscarproyecto" value="#{var.buscarProyecto}" action="#{Supervisor$IngresarNuevaObra.buscarSupervisor}"
+                                           execute="hit_buscar_Supervisor, gpTotalSupervisor" render="gpTotalSupervisor" />
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGrid >
+                    <interkont:spacer height="5" />
+
+                    <rich:dataTable id="tablaSupervisores"
+                                    rows="10"
+                                    var ="supervisor"
+                                    rowKeyVar="filaSeleccionada"                                  
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                    onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                    sortMode="single"
+                                    rendered="true"
+                                    value="#{Supervisor$IngresarNuevaObra.listaSupervisores}"
+                                    binding="#{Supervisor$IngresarNuevaObra.tablasupervisores}"                                    
+                                    >
+                        <f:facet name="header">
+                            <rich:columnGroup>
+
+                                <rich:column colspan="6">
+                                    <h:outputText  styleClass="ikont-hot-contratistasencontrados" value="#{var.supervisores} encontrados #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina} #{var.deCiu} #{Supervisor$IngresarNuevaObra.totalpaginas}" />
+                                </rich:column>
+
+                                <rich:column width="150px" breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-cedula" value="#{var.cedulaah}"/>
+                                </rich:column>
+                                <rich:column width="150px">
+                                    <h:outputText  styleClass="ikont-hot-txtnombre" value="#{var.nombre}" />
+                                </rich:column>
+                                <rich:column width="150px">
+                                    <h:outputText  styleClass="ikont-hot-txtseleccionar" value="#{var.seleccionar}" />
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:columnGroup id="CuerpoObraPadres">
+                            <rich:column  width="150px" breakRowBefore="true">
+                                <h:outputText  styleClass="ikont-hot-intcedula" value="#{supervisor.intcedula}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-nombreapellido" value="#{supervisor.strnombre}"/>
+                            </rich:column>
+                            <rich:column >
+                                <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarSupervisor}"
+                                                   render="gpsupervisorseleccionado, txtSupervisor, @form" execute="gpSupervisorseleccionado, txtSupervisor, @this" immediate="true"
+                                                   onclick="#{rich:component('mp-listado-Supervisor')}.hide()"/>                                
+                            </rich:column>   
+
+                        </rich:columnGroup>                               
+                        <f:facet name="footer">
+                            <rich:columnGroup>
+                                <rich:column colspan="5" breakRowBefore="true">
+                                    <center>
+                                        <h:panelGrid columns="4">
+                                            <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.primeraPagina}" render="gpTotalSupervisor"  action="#{Supervisor$IngresarNuevaObra.primerosSupervisores}" execute="@this">
+                                                <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.anteriorPagina}" render="gpTotalSupervisor"  action="#{Supervisor$IngresarNuevaObra.anterioresTerceros}" execute="@this">
+                                                <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.siguientePagina}" render="gpTotalSupervisor"  action="#{Supervisor$IngresarNuevaObra.siguienteTerceros}" execute="@this" >
+                                                <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.ultimoPagina}" render="gpTotalSupervisor"  action="#{Supervisor$IngresarNuevaObra.ultimosTerceros}" execute="@this">
+                                                <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+                                            </a4j:commandButton>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                    </rich:dataTable>
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:form>       
+                </rich:popupPanel>
+</ui:composition>

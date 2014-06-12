@@ -191,7 +191,16 @@
                                             <h:outputText styleClass="ikont-hcl-zoom-nocontrato" />
                                             <h:panelGroup layout="block">
                                                 <h:outputText styleClass="ikont-hot-supervisorciu" value="#{var.supervisorciu}: " ></h:outputText>
-                                                <h:outputLabel styleClass="ikont-hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputLabel>
+                                                <h:outputLabel styleClass="ikont-hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.supervisor.strnombre}" rendered="#{Supervisor$AdministrarObraNew.obra.supervisor!=null}"></h:outputLabel>
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                    <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                        <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                            <h:outputText styleClass="ikont-hcl-zoom-nocontrato" />
+                                            <h:panelGroup layout="block">
+                                                <h:outputText styleClass="ikont-hot-supervisorciu" value="#{var.interventor}: " ></h:outputText>
+                                                <h:outputLabel styleClass="ikont-hot-strinterventor" value="#{Supervisor$AdministrarObraNew.obra.interventor.strnombre}" rendered="#{Supervisor$AdministrarObraNew.obra.interventor!=null}"></h:outputLabel>
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGroup>

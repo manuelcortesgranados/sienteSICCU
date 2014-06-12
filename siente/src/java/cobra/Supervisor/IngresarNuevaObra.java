@@ -12,6 +12,7 @@ import co.com.interkont.cobra.to.Barrio;
 import co.com.interkont.cobra.to.Bdpu;
 import co.com.interkont.cobra.to.Claseobra;
 import co.com.interkont.cobra.to.Comuna;
+import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Corregimiento;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -222,6 +223,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
     private UIDataTable tablaObrasPadres = new UIDataTable();
+    private UIDataTable tablainterventores = new UIDataTable();
+    private UIDataTable tablasupervisores = new UIDataTable();
     // </editor-fold>
     /**
      * Variables Int.
@@ -324,6 +327,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private String strempleosdirectos = bundle.getString("numempleosdirectos");
     private String strempleosindirectos = bundle.getString("numempleosindirectos");
     private String strbeneficiarios = bundle.getString("numbeneficiarios");
+    private boolean primeraPagina;
+    private boolean anteriorPagina;
+    private boolean siguientePagina;
+    private boolean ultimoPagina;
+    List<Tercero> listaTotalTerceros;
+    private boolean isSupervisor; //true es supervisor, false es interventor
+    
     
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
@@ -357,6 +367,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.longitudmapa = longitudmapa;
     }
     // </editor-fold>
+    
+    private String nombre = "";
+    private boolean aplicaFiltroInterventor;
+    private List<Tercero> listaInterventores;
+    private String nombreSupervisor = "";
+    private boolean aplicaFiltroSupervisor;
+    private List<Tercero> listaSupervisores;
     /**
      * Medios de vida
      */
@@ -1642,6 +1659,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarVeredas();
         llenarComunas();
         llenarCorregimientos();
+//        buscarInterventor();
+//        buscarSupervisor();
+        
     }
 
     /**
@@ -1672,6 +1692,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        nombre = "";
     }
 
     @Override
@@ -6430,6 +6451,163 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem,cars);
     }
     
+    public void buscarInterventor(){
+        aplicaFiltroInterventor = false;
+        if (nombre.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroInterventor = true;
+        }
+        primerosInterventores();
+    }
+    
+    public void primerosTerceros() {
+        int fin = listaTotalTerceros.size()>=10 ? 9 : listaTotalTerceros.size()-1;
+            
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, 0, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, 0, fin);
+        }
+        
+        setPrimeraPagina(false);
+        setAnteriorPagina(false);
+        pagina = 1;
+        int round = Math.round(listaTotalTerceros.size()/10);
+        if(round*10<listaTotalTerceros.size()){
+            round++;
+        }
+        totalpaginas = round;
+        if(listaTotalTerceros.size()<=10){
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }else{
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }
+    }
+    
+    public void anterioresTerceros() {
+        pagina--;
+        int fin = pagina*10-1;
+        int ini = (pagina-1)*10;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+        
+        
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    public void siguienteTerceros() {
+        pagina++;
+        int fin = pagina*10 > listaTotalTerceros.size() ? listaTotalTerceros.size()-1 : pagina*10-1;
+        int ini = (pagina-1)*10;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    
+    public void ultimosTerceros() {
+        pagina = totalpaginas;
+        int fin = listaTotalTerceros.size()-1;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, fin-20 < 0 ? 0 : fin-20, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, fin-20 < 0 ? 0 : fin-20, fin);
+        }
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    
+    public void primerosInterventores() {
+        if (aplicaFiltroInterventor) {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombre, 30);
+            totalfilas = listaTotalTerceros.size();
+        } else {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 30);
+            totalfilas = listaTotalTerceros.size();
+        }
+        primerosTerceros();
+    }
+    public String seleccionarInterventor() {
+        obranueva.setInterventor((Tercero) tablainterventores.getRowData());
+        return null;
+    }
+    
+    public void buscarSupervisor(){
+        aplicaFiltroSupervisor = false;
+        if (nombreSupervisor.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroSupervisor = true;
+        }
+        primerosSupervisores();
+    }
+    public void primerosSupervisores() {
+        if (aplicaFiltroInterventor) {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombreSupervisor, 28);
+            totalfilas = listaTotalTerceros.size();
+        } else {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 28);
+            totalfilas = listaTotalTerceros.size();
+        }
+        
+        primerosTerceros();
+        
+    }
+    public String seleccionarSupervisor() {
+        obranueva.setSupervisor((Tercero) tablasupervisores.getRowData());
+        return null;
+    }
+            
     /**
      * Selector de cuencas
      */
@@ -6649,4 +6827,197 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             tiposLocalidadSelectItem[i++] = selectItem;
         }
     }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the listaInterventores
+     */
+    public List<Tercero> getListaInterventores() {
+        return listaInterventores;
+    }
+
+    /**
+     * @param listaInterventores the listaInterventores to set
+     */
+    public void setListaInterventores(List<Tercero> listaInterventores) {
+        this.listaInterventores = listaInterventores;
+    }
+
+    /**
+     * @return the tablainterventores
+     */
+    public UIDataTable getTablainterventores() {
+        return tablainterventores;
+    }
+
+    /**
+     * @param tablainterventores the tablainterventores to set
+     */
+    public void setTablainterventores(UIDataTable tablainterventores) {
+        this.tablainterventores = tablainterventores;
+    }
+
+    /**
+     * @return the tablasupervisores
+     */
+    public UIDataTable getTablasupervisores() {
+        return tablasupervisores;
+    }
+
+    /**
+     * @param tablasupervisores the tablasupervisores to set
+     */
+    public void setTablasupervisores(UIDataTable tablasupervisores) {
+        this.tablasupervisores = tablasupervisores;
+    }
+
+    /**
+     * @return the nombreSupervisor
+     */
+    public String getNombreSupervisor() {
+        return nombreSupervisor;
+    }
+
+    /**
+     * @param nombreSupervisor the nombreSupervisor to set
+     */
+    public void setNombreSupervisor(String nombreSupervisor) {
+        this.nombreSupervisor = nombreSupervisor;
+    }
+
+    /**
+     * @return the aplicaFiltroSupervisor
+     */
+    public boolean isAplicaFiltroSupervisor() {
+        return aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @param aplicaFiltroSupervisor the aplicaFiltroSupervisor to set
+     */
+    public void setAplicaFiltroSupervisor(boolean aplicaFiltroSupervisor) {
+        this.aplicaFiltroSupervisor = aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @return the listaSupervisores
+     */
+    public List<Tercero> getListaSupervisores() {
+        return listaSupervisores;
+    }
+
+    /**
+     * @param listaSupervisores the listaSupervisores to set
+     */
+    public void setListaSupervisores(List<Tercero> listaSupervisores) {
+        this.listaSupervisores = listaSupervisores;
+    }
+
+    private List<Tercero> detachTerceros(List<Object[]> terceros) {
+        List<Tercero> detTerceros = new ArrayList<Tercero>();
+        for(Object[] obj : terceros){
+            detTerceros.add(detachTercero(obj));
+        }
+        return detTerceros;
+    }
+
+    private Tercero detachTercero(Object[] obj) {
+        Tercero ter = new Tercero();
+        ter.setIntcodigo((Integer) obj[0]);
+        ter.setIntcedula(obj[1].toString());
+        ter.setStrnombre(obj[2].toString());
+        return ter;
+    }
+    
+    private List<Tercero> rangoTerceros(List<Tercero> lista, int inicio, int fin) {
+        List<Tercero> primeros = new ArrayList<Tercero>();
+        for(int i = inicio; i<=fin; i++){
+            primeros.add(lista.get(i));
+        }
+        return primeros;
+    }
+
+    /**
+     * @return the primeraPagina
+     */
+    public boolean isPrimeraPagina() {
+        return primeraPagina;
+    }
+
+    /**
+     * @param primeraPagina the primeraPagina to set
+     */
+    public void setPrimeraPagina(boolean primeraPagina) {
+        this.primeraPagina = primeraPagina;
+    }
+
+    /**
+     * @return the anteriorPagina
+     */
+    public boolean isAnteriorPagina() {
+        return anteriorPagina;
+    }
+
+    /**
+     * @param anteriorPagina the anteriorPagina to set
+     */
+    public void setAnteriorPagina(boolean anteriorPagina) {
+        this.anteriorPagina = anteriorPagina;
+    }
+
+    /**
+     * @return the siguientePagina
+     */
+    public boolean isSiguientePagina() {
+        return siguientePagina;
+    }
+
+    /**
+     * @param siguientePagina the siguientePagina to set
+     */
+    public void setSiguientePagina(boolean siguientePagina) {
+        this.siguientePagina = siguientePagina;
+    }
+
+    /**
+     * @return the ultimoPagina
+     */
+    public boolean isUltimoPagina() {
+        return ultimoPagina;
+    }
+
+    /**
+     * @param ultimoPagina the ultimoPagina to set
+     */
+    public void setUltimoPagina(boolean ultimoPagina) {
+        this.ultimoPagina = ultimoPagina;
+    }
+
+    /**
+     * @return the isSupervisor
+     */
+    public boolean isIsSupervisor() {
+        return isSupervisor;
+    }
+
+    /**
+     * @param isSupervisor the isSupervisor to set
+     */
+    public void setIsSupervisor(boolean isSupervisor) {
+        this.isSupervisor = isSupervisor;
+    }
+    
 }
