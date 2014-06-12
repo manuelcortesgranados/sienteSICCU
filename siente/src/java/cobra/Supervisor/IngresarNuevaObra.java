@@ -327,6 +327,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private String strempleosdirectos = bundle.getString("numempleosdirectos");
     private String strempleosindirectos = bundle.getString("numempleosindirectos");
     private String strbeneficiarios = bundle.getString("numbeneficiarios");
+    private boolean primeraPagina;
+    private boolean anteriorPagina;
+    private boolean siguientePagina;
+    private boolean ultimoPagina;
+    List<Tercero> listaTotalTerceros;
+    private boolean isSupervisor; //true es supervisor, false es interventor
+    
     
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
@@ -1652,8 +1659,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarVeredas();
         llenarComunas();
         llenarCorregimientos();
-        buscarInterventor();
-        buscarSupervisor();
+//        buscarInterventor();
+//        buscarSupervisor();
         
     }
 
@@ -6452,117 +6459,124 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         primerosInterventores();
     }
+    
+    public void primerosTerceros() {
+        int fin = listaTotalTerceros.size()>=10 ? 9 : listaTotalTerceros.size()-1;
+            
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, 0, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, 0, fin);
+        }
+        
+        setPrimeraPagina(false);
+        setAnteriorPagina(false);
+        pagina = 1;
+        int round = Math.round(listaTotalTerceros.size()/10);
+        if(round*10<listaTotalTerceros.size()){
+            round++;
+        }
+        totalpaginas = round;
+        if(listaTotalTerceros.size()<=10){
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }else{
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }
+    }
+    
+    public void anterioresTerceros() {
+        pagina--;
+        int fin = pagina*10-1;
+        int ini = (pagina-1)*10;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+        
+        
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    public void siguienteTerceros() {
+        pagina++;
+        int fin = pagina*10 > listaTotalTerceros.size() ? listaTotalTerceros.size()-1 : pagina*10-1;
+        int ini = (pagina-1)*10;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    
+    public void ultimosTerceros() {
+        pagina = totalpaginas;
+        int fin = listaTotalTerceros.size()-1;
+        
+        if(isIsSupervisor()){
+            listaSupervisores = rangoTerceros(listaTotalTerceros, fin-20 < 0 ? 0 : fin-20, fin);
+        }else{
+            listaInterventores = rangoTerceros(listaTotalTerceros, fin-20 < 0 ? 0 : fin-20, fin);
+        }
+        if(pagina == 1){
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        }else{
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+        
+        if(pagina<totalpaginas){
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }else{
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+    
     public void primerosInterventores() {
         if (aplicaFiltroInterventor) {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, 0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarInterventores(nombre);
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombre, 30);
+            totalfilas = listaTotalTerceros.size();
         } else {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, 0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarInterventores(null);
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 30);
+            totalfilas = listaTotalTerceros.size();
         }
-        pagina = 1;
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        veranteriorreales = false;
-        if (totalpaginas > 1) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-    }
-    public String siguientesInterventores() {
-        int num = (pagina) * 10;
-        if (aplicaFiltroInterventor) {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num +10);
-            
-        } else {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, num, num + 10);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        pagina = pagina + 1;
-        if (pagina < totalpaginas) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-        veranteriorreales = true;
-        return null;
-    }
-
-    /**
-     * Metodo que se utiliza para paginar, Trae los 5 anteriores proyectos
-     *
-     * @return null
-     */
-    public String anterioresInterventores() {
-        pagina = pagina - 1;
-        int num = (pagina - 1) * 10;
-        if (aplicaFiltroInterventor) {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num + 10);
-        } else {
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, num, num + 10);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-
-        if (pagina > 1) {
-            veranteriorreales = true;
-        } else {
-            veranteriorreales = false;
-        }
-        verultimosreales = true;
-        return null;
-    }
-
-    /**
-     * Metodo que se utiliza para paginar, Trae los ultimos 5 proyectos
-     *
-     * @return null
-     */
-    public String ultimoIntervetores() {
-        int num = totalfilas % 10;
-        if (aplicaFiltroInterventor) {
-            List<Tercero> list = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, 0, 0);
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(nombre, totalfilas - num, totalfilas);
-        } else {
-            List<Tercero> list = getSessionBeanCobra().getCobraService().filtrarInterventores(null, 0, 0);
-            listaInterventores = getSessionBeanCobra().getCobraService().filtrarInterventores(null, totalfilas - num, totalfilas);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        pagina = totalpaginas;
-        if (pagina < totalpaginas) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-        veranteriorreales = true;
-        return null;
+        primerosTerceros();
     }
     public String seleccionarInterventor() {
         obranueva.setInterventor((Tercero) tablainterventores.getRowData());
@@ -6579,113 +6593,15 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
     public void primerosSupervisores() {
         if (aplicaFiltroInterventor) {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, 0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarSupervisores(nombreSupervisor);
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombreSupervisor, 28);
+            totalfilas = listaTotalTerceros.size();
         } else {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, 0, 10);
-            totalfilas = getSessionBeanCobra().getCobraService().countFiltrarSupervisores(null);
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 28);
+            totalfilas = listaTotalTerceros.size();
         }
-        pagina = 1;
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        veranteriorreales = false;
-        if (totalpaginas > 1) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-    }
-    public String siguientesSupervisores() {
-        int num = (pagina) * 10;
-        if (aplicaFiltroSupervisor) {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num +10);
-            
-        } else {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, num, num + 10);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        pagina = pagina + 1;
-        if (pagina < totalpaginas) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-        veranteriorreales = true;
-        return null;
-    }
-
-    /**
-     * Metodo que se utiliza para paginar, Trae los 5 anteriores proyectos
-     *
-     * @return null
-     */
-    public String anterioresSupervisores() {
-        pagina = pagina - 1;
-        int num = (pagina - 1) * 10;
-        if (aplicaFiltroSupervisor) {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num + 10);
-        } else {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, num, num + 10);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-
-        if (pagina > 1) {
-            veranteriorreales = true;
-        } else {
-            veranteriorreales = false;
-        }
-        verultimosreales = true;
-        return null;
-    }
-
-    /**
-     * Metodo que se utiliza para paginar, Trae los ultimos 5 proyectos
-     *
-     * @return null
-     */
-    public String ultimoSupervisores() {
-        int num = totalfilas % 10;
-        if (aplicaFiltroSupervisor) {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(nombreSupervisor, totalfilas - num, totalfilas);
-        } else {
-            listaSupervisores = getSessionBeanCobra().getCobraService().filtrarSupervisores(null, totalfilas - num, totalfilas);
-        }
-        if (totalfilas <= 10) {
-            totalpaginas = 1;
-        } else {
-            totalpaginas = totalfilas / 10;
-            if (totalfilas % 10 > 0) {
-                totalpaginas++;
-            }
-        }
-        pagina = totalpaginas;
-        if (pagina < totalpaginas) {
-            verultimosreales = true;
-        } else {
-            verultimosreales = false;
-        }
-        veranteriorreales = true;
-        return null;
+        
+        primerosTerceros();
+        
     }
     public String seleccionarSupervisor() {
         obranueva.setSupervisor((Tercero) tablasupervisores.getRowData());
@@ -7009,4 +6925,99 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setListaSupervisores(List<Tercero> listaSupervisores) {
         this.listaSupervisores = listaSupervisores;
     }
+
+    private List<Tercero> detachTerceros(List<Object[]> terceros) {
+        List<Tercero> detTerceros = new ArrayList<Tercero>();
+        for(Object[] obj : terceros){
+            detTerceros.add(detachTercero(obj));
+        }
+        return detTerceros;
+    }
+
+    private Tercero detachTercero(Object[] obj) {
+        Tercero ter = new Tercero();
+        ter.setIntcodigo((Integer) obj[0]);
+        ter.setIntcedula(obj[1].toString());
+        ter.setStrnombre(obj[2].toString());
+        return ter;
+    }
+    
+    private List<Tercero> rangoTerceros(List<Tercero> lista, int inicio, int fin) {
+        List<Tercero> primeros = new ArrayList<Tercero>();
+        for(int i = inicio; i<=fin; i++){
+            primeros.add(lista.get(i));
+        }
+        return primeros;
+    }
+
+    /**
+     * @return the primeraPagina
+     */
+    public boolean isPrimeraPagina() {
+        return primeraPagina;
+    }
+
+    /**
+     * @param primeraPagina the primeraPagina to set
+     */
+    public void setPrimeraPagina(boolean primeraPagina) {
+        this.primeraPagina = primeraPagina;
+    }
+
+    /**
+     * @return the anteriorPagina
+     */
+    public boolean isAnteriorPagina() {
+        return anteriorPagina;
+    }
+
+    /**
+     * @param anteriorPagina the anteriorPagina to set
+     */
+    public void setAnteriorPagina(boolean anteriorPagina) {
+        this.anteriorPagina = anteriorPagina;
+    }
+
+    /**
+     * @return the siguientePagina
+     */
+    public boolean isSiguientePagina() {
+        return siguientePagina;
+    }
+
+    /**
+     * @param siguientePagina the siguientePagina to set
+     */
+    public void setSiguientePagina(boolean siguientePagina) {
+        this.siguientePagina = siguientePagina;
+    }
+
+    /**
+     * @return the ultimoPagina
+     */
+    public boolean isUltimoPagina() {
+        return ultimoPagina;
+    }
+
+    /**
+     * @param ultimoPagina the ultimoPagina to set
+     */
+    public void setUltimoPagina(boolean ultimoPagina) {
+        this.ultimoPagina = ultimoPagina;
+    }
+
+    /**
+     * @return the isSupervisor
+     */
+    public boolean isIsSupervisor() {
+        return isSupervisor;
+    }
+
+    /**
+     * @param isSupervisor the isSupervisor to set
+     */
+    public void setIsSupervisor(boolean isSupervisor) {
+        this.isSupervisor = isSupervisor;
+    }
+    
 }

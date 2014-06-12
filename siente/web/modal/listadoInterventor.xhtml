@@ -84,10 +84,18 @@
                                 <rich:column colspan="5" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
-                                            <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorreales}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.primerosInterventores}" execute="@this"/>
-                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorreales}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.anterioresInterventores}" execute="@this"/>
-                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimosreales}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.siguientesInterventores}" execute="@this" />
-                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimosreales}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.ultimoIntervetores}" execute="@this"/>
+                                            <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.primeraPagina}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.primerosTerceros}" execute="@this">
+                                                <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.anteriorPagina}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.anterioresTerceros}" execute="@this">
+                                            <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.siguientePagina}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.siguienteTerceros}" execute="@this" >
+                                            <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                            </a4j:commandButton>
+                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.ultimoPagina}" render="gpTotalInterventor"  action="#{Supervisor$IngresarNuevaObra.ultimosTerceros}" execute="@this">
+                                            <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                            </a4j:commandButton>
                                         </h:panelGrid>
                                     </center>
                                 </rich:column>

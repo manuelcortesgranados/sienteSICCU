@@ -104,16 +104,36 @@
                                 </B>
                                 <hr class="ikont-hr-separador-inicial" />
                             </h:panelGroup>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Sector Económico</h:outputLabel> 
+                            
+                                                        <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto">Sector Económico:</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <h:outputLabel class="ikont-" style="font-weight: bold;" value="
+                                        #{ Supervisor$Contrato.contrato.tipificacionConvenio eq null ?
+                                        'no asignado':
+                                        Supervisor$Contrato.contrato.tipificacionConvenio.tipificacionConvenioSector.nombre}" >
+                                </h:outputLabel>
                                 <hr class="ikont-hr" />
                             </h:panelGroup>
+
                             <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Objetivos PDN</h:outputLabel>   
+                                <h:outputLabel class="ikont-hol-detalle-proyecto">Objetivos PND:</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <h:outputLabel class="ikont-" style="font-weight: bold;" value=" 
+                                        #{ Supervisor$Contrato.contrato.tipificacionConvenio eq null ?
+                                        'no asignado':
+                                        Supervisor$Contrato.contrato.tipificacionConvenio.tipificacionConvenioObjetivo.nombre}" >
+                                </h:outputLabel>
                                 <hr class="ikont-hr" />
                             </h:panelGroup>
-                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >Estrategia</h:outputLabel>  
+                           <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto" >Estrategia:</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <h:outputLabel class="ikont-" style="font-weight: bold;" value=" 
+                                        #{ Supervisor$Contrato.contrato.tipificacionConvenio eq null ?
+                                        'no asignado':
+                                        Supervisor$Contrato.contrato.tipificacionConvenio.tipificacionConvenioEstrategia.nombre}" >
+                                </h:outputLabel>
                                 <hr class="ikont-hr" />
                             </h:panelGroup>
 

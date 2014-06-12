@@ -124,7 +124,7 @@
 
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = 'http://localhost:8080/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}', '_blank');"/>
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
 
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = 'http://localhost:8080/ReportesFonade/Servlet_Reportes?identificador_reporte=2', '_blank');"/>
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=2', '_blank');"/>
                                 </div>
                             </div>
                         </div>

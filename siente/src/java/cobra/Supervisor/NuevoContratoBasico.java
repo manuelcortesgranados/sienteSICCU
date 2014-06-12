@@ -88,18 +88,18 @@ import javax.servlet.ServletContext;
 import co.com.interkont.cobra.marcologico.to.Contratoestrategia;
 import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
-import co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO;
 import co.com.interkont.cobra.to.Componente;
 import co.com.interkont.cobra.to.Contratocomponente;
-import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.to.TipificacionConvenio;
+import co.com.interkont.cobra.to.TipificacionConvenioEstrategia;
+import co.com.interkont.cobra.to.TipificacionConvenioObjetivo;
+import co.com.interkont.cobra.to.TipificacionConvenioSector;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Unidad;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
-import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.util.CobraUtil;
-import java.security.SecureRandom;
 import java.util.HashSet;
 
 /**
@@ -174,6 +174,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listado de pólizas a eliminar del contrato
      */
     private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
+    private int selectedUnit;
 
     public List<Polizacontrato> getListaPolizasEliminar() {
         return listaPolizasEliminar;
@@ -9577,6 +9578,129 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setIsFromContracts(boolean isFromContracts) {
         this.isFromContracts = isFromContracts;
     }
+    
+        /*   
+     * ///////////// INICIO LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\
+     */
+    public List<TipificacionConvenioSector> getListaTipificacionSectores() {
+
+        if (this.listaTipificacionSectores == null) {
+            this.listaTipificacionSectores = this.getSessionBeanCobra().getCobraService().getTipificacionSectores();
+        }    
+
+        return listaTipificacionSectores;
+    }    
+
+    public List<TipificacionConvenioObjetivo> getListaTipificacionObjetivos() {
+
+        if (this.tipificacionSector != null && this.tipificacionObjetivo == null) {
+            this.listaTipificacionObjetivos = this.getSessionBeanCobra().getCobraService().getTipificacionObjetivosPorSector(this.tipificacionSector);
+        }    
+        return listaTipificacionObjetivos;
+    }    
+
+    public List<TipificacionConvenioEstrategia> getListaTipificacionEstrategias() {
+        if (this.tipificacionObjetivo != null && this.tipificacionEstrategia == null) {
+            this.listaTipificacionEstrategias = this.getSessionBeanCobra().getCobraService().getTipificacionEstrategiasPorObjetivo(this.tipificacionObjetivo);
+        }    
+        return listaTipificacionEstrategias;
+    }    
+
+    public int getTipificacionSector() {
+
+        if (this.tipificacionSector != null) {
+            return this.tipificacionSector.getId();
+        }    
+        return 0;
+    }    
+
+    public void setTipificacionSector(int idSector) {
+        if (idSector > 0) { 
+            this.tipificacionSector = new TipificacionConvenioSector(idSector, null);
+        }    
+        else{
+            this.tipificacionSector = null;
+        }    
+        this.contrato.setTipificacionConvenio(null);
+        this.tipificacionConvenio = null;
+        this.tipificacionObjetivo = null;
+        this.tipificacionEstrategia = null;
+    }    
+
+    public int getTipificacionObjetivo() {
+        if (this.tipificacionObjetivo != null) {
+            return this.tipificacionObjetivo.getId();
+        }
+        return 0;
+    }
+
+    public void setTipificacionObjetivo(int idObjetivo) {
+        if (idObjetivo > 0) {
+            this.tipificacionObjetivo = new TipificacionConvenioObjetivo(idObjetivo, this.tipificacionSector, null);
+        }
+        else{
+            this.tipificacionObjetivo = null;
+        }
+        this.contrato.setTipificacionConvenio(null);
+        this.tipificacionConvenio = null;
+        this.tipificacionEstrategia = null;
+    }
+
+    public int getTipificacionEstrategia() {
+        if (this.tipificacionEstrategia != null) {
+            return this.tipificacionEstrategia.getId();
+        }
+        return 0;
+    }
+
+    public void setTipificacionEstrategia(int idEstrategia) {
+        if (idEstrategia > 0) {
+            this.tipificacionEstrategia = new TipificacionConvenioEstrategia(idEstrategia, this.tipificacionObjetivo, null);
+            this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, contrato);
+            this.contrato.setTipificacionConvenio(this.tipificacionConvenio);
+        } else {
+            this.tipificacionConvenio = null;
+            this.tipificacionEstrategia = null;
+        }
+    }
+    /*
+     * ///////////// FIN LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     */
+
+
+    /**
+     * @return the lstUnidades
+     */
+    public List<Unidad> getLstUnidades() {
+        return lstUnidades;
+    }
+
+    /**
+     * @param lstUnidades the lstUnidades to set
+     */
+    public void setLstUnidades(List<Unidad> lstUnidades) {
+        this.lstUnidades = lstUnidades;
+    }
+
+    private void llenarUnidades() {
+        lstUnidades = getSessionBeanCobra().getCobraService().encontrarUnidades();
+    }
+
+    /**
+     * @return the selectedUnit
+     */
+    public int getSelectedUnit() {
+        return selectedUnit;
+    }
+
+    /**
+     * @param selectedUnit the selectedUnit to set
+     */
+    public void setSelectedUnit(int selectedUnit) {
+        this.selectedUnit = selectedUnit;
+    }
+
+   
 
     /**
      * @return the lstUnidades

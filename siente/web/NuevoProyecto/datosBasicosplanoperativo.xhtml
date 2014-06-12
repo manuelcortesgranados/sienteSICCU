@@ -15,6 +15,47 @@
                 <h:outputLabel value="#{var.informacionbasica}" styleClass="hol_info_convenio_zoom"/>
                 <a4j:region id="datosBasicosConvenio" >
                     <h:panelGrid columns="1" cellpadding="5" cellspacing="10">
+                        
+                        <h:panelGrid columns="1" styleClass="panel_numero_convenio">
+                            <rich:column>
+                                <h:outputText value="Plan Nacional de desarrollo:" styleClass="hot_n_convenio label_texto_convenio"/>
+                            </rich:column>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
+                            <rich:column>
+                                <h:selectOneMenu  immediate="true" id="selectTipificN1" value="#{Supervisor$Contrato.tipificacionSector}" required="true" style="width: 420px!important;height: 32px!important;">
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Sector Económico" itemValue="#{0}"/>
+                                    <f:selectItems value="#{Supervisor$Contrato.listaTipificacionSectores}" var="sector" itemValue="#{sector.id}" itemLabel="#{sector.nombre}" />
+                                    <a4j:ajax render="selectTipificN2,selectTipificN3"  limitRender="true" execute="selectTipificN1"></a4j:ajax>
+                                </h:selectOneMenu>
+                                <rich:message for="selectTipificN1"/>
+                            </rich:column>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
+                            <rich:column>
+                                <h:selectOneMenu immediate="true" value="#{Supervisor$Contrato.tipificacionObjetivo}" id="selectTipificN2" required="true" style="width: 420px!important;height: 32px!important;">
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Objectivos PDN" itemValue="0"/>
+                                    <f:selectItems value="#{Supervisor$Contrato.listaTipificacionObjetivos}" var="objetivo" itemValue="#{objetivo.id}" itemLabel="#{objetivo.nombre}"  />
+                                    <a4j:ajax render="selectTipificN3"  limitRender="true" execute="selectTipificN2"></a4j:ajax>
+                                </h:selectOneMenu>
+                                <rich:message for="ikont-hsom-tipoconvenio"/>
+                            </rich:column>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
+                            <rich:column>
+                                <h:selectOneMenu immediate="true" value="#{Supervisor$Contrato.tipificacionEstrategia}" id="selectTipificN3" required="true" style="width: 420px!important;height: 32px!important;">
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Seleccione una Estrategia" itemValue="0"/>
+                                    <f:selectItems value="#{Supervisor$Contrato.listaTipificacionEstrategias}" var="estrategia" itemValue="#{estrategia.id}" itemLabel="#{estrategia.nombre}"  />
+                                    <a4j:ajax render=""  limitRender="true" execute="selectTipificN3"></a4j:ajax>
+                                </h:selectOneMenu>
+                                <rich:message for="selectTipificN3"/>
+                            </rich:column>
+                        </h:panelGrid>
+
+                        <br/>
+
                         <h:panelGrid columns="2" styleClass="panel_numero_convenio">
                             <rich:column>
                                 <h:outputText value="Número del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>

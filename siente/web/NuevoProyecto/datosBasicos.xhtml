@@ -117,9 +117,11 @@
                                 <interkont:spacer width="7"/>
                                 <h:inputText styleClass="ikont-hit-textcontratista" id="txtInterventor" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.interventor.strnombre}">
                                 </h:inputText>  
-                                 <h:commandButton value="Buscar">
-                                    <rich:componentControl target="mp-listado-Interventor" operation="show" />
-                                </h:commandButton> 
+                                <a4j:commandButton styleClass="ikont-acb-buscarcontratista" id="btnBuscarinterventor" value="#{var.buscarProyecto}" action="#{Supervisor$IngresarNuevaObra.buscarInterventor}"
+                                                           render="gpTotalInterventor" execute="gpTotalInterventor" immediate="true"
+                                                           oncomplete="#{rich:component('mp-listado-Interventor')}.show();">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                 </a4j:commandButton>
                             </h:panelGroup>
                             
                             <h:outputLabel  styleClass="ikont-hol-contratista font-general" id="lblsupervisor"  
@@ -128,9 +130,12 @@
                                 <interkont:spacer width="7"/>
                                 <h:inputText styleClass="ikont-hit-textcontratista" id="txtSupervisor" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.supervisor.strnombre}">
                                 </h:inputText>  
-                                 <h:commandButton value="Buscar">
-                                    <rich:componentControl target="mp-listado-Supervisor" operation="show" />
-                                </h:commandButton> 
+                                <a4j:commandButton styleClass="ikont-acb-buscarcontratista" id="btnBuscarsupervisor" value="#{var.buscarProyecto}" action="#{Supervisor$IngresarNuevaObra.buscarSupervisor}"
+                                                           render="gpTotalSupervisor" execute="gpTotalSupervisor" immediate="true"
+                                                           oncomplete="#{rich:component('mp-listado-Supervisor')}.show();">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+                                    
+                                 </a4j:commandButton>
                             </h:panelGroup>
 
 

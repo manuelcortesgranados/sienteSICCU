@@ -268,7 +268,14 @@
                 <value>co/com/interkont/cobra/to/Objetoindicador.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Indicador.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Indicadorobra.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/Alimentacionindicador.hbm.xml</value>               
+                <value>co/com/interkont/cobra/to/Alimentacionindicador.hbm.xml</value>  
+                
+                <!--Tipificacion Convenio-->
+                <value>co/com/interkont/cobra/to/TipificacionConvenio.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/TipificacionConvenioSector.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/TipificacionConvenioObjetivo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/TipificacionConvenioEstrategia.hbm.xml</value>
+          
                 
             </list>
         </property>
@@ -567,27 +574,27 @@
         </property>
     </bean>
     -->
-<!--
-    <bean id="solicitudService" scope="prototype"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref local="transactionManager" />
-        </property>
-        <property name="target">
-            <ref local="solicitudServiceTarget" />
-        </property>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="save*">PROPAGATION_REQUIRED</prop>
-                <prop key="update*">PROPAGATION_REQUIRED</prop>
-                <prop key="delete*">PROPAGATION_REQUIRED</prop>
-                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
--->
+    <!--
+        <bean id="solicitudService" scope="prototype"
+              class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+            <property name="transactionManager">
+                <ref local="transactionManager" />
+            </property>
+            <property name="target">
+                <ref local="solicitudServiceTarget" />
+            </property>
+            <property name="transactionAttributes">
+                <props>
+                    <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                    <prop key="save*">PROPAGATION_REQUIRED</prop>
+                    <prop key="update*">PROPAGATION_REQUIRED</prop>
+                    <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                    <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                    <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                </props>
+            </property>
+        </bean>
+    -->
     <bean id="supervisionExternaService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
@@ -693,26 +700,26 @@
     </bean>
     
     <!--
-     <bean id="marcoLogicoService" scope="prototype"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
-        <property name="transactionManager">
-            <ref local="transactionManager" />
-        </property>
-        <property name="target">
-            <ref local="marcoLogicoServiceTarget" />
-        </property>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="save*">PROPAGATION_REQUIRED</prop>
-                <prop key="update*">PROPAGATION_REQUIRED</prop>
-                <prop key="delete*">PROPAGATION_REQUIRED</prop>
-                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
-                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
-                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
-   -->
+      <bean id="marcoLogicoService" scope="prototype"
+           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+         <property name="transactionManager">
+             <ref local="transactionManager" />
+         </property>
+         <property name="target">
+             <ref local="marcoLogicoServiceTarget" />
+         </property>
+         <property name="transactionAttributes">
+             <props>
+                 <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="save*">PROPAGATION_REQUIRED</prop>
+                 <prop key="update*">PROPAGATION_REQUIRED</prop>
+                 <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                 <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                 <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                 <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+             </props>
+         </property>
+     </bean>
+    -->
 </beans>
