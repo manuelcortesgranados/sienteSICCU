@@ -174,6 +174,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Listado de pólizas a eliminar del contrato
      */
     private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
+    private int selectedUnit;
 
     public List<Polizacontrato> getListaPolizasEliminar() {
         return listaPolizasEliminar;
