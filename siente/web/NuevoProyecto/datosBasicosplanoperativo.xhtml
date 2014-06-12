@@ -187,6 +187,18 @@
                                 <h:outputLabel value="Plazo en dias #{Supervisor$Contrato.contrato.intduraciondias} (A razón del Acta de inicio)" id="h-ol-duraciondias"/>
                             </rich:column>
                         </h:panelGrid>  
+                        <h:panelGrid columns="2" style="position: relative;right: -74px;top: -3px;">
+                            <rich:column>
+                                <h:outputText value="Unidad de Convenio" styleClass="input_ger_convenio label_texto_convenio" />
+                            </rich:column>
+                            <rich:column>
+                                <h:selectOneMenu value="#{Supervisor$Contrato.selectedUnit}" required="true" style="font-style: italic!important; font-size: 12px!important;" >
+                                    <f:selectItem itemLabel="Ej: Unidad X" itemValue="-1"/>
+                                    <f:selectItems value="#{Supervisor$Contrato.lstUnidades}" var="unidad" itemValue="#{unidad.id}" itemLabel="#{unidad.nombre}" />
+                                    <a4j:ajax event="valueChange"/>
+                                </h:selectOneMenu>
+                            </rich:column>
+                        </h:panelGrid>
 
                         
                     </h:panelGrid>

@@ -82,6 +82,12 @@
                                 <h:outputLabel class="ikont-" style="font-weight: bold;">#{Supervisor$Contrato.contrato.datefechaini} #{Supervisor$Contrato.contrato.datefechafin} </h:outputLabel>
                                 <hr class="ikont-hr" />
                             </h:panelGroup>
+                            <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                                <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.unidadMay}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <h:outputLabel class="ikont-" style="font-weight: bold;">#{Supervisor$Contrato.contrato.unidad.nombre} </h:outputLabel>
+                                <hr class="ikont-hr" />
+                            </h:panelGroup>
                             <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.objetoMay}</h:outputLabel>
                             <interkont:spacer width="20" />
                             <div id = "objetoId">

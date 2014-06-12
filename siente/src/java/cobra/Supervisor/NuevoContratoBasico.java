@@ -96,6 +96,7 @@ import co.com.interkont.cobra.to.TipificacionConvenioEstrategia;
 import co.com.interkont.cobra.to.TipificacionConvenioObjetivo;
 import co.com.interkont.cobra.to.TipificacionConvenioSector;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
+import co.com.interkont.cobra.to.Unidad;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.interkont.cobra.util.CobraUtil;
@@ -835,6 +836,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     List<Actividadobra> lstActividadesEliminar = new ArrayList<Actividadobra>();
     public int mostrarContratoConvenio;
     private List<Tercero> lstgerentes = new ArrayList<Tercero>();
+    private List<Unidad> lstUnidades = new ArrayList<Unidad>();
     private Tercero tercero = new Tercero();
 
     private List<Contrato> contAsociados = new ArrayList<Contrato>();
@@ -2939,6 +2941,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         llenarEstadoConvenio();
         llenarEntidades();
         llenarGerentes();
+        llenarUnidades();
+        selectedUnit = -1;
         this.listaxTipocontratoselect();
         filtrocontrato.setEsadministrador(getSessionBeanCobra().getUsuarioService().validarPerteneceGrupoAdministrador(6));
         // }
@@ -4997,6 +5001,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             tipoContCon = "Contrato";
             booltipocontratoconvenio = false;
+        }
+        if(booltipocontratoconvenio){
+            contrato.setUnidad(getSessionBeanCobra().getCobraService().obtenerUnidadXConvenioId(contrato.getIntidcontrato()));
         }
         if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
             getContrato().getTipocontratoconsultoria().setStrdescripcion("Obra");
@@ -8746,6 +8753,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //      Adicionando una forma de pago por defecto para que no saque error el sistema al intentar validarlo
         contrato.setFormapago(new Formapago(1, null, true));
         contrato.setTercero(null);
+        contrato.setUnidad(null);
 //      Si el contrato no se ha creado que guarde en fecha de creacion si no en fechamodificacion
         if (contrato.getDatefechacreacion() != null) {
             contrato.setDatefechamodificacion(new Date());
@@ -8783,6 +8791,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setGerenteconvenio(getSessionBeanCobra().getUsuarioObra().getTercero());
         } else {
             contrato.setGerenteconvenio(getTercero());
+        }
+        if(selectedUnit>0){
+            Unidad unidad = new Unidad();
+            unidad.setId(selectedUnit);
+            contrato.setUnidad(unidad);
         }
 
         //contrato.setNumvlrcontrato(getRecursosconvenio().getSumafuentes());                  
@@ -9666,5 +9679,39 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * ///////////// FIN LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
 
+
+    /**
+     * @return the lstUnidades
+     */
+    public List<Unidad> getLstUnidades() {
+        return lstUnidades;
+    }
+
+    /**
+     * @param lstUnidades the lstUnidades to set
+     */
+    public void setLstUnidades(List<Unidad> lstUnidades) {
+        this.lstUnidades = lstUnidades;
+    }
+
+    private void llenarUnidades() {
+        lstUnidades = getSessionBeanCobra().getCobraService().encontrarUnidades();
+    }
+
+    /**
+     * @return the selectedUnit
+     */
+    public int getSelectedUnit() {
+        return selectedUnit;
+    }
+
+    /**
+     * @param selectedUnit the selectedUnit to set
+     */
+    public void setSelectedUnit(int selectedUnit) {
+        this.selectedUnit = selectedUnit;
+    }
+
+   
 
 }
