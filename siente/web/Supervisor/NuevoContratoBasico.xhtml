@@ -235,7 +235,7 @@
                                                          value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
                                             <f:selectItem noSelectionOption="true" itemLabel="Seleccione la opción" itemValue="0"/>
                                             <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
-                                            <a4j:ajax event="valueChange" render="ikont-hpg-labelrecursospropios, ikont-hpg-recursospropios ikont-hpg-multiplescontratantesexterno" execute="@this"/>
+                                            <a4j:ajax event="valueChange" render="ikont-hpg-labelrecursospropios ikont-hpg-recursospropios ikont-hpg-multiplescontratantesexterno" execute="@this"/>
                                         </h:selectOneMenu>
                                         <h:message for="ikont-hsom-tipoconvenio" styleClass="ikont-rm-tipoconvenio"  />
                                     </h:panelGrid>
@@ -636,7 +636,7 @@
                             </a4j:commandButton>
                         </rich:column>
                     </rich:dataTable>
-                    <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont" render="tablaDocumentoscont"/>
+                    <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont"/>
                 </rich:panel>
 
                 <rich:panel id="collapsiblePanelImpactoComponentes" header="5. Impacto de componentes"
@@ -738,9 +738,9 @@
         <h:panelGroup rendered="#{var.versioncobra eq 'siente'}">
             <ui:include src="/modal/listadoNumeroEncargo.xhtml"/>
         </h:panelGroup> 
-            <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
-            <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>
-            <ui:include src="/modal/subirDocPoliza.xhtml"/>
+        <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
+        <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>
+        <ui:include src="/modal/subirDocPoliza.xhtml"/>
         <ui:include src="/modal/listadoContratistas.xhtml"/>
         <ui:include src="/modal/listadoContratantes.xhtml"/>
         <ui:include src="/modal/crearcontratista.xhtml"/>
