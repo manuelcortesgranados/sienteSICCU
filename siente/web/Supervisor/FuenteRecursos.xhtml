@@ -29,7 +29,7 @@
                 <h:outputText value="Entidad"  styleClass="input_var_convenio label_texto_convenio" />
             </rich:column>
             <rich:column>
-                <rich:select    id="rs-entidad" defaultLabel="Ej: Ministerio de vivienda" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo}" required="true" style="font-style: italic!important; font-size: 12px!important;">                                
+                <rich:select    id="rs-entidad" defaultLabel="Ej: Ministerio de vivienda" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo}" required="true" style="font-style: italic!important; font-size: 12px!important;" enableManualInput="true" >                                
                     <f:selectItems  value="#{Supervisor$Contrato.lstentidades}" var="ent" itemValue="#{ent.intcodigo}" itemLabel="#{ent.strnombrecompleto}" />
                 </rich:select>
                 <rich:message for="rs-entidad"  />
