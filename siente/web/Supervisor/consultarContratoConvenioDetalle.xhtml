@@ -59,6 +59,16 @@
                         <h:panelGrid style="width: 400px; border-spacing: 4px">
                             <h:panelGroup >
 
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.id}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <B>
+                                    <h:outputLabel id="contratoId" styleClass="ikont-" value="#{Supervisor$Contrato.contrato.intidcontrato}">
+                                    </h:outputLabel>
+                                </B>
+                            </h:panelGroup>
+                            <hr class="ikont-hr" />
+                            <h:panelGroup >
+
                                 <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratanteCliente}</h:outputLabel>
                                 <interkont:spacer width="20" />
                                 <B>
