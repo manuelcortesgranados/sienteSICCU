@@ -179,6 +179,12 @@
 
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$GraficoEvolucionFinancieraContrato</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.GraficoEvolucionFinancieraContrato</managed-bean-class>
+
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>Supervisor$AdministrarObraNew</managed-bean-name>

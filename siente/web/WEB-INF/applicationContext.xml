@@ -29,6 +29,7 @@
         <property name="mappingResources">
             <list>
                 <!-- Alarmas -->  
+                <value>co/com/interkont/cobra/to/Desembolso.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Unidad.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Typeresultadovalidacion.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Fase.hbm.xml</value>
