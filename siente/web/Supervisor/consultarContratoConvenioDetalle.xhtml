@@ -67,6 +67,16 @@
                                 </B>
                             </h:panelGroup>
                             <hr class="ikont-hr" />
+                            <h:panelGroup >
+
+                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratista}</h:outputLabel>
+                                <interkont:spacer width="20" />
+                                <B>
+                                    <h:outputLabel id="contratistavalue" styleClass="ikont-" value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}">
+                                    </h:outputLabel>
+                                </B>
+                            </h:panelGroup>
+                            <hr class="ikont-hr" />
                             <h:panelGroup>
                                 <h:outputLabel rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.nroConvenio}</h:outputLabel>
                                 <h:outputLabel rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" class="ikont-"  >#{var.noContrato}</h:outputLabel>
