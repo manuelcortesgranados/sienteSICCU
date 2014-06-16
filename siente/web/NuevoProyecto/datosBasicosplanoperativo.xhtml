@@ -23,6 +23,17 @@
                         </h:panelGrid>
                         <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
                             <rich:column>
+                                <h:selectOneMenu  immediate="true" id="selectPND" value="#{Supervisor$Contrato.planNacionalDeDesarrollo}" required="true" style="width: 420px!important;height: 32px!important;">
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Plan Nacional de Desarrollo" itemValue="#{0}"/>
+                                    <f:selectItems value="#{Supervisor$Contrato.listaPlanNacionalDeDesarrollo}" var="pnd" itemValue="#{pnd.id}" itemLabel="(#{pnd.periodo}) #{pnd.nombre}" />
+                                    <a4j:ajax render="selectTipificN1,selectTipificN2,selectTipificN3"  limitRender="true" execute="selectPND"></a4j:ajax>
+                                </h:selectOneMenu>
+                                <rich:message for="selectTipificN1"/>
+                            </rich:column>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
+                            <rich:column>
                                 <h:selectOneMenu  immediate="true" id="selectTipificN1" value="#{Supervisor$Contrato.tipificacionSector}" required="true" style="width: 420px!important;height: 32px!important;">
                                     <f:selectItem noSelectionOption="true" itemLabel="(*) Sector Económico" itemValue="#{0}"/>
                                     <f:selectItems value="#{Supervisor$Contrato.listaTipificacionSectores}" var="sector" itemValue="#{sector.id}" itemLabel="#{sector.nombre}" />
@@ -35,7 +46,7 @@
                         <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
                             <rich:column>
                                 <h:selectOneMenu immediate="true" value="#{Supervisor$Contrato.tipificacionObjetivo}" id="selectTipificN2" required="true" style="width: 420px!important;height: 32px!important;">
-                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Objectivos PDN" itemValue="0"/>
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Objectivo" itemValue="0"/>
                                     <f:selectItems value="#{Supervisor$Contrato.listaTipificacionObjetivos}" var="objetivo" itemValue="#{objetivo.id}" itemLabel="#{objetivo.nombre}"  />
                                     <a4j:ajax render="selectTipificN3"  limitRender="true" execute="selectTipificN2"></a4j:ajax>
                                 </h:selectOneMenu>
@@ -46,7 +57,7 @@
                         <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
                             <rich:column>
                                 <h:selectOneMenu immediate="true" value="#{Supervisor$Contrato.tipificacionEstrategia}" id="selectTipificN3" required="true" style="width: 420px!important;height: 32px!important;">
-                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Seleccione una Estrategia" itemValue="0"/>
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Estrategia" itemValue="0"/>
                                     <f:selectItems value="#{Supervisor$Contrato.listaTipificacionEstrategias}" var="estrategia" itemValue="#{estrategia.id}" itemLabel="#{estrategia.nombre}"  />
                                     <a4j:ajax render=""  limitRender="true" execute="selectTipificN3"></a4j:ajax>
                                 </h:selectOneMenu>

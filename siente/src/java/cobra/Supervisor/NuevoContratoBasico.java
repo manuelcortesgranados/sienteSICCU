@@ -91,6 +91,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.to.Componente;
 import co.com.interkont.cobra.to.Contratocomponente;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.to.PlanNacionalDeDesarrollo;
 import co.com.interkont.cobra.to.TipificacionConvenio;
 import co.com.interkont.cobra.to.TipificacionConvenioEstrategia;
 import co.com.interkont.cobra.to.TipificacionConvenioObjetivo;
@@ -178,10 +179,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     
      /**
      * VARIABLES TIPIFICACION CONVENIO
+     * Estas variables se usan para la creacion y búsqueda de convenios
      */
+    private List<PlanNacionalDeDesarrollo> listaPlanNacionalDeDesarrollo;
     private List<TipificacionConvenioSector> listaTipificacionSectores;
     private List<TipificacionConvenioObjetivo> listaTipificacionObjetivos;
     private List<TipificacionConvenioEstrategia> listaTipificacionEstrategias;
+    private PlanNacionalDeDesarrollo planNacionalDeDesarrollo;
     private TipificacionConvenioSector tipificacionSector;
     private TipificacionConvenioObjetivo tipificacionObjetivo;
     private TipificacionConvenioEstrategia tipificacionEstrategia;
@@ -9589,14 +9593,57 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setIsFromContracts(boolean isFromContracts) {
         this.isFromContracts = isFromContracts;
     }
+
+    
     
         /*   
      * ///////////// INICIO LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\
      */
+    
+    public List<PlanNacionalDeDesarrollo> getListaPlanNacionalDeDesarrollo() {
+        if( listaPlanNacionalDeDesarrollo == null ){
+            this.listaPlanNacionalDeDesarrollo = this.getSessionBeanCobra().getCobraService().getPlanesNacionalesDeDesarrollo();
+        }
+        
+        return listaPlanNacionalDeDesarrollo;
+    }
+
+    public void setListaPlanNacionalDeDesarrollo(List<PlanNacionalDeDesarrollo> listaPlanNacionalDeDesarrollo) {
+        this.listaPlanNacionalDeDesarrollo = listaPlanNacionalDeDesarrollo;
+    }
+
+    public int getPlanNacionalDeDesarrollo() {
+        if(this.planNacionalDeDesarrollo != null){
+            return this.planNacionalDeDesarrollo.getId();
+        }
+        return 0;
+    }
+
+    public void setPlanNacionalDeDesarrollo(int pnd) {
+        
+        if (pnd > 0) { 
+            this.planNacionalDeDesarrollo = new PlanNacionalDeDesarrollo(pnd, null, null, null);
+            this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
+            this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(this.planNacionalDeDesarrollo);
+        }    
+        else{
+            this.planNacionalDeDesarrollo = null;
+        }
+        
+        this.contrato.setTipificacionConvenio(null);
+        this.tipificacionSector = null;
+        this.tipificacionConvenio = null;
+        this.tipificacionObjetivo = null;
+        this.tipificacionEstrategia = null;
+        
+        
+        
+    }
+    
     public List<TipificacionConvenioSector> getListaTipificacionSectores() {
 
-        if (this.listaTipificacionSectores == null) {
-            this.listaTipificacionSectores = this.getSessionBeanCobra().getCobraService().getTipificacionSectores();
+        if (this.tipificacionSector == null && this.planNacionalDeDesarrollo != null) {
+            this.listaTipificacionSectores = this.getSessionBeanCobra().getCobraService().getTipificacionSectores(this.planNacionalDeDesarrollo);
         }    
 
         return listaTipificacionSectores;
@@ -9628,6 +9675,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionSector(int idSector) {
         if (idSector > 0) { 
             this.tipificacionSector = new TipificacionConvenioSector(idSector, null);
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(this.tipificacionSector);
         }    
         else{
             this.tipificacionSector = null;
@@ -9648,6 +9696,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionObjetivo(int idObjetivo) {
         if (idObjetivo > 0) {
             this.tipificacionObjetivo = new TipificacionConvenioObjetivo(idObjetivo, this.tipificacionSector, null);
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(this.tipificacionObjetivo);
         }
         else{
             this.tipificacionObjetivo = null;
@@ -9667,8 +9716,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionEstrategia(int idEstrategia) {
         if (idEstrategia > 0) {
             this.tipificacionEstrategia = new TipificacionConvenioEstrategia(idEstrategia, this.tipificacionObjetivo, null);
-            this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, contrato);
+            this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, this.planNacionalDeDesarrollo ,contrato);
             this.contrato.setTipificacionConvenio(this.tipificacionConvenio);
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(this.tipificacionEstrategia);
         } else {
             this.tipificacionConvenio = null;
             this.tipificacionEstrategia = null;
@@ -9709,6 +9759,39 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setSelectedUnit(int selectedUnit) {
         this.selectedUnit = selectedUnit;
+    }
+    
+    /**
+     * Ejecuta la busqueda cuando se modifica el filtro de Plan Nacional De Desarrollo
+     */
+    public void buscarPorPND(){
+        
+
+        if(this.filtrocontrato.getTipificacionConvenio() != null){
+            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 20);
+            totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+            for (Contrato con : listacontratos) {
+
+                if (con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
+                    con.getTipocontratoconsultoria().setStrdescripcion("Obra");
+                }
+            }
+
+            pagina = 1;
+            if (totalfilas <= 20) {
+                totalpaginas = 1;
+            } else {
+                totalpaginas = totalfilas / 20;
+                if (totalfilas % 20 > 0) {
+                    totalpaginas++;
+                }
+            }
+            veranteriorcontrato = false;
+            if (totalpaginas > 1) {
+                verultimoscontrato = true;
+            }
+        }
+
     }
 
 }
