@@ -502,7 +502,7 @@
 
                 <rich:collapsiblePanel header="#{var.generarReportes}">
 
-                    <h:panelGrid columns="3" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" styleClass="font-general">
+                    <h:panelGrid columns="3" columnClasses="panelcenter" styleClass="font-general">
                         <h:panelGrid columnClasses="panelcenter">
                             <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
                             <h:outputText  styleClass="ikont- font-general"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
