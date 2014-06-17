@@ -39,10 +39,17 @@
 
         <h:form prependId="false" >
             <interkont:spacer height="35" />
-            <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
+<!--            <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
                 <center>
                     <h:outputText  styleClass="ikont-hot-scriptGrafico"   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
                     <div id="graficoEvolucionContrato" style="width: 100%; height: 400px; text-align: left; overflow: hidden;">
+                    </div>
+                </center>
+            </rich:collapsiblePanel>-->
+            <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
+                <center>
+                    <h:outputText  styleClass="ikont-hot-scriptGrafico"   value="#{Supervisor$GraficoEvolucionFinancieraContrato.graficoEvolucionFinancieraContrato.scriptGrafico}" escape="false"/>
+                    <div id="graficoEvolucionFinancieraContrato" style="width: 100%; height: 400px; text-align: left; overflow: hidden;">
                     </div>
                 </center>
             </rich:collapsiblePanel>
@@ -130,48 +137,34 @@
                 <h:form>
                     <h:panelGrid  style="width: 83%" >
                         <interkont:spacer height="5" />
-                        <rich:dataTable id="tablaMovimientos"
-                                        var ="movimiento"
+                        <rich:dataTable id="tablaDesembolsos"
+                                        var ="desembolso"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
-                                        value="#{Supervisor$GraficosEvolucion.movimientos}"
+                                        value="#{Supervisor$GraficosEvolucion.desembolsos}"
                                         >
                             <f:facet name="header">
                                 <rich:columnGroup>
-                                    <rich:column width="100px" breakRowBefore="true" colspan="4">
+                                    <rich:column width="200px" breakRowBefore="true" colspan="2">
                                         <h:outputText  styleClass="ikont-hot-movimientosfinancieros"   value="#{var.movimientosfinancieros}"/>
                                     </rich:column>
-                                    <rich:column width="100px" breakRowBefore="true" >
-                                        <h:outputText  styleClass="ikont-hot-ordenpago"   value="#{var.ordenpago}"/>
-                                    </rich:column>
-                                    <rich:column width="100px" >
+                                    <rich:column width="100px"  breakRowBefore="true" >
                                         <h:outputText  styleClass="ikont-hot-fecha"   value="#{var.fecha}"/>
                                     </rich:column>
                                     <rich:column width="100px">
                                         <h:outputText  styleClass="ikont-hot-valormovimiento"   value="#{var.valormovimiento}" />
                                     </rich:column>
-                                    <rich:column width="100px">
-                                        <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.TIPO}" />
-                                    </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup>
-                                <rich:column  width="100px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-strordenpago"   value="#{movimiento.ordendepago.strordenpago}"/>
-                                </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-fechamovimiento"   value="#{movimiento.fechamovimiento}">
+                                    <h:outputText  styleClass="ikont-hot-fechamovimiento"   value="#{desembolso.fecha}">
                                         <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-numvlrejecutado"   value="#{movimiento.numvlrejecutado}">
+                                    <h:outputText  styleClass="ikont-hot-numvlrejecutado"   value="#{desembolso.valor}">
                                         <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                    </h:outputText>
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-strnombretipomovimiento"   value="#{movimiento.tipomovimiento.strnombretipomovimiento}">
-
                                     </h:outputText>
                                 </rich:column>
                             </rich:columnGroup>
@@ -233,24 +226,24 @@
                                 </h:outputLabel>                                    
                             </f:facet>
                         </rich:column>    
-                        
-                         <rich:column  width="100px" >
+
+                        <rich:column  width="100px" >
                             <f:facet name="header">
                                 <h:outputText    value="Avance fisico convenio"/>
                             </f:facet>
                             <h:outputText value="#{avancefisico.avancefisico} %">
                                 <f:convertNumber type="percent"/>
                             </h:outputText>  
-                             <f:facet name="footer">                                 
+                            <f:facet name="footer">                                 
                                 <h:outputText value="#{Supervisor$Contrato.avancefisicoconvenio}%">
-                                      <f:convertNumber type="percent"/>
-                                 </h:outputText>                                     
-                             </f:facet>
+                                    <f:convertNumber type="percent"/>
+                                </h:outputText>                                     
+                            </f:facet>
                         </rich:column>                        
                     </rich:dataTable>
                     <h:panelGrid width="95%">
                         <rich:dataScroller for="rdtlistaavance" style="width: 95%"/>
-                </h:panelGrid>
+                    </h:panelGrid>
                 </h:panelGrid>
             </h:form>
         </rich:collapsiblePanel>
