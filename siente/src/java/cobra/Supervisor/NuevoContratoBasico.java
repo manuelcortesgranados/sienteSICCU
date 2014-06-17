@@ -9624,11 +9624,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (pnd > 0) { 
             this.planNacionalDeDesarrollo = new PlanNacionalDeDesarrollo(pnd, null, null, null);
             this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
-            this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(this.planNacionalDeDesarrollo);
+            
         }    
         else{
             this.planNacionalDeDesarrollo = null;
         }
+        //Búsqueda
+        this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(new PlanNacionalDeDesarrollo(pnd, null, null, null));
         
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionSector = null;
@@ -9675,11 +9677,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionSector(int idSector) {
         if (idSector > 0) { 
             this.tipificacionSector = new TipificacionConvenioSector(idSector, null);
-            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(this.tipificacionSector);
+            
         }    
         else{
             this.tipificacionSector = null;
-        }    
+        }
+        //Búsqueda
+        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(new TipificacionConvenioSector(idSector, null));
+        
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionConvenio = null;
         this.tipificacionObjetivo = null;
@@ -9696,11 +9701,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionObjetivo(int idObjetivo) {
         if (idObjetivo > 0) {
             this.tipificacionObjetivo = new TipificacionConvenioObjetivo(idObjetivo, this.tipificacionSector, null);
-            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(this.tipificacionObjetivo);
         }
         else{
             this.tipificacionObjetivo = null;
         }
+        //Búsqueda
+        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(new TipificacionConvenioObjetivo(idObjetivo, null, null));
+        
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionConvenio = null;
         this.tipificacionEstrategia = null;
@@ -9718,11 +9725,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             this.tipificacionEstrategia = new TipificacionConvenioEstrategia(idEstrategia, this.tipificacionObjetivo, null);
             this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, this.planNacionalDeDesarrollo ,contrato);
             this.contrato.setTipificacionConvenio(this.tipificacionConvenio);
-            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(this.tipificacionEstrategia);
         } else {
             this.tipificacionConvenio = null;
             this.tipificacionEstrategia = null;
         }
+        //Búsqueda
+        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(new TipificacionConvenioEstrategia(idEstrategia, null, null));
     }
     /*
      * ///////////// FIN LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
