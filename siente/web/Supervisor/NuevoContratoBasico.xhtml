@@ -134,25 +134,25 @@
                                             <h:outputText  styleClass="ikont-hot-strnumcontratobasic" value="#{currentRow.strnumcontrato}"/>
                                         </rich:column>
 
-                                        <rich:column id="nombrecontratopase" >
+                                        <rich:column>
                                             <f:facet name="header">
                                                 <h:outputText styleClass="ikont-hot-nombrecontbasictxt" value="#{var.nombre}"/>
                                             </f:facet>
                                             <h:inputTextarea styleClass="ikont-hit-nombrecontbasic" id="otxt_strnombreobra-conrpasele" value="#{currentRow.strnombre}"  disabled="true" cols="30" rows="2"/>
                                         </rich:column>
-                                        <rich:column  id="datefechainic"  width="60px">
+                                        <rich:column width="60px">
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-fechainicontconvbasico" value="#{var.fechadeinicio}"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-datefecinicontconvbasico" id="iddatefechainic" value="#{currentRow.datefechaini}"/>
                                         </rich:column>
-                                        <rich:column  id="datefechafin"  width="60px">
+                                        <rich:column width="60px">
                                             <f:facet name="header">           
                                                 <h:outputText  styleClass="ikont-hot-fechfincontconvbasico" value="#{var.fechadefinalizacion}"/>
                                             </f:facet>
                                             <h:outputText  styleClass="ikont-hot-datefecfincontconvbasico" id="iddatefechafin" value="#{currentRow.datefechafin}"/>
                                         </rich:column>
-                                        <rich:column  id="valor"  width="60px">
+                                        <rich:column width="60px">
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-valorcontconvbasico" value="#{var.valor}"/>
                                             </f:facet>
@@ -160,7 +160,7 @@
                                                 <f:convertNumber pattern="#{var.formatomoneda}"/>
                                             </h:outputText>
                                         </rich:column>
-                                        <rich:column id="vlcongtrhijossele"  width="60px">
+                                        <rich:column width="60px">
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-vlrdisponible"   value="Valor Disponible"/>
                                             </f:facet>
@@ -169,7 +169,7 @@
                                             </h:outputText>
                                         </rich:column>
 
-                                        <rich:column id="vlcongtrrecursos"  width="150px" rendered="false">
+                                        <rich:column width="150px" rendered="false">
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-recursoscontconvbasico" value="Recursos"/>
                                             </f:facet>
@@ -190,7 +190,7 @@
                                         </rich:column>
 
 
-                                        <rich:column id="Eliminar" width="50px" >
+                                        <rich:column width="50px" >
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-eliminarcontconvbasic" value="#{var.eliminar}"/>                                            </f:facet>
                                             <a4j:commandButton disabled="#{Supervisor$Contrato.varmostrarseleccionconveniosuperior==1}" styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
@@ -368,7 +368,7 @@
                                         <h:panelGrid columns="2" rendered="#{not var.multiplescontratantes or Supervisor$Contrato.interadministrativo}">
                                             <h:inputText styleClass="ikont-hit-numrecursopropio" id="innumrecursospropios"  value="#{Supervisor$Contrato.contrato.numrecursospropios}"
                                                          size="20"  maxlength="20" required="true" >
-                                                <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                                <a4j:ajax event="change" render="gpValContrato,stpformadepago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                                 <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                             </h:inputText>
                                             <h:message for="innumrecursospropios" styleClass="ikont-"  />
@@ -378,7 +378,7 @@
                                     <h:panelGrid columns="2" rendered="#{var.varrecurosoch}">
                                         <h:inputText styleClass="ikont-hit-numrecursoch" id="innumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}"
                                                      size="20"  maxlength="20" required="true">
-                                            <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                            <a4j:ajax event="change" render="gpValContrato,stpformadepago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                             <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <h:message for="innumrecursosch" styleClass="ikont-rm-numrecursoch"  />
@@ -387,15 +387,14 @@
                                     <h:panelGrid columns="2" rendered="#{not var.multiplescontratantes}">
                                         <h:inputText styleClass="ikont-hit-numrecursoter" id="innumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}"
                                                      size="20"  maxlength="20" required="true">
-                                            <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                            <a4j:ajax event="change" render="gpValContrato,stpformadepago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                             <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                                         </h:inputText>
                                         <h:message for="innumrecursoster" styleClass="ikont-rm-numrecursoter"  />
                                     </h:panelGrid>
-                                    <h:outputText  styleClass="ikont-hot-valrtipocontconv font-general" id="lblvalor"  value="(*) #{var.valor} #{Supervisor$Contrato.tipoContCon} :"/>
-                                    <h:panelGroup id="gpValContrato">
+                                    <h:outputText  styleClass="ikont-hot-valrtipocontconv font-general" id="lblvalor"  value="(*) #{var.valor} #{Supervisor$Contrato.tipoContCon} :" rendered="#{not var.multiplescontratantes}"/>
+                                    <h:panelGroup id="gpValContrato" rendered="#{not var.multiplescontratantes}">
                                         <h:outputText  styleClass="ikont-hot-valrcontconv font-general" id="lblval" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                     <h:outputText id="outputTextEnlaceProceso" styleClass="ikont-hot-strenlaceproceso font-general" value="Enlace a proceso en SECOP" rendered="#{var.aplicaepc and !Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
@@ -415,25 +414,34 @@
                             <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
                                             value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
                                                     rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                    var="objeto">
+                                                    var="contratoContratante">
                                 <rich:column>
                                     <f:facet name="header" >
                                         <h:outputText  styleClass="ikont-hot-identificacioncontratante"   value="#{var.identificacioncontratante}"/>
                                     </f:facet>
-                                    <h:outputText  value="#{objeto.contratante.tercero.intcedula}"/>
+                                    <h:outputText  value="#{contratoContratante.contratante.tercero.intcedula}"/>
                                 </rich:column>
                                 <rich:column>
                                     <f:facet name="header" >
                                         <h:outputText  styleClass="ikont-hot-nombrecontratante" value="#{var.nombrecontratante}"/>
                                     </f:facet>
-                                    <h:outputText value="#{objeto.contratante.tercero.strnombre}"/>
+                                    <h:outputText value="#{contratoContratante.contratante.tercero.strnombre}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvaloraportado}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{contratoContratante.contratante.numvaloraportado}"/>
+                                    <f:facet name="footer" >
+                                        <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}"/>
+                                    </f:facet>
                                 </rich:column>
                                 <rich:column>
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratante}"/>
                                     </f:facet>
                                     <a4j:commandButton value="#{var.eliminarcontratante}" 
-                                                       action="#{Supervisor$Contrato.eliminarContratanteConvenioAction(objeto)}" 
+                                                       action="#{Supervisor$Contrato.eliminarContratanteConvenioAction(contratoContratante)}" 
                                                        execute="@this" immediate="true" render="ikont-hpg-multiplescontratantes gpValContrato">
                                     </a4j:commandButton>   
                                 </rich:column>
@@ -451,25 +459,25 @@
                         <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
                                                 value="#{Supervisor$Contrato.contrato.listaContratistas}"
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                var="objeto" rows="25">
+                                                var="contratista" rows="25">
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
                                 </f:facet>
-                                <h:outputText  value="#{objeto.tercero.intcedula}"/>
+                                <h:outputText  value="#{contratista.tercero.intcedula}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
                                 </f:facet>
-                                <h:outputText value="#{objeto.tercero.strnombre}"/>
+                                <h:outputText value="#{contratista.tercero.strnombre}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratista}"/>
                                 </f:facet>
                                 <a4j:commandButton value="#{var.eliminarcontratista}" 
-                                                   action="#{Supervisor$Contrato.eliminarContratistaConvenioAction(objeto)}" 
+                                                   action="#{Supervisor$Contrato.eliminarContratistaConvenioAction(contratista)}" 
                                                    execute="@this" immediate="true" render="ikont-hpg-multiplescontratistas">
                                 </a4j:commandButton>   
                             </rich:column>
@@ -535,21 +543,19 @@
                                             var="registro" rowKeyVar="filaSeleccionada"
                                             binding="#{Supervisor$Contrato.tablaPolizasbin}"
                                             >
-                                <rich:column id="tc-strTipoPoliza" width="100px">
+                                <rich:column width="100px">
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-policont" value="#{var.tipoPolizaContrato}:" />
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
                                 </rich:column>
-                                <rich:column id="tc-strnumPolizaContrato" 
-                                             >
+                                <rich:column>
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-numpolizacont" value="#{var.numPolizaContrato}:" />
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
                                 </rich:column>
-                                <rich:column id="tc-strVencimientoPoliza" width="100px"
-                                             >
+                                <rich:column width="100px">
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-vencepoliza" value="#{var.vencimientoPoliza}:" />
                                     </f:facet>
@@ -557,14 +563,13 @@
                                         <f:convertDateTime pattern="#{var.formatofecha}"/>
                                     </h:outputText>
                                 </rich:column>
-                                <rich:column id="tc-strEntidadPoliza" 
-                                             >
+                                <rich:column>
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-entipoliza" value="#{var.entidadPoliza}:" />
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nomentipoliza"   id="otxt-strEntidadPoliza" value="#{registro.aseguradora.strnombreentidad}"/>
                                 </rich:column>
-                                <rich:column id="tc-streliminarPoliza" width="250px"
+                                <rich:column width="250px"
                                              >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-eliminars"   value="#{var.eliminar}" />
@@ -630,7 +635,7 @@
                         <rich:column>
                             <h:outputText  styleClass="ikont-hot-nombredocs" value="#{currentRow.strnombre}" />
                         </rich:column>
-                        <rich:column >
+                        <rich:column>
                             <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
                                                action="#{Supervisor$Contrato.eliminardocu}">
                             </a4j:commandButton>
@@ -678,7 +683,7 @@
                         <rich:dataTable id="dataTableComponentesImpactados" noDataLabel="No se han agregado componentes."
                                         value="#{Supervisor$Contrato.listacomponentesimpactados}" var="contratoComponenteImpactado"
                                         binding="#{Supervisor$Contrato.tablaComponentesImpactados}">
-                            <rich:column id="columnComponente" sortBy="#{contratoComponenteImpactado.componente.strnombrecomponente}">
+                            <rich:column sortBy="#{contratoComponenteImpactado.componente.strnombrecomponente}">
                                 <f:facet name="header">
                                     <h:outputLabel value="Componente" />
                                 </f:facet>
@@ -687,7 +692,7 @@
                                 <h:outputText value="#{contratoComponenteImpactado.componente.componente.strnombrecomponente}" rendered="#{contratoComponenteImpactado.componente.componente.strnombrecomponente != null}" />
                             </rich:column>
 
-                            <rich:column id="columnSubcomponente">
+                            <rich:column>
                                 <f:facet name="header">
                                     <h:outputLabel value="Subcomponente" />
                                 </f:facet>

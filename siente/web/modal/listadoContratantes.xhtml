@@ -3,7 +3,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -22,15 +22,17 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-
-        <h:form>
-            <h:panelGrid id="ikont-hpg-contratantes">
-                <h:panelGrid columns="3" id="ikont-hpg-filtrocontratante">
+        
+        <h:form id="ikont-f-filtrocontratante">
+            <h:panelGrid columns="3" id="ikont-hpg-filtrocontratante">
                     <h:outputLabel id="ikont-hol-nombrecedulaonit" styleClass="ikont-hol-nombrecedulaonit" value="#{var.nombrecedulaonit}" />
-                    <h:inputText id="ikont-hit-nombrecedulanitcontratante" styleClass="ikont-hit-nombrecedulanitcontratante" value="#{Supervisor$Contrato.nombre}" size="20" onfocus="clearText(this);" />
+                    <h:inputText id="ikont-hit-nombrecedulanitcontratante" styleClass="ikont-hit-nombrecedulanitcontratante" value="#{Supervisor$Contrato.nombreCedulaNitContratante}" size="20" onfocus="clearText(this);" />
                     <a4j:commandButton styleClass="ikont-acb-buscarproyecto" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratantes()}" 
-                                       execute="ikont-hit-nombrecedulanitcontratante"  render="ikont-hpg-tabla-contratantes" immediate="true"/>
+                                       render="ikont-hpg-tabla-contratantes" execute="@form"/>
                 </h:panelGrid>
+        </h:form>
+        <h:form id="ikont-f-tablacontratante">
+            <h:panelGrid id="ikont-hpg-contratantes">
                 <h:panelGroup id="ikont-hpg-tabla-contratantes" styleClass="ikont-hpg-tabla-contratantes">
                     <rich:dataTable id="ikont-rdt-contratantes" styleClass="ikont-rdt-contratantes" 
                                 value="#{Supervisor$Contrato.contratantes}"
@@ -60,13 +62,13 @@
                         </f:facet>
                         <a4j:commandButton value="#{var.seleccionarcontratante}" 
                                            action="#{Supervisor$Contrato.adicionarContratanteConvenioAction(objeto)}" 
-                                           execute="@this ikont-hit-numvaloraportado" render="ikont-hpg-multiplescontratantes gpValContrato"
-                                           oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('mp-listado-contratantes')}.hide();">
+                                           execute="@this ikont-hit-numvaloraportado" render="ikont-hpg-multiplescontratantes gpValContrato stpformadepago"
+                                           oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('mp-listado-contratantes')}.hide(); else return false;">
                         </a4j:commandButton>   
                     </rich:column>
                 </rich:dataTable>
                 </h:panelGroup>
-                <rich:dataScroller maxPages="10" id="ikont-rds-contratantes" styleClass="ikont-rds-contratantes" for="ikont-rdt-contratantes" render="ikont-rdt-contratantes"/>
+                <rich:dataScroller maxPages="10" id="ikont-rds-contratantes" styleClass="ikont-rds-contratantes" for="ikont-rdt-contratantes"/>
             </h:panelGrid>
         </h:form>        
     </rich:popupPanel>

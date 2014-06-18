@@ -77,6 +77,10 @@
                                 <h:outputLabel class="ikont-" style="font-weight: bold;">#{Supervisor$Contrato.contrato.datefechaini} #{Supervisor$Contrato.contrato.datefechafin} </h:outputLabel>
                                 <hr class="ikont-hr" />
                             </h:panelGroup>
+                            <h:panelGrid id="ikont-hpg-tipocontrato" styleClass="ikont-hpg-tipocontrato" columns="2" rendered="#{var.conveniocontipo}">
+                                <h:outputLabel id="ikont-hol-labeltipocontrato" styleClass="ikont-hol-labeltipocontrato" value="#{var.tipoconvenio}"/>
+                                <h:outputLabel id="ikont-hol-tipocontrato" styleClass="ikont-hol-tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"/>
+                            </h:panelGrid>
                             <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.objetoMay}</h:outputLabel>
                             <interkont:spacer width="20" />
                             <div id = "objetoId">
@@ -129,27 +133,18 @@
                         <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
                                         value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                var="objeto">
+                                                var="contratoContratante">
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-identificacioncontratante"   value="#{var.identificacioncontratante}"/>
                                 </f:facet>
-                                <h:outputText  value="#{objeto.tercero.intcedula}"/>
+                                <h:outputText  value="#{contratoContratante.contratante.tercero.intcedula}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-nombrecontratante" value="#{var.nombrecontratante}"/>
                                 </f:facet>
-                                <h:outputText value="#{objeto.tercero.strnombre}"/>
-                            </rich:column>
-                            <rich:column>
-                                <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratante}"/>
-                                </f:facet>
-                                <a4j:commandButton value="#{var.eliminarcontratante}" 
-                                                   action="#{Supervisor$Contrato.eliminarContratanteConvenioAction(objeto)}" 
-                                                   execute="@this" immediate="true" render="ikont-hpg-multiplescontratantes gpValContrato">
-                                </a4j:commandButton>   
+                                <h:outputText value="#{contratoContratante.contratante.tercero.strnombre}"/>
                             </rich:column>
                         </rich:dataTable>
                         <rich:dataScroller id="ikont-rds-multiplescontratantes" for="ikont-rdt-multiplescontratantes" styleClass="ikont-rds-multiplescontratantes"/>
@@ -162,18 +157,18 @@
                         <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
                                                 value="#{Supervisor$Contrato.contrato.listaContratistas}"
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                var="objeto">
+                                                var="contratista">
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
                                 </f:facet>
-                                <h:outputText  value="#{objeto.tercero.intcedula}"/>
+                                <h:outputText  value="#{contratista.tercero.intcedula}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
                                 </f:facet>
-                                <h:outputText value="#{objeto.tercero.strnombre}"/>
+                                <h:outputText value="#{contratista.tercero.strnombre}"/>
                             </rich:column>
                         </rich:dataTable>
                     </h:panelGrid>

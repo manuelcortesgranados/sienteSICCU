@@ -12,7 +12,9 @@ import static co.com.interkont.cobra.planoperativo.exceptionspo.ValidacionesPO.o
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
+import co.com.interkont.cobra.to.Tipodocumento;
 import cobra.PlanOperativo.ProyectoPlanOperativo;
 import com.interkont.cobra.util.CobraUtil;
 import java.math.BigDecimal;
@@ -268,6 +270,27 @@ public class ValidacionesConvenio {
     public static void validarContratanteRequerido(Contrato contrato) {
         if (contrato.getContratocontratantes() == null || contrato.getContratocontratantes().isEmpty() ) {
             throw new ConvenioException("El convenio debe tener por lo menos un contratante asociado");
+        }
+    }
+
+    /**
+     * Valida que el contrato contenga por lo menos un docmento de tipo convenio
+     * @param documentosobra Listado de docummentos del convenio
+     */
+    public static void validarTipoDocumentoConvenioRequerido(List<Documentoobra> documentosobra) {
+        boolean documentoValido = false;
+        if(documentosobra != null) {
+            System.out.println("documentosobra = " + documentosobra.size());
+            for(Object objectDocumetoObra : documentosobra)  {
+                Documentoobra documentoobra =    (Documentoobra) objectDocumetoObra;
+                System.out.println("documentoobra.getTipodocumento().getInttipodoc() = " + documentoobra.getTipodocumento().getInttipodoc());
+                if(documentoobra.getTipodocumento().getInttipodoc() == Tipodocumento.ID_TIPO_DOCUMENTO_CONVENIO) {
+                    documentoValido = true;
+                }
+            }
+        }
+        if (!documentoValido) {
+            throw new ConvenioException("Debe adicionar el documento del convenio");
         }
     }
 }
