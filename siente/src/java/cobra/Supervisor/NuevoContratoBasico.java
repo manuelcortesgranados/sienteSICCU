@@ -6171,9 +6171,35 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
     
     public String llenarContrConvHijoPorNombre() {
+        List<Contrato> listaContr = new ArrayList<Contrato>();
+        boolean first = listaContrConvHijo.isEmpty();
+        
         boolconthijo = true;
         listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijosPorNombre(getContrato(), false, getSessionBeanCobra().getUsuarioObra(), buscarproyecto);
 
+        
+        
+        if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
+            buscarproyecto = "";
+            for (Contrato cMacro : listaContrConvHijo) {
+
+                if (cMacro.getContrato().getBooltipocontratoconvenio()) {
+                    listaContr.add(cMacro);
+                }
+            }
+        } else {
+
+            for (Contrato cDerivado : listaContrConvHijo) {
+
+                if (!cDerivado.getContrato().getBooltipocontratoconvenio()) {
+                    listaContr.add(cDerivado);
+                }
+            }
+        }
+
+        contAsociados = listaContr;
+        getFirstContracts();
+        
         return null;
     }
 
