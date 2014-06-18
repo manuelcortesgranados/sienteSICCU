@@ -129,7 +129,7 @@
                                 <f:selectItem itemLabel=" -- todos --" itemValue="#{0}"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaPlanNacionalDeDesarrollo}" var="pnd" itemValue="#{pnd.id}" itemLabel="(#{pnd.periodo}) #{pnd.nombre}" />
                                 <a4j:ajax  
-                                    render="selectTipificN1,selectTipificN2,selectTipificN3,tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"  
+                                    render="selectTipificN1,selectTipificN2,selectTipificN3, pl-tabla-listado-contratoconvenio"  
                                     limitRender="true" 
                                     execute="@this" 
                                     transient="true" 
@@ -146,7 +146,7 @@
                                 <f:selectItem  itemLabel="-- todos --" itemValue="#{0}"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionSectores}" var="sector" itemValue="#{sector.id}" itemLabel="#{sector.nombre}" />
                                 <a4j:ajax 
-                                    render="selectTipificN2,selectTipificN3,tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"  
+                                    render="selectTipificN2,selectTipificN3,pl-tabla-listado-contratoconvenio"  
                                     limitRender="true" 
                                     execute="selectTipificN1" 
                                     transient="true"
@@ -162,7 +162,7 @@
                                 <f:selectItem  itemLabel="-- todos --" itemValue="0"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionObjetivos}" var="objetivo" itemValue="#{objetivo.id}" itemLabel="#{objetivo.nombre}"  />
                                 <a4j:ajax 
-                                    render="selectTipificN3,tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"  
+                                    render="selectTipificN3,pl-tabla-listado-contratoconvenio"  
                                     limitRender="true" 
                                     execute="selectTipificN2"
                                     transient="true"
@@ -177,7 +177,7 @@
                             <h:selectOneMenu value="#{Supervisor$Contrato.tipificacionEstrategia}" id="selectTipificN3" required="true" style="width: 420px!important;height: 32px!important;">
                                 <f:selectItem itemLabel="-- todos --" itemValue="0"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionEstrategias}" var="estrategia" itemValue="#{estrategia.id}" itemLabel="#{estrategia.nombre}"  />
-                                <a4j:ajax render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"  
+                                <a4j:ajax render="pl-tabla-listado-contratoconvenio"  
                                           limitRender="true" 
                                           execute="selectTipificN3" 
                                           transient="true"
