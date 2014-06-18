@@ -301,7 +301,7 @@
                                         <h:outputLabel  styleClass="ikont-hol-calendarVenciPolizaModi"   id="lblEntidadPolizaModi"  value=" #{var.entidadPoliza}:" for="comboentidadPolizaModi">
                                         </h:outputLabel>
                                         <h:selectOneMenu id="comboentidadPolizaModi" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
-                                            <f:selectItems value="#{Supervisor$Contrato.companias}"/>
+                                            <f:selectItems value="#{Supervisor$Contrato.companias}" var="companias" itemValue="#{companias.intnumnitentidad}" itemLabel="#{companias.strnombreentidad}"/>
                                         </h:selectOneMenu>
 
                                         <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  >
