@@ -46,7 +46,7 @@
                         <h:panelGrid columns="1" styleClass="panel_nom_abreviado">
                             <rich:column>
                                 <h:selectOneMenu immediate="true" value="#{Supervisor$Contrato.tipificacionObjetivo}" id="selectTipificN2" required="true" style="width: 420px!important;height: 32px!important;">
-                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Objectivo" itemValue="0"/>
+                                    <f:selectItem noSelectionOption="true" itemLabel="(*) Objetivo" itemValue="0"/>
                                     <f:selectItems value="#{Supervisor$Contrato.listaTipificacionObjetivos}" var="objetivo" itemValue="#{objetivo.id}" itemLabel="#{objetivo.nombre}"  />
                                     <a4j:ajax render="selectTipificN3"  limitRender="true" execute="selectTipificN2"></a4j:ajax>
                                 </h:selectOneMenu>
