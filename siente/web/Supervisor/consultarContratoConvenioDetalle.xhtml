@@ -185,7 +185,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
-                <rich:collapsiblePanel switchType="client" header="#{var.informeFisico}" style="width: 87%;" expanded="true">
+                <rich:collapsiblePanel switchType="client" header="#{var.informeFisico}" style="width: 87%;" expanded="true" rendered="#{Supervisor$Contrato.tipoContCon != 'Contrato'}">
                     <h:panelGrid columns="2">
                         <h:panelGrid  columns="1">
                             <h:outputText styleClass="ikont-hol-detalle-proyecto" value="#{var.estado}"/>
