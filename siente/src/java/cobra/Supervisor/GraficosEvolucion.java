@@ -4,6 +4,7 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.to.Desembolso;
 import co.com.interkont.cobra.to.Movimiento;
 import co.com.interkont.cobra.to.Planificacionpago;
 import cobra.SessionBeanCobra;
@@ -35,9 +36,10 @@ public class GraficosEvolucion implements Serializable{
 
     public String rutaGrafico = "";
     public List<Movimiento> movimientos;
+    private List<Desembolso> desembolsos;
  
     public GraficosEvolucion() {
-        GenerarJson();
+        desembolsos = getSessionBeanCobra().getCobraService().encontrarDesembolsoxContrato(getNuevoContratoBasico().getContrato());
     }
 
     private void GenerarJson() {
@@ -372,5 +374,19 @@ public class GraficosEvolucion implements Serializable{
         long diferencia = fechaFinalMs - fechaInicialMs;
         double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
         return ((int) dias);
+    }
+
+    /**
+     * @return the desembolsos
+     */
+    public List<Desembolso> getDesembolsos() {
+        return desembolsos;
+    }
+
+    /**
+     * @param desembolsos the desembolsos to set
+     */
+    public void setDesembolsos(List<Desembolso> desembolsos) {
+        this.desembolsos = desembolsos;
     }
 }

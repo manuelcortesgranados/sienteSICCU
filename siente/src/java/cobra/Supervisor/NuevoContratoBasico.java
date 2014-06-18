@@ -176,10 +176,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
     private int selectedUnit;
-
-    /**
-     * VARIABLES TIPIFICACION CONVENIO Estas variables se usan para la creacion
-     * y búsqueda de convenios
+    
+     /**
+     * VARIABLES TIPIFICACION CONVENIO
+     * Estas variables se usan para la creacion y búsqueda de convenios
      */
     private List<PlanNacionalDeDesarrollo> listaPlanNacionalDeDesarrollo;
     private List<TipificacionConvenioSector> listaTipificacionSectores;
@@ -6168,9 +6168,35 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public String llenarContrConvHijoPorNombre() {
+        List<Contrato> listaContr = new ArrayList<Contrato>();
+        boolean first = listaContrConvHijo.isEmpty();
+        
         boolconthijo = true;
         listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijosPorNombre(getContrato(), false, getSessionBeanCobra().getUsuarioObra(), buscarproyecto);
 
+        
+        
+        if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
+            buscarproyecto = "";
+            for (Contrato cMacro : listaContrConvHijo) {
+
+                if (cMacro.getContrato().getBooltipocontratoconvenio()) {
+                    listaContr.add(cMacro);
+                }
+            }
+        } else {
+
+            for (Contrato cDerivado : listaContrConvHijo) {
+
+                if (!cDerivado.getContrato().getBooltipocontratoconvenio()) {
+                    listaContr.add(cDerivado);
+                }
+            }
+        }
+
+        contAsociados = listaContr;
+        getFirstContracts();
+        
         return null;
     }
 
@@ -9616,8 +9642,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             //Búsqueda
             this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
-            this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(new PlanNacionalDeDesarrollo(pnd, null, null, null));
-
+        }    
+        else{
         } else {
             this.planNacionalDeDesarrollo = null;
             this.filtrocontrato.setTipificacionConvenio(null);
