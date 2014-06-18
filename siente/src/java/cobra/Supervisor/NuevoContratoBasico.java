@@ -9649,13 +9649,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         
         if (pnd > 0) { 
             this.planNacionalDeDesarrollo = new PlanNacionalDeDesarrollo(pnd, null, null, null);
-            this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
-            
         }    
         else{
             this.planNacionalDeDesarrollo = null;
         }
         //Búsqueda
+        this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
         this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(new PlanNacionalDeDesarrollo(pnd, null, null, null));
         
         this.contrato.setTipificacionConvenio(null);
