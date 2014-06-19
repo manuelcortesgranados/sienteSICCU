@@ -125,7 +125,7 @@
                     <h:outputLabel value="Plan Nacional de Desarrollo:" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"/>
                     <h:panelGrid columns="1" styleClass="panel_nom_abreviado" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}">
                         <rich:column>
-                            <h:selectOneMenu  id="selectPND" value="#{Supervisor$Contrato.planNacionalDeDesarrollo}" required="true" style="width: 420px!important;height: 32px!important;">
+                            <h:selectOneMenu  id="selectPND" value="#{Supervisor$Contrato.planNacionalDeDesarrollo}" style="width: 420px!important;height: 32px!important;">
                                 <f:selectItem itemLabel=" -- todos --" itemValue="#{0}"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaPlanNacionalDeDesarrollo}" var="pnd" itemValue="#{pnd.id}" itemLabel="(#{pnd.periodo}) #{pnd.nombre}" />
                                 <a4j:ajax  
@@ -142,7 +142,7 @@
                     <h:outputLabel value="Sector:" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"/>
                     <h:panelGrid columns="1" styleClass="panel_nom_abreviado" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}">
                         <rich:column>
-                            <h:selectOneMenu  id="selectTipificN1" value="#{Supervisor$Contrato.tipificacionSector}" required="true" style="width: 420px!important;height: 32px!important;">
+                            <h:selectOneMenu  id="selectTipificN1" value="#{Supervisor$Contrato.tipificacionSector}"  style="width: 420px!important;height: 32px!important;">
                                 <f:selectItem  itemLabel="-- todos --" itemValue="#{0}"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionSectores}" var="sector" itemValue="#{sector.id}" itemLabel="#{sector.nombre}" />
                                 <a4j:ajax 
@@ -158,7 +158,7 @@
                     <h:outputLabel value="Objetivo:" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"/>
                     <h:panelGrid columns="1" styleClass="panel_nom_abreviado" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}">
                         <rich:column>
-                            <h:selectOneMenu value="#{Supervisor$Contrato.tipificacionObjetivo}" id="selectTipificN2" required="true" style="width: 420px!important;height: 32px!important;">
+                            <h:selectOneMenu value="#{Supervisor$Contrato.tipificacionObjetivo}" id="selectTipificN2" style="width: 420px!important;height: 32px!important;">
                                 <f:selectItem  itemLabel="-- todos --" itemValue="0"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionObjetivos}" var="objetivo" itemValue="#{objetivo.id}" itemLabel="#{objetivo.nombre}"  />
                                 <a4j:ajax 
@@ -174,7 +174,7 @@
                     <h:outputLabel value="Estrategia:" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"/>
                     <h:panelGrid columns="1" styleClass="panel_nom_abreviado" rendered="#{var.conplanoperativo and Supervisor$Contrato.tipoContCon == 'Convenio'}">
                         <rich:column>
-                            <h:selectOneMenu value="#{Supervisor$Contrato.tipificacionEstrategia}" id="selectTipificN3" required="true" style="width: 420px!important;height: 32px!important;">
+                            <h:selectOneMenu value="#{Supervisor$Contrato.tipificacionEstrategia}" id="selectTipificN3" style="width: 420px!important;height: 32px!important;">
                                 <f:selectItem itemLabel="-- todos --" itemValue="0"/>
                                 <f:selectItems value="#{Supervisor$Contrato.listaTipificacionEstrategias}" var="estrategia" itemValue="#{estrategia.id}" itemLabel="#{estrategia.nombre}"  />
                                 <a4j:ajax render="pl-tabla-listado-contratoconvenio"  
