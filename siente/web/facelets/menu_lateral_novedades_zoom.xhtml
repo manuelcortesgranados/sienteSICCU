@@ -62,7 +62,7 @@
             
             <h:commandLink styleClass="ikont-img-posicion-actividad-reporte-gerencia ikont-posicion-reporte-gerencia"   immediate="true" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}"
                            onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"/>
-            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Gerencial" 
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="Reporte Gerencial" action="#{SessionBeanCobra.insertarBitacoraReporte}"
                            onclick="window.open(document.location.href = '#{var.ipserver}#{var.versioncobra}/reportes/Reporte_General/REPORTE_GERENCIAL.xlsx', '_blank');"
                            rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_gerencial}"/>   
         <br/>

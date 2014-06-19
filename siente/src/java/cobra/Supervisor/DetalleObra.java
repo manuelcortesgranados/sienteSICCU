@@ -53,6 +53,7 @@ import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.to.Visita;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import co.interkont.bitacora.entidades.Accion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
 import java.math.RoundingMode;
@@ -1344,6 +1345,9 @@ public class DetalleObra implements Serializable {
         if (getAdministrarObraNew().getObra().getDatefecfinobra() != null) {
             finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
         }
+        
+        // Ingresar en bitacora el ingreso a ver un proyecto
+        getSessionBeanCobra().insertarBitacora(Accion.VISITAR_PROYECTO, getAdministrarObraNew().getObra().getIntcodigoobra());
     }
 
     protected AdministrarObraNew getAdministrarObraNew() {

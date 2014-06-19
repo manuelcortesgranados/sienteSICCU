@@ -17,6 +17,7 @@ import co.com.interkont.cobra.to.Tiposolicitante;
 import co.com.interkont.cobra.to.Tipotercero;
 import co.com.interkont.cobra.to.Tipousuario;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
+import co.interkont.bitacora.entidades.Accion;
 import co.interkont.zoomfonadews.autenticacion.to.Usuario;
 import cobra.Ciudadano.PerfilCiudadano;
 import cobra.Supervisor.FacesUtils;
@@ -219,6 +220,10 @@ public class Login implements Serializable {
                             getSessionBeanCobra().getUsuarioService().guardarOrActualizarUsuario(getSessionBeanCobra().getUsuarioObra());
                         }
                     }
+                    
+                    // Ingresar en bitacora el inicio de sesion
+                    getSessionBeanCobra().insertarBitacora(Accion.INICIO_SESION, null);
+                    
                     return respuesta;
 
             }

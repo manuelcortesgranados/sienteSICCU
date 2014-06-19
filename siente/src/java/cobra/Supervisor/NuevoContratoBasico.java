@@ -99,6 +99,7 @@ import co.com.interkont.cobra.to.TipificacionConvenioSector;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Unidad;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
+import co.interkont.bitacora.entidades.Accion;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.interkont.cobra.util.CobraUtil;
 import java.util.HashSet;
@@ -5032,6 +5033,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }else{
             boolBack = false;
+        }
+        
+        // Ingresar en la bitacora que estan ingresando al convenio o contrato
+        if (contrato.getBooltipocontratoconvenio()) {
+            getSessionBeanCobra().insertarBitacora(Accion.VISITAR_CONVENIO, contrato.getIntidcontrato());
+        } else {
+            getSessionBeanCobra().insertarBitacora(Accion.VISITAR_CONTRATO, contrato.getIntidcontrato());   
         }
     }
 

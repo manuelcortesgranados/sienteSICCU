@@ -31,6 +31,10 @@ import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
+import co.interkont.bitacora.entidades.Accion;
+import co.interkont.bitacora.entidades.Bitacora;
+import co.interkont.bitacora.persistence.BitacoraPersistence;
+import co.interkont.bitacora.persistence.api.IBitacoraPersistence;
 import cobra.MarcoLogico.service.MarcoLogicoServiceAble;
 import cobra.Supervisor.FacesUtils;
 import cobra.gestion.HomeGestion;
@@ -131,15 +135,15 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public HomeGestion getHomeGestion() {
-            return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
-        
+        return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
+
     }
 
     public HomeGestionGiprom getHomeGestionGiprom() {
-            return (HomeGestionGiprom) FacesUtils.getManagedBean("HomeGestion");
-        
+        return (HomeGestionGiprom) FacesUtils.getManagedBean("HomeGestion");
+
     }
-    
+
     public boolean isLogueado() {
         return logueado;
     }
@@ -469,7 +473,7 @@ public class SessionBeanCobra implements Serializable {
     public String getFechaServer() {
         return FechaServer;
     }
-    
+
     /**
      * Set the value of FechaServer
      *
@@ -486,12 +490,12 @@ public class SessionBeanCobra implements Serializable {
     public long getFechaMilisegundosServidor() {
         return new Date().getTime();
     }
-    
+
     public long getFechaMilisegundosServidor1() {
-        long lnMilisegundos = utilDate.getTime();       
+        long lnMilisegundos = utilDate.getTime();
         return lnMilisegundos;
-    } 
-    
+    }
+
     // </editor-fold>
     /**
      * <p>
@@ -1186,7 +1190,7 @@ public class SessionBeanCobra implements Serializable {
 
     public void logueardesdemapa() {
         Login bean = (Login) FacesUtils.getManagedBean("login");
-        
+
         bean.usuarioSinRegistro();
 
     }
@@ -1274,9 +1278,7 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public Obra castearVwInformacionMunicipaltoObra(VwInmInfoMunicipal mun) {
-        
-        
-        
+
         Obra vista = new Obra();
 
         vista.setStrnombreobra(mun.getLclNombre());
@@ -1290,7 +1292,7 @@ public class SessionBeanCobra implements Serializable {
         vista.setTercero(new Tercero());
         vista.getTercero().setStrnombrecompleto(mun.getMncNombre());
         vista.getTercero().setStrapellido1(mun.getDptNombre());
-        
+
         vista.setNumvaltotobra(BigDecimal.ZERO);
 
 //                vista.getObra().setIntcodigoobra(mun.getId().intValueExact());
@@ -1311,7 +1313,7 @@ public class SessionBeanCobra implements Serializable {
         } else {
             vista.setStrcorregimiento("Faltante");
         }
-      
+
         vista.setNumvalavanfisicodeclarado(mun.getNumencuestas());
         vista.setNumvaldeclarado(mun.getNumhabitantes());
         vista.setNumvalprogramejec(mun.getConsumoenergeticohabitante());
@@ -1321,8 +1323,8 @@ public class SessionBeanCobra implements Serializable {
         vista.setClaseobra(new Claseobra());
         vista.getClaseobra().setIntidclaseobra(1);
         vista.setLugarobra(new Lugarobra());
-        vista.getLugarobra().setIntidlugarobra(1);       
-        vista.setTipocosto(new Tipocosto(1,""));
+        vista.getLugarobra().setIntidlugarobra(1);
+        vista.setTipocosto(new Tipocosto(1, ""));
         vista.setPeriodomedida(new Periodomedida());
         vista.getPeriodomedida().setIntidperiomedida(1);
         vista.setTipoorigen(new Tipoorigen(1, ""));
@@ -1331,9 +1333,32 @@ public class SessionBeanCobra implements Serializable {
         vista.setJsfUsuario(getUsuarioObra());
         vista.getTercero().setIntcodigo(getUsuarioObra().getTercero().getIntcodigo());
         vista.setStrcodigopropio(mun.getId().toString());
-        
-        
-        
+
         return vista;
-    }   
+    }
+
+    /**
+     * Insertar en la bitacora el movimiento del usuario. En la fecha se ingresa
+     * la actual. El usuario es el que esta logeado.
+     *
+     * @param accion Accion que se va a insertar en la visita
+     * @param idVisita Id de la visita, si es id del proyecto de la obra, del
+     * contrato o del convenio.
+     */
+    public void insertarBitacora(Integer accion, Integer idVisita) {
+        // Buscar el usuario logeado
+        Integer usuarioId = getCiudadanoservice().getUsuariomostrar().getUsuId();
+
+        // Insertar a la bitacora solo si el usuario no es ciudadano
+        if(usuarioId != 0){
+            Bitacora bitacora = new Bitacora(usuarioId, idVisita, accion, new Date());
+            IBitacoraPersistence bitacoraPersistence = new BitacoraPersistence();
+            bitacoraPersistence.crearBitacora(bitacora);
+        }
+    }
+
+    public void insertarBitacoraReporte() {
+        insertarBitacora(Accion.REPORTE_GERENCIA, null);
+    }
+
 }
