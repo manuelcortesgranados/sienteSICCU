@@ -90,8 +90,13 @@ import co.com.interkont.cobra.marcologico.to.Estrategia;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.to.Componente;
 import co.com.interkont.cobra.to.Contratocomponente;
+import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.PlanNacionalDeDesarrollo;
+import co.com.interkont.cobra.to.Planificacionmovconvenio;
+import co.com.interkont.cobra.to.Planificacionmovcuotagerencia;
+import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
+import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
 import co.com.interkont.cobra.to.TipificacionConvenio;
 import co.com.interkont.cobra.to.TipificacionConvenioEstrategia;
 import co.com.interkont.cobra.to.TipificacionConvenioObjetivo;
@@ -100,8 +105,11 @@ import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Unidad;
 import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
+import cobra.PlanOperativo.FlujoEgresos;
 import com.interkont.cobra.util.CobraUtil;
 import java.util.HashSet;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * <p>
@@ -176,10 +184,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private List<Polizacontrato> listaPolizasEliminar = new ArrayList<Polizacontrato>();
     private int selectedUnit;
-    
-     /**
-     * VARIABLES TIPIFICACION CONVENIO
-     * Estas variables se usan para la creacion y búsqueda de convenios
+
+    /**
+     * VARIABLES TIPIFICACION CONVENIO Estas variables se usan para la creacion
+     * y búsqueda de convenios
      */
     private List<PlanNacionalDeDesarrollo> listaPlanNacionalDeDesarrollo;
     private List<TipificacionConvenioSector> listaTipificacionSectores;
@@ -4265,7 +4273,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
 
         listacomponentesimpactados = new ArrayList<Contratocomponente>();
-        
+
         this.planNacionalDeDesarrollo = null;
         this.tipificacionSector = null;
         this.tipificacionObjetivo = null;
@@ -6008,34 +6016,37 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String llenarplanificacionpagos() {
 
-        setAnticiforma(new Integer(0));
-        setVloranticipo(new BigDecimal(0));
-        setPorcenanticipo(new BigDecimal(0));
-        setFechapago(new Date());
-        getSessionBeanCobra().getCobraService().setListaPlanificacionpagos(getSessionBeanCobra().getCobraService().encontrarPlanificacionpagoxContrato(contrato));
+        if (!booltipocontratoconvenio){
+            setAnticiforma(new Integer(0));
+            setVloranticipo(new BigDecimal(0));
+            setPorcenanticipo(new BigDecimal(0));
+            setFechapago(new Date());
+            getSessionBeanCobra().getCobraService().setListaPlanificacionpagos(getSessionBeanCobra().getCobraService().encontrarPlanificacionpagoxContrato(contrato));
 
-        if (getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().size() > 0) {
-            switch (contrato.getFormapago().getIntidformapago()) {
-                case 1:
-                    //"ANTICIPO Y ACTAS PARCIALES"
-                    setAnticiforma(1);
-                    setVloranticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrpago());
-                    setPorcenanticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrporcentage());
-                    setFechapago(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getDatefechapago());
-                    getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().remove(0);
-                    break;
-                case 2:
-                    //"ACTAS PARCIALES"
-                    setAnticiforma(2);
-                    break;
-                case 3:
-                    //"ACTA UNICA"
-                    setAnticiforma(3);
-                    setVloranticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrpago());
-                    setFechapago(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getDatefechapago());
-                    break;
+            if (getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().size() > 0) {
+                switch (contrato.getFormapago().getIntidformapago()) {
+                    case 1:
+                        //"ANTICIPO Y ACTAS PARCIALES"
+                        setAnticiforma(1);
+                        setVloranticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrpago());
+                        setPorcenanticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrporcentage());
+                        setFechapago(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getDatefechapago());
+                        getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().remove(0);
+                        break;
+                    case 2:
+                        //"ACTAS PARCIALES"
+                        setAnticiforma(2);
+                        break;
+                    case 3:
+                        //"ACTA UNICA"
+                        setAnticiforma(3);
+                        setVloranticipo(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getNumvlrpago());
+                        setFechapago(getSessionBeanCobra().getCobraService().getListaPlanificacionpagos().get(0).getDatefechapago());
+                        break;
+                }
             }
         }
+
         return null;
     }
 
@@ -6181,12 +6192,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String llenarContrConvHijoPorNombre() {
         List<Contrato> listaContr = new ArrayList<Contrato>();
         boolean first = listaContrConvHijo.isEmpty();
-        
+
         boolconthijo = true;
         listaContrConvHijo = getSessionBeanCobra().getCobraService().encontrarContratosHijosPorNombre(getContrato(), false, getSessionBeanCobra().getUsuarioObra(), buscarproyecto);
 
-        
-        
         if (first || (listaContrConvHijo.size() > 0 && !listaContrConvHijo.get(0).getContrato().getBooltipocontratoconvenio())) {
             buscarproyecto = "";
             for (Contrato cMacro : listaContrConvHijo) {
@@ -6207,7 +6216,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         contAsociados = listaContr;
         getFirstContracts();
-        
+
         return null;
     }
 
@@ -9643,9 +9652,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int getPlanNacionalDeDesarrollo() {
         if (this.planNacionalDeDesarrollo != null) {
             return this.planNacionalDeDesarrollo.getId();
-        }
-        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
-            if(this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo() != null){
+        } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
+            if (this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo() != null) {
                 this.planNacionalDeDesarrollo = this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo();
                 return this.planNacionalDeDesarrollo.getId();
             }
@@ -9660,8 +9668,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //Búsqueda
             this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
             this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(this.planNacionalDeDesarrollo);
-        }    
-        else{
+        } else {
             this.planNacionalDeDesarrollo = null;
             this.filtrocontrato.setTipificacionConvenio(null);
         }
@@ -9671,7 +9678,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tipificacionConvenio = null;
         this.tipificacionObjetivo = null;
         this.tipificacionEstrategia = null;
-        
+
         this.listaTipificacionSectores = null;
         this.listaTipificacionObjetivos = null;
         this.listaTipificacionEstrategias = null;
@@ -9706,9 +9713,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         if (this.tipificacionSector != null) {
             return this.tipificacionSector.getId();
-        }
-        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
-            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioSector() != null){
+        } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
+            if (this.contrato.getTipificacionConvenio().getTipificacionConvenioSector() != null) {
                 this.tipificacionSector = this.contrato.getTipificacionConvenio().getTipificacionConvenioSector();
                 return this.tipificacionSector.getId();
             }
@@ -9732,7 +9738,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tipificacionConvenio = null;
         this.tipificacionObjetivo = null;
         this.tipificacionEstrategia = null;
-        
+
         this.listaTipificacionObjetivos = null;
         this.listaTipificacionEstrategias = null;
     }
@@ -9740,9 +9746,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int getTipificacionObjetivo() {
         if (this.tipificacionObjetivo != null) {
             return this.tipificacionObjetivo.getId();
-        }
-        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
-            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo() != null){
+        } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
+            if (this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo() != null) {
                 this.tipificacionObjetivo = this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo();
                 return this.tipificacionObjetivo.getId();
             }
@@ -9770,9 +9775,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public int getTipificacionEstrategia() {
         if (this.tipificacionEstrategia != null) {
             return this.tipificacionEstrategia.getId();
-        }
-        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
-            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioEstrategia() != null){
+        } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
+            if (this.contrato.getTipificacionConvenio().getTipificacionConvenioEstrategia() != null) {
                 this.tipificacionEstrategia = this.contrato.getTipificacionConvenio().getTipificacionConvenioEstrategia();
                 return this.tipificacionEstrategia.getId();
             }
@@ -9863,5 +9867,4 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
 
     }
-
 }

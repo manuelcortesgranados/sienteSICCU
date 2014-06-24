@@ -49,6 +49,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
@@ -79,6 +80,8 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private List<Actividadobra> actividadesObra;
     private TreeMap<Date, BigDecimal> fechasDesembolsos;
+    private TreeMap<Date, Double> mapPlani = new TreeMap<Date, Double>();
+    private List<Entry<Date,Double>> planificado;
     public GraficoSeries getGraficoEvolucionFinancieraConvenio() {
         return grafico;
     }
@@ -138,6 +141,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
                 datoPlani.setEtiqueta(stringEtiDatoPlaniActual.toString());
                 conjuntoDatosPlani.getListaDatos().add(datoPlani);
             }
+            getSessionBeanCobra().getCobraService().setPlanificadoConvenio(new ArrayList<Entry<Date, Double>>(mapPlani.entrySet()));
         }
         grafico.getConjuntosDatosGrafico().add(conjuntoDatosPlani);
         
@@ -717,11 +721,12 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
         calcularGMF();
 
         getTotalEgresosPeriodoAcumulativo()[0] += getTotalEgresosPeriodo()[0];
+        getMapPlani().put(periodosConvenio.get(0).getPeriodoflujocaja().getFechainicio(), getTotalEgresosPeriodo()[0]);
         iterador = 1;
 
         while (iterador < getPeriodosConvenio().size()) {
             getTotalEgresosPeriodoAcumulativo()[iterador] += (getTotalEgresosPeriodoAcumulativo()[iterador - 1] + getTotalEgresosPeriodo()[iterador]);
-
+            getMapPlani().put(periodosConvenio.get(iterador).getPeriodoflujocaja().getFechainicio(), getTotalEgresosPeriodo()[iterador]);
             iterador++;
         }
     }
@@ -1029,5 +1034,33 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
      */
     public void setBundle(ResourceBundle bundle) {
         this.bundle = bundle;
+    }
+
+    /**
+     * @return the mapPlani
+     */
+    public TreeMap<Date, Double> getMapPlani() {
+        return mapPlani;
+    }
+
+    /**
+     * @param mapPlani the mapPlani to set
+     */
+    public void setMapPlani(TreeMap<Date, Double> mapPlani) {
+        this.mapPlani = mapPlani;
+    }
+
+    /**
+     * @return the planificado
+     */
+    public List<Entry<Date,Double>> getPlanificado() {
+        return planificado;
+    }
+
+    /**
+     * @param planificado the planificado to set
+     */
+    public void setPlanificado(List<Entry<Date,Double>> planificado) {
+        this.planificado = planificado;
     }
 }
