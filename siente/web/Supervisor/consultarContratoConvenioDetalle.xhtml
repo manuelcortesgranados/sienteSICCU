@@ -131,7 +131,7 @@
                                 <h:outputLabel class="ikont-" style="font-weight: bold;" value="
                                         #{ Supervisor$Contrato.contrato.tipificacionConvenio eq null ?
                                                   'no asignado':
-                                                  Supervisor$Contrato.contrato.tipificacionConvenio.planNacionalDeDesarrollo}" >
+                                                  Supervisor$Contrato.contrato.tipificacionConvenio.planNacionalDeDesarrollo.periodo    }" >
                                     
                                 </h:outputLabel>
                                 <hr class="ikont-hr" />
@@ -276,13 +276,23 @@
                                 </h:panelGrid>
                             </fieldset>
                         </h:panelGroup>
-                        <h:panelGroup style="width:60%;">
+                        <h:panelGroup style="width:60%;" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
 
                             <h:outputLabel>#{var.evolucionFinanciera}</h:outputLabel>
                             <h:panelGroup layout="block" styleClass="panelcenter">
                                 <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionFinancieraContrato.graficoEvolucionFinancieraContrato.scriptGrafico}" escape="false"/>
                                 <!--al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style--> 
                                 <div id="graficoEvolucionFinancieraContrato" style="width: 550px; height: 200px; text-align: left;">
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup style="width:60%;" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+
+                            <h:outputLabel>#{var.evolucionFinanciera}</h:outputLabel>
+                            <h:panelGroup layout="block" styleClass="panelcenter">
+                                <h:outputText  styleClass="ikont-hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionFinancieraConvenio.graficoEvolucionFinancieraConvenio.scriptGrafico}" escape="false"/>
+                                <!--al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style--> 
+                                <div id="graficoEvolucionFinancieraConvenio" style="width: 550px; height: 200px; text-align: left;">
                                 </div>
                             </h:panelGroup>
                         </h:panelGroup>
