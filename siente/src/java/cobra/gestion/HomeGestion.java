@@ -941,8 +941,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             filtro.setIntestadoobra(1);
         }
         mostrarCantidadProyectos();
-        mostrarContratistas();
-        llenarComboEntidades();
+        //mostrarContratistas();
+        //llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
         filtro.setIntvista(1);
@@ -951,7 +951,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtro.setBoolobraterminada(false);
         filtro.setIntregionespecifica(0);
         iniciarfiltro();
-        primeroListProyectos();
+        //primeroListProyectos();
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
@@ -1708,7 +1708,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtro.setIntvista(1);
         getSessionBeanCobra().setActualcomentario(true);
         getSessionBeanCobra().setActualdash(true);
-        primeroListProyectos();
+        //primeroListProyectos();
 
         return "gestion";
     }

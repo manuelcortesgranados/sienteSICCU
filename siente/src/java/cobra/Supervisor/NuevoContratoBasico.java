@@ -192,7 +192,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private TipificacionConvenioEstrategia tipificacionEstrategia;
     private TipificacionConvenio tipificacionConvenio;
 
-    
     public List<Polizacontrato> getListaPolizasEliminar() {
         return listaPolizasEliminar;
     }
@@ -858,17 +857,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private Tercero tercero = new Tercero();
 
     private List<Contrato> contAsociados = new ArrayList<Contrato>();
-    
+
     private List<Obra> proyAsociados = new ArrayList<Obra>();
     /*Variable para almancenar el tipo de Aporte para el la planificacion de pagos.
      * Esta puede ser en valor o en porcentaje.
      * 
      */
     private int tipoAporte;
-    
+
     private int contratoPadre;
     private boolean isFromContracts;
-    
+
     /**
      * Get the value of eliminarPeriodosFueraRango
      *
@@ -942,9 +941,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private Componente componenteImpactado = new Componente();
 
     private Componente subcomponenteImpactado = new Componente();
-    
+
     private String objetoSub = "";
-    
+
     private Boolean boolBack = false;
 
     /**
@@ -1268,9 +1267,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private boolean anteriorPagina;
     private boolean siguientePagina;
     private boolean ultimoPagina;
-    
-    
-    
+
     /**
      * Variable para ver los reportes de plan operativo
      *
@@ -3066,7 +3063,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 }
 
                 TerceroOption[i++] = itemTercero;
-                if(Boolean.valueOf(Propiedad.getValor("preselenticontratanteppal"))) {
+                if (Boolean.valueOf(Propiedad.getValor("preselenticontratanteppal"))) {
                     if (ter.getIntcodigo() == Tercero.COD_ENTIDAD_PRINCIPAL) {
                         contrato.setTercero(ter);
                     }
@@ -3173,7 +3170,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void llenarTipoContrato() {
         List<Tipocontrato> listipcon;
-        if(Propiedad.getValor("versioncobra").equals("siccu") 
+        if (Propiedad.getValor("versioncobra").equals("siccu")
                 && tipoContCon.equals("Convenio")) {
             listipcon = getSessionBeanCobra().getCobraService().encontrarTiposConvenio();
         } else {
@@ -4269,6 +4266,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
 
         listacomponentesimpactados = new ArrayList<Contratocomponente>();
+        
+        this.planNacionalDeDesarrollo = null;
+        this.tipificacionSector = null;
+        this.tipificacionObjetivo = null;
+        this.tipificacionEstrategia = null;
     }
 
     public void iniciarTiposContrato() {
@@ -4832,7 +4834,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        setContrato(contratotabla);
 //        finentrega = contratotabla.getDatefechafin().toString();
 
-        if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
+        if (contratotabla.getEstadoconvenio() != null && contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
 
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
@@ -5006,7 +5008,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             tipoContCon = "Contrato";
             booltipocontratoconvenio = false;
         }
-        if(booltipocontratoconvenio){
+        if (booltipocontratoconvenio) {
             contrato.setUnidad(getSessionBeanCobra().getCobraService().obtenerUnidadXConvenioId(contrato.getIntidcontrato()));
         }
         if (getContrato().getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
@@ -5020,18 +5022,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             llenarObraAsociada();
         }
 
-        if(contrato.getTextobjeto().length()>100){
+        if (contrato.getTextobjeto().length() > 100) {
             objetoSub = contrato.getTextobjeto().substring(0, 100);
-        }else{
+        } else {
             objetoSub = contrato.getTextobjeto();
         }
-        
-        if(contrato.getContrato()!= null){
+
+        if (contrato.getContrato() != null) {
             boolBack = true;
-            if(isFromContracts){
+            if (isFromContracts) {
                 boolBack = false;
             }
-        }else{
+        } else {
             boolBack = false;
         }
         
@@ -5588,6 +5590,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             // aplicafiltrocontrato = false;
             listacontratos.clear();
             listacontratoscontratista.clear();
+            /*Adicion Dass Se añade pues para contrato no se define filtro estadoConvenio 
+            y esta tomando valor <> 0 en la presentacion lo que afecta la busqueda de contrato*/            
+            if (tipoContCon.equals("Contrato")) {                
+                filtrocontrato.setEstadoConvenio(0);
+            }
+            //Fin Adicion Dass
             if (filtrocontrato.getPalabraClave().length() != 0) {
                 listacontratos.clear();
                 //aplicafiltrocontrato = true;
@@ -6177,7 +6185,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         return null;
     }
-    
+
     public String llenarContrConvHijoPorNombre() {
         List<Contrato> listaContr = new ArrayList<Contrato>();
         boolean first = listaContrConvHijo.isEmpty();
@@ -6242,12 +6250,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
         contAsociados = listaContr;
         getFirstContracts();
-        
+
         return null;
     }
-    
-    public void siguientesConvenios(){
-        
+
+    public void siguientesConvenios() {
+
     }
 
     /**
@@ -6495,7 +6503,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         primeroObra();
         return null;
     }
-    
 
     public void primeroDetProyectosAsociados() {
         listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, 20, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
@@ -6608,8 +6615,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String primeroObra() {
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
         proyAsociados = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, 0, totalfilas, booltipocontratoconvenio, getSessionBeanCobra().getUsuarioObra(), filtrocontrato.isEsadministrador());
-        
-       getFirstProjects();
+
+        getFirstProjects();
         return null;
     }
 
@@ -8829,7 +8836,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             contrato.setGerenteconvenio(getTercero());
         }
-        if(selectedUnit>0){
+        if (selectedUnit > 0) {
             Unidad unidad = new Unidad();
             unidad.setId(selectedUnit);
             contrato.setUnidad(unidad);
@@ -9322,15 +9329,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     private List<Contrato> rangoConvenios(List<Contrato> lista, int inicio, int fin) {
         List<Contrato> primeros = new ArrayList<Contrato>();
-        for(int i = inicio; i<=fin; i++){
+        for (int i = inicio; i <= fin; i++) {
             primeros.add(lista.get(i));
         }
         return primeros;
     }
-    
+
     private List<Obra> rangoProyectos(List<Obra> lista, int inicio, int fin) {
         List<Obra> primeros = new ArrayList<Obra>();
-        for(int i = inicio; i<=fin; i++){
+        for (int i = inicio; i <= fin; i++) {
             primeros.add(lista.get(i));
         }
         return primeros;
@@ -9393,180 +9400,178 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void getFirstContracts() {
-        int fin = contAsociados.size()>=20 ? 19 : contAsociados.size()-1;
-            
-        
+        int fin = contAsociados.size() >= 20 ? 19 : contAsociados.size() - 1;
+
         listaContrConvHijo = rangoConvenios(contAsociados, 0, fin);
         primeraPagina = false;
         anteriorPagina = false;
         pagina = 1;
-        int round = Math.round(contAsociados.size()/20);
-        if(round*20<contAsociados.size()){
+        int round = Math.round(contAsociados.size() / 20);
+        if (round * 20 < contAsociados.size()) {
             round++;
         }
         totalpaginas = round;
-        if(contAsociados.size()<=20){
+        if (contAsociados.size() <= 20) {
             siguientePagina = false;
             ultimoPagina = false;
-        }else{
+        } else {
             siguientePagina = true;
             ultimoPagina = true;
         }
     }
-    
+
     public void getBackContracts() {
         pagina--;
-        int fin = pagina*20-1;
-        int ini = (pagina-1)*20;
-        
+        int fin = pagina * 20 - 1;
+        int ini = (pagina - 1) * 20;
+
         listaContrConvHijo = rangoConvenios(contAsociados, ini, fin);
-        if(pagina == 1){
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
     }
+
     public void getNextContracts() {
         pagina++;
-        int fin = pagina*20 > contAsociados.size() ? contAsociados.size()-1 : pagina*20-1;
-        int ini = (pagina-1)*20;
-        
+        int fin = pagina * 20 > contAsociados.size() ? contAsociados.size() - 1 : pagina * 20 - 1;
+        int ini = (pagina - 1) * 20;
+
         listaContrConvHijo = rangoConvenios(contAsociados, ini, fin);
-        if(pagina == 1){
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
     }
-    
+
     public void getLastContracts() {
         pagina = totalpaginas;
-        int fin = contAsociados.size()-1;
-        
-        
-        listaContrConvHijo = rangoConvenios(contAsociados, fin-20 < 0 ? 0 : fin-20, fin);
-        if(pagina == 1){
+        int fin = contAsociados.size() - 1;
+
+        listaContrConvHijo = rangoConvenios(contAsociados, fin - 20 < 0 ? 0 : fin - 20, fin);
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
     }
-    
-     public void getFirstProjects() {
-        int fin = proyAsociados.size()>=20 ? 19 : proyAsociados.size()-1;
-            
-        
+
+    public void getFirstProjects() {
+        int fin = proyAsociados.size() >= 20 ? 19 : proyAsociados.size() - 1;
+
         listaObraContrato = rangoProyectos(proyAsociados, 0, fin);
         primeraPagina = false;
         anteriorPagina = false;
         pagina = 1;
-        int round = Math.round(proyAsociados.size()/20);
-        if(round*20<proyAsociados.size()){
+        int round = Math.round(proyAsociados.size() / 20);
+        if (round * 20 < proyAsociados.size()) {
             round++;
         }
         totalpaginas = round;
-        if(proyAsociados.size()<=20){
+        if (proyAsociados.size() <= 20) {
             siguientePagina = false;
             ultimoPagina = false;
-        }else{
+        } else {
             siguientePagina = true;
             ultimoPagina = true;
         }
     }
-    
+
     public void getBackProyects() {
         pagina--;
-        int fin = pagina*20-1;
-        int ini = (pagina-1)*20;
-        
+        int fin = pagina * 20 - 1;
+        int ini = (pagina - 1) * 20;
+
         listaObraContrato = rangoProyectos(proyAsociados, ini, fin);
-        if(pagina == 1){
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
     }
+
     public void getNextProyects() {
         pagina++;
-        int fin = pagina*20 > proyAsociados.size() ? proyAsociados.size()-1 : pagina*20-1;
-        int ini = (pagina-1)*20;
-        
+        int fin = pagina * 20 > proyAsociados.size() ? proyAsociados.size() - 1 : pagina * 20 - 1;
+        int ini = (pagina - 1) * 20;
+
         listaObraContrato = rangoProyectos(proyAsociados, ini, fin);
-        if(pagina == 1){
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
     }
-    
+
     public void getLastProjects() {
         pagina = totalpaginas;
-        int fin = proyAsociados.size()-1;
-        
-        
-        listaObraContrato = rangoProyectos(proyAsociados, fin-20 < 0 ? 0 : fin-20, fin);
-        if(pagina == 1){
+        int fin = proyAsociados.size() - 1;
+
+        listaObraContrato = rangoProyectos(proyAsociados, fin - 20 < 0 ? 0 : fin - 20, fin);
+        if (pagina == 1) {
             primeraPagina = false;
             anteriorPagina = false;
-        }else{
+        } else {
             primeraPagina = true;
             anteriorPagina = true;
         }
-        
-        if(pagina<totalpaginas){
+
+        if (pagina < totalpaginas) {
             siguientePagina = true;
             ultimoPagina = true;
-        }else{
+        } else {
             siguientePagina = false;
             ultimoPagina = false;
         }
@@ -9628,17 +9633,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.isFromContracts = isFromContracts;
     }
 
-    
-    
-        /*   
+    /*   
      * ///////////// INICIO LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\
      */
-    
     public List<PlanNacionalDeDesarrollo> getListaPlanNacionalDeDesarrollo() {
-        if( listaPlanNacionalDeDesarrollo == null ){
+        if (listaPlanNacionalDeDesarrollo == null) {
             this.listaPlanNacionalDeDesarrollo = this.getSessionBeanCobra().getCobraService().getPlanesNacionalesDeDesarrollo();
         }
-        
+
         return listaPlanNacionalDeDesarrollo;
     }
 
@@ -9647,86 +9649,111 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public int getPlanNacionalDeDesarrollo() {
-        if(this.planNacionalDeDesarrollo != null){
+        if (this.planNacionalDeDesarrollo != null) {
             return this.planNacionalDeDesarrollo.getId();
+        }
+        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
+            if(this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo() != null){
+                this.planNacionalDeDesarrollo = this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo();
+                return this.planNacionalDeDesarrollo.getId();
+            }
         }
         return 0;
     }
 
     public void setPlanNacionalDeDesarrollo(int pnd) {
-        
-        if (pnd > 0) { 
+        if (pnd > 0) {
             this.planNacionalDeDesarrollo = new PlanNacionalDeDesarrollo(pnd, null, null, null);
+
+            //Búsqueda
+            this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
+            this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(this.planNacionalDeDesarrollo);
         }    
         else{
             this.planNacionalDeDesarrollo = null;
+            this.filtrocontrato.setTipificacionConvenio(null);
         }
-        //Búsqueda
-        this.filtrocontrato.setTipificacionConvenio(new TipificacionConvenio());
-        this.filtrocontrato.getTipificacionConvenio().setPlanNacionalDeDesarrollo(new PlanNacionalDeDesarrollo(pnd, null, null, null));
-        
+
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionSector = null;
         this.tipificacionConvenio = null;
         this.tipificacionObjetivo = null;
         this.tipificacionEstrategia = null;
         
-        
-        
+        this.listaTipificacionSectores = null;
+        this.listaTipificacionObjetivos = null;
+        this.listaTipificacionEstrategias = null;
+
     }
-    
+
     public List<TipificacionConvenioSector> getListaTipificacionSectores() {
 
         if (this.tipificacionSector == null && this.planNacionalDeDesarrollo != null) {
             this.listaTipificacionSectores = this.getSessionBeanCobra().getCobraService().getTipificacionSectores(this.planNacionalDeDesarrollo);
-        }    
+        }
 
         return listaTipificacionSectores;
-    }    
+    }
 
     public List<TipificacionConvenioObjetivo> getListaTipificacionObjetivos() {
 
         if (this.tipificacionSector != null && this.tipificacionObjetivo == null) {
             this.listaTipificacionObjetivos = this.getSessionBeanCobra().getCobraService().getTipificacionObjetivosPorSector(this.tipificacionSector);
-        }    
+        }
         return listaTipificacionObjetivos;
-    }    
+    }
 
     public List<TipificacionConvenioEstrategia> getListaTipificacionEstrategias() {
         if (this.tipificacionObjetivo != null && this.tipificacionEstrategia == null) {
             this.listaTipificacionEstrategias = this.getSessionBeanCobra().getCobraService().getTipificacionEstrategiasPorObjetivo(this.tipificacionObjetivo);
-        }    
+        }
         return listaTipificacionEstrategias;
-    }    
+    }
 
     public int getTipificacionSector() {
 
         if (this.tipificacionSector != null) {
             return this.tipificacionSector.getId();
-        }    
+        }
+        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
+            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioSector() != null){
+                this.tipificacionSector = this.contrato.getTipificacionConvenio().getTipificacionConvenioSector();
+                return this.tipificacionSector.getId();
+            }
+        }
         return 0;
-    }    
+    }
 
     public void setTipificacionSector(int idSector) {
-        if (idSector > 0) { 
+        if (idSector > 0) {
             this.tipificacionSector = new TipificacionConvenioSector(idSector, null);
-            
-        }    
-        else{
+
+            //Búsqueda
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(new TipificacionConvenioSector(idSector, null));
+
+        } else {
             this.tipificacionSector = null;
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(null);
         }
-        //Búsqueda
-        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioSector(new TipificacionConvenioSector(idSector, null));
-        
+
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionConvenio = null;
         this.tipificacionObjetivo = null;
         this.tipificacionEstrategia = null;
-    }    
+        
+        this.listaTipificacionObjetivos = null;
+        this.listaTipificacionEstrategias = null;
+    }
 
     public int getTipificacionObjetivo() {
         if (this.tipificacionObjetivo != null) {
             return this.tipificacionObjetivo.getId();
+        }
+        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
+            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo() != null){
+                this.tipificacionObjetivo = this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo();
+                return this.tipificacionObjetivo.getId();
+            }
         }
         return 0;
     }
@@ -9734,21 +9761,29 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionObjetivo(int idObjetivo) {
         if (idObjetivo > 0) {
             this.tipificacionObjetivo = new TipificacionConvenioObjetivo(idObjetivo, this.tipificacionSector, null);
-        }
-        else{
+
+            //Búsqueda
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(new TipificacionConvenioObjetivo(idObjetivo, null, null));
+        } else {
             this.tipificacionObjetivo = null;
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(null);
         }
-        //Búsqueda
-        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioObjetivo(new TipificacionConvenioObjetivo(idObjetivo, null, null));
-        
+
         this.contrato.setTipificacionConvenio(null);
         this.tipificacionConvenio = null;
         this.tipificacionEstrategia = null;
+        this.listaTipificacionEstrategias = null;
     }
 
     public int getTipificacionEstrategia() {
         if (this.tipificacionEstrategia != null) {
             return this.tipificacionEstrategia.getId();
+        }
+        else if(this.contrato != null && this.contrato.getTipificacionConvenio() != null ){
+            if(this.contrato.getTipificacionConvenio().getTipificacionConvenioEstrategia() != null){
+                this.tipificacionEstrategia = this.contrato.getTipificacionConvenio().getTipificacionConvenioEstrategia();
+                return this.tipificacionEstrategia.getId();
+            }
         }
         return 0;
     }
@@ -9756,19 +9791,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTipificacionEstrategia(int idEstrategia) {
         if (idEstrategia > 0) {
             this.tipificacionEstrategia = new TipificacionConvenioEstrategia(idEstrategia, this.tipificacionObjetivo, null);
-            this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, this.planNacionalDeDesarrollo ,contrato);
+            this.tipificacionConvenio = new TipificacionConvenio(this.tipificacionSector, this.tipificacionObjetivo, this.tipificacionEstrategia, this.planNacionalDeDesarrollo, contrato);
             this.contrato.setTipificacionConvenio(this.tipificacionConvenio);
+
+            //Búsqueda
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(new TipificacionConvenioEstrategia(idEstrategia, null, null));
+
         } else {
             this.tipificacionConvenio = null;
             this.tipificacionEstrategia = null;
+            //Búsqueda
+            this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(null);
         }
-        //Búsqueda
-        this.filtrocontrato.getTipificacionConvenio().setTipificacionConvenioEstrategia(new TipificacionConvenioEstrategia(idEstrategia, null, null));
+
     }
     /*
      * ///////////// FIN LOGICA TIPIFICACION DEL CONTRATO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
-
 
     /**
      * @return the lstUnidades
@@ -9801,36 +9840,34 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setSelectedUnit(int selectedUnit) {
         this.selectedUnit = selectedUnit;
     }
-    
+
     /**
-     * Ejecuta la busqueda cuando se modifica el filtro de Plan Nacional De Desarrollo
+     * Ejecuta la busqueda cuando se modifica el filtro de Plan Nacional De
+     * Desarrollo en búsqueda de convenio
      */
-    public void buscarPorPND(){
-        
+    public void buscarPorPND() {
 
-        if(this.filtrocontrato.getTipificacionConvenio() != null){
-            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 20);
-            totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
-            for (Contrato con : listacontratos) {
+        listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 20);
+        totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getSessionBeanCobra().getUsuarioObra(), getContrato().getTercero().getIntcodigo(), filtrocontrato);
+        for (Contrato con : listacontratos) {
 
-                if (con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
-                    con.getTipocontratoconsultoria().setStrdescripcion("Obra");
-                }
+            if (con.getTipocontratoconsultoria().getIntidtipocontratoconsultoria() == 1) {
+                con.getTipocontratoconsultoria().setStrdescripcion("Obra");
             }
+        }
 
-            pagina = 1;
-            if (totalfilas <= 20) {
-                totalpaginas = 1;
-            } else {
-                totalpaginas = totalfilas / 20;
-                if (totalfilas % 20 > 0) {
-                    totalpaginas++;
-                }
+        pagina = 1;
+        if (totalfilas <= 20) {
+            totalpaginas = 1;
+        } else {
+            totalpaginas = totalfilas / 20;
+            if (totalfilas % 20 > 0) {
+                totalpaginas++;
             }
-            veranteriorcontrato = false;
-            if (totalpaginas > 1) {
-                verultimoscontrato = true;
-            }
+        }
+        veranteriorcontrato = false;
+        if (totalpaginas > 1) {
+            verultimoscontrato = true;
         }
 
     }
