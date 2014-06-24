@@ -6592,7 +6592,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         primerosSupervisores();
     }
     public void primerosSupervisores() {
-        if (aplicaFiltroInterventor) {
+        if (aplicaFiltroSupervisor) {
             listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombreSupervisor, 28);
             totalfilas = listaTotalTerceros.size();
         } else {
