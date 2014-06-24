@@ -4831,7 +4831,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        setContrato(contratotabla);
 //        finentrega = contratotabla.getDatefechafin().toString();
 
-        if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
+        if (contratotabla.getEstadoconvenio() != null && contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
 
             setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             recursosconvenio.setLstFuentesRecursos(getSessionBeanCobra().getCobraService().obtenerFuentesRecursosConvenio(contrato.getIntidcontrato()));
@@ -5580,6 +5580,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             // aplicafiltrocontrato = false;
             listacontratos.clear();
             listacontratoscontratista.clear();
+            /*Adicion Dass Se añade pues para contrato no se define filtro estadoConvenio 
+            y esta tomando valor <> 0 en la presentacion lo que afecta la busqueda de contrato*/            
+            if (tipoContCon.equals("Contrato")) {                
+                filtrocontrato.setEstadoConvenio(0);
+            }
+            //Fin Adicion Dass
             if (filtrocontrato.getPalabraClave().length() != 0) {
                 listacontratos.clear();
                 //aplicafiltrocontrato = true;
