@@ -46,10 +46,17 @@
                     </div>
                 </center>
             </rich:collapsiblePanel>-->
-            <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
+            <rich:collapsiblePanel id="simpleToggleEvolucionFisiContrato" header="#{var.evolucion}" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                 <center>
                     <h:outputText  styleClass="ikont-hot-scriptGrafico"   value="#{Supervisor$GraficoEvolucionFinancieraContrato.graficoEvolucionFinancieraContrato.scriptGrafico}" escape="false"/>
                     <div id="graficoEvolucionFinancieraContrato" style="width: 100%; height: 400px; text-align: left; overflow: hidden;">
+                    </div>
+                </center>
+            </rich:collapsiblePanel>
+            <rich:collapsiblePanel id="simpleToggleEvolucionFisiConvenio" header="#{var.evolucion}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                <center>
+                    <h:outputText  styleClass="ikont-hot-scriptGrafico"   value="#{Supervisor$GraficoEvolucionFinancieraConvenio.graficoEvolucionFinancieraConvenio.scriptGrafico}" escape="false"/>
+                    <div id="graficoEvolucionFinancieraConvenio" style="width: 100%; height: 400px; text-align: left; overflow: hidden;">
                     </div>
                 </center>
             </rich:collapsiblePanel>
@@ -86,9 +93,9 @@
                 </h:panelGrid>
 
                 <h:form>
-                    <h:panelGrid style="width: 100%;"  rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                    <h:panelGrid style="width: 100%;"  rendered="#{(Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2) and !Supervisor$Contrato.booltipocontratoconvenio}">
                         <interkont:spacer height="5" />
-                        <rich:dataTable id="tablaPlanificacion"
+                        <rich:dataTable id="tablaPlanificacionContrato"
                                         rows="5"
                                         var ="planificacion"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -129,15 +136,51 @@
 
                         </rich:dataTable>
                     </h:panelGrid>
+                    <h:panelGrid style="width: 100%;"  rendered="#{Supervisor$Contrato.booltipocontratoconvenio}">
+                        <interkont:spacer height="5" />
+                        <rich:dataTable id="tablaPlanificacionConvenio"
+                                        rows="5"
+                                        var ="planificacion"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        sortMode="single"
+                                        value="#{SessionBeanCobra.cobraService.planificadoConvenio}"
+                                        >
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column width="100px" breakRowBefore="true" colspan="3">
+                                        <h:outputText  styleClass="ikont-hot-numeroactasparciales"   value="#{var.numero} de Actas Parciales"/>
+                                    </rich:column>
+                                    <rich:column width="100px" breakRowBefore="true">
+                                        <h:outputText  styleClass="ikont-hot-fechadeciuacta"   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText  styleClass="ikont-hot-valordeciuacta"   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup>
+                                <rich:column >
+                                    <h:outputText  styleClass="ikont-hot-datefechapago"   value="#{planificacion.key}">
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-numvlrpago"   value="#{planificacion.value}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
+                                </rich:column>
+                            </rich:columnGroup>
+                        </rich:dataTable>
+                    </h:panelGrid>
                 </h:form>
             </h:panelGroup>
 
             <h:panelGroup layout="block" id="gpListadoMovimientos">
 
                 <h:form>
-                    <h:panelGrid  style="width: 83%" >
+                    <h:panelGrid  style="width: 83%" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}">
                         <interkont:spacer height="5" />
-                        <rich:dataTable id="tablaDesembolsos"
+                        <rich:dataTable id="tablaDesembolsosContrato"
                                         var ="desembolso"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
@@ -164,6 +207,42 @@
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-numvlrejecutado"   value="#{desembolso.valor}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
+                                </rich:column>
+                            </rich:columnGroup>
+
+                        </rich:dataTable>
+                    </h:panelGrid>
+                    <h:panelGrid  style="width: 83%" rendered="#{Supervisor$Contrato.booltipocontratoconvenio}" >
+                        <interkont:spacer height="5" />
+                        <rich:dataTable id="tablaDesembolsosConvenio"
+                                        var ="desembolso"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        sortMode="single"
+                                        value="#{Supervisor$GraficosEvolucion.desembolsoEntry}"
+                                        >
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column width="200px" breakRowBefore="true" colspan="2">
+                                        <h:outputText  styleClass="ikont-hot-movimientosfinancieros"   value="#{var.movimientosfinancieros}"/>
+                                    </rich:column>
+                                    <rich:column width="100px"  breakRowBefore="true" >
+                                        <h:outputText  styleClass="ikont-hot-fecha"   value="#{var.fecha}"/>
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText  styleClass="ikont-hot-valormovimiento"   value="#{var.valormovimiento}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup>
+                                <rich:column >
+                                    <h:outputText  styleClass="ikont-hot-fechamovimiento"   value="#{desembolso.key}">
+                                        <f:convertDateTime pattern="#{var.formatofecha}"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-numvlrejecutado"   value="#{desembolso.value}">
                                         <f:convertNumber pattern="#{var.formatomoneda}"/>
                                     </h:outputText>
                                 </rich:column>
