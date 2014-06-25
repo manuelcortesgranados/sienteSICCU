@@ -25,6 +25,8 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
@@ -32,14 +34,35 @@ import javax.servlet.ServletContext;
  *
  * @author felipe
  */
-public class GraficosEvolucion implements Serializable{
+public class GraficosEvolucion implements Serializable {
 
     public String rutaGrafico = "";
     public List<Movimiento> movimientos;
     private List<Desembolso> desembolsos;
- 
+    private List<Entry<Date, BigDecimal>> desembolsoEntry;
+    
+
     public GraficosEvolucion() {
-        desembolsos = getSessionBeanCobra().getCobraService().encontrarDesembolsoxContrato(getNuevoContratoBasico().getContrato());
+        if (!getNuevoContratoBasico().isBooltipocontratoconvenio()) {
+            desembolsos = getSessionBeanCobra().getCobraService().encontrarDesembolsoxContrato(getNuevoContratoBasico().getContrato());
+        } else {
+            desembolsos = getSessionBeanCobra().getCobraService().encontrarDesembolsoxConvenio(getNuevoContratoBasico().getContrato());
+            TreeMap<Date, BigDecimal> fechasDesembolsos = new TreeMap<Date, BigDecimal>();
+            BigDecimal valoracum;
+            for (Desembolso des : desembolsos) {
+                if (!fechasDesembolsos.containsKey(des.getFecha())) {
+                    fechasDesembolsos.put(des.getFecha(), des.getValor());
+                } else {
+                    valoracum = fechasDesembolsos.get(des.getFecha());
+                    fechasDesembolsos.remove(des.getFecha());
+                    valoracum.add(des.getValor());
+                    fechasDesembolsos.put(des.getFecha(), valoracum);
+
+                }
+            }
+            desembolsoEntry = new ArrayList<Entry<Date, BigDecimal>>(fechasDesembolsos.entrySet());
+        }
+
     }
 
     private void GenerarJson() {
@@ -48,7 +71,6 @@ public class GraficosEvolucion implements Serializable{
 
         List<Data> dato1 = new ArrayList();
         List<Data> dato2 = new ArrayList();
-
 
         List<Optionset> optionset = new ArrayList();
         optionset.add(new Optionset("setSize", "850, 400"));
@@ -142,8 +164,6 @@ public class GraficosEvolucion implements Serializable{
                         dato2.add(new Data("0", valoreje));
                     }
 
-
-
                 }
 
                 int diasM = fechasDiferenciaEnDias(movimientos.get(0).getDatefechainirecursos(), planificacionpago.get(0).getDatefechapago());
@@ -176,10 +196,8 @@ public class GraficosEvolucion implements Serializable{
                             valoreje = String.valueOf(totalvalormovimiento.setScale(3, RoundingMode.HALF_UP));
                         }
 
-
                         optionset.add(new Optionset("setTooltip", "[" + periodoeje + ", xxFecha Inicial:" + movimientos.get(k).getDatefechainirecursos() + " Valor ejecutado en millones $" + valoreje + "xx , xxgreenxx ]"));
                         dato2.add(new Data(periodoeje, valoreje));
-
 
                     }
 
@@ -237,13 +255,10 @@ public class GraficosEvolucion implements Serializable{
 
                 i += 1;
 
-
             }
 
             //encontrar los movimientos despues del ultimo periodo de planificacion
             if (!planificacionpago.isEmpty() && planificacionpago.get(planificacionpago.size() - 1).getDatefechapago().before(movimientos.get(movimientos.size() - 1).getDatefechainirecursos())) {
-
-
 
                 int diasM = fechasDiferenciaEnDias(planificacionpago.get(planificacionpago.size() - 1).getDatefechapago(), movimientos.get(movimientos.size() - 1).getDatefechainirecursos());
 
@@ -274,11 +289,9 @@ public class GraficosEvolucion implements Serializable{
                     }
                 }
 
-
             }
 
             linea.add(new Datasets("line", "green", dato2));
-
 
         } else {
 
@@ -286,8 +299,8 @@ public class GraficosEvolucion implements Serializable{
             while (ite.hasNext()) {
                 /*Calendar cal=Calendar.getInstance();
 
-                cal.setTime(planitemp.getDatefechapago());
-                // System.out.println("numero = " + cal.getTimeInMillis()+"fecha: " +cal.getTime());*/
+                 cal.setTime(planitemp.getDatefechapago());
+                 // System.out.println("numero = " + cal.getTimeInMillis()+"fecha: " +cal.getTime());*/
 
                 periodo = String.valueOf(i);
 
@@ -302,12 +315,9 @@ public class GraficosEvolucion implements Serializable{
                 dato1.add(new Data(periodo, valorplani));
                 optionset.add(new Optionset("setTooltip", "[" + i + ", xxFecha :" + planitemp.getDatefechapago() + " Valor planificado en millones $" + valorplani + "xx , xxbluexx ]"));
 
-
                 i += 1;
             }
         }
-
-
 
         linea.add(new Datasets("line", "blue", dato1));
 
@@ -325,8 +335,7 @@ public class GraficosEvolucion implements Serializable{
 
         FileManager filejson = new FileManager();
         filejson.writeInFile(temp, realArchivoPath);
-        this.rutaGrafico = "/"+getSessionBeanCobra().getBundle().getString("versioncobra")+ "/resources/json/datafinanciera.json";
-
+        this.rutaGrafico = "/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/json/datafinanciera.json";
 
     }
 
@@ -388,5 +397,19 @@ public class GraficosEvolucion implements Serializable{
      */
     public void setDesembolsos(List<Desembolso> desembolsos) {
         this.desembolsos = desembolsos;
+    }
+
+    /**
+     * @return the desembolsoEntry
+     */
+    public List<Entry<Date, BigDecimal>> getDesembolsoEntry() {
+        return desembolsoEntry;
+    }
+
+    /**
+     * @param desembolsoEntry the desembolsoEntry to set
+     */
+    public void setDesembolsoEntry(List<Entry<Date, BigDecimal>> desembolsoEntry) {
+        this.desembolsoEntry = desembolsoEntry;
     }
 }
