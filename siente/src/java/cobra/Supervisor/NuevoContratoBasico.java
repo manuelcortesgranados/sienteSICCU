@@ -9663,6 +9663,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
             if (this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo() != null) {
                 this.planNacionalDeDesarrollo = this.contrato.getTipificacionConvenio().getPlanNacionalDeDesarrollo();
+                this.getListaTipificacionSectores();
+                this.getTipificacionSector();
                 return this.planNacionalDeDesarrollo.getId();
             }
         }
@@ -9724,6 +9726,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
             if (this.contrato.getTipificacionConvenio().getTipificacionConvenioSector() != null) {
                 this.tipificacionSector = this.contrato.getTipificacionConvenio().getTipificacionConvenioSector();
+                this.getListaTipificacionObjetivos();
+                this.getTipificacionObjetivo();
                 return this.tipificacionSector.getId();
             }
         }
@@ -9757,6 +9761,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else if (this.contrato != null && this.contrato.getTipificacionConvenio() != null) {
             if (this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo() != null) {
                 this.tipificacionObjetivo = this.contrato.getTipificacionConvenio().getTipificacionConvenioObjetivo();
+                this.getListaTipificacionEstrategias();
+                this.getTipificacionEstrategia();
                 return this.tipificacionObjetivo.getId();
             }
         }
