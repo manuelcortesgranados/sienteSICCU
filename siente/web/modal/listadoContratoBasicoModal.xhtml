@@ -117,7 +117,7 @@
 
                                 <rich:column>
                                     <a4j:commandButton styleClass="ikont-acb-seleccionar" value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelec}"
-                                                       render="rpconpasel,tpDatosBasicos,selectentidadcontrato" execute="@this,selectentidadcontrato"
+                                                       render="rpconpasel,tpDatosBasicos,selectentidadcontrato,ikont-rcp-contratantescontrato" execute="@this,selectentidadcontrato"
                                                        oncomplete="#{rich:component('mp-listado-contratos')}.hide();" />
                                 </rich:column>
                             </rich:columnGroup>

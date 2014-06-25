@@ -52,7 +52,7 @@
                 </h:panelGroup>
                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
                                                          and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}" > 
-                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevocontrato-admconvenio"   actionListener="#{Supervisor$Contrato.crearContratoConvenio}" action="nuevoContrato"  immediate="true" />
+                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-hcl-crearcontratoenconvenio"   actionListener="#{Supervisor$Contrato.crearContratoConvenio}" action="nuevoContrato"  immediate="true" />
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.crearContratoConvenio}" action="nuevoContrato"   immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
                 </h:panelGroup>
             </h:panelGrid>

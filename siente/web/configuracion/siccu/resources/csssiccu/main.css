@@ -4869,3 +4869,13 @@ a:hover {
 .ikont-hol-tipocontrato {
     font-weight: bold;
 }
+
+.ikont-hcl-crearcontratoenconvenio{
+    background-position:-1046px -10px;
+    width: 120px;
+}
+
+.ikont-hcl-crearcontratoenconvenio:hover, .ikont-hcl-crearcontratoenconvenio.buttonactive{
+    background-position:-1046px -110px;
+    width: 120px;
+}

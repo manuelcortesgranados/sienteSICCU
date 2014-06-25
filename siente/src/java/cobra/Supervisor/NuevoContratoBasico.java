@@ -101,6 +101,7 @@ import co.com.interkont.cobra.vista.VistaProyectoAvanceFisicoConvenio;
 import cobra.MarcoLogico.MarcoLogicoBean;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.interkont.cobra.util.CobraUtil;
+import java.math.MathContext;
 import java.security.SecureRandom;
 import java.util.HashSet;
 
@@ -2786,7 +2787,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setControlvisualizaciondocumento(int controlvisualizaciondocumento) {
         this.controlvisualizaciondocumento = controlvisualizaciondocumento;
     }
-
     /**
      * <p>
      * Automatically managed component initialization.
@@ -3380,8 +3380,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             ValidacionesConvenio.validarContratistaRequerido(contrato);
             ValidacionesConvenio.validarContratanteRequerido(contrato);
-            if (Boolean.valueOf(Propiedad.getValor("conveniocontipo")) && tipoContCon.equals("Convenio")) {
+            if (Boolean.valueOf(Propiedad.getValor("nuevoconveniodocconveniorequerido")) && tipoContCon.equals("Convenio")) {
                 ValidacionesConvenio.validarTipoDocumentoConvenioRequerido(listadocumentos);
+            }
+            if (Boolean.valueOf(Propiedad.getValor("nuevocontratodoccontratorequerido")) && tipoContCon.equals("Contrato")) {
+                ValidacionesConvenio.validarTipoDocumentoContratoRequerido(listadocumentos);
             }
 //        if (validarContrato()) {        
             boolean band = true;
@@ -4152,7 +4155,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         return null;
-
     }
 
     /**
@@ -9095,7 +9097,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public void crearContratoConvenio() {
-
         Contrato fk_contrato = new Contrato();
         contrpadre = new Contrato();
         fk_contrato = contrato;
@@ -9111,7 +9112,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = fk_contrato;
         getContrato().setContrato(contrpadre);
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
-
+        
         if (fk_contrato.getContratista() != null) {
             listaentiddadcontratoconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(fk_contrato.getContratista().getIntcodigo());
 
@@ -9603,6 +9604,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void consultarContratantes() {
         contratantes = getSessionBeanCobra().getCobraService().consultarContratantes(nombreCedulaNitContratante);
     }
+    
+    /**
+     * Carga los valores desponibles de los contratantes asociados al convenio
+     */
+    public void cargarValoresDisponiblesContratantesConvenio() {
+        getSessionBeanCobra().getCobraService().cargarValoresDisponibles(contrpadre.getContratocontratantes());
+    }
 
     /**
      * Adiciona el contratante a la lista de contratantes del conenio
@@ -9616,6 +9624,33 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contratocontratante.setNumvaloraportado(contratante.getNumvaloraportado());
         contrato.getContratocontratantes().add(contratocontratante);
         contrato.setNumvlrcontrato(contrato.getNumvlrcontrato().add(contratocontratante.getNumvaloraportado()));
+    }
+    
+    /**
+     * Asocia los valores ingresados para las fuentes de recursos del contrato y
+     * actualiza el valor total del contrato de acuerdo a los valores de las 
+     * fuentes de recursos ingresados
+     */
+    public void asociarValorAportadoContrato() {
+        BigDecimal valorAsociadoContrato = BigDecimal.ZERO;
+        for(Contratocontratante contratocontratanteSeleccionado : contrpadre.getListaContratocontratantes()) {
+            if(contratocontratanteSeleccionado.getNumvaloraaportar() != null 
+                    && contratocontratanteSeleccionado.getNumvaloraaportar().compareTo(BigDecimal.ZERO) > 0) {
+                BigDecimal nuevoValorDisponible = contratocontratanteSeleccionado.getNumvalordisponible().subtract(contratocontratanteSeleccionado.getNumvaloraaportar());
+                if(nuevoValorDisponible.compareTo(BigDecimal.ZERO) >= 0) {
+                    Contratocontratante contratocontratante = new Contratocontratante();
+                    contratocontratante.setContratante(contratocontratanteSeleccionado.getContratante());
+                    contratocontratante.setContrato(contrato);
+                    contratocontratante.setNumvaloraportado(contratocontratanteSeleccionado.getNumvaloraaportar());
+                    contratocontratanteSeleccionado.setNumvalordisponible(nuevoValorDisponible);
+                    contrato.getContratocontratantes().add(contratocontratante);
+                    valorAsociadoContrato = valorAsociadoContrato.add(contratocontratanteSeleccionado.getNumvaloraportado());
+                } else {
+                    FacesUtils.addErrorMessage("El valor ingresado ("+contratocontratanteSeleccionado.getNumvaloraaportar()+") ha sobrepasado el valor disponible ("+contratocontratanteSeleccionado.getNumvalordisponible()+") para la entidad: "+contratocontratanteSeleccionado.getContratante().getTercero().getStrnombre());
+                }
+            }
+        }
+        contrato.setNumvlrcontrato(valorAsociadoContrato);
     }
 
     /**
@@ -9643,7 +9678,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return
      */
     public boolean isCooperacion() {
-        return contrato != null && contrato.getTipocontrato() != null && contrato.getTipocontrato().getInttipocontrato() == Tipocontrato.ID_TIPO_CONVENIO_COOPERACION;
+        return contrato != null && contrato.getTipocontrato() != null 
+                && 
+                (
+                    (tipoContCon.equals("Convenio") && contrato.getTipocontrato().getInttipocontrato() == Tipocontrato.ID_TIPO_CONVENIO_COOPERACION)
+                    || 
+                    (tipoContCon.equals("Contrato") && contrpadre != null && contrpadre.getTipocontrato().getInttipocontrato() == Tipocontrato.ID_TIPO_CONVENIO_COOPERACION)
+                );
     }
-
+    
 }

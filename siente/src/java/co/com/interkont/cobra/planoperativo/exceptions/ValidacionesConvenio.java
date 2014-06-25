@@ -274,16 +274,14 @@ public class ValidacionesConvenio {
     }
 
     /**
-     * Valida que el contrato contenga por lo menos un docmento de tipo convenio
+     * Valida que el convenio contenga por lo menos un docmento de tipo convenio
      * @param documentosobra Listado de docummentos del convenio
      */
     public static void validarTipoDocumentoConvenioRequerido(List<Documentoobra> documentosobra) {
         boolean documentoValido = false;
         if(documentosobra != null) {
-            System.out.println("documentosobra = " + documentosobra.size());
             for(Object objectDocumetoObra : documentosobra)  {
                 Documentoobra documentoobra =    (Documentoobra) objectDocumetoObra;
-                System.out.println("documentoobra.getTipodocumento().getInttipodoc() = " + documentoobra.getTipodocumento().getInttipodoc());
                 if(documentoobra.getTipodocumento().getInttipodoc() == Tipodocumento.ID_TIPO_DOCUMENTO_CONVENIO) {
                     documentoValido = true;
                 }
@@ -291,6 +289,25 @@ public class ValidacionesConvenio {
         }
         if (!documentoValido) {
             throw new ConvenioException("Debe adicionar el documento del convenio");
+        }
+    }
+    
+    /**
+     * Valida que el contrato contenga por lo menos un docmento de tipo convenio
+     * @param documentosobra Listado de docummentos del contrato
+     */
+    public static void validarTipoDocumentoContratoRequerido(List<Documentoobra> documentosobra) {
+        boolean documentoValido = false;
+        if(documentosobra != null) {
+            for(Object objectDocumetoObra : documentosobra)  {
+                Documentoobra documentoobra =    (Documentoobra) objectDocumetoObra;
+                if(documentoobra.getTipodocumento().getInttipodoc() == Tipodocumento.ID_TIPO_DOCUMENTO_CONTRATO) {
+                    documentoValido = true;
+                }
+            }
+        }
+        if (!documentoValido) {
+            throw new ConvenioException("Debe adicionar el documento del contrato");
         }
     }
 }
