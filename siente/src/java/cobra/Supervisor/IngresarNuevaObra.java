@@ -2506,12 +2506,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
                         k++;
                     }
+                    
                     row = sheet.getRow(3);
                     cell = row.getCell(6);
                     CellReference celdafinal = new CellReference(65535, j);
                     CellReference celdainicial = new CellReference(9, j);
                     formula = "SUM(" + celdainicial.formatAsString() + ":" + celdafinal.formatAsString() + ")";
                     cell.setCellFormula(formula);
+                    
+                    Row focusRow =  sheet.getRow(9);
+                    Cell focusCell = focusRow.getCell(2);
+                    focusCell.setAsActiveCell();
                     File carpeta = new File(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()));
                     if (!carpeta.exists()) {
                         carpeta.mkdirs();
