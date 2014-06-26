@@ -56,7 +56,7 @@
                 <rich:dataScroller id="ikont-rds-contratantescontrato" styleClass="ikont-rds-contratantescontrato" for="ikont-rdt-contratantescontrato"/>
                 <a4j:commandButton value="#{var.seleccionarcontratante}" 
                                    action="#{Supervisor$Contrato.asociarValorAportadoContrato()}" 
-                                   execute="@form" render="ikont-hpg-multiplescontratantes gpValContrato stpformadepago"
+                                   execute="@form" render="ikont-hpg-contratantescontrato ikont-hpg-multiplescontratantes gpValContrato stpformadepago"
                                    oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('mp-listado-contratantescontrato')}.hide(); else return false;">
                 </a4j:commandButton>
             </h:panelGrid>

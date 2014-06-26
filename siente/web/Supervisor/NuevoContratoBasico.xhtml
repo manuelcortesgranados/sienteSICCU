@@ -410,9 +410,9 @@
                         <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Convenio'}" styleClass="ikont-acb-buscarmultiplescontratante" id="ikont-acb-buscarmultiplescontratantes" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratantes()}"
                                            render="ikont-hpg-contratantes" execute="@this" immediate="true"
                                            oncomplete="#{rich:component('mp-listado-contratantes')}.show();"/>
-                        <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}" styleClass="ikont-acb-buscarmultiplescontratantescontrato" id="ikont-acb-buscarmultiplescontratantescontrato" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.cargarValoresDisponiblesContratantesConvenio()}"
+                        <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}" styleClass="ikont-acb-buscarmultiplescontratantescontrato" id="ikont-acb-buscarmultiplescontratantescontrato" value="#{var.buscarProyecto}"
                                            render="ikont-hpg-contratantescontrato" execute="@this" immediate="true"
-                                           oncomplete="#{rich:component('mp-listado-contratantescontrato')}.show();"/>
+                                           onclick="#{rich:component('mp-listado-contratantescontrato')}.show(); return false;"/>
                         <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
                                         value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
@@ -444,7 +444,7 @@
                                 </f:facet>
                                 <a4j:commandButton value="#{var.eliminarcontratante}" 
                                                    action="#{Supervisor$Contrato.eliminarContratanteConvenioAction(contratoContratante)}" 
-                                                   execute="@this" immediate="true" render="ikont-hpg-multiplescontratantes gpValContrato">
+                                                   execute="@this" immediate="true" render="ikont-hpg-multiplescontratantes ikont-hpg-contratantescontrato gpValContrato">
                                 </a4j:commandButton>   
                             </rich:column>
                         </rich:dataTable>
@@ -728,7 +728,7 @@
                 <a4j:commandButton styleClass="ikont-acb-guardarcontratos" id="ikont-acb-guardarcontratoiccu"  
                                    action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
                                    render="pgcontrato" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Contrato'}"
-                                   execute="@this,selectentidadcontrato1,cmbcontrato1,ikont-hsom-modalidadcontrato,
+                                   execute="@this,selectentidadcontrato1,cmbcontrato1,ikont-hsom-modalidadcontrato,cmbcontcon,
                                    cmbcontconContraloria,ikont-hpg-numcontratoconvenio,txtNomcont,ikont-hit-anio,fecsusContrato,fecIniContrato,fecfinContrato,
                                    textobjetot,innumrecursospropios,innumrecursoster,poranti,
                                    fecpagoantic,innumactasparciales,gpCuotas,fecpagoactaunica"/>

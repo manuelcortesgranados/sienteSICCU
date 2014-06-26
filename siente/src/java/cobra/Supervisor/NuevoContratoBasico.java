@@ -9112,7 +9112,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = fk_contrato;
         getContrato().setContrato(contrpadre);
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
-        
+        cargarValoresDisponiblesContratantesConvenio();
         if (fk_contrato.getContratista() != null) {
             listaentiddadcontratoconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(fk_contrato.getContratista().getIntcodigo());
 
@@ -9633,22 +9633,55 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void asociarValorAportadoContrato() {
         BigDecimal valorAsociadoContrato = BigDecimal.ZERO;
-        for(Contratocontratante contratocontratanteSeleccionado : contrpadre.getListaContratocontratantes()) {
-            if(contratocontratanteSeleccionado.getNumvaloraaportar() != null 
-                    && contratocontratanteSeleccionado.getNumvaloraaportar().compareTo(BigDecimal.ZERO) > 0) {
-                BigDecimal nuevoValorDisponible = contratocontratanteSeleccionado.getNumvalordisponible().subtract(contratocontratanteSeleccionado.getNumvaloraaportar());
-                if(nuevoValorDisponible.compareTo(BigDecimal.ZERO) >= 0) {
-                    Contratocontratante contratocontratante = new Contratocontratante();
-                    contratocontratante.setContratante(contratocontratanteSeleccionado.getContratante());
-                    contratocontratante.setContrato(contrato);
-                    contratocontratante.setNumvaloraportado(contratocontratanteSeleccionado.getNumvaloraaportar());
-                    contratocontratanteSeleccionado.setNumvalordisponible(nuevoValorDisponible);
-                    contrato.getContratocontratantes().add(contratocontratante);
-                    valorAsociadoContrato = valorAsociadoContrato.add(contratocontratanteSeleccionado.getNumvaloraportado());
-                } else {
-                    FacesUtils.addErrorMessage("El valor ingresado ("+contratocontratanteSeleccionado.getNumvaloraaportar()+") ha sobrepasado el valor disponible ("+contratocontratanteSeleccionado.getNumvalordisponible()+") para la entidad: "+contratocontratanteSeleccionado.getContratante().getTercero().getStrnombre());
+        //Se recorren los contratantes del padere
+        for(Contratocontratante contratocontratantePadreSeleccionado : contrpadre.getListaContratocontratantes()) {
+            boolean contratoSeleccionadoAntes = false;
+            Contratocontratante contratocontratanteAEliminar = null;
+            //Se reccorren los contratantes del hijo
+            for(Contratocontratante contratocontratanteSeleccionado : contrato.getListaContratocontratantes()) {
+                //Si ya había sido seleccionado, se actualiza el nuevo valor
+                if(contratocontratanteSeleccionado.getContratante().getIntcodigo() 
+                        == contratocontratantePadreSeleccionado.getContratante().getIntcodigo()) {
+                    contratoSeleccionadoAntes = true;
+                    //Si el nuevo valor es nulo o cero se almacena para eliminar de la lista de contratantes del hijo el finalizar el ciclo
+                    if(contratocontratantePadreSeleccionado.getNumvaloraaportar() == null 
+                    || contratocontratantePadreSeleccionado.getNumvaloraaportar().compareTo(BigDecimal.ZERO) == 0) {
+                        contratocontratanteAEliminar = contratocontratantePadreSeleccionado;
+                        break;
+                    } else { 
+                        BigDecimal diferencia = contratocontratantePadreSeleccionado.getNumvaloraaportar().subtract(contratocontratanteSeleccionado.getNumvaloraportado());
+                        BigDecimal nuevoValorDisponible = contratocontratantePadreSeleccionado.getNumvalordisponible().subtract(diferencia);
+                        if(nuevoValorDisponible.compareTo(BigDecimal.ZERO) >= 0) {
+                            contratocontratanteSeleccionado.setNumvaloraportado(contratocontratantePadreSeleccionado.getNumvaloraaportar());
+                            contratocontratantePadreSeleccionado.setNumvalordisponible(nuevoValorDisponible);
+                        } else {
+                            FacesUtils.addErrorMessage("El valor ingresado ("+contratocontratantePadreSeleccionado.getNumvaloraaportar()+") ha sobrepasado el valor disponible ("+contratocontratantePadreSeleccionado.getNumvalordisponible()+") para la entidad: "+contratocontratantePadreSeleccionado.getContratante().getTercero().getStrnombre());
+                        }
+                    }
                 }
             }
+            //Se elimina de la lista de contratantes del hijo si existía y el nuevo valor es nulo o cero
+            if(contratocontratanteAEliminar != null) {
+                contrato.getListaContratocontratantes().remove(contratocontratanteAEliminar);
+            }
+            //Si no se había adicionado previamente, se adiciona a la lista
+            if(!contratoSeleccionadoAntes && contratocontratantePadreSeleccionado.getNumvaloraaportar() != null 
+                    && contratocontratantePadreSeleccionado.getNumvaloraaportar().compareTo(BigDecimal.ZERO) > 0) {
+                BigDecimal nuevoValorDisponible = contratocontratantePadreSeleccionado.getNumvalordisponible().subtract(contratocontratantePadreSeleccionado.getNumvaloraaportar());
+                if(nuevoValorDisponible.compareTo(BigDecimal.ZERO) >= 0) {
+                    Contratocontratante contratocontratante = new Contratocontratante();
+                    contratocontratante.setContratante(contratocontratantePadreSeleccionado.getContratante());
+                    contratocontratante.setContrato(contrato);
+                    contratocontratante.setNumvaloraportado(contratocontratantePadreSeleccionado.getNumvaloraaportar());
+                    contratocontratantePadreSeleccionado.setNumvalordisponible(nuevoValorDisponible);
+                    contrato.getContratocontratantes().add(contratocontratante);
+                } else {
+                    FacesUtils.addErrorMessage("El valor ingresado ("+contratocontratantePadreSeleccionado.getNumvaloraaportar()+") ha sobrepasado el valor disponible ("+contratocontratantePadreSeleccionado.getNumvalordisponible()+") para la entidad: "+contratocontratantePadreSeleccionado.getContratante().getTercero().getStrnombre());
+                }
+            }
+        }
+        for(Contratocontratante contratocontratante : contrato.getListaContratocontratantes()) {
+            valorAsociadoContrato = valorAsociadoContrato.add(contratocontratante.getNumvaloraportado());
         }
         contrato.setNumvlrcontrato(valorAsociadoContrato);
     }
@@ -9659,8 +9692,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @param contratocontratante Contratante a eliminar
      */
     public void eliminarContratanteConvenioAction(Contratocontratante contratocontratante) {
-        contrato.getContratocontratantes().remove(contratocontratante);
+        for(Contratocontratante contratocontratanteSeleccionado : contrpadre.getListaContratocontratantes()) {
+            if(contratocontratanteSeleccionado.getContratante().getIntcodigo() 
+                    == contratocontratante.getContratante().getIntcodigo() ) {
+                contratocontratanteSeleccionado.setNumvalordisponible(contratocontratanteSeleccionado.getNumvalordisponible().add(contratocontratante.getNumvaloraportado()));
+            }
+        }
         contrato.setNumvlrcontrato(contrato.getNumvlrcontrato().subtract(contratocontratante.getNumvaloraportado()));
+        contrato.getContratocontratantes().remove(contratocontratante);
     }
 
     /**
