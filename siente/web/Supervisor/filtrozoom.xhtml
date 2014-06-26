@@ -34,11 +34,12 @@
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
                               onclick="this.value = ''"  styleClass="input_filtro">
-                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
+                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" />
+                </h:inputText>
 
                 <h:selectOneMenu rendered="#{var.tipoproyectoporsector}" style="" id="sectorProyecto" value="#{HomeGestion.filtro.intsectorproyecto}"  styleClass="input_filtro_select" >
                     <f:selectItems value="#{HomeGestion.claseObra}" />
-                    <a4j:ajax event="valueChange" listener="#{HomeGestion.cambioSectorProyecto}" 
+                    <a4j:ajax event="valueChange" listener="#{HomeGestion.cambioSectorProyecto}" limitRender="true" transient="true" 
                               render="tiposProyecto,subtiposProyecto" execute="tiposProyecto,tipoProyecto,subtiposProyecto,subtipoProyecto" rendered="#{var.tipoproyectoporsector}" />
                 </h:selectOneMenu>    
                 <h:panelGroup id="tiposProyecto"  styleClass="input_filtro" >
@@ -94,12 +95,12 @@
                 <div id="slider-range-avance" class="ikont-filtro-slider-range-avance"></div>
             </h:panelGrid>
             <center>
-                <h:commandButton type="submit" action="#{HomeGestion.filtrosSeparacionlateral}" id="filtrar_nuevo1"  value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn"    />
+                <a4j:commandButton  execute="txtPalabraClave_filtro_nuevo,numero1,numero2,estadoObra,subtiposProyecto,ava1,ava2" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo1"   value="#{var.buscar}"
+                                 styleClass="boton1 ikont-filtro-filtrar_btn" />
             </center>
             <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
         </rich:tab>              
-        <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
+        <rich:tab header="#{var.filtrodonde}" rendered="false"  id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom "  >
                 <h:panelGroup>
@@ -154,7 +155,7 @@
             </center>
         </rich:tab>
 
-        <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
+        <rich:tab rendered="false" header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
             <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
 

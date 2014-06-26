@@ -31,7 +31,6 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
 import co.com.interkont.cobra.vista.Vistahomezoom;
-import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.DatosGeneralesPerfilControl;
 import cobra.FiltroGerencial;
 import cobra.FiltroObra;
@@ -61,7 +60,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import org.richfaces.component.UIDataTable;
-import com.googlecode.gmaps4jsf.component.marker.Marker;
 
 /**
  *
@@ -930,6 +928,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
+        System.out.println("_________________________________________ iniciarHome");
+        long l1 = System.currentTimeMillis();
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
         setInttipoorigen(1);
 
@@ -981,6 +981,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //                }
 //            }
 //        }
+        System.out.println("TIME iniciarHome(): "+(System.currentTimeMillis() - l1));
     }
 
     public void configurarzonalocali() {
@@ -1022,6 +1023,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void iniciarFiltroAvanzado() {
+        System.out.println("_________________________________________ iniciarFiltroAvanzado");
         //filtro.setPalabraClave(new String());
         List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
         llenarComboMunicipio(listaMunicipios);
@@ -1080,7 +1082,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         getSessionBeanCobra().llenarPeriodoEvento();
         cargarSubtiposProyecto();
-        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
             llenarProvincias();
             llenarCorregimients();
             llenarCars();
@@ -1111,9 +1113,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the
-     * <code>activate()</code> method will be called to indicate that the
-     * transfer is complete.</p>
+     * instance, after which the <code>activate()</code> method will be called
+     * to indicate that the transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -1134,7 +1135,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void cargarMapa() {
-
+        System.out.println("_____________________________- cargarMapa");
         if (listaobrasusu != null) {
             //mapa.getChildren().clear();
             markers = new ArrayList();
@@ -1518,7 +1519,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void llenarComboSubTiposProyecto(List listSubTiposProyectos) {
         SelectItem[] TempSubTipoProyecto = new SelectItem[listSubTiposProyectos.size() + 1];
 
-        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
+        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de " + bundle.getString("obra"));
 
         int j = 1, k = 1;
         for (Iterator i = listSubTiposProyectos.iterator(); i.hasNext();) {
@@ -1532,7 +1533,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
         }
         subTiposProyecto = new SelectItem[j];
-        subTiposProyecto[0] = new SelectItem(0, "Subtipos de "+bundle.getString("obra"));
+        subTiposProyecto[0] = new SelectItem(0, "Subtipos de " + bundle.getString("obra"));
         while (k < j) {
             subTiposProyecto[k] = TempSubTipoProyecto[k];
             k++;
@@ -2054,6 +2055,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String primeroListProyectos() {
+        System.out.println("______________________________________ primeroListProyectos");
         obrasEncontradas = 0;
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
@@ -2382,15 +2384,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaCorto() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=169");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichacorto") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrcoddepto());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrmunicipio());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichacorto") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2402,15 +2404,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaObras() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=169");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaobras") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2422,15 +2424,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public String reportePdfFichaConvenio() {
         try {
             if (filtro.getStrcoddepto().equals("0")) {
-                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
-                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=169");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
             } else {
                 if (filtro.getStrmunicipio().equals("-1")) {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrcoddepto());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 } else {
-                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+                    getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportepdftotalfichaconvenio") + "&munici=" + filtro.getStrmunicipio());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
                 }
             }
         } catch (IOException ex) {
@@ -2440,7 +2442,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void cargarMapaCiudadano() {
-
+        System.out.println("_____________________________________________-cargarMapaCiudadano");
         if (listaobrasusu != null) {
             //mapa.getChildren().clear();
             markers = new ArrayList();
@@ -2775,7 +2777,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * metodo que crea la valla del mapa para fonade
      */
     public void cargarVallaFonade() {
-
+        System.out.println("_______________________________ cargarVallaFonade");
         if (listaobrasusu != null) {
             //mapa.getChildren().clear();
             markers = new ArrayList();
@@ -3068,10 +3070,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     //Metodo para cargar las listas para el autocomplete del filtro
     public void mostrarContratistas() {
+        System.out.println("_________________________mostrarContratistas");
+        long l1 = System.currentTimeMillis();
         contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratista();
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
+        System.out.println("_________________________mostrarContratistas: "+(System.currentTimeMillis() -l1));
     }
 
     /**
@@ -3101,8 +3106,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
-     * Metodo Utilizado para  Llenar el sector Filtro mapa
-     * @param listaclaseobra 
+     * Metodo Utilizado para Llenar el sector Filtro mapa
+     *
+     * @param listaclaseobra
      */
     public void llenarClaseSectorObra(List<Claseobra> listaclaseobra) {
         ClaseObra = new SelectItem[listaclaseobra.size() + 1];
@@ -3120,7 +3126,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
-     *Metodo Utilizado para Listar el Tipo de proyecto segun el Sector 
+     * Metodo Utilizado para Listar el Tipo de proyecto segun el Sector
      */
     public void cambioSectorProyecto() {
 
@@ -3137,7 +3143,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             cargarSubtiposProyecto();
         }
     }
-    
+
     /**
      * Selector de provincias
      */
@@ -3151,7 +3157,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.provinciasSelectItem = provinciasSelectItem;
     }
 
-        /**
+    /**
      * Listado de provincias parametrizadas en el sistema
      */
     private List<Localidad> provincias;
@@ -3164,17 +3170,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.provincias = provincias;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de provincias
-     * @return 
+     *
+     * @return
      */
     public String llenarProvincias() {
         provincias = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_PROVINCIA);
         provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
         return null;
     }
-    
+
     /**
      * Selector de corregimients
      */
@@ -3201,17 +3207,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.corregimients = corregimients;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de corregimients
-     * @return 
+     *
+     * @return
      */
     public String llenarCorregimients() {
         corregimients = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CORREGIMIENTO);
         corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
         return null;
     }
-    
+
     /**
      * Selector de cars
      */
@@ -3238,17 +3244,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.cars = cars;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de cars
-     * @return 
+     *
+     * @return
      */
     public String llenarCars() {
         cars = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CAR);
         carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
         return null;
     }
-    
+
     /**
      * Selector de cuencas
      */
@@ -3262,7 +3268,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.cuencasSelectItem = cuencasSelectItem;
     }
 
-        /**
+    /**
      * Listado de cuencas parametrizadas en el sistema
      */
     private List<Localidad> cuencas;
@@ -3275,20 +3281,21 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.cuencas = cuencas;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de cuencas
-     * @return 
+     *
+     * @return
      */
     public String llenarCuencas() {
         cuencas = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CUENCA);
         cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
         return null;
     }
-    
+
     /**
      * Carga la lista de selección proporcionada con la lista de localidades
      * proporcionada
+     *
      * @param localidadesSelectItem Lista de selección
      * @param localidadesEsp Localidades a cargar en la lista
      * @return Lista de selección cargada
@@ -3302,18 +3309,404 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         return localidadesSelectItem;
     }
-    
+
     /**
-     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de 
+     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de
      * ubicación de la obra;
-     * @return 
+     *
+     * @return
      */
     public String pasarUbicacionObra() {
-        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
             llenarProvincias();
             llenarCorregimients();
             llenarCars();
         }
         return "datosubicaciondelaObra";
+    }
+
+    /*
+     PERFORMANCE - Búsqueda de Proyectos
+     */
+    /*
+     * nuevas Variables para aumentar el performance
+     */
+    private List<Object[]> listaPerformanceObras;
+    private List<Object[]> listaPerformancePage;
+    private int pivote = 0;
+    public static int maxRowsPerPage = 100;
+
+    public List<Object[]> getListaPerformanceObras() {
+        return listaPerformanceObras;
+    }
+
+    public void anteriorPaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote > 0) {
+            int limit = this.pivote;
+            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = true;
+            this.veranteriorobra = false;
+        }
+    }
+
+    public void siguientePaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote + HomeGestion.maxRowsPerPage < this.totalfilas) {
+            int init = this.pivote + HomeGestion.maxRowsPerPage;
+            int limit = Math.min(init + HomeGestion.maxRowsPerPage, this.totalfilas);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.veranteriorobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+        }
+
+    }
+
+    public void primeraPaginaPerformance() {
+
+        if (this.listaPerformanceObras != null) {
+            int init = 0;
+            int limit = Math.min(this.totalfilas, HomeGestion.maxRowsPerPage);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = true;
+            this.veranteriorobra = false;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+            this.veranteriorobra = false;
+        }
+
+    }
+
+    public void ultimaPaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote < this.totalfilas - 1) {
+            int limit = totalfilas;
+            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = false;
+            this.veranteriorobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+            this.veranteriorobra = false;
+        }
+
+    }
+
+    public List<Object[]> getListaPerformancePage() {
+        return listaPerformancePage;
+    }
+
+    public void setListaPerformancePage(List<Object[]> listaPerformancePage) {
+        this.listaPerformancePage = listaPerformancePage;
+    }
+
+    public void buscarProyectoPerformance() {
+        this.listaPerformanceObras = this.getSessionBeanCobra().getCobraService().performaceEncontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
+        this.totalfilas = this.listaPerformanceObras.size();
+        this.obrasEncontradas = this.totalfilas;
+        this.cargarVallaFonadePerformance();
+        this.primeraPaginaPerformance();
+        this.totalpaginas = this.totalfilas / HomeGestion.maxRowsPerPage;
+        if(totalpaginas == 0)
+            totalpaginas++;
+    }
+
+    public int getRowsPerPage() {
+        return HomeGestion.maxRowsPerPage;
+    }
+
+    /**
+     * Este método reemplaza a cargarVallaFonade()
+     */
+    public void cargarVallaFonadePerformance() {
+        long l1 = System.currentTimeMillis();
+
+        if (this.listaPerformanceObras != null) {
+            markers = new ArrayList();
+
+            int i = 0;
+            NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
+            String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+            String version = getSessionBeanCobra().getBundle().getString("versioncobra");
+
+            while (i < this.listaPerformanceObras.size()) {
+                try {
+
+                    Object[] obra = listaPerformanceObras.get(i);
+
+                    //sql.append("OBRA.strnombreobra,");//0
+                    //sql.append("OBRA.numvaltotobra,");//1
+                    //sql.append("OBRA.intplazoobra,");//2
+                    //sql.append("OBRA.numvalavanfisicodeclarado,");//3
+                    //sql.append("OBRA.intcodigoobra,");//4
+                    //sql.append("OBRA.floatlatitud,");//5
+                    //sql.append("OBRA.floatlongitud,");//6
+                    //sql.append("OBRA.numvalejecobra,");//7
+                    //sql.append("OBRA.strimagenobra,");//8
+                    //sql.append("OBRA.strdireccion,");//9
+                    //sql.append("OBRA.fksolicitud_obra,");//10
+                    //sql.append("OBRA.strobjetoobra,");//11
+                    String _obra_strnombreobra = obra[0] == null ? "" : obra[0].toString();
+                    Double _obra_numvaltotobra = obra[1] == null ? null : Double.parseDouble(obra[1].toString());
+                    //Integer _obra_intplazoobra = obra[2] == null ? null : Integer.parseInt(obra[2].toString());
+                    //Double _obra_numvalavanfisicodeclarado = obra[3] == null ? null : Double.parseDouble(obra[3].toString());
+                    Integer _obra_intcodigoobra = obra[4] == null ? null : Integer.parseInt(obra[4].toString());
+                    Double _obra_floatlatitud = obra[5] == null ? null : Double.parseDouble(obra[5].toString());
+                    Double _obra_floatlongitud = obra[6] == null ? null : Double.parseDouble(obra[6].toString());
+                    Double _obra_numvalejecobra = obra[7] == null ? null : Double.parseDouble(obra[7].toString());
+                    String _obra_strimagenobra = obra[8] == null ? null : obra[8].toString();
+                    //String _obra_strdireccion = obra[9] == null ? null : obra[9].toString();
+                    //String _obra_fksolicitud_obra = obra[10] == null ? null : obra[10].toString();
+                    String _obra_strobjetoobra = obra[11] == null ? "" : obra[11].toString();
+
+                    //sql.append("CONT.strnombre,");//12
+                    //sql.append("TERC.strnombrecompleto,");//13
+                    //String _contrato_strnombre = obra[12] == null ? null : obra[12].toString();
+                    String _tercero_strnombrecompleto = obra[13] == null ? "" : obra[13].toString();
+
+                    //sql.append("TIPO.strdesctipoobra,");//14
+                    //sql.append("TIPO.strurlimagen,");//15
+                    //sql.append("TIPO.strurlimagen_marcador,");//16
+                    //sql.append("TIPO.strurlimagen_suspendido,");//17
+                    //sql.append("TIPO.strurlimagen_finalizado,");//18
+                    //sql.append("TIPO.strurlimagen_ejecucion,");//19
+                    //String _tipoobra_strdesctipoobra = obra[14] == null ? null : obra[14].toString();
+                    //String _tipoobra_strurlimagen = obra[15] == null ? null : obra[15].toString();
+                    String _tipoobra_strurlimagen_marcador = obra[16] == null ? null : obra[16].toString();
+                    String _tipoobra_strurlimagen_suspendido = obra[17] == null ? null : obra[17].toString();
+                    String _tipoobra_strurlimagen_finalizado = obra[18] == null ? null : obra[18].toString();
+                    String _tipoobra_strurlimagen_ejecucion = obra[19] == null ? null : obra[19].toString();
+
+                    //sql.append("STAT.intestadoobra,");//20
+                    //sql.append("STAT.strdesctipoestado,");//21
+                    Integer _tipoestadoobra_intestadoobra = obra[20] == null ? null : Integer.parseInt(obra[20].toString());
+                    String _tipoestadoobra_strdesctipoestado = obra[21] == null ? null : obra[21].toString();
+
+                    //sql.append("TIPP.intidtipoproyecto,");//22
+                    //sql.append("TIPP.strnombre,");//23
+                    //sql.append("f_proyecto_semaforo(OBRA.intcodigoobra) AS semaforo ");//24
+                    Integer _tipoproyecto_intidtipoproyecto = obra[22] == null ? null : Integer.parseInt(obra[22].toString());
+                    String _tipoproyecto_strnombre = obra[23] == null ? null : obra[23].toString();
+                    String _semaforo = obra[24] == null ? null : obra[24].toString();
+
+                    Marcador marker = new Marcador();
+                    marker.setLatitude(_obra_floatlatitud + "");
+                    marker.setLongitude(_obra_floatlongitud + "");
+
+                    marker.setIntcodobra(_obra_intcodigoobra);
+                    marker.setJsVariable((new StringBuilder("js_")).append(_obra_intcodigoobra).toString());
+
+                    String pin = _tipoobra_strurlimagen_marcador;
+                    switch (_tipoestadoobra_intestadoobra == null ? 0 : _tipoestadoobra_intestadoobra) {
+                        case 5:
+                            pin = _tipoobra_strurlimagen_ejecucion;
+                            break;
+                        case 2:
+                            pin = _tipoobra_strurlimagen_finalizado;
+                            break;
+                        case 6:
+                            pin = _tipoobra_strurlimagen_suspendido;
+                            break;
+                    }
+
+                    marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
+
+
+                    double porcentaje = 0;
+
+                    if (_obra_numvalejecobra != null && _tipoestadoobra_intestadoobra != null && _tipoestadoobra_intestadoobra > 0) {
+                        porcentaje = (porcentaje * 100) / _obra_numvaltotobra;
+
+                    }
+                    int asi_va_text = (int) Math.floor(porcentaje);
+
+
+                    StringBuilder list_contratante = new StringBuilder();
+                    if (_tercero_strnombrecompleto.length() > 25) {
+                        list_contratante.append("<label class=\"tool\">");
+                        list_contratante.append(_tercero_strnombrecompleto.substring(0, 22));
+                        list_contratante.append("...");
+                        list_contratante.append("<div>");
+                        list_contratante.append("<p>");
+                        list_contratante.append(_tercero_strnombrecompleto);
+                        list_contratante.append("</p>");
+                        list_contratante.append("</div>");
+                        list_contratante.append("</label>");
+                    } else {
+                        list_contratante.append(_tercero_strnombrecompleto);
+                    }
+                    String stylesemaforo = "";
+                    if (_semaforo != null && _semaforo.compareTo("") != 0) {
+                        if (_semaforo.equals("/resources/botones/rojo.png")) {
+                            stylesemaforo = "semafororojo";
+                        } else if (_semaforo.equals("/resources/botones/amarillo.png")) {
+                            stylesemaforo = "semaforoamarillo";
+                        } else if (_semaforo.equals("/resources/botones/verde.png")) {
+                            stylesemaforo = "semaforoverde";
+                        }
+                    }
+
+                    StringBuilder descripcion = new StringBuilder();
+                    descripcion.append("<html>");
+                    descripcion.append("<body >");
+                    descripcion.append("<div class=\"modal-content-fonade\">");
+                    descripcion.append("<div class=\"modal-header-fonade\">");
+                    descripcion.append("<div class=\"tabla\">");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna \">");
+                    descripcion.append("<span class=\"imagotipo\"></span>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"columna\">");
+                    descripcion.append("<label class=\"textvalla1\">");
+                    String nombreCorto = _obra_strnombreobra;
+                    if (nombreCorto.length() > 50) {
+                        nombreCorto = nombreCorto.substring(0, 49) + "...";
+                    }
+                    descripcion.append(nombreCorto);
+                    descripcion.append("</label>");
+                    descripcion.append("</div>");
+                    descripcion.append("</p>");
+                    descripcion.append("</div>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"modal-body-fonade tabla\">");
+                    descripcion.append("<div class=\"tabla content-left\">");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
+
+                    descripcion.append("</p>");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna textvalla5\">");
+                    descripcion.append((money.format(_obra_numvaltotobra) + getDetalleObra().getValorinterventoria()));
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO");
+                    descripcion.append("<div>");
+                    descripcion.append("<p>");
+                    descripcion.append(_obra_strobjetoobra.replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
+                    descripcion.append("</p>");
+                    descripcion.append("</div>");
+                    descripcion.append("</label></div>");
+                    descripcion.append("</p>");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna textvalla3\"> Contratante : </div>");
+                    descripcion.append("<div class=\"columna textvalla4\">");
+                    descripcion.append(list_contratante.toString());
+                    descripcion.append("</div>");
+                    descripcion.append("</p>");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna vallacontentinfo\">");
+                    descripcion.append("<span class=\"textvalla4\">Semáforo</span>");
+                    descripcion.append("<span class=\"imgsemaforo ").append(stylesemaforo).append("\">");
+                    descripcion.append("</span>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"columna vallacontentinfo\">");
+                    descripcion.append("<span class=\"textvalla4\">Avance</span>");
+                    descripcion.append("<span class=\"textvalla6\">").append(asi_va_text);
+                    descripcion.append("%");
+                    descripcion.append("</span>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"columna vallacontentinfo\">");
+                    descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
+                    descripcion.append("<a class=\"imgtipo tipo").append(_tipoproyecto_intidtipoproyecto).append("\" value=\"").append(_tipoproyecto_strnombre).append("\">");
+                    descripcion.append("</a>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"columna vallacontentinfo\">");
+                    descripcion.append("<span class=\"textvalla4 \">Estado </span>");
+                    descripcion.append("<a class=\"imgestado estado").append(_tipoestadoobra_intestadoobra).append("\" value=\"").append(_tipoestadoobra_strdesctipoestado).append("\">");
+                    descripcion.append("</a>");
+                    descripcion.append("</div>");
+                    descripcion.append("</p>");
+                    descripcion.append("</div>");
+                    descripcion.append("<div class=\"tabla content-rigth\">");
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna\">");
+                    if (_obra_strimagenobra != null && !_obra_strimagenobra.isEmpty() && _obra_strimagenobra.contains(".")) {
+                        descripcion.append("<img class=\"imgvalla\" src=\"/").append(version);
+                        descripcion.append(_obra_strimagenobra);
+                        descripcion.append("\">");
+                    } else {
+                        descripcion.append("<img class=\"imgvalla\" src=\"/").append(version).append("/resources/imgs/noimagen_mapa.png\">");
+                    }
+                    descripcion.append(" </div>");
+                    descripcion.append("</p>");
+
+                    if (_tipoestadoobra_intestadoobra != 0) {
+                        descripcion.append("<p>");
+                        descripcion.append("<div class=\"columna\">");
+                        descripcion.append("<a class=\"imgaction button1\" href=\"");
+                        descripcion.append(contextPath).append("\"/Supervisor/DetalleObra.xhtml\"");
+                        descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Información\" >");
+                        descripcion.append("</a>");
+                        descripcion.append("</div>");
+                        if (!getSessionBeanCobra().getUsuarioObra().getUsuLogin().equals(bundle.getString("ciudadanosinregistro"))) {
+                            descripcion.append("<div  class=\"columna\">");
+                            descripcion.append("<a class=\"imgaction button2\" href=\"");
+                            descripcion.append(contextPath).append("/Ciudadano/ParticipacionCiudadano.xhtml");
+                            descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Comentarios\" >");
+                            descripcion.append("</a>");
+                            descripcion.append("</div>");
+                        }
+                        descripcion.append("<div class=\"columna\">");
+                        descripcion.append("<a class=\"imgaction button3\" href=\"");
+                        descripcion.append(contextPath).append("/Supervisor/ImagenObra.xhtml");
+                        descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Fotos\" >");
+                        descripcion.append("</a>");
+                        descripcion.append("</div>");
+                        descripcion.append("</p>");
+                    } else if (_tipoestadoobra_intestadoobra == 0 && !filtro.isIsciu()) {
+                        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnproyecto()) {
+                            descripcion.append("<p>");
+                            descripcion.append("<div class=\"columna\">");
+                            descripcion.append("<a class=\"imgaction button1\" href=\"");
+                            descripcion.append(contextPath).append("/NuevoProyecto/tipificacionproyecto.xhtml");
+                            descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Información\" >");
+                            descripcion.append("</a>");
+                            descripcion.append("</div>");
+                        }
+                    }
+
+                    descripcion.append("</div>");
+                    descripcion.append("</div>");
+                    descripcion.append("</div>");
+                    descripcion.append("</body>");
+                    descripcion.append("</html>");
+                    marker.setInformationWindow(descripcion.toString());
+
+                    markers.add(marker);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println(e.getMessage());
+
+                }
+                i++;
+            }
+
+        }
+        System.out.println("__________TIME cargarVallaFonadePerformance: " + (System.currentTimeMillis() - l1));
     }
 }
