@@ -31,6 +31,37 @@
     </ui:define>
 
     <ui:define name="body">
+
+        <script type='text/javascript'>
+            function showRegionMetasUnidad(radio)
+            {
+
+                if (radio.value == 'Unidad') {
+
+                    document.getElementById('formRepBody:formRepMetas:selUnidad').style.display = '';
+                    document.getElementById('formRepBody:formRepMetas:selEstConvenio').style.display = '';
+                    document.getElementById('formRepBody:formRepMetas:outEstConvenio').style.display = '';
+                    document.getElementById('formRepBody:formRepMetas:btnUnidad').style.display = '';
+
+                    document.getElementById('formRepBody:formRepMetas:outNumConvenio').style.display = 'none';
+                    document.getElementById('formRepBody:formRepMetas:inNumConvenio').style.display = 'none';
+                    document.getElementById('formRepBody:formRepMetas:btnConvenio').style.display = 'none';
+                    
+
+                } else {
+                    document.getElementById('formRepBody:formRepMetas:selUnidad').style.display = 'none';
+                    document.getElementById('formRepBody:formRepMetas:selEstConvenio').style.display = 'none';
+                    document.getElementById('formRepBody:formRepMetas:outEstConvenio').style.display = 'none';
+                    document.getElementById('formRepBody:formRepMetas:btnUnidad').style.display = 'none';
+
+                    document.getElementById('formRepBody:formRepMetas:outNumConvenio').style.display = '';
+                    document.getElementById('formRepBody:formRepMetas:inNumConvenio').style.display = '';
+                    document.getElementById('formRepBody:formRepMetas:btnConvenio').style.display = '';
+                }
+
+            }
+        </script>
+
         <h:form id="formRepBody">
 
             <div class="titulos">
@@ -55,14 +86,18 @@
                     <h:panelGrid columns="1" class="bl2">
                         <div class="icon_bl2"></div>
                         <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteImpl}</p></div>
-                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepGcial" value="No disponible"/>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepImpl" value="Generar"
+                                           render="gpPopUpImpl" execute="gpPopUpImpl" immediate="true"
+                                           oncomplete="#{rich:component('popUprepImpl')}.show();"/>
                     </h:panelGrid>
                 </h:panelGroup>
                 <h:panelGroup>
                     <h:panelGrid columns="1" class="bl3">
                         <div class="icon_bl3"></div>
                         <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteMetas}</p></div>
-                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepGeo" value="No disponible"/>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepMetas" value="Generar"
+                                           render="gpPopUpMetas" execute="gpPopUpMetas" immediate="true"
+                                           oncomplete="#{rich:component('popUprepMetas')}.show();"/>
                     </h:panelGrid>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -81,9 +116,19 @@
                                            oncomplete="#{rich:component('popUprepCtas')}.show();"/>
                     </h:panelGrid>
                 </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl1">
+                        <div class="icon_bl1"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reportesConsGcialConv}</p>
+                        </div>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepConsGcialConv" value="Generar"
+                                           render="gpPopUpConsGcialConv" execute="gpPopUpConsGcialConv" immediate="true"
+                                           oncomplete="#{rich:component('popUprepConsGcialConv')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
             </h:panelGrid>
 
-            <!--PopUP Reporte rendición de cuentas-->
+            <!--PopUP Reporte Consolidación Geo-->
             <rich:popupPanel id="popUprepGeo" autosized="true" moveable="true" headerClass="rich-panel-header">
                 <f:facet name="header" >
                     <h:panelGroup >
@@ -95,7 +140,7 @@
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepGeo')}.hide();
-                                                      return false;"/>
+                return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -124,7 +169,7 @@
 
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}', '_blank');"/>
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -133,9 +178,7 @@
                 </h:form>        
             </rich:popupPanel>
 
-
             <!-- PopUP Reporte Rendición de Cuentas -->
-
             <rich:popupPanel id="popUprepCtas" autosized="true" moveable="true" headerClass="rich-panel-header">
                 <f:facet name="header" >
                     <h:panelGroup >
@@ -152,7 +195,7 @@
                     </h:form>
                 </f:facet>
 
-                <h:form>
+                <h:form id="formRepCtas">
                     <h:panelGroup layout="block" id="gpPopUpGcial">
 
 
@@ -163,7 +206,7 @@
 
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=2', '_blank');"/>
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=2&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -172,6 +215,151 @@
                 </h:form>        
             </rich:popupPanel>
 
+            <!-- PopUP Reporte Metas y Compromisos-->
+            <rich:popupPanel id="popUprepMetas" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteMetas}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepMetas')}.hide();
+                                                           return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form id="formRepMetas">
+                    <h:panelGroup layout="block" id="gpPopUpMetas">
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+                                <div class="seleccione">
+                                    <h:selectOneRadio id="radioMetas" value="#{var.unidad}" onchange="showRegionMetasUnidad(this);">
+                                        <f:selectItem itemValue="#{var.unidad}" itemLabel="#{var.unidad}" />
+                                        <f:selectItem itemValue="#{var.convenio}" itemLabel="#{var.convenio}" />
+                                    </h:selectOneRadio>
+                                </div>
+
+                                <div class="dropdown">
+
+                                    <h:outputText id="outNumConvenio" style="display: none;" value="Número del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:inputText id="inNumConvenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important; width: 320px!important;display: none;" maxlength="25" required="true" >
+                                        <rich:placeholder value="Ej: 442D5" styleClass="input_num_convenio"/>
+                                        <f:validateLength maximum="255"/>
+                                        <a4j:ajax execute="@this" event="change" render="gpPopUpMetas" />
+                                    </h:inputText>
+
+                                    <h:selectOneMenu id="selUnidad" value="#{Supervisor$Contrato.selectedUnit}" required="true" style="font-style: italic!important; font-size: 12px!important;" >
+                                        <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                        <f:selectItems value="#{Supervisor$Contrato.lstUnidades}" var="unidad" itemValue="#{unidad.id}" itemLabel="#{unidad.nombre}" />
+                                        <a4j:ajax execute="@this" event="change" render="gpPopUpMetas" />
+                                    </h:selectOneMenu>
+
+                                </div>
+                                <div class="dropdown">
+
+                                    <h:outputText id="outEstConvenio" value="Estado del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>
+
+                                    <h:selectOneMenu id="selEstConvenio" value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}">
+                                        <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                        <f:selectItems value="#{Supervisor$Contrato.estadoConvenioOption}" />     
+                                        <a4j:ajax execute="@this" event="change" render="gpPopUpMetas" />
+                                    </h:selectOneMenu>  
+
+                                </div>
+
+                                <div class="descargarbtn">
+                                    <h:commandLink id="btnUnidad" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;estado_convenio=#{Supervisor$Contrato.filtrocontrato.estadoConvenio == '0' ? 'ALL' : Supervisor$Contrato.filtrocontrato.estadoConvenio}', '_blank');"/>
+                                    <h:commandLink id="btnConvenio" style="display: none;" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3b&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+
+            <!-- PopUP Reporte Implementacion -->
+            <rich:popupPanel id="popUprepImpl" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteImpl}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepImpl')}.hide();
+                                                           return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form id="formRepImpl">
+                    <h:panelGroup layout="block" id="gpPopUpImpl">
+
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=5&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+            
+            <!-- PopUP Reporte Consolidado Gerencial de Convenios -->
+            <rich:popupPanel id="popUprepConsGcialConv" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteImpl}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepConsGcialConv')}.hide();
+                                                           return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form id="formRepConsGcialConv">
+                    <h:panelGroup layout="block" id="gpPopUpConsGcialConv">
+
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=7a&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+            
         </h:form>
 
     </ui:define>
