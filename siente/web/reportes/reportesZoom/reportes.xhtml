@@ -46,7 +46,7 @@
                     document.getElementById('formRepBody:formRepMetas:outNumConvenio').style.display = 'none';
                     document.getElementById('formRepBody:formRepMetas:inNumConvenio').style.display = 'none';
                     document.getElementById('formRepBody:formRepMetas:btnConvenio').style.display = 'none';
-
+                    
 
                 } else {
                     document.getElementById('formRepBody:formRepMetas:selUnidad').style.display = 'none';
@@ -104,9 +104,7 @@
                     <h:panelGrid columns="1" class="bl4">
                         <div class="icon_bl4"></div>
                         <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteAuditoria}</p></div>
-                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepAuditoria" value="Generar"
-                                           render="gpPopUpAuditoria" execute="gpPopUpAuditoria" immediate="true"
-                                           oncomplete="#{rich:component('popUprepAuditoria')}.show();"/>
+                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepCuentas" value="No disponible"/>
                     </h:panelGrid>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -324,7 +322,7 @@
                     </h:panelGroup>
                 </h:form>        
             </rich:popupPanel>
-
+            
             <!-- PopUP Reporte Consolidado Gerencial de Convenios -->
             <rich:popupPanel id="popUprepConsGcialConv" autosized="true" moveable="true" headerClass="rich-panel-header">
                 <f:facet name="header" >
@@ -361,63 +359,7 @@
                     </h:panelGroup>
                 </h:form>        
             </rich:popupPanel>
-
-            <!-- PopUP Reporte Reporte de Auditoria -->
-            <rich:popupPanel id="popUprepAuditoria" autosized="true" moveable="true" headerClass="rich-panel-header">
-                <f:facet name="header" >
-                    <h:panelGroup >
-                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteAuditoria}"   />
-                    </h:panelGroup>
-                </f:facet>
-                <f:facet name="controls">
-                    <h:form>
-                        <h:panelGroup>
-                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
-                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepAuditoria')}.hide();
-                                                           return false;"/>
-                        </h:panelGroup>
-                    </h:form>
-                </f:facet>
-
-                <h:form id="formRepAuditoria">
-                    <h:panelGroup layout="block" id="gpPopUpAuditoria">
-
-                        <div class="cont_bottom">
-                            <div class="icon_bot"></div>
-
-                            <div class="cont_central">
-
-                                <div class="dropdown">
-                                    
-                                    <h:outputText value="#{var.unidad}" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    
-                                    <h:selectOneMenu id="selUnidadA" value="#{Supervisor$Contrato.selectedUnit}" required="true" style="font-style: italic!important; font-size: 12px!important;" >
-                                        <f:selectItem itemLabel="Todos" itemValue="0"/>
-                                        <f:selectItems value="#{Supervisor$Contrato.lstUnidades}" var="unidad" itemValue="#{unidad.id}" itemLabel="#{unidad.nombre}" />
-                                        <a4j:ajax execute="@this" event="change" render="gpPopUpAuditoria" />
-                                    </h:selectOneMenu>
-
-                                </div>
-                                <div class="dropdown">
-
-                                    <h:outputText id="outEstConvenio" value="Período" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    <rich:calendar id="periodoA"  datePattern="#{var.formatofechaReportes}" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" style="width: 320px !important;" styleClass="periodoA" showWeekDaysBar="false" showFooter="false" oncurrentdateselect="event.rich.component.selectDate(event.rich.date)" firstWeekDay="true">
-                                        <a4j:ajax execute="@this" event="change" render="gpPopUpAuditoria" />
-                                    </rich:calendar>
-
-
-                                </div>
-
-                                <div class="descargarbtn">
-                                    <h:commandLink id="btnUnidad" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Supervisor$Contrato.contrato.datefechaini}', '_blank');"/>
-                                </div>
-                            </div>
-                        </div>
-                    </h:panelGroup>
-                </h:form>        
-            </rich:popupPanel>
-
+            
         </h:form>
 
     </ui:define>
