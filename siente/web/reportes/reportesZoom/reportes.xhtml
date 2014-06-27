@@ -116,6 +116,16 @@
                                            oncomplete="#{rich:component('popUprepCtas')}.show();"/>
                     </h:panelGrid>
                 </h:panelGroup>
+                <h:panelGroup>
+                    <h:panelGrid columns="1" class="bl1">
+                        <div class="icon_bl1"></div>
+                        <div class="bl1_texto_div"><p class="bl1_texto">#{var.reportesConsGcialConv}</p>
+                        </div>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepConsGcialConv" value="Generar"
+                                           render="gpPopUpConsGcialConv" execute="gpPopUpConsGcialConv" immediate="true"
+                                           oncomplete="#{rich:component('popUprepConsGcialConv')}.show();"/>
+                    </h:panelGrid>
+                </h:panelGroup>
             </h:panelGrid>
 
             <!--PopUP Reporte Consolidación Geo-->
@@ -305,6 +315,43 @@
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
                                                    onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=5&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:panelGroup>
+                </h:form>        
+            </rich:popupPanel>
+            
+            <!-- PopUP Reporte Consolidado Gerencial de Convenios -->
+            <rich:popupPanel id="popUprepConsGcialConv" autosized="true" moveable="true" headerClass="rich-panel-header">
+                <f:facet name="header" >
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-seleccioncontratista" value="#{var.reporteImpl}"   />
+                    </h:panelGroup>
+                </f:facet>
+                <f:facet name="controls">
+                    <h:form>
+                        <h:panelGroup>
+                            <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
+                                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepConsGcialConv')}.hide();
+                                                           return false;"/>
+                        </h:panelGroup>
+                    </h:form>
+                </f:facet>
+
+                <h:form id="formRepConsGcialConv">
+                    <h:panelGroup layout="block" id="gpPopUpConsGcialConv">
+
+
+                        <div class="cont_bottom">
+                            <div class="icon_bot"></div>
+
+                            <div class="cont_central">
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
+                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=7a&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
