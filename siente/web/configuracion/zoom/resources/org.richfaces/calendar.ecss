@@ -429,3 +429,7 @@
 input.rf-cal-dflt-lbl {
     color: #b3b3b3;
 }
+
+.periodoA tr[id]{  
+ display:none;  
+ } 
