@@ -32,6 +32,7 @@
     </ui:define>
     <ui:define name="body">
         <h:form  id="form_nuevo_contrato_basico" >
+            <h:panelGroup id="pgcontrato">
             <rich:panel styleClass="ikont-rcp-datosbasicos" id="tpDatosBasicos" header="#{var.datosbasicos}">
                 <center>
                     <h:panelGrid  columns="2" rendered="#{var.nuevocontratoperiodoevento}" styleClass="font-general">
@@ -755,6 +756,7 @@
                 </h:commandButton>
 
             </h:panelGrid>              
+            </h:panelGroup>
         </h:form>
 
         <h:panelGroup rendered="#{var.versioncobra eq 'siente'}">
