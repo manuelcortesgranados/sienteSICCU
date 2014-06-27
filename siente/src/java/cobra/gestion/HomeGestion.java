@@ -928,8 +928,10 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
-        System.out.println("_________________________________________ iniciarHome");
+
+        
         long l1 = System.currentTimeMillis();
+
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
         setInttipoorigen(1);
 
@@ -952,9 +954,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtro.setIntregionespecifica(0);
         iniciarfiltro();
         //primeroListProyectos();
-        iniciarFiltroAvanzado();
-        llenarTablaNovedades();
-        llenarZonaEspecifica();
+
+        //PERFORMANCE
+        if (!this.searchInitialized) {
+            iniciarFiltroAvanzado();
+            //llenarTablaNovedades();
+            //llenarZonaEspecifica();
+            this.searchInitialized = true;
+        }
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
 //                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
 
@@ -981,7 +988,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //                }
 //            }
 //        }
-        System.out.println("TIME iniciarHome(): "+(System.currentTimeMillis() - l1));
+        System.out.println("__________TIME iniciarHome(): " + (System.currentTimeMillis() - l1));
     }
 
     public void configurarzonalocali() {
@@ -1023,71 +1030,81 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void iniciarFiltroAvanzado() {
-        System.out.println("_________________________________________ iniciarFiltroAvanzado");
-        //filtro.setPalabraClave(new String());
-        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
-        llenarComboMunicipio(listaMunicipios);
+
+        //PERFORMANCE
         List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
-
-        if (listaEstadosObras != null) {
-            llenarComboEstadosObra(listaEstadosObras);
-        }
-
-        if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
-            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-            List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
-            llenarComboDeptos(deptos);
-
-        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 1) {
-            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
-            municipio = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
-            filtro.setStrmunicipio(depto.getStrcodigolocalidad());
-
-        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 2) {
-            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
-            depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
-            filtro.setStrcoddepto(depto.getStrcodigolocalidad());
-            //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
-            llenarComboMunicipio(listaMunicipios);
-        }
-        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
-            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
-
-            if (listaTiposProyecto != null) {
-                llenarComboTiposProyecto(listaTiposProyecto);
-            }
-        } else {
-            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
-            if (listaclase != null) {
-                llenarClaseSectorObra(listaclase);
-            }
-            cambioSectorProyecto();
-        }
-
+        llenarComboEstadosObra(listaEstadosObras);
+        List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+        llenarComboTiposProyecto(listaTiposProyecto);
+        List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+        llenarClaseSectorObra(listaclase);
         List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
-        List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
-        List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
-        List<Region> listaRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
-
-        if (listaFases != null) {
-            llenarComboFases(listaFases);
-        }
-        if (listaEventos != null) {
-            llenarComboEventos(listaEventos);
-        }
-        if (listaZonaespecificas != null) {
-            llenarComboZonasEspecificas(listaZonaespecificas);
-        }
-        getSessionBeanCobra().llenarPeriodoEvento();
+        llenarComboFases(listaFases);
         cargarSubtiposProyecto();
-        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
-            llenarProvincias();
-            llenarCorregimients();
-            llenarCars();
-            llenarCuencas();
-        }
+
+//        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+//        llenarComboMunicipio(listaMunicipios);
+//        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
+//
+//        if (listaEstadosObras != null) {
+//            llenarComboEstadosObra(listaEstadosObras);
+//        }
+//
+//        if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
+//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+//            List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+//            llenarComboDeptos(deptos);
+//
+//        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 1) {
+//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+//            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
+//            municipio = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
+//            filtro.setStrmunicipio(depto.getStrcodigolocalidad());
+//
+//        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 2) {
+//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+//            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
+//            depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
+//            filtro.setStrcoddepto(depto.getStrcodigolocalidad());
+//            //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+//            llenarComboMunicipio(listaMunicipios);
+//        }
+//        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
+//            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+//
+//            if (listaTiposProyecto != null) {
+//                llenarComboTiposProyecto(listaTiposProyecto);
+//            }
+//        } else {
+//            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+//            if (listaclase != null) {
+//                llenarClaseSectorObra(listaclase);
+//            }
+//            cambioSectorProyecto();
+//        }
+//
+//        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+//        List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
+//        List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
+//        List<Region> listaRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
+//
+//        if (listaFases != null) {
+//            llenarComboFases(listaFases);
+//        }
+//        if (listaEventos != null) {
+//            llenarComboEventos(listaEventos);
+//        }
+//        if (listaZonaespecificas != null) {
+//            llenarComboZonasEspecificas(listaZonaespecificas);
+//        }
+//        getSessionBeanCobra().llenarPeriodoEvento();
+//        cargarSubtiposProyecto();
+//        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+//            llenarProvincias();
+//            llenarCorregimients();
+//            llenarCars();
+//            llenarCuencas();
+//        }
     }
 
     public void cargarMunicipios() {
@@ -3076,7 +3093,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
         clientes = getSessionBeanCobra().getCobraService().encontrarCliente();
         gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
-        System.out.println("_________________________mostrarContratistas: "+(System.currentTimeMillis() -l1));
+        System.out.println("_________________________mostrarContratistas: " + (System.currentTimeMillis() - l1));
     }
 
     /**
@@ -3334,7 +3351,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<Object[]> listaPerformanceObras;
     private List<Object[]> listaPerformancePage;
     private int pivote = 0;
+    private boolean searchInitialized = false;
+    private boolean searchActivated = false;
     public static int maxRowsPerPage = 100;
+
+    public boolean isSearchInitialized() {
+        return this.searchInitialized;
+    }
+
+    public boolean isSearchActivated() {
+        return this.searchActivated;
+    }
 
     public List<Object[]> getListaPerformanceObras() {
         return listaPerformanceObras;
@@ -3432,8 +3459,10 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.cargarVallaFonadePerformance();
         this.primeraPaginaPerformance();
         this.totalpaginas = this.totalfilas / HomeGestion.maxRowsPerPage;
-        if(totalpaginas == 0)
+        if (totalpaginas == 0) {
             totalpaginas++;
+        }
+        this.searchActivated = true;
     }
 
     public int getRowsPerPage() {
@@ -3536,7 +3565,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
 
-
                     double porcentaje = 0;
 
                     if (_obra_numvalejecobra != null && _tipoestadoobra_intestadoobra != null && _tipoestadoobra_intestadoobra > 0) {
@@ -3544,7 +3572,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     }
                     int asi_va_text = (int) Math.floor(porcentaje);
-
 
                     StringBuilder list_contratante = new StringBuilder();
                     if (_tercero_strnombrecompleto.length() > 25) {
