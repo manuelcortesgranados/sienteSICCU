@@ -128,7 +128,7 @@
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-multiplescontratantes" styleClass="ikont-rcp-multiplescontratantes" header="#{var.tituloadicionarmultilescontratantes}" 
                                        expanded="false" immediate="true" toggleListener="#{Supervisor$Contrato.consultarContratantes()}" 
-                                       rendered="#{var.multiplescontratantes and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                                       rendered="#{var.multiplescontratantes}">
                     <h:panelGrid id="ikont-hpg-multiplescontratantes" styleClass="ikont-hpg-multiplescontratantes">
                         <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
                                         value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
@@ -152,7 +152,7 @@
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}" 
                                        expanded="false" immediate="true"
-                                       rendered="#{var.multiplescontratistas and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                                       rendered="#{var.multiplescontratistas}">
                     <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
                         <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
                                                 value="#{Supervisor$Contrato.contrato.listaContratistas}"
