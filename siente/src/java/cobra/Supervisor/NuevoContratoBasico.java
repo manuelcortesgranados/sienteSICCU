@@ -3559,7 +3559,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private void validadcionGuardarContrato() {
         if (bundle.getString("boolencargofidu").equals("false")) {
-            if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
+            if (contrato.getEncargofiduciario() != null && contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
         }
@@ -9569,6 +9569,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Adiciona el contratista seleccionado a la lista de contratistas
      */
     public void adicionarContratistaAction() {
+        Contratista contratista = (Contratista) tablacontratistas.getRowData();
+        contratista.getContratos().add(contrato);
         contrato.getContratistas().add(tablacontratistas.getRowData());
     }
 

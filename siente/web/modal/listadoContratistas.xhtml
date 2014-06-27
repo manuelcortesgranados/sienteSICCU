@@ -62,12 +62,6 @@
                                     <rich:column width="150px">
                                         <h:outputText  styleClass="ikont-hot-txtnombre" value="#{var.nombre}" />
                                     </rich:column>
-                                    <!-- <rich:column width="150px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.apellido}" />
-                                    </rich:column>
-                                    <rich:column width="150px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.apellido}" />
-                                    </rich:column>-->
                                     <rich:column width="150px">
                                         <h:outputText  styleClass="ikont-hot-txtseleccionar" value="#{var.seleccionar}" />
                                     </rich:column>
@@ -83,12 +77,6 @@
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-nombreapellido" value="#{Contratista.tercero.strnombre} #{Contratista.tercero.strapellido1}"/>
                                 </rich:column>
-                                <!--<rich:column>
-                                    <h:outputText  styleClass="ikont "   value="#{Contratista.tercero.strapellido1}"/>
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont "   value="#{Contratista.tercero.strapellido2}"/>
-                                </rich:column>-->
                                 <rich:column >
                                     <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas}"
                                                        render="gpcontratistaseleccionado, @form" immediate="true"

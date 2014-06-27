@@ -127,7 +127,7 @@
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-multiplescontratantes" styleClass="ikont-rcp-multiplescontratantes" header="#{var.tituloadicionarmultilescontratantes}" 
-                                       expanded="false" immediate="true" switchType="server" toggleListener="#{Supervisor$Contrato.consultarContratantes()}" 
+                                       expanded="false" immediate="true" toggleListener="#{Supervisor$Contrato.consultarContratantes()}" 
                                        rendered="#{var.multiplescontratantes and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
                     <h:panelGrid id="ikont-hpg-multiplescontratantes" styleClass="ikont-hpg-multiplescontratantes">
                         <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
