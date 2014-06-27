@@ -269,7 +269,7 @@
                                     <h:panelGroup >
                                         <h:outputLabel  styleClass="ikont-"   id="dispo" value="#{var.vlrdispo}:" />
                                         <interkont:spacer width="20" />
-                                        <h:outputLabel    id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
+                                        <h:outputLabel    id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-Supervisor$Contrato.contrato.numvlrsumahijos}">
                                             <f:convertNumber pattern="#{var.formatomoneda}" />
                                         </h:outputLabel>  
                                     </h:panelGroup>

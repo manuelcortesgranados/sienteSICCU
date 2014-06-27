@@ -439,7 +439,7 @@ public class ModificarContrato implements Serializable {
             if (getNuevoContratoBasico().getContrato().getNumvlrcontrato().compareTo(modificarcontrato.getNumvlrnuevo()) < 0 && modificarcontrato.getPresupuesto() == 1) {
                 //Si es adicion y valor positivo
                 if (getNuevoContratoBasico().getContrato().getContrato() != null) {
-                    BigDecimal vldispo = getNuevoContratoBasico().getContrato().getContrato().getNumvlrcontrato().subtract(getNuevoContratoBasico().getContrato().getContrato().getNumvlrsumahijos().add(getNuevoContratoBasico().getContrato().getContrato().getNumvlrsumaproyectos()));
+                    BigDecimal vldispo = getNuevoContratoBasico().getContrato().getContrato().getNumvlrcontrato().subtract(getNuevoContratoBasico().getContrato().getContrato().getNumvlrsumahijos());
                     valorModificadocontrato = modificarcontrato.getNumvlrnuevo().subtract(getNuevoContratoBasico().getContrato().getNumvlrcontrato());
                     if (valorModificadocontrato.compareTo(vldispo) <= 0) {//El valor del contrato a crear debe ser menor o igual al valor disponible                        
                         //el valor real que se va a aumentar se le suma al valor de numsumahijos contrato del padre
