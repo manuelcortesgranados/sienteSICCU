@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadores" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="Modulo Metas"/>
+                    </f:facet>
+                    <rich:tabPanel>
+                        <rich:tab header="Modulo Parametrizacion">
+                            <h:panelGroup id="ikont-hpg-rp-metasproyecto">
+                                <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-metasdisponibles">
+                                    <h:commandButton id="btCrearMetaObra"  value="Crear Meta" immediate="true"
+                                                     action="#{MetasProyecto.irApagina_IngresarMeta()}" />
+                                    <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
+                                                     action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
+                                    <h:commandButton value="Prueba" immediate="true"
+                                                     action="#{MetasProyecto.test}" />                                    
+                                    <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas2}" styleClass="ikont-rdt-indicadoresdisponibles"
+                                                            rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                            var="meta">                           
+                                        <rich:column width="5em">
+                                            <f:facet name="header">
+                                                <h:outputText  value="Id"/>
+                                            </f:facet>
+                                            <h:outputText  value="#{meta.id}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Objetivo"/></f:facet>
+                                            <h:outputText  value="#{meta.objetivo}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Programa"/></f:facet>
+                                            <h:outputText  value="#{meta.programa}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="SubPrograma"/></f:facet>
+                                            <h:outputText  value="#{meta.subprograma}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Int Nom Pro"/></f:facet>
+                                            <h:outputText  value="#{meta.nomp}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Descripcion Meta Producto"/></f:facet>
+                                            <h:outputText  value="#{meta.descripcionmetaproducto}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Unidad de Medida"/></f:facet>
+                                            <h:outputText  value="#{meta.unidadmedida}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Nombre Indicador"/></f:facet>
+                                            <h:outputText  value="#{meta.nombreindicador}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
+                                            <h:outputText  value="#{meta.tipometa}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
+                                            <h:commandLink action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
+                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
+                                            </h:commandLink>
+                                        </rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
+                                            <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
+                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            </h:commandLink>
+                                        </rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
+                                            <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
+                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                                <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                            </h:commandLink>
+                                        </rich:column>
+                                    </rich:extendedDataTable>                            
+                                </rich:collapsiblePanel>
+                            </h:panelGroup>
+                        </rich:tab>
+                        <rich:tab header="Metas Asociadas al Proyecto">
+                            <rich:collapsiblePanel switchType="client" header="Metas asociadas al proyecto" expanded="true" id="ikont-rcp-metasasociadasproyecto">
+                                <h:commandButton id="btExportarTablaMetas2"  value="Exportar Tabla de asociaciones a Excel" immediate="true"
+                                                 action="#{MetasProyecto.generarReporteExcelTabla2()}" />                                    
+                                <rich:extendedDataTable id="ikont-rdt-metasasociadasproyecto" value="#{MetasProyecto.listaMetasObras}"
+                                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                        var="metaobra">                           
+                                    <rich:column width="18em"><f:facet name="header"><h:outputText  value="Id. Meta "/></f:facet>
+                                        <h:outputText  value="#{metaobra.idmeta}"/></rich:column>
+                                    <rich:column width="18em"><f:facet name="header"><h:outputText  value="Id. Meta Obra "/></f:facet>
+                                        <h:outputText  value="#{metaobra.idmetaobra}"/></rich:column>
+                                    <rich:column width="18em"><f:facet name="header"><h:outputText  value="Descripcion Meta"/></f:facet>
+                                        <h:outputText  value="#{metaobra.descripcionmetaproducto}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Nombre del Proyecto"/></f:facet>
+                                        <h:outputText  value="#{metaobra.strnombreobra}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Año"/></f:facet>
+                                        <h:outputText  value="#{metaobra.anio}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Frecuencia Medicion"/></f:facet>
+                                        <h:outputText  value="#{metaobra.frecuencia_medicion}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaObra}" type="submit" value="Eliminar">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMetaObra()}" type="submit" value="Actualizar">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Registrar Programacion Meta"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Programacion Meta">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                </rich:extendedDataTable>                            
+                            </rich:collapsiblePanel>
+                        </rich:tab>
+                        <rich:tab header="Registro de Programacion de Metas">
+                            <html>
+                                <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
+                                    <c:forEach items="#{MetasProyecto.listaMetas2}" var="meta">
+                                        <tr>
+                                            <td width="41%" class="ikont-label-borde"><table width="100%" border="0" cellspacing="5" cellpadding="5">
+                                                    <tr>
+                                                        <td class="ikont-hcl-reportes_administrativos">Informacion Meta</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Id Meta</td>
+                                                                    <td class="ikont-hot-desea">#{meta.id}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Objetivo</td>
+                                                                    <td class="ikont-hot-desea">#{meta.objetivo}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Programa</td>
+                                                                    <td class="ikont-hot-desea">#{meta.programa}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Subprograma</td>
+                                                                    <td class="ikont-hot-desea">#{meta.subprograma}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Nomp</td>
+                                                                    <td class="ikont-hot-desea">#{meta.nomp}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Descripcion Meta Producto</td>
+                                                                    <td class="ikont-hot-desea">#{meta.descripcionmetaproducto}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Unidad Medida</td>
+                                                                    <td class="ikont-hot-desea">#{meta.unidadmedida}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Nombre Indicador</td>
+                                                                    <td class="ikont-hot-desea">#{meta.nombreindicador}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Tipo Meta</td>
+                                                                    <td class="ikont-hot-desea">#{meta.tipometa}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Linea Base Indicador</td>
+                                                                    <td class="ikont-hot-desea">#{meta.lineaBaseIndicador}</td>
+                                                                </tr>
+                                                            </table></td>
+                                                    </tr>
+                                                </table></td>
+                                            <td valign="top" width="59%" colspan="2" class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                    <c:forEach items="#{MetasProyecto.consultarMetaobrasDetalle(meta.id)}" var="metaobra"> 
+                                                        <tr>
+                                                            <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                    <tr>
+                                                                        <td class="ikont-label-borde" valign="top"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                <tr>
+                                                                                    <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Relacion Meta Obra</div></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-derechos-reser">Año</td>
+                                                                                    <td class="ikont-hot-desea">#{metaobra.anio}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-derechos-reser">Frecuencia Medicion</td>
+                                                                                    <td class="ikont-hot-desea">#{metaobra.frecuenciaMedicion}</td>
+                                                                                </tr>
+                                                                            </table></td>
+                                                                        <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                <tr>
+                                                                                    <td class="ikont-hcl-reportes_administrativos"><div align="center">Registro Programacion Metas en detalle</div></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                            <tr>
+                                                                                                <td class="ikont-hot-derechos-reser">Id.</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Meta Proyectada</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Meta Acumulada</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Porcentaje</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Observaciones</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Fecha</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Operaciones</td>
+                                                                                                <td class="ikont-hot-derechos-reser"></td>
+                                                                                                <td class="ikont-hot-derechos-reser"></td>
+                                                                                            </tr>
+                                                                                            <c:forEach items="#{MetasProyecto.consultaMetaRegistroDetalle(metaobra.idmetaobra)}" var="metaregistro"> 
+                                                                                                <tr>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.id.idregistrometaobra}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.metaProyectada}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.metaAcumulada}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.porcentaje}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.fecha}</td>
+                                                                                                    <td class="ikont-hot-desea">
+                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaRegistro(metaregistro.id.idregistrometaobra)}" type="submit" value="Eliminar">
+                                                                                                        </h:commandButton>
+                                                                                                    </td>
+                                                                                                    <td class="ikont-hot-desea">
+                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaRegistro()}" type="submit" value="Actualizar">
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.id.idregistrometaobra}" />
+                                                                                                        </h:commandButton>                                                                                                        
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <h:commandLink immediate="true"  action="#{Supervisor$Contrato.detalleContrato}">
+                                                                                                            <h:graphicImage  styleClass="ikont-hgi-btverpng" value="/resources/imgs/bt_msjnuevo.png" />
+                                                                                                            <h:outputText  value="TEST"/>
+                                                                                                        </h:commandLink>                                                                                                        
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </c:forEach>
+                                                                                        </table></td>
+                                                                                </tr>
+                                                                            </table></td>
+                                                                    </tr>
+                                                                </table></td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </html>
+                            <h:commandButton id="btExportarTablaMetas3_1"  value="Exportar Tabla de Programacion de Metas a Excel" immediate="true"
+                                             action="#{MetasProyecto.generarReporteExcelTabla3()}" />                                                                                                                                                                    
+                        </rich:tab>
+                    </rich:tabPanel>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>   
+</ui:composition>

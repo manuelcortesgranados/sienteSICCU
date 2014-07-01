@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadores" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="#{var.modulometas}"/>
+                    </f:facet>
+                    <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
+                        <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
+                            <h:outputLabel  value="Objetivo"/>
+                            <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.meta.objetivo}"/>
+                            <h:outputLabel  value="Programa"/>
+                            <h:inputText   immediate="true" required="false" id="strprograma" size="25" maxlength="25" value="#{MetasProyecto.meta.programa}"/>
+                            <h:outputLabel  value="Subprograma"/>
+                            <h:inputText  immediate="true" required="false" id="strsubprograma" size="25" maxlength="25" value="#{MetasProyecto.meta.subprograma}"/>
+                            <h:outputLabel  value="intnomp"/>
+                            <h:inputText  immediate="true" required="false" id="intnomp" size="25" maxlength="25" value="#{MetasProyecto.meta.nomp}"/>
+                            <h:outputLabel  value="Descripcion Meta Producto"/>
+                            <h:inputText  immediate="true" required="false" id="strdescripcionmetaproducto" size="25" maxlength="25" value="#{MetasProyecto.meta.descripcionmetaproducto}"/>
+                            <h:outputLabel  value="Unidad de Medida"/>
+                            <h:selectOneMenu id="cmbUnidadMeta" value="#{MetasProyecto.meta.unidadmedida}" immediate="true">
+                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
+                            </h:selectOneMenu>
+                            <h:outputLabel  value="Nombre Indicador"/>
+                            <h:inputText  immediate="true" required="false" id="strnombreindicador" size="25" maxlength="25" value="#{MetasProyecto.meta.nombreindicador}"/>
+                            <h:outputLabel  value="Tipo Meta"/>
+                            <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.tipometa}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
+                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.actualizarMeta}" type="submit" value="Actualizar"/>
+                        </h:panelGrid>              
+                    </h:panelGroup>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>   
+</ui:composition>

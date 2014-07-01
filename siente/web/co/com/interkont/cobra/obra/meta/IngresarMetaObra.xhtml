@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadores" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="Ingresar Nueva Meta"/>
+                    </f:facet>
+                    <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
+                        <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 40%">
+                            <h:outputLabel  value="Meta"/>
+                            <h:outputText  value="#{MetasProyecto.p_idmeta}"/>
+                            <h:outputLabel  value="Proyecto"/>
+                            <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
+                            <h:outputLabel  value="Año"/>
+                            <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
+                            <h:outputLabel  value="Frecuencia Medicion"/>
+                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
+                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
+                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaObra}" type="submit" value="Guardar"/>
+                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" value="Regresar"/>
+                        </h:panelGrid>              
+                    </h:panelGroup>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>   
+</ui:composition>
