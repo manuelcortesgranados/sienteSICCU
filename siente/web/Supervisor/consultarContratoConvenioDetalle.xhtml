@@ -303,6 +303,9 @@
                 <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" style="width: 87%">
                     <ui:include src="contratosConvenio.xhtml" />
                 </h:panelGroup>
+                <h:panelGroup rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" style="width: 87%">
+                    <ui:include src="contratosConvenioSubconvenio.xhtml" />
+                </h:panelGroup>
                 <h:panelGroup rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                     <ui:include src="proyectosContrato.xhtml" />
                 </h:panelGroup>                        
