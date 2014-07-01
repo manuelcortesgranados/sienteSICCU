@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form_seguimientos_contrato" >
+            <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+            <h:panelGroup styleClass="ikont-hpg-templatemain templatecontentinfo">
+                <rich:panel>
+                    <f:facet name="header" >
+                        <h:outputText  styleClass=""   value="Modulo Seguimiento Contratos" />
+                    </f:facet>
+                    <rich:panel>
+                        <h:outputText  styleClass=""   value="Cada Contrato debe estar en la capacidad de ser supervisado por parte del funcionario" />
+                    </rich:panel>
+                    <rich:tabPanel>
+                        <rich:tab header="|Informacion Encabezado|" headerClass="">
+                            <h:panelGrid id="pg_seguimientos_contratos" columns="2" width="100%">
+                                <rich:panel rendered="true" styleClass="noneborder">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass=""   value="Datos Preliminares del Contrato/Obra" />
+                                    </f:facet>
+                                </rich:panel>
+                                <rich:panel rendered="true" styleClass="noneborder">
+                                    <f:facet name="header" >
+                                        <h:outputText  styleClass=""   value="Parametros Seguimiento Contrato" />
+                                    </f:facet>
+                                </rich:panel>
+                                <rich:panel rendered="true" styleClass="noneborder">
+                                    <h:panelGrid columns="2" width="100%">
+                                        <h:outputLabel  value="Convenio/Contrato : "/>
+                                        <h:outputText value="CONVENIO/CONTRATO"></h:outputText>
+                                        <h:outputLabel  value="Contratista : "/>
+                                        <h:outputText value="public.contrato.strcontratista"></h:outputText>
+                                        <h:outputLabel  value="Tipo : "/>
+                                        <h:outputText value="public.contrato.inttipocosto"></h:outputText>
+                                        <h:outputLabel  value="Objeto : "/>
+                                        <h:outputText value="public.contrato.strobjetoobra"></h:outputText>
+                                        <h:outputLabel  value="CDP : "/>
+                                        <h:outputText value="CDP"></h:outputText>
+                                        <h:outputLabel  value="RPC : "/>
+                                        <h:outputText value="RPC"></h:outputText>
+                                        <h:outputLabel  value="Valor Inicial : "/>
+                                        <h:outputText value="public.contrato.numvaltotobra"></h:outputText>
+                                        <h:outputLabel  value="Valor Adicional :"/>
+                                        <h:outputText value="VALOR_ADICIONAL"></h:outputText>
+                                        <h:outputLabel  value="Valor Total : "/>
+                                        <h:outputText value="VALOR_TOTAL"></h:outputText>
+                                        <h:outputLabel  value="Aportes iCCU : "/>
+                                        <h:outputText value="APORTES_ICCU"></h:outputText>
+                                        <h:outputLabel  value="Aporte Municipio : "/>
+                                        <h:outputText value="APORTES_MUNICIPIOS11"></h:outputText>
+                                        <h:outputLabel  value="Plazo : "/>
+                                        <h:outputText value="plazo"></h:outputText>
+                                        <h:outputLabel  value="Fecha Suscripcion Contrato : "/>
+                                        <h:outputText value="FECHA_SUSCRIPCION_CONTRATO"></h:outputText>
+                                        <h:outputLabel  value="Acta de Inicio : "/>
+                                        <h:outputText value="ACTA_INICIO1"></h:outputText>
+                                        <h:outputLabel  value="Porcentaje de Avance : "/>
+                                        <h:outputText value="PORCENTAJE_AVANCE"></h:outputText>
+                                        <h:outputLabel  value="Supervisor : "/>
+                                        <h:outputText value="SUPERVISOR"></h:outputText>
+                                    </h:panelGrid>s
+                                </rich:panel>
+                                <rich:panel rendered="true" styleClass="noneborder">                                
+                                    <h:panelGrid columns="4" width="100%">
+                                        <h:outputLabel  value="Nombre del Representante Legal : "/>
+                                        <h:inputText maxlength="70" value="#{SeguimientosContrato.seg_encab.representanteLegal}"></h:inputText>
+                                        <h:outputLabel  value="NIT Representante Legal : "/>
+                                        <h:inputText maxlength="70" value="#{SeguimientosContrato.seg_encab.nit}"></h:inputText>
+                                        <h:outputLabel  value="Infraestructura/Construccion : "/>
+                                        <h:inputText></h:inputText>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Contrato"/>
+                                        <h:selectBooleanCheckbox id="sbcb_seguimientos_contrato" onclick="submit()" value="#{SeguimientosContrato.seg_encab.contrato}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(1)}" >
+                                            <f:ajax execute="sbcb_seguimientos_contrato" render="calendar_contrato" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Contrato" id="calendar_contrato" value="#{SeguimientosContrato.seg_encab.fechaContrato}" disabled="#{!SeguimientosContrato.seg_encab.contrato}" required="#{SeguimientosContrato.seg_encab.contrato}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Plan de Inversion"/>
+                                        <h:selectBooleanCheckbox id="sbcb_plan_inversion" onclick="submit()" value="#{SeguimientosContrato.seg_encab.planInversion}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(2)}" >
+                                            <f:ajax execute="sbcb_seguimientos_contrato" render="calendar_plan_inversion" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Contrato" id="calendar_plan_inversion" value="#{SeguimientosContrato.seg_encab.fechaPlanInversion}" disabled="#{!SeguimientosContrato.seg_encab.planInversion}" required="#{SeguimientosContrato.seg_encab.planInversion}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Cronograma de Actividades"/>
+                                        <h:selectBooleanCheckbox id="sbcb_cronograma_actividades" onclick="submit()" value="#{SeguimientosContrato.seg_encab.cronogramaActividades}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(3)}" >
+                                            <f:ajax execute="sbcb_cronograma_actividades" render="calendar_cronograma_actividades" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Cronograma Actividades" id="calendar_cronograma_actividades" value="#{SeguimientosContrato.seg_encab.fechaCronogramaActividades}" disabled="#{!SeguimientosContrato.seg_encab.cronogramaActividades}" required="#{SeguimientosContrato.seg_encab.cronogramaActividades}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Certificacion Bancaria"/>
+                                        <h:selectBooleanCheckbox id="sbcb_certificacion_bancaria" onclick="submit()" value="#{SeguimientosContrato.seg_encab.certificacionBancaria}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(4)}" >
+                                            <f:ajax execute="sbcb_certificacion_bancaria" render="calendar_certificacion_bancaria" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Certificacion Bancaria" id="calendar_certificacion_bancaria" value="#{SeguimientosContrato.seg_encab.fechaCertificacionBancaria}" disabled="#{!SeguimientosContrato.seg_encab.certificacionBancaria}" required="#{SeguimientosContrato.seg_encab.certificacionBancaria}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Resolucion Adjudicacion ->"/>
+                                        <h:selectBooleanCheckbox id="sbcb_resolucionAdjudicacion" onclick="submit()" value="#{SeguimientosContrato.seg_encab.resolucionAdjudicacion}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(5)}" >
+                                            <f:ajax execute="sbcb_resolucionAdjudicacion" render="calendar_resolucionAdjudicacion" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Resolucion Adjudicacion" id="calendar_resolucionAdjudicacion" value="#{SeguimientosContrato.seg_encab.fechaResolucionAdjudicacion}" disabled="#{!SeguimientosContrato.seg_encab.resolucionAdjudicacion}" required="#{SeguimientosContrato.seg_encab.resolucionAdjudicacion}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Cronograma Proceso Seleccion -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_cronogramaProcesoSeleccion" onclick="submit()" value="#{SeguimientosContrato.seg_encab.cronogramaProcesoSeleccion}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(6)}" >
+                                            <f:ajax execute="sbcb_cronogramaProcesoSeleccion" render="calendar_cronogramaProcesoSeleccion" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Cronograma Proceso Seleccion" id="calendar_cronogramaProcesoSeleccion" value="#{SeguimientosContrato.seg_encab.fechaCronogramaProcesoSeleccion}" disabled="#{!SeguimientosContrato.seg_encab.cronogramaProcesoSeleccion}" required="#{SeguimientosContrato.seg_encab.cronogramaProcesoSeleccion}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Polizas -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_polizas" onclick="submit()" value="#{SeguimientosContrato.seg_encab.polizas}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(7)}" >
+                                            <f:ajax execute="sbcb_polizas" render="calendar_polizas" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha polizas" id="calendar_polizas" value="#{SeguimientosContrato.seg_encab.fechaPolizas}" disabled="#{!SeguimientosContrato.seg_encab.polizas}" required="#{SeguimientosContrato.seg_encab.polizas}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Estado -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_estado" onclick="submit()" value="#{SeguimientosContrato.seg_encab.estado}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(8)}" >
+                                            <f:ajax execute="sbcb_estado" render="calendar_estado" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Fecha Estado" id="calendar_estado" value="#{SeguimientosContrato.seg_encab.fechaEstado}" disabled="#{!SeguimientosContrato.seg_encab.estado}" required="#{SeguimientosContrato.seg_encab.estado}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Acta Inicio Firmada ALC -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_actaInicioFirmadaAlc" onclick="submit()" value="#{SeguimientosContrato.seg_encab.actaInicioFirmadaAlc}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(9)}" >
+                                            <f:ajax execute="sbcb_actaInicioFirmadaAlc" render="calendar_actaInicioFirmadaAlc" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Acta Inicio Firmada ALC" id="calendar_actaInicioFirmadaAlc" value="#{SeguimientosContrato.seg_encab.fechaActaInicioFirmadaAlc}" disabled="#{!SeguimientosContrato.seg_encab.actaInicioFirmadaAlc}" required="#{SeguimientosContrato.seg_encab.actaInicioFirmadaAlc}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Acta Inicio Firmada ING -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_actaInicioFirmadaIng" onclick="submit()" value="#{SeguimientosContrato.seg_encab.actaInicioFirmadaIng}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(10)}" >
+                                            <f:ajax execute="sbcb_actaInicioFirmadaIng" render="calendar_actaInicioFirmadaIng" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Acta Inicio Firmada ING" id="calendar_actaInicioFirmadaIng" value="#{SeguimientosContrato.seg_encab.fechaActaInicioFirmadaIng}" disabled="#{!SeguimientosContrato.seg_encab.actaInicioFirmadaIng}" required="#{SeguimientosContrato.seg_encab.actaInicioFirmadaIng}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:outputLabel  value="Tramite Completo -> "/>
+                                        <h:selectBooleanCheckbox id="sbcb_tramiteCompleto" onclick="submit()" value="#{SeguimientosContrato.seg_encab.tramiteCompleto}" valueChangeListener="#{SeguimientosContrato.validarCamposFechasBooleanos(11)}" >
+                                            <f:ajax execute="sbcb_actaInicioFirmadaIng" render="calendar_tramiteCompleto" event="change"/>
+                                        </h:selectBooleanCheckbox>    
+                                        <rich:calendar defaultLabel="(*) Acta Inicio Firmada ING" id="calendar_tramiteCompleto" value="#{SeguimientosContrato.seg_encab.fechaTramiteCompleto}" disabled="#{!SeguimientosContrato.seg_encab.tramiteCompleto}" required="#{SeguimientosContrato.seg_encab.tramiteCompleto}"></rich:calendar>
+                                        <h:outputLabel  value=""/>
+                                        <h:commandButton onclick="submit()" value="Procesar" action="#{SeguimientosContrato.actualizarRegistroSeguimientoEncabezado}"></h:commandButton>
+                                    </h:panelGrid>
+                                </rich:panel>
+                            </h:panelGrid>                        
+                        </rich:tab>
+                        <rich:tab header="Seguimiento en detalle|">
+                            <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-metasdisponibles">
+                                <h:commandButton id="btCrearMetaObra"  value="Crear Meta" immediate="true"
+                                                 action="#{MetasProyecto.irApagina_IngresarMeta()}" />
+                                <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
+                                                 action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
+                                <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas}" styleClass="ikont-rdt-indicadoresdisponibles"
+                                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                        var="objetoMetasProyecto">                           
+                                    <rich:column width="5em">
+                                        <f:facet name="header">
+                                            <h:outputText  value="Id"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.id}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Objetivo"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Programa"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.programa}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="SubPrograma"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.subprograma}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Int Nom Pro"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.nomp}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Descripcion Meta Producto"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.descripcionmetaproducto}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Unidad de Medida"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.unidadmedida}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Nombre Indicador"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.nombreindicador}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.tipometa}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
+                                        <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                        </h:commandLink>
+                                    </rich:column>
+                                </rich:extendedDataTable>                            
+                            </rich:collapsiblePanel>
+                        </rich:tab>
+                        <rich:tab header="Reportes Consolidados|">
+                            <h:outputLabel  value="Rep"/>
+                        </rich:tab>
+                        <rich:tab header="Historico Cambios|">
+                            <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-seguimientos-historicos-cambios">
+                                <h:commandButton id="btCrearMetaObra1"  value="Crear Meta" immediate="true"
+                                                 action="#{MetasProyecto.irApagina_IngresarMeta()}" />
+                                <h:commandButton id="btExportarTablaMetas11"  value="Exportar Tabla a Excel" immediate="true"
+                                                 action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
+                                <rich:extendedDataTable id="ikont-rdt-metadisponibles1" value="#{MetasProyecto.listaMetas}" styleClass="ikont-rdt-indicadoresdisponibles"
+                                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                        var="objetoMetasProyecto">                           
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Id Seguimiento Detalle"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Representante Legal"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="NIT"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Infraestructura/Construcion"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Contrato"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Plan de Inversion"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Cronograma de Actividades"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" > - <h:outputText  value="Certificacion Bancaria"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Resolucion Adjudicacion"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Cronograma Proceso Seleccion"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Polizas"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Estado"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Acta Inicio Firmada ALC"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Acta Inicio Firmada ING"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Tramite Completo"/></f:facet>
+                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
+                                </rich:extendedDataTable>                            
+                            </rich:collapsiblePanel>                        </rich:tab>
+                    </rich:tabPanel>
+                </rich:panel>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
