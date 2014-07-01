@@ -9,7 +9,7 @@
 
     >
     <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proestructuracion">
-        <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proestructuracion"   columns="10"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
+        <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proestructuracion"   columns="14"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
             <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
                 <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                 <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
@@ -78,6 +78,20 @@
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-finalizar-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
                 <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text" value="#{var.guardar} #{var.proyecto}"  style="width: 120px;" action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
             </h:panelGroup>
+            <!-- MCG Mayo 21 2014 Metas -->
+            <h:panelGroup layout="block"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-metas-proestructuracion"  action="#{MetasProyecto.irApagina_Metas}" type="submit">
+                    <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra }" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                </h:commandLink>    
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="Modulo Metas" style="width: 120px;" action="#{MetasProyecto.irApagina_MetasProyecto}"/>
+            </h:panelGroup>            
+            <!-- MCG Junio 19 2014 Opcion Seguimientos -->
+            <h:panelGroup layout="block"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-seguimientos-proestructuracion"  action="#{SeguimientosContrato.irApagina_SeguimientosContrato}" actionListener="#{SeguimientosContrato.generarRegistroPrimeraVez(Supervisor$IngresarNuevaObra.obranueva.intcodigoobra)}" type="submit">
+                    <a4j:param assignTo="#{SeguimientosContrato.p_idcodigoobra }" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}"/>
+                </h:commandLink>    
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-menu-detalle-text"  value="Modulo Metas" style="width: 120px;" action="#{SeguimientosContrato.irApagina_SeguimientosContrato}"/>
+            </h:panelGroup>                        
         </h:panelGrid>
     </h:panelGroup>
     <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
