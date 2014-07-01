@@ -303,6 +303,16 @@
         <managed-bean-class>cobra.PlanOperativo.FlujoCaja</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>MetasProyecto</managed-bean-name>
+        <managed-bean-class>co.com.interkont.cobra.obra.meta.MetasProyecto</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>SeguimientosContrato</managed-bean-name>
+        <managed-bean-class>co.com.interkont.cobra.obra.seguimiento.SeguimientosContrato</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>    
 
     <managed-bean>
         <managed-bean-name>SessionBeanCobra</managed-bean-name>
@@ -757,6 +767,18 @@
             <from-outcome>generarorden</from-outcome>
             <to-view-id>/Financiera/OrdenPago.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>IngresarMetaProyecto</from-outcome>
+            <to-view-id>/co/com/interkont/cobra/obra/meta/IngresarMetaProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Metas</from-outcome>
+            <to-view-id>/co/com/interkont/cobra/obra/meta/MetasProyecto.xhtml</to-view-id>
+        </navigation-case>                        
+        <navigation-case>
+            <from-outcome>IrSeguimientosContrato</from-outcome>
+            <to-view-id>/co/com/interkont/cobra/obra/seguimiento/SeguimientosContrato.xhtml</to-view-id>
+        </navigation-case>                
     </navigation-rule>
 
     <navigation-rule>
