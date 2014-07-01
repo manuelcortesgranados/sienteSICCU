@@ -3052,6 +3052,31 @@ css usuario modificacion
     width: 105px;
     background-position: -896px -96px;
 }
+
+/*
+---------------------------------------------------------------------------------------------------------------------------------------------------
+MCG Mayo 21 2014 2:02 PM Req. Metas
+*/
+.ikont-posicion-nuevo-metas-proestructuracion{
+    background-position: -1261px -21px;
+}
+.ikont-posicion-nuevo-metas-proestructuracion:hover, .ikont-posicion-nuevo-metas-proestructuracion.scroll.buttonactive{
+    background-position: -1261px -96px;
+}
+
+/*
+---------------------------------------------------------------------------------------------------------------------------------------------------
+MCG Junio 20 2014 Req. Seguimientos
+*/
+.ikont-posicion-nuevo-seguimientos-proestructuracion{
+    width: 110px;
+    background-position: -1354px -21px;
+}
+.ikont-posicion-nuevo-seguimientos-proestructuracion:hover, .ikont-posicion-nuevo-seguimientos-proestructuracion.scroll.buttonactive{
+    width: 110px;
+    background-position: -1354px -96px;
+}
+
 .ikont-acl-calcutodamatrix{
     width: 20px;
     height: 20px;
@@ -4878,4 +4903,6 @@ a:hover {
 .ikont-hcl-crearcontratoenconvenio:hover, .ikont-hcl-crearcontratoenconvenio.buttonactive{
     background-position:-1046px -110px;
     width: 120px;
+}.ikont-label-borde {
+	border: 1px solid #80CCFF;
 }
