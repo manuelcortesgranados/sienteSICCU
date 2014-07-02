@@ -99,58 +99,29 @@
             </center>
             <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
         </rich:tab>              
-        <rich:tab header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
+        <rich:tab header="#{var.filtrodonde}"   id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom "  >
                 <h:panelGroup>
-                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" rendered="false" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">                       
-                        <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
-                        <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
-                        <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
-                    </h:selectOneMenu>
-
                     <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
-                        <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
-                            <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}"  styleClass="input_filtro_select">
-                                <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
-                                <f:selectItems value="#{HomeGestion.zonaespe}"/>
-                                <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
-                            </h:selectOneMenu>
-                        </h:panelGrid>
                         <h:panelGrid id="filtrodeptos" styleClass="ikont-hpg-filtrolocalidades"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
                             <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="combos_ubicacion"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                 <f:selectItems value="#{HomeGestion.departamentos}"/>
-                                <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
+                                <a4j:ajax event="valueChange" listener="#{HomeGestion.cargarMunicipios}" limitRender="true" transient="true" execute="@this"
                                           render="municipios"/>
                             </h:selectOneMenu>
                             <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="combos_ubicacion"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
                                 <f:selectItems value="#{HomeGestion.municipios}" />
                             </h:selectOneMenu>
-                            <h:selectOneMenu id="ikont-hsom-provincia" value="#{HomeGestion.filtro.codProvincia}" styleClass="combos_ubicacion" rendered="#{var.verotrostiposdelocalidad}">
-                                <f:selectItem itemValue="0" itemLabel="#{var.provincia}"/>
-                                <f:selectItems value="#{HomeGestion.provinciasSelectItem}"/>
-                            </h:selectOneMenu>
-                            <h:selectOneMenu id="ikont-hsom-corregimient" value="#{HomeGestion.filtro.codCorregimient}" styleClass="combos_ubicacion" rendered="#{var.verotrostiposdelocalidad}">
-                                <f:selectItem itemValue="0" itemLabel="#{var.corregimiento}"/>
-                                <f:selectItems value="#{HomeGestion.corregimientsSelectItem}"/>
-                            </h:selectOneMenu>
-                            <h:selectOneMenu id="ikont-hsom-car" value="#{HomeGestion.filtro.codCar}" styleClass="combos_ubicacion" rendered="#{var.verotrostiposdelocalidad}">
-                                <f:selectItem itemValue="0" itemLabel="#{var.car}"/>
-                                <f:selectItems value="#{HomeGestion.carsSelectItem}"/>
-                            </h:selectOneMenu>
-                            <h:selectOneMenu id="ikont-hsom-cuenca" value="#{HomeGestion.filtro.codCuenca}" styleClass="combos_ubicacion" rendered="#{var.verotrostiposdelocalidad}">
-                                <f:selectItem itemValue="0" itemLabel="#{var.cuenca}"/>
-                                <f:selectItems value="#{HomeGestion.cuencasSelectItem}"/>
-                            </h:selectOneMenu>
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:panelGroup>
             </h:panelGrid>
             <center>
-                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn"        />
+                <a4j:commandButton  execute="municipios, depto, zona" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo2"   value="#{var.buscar}"
+                                 styleClass="boton1 ikont-filtro-filtrar_btn" />
             </center>
         </rich:tab>
 
@@ -158,39 +129,30 @@
             <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
 
-                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" styleClass="ikont-filtro-filtrar-autocomplete-cliente"
-                                   var="cap3" fetchValue="#{cap3.strnombrecompleto}" value="#{HomeGestion.filtro.strcliente}" layout="div">
-                    #{cap3.strnombrecompleto}
+                <h:inputText  id="auto_cliente" rendered="false"  value="#{HomeGestion.filtro.strcliente}">
                     <rich:placeholder id="placeHolderCliente" value="Cliente" />
-                </rich:autocomplete>
-
-                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" styleClass="ikont-filtro-filtrar-autocomplete-contratista"
-                                   var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
-                    #{cap.strnombre}
-                    <rich:placeholder id="placeHolderContratista" value="#{var.contratista}" />
-                </rich:autocomplete>
-
-                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" styleClass="ikont-filtro-filtrar-autocomplete-interventor"                              
-                                   var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
-                    #{cap1.strinterventor}
+                </h:inputText>
+                
+                <h:inputText  id="auto_contratista"  value="#{HomeGestion.filtro.strcontratista}">
+                    <rich:placeholder id="placeHolderContratista" value="Contratista" />
+                </h:inputText>
+                
+                <h:inputText  id="auto_interventor"  styleClass="input_filtro" value="#{HomeGestion.filtro.strinterventor}">
                     <rich:placeholder  id="placeHolderInterventor" value="#{var.interventorObra}" />
-                </rich:autocomplete>
-
-                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" styleClass="ikont-filtro-filtrar-autocomplete-gerente"
-                                   var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
-                    #{cap2.strnombrecompleto}
+                </h:inputText>
+                
+                <h:inputText  id="auto_gerente"  styleClass="input_filtro" value="#{HomeGestion.filtro.strgerenteconvenio}">
                     <rich:placeholder id="placeHolderGerente" value="#{var.gerenteconvenio}" />
-                </rich:autocomplete>
-
-
+                </h:inputText>
+                <br/>
+                <br/>
             </h:panelGrid>
-
+            
+            
             <center>
 
-                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn"  >
-                    <a4j:param value="1" assignTo="#{HomeGestion.filtro.ordenarPor}"/>
-                </h:commandButton>
+                <a4j:commandButton  execute="auto_cliente,auto_contratista,auto_interventor,auto_gerente" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo3"   value="#{var.buscar}"
+                                 styleClass="boton1 ikont-filtro-filtrar_btn" />
 
             </center>
         </rich:tab>

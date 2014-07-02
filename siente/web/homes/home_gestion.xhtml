@@ -14,7 +14,7 @@
     template="/facelets/template_main.xhtml">
 
     <ui:define name="head">
-        <title>Cobra - Home Gestion</title>
+        <title>Cobra - Home Gestión</title>
         <ui:include src="/includes/google_maps_key.xhtml" />   
         <script src="/#{var.versioncobra}/resources/js/analytics/#{var.srcanalytics}" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
@@ -52,16 +52,6 @@
         <ui:include src="/facelets/menu_gestion_zoom.xhtml" />
     </ui:define>
     <ui:define name="menu_lateral">  
-        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
-            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
-                <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
-                <ui:include src="/facelets/panel_conozca_inversion.xhtml"/>
-            </h:panelGroup>
-        </h:panelGroup>
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
 
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
@@ -160,7 +150,7 @@
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" rendered="#{HomeGestion.filtro.intvista == 1}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
 
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
-                               jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
+                               jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
 
                             <ui:repeat var="marker" value="#{HomeGestion.markers}">
                                 <m:polyline lineWidth="10" hexaColor="#747474" geodesic="true" rendered="#{marker.verlinea}">
@@ -176,13 +166,15 @@
                                 <m:marker latitude="#{marker.latitude}" 
                                           longitude="#{marker.longitude}"
                                           jsVariable="#{marker.jsVariable}" 
-                                          draggable="false" >
-                                    <m:eventListener eventName="click" jsFunction="mapavalla" />                                      
-
-
-
+                                          draggable="false" showInformationEvent="click"
+                                          immediate="true"
+                                          transient="true"
+                                          submitOnValueChange="false"
+                                          >
                                     <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
-                                    <m:htmlInformationWindow htmlText="#{marker.informationWindow}" />
+                                    
+                                    <m:htmlInformationWindow transient="true"  htmlText="#{marker.informationWindow}">
+                                    </m:htmlInformationWindow>
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
