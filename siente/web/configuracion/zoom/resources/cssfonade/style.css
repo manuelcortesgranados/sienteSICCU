@@ -305,6 +305,14 @@ blockquote									{ padding: 0 20px; margin-left: 20px; border-left: 20px solid
     border:solid 1px #C1C1C1;
     border-radius:13px;
 }
+.cont_bottom_auditoria
+{
+    width:859px;
+    height:400px;
+    float:left;
+    border:solid 1px #C1C1C1;
+    border-radius:13px;
+}
 .cont_central
 {
     width:308px;
