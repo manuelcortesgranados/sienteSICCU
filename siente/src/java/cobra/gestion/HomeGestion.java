@@ -78,7 +78,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      */
     private Integer ubicaciondetalle = 0;
     //private Alimentacion alimentacionultima = new Alimentacion();
-    private SelectItem[] ClaseObra;
+    private static SelectItem[] ClaseObra;
 
     public Integer getUbicaciondetalle() {
         return ubicaciondetalle;
@@ -226,9 +226,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private Contratista contratista = new Contratista();
     private SelectItem[] tiposEstadoObra = new SelectItem[0];
     private SelectItem[] tiposProyectos = new SelectItem[0];
-    private SelectItem[] fases = new SelectItem[0];
+    private static SelectItem[] fases;
     private SelectItem[] departamentos = new SelectItem[0];
-    private SelectItem[] zonaespe;
+    private static SelectItem[] zonaespe;
     private SelectItem[] municipios = new SelectItem[0];
     private SelectItem[] subTiposProyecto = new SelectItem[0];
     private Tipoproyecto tipoProyecto = new Tipoproyecto();
@@ -245,8 +245,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private boolean verultimosobra;
     private boolean veranteriorobra;
     private boolean aplicafiltroobra = false;
-    private SelectItem[] eventos = new SelectItem[0];
-    private SelectItem[] zonasespecificas = new SelectItem[0];
+    private static SelectItem[] eventos;
+    private static SelectItem[] zonasespecificas;
     private int opcionov = 0;
     private int inttipoorigen = 0;
     public boolean onNovedades = false;
@@ -929,8 +929,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
-
-        
         long l1 = System.currentTimeMillis();
 
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
@@ -960,7 +958,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         if (!this.searchInitialized) {
             iniciarFiltroAvanzado();
             //llenarTablaNovedades();
-            //llenarZonaEspecifica();
             this.searchInitialized = true;
         }
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
@@ -1033,43 +1030,52 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void iniciarFiltroAvanzado() {
 
         //PERFORMANCE
-        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
-        llenarComboEstadosObra(listaEstadosObras);
-        List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
-        llenarComboTiposProyecto(listaTiposProyecto);
-        List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
-        llenarClaseSectorObra(listaclase);
-        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
-        llenarComboFases(listaFases);
-        cargarSubtiposProyecto();
+        llenarComboMunicipio(new ArrayList());
+        llenarClaseSectorObra();
+        cambioSectorProyecto();
+        llenarComboFases();
+        //llenarComboEventos();
+        llenarZonaEspecifica();
+        llenarComboZonasEspecificas();
 
+//        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
+//        llenarComboEstadosObra(listaEstadosObras);
+//        List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+//        llenarComboTiposProyecto(listaTiposProyecto);
+//        List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+//        llenarClaseSectorObra(listaclase);
+//        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+//        llenarComboFases(listaFases);
+//        cargarSubtiposProyecto();
+//        List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+//        llenarComboDeptos(deptos);
 //        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
 //        llenarComboMunicipio(listaMunicipios);
-//        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
-//
-//        if (listaEstadosObras != null) {
-//            llenarComboEstadosObra(listaEstadosObras);
-//        }
-//
-//        if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
-//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-//            List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
-//            llenarComboDeptos(deptos);
-//
-//        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 1) {
-//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-//            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
-//            municipio = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
-//            filtro.setStrmunicipio(depto.getStrcodigolocalidad());
-//
-//        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 2) {
-//            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
-//            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
-//            depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
-//            filtro.setStrcoddepto(depto.getStrcodigolocalidad());
-//            //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
-//            llenarComboMunicipio(listaMunicipios);
-//        }
+        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
+
+        if (listaEstadosObras != null) {
+            llenarComboEstadosObra(listaEstadosObras);
+        }
+
+        if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 4) {
+            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+            List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+            llenarComboDeptos(deptos);
+
+        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 1) {
+            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
+            municipio = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
+            filtro.setStrmunicipio(depto.getStrcodigolocalidad());
+
+        } else if (getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen().getIntidtipoorigen() == 2) {
+            tipoOrigenUsuario = getSessionBeanCobra().getUsuarioObra().getTercero().getTipoOrigen();
+            String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
+            depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
+            filtro.setStrcoddepto(depto.getStrcodigolocalidad());
+            List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+            llenarComboMunicipio(listaMunicipios);
+        }
 //        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
 //            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
 //
@@ -1083,7 +1089,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //            }
 //            cambioSectorProyecto();
 //        }
-//
+
 //        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
 //        List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
 //        List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
@@ -1345,13 +1351,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void llenarZonaEspecifica() {
-        getSessionBeanCobra().getCobraService().setListazonaespecificas(getSessionBeanCobra().getCobraService().encontrarZonaespecifica());
-        zonaespe = new SelectItem[getSessionBeanCobra().getCobraService().getListazonaespecificas().size()];
-        int i = 0;
-        for (Zonaespecifica zona : getSessionBeanCobra().getCobraService().getListazonaespecificas()) {
-            SelectItem zon = new SelectItem(zona.getIntidzonaespecifica(), zona.getStrdescripcionzona().toUpperCase());
+        if (HomeGestion.zonaespe == null) {
+            getSessionBeanCobra().getCobraService().setListazonaespecificas(getSessionBeanCobra().getCobraService().encontrarZonaespecifica());
+            zonaespe = new SelectItem[getSessionBeanCobra().getCobraService().getListazonaespecificas().size()];
+            int i = 0;
+            for (Zonaespecifica zona : getSessionBeanCobra().getCobraService().getListazonaespecificas()) {
+                SelectItem zon = new SelectItem(zona.getIntidzonaespecifica(), zona.getStrdescripcionzona().toUpperCase());
 
-            zonaespe[i++] = zon;
+                zonaespe[i++] = zon;
+            }
         }
 
     }
@@ -1426,59 +1434,60 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return false;
     }
 
-    public void llenarComboFases(List listFases) {
-        fases = new SelectItem[listFases.size()];
+    public void llenarComboFases() {
+        if (HomeGestion.fases == null) {
+            List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+            fases = new SelectItem[listaFases.size()];
 
-        int j = 0;
-        for (Iterator i = listFases.iterator(); i.hasNext();) {
-
-            Fase fas = (Fase) i.next();
-
-            SelectItem opt = new SelectItem(fas.getIntidfase(), fas.getStrnombre());
-            fases[j] = opt;
-            j++;
+            int j = 0;
+            for (Fase fas : listaFases) {
+                SelectItem opt = new SelectItem(fas.getIntidfase(), fas.getStrnombre());
+                fases[j] = opt;
+                j++;
+            }
         }
 
     }
 
     /*------------------*/
-    public void llenarComboEventos(List listaEventos) {
+    public void llenarComboEventos() {
 
-        eventos = new SelectItem[listaEventos.size()];
-        int j = 0;
-        for (Iterator i = listaEventos.iterator(); i.hasNext();) {
-
-            Evento eve = (Evento) i.next();
-
-            SelectItem opt = new SelectItem(eve.getIntidevento(), eve.getStrnombre());
-            eventos[j] = opt;
-            j++;
-
+        if (HomeGestion.eventos == null) {
+            List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
+            eventos = new SelectItem[listaEventos.size()];
+            int j = 0;
+            for (Evento eve : listaEventos) {
+                SelectItem opt = new SelectItem(eve.getIntidevento(), eve.getStrnombre());
+                eventos[j] = opt;
+                j++;
+            }
         }
 
     }
 
-    public void llenarComboZonasEspecificas(List listaZonasEspecificas) {
-        SelectItem[] TempZonaE = new SelectItem[listaZonasEspecificas.size() + 1];
+    public void llenarComboZonasEspecificas() {
 
-        TempZonaE[0] = new SelectItem(0, bundle.getString("todos"));
+        if (HomeGestion.zonasespecificas == null) {
+            List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
+            SelectItem[] TempZonaE = new SelectItem[listaZonaespecificas.size() + 1];
 
-        int j = 1, k = 1;
-        for (Iterator i = listaZonasEspecificas.iterator(); i.hasNext();) {
+            TempZonaE[0] = new SelectItem(0, bundle.getString("todos"));
 
-            Zonaespecifica ze = (Zonaespecifica) i.next();
-            if (verificarZonaE(ze, j, TempZonaE) == false) {
-                SelectItem opt = new SelectItem(ze.getIntidzonaespecifica(), ze.getStrnombrezona());
-                TempZonaE[j] = opt;
-                j++;
+            int j = 1, k = 1;
+            for (Zonaespecifica ze : listaZonaespecificas) {
+                if (verificarZonaE(ze, j, TempZonaE) == false) {
+                    SelectItem opt = new SelectItem(ze.getIntidzonaespecifica(), ze.getStrnombrezona());
+                    TempZonaE[j] = opt;
+                    j++;
 
+                }
             }
-        }
-        zonasespecificas = new SelectItem[j];
-        zonasespecificas[0] = new SelectItem(0, bundle.getString("todos"));
-        while (k < j) {
-            zonasespecificas[k] = TempZonaE[k];
-            k++;
+            zonasespecificas = new SelectItem[j];
+            zonasespecificas[0] = new SelectItem(0, bundle.getString("todos"));
+            while (k < j) {
+                zonasespecificas[k] = TempZonaE[k];
+                k++;
+            }
         }
     }
 
@@ -3126,20 +3135,23 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     /**
      * Metodo Utilizado para Llenar el sector Filtro mapa
      *
-     * @param listaclaseobra
      */
-    public void llenarClaseSectorObra(List<Claseobra> listaclaseobra) {
-        ClaseObra = new SelectItem[listaclaseobra.size() + 1];
-        int i = 0;
-        SelectItem clap = new SelectItem(0, "Sector");
-        ClaseObra[i] = clap;
-        i++;
-        for (Claseobra clase : listaclaseobra) {
-            SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
-            ClaseObra[i++] = opt;
+    public void llenarClaseSectorObra() {
+
+        if (HomeGestion.ClaseObra == null) {
+            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+            ClaseObra = new SelectItem[listaclase.size() + 1];
+            int i = 0;
+            SelectItem clap = new SelectItem(0, "Sector");
+            ClaseObra[i] = clap;
+            i++;
+            for (Claseobra clase : listaclase) {
+                SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
+                ClaseObra[i++] = opt;
+            }
+            getIngresarNuevaObra().getFaseelegida().setIntidfase(getIngresarNuevaObra().getTiahselect());
+            getIngresarNuevaObra().setTiposelec(0);
         }
-        getIngresarNuevaObra().getFaseelegida().setIntidfase(getIngresarNuevaObra().getTiahselect());
-        getIngresarNuevaObra().setTiposelec(0);
 
     }
 
@@ -3355,6 +3367,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private boolean searchInitialized = false;
     private boolean searchActivated = false;
     public static int maxRowsPerPage = 100;
+    public static final String html_01 = "<div class=\"modal-header-fonade\"><div class=\"tabla\"><p><div class=\"columna\"><span class=\"imagotipo\"/></div><div class=\"columna\"><label class=\"textvalla1\">";
+    public static final String html_02 = "</label></div></p></div></div></div><div class=\"modal-body-fonade tabla\"><div class=\"tabla content-left\"><p><div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div></p><p><div class=\"columna textvalla5\">";
+    public static final String html_03 = "</div><div class=\"columna\"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO<div><p>";
+    public static final String html_04 = "</p></div></label></div></p><p><div class=\"columna textvalla3\">Contratante:</div><div class=\"columna textvalla4\">";
+    public static final String html_05 = "</div></p><p><div class=\"columna vallacontentinfo\"><span class=\"textvalla4\">Semáforo</span><span class=\"imgsemaforo ";
+    public static final String html_06 = "\"></span></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4\">Avance</span><span class=\"textvalla6\">";
+    public static final String html_07 = "%</span></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4 \">Tipo</span><a class=\"imgtipo tipo";
+    public static final String html_08 = "\"></a></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4 \">Estado</span><a class=\"imgestado estado";
+    public static final String html_09 = "\"></a></div></p></div><div class=\"tabla content-rigth\"><p><div class=\"columna\">";
+    public static final String html_10 = "</div></p>";
+    public static final String html_11 = "</div></div></div>";
 
     public boolean isSearchInitialized() {
         return this.searchInitialized;
@@ -3489,57 +3512,30 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     Object[] obra = listaPerformanceObras.get(i);
 
-                    //sql.append("OBRA.strnombreobra,");//0
-                    //sql.append("OBRA.numvaltotobra,");//1
-                    //sql.append("OBRA.intplazoobra,");//2
-                    //sql.append("OBRA.numvalavanfisicodeclarado,");//3
-                    //sql.append("OBRA.intcodigoobra,");//4
-                    //sql.append("OBRA.floatlatitud,");//5
-                    //sql.append("OBRA.floatlongitud,");//6
-                    //sql.append("OBRA.numvalejecobra,");//7
-                    //sql.append("OBRA.strimagenobra,");//8
-                    //sql.append("OBRA.strdireccion,");//9
-                    //sql.append("OBRA.fksolicitud_obra,");//10
-                    //sql.append("OBRA.strobjetoobra,");//11
                     String _obra_strnombreobra = obra[0] == null ? "" : obra[0].toString();
                     Double _obra_numvaltotobra = obra[1] == null ? null : Double.parseDouble(obra[1].toString());
-                    //Integer _obra_intplazoobra = obra[2] == null ? null : Integer.parseInt(obra[2].toString());
-                    //Double _obra_numvalavanfisicodeclarado = obra[3] == null ? null : Double.parseDouble(obra[3].toString());
                     Integer _obra_intcodigoobra = obra[4] == null ? null : Integer.parseInt(obra[4].toString());
                     Double _obra_floatlatitud = obra[5] == null ? null : Double.parseDouble(obra[5].toString());
                     Double _obra_floatlongitud = obra[6] == null ? null : Double.parseDouble(obra[6].toString());
+
+                    if (_obra_floatlatitud == null || _obra_floatlongitud == null) {
+                        i++;
+                        continue;
+                    }
                     Double _obra_numvalejecobra = obra[7] == null ? null : Double.parseDouble(obra[7].toString());
                     String _obra_strimagenobra = obra[8] == null ? null : obra[8].toString();
-                    //String _obra_strdireccion = obra[9] == null ? null : obra[9].toString();
-                    //String _obra_fksolicitud_obra = obra[10] == null ? null : obra[10].toString();
                     String _obra_strobjetoobra = obra[11] == null ? "" : obra[11].toString();
 
-                    //sql.append("CONT.strnombre,");//12
-                    //sql.append("TERC.strnombrecompleto,");//13
-                    //String _contrato_strnombre = obra[12] == null ? null : obra[12].toString();
                     String _tercero_strnombrecompleto = obra[13] == null ? "" : obra[13].toString();
 
-                    //sql.append("TIPO.strdesctipoobra,");//14
-                    //sql.append("TIPO.strurlimagen,");//15
-                    //sql.append("TIPO.strurlimagen_marcador,");//16
-                    //sql.append("TIPO.strurlimagen_suspendido,");//17
-                    //sql.append("TIPO.strurlimagen_finalizado,");//18
-                    //sql.append("TIPO.strurlimagen_ejecucion,");//19
-                    //String _tipoobra_strdesctipoobra = obra[14] == null ? null : obra[14].toString();
-                    //String _tipoobra_strurlimagen = obra[15] == null ? null : obra[15].toString();
                     String _tipoobra_strurlimagen_marcador = obra[16] == null ? null : obra[16].toString();
                     String _tipoobra_strurlimagen_suspendido = obra[17] == null ? null : obra[17].toString();
                     String _tipoobra_strurlimagen_finalizado = obra[18] == null ? null : obra[18].toString();
                     String _tipoobra_strurlimagen_ejecucion = obra[19] == null ? null : obra[19].toString();
 
-                    //sql.append("STAT.intestadoobra,");//20
-                    //sql.append("STAT.strdesctipoestado,");//21
                     Integer _tipoestadoobra_intestadoobra = obra[20] == null ? null : Integer.parseInt(obra[20].toString());
                     String _tipoestadoobra_strdesctipoestado = obra[21] == null ? null : obra[21].toString();
 
-                    //sql.append("TIPP.intidtipoproyecto,");//22
-                    //sql.append("TIPP.strnombre,");//23
-                    //sql.append("f_proyecto_semaforo(OBRA.intcodigoobra) AS semaforo ");//24
                     Integer _tipoproyecto_intidtipoproyecto = obra[22] == null ? null : Integer.parseInt(obra[22].toString());
                     String _tipoproyecto_strnombre = obra[23] == null ? null : obra[23].toString();
                     String _semaforo = obra[24] == null ? null : obra[24].toString();
@@ -3578,13 +3574,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     if (_tercero_strnombrecompleto.length() > 25) {
                         list_contratante.append("<label class=\"tool\">");
                         list_contratante.append(_tercero_strnombrecompleto.substring(0, 22));
-                        list_contratante.append("...");
-                        list_contratante.append("<div>");
-                        list_contratante.append("<p>");
+                        list_contratante.append("...<div><p>");
                         list_contratante.append(_tercero_strnombrecompleto);
-                        list_contratante.append("</p>");
-                        list_contratante.append("</div>");
-                        list_contratante.append("</label>");
+                        list_contratante.append("</p></div></label>");
                     } else {
                         list_contratante.append(_tercero_strnombrecompleto);
                     }
@@ -3600,78 +3592,35 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     }
 
                     StringBuilder descripcion = new StringBuilder();
-                    descripcion.append("<html>");
-                    descripcion.append("<body >");
-                    descripcion.append("<div class=\"modal-content-fonade\">");
-                    descripcion.append("<div class=\"modal-header-fonade\">");
-                    descripcion.append("<div class=\"tabla\">");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna \">");
-                    descripcion.append("<span class=\"imagotipo\"></span>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"columna\">");
-                    descripcion.append("<label class=\"textvalla1\">");
+                    descripcion.append(html_01);
                     String nombreCorto = _obra_strnombreobra;
                     if (nombreCorto.length() > 50) {
                         nombreCorto = nombreCorto.substring(0, 49) + "...";
                     }
                     descripcion.append(nombreCorto);
-                    descripcion.append("</label>");
-                    descripcion.append("</div>");
-                    descripcion.append("</p>");
-                    descripcion.append("</div>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"modal-body-fonade tabla\">");
-                    descripcion.append("<div class=\"tabla content-left\">");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
+                    descripcion.append(html_02);
 
-                    descripcion.append("</p>");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna textvalla5\">");
                     descripcion.append((money.format(_obra_numvaltotobra) + getDetalleObra().getValorinterventoria()));
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO");
-                    descripcion.append("<div>");
-                    descripcion.append("<p>");
+                    descripcion.append(html_03);
+
                     descripcion.append(_obra_strobjetoobra.replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
-                    descripcion.append("</p>");
-                    descripcion.append("</div>");
-                    descripcion.append("</label></div>");
-                    descripcion.append("</p>");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna textvalla3\"> Contratante : </div>");
-                    descripcion.append("<div class=\"columna textvalla4\">");
+                    descripcion.append(html_04);
+
                     descripcion.append(list_contratante.toString());
-                    descripcion.append("</div>");
-                    descripcion.append("</p>");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna vallacontentinfo\">");
-                    descripcion.append("<span class=\"textvalla4\">Semáforo</span>");
-                    descripcion.append("<span class=\"imgsemaforo ").append(stylesemaforo).append("\">");
-                    descripcion.append("</span>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"columna vallacontentinfo\">");
-                    descripcion.append("<span class=\"textvalla4\">Avance</span>");
-                    descripcion.append("<span class=\"textvalla6\">").append(asi_va_text);
-                    descripcion.append("%");
-                    descripcion.append("</span>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"columna vallacontentinfo\">");
-                    descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
-                    descripcion.append("<a class=\"imgtipo tipo").append(_tipoproyecto_intidtipoproyecto).append("\" value=\"").append(_tipoproyecto_strnombre).append("\">");
-                    descripcion.append("</a>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"columna vallacontentinfo\">");
-                    descripcion.append("<span class=\"textvalla4 \">Estado </span>");
-                    descripcion.append("<a class=\"imgestado estado").append(_tipoestadoobra_intestadoobra).append("\" value=\"").append(_tipoestadoobra_strdesctipoestado).append("\">");
-                    descripcion.append("</a>");
-                    descripcion.append("</div>");
-                    descripcion.append("</p>");
-                    descripcion.append("</div>");
-                    descripcion.append("<div class=\"tabla content-rigth\">");
-                    descripcion.append("<p>");
-                    descripcion.append("<div class=\"columna\">");
+                    descripcion.append(html_05);
+
+                    descripcion.append(stylesemaforo);
+                    descripcion.append(html_06);
+
+                    descripcion.append(asi_va_text);
+                    descripcion.append(html_07);
+
+                    descripcion.append(_tipoproyecto_intidtipoproyecto).append("\" value=\"").append(_tipoproyecto_strnombre);
+                    descripcion.append(html_08);
+
+                    descripcion.append(_tipoestadoobra_intestadoobra).append("\" value=\"").append(_tipoestadoobra_strdesctipoestado);
+                    descripcion.append(html_09);
+
                     if (_obra_strimagenobra != null && !_obra_strimagenobra.isEmpty() && _obra_strimagenobra.contains(".")) {
                         descripcion.append("<img class=\"imgvalla\" src=\"/").append(version);
                         descripcion.append(_obra_strimagenobra);
@@ -3679,49 +3628,35 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     } else {
                         descripcion.append("<img class=\"imgvalla\" src=\"/").append(version).append("/resources/imgs/noimagen_mapa.png\">");
                     }
-                    descripcion.append(" </div>");
-                    descripcion.append("</p>");
+                    descripcion.append(html_10);
 
                     if (_tipoestadoobra_intestadoobra != 0) {
-                        descripcion.append("<p>");
-                        descripcion.append("<div class=\"columna\">");
-                        descripcion.append("<a class=\"imgaction button1\" href=\"");
-                        descripcion.append(contextPath).append("/Supervisor/DetalleObra.xhtml");
-                        descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Información\" >");
-                        descripcion.append("</a>");
-                        descripcion.append("</div>");
+                        descripcion.append("<p><div class=\"columna\"><a class=\"imgaction button1\" href=\"");
+                        descripcion.append(contextPath).append("/Supervisor/DetalleObra.xhtml?id=");
+                        descripcion.append(_obra_intcodigoobra);
+                        descripcion.append("\" value=\"Información\"></a></div>");
+
                         if (!getSessionBeanCobra().getUsuarioObra().getUsuLogin().equals(bundle.getString("ciudadanosinregistro"))) {
-                            descripcion.append("<div  class=\"columna\">");
-                            descripcion.append("<a class=\"imgaction button2\" href=\"");
-                            descripcion.append(contextPath).append("/Ciudadano/ParticipacionCiudadano.xhtml");
-                            descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Comentarios\" >");
-                            descripcion.append("</a>");
-                            descripcion.append("</div>");
+                            descripcion.append("<div  class=\"columna\"><a class=\"imgaction button2\" href=\"");
+                            descripcion.append(contextPath).append("/Ciudadano/ParticipacionCiudadano.xhtml?id=");
+                            descripcion.append(_obra_intcodigoobra);
+                            descripcion.append("\" value=\"Comentarios\"></a></div>");
                         }
-                        descripcion.append("<div class=\"columna\">");
-                        descripcion.append("<a class=\"imgaction button3\" href=\"");
-                        descripcion.append(contextPath).append("/Supervisor/ImagenObra.xhtml");
-                        descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Fotos\" >");
-                        descripcion.append("</a>");
-                        descripcion.append("</div>");
-                        descripcion.append("</p>");
+
+                        descripcion.append("<div class=\"columna\"><a class=\"imgaction button3\" href=\"");
+                        descripcion.append(contextPath).append("/Supervisor/ImagenObra.xhtml?id=");
+                        descripcion.append(_obra_intcodigoobra).append("\" value=\"Fotos\" >");
+                        descripcion.append("</a></div></p>");
                     } else if (_tipoestadoobra_intestadoobra == 0 && !filtro.isIsciu()) {
                         if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnproyecto()) {
-                            descripcion.append("<p>");
-                            descripcion.append("<div class=\"columna\">");
-                            descripcion.append("<a class=\"imgaction button1\" href=\"");
-                            descripcion.append(contextPath).append("/NuevoProyecto/tipificacionproyecto.xhtml");
-                            descripcion.append("?id=").append(_obra_intcodigoobra).append("\" value=\"Información\" >");
-                            descripcion.append("</a>");
-                            descripcion.append("</div>");
+                            descripcion.append("<p><div class=\"columna\"><a class=\"imgaction button1\" href=\"");
+                            descripcion.append(contextPath).append("/NuevoProyecto/tipificacionproyecto.xhtml?id=");
+                            descripcion.append(_obra_intcodigoobra);
+                            descripcion.append("\" value=\"Información\"></a></div></p>");
                         }
                     }
 
-                    descripcion.append("</div>");
-                    descripcion.append("</div>");
-                    descripcion.append("</div>");
-                    descripcion.append("</body>");
-                    descripcion.append("</html>");
+                    descripcion.append(html_11);
                     marker.setInformationWindow(descripcion.toString());
 
                     markers.add(marker);
@@ -3737,4 +3672,5 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         System.out.println("__________TIME cargarVallaFonadePerformance: " + (System.currentTimeMillis() - l1));
     }
+
 }
