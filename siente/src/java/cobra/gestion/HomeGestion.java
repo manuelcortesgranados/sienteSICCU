@@ -1,3 +1,4 @@
+//PERFORMANCE
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -79,7 +80,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      */
     private Integer ubicaciondetalle = 0;
     //private Alimentacion alimentacionultima = new Alimentacion();
-    private SelectItem[] ClaseObra;
+    private static SelectItem[] ClaseObra;
 
     public Integer getUbicaciondetalle() {
         return ubicaciondetalle;
@@ -134,7 +135,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     /**
      * Set the value of datos_mapa
      *
-     * @param datos_mapa new value of datos_mapa
+     * @return 
      */
     public SelectItem[] getTipoObraUsuario() {
 
@@ -146,14 +147,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
-     * Get the value of ObrasUsuario
-     *
-     * @return the value of ObrasUsuario
-     */
-    /**
      * Set the value of ObrasUsuario
      *
-     * @param ObrasUsuario new value of ObrasUsuario
+     * @return 
      */
     public SelectItem[] getUbicacionObra() {
         return UbicacionObra;
@@ -227,9 +223,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private Contratista contratista = new Contratista();
     private SelectItem[] tiposEstadoObra = new SelectItem[0];
     private SelectItem[] tiposProyectos = new SelectItem[0];
-    private SelectItem[] fases = new SelectItem[0];
+    private static SelectItem[] fases;
     private SelectItem[] departamentos = new SelectItem[0];
-    private SelectItem[] zonaespe;
+    private static SelectItem[] zonaespe;
     private SelectItem[] municipios = new SelectItem[0];
     private SelectItem[] subTiposProyecto = new SelectItem[0];
     private Tipoproyecto tipoProyecto = new Tipoproyecto();
@@ -246,8 +242,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private boolean verultimosobra;
     private boolean veranteriorobra;
     private boolean aplicafiltroobra = false;
-    private SelectItem[] eventos = new SelectItem[0];
-    private SelectItem[] zonasespecificas = new SelectItem[0];
+    private static SelectItem[] eventos;
+    private static SelectItem[] zonasespecificas;
     private int opcionov = 0;
     private int inttipoorigen = 0;
     public boolean onNovedades = false;
@@ -471,7 +467,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setZonaespe(SelectItem[] zonaespe) {
-        this.zonaespe = zonaespe;
+        HomeGestion.zonaespe = zonaespe;
     }
 
     public String getMensaje() {
@@ -535,7 +531,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setZonasespecificas(SelectItem[] zonasespecificas) {
-        this.zonasespecificas = zonasespecificas;
+        HomeGestion.zonasespecificas = zonasespecificas;
     }
 
     public SelectItem[] getEventos() {
@@ -543,7 +539,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setEventos(SelectItem[] eventos) {
-        this.eventos = eventos;
+        HomeGestion.eventos = eventos;
     }
 
     public boolean isAplicafiltroobra() {
@@ -875,7 +871,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setClaseObra(SelectItem[] ClaseObra) {
-        this.ClaseObra = ClaseObra;
+        HomeGestion.ClaseObra = ClaseObra;
     }
 
     public void iniciarfiltro() {
@@ -930,6 +926,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
+        
+        long l1 = System.currentTimeMillis();
+
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
         setInttipoorigen(1);
 
@@ -952,9 +951,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtro.setIntregionespecifica(0);
         iniciarfiltro();
         //primeroListProyectos();
-        iniciarFiltroAvanzado();
-        llenarTablaNovedades();
-        llenarZonaEspecifica();
+
+        //PERFORMANCE
+        if (!this.searchInitialized) {
+            iniciarFiltroAvanzado();
+            //llenarTablaNovedades();
+            this.searchInitialized = true;
+        }
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
 //                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
 
@@ -1022,9 +1025,29 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void iniciarFiltroAvanzado() {
-        //filtro.setPalabraClave(new String());
-        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
-        llenarComboMunicipio(listaMunicipios);
+
+        //PERFORMANCE
+        llenarComboMunicipio(new ArrayList());
+        llenarClaseSectorObra();
+        cambioSectorProyecto();
+        llenarComboFases();
+        //llenarComboEventos();
+        llenarZonaEspecifica();
+        llenarComboZonasEspecificas();
+
+//        List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
+//        llenarComboEstadosObra(listaEstadosObras);
+//        List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+//        llenarComboTiposProyecto(listaTiposProyecto);
+//        List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+//        llenarClaseSectorObra(listaclase);
+//        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+//        llenarComboFases(listaFases);
+//        cargarSubtiposProyecto();
+//        List<Localidad> deptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+//        llenarComboDeptos(deptos);
+//        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+//        llenarComboMunicipio(listaMunicipios);
         List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
 
         if (listaEstadosObras != null) {
@@ -1047,45 +1070,45 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
             depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
             filtro.setStrcoddepto(depto.getStrcodigolocalidad());
-            //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+            List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
             llenarComboMunicipio(listaMunicipios);
         }
-        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
-            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+//        if (!Boolean.parseBoolean(bundle.getString("tipoproyectoporsector"))) {
+//            List<Tipoproyecto> listaTiposProyecto = getSessionBeanCobra().getCobraService().encontrarTiposProyecto();
+//
+//            if (listaTiposProyecto != null) {
+//                llenarComboTiposProyecto(listaTiposProyecto);
+//            }
+//        } else {
+//            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+//            if (listaclase != null) {
+//                llenarClaseSectorObra(listaclase);
+//            }
+//            cambioSectorProyecto();
+//        }
 
-            if (listaTiposProyecto != null) {
-                llenarComboTiposProyecto(listaTiposProyecto);
-            }
-        } else {
-            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
-            if (listaclase != null) {
-                llenarClaseSectorObra(listaclase);
-            }
-            cambioSectorProyecto();
-        }
-
-        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
-        List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
-        List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
-        List<Region> listaRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
-
-        if (listaFases != null) {
-            llenarComboFases(listaFases);
-        }
-        if (listaEventos != null) {
-            llenarComboEventos(listaEventos);
-        }
-        if (listaZonaespecificas != null) {
-            llenarComboZonasEspecificas(listaZonaespecificas);
-        }
-        getSessionBeanCobra().llenarPeriodoEvento();
-        cargarSubtiposProyecto();
-        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
-            llenarProvincias();
-            llenarCorregimients();
-            llenarCars();
-            llenarCuencas();
-        }
+//        List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+//        List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
+//        List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
+//        List<Region> listaRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
+//
+//        if (listaFases != null) {
+//            llenarComboFases(listaFases);
+//        }
+//        if (listaEventos != null) {
+//            llenarComboEventos(listaEventos);
+//        }
+//        if (listaZonaespecificas != null) {
+//            llenarComboZonasEspecificas(listaZonaespecificas);
+//        }
+//        getSessionBeanCobra().llenarPeriodoEvento();
+//        cargarSubtiposProyecto();
+//        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+//            llenarProvincias();
+//            llenarCorregimients();
+//            llenarCars();
+//            llenarCuencas();
+//        }
     }
 
     public void cargarMunicipios() {
@@ -1326,13 +1349,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void llenarZonaEspecifica() {
-        getSessionBeanCobra().getCobraService().setListazonaespecificas(getSessionBeanCobra().getCobraService().encontrarZonaespecifica());
-        zonaespe = new SelectItem[getSessionBeanCobra().getCobraService().getListazonaespecificas().size()];
-        int i = 0;
-        for (Zonaespecifica zona : getSessionBeanCobra().getCobraService().getListazonaespecificas()) {
-            SelectItem zon = new SelectItem(zona.getIntidzonaespecifica(), zona.getStrdescripcionzona().toUpperCase());
+        if (HomeGestion.zonaespe == null) {
+            getSessionBeanCobra().getCobraService().setListazonaespecificas(getSessionBeanCobra().getCobraService().encontrarZonaespecifica());
+            zonaespe = new SelectItem[getSessionBeanCobra().getCobraService().getListazonaespecificas().size()];
+            int i = 0;
+            for (Zonaespecifica zona : getSessionBeanCobra().getCobraService().getListazonaespecificas()) {
+                SelectItem zon = new SelectItem(zona.getIntidzonaespecifica(), zona.getStrdescripcionzona().toUpperCase());
 
-            zonaespe[i++] = zon;
+                zonaespe[i++] = zon;
+            }
         }
 
     }
@@ -1407,59 +1432,60 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return false;
     }
 
-    public void llenarComboFases(List listFases) {
-        fases = new SelectItem[listFases.size()];
+    public void llenarComboFases() {
+        if (HomeGestion.fases == null) {
+            List<Fase> listaFases = getSessionBeanCobra().getCobraService().encontrarFase();
+            fases = new SelectItem[listaFases.size()];
 
-        int j = 0;
-        for (Iterator i = listFases.iterator(); i.hasNext();) {
-
-            Fase fas = (Fase) i.next();
-
-            SelectItem opt = new SelectItem(fas.getIntidfase(), fas.getStrnombre());
-            fases[j] = opt;
-            j++;
+            int j = 0;
+            for (Fase fas : listaFases) {
+                SelectItem opt = new SelectItem(fas.getIntidfase(), fas.getStrnombre());
+                fases[j] = opt;
+                j++;
+            }
         }
 
     }
 
     /*------------------*/
-    public void llenarComboEventos(List listaEventos) {
+    public void llenarComboEventos() {
 
-        eventos = new SelectItem[listaEventos.size()];
-        int j = 0;
-        for (Iterator i = listaEventos.iterator(); i.hasNext();) {
-
-            Evento eve = (Evento) i.next();
-
-            SelectItem opt = new SelectItem(eve.getIntidevento(), eve.getStrnombre());
-            eventos[j] = opt;
-            j++;
-
+        if (HomeGestion.eventos == null) {
+            List<Evento> listaEventos = getSessionBeanCobra().getCobraService().encontrarEventos();
+            eventos = new SelectItem[listaEventos.size()];
+            int j = 0;
+            for (Evento eve : listaEventos) {
+                SelectItem opt = new SelectItem(eve.getIntidevento(), eve.getStrnombre());
+                eventos[j] = opt;
+                j++;
+            }
         }
 
     }
 
-    public void llenarComboZonasEspecificas(List listaZonasEspecificas) {
-        SelectItem[] TempZonaE = new SelectItem[listaZonasEspecificas.size() + 1];
+    public void llenarComboZonasEspecificas() {
 
-        TempZonaE[0] = new SelectItem(0, bundle.getString("todos"));
+        if (HomeGestion.zonasespecificas == null) {
+            List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
+            SelectItem[] TempZonaE = new SelectItem[listaZonaespecificas.size() + 1];
 
-        int j = 1, k = 1;
-        for (Iterator i = listaZonasEspecificas.iterator(); i.hasNext();) {
+            TempZonaE[0] = new SelectItem(0, bundle.getString("todos"));
 
-            Zonaespecifica ze = (Zonaespecifica) i.next();
-            if (verificarZonaE(ze, j, TempZonaE) == false) {
-                SelectItem opt = new SelectItem(ze.getIntidzonaespecifica(), ze.getStrnombrezona());
-                TempZonaE[j] = opt;
-                j++;
+            int j = 1, k = 1;
+            for (Zonaespecifica ze : listaZonaespecificas) {
+                if (verificarZonaE(ze, j, TempZonaE) == false) {
+                    SelectItem opt = new SelectItem(ze.getIntidzonaespecifica(), ze.getStrnombrezona());
+                    TempZonaE[j] = opt;
+                    j++;
 
+                }
             }
-        }
-        zonasespecificas = new SelectItem[j];
-        zonasespecificas[0] = new SelectItem(0, bundle.getString("todos"));
-        while (k < j) {
-            zonasespecificas[k] = TempZonaE[k];
-            k++;
+            zonasespecificas = new SelectItem[j];
+            zonasespecificas[0] = new SelectItem(0, bundle.getString("todos"));
+            while (k < j) {
+                zonasespecificas[k] = TempZonaE[k];
+                k++;
+            }
         }
     }
 
@@ -2296,6 +2322,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String llenarTablaNovedades() {
+        
+        //PERFORMANCE
+        if(true)
+            return "";
+        
         llenarComentarios();
         opcionov = 1;
         listarecientes = new ArrayList<ActividadReciente>();
@@ -3101,21 +3132,30 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
+<<<<<<< HEAD
      * Metodo Utilizado para  Llenar el sector Filtro mapa
      * @param listaclaseobra 
+=======
+     * Metodo Utilizado para Llenar el sector Filtro mapa
+     *
+>>>>>>> PERFORMANCE_BUSQUEDA_PROYECTOS
      */
-    public void llenarClaseSectorObra(List<Claseobra> listaclaseobra) {
-        ClaseObra = new SelectItem[listaclaseobra.size() + 1];
-        int i = 0;
-        SelectItem clap = new SelectItem(0, "Sector");
-        ClaseObra[i] = clap;
-        i++;
-        for (Claseobra clase : listaclaseobra) {
-            SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
-            ClaseObra[i++] = opt;
+    public void llenarClaseSectorObra() {
+
+        if (HomeGestion.ClaseObra == null) {
+            List<Claseobra> listaclase = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(2);
+            ClaseObra = new SelectItem[listaclase.size() + 1];
+            int i = 0;
+            SelectItem clap = new SelectItem(0, "Sector");
+            ClaseObra[i] = clap;
+            i++;
+            for (Claseobra clase : listaclase) {
+                SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
+                ClaseObra[i++] = opt;
+            }
+            getIngresarNuevaObra().getFaseelegida().setIntidfase(getIngresarNuevaObra().getTiahselect());
+            getIngresarNuevaObra().setTiposelec(0);
         }
-        getIngresarNuevaObra().getFaseelegida().setIntidfase(getIngresarNuevaObra().getTiahselect());
-        getIngresarNuevaObra().setTiposelec(0);
 
     }
 
@@ -3315,5 +3355,327 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             llenarCars();
         }
         return "datosubicaciondelaObra";
+    }
+
+    /*
+     PERFORMANCE - Búsqueda de Proyectos
+     */
+    /*
+     * nuevas Variables para aumentar el performance
+     */
+    private List<Object[]> listaPerformanceObras;
+    private List<Object[]> listaPerformancePage;
+    private int pivote = 0;
+    private boolean searchInitialized = false;
+    private boolean searchActivated = false;
+    public static int maxRowsPerPage = 100;
+    public static final String html_01 = "<div class=\"modal-header-fonade\"><div class=\"tabla\"><p><div class=\"columna\"><span class=\"imagotipo\"/></div><div class=\"columna\"><label class=\"textvalla1\">";
+    public static final String html_02 = "</label></div></p></div></div></div><div class=\"modal-body-fonade tabla\"><div class=\"tabla content-left\"><p><div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div></p><p><div class=\"columna textvalla5\">";
+    public static final String html_03 = "</div><div class=\"columna\"> <label class=\"textvalla7 label-obj-proyecto tool\">OBJETO<div><p>";
+    public static final String html_04 = "</p></div></label></div></p><p><div class=\"columna textvalla3\">Contratante:</div><div class=\"columna textvalla4\">";
+    public static final String html_05 = "</div></p><p><div class=\"columna vallacontentinfo\"><span class=\"textvalla4\">Semáforo</span><span class=\"imgsemaforo ";
+    public static final String html_06 = "\"></span></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4\">Avance</span><span class=\"textvalla6\">";
+    public static final String html_07 = "%</span></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4 \">Tipo</span><a class=\"imgtipo tipo";
+    public static final String html_08 = "\"></a></div><div class=\"columna vallacontentinfo\"><span class=\"textvalla4 \">Estado</span><a class=\"imgestado estado";
+    public static final String html_09 = "\"></a></div></p></div><div class=\"tabla content-rigth\"><p><div class=\"columna\">";
+    public static final String html_10 = "</div></p>";
+    public static final String html_11 = "</div></div></div>";
+
+    public boolean isSearchInitialized() {
+        return this.searchInitialized;
+    }
+
+    public boolean isSearchActivated() {
+        return this.searchActivated;
+    }
+
+    public List<Object[]> getListaPerformanceObras() {
+        return listaPerformanceObras;
+    }
+
+    public void anteriorPaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote > 0) {
+            int limit = this.pivote;
+            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = true;
+            this.veranteriorobra = false;
+        }
+    }
+
+    public void siguientePaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote + HomeGestion.maxRowsPerPage < this.totalfilas) {
+            int init = this.pivote + HomeGestion.maxRowsPerPage;
+            int limit = Math.min(init + HomeGestion.maxRowsPerPage, this.totalfilas);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.veranteriorobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+        }
+
+    }
+
+    public void primeraPaginaPerformance() {
+
+        if (this.listaPerformanceObras != null) {
+            int init = 0;
+            int limit = Math.min(this.totalfilas, HomeGestion.maxRowsPerPage);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = true;
+            this.veranteriorobra = false;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+            this.veranteriorobra = false;
+        }
+
+    }
+
+    public void ultimaPaginaPerformance() {
+        if (this.listaPerformanceObras != null && this.pivote < this.totalfilas - 1) {
+            int limit = totalfilas;
+            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
+            this.listaPerformancePage = new ArrayList<Object[]>();
+            for (int i = init; i < limit; i++) {
+                listaPerformancePage.add(listaPerformanceObras.get(i));
+            }
+            this.verultimosobra = false;
+            this.veranteriorobra = true;
+            this.pivote = init;
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+
+        } else {
+            this.verultimosobra = false;
+            this.veranteriorobra = false;
+        }
+
+    }
+
+    public List<Object[]> getListaPerformancePage() {
+        return listaPerformancePage;
+    }
+
+    public void setListaPerformancePage(List<Object[]> listaPerformancePage) {
+        this.listaPerformancePage = listaPerformancePage;
+    }
+
+    public void buscarProyectoPerformance() {
+        this.listaPerformanceObras = this.getSessionBeanCobra().getCobraService().performaceEncontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
+        this.totalfilas = this.listaPerformanceObras.size();
+        this.obrasEncontradas = this.totalfilas;
+        this.cargarVallaFonadePerformance();
+        this.primeraPaginaPerformance();
+        this.totalpaginas = this.totalfilas / HomeGestion.maxRowsPerPage;
+        if (totalpaginas == 0) {
+            totalpaginas++;
+        }
+        this.searchActivated = true;
+    }
+
+    public int getRowsPerPage() {
+        return HomeGestion.maxRowsPerPage;
+    }
+
+    /**
+     * Este método reemplaza a cargarVallaFonade()
+     */
+    public void cargarVallaFonadePerformance() {
+        long l1 = System.currentTimeMillis();
+
+        if (this.listaPerformanceObras != null) {
+            markers = new ArrayList();
+
+            int i = 0;
+            NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
+            String contextPath = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+            String version = getSessionBeanCobra().getBundle().getString("versioncobra");
+
+            while (i < this.listaPerformanceObras.size()) {
+                try {
+
+                    Object[] obra = listaPerformanceObras.get(i);
+
+                    String _obra_strnombreobra = obra[0] == null ? "" : obra[0].toString();
+                    Double _obra_numvaltotobra = obra[1] == null ? null : Double.parseDouble(obra[1].toString());
+                    Integer _obra_intcodigoobra = obra[4] == null ? null : Integer.parseInt(obra[4].toString());
+                    Double _obra_floatlatitud = obra[5] == null ? null : Double.parseDouble(obra[5].toString());
+                    Double _obra_floatlongitud = obra[6] == null ? null : Double.parseDouble(obra[6].toString());
+
+                    if (_obra_floatlatitud == null || _obra_floatlongitud == null) {
+                        i++;
+                        continue;
+                    }
+                    Double _obra_numvalejecobra = obra[7] == null ? null : Double.parseDouble(obra[7].toString());
+                    String _obra_strimagenobra = obra[8] == null ? null : obra[8].toString();
+                    String _obra_strobjetoobra = obra[11] == null ? "" : obra[11].toString();
+
+                    String _tercero_strnombrecompleto = obra[13] == null ? "" : obra[13].toString();
+
+                    String _tipoobra_strurlimagen_marcador = obra[16] == null ? null : obra[16].toString();
+                    String _tipoobra_strurlimagen_suspendido = obra[17] == null ? null : obra[17].toString();
+                    String _tipoobra_strurlimagen_finalizado = obra[18] == null ? null : obra[18].toString();
+                    String _tipoobra_strurlimagen_ejecucion = obra[19] == null ? null : obra[19].toString();
+
+                    Integer _tipoestadoobra_intestadoobra = obra[20] == null ? null : Integer.parseInt(obra[20].toString());
+                    String _tipoestadoobra_strdesctipoestado = obra[21] == null ? null : obra[21].toString();
+
+                    Integer _tipoproyecto_intidtipoproyecto = obra[22] == null ? null : Integer.parseInt(obra[22].toString());
+                    String _tipoproyecto_strnombre = obra[23] == null ? null : obra[23].toString();
+                    String _semaforo = obra[24] == null ? null : obra[24].toString();
+
+                    Marcador marker = new Marcador();
+                    marker.setLatitude(_obra_floatlatitud + "");
+                    marker.setLongitude(_obra_floatlongitud + "");
+
+                    marker.setIntcodobra(_obra_intcodigoobra);
+                    marker.setJsVariable((new StringBuilder("js_")).append(_obra_intcodigoobra).toString());
+
+                    String pin = _tipoobra_strurlimagen_marcador;
+                    switch (_tipoestadoobra_intestadoobra == null ? 0 : _tipoestadoobra_intestadoobra) {
+                        case 5:
+                            pin = _tipoobra_strurlimagen_ejecucion;
+                            break;
+                        case 2:
+                            pin = _tipoobra_strurlimagen_finalizado;
+                            break;
+                        case 6:
+                            pin = _tipoobra_strurlimagen_suspendido;
+                            break;
+                    }
+
+                    marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
+
+                    double porcentaje = 0;
+
+                    if (_obra_numvalejecobra != null && _tipoestadoobra_intestadoobra != null && _tipoestadoobra_intestadoobra > 0) {
+                        porcentaje = (porcentaje * 100) / _obra_numvaltotobra;
+
+                    }
+                    int asi_va_text = (int) Math.floor(porcentaje);
+
+                    StringBuilder list_contratante = new StringBuilder();
+                    if (_tercero_strnombrecompleto.length() > 25) {
+                        list_contratante.append("<label class=\"tool\">");
+                        list_contratante.append(_tercero_strnombrecompleto.substring(0, 22));
+                        list_contratante.append("...<div><p>");
+                        list_contratante.append(_tercero_strnombrecompleto);
+                        list_contratante.append("</p></div></label>");
+                    } else {
+                        list_contratante.append(_tercero_strnombrecompleto);
+                    }
+                    String stylesemaforo = "";
+                    if (_semaforo != null && _semaforo.compareTo("") != 0) {
+                        if (_semaforo.equals("/resources/botones/rojo.png")) {
+                            stylesemaforo = "semafororojo";
+                        } else if (_semaforo.equals("/resources/botones/amarillo.png")) {
+                            stylesemaforo = "semaforoamarillo";
+                        } else if (_semaforo.equals("/resources/botones/verde.png")) {
+                            stylesemaforo = "semaforoverde";
+                        }
+                    }
+
+                    StringBuilder descripcion = new StringBuilder();
+                    descripcion.append(html_01);
+                    String nombreCorto = _obra_strnombreobra;
+                    if (nombreCorto.length() > 50) {
+                        nombreCorto = nombreCorto.substring(0, 49) + "...";
+                    }
+                    descripcion.append(nombreCorto);
+                    descripcion.append(html_02);
+
+                    descripcion.append((money.format(_obra_numvaltotobra) + getDetalleObra().getValorinterventoria()));
+                    descripcion.append(html_03);
+
+                    descripcion.append(_obra_strobjetoobra.replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
+                    descripcion.append(html_04);
+
+                    descripcion.append(list_contratante.toString());
+                    descripcion.append(html_05);
+
+                    descripcion.append(stylesemaforo);
+                    descripcion.append(html_06);
+
+                    descripcion.append(asi_va_text);
+                    descripcion.append(html_07);
+
+                    descripcion.append(_tipoproyecto_intidtipoproyecto).append("\" value=\"").append(_tipoproyecto_strnombre);
+                    descripcion.append(html_08);
+
+                    descripcion.append(_tipoestadoobra_intestadoobra).append("\" value=\"").append(_tipoestadoobra_strdesctipoestado);
+                    descripcion.append(html_09);
+
+                    if (_obra_strimagenobra != null && !_obra_strimagenobra.isEmpty() && _obra_strimagenobra.contains(".")) {
+                        descripcion.append("<img class=\"imgvalla\" src=\"/").append(version);
+                        descripcion.append(_obra_strimagenobra);
+                        descripcion.append("\">");
+                    } else {
+                        descripcion.append("<img class=\"imgvalla\" src=\"/").append(version).append("/resources/imgs/noimagen_mapa.png\">");
+                    }
+                    descripcion.append(html_10);
+
+                    if (_tipoestadoobra_intestadoobra != 0) {
+                        descripcion.append("<p><div class=\"columna\"><a class=\"imgaction button1\" href=\"");
+                        descripcion.append(contextPath).append("/Supervisor/DetalleObra.xhtml?id=");
+                        descripcion.append(_obra_intcodigoobra);
+                        descripcion.append("\" value=\"Información\"></a></div>");
+
+                        if (!getSessionBeanCobra().getUsuarioObra().getUsuLogin().equals(bundle.getString("ciudadanosinregistro"))) {
+                            descripcion.append("<div  class=\"columna\"><a class=\"imgaction button2\" href=\"");
+                            descripcion.append(contextPath).append("/Ciudadano/ParticipacionCiudadano.xhtml?id=");
+                            descripcion.append(_obra_intcodigoobra);
+                            descripcion.append("\" value=\"Comentarios\"></a></div>");
+                        }
+
+                        descripcion.append("<div class=\"columna\"><a class=\"imgaction button3\" href=\"");
+                        descripcion.append(contextPath).append("/Supervisor/ImagenObra.xhtml?id=");
+                        descripcion.append(_obra_intcodigoobra).append("\" value=\"Fotos\" >");
+                        descripcion.append("</a></div></p>");
+                    } else if (_tipoestadoobra_intestadoobra == 0 && !filtro.isIsciu()) {
+                        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnproyecto()) {
+                            descripcion.append("<p><div class=\"columna\"><a class=\"imgaction button1\" href=\"");
+                            descripcion.append(contextPath).append("/NuevoProyecto/tipificacionproyecto.xhtml?id=");
+                            descripcion.append(_obra_intcodigoobra);
+                            descripcion.append("\" value=\"Información\"></a></div></p>");
+                        }
+                    }
+
+                    descripcion.append(html_11);
+                    marker.setInformationWindow(descripcion.toString());
+
+                    markers.add(marker);
+
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+                catch(NullPointerException ne){
+                    System.out.println(ne.getMessage());
+                }
+                catch(ArrayIndexOutOfBoundsException ae){
+                    System.out.println(ae.getMessage());
+                }
+                i++;
+            }
+
+        }
+        System.out.println("__________TIME cargarVallaFonadePerformance: " + (System.currentTimeMillis() - l1));
     }
 }

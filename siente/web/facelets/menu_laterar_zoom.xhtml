@@ -37,12 +37,12 @@
                     <center>
 
                         <a4j:commandLink styleClass="ikont-enlace-boton-restaurar-passwd" value="#{var.logintabentrarolvidocontrasenia}"   
-                                          oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
+                                         oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
                         <br/>
                         <h:panelGrid columns="3">
                             <h:commandButton id="enviardosnuevo" value="Ingresar" action="#{login.enviar_action}"                              
                                              type="submit"  /> 
-                            
+
 
                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                 <rich:message for="usuarionuevo" />
@@ -84,16 +84,49 @@
                                 <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
                                     <rich:placeholder value="Em@il" />
                                 </h:inputText>
-                                <h:selectOneMenu id="combodepartamentoCiudadanuevo" value="2"  >
-                                    <f:selectItems value="#{Perfil$Usuario.localidadusuario}" />
+                                <h:selectOneMenu  id="combodepartamentoCiudadanuevo" value="2"  >
+                                    <f:selectItem  itemValue="16905" itemLabel="Antioquia"/>
+                                    <f:selectItem  itemValue="16981" itemLabel="Arauca"/>
+                                    <f:selectItem  itemValue="16908" itemLabel="Atlántico"/>
+                                    <f:selectItem  itemValue="16911" itemLabel="Bogotá D.C."/>
+                                    <f:selectItem  itemValue="16913" itemLabel="Bolívar"/>
+                                    <f:selectItem  itemValue="16915" itemLabel="Boyacá"/>
+                                    <f:selectItem  itemValue="16917" itemLabel="Caldas"/>
+                                    <f:selectItem  itemValue="16918" itemLabel="Caquetá"/>
+                                    <f:selectItem  itemValue="16985" itemLabel="Casanare"/>
+                                    <f:selectItem  itemValue="16919" itemLabel="Cauca"/>
+                                    <f:selectItem  itemValue="16920" itemLabel="Cesar"/>
+                                    <f:selectItem  itemValue="16927" itemLabel="Chocó"/>
+                                    <f:selectItem  itemValue="16923" itemLabel="Córdoba"/>
+                                    <f:selectItem  itemValue="16925" itemLabel="Cundinamarca"/>
+                                    <f:selectItem  itemValue="16994" itemLabel="Guainía"/>
+                                    <f:selectItem  itemValue="16995" itemLabel="Guaviare"/>
+                                    <f:selectItem  itemValue="16941" itemLabel="Huila"/>
+                                    <f:selectItem  itemValue="16944" itemLabel="La Guajira"/>
+                                    <f:selectItem  itemValue="16947" itemLabel="Magdalena"/>
+                                    <f:selectItem  itemValue="16950" itemLabel="Meta"/>
+                                    <f:selectItem  itemValue="16952" itemLabel="Nariño"/>
+                                    <f:selectItem  itemValue="16954" itemLabel="Norte de Santander"/>
+                                    <f:selectItem  itemValue="16986" itemLabel="Putumayo"/>
+                                    <f:selectItem  itemValue="16963" itemLabel="Quindío"/>
+                                    <f:selectItem  itemValue="16966" itemLabel="Risaralda"/>
+                                    <f:selectItem  itemValue="16988" itemLabel="San Andrés"/>
+                                    <f:selectItem  itemValue="16968" itemLabel="Santander"/>
+                                    <f:selectItem  itemValue="16970" itemLabel="Sucre"/>
+                                    <f:selectItem  itemValue="16973" itemLabel="Tolima"/>
+                                    <f:selectItem  itemValue="16976" itemLabel="Valle del Cauca"/>
+                                    <f:selectItem  itemValue="16997" itemLabel="Vaupés"/>
+                                    <f:selectItem  itemValue="16999" itemLabel="Vichada"/>
                                 </h:selectOneMenu> 
 
                                 <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.fechadeNacimiento}"/>
                                 <rich:calendar id="fechaciudadanonuevo" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"  
                                                value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
                                 <h:outputLabel styleClass="ikont-outtext-subtitulo"  value="#{var.generoContratista}"/>
-                                <h:selectOneMenu id="combogeneronuevo" value="genero">
-                                    <f:selectItems value="#{Perfil$Usuario.generosoption}" />
+                                <h:selectOneMenu  id="combogeneronuevo" value="genero">
+                                    <f:selectItem itemValue="1" itemLabel="Masculino" />
+                                    <f:selectItem itemValue="2" itemLabel="Femenino" />
+                                    <f:selectItem itemValue="3" itemLabel="No Aplica" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
                             <hr class="ikont-hr-separador" />
@@ -131,7 +164,7 @@
 
         <div  class="ikont-div-cerrar-panel">
             <h:commandLink styleClass="ikont-btn-cerrar-flecha-session"   onclick="esconderIngresoAnimado();
-                        return  false;"/>
+                    return  false;"/>
         </div>
     </div>
 
@@ -142,7 +175,7 @@
 
     <div class="ikont-div-scroll-menu" >
         <h:panelGrid rendered="#{var.permisonuevodiseno}" onmouseover="mostrarMenuAnimado();
-                        return  false;" styleClass="ikont-panel-spacing-menu" columns="3">        
+                return  false;" styleClass="ikont-panel-spacing-menu" columns="3">        
             <h:commandLink styleClass="ikont-menu-inicio-zoom_1 ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="INICIO" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>  
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
@@ -275,47 +308,47 @@
     </div>
     <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript">
-                    j = jQuery;
+                                       j = jQuery;
 
-                    $(function() {
-                        inicializar();
-                    })
-                    function  inicializar() {
-                        // esconderIngreso();
-                        var divMenuPrincipal = j('.ikont-div-menu-principal');
-                        divMenuPrincipal.mouseleave(esconderMenuAnimado);
-                    }
+                                       $(function() {
+                                           inicializar();
+                                       })
+                                       function  inicializar() {
+                                           // esconderIngreso();
+                                           var divMenuPrincipal = j('.ikont-div-menu-principal');
+                                           divMenuPrincipal.mouseleave(esconderMenuAnimado);
+                                       }
 
-                    function esconderIngreso() {
-                        var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-                        divIngresoUsuario.hide();
-                    }
+                                       function esconderIngreso() {
+                                           var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                                           divIngresoUsuario.hide();
+                                       }
 
-                    function mostrarIngresoAnimado() {
-                        var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-                        divIngresoUsuario.stop().animate({height: '572px'});
-                    }
-                    function esconderIngresoAnimado() {
-                        var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-                        divIngresoUsuario.stop().animate({height: '0px'});
-                    }
-                    //Menu
-                    function mostrarMenuAnimado() {
-                        var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
-                        cbMostrarMenu.hide();
-                        var divIngresoUsuario = j('.ikont-div-menu-principal');
-                        divIngresoUsuario.stop().animate({width: '268px'});
-                    }
-                    function esconderMenuAnimado() {
-                        var divIngresoUsuario = j('.ikont-div-menu-principal');
-                        divIngresoUsuario.stop().animate({width: '0px'});
-                        mostrarCbMostrarMenu();
-                    }
+                                       function mostrarIngresoAnimado() {
+                                           var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                                           divIngresoUsuario.stop().animate({height: '572px'});
+                                       }
+                                       function esconderIngresoAnimado() {
+                                           var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                                           divIngresoUsuario.stop().animate({height: '0px'});
+                                       }
+                                       //Menu
+                                       function mostrarMenuAnimado() {
+                                           var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
+                                           cbMostrarMenu.hide();
+                                           var divIngresoUsuario = j('.ikont-div-menu-principal');
+                                           divIngresoUsuario.stop().animate({width: '268px'});
+                                       }
+                                       function esconderMenuAnimado() {
+                                           var divIngresoUsuario = j('.ikont-div-menu-principal');
+                                           divIngresoUsuario.stop().animate({width: '0px'});
+                                           mostrarCbMostrarMenu();
+                                       }
 
-                    function mostrarCbMostrarMenu() {
-                        var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
-                        cbMostrarMenu.show();
-                    }
+                                       function mostrarCbMostrarMenu() {
+                                           var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
+                                           cbMostrarMenu.show();
+                                       }
 
     </script>
     <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
