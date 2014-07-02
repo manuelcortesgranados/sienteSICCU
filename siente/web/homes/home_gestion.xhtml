@@ -121,12 +121,16 @@
                 <h:panelGroup id="conteo_proyectos" style="width: 100px!important;position: relative;top: -220px;left: 720px;text-align: right;">
 
                     <h:panelGrid columns="4" >
+                        
                         <h:outputText rendered="#{HomeGestion.searchActivated}"  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
-                        <h:outputText   styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
+                        
+                        <h:outputText styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
+                        
                         <h:commandLink onclick="document.getElementById('vistaMapa').style.display = 'block';
                                 document.getElementById('vistaLista').style.display = 'none';
-                                return false;"   styleClass="ikont-hcl-activarmapabutton"  type="button">
+                                return false;" styleClass="ikont-hcl-activarmapabutton"  type="button">
                         </h:commandLink>
+                        
                         <h:commandLink onclick="document.getElementById('vistaMapa').style.display = 'none';
                                 document.getElementById('vistaLista').style.display = 'block';
                                 return false;" styleClass="ikont-acl-activarlista" type="button">
