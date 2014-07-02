@@ -3379,7 +3379,17 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         try {
 
             ValidacionesConvenio.validarContratistaRequerido(contrato);
-            ValidacionesConvenio.validarContratanteRequerido(contrato);
+            if(isCooperacion()) {
+                ValidacionesConvenio.validarContratanteRequerido(contrato);
+            } else {
+                Contratante contratante = new Contratante();
+                contratante.setIntcodigo(Tercero.COD_ENTIDAD_PRINCIPAL);
+                Contratocontratante contratocontratante = new Contratocontratante();
+                contratocontratante.setContratante(contratante);
+                contratocontratante.setContrato(contrato);
+                contratocontratante.setNumvaloraportado(contrato.getNumvlrcontrato());
+                contrato.getListaContratocontratantes().add(contratocontratante);
+            }
             if (Boolean.valueOf(Propiedad.getValor("nuevoconveniodocconveniorequerido")) && tipoContCon.equals("Convenio")) {
                 ValidacionesConvenio.validarTipoDocumentoConvenioRequerido(listadocumentos);
             }
@@ -3543,6 +3553,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 validardatosbasicosplano = 1;
                 FacesUtils.addErrorMessage(bundle.getString("numerocontratoyaexiste"));
             }
+            limpiarContrato();
         } catch (ConvenioException ce) {
             FacesUtils.addErrorMessage(ce.getMessage());
         }
@@ -3559,7 +3570,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private void validadcionGuardarContrato() {
         if (bundle.getString("boolencargofidu").equals("false")) {
-            if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
+            if (contrato.getEncargofiduciario() != null && contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
                 contrato.setEncargofiduciario(null);
             }
         }
@@ -9569,6 +9580,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Adiciona el contratista seleccionado a la lista de contratistas
      */
     public void adicionarContratistaAction() {
+        Contratista contratista = (Contratista) tablacontratistas.getRowData();
+        contratista.getContratos().add(contrato);
         contrato.getContratistas().add(tablacontratistas.getRowData());
     }
 

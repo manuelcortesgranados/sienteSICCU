@@ -32,6 +32,7 @@
     </ui:define>
     <ui:define name="body">
         <h:form  id="form_nuevo_contrato_basico" >
+            <h:panelGroup id="pgcontrato">
             <rich:panel styleClass="ikont-rcp-datosbasicos" id="tpDatosBasicos" header="#{var.datosbasicos}">
                 <center>
                     <h:panelGrid  columns="2" rendered="#{var.nuevocontratoperiodoevento}" styleClass="font-general">
@@ -433,9 +434,13 @@
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvaloraportado}"/>
                                 </f:facet>
-                                <h:outputText value="#{contratoContratante.numvaloraportado}"/>
+                                <h:outputText value="#{contratoContratante.numvaloraportado}">
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                </h:outputText>
                                 <f:facet name="footer" >
-                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}"/>
+                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
                                 </f:facet>
                             </rich:column>
                             <rich:column>
@@ -511,13 +516,18 @@
                         <h:inputText  styleClass="ikont-hit-strnumpoliza" id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}" required="#{var.versioncobra eq 'siccu'}"/>
                         <h:message for="numPolizaContrato" styleClass="ikont-rm-numpoliza"/>
 
-                        <h:outputLabel  styleClass="ikont-hol-numvalorasegurado font-general" id="ikont-hol-numvalorasegurado"  value=" #{var.valor}:" for="ikont-hit-numvalorasegurado" rendered="#{var.polizaconvalor}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numvalorasegurado font-general" id="ikont-hol-numvalorasegurado"  value=" #{var.valorasegurado}:" for="ikont-hit-numvalorasegurado" rendered="#{var.polizaconvalor}"/>
                         <h:inputText  styleClass="ikont-hit-numvalorasegurado" id="ikont-hit-numvalorasegurado" rendered="#{var.polizaconvalor}"
                                       value="#{Supervisor$Contrato.polizacontrato.numvalorasegurado}" required="#{var.versioncobra eq 'siccu'}">
                             <f:convertNumber  maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
                         </h:inputText>
                         <h:message for="ikont-hit-numvalorasegurado" styleClass="ikont-rm-numvalorasegurado" rendered="#{var.polizaconvalor}"/>
 
+                        <h:outputLabel  styleClass="ikont-hol-fechaaprobacionpoliza font-general" id="ikont-hol-fechaaprobacionpoliza"  value=" #{var.fechaaprobacionpoliza}:" for="ikont-rc-fechaaprobacionpoliza"/>
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="ikont-rc-fechaaprobacionpoliza" inputSize="10"
+                                       value="#{Supervisor$Contrato.polizacontrato.datefechaaprobacion}" required="#{var.versioncobra eq 'siccu'}"/>
+                        <h:message for="ikont-rc-fechaaprobacionpoliza" styleClass="ikont-rm-fechavencimientopoliza"/>
+                        
                         <h:outputLabel  styleClass="ikont-hol-vencepoliza font-general" id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza"/>
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" required="#{var.versioncobra eq 'siccu'}"/>
@@ -534,7 +544,7 @@
                         <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
                             <a4j:commandButton  value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}"
                                                 styleClass="ikont-acb-addpoliza" render="gpPolizaSelec,pgpolis" 
-                                                execute="@this, fecfinContrato, comboTipoPoliza, numPolizaContrato, ikont-hit-numvalorasegurado, calendarVenciPoliza, comboentidadPoliza"/>
+                                                execute="@this, fecfinContrato, comboTipoPoliza, numPolizaContrato, ikont-hit-numvalorasegurado, calendarVenciPoliza, ikont-rc-fechaaprobacionpoliza, comboentidadPoliza"/>
                         </h:panelGrid>
                     </h:panelGrid>
                     <br/><br/>
@@ -556,6 +566,14 @@
                                     <h:outputText  styleClass="ikont-hot-numpolizacont" value="#{var.numPolizaContrato}:" />
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
+                            </rich:column>
+                            <rich:column width="100px">
+                                <f:facet name="header">
+                                    <h:outputText  styleClass="ikont-hot-fechaaprobacionpoliza-titulotabla" value="#{var.fechaaprobacionpoliza}:" />
+                                </f:facet>
+                                <h:outputText  styleClass="ikont-hot-fechaaprobacionpoliza-tabla" id="ikont-hot-fechaaprobacionpoliza-tabla" value="#{registro.datefechaaprobacion}">
+                                    <f:convertDateTime pattern="#{var.formatofecha}"/>
+                                </h:outputText>
                             </rich:column>
                             <rich:column width="100px">
                                 <f:facet name="header">
@@ -738,6 +756,7 @@
                 </h:commandButton>
 
             </h:panelGrid>              
+            </h:panelGroup>
         </h:form>
 
         <h:panelGroup rendered="#{var.versioncobra eq 'siente'}">
