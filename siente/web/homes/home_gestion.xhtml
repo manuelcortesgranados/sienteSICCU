@@ -177,43 +177,7 @@
                             alert("Current markerC latlng is: " + event.latLng);
                         }
                     </script>
-                    <a4j:jsFunction name="mapavalla" actionListener="#{HomeGestion.marcadorSeleccion}" oncomplete="#{rich:component('panelVallaMapa')}.hide();" />
-                    <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
-
-                        <rich:dataGrid styleClass="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
-                                       rendered="#{HomeGestion.obrasEncontradas == null or HomeGestion.obrasEncontradas > 0 }">
-                            <f:facet name="header">
-                                <h:outputText  styleClass="ikont-hot-totalproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
-                            </f:facet>
-                            <center>
-                                <h:panelGrid columns="1">
-                                    <a4j:commandLink id="irNuevaObra"  onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra==0}" disabled="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
-                                        <h:graphicImage  styleClass="ikont-" value="#{obras.strimagenobra}" />
-                                    </a4j:commandLink>
-                                    <a4j:commandLink id="irDetalle"  onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra>0}">
-                                        <h:graphicImage  styleClass="ikont-hgi-strimagneobra" value="#{obras.strimagenobra}" />
-                                    </a4j:commandLink>
-                                </h:panelGrid>
-                                <rich:tooltip followMouse="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"  showDelay="500" styleClass="ikont-rtt-btndetalleproyecto"  >
-                                    <h:outputLabel  styleClass="ikont-hol-strnombreobra"   value="#{obras.strnombreobra}"/>
-                                </rich:tooltip>
-                            </center>
-                            <f:facet name="footer">
-                                <h:panelGroup>
-                                    <center>
-                                        <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="vitasthumbnail" action="#{HomeGestion.primeroListProyectos}"/>
-                                        <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="vitasthumbnail" action="#{HomeGestion.anterioresProyectos}"/>
-                                        <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!HomeGestion.verultimosobra}" render="vitasthumbnail" action="#{HomeGestion.siguienteProyectos}"/>
-                                        <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!HomeGestion.verultimosobra}" render="vitasthumbnail" action="#{HomeGestion.ultimoProyectos}"/>
-                                    </center>
-                                </h:panelGroup>
-                            </f:facet>
-                        </rich:dataGrid>
-                    </h:panelGrid>
-
-
-
-                    <h:panelGrid id="vistaLista"  rendered="#{HomeGestion.filtro.intvista == 3}" style="width: 700px; box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;" >
+                    <h:panelGrid id="vistaLista" style="width: 700px;box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right; display: none;" >
                         <rich:extendedDataTable id="tablObrasVigentes"
                                                 value="#{HomeGestion.listaobrasusu}"
                                                 var="obra" 
