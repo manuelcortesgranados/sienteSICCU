@@ -159,6 +159,7 @@ public class Reporte implements ILifeCycleAware, Serializable {
     private int _idConvenio;
     private int _reporteSelectAdministrativos;
     private int _reporteSelectFaseAdministrativos;
+    private String periodo;
 
     public int getReporteSelectFaseAdministrativos() {
         return _reporteSelectFaseAdministrativos;
@@ -3000,4 +3001,14 @@ public class Reporte implements ILifeCycleAware, Serializable {
     public void setDptoSelected(String dptoSelected) {
         this.dptoSelected = dptoSelected;
     }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+    
+    
 }
