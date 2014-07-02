@@ -135,7 +135,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     /**
      * Set the value of datos_mapa
      *
-     * @param datos_mapa new value of datos_mapa
+     * @return 
      */
     public SelectItem[] getTipoObraUsuario() {
 
@@ -147,14 +147,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
-     * Get the value of ObrasUsuario
-     *
-     * @return the value of ObrasUsuario
-     */
-    /**
      * Set the value of ObrasUsuario
      *
-     * @param ObrasUsuario new value of ObrasUsuario
+     * @return 
      */
     public SelectItem[] getUbicacionObra() {
         return UbicacionObra;
@@ -472,7 +467,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setZonaespe(SelectItem[] zonaespe) {
-        this.zonaespe = zonaespe;
+        HomeGestion.zonaespe = zonaespe;
     }
 
     public String getMensaje() {
@@ -536,7 +531,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setZonasespecificas(SelectItem[] zonasespecificas) {
-        this.zonasespecificas = zonasespecificas;
+        HomeGestion.zonasespecificas = zonasespecificas;
     }
 
     public SelectItem[] getEventos() {
@@ -544,7 +539,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setEventos(SelectItem[] eventos) {
-        this.eventos = eventos;
+        HomeGestion.eventos = eventos;
     }
 
     public boolean isAplicafiltroobra() {
@@ -876,7 +871,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void setClaseObra(SelectItem[] ClaseObra) {
-        this.ClaseObra = ClaseObra;
+        HomeGestion.ClaseObra = ClaseObra;
     }
 
     public void iniciarfiltro() {
@@ -3663,10 +3658,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     markers.add(marker);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (NumberFormatException e) {
                     System.out.println(e.getMessage());
-
+                }
+                catch(NullPointerException ne){
+                    System.out.println(ne.getMessage());
+                }
+                catch(ArrayIndexOutOfBoundsException ae){
+                    System.out.println(ae.getMessage());
                 }
                 i++;
             }

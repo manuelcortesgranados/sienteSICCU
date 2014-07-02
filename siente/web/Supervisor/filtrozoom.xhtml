@@ -66,7 +66,7 @@
                 <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
                 <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
                 <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>
-                
+
 
                 <h:panelGrid styleClass="ikont-hpg-slider-valor">           
                     <h:panelGrid id="numeros_la" columns="1" styleClass="ikont-hpg-slider-valor1">
@@ -95,10 +95,11 @@
             </h:panelGrid>
             <center>
                 <a4j:commandButton  execute="txtPalabraClave_filtro_nuevo,numero1,numero2,estadoObra,subtiposProyecto,ava1,ava2" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo1"   value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn"/>
+                                    styleClass="boton1 ikont-filtro-filtrar_btn"/>
             </center>
             <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
-        </rich:tab>              
+        </rich:tab>        
+
         <rich:tab header="#{var.filtrodonde}"   id="tab_uno" name="tab_uno"   >  
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom "  >
@@ -121,7 +122,7 @@
             </h:panelGrid>
             <center>
                 <a4j:commandButton  execute="municipios, depto, zona" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo2"   value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn" />
+                                    styleClass="boton1 ikont-filtro-filtrar_btn" />
             </center>
         </rich:tab>
 
@@ -132,28 +133,24 @@
                 <h:inputText  id="auto_cliente" rendered="false"  value="#{HomeGestion.filtro.strcliente}">
                     <rich:placeholder id="placeHolderCliente" value="Cliente" />
                 </h:inputText>
-                
+
                 <h:inputText  id="auto_contratista"  value="#{HomeGestion.filtro.strcontratista}">
                     <rich:placeholder id="placeHolderContratista" value="Contratista" />
                 </h:inputText>
-                
+
                 <h:inputText  id="auto_interventor"  styleClass="input_filtro" value="#{HomeGestion.filtro.strinterventor}">
                     <rich:placeholder  id="placeHolderInterventor" value="#{var.interventorObra}" />
                 </h:inputText>
-                
+
                 <h:inputText  id="auto_gerente"  styleClass="input_filtro" value="#{HomeGestion.filtro.strgerenteconvenio}">
                     <rich:placeholder id="placeHolderGerente" value="#{var.gerenteconvenio}" />
                 </h:inputText>
                 <br/>
                 <br/>
             </h:panelGrid>
-            
-            
             <center>
-
                 <a4j:commandButton  execute="auto_cliente,auto_contratista,auto_interventor,auto_gerente" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo3"   value="#{var.buscar}"
-                                 styleClass="boton1 ikont-filtro-filtrar_btn" />
-
+                                    styleClass="boton1 ikont-filtro-filtrar_btn" />
             </center>
         </rich:tab>
     </rich:tabPanel>

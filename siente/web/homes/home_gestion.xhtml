@@ -142,27 +142,13 @@
                     <h:outputText  styleClass="ikont-hot-filtrointvisita"   value="" rendered="#{HomeGestion.filtro.intvista==1}" />
                 </h:panelGroup>
 
-                <!--                <h:panelGroup  id="vistas_proyectos" style="width: 100px!important;position: relative;top: -220px;left: 779px;text-align: right;">
-                
-                                </h:panelGroup>-->
-
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
-                    <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" rendered="#{HomeGestion.filtro.intvista == 1}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
 
+                    <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
-
                             <ui:repeat var="marker" value="#{HomeGestion.markers}">
-                                <m:polyline lineWidth="10" hexaColor="#747474" geodesic="true" rendered="#{marker.verlinea}">
-                                    <a4j:repeat   var="point" value="#{marker.listapuntosruta}"  >
-                                        <m:point latitude="#{point.floatlatitud}" longitude="#{point.floatlongitud}"  />
-                                    </a4j:repeat>
-                                </m:polyline>
-                                <m:polyline lineWidth="1"  hexaColor="#FFFFFF" geodesic="false" rendered="#{marker.verlinea}">
-                                    <a4j:repeat   var="point" value="#{marker.listapuntosruta}"  >
-                                        <m:point latitude="#{point.floatlatitud}" longitude="#{point.floatlongitud}"  />
-                                    </a4j:repeat>
-                                </m:polyline>
+
                                 <m:marker latitude="#{marker.latitude}" 
                                           longitude="#{marker.longitude}"
                                           jsVariable="#{marker.jsVariable}" 
@@ -172,7 +158,6 @@
                                           submitOnValueChange="false"
                                           >
                                     <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
-                                    
                                     <m:htmlInformationWindow transient="true"  htmlText="#{marker.informationWindow}">
                                     </m:htmlInformationWindow>
                                 </m:marker>
