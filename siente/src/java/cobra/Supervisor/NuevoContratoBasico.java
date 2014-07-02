@@ -5052,6 +5052,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             getSessionBeanCobra().insertarBitacora(Accion.VISITAR_CONTRATO, contrato.getIntidcontrato());   
         }
+        
+        // Cargar las unidades y asignarla la uniadad del contrato al combo
+        llenarUnidades();
+        if(contrato.getUnidad() != null){
+            setSelectedUnit(contrato.getUnidad().getId());
+        }
     }
 
     /**
@@ -7656,6 +7662,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
+        if (selectedUnit > 0) {
+            Unidad unidad = new Unidad();
+            unidad.setId(selectedUnit);
+            contrato.setUnidad(unidad);
+        }
+        
         ValidacionesConvenio.validarValorCuotaGerencia(contrato.getNumvlrcontrato(), contrato.getNumValorCuotaGerencia());
         if (!contrato.getActividadobras().isEmpty()) {
             List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
