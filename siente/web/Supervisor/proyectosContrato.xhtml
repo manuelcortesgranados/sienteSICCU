@@ -56,16 +56,14 @@
                         <f:facet name="header" >
                             <h:outputText value="#{var.consultar}"/>
                         </f:facet>
-<!--                        <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btn_consultaproyecenconvenio}"
-                                         id="irDatosBasicos"  onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{_row.intcodigoobra}';">
-                            <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
-                        </a4j:commandLink>-->
-                        <a4j:commandLink id="irDetalle"
-                                         onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{_row.intcodigoobra}';">
-                            <h:graphicImage  styleClass="ikont-"    value="/resources/imgs/bt_ver.png" />
+                        <a4j:commandLink type="submit" execute="@this" rendered="#{_row.tipoestadobra.intestadoobra == 0 }" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{_row.intcodigoobra}';">
+                            <h:graphicImage  styleClass="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
+                        </a4j:commandLink>
+                        <a4j:commandLink rendered="#{_row.tipoestadobra.intestadoobra != 0}" id="irDetallebt" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{_row.intcodigoobra}';">
+                            <h:graphicImage  styleClass="ikont-hgi-bnverdetalle"    value="/resources/imgs/bt_ver.png"/>
                             <a4j:param assignTo="#{Supervisor$AdministrarObraNew.contratoId}" value="#{Supervisor$Contrato.contrato.intidcontrato}"/>
                             <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="false" />
-                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.isFromContracts}" value="false" />    
+                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.isFromContracts}" value="false" />   
                         </a4j:commandLink>
                     </rich:column>
                     <f:facet name="footer">
