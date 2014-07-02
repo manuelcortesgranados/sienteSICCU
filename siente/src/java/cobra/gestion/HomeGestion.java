@@ -2322,6 +2322,11 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public String llenarTablaNovedades() {
+        
+        //PERFORMANCE
+        if(true)
+            return "";
+        
         llenarComentarios();
         opcionov = 1;
         listarecientes = new ArrayList<ActividadReciente>();
