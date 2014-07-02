@@ -46,7 +46,7 @@
                     document.getElementById('formRepBody:formRepMetas:outNumConvenio').style.display = 'none';
                     document.getElementById('formRepBody:formRepMetas:inNumConvenio').style.display = 'none';
                     document.getElementById('formRepBody:formRepMetas:btnConvenio').style.display = 'none';
-                    
+
 
                 } else {
                     document.getElementById('formRepBody:formRepMetas:selUnidad').style.display = 'none';
@@ -125,7 +125,9 @@
                     <h:panelGrid columns="1" class="bl4">
                         <div class="icon_bl4"></div>
                         <div class="bl1_texto_div"><p class="bl1_texto">#{var.reporteAuditoria}</p></div>
-                        <a4j:commandButton styleClass="ikont-label-menu-estr-sub-titulo" style="margin-left: 30px;" id="btnRepCuentas" value="No disponible"/>
+                        <a4j:commandButton styleClass="bl1_texto" style="margin-left: 46px;" id="btnRepAuditoria" value="Generar"
+                                           render="gpPopUpAuditoria" execute="gpPopUpAuditoria" immediate="true"
+                                           oncomplete="#{rich:component('popUprepAuditoria')}.show();"/>
                     </h:panelGrid>
                 </h:panelGroup>
                 <h:panelGroup>
@@ -350,7 +352,7 @@
                     </h:panelGroup>
                 </h:form>        
             </rich:popupPanel>
-            
+
             <!-- PopUP Reporte Consolidado Gerencial de Convenios -->
             <rich:popupPanel id="popUprepConsGcialConv" autosized="true" moveable="true" headerClass="rich-panel-header">
                 <f:facet name="header" >
