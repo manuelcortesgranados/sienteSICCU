@@ -2839,6 +2839,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/ImagenObra.xhtml";
                 String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Ciudadano/ParticipacionCiudadano.xhtml";
                 BigDecimal porcentaje = BigDecimal.valueOf(0);
+                
                 if (obra.getNumvalejecobra() != null && obra.getTipoestadobra().getIntestadoobra() > 0) {
                     porcentaje = obra.getNumvalejecobra();
                     porcentaje = porcentaje.multiply(BigDecimal.valueOf(100));
@@ -3565,8 +3566,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
 
                     double porcentaje = 0;
-
-                    if (_obra_numvalejecobra != null && _tipoestadoobra_intestadoobra != null && _tipoestadoobra_intestadoobra > 0) {
+                    if (_obra_numvalejecobra != null && _obra_numvaltotobra != null && _obra_numvaltotobra > 0 && _tipoestadoobra_intestadoobra != null && _tipoestadoobra_intestadoobra > 0) {
+                        porcentaje = _obra_numvalejecobra;
                         porcentaje = (porcentaje * 100) / _obra_numvaltotobra;
 
                     }
@@ -3602,7 +3603,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     descripcion.append(nombreCorto);
                     descripcion.append(html_02);
 
-                    descripcion.append((money.format(_obra_numvaltotobra) + getDetalleObra().getValorinterventoria()));
+                    descripcion.append((money.format( Math.floor(_obra_numvaltotobra + getDetalleObra().getValorinterventoria().doubleValue()) ).replaceAll("\\,00", "")));
                     descripcion.append(html_03);
 
                     descripcion.append(_obra_strobjetoobra.replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
@@ -3676,6 +3677,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
 
         }
-        System.out.println("__________TIME cargarVallaFonadePerformance: " + (System.currentTimeMillis() - l1));
+        System.out.println("__________TIME cargarVallaFonadePerformance("+markers.size()+"): " + (System.currentTimeMillis() - l1));
     }
 }
