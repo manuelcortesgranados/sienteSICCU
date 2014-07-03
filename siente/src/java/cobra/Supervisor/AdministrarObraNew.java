@@ -168,15 +168,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
     public int controltipodocumento = 0;
-    private int contratoId = 0;
-    private boolean isFromContracts = false;
     
     /**
      * variables para las fechas de informe circular tolima
      */
     private Date fechaInicioCircular;
     private Date fechaFinCircular;
-    private boolean boolBack;
 
     public Date getFechaInicioCircular() {
         return fechaInicioCircular;
@@ -1029,16 +1026,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void prerender() {
 
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        if(contratoId != 0){
-            setBoolBack(true);
-            if(isFromContracts){
-                setBoolBack(false);
-            }
-        }else{
-            setBoolBack(false);
-        }
         int cual = opcion;
-
         if (id != null) {
 
             if (getObra() != null && id != null) {
@@ -2675,45 +2663,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         videoEnlace.setObra(getObra());
     }
 
-    /**
-     * @return the contratoId
-     */
-    public int getContratoId() {
-        return contratoId;
-    }
-
-    /**
-     * @param contratoId the contratoId to set
-     */
-    public void setContratoId(int contratoId) {
-        this.contratoId = contratoId;
-    }
-
-    /**
-     * @return the isFromContracts
-     */
-    public boolean isIsFromContracts() {
-        return isFromContracts;
-    }
-
-    /**
-     * @param isFromContracts the isFromContracts to set
-     */
-    public void setIsFromContracts(boolean isFromContracts) {
-        this.isFromContracts = isFromContracts;
-    }
-
-    /**
-     * @return the boolBack
-     */
-    public boolean isBoolBack() {
-        return boolBack;
-    }
-
-    /**
-     * @param boolBack the boolBack to set
-     */
-    public void setBoolBack(boolean boolBack) {
-        this.boolBack = boolBack;
+    public String irContratoPadre() {
+        getNuevoContratoBasico().cargarContrato(getObra().getContrato());
+        return "consultarContrato";
     }
 }

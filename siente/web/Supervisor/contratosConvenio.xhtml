@@ -74,8 +74,6 @@
                         </f:facet>
                         <h:commandLink rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}" styleClass="ikont-hcl-zoom-contratista" title="#{var.contrato}" immediate="true"   action="#{Supervisor$AdministrarObraNew.detalleContrato}">
                             <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{_row.intidcontrato}" />
-                            <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="false" />
-                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.isFromContracts}" value="false" />    
                         </h:commandLink>
                     </rich:column>
                     <f:facet name="footer">
