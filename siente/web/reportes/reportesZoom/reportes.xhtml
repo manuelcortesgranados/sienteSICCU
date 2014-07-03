@@ -96,15 +96,15 @@ departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
 municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
 usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}');
                 
-                window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
-identificador_reporte=6&amp;\n\
-identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
-identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
-fecha_inicial='+fechaInicial+'&amp;\n\
-fecha_final='+fechaFin+'&amp;\n\
-departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
-municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
-usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
+//                window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
+//identificador_reporte=6&amp;\n\
+//identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
+//identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
+//fecha_inicial='+fechaInicial+'&amp;\n\
+//fecha_final='+fechaFin+'&amp;\n\
+//departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
+//municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
+//usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
             }
         </script>
 
@@ -550,7 +550,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
 
                                 <div class="dropdown">
 
-                                    <h:outputText value="Departamento: " styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:outputText value="#{var.departamento}" styleClass="hot_n_convenio label_texto_convenio"/>
                                     <h:selectOneMenu value="#{Reportes.deptosah}" 
                                                      onclick="this.style.width = 'auto;';" >
                                         <f:selectItem itemValue="-1" itemLabel="Todos" />
@@ -562,7 +562,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
 
                                 <div class="dropdown">
 
-                                    <h:outputText value="Municipio: " styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:outputText value="#{var.municipio}" styleClass="hot_n_convenio label_texto_convenio"/>
                                     <h:panelGroup id="panelMuni">
                                         <h:selectOneMenu value="#{Reportes.muniah}" 
                                                          onclick="this.style.width = 'auto;';" >
