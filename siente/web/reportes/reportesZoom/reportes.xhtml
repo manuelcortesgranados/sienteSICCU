@@ -81,6 +81,31 @@
                 }
 
             }
+            function getHref(){
+                
+                var fechaInicial = document.getElementById('formRepBody:formRepMonEva:fcInicioMonEvaInputDate').value;
+                var fechaFin = document.getElementById('formRepBody:formRepMonEva:fcFinMonEvaInputDate').value;
+                
+                alert('#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
+identificador_reporte=6&amp;\n\
+identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
+identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
+fecha_inicial='+fechaInicial+'&amp;\n\
+fecha_final='+fechaFin+'&amp;\n\
+departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
+municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
+usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}');
+                
+                window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
+identificador_reporte=6&amp;\n\
+identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
+identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
+fecha_inicial='+fechaInicial+'&amp;\n\
+fecha_final='+fechaFin+'&amp;\n\
+departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
+municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
+usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
+            }
         </script>
 
         <h:form id="formRepBody">
@@ -200,8 +225,7 @@
                                 </div>
 
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -237,8 +261,7 @@
                             <div class="cont_central">
 
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=2&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=2&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -307,10 +330,8 @@
                                 </div>
 
                                 <div class="descargarbtn">
-                                    <h:commandLink id="btnUnidad" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;estado_convenio=#{Supervisor$Contrato.filtrocontrato.estadoConvenio == '0' ? 'ALL' : Supervisor$Contrato.filtrocontrato.estadoConvenio}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
-                                    <h:commandLink id="btnConvenio" style="display: none;" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3b&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink id="btnUnidad" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;estado_convenio=#{Supervisor$Contrato.filtrocontrato.estadoConvenio == '0' ? 'ALL' : Supervisor$Contrato.filtrocontrato.estadoConvenio}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink id="btnConvenio" style="display: none;" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=3b&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -345,8 +366,7 @@
                             <div class="cont_central">
 
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=5&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=5&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -382,8 +402,7 @@
                             <div class="cont_central">
 
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=7a&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=7a&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -459,11 +478,9 @@
                                 </div>
 
                                 <div class="descargarbtn">
-                                    <h:commandLink id="btnUnidadA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink id="btnUnidadA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
 
-                                    <h:commandLink id="btnConvenioA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" style="display: none;" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink id="btnConvenioA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" style="display: none;" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -491,7 +508,7 @@
                 <h:form id="formRepMonEva">
                     <h:panelGroup layout="block" id="gPopUpMonEva">
 
-                        <div class="cont_bottom">
+                        <div class="cont_bottom_monEva">
                             <div class="icon_bot"></div>
 
                             <div class="cont_central">
@@ -516,30 +533,51 @@
                                         <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
                                     </h:inputText>
                                 </div>
-                                
+
                                 <div class="dropdown">
-                                    <h:outputText id="outInicioMonEva" value="#{var.fechadeinicio}" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    <rich:calendar id="fcInicioMonEva"  datePattern="#{var.formatofechaReportes2}" direction="bottomRight" currentDate="#{Reportes.fecfinob}" value="#{Supervisor$Contrato.contrato.datefechaini}" style="width: 320px !important;" >
+                                    <h:outputText id="outInicioMonEva" value="#{var.graevuproyeti1dato}" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <rich:calendar id="fcInicioMonEva"  datePattern="#{var.formatofechaReportes2}" direction="bottomRight" value="#{Reportes.feciniob}" >
+                                        <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
+                                    </rich:calendar>
+                                </div>
+
+                                <div class="dropdown">
+                                    <h:outputText id="outFinMonEva" value="#{var.graevuproyeti2dato}" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <rich:calendar id="fcFinMonEva"  datePattern="#{var.formatofechaReportes2}" direction="bottomRight" value="#{Reportes.fecfinob}" >
                                         <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
                                     </rich:calendar>
                                 </div>
 
                                 <div class="dropdown">
 
-                                    <h:outputText value="#{var.departamento}" styleClass="hot_n_convenio label_texto_convenio"/>
-
-                                    <h:selectOneMenu id="listDpto" value="#{Reportes.dptoSelected}" 
-                                                     onclick="this.style.width = 'auto;';">
-                                        <f:selectItem itemValue="ALL" itemLabel="Todos" />
+                                    <h:outputText value="Departamento: " styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:selectOneMenu value="#{Reportes.deptosah}" 
+                                                     onclick="this.style.width = 'auto;';" >
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
                                         <f:selectItems value="#{Reportes.sedeptosah}"/>
                                         <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" listener="#{Reportes.llenarMuniciAh}"/>
                                     </h:selectOneMenu>
 
                                 </div>
 
+                                <div class="dropdown">
+
+                                    <h:outputText value="Municipio: " styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:panelGroup id="panelMuni">
+                                        <h:selectOneMenu value="#{Reportes.muniah}" 
+                                                         onclick="this.style.width = 'auto;';" >
+                                            <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                            <f:selectItems value="#{Reportes.semuniah}"/>
+                                            <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
+                                        </h:selectOneMenu>
+                                    </h:panelGroup>
+
+                                </div>
+
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" rendered="#{var.verreportegeneral and SessionBeanCobra.usuarioObra.renderrecurso.btn_visualizar_reporte_global}"
-                                                   onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="getHref();" />
+                                    
+                                    <a href=""/>
                                 </div>
                             </div>
                         </div>
