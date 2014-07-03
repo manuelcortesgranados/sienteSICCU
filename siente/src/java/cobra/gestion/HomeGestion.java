@@ -3661,7 +3661,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     descripcion.append(html_11);
                     marker.setInformationWindow(descripcion.toString());
-
                     markers.add(marker);
 
                 } catch (NumberFormatException e) {
