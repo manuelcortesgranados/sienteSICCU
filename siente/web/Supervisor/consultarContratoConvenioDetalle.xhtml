@@ -50,9 +50,8 @@
         <h:panelGroup layout="block" id="pgcontratoconvenio" >
 
             <h:form id="ccForm">
-                <h:commandLink value="#{var.volver}" action="#{Supervisor$AdministrarObraNew.detalleContrato}"  disabled="#{!Supervisor$Contrato.boolBack}" >
-                    <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="#{Supervisor$Contrato.contrato.contrato.intidcontrato}" />
-                    <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="true" />
+                <h:commandLink class="rf-tab-lbl" id="irPadre" action="#{Supervisor$Contrato.irContratoPadre}"  rendered="#{Supervisor$Contrato.contrato.contrato!= null}" >
+                    Ir a convenio
                 </h:commandLink>
                 <rich:collapsiblePanel switchType="client" header="#{var.infoGeneral}" style="width: 87%;" expanded="true">
                     <h:panelGrid columns="2" style="width: 100%;">
@@ -517,7 +516,7 @@
 
                     <h:panelGrid columns="3" columnClasses="panelcenter" styleClass="font-general">
                         <h:panelGrid columnClasses="panelcenter">
-                            <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
+                            <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" target="_blank"/>
                             <h:outputText  styleClass="ikont- font-general"   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
                         </h:panelGrid>
                         <h:panelGrid columnClasses="panelcenter">
