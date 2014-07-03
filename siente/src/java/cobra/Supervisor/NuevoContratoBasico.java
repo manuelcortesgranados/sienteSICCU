@@ -7672,6 +7672,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (!contrato.getActividadobras().isEmpty()) {
             List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
             Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+            if(actiRaiz != null){
+                actiRaiz.setStrdescactividad(contrato.getStrnumcontrato());
+            }
             encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
             ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
         }
@@ -7698,6 +7701,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             if (!contrato.getActividadobras().isEmpty()) {
                 List<Actividadobra> lstActividadObraTodas = new ArrayList<Actividadobra>();
                 Actividadobra actiRaiz = (Actividadobra) contrato.getActividadobras().iterator().next();
+                if(actiRaiz != null){
+                    actiRaiz.setStrdescactividad(contrato.getStrnumcontrato());
+                }
                 encontrarActividadContrato(actiRaiz, lstActividadObraTodas);
                 ValidacionesConvenio.validarFechaActaInicioTO(lstActividadObraTodas, contrato);
             }
