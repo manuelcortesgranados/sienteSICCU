@@ -72,9 +72,8 @@
                 <h:panelGrid  id="gpPrincipalInfCiudad-zoom">
                     <h:form prependId="false">
                         
-                        <h:commandLink value="#{var.volver}" action="#{Supervisor$AdministrarObraNew.detalleContrato}"  disabled="#{!Supervisor$AdministrarObraNew.boolBack}" >
-                            <a4j:param assignTo="#{Supervisor$Contrato.isFromContracts}" value="true" />
-                            <a4j:param assignTo="#{Supervisor$AdministrarObraNew.mostrarContratoConvenio}" value="0" />
+                        <h:commandLink class="rf-tab-lbl" id="irPadre" action="#{Supervisor$AdministrarObraNew.irContratoPadre}" rendered="#{Supervisor$AdministrarObraNew.obra.contrato!=null and !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}" >
+                            Ir a contrato
                         </h:commandLink>
                         <h:panelGroup layout="block">
                             <center>
