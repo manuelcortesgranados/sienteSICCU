@@ -201,6 +201,7 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
 
 .templatetablamenulateral{
     width: 268px;
+    height: 100%;
     border-right-style: solid;
     border-right-color: '#{richSkin.barraMenuLateralcolor}';
     border-right-width: thin;
