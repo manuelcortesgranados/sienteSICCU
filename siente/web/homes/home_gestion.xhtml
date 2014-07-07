@@ -121,25 +121,28 @@
                 <h:panelGroup id="conteo_proyectos" style="width: 100px!important;position: relative;top: -220px;left: 720px;text-align: right;">
 
                     <h:panelGrid columns="4" >
-                        
+
                         <h:outputText rendered="#{HomeGestion.searchActivated}"  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
-                        
+
                         <h:outputText styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
-                        
+
+
                         <h:commandLink onclick="document.getElementById('vistaMapa').style.display = 'block';
                                 document.getElementById('vistaLista').style.display = 'none';
                                 return false;" styleClass="ikont-hcl-activarmapabutton"  type="button">
                         </h:commandLink>
-                        
+
                         <h:commandLink onclick="document.getElementById('vistaMapa').style.display = 'none';
                                 document.getElementById('vistaLista').style.display = 'block';
                                 return false;" styleClass="ikont-acl-activarlista" type="button">
                         </h:commandLink>
                     </h:panelGrid>
+
                 </h:panelGroup>
 
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
+                        
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
                             <ui:repeat var="marker" value="#{HomeGestion.markers}">
@@ -157,6 +160,7 @@
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
+                        <h:outputText style="font-size: 9px;"  styleClass="ikont-hot-proyectostotalfilas" rendered="#{HomeGestion.searchActivated}" value="#{var.paginaCiu} #{HomeGestion.pagina} / #{HomeGestion.totalpaginas}" />
                     </h:panelGrid>
                     <script type="text/javascript">
                         function marker1DragHandler(event) {
@@ -173,7 +177,7 @@
                     </script>
                     <h:panelGrid id="vistaLista" style="width: 700px;box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right; display: none;" >
                         <rich:extendedDataTable id="tablObrasVigentes"
-                                                value="#{HomeGestion.listaPerformancePage}"
+                                                value="#{HomeGestion.listaPerformanceObras}"
                                                 var="obra" 
                                                 rowKeyVar="filaSeleccionada"
                                                 rendered="#{HomeGestion.totalfilas > 0 }"
@@ -186,7 +190,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-totallistaproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
                             </f:facet>
-                            <rich:column  headerClass="ikont-hgi-ordenalistaascendente" sortBy="#{obra[0]}" sortType="String" transient="true" id="nombreObra" styleClass="ikont-rdt-rc-nombreobra" width="210">
+                            <rich:column  headerClass="ikont-hgi-ordenalistaascendente" sortBy="#{obra[0]}" sortOrder="ascending" transient="true" id="nombreObra" styleClass="ikont-rdt-rc-nombreobra" width="210">
                                 <f:facet name="header">
                                     <h:panelGroup  styleClass="ikont-hpg-listaproyecto">
                                         <h:outputText  styleClass="ikont-hot-nombreobra" style="color: white;text-decoration: none;"  value="Nombre" />
@@ -254,10 +258,10 @@
                         <rich:panel>
                             <rich:panel>
                                 <center>
-                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block'; return false;" limitRender="true" value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.primeraPaginaPerformance()}"/>
-                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block'; return false;" limitRender="true" value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.anteriorPaginaPerformance()}"/>
-                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block'; return false;" limitRender="true" value="#{var.siguienteCiu}" disabled="#{!HomeGestion.verultimosobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.siguientePaginaPerformance()}"/>
-                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block'; return false;" limitRender="true" value="#{var.ultimoCiu}" disabled="#{!HomeGestion.verultimosobra}"  render="tablObrasVigentes,vistaLista" execute="tablObrasVigentes,vistaLista" actionListener="#{HomeGestion.ultimaPaginaPerformance()}"/>
+                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block';document.getElementById('vistaMapa').style.display = 'none'; return false;" limitRender="true" value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}" execute="vistaLista"  render="tablObrasVigentes,vistaLista,vistaMapa" transient="true" actionListener="#{HomeGestion.primeraPaginaPerformance()}"/>
+                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block';document.getElementById('vistaMapa').style.display = 'none'; return false;" limitRender="true" value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}" execute="vistaLista"  render="tablObrasVigentes,vistaLista,vistaMapa" transient="true"  actionListener="#{HomeGestion.anteriorPaginaPerformance()}"/>
+                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block';document.getElementById('vistaMapa').style.display = 'none'; return false;" limitRender="true" value="#{var.siguienteCiu}" disabled="#{!HomeGestion.verultimosobra}" execute="vistaLista"  render="tablObrasVigentes,vistaLista,vistaMapa" transient="true"  actionListener="#{HomeGestion.siguientePaginaPerformance()}"/>
+                                    <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block';document.getElementById('vistaMapa').style.display = 'none'; return false;" limitRender="true" value="#{var.ultimoCiu}" disabled="#{!HomeGestion.verultimosobra}" execute="vistaLista"  render="tablObrasVigentes,vistaLista,vistaMapa" transient="true"  actionListener="#{HomeGestion.ultimaPaginaPerformance()}"/>
                                 </center>
                             </rich:panel>
                         </rich:panel>
