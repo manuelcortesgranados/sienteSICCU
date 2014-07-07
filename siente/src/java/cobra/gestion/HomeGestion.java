@@ -3365,7 +3365,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * nuevas Variables para aumentar el performance
      */
     private List<Object[]> listaPerformanceObras;
-    private List<Object[]> listaPerformancePage;
     private int pivote = 0;
     private boolean searchInitialized = false;
     private boolean searchActivated = false;
@@ -3395,16 +3394,14 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void anteriorPaginaPerformance() {
-        if (this.listaPerformanceObras != null && this.pivote > 0) {
-            int limit = this.pivote;
-            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
-            this.listaPerformancePage = new ArrayList<Object[]>();
-            for (int i = init; i < limit; i++) {
-                listaPerformancePage.add(listaPerformanceObras.get(i));
-            }
+        if (this.pivote > 0) {
+            this.pivote -= HomeGestion.maxRowsPerPage;
+            this.buscarPerformanceGeneral(this.pivote);
             this.verultimosobra = true;
-            this.pivote = init;
             this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+            if(pagina == 1)
+                veranteriorobra = false;
+                
 
         } else {
             this.verultimosobra = true;
@@ -3413,16 +3410,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public void siguientePaginaPerformance() {
-        if (this.listaPerformanceObras != null && this.pivote + HomeGestion.maxRowsPerPage < this.totalfilas) {
-            int init = this.pivote + HomeGestion.maxRowsPerPage;
-            int limit = Math.min(init + HomeGestion.maxRowsPerPage, this.totalfilas);
-            this.listaPerformancePage = new ArrayList<Object[]>();
-            for (int i = init; i < limit; i++) {
-                listaPerformancePage.add(listaPerformanceObras.get(i));
-            }
+        if (this.pivote + HomeGestion.maxRowsPerPage < this.totalfilas) {
+            this.pivote += HomeGestion.maxRowsPerPage;
+            this.buscarPerformanceGeneral(this.pivote);
             this.veranteriorobra = true;
-            this.pivote = init;
             this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+            if(this.pivote + HomeGestion.maxRowsPerPage > totalfilas)
+                verultimosobra = false;
 
         } else {
             this.verultimosobra = false;
@@ -3432,37 +3426,24 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public void primeraPaginaPerformance() {
 
-        if (this.listaPerformanceObras != null) {
-            int init = 0;
-            int limit = Math.min(this.totalfilas, HomeGestion.maxRowsPerPage);
-            this.listaPerformancePage = new ArrayList<Object[]>();
-            for (int i = init; i < limit; i++) {
-                listaPerformancePage.add(listaPerformanceObras.get(i));
-            }
-            this.verultimosobra = true;
-            this.veranteriorobra = false;
-            this.pivote = init;
-            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
-
-        } else {
+        this.pivote = 0;
+        this.buscarPerformanceGeneral(this.pivote);
+        this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
+        this.verultimosobra = true;
+        this.veranteriorobra = false;
+        
+        if(totalfilas < HomeGestion.maxRowsPerPage)
             this.verultimosobra = false;
-            this.veranteriorobra = false;
-        }
 
     }
 
     public void ultimaPaginaPerformance() {
-        if (this.listaPerformanceObras != null && this.pivote < this.totalfilas - 1) {
-            int limit = totalfilas;
-            int init = Math.max(limit - HomeGestion.maxRowsPerPage, 0);
-            this.listaPerformancePage = new ArrayList<Object[]>();
-            for (int i = init; i < limit; i++) {
-                listaPerformancePage.add(listaPerformanceObras.get(i));
-            }
+        if (this.pivote + HomeGestion.maxRowsPerPage < this.totalfilas) {
+            this.pivote = (this.totalfilas / HomeGestion.maxRowsPerPage ) * HomeGestion.maxRowsPerPage;
+            this.buscarPerformanceGeneral(this.pivote);
+            this.pagina = this.pivote / HomeGestion.maxRowsPerPage +1 ;
             this.verultimosobra = false;
             this.veranteriorobra = true;
-            this.pivote = init;
-            this.pagina = this.pivote / HomeGestion.maxRowsPerPage + 1;
 
         } else {
             this.verultimosobra = false;
@@ -3471,25 +3452,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     }
 
-    public List<Object[]> getListaPerformancePage() {
-        return listaPerformancePage;
-    }
-
-    public void setListaPerformancePage(List<Object[]> listaPerformancePage) {
-        this.listaPerformancePage = listaPerformancePage;
-    }
-
     public void buscarProyectoPerformance() {
-        this.listaPerformanceObras = this.getSessionBeanCobra().getCobraService().performaceEncontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
-        this.totalfilas = this.listaPerformanceObras.size();
-        this.obrasEncontradas = this.totalfilas;
-        this.cargarVallaFonadePerformance();
+        
+        Object o = this.getSessionBeanCobra().getCobraService().performaceEncontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro, true , 0, -1).get(0);
+        this.totalfilas =  Integer.parseInt(o.toString());
         this.primeraPaginaPerformance();
-        this.totalpaginas = this.totalfilas / HomeGestion.maxRowsPerPage;
-        if (totalpaginas == 0) {
-            totalpaginas++;
-        }
+        this.obrasEncontradas = this.totalfilas;
+        this.totalpaginas = this.totalfilas / HomeGestion.maxRowsPerPage +1;
         this.searchActivated = true;
+    }
+    
+    public void buscarPerformanceGeneral(int offset){
+        this.listaPerformanceObras = this.getSessionBeanCobra().getCobraService().performaceEncontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro, false , offset, HomeGestion.maxRowsPerPage);
+        this.cargarVallaFonadePerformance();
     }
 
     public int getRowsPerPage() {
