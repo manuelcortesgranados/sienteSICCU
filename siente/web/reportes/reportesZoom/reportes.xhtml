@@ -83,28 +83,32 @@
             }
             function getHref(){
                 
+                var unidadId = document.getElementById('formRepBody:formRepMonEva:selUnidadMonEva').value;
+                if(unidadId == 0 || unidadId == -1){
+                    unidadId = 'ALL';
+                }
+                var numConvenio = document.getElementById('formRepBody:formRepMonEva:inNumConvenioMonEva').value;
                 var fechaInicial = document.getElementById('formRepBody:formRepMonEva:fcInicioMonEvaInputDate').value;
                 var fechaFin = document.getElementById('formRepBody:formRepMonEva:fcFinMonEvaInputDate').value;
+                var dpto = document.getElementById('formRepBody:formRepMonEva:dptoMonEva').value;
+                if(dpto == -1){
+                    dpto = 'ALL';
+                }
+                var muni = document.getElementById('formRepBody:formRepMonEva:muniMonEva').value;
+                if(muni == -1){
+                    muni = 'ALL';
+                }
                 
-                alert('#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
+                window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
 identificador_reporte=6&amp;\n\
-identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
-identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
+identificador_unidad='+unidadId+'&amp;\n\
+identificador_convenio='+numConvenio+'&amp;\n\
 fecha_inicial='+fechaInicial+'&amp;\n\
 fecha_final='+fechaFin+'&amp;\n\
-departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
-municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
-usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}');
-                
-//                window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
-//identificador_reporte=6&amp;\n\
-//identificador_unidad=#{Supervisor$Contrato.selectedUnit == 0 || Supervisor$Contrato.selectedUnit == -1 ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;\n\
-//identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;\n\
-//fecha_inicial='+fechaInicial+'&amp;\n\
-//fecha_final='+fechaFin+'&amp;\n\
-//departamento=#{Reportes.deptosah == -1 ? 'ALL' : Reportes.deptosah}&amp;\n\
-//municipio=#{Reportes.muniah == -1 ? 'ALL' : Reportes.muniah}&amp;\n\
-//usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
+departamento='+dpto+'&amp;\n\
+municipio='+muni+'&amp;\n\
+usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
+    
             }
         </script>
 
@@ -551,7 +555,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}');
                                 <div class="dropdown">
 
                                     <h:outputText value="#{var.departamento}" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    <h:selectOneMenu value="#{Reportes.deptosah}" 
+                                    <h:selectOneMenu id="dptoMonEva" value="#{Reportes.deptosah}" 
                                                      onclick="this.style.width = 'auto;';" >
                                         <f:selectItem itemValue="-1" itemLabel="Todos" />
                                         <f:selectItems value="#{Reportes.sedeptosah}"/>
@@ -563,15 +567,12 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}');
                                 <div class="dropdown">
 
                                     <h:outputText value="#{var.municipio}" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    <h:panelGroup id="panelMuni">
-                                        <h:selectOneMenu value="#{Reportes.muniah}" 
-                                                         onclick="this.style.width = 'auto;';" >
-                                            <f:selectItem itemValue="-1" itemLabel="Todos" />
-                                            <f:selectItems value="#{Reportes.semuniah}"/>
-                                            <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
-                                        </h:selectOneMenu>
-                                    </h:panelGroup>
-
+                                    <h:selectOneMenu id="muniMonEva" value="#{Reportes.muniah}" 
+                                                     onclick="this.style.width = 'auto;';" >
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.semuniah}"/>
+                                        <a4j:ajax execute="@this" event="change" render="gPopUpMonEva" />
+                                    </h:selectOneMenu>
                                 </div>
 
                                 <div class="descargarbtn">
