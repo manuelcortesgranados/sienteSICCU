@@ -44,8 +44,6 @@
                                                      action="#{MetasProyecto.irApagina_IngresarMeta()}" />
                                     <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
                                                      action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
-                                    <h:commandButton value="Prueba" immediate="true"
-                                                     action="#{MetasProyecto.test}" />                                    
                                     <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas2}" styleClass="ikont-rdt-indicadoresdisponibles"
                                                             rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                             var="meta">                           
@@ -222,27 +220,23 @@
                                                                                             </tr>
                                                                                             <c:forEach items="#{MetasProyecto.consultaMetaRegistroDetalle(metaobra.idmetaobra)}" var="metaregistro"> 
                                                                                                 <tr>
-                                                                                                    <td class="ikont-hot-desea">#{metaregistro.id.idregistrometaobra}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.idregistrometaobra}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.metaProyectada}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.metaAcumulada}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.porcentaje}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.fecha}</td>
                                                                                                     <td class="ikont-hot-desea">
-                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaRegistro(metaregistro.id.idregistrometaobra)}" type="submit" value="Eliminar">
+                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaRegistro(metaregistro.idregistrometaobra)}" type="submit" value="Eliminar">
                                                                                                         </h:commandButton>
                                                                                                     </td>
                                                                                                     <td class="ikont-hot-desea">
                                                                                                         <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaRegistro()}" type="submit" value="Actualizar">
                                                                                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.id.idregistrometaobra}" />
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.idregistrometaobra}" />
                                                                                                         </h:commandButton>                                                                                                        
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <h:commandLink immediate="true"  action="#{Supervisor$Contrato.detalleContrato}">
-                                                                                                            <h:graphicImage  styleClass="ikont-hgi-btverpng" value="/resources/imgs/bt_msjnuevo.png" />
-                                                                                                            <h:outputText  value="TEST"/>
-                                                                                                        </h:commandLink>                                                                                                        
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </c:forEach>
