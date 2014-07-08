@@ -46,6 +46,43 @@
                                 <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
+                        <h:panelGrid columns="3" width="100%">
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <f:facet name="header">
+                                    <h:outputText  value="Rango Inferior"/>
+                                </f:facet>                                            
+                                <h:panelGrid columns="3" width="100%">
+                                    <h:outputLabel  value="Valor Minimo "/>
+                                    <h:inputText id="it_valor_minimo_rango_inferior" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMin}"/>
+                                    <rich:tooltip value="Valor Minimo Rango Inferior" target="it_valor_minimo_rango_inferior"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                                    <h:outputLabel  value="Valor Maximo "/>
+                                    <h:inputText id="it_valor_maximo_rango_inferior" label="0" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMax}"/>
+                                    <rich:tooltip value="Valor Maximo Rango Inferior" target="it_valor_maximo_rango_inferior"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                                </h:panelGrid>
+                            </rich:panel>
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <f:facet name="header">
+                                    <h:outputText  value="Rango Medio"/>
+                                </f:facet>                                            
+                                <h:panelGrid columns="2" width="100%">
+                                    <h:outputLabel  value="Valor Minimo "/>
+                                    <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoMedioMin}"/>
+                                    <h:outputLabel  value="Valor Maximo "/>
+                                    <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoMedioMax}"/>
+                                </h:panelGrid>
+                            </rich:panel>
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <f:facet name="header">
+                                    <h:outputText  value="Rango Superior"/>
+                                </f:facet>                                            
+                                <h:panelGrid columns="2" width="100%">
+                                    <h:outputLabel  value="Valor Minimo "/>
+                                    <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoSuperiorMin}"/>
+                                    <h:outputLabel  value="Valor Maximo "/>
+                                    <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoSuperiorMax}"/>
+                                </h:panelGrid>
+                            </rich:panel>
+                        </h:panelGrid>                                                        
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.actualizarMetaObra()}" type="submit" value="Actualizar"/>
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas}" type="submit" value="Regresar"/>
