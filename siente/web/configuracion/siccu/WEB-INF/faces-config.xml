@@ -313,6 +313,11 @@
         <managed-bean-class>co.com.interkont.cobra.obra.seguimiento.SeguimientosContrato</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>    
+    <managed-bean>
+        <managed-bean-name>CobraExceptionBean</managed-bean-name>
+        <managed-bean-class>co.com.interkont.cobra.exception.CobraExceptionBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>    
 
     <managed-bean>
         <managed-bean-name>SessionBeanCobra</managed-bean-name>
