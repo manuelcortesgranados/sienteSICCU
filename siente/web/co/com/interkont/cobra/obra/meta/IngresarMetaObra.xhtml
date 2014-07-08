@@ -34,22 +34,90 @@
                         <h:outputText  value="Ingresar Nueva Meta"/>
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
-                        <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 40%">
-                            <h:outputLabel  value="Meta"/>
-                            <h:outputText  value="#{MetasProyecto.p_idmeta}"/>
-                            <h:outputLabel  value="Proyecto"/>
-                            <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
-                            <h:outputLabel  value="Año"/>
-                            <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
-                            <h:outputLabel  value="Frecuencia Medicion"/>
-                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
-                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
-                            </h:selectOneMenu>
+                        <h:panelGrid columns="2" width="100%">
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <f:facet name="header">
+                                    <h:outputText  value="Informacion Meta Relacionada a Asociar con el Proyecto"/>
+                                </f:facet>
+                                <h:panelGrid columns="2" width="70%">
+                                    <h:outputLabel  value="Id : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.id}"></h:outputText>
+                                    <h:outputLabel  value="Objetivo : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.objetivo}"></h:outputText>
+                                    <h:outputLabel  value="Programa : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.programa}"></h:outputText>
+                                    <h:outputLabel  value="Subprograma : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.subprograma}"></h:outputText>
+                                    <h:outputLabel  value="Nomp : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.nomp}"></h:outputText>
+                                    <h:outputLabel  value="Descripcion Meta Producto : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.descripcionmetaproducto}"></h:outputText>
+                                    <h:outputLabel  value="Unidad de Medida : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.unidadmedida}"></h:outputText>
+                                    <h:outputLabel  value="Nombre Indicador :"/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.nombreindicador}"></h:outputText>
+                                    <h:outputLabel  value="Tipo Meta : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.tipometa}"></h:outputText>
+                                    <h:outputLabel  value="Linea Base Indicador : "/>
+                                    <h:outputText value="#{MetasProyecto.meta_consulta.lineaBaseIndicador}"></h:outputText>
+                                </h:panelGrid>
+                            </rich:panel>                            
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <h:panelGrid columns="2" width="100%">
+                                    <h:outputLabel  value="Meta"/>
+                                    <h:outputText  value="#{MetasProyecto.p_idmeta}"/>
+                                    <h:outputLabel  value="Proyecto"/>
+                                    <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
+                                    <h:outputLabel  value="Año"/>
+                                    <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
+                                    <h:outputLabel  value="Frecuencia Medicion"/>
+                                    <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
+                                        <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
+                                    </h:selectOneMenu>
+                                </h:panelGrid>             
+                                <h:panelGrid columns="3" width="100%">
+                                    <rich:panel rendered="true" styleClass="noneborder">
+                                        <f:facet name="header">
+                                            <h:outputText  value="Rango Inferior"/>
+                                        </f:facet>                                            
+                                        <h:panelGrid columns="3" width="100%">
+                                            <h:outputLabel  value="Valor Minimo "/>
+                                            <h:inputText id="it_valor_minimo_rango_inferior" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMin}"/>
+                                            <rich:tooltip value="Valor Minimo Rango Inferior" target="it_valor_minimo_rango_inferior"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                                            <h:outputLabel  value="Valor Maximo "/>
+                                            <h:inputText id="it_valor_maximo_rango_inferior" label="0" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMax}"/>
+                                            <rich:tooltip value="Valor Maximo Rango Inferior" target="it_valor_maximo_rango_inferior"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                    <rich:panel rendered="true" styleClass="noneborder">
+                                        <f:facet name="header">
+                                            <h:outputText  value="Rango Medio"/>
+                                        </f:facet>                                            
+                                        <h:panelGrid columns="2" width="100%">
+                                            <h:outputLabel  value="Valor Minimo "/>
+                                            <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoMedioMin}"/>
+                                            <h:outputLabel  value="Valor Maximo "/>
+                                            <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoMedioMax}"/>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                    <rich:panel rendered="true" styleClass="noneborder">
+                                        <f:facet name="header">
+                                            <h:outputText  value="Rango Superior"/>
+                                        </f:facet>                                            
+                                        <h:panelGrid columns="2" width="100%">
+                                            <h:outputLabel  value="Valor Minimo "/>
+                                            <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoSuperiorMin}"/>
+                                            <h:outputLabel  value="Valor Maximo "/>
+                                            <h:inputText   immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoSuperiorMax}"/>
+                                        </h:panelGrid>
+                                    </rich:panel>
+                                </h:panelGrid>                                
+                                <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
+                                    <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaObra}" type="submit" value="Guardar"/>
+                                    <h:commandButton action="#{MetasProyecto.irApagina_Metas}" value="Regresar"/>
+                                </h:panelGrid> 
+                            </rich:panel>
                         </h:panelGrid>
-                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaObra}" type="submit" value="Guardar"/>
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" value="Regresar"/>
-                        </h:panelGrid>              
                     </h:panelGroup>
                 </rich:panel>
             </h:panelGrid>
