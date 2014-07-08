@@ -62,9 +62,13 @@
                     <p>#{var.debeHaberAlgoMal}<br/>
                         #{var.estamosTrabajandoEnlaSolucion}<br/>
                         #{var.puedesVolver} <h:commandLink  styleClass="ikont-link-error"  
-                            value="#{var.paginaInicio}" action="#{SessionBeanCobra.cerrarSession_action}"/>#{var.reportarAlaRedSoporte}  
+                                        value="#{var.paginaInicio}" action="#{SessionBeanCobra.cerrarSession_action}"/>#{var.reportarAlaRedSoporte}  
                         <a class="ikont-link-error" href="#{var.linksoporte}">  #{var.clickAqui}"  </a>
                     </p>
+                    <p></p>
+                    <h:panelGroup id="ikont-hpg-rp-metasproyecto" rendered="#{CobraExceptionBean.ambiente_pruebas}">
+                        <h:outputText value="#{CobraExceptionBean.printStackTrace(requestScope['javax.servlet.error.exception'])}"></h:outputText>
+                    </h:panelGroup>
                 </div>
             </div>
 
