@@ -222,6 +222,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
     private UIDataTable tablaObrasPadres = new UIDataTable();
+    private UIDataTable tablainterventores = new UIDataTable();
+    private UIDataTable tablasupervisores = new UIDataTable();
     // </editor-fold>
     /**
      * Variables Int.
@@ -320,11 +322,25 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private String longitudmapa = getSessionBeanCobra().getBundle().getString("longitudmapa");
     private boolean redibujarmapa = false;
     private boolean tipoOrigenSoloLectura;
-    private  BigDecimal valorfaltanteasociarcontrato = BigDecimal.ZERO;
+    private BigDecimal valorfaltanteasociarcontrato = BigDecimal.ZERO;
     private String strempleosdirectos = bundle.getString("numempleosdirectos");
     private String strempleosindirectos = bundle.getString("numempleosindirectos");
     private String strbeneficiarios = bundle.getString("numbeneficiarios");
-    
+
+    private boolean isSupervisor; //true es supervisor, false es interventor
+
+    private String nombre = "";
+    private boolean aplicaFiltroInterventor;
+    private List<Tercero> listaInterventores;
+    private String nombreSupervisor = "";
+    private boolean aplicaFiltroSupervisor;
+    private List<Tercero> listaSupervisores;
+    List<Tercero> listaTotalTerceros;
+    private boolean primeraPagina;
+    private boolean anteriorPagina;
+    private boolean siguientePagina;
+    private boolean ultimoPagina;
+
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
     }
@@ -1562,7 +1578,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setStrbeneficiarios(String strbeneficiarios) {
         this.strbeneficiarios = strbeneficiarios;
     }
-    
+
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -2040,8 +2056,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         int i = 0;
         for (Claseobra clase : lista) {
             SelectItem opt = new SelectItem(clase.getIntidclaseobra(), clase.getStrdescclaseobra());
-                ClaseObra[i++] = opt;
-            }
+            ClaseObra[i++] = opt;
+        }
         faseelegida.setIntidfase(tiahselect);
         tiproyectoselec = 0;
 
@@ -3741,24 +3757,19 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         if (comboEntidadesObraguardar()) {
             if (validarTipificacion()) {
-                if(obranueva.getDatefeciniobra()==null && obranueva.getDatefecfinobra()==null)
-                {
+                if (obranueva.getDatefeciniobra() == null && obranueva.getDatefecfinobra() == null) {
 //                    fechas
 //                }    
 //                if (fechasvalidas) {
                     obranueva.setTipoestadobra(new Tipoestadobra(0));
                     guardarObraTemporal();
                 } else {
-                    if(obranueva.getDatefeciniobra()==null || obranueva.getDatefecfinobra()==null)
-                    {
+                    if (obranueva.getDatefeciniobra() == null || obranueva.getDatefecfinobra() == null) {
                         obranueva.setTipoestadobra(new Tipoestadobra(0));
                         guardarObraTemporal();
-                    }
-                    else
-                    {    
+                    } else {
                         fechaCambio();
-                        if(fechasvalidas)
-                        {
+                        if (fechasvalidas) {
                             obranueva.setTipoestadobra(new Tipoestadobra(0));
                             guardarObraTemporal();
                         }
@@ -4112,7 +4123,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         return null;
     }
-    
+
     /**
      * Llenado de selectitem Region.
      */
@@ -4137,7 +4148,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         validarDatosBasicos();
     }
-    
+
     public void agregarLocalidad() {
         switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
             case 1:
@@ -4215,19 +4226,19 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String eliminarLocalidad() {
         Localidad local = (Localidad) tablalocalidades.getRowData();
-        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_PROVINCIA) {
+        if (local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_PROVINCIA) {
             provincias.add(local);
 //            cargarSelectItemLocalidad(provinciasSelectItem, provincias);
         }
-        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CORREGIMIENTO) {
+        if (local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CORREGIMIENTO) {
             corregimients.add(local);
 //            cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
         }
-        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CAR) {
+        if (local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CAR) {
             cars.add(local);
 //            cargarSelectItemLocalidad(carsSelectItem, cars);
         }
-        if(local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CUENCA) {
+        if (local.getTipolocalidad().getOidcodigotipolocalidad() == Tipolocalidad.ID_CUENCA) {
             cuencas.add(local);
 //            cargarSelectItemLocalidad(carsSelectItem, cars);
         }
@@ -4494,7 +4505,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         disableCronograma = 0;
         disableAiu = 0;
         obranueva.setNumvaltotobra(BigDecimal.ZERO);
-            valortotalobra= BigDecimal.ZERO;
+        valortotalobra = BigDecimal.ZERO;
         if (obranueva.isBooleantienehijos() || isProyectoestrategia()) {
             disableCronograma = 1;
             disableAiu = 1;
@@ -4992,7 +5003,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     /**
      * Realiza la redirección al paso de asociar contrato
-     * @return 
+     *
+     * @return
      */
     public String pasoAsociarContrato() {
         return "datosAsociarContrato";
@@ -5033,17 +5045,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     public boolean validarTipificacion() {
         boolean valido = true;
-        if (obranueva.getClaseobra().getIntidclaseobra()==0) {
+        if (obranueva.getClaseobra().getIntidclaseobra() == 0) {
             FacesUtils.addErrorMessage("Debe seleccionar un sector para la obra.");
-            valido= false;
+            valido = false;
         }
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         if (tiahselect == 0 || subtiposelec == 0 || tiproyectoselec == 0) {
-             FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
-            valido= false;
+            FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
+            valido = false;
         } else {
-            valido= true;
+            valido = true;
         }
         return valido;
     }
@@ -5329,7 +5341,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 //        if (!obranueva.isBooleantienehijos()) {
 //            validacion.setPresupuesto(true);
 //        }
-
         //if (validacion.isTipificacion() && validacion.isDatosbasicos()) {
         //guardarObraTemporal();
         //}
@@ -5490,12 +5501,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return
      */
-     public String navegarNuevaObra() {
+    public String navegarNuevaObra() {
         String regla = null;
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
 
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
-        
+
         switch (navegacion) {
             case 0:
                 regla = volverTipificacion();
@@ -5558,8 +5569,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public String reporteHistorialValidaciones() {
 
         try {
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver")+bundle.getString("reportehistorialvalidaciones") + obranueva.getIntcodigoobra());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/Reportes");
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("reportehistorialvalidaciones") + obranueva.getIntcodigoobra());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -5845,27 +5856,28 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 
     }
-    public void tipoImpactoSocial (){      
-       
-        if (!getNuevoContratoBasico().getListimpactosocial().isEmpty()){
-            for (Tipoimpactosocial imp : getNuevoContratoBasico().getListimpactosocial()){
-                if (imp.getStrnombrecolumna().equals("empleos directos")){                    
+
+    public void tipoImpactoSocial() {
+
+        if (!getNuevoContratoBasico().getListimpactosocial().isEmpty()) {
+            for (Tipoimpactosocial imp : getNuevoContratoBasico().getListimpactosocial()) {
+                if (imp.getStrnombrecolumna().equals("empleos directos")) {
                     setStrempleosdirectos(imp.getStrdescripcionimpacto());
-            }else if (imp.getStrnombrecolumna().equals("empleos indirectos")){
-                setStrempleosindirectos(imp.getStrdescripcionimpacto());
-            }else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")){
-                setStrbeneficiarios(imp.getStrdescripcionimpacto());
-            }
-                
+                } else if (imp.getStrnombrecolumna().equals("empleos indirectos")) {
+                    setStrempleosindirectos(imp.getStrdescripcionimpacto());
+                } else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")) {
+                    setStrbeneficiarios(imp.getStrdescripcionimpacto());
+                }
+
             }
         } else {
             setStrbeneficiarios(bundle.getString("numbeneficiarios"));
             setStrempleosdirectos(bundle.getString("numempleosdirectos"));
             setStrempleosindirectos(bundle.getString("numempleosindirectos"));
         }
-        
+
     }
-    
+
     /**
      * Listado de indicadores parametrizados en el sistema
      */
@@ -5878,7 +5890,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setListaIndicadores(List<Indicador> listaIndicadores) {
         this.listaIndicadores = listaIndicadores;
     }
-    
+
     /**
      * Listado de indicadores asociados a la obra
      */
@@ -5891,7 +5903,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setListaIndicadoresObra(List<Indicadorobra> listaIndicadoresObra) {
         this.listaIndicadoresObra = listaIndicadoresObra;
     }
-    
+
     /**
      * Variable temporal para gestionar el indicador
      */
@@ -5904,7 +5916,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setIndicador(Indicador indicador) {
         this.indicador = indicador;
     }
-    
+
     /**
      * Indicador de obra para el objeto urbano
      */
@@ -5922,7 +5934,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Indicador de obra para el objeto rural
      */
     private Indicadorobra indicadorobraobjetorural = new Indicadorobra();
-    
+
     public Indicadorobra getIndicadorobraobjetorural() {
         return indicadorobraobjetorural;
     }
@@ -5930,7 +5942,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setIndicadorobraobjetorural(Indicadorobra indicadorobraobjetorural) {
         this.indicadorobraobjetorural = indicadorobraobjetorural;
     }
-    
+
     /**
      * Objeto temporal para gestionar el indicador asociado a una obra
      */
@@ -5943,9 +5955,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setIndicadorobra(Indicadorobra indicadorobra) {
         this.indicadorobra = indicadorobra;
     }
-    
+
     /**
-     * De acuerdo a esta variable se visualiza o no la sección urbano en la 
+     * De acuerdo a esta variable se visualiza o no la sección urbano en la
      * ventana de editar indicador
      */
     private boolean verSeccionUrbano;
@@ -5959,11 +5971,11 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * De acuerdo a esta variable se visualiza o no la sección rural en la 
+     * De acuerdo a esta variable se visualiza o no la sección rural en la
      * ventana de editar indicador
      */
     private boolean verSeccionRural;
-    
+
     public boolean isVerSeccionRural() {
         return verSeccionRural;
     }
@@ -5971,9 +5983,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setVerSeccionRural(boolean verSeccionRural) {
         this.verSeccionRural = verSeccionRural;
     }
-    
+
     /**
-     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * Variable asociada al filtro de la columna correspondiente al nombre del
      * indicador de la tabla de indicadores disponibles
      */
     private String indicadorFilter;
@@ -5985,9 +5997,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setIndicadorFilter(String indicadorFilter) {
         this.indicadorFilter = indicadorFilter;
     }
-    
+
     /**
-     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * Variable asociada al filtro de la columna correspondiente a la primera
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores disponibles
      */
@@ -6000,9 +6012,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setClasificacion1Filter(String clasificacion1Filter) {
         this.clasificacion1Filter = clasificacion1Filter;
     }
-    
+
     /**
-     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * Variable asociada al filtro de la columna correspondiente a la segunda
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores disponibles
      */
@@ -6015,9 +6027,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setClasificacion2Filter(String clasificacion2Filter) {
         this.clasificacion2Filter = clasificacion2Filter;
     }
-    
+
     /**
-     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * Variable asociada al filtro de la columna correspondiente al nombre del
      * indicador de la tabla de indicadores asociados
      */
     private String indicadorAsociadoFilter;
@@ -6031,7 +6043,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * Variable asociada al filtro de la columna correspondiente a la primera
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores asociados
      */
@@ -6046,7 +6058,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * Variable asociada al filtro de la columna correspondiente a la segunda
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores asociados
      */
@@ -6059,7 +6071,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setClasificacion2AsociadoFilter(String clasificacion2AsociadoFilter) {
         this.clasificacion2AsociadoFilter = clasificacion2AsociadoFilter;
     }
-    
+
     /**
      * Constante que representa un objeto urbano
      */
@@ -6068,7 +6080,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Constante que representa un objeto rural
      */
     private final Objetoindicador objetoRural = new Objetoindicador(2, "Rural");
-    
+
     /**
      * Ordena las listas de indicadores disponibles e indicadores asociados
      * presentada en las tablas de la vista
@@ -6077,22 +6089,23 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         Collections.sort(listaIndicadores);
         Collections.sort(listaIndicadoresObra);
     }
-    
+
     /**
      * Método ejecutado cuando se selecciona el paso Ingresar Indicadores
-     * @return 
+     *
+     * @return
      */
     public String pasoIngresarIndicadores() {
         listaIndicadores = getSessionBeanCobra().getCobraService().encontrarIndicadores();
         listaIndicadoresObra = getSessionBeanCobra().getCobraService().encontrarIndicadoresObra(obranueva.getIntcodigoobra());
-        for(Indicadorobra ind : listaIndicadoresObra) {
+        for (Indicadorobra ind : listaIndicadoresObra) {
             listaIndicadores.remove(ind.getIndicador());
             ind.setObra(obranueva);
         }
         ordenarListas();
         return "IndicadoresProyecto";
     }
-    
+
     /**
      * Validar si el Paso de Asociar Contrato esta bien diligenciado
      *
@@ -6102,7 +6115,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         int i = 0;
         while (i < listaImagenesevolucionobra.size()) {
             if (listaImagenesevolucionobra.get(i).getTipoimagen().getIntidtipoimagen() == 1) {
-                if(Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+                if (Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
                     return pasoIngresarIndicadores();
                 } else {
                     return "datosAsociarContrato";
@@ -6113,23 +6126,25 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagenppal"));
         return null;
     }
-    
+
     /**
-     * Metodo que devuelve la regla de navegación para regresar al módulo de 
+     * Metodo que devuelve la regla de navegación para regresar al módulo de
      * indicadores
+     *
      * @return Regla de navegación evaluada por el faces-config
      */
     public String pasoVolverAIndicadores() {
-        if(Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+        if (Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
             return pasoIngresarIndicadores();
         } else {
             return "datosGenerarImagenes";
         }
     }
-    
+
     /**
-     * Acción ejecutada cuando se selecciona un registro de la tabla de 
+     * Acción ejecutada cuando se selecciona un registro de la tabla de
      * indicadores
+     *
      * @param indicador Indicador seleccionado de la tabla
      */
     public void seleccionarIndicadorAction(Indicador indicador) {
@@ -6138,73 +6153,75 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         indicadorobraobjetourbano.setObjetoindicador(objetoUrbano);
         indicadorobraobjetourbano.setIndicador(indicador);
         indicadorobraobjetourbano.setObra(obranueva);
-        
+
         indicadorobraobjetorural = new Indicadorobra();
         indicadorobraobjetorural.setObjetoindicador(objetoRural);
         indicadorobraobjetorural.setIndicador(indicador);
         indicadorobraobjetorural.setObra(obranueva);
-        
+
         establecerVerSeccionUrbano();
         establecerVerSeccionRural();
     }
-    
+
     /**
-     * Establece si el indicador de la obra de objeto urbano ya se encuentra 
+     * Establece si el indicador de la obra de objeto urbano ya se encuentra
      * asociado al proyecto
      */
     public void establecerVerSeccionUrbano() {
         verSeccionUrbano = true;
         for (Indicadorobra indobra : listaIndicadoresObra) {
-            if(indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 1) {
+            if (indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 1) {
                 verSeccionUrbano = false;
             }
         }
     }
-    
+
     /**
-     * Estblece si el indicador de la obra de objeto urbano ya se encuentra 
+     * Estblece si el indicador de la obra de objeto urbano ya se encuentra
      * asociado al proyecto
      */
     public void establecerVerSeccionRural() {
         verSeccionRural = true;
         for (Indicadorobra indobra : listaIndicadoresObra) {
-            if(indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 2) {
+            if (indobra.getIndicador().equals(indicador) && indobra.getObjetoindicador().getIntidobjetoindicador() == 2) {
                 verSeccionRural = false;
             }
         }
     }
-    
+
     /**
      * Ingresa el indicador a la lista de indicadores del proyecto
      */
     public void ingresarIndicadorAction() {
-        if(verSeccionUrbano) {
+        if (verSeccionUrbano) {
             ingresarIndicador(indicadorobraobjetourbano);
         }
-        if(verSeccionRural) {
+        if (verSeccionRural) {
             ingresarIndicador(indicadorobraobjetorural);
         }
         ordenarListas();
     }
+
     public void ingresarIndicador(Indicadorobra indicadorobra) {
         listaIndicadoresObra.add(indicadorobra);
         listaIndicadores.remove(indicadorobra.getIndicador());
         getSessionBeanCobra().getCobraService().guardarIndicadorObra(indicadorobra);
     }
-    
+
     /**
      * Establece la referencia del indicador seleccionado para eliminar
+     *
      * @param indicadorobra Indicador seleccionado de la tabla
      */
     public void eliminarIndicadorObraAction(Indicadorobra indicadorobra) {
         this.indicadorobra = indicadorobra;
     }
-    
+
     /**
      * Realiza la eliminación del indicador
      */
     public void aceptarEliminarIndicadorObraAction() {
-        if(!listaIndicadores.contains(indicadorobra.getIndicador())) {
+        if (!listaIndicadores.contains(indicadorobra.getIndicador())) {
             listaIndicadores.add(indicadorobra.getIndicador());
         }
         listaIndicadoresObra.remove(indicadorobra);
@@ -6212,20 +6229,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         Collections.sort(listaIndicadores);
         Collections.sort(listaIndicadoresObra);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * Selector de provincias
      */
@@ -6265,17 +6269,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.provincias = provincias;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de provincias
-     * @return 
+     *
+     * @return
      */
     public String llenarProvincias() {
         provincias = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_PROVINCIA);
         provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
         return null;
     }
-    
+
     /**
      * Agrega la provincia a la lista de localidades a adicionar
      */
@@ -6283,7 +6287,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         for (Localidad localidad : provincias) {
             if (localidad.getStrcodigolocalidad().compareTo(codProvincia) == 0) {
                 for (Localidad localidadAsociada : listaLocalidades) {
-                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                    if (localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
                         FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
                         return;
                     }
@@ -6293,7 +6297,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 //        provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem,provincias);
     }
-    
+
     /**
      * Selector de corregimients
      */
@@ -6333,17 +6337,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.corregimients = corregimients;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de corregimients
-     * @return 
+     *
+     * @return
      */
     public String llenarCorregimients() {
         corregimients = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CORREGIMIENTO);
         corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
         return null;
     }
-    
+
     /**
      * Agrega la corregimient a la lista de localidades a adicionar
      */
@@ -6351,7 +6355,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         for (Localidad localidad : corregimients) {
             if (localidad.getStrcodigolocalidad().compareTo(codCorregimient) == 0) {
                 for (Localidad localidadAsociada : listaLocalidades) {
-                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                    if (localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
                         FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
                         return;
                     }
@@ -6361,7 +6365,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 //        corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem,corregimients);
     }
-    
+
     /**
      * Selector de cars
      */
@@ -6401,17 +6405,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.cars = cars;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de cars
-     * @return 
+     *
+     * @return
      */
     public String llenarCars() {
         cars = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CAR);
         carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
         return null;
     }
-    
+
     /**
      * Agrega la car a la lista de localidades a adicionar
      */
@@ -6419,7 +6423,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         for (Localidad localidad : cars) {
             if (localidad.getStrcodigolocalidad().compareTo(codCar) == 0) {
                 for (Localidad localidadAsociada : listaLocalidades) {
-                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                    if (localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
                         FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
                         return;
                     }
@@ -6429,7 +6433,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 //        carsSelectItem = cargarSelectItemLocalidad(carsSelectItem,cars);
     }
-    
+
     /**
      * Selector de cuencas
      */
@@ -6469,17 +6473,17 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.cuencas = cuencas;
     }
 
-    
     /**
      * Metodo encargado de llenar los datos para el selector de cuencas
-     * @return 
+     *
+     * @return
      */
     public String llenarCuencas() {
         cuencas = getSessionBeanCobra().getCobraService().encontrarLocalidadesPorTipolocalidad(Tipolocalidad.ID_CUENCA);
         cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
         return null;
     }
-    
+
     /**
      * Agrega la cuenca a la lista de localidades a adicionar
      */
@@ -6487,7 +6491,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         for (Localidad localidad : cuencas) {
             if (localidad.getStrcodigolocalidad().compareTo(codCuenca) == 0) {
                 for (Localidad localidadAsociada : listaLocalidades) {
-                    if(localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                    if (localidadAsociada.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
                         FacesUtils.addErrorMessage(Propiedad.getValor("localidadyaasociadaerror"));
                         return;
                     }
@@ -6497,27 +6501,29 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
 //        cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem,cuencas);
     }
-    
+
     /**
-     * Actualiza la lista de localidades específicas disponibles teniendo en 
+     * Actualiza la lista de localidades específicas disponibles teniendo en
      * cuenta aquellas que ya han sido asociadas al proyecto
+     *
      * @param localidadesEsp Lista de localidades específicas
      */
     public void actualizarLocalidadesEspDisponibles(List<Localidad> localidadesEsp) {
         List<Localidad> localidadesAEliminar = new ArrayList<Localidad>();
         for (Localidad localidad : listaLocalidades) {
             for (Localidad localidadEsp : localidadesEsp) {
-                if(localidadEsp.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
+                if (localidadEsp.getStrcodigolocalidad().equals(localidad.getStrcodigolocalidad())) {
                     localidadesAEliminar.add(localidadEsp);
                 }
             }
         }
         localidadesEsp.removeAll(localidadesAEliminar);
     }
-    
+
     /**
      * Carga la lista de selección proporcionada con la lista de localidades
      * proporcionada
+     *
      * @param localidadesSelectItem Lista de selección
      * @param localidadesEsp Localidades a cargar en la lista
      * @return Lista de selección cargada
@@ -6532,14 +6538,15 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         return localidadesSelectItem;
     }
-    
+
     /**
-     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de 
+     * Metodo ejecutado cuando se selecciona la opción de pasar a la pestaña de
      * ubicación de la obra;
-     * @return 
+     *
+     * @return
      */
     public String pasarUbicacionObra() {
-        if(Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
+        if (Boolean.valueOf(Propiedad.getValor("verotrostiposdelocalidad"))) {
             llenarProvincias();
             llenarCorregimients();
             llenarCars();
@@ -6547,7 +6554,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         return "datosubicaciondelaObra";
     }
-    
+
     /**
      * Variable para la gestión de una localidad
      */
@@ -6560,7 +6567,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setLocalidad(Localidad localidad) {
         this.localidad = localidad;
     }
-    
+
     public long oidcodigotipolocalidad;
 
     public long getOidcodigotipolocalidad() {
@@ -6570,30 +6577,30 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setOidcodigotipolocalidad(long oidcodigotipolocalidad) {
         this.oidcodigotipolocalidad = oidcodigotipolocalidad;
     }
-    
+
     /**
      * Método para crear una nueva localidad Específica
      */
     public void crearNuevaLocalidad() {
         localidad.setTipolocalidad(new Tipolocalidad(oidcodigotipolocalidad));
         getSessionBeanCobra().getCobraService().guardarLocalidad(localidad);
-        switch ((int)localidad.getTipolocalidad().getOidcodigotipolocalidad()) {
-            case (int)Tipolocalidad.ID_CAR :    
+        switch ((int) localidad.getTipolocalidad().getOidcodigotipolocalidad()) {
+            case (int) Tipolocalidad.ID_CAR:
                 codCar = localidad.getStrcodigolocalidad();
                 cars.add(localidad);
                 carsSelectItem = cargarSelectItemLocalidad(carsSelectItem, cars);
                 break;
-            case (int)Tipolocalidad.ID_CORREGIMIENTO :    
+            case (int) Tipolocalidad.ID_CORREGIMIENTO:
                 codCorregimient = localidad.getStrcodigolocalidad();
                 corregimients.add(localidad);
                 corregimientsSelectItem = cargarSelectItemLocalidad(corregimientsSelectItem, corregimients);
                 break;
-            case (int)Tipolocalidad.ID_CUENCA :    
+            case (int) Tipolocalidad.ID_CUENCA:
                 codCuenca = localidad.getStrcodigolocalidad();
                 cuencas.add(localidad);
                 cuencasSelectItem = cargarSelectItemLocalidad(cuencasSelectItem, cuencas);
                 break;
-            case (int)Tipolocalidad.ID_PROVINCIA :    
+            case (int) Tipolocalidad.ID_PROVINCIA:
                 codProvincia = localidad.getStrcodigolocalidad();
                 provincias.add(localidad);
                 provinciasSelectItem = cargarSelectItemLocalidad(provinciasSelectItem, provincias);
@@ -6601,7 +6608,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
         localidad = new Localidad();
     }
-    
+
     /**
      * Lista de tipos de localidad
      */
@@ -6614,7 +6621,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setTiposLocalidad(List<Tipolocalidad> tiposLocalidad) {
         this.tiposLocalidad = tiposLocalidad;
     }
-    
+
     /**
      * Selector de tipos de localidad
      */
@@ -6627,7 +6634,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setTiposLocalidadSelectItem(SelectItem[] tiposLocalidadSelectItem) {
         this.tiposLocalidadSelectItem = tiposLocalidadSelectItem;
     }
-    
+
     /**
      * Método ejecutado cuando se activa la sección de ingresar nueva localidad
      * en ubicación de nuevo proyecto
@@ -6636,7 +6643,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         localidad = new Localidad();
         llenarTiposLocalidad();
     }
-    
+
     /**
      * Carga la lista de selección de os codigos de localidad
      */
@@ -6648,5 +6655,354 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem selectItem = new SelectItem(tipolocalidad.getOidcodigotipolocalidad(), tipolocalidad.getStrnombretipolocalidad());
             tiposLocalidadSelectItem[i++] = selectItem;
         }
+    }
+
+    /**
+     * @return the tablainterventores
+     */
+    public UIDataTable getTablainterventores() {
+        return tablainterventores;
+    }
+
+    /**
+     * @param tablainterventores the tablainterventores to set
+     */
+    public void setTablainterventores(UIDataTable tablainterventores) {
+        this.tablainterventores = tablainterventores;
+    }
+
+    /**
+     * @return the tablasupervisores
+     */
+    public UIDataTable getTablasupervisores() {
+        return tablasupervisores;
+    }
+
+    /**
+     * @param tablasupervisores the tablasupervisores to set
+     */
+    public void setTablasupervisores(UIDataTable tablasupervisores) {
+        this.tablasupervisores = tablasupervisores;
+    }
+
+    /**
+     * @return the isSupervisor
+     */
+    public boolean isIsSupervisor() {
+        return isSupervisor;
+    }
+
+    /**
+     * @param isSupervisor the isSupervisor to set
+     */
+    public void setIsSupervisor(boolean isSupervisor) {
+        this.isSupervisor = isSupervisor;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the aplicaFiltroInterventor
+     */
+    public boolean isAplicaFiltroInterventor() {
+        return aplicaFiltroInterventor;
+    }
+
+    /**
+     * @param aplicaFiltroInterventor the aplicaFiltroInterventor to set
+     */
+    public void setAplicaFiltroInterventor(boolean aplicaFiltroInterventor) {
+        this.aplicaFiltroInterventor = aplicaFiltroInterventor;
+    }
+
+    /**
+     * @return the listaInterventores
+     */
+    public List<Tercero> getListaInterventores() {
+        return listaInterventores;
+    }
+
+    /**
+     * @param listaInterventores the listaInterventores to set
+     */
+    public void setListaInterventores(List<Tercero> listaInterventores) {
+        this.listaInterventores = listaInterventores;
+    }
+
+    /**
+     * @return the nombreSupervisor
+     */
+    public String getNombreSupervisor() {
+        return nombreSupervisor;
+    }
+
+    /**
+     * @param nombreSupervisor the nombreSupervisor to set
+     */
+    public void setNombreSupervisor(String nombreSupervisor) {
+        this.nombreSupervisor = nombreSupervisor;
+    }
+
+    /**
+     * @return the aplicaFiltroSupervisor
+     */
+    public boolean isAplicaFiltroSupervisor() {
+        return aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @param aplicaFiltroSupervisor the aplicaFiltroSupervisor to set
+     */
+    public void setAplicaFiltroSupervisor(boolean aplicaFiltroSupervisor) {
+        this.aplicaFiltroSupervisor = aplicaFiltroSupervisor;
+    }
+
+    /**
+     * @return the listaSupervisores
+     */
+    public List<Tercero> getListaSupervisores() {
+        return listaSupervisores;
+    }
+
+    /**
+     * @param listaSupervisores the listaSupervisores to set
+     */
+    public void setListaSupervisores(List<Tercero> listaSupervisores) {
+        this.listaSupervisores = listaSupervisores;
+    }
+
+    public void buscarInterventor() {
+        aplicaFiltroInterventor = false;
+        if (nombre.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroInterventor = true;
+        }
+        primerosInterventores();
+    }
+
+    public void primerosTerceros() {
+        int fin = listaTotalTerceros.size() >= 10 ? 9 : listaTotalTerceros.size() - 1;
+
+        if (isIsSupervisor()) {
+            listaSupervisores = rangoTerceros(listaTotalTerceros, 0, fin);
+        } else {
+            listaInterventores = rangoTerceros(listaTotalTerceros, 0, fin);
+        }
+
+        setPrimeraPagina(false);
+        setAnteriorPagina(false);
+        pagina = 1;
+        int round = Math.round(listaTotalTerceros.size() / 10);
+        if (round * 10 < listaTotalTerceros.size()) {
+            round++;
+        }
+        totalpaginas = round;
+        if (listaTotalTerceros.size() <= 10) {
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        } else {
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        }
+    }
+
+    public void anterioresTerceros() {
+        pagina--;
+        int fin = pagina * 10 - 1;
+        int ini = (pagina - 1) * 10;
+
+        if (isIsSupervisor()) {
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        } else {
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+
+        if (pagina == 1) {
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        } else {
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+
+        if (pagina < totalpaginas) {
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        } else {
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+
+    public void siguienteTerceros() {
+        pagina++;
+        int fin = pagina * 10 > listaTotalTerceros.size() ? listaTotalTerceros.size() - 1 : pagina * 10 - 1;
+        int ini = (pagina - 1) * 10;
+
+        if (isIsSupervisor()) {
+            listaSupervisores = rangoTerceros(listaTotalTerceros, ini, fin);
+        } else {
+            listaInterventores = rangoTerceros(listaTotalTerceros, ini, fin);
+        }
+        if (pagina == 1) {
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        } else {
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+
+        if (pagina < totalpaginas) {
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        } else {
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+
+    public void ultimosTerceros() {
+        pagina = totalpaginas;
+        int fin = listaTotalTerceros.size() - 1;
+
+        if (isIsSupervisor()) {
+            listaSupervisores = rangoTerceros(listaTotalTerceros, fin - 20 < 0 ? 0 : fin - 20, fin);
+        } else {
+            listaInterventores = rangoTerceros(listaTotalTerceros, fin - 20 < 0 ? 0 : fin - 20, fin);
+        }
+        if (pagina == 1) {
+            setPrimeraPagina(false);
+            setAnteriorPagina(false);
+        } else {
+            setPrimeraPagina(true);
+            setAnteriorPagina(true);
+        }
+
+        if (pagina < totalpaginas) {
+            setSiguientePagina(true);
+            setUltimoPagina(true);
+        } else {
+            setSiguientePagina(false);
+            setUltimoPagina(false);
+        }
+    }
+
+    public void primerosInterventores() {
+        if (aplicaFiltroInterventor) {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombre, 2);
+            totalfilas = listaTotalTerceros.size();
+        } else {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 2);
+            totalfilas = listaTotalTerceros.size();
+        }
+        primerosTerceros();
+    }
+
+    public String seleccionarInterventor() {
+        obranueva.setInterventor((Tercero) tablainterventores.getRowData());
+        return null;
+    }
+
+    public void buscarSupervisor() {
+        aplicaFiltroSupervisor = false;
+        if (nombreSupervisor.length() != 0) {
+            //   listaContratista.clear();
+            aplicaFiltroSupervisor = true;
+        }
+        primerosSupervisores();
+    }
+
+    public void primerosSupervisores() {
+        if (aplicaFiltroSupervisor) {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(nombreSupervisor, 23);
+            totalfilas = listaTotalTerceros.size();
+        } else {
+            listaTotalTerceros = getSessionBeanCobra().getCobraService().getTerceroXGrupo(null, 23);
+            totalfilas = listaTotalTerceros.size();
+        }
+
+        primerosTerceros();
+
+    }
+
+    public String seleccionarSupervisor() {
+        obranueva.setSupervisor((Tercero) tablasupervisores.getRowData());
+        return null;
+    }
+
+    private List<Tercero> rangoTerceros(List<Tercero> lista, int inicio, int fin) {
+        List<Tercero> primeros = new ArrayList<Tercero>();
+        for (int i = inicio; i <= fin; i++) {
+            primeros.add(lista.get(i));
+        }
+        return primeros;
+    }
+
+    /**
+     * @return the primeraPagina
+     */
+    public boolean isPrimeraPagina() {
+        return primeraPagina;
+    }
+
+    /**
+     * @param primeraPagina the primeraPagina to set
+     */
+    public void setPrimeraPagina(boolean primeraPagina) {
+        this.primeraPagina = primeraPagina;
+    }
+
+    /**
+     * @return the anteriorPagina
+     */
+    public boolean isAnteriorPagina() {
+        return anteriorPagina;
+    }
+
+    /**
+     * @param anteriorPagina the anteriorPagina to set
+     */
+    public void setAnteriorPagina(boolean anteriorPagina) {
+        this.anteriorPagina = anteriorPagina;
+    }
+
+    /**
+     * @return the siguientePagina
+     */
+    public boolean isSiguientePagina() {
+        return siguientePagina;
+    }
+
+    /**
+     * @param siguientePagina the siguientePagina to set
+     */
+    public void setSiguientePagina(boolean siguientePagina) {
+        this.siguientePagina = siguientePagina;
+    }
+
+    /**
+     * @return the ultimoPagina
+     */
+    public boolean isUltimoPagina() {
+        return ultimoPagina;
+    }
+
+    /**
+     * @param ultimoPagina the ultimoPagina to set
+     */
+    public void setUltimoPagina(boolean ultimoPagina) {
+        this.ultimoPagina = ultimoPagina;
     }
 }
