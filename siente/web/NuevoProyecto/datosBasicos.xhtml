@@ -79,27 +79,6 @@
                                     <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
                                 </rich:calendar>
                             </h:panelGroup>
-                            <h:outputLabel  styleClass="ikont-hol-periodomedida font-general"    value="#{var.periodomedida}"/>
-                            <h:panelGroup id="layoutPeriodoMedi2">
-                                <h:selectOneMenu id="comboperiodomedida" value="#{Supervisor$IngresarNuevaObra.obranueva.periodomedida.intidperiomedida}"  >
-                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoMedida}" />
-                                    <a4j:ajax event="change" render="layoutPeriodo, layoutPeriodoMedi2 " />
-                                </h:selectOneMenu>
-                            </h:panelGroup>
-
-                            <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont-hol-plazodias font-general"   id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
-                                <rich:message for="plazodias" />
-                            </h:panelGroup>
-
-                            <h:panelGroup id="layoutPeriodo">
-                                <h:inputText  size="15" id="plazodias" value="#{Supervisor$IngresarNuevaObra.obranueva.intplazoobra}" disabled="true">
-                                    <f:validateLongRange minimum="0"/>
-                                    <f:validateLength maximum="6" minimum="1"/>
-                                    <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" render="layoutPeriodo"/>
-                                </h:inputText>
-                            </h:panelGroup>
-
                             <h:outputLabel  styleClass="ikont-hol-entidadContratantec font-general"   id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
                             <h:panelGroup id="layoutenco">
                                 <h:selectOneMenu   id="cmbEntidadContratantec" 
