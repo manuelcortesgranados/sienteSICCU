@@ -151,26 +151,27 @@
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}" 
-                                       expanded="false" immediate="true"
+                                       expanded="false" immediate="true" toggleListener="#{Supervisor$Contrato.consultarContratistas()}" 
                                        rendered="#{var.multiplescontratistas}">
                     <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
                         <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
-                                                value="#{Supervisor$Contrato.contrato.listaContratistas}"
+                                        value="#{Supervisor$Contrato.contrato.listaContratocontratistas}" rows="25"
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                var="contratista">
+                                                var="contratoContratista">
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
                                 </f:facet>
-                                <h:outputText  value="#{contratista.tercero.intcedula}"/>
+                                <h:outputText  value="#{contratoContratista.contratista.tercero.intcedula}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header" >
                                     <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
                                 </f:facet>
-                                <h:outputText value="#{contratista.tercero.strnombre}"/>
+                                <h:outputText value="#{contratoContratista.contratista.tercero.strnombre}"/>
                             </rich:column>
                         </rich:dataTable>
+                        <rich:dataScroller id="ikont-rds-multiplescontratistas" for="ikont-rdt-multiplescontratistas" styleClass="ikont-rds-multiplescontratistas"/>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel switchType="client" header="#{var.informeFisico}" style="width: 87%;" expanded="true">
