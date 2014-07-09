@@ -258,7 +258,7 @@ public class ValidacionesConvenio {
      * @param contrato Convenio
      */
     public static void validarContratistaRequerido(Contrato contrato) {
-        if (contrato.getContratistas() == null || contrato.getContratistas().isEmpty() ) {
+        if (contrato.getContratocontratistas() == null || contrato.getContratocontratistas().isEmpty() ) {
             throw new ConvenioException("El convenio debe tener por lo menos un contratista asociado");
         }
     }

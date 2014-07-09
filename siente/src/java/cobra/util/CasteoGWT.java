@@ -964,7 +964,7 @@ public class CasteoGWT implements Serializable {
         contrato.setBoolplanoperativo(Boolean.TRUE);
         contrato.setBooltipocontratoconvenio(Boolean.FALSE);
         
-        contrato.setContratistas(null);
+        contrato.setContratocontratistas(null);
         contrato.setContrato(null);
         if (contrato.getIntidcontrato() != 0) {
             contrato.setDatefechacreacion(contratoDto.getDatefechacreacion());

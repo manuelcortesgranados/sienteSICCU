@@ -57,13 +57,19 @@
                             <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
                         </h:selectOneMenu>
                     </h:panelGrid>
-                    <h:panelGrid id="panel_entidad_contrato" columns="2" rendered="#{not var.multiplescontratantes}">
-                        <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante1"  value="(*) #{var.entidadcontratante}" rendered="#{var.boolentidadcontratante}"/>
-                        <h:panelGroup id="cmbEntContra1" styleClass="ikont-hpg-entcontra"  >
-                            <rich:select id="selectentidadcontrato1" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" rendered="#{var.boolentidadcontratante}"
-                                         defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
-                                <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-                            </rich:select>
+                    <h:panelGrid id="panel_entidad_contrato" columns="2" rendered="#{var.boolentidadcontratante and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                        <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante1"  value="(*) #{var.entidadcontratante}"/>
+                        <h:panelGroup id="cmbEntContra1" styleClass="ikont-hpg-entcontra">
+                            <h:selectOneMenu  id="selectentidadcontrato1" styleClass="ikont-rs-ingresarenti" rendered="#{var.boolentidadcontratanteasociadaausuario}"
+                                              disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
+                                              value="#{Supervisor$Contrato.contrato.tercero.intcodigo}" required="#{var.versioncobra eq 'siccu'}">
+                                <f:selectItems value="#{Supervisor$Contrato.terceros}" var="tercero" itemLabel="#{tercero.strnombre}" itemValue="#{tercero.intcodigo}"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu  id="ikont-shom-entidadcontratante" styleClass="ikont-shom-entidadcontratante" rendered="#{not var.boolentidadcontratanteasociadaausuario}" 
+                                              disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
+                                              value="#{Supervisor$Contrato.contrato.tercero.intcodigo}" required="#{var.versioncobra eq 'siccu'}">
+                                <f:selectItems value="#{Supervisor$Contrato.contratantes}" var="contratante" itemLabel="#{contratante.tercero.strnombre}" itemValue="#{contratante.tercero.intcodigo}"/>
+                            </h:selectOneMenu>
                         </h:panelGroup>
                     </h:panelGrid>
                     <h:panelGrid columns="2"  styleClass="font-general">
@@ -235,7 +241,6 @@
                                                      value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
                                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione la opción" itemValue="0"/>
                                         <f:selectItems value="#{Supervisor$Contrato.tipocontrato}" />
-                                        <a4j:ajax event="valueChange" render="ikont-hpg-labelrecursospropios ikont-hpg-recursospropios ikont-hpg-multiplescontratantesexterno" execute="@this"/>
                                     </h:selectOneMenu>
                                     <h:message for="ikont-hsom-tipoconvenio" styleClass="ikont-rm-tipoconvenio"  />
                                 </h:panelGrid>
@@ -273,10 +278,11 @@
 
                                 <h:outputLabel  styleClass="ikont-hol-lblcombenticontr font-general" id="cmbEntidadContratante"  value="(*) #{var.entidadcontratante}" rendered="#{!var.boolentidadcontratante}"/>
                                 <h:panelGroup id="cmbEntContra" styleClass="ikont-hpg-entcontra" rendered="#{!var.boolentidadcontratante}">
-                                    <rich:select id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}" 
-                                                 defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
-                                        <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-                                    </rich:select>
+                                    <h:selectOneMenu  id="selectentidadcontrato" styleClass="ikont-rs-ingresarenti" 
+                                                        disabled="#{Supervisor$Contrato.boolnumencargosoli or Supervisor$Contrato.contrpadre != null}"
+                                                        value="#{Supervisor$Contrato.contrato.tercero.intcodigo}" required="#{var.versioncobra eq 'siccu'}">
+                                          <f:selectItems value="#{Supervisor$Contrato.contratantes}" var="contratante" itemLabel="#{contratante.tercero.strnombre}" itemValue="#{contratante.tercero.intcodigo}"/>
+                                      </h:selectOneMenu>
                                 </h:panelGroup>
                                 <h:outputLabel  styleClass="ikont-hol-numencargo font-general" id="lblnumerocencar" value="#{var.numeroencargo}:"
                                                 rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
@@ -362,10 +368,10 @@
                                 </h:panelGroup>
 
                                 <h:panelGroup id="ikont-hpg-labelrecursospropios">
-                                    <h:outputText  styleClass="ikont-hot-enticontratante font-general" id="lblnumrecursospropios"  value="#{var.numrecursospropios} (Entidad Contratante):" rendered="#{not var.multiplescontratantes or Supervisor$Contrato.interadministrativo}"/>
+                                    <h:outputText  styleClass="ikont-hot-enticontratante font-general" id="lblnumrecursospropios"  value="#{var.numrecursospropios} (Entidad Contratante):" rendered="#{not var.multiplescontratantes}"/>
                                 </h:panelGroup>
                                 <h:panelGroup id="ikont-hpg-recursospropios">
-                                    <h:panelGrid columns="2" rendered="#{not var.multiplescontratantes or Supervisor$Contrato.interadministrativo}">
+                                    <h:panelGrid columns="2" rendered="#{not var.multiplescontratantes}">
                                         <h:inputText styleClass="ikont-hit-numrecursopropio" id="innumrecursospropios"  value="#{Supervisor$Contrato.contrato.numrecursospropios}"
                                                      size="20"  maxlength="20" required="true" >
                                             <a4j:ajax event="change" render="gpValContrato,stpformadepago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
@@ -406,13 +412,13 @@
             </rich:panel>
             <h:panelGroup id="ikont-hpg-multiplescontratantesexterno" styleClass="ikont-hpg-multiplescontratantesexterno">
                 <rich:panel id="ikont-rcp-multiplescontratantes" styleClass="ikont-rcp-multiplescontratantes" header="#{var.tituloadicionarmultilescontratantes}"
-                            rendered="#{var.multiplescontratantes and Supervisor$Contrato.cooperacion}">
+                            rendered="#{var.multiplescontratantes}">
                     <h:panelGrid id="ikont-hpg-multiplescontratantes" styleClass="ikont-hpg-multiplescontratantes">
-                        <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Convenio'}" styleClass="ikont-acb-buscarmultiplescontratante" id="ikont-acb-buscarmultiplescontratantes" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratantes()}"
-                                           render="ikont-hpg-contratantes" execute="@this" immediate="true"
-                                           oncomplete="#{rich:component('mp-listado-contratantes')}.show();"/>
+                        <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Convenio'}" styleClass="ikont-acb-buscarmultiplescontratante" id="ikont-acb-buscarmultiplescontratantes" value="#{var.buscarProyecto}"
+                                           execute="@this" immediate="true"
+                                           onclick="#{rich:component('mp-listado-contratantes')}.show(); return false;"/>
                         <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}" styleClass="ikont-acb-buscarmultiplescontratantescontrato" id="ikont-acb-buscarmultiplescontratantescontrato" value="#{var.buscarProyecto}"
-                                           render="ikont-hpg-contratantescontrato" execute="@this" immediate="true"
+                                           execute="@this" immediate="true"
                                            onclick="#{rich:component('mp-listado-contratantescontrato')}.show(); return false;"/>
                         <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
                                         value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
@@ -457,41 +463,56 @@
                     </h:panelGrid>
                 </rich:panel>
             </h:panelGroup>
-            <rich:panel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}"   
-                        rendered="#{var.multiplescontratistas}">
-                <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
-                    <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarContratistaContrato}"
-                                       render="gpTotalContratistas" execute="@this" immediate="true" rendered="#{empty Supervisor$Contrato.contrato.listaContratistas or Supervisor$Contrato.tipoContCon eq 'Convenio'}"
-                                       oncomplete="#{rich:component('mp-listado-contratistas')}.show();"/>
-                    <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
-                                    value="#{Supervisor$Contrato.contrato.listaContratistas}"
-                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                    var="contratista" rows="25">
-                        <rich:column>
-                            <f:facet name="header" >
-                                <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
-                            </f:facet>
-                            <h:outputText  value="#{contratista.tercero.intcedula}"/>
-                        </rich:column>
-                        <rich:column>
-                            <f:facet name="header" >
-                                <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
-                            </f:facet>
-                            <h:outputText value="#{contratista.tercero.strnombre}"/>
-                        </rich:column>
-                        <rich:column>
-                            <f:facet name="header">
-                                <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratista}"/>
-                            </f:facet>
-                            <a4j:commandButton value="#{var.eliminarcontratista}" 
-                                               action="#{Supervisor$Contrato.eliminarContratistaConvenioAction(contratista)}" 
-                                               execute="@this" immediate="true" render="ikont-hpg-multiplescontratistas">
-                            </a4j:commandButton>   
-                        </rich:column>
-                    </rich:dataTable>
-                    <rich:dataScroller id="ikont-rds-multiplescontratistas" styleClass="ikont-rds-multiplescontratistas" for="ikont-rdt-multiplescontratistas"/>
-                </h:panelGrid>
-            </rich:panel>
+            <h:panelGroup id="ikont-hpg-multiplescontratistasexterno" styleClass="ikont-hpg-multiplescontratistasexterno">
+                <rich:panel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}"
+                            rendered="#{var.multiplescontratistas}">
+                    <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
+                        <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistas()}"
+                                           render="ikont-hpg-contratistas" execute="@this" immediate="true"
+                                           oncomplete="#{rich:component('ikont-rpp-listado-contratistas')}.show();"/>
+                        <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
+                                        value="#{Supervisor$Contrato.contrato.listaContratocontratistas}" rows="25"
+                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                        var="contratoContratista">
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-identificacioncontratista"   value="#{var.identificacioncontratista}"/>
+                                </f:facet>
+                                <h:outputText  value="#{contratoContratista.contratista.tercero.intcedula}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
+                                </f:facet>
+                                <h:outputText value="#{contratoContratista.contratista.tercero.strnombre}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-numvalorcontratado" value="#{var.numvalorcontratado}"/>
+                                </f:facet>
+                                <h:outputText value="#{contratoContratista.numvalorcontratado}">
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                </h:outputText>
+                                <f:facet name="footer" >
+                                    <h:outputText  styleClass="ikont-hot-numvalorcontratado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
+                                </f:facet>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header">
+                                    <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.eliminarcontratista}"/>
+                                </f:facet>
+                                <a4j:commandButton value="#{var.eliminarcontratista}" 
+                                                   action="#{Supervisor$Contrato.eliminarContratistaConvenioAction(contratoContratista)}" 
+                                                   execute="@this" immediate="true" render="ikont-hpg-multiplescontratistas">
+                                </a4j:commandButton>   
+                            </rich:column>
+                        </rich:dataTable>
+                        <rich:dataScroller id="ikont-rds-multiplescontratistas" for="ikont-rdt-multiplescontratistas" styleClass="ikont-rds-multiplescontratistas"/>
+                    </h:panelGrid>
+                </rich:panel>
+            </h:panelGroup>
             <rich:panel styleClass="ikont-rcp-formapago" id="stpformadepago"  header="#{var.outformapago}">                               
                 <h:panelGroup rendered="#{!var.aplicaepc}">
                     <ui:include src="/Supervisor/FormaPago.xhtml"  />
@@ -738,7 +759,7 @@
                 <a4j:commandButton styleClass="ikont-acb-guardarcontratos" id="ikont-acb-guardarconvenioiccu"  
                                    action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
                                    render="pgcontrato" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"
-                                   execute="@this,selectentidadcontrato1,cmbcontrato2,ikont-hsom-tipoconvenio,
+                                   execute="@this,ikont-shom-entidadcontratante,ikont-hsom-tipoconvenio,
                                    ikont-hpg-numcontratoconvenio,txtNomcont,ikont-hit-anio,fecsusContrato,fecIniContrato,fecfinContrato,
                                    textobjetot,innumrecursospropios,innumrecursoster,poranti,
                                    fecpagoantic,innumactasparciales,gpCuotas,fecpagoactaunica"/>
@@ -765,9 +786,15 @@
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>
         <ui:include src="/modal/subirDocPoliza.xhtml"/>
-        <ui:include src="/modal/listadoContratistas.xhtml"/>
-        <ui:include src="/modal/listadoContratantes.xhtml"/>
-        <ui:include src="/modal/listadoContratantesContrato.xhtml"/>
+        
+        <h:panelGroup rendered="#{not var.multiplescontratistas}">
+            <ui:include src="/modal/listadoContratistas.xhtml"/>
+        </h:panelGroup> 
+        <h:panelGroup rendered="#{var.multiplescontratistas}">
+            <ui:include src="/modal/listadoContratistasConvenio.xhtml"/>
+            <ui:include src="/modal/listadoContratantes.xhtml"/>
+            <ui:include src="/modal/listadoContratantesContrato.xhtml"/>
+        </h:panelGroup> 
         <ui:include src="/modal/crearcontratista.xhtml"/>
     </ui:define>    
 </ui:composition>
