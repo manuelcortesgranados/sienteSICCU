@@ -54,8 +54,8 @@
                             <h:panelGroup>
                                 <h:outputLabel  styleClass="ikont-hol-nomabrev  font-general"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>                               
 
-                                        <h:outputText  styleClass="ikont-hot-textoinicial  font-general"   id="lbllegendnombreproy"  value="#{var.legendnombreabre}"/>
-                                    
+                                <h:outputText  styleClass="ikont-hot-textoinicial  font-general"   id="lbllegendnombreproy"  value="#{var.legendnombreabre}"/>
+
                                 <rich:message for="txtNombreAbrev" />
                             </h:panelGroup>
 
@@ -110,10 +110,32 @@
                                     </a4j:ajax>
                                 </h:selectOneMenu>
                             </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general" id="lblinterventor"  
+                                            value="(*) #{var.interventorObra}:" />
+                            <h:panelGroup id="gpInterventorseleccionado">                                            
+                                <interkont:spacer width="7"/>
+                                <h:inputText styleClass="ikont-hit-textcontratista" id="txtInterventor" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.interventor.strnombre}">
+                                </h:inputText>  
+                                <a4j:commandButton styleClass="ikont-acb-buscarcontratista" id="btnBuscarinterventor" value="#{var.buscarProyecto}" action="#{Supervisor$IngresarNuevaObra.buscarInterventor}"
+                                                   render="gpTotalInterventor" execute="gpTotalInterventor" immediate="true"
+                                                   oncomplete="#{rich:component('mp-listado-Interventor')}.show();">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="false" />
+                                </a4j:commandButton>
+                            </h:panelGroup>
 
-                            <h:outputLabel  styleClass="ikont-hol-interventor font-general"   id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
-                            <h:inputText  id="txtInterventor" value="#{Supervisor$IngresarNuevaObra.obranueva.strinterventor}" disabled="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}"
-                                          maxlength="100" size="40"/>
+                            <h:outputLabel  styleClass="ikont-hol-contratista font-general" id="lblsupervisor"  
+                                            value="(*) #{var.supervisorciu}:" />
+                            <h:panelGroup id="gpSupervisorseleccionado">                                            
+                                <interkont:spacer width="7"/>
+                                <h:inputText styleClass="ikont-hit-textcontratista" id="txtSupervisor" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.supervisor.strnombre}">
+                                </h:inputText>  
+                                <a4j:commandButton styleClass="ikont-acb-buscarcontratista" id="btnBuscarsupervisor" value="#{var.buscarProyecto}" action="#{Supervisor$IngresarNuevaObra.buscarSupervisor}"
+                                                   render="gpTotalSupervisor" execute="gpTotalSupervisor" immediate="true"
+                                                   oncomplete="#{rich:component('mp-listado-Supervisor')}.show();">
+                                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.isSupervisor}" value="true" />
+
+                                </a4j:commandButton>
+                            </h:panelGroup>
 
                             <h:outputLabel  styleClass="ikont-hol-solicitante font-general"   id="lblsolicitante"  value="#{var.solicitante}:" for="txtSolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
                             <h:panelGroup id="gpsolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
@@ -201,14 +223,14 @@
                                 <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number"  />
 
                             </h:inputText>
-                            
+
                             <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado font-general"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}  %" >
                             </h:outputLabel>
-                                <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
-                                             size="20"  maxlength="20">                                             
-                                    <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
-                                </h:inputText>
-                  
+                            <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
+                                         size="20"  maxlength="20">                                             
+                                <f:convertNumber maxFractionDigits="#{var.numerodecimales}" minFractionDigits="#{var.numerodecimales}" type="number" />
+                            </h:inputText>
+
                             <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado font-general"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
@@ -271,6 +293,8 @@
         </h:panelGrid>
         <ui:include src="/modal/listadoRuta.xhtml"/>
         <ui:include src="/modal/modallistadosedes.xhtml"/>
+        <ui:include src="/modal/listadoInterventor.xhtml"/>
+        <ui:include src="/modal/listadoSupervisor.xhtml"/>
     </ui:define>
 
 </ui:composition>
