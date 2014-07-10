@@ -14,7 +14,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql://10.0.1.71/cobrasiccu</value>
+            <value>jdbc:postgresql://172.16.252.7/cobrasiccu</value>
         </property>
         <property name="username">
             <value>postgres</value>
