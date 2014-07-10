@@ -213,7 +213,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-datosbasicoscontconvbasic" value="#{var.datosbasicos}" />
                             </f:facet>
-                            <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
+                            <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%" rendered="#{var.versioncobra != 'siccu'}">
                                 <h:outputLabel styleClass="ikont-hot-tipocontrcontraloria font-general" id="lbltipocontratoselectselect1" value="#{var.selecciontipocontrato}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}"/>
                                 <h:selectOneMenu id="ikont-hsom-modalidadcontrato" value="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" rendered="#{Supervisor$Contrato.tipoContCon != 'Convenio'}" >
                                     <f:selectItem itemLabel="Seleccione la opción" itemValue="0"/>
@@ -236,7 +236,7 @@
                             <h:panelGrid columns="2">
 
                                 <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
-                                <h:panelGrid id="ikont-hpg-tipoconvenio" columns="2" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}">
+                                <h:panelGrid id="ikont-hpg-tipoconvenio" columns="2" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu'}">
                                     <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" required="true"
                                                      value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
                                         <f:selectItem noSelectionOption="true" itemLabel="Seleccione la opción" itemValue="0"/>
@@ -767,7 +767,7 @@
                 <a4j:commandButton styleClass="ikont-acb-guardarcontratos" id="ikont-acb-guardarcontratoiccu"  
                                    action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
                                    render="pgcontrato" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Contrato'}"
-                                   execute="@this,selectentidadcontrato1,cmbcontrato1,ikont-hsom-modalidadcontrato,cmbcontcon,
+                                   execute="@this,selectentidadcontrato1,ikont-hsom-tipoconvenio,cmbcontrato1,ikont-hsom-modalidadcontrato,cmbcontcon,
                                    cmbcontconContraloria,ikont-hpg-numcontratoconvenio,txtNomcont,ikont-hit-anio,fecsusContrato,fecIniContrato,fecfinContrato,
                                    textobjetot,innumrecursospropios,innumrecursoster,poranti,
                                    fecpagoantic,innumactasparciales,gpCuotas,fecpagoactaunica"/>

@@ -54,7 +54,8 @@
                     <h:panelGrid columns="2" style="width: 100%;">
                         <h:panelGrid style="width: 400px; border-spacing: 4px">
                             <h:panelGroup >
-                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratanteCliente}</h:outputLabel>
+                                <h:outputLabel class="ikont-hol-detalle-proyecto" rendered="#{var.versioncobra ne 'siccu'}" >#{var.contratanteCliente}</h:outputLabel>
+                                <h:outputLabel class="ikont-hol-detalle-proyecto" rendered="#{var.versioncobra eq 'siccu'}" >#{var.entidadcontratante}</h:outputLabel>
                                 <interkont:spacer width="20" />
                                 <B>
                                     <h:outputLabel id="entiodadcontratantevalue" styleClass="ikont-" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
