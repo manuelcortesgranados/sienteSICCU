@@ -81,34 +81,34 @@
                 }
 
             }
-            function getHref(){
-                
+            function getHref() {
+
                 var unidadId = document.getElementById('formRepBody:formRepMonEva:selUnidadMonEva').value;
-                if(unidadId == 0 || unidadId == -1){
+                if (unidadId == 0 || unidadId == -1) {
                     unidadId = 'ALL';
                 }
                 var numConvenio = document.getElementById('formRepBody:formRepMonEva:inNumConvenioMonEva').value;
                 var fechaInicial = document.getElementById('formRepBody:formRepMonEva:fcInicioMonEvaInputDate').value;
                 var fechaFin = document.getElementById('formRepBody:formRepMonEva:fcFinMonEvaInputDate').value;
                 var dpto = document.getElementById('formRepBody:formRepMonEva:dptoMonEva').value;
-                if(dpto == -1){
+                if (dpto == -1) {
                     dpto = 'ALL';
                 }
                 var muni = document.getElementById('formRepBody:formRepMonEva:muniMonEva').value;
-                if(muni == -1){
+                if (muni == -1) {
                     muni = 'ALL';
                 }
-                
+
                 window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?\n\
 identificador_reporte=6&amp;\n\
-identificador_unidad='+unidadId+'&amp;\n\
-identificador_convenio='+numConvenio+'&amp;\n\
-fecha_inicial='+fechaInicial+'&amp;\n\
-fecha_final='+fechaFin+'&amp;\n\
-departamento='+dpto+'&amp;\n\
-municipio='+muni+'&amp;\n\
+identificador_unidad=' + unidadId + '&amp;\n\
+identificador_convenio=' + numConvenio + '&amp;\n\
+fecha_inicial=' + fechaInicial + '&amp;\n\
+fecha_final=' + fechaFin + '&amp;\n\
+departamento=' + dpto + '&amp;\n\
+municipio=' + muni + '&amp;\n\
 usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');
-    
+
             }
         </script>
 
@@ -213,15 +213,13 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                             <div class="icon_bot"></div>
 
                             <div class="cont_central">
-                                <div class="seleccione">
-                                    <p class="select_texto">#{var.reporteDtpo}</p>
-                                </div>
 
                                 <div class="dropdown">
 
-                                    <h:selectOneMenu id="listDpto" value="#{Reportes.dptoSelected}" 
-                                                     onclick="this.style.width = 'auto;';">
-                                        <f:selectItem itemValue="ALL" itemLabel="Todos" />
+                                    <h:outputText value="#{var.departamento}" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:selectOneMenu id="dptoGeo" value="#{Reportes.deptosah}" 
+                                                     onclick="this.style.width = 'auto;';" >
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
                                         <f:selectItems value="#{Reportes.sedeptosah}"/>
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpGbal" listener="#{Reportes.llenarMuniciAh}"/>
                                     </h:selectOneMenu>
@@ -229,7 +227,22 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                                 </div>
 
                                 <div class="descargarbtn">
-                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.dptoSelected}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                </div>
+
+                                <div class="dropdown">
+
+                                    <h:outputText value="#{var.municipio}" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:selectOneMenu id="muniGeo" value="#{Reportes.muniah}" 
+                                                     onclick="this.style.width = 'auto;';" >
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.semuniah}"/>
+                                        <a4j:ajax execute="@this" event="change" render="gpPopUpGbal" />
+                                    </h:selectOneMenu>
+                                </div>
+
+                                <div class="descargarbtn">
+                                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1a&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;identificador_municipio=#{Reportes.muniah == '-1' ? 'ALL' : Reportes.muniah}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
@@ -250,7 +263,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepCtas')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -286,7 +299,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepMetas')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -355,7 +368,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepImpl')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -391,7 +404,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepConsGcialConv')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -427,7 +440,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepAuditoria')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -504,7 +517,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                         <h:panelGroup>
                             <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                               title="#{var.cerrar}" immediate="true" onclick="#{rich:component('popUprepMonEva')}.hide();
-                                                           return false;"/>
+                                            return false;"/>
                         </h:panelGroup>
                     </h:form>
                 </f:facet>
@@ -577,7 +590,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
 
                                 <div class="descargarbtn">
                                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="getHref();" />
-                                    
+
                                     <a href=""/>
                                 </div>
                             </div>
