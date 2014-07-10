@@ -6113,17 +6113,22 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String pasoIndicadores() {
         int i = 0;
-        while (i < listaImagenesevolucionobra.size()) {
-            if (listaImagenesevolucionobra.get(i).getTipoimagen().getIntidtipoimagen() == 1) {
-                if (Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
-                    return pasoIngresarIndicadores();
-                } else {
-                    return "datosAsociarContrato";
+        if (listaImagenesevolucionobra.size() > 0) {
+            while (i < listaImagenesevolucionobra.size()) {
+                if (listaImagenesevolucionobra.get(i).getTipoimagen().getIntidtipoimagen() == 1) {
+                    if (Boolean.valueOf(Propiedad.getValor("vermoduloindicadores"))) {
+                        return pasoIngresarIndicadores();
+                    } else {
+                        return "datosAsociarContrato";
+                    }
                 }
+                i++;
             }
-            i++;
+        }else{
+            return "datosAsociarContrato";
         }
-        FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagenppal"));
+
+        //FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagenppal"));
         return null;
     }
 
