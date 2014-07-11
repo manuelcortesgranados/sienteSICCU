@@ -43,7 +43,7 @@
                     </h:panelGroup>
                     <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu" styleClass="totalwidth">
                         <rich:panel header="#{var.finalizarobra}">
-                            <h:outputText  styleClass="ikont-hot-panelfinalizarpaso1"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
+                            <h:outputText  styleClass="ikont-hot-panelfinalizarpaso1"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5 and !Supervisor$AdministrarObraNew.obraFinalizada}"
                                            value="#{var.solopuedefinalizaobrasactivas}" />
                             <h:panelGroup>
                                 <center>
