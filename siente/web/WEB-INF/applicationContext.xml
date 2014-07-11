@@ -29,6 +29,7 @@
         <property name="mappingResources">
             <list>
                 <!-- Alarmas -->  
+                <value>co/com/interkont/cobra/to/MetasCompromisosDinero.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Desembolso.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Unidad.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Typeresultadovalidacion.hbm.xml</value>
@@ -284,7 +285,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="log4j.logger.net.sf.hibernate.type">debug</prop>
