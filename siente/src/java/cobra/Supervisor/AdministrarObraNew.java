@@ -86,7 +86,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private boolean verModificar = false;
     private boolean verSuspender = false;
     private boolean verReiniciar = false;
-    ///Finalizar
+    ///Finalizar    
     private boolean verFin = false;
     private String urlactafin = "";
     private CargadorArchivosWeb subirActaFin = new CargadorArchivosWeb();
@@ -169,6 +169,15 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
     public int controltipodocumento = 0;
     
+    //adicion variable para que cuando se termine el proyecto no muestre validacion anterior
+    private boolean obraFinalizada = false;    
+    public boolean isObraFinalizada() {
+        return obraFinalizada;
+    }
+
+    public void setObraFinalizada(boolean obraFinalizada) {
+        this.obraFinalizada = obraFinalizada;
+    }
     /**
      * variables para las fechas de informe circular tolima
      */
@@ -1381,7 +1390,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), 7);
         urlactafin = "";
         subirActaFin = new CargadorArchivosWeb();
-
+        obraFinalizada =true;
         return null;
     }
 
