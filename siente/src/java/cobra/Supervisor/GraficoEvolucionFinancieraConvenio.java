@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Actividadobra;
@@ -11,6 +10,7 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Desembolso;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
+import co.com.interkont.cobra.to.MetasCompromisosDinero;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
@@ -35,7 +35,6 @@ import cobra.graficos.GraficoSeriesAmCharts;
 import com.google.common.collect.HashBiMap;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,14 +58,14 @@ import java.util.TreeMap;
  * @author maritzabell1
  */
 public class GraficoEvolucionFinancieraConvenio implements Serializable {
-    
+
     private GraficoSeries grafico = new GraficoSeriesAmCharts("graficoEvolucionFinancieraConvenio");
 
     private List<Relacioncontratoperiodoflujocaja> periodosConvenio;
     private Calendar fechaInicioConvenio;
     private Calendar fechaFinConvenio;
     private Contrato convenio;
-    
+
     private List<FlujoEgresos> flujoEgresos;
     private double totalEgresos;
     private List<Planificacionmovimientoproyecto> planifmovimientoconvenioproyecto;
@@ -80,8 +79,10 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private List<Actividadobra> actividadesObra;
     private TreeMap<Date, BigDecimal> fechasDesembolsos;
+    private TreeMap<Date, Double> metasMap;
     private TreeMap<Date, Double> mapPlani = new TreeMap<Date, Double>();
-    private List<Entry<Date,Double>> planificado;
+    private List<Entry<Date, Double>> planificado;
+
     public GraficoSeries getGraficoEvolucionFinancieraConvenio() {
         return grafico;
     }
@@ -103,12 +104,13 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     }
 
     /**
-     * Genera el grácico de evolución del proyecto estableciendo el código de
-     * la gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
+     * Genera el grácico de evolución del proyecto estableciendo el código de la
+     * gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
      */
     private void graficar() {
         BigDecimal divisor = new BigDecimal(1000000);
         BigDecimal acumuladoVlrEjecutado = new BigDecimal(0);
+        Double acumuladoVlrEjecutadoMetas = 0D;
 
         convenio = getNuevoContratoBasico().getContrato();
         cargarActividadesPlanOperativo();
@@ -116,56 +118,57 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
         crearEstructuraFlujoEgresosConContratos();
         iniciarTotalesEgresosPeriodo();
         calcularTotalesFlujoEgreso();
-        
-        
+
         ConjuntoDatosGrafico conjuntoDatosPlani = new ConjuntoDatosGrafico();
         conjuntoDatosPlani.setCodigo("plan");
-        conjuntoDatosPlani.setEtiqueta(Propiedad.getValor("graEvuContratoPlani"));
+        conjuntoDatosPlani.setEtiqueta(Propiedad.getValor("graEvuContratoPlaniFis"));
         EstiloGrafico estiloDatosPlani = new EstiloGrafico();
         estiloDatosPlani.setColorSerie("#336699");
         conjuntoDatosPlani.setEstilo(estiloDatosPlani);
-
-        
-        if(totalEgresosPeriodoAcumulativo!= null){
-            BigDecimal plan ;
+        int res;
+        if (totalEgresosPeriodoAcumulativo != null) {
+            BigDecimal plan;
             String valStr;
-                    
-            for(int i=0 ; i< totalEgresosPeriodoAcumulativo.length; i++){
-                DatoGrafico datoPlani = new DatoGrafico();
-                datoPlani.setValorX("" + periodosConvenio.get(i).getPeriodoflujocaja().getFechainicio().getTime());
+
+            for (int i = 0; i < totalEgresosPeriodoAcumulativo.length; i++) {
                 plan = new BigDecimal(totalEgresosPeriodoAcumulativo[i]);
-                valStr = plan.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString();
-                datoPlani.setValorY(valStr);
-                StringBuffer stringEtiDatoPlaniActual = new StringBuffer();
-                stringEtiDatoPlaniActual.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(periodosConvenio.get(i).getPeriodoflujocaja().getFechainicio()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoPlan")).append(valStr);
-                datoPlani.setEtiqueta(stringEtiDatoPlaniActual.toString());
-                conjuntoDatosPlani.getListaDatos().add(datoPlani);
+                res = plan.compareTo(new BigDecimal(0));
+
+                if (res == 1) {
+                    DatoGrafico datoPlani = new DatoGrafico();
+                    datoPlani.setValorX("" + periodosConvenio.get(i).getPeriodoflujocaja().getFechainicio().getTime());
+
+                    valStr = plan.divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString();
+                    datoPlani.setValorY(valStr);
+                    StringBuffer stringEtiDatoPlaniActual = new StringBuffer();
+                    stringEtiDatoPlaniActual.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(periodosConvenio.get(i).getPeriodoflujocaja().getFechainicio()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoPlan")).append(valStr);
+                    datoPlani.setEtiqueta(stringEtiDatoPlaniActual.toString());
+                    conjuntoDatosPlani.getListaDatos().add(datoPlani);
+                }
             }
             getSessionBeanCobra().getCobraService().setPlanificadoConvenio(new ArrayList<Entry<Date, Double>>(mapPlani.entrySet()));
         }
         grafico.getConjuntosDatosGrafico().add(conjuntoDatosPlani);
-        
+
         List<Desembolso> desembolsos = getSessionBeanCobra().getCobraService().encontrarDesembolsoxConvenio(getNuevoContratoBasico().getContrato());
-        
+
         fechasDesembolsos = new TreeMap<Date, BigDecimal>();
         BigDecimal valoracum;
-        for(Desembolso des : desembolsos){
-            if(!fechasDesembolsos.containsKey(des.getFecha())){
+        for (Desembolso des : desembolsos) {
+            if (!fechasDesembolsos.containsKey(des.getFecha())) {
                 fechasDesembolsos.put(des.getFecha(), des.getValor());
-            }else{
+            } else {
                 valoracum = fechasDesembolsos.get(des.getFecha());
                 fechasDesembolsos.remove(des.getFecha());
                 valoracum.add(des.getValor());
                 fechasDesembolsos.put(des.getFecha(), valoracum);
-                
+
             }
         }
-        
-        
-        
+
         ConjuntoDatosGrafico conjuntoDatosEje = new ConjuntoDatosGrafico();
         conjuntoDatosEje.setCodigo("eje");
-        conjuntoDatosEje.setEtiqueta(Propiedad.getValor("graEvuContratoEjec"));
+        conjuntoDatosEje.setEtiqueta(Propiedad.getValor("graEvuContratoPlaniDesFis"));
         EstiloGrafico estiloDatosEje = new EstiloGrafico();
         estiloDatosEje.setColorSerie("#FF0000");
         conjuntoDatosEje.setEstilo(estiloDatosEje);
@@ -174,21 +177,157 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             Set<Map.Entry<Date, BigDecimal>> entrySet = fechasDesembolsos.entrySet();
             for (Iterator it = entrySet.iterator(); it.hasNext();) {
                 Map.Entry<Date, BigDecimal> desembolso = (Map.Entry<Date, BigDecimal>) it.next();
-                DatoGrafico datoEje = new DatoGrafico();
-                datoEje.setValorX("" + desembolso.getKey().getTime());
-                acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(desembolso.getValue().divide(divisor));
-                datoEje.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
+                res = desembolso.getValue().compareTo(new BigDecimal(0));
+                if (res == 1) {
+                    DatoGrafico datoEje = new DatoGrafico();
+                    datoEje.setValorX("" + desembolso.getKey().getTime());
+                    acumuladoVlrEjecutado = acumuladoVlrEjecutado.add(desembolso.getValue().divide(divisor));
+                    datoEje.setValorY(acumuladoVlrEjecutado.setScale(3, RoundingMode.HALF_UP).toPlainString());
 
-                StringBuffer stringEtiDatoEjecutado = new StringBuffer();
-                stringEtiDatoEjecutado.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(desembolso.getKey()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoPlan")).append(desembolso.getValue().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
-                datoEje.setEtiqueta(stringEtiDatoEjecutado.toString());
-                conjuntoDatosEje.getListaDatos().add(datoEje);
+                    StringBuffer stringEtiDatoEjecutado = new StringBuffer();
+                    stringEtiDatoEjecutado.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(desembolso.getKey()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoPlan")).append(desembolso.getValue().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    datoEje.setEtiqueta(stringEtiDatoEjecutado.toString());
+                    conjuntoDatosEje.getListaDatos().add(datoEje);
+                }
             }
         }
         grafico.getConjuntosDatosGrafico().add(conjuntoDatosEje);
 
-        
-        
+        List<MetasCompromisosDinero> metas = getSessionBeanCobra().getCobraService().encontrarMetasxNumConvenio(getNuevoContratoBasico().getContrato().getStrnumcontrato());
+
+        metasMap = new TreeMap<Date, Double>();
+        Date fecha;
+        Double value;
+        Calendar cal;
+        for (MetasCompromisosDinero meta : metas) {
+            cal = Calendar.getInstance();
+            cal.set(meta.getAnio(), Calendar.JANUARY, 1);
+            fecha = cal.getTime();
+            if (metasMap.containsKey(fecha)) {
+                value = metasMap.get(fecha);
+                value += meta.getEnero();
+                metasMap.put(fecha, value);
+                cal.set(meta.getAnio(), Calendar.FEBRUARY, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getFebrero();
+                metasMap.put(fecha, meta.getFebrero());
+                cal.set(meta.getAnio(), Calendar.MARCH, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getMarzo();
+                metasMap.put(fecha, meta.getMarzo());
+                cal.set(meta.getAnio(), Calendar.APRIL, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getAbril();
+                metasMap.put(fecha, meta.getAbril());
+                cal.set(meta.getAnio(), Calendar.MAY, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getMayo();
+                metasMap.put(fecha, meta.getMayo());
+                cal.set(meta.getAnio(), Calendar.JUNE, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getJunio();
+                metasMap.put(fecha, meta.getJunio());
+                cal.set(meta.getAnio(), Calendar.JULY, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getJulio();
+                metasMap.put(fecha, meta.getJulio());
+                cal.set(meta.getAnio(), Calendar.AUGUST, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getAgosto();
+                metasMap.put(fecha, meta.getAgosto());
+                cal.set(meta.getAnio(), Calendar.SEPTEMBER, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getSeptiembre();
+                metasMap.put(fecha, meta.getSeptiembre());
+                cal.set(meta.getAnio(), Calendar.OCTOBER, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getOctubre();
+                metasMap.put(fecha, meta.getOctubre());
+                cal.set(meta.getAnio(), Calendar.NOVEMBER, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getNoviembre();
+                metasMap.put(fecha, meta.getNoviembre());
+                cal.set(meta.getAnio(), Calendar.DECEMBER, 1);
+                fecha = cal.getTime();
+                value = metasMap.get(fecha);
+                value += meta.getDiciembre();
+                metasMap.put(fecha, meta.getDiciembre());
+            } else {
+                cal.set(meta.getAnio(), Calendar.JANUARY, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getEnero());
+                cal.set(meta.getAnio(), Calendar.FEBRUARY, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getFebrero());
+                cal.set(meta.getAnio(), Calendar.MARCH, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getMarzo());
+                cal.set(meta.getAnio(), Calendar.APRIL, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getAbril());
+                cal.set(meta.getAnio(), Calendar.MAY, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getMayo());
+                cal.set(meta.getAnio(), Calendar.JUNE, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getJunio());
+                cal.set(meta.getAnio(), Calendar.JULY, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getJulio());
+                cal.set(meta.getAnio(), Calendar.AUGUST, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getAgosto());
+                cal.set(meta.getAnio(), Calendar.SEPTEMBER, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getSeptiembre());
+                cal.set(meta.getAnio(), Calendar.OCTOBER, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getOctubre());
+                cal.set(meta.getAnio(), Calendar.NOVEMBER, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getNoviembre());
+                cal.set(meta.getAnio(), Calendar.DECEMBER, 1);
+                fecha = cal.getTime();
+                metasMap.put(fecha, meta.getDiciembre());
+            }
+        }
+
+        ConjuntoDatosGrafico conjuntoDatosEjeMetas = new ConjuntoDatosGrafico();
+        conjuntoDatosEjeMetas.setCodigo("metas");
+        conjuntoDatosEjeMetas.setEtiqueta(Propiedad.getValor("graEvuContratoPlaniMetasFis"));
+        EstiloGrafico estiloDatosEjeMetas = new EstiloGrafico();
+        estiloDatosEjeMetas.setColorSerie("#5E2D79");
+        conjuntoDatosEjeMetas.setEstilo(estiloDatosEjeMetas);
+
+        if (metas != null) {
+            Set<Map.Entry<Date, Double>> entrySet = metasMap.entrySet();
+            for (Iterator it = entrySet.iterator(); it.hasNext();) {
+                Map.Entry<Date, Double> metaEntry = (Map.Entry<Date, Double>) it.next();
+                if (metaEntry.getValue() > 0) {
+                    DatoGrafico datoEjeMetas = new DatoGrafico();
+                    datoEjeMetas.setValorX("" + metaEntry.getKey().getTime());
+                    acumuladoVlrEjecutadoMetas += (metaEntry.getValue() / divisor.doubleValue());
+                    datoEjeMetas.setValorY(new BigDecimal(acumuladoVlrEjecutadoMetas).setScale(3, RoundingMode.HALF_UP).toPlainString());
+
+                    StringBuffer stringEtiDatoEjecutadoMeta = new StringBuffer();
+                    stringEtiDatoEjecutadoMeta.append(Propiedad.getValor("graEvuContratoEtiDato")).append(" ").append(metaEntry.getKey()).append(" ").append(Propiedad.getValor("graEvuContratoEtiDatoPlan")).append(new BigDecimal(acumuladoVlrEjecutadoMetas).setScale(3, RoundingMode.HALF_UP).toPlainString());
+                    datoEjeMetas.setEtiqueta(stringEtiDatoEjecutadoMeta.toString());
+                    conjuntoDatosEjeMetas.getListaDatos().add(datoEjeMetas);
+                }
+            }
+        }
+        grafico.getConjuntosDatosGrafico().add(conjuntoDatosEjeMetas);
+
         grafico.setTipoGrafico(GraficoSeries.TIPO_LINEAS);
         grafico.getEstilo().setVerLeyenda(true);
         grafico.getEstilo().setVerCursor(true);
@@ -201,11 +340,10 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
         grafico.getEstilo().setAnimado(true);
         grafico.getEstilo().setEvolucionproyectociudadano(true);
         grafico.setTituloEjeY(Propiedad.getValor("graEvuContratoTituloEjeYMillones"));
-        
-        
+
         grafico.generarGrafico();
     }
-    
+
     /**
      * Genera los periodos del flujo de caja de acuerdo con la fecha de inicio y
      * finalización del convenio marco.
@@ -267,7 +405,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             actualizarPeriodosConvenio(fechaPeriodos);
         }
     }
-    
+
     /**
      * Definir periodo del flujo de caja. El método recibe un periodo genérico y
      * una fecha de inicio de periodo a aplicar. Si la fecha de inicio
@@ -302,7 +440,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
         return periodoConvenio;
     }
-    
+
     /**
      * Obtener primer o último día del mes. De acuerdo con una fecha de
      * referencia.
@@ -328,7 +466,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
         return fecha;
     }
-    
+
     /**
      * Calcular el total de meses para periodos de flujo que hay entre dos
      * fechas. Devuelve la diferencias (mas uno) que hay entre las dos fechas.
@@ -348,7 +486,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
         return (meses + 1);
     }
-    
+
     /**
      * Actualizar los periodos establecidos del flujo de caja. Recorre los
      * periodos del flujo de caja del convenio establecidos y los actualiza a
@@ -367,7 +505,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
         return fechaPeriodos;
     }
-    
+
     /**
      * Etiquetar periodo del flujo de caja del convenio. Este método devuelve
      * una cadena que representa la descripción del periodo, de acuerdo con la
@@ -383,7 +521,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
         return etiquetaPeriodo;
     }
-    
+
     /**
      * Crear la estructura del flujo de egresos.
      *
@@ -464,12 +602,12 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
                             boolean estaPlanificado = false;
                             for (Object object : planificacionmovimientoproyecto.getPlanificacionmovimientocontratos()) {
                                 Planificacionmovimientocontrato planificacionmovimientocontrato = (Planificacionmovimientocontrato) object;
-                                if(planificacionmovimientocontrato.getContrato().getIntidcontrato() == contratoProyecto.getIntidcontrato()) {
+                                if (planificacionmovimientocontrato.getContrato().getIntidcontrato() == contratoProyecto.getIntidcontrato()) {
                                     estaPlanificado = true;
                                     break;
                                 }
                             }
-                            if(!estaPlanificado) {
+                            if (!estaPlanificado) {
                                 Planificacionmovimientocontrato planMovimientoContrato = new Planificacionmovimientocontrato();
                                 planMovimientoContrato.setContrato(contratoProyecto);
                                 planMovimientoContrato.setPlanificacionmovimientoproyecto(planificacionmovimientoproyecto);
@@ -589,7 +727,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             }
         }
     }
-    
+
     /**
      * Inicializar los totales de egresos para los periodos.
      *
@@ -606,21 +744,17 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
 
             iterador++;
         }
-        
+
         //Se inicializa el consolidado de las cuotas de gerencia
         for (FlujoEgresos flujoEgresosCuotaGerencia : getFlujoEgresos()) {
-            if (
-                    flujoEgresosCuotaGerencia.isEgresoOtros() && ( 
-                        flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GERENCIA_CONVENIO
-                        || flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GMF
-                    )
-                    ){
+            if (flujoEgresosCuotaGerencia.isEgresoOtros() && (flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GERENCIA_CONVENIO
+                    || flujoEgresosCuotaGerencia.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_GMF)) {
                 for (Planificacionmovconvenio planificacionmovconvenio : flujoEgresosCuotaGerencia.getPlanMovimientosEgresosConvenio()) {
                     planificacionmovconvenio.setValor(BigDecimal.ZERO);
                 }
             }
         }
-        
+
         iniciarAcumuladoGMF();
     }
 
@@ -639,6 +773,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             iterador++;
         }
     }
+
     /**
      * Metodo ejecutado cada vez que se modifica el valor de la planificación de
      * un contrato del flujo de caja
@@ -665,9 +800,9 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
                 if (flujoEgresosRefrescar.isEgresoProyecto()) {
 //                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
                     /**
-                     * Se adiciona al total del periodo el valor de las planificaciones de: 
-                     * "Pagos estimados con cargo directo al convenio" (3)
-                     * "Otros egresos" (5)
+                     * Se adiciona al total del periodo el valor de las
+                     * planificaciones de: "Pagos estimados con cargo directo al
+                     * convenio" (3) "Otros egresos" (5)
                      */
                 } else if (flujoEgresosRefrescar.isEgresoOtros() && (flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_PAGOS_CARGO_DIRECTO_CONVENIO || flujoEgresosRefrescar.getItemFlujoEgresos().getIditemflujocaja() == Itemflujocaja.ID_OTROS_EGRESOS)) {
                     getTotalEgresosPeriodo()[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
@@ -730,6 +865,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             iterador++;
         }
     }
+
     /**
      * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-.
      *
@@ -779,7 +915,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
         }
 
     }
-    
+
     public void cargarActividadesPlanOperativo() {
 
         actividadesObra = new ArrayList<Actividadobra>();
@@ -788,7 +924,7 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
             cargarActividadesConsultadas(activiprincipal);
         }
     }
-    
+
     /*
      *metodo que se encarga de asignar la numeracion a las actividades
      *cuando el convenio se consulta.
@@ -918,7 +1054,8 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     }
 
     /**
-     * @param planifmovimientoconvenioproyecto the planifmovimientoconvenioproyecto to set
+     * @param planifmovimientoconvenioproyecto the
+     * planifmovimientoconvenioproyecto to set
      */
     public void setPlanifmovimientoconvenioproyecto(List<Planificacionmovimientoproyecto> planifmovimientoconvenioproyecto) {
         this.planifmovimientoconvenioproyecto = planifmovimientoconvenioproyecto;
@@ -974,7 +1111,8 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     }
 
     /**
-     * @param planificacionmovcuotagerencia the planificacionmovcuotagerencia to set
+     * @param planificacionmovcuotagerencia the planificacionmovcuotagerencia to
+     * set
      */
     public void setPlanificacionmovcuotagerencia(List<Planificacionmovcuotagerencia> planificacionmovcuotagerencia) {
         this.planificacionmovcuotagerencia = planificacionmovcuotagerencia;
@@ -1002,7 +1140,8 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     }
 
     /**
-     * @param totalEgresosPeriodoAcumulativo the totalEgresosPeriodoAcumulativo to set
+     * @param totalEgresosPeriodoAcumulativo the totalEgresosPeriodoAcumulativo
+     * to set
      */
     public void setTotalEgresosPeriodoAcumulativo(double[] totalEgresosPeriodoAcumulativo) {
         this.totalEgresosPeriodoAcumulativo = totalEgresosPeriodoAcumulativo;
@@ -1053,14 +1192,14 @@ public class GraficoEvolucionFinancieraConvenio implements Serializable {
     /**
      * @return the planificado
      */
-    public List<Entry<Date,Double>> getPlanificado() {
+    public List<Entry<Date, Double>> getPlanificado() {
         return planificado;
     }
 
     /**
      * @param planificado the planificado to set
      */
-    public void setPlanificado(List<Entry<Date,Double>> planificado) {
+    public void setPlanificado(List<Entry<Date, Double>> planificado) {
         this.planificado = planificado;
     }
 }
