@@ -24,11 +24,54 @@
                         i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
                         j = (j = i.length) > 3 ? j % 3 : 0;
                 return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
-            };</script>
+            };
+            
+            
+            /**
+            * Carga los slider del filtro de búsqueda principal
+            */
+           function cargarSliedersFiltroDeBusqueda() {               
+               $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
+                    slide: function(event, ui) {
+                        var numero1 = ui.values[ 0 ];
+                        var numero2 = ui.values[ 1 ];
+                        $("#numero1").val(numero1);
+                        $("#numero2").val(numero2);
+                        $("#slider-range").val(numero1 + "% a " + numero2 + "%");
+                    }
+                });
+                $("#slider-range").val($("#slider-range").slider("values", 0) +
+                                              "%  a  " + $("#slider-range").slider("values", 1) + "%");
+                $("#slider-range-avance").slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
+                    slide: function(event, ui) {
+                        var avance1 = ui.values[ 0 ];
+                        var avance2 = ui.values[ 1 ];
+                        $("#ava1").val(avance1);
+                        $("#ava2").val(avance2);
+                        $("#avance").val(avance1 + "% a " + avance2 + "%");
+                    }
+                });
+                $("#avance").val($("#slider-range-avance").slider("values", 0) +
+                                              "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
+           }
+
+           $(function() {
+               cargarSliedersFiltroDeBusqueda();
+           });
+            
+        </script>
 
     </h:head>
 
-    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
+    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos" onitemchange="cargarSliedersFiltroDeBusqueda()">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos"  > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
