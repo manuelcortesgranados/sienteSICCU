@@ -237,7 +237,7 @@
 
                                 <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
                                     <h:outputText  styleClass="ikont-hot-outxtcontratistacc"   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                    <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                    <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.contratanteCliente}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
                                     <h:outputText  styleClass="ikont-hot-outxtcontraconsul"   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
                                 </rich:column>
 
@@ -290,7 +290,7 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.tercero.strnombrecompleto}" />
                         </rich:column>
 
                         <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
