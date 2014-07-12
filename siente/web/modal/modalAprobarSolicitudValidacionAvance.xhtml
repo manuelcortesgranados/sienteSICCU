@@ -203,6 +203,9 @@
 
                                     <div class="contenedor_botones_formulario_datos_basicos">
                                         <div class="contenedor_botones_formulario_datos_basicos_continuar">
+                                            <div style="font-size: 16px;">
+                                                ¿Desea aprobar la solicitud?
+                                            </div>
                                             <h:selectOneRadio id="valorAprobacionSVA" value="#{Supervisor$DetalleObra.aprobacionSVA}" style=" font-size: 30px;" >
                                                 <f:selectItem  itemValue="1" itemLabel="Si" />
                                                 <f:selectItem  itemValue="2" itemLabel="No" />
@@ -211,7 +214,7 @@
                                             <a4j:commandLink id="resgistrarSVA" 
                                                              action="#{Supervisor$DetalleObra.registrarRespuestaSolicitudValidacionAvance}"
                                                              limitRender="true"
-                                                             render="modalSVAend"
+                                                             render="modalSVAend,historialAprobacionesAvances"
                                                              execute="valorAprobacionSVA"
                                                              transient="true"
                                                              oncomplete="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.hide();#{rich:component('modalSVAend')}.show();return false;"

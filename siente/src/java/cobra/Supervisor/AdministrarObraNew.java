@@ -1920,6 +1920,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         if (getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getObra().getIntcodigoobra()) != null) {
             getDetalleObra().llenarPeriodoAliment();
             getDetalleObra().llenarmodalvalidacion();
+            this.cargarHistorialSVA();
 
             return "evolucion";
         } else {
@@ -2740,10 +2741,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.errorMessageSVA = null;
         this.setPeriodoSolicitudValidacionAvance(0);
         this.setObservacionSolicitudValidacionAvance(null);
-        this.setListaSVA(getSessionBeanCobra().getCobraService().getSolicitudesValidacionAvance(this.getObra()));
+        this.cargarHistorialSVA();
         List<Periodo> temp = getSessionBeanCobra().getCobraService().encontrarPeriodosxAlimentacionesObra(this.getObra().getIntcodigoobra());
         this.setPeriodosalimentacionSolicitudValidacionAvance(temp);
         return "solicitud_validacion_avance";
+    }
+    
+    public void cargarHistorialSVA(){
+        this.setListaSVA(getSessionBeanCobra().getCobraService().getSolicitudesValidacionAvance(this.getObra()));
     }
 
     public void registrarSolicitudValidacionAvance() {

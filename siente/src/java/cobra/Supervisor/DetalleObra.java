@@ -2076,9 +2076,11 @@ public class DetalleObra implements Serializable {
         if (!getRenderSVA()) {
             return;
         }
-        System.out.println("registrarRespuestaSolicitudValidacionAvance " + aprobacionSVA);
         this.solicitudValidacionAvance.setEstado(aprobacionSVA);
+        this.solicitudValidacionAvance.setFechaRespuesta(new Date());
+        this.solicitudValidacionAvance.setJsfUsuarioByUsuarioSupervisor(getSessionBeanCobra().getUsuarioObra());
         this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardarOrActualizar(this.solicitudValidacionAvance);
+        this.getAdministrarObraNew().cargarHistorialSVA();
     }
 
     //

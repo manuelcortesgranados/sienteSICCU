@@ -237,6 +237,43 @@
 
                 </rich:collapsiblePanel>
             </rich:collapsiblePanel>
+            <rich:collapsiblePanel switchType="client" expanded="#{Supervisor$AdministrarObraNew.listaSVA.size() > 0}" id="historialAprobacionesAvances" header="Historial Aprobacion de Avances" >
+                <h:panelGroup id="panel_solicitudes_avances">
+                    <h:outputLabel value="No se han generado solicitudes de aprobación" rendered="#{Supervisor$AdministrarObraNew.listaSVA.size() == 0}" style="font-size: 12px;font-weight: bold;"/>
+                    <rich:dataTable value="#{Supervisor$AdministrarObraNew.listaSVA}" rendered="#{Supervisor$AdministrarObraNew.listaSVA.size() > 0}" var="sva">
+
+                        <rich:column>
+                            <f:facet name="header">Observaciones</f:facet>
+                            <h:outputLabel value="#{sva.observaciones}">
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Periodo de corte</f:facet>
+                            <h:outputLabel value="#{sva.periodo.datefeciniperiodo} - #{sva.periodo.datefecfinperiodo} ">
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Fecha Solicitud</f:facet>
+                            <h:outputLabel value="#{sva.fechaSolicitud}">
+                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Fecha Respuesta</f:facet>
+                            <h:outputLabel value="#{sva.fechaRespuesta}">
+                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                            </h:outputLabel>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">Estado</f:facet>
+                            <h:outputLabel rendered="#{sva.estado == 0}" value="Pendiente" />
+                            <h:graphicImage rendered="#{sva.estado == 1}" value="/resources/imgs/solicitud_validacion_avance_3.png" />
+                            <h:graphicImage rendered="#{sva.estado == 2}" value="/resources/imgs/solicitud_validacion_avance_4.png" />
+                        </rich:column>
+                    </rich:dataTable>
+                </h:panelGroup>
+            </rich:collapsiblePanel>
             <br/>
         </h:form>
 
