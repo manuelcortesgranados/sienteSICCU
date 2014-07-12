@@ -2133,6 +2133,15 @@ input[type="text"], input[type="password"], select{
     background-position: -920px -82px;
 }
 
+.ikont-posicion-solicitud-aprobacion-avance{
+    background-position: -1075px -25px;
+    width: 120px;
+}
+
+.ikont-posicion-solicitud-aprobacion-avance:hover, .ikont-posicion-solicitud-aprobacion-avance.buttonactive{
+    background-position: -1075px -82px;
+}
+
 .ikont-hr-separador-usuario{
     background-color: #C0C0C0;
     height: 1px;
@@ -5236,7 +5245,20 @@ a.ikont-a4jcl-solicitumaestro {
     width: 110px;
 }
 a.ikont-a4jcl-solicitumaestro:hover {
-    background-position: 0px  -86px;
+    background-position: -600px  -86px;
+    transition: .5s all;
+}
+
+a.ikont-a4jcl-solicituvalidacionavance {
+    background-image: url("../imgs/detalle_reporte_sprite.png");
+    background-position: -673 0;
+    background-repeat: no-repeat;
+    display: block;
+    height: 90px;
+    width: 110px;
+}
+a.ikont-a4jcl-solicituvalidacionavance:hover {
+    background-position: -673px  -86px;
     transition: .5s all;
 }
 

@@ -278,6 +278,10 @@
                 <value>co/com/interkont/cobra/to/TipificacionConvenioSector.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/TipificacionConvenioObjetivo.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/TipificacionConvenioEstrategia.hbm.xml</value>
+                
+                <!--Solicitud Validacion Avance-->
+                <value>co/com/interkont/cobra/to/SolicitudValidacionAvance.hbm.xml</value>
+                
           
                 
             </list>
@@ -288,7 +292,6 @@
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
-                <prop key="log4j.logger.net.sf.hibernate.type">debug</prop>
             </props>
         </property>
         <property name="dataSource">
