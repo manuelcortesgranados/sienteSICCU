@@ -47,6 +47,7 @@ import co.com.interkont.cobra.to.Relacionalimentacionactividad;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
 import co.com.interkont.cobra.to.Relacionobraseguidor;
 import co.com.interkont.cobra.to.Seguimiento;
+import co.com.interkont.cobra.to.SolicitudValidacionAvance;
 import co.com.interkont.cobra.to.Tipoimpactosocial;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Validacionalimentacion;
@@ -61,8 +62,9 @@ import java.util.Collections;
 import javax.faces.context.FacesContext;
 
 /**
- * <p>Fragment bean that corresponds to a similarly named JSP page fragment.
- * This class contains component definitions (and initialization code) for all
+ * <p>
+ * Fragment bean that corresponds to a similarly named JSP page fragment. This
+ * class contains component definitions (and initialization code) for all
  * components that you have defined on this fragment, as well as lifecycle
  * methods and event handlers where you may add behavior to respond to incoming
  * events.</p>
@@ -147,7 +149,7 @@ public class DetalleObra implements Serializable {
     private String strbeneficiariosdetalle;
     private String strempleosdirectosdetalle;
     private String strempleosindirectosdetalle;
-    
+
     /**
      * Lista de proyectos hijos de este proyecto cuando se trata de un proyecto
      * padre
@@ -251,8 +253,8 @@ public class DetalleObra implements Serializable {
 
     public void setStrempleosindirectosdetalle(String strempleosindirectosdetalle) {
         this.strempleosindirectosdetalle = strempleosindirectosdetalle;
-    }   
-   
+    }
+
     public void setPermitirvalidar(boolean permitirvalidar) {
         this.permitirvalidar = permitirvalidar;
     }
@@ -477,9 +479,6 @@ public class DetalleObra implements Serializable {
     }
 
     public UIDataTable getTabladificultadalimentacion() {
-
-
-
 
         return tabladificultadalimentacion;
     }
@@ -856,7 +855,7 @@ public class DetalleObra implements Serializable {
     public void setTablacalificacionesauditoriaobra(UIDataTable tablacalificacionesauditoriaobra) {
         this.tablacalificacionesauditoriaobra = tablacalificacionesauditoriaobra;
     }
-    
+
     /**
      * Listado de indicadores asociados a la obra
      */
@@ -869,9 +868,9 @@ public class DetalleObra implements Serializable {
     public void setListaIndicadoresObra(List<Indicadorobra> listaIndicadoresObra) {
         this.listaIndicadoresObra = listaIndicadoresObra;
     }
-    
+
     /**
-     * Variable asociada al filtro de la columna correspondiente al nombre del 
+     * Variable asociada al filtro de la columna correspondiente al nombre del
      * indicador de la tabla de indicadores asociados
      */
     private String indicadorAsociadoFilter;
@@ -885,7 +884,7 @@ public class DetalleObra implements Serializable {
     }
 
     /**
-     * Variable asociada al filtro de la columna correspondiente a la primera 
+     * Variable asociada al filtro de la columna correspondiente a la primera
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores asociados
      */
@@ -900,7 +899,7 @@ public class DetalleObra implements Serializable {
     }
 
     /**
-     * Variable asociada al filtro de la columna correspondiente a la segunda 
+     * Variable asociada al filtro de la columna correspondiente a la segunda
      * clasificación del indicador en el sentido hoja -> tallo de la jerarquía
      * de la tabla de indicadores asociados
      */
@@ -915,7 +914,8 @@ public class DetalleObra implements Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
      * user-specified code inserted here is subject to being replaced.</p>
      */
@@ -985,7 +985,6 @@ public class DetalleObra implements Serializable {
         } else {
 
             // alimentacionmostrar = getSessionBeanCobra().getCobraService().encontrarAlimentacionxPeriodo(periodoevo.getIntidperiodo(), getAdministrarObraNew().getObra().getIntcodigoobra());
-
             alimentacionmostrar = (Alimentacion) tablalistaavances.getRowData();
 
             if (getAlimentacionmostrar() != null && getAlimentacionmostrar().getSemaforo().getStrimagen().equals(bundle.getString("semafo_verde"))) {
@@ -1083,7 +1082,6 @@ public class DetalleObra implements Serializable {
 
         getDatosgrafico().cargarDocumento(path + "/amline_data.xml");
 
-
         Document docNuevo = new Document();
 
         // Vamos a generar la etiqueta raiz
@@ -1107,7 +1105,6 @@ public class DetalleObra implements Serializable {
 
         Long dias = fin.getTime() - inicio.getTime();
         dias = dias / (3600 * 24 * 1000);
-
 
         for (int i = 0; i <= dias; i++) {
 
@@ -1165,15 +1162,11 @@ public class DetalleObra implements Serializable {
 
         if (getPrimerhisto() != null) {
 
-
             Element xmlGraph3 = new Element("graph");
             xmlGraph3.setAttribute("gid", "3");
             xmlGraph.addContent(xmlGraph3);
 
-
             BigDecimal historico = BigDecimal.valueOf(0);
-
-
 
             Iterator periodositer = getSessionBeanCobra().getCobraService().obtenerPeriodosporHistorico(getPrimerhisto().getOididhistoricoobra()).iterator();
 
@@ -1195,10 +1188,7 @@ public class DetalleObra implements Serializable {
             }
         }
 
-
-
         docNuevo.addContent(raiz);
-
 
         getDatosgrafico().guardarDocumento(docNuevo, path + "/amline_data.xml");
 
@@ -1232,15 +1222,15 @@ public class DetalleObra implements Serializable {
                 getAdministrarObraNew().setProyectoestrategia(true);
                 //Llenamos objetos de avance                
                 getAdministrarObraNew().setVproductomedios(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(2, obraMapa.getIntcodigoobra()));
-                getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));                
+                getAdministrarObraNew().setVproductogestion(getSessionBeanCobra().getMarcoLogicoService().obtenerVistaProyectosMarcoxTipo(3, obraMapa.getIntcodigoobra()));
 
             }
         }
-        
-        listimpactosocialdetalle = new  ArrayList<Tipoimpactosocial>();
-        if (obraMapa.getContrato() != null){
+
+        listimpactosocialdetalle = new ArrayList<Tipoimpactosocial>();
+        if (obraMapa.getContrato() != null) {
             listimpactosocialdetalle = getSessionBeanCobra().getCobraService().encontrarImpactoSocial(obraMapa.getContrato().getIntidcontrato());
-            
+
         }
         tipoImpactoSocialDetalle();
         limpiardetalle();
@@ -1333,10 +1323,8 @@ public class DetalleObra implements Serializable {
         llenarSelectPeriodoCorto();
         calcularUbicacionGradosMinutosSegundo();
 
-
 //        } catch (Exception e) {
 //        }
-
         getAdministrarObraNew().iniciarDocumentos();
         if (getSessionBeanCobra().getCobraService().isCiu()) {
             getAdministrarObraNew().mostrarGoogle();
@@ -1345,7 +1333,7 @@ public class DetalleObra implements Serializable {
         if (getAdministrarObraNew().getObra().getDatefecfinobra() != null) {
             finentrega = getAdministrarObraNew().getObra().getDatefecfinobra().toString();
         }
-        
+
         // Ingresar en bitacora el ingreso a ver un proyecto
         getSessionBeanCobra().insertarBitacora(Accion.VISITAR_PROYECTO, getAdministrarObraNew().getObra().getIntcodigoobra());
     }
@@ -1381,7 +1369,6 @@ public class DetalleObra implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
         return null;
     }
@@ -1628,7 +1615,6 @@ public class DetalleObra implements Serializable {
         listaActividadesAlimentacion = getSessionBeanCobra().getCobraService().obtenerActividadxAlimentacion(alimentacionmostrar.getIntidalimenta(), num, num + 5);
         totalfilas = getSessionBeanCobra().getCobraService().numAlimentacionActividadxAlimentacion(alimentacionmostrar.getIntidalimenta());
 
-
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -1707,7 +1693,6 @@ public class DetalleObra implements Serializable {
     public String llenarMovimientos() {
         int codsoli = 0;
 
-
         if (getAdministrarObraNew().getObra().getSolicitud_obra() != null) {
             codsoli = getAdministrarObraNew().getObra().getSolicitud_obra().getIntserial();
             listadomovimientos = getSessionBeanCobra().getSolicitudService().encontrarmovimientossolicitudobra(codsoli);
@@ -1719,7 +1704,6 @@ public class DetalleObra implements Serializable {
             listadomovimientos = getSessionBeanCobra().getAtencionhumanitariaService().encontrarmovimientossolicitud(codsoli);
             Carcularvalores();
         }
-
 
         return null;
     }
@@ -1752,7 +1736,6 @@ public class DetalleObra implements Serializable {
         valorinterventoria = BigDecimal.ZERO;
 
         //List<Relacioncontratoobra> listrelacion = new ArrayList<Relacioncontratoobra>();
-
         getSessionBeanCobra().getCobraService().setListaContratoInterventoria(new ArrayList<Relacioncontratoobra>());
         //listrelacion = getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(),true);
         getSessionBeanCobra().getCobraService().setListaContratoInterventoria(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
@@ -1841,7 +1824,6 @@ public class DetalleObra implements Serializable {
 
     public String llenarListaverificacion() {
         listaverificacion = getSessionBeanCobra().getCobraService().obtenerlistarVerificacion(getAdministrarObraNew().getObra());
-
 
         return null;
 
@@ -1977,9 +1959,11 @@ public class DetalleObra implements Serializable {
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-/**
- * Metodo utilizado para calcular La localidad por Grados, Minutos y Segundos.
- */
+
+    /**
+     * Metodo utilizado para calcular La localidad por Grados, Minutos y
+     * Segundos.
+     */
     public void calcularUbicacionGradosMinutosSegundo() {
         BigDecimal minseg = new BigDecimal(60);
         BigDecimal longitud = getAdministrarObraNew().getObra().getFloatlongitud();
@@ -2010,31 +1994,31 @@ public class DetalleObra implements Serializable {
         }
 
     }
-    
-    public void tipoImpactoSocialDetalle (){       
-        
-        if (!listimpactosocialdetalle.isEmpty()){
-            for (Tipoimpactosocial imp : listimpactosocialdetalle){
-                if (imp.getStrnombrecolumna().equals("empleos directos")){                    
+
+    public void tipoImpactoSocialDetalle() {
+
+        if (!listimpactosocialdetalle.isEmpty()) {
+            for (Tipoimpactosocial imp : listimpactosocialdetalle) {
+                if (imp.getStrnombrecolumna().equals("empleos directos")) {
                     setStrempleosdirectosdetalle(imp.getStrdescripcionimpacto());
-            }else if (imp.getStrnombrecolumna().equals("empleos indirectos")){
-                setStrempleosindirectosdetalle(imp.getStrdescripcionimpacto());
-            }else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")){
-                setStrbeneficiariosdetalle(imp.getStrdescripcionimpacto());
-            }
-                
+                } else if (imp.getStrnombrecolumna().equals("empleos indirectos")) {
+                    setStrempleosindirectosdetalle(imp.getStrdescripcionimpacto());
+                } else if (imp.getStrnombrecolumna().equals("habitantes beneficiados")) {
+                    setStrbeneficiariosdetalle(imp.getStrdescripcionimpacto());
+                }
+
             }
         } else {
             setStrbeneficiariosdetalle(bundle.getString("personasbeneficiadas"));
             setStrempleosdirectosdetalle(bundle.getString("empleosdirectos"));
             setStrempleosindirectosdetalle(bundle.getString("empleosindirectos"));
         }
-        
+
     }
-    
+
     /**
-     * Metodo ejecutado al activar la sección de alimentar indicadores.
-     * Realiza la carga inicial de los indicadores por alimentar
+     * Metodo ejecutado al activar la sección de alimentar indicadores. Realiza
+     * la carga inicial de los indicadores por alimentar
      */
     public void cargarIndicadoresObra() {
         listaIndicadoresObra = getSessionBeanCobra().getCobraService().encontrarIndicadoresObra(getAdministrarObraNew().getObra().getIntcodigoobra());
@@ -2047,4 +2031,59 @@ public class DetalleObra implements Serializable {
             }
         }
     }
+
+    //
+    //
+    // INICIO LOGICA - SOLICITUD VALIDACION AVANCE (SVA)
+    //
+    //
+    private SolicitudValidacionAvance solicitudValidacionAvance;
+    private int aprobacionSVA;
+
+    public boolean getRenderSVA() {
+        return getAdministrarObraNew().getObra().getSupervisor().getIntcodigo() == getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
+    }
+
+    public SolicitudValidacionAvance getSolicitudValidacionAvance() {
+        return solicitudValidacionAvance;
+    }
+
+    public void setSolicitudValidacionAvance(SolicitudValidacionAvance solicitudValidacionAvance) {
+        this.solicitudValidacionAvance = solicitudValidacionAvance;
+    }
+
+    public int getAprobacionSVA() {
+        return aprobacionSVA;
+    }
+
+    public void setAprobacionSVA(int code) {
+        this.aprobacionSVA = code;
+    }
+
+    public void initBusquedaSolicitudValidacionAvance() {
+        if (!getRenderSVA()) {
+            return;
+        }
+        this.setAprobacionSVA(SolicitudValidacionAvance.ESTADO_APROBADO);
+        if (periodoevo.getIntidperiodo() == -1 || alimentacionmostrar == null) {
+            this.setSolicitudValidacionAvance(null);
+        } else {
+            this.setSolicitudValidacionAvance(getSessionBeanCobra().getCobraService().searchSolicitudValidacionAvance(periodoevo, getAdministrarObraNew().getObra(), alimentacionmostrar));
+        }
+    }
+
+    public void registrarRespuestaSolicitudValidacionAvance() {
+        if (!getRenderSVA()) {
+            return;
+        }
+        System.out.println("registrarRespuestaSolicitudValidacionAvance " + aprobacionSVA);
+        this.solicitudValidacionAvance.setEstado(aprobacionSVA);
+        this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardarOrActualizar(this.solicitudValidacionAvance);
+    }
+
+    //
+    //
+    // FIN LOGICA - SOLICITUD VALIDACION AVANCE (SAV)
+    //
+    //
 }

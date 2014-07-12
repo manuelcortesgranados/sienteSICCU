@@ -203,20 +203,31 @@
                                              oncomplete="#{rich:component('modalactividades')}.show();" render="listaractividades" />
                             <a4j:commandLink id="btlogros1" styleClass="ikont-a4jcl-btlogros1"  
 
-                                                 oncomplete="#{rich:component('modalImpacto')}.show();" render="tablaaliperim" />
+                                             oncomplete="#{rich:component('modalImpacto')}.show();" render="tablaaliperim" />
                             <a4j:commandLink id="btlogrosx2" styleClass="ikont-a4jcl-btlogrosx2"  
-                                                 action="#{Supervisor$DetalleObra.LlenarDocumentos}"
+                                             action="#{Supervisor$DetalleObra.LlenarDocumentos}"
 
-                                                 oncomplete="#{rich:component('modalDocumento')}.show();" render="tablaDocsAlim"/>
+                                             oncomplete="#{rich:component('modalDocumento')}.show();" render="tablaDocsAlim"/>
                             <a4j:commandLink id="btlogrosx3" styleClass="ikont-a4jcl-btlogrosx3"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
-                                                                                                                   supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
-                                                 action="#{Supervisor$DetalleObra.llenarmodalvalidacion}"
+                                                                                                               supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
+                                             action="#{Supervisor$DetalleObra.llenarmodalvalidacion}"
 
-                                                 oncomplete="#{rich:component('modalValidarAlimentacion')}.show();" render="frmValidarAlimentacion"/>
+                                             oncomplete="#{rich:component('modalValidarAlimentacion')}.show();" render="frmValidarAlimentacion"/>
                             <a4j:commandLink id="pruebamodal" styleClass="ikont-a4jcl-solicitumaestro" value="prueba" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"
-                                                 action="#{Supervisor$DetalleObra.llenarBeneficiariosxavance}">
-                                    <a4j:ajax event="complete" onbeforesubmit="#{rich:component('beneficiarioxperiodo')}.show();" render="rpListaBeneficiarios"/>
-                                </a4j:commandLink>
+                                             action="#{Supervisor$DetalleObra.llenarBeneficiariosxavance}">
+                                <a4j:ajax event="complete" onbeforesubmit="#{rich:component('beneficiarioxperiodo')}.show();" render="rpListaBeneficiarios"/>
+                            </a4j:commandLink>
+
+                            <a4j:commandLink id="showSVA" 
+                                             styleClass="ikont-a4jcl-solicituvalidacionavance" 
+                                             rendered="#{Supervisor$DetalleObra.renderSVA}"
+                                             oncomplete="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.show();"
+                                             render="modalAprobarSolicitudValidacionAvanceForm"
+                                             limitRender="true"
+                                             transient="true"
+                                             action="#{Supervisor$DetalleObra.initBusquedaSolicitudValidacionAvance()}">
+
+                            </a4j:commandLink>
                         </h:panelGrid>
                         <h:panelGrid columns="1" id="panelVali" styleClass="ikont-hpg-panelVali"    >
                             <h:outputText  styleClass="ikont-hot-validacionultimaalimentacion"   value="La última alimentación no ha sido validada aún por el funcionario de Colombia Humanitaria"
@@ -239,6 +250,7 @@
         <ui:include src="/modal/modalValidarAlimentacion.xhtml"/>
         <ui:include src="/modal/modalFormularioValidarAlimentacion.xhtml"/>
         <ui:include src="/modal/atencionHumanitaria/beneficiarioxperiodo.xhtml"/>
+        <ui:include src="/modal/modalAprobarSolicitudValidacionAvance.xhtml"/>
 
 
     </ui:define>

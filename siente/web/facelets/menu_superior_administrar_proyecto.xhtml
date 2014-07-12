@@ -10,7 +10,7 @@
     >
     <h:form styleClass="ikont-hf-nuevodetalleobrazoom">
         <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proyecto" rendered="#{SessionBeanCobra.logueadodesdemapa}">
-            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="11"   cellspacing="5" cellpadding="0" rowClasses="panelcenter">         
+            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="12"   cellspacing="5" cellpadding="0" rowClasses="panelcenter">         
                 <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
                     <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                     <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
@@ -75,7 +75,13 @@
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-participacion-ciudadana-proyecto" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 145px;" value="Participación ciudadana" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
                 </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{Supervisor$AdministrarObraNew.renderSVA}">
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-solicitud-aprobacion-avance" immediate="true"  action="#{Supervisor$AdministrarObraNew.initSolicitudValidacionAvance()}"/>
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 145px;" value="Aprobaciones" immediate="true"  action="#{Supervisor$AdministrarObraNew.initSolicitudValidacionAvance()}"/>
+                </h:panelGroup>
             </h:panelGrid>
+               
+             
         </h:panelGroup>
     </h:form>
     <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
