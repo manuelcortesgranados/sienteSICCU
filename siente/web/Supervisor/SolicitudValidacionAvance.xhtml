@@ -1,0 +1,406 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <title>Solicitud Validación de Avance</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+        <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'></link>
+        <h:outputScript library="css" name="/resources/css/Supervisor/SolicitudValidacionAvance.css"/>
+        <script type="text/javascript">
+            var GLOBAL_SVA_TIMEOUT;
+            var GLOBAL_SVA_TIMEOUT_STARTED = false;
+            function timeoutSVA() {
+                GLOBAL_SVA_TIMEOUT_STARTED = true;
+                GLOBAL_SVA_TIMEOUT = setTimeout(hideSVAmessage, 3000);
+                
+            }
+            function hideSVAmessage() {
+                document.getElementById('status_message_div').style.visibility = 'hidden';
+                GLOBAL_SVA_TIMEOUT_STARTED = false;
+            }
+            function showSVAmessage() {
+                if(GLOBAL_SVA_TIMEOUT_STARTED)
+                    clearTimeout(GLOBAL_SVA_TIMEOUT);
+                document.getElementById('status_message_div').style.visibility = 'visible';
+                timeoutSVA();
+
+            }
+        </script>
+        <style>
+            #contenedor_pricipal_aprobaciones_datos_basicos {
+                width: 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            #contenedor_titulo {
+            }
+            #contenedor_titulo .contenedor_titulo_pri {
+                font-family: 'Open Sans', sans-serif;
+                color: #939598;
+            }
+            #contenedor_titulo .contenedor_linea_divisora {
+                width: 100px;
+                height: 1px;
+                border-bottom: 1px solid #AAAAAA;
+                margin: 0 auto;
+            }
+            #aprobaciones_datos_basicos {
+                margin: 0 auto;
+                width: 470px;
+            }
+            #aprobaciones_datos_basicos .label_aprobacioness_datos_basicos {
+                float: left;
+                text-align: right;
+                width: 190px;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 14px;
+                color: #58595B;
+            }
+            #aprobaciones_datos_basicos .input_aprobacioness_datos_basicos {
+                float: right;
+                border: none;
+                height: 25px;
+                width: 250px;
+                padding-left: 5px;
+                background-color: #F2F2F2;
+                font-style: italic;
+                font-family: 'Open Sans';
+                color: #A7A9AC;
+            }
+            #contenedor_botones_aprobaciones_datos_basicos {
+                width: 220px;
+                height: 300px;
+                line-height: 200px;
+                margin: 0 auto;
+                margin-top: 50px;
+            }
+            #contenedor_botones_aprobaciones_datos_basicos .contenedor_botones_aprobaciones_datos_basicos_continuar a {
+                width: 100px;
+                height: 100px;
+                border: solid 1px #CCC;
+                border-radius: 50% 50% 50% 50%;
+                float: left;
+                text-decoration: none;
+                color: #A7A9AC;
+                font-family: 'Open Sans';
+                line-height: 95px;
+            }
+            #contenedor_botones_aprobaciones_datos_basicos .contenedor_botones_aprobaciones_datos_basicos_continuar a:hover {
+                width: 100px;
+                height: 100px;
+                border: solid 1px #CCC;
+                border-radius: 50% 50% 50% 50%;
+                float: left;
+                text-decoration: none;
+                color: #9CFF00;
+                background-color: #257500;
+                transition: background-color 1s ease-in-out 0s;
+                font-family: 'Open Sans';
+                line-height: 95px;
+            }
+            #contenedor_botones_aprobaciones_datos_basicos .contenedor_botones_aprobaciones_datos_basicos_finalizar a {
+                width: 100px;
+                height: 100px;
+                border: solid 1px #CCC;
+                border-radius: 50% 50% 50% 50%;
+                float: right;
+                text-decoration: none;
+                color: #A7A9AC;
+                font-family: 'Open Sans';
+                line-height: 95px;
+            }
+            #contenedor_botones_aprobaciones_datos_basicos .contenedor_botones_aprobaciones_datos_basicos_finalizar a:hover {
+                width: 100px;
+                height: 100px;
+                border: solid 1px #257500;
+                border-radius: 50% 50% 50% 50%;
+                float: right;
+                text-decoration: none;
+                color: #9CFF00;
+                background-color: #257500;
+                transition: background-color 1s ease-in-out 0s;
+                font-family: 'Open Sans';
+                line-height: 95px;
+            }
+            .aprobaciones {
+                margin: 0px;
+                padding: 0px;
+                margin-top: 40px;
+                width: 100%;
+                border: 1px solid #007525;
+                -moz-border-radius-bottomleft: 5px;
+                -webkit-border-bottom-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                -moz-border-radius-bottomright: 5px;
+                -webkit-border-bottom-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                -moz-border-radius-topright: 5px;
+                -webkit-border-top-right-radius: 5px;
+                border-top-right-radius: 5px;
+                -moz-border-radius-topleft: 5px;
+                -webkit-border-top-left-radius: 5px;
+                border-top-left-radius: 5px;
+            }
+            .aprobaciones table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+            .aprobaciones tr:last-child td:last-child {
+                -moz-border-radius-bottomright: 5px;
+                -webkit-border-bottom-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            .aprobaciones table tr:first-child td:first-child {
+                -moz-border-radius-topleft: 5px;
+                -webkit-border-top-left-radius: 5px;
+                border-top-left-radius: 5px;
+            }
+            .aprobaciones table tr:first-child td:last-child {
+                -moz-border-radius-topright: 5px;
+                -webkit-border-top-right-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+            .aprobaciones tr:last-child td:first-child {
+                -moz-border-radius-bottomleft: 5px;
+                -webkit-border-bottom-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+            .aprobaciones tr:hover td {
+            }
+            .aprobaciones tr:nth-child(odd) {
+                background-color: #e5e5e5;
+            }
+            .aprobaciones tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+            .aprobaciones td {
+                vertical-align: middle;
+                border: 1px solid #007525;
+                border-width: 0px 1px 1px 0px;
+                text-align: left;
+                padding: 7px;
+                font-size: 10px;
+                font-family: Trebuchet MS;
+                font-weight: normal;
+                color: #191919;
+            }
+            .aprobaciones tr:last-child td {
+                border-width: 0px 1px 0px 0px;
+            }
+            .aprobaciones tr td:last-child {
+                border-width: 0px 0px 1px 0px;
+            }
+            .aprobaciones tr:last-child td:last-child {
+                border-width: 0px 0px 0px 0px;
+            }
+            .aprobaciones tr:first-child td {
+                background: -o-linear-gradient(bottom, #007525 5%, #007525 100%);
+                background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #007525), color-stop(1, #007525) );
+                background: -moz-linear-gradient( center top, #007525 5%, #007525 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#007525", endColorstr="#007525");
+                background: -o-linear-gradient(top, #007525, 007525);
+                background-color: #007525;
+                border: 0px solid #007525;
+                text-align: center;
+                border-width: 0px 0px 1px 1px;
+                font-size: 13px;
+                font-family: Trebuchet MS;
+                font-weight: normal;
+                color: #ffffff;
+            }
+            .aprobaciones tr:first-child:hover td {
+                background: -o-linear-gradient(bottom, #007525 5%, #007525 100%);
+                background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #007525), color-stop(1, #007525) );
+                background: -moz-linear-gradient( center top, #007525 5%, #007525 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#007525", endColorstr="#007525");
+                background: -o-linear-gradient(top, #007525, 007525);
+                background-color: #007525;
+            }
+            .aprobaciones tr:first-child td:first-child {
+                border-width: 0px 0px 1px 0px;
+            }
+            .aprobaciones tr:first-child td:last-child {
+                border-width: 0px 0px 1px 1px;
+            }
+            #contenedor_botones_formulario_datos_basicos {
+                width: 175px;
+                margin: 0 auto;
+                margin-top: 20px;
+            }
+            #contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a {
+                width: 175px;
+                height: 30px;
+                float: left;
+                text-decoration: none;
+                color: #257500;
+                font-family: 'Open Sans';
+                background-color: transparent;
+                border: 1px solid #257500;
+                padding-top: 8px;
+                text-align: center;
+                margin: 0 auto;
+            }
+            #contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a:hover {
+                width: 175px;
+                height: 30px;
+                float: left;
+                text-decoration: none;
+                color: #9CFF00;
+                background-color: #257500;
+                transition: background-color 1s ease 0s;
+                font-family: 'Open Sans';
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
+    </ui:define>
+    <ui:define name="menusuperior">
+        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml" />
+        </h:panelGroup>
+        <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml" />
+    </ui:define>
+
+    <ui:define name="body">
+        <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.periodosalimentacionSolicitudValidacionAvance.size() == 0}" style="width:100%">
+            <center>
+                <br></br>
+                <br></br>
+                <h:graphicImage value="/resources/imgs/solicitud_validacion_avance_1.png" ></h:graphicImage>
+                <br></br>
+                <h:outputText style="display: block;font-size: 18px;font-family: 'Open Sans';" value="Esta obra no tiene avances registrados"/>
+            </center>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.periodosalimentacionSolicitudValidacionAvance.size() > 0}" style="width:100%">
+            <center>
+                <h:panelGroup >
+
+                    <h:graphicImage value="/resources/imgs/solicitud_validacion_avance_1.png" ></h:graphicImage>
+                    <h:outputLabel style="color:#257500; font-size: 24px;font-weight: bold;display: block;" value="Solicitar Aprobaci&oacute;n de Avances"></h:outputLabel>
+                    <h:outputText style="color:#257500;display: block;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+                    <h:outputLabel style="display: block;" value="Ingrese el periodo de corte del que"></h:outputLabel>
+                    <h:outputLabel style="display: block;" value="busca una aprobaci&oacute;n"></h:outputLabel>
+                    <div style="display: block;" styleClass="contenedor_linea_divisora"></div>
+
+                </h:panelGroup>
+                <br></br>
+                <br></br>
+                <h:form>
+                    <a4j:region >
+                        <h:panelGrid  cellspacing="12" columns="2"  id="panel-filtro-novedades">
+
+                            <h:outputLabel  styleClass="ikont-hol-periododecorte"  value="#{var.periododecorte} "  />
+                            <h:selectOneMenu id="periodo_corte" value="#{Supervisor$AdministrarObraNew.periodoSolicitudValidacionAvance}" >
+                                <f:selectItem noSelectionOption="true" itemValue="0" itemLabel="Seleccione"/>
+                                <f:selectItems var="sva" itemLabel="#{sva.datefeciniperiodo} - #{sva.datefecfinperiodo}" itemValue="#{sva.intidperiodo}" value="#{Supervisor$AdministrarObraNew.periodosalimentacionSolicitudValidacionAvance}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputLabel   styleClass="ikont-hol-periododecorte"   value="Observación"  />
+                            <h:inputTextarea  value="#{Supervisor$AdministrarObraNew.observacionSolicitudValidacionAvance}" id="observaciones" style="height: 150px;"></h:inputTextarea>
+
+                        </h:panelGrid>
+                    </a4j:region>
+                    <br></br>
+                    <div id="contenedor_botones_formulario_datos_basicos">
+                        <div class="contenedor_botones_formulario_datos_basicos_continuar">
+                            <a4j:commandLink id="registrar" 
+                                             style="display: block;font-size: 16px;" 
+                                             styleClass="contenedor_botones_formulario_datos_basicos_continuar" 
+                                             value="Solicitar Aprobaci&oacute;n" 
+                                             execute="@form" 
+                                             render="panel_mis_solicitudes,status_message,observaciones,periodo_corte"
+                                             limitRender="true"
+                                             oncomplete="showSVAmessage();"
+                                             transient="true"
+                                             type="button"
+                                             action="#{Supervisor$AdministrarObraNew.registrarSolicitudValidacionAvance()}"/>
+                        </div>
+                    </div>
+                    <br></br>
+                    <br></br>
+
+                    <a4j:outputPanel id="status_message" ajaxRendered="true" >
+                        <div id="status_message_div">
+                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.codigoErrorSVA == 0}" value="#{Supervisor$AdministrarObraNew.errorMessageSVA}" style="color:blue;"/>
+                            <h:outputLabel  rendered="#{Supervisor$AdministrarObraNew.codigoErrorSVA != 0}" value="#{Supervisor$AdministrarObraNew.errorMessageSVA}" style="color:red;"/>
+                        </div>
+                    </a4j:outputPanel>
+                </h:form>
+                <br></br>
+                <br></br>
+                <h:panelGroup>
+                    <h:graphicImage value="/resources/imgs/solicitud_validacion_avance_2.png" ></h:graphicImage>
+                    <h:outputLabel style="color:#257500; font-size: 24px;font-weight: bold;display: block;" value="Mis solicitudes"></h:outputLabel>
+                    <h:outputLabel style="display: block;" value="Lista y estados de las solicitudes"></h:outputLabel>
+                    <h:outputLabel style="display: block;" value="hasta hoy"></h:outputLabel>
+                    <h:outputLabel style="display: block;" styleClass="contenedor_linea_divisora"></h:outputLabel>
+
+                </h:panelGroup>
+
+                <h:panelGroup id="panel_mis_solicitudes">
+                    <rich:dataTable value="#{Supervisor$AdministrarObraNew.listaSVA}" var="sva">
+
+                        <rich:column>
+                            <f:facet name="header">Observaciones</f:facet>
+                            <h:outputLabel value="#{sva.observaciones}">
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Periodo de corte</f:facet>
+                            <h:outputLabel value="#{sva.periodo.datefeciniperiodo} - #{sva.periodo.datefecfinperiodo} ">
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Fecha Solicitud</f:facet>
+                            <h:outputLabel value="#{sva.fechaSolicitud}">
+                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column>
+                            <f:facet name="header">Fecha Respuesta</f:facet>
+                            <h:outputLabel value="#{sva.fechaRespuesta}">
+                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                            </h:outputLabel>
+                        </rich:column>
+
+                        <rich:column>
+                            <f:facet name="header">Estado</f:facet>
+                            <h:outputLabel rendered="#{sva.estado == 0}" value="Pendiente" />
+                            <h:graphicImage rendered="#{sva.estado == 1}" value="/resources/imgs/solicitud_validacion_avance_3.png" />
+                            <h:graphicImage rendered="#{sva.estado == 2}" value="/resources/imgs/solicitud_validacion_avance_4.png" />
+                        </rich:column>
+                    </rich:dataTable>
+                </h:panelGroup>
+            </center>
+        </h:panelGroup>
+
+
+    </ui:define>
+</ui:composition>
+

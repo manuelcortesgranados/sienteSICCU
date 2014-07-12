@@ -15,10 +15,12 @@ import co.com.interkont.cobra.to.Imagenevolucionobra;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Novedad;
 import co.com.interkont.cobra.to.Obra;
+import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Polizacontrato;
 import co.com.interkont.cobra.to.Puntoobra;
 import co.com.interkont.cobra.to.Puntoreferencia;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
+import co.com.interkont.cobra.to.SolicitudValidacionAvance;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipodocumento;
 import co.com.interkont.cobra.to.Tipoestadobra;
@@ -168,9 +170,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Barrio> listaBarrios = new ArrayList<Barrio>();
     private List<Vereda> listaVeredas = new ArrayList<Vereda>();
     public int controltipodocumento = 0;
-    
+
     //adicion variable para que cuando se termine el proyecto no muestre validacion anterior
-    private boolean obraFinalizada = false;    
+    private boolean obraFinalizada = false;
+
     public boolean isObraFinalizada() {
         return obraFinalizada;
     }
@@ -178,6 +181,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setObraFinalizada(boolean obraFinalizada) {
         this.obraFinalizada = obraFinalizada;
     }
+
     /**
      * variables para las fechas de informe circular tolima
      */
@@ -1052,7 +1056,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                         getObra().setStrvereda(vwIndIndicadorMunicipal.getIndFntNombre());
                     }
 
-
                     listindhabanual = getSessionBeanCobra().getGipromService().obtenerIndicadorMunicipalxcodmunicipio(municipal.getLclCodigo(), "040104", BigDecimal.valueOf(2));
                     if (!listindhabanual.isEmpty()) {
                         VwIndIndicadorMunicipal den = listindhabanual.get(0);
@@ -1070,7 +1073,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                     if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
                         getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
                         setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(Integer.parseInt(id)));
-                        
+
                         //llenarContrato();
                         obtenerTacometro();
                     }
@@ -1390,7 +1393,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), 7);
         urlactafin = "";
         subirActaFin = new CargadorArchivosWeb();
-        obraFinalizada =true;
+        obraFinalizada = true;
         return null;
     }
 
@@ -1519,14 +1522,14 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 break;
             }
         }
-         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
-            
-                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
-            
-         }
+        if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+
+            getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+
+        }
         this.documentoobra.setObra(getObra());
         try {
-            
+
             subirDocumento();
             getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobra);
             listaDocumentosobra.add(documentoobra);
@@ -1693,18 +1696,17 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String bt_agregar_imagenevolucion_action() {
-         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
-            
-                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
-            
-         }
-        
+        if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {
+
+            getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+
+        }
+
         this.imagenevolucionobra.setObra(getObra());
         try {
             subirImagenevolucion();
             imagenevolucionobra.setTipoimagen(getSessionBeanCobra().getCobraService().obtenerTipoimagenporId(imagenevolucionobra.getTipoimagen().getIntidtipoimagen()));
-            
-            
+
             getSessionBeanCobra().getCobraService().guardarImagen(this.imagenevolucionobra);
             if (imagenevolucionobra.getTipoimagen().getIntidtipoimagen() == 2) {
                 getSessionBeanCobra().getCobraService().funcion_EstablecerImagenActual(imagenevolucionobra.getIntidimagen());
@@ -2621,8 +2623,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         return null;
     }
-    
-    
+
     /*
      Adicionar enlace de video a la obra
      */
@@ -2647,11 +2648,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     public void guardarEnlaceVideo() {
         if (Utilidades.isUrl(videoEnlace.getStrurlvideo())) {
-            if(!videoEnlace.getStrurlvideo().contains("http"))
-            {
-                videoEnlace.setStrurlvideo("http://"+videoEnlace.getStrurlvideo());
+            if (!videoEnlace.getStrurlvideo().contains("http")) {
+                videoEnlace.setStrurlvideo("http://" + videoEnlace.getStrurlvideo());
             }
-            
+
             videoEnlace.setBoolubicacionlocal(false);
             videoEnlace.setDatefecha(new Date());
 
@@ -2659,7 +2659,6 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             lstVideosEnlazados.add(videoEnlace);
             limpiarVideo();
 
-            
             FacesUtils.addInfoMessage("El enlace de video se ha almacenado con éxito.");
         } else {
             FacesUtils.addErrorMessage("Debe ingresar un enlace de video válido.");
@@ -2676,4 +2675,181 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         getNuevoContratoBasico().cargarContrato(getObra().getContrato());
         return "consultarContrato";
     }
+
+    //
+    // 
+    // INICIO LOGICA - SOLICITUD VALIDACION DE AVANCE  - SVA
+    //
+    //
+    private int periodoSolicitudValidacionAvance;
+    private String observacionSolicitudValidacionAvance;
+    private List<Periodo> periodosalimentacionSolicitudValidacionAvance;
+    private List<SolicitudValidacionAvance> listaSVA;
+    private int codigoErrorSVA;
+    private String errorMessageSVA;
+
+    public int getPeriodoSolicitudValidacionAvance() {
+        return periodoSolicitudValidacionAvance;
+    }
+
+    public void setPeriodoSolicitudValidacionAvance(int periodoSolicitudValidacionAvance) {
+        this.periodoSolicitudValidacionAvance = periodoSolicitudValidacionAvance;
+    }
+
+    public String getObservacionSolicitudValidacionAvance() {
+        return observacionSolicitudValidacionAvance;
+    }
+
+    public void setObservacionSolicitudValidacionAvance(String observacionSolicitudValidacionAvance) {
+        this.observacionSolicitudValidacionAvance = observacionSolicitudValidacionAvance;
+    }
+
+    public List<SolicitudValidacionAvance> getListaSVA() {
+        return this.listaSVA;
+    }
+
+    public void setListaSVA(List<SolicitudValidacionAvance> listaSVA) {
+        this.listaSVA = listaSVA;
+    }
+
+    public List<Periodo> getPeriodosalimentacionSolicitudValidacionAvance() {
+        return periodosalimentacionSolicitudValidacionAvance;
+    }
+
+    public void setPeriodosalimentacionSolicitudValidacionAvance(List<Periodo> items) {
+        this.periodosalimentacionSolicitudValidacionAvance = items;
+    }
+
+    public int getCodigoErrorSVA() {
+        return codigoErrorSVA;
+    }
+
+    public String getErrorMessageSVA() {
+        return errorMessageSVA;
+    }
+
+    public boolean getRenderSVA() {
+        return this.getObra().getInterventor().getIntcodigo() == getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
+    }
+
+    public String initSolicitudValidacionAvance() {
+        if (!getRenderSVA()) {
+            return null;
+        }
+        this.codigoErrorSVA = 0;
+        this.errorMessageSVA = null;
+        this.setPeriodoSolicitudValidacionAvance(0);
+        this.setObservacionSolicitudValidacionAvance(null);
+        this.setListaSVA(getSessionBeanCobra().getCobraService().getSolicitudesValidacionAvance(this.getObra()));
+        List<Periodo> temp = getSessionBeanCobra().getCobraService().encontrarPeriodosxAlimentacionesObra(this.getObra().getIntcodigoobra());
+        this.setPeriodosalimentacionSolicitudValidacionAvance(temp);
+        return "solicitud_validacion_avance";
+    }
+
+    public void registrarSolicitudValidacionAvance() {
+        if (!getRenderSVA()) {
+            return;
+        }
+        Periodo periodo = new Periodo();
+        periodo.setIntidperiodo(this.getPeriodoSolicitudValidacionAvance());
+        List<Alimentacion> temp = null;
+        if (this.getPeriodoSolicitudValidacionAvance() > 0) {
+            temp = this.getSessionBeanCobra().getCobraService().encontrarAlimentacionesxPeriodo(periodo.getIntidperiodo(), this.getObra().getIntcodigoobra());
+        }
+        Alimentacion avance = null;
+        if (temp != null && !temp.isEmpty()) {
+            avance = temp.get(0);
+        }
+
+        SolicitudValidacionAvance sva = new SolicitudValidacionAvance();
+        sva.setObra(this.getObra());
+        sva.setAlimentacion(avance);
+        sva.setPeriodo(periodo);
+        sva.setFechaSolicitud(new Date());
+        sva.setEstado(SolicitudValidacionAvance.ESTADO_PENDIENTE);
+        sva.setJsfUsuarioByUsuarioInterventor(this.getSessionBeanCobra().getUsuarioObra());
+        sva.setObservaciones(this.getObservacionSolicitudValidacionAvance());
+
+        String messageSVA;
+        int errorCodeSVA = validateSolicitudValidacionAvance(sva);
+        switch (errorCodeSVA) {
+            case 0:
+                this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardar(sva);
+                this.initSolicitudValidacionAvance();
+                messageSVA = "La solicitud se registró exitosamente";
+                break;
+            case 1:
+                messageSVA = "Debe seleccionar un periodo";
+                break;
+            case 2:
+                messageSVA = "El campo observación no pude ser vacio";
+                break;
+            case 3:
+                messageSVA = "La solicitud se registró exitosamente";
+                break;
+            case 4:
+                messageSVA = "Existe una solicitud  \"APROBADA\" para el periodo seleccionado";
+                break;
+            case 5:
+                messageSVA = "Existe una solicitud \"PENDIENTE\"  para el periodo seleccionado";
+                break;
+            case 6:
+                messageSVA = "Existen periodos previos sin aprobar";
+                break;
+            default:
+                messageSVA = "Error de validación";
+                break;
+        }
+        this.codigoErrorSVA = errorCodeSVA;
+        this.errorMessageSVA = messageSVA;
+
+    }
+
+    /**
+     * Este método valida que los campos de la solicitud no sean nulos y que no
+     * exista una solicitud para el mismo periodo en estado aprobado o
+     * pendiente. Tambien valida que las solicitudes se hagan en orden, es decir
+     * que al hacer una solicitud no se salten los periodos
+     *
+     * @param sva
+     * @return
+     */
+    private int validateSolicitudValidacionAvance(SolicitudValidacionAvance sva) {
+
+        if (sva.getPeriodo().getIntidperiodo() == 0) {
+            return 1;
+        } else if (sva.getObservaciones() == null || sva.getObservaciones().isEmpty()) {
+            return 2;
+        } else if (sva.getAlimentacion() == null || sva.getObra() == null || sva.getJsfUsuarioByUsuarioInterventor() == null) {
+            return 3;
+        }
+        List<SolicitudValidacionAvance> list = this.getListaSVA();
+        List<Periodo> periodos = this.getPeriodosalimentacionSolicitudValidacionAvance();
+        int j = 0;
+        for (SolicitudValidacionAvance s : list) {
+            if (s.getPeriodo().getIntidperiodo() == sva.getPeriodo().getIntidperiodo() && s.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO) {
+                return 4;
+            } else if (s.getPeriodo().getIntidperiodo() == sva.getPeriodo().getIntidperiodo() && s.getEstado() == SolicitudValidacionAvance.ESTADO_PENDIENTE) {
+                return 5;
+            }
+
+            //Se analiza que para cada periodo exista una solicitud aprobada
+            if (s.getPeriodo().getIntidperiodo() == periodos.get(j).getIntidperiodo() && s.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO) {
+                j++;
+            }
+        }
+
+        //La nueva solicitud debe ser para el periodo inmediatamente siguiente
+        if (j < periodos.size() && periodos.get(j).getIntidperiodo() != sva.getPeriodo().getIntidperiodo()) {
+            return 6;
+        }
+
+        return 0;
+    }
+
+    //
+    // 
+    // FIN LOGICA - SOLICITUD VALIDACION DE AVANCE
+    //
+    //
 }

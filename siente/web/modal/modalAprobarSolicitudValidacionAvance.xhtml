@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <style>
+        #contenedor_pricipal_modal_datos_basicos {
+            width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #contenedor_titulo {
+        }
+        #contenedor_titulo .contenedor_titulo_pri {
+            font-family: 'Open Sans', sans-serif;
+            color: #939598;
+        }
+        #contenedor_titulo .contenedor_linea_divisora {
+            width: 100px;
+            height: 1px;
+            border-bottom: 1px solid #AAAAAA;
+            margin: 0 auto;
+        }
+        #modal_datos_basicos {
+            margin: 0 auto;
+            width: 470px;
+        }
+        #modal_datos_basicos .label_modals_datos_basicos {
+            float: left;
+            text-align: right;
+            width: 190px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: #58595B;
+        }
+        #modal_datos_basicos .input_modals_datos_basicos {
+            float: right;
+            border: none;
+            height: 25px;
+            width: 250px;
+            padding-left: 5px;
+            background-color: #F2F2F2;
+            font-style: italic;
+            font-family: 'Open Sans';
+            color: #A7A9AC;
+        }
+        #contenedor_botones_modal_datos_basicos {
+            width: 220px;
+            height: 300px;
+            line-height: 200px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        #contenedor_botones_modal_datos_basicos .contenedor_botones_modal_datos_basicos_continuar a {
+            width: 100px;
+            height: 100px;
+            border: solid 1px #CCC;
+            border-radius: 50% 50% 50% 50%;
+            float: left;
+            text-decoration: none;
+            color: #A7A9AC;
+            font-family: 'Open Sans';
+            line-height: 95px;
+        }
+        #contenedor_botones_modal_datos_basicos .contenedor_botones_modal_datos_basicos_continuar a:hover {
+            width: 100px;
+            height: 100px;
+            border: solid 1px #CCC;
+            border-radius: 50% 50% 50% 50%;
+            float: left;
+            text-decoration: none;
+            color: #9CFF00;
+            background-color: #257500;
+            transition: background-color 1s ease-in-out 0s;
+            font-family: 'Open Sans';
+            line-height: 95px;
+        }
+        #contenedor_botones_modal_datos_basicos .contenedor_botones_modal_datos_basicos_finalizar a {
+            width: 100px;
+            height: 100px;
+            border: solid 1px #CCC;
+            border-radius: 50% 50% 50% 50%;
+            float: right;
+            text-decoration: none;
+            color: #A7A9AC;
+            font-family: 'Open Sans';
+            line-height: 95px;
+        }
+        .contenedor_botones_formulario_datos_basicos {
+            width: 175px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a {
+            width: 175px;
+            height: 30px;
+            float: left;
+            text-decoration: none;
+            color: #257500;
+            font-family: 'Open Sans';
+            background-color: transparent;
+            border: 1px solid #257500;
+            padding-top: 8px;
+            text-align: center;
+            margin: 0 auto;
+            font-size: 20px;
+        }
+        .contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a:hover {
+            width: 175px;
+            height: 30px;
+            float: left;
+            text-decoration: none;
+            color: #9CFF00;
+            background-color: #257500;
+            transition: background-color 1s ease 0s;
+            font-family: 'Open Sans';
+            font-size: 20px;
+        }
+    </style>
+
+
+    <h:form id="svaForm">
+
+        <rich:popupPanel domElementAttachment="form" id="modalAprobarSolicitudValidacionAvanceForm"  autosized="true"  headerClass="rich-panel-header" styleClass="ikont"   >
+            <f:facet name="controls">
+
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" 
+                                     immediate="true" 
+                                     onclick="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
+            </f:facet>
+
+            <center>
+                <a4j:outputPanel  rendered="#{Supervisor$DetalleObra.solicitudValidacionAvance == null}">
+                    <br></br>
+                    <div style="font-size: 16px;font-family: 'Open Sans';">
+                        No hay solicitudes pendientes por aprobar para este avance!
+
+                    </div>
+                    <div class="contenedor_botones_formulario_datos_basicos">
+                        <div class="contenedor_botones_formulario_datos_basicos_continuar">
+
+                            <a4j:commandLink value="Cerrar"
+                                             immediate="true"
+                                             onclick="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.hide();
+                                             return false;" />
+                        </div>
+                    </div>
+                    <br></br>
+                    <br>&nbsp;</br>
+                </a4j:outputPanel>
+                <a4j:outputPanel rendered="#{Supervisor$DetalleObra.solicitudValidacionAvance != null}">
+
+                    <br></br>
+                    <br></br>
+                    <div id="contenedor_pricipal_modal_datos_basicos">
+                        <div id="contenedor_titulo">
+                            <div class="contenedor_titulo_pri">
+                                <h:outputLabel value="APROBACI&Oacute;N SOLICITUD DE AVANCE" style="color:#257500; font-size: 24px;font-weight: bold;display: block;"/>
+                                <h:outputLabel value="Responda a la solicitud de este poyecto leyendo" style="display: block;"/>
+                                <h:outputLabel value="su informacion a continuacion" style="display: block;"/>
+                                <br></br>
+                                <div class="contenedor_linea_divisora"></div>
+                            </div>
+                            <div style=" margin: 20px 0px;">
+                                <table border="0" style=" font-size: 14px; color:#666; margin: 0 auto; " width="400" cellpadding="6" cellspacing="10">
+                                    <tr>
+                                        <td style="text-align: right; width: 170px;"><b>Nombre del proyecto</b></td>
+                                        <td style="text-align: left;">
+                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; width: 170px;"><b>Valor</b></td>
+                                        <td style="text-align: left;">
+                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; width: 170px;"><b>Interventor</b></td>
+                                        <td style="text-align: left;">
+                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.interventor.strnombrecompleto}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; width: 170px;"><b>Observaci&oacute;n</b></td>
+                                        <td style="text-align: left;">
+                                            <h:outputLabel value="#{Supervisor$DetalleObra.solicitudValidacionAvance.observaciones}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div style=" margin: 30px 0px; text-align: center">
+
+                                    <div class="contenedor_botones_formulario_datos_basicos">
+                                        <div class="contenedor_botones_formulario_datos_basicos_continuar">
+                                            <h:selectOneRadio id="valorAprobacionSVA" value="#{Supervisor$DetalleObra.aprobacionSVA}" style=" font-size: 30px;" >
+                                                <f:selectItem  itemValue="1" itemLabel="Si" />
+                                                <f:selectItem  itemValue="2" itemLabel="No" />
+                                            </h:selectOneRadio>
+                                            <br></br>
+                                            <a4j:commandLink id="resgistrarSVA" 
+                                                             action="#{Supervisor$DetalleObra.registrarRespuestaSolicitudValidacionAvance}"
+                                                             limitRender="true"
+                                                             render="modalSVAend"
+                                                             execute="valorAprobacionSVA"
+                                                             transient="true"
+                                                             oncomplete="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.hide();#{rich:component('modalSVAend')}.show();return false;"
+                                                             value="Responder Solicitud"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br></br>
+                    <br></br>
+                </a4j:outputPanel>
+            </center>
+        </rich:popupPanel>
+    </h:form>
+
+    <rich:popupPanel id="modalSVAend"  autosized="true"  headerClass="rich-panel-header" styleClass="ikont"   >
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" 
+
+                                     immediate="true" 
+                                     onclick="#{rich:component('modalSVAend')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <a4j:outputPanel>
+            <center>
+
+                <br></br>
+                <div style="font-size: 16px;font-family: 'Open Sans';">
+                    La solicitud se 
+                    <h:outputLabel rendered="#{Supervisor$DetalleObra.aprobacionSVA == 2}" value="'RECHAZÓ'" />
+                    <h:outputLabel rendered="#{Supervisor$DetalleObra.aprobacionSVA == 1}" value="'APROBÓ'" />
+                    exitosamente
+                </div>
+                <div class="contenedor_botones_formulario_datos_basicos">
+                    <div class="contenedor_botones_formulario_datos_basicos_continuar">
+
+                        <a4j:commandLink value="Cerrar" 
+                                         onclick="#{rich:component('modalSVAend')}.hide();
+                                             return false;" />
+                    </div>
+                </div>
+                <br></br>
+                <br>&nbsp;</br>
+            </center>
+        </a4j:outputPanel>
+    </rich:popupPanel>
+
+
+</ui:composition>
