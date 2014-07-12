@@ -98,10 +98,12 @@
                         <rich:column  width="60px">
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-ver1"   value="#{var.Ver}"/>
-                            </f:facet>                                    
-
-                            <h:commandLink id="boton_" action="#{Supervisor$AdministrarObraNew.bt_download_documento_action}"  immediate="true">
-                                <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                            </f:facet>      
+                            <h:commandLink immediate="true" rendered="#{currentRow.tipodocumento.inttipodoc == var.tipoDocumentoUrlOrfeo}"  onclick="window.open('#{currentRow.strubicacion}');">
+                                <h:graphicImage  styleClass="ikont-hgi-bt_ver"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                            </h:commandLink>
+                            <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_documento_action_modulo}"  immediate="true" rendered="#{currentRow.tipodocumento.inttipodoc != var.tipoDocumentoUrlOrfeo}">
+                                <h:graphicImage  styleClass="ikont-hgi-bt_ver"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
                         <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.ver_editardoc}">
@@ -179,6 +181,51 @@
                                                    rendered="#{Supervisor$AdministrarObraNew.cargadorDocumentos.numArchivos!=0}"/>
                             </h:panelGrid>
                         </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+            </rich:dataTable>            
+        </h:form>
+        <h:form>
+            
+            <rich:dataTable id="linksubir"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirdocumento}">
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column colspan="4" >
+                            <h:outputText  styleClass="ikont-hot-rccoldoc1"   value="#{var.subidarapidadeEnlaceOrfeo}"/>
+                        </rich:column>
+                        <rich:column breakRowBefore="true" >
+                            <h:outputText  styleClass="ikont-hot-rccoldoc2"    value="#{var.descripcion}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-rccoldoc2"    value="Url"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-rccoldoc4"   value="#{var.fechadeldocumento}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-rccoldoc5"   value="#{var.subir}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+                <f:facet name="footer">
+                    <rich:columnGroup >
+                         <rich:column >
+                            <h:inputText maxlength="255" value="#{Supervisor$AdministrarObraNew.documentoobra.strnombre}" required="true" requiredMessage="#{var.debeproporcinarelnombredeldocu}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:inputText maxlength="255" value="#{Supervisor$AdministrarObraNew.documentoobra.strubicacion}" required="true" requiredMessage="Debe ingresar la URL"/>
+                        </rich:column>
+                        <rich:column >
+                            <rich:calendar locale="#{var.rcalendarlocale}" value="#{Supervisor$AdministrarObraNew.documentoobra.datefecha}" required="true" inputSize="10"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:panelGrid id="panelsubido" columns="1">
+                                <a4j:commandButton action="#{Supervisor$AdministrarObraNew.agregarUrlOrfeo}"
+                                                   title="#{var.agregar}" value="#{var.agregar}"
+                                                   render="docsubir, linksubir,  tablaDocumentos, gpDocModal"/>
+                            </h:panelGrid>
+                        </rich:column>
+                        
                     </rich:columnGroup>
                 </f:facet>
             </rich:dataTable>

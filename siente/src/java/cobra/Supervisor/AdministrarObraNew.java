@@ -1546,6 +1546,26 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         return null;
     }
+    
+     public String agregarUrlOrfeo() {        
+         if (getSessionBeanCobra().getBundle().getString("vistasgiprom").compareTo("true") == 0) {            
+                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);            
+         }
+        this.documentoobra.setObra(getObra());
+        try {            
+            this.documentoobra.setTipodocumento(new Tipodocumento(Tipodocumento.URL_ORFEO));
+            getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobra);
+            listaDocumentosobra.add(documentoobra);
+            this.documentoobra = new Documentoobra();
+            this.documentoobra.setTipodocumento(new Tipodocumento(1, "", true));
+            this.documentoobra.setDatefecha(new Date());
+            this.cargadorDocumentos = new CargadorArchivosWeb();
+        } catch (Exception ex) {
+            Logger.getLogger(ModificarProyecto.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;       
+    }
 
     private void eliminarDocumento() {
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();

@@ -7243,6 +7243,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return null;
     }
+    
+    public String agregarUrlOrfeo() {
+        try {
+            this.documentoobra.setTipodocumento(new Tipodocumento(Tipodocumento.URL_ORFEO));
+            this.documentoobra.setContrato(contrato);
+            getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobra);
+            getSessionBeanCobra().getCobraService().getListaDocumentosContrato().add(documentoobra);
+            inicializarVariablesdocu();
+        } catch (Exception ex) {
+            Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     /**
      * invocar el reporte de convenio enviando el id del mismo
