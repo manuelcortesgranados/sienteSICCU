@@ -44,6 +44,15 @@
                 ingre.stop().animate({height: '150%'});
             }
         </script>
+        <style>
+            tr.oddeven:nth-child(odd) {
+                background-color: #F3F3F3;
+            }
+
+            tr.oddeven:nth-child(even) {
+                background-color: #FFFFFF;
+            } 
+        </style>
 
 
     </ui:define>
@@ -142,7 +151,7 @@
 
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
-                        
+
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
                             <ui:repeat var="marker" value="#{HomeGestion.markers}">
@@ -184,7 +193,8 @@
                                                 rows="#{HomeGestion.rowsPerPage}"
                                                 style="height:300px; width:700px;" selectionMode="none"
                                                 frozenColumns="1"
-                                                >
+                                                rowClasses="oddeven">
+                            >
 
 
                             <f:facet name="header">
@@ -196,7 +206,11 @@
                                         <h:outputText  styleClass="ikont-hot-nombreobra" style="color: white;text-decoration: none;"  value="Nombre" />
                                     </h:panelGroup>
                                 </f:facet>
-                                <h:inputTextarea  styleClass="ikont-hot-nombreobras"   id="otxt-nombreObras"  value="#{obra[0]}" disabled="true" cols="20" rows="2" />   
+                                <h:outputLabel  styleClass="ikont-hot-nombreobras"   id="otxt-nombreObras"  value="#{obra[0]}" >
+                                    <rich:tooltip followMouse="true" direction="bottomRight" styleClass="ikont-rtt-btndetalleproyecto" >
+                                        <h:outputText styleClass="ikont-hol-strnombreobra" value="#{obra[0]}"></h:outputText>
+                                    </rich:tooltip>
+                                </h:outputLabel>   
                             </rich:column>
                             <rich:column id="nombreConvenio" styleClass="ikont-rdt-rc-convenio" width="150">
                                 <f:facet name="header">
