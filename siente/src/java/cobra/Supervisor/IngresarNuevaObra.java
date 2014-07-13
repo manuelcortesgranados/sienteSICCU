@@ -2429,6 +2429,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     if (division>255){
                         String mensaje_error="ERROR : El periodo de medida especificado es muy reducido en numero de dias para el rango de fechas de inicio y fin del proyecto especificado.  El numero de mediciones resultante fue de  "+division+" Cuando se espera que sea de maximo 255";
                         FacesUtils.addErrorMessage(mensaje_error);
+                        FacesUtils.addErrorMessage("NO se ha generado el cronograma en Excel.");
                         throw new Exception();
                     }
 
