@@ -2041,6 +2041,9 @@ public class DetalleObra implements Serializable {
     private int aprobacionSVA;
 
     public boolean getRenderSVA() {
+        if (getAdministrarObraNew().getObra() == null || getAdministrarObraNew().getObra().getSupervisor() == null || getSessionBeanCobra().getUsuarioObra() == null || getSessionBeanCobra().getUsuarioObra().getTercero() == null) {
+            return false;
+        }
         return getAdministrarObraNew().getObra().getSupervisor().getIntcodigo() == getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
     }
 

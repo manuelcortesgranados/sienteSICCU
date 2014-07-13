@@ -2750,6 +2750,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public boolean getRenderSVA() {
+        if(this.getObra() == null || this.getObra().getInterventor() == null || getSessionBeanCobra().getUsuarioObra() == null || getSessionBeanCobra().getUsuarioObra().getTercero() == null ){
+            return false;
+        }
         return this.getObra().getInterventor().getIntcodigo() == getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
     }
 
