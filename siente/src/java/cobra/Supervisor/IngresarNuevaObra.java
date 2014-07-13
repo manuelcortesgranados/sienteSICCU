@@ -2424,6 +2424,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
                     int i = 1;
                     int j = 8;
+                    
+                    // MCG 13 JUN 2014, si se excede de 255 columnas (por limitacion de excel) avisa al usuario
+                    if (division>255){
+                        String mensaje_error="ERROR : El periodo de medida especificado es muy reducido en numero de dias para el rango de fechas de inicio y fin del proyecto especificado.  El numero de mediciones resultante fue de  "+division+" Cuando se espera que sea de maximo 255";
+                        FacesUtils.addErrorMessage(mensaje_error);
+                        throw new Exception();
+                    }
 
                     while (i <= division) {
 
