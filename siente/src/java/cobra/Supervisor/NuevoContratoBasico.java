@@ -4273,6 +4273,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tipificacionSector = null;
         this.tipificacionObjetivo = null;
         this.tipificacionEstrategia = null;
+        
+        selectedUnit = -1;
     }
 
     public void iniciarTiposContrato() {
