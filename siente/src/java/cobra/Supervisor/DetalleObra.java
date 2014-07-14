@@ -923,7 +923,18 @@ public class DetalleObra implements Serializable {
     }
     // </editor-fold>
     private UIDataTable tablalistaavances = new UIDataTable();
+    
+    //Inicio Adicion Dass reporte FMI017
+    private int fechaescogida;
+    public int getFechaescogida() {
+        return fechaescogida;
+    }
 
+    public void setFechaescogida(int fechaescogida) {
+        this.fechaescogida = fechaescogida;
+    }
+    //Fin Adicion Dass
+    
     public UIDataTable getTablalistaavances() {
         return tablalistaavances;
     }
@@ -1342,6 +1353,20 @@ public class DetalleObra implements Serializable {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
 
+    public String reporteFMI017Pdf() {
+        try {    
+            if(getFechaescogida() > 0){
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfFMI017") +"&Codigo%20Obra=" +getAdministrarObraNew().getObra().getIntcodigoobra() +"&idPeriodo=" +getFechaescogida());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
+            }else{
+                FacesUtils.addErrorMessage("Debe Seleccionar un periodo, para generar el reporte");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public String reportePdf() {
         try {
             getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
