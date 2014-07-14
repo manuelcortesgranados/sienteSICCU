@@ -235,7 +235,7 @@
                             </h:panelGrid>
                             <h:panelGrid columns="2">
 
-                                <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
+                                <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio} #{Supervisor$Contrato.tipoContCon}:" rendered="#{var.versioncobra eq 'siccu'}"/>
                                 <h:panelGrid id="ikont-hpg-tipoconvenio" columns="2" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu'}">
                                     <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" required="true"
                                                      value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
@@ -350,6 +350,16 @@
 
                                     </h:inputTextarea>
                                     <h:message for="textobjetot" styleClass="ikont-"  />
+                                </h:panelGrid> 
+                                <h:outputLabel styleClass="ikont-hol-codigocdp font-general" id="ikont-hol-codigocdp"  value="#{var.codigocdp} :" rendered="#{var.concodigocdpcontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}"/>
+                                <h:panelGrid columns="2" rendered="#{var.concodigocdpcontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
+                                    <h:inputText styleClass="ikont-hit-codigocdp" id="ikont-hit-codigocdp" value="#{Supervisor$Contrato.contrato.strcodigocdp}" />
+                                    <h:message for="ikont-hit-codigocdp"/>
+                                </h:panelGrid> 
+                                <h:outputLabel styleClass="ikont-hol-codigorpc font-general" id="ikont-hol-codigorpc"  value="#{var.codigorpc} :" rendered="#{var.concodigorpccontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}"/>
+                                <h:panelGrid columns="2" rendered="#{var.concodigorpccontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
+                                    <h:inputText styleClass="ikont-hit-codigorpc" id="ikont-hit-codigorpc" value="#{Supervisor$Contrato.contrato.strcodigorpc}" />
+                                    <h:message for="ikont-hit-codigorpc"/>
                                 </h:panelGrid> 
                                 <h:outputLabel  styleClass="ikont-hol-contratista font-general" id="lblcontratista"  
                                                 value="(*) #{var.contratista}:" rendered="#{not var.multiplescontratistas}"/>

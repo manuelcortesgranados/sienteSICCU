@@ -9113,6 +9113,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //limpiarContrato();
         booltipocontratoconvenio = false;
         tipoContCon = "Contrato";
+        llenarTipoContrato();
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         contrpadre = fk_contrato;
