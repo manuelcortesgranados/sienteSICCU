@@ -147,6 +147,19 @@
                                 </f:facet>
                                 <h:outputText value="#{contratoContratante.contratante.tercero.strnombre}"/>
                             </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvaloraportado}"/>
+                                </f:facet>
+                                <h:outputText value="#{contratoContratante.numvaloraportado}">
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                </h:outputText>
+                                <f:facet name="footer" >
+                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
+                                </f:facet>
+                            </rich:column>
                         </rich:dataTable>
                         <rich:dataScroller id="ikont-rds-multiplescontratantes" for="ikont-rdt-multiplescontratantes" styleClass="ikont-rds-multiplescontratantes"/>
                     </h:panelGrid>

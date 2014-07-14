@@ -9624,18 +9624,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
     
     /**
-     * Consulta las entidades contratantes;
+     * Consulta las entidades contratantes
      */
     public void consultarContratantes() {
         contratantes = getSessionBeanCobra().getCobraService().consultarContratantes(nombreCedulaNitContratante);
     }
     
     /**
-     * Consulta las entidades contratantes;
+     * Consulta las entidades contratistas
      */
     public void consultarContratistas() {
-        contratistas = getSessionBeanCobra().getCobraService().consultarContratistas(nombreCedulaNitContratista);
-        System.out.println("contratistas.size() = " + contratistas.size());
+        if(tipoContCon.equals("Convenio")) {
+            contratistas = getSessionBeanCobra().getCobraService().consultarContratistas(nombreCedulaNitContratista,Tipocontratista.ID_TIPO_ENTE_TERRITORIAL);
+        }
+        if(tipoContCon.equals("Contrato")) {
+            contratistas = getSessionBeanCobra().getCobraService().consultarContratistas(nombreCedulaNitContratista,Tipocontratista.ID_TIPO_TERCERO);
+        }
     }
     
     /**

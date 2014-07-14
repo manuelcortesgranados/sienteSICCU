@@ -467,9 +467,14 @@
                 <rich:panel id="ikont-rcp-multiplescontratistas" styleClass="ikont-rcp-multiplescontratistas" header="#{var.tituloadicionarmultilescontratistas}"
                             rendered="#{var.multiplescontratistas}">
                     <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
-                        <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistas()}"
-                                           render="ikont-hpg-contratistas" execute="@this" immediate="true"
-                                           oncomplete="#{rich:component('ikont-rpp-listado-contratistas')}.show();"/>
+                        <h:panelGrid id="ikont-acb-botonesmultiplescontratistas" styleClass="ikont-acb-botonesmultiplescontratistas" columns="2">
+                            <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistas()}"
+                                               render="ikont-hpg-contratistas" execute="@this" immediate="true"
+                                               oncomplete="#{rich:component('ikont-rpp-listado-contratistas')}.show();"/>
+                            <a4j:commandButton styleClass="ikont-acb-crearmultiplecontratista" id="ikont-acb-crearmultiplecontratista" value="#{var.crearcontratista}" 
+                                            action="#{Supervisor$Contrato.inicializarContratista}" execute="@this" 
+                                            oncomplete="#{rich:component('mp-crear-contratista')}.show();" render="rpContratista"/>
+                        </h:panelGrid>
                         <rich:dataTable id="ikont-rdt-multiplescontratistas" styleClass="ikont-rdt-multiplescontratistas" 
                                         value="#{Supervisor$Contrato.contrato.listaContratocontratistas}" rows="25"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
