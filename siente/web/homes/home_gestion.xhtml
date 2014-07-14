@@ -152,7 +152,7 @@
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
-                               jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
+                               jsVariable="mapa" zoom="#{var.zoommapa}"  autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
 
                             <ui:repeat var="markervalla" value="#{HomeGestion.markers}">
                                 <m:marker latitude="#{markervalla.latitude}" 
