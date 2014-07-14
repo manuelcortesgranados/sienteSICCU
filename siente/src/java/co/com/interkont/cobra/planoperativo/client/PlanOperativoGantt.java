@@ -538,8 +538,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                                 toTask.setPredecesor(toTask.getPredecesor() + "," + fromTask.getNumeracion());
                                 band = true;
+                            } else {
+                                band = false;
                             }
-                            band = true;
+
                         } else {
                             toTask.setPredecesor(String.valueOf(fromTask.getNumeracion()));
                             band = true;
@@ -551,6 +553,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 }
                 ejecutarCascada = true;
+
                 if (band) {
                     return crearDependencia(fromTask.getNumeracion(), toTask, fromTask, 1, type);
                 } else {
@@ -935,7 +938,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         box.hide();
                     }
                 };
-                t.schedule(500);
+                t.schedule(10);
 
                 ejecutarCascada = true;
             }
@@ -1038,6 +1041,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ToolBarInferior toolinferior = new ToolBarInferior(service, taskStore, convenioDTO, depStore);
             main.add(toolinferior);
         }
+
         return main;
     }
 
@@ -1720,20 +1724,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                      * Modificar hijos
                      */
 
-                    for (ActividadobraDTO act : dep.getActividadTo().getChildren()) {
-                        if (act.getStartDateTime().before(dep.getActividadTo().getStartDateTime())) {
-                            act.setStartDateTime(dep.getActividadTo().getStartDateTime());
-                            dw = new DateWrapper(act.getStartDateTime()).clearTime();
-                            act.setEndDateTime(dw.addDays(act.getDuration() - 1).asDate());
-
-                        }
-
-//                    if (act.getStartDateTime().after(dep.getActividadTo().getEndDateTime()) || act.getStartDateTime().equals(dep.getActividadTo().getEndDateTime())) {
-//                        act.setStartDateTime(dep.getActividadTo().getStartDateTime());
-//                        dw = new DateWrapper(act.getStartDateTime()).clearTime();
-//                        act.setEndDateTime(dw.addDays(act.getDuration() - 1).asDate());
-//                    }
-                    }
+                    modificarHijos(dep.getActividadTo());
 
                     ///Validar modificación del papa
                     modificarFechaFin(dep.getActividadTo());
@@ -1743,24 +1734,42 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         }
 
-//        getGantt().getGanttPanel().reconfigure();
-//        getGantt().refresh();
+        getGantt().getGanttPanel().reconfigure();
+        getGantt().refresh();
+    }
+
+    public void modificarHijos(ActividadobraDTO actividad) {
+        for (ActividadobraDTO act : actividad.getChildren()) {
+            if (act.getStartDateTime().before(actividad.getStartDateTime())) {
+                act.setStartDateTime(actividad.getStartDateTime());
+                DateWrapper dw = new DateWrapper(act.getStartDateTime()).clearTime();
+                act.setEndDateTime(dw.addDays(act.getDuration() - 1).asDate());
+                if(!act.getChildren().isEmpty())
+                {
+                    modificarHijos(act);
+                }    
+            }
+
+//                  
+        }
     }
 
     public void modificarFechaFin(ActividadobraDTO actividad) {
 
         ActividadobraDTO actpadre = taskStore.getParent(actividad);
+
         if (actpadre != null) {
             if (actividad.getEndDateTime().after(actpadre.getEndDateTime())) {
                 int dias;
                 DateWrapper dw = new DateWrapper(actividad.getEndDateTime()).clearTime();
                 dias = CalendarUtil.getDaysBetween(actpadre.getStartDateTime(), dw.asDate());
                 actpadre.setDuration(dias + 1);
-                taskStore.update(actpadre);
+                actpadre.setEndDateTime(actividad.getEndDateTime());
+                //taskStore.update(actpadre);
                 getGantt().getGanttPanel().reconfigure();
-                //getGantt().refresh();
+                getGantt().refresh();
                 modificarFechaFin(actpadre);
-                validarDependencias();
+                //validarDependencias();
             }
         }
     }
