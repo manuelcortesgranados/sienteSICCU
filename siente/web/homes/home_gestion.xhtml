@@ -151,37 +151,30 @@
 
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
-
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="true" autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
-                            <ui:repeat var="marker" value="#{HomeGestion.markers}">
-                                <m:marker latitude="#{marker.latitude}" 
-                                          longitude="#{marker.longitude}"
-                                          jsVariable="#{marker.jsVariable}" 
-                                          draggable="false" showInformationEvent="click"
-                                          immediate="true"
-                                          transient="true"
+
+                            <ui:repeat var="markervalla" value="#{HomeGestion.markers}">
+                                <m:marker latitude="#{markervalla.latitude}" 
+                                          longitude="#{markervalla.longitude}"
+                                          jsVariable="#{markervalla.jsVariable}" 
+                                          draggable="false" 
                                           submitOnValueChange="false"
+                                          transient="true"
                                           >
-                                    <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
-                                    <m:htmlInformationWindow transient="true"  htmlText="#{marker.informationWindow}">
-                                    </m:htmlInformationWindow>
+                                    <m:icon imageURL="#{markervalla.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
+                                    <m:eventListener eventName="click"  jsFunction="showVallaJS"   />
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
+                        <a4j:jsFunction name="showVallaJSP" render="modalVallaFonade" limitRender="true" oncomplete="#{rich:component('modalVallaFonade')}.show();">
+                            <a4j:param name="data" assignTo="#{HomeGestion.vallaDemanda}"/>
+                        </a4j:jsFunction>
                         <h:outputText style="font-size: 9px;"  styleClass="ikont-hot-proyectostotalfilas" rendered="#{HomeGestion.searchActivated}" value="#{var.paginaCiu} #{HomeGestion.pagina} / #{HomeGestion.totalpaginas}" />
                     </h:panelGrid>
                     <script type="text/javascript">
-                        function marker1DragHandler(event) {
-
-                            alert("Current markerA latlng is: " + document.getElementById('js_58').valueOf());
-
-                        }
-                        function marker2DragHandler(event) {
-                            alert("Current markerB latlng is: " + event.latLng);
-                        }
-                        function marker3DragHandler(event) {
-                            alert("Current markerC latlng is: " + event.latLng);
+                        function showVallaJS(obra) {
+                            showVallaJSP(obra.latLng.k+"@"+obra.latLng.B);
                         }
                     </script>
                     <h:panelGrid id="vistaLista" style="width: 700px;box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right; display: none;" >
@@ -218,8 +211,8 @@
                                         <h:outputText  styleClass="ikont-hot-convenio" style="color: white;text-decoration: none;"  value="Convenio" />
                                     </h:panelGroup>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-strnombre"   id="otxt-nombreconvenio" value="#{obra[12]}" rendered="#{obra[12] != null}"/>
-                                <h:outputText  styleClass="ikont-hot-nombreconvenio"   id="otxt-nonombreconvenio" value="N/A" rendered="#{obra[12] == null}"/>
+                                <h:outputText  styleClass="ikont-hot-strnombre"   id="otxt-nombreconvenio" value="#{obra[6]}" rendered="#{obra[6] != null}"/>
+                                <h:outputText  styleClass="ikont-hot-nombreconvenio"   id="otxt-nonombreconvenio" value="N/A" rendered="#{obra[6] == null}"/>
                             </rich:column>
                             <rich:column id="tipoObra" styleClass="ikont-rdt-rc-tipoobra">
                                 <f:facet name="header">
@@ -228,7 +221,7 @@
                                     </h:panelGroup>
 
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-strdestipobra"   id="otxt-tipoObras" value="#{obra[14]}"/>
+                                <h:outputText  styleClass="ikont-hot-strdestipobra"   id="otxt-tipoObras" value="#{obra[7]}"/>
                             </rich:column>
                             <rich:column id="valorObra" styleClass="ikont-rdt-rc-valor" >
                                 <f:facet name="header">
@@ -247,7 +240,7 @@
                                         <h:outputText  styleClass="ikont-hot-avance"   value="Avance" />
                                     </h:panelGroup>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclarado"   id="otxt-avanceObras" value="#{obra[3]}">
+                                <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclarado"   id="otxt-avanceObras" value="#{obra[2]}">
                                     <f:convertNumber maxFractionDigits="2" />
                                 </h:outputText>
                                 <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclaradoporcentaje"   value=" %"/>
@@ -256,10 +249,10 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-tipointervencion"   value="Ver" />
                                 </f:facet>
-                                <a4j:commandLink type="submit" execute="@this" rendered="#{obra[20] == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto}" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{obra[4]}';">
+                                <a4j:commandLink type="submit" execute="@this" rendered="#{obra[8] == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu and SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto}" id="irDatosBasicos" onclick="document.location.href = '../NuevoProyecto/tipificacionproyecto.xhtml?id=#{obra[3]}';">
                                     <h:graphicImage  styleClass="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
-                                <a4j:commandLink rendered="#{obra[20] != 0}" id="irDetalle" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obra[4]}';">
+                                <a4j:commandLink rendered="#{obra[8] != 0}" id="irDetalle" onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{obra[3]}';">
                                     <h:graphicImage  styleClass="ikont-hgi-bnverdetalle"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
@@ -283,6 +276,25 @@
                 </h:panelGroup>
             </h:panelGrid>
         </h:form>
+        <rich:popupPanel id="modalVallaFonade"  autosized="true"  headerClass="rich-panel-header" styleClass="ikont"   >
+            <f:facet name="controls">
+                <h:form>
+                    <h:panelGroup>
+                        <a4j:commandLink styleClass="ikont-acl-cerrar closemodal"  
+                                         title="#{var.cerrar}" 
+
+                                         immediate="true" 
+                                         onclick="#{rich:component('modalVallaFonade')}.hide();
+                                        return false;"/>
+                    </h:panelGroup>
+                </h:form>
+            </f:facet>
+            <a4j:outputPanel>
+                <div style="padding: 15px;">
+                    <h:outputText value="#{HomeGestion.vallaDemanda}" escape="false"/>
+                </div>
+            </a4j:outputPanel>
+        </rich:popupPanel>
         <f:subview id="murocomentarios" rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
         </f:subview>
