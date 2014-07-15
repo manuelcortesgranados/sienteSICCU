@@ -56,6 +56,7 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.interkont.bitacora.entidades.Accion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
+import email.MailFonade;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.Collections;
@@ -2083,7 +2084,24 @@ public class DetalleObra implements Serializable {
         this.solicitudValidacionAvance.setFechaRespuesta(new Date());
         this.solicitudValidacionAvance.setJsfUsuarioByUsuarioSupervisor(getSessionBeanCobra().getUsuarioObra());
         this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardarOrActualizar(this.solicitudValidacionAvance);
+        this.sendNotificationSVA(solicitudValidacionAvance, getAdministrarObraNew().getObra());
         this.getAdministrarObraNew().cargarHistorialSVA();
+    }
+    
+    private void sendNotificationSVA(SolicitudValidacionAvance sva, Obra obra){
+        if(obra == null || obra.getInterventor() == null || obra.getInterventor().getStremail() == null){
+            Logger.getLogger(AdministrarObraNew.class.getName()).info("ERROR: No se puede enviar correo. Interventor no está configurado correctamente.");
+            return;
+        }
+        String [] recipients = {obra.getInterventor().getStremail()};
+        String subject = "Solicitud de validación para un Avance";
+        StringBuilder body = new StringBuilder();
+
+        body.append("<h1>Su solicitud ha sido ").append(sva.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO?"aprobada":"rechazada").append("!</h1>");
+        body.append("<div><b>Obra:&nbsp;</b>").append(obra.getStrnombreobra()).append("</div>");
+        body.append("<div><b>Periodo:&nbsp;</b>").append(sva.getPeriodo().getDatefeciniperiodo()).append(" - ").append(sva.getPeriodo().getDatefecfinperiodo()).append("</div>");
+        MailFonade mailFonade = new MailFonade();
+        mailFonade.sendMail(recipients, subject, body.toString());
     }
 
     //
