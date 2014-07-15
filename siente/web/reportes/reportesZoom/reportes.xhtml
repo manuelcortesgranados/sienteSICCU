@@ -243,7 +243,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpGbal" listener="#{Reportes.llenarMuniciAh}"/>
                                     </h:selectOneMenu>
                                     <h:outputLabel  value=""/>
-                                    <h:commandButton styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver_reportes_fonade}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '-1' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandButton styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '-1' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </h:panelGrid>                            
                             </rich:panel>
                             <rich:panel rendered="true" styleClass="noneborder">
@@ -269,7 +269,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpGbal" />
                                     </h:selectOneMenu>
                                     <h:outputLabel  value=""/>
-                                    <h:commandButton styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver_reportes_fonade}/ReportesFonade/Servlet_Reportes?identificador_reporte=1a&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;identificador_municipio=#{Reportes.muniah == '-1' ? 'ALL' : Reportes.muniah}&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '-1' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandButton styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=1a&amp;identificador_departamento=#{Reportes.deptosah == '-1' ? 'ALL' : Reportes.deptosah}&amp;identificador_municipio=#{Reportes.muniah == '-1' ? 'ALL' : Reportes.muniah}&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '-1' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </h:panelGrid>                            
                             </rich:panel>
                         </h:panelGrid>
