@@ -152,29 +152,31 @@
                 <h:panelGroup id="ikont-hpg-vistas" style="position: absolute;">
                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
-                               jsVariable="mapa" zoom="#{var.zoommapa}"  autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
+                               zoom="#{var.zoommapa}" transient="true" partiallyTriggered="true" immediate="true"  autoReshape="true"    height="#{SessionBeanCobra.cobraService.altomapa}">
 
                             <ui:repeat var="markervalla" value="#{HomeGestion.markers}">
                                 <m:marker latitude="#{markervalla.latitude}" 
                                           longitude="#{markervalla.longitude}"
-                                          jsVariable="#{markervalla.jsVariable}" 
                                           draggable="false" 
                                           submitOnValueChange="false"
                                           transient="true"
-                                          >
+                                          immediate="true"
+                                          showInformationEvent="click">
+
                                     <m:icon imageURL="#{markervalla.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
-                                    <m:eventListener eventName="click"  jsFunction="showVallaJS"   />
+                                    <m:eventListener eventName="click" transient="true"  jsFunction="showVallaJS"   />
                                 </m:marker>
                             </ui:repeat>
                         </m:map>
-                        <a4j:jsFunction name="showVallaJSP" render="modalVallaFonade" limitRender="true" oncomplete="#{rich:component('modalVallaFonade')}.show();">
-                            <a4j:param name="data" assignTo="#{HomeGestion.vallaDemanda}"/>
-                        </a4j:jsFunction>
+
                         <h:outputText style="font-size: 9px;"  styleClass="ikont-hot-proyectostotalfilas" rendered="#{HomeGestion.searchActivated}" value="#{var.paginaCiu} #{HomeGestion.pagina} / #{HomeGestion.totalpaginas}" />
                     </h:panelGrid>
+                    <a4j:jsFunction name="showVallaJSP" transient="true" render="modalVallaFonade" limitRender="true" oncomplete="#{rich:component('modalVallaFonade')}.show();">
+                        <a4j:param name="data" assignTo="#{HomeGestion.vallaDemanda}"/>
+                    </a4j:jsFunction>
                     <script type="text/javascript">
                         function showVallaJS(obra) {
-                            showVallaJSP(obra.latLng.k+"@"+obra.latLng.B);
+                            showVallaJSP(obra.latLng.k + "@" + obra.latLng.B);
                         }
                     </script>
                     <h:panelGrid id="vistaLista" style="width: 700px;box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right; display: none;" >
