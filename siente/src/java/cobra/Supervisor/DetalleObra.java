@@ -924,7 +924,26 @@ public class DetalleObra implements Serializable {
     }
     // </editor-fold>
     private UIDataTable tablalistaavances = new UIDataTable();
+    
+    //Inicio Adicion Dass reporte FMI017
+    private SelectItem[] periodos;
+    public SelectItem[] getPeriodos() {
+        return periodos;
+    }
 
+    public void setPeriodos(SelectItem[] periodos) {
+        this.periodos = periodos;
+    }
+    private int fechaescogida;
+    public int getFechaescogida() {
+        return fechaescogida;
+    }
+
+    public void setFechaescogida(int fechaescogida) {
+        this.fechaescogida = fechaescogida;
+    }
+    //Fin Adicion Dass
+    
     public UIDataTable getTablalistaavances() {
         return tablalistaavances;
     }
@@ -1210,6 +1229,7 @@ public class DetalleObra implements Serializable {
     public void iniciardetalle() {
         getAdministrarObraNew().setProyectoestrategia(false);
         imagenEvolucion();
+        llenarPeriodos();
         getAdministrarObraNew().cargarListas();
         llenarContratosInterventoria();
         getAdministrarObraNew().modificarObjetoObra = false;
@@ -1338,11 +1358,38 @@ public class DetalleObra implements Serializable {
         // Ingresar en bitacora el ingreso a ver un proyecto
         getSessionBeanCobra().insertarBitacora(Accion.VISITAR_PROYECTO, getAdministrarObraNew().getObra().getIntcodigoobra());
     }
-
+    
     protected AdministrarObraNew getAdministrarObraNew() {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
-
+    /*Adicion Dass Reporte FMI017*/
+    public String reporteFMI017Pdf() {
+        try {    
+            if(getFechaescogida() > 0){
+            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfFMI017") +"&Codigo%20Obra=" +getAdministrarObraNew().getObra().getIntcodigoobra() +"&idPeriodo=" +getFechaescogida());
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
+            }else{
+                FacesUtils.addErrorMessage("Debe Seleccionar un periodo, para generar el reporte");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public void llenarPeriodos() {
+        getSessionBeanCobra().getCobraService().setPeriodos(getSessionBeanCobra().getCobraService().encontrarPeriodosObra(getAdministrarObraNew().getObra()));
+        periodos = new SelectItem[getSessionBeanCobra().getCobraService().getPeriodos().size()];
+        int i = 0;
+        for (Periodo period : getSessionBeanCobra().getCobraService().getPeriodos()) {
+            SelectItem peri = new SelectItem(period.getIntidperiodo(), period.getDatefeciniperiodo() + " - " + period.getDatefecfinperiodo());
+            if (i == 0) {
+                fechaescogida = -1;
+            }
+            periodos[i++] = peri;
+        }
+    }
+    /*FIN ADICION DASS*/
+    
     public String reportePdf() {
         try {
             getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());

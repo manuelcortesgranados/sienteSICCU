@@ -520,6 +520,18 @@
                                 <h:commandLink id="word_infociu2" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="butonreport zoom-word" target="_blank" />
                             </h:panelGrid>
                         </rich:collapsiblePanel>
+                        <rich:collapsiblePanel switchType="client" header="Reporte FM017" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu and SessionBeanCobra.logueadodesdemapa}">
+                            <center>
+                                <h:panelGrid columns="1" styleClass="panelcenter">                                
+                                    <h:outputLabel  styleClass="ikont-hol-fechadelacta font-general"    value="Seleccione el periodo para generar el reporte:" for="fechaalimentacion" />
+                                    <h:selectOneMenu id="fecInfo" value="#{Supervisor$DetalleObra.fechaescogida}">
+                                        <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
+                                        <f:selectItems value="#{Supervisor$DetalleObra.periodos}"/>
+                                    </h:selectOneMenu>
+                                    <h:commandLink id="pdfFM017_infociu2" action="#{Supervisor$DetalleObra.reporteFMI017Pdf}" styleClass="butonreport zoom-pdf" target="_blank"/>                                
+                                </h:panelGrid>
+                            </center>
+                        </rich:collapsiblePanel>
                         <rich:collapsiblePanel switchType="ajax" toggleListener="#{Supervisor$DetalleObra.cargarVisitasAuditoriaObra}" header="#{var.tituloseccionmatrizauditoria}" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.permiso_auditoria}"                                         >
                             <rich:dataTable id="tablalistavisitasfallidas" rows="25" 
                                             rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablavisitasfallidas"  
