@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/zoom"/>
+<Context antiJARLocking="true" path="/zoom">
+
+    <Resource name="mail/FONADE" 
+              auth="Container" 
+              type="javax.mail.Session" 
+              mail.smtp.host="smtp.gmail.com" 
+              mail.smtp.port="465"
+              mail.smtp.auth="true"
+              mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
+              mail.smtp.user="zoom@interkont.co"
+              mail.smtp.password="z00mAl4rm4s!" 
+              debug="false"/>
+</Context>
+    
+    

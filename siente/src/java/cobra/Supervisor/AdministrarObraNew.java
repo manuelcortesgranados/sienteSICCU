@@ -30,7 +30,6 @@ import co.com.interkont.cobra.to.Tiponovedad;
 import co.com.interkont.cobra.to.Vereda;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
-import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.giprom.vista.VwIndIndicadorMunicipal;
 import co.com.interkont.giprom.vista.VwInmInfoMunicipal;
 import cobra.ArchivoWeb;
@@ -44,6 +43,7 @@ import cobra.util.RutasWebArchivos;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
 import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import com.interkont.cobra.exception.ArchivoExistenteException;
+import email.MailFonade;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -2803,6 +2803,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         switch (errorCodeSVA) {
             case 0:
                 this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardar(sva);
+                this.sendNotificationSVA(sva, this.getObra());
                 this.initSolicitudValidacionAvance();
                 messageSVA = "La solicitud se registró exitosamente";
                 break;
@@ -2831,6 +2832,26 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         this.codigoErrorSVA = errorCodeSVA;
         this.errorMessageSVA = messageSVA;
 
+    }
+    
+    private void sendNotificationSVA(SolicitudValidacionAvance sva, Obra obra){
+        if(obra == null || obra.getSupervisor() == null || obra.getSupervisor().getStremail() == null){
+            Logger.getLogger(AdministrarObraNew.class.getName()).info("ERROR: No se puede enviar correo. Supervisor no está configurado correctamente");
+            return;
+        }
+        String [] recipients = {obra.getSupervisor().getStremail()};
+        String subject = "Solicitud de validación para un Avance";
+        StringBuilder body = new StringBuilder();
+        body.append("<div><b>Obra:&nbsp;</b>").append(sva.getObra().getStrnombreobra()).append("</div>");
+        for (Periodo periodo : periodosalimentacionSolicitudValidacionAvance) {
+            if(periodo.getIntidperiodo() == sva.getPeriodo().getIntidperiodo()){
+                body.append("<div><b>Periodo:&nbsp;</b>").append(periodo.getDatefeciniperiodo()).append(" - ").append(periodo.getDatefecfinperiodo()).append("</div>");
+                break;
+            }
+        }
+        body.append("<div><b>Observaciones:&nbsp;</b>").append(sva.getObservaciones());
+        MailFonade mailFonade = new MailFonade();
+        mailFonade.sendMail(recipients, subject, body.toString());
     }
 
     /**
