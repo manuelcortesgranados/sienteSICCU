@@ -50,6 +50,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -925,8 +926,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public final void iniciarHome() {
 
-        long l1 = System.currentTimeMillis();
-
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
         setInttipoorigen(1);
 
@@ -953,10 +952,10 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         //PERFORMANCE
         if (!homeInitialized) {
             iniciarFiltroAvanzado();
-            
+
             // Se invoca este método para que cargue el mapa cuando entra a la página
-            this.buscarProyectoPerformance();
-            
+            this.cargarListaCompletaPuntosMapa();
+
             homeInitialized = true;
         }
         //llenarTablaNovedades();
@@ -3489,37 +3488,19 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                     Object[] obra = listaPerformanceObras.get(i);
 
-                    String _obra_intcodigoobra = obra[3] == null ? null : obra[3].toString();
                     Double _obra_floatlatitud = obra[4] == null ? null : Double.parseDouble(obra[4].toString());
                     Double _obra_floatlongitud = obra[5] == null ? null : Double.parseDouble(obra[5].toString());
-                    Integer _tipoestadoobra_intestadoobra = obra[8] == null ? null : Integer.parseInt(obra[8].toString());
 
                     if (_obra_floatlatitud == null || _obra_floatlongitud == null) {
                         i++;
                         continue;
                     }
 
-                    String pin = "/resources/imgs/pin_normal_s7.png";
-                    switch (_tipoestadoobra_intestadoobra == null ? 0 : _tipoestadoobra_intestadoobra) {
-                        case 5:
-                            pin = "/resources/imgs/pin_normal_ejecucion_s7.png";
-                            break;
-                        case 2:
-                            pin = "/resources/imgs/pin_normal_finalizado_s7.png";
-                            break;
-                        case 6:
-                            pin = "/resources/imgs/pin_normal_suspendido_s7.png";
-                            break;
-                    }
+                    Integer _tipoestadoobra_intestadoobra = obra[8] == null ? null : Integer.parseInt(obra[8].toString());
+                    Integer _obra_intcodigoobra = obra[3] == null ? null : Integer.parseInt(obra[3].toString());
 
-                    Marcador marker = new Marcador();
-
-                    marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
-
-                    marker.setLatitude(_obra_floatlatitud.toString());
-                    marker.setLongitude(_obra_floatlongitud.toString());
-                    marker.setInformationWindow(_obra_intcodigoobra);
-                    markers.add(marker);
+                    Marcador m = crearMarcadorPerformance(version, _obra_intcodigoobra, _obra_floatlatitud, _obra_floatlongitud, _tipoestadoobra_intestadoobra);
+                    this.markers.add(m);
 
                 } catch (NumberFormatException e) {
                     System.out.println(e.getMessage());
@@ -3533,6 +3514,27 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
         }
         System.out.println("__________TIME cargarPuntosMapaFonadePerformance(" + markers.size() + "): " + (System.currentTimeMillis() - l1));
+    }
+
+    private Marcador crearMarcadorPerformance(String version, final Integer obraID, final Double latitud, final Double longitud, final Integer estadoobra) {
+        String pin = "/resources/imgs/pin_normal_s7.png";
+        switch (estadoobra == null ? 0 : estadoobra) {
+            case 5:
+                pin = "/resources/imgs/pin_normal_ejecucion_s7.png";
+                break;
+            case 2:
+                pin = "/resources/imgs/pin_normal_finalizado_s7.png";
+                break;
+            case 6:
+                pin = "/resources/imgs/pin_normal_suspendido_s7.png";
+                break;
+        }
+        Marcador marker = new Marcador();
+        marker.setIcon((new StringBuilder("/")).append(version).append(pin).toString());
+        marker.setLatitude(latitud.toString());
+        marker.setLongitude(longitud.toString());
+        marker.setInformationWindow(obraID.toString());
+        return marker;
     }
 
     private Object valla;
@@ -3552,8 +3554,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         valla = html;
     }
 
-    
-
     public int searchObraIdByLocation(double lat, double lng) {
         int size = this.markers.size();
         double minDistance = Double.MAX_VALUE;
@@ -3571,7 +3571,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         return Integer.parseInt(markers.get(index).getInformationWindow());
     }
-    
+
     /**
      * Este método reemplaza a cargarVallaFonade()
      */
@@ -3624,7 +3624,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 } else {
                     list_contratante.append(_tercero_strnombrecompleto);
                 }
-                
+
                 String stylesemaforo = "";
                 if (_semaforo != null && _semaforo.compareTo("") != 0) {
                     if (_semaforo.equals("/resources/botones/rojo.png")) {
@@ -3713,4 +3713,42 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
         return descripcion.toString();
     }
+
+    private static List<Marcador> listaCompletaPuntosMapa;
+    private static Calendar ultimafechaCargaPuntos;
+
+    public void cargarListaCompletaPuntosMapa() {
+
+        boolean recargar = false;
+        if (ultimafechaCargaPuntos == null || listaCompletaPuntosMapa == null) {
+            recargar = true;
+        } else {
+            Calendar ayer = Calendar.getInstance();
+            ayer.add(Calendar.DAY_OF_MONTH, -1);
+            System.out.println("Ayer: "+ayer.getTime());
+            if (ultimafechaCargaPuntos.compareTo(ayer) < 0) {
+                recargar = true;
+            }
+        }
+
+        if (recargar) {
+            Logger.getLogger(HomeGestion.class.getName()).info("Se recargan los puntos del mapa");
+            ultimafechaCargaPuntos = Calendar.getInstance();
+            List<Object[]> list = getSessionBeanCobra().getCobraService().buscarTodosLosPuntosMapaEnEjecucion();
+            String version = getSessionBeanCobra().getBundle().getString("versioncobra");
+            listaCompletaPuntosMapa = new ArrayList<Marcador>();
+            for (Object[] obra : list) {
+                Integer _obra_intcodigoobra = obra[0] == null ? null : Integer.parseInt(obra[0].toString());
+                Double _obra_floatlatitud = obra[1] == null ? null : Double.parseDouble(obra[1].toString());
+                Double _obra_floatlongitud = obra[2] == null ? null : Double.parseDouble(obra[2].toString());
+                Integer _tipoestadoobra_intestadoobra = obra[3] == null ? null : Integer.parseInt(obra[3].toString());
+                Marcador m = crearMarcadorPerformance(version, _obra_intcodigoobra, _obra_floatlatitud, _obra_floatlongitud, _tipoestadoobra_intestadoobra);
+                HomeGestion.listaCompletaPuntosMapa.add(m);
+            }
+        }
+
+        this.markers = listaCompletaPuntosMapa;
+        this.totalfilas = listaCompletaPuntosMapa.size();
+    }
+
 }

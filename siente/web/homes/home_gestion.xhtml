@@ -132,7 +132,7 @@
 
                         <h:panelGrid columns="4" >
 
-                            <h:outputText rendered="#{HomeGestion.searchActivated}"  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
+                            <h:outputText styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
 
                             <h:outputText styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
 
@@ -157,8 +157,11 @@
                         
                         <script type="text/javascript">
                             function showVallaJS(obra) {
+                                var coordinates = obra.latLng.k + "@" + obra.latLng.B;
+                                console.log(coordinates);
                                 showVallaJSF(obra.latLng.k + "@" + obra.latLng.B);
                             }
+                            
                         </script>
                         <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
                             <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
