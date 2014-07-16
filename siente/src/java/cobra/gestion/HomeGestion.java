@@ -951,11 +951,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         //primeroListProyectos();
 
         //PERFORMANCE
-        if (!this.searchInitialized) {
+        if (!homeInitialized) {
             iniciarFiltroAvanzado();
-            //llenarTablaNovedades();
-            this.searchInitialized = true;
+            
+            // Se invoca este método para que cargue el mapa cuando entra a la página
+            this.buscarProyectoPerformance();
+            
+            homeInitialized = true;
         }
+        //llenarTablaNovedades();
 //            getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().setStrfoto(getSessionBeanCobra().getUsuarioObra().getTercero().getStrfoto());
 //                    System.out.println("getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero()"+getSessionBeanCobra().getCiudadanoservice().getUsuariomostrar().getTercero().getStrfoto());
 
@@ -3365,7 +3369,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      */
     private List<Object[]> listaPerformanceObras;
     private int pivote = 0;
-    private boolean searchInitialized = false;
+    private boolean homeInitialized = false;
     private boolean searchActivated = false;
     public static int maxRowsPerPage = 100;
     public static final String html_01 = "<div class=\"modal-header-fonade\"><div class=\"tabla\"><p><div class=\"columna\"><span class=\"imagotipo\"/></div><div class=\"columna\"><label class=\"textvalla1\">";
@@ -3379,10 +3383,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public static final String html_09 = "\"></a></div></p></div><div class=\"tabla content-rigth\"><p><div class=\"columna\">";
     public static final String html_10 = "</div></p>";
     public static final String html_11 = "</div></div>";
-
-    public boolean isSearchInitialized() {
-        return this.searchInitialized;
-    }
 
     public boolean isSearchActivated() {
         return this.searchActivated;
