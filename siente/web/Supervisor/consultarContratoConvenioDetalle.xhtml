@@ -54,7 +54,8 @@
                     <h:panelGrid columns="2" style="width: 100%;">
                         <h:panelGrid style="width: 400px; border-spacing: 4px">
                             <h:panelGroup >
-                                <h:outputLabel class="ikont-hol-detalle-proyecto"  >#{var.contratanteCliente}</h:outputLabel>
+                                <h:outputLabel class="ikont-hol-detalle-proyecto" rendered="#{var.versioncobra ne 'siccu'}" >#{var.contratanteCliente}</h:outputLabel>
+                                <h:outputLabel class="ikont-hol-detalle-proyecto" rendered="#{var.versioncobra eq 'siccu'}" >#{var.entidadcontratante}</h:outputLabel>
                                 <interkont:spacer width="20" />
                                 <B>
                                     <h:outputLabel id="entiodadcontratantevalue" styleClass="ikont-" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
@@ -145,6 +146,19 @@
                                     <h:outputText  styleClass="ikont-hot-nombrecontratante" value="#{var.nombrecontratante}"/>
                                 </f:facet>
                                 <h:outputText value="#{contratoContratante.contratante.tercero.strnombre}"/>
+                            </rich:column>
+                            <rich:column>
+                                <f:facet name="header" >
+                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvaloraportado}"/>
+                                </f:facet>
+                                <h:outputText value="#{contratoContratante.numvaloraportado}">
+                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                </h:outputText>
+                                <f:facet name="footer" >
+                                    <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                    </h:outputText>
+                                </f:facet>
                             </rich:column>
                         </rich:dataTable>
                         <rich:dataScroller id="ikont-rds-multiplescontratantes" for="ikont-rdt-multiplescontratantes" styleClass="ikont-rds-multiplescontratantes"/>

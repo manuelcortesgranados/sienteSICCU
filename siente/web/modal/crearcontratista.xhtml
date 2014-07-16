@@ -37,9 +37,9 @@
                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.cambiarPersona}" execute="@this" render="rpContratista" />
                         </h:selectOneMenu>
 
-                        <h:outputText  styleClass="ikont-hot-lbltelefonomovilcrea"   id="lbltelefonoMovilCrea"  value="(*)#{var.telefonoMovil}"/>
+                        <h:outputText  styleClass="ikont-hot-lbltelefonomovilcrea"   id="lbltelefonoMovilCrea"  value="#{(var.versioncobra ne 'siccu') ? '(*)' : ''}#{var.telefonoMovil}"/>
                         <h:panelGrid columns="2">
-                            <h:inputText  size="25" maxlength="15" id="txtelefonoMovilCrea" value="#{Supervisor$Contrato.contratista.tercero.strmovil}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
+                            <h:inputText  size="25" maxlength="15" id="txtelefonoMovilCrea" value="#{Supervisor$Contrato.contratista.tercero.strmovil}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="#{var.versioncobra ne 'siccu'}"/>
                             <rich:message for="txtelefonoMovilCrea" />
                         </h:panelGrid>
 
@@ -69,9 +69,9 @@
                             <rich:message for="txtcedulaContratistaCrea" />
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont-hot-lbldirecioncontratistacrea"   id="lbldirecionContratistaCrea"  value="(*)#{var.label_direccion}"/>
+                        <h:outputText  styleClass="ikont-hot-lbldirecioncontratistacrea"   id="lbldirecionContratistaCrea"  value="#{(var.versioncobra ne 'siccu') ? '(*)' : ''}#{var.label_direccion}"/>
                         <h:panelGrid columns="2">
-                            <h:inputText  size="25" maxlength="250" id="txtdirecionContratistaCrea" value="#{Supervisor$Contrato.contratista.tercero.strdireccionprincipal}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
+                            <h:inputText  size="25" maxlength="250" id="txtdirecionContratistaCrea" value="#{Supervisor$Contrato.contratista.tercero.strdireccionprincipal}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="#{var.versioncobra ne 'siccu'}"/>
                             <rich:message for="txtdirecionContratistaCrea" />
                         </h:panelGrid>
 

@@ -170,9 +170,14 @@
                                 </rich:column>
 
                                 <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-outxtcontratistacc"   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                    <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                    <h:outputText  styleClass="ikont-hot-outxtcontraconsul"   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    <h:panelGroup rendered="#{var.versioncobra ne 'siccu'}">
+                                        <h:outputText  styleClass="ikont-hot-outxtcontratistacc"   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                        <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                        <h:outputText  styleClass="ikont-hot-outxtcontraconsul"   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{var.versioncobra eq 'siccu'}">
+                                        <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="entidadpromotora" value="#{var.entidadcontratante}" />
+                                    </h:panelGroup>
                                 </rich:column>
 
                                 <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
@@ -224,7 +229,8 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" />
+                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" rendered="#{var.versioncobra ne 'siccu'}" />
+                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc1" value="#{currentRow.tercero.strnombre} #{currentRow.tercero.strapellido1}" rendered="#{var.versioncobra eq 'siccu'}" />
                         </rich:column>
 
                         <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
@@ -324,9 +330,14 @@
                                 </rich:column>
 
                                 <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                    <h:outputText  styleClass="ikont-hot-entidad"   value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                    <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    <h:panelGroup rendered="#{var.versioncobra ne 'siccu'}">
+                                        <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                        <h:outputText  styleClass="ikont-hot-entidad"   value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                        <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{var.versioncobra eq 'siccu'}">
+                                        <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="entidadpromotora" value="#{var.entidadcontratante}" />
+                                    </h:panelGroup>
                                 </rich:column>
 
                                 <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
@@ -377,7 +388,8 @@
                         </rich:column>
 
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" />
+                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.tercero.strnombre} #{currentRow.contratista.tercero.strapellido1}" rendered="#{var.versioncobra ne 'siccu'}" />
+                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc1" value="#{currentRow.tercero.strnombre} #{currentRow.tercero.strapellido1}" rendered="#{var.versioncobra eq 'siccu'}" />
                         </rich:column>
 
                         <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
