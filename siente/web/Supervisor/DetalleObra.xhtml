@@ -526,10 +526,7 @@
                                     <h:outputLabel  styleClass="ikont-hol-fechadelacta font-general"    value="Seleccione el periodo para generar el reporte:" for="fechaalimentacion" />
                                     <h:selectOneMenu id="fecInfo" value="#{Supervisor$DetalleObra.fechaescogida}">
                                         <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
-                                        <f:selectItems value="#{Supervisor$Alimentar.periodos}"/>
-                                        <a4j:ajax event="valueChange" listener="#{Supervisor$Alimentar.fechaCambio}" execute="@this,layoutComentario" 
-                                                  render="alimentaravance,valores,layoutComentario, layoutEjecutado, layoutComentafactor, layoutFactores, gpErrorAlimentar, pnActividades"/>
-
+                                        <f:selectItems value="#{Supervisor$DetalleObra.periodos}"/>
                                     </h:selectOneMenu>
                                     <h:commandLink id="pdfFM017_infociu2" action="#{Supervisor$DetalleObra.reporteFMI017Pdf}" styleClass="butonreport zoom-pdf" target="_blank"/>                                
                                 </h:panelGrid>
