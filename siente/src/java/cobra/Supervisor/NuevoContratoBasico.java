@@ -873,6 +873,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      */
     private int tipoAporte;
+    
+    private int idContrato;
 
     /**
      * Get the value of eliminarPeriodosFueraRango
@@ -4812,7 +4814,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String detalleContrato() {
 
-        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
+        Contrato contratotabla = getSessionBeanCobra().getCobraService().encontrarContratoxId(idContrato);
         return detalleContratoGeneric(contratotabla);
 
     }
@@ -4927,7 +4929,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
 //        Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
         encontrarAvanceFisicoConvenio();
-        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
+        Contrato contratotabla = getSessionBeanCobra().getCobraService().encontrarContratoxId(idContrato);
         //limpiarContrato();
         //contratotabla.getContrato().setFormapago(new Formapago());
         if (contratotabla.getContrato() != null) {
@@ -9903,5 +9905,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String irContratoPadre() {
         cargarContrato(contrato.getContrato());
         return "consultarContrato";
+    }
+
+    /**
+     * @return the idContrato
+     */
+    public int getIdContrato() {
+        return idContrato;
+    }
+
+    /**
+     * @param idContrato the idContrato to set
+     */
+    public void setIdContrato(int idContrato) {
+        this.idContrato = idContrato;
     }
 }
