@@ -36,31 +36,57 @@
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid columns="2" width="100%">
                             <rich:panel rendered="true" styleClass="noneborder">
-                                <f:facet name="header">
-                                    <h:outputText  value="Informacion Meta Relacionada a Asociar con el Proyecto"/>
-                                </f:facet>
-                                <h:panelGrid columns="2" width="70%">
-                                    <h:outputLabel  value="Id : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.id}"></h:outputText>
-                                    <h:outputLabel  value="Objetivo : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.objetivo}"></h:outputText>
-                                    <h:outputLabel  value="Programa : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.programa}"></h:outputText>
-                                    <h:outputLabel  value="Subprograma : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.subprograma}"></h:outputText>
-                                    <h:outputLabel  value="Nomp : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.nomp}"></h:outputText>
-                                    <h:outputLabel  value="Descripcion Meta Producto : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.descripcionmetaproducto}"></h:outputText>
-                                    <h:outputLabel  value="Unidad de Medida : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.unidadmedida}"></h:outputText>
-                                    <h:outputLabel  value="Nombre Indicador :"/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.nombreindicador}"></h:outputText>
-                                    <h:outputLabel  value="Tipo Meta : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.tipometa}"></h:outputText>
-                                    <h:outputLabel  value="Linea Base Indicador : "/>
-                                    <h:outputText value="#{MetasProyecto.meta_consulta.lineaBaseIndicador}"></h:outputText>
-                                </h:panelGrid>
+                                <html>
+                                    <table width="400px" border="0" cellspacing="1" cellpadding="1">
+                                        <tr>
+                                            <td class="ikont-hcl-reportes_administrativos">Informacion Meta Relacionada a Asociar con el Proyecto</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Id : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.id}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Objetivo : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.objetivo}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Programa : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.programa}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Subprograma : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.subprograma}"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Nomp : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.nomp}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Descripcion Meta Producto : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.descripcionmetaproducto}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Unidad de Medida : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.unidadmedida}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Nombre Indicador : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.nombreindicador}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Tipo Meta : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.tipometa}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Linea Base Indicador : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.lineaBaseIndicador}</td>
+                                                    </tr>
+                                                </table></td>
+                                        </tr>
+                                    </table>
+                                </html>
                             </rich:panel>                            
                             <rich:panel rendered="true" styleClass="noneborder">
                                 <h:panelGrid columns="2" width="100%">
@@ -82,7 +108,7 @@
                                         </f:facet>                                            
                                         <h:panelGrid columns="3" width="100%">
                                             <h:outputLabel  value="Valor Minimo "/>
-                                            <h:inputText id="it_valor_minimo_rango_inferior" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMin}"/>
+                                            <h:inputText id="it_valor_minimo_rango_inferior" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMin}"/>
                                             <rich:tooltip value="Valor Minimo Rango Inferior" target="it_valor_minimo_rango_inferior"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                                             <h:outputLabel  value="Valor Maximo "/>
                                             <h:inputText id="it_valor_maximo_rango_inferior" label="0" immediate="true" required="true" size="5" maxlength="5"  value="#{MetasProyecto.metaobra.rangoInferiorMax}"/>
