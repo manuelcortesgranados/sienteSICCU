@@ -2978,6 +2978,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         return null;
     }
+    
+    /**
+     * Carga el listado de pólizas asociado al contrato para el detalle del contrato
+     */
+    public void cargarPolizasDetalle() {
+        listapolizas = getSessionBeanCobra().getCobraService().encontrarPolizasxContrato(getContrato().getIntidcontrato());
+    }
     /*
      * Según el usuario logueado se llenan las entidades o la entidad
      */
@@ -4818,6 +4825,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public String detalleContratoGeneric(Contrato contratotabla) {
 
+        
         //NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         //Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
         getSessionBeanCobra().setConsulteContrato(true);
@@ -5022,7 +5030,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             objetoSub = contrato.getTextobjeto();
         }
-
+        cargarPolizasDetalle();
     }
 
     /**
@@ -5973,7 +5981,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             primeroDetcontratoContratista();
         }
         getSessionBeanCobra().getUsuarioObra().getRenderrecurso().setTipocontrato(true);
-
         return "consultarContratoConvenio";
     }
 
@@ -9113,6 +9120,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //limpiarContrato();
         booltipocontratoconvenio = false;
         tipoContCon = "Contrato";
+        llenarTipoContrato();
         boolcontrconsultoria = false;
         getSessionBeanCobra().getCobraService().setAsoContratoCrear(false);
         contrpadre = fk_contrato;
@@ -9802,5 +9810,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
     }
-    
+
+    /**
+     * Realiza el guardado de las pólizas del contrato desde el detalle
+     */
+    public void guardarPolizasDetalle() {
+        contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
+        getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        for (Polizacontrato poliza : listaPolizasEliminar) {
+            getSessionBeanCobra().getCobraService().borrarPolizaContrato(poliza);
+        }
+        FacesUtils.addInfoMessage("Las pólizas se han guardado exitósamente");
+    }
 }
