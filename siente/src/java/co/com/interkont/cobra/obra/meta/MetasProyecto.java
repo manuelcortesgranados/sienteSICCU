@@ -317,6 +317,7 @@ public class MetasProyecto implements Serializable {
     public String irApagina_ActualizarMetaObra() throws Exception {
         if (validarActualizacionEliminacionMetaObra(this.p_idmetaobra)) {
             this.consultarMetaObraparaActualizar();
+            consultarMetaparaConsulta();
             return "ActualizarMetaObra";
         } else {
             FacesUtils.addErrorMessage("No es posible actualizar la asociacion de la Meta con el Proyecto, ya que tiene registro de programacion asociados");
@@ -476,10 +477,6 @@ public class MetasProyecto implements Serializable {
             metaobra.setMeta(meta_1);
             metaobra.setIdproyecto(this.p_idcodigoobra);
             if (validarInsercionMeta(metaobra)) {
-                //DataSourceFactory ds = new DataSourceFactory();
-                //MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
-                //metDAO.insert(metaobra);
-                //ds.closeConnection();
                 getSessionBeanCobra().getCobraService().guardarMetaObra(metaobra);
                 FacesUtils.addInfoMessage("La meta ha sido asociada a la obra o proyecto con exito");
                 return null;
