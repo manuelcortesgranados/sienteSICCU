@@ -69,20 +69,20 @@
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
                                             <h:outputText  value="#{meta.tipometa}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
-                                            <h:commandLink action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
+                                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
-                                            </h:commandLink>
+                                            </h:commandButton>
                                         </rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
-                                            <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
+                                            <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
-                                            </h:commandLink>
+                                            </h:commandButton>
                                         </rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
-                                            <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
+                                            <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                                 <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
-                                            </h:commandLink>
+                                            </h:commandButton>
                                         </rich:column>
                                     </rich:extendedDataTable>                            
                                 </rich:collapsiblePanel>
@@ -108,16 +108,16 @@
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Frecuencia Medicion"/></f:facet>
                                         <h:outputText  value="#{metaobra.frecuencia_medicion}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaObra}" type="submit" value="Eliminar">
+                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaObra}" type="submit" value="Eliminar">
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
-                                        </h:commandLink>
+                                        </h:commandButton>
                                     </rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMetaObra()}" type="submit" value="Actualizar">
+                                        <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaObra()}" type="submit" value="Actualizar">
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
-                                        </h:commandLink>
+                                        </h:commandButton>
                                     </rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Registrar Programacion Meta"/></f:facet>
                                         <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Programacion Meta">
