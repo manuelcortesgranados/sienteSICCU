@@ -277,6 +277,7 @@
                             </f:facet>
                             <h:commandLink style="height: 50px"  action="#{Supervisor$Contrato.detalleContratoPadre}" rendered="#{currentRow.contrato!=null}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                <a4j:param assignTo="#{Supervisor$Contrato.idContrato}" value="#{currentRow.intidcontrato}"></a4j:param>
                             </h:commandLink>
                         </rich:column>
                         <rich:column width="330px" style="height: 60px" rendered="#{Supervisor$Contrato.booltipocontratoconvenio}">
