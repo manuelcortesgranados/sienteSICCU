@@ -149,9 +149,9 @@
 }
 
 .imgtipo{
-    background-image: url("../imgs/valla/tipo_sprite.png");
+    background-image: url("../imgs/valla/strite_tipologia_valla.png");
     background-repeat: no-repeat;
-    background-size: 200px 120px;
+    background-size: 89px 2335px;
     width: 40px;
     height: 40px;
     display: block !important;
@@ -161,68 +161,162 @@
 }
 
 .imgtipo.tipo1{
-    background-position: -40px -40px;
+    background-position: -31px -0px;
 }
-
-.imgtipo.tipo2{
-    background-position: -120px 0px;
-}
-
-.imgtipo.tipo3{
-    background-position: -40px 0px;
-}
-
-.imgtipo.tipo4{
-    background-position: -160px -80px;
-}
-
-.imgtipo.tipo5{
-    background-position: 0px -40px;
-}
-
-.imgtipo.tipo6{
-    background-position: -160px -40px;
-}
-
-.imgtipo.tipo7{
-    background-position: -120px -40px;
-}
-
-.imgtipo.tipo8{
-    background-position: -80px -40px;
-}
-
-.imgtipo.tipo9{
-    background-position: -160px 0px;
-}
-
-.imgtipo.tipo10{
-    background-position: -80px 0px;
-}
-
-.imgtipo.tipo11{
-    background-position: 0px 0px;
-}
-
-.imgtipo.tipo12{
-    background-position: -120px -80px;
-}
-
-.imgtipo.tipo13{
-    background-position: -80px -40px;
-}
-
 .imgtipo.tipo14{
-    background-position: -0px -80px;
+    background-position: -31px -48px;
+}
+.imgtipo.tipo18{
+    background-position: -31px -91px;
+}
+.imgtipo.tipo24{
+    background-position: -31px -137px;
+}
+.imgtipo.tipo32{
+    background-position: -31px -187px;
+}
+.imgtipo.tipo33{
+    background-position: -31px -234px;
+}
+.imgtipo.tipo34{
+    background-position: -31px -277px;
+}
+.imgtipo.tipo35{
+    background-position: -31px -323px;
+}
+.imgtipo.tipo36{
+    background-position: -31px -365px;
+}
+.imgtipo.tipo37{
+    background-position: -31px -416px;
+}
+.imgtipo.tipo38{
+    background-position: -31px -458px;
+}
+.imgtipo.tipo39{
+    background-position: -31px -509px;
+}
+.imgtipo.tipo40{
+    background-position: -31px -558px;
+}
+.imgtipo.tipo41{
+    background-position: -31px -605px;
+}
+.imgtipo.tipo42{
+    background-position: -31px -647px;
+}
+.imgtipo.tipo43{
+    background-position: -31px -692px;
+}
+.imgtipo.tipo44{
+    background-position: -31px -736px;
+}
+.imgtipo.tipo45{
+    background-position: -31px -784px;
+}
+.imgtipo.tipo46{
+    background-position: -31px -832px;
+}
+.imgtipo.tipo47{
+    background-position: -31px -870px;
+}
+.imgtipo.tipo48{
+    background-position: -31px -914px;
+}
+.imgtipo.tipo49{
+    background-position: -31px -958px;
+}
+.imgtipo.tipo50{
+    background-position: -31px -1005px;
+}
+.imgtipo.tipo51{
+    background-position: -31px -1045px;
+}
+.imgtipo.tipo52{
+    background-position: -31px -1083px;
+}
+.imgtipo.tipo53{
+    background-position: -31px -1120px;
+}
+.imgtipo.tipo54{
+    background-position: -31px -1170px;
+}
+.imgtipo.tipo55{
+    background-position: -31px -1211px;
+}
+.imgtipo.tipo56{
+    background-position: -31px -1254px;
+}
+.imgtipo.tipo57{
+    background-position: -31px -1297px;
+}
+.imgtipo.tipo58{
+    background-position: -31px -1341px;
+}
+.imgtipo.tipo59{
+    background-position: -31px -1387px;
+}
+.imgtipo.tipo60{
+    background-position: -31px -1431px;
+}
+.imgtipo.tipo61{
+    background-position: -31px -1473px;
+}
+.imgtipo.tipo62{
+    background-position: -31px -1523px;
+}
+.imgtipo.tipo63{
+    background-position: -31px -1567px;
+}
+.imgtipo.tipo64{
+    background-position: -31px -1618px;
+}
+.imgtipo.tipo65{
+    background-position: -31px -1663px;
+}
+.imgtipo.tipo66{
+    background-position: -31px -1710px;
+}
+.imgtipo.tipo67{
+    background-position: -31px -1752px;
+}
+.imgtipo.tipo68{
+    background-position: -31px -1801px;
+}
+.imgtipo.tipo69{
+    background-position: -31px -1838px;
+}
+.imgtipo.tipo70{
+    background-position: -31px -1887px;
+}
+.imgtipo.tipo71{
+    background-position: -31px -1930px;
+}
+.imgtipo.tipo72{
+    background-position: -31px -1973px;
+}
+.imgtipo.tipo73{
+    background-position: -31px -2012px;
+}
+.imgtipo.tipo74{
+    background-position: -31px -2065px;
+}
+.imgtipo.tipo75{
+    background-position: -31px -2112px;
+}
+.imgtipo.tipo76{
+    background-position: -31px -2158px;
+}
+.imgtipo.tipo77{
+    background-position: -31px -2196px;
+}
+.imgtipo.tipo78{
+    background-position: -31px -2242px;
+}
+.imgtipo.tipo79{
+    background-position: -31px -2288px;
 }
 
-.imgtipo.tipo15{
-    background-position: -160px -40px;
-}
-
-.imgtipo.tipo16{
-    background-position: 0px -40px;
-}
 
 .imgestado{
     background-image: url("../imgs/valla/estado_sprite.png");
