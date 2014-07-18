@@ -25,13 +25,13 @@
                         j = (j = i.length) > 3 ? j % 3 : 0;
                 return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
             };
-            
-            
+
+
             /**
-            * Carga los slider del filtro de búsqueda principal
-            */
-           function cargarSliedersFiltroDeBusqueda() {               
-               $("#slider-range").slider({
+             * Carga los slider del filtro de búsqueda principal
+             */
+            function cargarSliedersFiltroDeBusqueda() {
+                $("#slider-range").slider({
                     range: true,
                     min: 0,
                     max: 100,
@@ -45,7 +45,7 @@
                     }
                 });
                 $("#slider-range").val($("#slider-range").slider("values", 0) +
-                                              "%  a  " + $("#slider-range").slider("values", 1) + "%");
+                        "%  a  " + $("#slider-range").slider("values", 1) + "%");
                 $("#slider-range-avance").slider({
                     range: true,
                     min: 0,
@@ -60,24 +60,26 @@
                     }
                 });
                 $("#avance").val($("#slider-range-avance").slider("values", 0) +
-                                              "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
-           }
+                        "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
+            }
 
-           $(function() {
-               cargarSliedersFiltroDeBusqueda();
-           });
-            
+            $(function() {
+                cargarSliedersFiltroDeBusqueda();
+            });
+
         </script>
 
     </h:head>
-
+    
     <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos" onitemchange="cargarSliedersFiltroDeBusqueda()">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos"  > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclavefiltro}"
                               onclick="this.value = ''"  styleClass="input_filtro">
-                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
+                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" />
+
+                </h:inputText>
 
                 <h:selectOneMenu rendered="#{var.tipoproyectoporsector}" style="" id="sectorProyecto" value="#{HomeGestion.filtro.intsectorproyecto}"  styleClass="input_filtro_select" >
                     <f:selectItems value="#{HomeGestion.claseObra}" />
@@ -140,7 +142,8 @@
                 <a4j:commandButton  execute="txtPalabraClave_filtro_nuevo,numero1,numero2,estadoObra,subtiposProyecto,ava1,ava2" limitRender="true" render="ikont-hpg-vistas,panel_mapa_filtro" transient="true" action="#{HomeGestion.buscarProyectoPerformance()}" id="filtrar_nuevo1"   value="#{var.buscar}"
                                     styleClass="boton1 ikont-filtro-filtrar_btn"/>
             </center>
-            <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/> 
+            <h:inputText value="AVANCE:" styleClass="input_filtro_2 ikont-hit-avance2"  disabled="true"/>
+            <rich:hotKey key="return" enabledInInput="false" selector="#txtPalabraClave_filtro_nuevo" onkeyup="#{rich:element('filtrar_nuevo1')}.click()"/>
         </rich:tab>        
 
         <rich:tab header="#{var.filtrodonde}"   id="tab_uno" name="tab_uno"   >  

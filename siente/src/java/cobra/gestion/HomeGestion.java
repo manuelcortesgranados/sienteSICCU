@@ -3725,7 +3725,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         } else {
             Calendar ayer = Calendar.getInstance();
             ayer.add(Calendar.DAY_OF_MONTH, -1);
-            System.out.println("Ayer: "+ayer.getTime());
             if (ultimafechaCargaPuntos.compareTo(ayer) < 0) {
                 recargar = true;
             }

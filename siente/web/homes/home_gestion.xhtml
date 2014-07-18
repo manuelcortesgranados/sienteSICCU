@@ -132,9 +132,10 @@
 
                         <h:panelGrid columns="4" >
 
-                            <h:outputText styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
+                            <h:outputText  styleClass="ikont-hot-proyectostotalfilas1" style="font-size: 14px; color: #000;"  value="#{HomeGestion.totalfilas}&nbsp;"  />
 
-                            <h:outputText styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
+                            <h:outputText rendered="#{HomeGestion.searchActivated}" styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="#{var.proyectosencontratos}"  />
+                            <h:outputText rendered="#{!HomeGestion.searchActivated}" styleClass="ikont-hot-proyectostotalfilas" style="font-size: 14px; color: #999;"  value="Proyectos en ejecución"  />
 
 
                             <h:commandLink onclick="document.getElementById('vistaMapa').style.display = 'block';
@@ -154,14 +155,14 @@
                         <a4j:jsFunction name="showVallaJSF" transient="true" render="modalVallaFonade" limitRender="true" oncomplete="#{rich:component('modalVallaFonade')}.show();">
                             <a4j:param name="data" assignTo="#{HomeGestion.vallaDemanda}"/>
                         </a4j:jsFunction>
-                        
+
                         <script type="text/javascript">
                             function showVallaJS(obra) {
                                 var coordinates = obra.latLng.k + "@" + obra.latLng.B;
                                 console.log(coordinates);
                                 showVallaJSF(obra.latLng.k + "@" + obra.latLng.B);
                             }
-                            
+
                         </script>
                         <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style="box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right;">
                             <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
@@ -182,7 +183,7 @@
                                 </ui:repeat>
                             </m:map>
 
-                            <h:outputText style="font-size: 9px;"  styleClass="ikont-hot-proyectostotalfilas" rendered="#{HomeGestion.searchActivated}" value="#{var.paginaCiu} #{HomeGestion.pagina} / #{HomeGestion.totalpaginas}" />
+                            <h:outputText style="font-size: 10px;"  styleClass="ikont-hot-proyectostotalfilas" rendered="#{HomeGestion.searchActivated}" value="Visulizando #{var.paginaCiu} #{HomeGestion.pagina} / #{HomeGestion.totalpaginas} de la búsqueda" />
                         </h:panelGrid>
 
                         <h:panelGrid id="vistaLista" style="width: 700px;box-shadow: 2px 2px 7px #999;padding: 9px;position: relative;top: -217px;right: -325px;float: right; display: none;" >
@@ -190,7 +191,7 @@
                                                     value="#{HomeGestion.listaPerformanceObras}"
                                                     var="obra" 
                                                     rowKeyVar="filaSeleccionada"
-                                                    rendered="#{HomeGestion.totalfilas > 0 }"
+                                                    rendered="#{HomeGestion.listaPerformanceObras != null}"
                                                     rows="#{HomeGestion.rowsPerPage}"
                                                     style="height:300px; width:700px;" selectionMode="none"
                                                     frozenColumns="1"
@@ -270,7 +271,7 @@
                                 </f:facet>
 
                             </rich:extendedDataTable>
-                            <rich:panel>
+                            <rich:panel rendered="#{HomeGestion.listaPerformanceObras != null}">
                                 <rich:panel>
                                     <center>
                                         <a4j:commandButton oncomplete="document.getElementById('vistaLista').style.display = 'block';document.getElementById('vistaMapa').style.display = 'none'; return false;" limitRender="true" value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}" execute="vistaLista"  render="tablObrasVigentes,vistaLista,vistaMapa" transient="true" actionListener="#{HomeGestion.primeraPaginaPerformance()}"/>
@@ -280,6 +281,17 @@
                                     </center>
                                 </rich:panel>
                             </rich:panel>
+                            <h:panelGroup rendered="#{HomeGestion.listaPerformanceObras == null}" style="width:100%">
+                                <center>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <h:outputText style="display: block;font-size: 18px;font-family: 'Open Sans';" value="No se han realizado búsquedas"/>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                </center>
+                            </h:panelGroup>
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
