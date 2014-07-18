@@ -256,21 +256,22 @@
                                              action="#{MetasProyecto.generarReporteExcelTabla3()}" />                                                                                                                                                                    
                         </rich:tab>
                         <rich:tab header="Graficos">
+                            <h:commandButton id="btExportarTablaMetas3_2"  value="Exportar Tabla de Programacion de Metas a Excel" immediate="true"
+                                             action="#{MetasProyecto.generarArchivoXMLFusionChart_MetaRegistro()}" />                                                                                                                                                                    
                             <html>
                                 <script type="text/javascript" src="/siccu/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
                                 <body>
                                     <script type="text/javascript">
                                         var chart = new FusionCharts("/siccu/LibreriasTerceros/FusionChartsFree/Charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "350");
                                         chart.addParam("WMode", "Transparent");
-                                        chart.setDataURL("/siccu/XML/Col3DLineDY.xml");
+                                        chart.setDataURL("/siccu/XML/example.xml");
                                         chart.render("chartdiv");
                                         chart.render("chartdiv1");
                                     </script>
                                     <div id="chartdiv">FusionCharts will render here</div>
                                     <div id="chartdiv1">FusionCharts will render here</div>
                                 </body>
-                            </html>
-                        </rich:tab>
+                            </html>                        </rich:tab>
                     </rich:tabPanel>
                 </rich:panel>
             </h:panelGrid>
