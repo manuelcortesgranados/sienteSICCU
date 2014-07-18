@@ -100,6 +100,11 @@
                                     <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
                                         <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
                                     </h:selectOneMenu>
+                                    <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
+                                        <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                                        <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" var="periodoMedida"
+                                                       itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
+                                    </h:selectOneMenu>                                
                                 </h:panelGrid>             
                                 <h:panelGrid columns="3" width="100%">
                                     <rich:panel rendered="true" styleClass="noneborder">

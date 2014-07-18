@@ -39,9 +39,18 @@
                             <h:outputText  value="#{MetasProyecto.p_idmetaobra}"/>
                             <h:outputLabel  value="Proyecto"/>
                             <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
-                            <h:outputLabel  value="Fecha"/>
+                            <h:outputLabel  value="Punto Medicion Periodo"/>
+                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
+                                <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" var="periodoMedida"
+                                               itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
+                            </h:selectOneMenu>
+                            <h:outputLabel  value="Fecha Inicio"/>
                             <rich:calendar  id="fecharegistro" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
-                                            value="#{MetasProyecto.metaregistro.fecha}"/>
+                                            value="#{MetasProyecto.metaregistro.fechaInicio}"/>
+                            <h:outputLabel  value="Fecha Final"/>
+                            <rich:calendar  id="fecharegistro" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
+                                            value="#{MetasProyecto.metaregistro.fechaFinal}"/>
                             <h:outputLabel  value="Meta Proyectada"/>
                             <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
                             <h:outputLabel  value="Meta Acumulada"/>

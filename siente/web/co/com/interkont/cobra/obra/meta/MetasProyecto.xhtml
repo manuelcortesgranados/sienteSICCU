@@ -256,22 +256,84 @@
                                              action="#{MetasProyecto.generarReporteExcelTabla3()}" />                                                                                                                                                                    
                         </rich:tab>
                         <rich:tab header="Graficos">
-                            <h:commandButton id="btExportarTablaMetas3_2"  value="Exportar Tabla de Programacion de Metas a Excel" immediate="true"
-                                             action="#{MetasProyecto.generarArchivoXMLFusionChart_MetaRegistro()}" />                                                                                                                                                                    
                             <html>
                                 <script type="text/javascript" src="/siccu/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
                                 <body>
-                                    <script type="text/javascript">
-                                        var chart = new FusionCharts("/siccu/LibreriasTerceros/FusionChartsFree/Charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "350");
-                                        chart.addParam("WMode", "Transparent");
-                                        chart.setDataURL("/siccu/XML/example.xml");
-                                        chart.render("chartdiv");
-                                        chart.render("chartdiv1");
-                                    </script>
-                                    <div id="chartdiv">FusionCharts will render here</div>
-                                    <div id="chartdiv1">FusionCharts will render here</div>
+                                    <c:forEach items="#{MetasProyecto.listaMetas2}" var="meta">
+                                        <c:forEach items="#{MetasProyecto.consultarMetaobrasDetalle(meta.id)}" var="metaobra">
+                                            <script type="text/javascript">
+                                                var chart = new FusionCharts("/siccu/LibreriasTerceros/FusionChartsFree/Charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "350");
+                                                chart.addParam("WMode", "Transparent");
+                                                chart.setDataURL("/siccu/XML/Metaregistro_#{metaobra.idmetaobra}.xml");
+                                                chart.render("chartdiv_#{metaobra.idmetaobra}");
+                                            </script>
+                                            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                <tr>
+                                                    <td valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                            <tr>
+                                                                <td valign="top" class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                        <tr>
+                                                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                    <tr>
+                                                                                        <td class="ikont-hcl-reportes_administrativos" colspan="7">Informacion detallada de Meta y Metaobra</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="ikont-hot-derechos-reser">Id Meta</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Objetivo</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Programa</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Subprograma</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Nomp</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Año</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Frecuencia Medicion</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="ikont-hot-desea">#{meta.id}</td>
+                                                                                        <td class="ikont-hot-desea">#{meta.objetivo}</td>
+                                                                                        <td class="ikont-hot-desea">#{meta.programa}</td>
+                                                                                        <td class="ikont-hot-desea">#{meta.subprograma}</td>
+                                                                                        <td class="ikont-hot-desea">#{meta.nomp}</td>
+                                                                                        <td class="ikont-hot-desea">#{meta.descripcionmetaproducto}</td>
+                                                                                        <td class="ikont-hot-desea">#{metaobra.frecuenciaMedicion}</td>
+                                                                                    </tr>
+                                                                                </table></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                    <tr>
+                                                                                        <td colspan="5" class="ikont-hcl-reportes_administrativos">Registro Programacion Metas en detalle</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td class="ikont-hot-derechos-reser">Id</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Meta Proyectada</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Meta Acumulada</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Porcentaje</td>
+                                                                                        <td class="ikont-hot-derechos-reser">Observaciones</td>
+                                                                                    </tr>
+                                                                                    <c:forEach items="#{MetasProyecto.consultaMetaRegistroDetalle(metaobra.idmetaobra)}" var="metaregistro"> 
+                                                                                        <tr>
+                                                                                            <td class="ikont-hot-desea">#{metaregistro.idregistrometaobra}</td>
+                                                                                            <td class="ikont-hot-desea">#{metaregistro.metaProyectada}</td>
+                                                                                            <td class="ikont-hot-desea">#{metaregistro.metaAcumulada}</td>
+                                                                                            <td class="ikont-hot-desea">#{metaregistro.porcentaje}</td>
+                                                                                            <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
+                                                                                        </tr>
+                                                                                    </c:forEach>
+                                                                                </table></td>
+                                                                        </tr>
+                                                                    </table></td>
+                                                                <td class="ikont-label-borde"><div id="chartdiv_#{metaobra.idmetaobra}">FusionCharts will render here</div></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">&nbsp;</td>
+                                                            </tr>
+                                                        </table></td>
+                                                </tr>
+                                            </table>
+                                        </c:forEach>    
+                                    </c:forEach>
                                 </body>
-                            </html>                        </rich:tab>
+                            </html>                        
+                        </rich:tab>
                     </rich:tabPanel>
                 </rich:panel>
             </h:panelGrid>

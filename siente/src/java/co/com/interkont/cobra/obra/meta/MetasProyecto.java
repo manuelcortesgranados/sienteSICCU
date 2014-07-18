@@ -10,11 +10,14 @@ import co.com.interkont.cobra.jdbc.entity.tables.MetaObraDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.MetaRegistroDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.MetasDAO;
 import co.com.interkont.cobra.jdbc.entity.CE.metas.MetasCE;
+import co.com.interkont.cobra.jdbc.entity.tables.PeriodosFrecuenciaDAO;
 import co.com.interkont.cobra.jdbc.model.CE.tables_amp.MetaObraAMPVO;
 import co.com.interkont.cobra.jdbc.model.CE.tables_amp.MetaRegistroAMPVO;
 import co.com.interkont.cobra.to.Meta;
 import co.com.interkont.cobra.to.Metaobra;
 import co.com.interkont.cobra.to.Metaregistro;
+import co.com.interkont.cobra.to.Periodomedida;
+import co.com.interkont.cobra.to.PeriodosFrecuencia;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import co.com.interkont.cobra.util.Utilitario;
@@ -26,7 +29,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
@@ -57,12 +62,14 @@ public class MetasProyecto implements Serializable {
 
     MetaObraAMPVO metaobraamp;
     MetaRegistroAMPVO metaregistroamp;
-
+    PeriodosFrecuencia per;
+    
     public List<Meta> listaMetas = new ArrayList<Meta>();
-    public List<Meta> listaMetas2 = new ArrayList<Meta>();
     public List<MetaObraAMPVO> listaMetasObras = new ArrayList<MetaObraAMPVO>();
     public List<MetaRegistroAMPVO> listaMetasObrasRegsitro = new ArrayList<MetaRegistroAMPVO>();
-    public List<String> listaFrecuenciaMedicion = new ArrayList<String>();
+    public Map<Integer,String> mapaFrecuenciaMedicion = new LinkedHashMap<Integer, String>();
+    public List<Periodomedida> listaPeriodoMedida = new ArrayList<Periodomedida>();
+    public List<PeriodosFrecuencia> listaPeriodosFrecuencia = new ArrayList<PeriodosFrecuencia>();
     public List<String> listaUnidadMedida = new ArrayList<String>();
 
     // Declaracion de variables para uso como parametros de busqueda
@@ -124,16 +131,8 @@ public class MetasProyecto implements Serializable {
         return listaMetas;
     }
 
-    public void setListaMetas(List<Meta> listaMetas) {
-        this.listaMetas = listaMetas;
-    }
-
-    public List<Meta> getListaMetas2() {
-        return listaMetas2;
-    }
-
-    public void setListaMetas2(List<Meta> listaMetas2) {
-        this.listaMetas2 = listaMetas2;
+    public void setListaMetas(List<Meta> listaMetas2) {
+        this.listaMetas = listaMetas2;
     }
 
     public List<MetaObraAMPVO> getListaMetasObras() {
@@ -152,14 +151,30 @@ public class MetasProyecto implements Serializable {
         this.listaMetasObrasRegsitro = listaMetasObrasRegsitro;
     }
 
-    public List<String> getListaFrecuenciaMedicion() {
-        return listaFrecuenciaMedicion;
+    public Map<Integer, String> getMapaFrecuenciaMedicion() {
+        return mapaFrecuenciaMedicion;
     }
 
-    public void setListaFrecuenciaMedicion(List<String> listaFrecuenciaMedicion) {
-        this.listaFrecuenciaMedicion = listaFrecuenciaMedicion;
+    public void setMapaFrecuenciaMedicion(Map<Integer, String> mapaFrecuenciaMedicion) {
+        this.mapaFrecuenciaMedicion = mapaFrecuenciaMedicion;
     }
 
+    public List<Periodomedida> getListaPeriodoMedida() {
+        return listaPeriodoMedida;
+    }
+
+    public void setListaPeriodoMedida(List<Periodomedida> listaPeriodoMedida) {
+        this.listaPeriodoMedida = listaPeriodoMedida;
+    }
+
+    public List<PeriodosFrecuencia> getListaPeriodosFrecuencia() {
+        return listaPeriodosFrecuencia;
+    }
+
+    public void setListaPeriodosFrecuencia(List<PeriodosFrecuencia> listaPeriodosFrecuencia) {
+        this.listaPeriodosFrecuencia = listaPeriodosFrecuencia;
+    }
+    
     public List<String> getListaUnidadMedida() {
         return listaUnidadMedida;
     }
@@ -207,26 +222,50 @@ public class MetasProyecto implements Serializable {
     public void setPactualizar(boolean pactualizar) {
         this.pactualizar = pactualizar;
     }
+    
 
     /**
      * @author Manuel Cortes Granados
      * @since Mayo 23 2014 11:40 AM
      */
     public MetasProyecto() throws Exception {
-        listaFrecuenciaMedicion.add("DIARIO");
-        listaFrecuenciaMedicion.add("SEMANAL");
-        listaFrecuenciaMedicion.add("MENSUAL");
-        listaFrecuenciaMedicion.add("BIMESTRAL");
-        listaFrecuenciaMedicion.add("TRIMESTRAL");
-        listaFrecuenciaMedicion.add("CUATRIMESTRAL");
-        listaFrecuenciaMedicion.add("ANUAL");
 
         this.listaUnidadMedida.add("METRO");
         this.listaUnidadMedida.add("KILOMETRO");
         this.listaUnidadMedida.add("UNIDAD");
         this.listaUnidadMedida.add("METRO CUADRADO");
         this.listaUnidadMedida.add("LITRO");
-
+        
+        cargarListaPeriodoMedida();
+        
+        try {
+            this.consultarMetaRegistro();
+        } catch (SQLException se) {
+            procesarError(se);
+        }
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since Julio 18 2014 1:31 PM
+     */
+    
+    public void cargarListaPeriodoMedida(){
+        this.listaPeriodoMedida=getSessionBeanCobra().getCobraService().encontrarPeriodosMedida();
+    }
+   
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Julio 2014 13:24
+     * @param periodomedida
+     * @throws Exception 
+     */
+    
+    public void cargarListaPeriodosFrecuencia(int periodomedida) throws Exception{
+        DataSourceFactory ds = new DataSourceFactory();
+        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(ds.getConnection());
+        this.mapaFrecuenciaMedicion=perDAO.select(periodomedida);
+        ds.closeConnection();
     }
 
     /**
@@ -234,6 +273,7 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
+    
     public String irApagina_Metas() throws Exception {
         meta = new Meta();
         metaobra = new Metaobra();
@@ -242,16 +282,13 @@ public class MetasProyecto implements Serializable {
         metaregistroamp = new MetaRegistroAMPVO();
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
-            listaMetas = metDAO.select();
             this.consultarMetaObra();
             this.consultarMetaRegistro();
-            ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
-        listaMetas2 = getSessionBeanCobra().getCobraService().consultarMetaObras();
+        listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
+        generarArchivoXMLFusionChart_MetaRegistro();
         return "Metas";
     }
 
@@ -308,7 +345,7 @@ public class MetasProyecto implements Serializable {
         DataSourceFactory ds = new DataSourceFactory();
         MetasDAO metDAO = new MetasDAO(ds.getConnection());
         meta_consulta = metDAO.select(p_idmeta);
-        ds.closeConnection();        
+        ds.closeConnection();
     }
 
     /**
@@ -482,6 +519,7 @@ public class MetasProyecto implements Serializable {
             metaobra.setIdproyecto(this.p_idcodigoobra);
             if (validarInsercionMeta(metaobra)) {
                 getSessionBeanCobra().getCobraService().guardarMetaObra(metaobra);
+                cargarListaPeriodosFrecuencia(metaobra.getFrecuenciaMedicion());
                 FacesUtils.addInfoMessage("La meta ha sido asociada a la obra o proyecto con exito");
                 return null;
             } else {
@@ -516,7 +554,7 @@ public class MetasProyecto implements Serializable {
         Utilitario util = new Utilitario();
         try {
             if (p_idmetaobra == 0) {
-                FacesUtils.addInfoMessage("El registro o fila no ha sido debidamente bien seleccionada.");
+                FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (this.validarActualizacionEliminacionMetaObra(p_idmetaobra)) {
                 DataSourceFactory ds = new DataSourceFactory();
                 MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
@@ -894,7 +932,7 @@ public class MetasProyecto implements Serializable {
             my_style.setFont(my_font);
             
 
-            for (Meta meta : this.listaMetas2) {
+            for (Meta meta : this.listaMetas) {
                 List<Metaobra> l_metaobra = util.fromSetToList(meta.getMetaobras());
                 for (Metaobra metaobra : l_metaobra) {
                     List<Metaregistro> l_metaregistro = util.fromSetToList(metaobra.getMetaregistros());
@@ -1000,47 +1038,47 @@ public class MetasProyecto implements Serializable {
         try {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String directorio=servletContext.getRealPath("/");
-            
+
             String contenido = "";
-            contenido = contenido+"<graph caption=\"Sales\" PYAxisName=\"Revenue\" SYAxisName=\"Quantity\" numberPrefix=\"$\" showvalues=\"0\" numDivLines=\"4\" formatNumberScale=\"0\" decimalPrecision=\"0\" anchorSides=\"10\" anchorRadius=\"3\" anchorBorderColor=\"009900\">";
-            contenido = contenido+"<categories>";
-            contenido = contenido+"<category name=\"March\"/>";
-            contenido = contenido+"<category name=\"April\"/>";
-            contenido = contenido+"<category name=\"May\"/>";
-            contenido = contenido+"<category name=\"June\"/>";
-            contenido = contenido+"<category name=\"July\"/>";
-            contenido = contenido+"</categories>";
-            contenido = contenido+"<dataset seriesName=\"Product A\" color=\"AFD8F8\" showValues=\"0\">";
-            contenido = contenido+"<set value=\"10000\"/>";
-            contenido = contenido+"<set value=\"20000\"/>";
-            contenido = contenido+"<set value=\"30000\"/>";
-            contenido = contenido+"<set value=\"40000\"/>";
-            contenido = contenido+"<set value=\"50000\"/>";
-            contenido = contenido+"</dataset>";
-            contenido = contenido+"<dataset seriesName=\"Product B\" color=\"F6BD0F\" showValues=\"0\">";
-            contenido = contenido+"<set value=\"57401.85\"/>";
-            contenido = contenido+"<set value=\"41941.19\"/>";
-            contenido = contenido+"<set value=\"45263.37\"/>";
-            contenido = contenido+"<set value=\"117320.16\"/>";
-            contenido = contenido+"<set value=\"114845.27\"/>";
-            contenido = contenido+"</dataset>";
-            contenido = contenido+"<dataset seriesName=\"Total Quantity\" color=\"8BBA00\" showValues=\"0\" parentYAxis=\"S\">";
-            contenido = contenido+"<set value=\"45000\"/>";
-            contenido = contenido+"<set value=\"44835\"/>";
-            contenido = contenido+"<set value=\"42835\"/>";
-            contenido = contenido+"<set value=\"77557\"/>";
-            contenido = contenido+"<set value=\"92633\"/>";
-            contenido = contenido+"</dataset>";
-            contenido = contenido+"</graph>";
             
-            File file = new File(directorio+"/XML/example.xml");
-            BufferedWriter output = new BufferedWriter(new FileWriter(file));
-            output.write(contenido);
-            output.close();
+            for (Meta meta:this.listaMetas){
+                List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
+                for (Metaobra metaobra:l_metaobra){
+                    List<Metaregistro> l_metaregistro=this.consultaMetaRegistroDetalle(metaobra.getIdmetaobra());
+                    
+                    contenido = "";
+                    contenido = contenido+"<graph caption=\"Sales\" PYAxisName=\"Revenue\" SYAxisName=\"Quantity\" numberPrefix=\"$\" showvalues=\"0\" numDivLines=\"4\" formatNumberScale=\"0\" decimalPrecision=\"0\" anchorSides=\"10\" anchorRadius=\"3\" anchorBorderColor=\"009900\">";
+                    contenido = contenido+"<categories>";
+                    for(Metaregistro metaregistro:l_metaregistro){
+                        contenido = contenido+"<category name=\""+metaregistro.getIdregistrometaobra()+"\"/>";
+                    }
+                    contenido = contenido+"</categories>";
+                    contenido = contenido+"<dataset seriesName=\"Meta Acumulada\" color=\"AFD8F8\" showValues=\"0\">";
+                    for(Metaregistro metaregistro:l_metaregistro){
+                        contenido = contenido+"<set value=\""+metaregistro.getMetaAcumulada()+"\"/>";
+                    }
+                    contenido = contenido+"</dataset>";
+                    
+                    contenido = contenido+"<dataset seriesName=\"Meta Proyectada\" color=\"F6BD0F\" showValues=\"0\">";
+                    for(Metaregistro metaregistro:l_metaregistro){
+                        contenido = contenido+"<set value=\""+metaregistro.getMetaProyectada()+"\"/>";
+                    }
+                    contenido = contenido+"</dataset>";
+                    
+                    contenido = contenido+"<dataset seriesName=\"Meta Proyectada - Tendencia\" color=\"8BBA00\" showValues=\"0\" parentYAxis=\"S\">";
+                    for(Metaregistro metaregistro:l_metaregistro){
+                        contenido = contenido+"<set value=\""+metaregistro.getMetaProyectada()+"\"/>";
+                    }
+                    contenido = contenido+"</dataset>";
+                    contenido = contenido+"</graph>";
+                    File file = new File(directorio+"/XML/Metaregistro_"+metaobra.getIdmetaobra()+".xml");
+                    BufferedWriter output = new BufferedWriter(new FileWriter(file));
+                    output.write(contenido);
+                    output.close();                    
+                }
+            }            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 }
-    
