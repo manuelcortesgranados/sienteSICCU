@@ -18,6 +18,9 @@ import co.com.interkont.cobra.to.Metaregistro;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import co.com.interkont.cobra.util.Utilitario;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 //import cobra.util.Utilitario;
 import java.io.Serializable;
@@ -25,6 +28,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -986,5 +990,57 @@ public class MetasProyecto implements Serializable {
         }
         throw se;
     }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 
+     */
 
+    public void generarArchivoXMLFusionChart_MetaRegistro() {
+        try {
+            ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String directorio=servletContext.getRealPath("/");
+            
+            String contenido = "";
+            contenido = contenido+"<graph caption=\"Sales\" PYAxisName=\"Revenue\" SYAxisName=\"Quantity\" numberPrefix=\"$\" showvalues=\"0\" numDivLines=\"4\" formatNumberScale=\"0\" decimalPrecision=\"0\" anchorSides=\"10\" anchorRadius=\"3\" anchorBorderColor=\"009900\">";
+            contenido = contenido+"<categories>";
+            contenido = contenido+"<category name=\"March\"/>";
+            contenido = contenido+"<category name=\"April\"/>";
+            contenido = contenido+"<category name=\"May\"/>";
+            contenido = contenido+"<category name=\"June\"/>";
+            contenido = contenido+"<category name=\"July\"/>";
+            contenido = contenido+"</categories>";
+            contenido = contenido+"<dataset seriesName=\"Product A\" color=\"AFD8F8\" showValues=\"0\">";
+            contenido = contenido+"<set value=\"10000\"/>";
+            contenido = contenido+"<set value=\"20000\"/>";
+            contenido = contenido+"<set value=\"30000\"/>";
+            contenido = contenido+"<set value=\"40000\"/>";
+            contenido = contenido+"<set value=\"50000\"/>";
+            contenido = contenido+"</dataset>";
+            contenido = contenido+"<dataset seriesName=\"Product B\" color=\"F6BD0F\" showValues=\"0\">";
+            contenido = contenido+"<set value=\"57401.85\"/>";
+            contenido = contenido+"<set value=\"41941.19\"/>";
+            contenido = contenido+"<set value=\"45263.37\"/>";
+            contenido = contenido+"<set value=\"117320.16\"/>";
+            contenido = contenido+"<set value=\"114845.27\"/>";
+            contenido = contenido+"</dataset>";
+            contenido = contenido+"<dataset seriesName=\"Total Quantity\" color=\"8BBA00\" showValues=\"0\" parentYAxis=\"S\">";
+            contenido = contenido+"<set value=\"45000\"/>";
+            contenido = contenido+"<set value=\"44835\"/>";
+            contenido = contenido+"<set value=\"42835\"/>";
+            contenido = contenido+"<set value=\"77557\"/>";
+            contenido = contenido+"<set value=\"92633\"/>";
+            contenido = contenido+"</dataset>";
+            contenido = contenido+"</graph>";
+            
+            File file = new File(directorio+"/XML/example.xml");
+            BufferedWriter output = new BufferedWriter(new FileWriter(file));
+            output.write(contenido);
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
+    
