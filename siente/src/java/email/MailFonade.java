@@ -48,7 +48,7 @@ public class MailFonade {
         envCtx = (Context) initCtx.lookup("java:comp/env");
         session = (Session) envCtx.lookup("mail/FONADE");
         final Properties props = session.getProperties();
-        session = Session.getDefaultInstance(props, new Authenticator() {
+        session = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(props.getProperty("mail.smtp.user"), props.getProperty("mail.smtp.password"));
