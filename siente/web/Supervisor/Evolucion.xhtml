@@ -242,34 +242,41 @@
                     <h:outputLabel value="No se han generado solicitudes de aprobación" rendered="#{Supervisor$AdministrarObraNew.listaSVA.size() == 0}" style="font-size: 12px;font-weight: bold;"/>
                     <rich:dataTable value="#{Supervisor$AdministrarObraNew.listaSVA}" rendered="#{Supervisor$AdministrarObraNew.listaSVA.size() > 0}" var="sva">
 
-                        <rich:column>
+                        <rich:column  style="width: 20%;">
                             <f:facet name="header">Observaciones</f:facet>
                             <h:outputLabel value="#{sva.observaciones}">
                             </h:outputLabel>
                         </rich:column>
-                        <rich:column>
+                        <rich:column style="width: 20%;">
+                            <f:facet name="header">Respuesta</f:facet>
+                            <h:outputLabel value="#{sva.respuesta}">
+                            </h:outputLabel>
+                        </rich:column>
+                        <rich:column style="width: 17%;">
                             <f:facet name="header">Periodo de corte</f:facet>
                             <h:outputLabel value="#{sva.periodo.datefeciniperiodo} - #{sva.periodo.datefecfinperiodo} ">
                             </h:outputLabel>
                         </rich:column>
-                        <rich:column>
+                        <rich:column style="width: 16%;">
                             <f:facet name="header">Fecha Solicitud</f:facet>
                             <h:outputLabel value="#{sva.fechaSolicitud}">
-                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" type="both"  />
                             </h:outputLabel>
                         </rich:column>
-                        <rich:column>
+                        <rich:column style="width: 16%;">
                             <f:facet name="header">Fecha Respuesta</f:facet>
                             <h:outputLabel value="#{sva.fechaRespuesta}">
-                                <f:convertDateTime locale="es_CO" dateStyle="medium" timeZone="America/Bogota" timeStyle="full" type="both"  />
+                                <f:convertDateTime locale="es_CO" dateStyle="short" timeZone="America/Bogota" type="both"  />
                             </h:outputLabel>
                         </rich:column>
+                        
 
-                        <rich:column>
+                        <rich:column style="width: 11%;">
                             <f:facet name="header">Estado</f:facet>
                             <h:outputLabel rendered="#{sva.estado == 0}" value="Pendiente" />
                             <h:graphicImage rendered="#{sva.estado == 1}" value="/resources/imgs/solicitud_validacion_avance_3.png" />
                             <h:graphicImage rendered="#{sva.estado == 2}" value="/resources/imgs/solicitud_validacion_avance_4.png" />
+                            <h:outputLabel rendered="#{sva.estado == 3}" value="Avance Eliminado" />
                         </rich:column>
                     </rich:dataTable>
                 </h:panelGroup>

@@ -2882,7 +2882,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
                 return 5;
             }
 
-            //Se analiza que para cada periodo exista una solicitud aprobada
+            //Se analiza que para cada periodo exista una solicitud aprobada (Tener en cuenta que se asume que las listas estan ordenadas)
             if (s.getPeriodo().getIntidperiodo() == periodos.get(j).getIntidperiodo() && s.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO) {
                 j++;
             }

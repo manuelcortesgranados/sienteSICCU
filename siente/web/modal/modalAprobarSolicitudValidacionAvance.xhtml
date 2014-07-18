@@ -17,6 +17,7 @@
             text-align: center;
         }
         #contenedor_titulo {
+            text-align: center;
         }
         #contenedor_titulo .contenedor_titulo_pri {
             font-family: 'Open Sans', sans-serif;
@@ -33,7 +34,6 @@
             width: 470px;
         }
         #modal_datos_basicos .label_modals_datos_basicos {
-            float: left;
             text-align: right;
             width: 190px;
             font-family: 'Open Sans', sans-serif;
@@ -63,7 +63,6 @@
             height: 100px;
             border: solid 1px #CCC;
             border-radius: 50% 50% 50% 50%;
-            float: left;
             text-decoration: none;
             color: #A7A9AC;
             font-family: 'Open Sans';
@@ -74,7 +73,6 @@
             height: 100px;
             border: solid 1px #CCC;
             border-radius: 50% 50% 50% 50%;
-            float: left;
             text-decoration: none;
             color: #9CFF00;
             background-color: #257500;
@@ -94,34 +92,33 @@
             line-height: 95px;
         }
         .contenedor_botones_formulario_datos_basicos {
-            width: 175px;
-            margin: 0 auto;
+            width: 100%;
             margin-top: 20px;
+            text-align: center !important;
         }
         .contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a {
-            width: 175px;
             height: 30px;
-            float: left;
             text-decoration: none;
             color: #257500;
             font-family: 'Open Sans';
             background-color: transparent;
             border: 1px solid #257500;
-            padding-top: 8px;
-            text-align: center;
-            margin: 0 auto;
+            padding: 8px;
+            text-align: center !important;
+            margin: 20px;
             font-size: 20px;
+
         }
         .contenedor_botones_formulario_datos_basicos .contenedor_botones_formulario_datos_basicos_continuar a:hover {
-            width: 175px;
             height: 30px;
-            float: left;
             text-decoration: none;
             color: #9CFF00;
+            padding: 8px;
             background-color: #257500;
             transition: background-color 1s ease 0s;
             font-family: 'Open Sans';
             font-size: 20px;
+            margin: 20px;
         }
     </style>
 
@@ -161,18 +158,15 @@
                 </a4j:outputPanel>
                 <a4j:outputPanel rendered="#{Supervisor$DetalleObra.solicitudValidacionAvance != null}">
 
-                    <br></br>
-                    <br></br>
                     <div id="contenedor_pricipal_modal_datos_basicos">
                         <div id="contenedor_titulo">
                             <div class="contenedor_titulo_pri">
                                 <h:outputLabel value="APROBACI&Oacute;N SOLICITUD DE AVANCE" style="color:#257500; font-size: 24px;font-weight: bold;display: block;"/>
-                                <h:outputLabel value="Responda a la solicitud de este poyecto leyendo" style="display: block;"/>
-                                <h:outputLabel value="su informacion a continuacion" style="display: block;"/>
+                                <h:outputLabel value="Responda a la solicitud de este proyecto leyendo la informaci&oacute;n a continuaci&oacute;n" style="display: block;"/>
                                 <br></br>
                                 <div class="contenedor_linea_divisora"></div>
                             </div>
-                            <div style=" margin: 20px 0px;">
+                            <div style=" margin: 20px 0px; text-align: center;">
                                 <table border="0" style=" font-size: 14px; color:#666; margin: 0 auto; " width="400" cellpadding="6" cellspacing="10">
                                     <tr>
                                         <td style="text-align: right; width: 170px;"><b>Nombre del proyecto</b></td>
@@ -183,7 +177,10 @@
                                     <tr>
                                         <td style="text-align: right; width: 170px;"><b>Valor</b></td>
                                         <td style="text-align: left;">
-                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" />
+                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                <f:convertNumber type="currency" />
+                                            </h:outputLabel>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -195,27 +192,36 @@
                                     <tr>
                                         <td style="text-align: right; width: 170px;"><b>Observaci&oacute;n</b></td>
                                         <td style="text-align: left;">
-                                            <h:outputLabel value="#{Supervisor$DetalleObra.solicitudValidacionAvance.observaciones}" />
+                                            <h:inputTextarea disabled="true" style="width: 300px;height: 100px;" value="#{Supervisor$DetalleObra.solicitudValidacionAvance.observaciones}" />
                                         </td>
                                     </tr>
                                 </table>
                                 <div style=" margin: 30px 0px; text-align: center">
 
                                     <div class="contenedor_botones_formulario_datos_basicos">
-                                        <div class="contenedor_botones_formulario_datos_basicos_continuar">
-                                            <div style="font-size: 16px;">
-                                                ¿Desea aprobar la solicitud?
+                                        <h:outputLabel style="font-size: 18px; font-weight: bold;" value="¿Desea aprobar la solicitud?" />
+                                        <br></br>
+                                        <center>
+
+                                            <div>
+
+                                                <h:selectOneRadio id="valorAprobacionSVA" value="#{Supervisor$DetalleObra.aprobacionSVA}" style=" font-size: 25px;" >
+                                                    <f:selectItem  itemValue="1" itemLabel="Si&nbsp;&nbsp;" />
+                                                    <f:selectItem  itemValue="2" itemLabel="No" />
+                                                </h:selectOneRadio>
                                             </div>
-                                            <h:selectOneRadio id="valorAprobacionSVA" value="#{Supervisor$DetalleObra.aprobacionSVA}" style=" font-size: 30px;" >
-                                                <f:selectItem  itemValue="1" itemLabel="Si" />
-                                                <f:selectItem  itemValue="2" itemLabel="No" />
-                                            </h:selectOneRadio>
-                                            <br></br>
+                                        </center>
+                                        <h:inputTextarea style="font-size: 14px; width:  350px !important;" id="respuestaSVA" value="#{Supervisor$DetalleObra.respuestaSVA}">
+                                            <rich:placeholder  value="Escriba aquí las justificaciones de su respuesta" />
+                                        </h:inputTextarea>
+                                        <br></br>
+                                        <br></br>
+                                        <div class="contenedor_botones_formulario_datos_basicos_continuar">
                                             <a4j:commandLink id="resgistrarSVA" 
                                                              action="#{Supervisor$DetalleObra.registrarRespuestaSolicitudValidacionAvance}"
                                                              limitRender="true"
                                                              render="modalSVAend,historialAprobacionesAvances"
-                                                             execute="valorAprobacionSVA"
+                                                             execute="valorAprobacionSVA,respuestaSVA"
                                                              transient="true"
                                                              oncomplete="#{rich:component('modalAprobarSolicitudValidacionAvanceForm')}.hide();#{rich:component('modalSVAend')}.show();return false;"
                                                              value="Responder Solicitud"/>
@@ -226,8 +232,6 @@
                             </div>
                         </div>
                     </div>
-                    <br></br>
-                    <br></br>
                 </a4j:outputPanel>
             </center>
         </rich:popupPanel>

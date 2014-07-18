@@ -924,9 +924,10 @@ public class DetalleObra implements Serializable {
     }
     // </editor-fold>
     private UIDataTable tablalistaavances = new UIDataTable();
-    
+
     //Inicio Adicion Dass reporte FMI017
     private SelectItem[] periodos;
+
     public SelectItem[] getPeriodos() {
         return periodos;
     }
@@ -935,6 +936,7 @@ public class DetalleObra implements Serializable {
         this.periodos = periodos;
     }
     private int fechaescogida;
+
     public int getFechaescogida() {
         return fechaescogida;
     }
@@ -943,7 +945,7 @@ public class DetalleObra implements Serializable {
         this.fechaescogida = fechaescogida;
     }
     //Fin Adicion Dass
-    
+
     public UIDataTable getTablalistaavances() {
         return tablalistaavances;
     }
@@ -1358,17 +1360,18 @@ public class DetalleObra implements Serializable {
         // Ingresar en bitacora el ingreso a ver un proyecto
         getSessionBeanCobra().insertarBitacora(Accion.VISITAR_PROYECTO, getAdministrarObraNew().getObra().getIntcodigoobra());
     }
-    
+
     protected AdministrarObraNew getAdministrarObraNew() {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
     /*Adicion Dass Reporte FMI017*/
+
     public String reporteFMI017Pdf() {
-        try {    
-            if(getFechaescogida() > 0){
-            getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfFMI017") +"&Codigo%20Obra=" +getAdministrarObraNew().getObra().getIntcodigoobra() +"&idPeriodo=" +getFechaescogida());
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
-            }else{
+        try {
+            if (getFechaescogida() > 0) {
+                getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfFMI017") + "&Codigo%20Obra=" + getAdministrarObraNew().getObra().getIntcodigoobra() + "&idPeriodo=" + getFechaescogida());
+                FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Reportes");
+            } else {
                 FacesUtils.addErrorMessage("Debe Seleccionar un periodo, para generar el reporte");
             }
         } catch (IOException ex) {
@@ -1376,6 +1379,7 @@ public class DetalleObra implements Serializable {
         }
         return null;
     }
+
     public void llenarPeriodos() {
         getSessionBeanCobra().getCobraService().setPeriodos(getSessionBeanCobra().getCobraService().encontrarPeriodosObra(getAdministrarObraNew().getObra()));
         periodos = new SelectItem[getSessionBeanCobra().getCobraService().getPeriodos().size()];
@@ -1389,7 +1393,7 @@ public class DetalleObra implements Serializable {
         }
     }
     /*FIN ADICION DASS*/
-    
+
     public String reportePdf() {
         try {
             getSessionBeanCobra().setUrlAbri(Propiedad.getValor("ipserver") + bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
@@ -2087,6 +2091,7 @@ public class DetalleObra implements Serializable {
     //
     private SolicitudValidacionAvance solicitudValidacionAvance;
     private int aprobacionSVA;
+    private String respuestaSVA;
 
     public boolean getRenderSVA() {
         if (getAdministrarObraNew().getObra() == null || getAdministrarObraNew().getObra().getSupervisor() == null || getSessionBeanCobra().getUsuarioObra() == null || getSessionBeanCobra().getUsuarioObra().getTercero() == null) {
@@ -2111,11 +2116,20 @@ public class DetalleObra implements Serializable {
         this.aprobacionSVA = code;
     }
 
+    public String getRespuestaSVA() {
+        return respuestaSVA;
+    }
+
+    public void setRespuestaSVA(String respuestaSVA) {
+        this.respuestaSVA = respuestaSVA;
+    }
+
     public void initBusquedaSolicitudValidacionAvance() {
         if (!getRenderSVA()) {
             return;
         }
         this.setAprobacionSVA(SolicitudValidacionAvance.ESTADO_APROBADO);
+        this.setRespuestaSVA(null);
         if (periodoevo.getIntidperiodo() == -1 || alimentacionmostrar == null) {
             this.setSolicitudValidacionAvance(null);
         } else {
@@ -2127,26 +2141,31 @@ public class DetalleObra implements Serializable {
         if (!getRenderSVA()) {
             return;
         }
+
         this.solicitudValidacionAvance.setEstado(aprobacionSVA);
         this.solicitudValidacionAvance.setFechaRespuesta(new Date());
         this.solicitudValidacionAvance.setJsfUsuarioByUsuarioSupervisor(getSessionBeanCobra().getUsuarioObra());
+        this.solicitudValidacionAvance.setRespuesta(respuestaSVA);
         this.getSessionBeanCobra().getCobraService().obtenerCobraDao().guardarOrActualizar(this.solicitudValidacionAvance);
         this.sendNotificationSVA(solicitudValidacionAvance, getAdministrarObraNew().getObra());
         this.getAdministrarObraNew().cargarHistorialSVA();
     }
-    
-    private void sendNotificationSVA(SolicitudValidacionAvance sva, Obra obra){
-        if(obra == null || obra.getInterventor() == null || obra.getInterventor().getStremail() == null){
+
+    private void sendNotificationSVA(SolicitudValidacionAvance sva, Obra obra) {
+        if (obra == null || obra.getInterventor() == null || obra.getInterventor().getStremail() == null) {
             Logger.getLogger(AdministrarObraNew.class.getName()).info("ERROR: No se puede enviar correo. Interventor no está configurado correctamente.");
             return;
         }
-        String [] recipients = {obra.getInterventor().getStremail()};
+        String[] recipients = {obra.getInterventor().getStremail()};
         String subject = "Solicitud de validación para un Avance";
         StringBuilder body = new StringBuilder();
 
-        body.append("<h1>Su solicitud ha sido ").append(sva.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO?"aprobada":"rechazada").append("!</h1>");
+        body.append("<h1>Su solicitud ha sido ").append(sva.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO ? "aprobada" : "rechazada").append("!</h1>");
         body.append("<div><b>Obra:&nbsp;</b>").append(obra.getStrnombreobra()).append("</div>");
         body.append("<div><b>Periodo:&nbsp;</b>").append(sva.getPeriodo().getDatefeciniperiodo()).append(" - ").append(sva.getPeriodo().getDatefecfinperiodo()).append("</div>");
+        if (sva.getRespuesta() != null) {
+            body.append("<div><b>Respuesta:&nbsp;</b>").append(sva.getRespuesta()).append("</div>");
+        }
         MailFonade mailFonade = new MailFonade();
         mailFonade.sendMail(recipients, subject, body.toString());
     }
