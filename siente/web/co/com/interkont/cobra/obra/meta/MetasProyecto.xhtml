@@ -44,7 +44,7 @@
                                                      action="#{MetasProyecto.irApagina_IngresarMeta()}" />
                                     <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
                                                      action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
-                                    <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas2}" styleClass="ikont-rdt-indicadoresdisponibles"
+                                    <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas}" styleClass="ikont-rdt-indicadoresdisponibles"
                                                             rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                             var="meta">                           
                                         <rich:column width="5em">
@@ -68,12 +68,12 @@
                                             <h:outputText  value="#{meta.nombreindicador}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
                                             <h:outputText  value="#{meta.tipometa}"/></rich:column>
-                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
                                             <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
                                             </h:commandButton>
                                         </rich:column>
-                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
                                             <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             </h:commandButton>
@@ -106,7 +106,7 @@
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Año"/></f:facet>
                                         <h:outputText  value="#{metaobra.anio}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Frecuencia Medicion"/></f:facet>
-                                        <h:outputText  value="#{metaobra.frecuencia_medicion}"/></rich:column>
+                                        <h:outputText  value="#{metaobra.strdescperiomedida}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
                                         <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaObra}" type="submit" value="Eliminar">
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
@@ -115,7 +115,7 @@
                                     </rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
                                         <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaObra()}" type="submit" value="Actualizar">
-                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metaobra.idmeta}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                         </h:commandButton>
                                     </rich:column>
@@ -124,6 +124,7 @@
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_periodomedida}" value="#{metaobra.intidperiomedida}" />
                                         </h:commandLink>
                                     </rich:column>
                                 </rich:extendedDataTable>                            
@@ -132,7 +133,7 @@
                         <rich:tab header="Registro de Programacion de Metas">
                             <html>
                                 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
-                                    <c:forEach items="#{MetasProyecto.listaMetas2}" var="meta">
+                                    <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
                                         <tr>
                                             <td width="41%" class="ikont-label-borde"><table width="100%" border="0" cellspacing="5" cellpadding="5">
                                                     <tr>
@@ -198,7 +199,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="ikont-hot-derechos-reser">Frecuencia Medicion</td>
-                                                                                    <td class="ikont-hot-desea">#{metaobra.frecuenciaMedicion}</td>
+                                                                                    <td class="ikont-hot-desea">#{metaobra.periodomedida.strdescperiomedida}</td>
                                                                                 </tr>
                                                                             </table></td>
                                                                         <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
@@ -232,6 +233,7 @@
                                                                                                     </td>
                                                                                                     <td class="ikont-hot-desea">
                                                                                                         <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaRegistro()}" type="submit" value="Actualizar">
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                                                                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                                                                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.idregistrometaobra}" />
                                                                                                         </h:commandButton>                                                                                                        
@@ -259,7 +261,7 @@
                             <html>
                                 <script type="text/javascript" src="/siccu/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
                                 <body>
-                                    <c:forEach items="#{MetasProyecto.listaMetas2}" var="meta">
+                                    <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
                                         <c:forEach items="#{MetasProyecto.consultarMetaobrasDetalle(meta.id)}" var="metaobra">
                                             <script type="text/javascript">
                                                 var chart = new FusionCharts("/siccu/LibreriasTerceros/FusionChartsFree/Charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "350");
@@ -293,7 +295,7 @@
                                                                                         <td class="ikont-hot-desea">#{meta.subprograma}</td>
                                                                                         <td class="ikont-hot-desea">#{meta.nomp}</td>
                                                                                         <td class="ikont-hot-desea">#{meta.descripcionmetaproducto}</td>
-                                                                                        <td class="ikont-hot-desea">#{metaobra.frecuenciaMedicion}</td>
+                                                                                        <td class="ikont-hot-desea">#{metaobra.periodomedida.strdescperiomedida}</td>
                                                                                     </tr>
                                                                                 </table></td>
                                                                         </tr>
