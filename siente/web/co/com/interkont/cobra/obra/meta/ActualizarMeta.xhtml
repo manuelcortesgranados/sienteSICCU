@@ -47,7 +47,7 @@
                             <h:inputText  immediate="true" required="false" id="strdescripcionmetaproducto" size="25" maxlength="25" value="#{MetasProyecto.meta.descripcionmetaproducto}"/>
                             <h:outputLabel  value="Unidad de Medida"/>
                             <h:selectOneMenu id="cmbUnidadMeta" value="#{MetasProyecto.meta.unidadmedida}" immediate="true">
-                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" />
+                                <f:selectItems value="#{MetasProyecto.listaUnidadMedida}" />
                             </h:selectOneMenu>
                             <h:outputLabel  value="Nombre Indicador"/>
                             <h:inputText  immediate="true" required="false" id="strnombreindicador" size="25" maxlength="25" value="#{MetasProyecto.meta.nombreindicador}"/>
