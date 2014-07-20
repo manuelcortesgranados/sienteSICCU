@@ -29,10 +29,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.event.ValueChangeListener;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -67,7 +70,6 @@ public class MetasProyecto implements Serializable {
     public List<Meta> listaMetas = new ArrayList<Meta>();
     public List<MetaObraAMPVO> listaMetasObras = new ArrayList<MetaObraAMPVO>();
     public List<MetaRegistroAMPVO> listaMetasObrasRegsitro = new ArrayList<MetaRegistroAMPVO>();
-    public Map<Integer,String> mapaFrecuenciaMedicion = new LinkedHashMap<Integer, String>();
     public List<Periodomedida> listaPeriodoMedida = new ArrayList<Periodomedida>();
     public List<PeriodosFrecuencia> listaPeriodosFrecuencia = new ArrayList<PeriodosFrecuencia>();
     public List<String> listaUnidadMedida = new ArrayList<String>();
@@ -77,7 +79,11 @@ public class MetasProyecto implements Serializable {
     int p_idmeta;
     int p_idmetaobra;
     int p_idmetaregistro;
+    int p_periodomedida;
+    int p_idperiodofrecuencia;
     boolean pactualizar;
+    
+    Date fecharegistroInicio;
 
     public Meta getMeta() {
         return meta;
@@ -131,8 +137,8 @@ public class MetasProyecto implements Serializable {
         return listaMetas;
     }
 
-    public void setListaMetas(List<Meta> listaMetas2) {
-        this.listaMetas = listaMetas2;
+    public void setListaMetas(List<Meta> listaMetas) {
+        this.listaMetas = listaMetas;
     }
 
     public List<MetaObraAMPVO> getListaMetasObras() {
@@ -149,14 +155,6 @@ public class MetasProyecto implements Serializable {
 
     public void setListaMetasObrasRegsitro(List<MetaRegistroAMPVO> listaMetasObrasRegsitro) {
         this.listaMetasObrasRegsitro = listaMetasObrasRegsitro;
-    }
-
-    public Map<Integer, String> getMapaFrecuenciaMedicion() {
-        return mapaFrecuenciaMedicion;
-    }
-
-    public void setMapaFrecuenciaMedicion(Map<Integer, String> mapaFrecuenciaMedicion) {
-        this.mapaFrecuenciaMedicion = mapaFrecuenciaMedicion;
     }
 
     public List<Periodomedida> getListaPeriodoMedida() {
@@ -222,8 +220,31 @@ public class MetasProyecto implements Serializable {
     public void setPactualizar(boolean pactualizar) {
         this.pactualizar = pactualizar;
     }
-    
 
+    public int getP_periodomedida() {
+        return p_periodomedida;
+    }
+
+    public void setP_periodomedida(int p_periodomedida) {
+        this.p_periodomedida = p_periodomedida;
+    }
+
+    public Date getFecharegistroInicio() {
+        return fecharegistroInicio;
+    }
+
+    public void setFecharegistroInicio(Date fecharegistroInicio) {
+        this.fecharegistroInicio = fecharegistroInicio;
+    }
+
+    public int getP_idperiodofrecuencia() {
+        return p_idperiodofrecuencia;
+    }
+
+    public void setP_idperiodofrecuencia(int p_idperiodofrecuencia) {
+        this.p_idperiodofrecuencia = p_idperiodofrecuencia;
+    }
+   
     /**
      * @author Manuel Cortes Granados
      * @since Mayo 23 2014 11:40 AM
@@ -264,8 +285,44 @@ public class MetasProyecto implements Serializable {
     public void cargarListaPeriodosFrecuencia(int periodomedida) throws Exception{
         DataSourceFactory ds = new DataSourceFactory();
         PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(ds.getConnection());
-        this.mapaFrecuenciaMedicion=perDAO.select(periodomedida);
+        this.listaPeriodosFrecuencia=perDAO.select(periodomedida);
         ds.closeConnection();
+    }
+    
+    /**
+     * Este metodo tiene por objeto asignar las fehas correspondientes a los rangos de 
+     * frecuencia correspondientes 
+     * 
+     * @author Manuel Cortes Granados
+     * @since 19 Julio 2014 3:32 AM
+     */
+    
+    public void cargarYAsignarFechasInicioFinal(ValueChangeEvent  event) throws Exception{
+        DataSourceFactory ds = new DataSourceFactory();
+        Utilitario util = new Utilitario();
+        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(ds.getConnection());
+        String idpfrecuencia = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idperiodosFrecuencia");
+        p_idperiodofrecuencia=Integer.valueOf(event.getNewValue().toString()).intValue();
+        PeriodosFrecuencia per=perDAO.select_by_idperiodos_frecuencia(this.p_idperiodofrecuencia);
+        String fechaInicial = new String("2014/"+per.getMesInicial()+"/"+per.getDiaInicial());
+        String fechaFinal = new String("2014/"+per.getMesFinal()+"/"+per.getDiaFinal());
+        metaregistro = new Metaregistro();
+        metaregistro.setFechaInicio(util.convertirStringtoDate(fechaInicial));
+        metaregistro.setFechaFinal(util.convertirStringtoDate(fechaFinal));
+        FacesContext.getCurrentInstance().renderResponse();
+        ds.closeConnection();        
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 19 Julio 2014 3:56 PM
+     * @param event
+     * @throws Exception 
+     */
+    
+    public void actualizarCampoPorcentaje(ValueChangeEvent  event) throws Exception{
+        metaregistro.setPorcentaje((metaregistro.getMetaAcumulada()/metaregistro.getMetaProyectada())*100);
+        FacesContext.getCurrentInstance().renderResponse();
     }
 
     /**
@@ -344,7 +401,7 @@ public class MetasProyecto implements Serializable {
     public void consultarMetaparaConsulta() throws Exception{
         DataSourceFactory ds = new DataSourceFactory();
         MetasDAO metDAO = new MetasDAO(ds.getConnection());
-        meta_consulta = metDAO.select(p_idmeta);
+        meta_consulta = metDAO.select(this.p_idmeta);
         ds.closeConnection();
     }
 
@@ -371,8 +428,8 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
-    public String irApagina_IngresarMetaRegistro() {
-        //meta = new Meta();
+    public String irApagina_IngresarMetaRegistro() throws Exception {
+        this.cargarListaPeriodosFrecuencia(this.p_periodomedida);
         return "IngresarMetaRegistro";
     }
 
@@ -383,6 +440,7 @@ public class MetasProyecto implements Serializable {
      */
     public String irApagina_ActualizarMetaRegistro() throws Exception {
         consultarMetaRegistroparaActualizar();
+        cargarListaPeriodosFrecuencia(metaobra.getPeriodomedida().getIntidperiomedida());
         return "ActualizarMetaRegistro";
     }
 
@@ -410,7 +468,6 @@ public class MetasProyecto implements Serializable {
             MetasDAO metDAO = new MetasDAO(ds.getConnection());
             metDAO.update(meta);
             ds.closeConnection();
-            FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
             return null;
         } catch (SQLException se) {
             procesarError(se);
@@ -430,7 +487,7 @@ public class MetasProyecto implements Serializable {
             DataSourceFactory ds = new DataSourceFactory();
             MetasDAO metDAO = new MetasDAO(ds.getConnection());
             if (this.p_idmeta == 0) {
-                FacesUtils.addInfoMessage("El registro o fila no ha sido debidamente bien seleccionada.");
+                FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (validarActualizacionEliminacionMeta(this.p_idmeta)) {
                 metDAO.delete(this.getP_idmeta());
                 FacesUtils.addInfoMessage("La meta con id " + this.getP_idmeta() + " ha sido eliminada con exito");
@@ -519,7 +576,6 @@ public class MetasProyecto implements Serializable {
             metaobra.setIdproyecto(this.p_idcodigoobra);
             if (validarInsercionMeta(metaobra)) {
                 getSessionBeanCobra().getCobraService().guardarMetaObra(metaobra);
-                cargarListaPeriodosFrecuencia(metaobra.getFrecuenciaMedicion());
                 FacesUtils.addInfoMessage("La meta ha sido asociada a la obra o proyecto con exito");
                 return null;
             } else {
@@ -538,9 +594,16 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 24 2014 11:40 AM
      * @return
      */
-    public String actualizarMetaObra() throws Exception {
-        Utilitario util = new Utilitario();
-        FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
+    public String actualizarMetaObra() throws Exception{
+        try{
+            DataSourceFactory ds = new DataSourceFactory();
+            MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
+            metDAO.update(metaobra);
+            ds.closeConnection();
+            FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");            
+        }catch(SQLException e){
+            procesarError(e);
+        }
         return null;
     }
 
@@ -633,6 +696,7 @@ public class MetasProyecto implements Serializable {
      * @since 1 Junio 2014 8:31 PM
      * @param idmeta
      */
+    
     public void filtrarBusquedaMetaObra() {
         FacesUtils.addInfoMessage("click sobre la fila" + this.p_idmeta);
     }
@@ -1004,7 +1068,7 @@ public class MetasProyecto implements Serializable {
     }
 
     public List<Metaobra> consultarMetaobrasDetalle(int idmeta) {
-        return getSessionBeanCobra().getCobraService().consultarMetaobrasDetalle(idmeta);
+        return getSessionBeanCobra().getCobraService().consultarMetaObrasDetalle(idmeta);
     }
 
     public List<Metaregistro> consultaMetaRegistroDetalle(int idmetaobra) {
