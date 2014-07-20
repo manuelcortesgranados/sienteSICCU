@@ -31,40 +31,100 @@
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
                     <f:facet name="header">
-                        <h:outputText  value="#{var.modulometas}"/>
+                        <h:outputText  value="Ingresar Registro de Meta"/>
                     </f:facet>
-                    <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
-                        <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 50%">
-                            <h:outputLabel  value="id. Meta Obra"/>
-                            <h:outputText  value="#{MetasProyecto.p_idmetaobra}"/>
-                            <h:outputLabel  value="Proyecto"/>
-                            <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
-                            <h:outputLabel  value="Punto Medicion Periodo"/>
-                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.frecuenciaMedicion}" immediate="true">
-                                <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
-                                <f:selectItems value="#{MetasProyecto.listaFrecuenciaMedicion}" var="periodoMedida"
-                                               itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
-                            </h:selectOneMenu>
-                            <h:outputLabel  value="Fecha Inicio"/>
-                            <rich:calendar  id="fecharegistro" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
-                                            value="#{MetasProyecto.metaregistro.fechaInicio}"/>
-                            <h:outputLabel  value="Fecha Final"/>
-                            <rich:calendar  id="fecharegistro" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
-                                            value="#{MetasProyecto.metaregistro.fechaFinal}"/>
-                            <h:outputLabel  value="Meta Proyectada"/>
-                            <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
-                            <h:outputLabel  value="Meta Acumulada"/>
-                            <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}"/>
-                            <h:outputLabel  value="Porcentaje"/>
-                            <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.porcentaje}"/>
-                            <h:outputLabel  value="Observaciones"/>
-                            <h:inputTextarea   immediate="true" required="false" value="#{MetasProyecto.metaregistro.observaciones}"/>
+                    <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto_1">
+                        <h:panelGrid columns="2" width="70%">
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <html>
+                                    <table width="400px" border="0" cellspacing="1" cellpadding="1">
+                                        <tr>
+                                            <td class="ikont-hcl-reportes_administrativos">Informacion Meta Relacionada a Asociar con el Proyecto</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Id : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.id}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Objetivo : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.objetivo}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Programa : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.programa}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Subprograma : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.subprograma}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Nomp : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.nomp}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Descripcion Meta Producto : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.descripcionmetaproducto}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Unidad de Medida : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.unidadmedida}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Nombre Indicador : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.nombreindicador}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Tipo Meta : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.tipometa}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Linea Base Indicador : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.lineaBaseIndicador}</td>
+                                                    </tr>
+                                                </table></td>
+                                        </tr>
+                                    </table>
+                                </html>                                                                
+                            </rich:panel>
+                            <rich:panel rendered="true" styleClass="noneborder">
+                                <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
+                                    <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 50%">
+                                        <h:outputLabel  value="id. Meta Obra"/>
+                                        <h:outputText  value="#{MetasProyecto.p_idmetaobra}"/>
+                                        <h:outputLabel  value="Proyecto"/>
+                                        <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
+                                        <h:outputLabel  value="Punto Medicion Periodo"/>
+                                        <h:selectOneMenu id="cmbFrecuenciaMedicionMeta" value="#{MetasProyecto.metaregistro.periodoFrecuencia}" onchange="submit()" valueChangeListener="#{MetasProyecto.cargarYAsignarFechasInicioFinal}">
+                                            <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                                            <f:selectItems value="#{MetasProyecto.listaPeriodosFrecuencia}" var="periodoFrecuencia"
+                                                           itemValue="#{periodoFrecuencia.idperiodosFrecuencia}" itemLabel="#{periodoFrecuencia.periodosFrecuencia}" />
+                                        </h:selectOneMenu>
+                                        <h:outputLabel  value="Fecha Inicio"/>
+                                        <rich:calendar  id="fecharegistroInicio" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
+                                                        value="#{MetasProyecto.metaregistro.fechaInicio}"/>
+                                        <h:outputLabel  value="Fecha Final"/>
+                                        <rich:calendar  id="fecharegistroFinal" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
+                                                        value="#{MetasProyecto.metaregistro.fechaFinal}"/>
+                                        <h:outputLabel  value="Meta Proyectada"/>
+                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
+                                        <h:outputLabel  value="Meta Acumulada"/>
+                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarCampoPorcentaje}"/>
+                                        <h:outputLabel  value="Porcentaje"/>
+                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.porcentaje}"/>
+                                        <h:outputLabel  value="Observaciones"/>
+                                        <h:inputTextarea   immediate="true" required="false" value="#{MetasProyecto.metaregistro.observaciones}"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
+                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaRegistro}" type="submit" value="Ingresar"/>
+                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas}" type="submit" value="Regresar"/>
+                                    </h:panelGrid>              
+                                </h:panelGroup>
+
+                            </rich:panel>
                         </h:panelGrid>
-                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaRegistro}" type="submit" value="Ingresar"/>
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" type="submit" value="Regresar"/>
-                        </h:panelGrid>              
-                    </h:panelGroup>
+                    </h:panelGroup>`                            
                 </rich:panel>
             </h:panelGrid>
         </h:form>
