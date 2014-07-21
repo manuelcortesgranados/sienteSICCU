@@ -69,9 +69,9 @@
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
                                             <h:outputText  value="#{meta.tipometa}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
-                                            <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
-                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
-                                            </h:commandButton>
+                                            <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMeta')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                            </a4j:commandButton>    
                                         </rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
                                             <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
@@ -108,10 +108,10 @@
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Frecuencia Medicion"/></f:facet>
                                         <h:outputText  value="#{metaobra.strdescperiomedida}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
-                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaObra}" type="submit" value="Eliminar">
+                                        <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMetaObra')}.show();" styleClass="ikont-a4jcb-modificarobra" >
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
-                                        </h:commandButton>
+                                        </a4j:commandButton>
                                     </rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Actualizar"/></f:facet>
                                         <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaObra()}" type="submit" value="Actualizar">
@@ -228,8 +228,8 @@
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.fecha}</td>
                                                                                                     <td class="ikont-hot-desea">
-                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.eliminarMetaRegistro(metaregistro.idregistrometaobra)}" type="submit" value="Eliminar">
-                                                                                                        </h:commandButton>
+                                                                                                        <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMetaObra')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                                                                        </a4j:commandButton>
                                                                                                     </td>
                                                                                                     <td class="ikont-hot-desea">
                                                                                                         <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaRegistro()}" type="submit" value="Actualizar">
@@ -340,5 +340,8 @@
                 </rich:panel>
             </h:panelGrid>
         </h:form>
-    </ui:define>   
+        <ui:include src="/co/com/interkont/cobra/obra/meta/modal/modalConfirmacionEliminarMeta.xhtml"/>
+        <ui:include src="/co/com/interkont/cobra/obra/meta/modal/modalConfirmacionEliminarMetaObra.xhtml"/>
+        <ui:include src="/co/com/interkont/cobra/obra/meta/modal/modalConfirmacionEliminarMetaRegistro.xhtml"/>
+    </ui:define>   ="/
 </ui:composition>
