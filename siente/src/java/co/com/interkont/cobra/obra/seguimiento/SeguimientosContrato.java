@@ -51,6 +51,7 @@ public class SeguimientosContrato implements Serializable {
      */
     public SeguimientosContrato() throws Exception {
         seg_encab = new SeguimientoObraEncab();
+        seg_detalle = new SeguimientoObraDetalle();
         existe_registro_codigoobra = false;
         p_usu_id = getSessionBeanCobra().getUsuarioObra().getUsuId();
     }
@@ -148,8 +149,10 @@ public class SeguimientosContrato implements Serializable {
             seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
             Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
             segDAO.update(seg_encab);
-            int usuId=getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
+            int usuId=getSessionBeanCobra().getUsuarioObra().getUsuId();
             SeguimientoObraEncabHist seg_encab_hist = new SeguimientoObraEncabHist(seg_encab,usuId,"MODIFICACION ");
+            seghistDAO.insert(seg_encab_hist);
+            consultarSeguimientoObraDetalle();
             FacesUtils.addInfoMessage("El Registro ha sido actualizado con exito");
             ds.closeConnection();
         } catch (Exception e) {
@@ -281,8 +284,12 @@ public class SeguimientosContrato implements Serializable {
     public void ingresarSeguimientoObraDetalle() throws Exception{
         DataSourceFactory ds = new DataSourceFactory();
         Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
+        SeguimientoObraDetalleId segId = new SeguimientoObraDetalleId();
+        segId.setIdseguimientoEncab(seg_encab.getIdseguimientoEncab());
+        seg_detalle.setId(segId);
         segDAO.insert(seg_detalle);
         ds.closeConnection();
+        FacesUtils.addInfoMessage("Se ha generado un registro de seguimiento con exito");
     }
     
     /**
@@ -346,7 +353,7 @@ public class SeguimientosContrato implements Serializable {
             DataSourceFactory ds = new DataSourceFactory();
             Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
             Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
-            this.listaSeguimientoObraDetalle = segDAO.select(p_idcodigoobra);
+            this.listaSeguimientoObraDetalle = segDAO.select(seg_encab.getIdseguimientoEncab());
             this.listaSeguimientoObraEncabHist = seghistDAO.select(p_idcodigoobra);
             ds.closeConnection();
         } catch (Exception e) {
