@@ -784,6 +784,14 @@
             <from-outcome>IrSeguimientosContrato</from-outcome>
             <to-view-id>/co/com/interkont/cobra/obra/seguimiento/SeguimientosContrato.xhtml</to-view-id>
         </navigation-case>                
+        <navigation-case>
+            <from-outcome>IrSeguimientosContrato</from-outcome>
+            <to-view-id>/co/com/interkont/cobra/obra/seguimiento/SeguimientosContrato.xhtml</to-view-id>
+        </navigation-case>                
+        <navigation-case>
+            <from-outcome>IrPaginaIngresarSeguimientoObraDetalle</from-outcome>
+            <to-view-id>/co/com/interkont/cobra/obra/seguimiento/IngresarSeguimientoObraDetalle.xhtml</to-view-id>
+        </navigation-case>                
     </navigation-rule>
 
     <navigation-rule>
