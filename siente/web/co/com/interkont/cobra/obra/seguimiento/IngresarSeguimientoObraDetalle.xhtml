@@ -36,7 +36,7 @@
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto_1">
                         <h:panelGrid columns="2" width="70%">
                             <rich:panel rendered="true" styleClass="noneborder">
-                                <h:outputLabel  value="AQUI VA LA TABLA DE CONSULTA SI ME ALCANZA EL TIEMPO"/>
+                                <h:outputLabel  value="."/>
                             </rich:panel>
                             <rich:panel rendered="true" styleClass="noneborder">
                                 <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
@@ -74,7 +74,7 @@
                                         <h:outputLabel  value="#{SeguimientosContrato.seg_encab.codigoobra}"/>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
-                                        <h:commandButton action="#{SeguimientosContrato.irApagina_SeguimientosContrato}" actionListener="#{MetasProyecto.ingresarSeguimientoObraDetalle}" type="submit" value="Ingresar"/>
+                                        <h:commandButton action="#{SeguimientosContrato.irApagina_SeguimientosContrato}" actionListener="#{SeguimientosContrato.ingresarSeguimientoObraDetalle}" type="submit" value="Ingresar"/>
                                         <h:commandButton action="#{SeguimientosContrato.irApagina_SeguimientosContrato}" type="submit" value="Regresar"/>
                                     </h:panelGrid>              
                                 </h:panelGroup>

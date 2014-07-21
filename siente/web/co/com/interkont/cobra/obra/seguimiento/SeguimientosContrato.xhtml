@@ -178,39 +178,34 @@
                                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                         var="seguimientoObraDetalle">                           
                                     <rich:column width="5em"><f:facet name="header"><h:outputText  value="Id Seguimiento Encab"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.idseguimiento_encab}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.id.idseguimientoEncab}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Id Seguimiento Detalle"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.idseguimiento_detalle}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.id.idseguimientoDetalle}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Enviado Pago"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.enviada_pago}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.enviadaPago}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Fecha Envio Pago"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.fecha_envio_pago}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.fechaEnvioPago}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Radicado en Tesoreria"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.radicado_tesoreria}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.radicadoTesoreria}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Radicado Financiera"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.radicado_financiera}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.radicadoFinanciera}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Firma Ordenador"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.firma_ordenador}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.firmaOrdenador}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Informacion"/></f:facet>
                                         <h:outputText  value="#{seguimientoObraDetalle.informacion}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Fecha Desembolso"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.fecha_desembolso}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.fechaDesembolso}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Valor Pagos"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.valor_pagos}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.valorPagos}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Orden Pago"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.orden_pago}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.ordenPago}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Saldo Contrato"/></f:facet>
-                                        <h:outputText  value="#{seguimientoObraDetalle.saldo_contrato}"/></rich:column>
+                                        <h:outputText  value="#{seguimientoObraDetalle.saldoContrato}"/></rich:column>
                                 </rich:extendedDataTable>                            
                             </rich:collapsiblePanel>
                         </rich:tab>
-                        <rich:tab header="Reportes Consolidados|">
-                            <h:outputLabel  value="Rep"/>
-                        </rich:tab>
                         <rich:tab header="Historico Cambios|">
                             <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-seguimientos-historicos-cambios">
-                                <h:commandButton id="btCrearMetaObra1"  value="Crear Meta" immediate="true"
-                                                 action="#{SeguimientosContrato.irApagina_IngresarMeta()}" />
                                 <h:commandButton id="btExportarTablaMetas11"  value="Exportar Tabla a Excel" immediate="true"
                                                  action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
                             </rich:collapsiblePanel>                        
