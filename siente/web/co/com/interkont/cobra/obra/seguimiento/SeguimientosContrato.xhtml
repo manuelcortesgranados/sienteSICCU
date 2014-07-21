@@ -9,7 +9,8 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
-    template="/facelets/template_main.xhtml">
+    template="/facelets/template_main.xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:define name="head">
         <title>Nuevo #{var.proyecto} - Supervisor</title>
@@ -175,46 +176,33 @@
                                                  action="#{MetasProyecto.irApagina_IngresarMeta()}" />
                                 <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
                                                  action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
-                                <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{MetasProyecto.listaMetas}" styleClass="ikont-rdt-indicadoresdisponibles"
+                                <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{SeguimientosContrato.listaSeguimientoObraDetalle}" styleClass="ikont-rdt-indicadoresdisponibles"
                                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                        var="objetoMetasProyecto">                           
-                                    <rich:column width="5em">
-                                        <f:facet name="header">
-                                            <h:outputText  value="Id"/>
-                                        </f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.id}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Objetivo"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Programa"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.programa}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="SubPrograma"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.subprograma}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Int Nom Pro"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.nomp}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Descripcion Meta Producto"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.descripcionmetaproducto}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Unidad de Medida"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.unidadmedida}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Nombre Indicador"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.nombreindicador}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.tipometa}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.eliminarMeta()}" type="submit" value="Eliminar">
-                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
-                                        </h:commandLink>
-                                    </rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
-                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
-                                        </h:commandLink>
-                                    </rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
-                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{objetoMetasProyecto.id}" />
-                                            <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
-                                        </h:commandLink>
-                                    </rich:column>
+                                                        var="seguimientoObraDetalle">                           
+                                    <rich:column width="5em"><f:facet name="header"><h:outputText  value="Id Seguimiento Encab"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.idseguimiento_encab}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Id Seguimiento Detalle"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.idseguimiento_detalle}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Enviado Pago"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.enviada_pago}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Fecha Envio Pago"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.fecha_envio_pago}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Radicado en Tesoreria"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.radicado_tesoreria}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Radicado Financiera"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.radicado_financiera}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Firma Ordenador"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.firma_ordenador}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Informacion"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.informacion}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Fecha Desembolso"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.fecha_desembolso}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Valor Pagos"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.valor_pagos}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Orden Pago"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.orden_pago}"/></rich:column>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Saldo Contrato"/></f:facet>
+                                        <h:outputText  value="#{seguimientoObraDetalle.saldo_contrato}"/></rich:column>
                                 </rich:extendedDataTable>                            
                             </rich:collapsiblePanel>
                         </rich:tab>
@@ -224,44 +212,141 @@
                         <rich:tab header="Historico Cambios|">
                             <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-seguimientos-historicos-cambios">
                                 <h:commandButton id="btCrearMetaObra1"  value="Crear Meta" immediate="true"
-                                                 action="#{MetasProyecto.irApagina_IngresarMeta()}" />
+                                                 action="#{SeguimientosContrato.irApagina_IngresarMeta()}" />
                                 <h:commandButton id="btExportarTablaMetas11"  value="Exportar Tabla a Excel" immediate="true"
                                                  action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
-                                <rich:extendedDataTable id="ikont-rdt-metadisponibles1" value="#{MetasProyecto.listaMetas}" styleClass="ikont-rdt-indicadoresdisponibles"
-                                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                                        var="objetoMetasProyecto">                           
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Id Seguimiento Detalle"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Representante Legal"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="NIT"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Infraestructura/Construcion"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Contrato"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Plan de Inversion"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Cronograma de Actividades"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" > - <h:outputText  value="Certificacion Bancaria"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Resolucion Adjudicacion"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Cronograma Proceso Seleccion"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Polizas"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Estado"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Acta Inicio Firmada ALC"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Acta Inicio Firmada ING"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Tramite Completo"/></f:facet>
-                                        <h:outputText  value="#{objetoMetasProyecto.objetivo}"/></rich:column>
-                                </rich:extendedDataTable>                            
-                            </rich:collapsiblePanel>                        </rich:tab>
+                            </rich:collapsiblePanel>                        
+                            <html>
+                                <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                    <c:forEach items="#{SeguimientosContrato.listaSeguimientoObraEncabHist}" var="seguimientoObraEncabHist">
+                                        <tr>
+                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                    <tr>
+                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <tr>
+                                                                    <td colspan="9" class="ikont-hcl-reportes_administrativos">Informacion Maestro</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Id. Seguimiento Encab</td>
+                                                                    <td class="ikont-hot-derechos-reser">Proyecto</td>
+                                                                    <td class="ikont-hot-derechos-reser">Nombre del Representante Legal</td>
+                                                                    <td class="ikont-hot-derechos-reser">NIT</td>
+                                                                    <td class="ikont-hot-derechos-reser">Infraestructura/Construccion</td>
+                                                                    <td class="ikont-hot-derechos-reser">Observaciones</td>
+                                                                    <td class="ikont-hot-derechos-reser">Usuario</td>
+                                                                    <td class="ikont-hot-derechos-reser">Fecha Modificacion</td>
+                                                                    <td class="ikont-hot-derechos-reser">Observaciones Cambio</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.id.idseguimientoEncab}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.id.codigoobra}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.representanteLegal}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.nit}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.infraestructuraCons}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.observaciones}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.usuId}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaModificacion}</td>
+                                                                    <td class="ikont-hot-desea">#{seguimientoObraEncabHist.observacionesCambio}</td>
+                                                                </tr>
+                                                            </table></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <tr>
+                                                                    <td colspan="11" class="ikont-hcl-reportes_administrativos">Informacion relacionada con el seguimiento</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Contrato</td>
+                                                                    <td class="ikont-hot-derechos-reser">Plan de Inversion</td>
+                                                                    <td class="ikont-hot-derechos-reser">Cronograma de Actividades</td>
+                                                                    <td class="ikont-hot-derechos-reser">Certificacion Bancaria</td>
+                                                                    <td class="ikont-hot-derechos-reser">Resolucion Adjudicacion</td>
+                                                                    <td class="ikont-hot-derechos-reser">Cronograma Proceso Seleccion</td>
+                                                                    <td class="ikont-hot-derechos-reser">Polizas</td>
+                                                                    <td class="ikont-hot-derechos-reser">Estado</td>
+                                                                    <td class="ikont-hot-derechos-reser">Acta Inicio Firmada ALC</td>
+                                                                    <td class="ikont-hot-derechos-reser">Acta Inicio Firmada Ing.</td>
+                                                                    <td class="ikont-hot-derechos-reser">Tramite Completo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.contrato}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaContrato}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.planInversion}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaPlanInversion}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.cronogramaActividades}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaCronogramaActividades}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.certificacionBancaria}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaCertificacionBancaria}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.resolucionAdjudicacion}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaResolucionAdjudicacion}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.cronogramaProcesoSeleccion}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaCronogramaProcesoSeleccion}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.polizas}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaPolizas}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.estado}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaEstado}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.actaInicioFirmadaAlc}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaActaInicioFirmadaAlc}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.actaInicioFirmadaIng}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaActaInicioFirmadaIng}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td class="ikont-hot-desea"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.tramiteCompleto}</td>
+                                                                                <td class="ikont-hot-desea">#{seguimientoObraEncabHist.fechaTramiteCompleto}</td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                </tr>
+                                                            </table></td>
+                                                    </tr>
+                                                </table></td>
+                                        </tr>
+                                    </c:forEach>
+                                    <tr>
+                                        <td class="ikont-label-borde">Otro registro</td>
+                                    </tr>
+                                </table>                                
+                            </html>
+                        </rich:tab>
                     </rich:tabPanel>
                 </rich:panel>
             </h:panelGroup>

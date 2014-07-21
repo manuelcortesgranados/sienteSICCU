@@ -5,20 +5,24 @@
  */
 package co.com.interkont.cobra.obra.seguimiento;
 
+import co.com.interkont.cobra.exception.CobraExceptionBean;
 import co.com.interkont.cobra.jdbc.entity.datasource.DataSourceFactory;
+import co.com.interkont.cobra.jdbc.entity.tables.Seguimiento_obra_detalleDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.seguimiento_obra_encabDAO;
-import co.com.interkont.cobra.jdbc.entity.tables.seguimiento_obra_encab_histDAO;
+import co.com.interkont.cobra.jdbc.entity.tables.Seguimiento_obra_encab_histDAO;
+import co.com.interkont.cobra.to.SeguimientoObraDetalle;
 import co.com.interkont.cobra.to.SeguimientoObraDetalleId;
 import co.com.interkont.cobra.to.SeguimientoObraEncab;
 import co.com.interkont.cobra.to.SeguimientoObraEncabHist;
 import co.com.interkont.cobra.to.SeguimientoObraEncabHistId;
+import co.com.interkont.cobra.util.Utilitario;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.IngresarNuevaObra;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import javax.faces.event.ValueChangeEvent;
 
 /**
@@ -33,8 +37,12 @@ public class SeguimientosContrato implements Serializable {
 
     boolean existe_registro_codigoobra;
     SeguimientoObraEncab seg_encab;
+    SeguimientoObraDetalle seg_detalle;
     int p_idcodigoobra;
     int p_usu_id;
+    
+    List<SeguimientoObraDetalle> listaSeguimientoObraDetalle;
+    List<SeguimientoObraEncabHist> listaSeguimientoObraEncabHist;
 
     /**
      * @author Manuel Cortes Granados
@@ -63,6 +71,14 @@ public class SeguimientosContrato implements Serializable {
         this.seg_encab = seg_encab;
     }
 
+    public SeguimientoObraDetalle getSeg_detalle() {
+        return seg_detalle;
+    }
+
+    public void setSeg_detalle(SeguimientoObraDetalle seg_detalle) {
+        this.seg_detalle = seg_detalle;
+    }
+
     public int getP_idcodigoobra() {
         return p_idcodigoobra;
     }
@@ -79,12 +95,33 @@ public class SeguimientosContrato implements Serializable {
         this.p_usu_id = p_usu_id;
     }
 
+    public List<SeguimientoObraDetalle> getListaSeguimientoObraDetalle() {
+        return listaSeguimientoObraDetalle;
+    }
+
+    public void setListaSeguimientoObraDetalle(List<SeguimientoObraDetalle> listaSeguimientoObraDetalle) {
+        this.listaSeguimientoObraDetalle = listaSeguimientoObraDetalle;
+    }
+
+    public List<SeguimientoObraEncabHist> getListaSeguimientoObraEncabHist() {
+        return listaSeguimientoObraEncabHist;
+    }
+
+    public void setListaSeguimientoObraEncabHist(List<SeguimientoObraEncabHist> listaSeguimientoObraEncabHist) {
+        this.listaSeguimientoObraEncabHist = listaSeguimientoObraEncabHist;
+    }
+    
+    
+    
+    
+
     /**
      * @author Manuel Cortes Granados
      * @since Junio 12 2014
      * @return
      */
     public String irApagina_SeguimientosContrato() {
+        consultarSeguimientoObraDetalle();
         return "IrSeguimientosContrato";
     }
 
@@ -109,13 +146,15 @@ public class SeguimientosContrato implements Serializable {
         try {
             DataSourceFactory ds = new DataSourceFactory();
             seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
+            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
             segDAO.update(seg_encab);
+            int usuId=getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo();
+            SeguimientoObraEncabHist seg_encab_hist = new SeguimientoObraEncabHist(seg_encab,usuId,"MODIFICACION ");
             FacesUtils.addInfoMessage("El Registro ha sido actualizado con exito");
             ds.closeConnection();
         } catch (Exception e) {
             FacesUtils.addErrorMessage(e.toString());
         }
-
     }
 
     /**
@@ -145,7 +184,7 @@ public class SeguimientosContrato implements Serializable {
                 this.setSeg_encab(seg);
                 FacesUtils.addInfoMessage("Ya existe un seguimiento relacionado con la obra con codigo " + this.p_idcodigoobra);
             } else {
-                insertarRegistroSeguimientoObraEncab();
+                insertarRegistroSeguimientoObraEncab_PrimeraVez(); 
             }
             irApagina_SeguimientosContrato();
             ds.closeConnection();
@@ -161,12 +200,12 @@ public class SeguimientosContrato implements Serializable {
      * @throws Exception 
      */
 
-    public void insertarRegistroSeguimientoObraEncab() throws SQLException, Exception {
+    public void insertarRegistroSeguimientoObraEncab_PrimeraVez() throws SQLException, Exception {
         String fecha = "2000/01/01";
         DataSourceFactory ds = new DataSourceFactory();
         SimpleDateFormat dt = new SimpleDateFormat("yyyy/mm/dd");
         seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
-        seguimiento_obra_encab_histDAO seghistDAO = new seguimiento_obra_encab_histDAO(ds.getConnection());
+        Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
         SeguimientoObraEncab seg = segDAO.select(p_idcodigoobra);
         SeguimientoObraEncabHist seghist = new SeguimientoObraEncabHist();
         
@@ -232,7 +271,20 @@ public class SeguimientosContrato implements Serializable {
         
         FacesUtils.addInfoMessage("Se ha generado un registro para seguimientos con respecto a la obra con codigo " + this.p_idcodigoobra);
     }
-
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Julio 2014 11:10 AM
+     * @throws Exception 
+     */
+    
+    public void ingresarSeguimientoObraDetalle() throws Exception{
+        DataSourceFactory ds = new DataSourceFactory();
+        Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
+        segDAO.insert(seg_detalle);
+        ds.closeConnection();
+    }
+    
     /**
      * @author Manuel Cortes Granados
      * @since Junio 23 2014 7:09 AM
@@ -256,6 +308,16 @@ public class SeguimientosContrato implements Serializable {
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since Julio 18 2014 10:14 AM
+     * @return 
+     */
+    
+    protected CobraExceptionBean getCobraExceptionBean() {
+        return (CobraExceptionBean) FacesUtils.getManagedBean("CobraExceptionBean");
+    }
 
     /**
      * @author Manuel Cortes Granados
@@ -269,5 +331,60 @@ public class SeguimientosContrato implements Serializable {
     public void mostrarMensaje(ValueChangeEvent evento) {
         FacesUtils.addInfoMessage("mostrarMensaje " + this.p_idcodigoobra);
     }
-
+    
+    /**
+     * Este metodo tiene por objeto consultar los seguimientos en detalle los cuales se muestran
+     * en la segunda pestaña llamada [Seguimiento en detalle].  Se llama cuando se carga
+     * toda la forma principal o pagina
+     * 
+     * @author Manuel Cortes Granados
+     * @since 19 JUliO 2014 9:00 AM
+     */
+    
+    public void consultarSeguimientoObraDetalle(){
+        try {
+            DataSourceFactory ds = new DataSourceFactory();
+            Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
+            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
+            this.listaSeguimientoObraDetalle = segDAO.select(p_idcodigoobra);
+            this.listaSeguimientoObraEncabHist = seghistDAO.select(p_idcodigoobra);
+            ds.closeConnection();
+        } catch (Exception e) {
+            FacesUtils.addErrorMessage(e.toString());
+        }        
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 30 Junio 2014 12:10 PM
+     * @param e
+     * @throws Exception
+     */
+    public void procesarError(SQLException se) throws Exception {
+        Utilitario util = new Utilitario();
+        FacesUtils.addErrorMessage("Ha ocurrido un error en el Sistema");
+        if (getCobraExceptionBean().isAmbiente_pruebas()) {
+            FacesUtils.addErrorMessage("Codigo del error en la base de datos : " + se.getErrorCode());
+            FacesUtils.addErrorMessage(se.toString());
+            System.out.println(util.getMessageStackException(se));
+        }
+        throw se;
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Julio 2014 10:25 AM
+     * @return 
+     */
+    
+    public String irApagina_SeguimientoObraDetalle() {
+        return "IrPaginaIngresarSeguimientoObraDetalle";
+    }
+    
+    
+    public void metodoPrueba(){
+        FacesUtils.addErrorMessage("ok METODOPRUEBA");
+    }
+    
+    
 }
