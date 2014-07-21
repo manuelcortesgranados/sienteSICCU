@@ -1087,7 +1087,6 @@ public class MetasProyecto implements Serializable {
         if (test) {
             FacesUtils.addErrorMessage("Codigo del error en la base de datos : " + se.getErrorCode());
             FacesUtils.addErrorMessage(se.toString());
-            //FacesUtils.addErrorMessage(util.getMessageStackException(se));
             System.out.println(util.getMessageStackException(se));
         }
         throw se;
