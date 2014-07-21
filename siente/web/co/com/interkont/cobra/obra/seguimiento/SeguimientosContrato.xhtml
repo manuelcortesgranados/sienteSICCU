@@ -171,11 +171,9 @@
                             </h:panelGrid>                        
                         </rich:tab>
                         <rich:tab header="Seguimiento en detalle|">
-                            <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-metasdisponibles">
-                                <h:commandButton id="btCrearMetaObra"  value="Crear Meta" immediate="true"
-                                                 action="#{MetasProyecto.irApagina_IngresarMeta()}" />
-                                <h:commandButton id="btExportarTablaMetas1"  value="Exportar Tabla a Excel" immediate="true"
-                                                 action="#{MetasProyecto.generarReporteExcelTabla1()}" />                                    
+                            <rich:collapsiblePanel switchType="client" header="Registro de Seguimientos" expanded="true" id="ikont-rcp-seguimientos">
+                                <h:commandButton id="btCrearGenerarSeguimiento"  value="Generar Seguimiento" immediate="true"
+                                                 action="#{SeguimientosContrato.irApagina_SeguimientoObraDetalle()}" />
                                 <rich:extendedDataTable id="ikont-rdt-metadisponibles" value="#{SeguimientosContrato.listaSeguimientoObraDetalle}" styleClass="ikont-rdt-indicadoresdisponibles"
                                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                         var="seguimientoObraDetalle">                           
