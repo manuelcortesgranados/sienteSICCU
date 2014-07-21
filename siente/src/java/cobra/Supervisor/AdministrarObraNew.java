@@ -43,7 +43,8 @@ import cobra.util.RutasWebArchivos;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
 import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-import email.MailFonade;
+import cobra.mail.MailFonade;
+import cobra.templates.TemplateFonade;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -52,6 +53,7 @@ import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -2840,16 +2842,23 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             return;
         }
         String [] recipients = {obra.getSupervisor().getStremail()};
-        String subject = "Solicitud de validación para un Avance";
+        String subject = "Solicitud de validación de Avance";
         StringBuilder body = new StringBuilder();
-        body.append("<div><b>Obra:&nbsp;</b>").append(sva.getObra().getStrnombreobra()).append("</div>");
-        for (Periodo periodo : periodosalimentacionSolicitudValidacionAvance) {
-            if(periodo.getIntidperiodo() == sva.getPeriodo().getIntidperiodo()){
-                body.append("<div><b>Periodo:&nbsp;</b>").append(periodo.getDatefeciniperiodo()).append(" - ").append(periodo.getDatefecfinperiodo()).append("</div>");
+        
+        HashMap<String,String> map = new HashMap<String, String>();
+        map.put("nombreobra",obra.getStrnombreobra() );
+        map.put("observaciones",sva.getObservaciones());
+        
+        for (Periodo per : this.periodosalimentacionSolicitudValidacionAvance) {
+            if(per.getIntidperiodo() == sva.getPeriodo().getIntidperiodo()){
+                map.put("periodo",sva.getPeriodo().getDatefeciniperiodo() +" - "+sva.getPeriodo().getDatefecfinperiodo());
                 break;
             }
         }
-        body.append("<div><b>Observaciones:&nbsp;</b>").append(sva.getObservaciones());
+        
+        TemplateFonade templateFonade = new TemplateFonade(TemplateFonade.TEMPLATE_SVA_SOLICITUD);
+        
+        body.append(templateFonade.getTemplateFinalText(map));
         MailFonade mailFonade = new MailFonade();
         mailFonade.sendMail(recipients, subject, body.toString());
     }

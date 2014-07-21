@@ -56,10 +56,13 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.interkont.bitacora.entidades.Accion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
-import email.MailFonade;
+import cobra.mail.MailFonade;
+import cobra.templates.TemplateFonade;
+import com.sun.faces.util.CollectionsUtils;
 import java.io.Serializable;
 import java.math.RoundingMode;
 import java.util.Collections;
+import java.util.HashMap;
 import javax.faces.context.FacesContext;
 
 /**
@@ -2157,15 +2160,19 @@ public class DetalleObra implements Serializable {
             return;
         }
         String[] recipients = {obra.getInterventor().getStremail()};
-        String subject = "Solicitud de validación para un Avance";
+        String subject = "Respuesta Solicitud de validación Avance";
         StringBuilder body = new StringBuilder();
+        
+        HashMap<String,String> map = new HashMap<String, String>();
+        map.put("resultado",sva.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO ? "aprobada" : "rechazada" );
+        map.put("nombreobra",obra.getStrnombreobra() );
+        map.put("periodo",sva.getPeriodo().getDatefeciniperiodo() +" - "+sva.getPeriodo().getDatefecfinperiodo());
+        map.put("respuesta",sva.getRespuesta() == null? "-":sva.getRespuesta());
+        
+        TemplateFonade templateFonade = new TemplateFonade(TemplateFonade.TEMPLATE_SVA_RESPUESTA);
+        
+        body.append(templateFonade.getTemplateFinalText(map));
 
-        body.append("<h1>Su solicitud ha sido ").append(sva.getEstado() == SolicitudValidacionAvance.ESTADO_APROBADO ? "aprobada" : "rechazada").append("!</h1>");
-        body.append("<div><b>Obra:&nbsp;</b>").append(obra.getStrnombreobra()).append("</div>");
-        body.append("<div><b>Periodo:&nbsp;</b>").append(sva.getPeriodo().getDatefeciniperiodo()).append(" - ").append(sva.getPeriodo().getDatefecfinperiodo()).append("</div>");
-        if (sva.getRespuesta() != null) {
-            body.append("<div><b>Respuesta:&nbsp;</b>").append(sva.getRespuesta()).append("</div>");
-        }
         MailFonade mailFonade = new MailFonade();
         mailFonade.sendMail(recipients, subject, body.toString());
     }
