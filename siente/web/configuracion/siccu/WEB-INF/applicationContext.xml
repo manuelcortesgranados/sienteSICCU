@@ -28,6 +28,7 @@
        <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>
+                <value>co/com/interkont/cobra/to/Bitacora.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Typeresultadovalidacion.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Fase.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Cargo.hbm.xml</value>
