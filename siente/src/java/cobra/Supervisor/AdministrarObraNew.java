@@ -1221,7 +1221,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     protected DetalleObra getDetalleObra() {
         return (DetalleObra) FacesUtils.getManagedBean("Supervisor$DetalleObra");
     }
-
+    protected BitacoraObra getBitacoraObra() {
+        return (BitacoraObra) FacesUtils.getManagedBean("Supervisor$BitacoraObra");
+    }
     protected IngresarNuevaObra getIngresarNuevaObra() {
         return (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
     }
@@ -2643,5 +2645,11 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void limpiarVideo() {
         videoEnlace = new Videoevolucionobra();
         videoEnlace.setObra(getObra());
+    }
+    
+    public String iniciarBitacora() {
+        opcion = 11;
+        getBitacoraObra().iniciarBitacora();
+        return "adminBitacora";
     }
 }

@@ -217,6 +217,11 @@
         <managed-bean-class>cobra.Supervisor.DetalleObra</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>Supervisor$BitacoraObra</managed-bean-name>
+        <managed-bean-class>cobra.Supervisor.BitacoraObra</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>Supervisor$DepurarImagen</managed-bean-name>
@@ -679,6 +684,10 @@
         <navigation-case>
             <from-outcome>admindetalleObra</from-outcome>
             <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>adminBitacora</from-outcome>
+            <to-view-id>/Supervisor/BitacoraObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>adminfinalizar</from-outcome>

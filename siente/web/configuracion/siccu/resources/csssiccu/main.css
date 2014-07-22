@@ -1634,6 +1634,26 @@ input[type="text"], input[type="password"], select{
     background-position: 0px -30px;
 }
 
+.ikont-acb-btn_comentar{
+    background-image: url(../imgs/comentar_btn.png);
+    background-repeat: no-repeat;
+    width: 126px;
+    height: 33px;
+    display: block;
+    background-position: 0px 0px;
+    background-color: white !important;
+}
+
+.ikont-acb-btn_comentar:hover{
+    background-image: url(../imgs/comentar_btn.png);
+    background-repeat: no-repeat;
+    width: 126px;
+    height: 33px;
+    display: block;
+    background-position: 0px -30px;
+    background-color: white !important;
+}
+
 .ikont-div-mostrar-ingreso {
     height:40px; width:100%;
     background-color: #006496;
@@ -2103,6 +2123,14 @@ input[type="text"], input[type="password"], select{
 
 .ikont-posicion-documentos-proyecto:hover, .ikont-posicion-documentos-proyecto.buttonactive{
     background-position: -820px -82px;
+}
+
+.ikont-posicion-bitacora-proyecto{
+    background-position: -1097px -25px;
+}
+
+.ikont-posicion-bitacora-proyecto:hover, .ikont-posicion-bitacora-proyecto.buttonactive{
+    background-position: -1097px -83px;
 }
 
 .ikont-posicion-participacion-ciudadana-proyecto{

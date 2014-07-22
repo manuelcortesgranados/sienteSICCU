@@ -2106,12 +2106,12 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-posicion-participacion-ciudadana-proyecto{
-    background-position: -920px -25px;
+    background-position: -1020px -25px;
     width: 120px;
 }
 
 .ikont-posicion-participacion-ciudadana-proyecto:hover, .ikont-posicion-participacion-ciudadana-proyecto.buttonactive{
-    background-position: -920px -82px;
+    background-position: -1020px -82px;
 }
 
 .ikont-hr-separador-usuario{
