@@ -33,15 +33,15 @@
     <ui:define name="body">
 
         <script type='text/javascript'>
-            
-            function consultarPorMunicipio(){
-                if (document.getElementById('formRepBody:formRepGeo:muniGeo').value==-1){
+
+            function consultarPorMunicipio() {
+                if (document.getElementById('formRepBody:formRepGeo:muniGeo').value == -1) {
                     alert('Debe elegir un municipio');
-                }else{
-                    
+                } else {
+
                 }
             }
-            
+
             function showRegionMetasUnidad(radio)
             {
 
@@ -69,27 +69,7 @@
                 }
 
             }
-            function showRegionAudiUnidad(radio)
-            {
 
-                if (radio.value == 'Unidad') {
-
-                    document.getElementById('formRepBody:formRepAuditoria:btnUnidadA').style.display = '';
-
-                    document.getElementById('formRepBody:formRepAuditoria:outNumConvenioA').style.display = 'none';
-                    document.getElementById('formRepBody:formRepAuditoria:inNumConvenioA').style.display = 'none';
-                    document.getElementById('formRepBody:formRepAuditoria:btnConvenioA').style.display = 'none';
-
-
-                } else {
-                    document.getElementById('formRepBody:formRepAuditoria:btnUnidadA').style.display = 'none';
-
-                    document.getElementById('formRepBody:formRepAuditoria:outNumConvenioA').style.display = '';
-                    document.getElementById('formRepBody:formRepAuditoria:inNumConvenioA').style.display = '';
-                    document.getElementById('formRepBody:formRepAuditoria:btnConvenioA').style.display = '';
-                }
-
-            }
             function getHref() {
 
                 var unidadId = document.getElementById('formRepBody:formRepMonEva:selUnidadMonEva').value;
@@ -481,20 +461,10 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
 
                                 <div class="dropdown">
 
-                                    <div class="seleccione">
-                                        <h:selectOneRadio id="radioMetas" value="#{var.unidad}" onchange="showRegionAudiUnidad(this);">
-                                            <f:selectItem itemValue="#{var.unidad}" itemLabel="#{var.unidad}" />
-                                            <f:selectItem itemValue="#{var.convenio}" itemLabel="#{var.convenio}" />
-                                        </h:selectOneRadio>
-                                    </div>
-
-                                </div>
-                                <div class="dropdown">
-
                                     <h:outputText value="#{var.unidad}" styleClass="hot_n_convenio label_texto_convenio"/>
 
                                     <h:selectOneMenu id="selUnidadA" value="#{Supervisor$Contrato.selectedUnit}" required="true" style="font-style: italic!important; font-size: 12px!important;" >
-                                        <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                        <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                         <f:selectItems value="#{Supervisor$Contrato.lstUnidades}" var="unidad" itemValue="#{unidad.id}" itemLabel="#{unidad.nombre}" />
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpAuditoria" />
                                     </h:selectOneMenu>
@@ -503,16 +473,21 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                                 <div class="dropdown">
 
                                     <h:outputText id="outEstConvenioA" value="Período" styleClass="hot_n_convenio label_texto_convenio"/>
-
-                                    <h:inputText id="periodoA" value="#{Reportes.periodo}" maxlength="6" required="true" >                                        <rich:placeholder value="Ej: 201411 (añoMes)" styleClass="input_num_convenio"/>
-                                        <f:validateLength maximum="6"/>
+                                    <h:selectOneMenu id="selPeriodoA" value="#{Reportes.periodo}" required="true" style="font-style: italic!important; font-size: 12px!important;" >
+                                        <f:selectItem itemLabel="201407" itemValue="201407"/>
+                                        <f:selectItem itemLabel="201408" itemValue="201408"/>
+                                        <f:selectItem itemLabel="201409" itemValue="201409"/>
+                                        <f:selectItem itemLabel="201410" itemValue="201410"/>
+                                        <f:selectItem itemLabel="201411" itemValue="201411"/>
+                                        <f:selectItem itemLabel="201412" itemValue="201412"/>
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpAuditoria" />
-                                    </h:inputText>
+                                    </h:selectOneMenu>
+
                                 </div>
                                 <div class="dropdown">
 
-                                    <h:outputText id="outNumConvenioA" style="display: none;" value="Número del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>
-                                    <h:inputText id="inNumConvenioA" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important; width: 320px!important;display: none;" maxlength="25" required="true" >
+                                    <h:outputText id="outNumConvenioA" value="Número del Convenio" styleClass="hot_n_convenio label_texto_convenio"/>
+                                    <h:inputText id="inNumConvenioA" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 32px!important;" maxlength="25" required="true" >
                                         <rich:placeholder value="Ej: 442D5" styleClass="input_num_convenio"/>
                                         <f:validateLength maximum="255"/>
                                         <a4j:ajax execute="@this" event="change" render="gpPopUpAuditoria" />
@@ -521,9 +496,7 @@ usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank')
                                 </div>
 
                                 <div class="descargarbtn">
-                                    <h:commandLink id="btnUnidadA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
-
-                                    <h:commandLink id="btnConvenioA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" style="display: none;" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4a&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '0' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
+                                    <h:commandLink id="btnConvenioA" styleClass="ikont-label-menu-estr-sub-titulo "   immediate="true" value="#{var.descargar}" onclick="window.open(document.location.href = '#{var.ipserver}/ReportesFonade/Servlet_Reportes?identificador_reporte=4&amp;identificador_unidad=#{Supervisor$Contrato.selectedUnit == '-1' ? 'ALL' : Supervisor$Contrato.selectedUnit}&amp;periodo_reporte=#{Reportes.periodo}&amp;identificador_convenio=#{Supervisor$Contrato.contrato.strnumcontrato}&amp;usuario=#{SessionBeanCobra.ciudadanoservice.usuariomostrar.usuLogin}', '_blank');"/>
                                 </div>
                             </div>
                         </div>
