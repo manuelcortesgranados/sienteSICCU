@@ -354,7 +354,7 @@ public class SeguimientosContrato implements Serializable {
             Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
             Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
             this.listaSeguimientoObraDetalle = segDAO.select(seg_encab.getIdseguimientoEncab());
-            this.listaSeguimientoObraEncabHist = seghistDAO.select(p_idcodigoobra);
+            //this.listaSeguimientoObraEncabHist = seghistDAO.select(p_idcodigoobra);
             ds.closeConnection();
         } catch (Exception e) {
             FacesUtils.addErrorMessage(e.toString());

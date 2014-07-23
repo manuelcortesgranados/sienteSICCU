@@ -35,27 +35,32 @@
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
-                            <h:outputLabel  value="Objetivo"/>
+                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true">
+                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
+                                <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
+                                               itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
+                            </h:selectOneMenu>                                                            
+                            <h:outputLabel  value="Objetivo : "/>
                             <h:inputTextarea required="true" id="strobjetivo" value="#{MetasProyecto.meta.objetivo}"/>
                             <rich:tooltip value="Objetivo del Indicador" target="strobjetivo"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
-                            <h:outputLabel  value="Programa"/>
+                            <h:outputLabel  value="Programa : "/>
                             <h:inputTextarea  required="true" id="strprograma" value="#{MetasProyecto.meta.programa}"/>
                             <rich:tooltip value="Programa" target="strprograma"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
-                            <h:outputLabel  value="Subprograma"/>
+                            <h:outputLabel  value="Subprograma : "/>
                             <h:inputTextarea required="true" id="strsubprograma" value="#{MetasProyecto.meta.subprograma}"/>
                             <rich:tooltip value="Subprograma" target="strsubprograma"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="No M.P."/>
                             <h:inputText  required="true" id="intnomp" size="100" maxlength="100" value="#{MetasProyecto.meta.nomp}"/>
                             <rich:tooltip value="Numero Meta" target="intnomp"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
-                            <h:outputLabel  value="Descripcion Meta Producto"/>
+                            <h:outputLabel  value="Descripcion Meta Producto : "/>
                             <h:inputTextarea  required="true" id="strdescripcionmetaproducto" value="#{MetasProyecto.meta.descripcionmetaproducto}"/>
                             <rich:tooltip value="Descripcion Meta del Producto.  Ejemplo : Contruir, Adecuar y/o mantener en el cuatrienio 500 sedes educativas en los municipios no certificados no certificados del departamento" target="strdescripcionmetaproducto"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
-                            <h:outputLabel  value="Unidad de Medida de la Meta (KM, UN, M2) "/>
+                            <h:outputLabel  value="Unidad de Medida de la Meta (KM, UN, M2) : "/>
                             <h:selectOneMenu id="cmbUnidadMeta" value="#{MetasProyecto.meta.unidadmedida}" immediate="true">
                                 <f:selectItems value="#{MetasProyecto.listaUnidadMedida}" />
                             </h:selectOneMenu>
                             <rich:tooltip value="cmbFrecuenciaMedicion" target="cmbFrecuenciaMedicion"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
-                            <h:outputLabel  value="Nombre del Indicador Meta de Producto"/>
+                            <h:outputLabel  value="Nombre del Indicador Meta de Producto : "/>
                             <h:inputTextarea  required="false" id="strnombreindicador" value="#{MetasProyecto.meta.nombreindicador}"/>
                             <rich:tooltip value="Ejemplo : No. de sedes educativas intervenidas en el cuatrienio" target="strnombreindicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Tipo de Meta"/>
@@ -64,6 +69,12 @@
                                 <f:selectItem itemLabel="Producto" itemValue="2" />                            
                             </h:selectOneMenu>
                             <rich:tooltip value="RESULTADO/PRODUCTO" target="inttipometa"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Linea Base del Indicador : "/>
+                            <h:inputTextarea  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
+                            <rich:tooltip value="Ejemplo : 100 si se desea que la meta sea 100" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
+                            <h:inputTextarea  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
+                            <rich:tooltip value="Valor Esperado del Indicador Producto Cuatrenio" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>

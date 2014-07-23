@@ -53,6 +53,8 @@
                             <h:inputText  immediate="true" required="false" id="strnombreindicador" size="25" maxlength="25" value="#{MetasProyecto.meta.nombreindicador}"/>
                             <h:outputLabel  value="Tipo Meta"/>
                             <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.tipometa}"/>
+                            <h:outputLabel  value="Linea Base"/>
+                            <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.actualizarMeta}" type="submit" value="Actualizar"/>

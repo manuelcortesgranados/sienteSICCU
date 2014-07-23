@@ -96,9 +96,11 @@
                                     <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
                                     <h:outputLabel  value="Año"/>
                                     <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
+                                    <h:outputLabel  value="Programado Meta Producto"/>
+                                    <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.programadoMetaProducto}"/>
                                     <h:outputLabel  value="Frecuencia Medicion"/>
                                     <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.periodomedida.intidperiomedida}" immediate="true">
-                                        <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
+                                        <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
                                         <f:selectItems value="#{MetasProyecto.listaPeriodoMedida}" var="periodoMedida"
                                                        itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
                                     </h:selectOneMenu>                                
