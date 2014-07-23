@@ -10,7 +10,7 @@
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:define name="head">
-        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <title></title>
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
     <ui:define name="menu">
@@ -31,7 +31,7 @@
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
                     <f:facet name="header">
-                        <h:outputText  value="Ingresar Nueva Meta"/>
+                        <h:outputText  value="Asociar Meta con Proyecto Actual"/>
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid columns="2" width="100%">
@@ -95,9 +95,9 @@
                                     <h:outputLabel  value="Proyecto"/>
                                     <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
                                     <h:outputLabel  value="Año"/>
-                                    <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
+                                    <h:inputText   immediate="true" required="false" id="anio" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.anio}"/>
                                     <h:outputLabel  value="Programado Meta Producto"/>
-                                    <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.programadoMetaProducto}"/>
+                                    <h:inputText   immediate="true" required="false" id="programadoMetaProducto" size="50" maxlength="50"  value="#{MetasProyecto.metaobra.programadoMetaProducto}"/>
                                     <h:outputLabel  value="Frecuencia Medicion"/>
                                     <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.metaobra.periodomedida.intidperiomedida}" immediate="true">
                                         <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
@@ -105,7 +105,7 @@
                                                        itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
                                     </h:selectOneMenu>                                
                                 </h:panelGrid>             
-                                <h:panelGrid columns="3" width="100%">
+                                <h:panelGrid columns="3" width="100%" rendered="false">
                                     <rich:panel rendered="true" styleClass="noneborder">
                                         <f:facet name="header">
                                             <h:outputText  value="Rango Inferior"/>

@@ -31,10 +31,16 @@
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
                     <f:facet name="header">
-                        <h:outputText  value="#{var.modulometas}"/>
+                        <h:outputText  value="Actualizacion Metas"/>
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
+                            <h:outputLabel  value="Plan de Desarrollo : "/>
+                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true">
+                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
+                                <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
+                                               itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
+                            </h:selectOneMenu>
                             <h:outputLabel  value="Objetivo"/>
                             <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.meta.objetivo}"/>
                             <h:outputLabel  value="Programa"/>
@@ -54,10 +60,13 @@
                             <h:outputLabel  value="Tipo Meta"/>
                             <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.tipometa}"/>
                             <h:outputLabel  value="Linea Base"/>
-                            <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
+                            <h:inputText  immediate="true" required="false" id="lineaBase" size="25" maxlength="25" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
+                            <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
+                            <h:inputTextarea  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.actualizarMeta}" type="submit" value="Actualizar"/>
+                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" value="Regresar"/>
                         </h:panelGrid>              
                     </h:panelGroup>
                 </rich:panel>

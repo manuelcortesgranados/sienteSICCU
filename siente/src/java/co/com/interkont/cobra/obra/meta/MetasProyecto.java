@@ -330,7 +330,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void actualizarCampoPorcentaje(ValueChangeEvent event) throws Exception {
-        metaregistro.setPorcentaje((metaregistro.getMetaAcumulada() / metaregistro.getMetaProyectada()) * 100);
+        //metaregistro.setPorcentaje((metaregistro.getMetaAcumulada() / metaregistro.getMetaProyectada()) * 100);
         FacesContext.getCurrentInstance().renderResponse();
     }
 
@@ -354,6 +354,7 @@ public class MetasProyecto implements Serializable {
         }
         listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
         generarArchivoXMLFusionChart_MetaRegistro();
+        cargarListaPlanDesarrollo();
         return "Metas";
     }
 
@@ -371,8 +372,7 @@ public class MetasProyecto implements Serializable {
         this.getMeta().setNombreindicador("Nombre Indicador");
         this.getMeta().setDescripcionmetaproducto("Descripcion Meta Producto");
         this.getMeta().setTipometa(0);
-        cargarListaPlanDesarrollo();
-
+            
         return "IngresarMeta";
     }
 
@@ -450,10 +450,11 @@ public class MetasProyecto implements Serializable {
      */
     public String irApagina_IngresarMetaRegistro() throws Exception {
         this.cargarListaPeriodosFrecuencia(this.p_periodomedida);
-        DataSourceFactory ds = new DataSourceFactory();
+        /*DataSourceFactory ds = new DataSourceFactory();
         MetasDAO metDAO = new MetasDAO(ds.getConnection());
         this.metaregistro.setMetaProyectada(metDAO.consultarLineaBaseIndicador(this.p_idmeta));
-        ds.closeConnection();
+        ds.closeConnection();*/
+        consultarMetaparaConsulta();
         return "IngresarMetaRegistro";
     }
 
@@ -475,8 +476,17 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String ingresarMeta() throws SQLException, Exception {
-        getSessionBeanCobra().getCobraService().guardarMeta(meta);
-        FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
+        //getSessionBeanCobra().getCobraService().guardarMeta(meta);
+        try {
+            DataSourceFactory ds = new DataSourceFactory();
+            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            metDAO.insert(meta);
+            ds.closeConnection();
+            FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
+            return null;
+        } catch (SQLException se) {
+            procesarError(se);
+        }
         return null;
     }
 
@@ -770,9 +780,10 @@ public class MetasProyecto implements Serializable {
         try {
             DataSourceFactory ds = new DataSourceFactory();
             MetaRegistroDAO metDAO = new MetaRegistroDAO(ds.getConnection());
-            metDAO.delete(idmetaregistro);
+            metDAO.delete(this.p_idmetaregistro);
             ds.closeConnection();
-            FacesUtils.addInfoMessage("La programacion con identificacion " + idmetaregistro + " del registro de la meta ha sido eliminada con exito");
+            FacesUtils.addInfoMessage("El Avance de Meta con ID "+this.p_idmetaregistro+" ha sido eliminado con exito");
+            FacesContext.getCurrentInstance().renderResponse();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -1123,51 +1134,14 @@ public class MetasProyecto implements Serializable {
             String directorio = servletContext.getRealPath("/");
 
             String contenido = "";
-
-            /*for (Meta meta:this.listaMetas){
-             List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
-             for (Metaobra metaobra:l_metaobra){
-             List<Metaregistro> l_metaregistro=this.consultaMetaRegistroDetalle(metaobra.getIdmetaobra());
-                    
-             contenido = "";
-             contenido = contenido+"<graph caption=\"Sales\" PYAxisName=\"\" SYAxisName=\"\" numberPrefix=\"\" showvalues=\"0\" numDivLines=\"4\" formatNumberScale=\"0\" decimalPrecision=\"0\" anchorSides=\"10\" anchorRadius=\"3\" anchorBorderColor=\"009900\">";
-             contenido = contenido+"<categories>";
-             for(Metaregistro metaregistro:l_metaregistro){
-             contenido = contenido+"<category name=\""+metaregistro.getIdregistrometaobra()+"\"/>";
-             }
-             contenido = contenido+"</categories>";
-             contenido = contenido+"<dataset seriesName=\"Meta Acumulada\" color=\"AFD8F8\" showValues=\"0\">";
-             for(Metaregistro metaregistro:l_metaregistro){
-             contenido = contenido+"<set value=\""+metaregistro.getMetaAcumulada()+"\"/>";
-             }
-             contenido = contenido+"</dataset>";
-                    
-             contenido = contenido+"<dataset seriesName=\"Meta Proyectada\" color=\"F6BD0F\" showValues=\"0\">";
-             for(Metaregistro metaregistro:l_metaregistro){
-             contenido = contenido+"<set value=\""+metaregistro.getMetaProyectada()+"\"/>";
-             }
-             contenido = contenido+"</dataset>";
-                    
-             contenido = contenido+"<dataset seriesName=\"Meta Proyectada - Tendencia\" color=\"8BBA00\" showValues=\"0\" parentYAxis=\"S\">";
-             for(Metaregistro metaregistro:l_metaregistro){
-             contenido = contenido+"<set value=\""+metaregistro.getMetaProyectada()+"\"/>";
-             }
-             contenido = contenido+"</dataset>";
-             contenido = contenido+"</graph>";
-             File file = new File(directorio+"/XML/Metaregistro_"+metaobra.getIdmetaobra()+".xml");
-             BufferedWriter output = new BufferedWriter(new FileWriter(file));
-             output.write(contenido);
-             output.close();                    
-             }
-             }*/
             for (Meta meta : this.listaMetas) {
                 List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
                 for (Metaobra metaobra : l_metaobra) {
                     List<Metaregistro> l_metaregistro = this.consultaMetaRegistroDetalle(metaobra.getIdmetaobra());
 
-                    contenido = contenido + "<graph caption=\"Grafica\" subcaption=\"Tendencia Registro Avance Meta\" xAxisName=\"Periodos Medicion\" yAxisMinValue=\"15000\" yAxisName=\"Avance\" decimalPrecision=\"0\" formatNumberScale=\"0\" numberPrefix=\"$\" showNames=\"1\" showValues=\"0\" showAlternateHGridColor=\"1\" AlternateHGridColor=\"ff5904\" divLineColor=\"ff5904\" divLineAlpha=\"20\" alternateHGridAlpha=\"5\">";
+                    contenido = contenido + "<graph caption=\"Grafica\" subcaption=\"Tendencia Registro Avance Meta\" xAxisName=\"Medicion\" yAxisMinValue=\"0\" yAxisName=\"Avance\" decimalPrecision=\"0\" formatNumberScale=\"0\" numberPrefix=\"\" showNames=\"1\" showValues=\"1\" showAlternateHGridColor=\"1\" AlternateHGridColor=\"ff5904\" divLineColor=\"ff5904\" divLineAlpha=\"20\" alternateHGridAlpha=\"5\">";
                     for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "        <set name=\""+metaregistro.getIdregistrometaobra()+"\" value=\""+metaregistro.getMetaAcumulada()+"\" hoverText=\"January\"/>";
+                        contenido = contenido + "        <set name=\""+metaregistro.getIdregistrometaobra()+"\" value=\""+metaregistro.getMetaAcumulada()+"\" hoverText=\""+metaregistro.getMetaAcumulada()+"\"/>";
                     }
                     contenido = contenido + "</graph>            ";
                     File file = new File(directorio + "/XML/Metaregistro_" + metaobra.getIdmetaobra() + ".xml");
@@ -1186,22 +1160,26 @@ public class MetasProyecto implements Serializable {
      * @since 23 Julio 2014 5:52 AM
      */
     
-    public void calcularcamposAutocalculadosMetas() throws Exception{
+    public void calcularcamposAutocalculadosMetas(int idmeta) throws Exception{
         
         int anio_inicial=2012;
         int anio_final=2016;
         
         DataSourceFactory ds = new DataSourceFactory();
-        
         MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
-        double valorEsperadoIndicador = this.meta.getValorEsperadoIndicador();
+        MetasDAO metaDAO = new MetasDAO(ds.getConnection());
+        
+        double valorEsperadoIndicador = metaDAO.consultarValorEsperadoIndicador(idmeta);
         for (anio_inicial=2012;anio_inicial<=anio_final;anio_final++){
             camposAutocalculadosMetasVO camVO = new camposAutocalculadosMetasVO();
             camVO.setAnio(anio_inicial);
             double programado_meta_anio = metDAO.getProgramadoMetaProducto(this.meta.getId(), anio_final);
-            //camVO.setPorcentaje_programado_anio(valorEsperadoIndicador);
+            camVO.setPorcentaje_programado_anio((valorEsperadoIndicador/programado_meta_anio)*100);
+            camVO.setEjecutado_meta_1_trimestre(0);
+            camVO.setEjecutado_meta_2_trimestre(0);
+            camVO.setEjecutado_meta_3_trimestre(0);
+            camVO.setEjecutado_meta_4_trimestre(0);
         }
         ds.closeConnection();
     }
-
 }

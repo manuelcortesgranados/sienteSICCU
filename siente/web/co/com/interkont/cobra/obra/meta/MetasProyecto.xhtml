@@ -70,8 +70,12 @@
                                             <h:outputText  value="#{meta.tipometa}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Plan Desarrollo"/></f:facet>
                                             <h:outputText  value="#{meta.planDesarrollo.nombre}"/></rich:column>
-                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Valor Esperado"/></f:facet>
-                                            <h:outputText  value="#{meta.planDesarrollo.nombre}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Tipo meta"/></f:facet>
+                                            <h:outputText  value="#{meta.tipometa}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Linea Base Indicador"/></f:facet>
+                                            <h:outputText  value="#{meta.lineaBaseIndicador}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Valor Esperado Indicador"/></f:facet>
+                                            <h:outputText  value="#{meta.valorEsperadoIndicador}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
                                             <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMeta')}.show();" styleClass="ikont-a4jcb-modificarobra" >
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
@@ -117,19 +121,19 @@
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                         </h:commandButton>
                                     </rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Registrar Avance"/></f:facet>
-                                        <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Programacion Meta">
+                                    <rich:column width="12em"><f:facet name="header" ><h:outputText  value="Registrar Avance"/></f:facet>
+                                        <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Avance">
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metaobra.idmeta}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_periodomedida}" value="#{metaobra.intidperiomedida}" />
-                                        </h:commandLink>
+                                        </h:commandButton>
                                     </rich:column>
                                 </rich:extendedDataTable>                            
                             </rich:collapsiblePanel>
                         </rich:tab>
-                        <rich:tab header="Consulta Registro de Avance">
+                        <rich:tab header="Consulta Registro de Avance | ">
                             <html>
                                 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
                                     <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
@@ -190,7 +194,7 @@
                                                                     <tr>
                                                                         <td class="ikont-label-borde" valign="top"><table width="100%" border="0" cellspacing="2" cellpadding="2">
                                                                                 <tr>
-                                                                                    <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Relacion Meta Obra</div></td>
+                                                                                    <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Asociacion</div></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="ikont-hot-derechos-reser">Año</td>
@@ -203,7 +207,7 @@
                                                                             </table></td>
                                                                         <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
                                                                                 <tr>
-                                                                                    <td class="ikont-hcl-reportes_administrativos"><div align="center">Registro Programacion Metas en detalle</div></td>
+                                                                                    <td class="ikont-hcl-reportes_administrativos"><div align="center">Registro Avance</div></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
@@ -227,7 +231,8 @@
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
                                                                                                     <td class="ikont-hot-desea">#{metaregistro.fecha}</td>
                                                                                                     <td class="ikont-hot-desea">
-                                                                                                        <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMetaObra')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                                                                        <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMetaRegistro')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.idregistrometaobra}" />
                                                                                                         </a4j:commandButton>
                                                                                                     </td>
                                                                                                     <td class="ikont-hot-desea">

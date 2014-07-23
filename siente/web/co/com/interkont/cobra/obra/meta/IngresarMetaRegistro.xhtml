@@ -31,7 +31,7 @@
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
                     <f:facet name="header">
-                        <h:outputText  value="Ingresar Registro de Meta"/>
+                        <h:outputText  value="Registrar Avance Meta"/>
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto_1">
                         <h:panelGrid columns="2" width="70%">
@@ -110,7 +110,7 @@
                                         <h:outputLabel  value="Meta Proyectada"/>
                                         <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
                                         <h:outputLabel  value="Meta Acumulada"/>
-                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarCampoPorcentaje}"/>
+                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}"/>
                                         <h:outputLabel  value="Observaciones"/>
                                         <h:inputTextarea   immediate="true" required="false" value="#{MetasProyecto.metaregistro.observaciones}"/>
                                     </h:panelGrid>

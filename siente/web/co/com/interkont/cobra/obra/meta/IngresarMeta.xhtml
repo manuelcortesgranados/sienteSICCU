@@ -10,7 +10,7 @@
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:define name="head">
-        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <title></title>
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
     <ui:define name="menu">
@@ -35,11 +35,13 @@
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
-                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true">
+                            <h:outputLabel  value="Plan de Desarrollo : "/>
+                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true" required="true">
                                 <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
                                 <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
                                                itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
-                            </h:selectOneMenu>                                                            
+                            </h:selectOneMenu>
+                            <rich:tooltip value="Plan de Desarrollo" target="cmbPlanDesarrollo"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Objetivo : "/>
                             <h:inputTextarea required="true" id="strobjetivo" value="#{MetasProyecto.meta.objetivo}"/>
                             <rich:tooltip value="Objetivo del Indicador" target="strobjetivo"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
@@ -73,8 +75,8 @@
                             <h:inputTextarea  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
                             <rich:tooltip value="Ejemplo : 100 si se desea que la meta sea 100" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
-                            <h:inputTextarea  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
-                            <rich:tooltip value="Valor Esperado del Indicador Producto Cuatrenio" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:inputTextarea  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
+                            <rich:tooltip value="Valor Esperado del Indicador Producto Cuatrenio" target="valorEsperadoProducto"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>
