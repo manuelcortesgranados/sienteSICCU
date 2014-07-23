@@ -37,7 +37,7 @@
                         <h:outputText  value="Modulo Metas"/>
                     </f:facet>
                     <rich:tabPanel>
-                        <rich:tab header="Modulo Parametrizacion">
+                        <rich:tab header="Parametrizacion | ">
                             <h:panelGroup id="ikont-hpg-rp-metasproyecto">
                                 <rich:collapsiblePanel switchType="client" header="Metas Disponibles" expanded="true" id="ikont-rcp-metasdisponibles">
                                     <h:commandButton id="btCrearMetaObra"  value="Crear Meta" immediate="true"
@@ -68,6 +68,10 @@
                                             <h:outputText  value="#{meta.nombreindicador}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="IPo meta"/></f:facet>
                                             <h:outputText  value="#{meta.tipometa}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Plan Desarrollo"/></f:facet>
+                                            <h:outputText  value="#{meta.planDesarrollo.nombre}"/></rich:column>
+                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Valor Esperado"/></f:facet>
+                                            <h:outputText  value="#{meta.planDesarrollo.nombre}"/></rich:column>
                                         <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Eliminar"/></f:facet>
                                             <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMeta')}.show();" styleClass="ikont-a4jcb-modificarobra" >
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
@@ -88,21 +92,15 @@
                                 </rich:collapsiblePanel>
                             </h:panelGroup>
                         </rich:tab>
-                        <rich:tab header="Metas Asociadas al Proyecto">
+                        <rich:tab header="Asociación | ">
                             <rich:collapsiblePanel switchType="client" header="Metas asociadas al proyecto" expanded="true" id="ikont-rcp-metasasociadasproyecto">
                                 <h:commandButton id="btExportarTablaMetas2"  value="Exportar Tabla de asociaciones a Excel" immediate="true"
                                                  action="#{MetasProyecto.generarReporteExcelTabla2()}" />                                    
                                 <rich:extendedDataTable id="ikont-rdt-metasasociadasproyecto" value="#{MetasProyecto.listaMetasObras}"
                                                         rowClasses="cabezo_tabla01, cabezo_tabla02"
                                                         var="metaobra">                           
-                                    <rich:column width="18em"><f:facet name="header"><h:outputText  value="Id. Meta "/></f:facet>
-                                        <h:outputText  value="#{metaobra.idmeta}"/></rich:column>
-                                    <rich:column width="18em"><f:facet name="header"><h:outputText  value="Id. Meta Obra "/></f:facet>
-                                        <h:outputText  value="#{metaobra.idmetaobra}"/></rich:column>
                                     <rich:column width="18em"><f:facet name="header"><h:outputText  value="Descripcion Meta"/></f:facet>
                                         <h:outputText  value="#{metaobra.descripcionmetaproducto}"/></rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Nombre del Proyecto"/></f:facet>
-                                        <h:outputText  value="#{metaobra.strnombreobra}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Año"/></f:facet>
                                         <h:outputText  value="#{metaobra.anio}"/></rich:column>
                                     <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Frecuencia Medicion"/></f:facet>
@@ -119,8 +117,9 @@
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                         </h:commandButton>
                                     </rich:column>
-                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Registrar Programacion Meta"/></f:facet>
+                                    <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Registrar Avance"/></f:facet>
                                         <h:commandLink action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Programacion Meta">
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metaobra.idmeta}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
@@ -130,7 +129,7 @@
                                 </rich:extendedDataTable>                            
                             </rich:collapsiblePanel>
                         </rich:tab>
-                        <rich:tab header="Registro de Programacion de Metas">
+                        <rich:tab header="Consulta Registro de Avance">
                             <html>
                                 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
                                     <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
@@ -259,14 +258,14 @@
                         </rich:tab>
                         <rich:tab header="Graficos">
                             <html>
-                                <script type="text/javascript" src="/siccu/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
+                                <script type="text/javascript" src="#{request.contextPath}/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
                                 <body>
                                     <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
                                         <c:forEach items="#{MetasProyecto.consultarMetaobrasDetalle(meta.id)}" var="metaobra">
                                             <script type="text/javascript">
-                                                var chart = new FusionCharts("/siccu/LibreriasTerceros/FusionChartsFree/Charts/FCF_MSColumn3DLineDY.swf", "ChartId", "600", "350");
+                                                var chart = new FusionCharts("#{request.contextPath}/LibreriasTerceros/FusionChartsFree/Charts/FCF_Line.swf", "ChartId", "600", "350");
                                                 chart.addParam("WMode", "Transparent");
-                                                chart.setDataURL("/siccu/XML/Metaregistro_#{metaobra.idmetaobra}.xml");
+                                                chart.setDataURL("#{request.contextPath}/XML/Metaregistro_#{metaobra.idmetaobra}.xml");
                                                 chart.render("chartdiv_#{metaobra.idmetaobra}");
                                             </script>
                                             <table width="100%" border="0" cellspacing="1" cellpadding="1">
