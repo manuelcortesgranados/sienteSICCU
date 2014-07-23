@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition    xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:ui="http://java.sun.com/jsf/facelets"
+                   template="./../facelets/template_main.xhtml"
+                   xmlns:a4j="http://richfaces.org/a4j"
+                   xmlns:interkont="http://www.interkont.com/jsf"
+                   xmlns:f="http://java.sun.com/jsf/core"
+                   xmlns:h="http://java.sun.com/jsf/html"
+                   xmlns:rich="http://richfaces.org/rich"
+                   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                   xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+                   >
+    <ui:define name="head">
+        <script>
+            localStorage.setItem('accionBitacoraObra', "ikont-img-posicion-menu-proyecto ikont-posicion-bitacora-proyecto");
+        </script>
+        <style>
+            .arrow_box { 
+                position: relative; 
+                background: #fcfcfc; 
+                border: 2px solid #5ec1e6; 
+                border-radius: 5px;
+                height: 60px;
+            } 
+
+        </style>
+        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            j = jQuery;
+            function mostrarComentarAnimado() {
+                var divComentar = j('.ikont-div-comentar-obra');
+                divComentar.stop().animate({height: '572px'});
+            }
+            function esconderComentarAnimado() {
+                var divComentar = j('.ikont-div-comentar-obra');
+                divComentar.stop().animate({height: '0px'});
+            }
+        </script>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText styleClass="ikont-hot-houtdetalle" rendered="#{!var.nuevomapa}" value="#{var.houtdetalle}" />
+        <h:outputText styleClass="ikont-hot-intcodobra" rendered="#{!var.nuevomapa}" value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})" />
+        <h:outputText styleClass="ikont-hot-strnombremedio" rendered="#{!var.nuevomapa}" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="./../facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="./../facelets/menu_lateral_administrar.xhtml" />  
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml" />
+        </h:panelGroup>
+    </ui:define>
+
+    <ui:define name="menusuperior">
+        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml" />
+        </h:panelGroup>
+        <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml" />
+    </ui:define>
+
+    <ui:define name="body">
+
+        <h:body>
+            <h:form>
+                <div style="left: 860px; position: relative;">
+                    <a4j:commandButton type="button" id="Comentar" styleClass="ikont-acb-btn_comentar" oncomplete="#{rich:component('mp-ingresar-Comentario-Obra')}.show();"  execute="@this" immediate="true">
+                    </a4j:commandButton>
+                </div>
+                <rich:list id="commentList" value="#{Supervisor$BitacoraObra.comentarios}" var="comentario" style="width: 900px; padding-left: 100px; list-style: none"  >
+                    <div class="arrow_box" >
+                        <h:outputText value="#{comentario.supervisor.strnombrecompleto}" style="font-size: 13px; padding-left: 5px; padding-top: 4px; color:cadetblue; font-weight: bold" />
+                        <h:outputText value="#{comentario.fecha}" style="float: right; font-size: 10px; padding-right: 5px; padding-top: 4px; color:cadetblue"/>
+                        <br/>
+                        <h:outputText value="#{comentario.comentario}" style="font-size: 13px; padding-left: 25px;" />
+                        <br/>
+                        <div style="float: right; padding-right: 15px; padding-bottom: 4px" >
+                            <h:graphicImage value="/resources/imgs/clip_btn.png" rendered="#{comentario.documento!=null}" />
+                            <a4j:commandLink value="#{comentario.documento.strnombre}" action="#{Supervisor$BitacoraObra.downloadFile()}" rendered="#{comentario.documento!=null}" style="font-size: 12px; color:cadetblue; font-weight: bold" onclick="windowdownload();">
+                                <a4j:param assignTo="#{Supervisor$BitacoraObra.carguearchivo}" value="#{comentario.documento.strubicacion}" />
+                            </a4j:commandLink>
+                        </div>
+                    </div>
+                    <br />
+                </rich:list>
+            </h:form>
+        </h:body>
+
+        <ui:include src="/modal/ingresarComentarioObra.xhtml"/>
+    </ui:define>
+
+</ui:composition>

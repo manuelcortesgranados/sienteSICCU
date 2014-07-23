@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-ingresar-Comentario-Obra" modal="false" autosized="true" resizeable="false" headerClass="rich-panel-header" style="background: white;width: 600px !important" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-seleccioninterventor" value="#{var.adicionar} #{var.comentario}"   />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder-mp-comentario" styleClass="ikont-acl-cerrar closemodal"  
+                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-ingresar-Comentario-Obra')}.hide();
+                                                  return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form>
+            <h:panelGroup layout="block"  >
+                <h:panelGrid columns="2" >
+                    <h:outputLabel value="#{var.comentario}" for="comment"/>
+                    <h:inputTextarea id="comment" value="#{Supervisor$BitacoraObra.comentario.comentario}" style="width: 400px !important;height: 200px;" required="true"/>
+                    <br/>
+                    <interkont:spacer height="5" />
+                    <div style="height:70px">
+                    <rich:fileUpload fileUploadListener="#{Supervisor$BitacoraObra.listener}" id="upload" acceptedTypes="doc, docx"
+                                     ontyperejected="alert('Only doc, docx files are accepted');" maxFilesQuantity="1" 
+                                     uploadLabel="#{var.subir}" 
+                                     addLabel="#{var.adicionar}" 
+                                     clearAllLabel="#{var.borrartodo}"
+                                     clearLabel="#{var.eliminar}"
+                                     doneLabel="#{var.hecho}" style="width: 400px !important;height: 100px !important;">
+                        <a4j:ajax event="uploadcomplete" render="commentList" />
+                    </rich:fileUpload>
+                    </div>
+                </h:panelGrid>
+            </h:panelGroup>
+            <br/>
+            <br/>
+
+            <h:panelGroup layout="block" style="padding-left: 210;">
+                <h:panelGrid columns="2">
+                    <a4j:commandButton id="comentar" value="Comentar"  action="#{Supervisor$BitacoraObra.comentar()}" oncomplete="#{rich:component('mp-ingresar-Comentario-Obra')}.hide()" render="commentList" />
+                <a4j:commandButton id="cancelar" value="Cancelar" action="#{Supervisor$BitacoraObra.cancelar()}"  onclick="#{rich:component('mp-ingresar-Comentario-Obra')}.hide()"  />
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:form>       
+        <style>
+            div.rf-fu-lst{
+                height: 70px !important;
+            }
+        </style>
+    </rich:popupPanel>
+</ui:composition>
