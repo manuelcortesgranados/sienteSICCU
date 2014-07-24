@@ -129,8 +129,7 @@ public class BitacoraObra implements Serializable {
 
     public String downloadFile() {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + carguearchivo);
-
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/" + carguearchivo);
         } catch (IOException ex) {
             Logger.getLogger(AdministrarObraNew.class
                     .getName()).log(Level.SEVERE, null, ex);
