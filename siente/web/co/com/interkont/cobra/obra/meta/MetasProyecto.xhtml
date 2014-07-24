@@ -86,7 +86,7 @@
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                             </h:commandButton>
                                         </rich:column>
-                                        <rich:column width="9em"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
+                                        <rich:column width="9em" rendered="#{MetasProyecto.perteneceGrupoSupervisor}"><f:facet name="header" ><h:outputText  value="Asociar"/></f:facet>
                                             <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
                                                 <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
@@ -96,7 +96,7 @@
                                 </rich:collapsiblePanel>
                             </h:panelGroup>
                         </rich:tab>
-                        <rich:tab header="Asociación | ">
+                        <rich:tab rendered="#{MetasProyecto.perteneceGrupoSupervisor or MetasProyecto.perteneceGrupoAdministrador}" header="Asociación | ">
                             <rich:collapsiblePanel switchType="client" header="Metas asociadas al proyecto" expanded="true" id="ikont-rcp-metasasociadasproyecto">
                                 <h:commandButton id="btExportarTablaMetas2"  value="Exportar Tabla de asociaciones a Excel" immediate="true"
                                                  action="#{MetasProyecto.generarReporteExcelTabla2()}" />                                    
@@ -133,7 +133,7 @@
                                 </rich:extendedDataTable>                            
                             </rich:collapsiblePanel>
                         </rich:tab>
-                        <rich:tab header="Consulta Registro de Avance | ">
+                        <rich:tab rendered="#{MetasProyecto.perteneceGrupoSupervisor}" header="Consulta Registro de Avance | ">
                             <html>
                                 <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
                                     <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
@@ -261,7 +261,7 @@
                             <h:commandButton id="btExportarTablaMetas3_1"  value="Exportar Tabla de Programacion de Metas a Excel" immediate="true"
                                              action="#{MetasProyecto.generarReporteExcelTabla3()}" />                                                                                                                                                                    
                         </rich:tab>
-                        <rich:tab header="Graficos">
+                        <rich:tab rendered="#{MetasProyecto.perteneceGrupoSupervisor}" header="Graficos | ">
                             <html>
                                 <script type="text/javascript" src="#{request.contextPath}/LibreriasTerceros/FusionChartsFree/JSClass/FusionCharts.js"></script>
                                 <body>
@@ -340,6 +340,14 @@
                                 </body>
                             </html>                        
                         </rich:tab>
+                        <rich:tab rendered="#{MetasProyecto.perteneceGrupoSupervisor}" header="Reporte">
+                            <rich:collapsiblePanel switchType="client" header="Avance Acumulado" expanded="true">
+                                <rich:collapsiblePanel switchType="client" header="Global hasta la fechal" expanded="true">
+                                </rich:collapsiblePanel>    
+                                <rich:collapsiblePanel switchType="client" header="Global hasta la fechal" expanded="true">
+                                </rich:collapsiblePanel>    
+                            </rich:collapsiblePanel>    
+                        </rich:tab>    
                     </rich:tabPanel>
                 </rich:panel>
             </h:panelGrid>

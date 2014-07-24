@@ -10,6 +10,7 @@ import co.com.interkont.cobra.jdbc.entity.tables.MetaObraDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.MetaRegistroDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.MetasDAO;
 import co.com.interkont.cobra.jdbc.entity.CE.metas.MetasCE;
+import co.com.interkont.cobra.jdbc.entity.tables.Jsf_usuario_grupoDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.PeriodosFrecuenciaDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.PlandesarrolloDAO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.camposAutocalculadosMetasVO;
@@ -89,6 +90,10 @@ public class MetasProyecto implements Serializable {
     boolean pactualizar;
 
     Date fecharegistroInicio;
+    
+    boolean perteneceGrupoMetas;
+    boolean perteneceGrupoSupervisor;
+    boolean perteneceGrupoAdministrador;
 
     public Meta getMeta() {
         return meta;
@@ -258,6 +263,34 @@ public class MetasProyecto implements Serializable {
         this.p_idperiodofrecuencia = p_idperiodofrecuencia;
     }
 
+    public boolean isPerteneceGrupoMetas() {
+        return perteneceGrupoMetas;
+    }
+
+    public void setPerteneceGrupoMetas(boolean perteneceGrupoMetas) {
+        this.perteneceGrupoMetas = perteneceGrupoMetas;
+    }
+
+    public boolean isPerteneceGrupoSupervisor() {
+        return perteneceGrupoSupervisor;
+    }
+
+    public void setPerteneceGrupoSupervisor(boolean perteneceGrupoSupervisor) {
+        this.perteneceGrupoSupervisor = perteneceGrupoSupervisor;
+    }
+
+    public boolean isPerteneceGrupoAdministrador() {
+        return perteneceGrupoAdministrador;
+    }
+
+    public void setPerteneceGrupoAdministrador(boolean perteneceGrupoAdministrador) {
+        this.perteneceGrupoAdministrador = perteneceGrupoAdministrador;
+    }
+    
+    
+    
+    
+
     /**
      * @author Manuel Cortes Granados
      * @since Mayo 23 2014 11:40 AM
@@ -277,6 +310,30 @@ public class MetasProyecto implements Serializable {
         } catch (SQLException se) {
             procesarError(se);
         }
+        
+        this.perteneceGrupoMetas=false;
+        this.perteneceGrupoSupervisor=false;
+        this.perteneceGrupoAdministrador=false;
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since Julio 24 2014 2:29 PM
+     */
+    
+    public void consultarPermisosUsuario() throws Exception{
+        DataSourceFactory ds = new DataSourceFactory();
+        Jsf_usuario_grupoDAO jsfusDAO = new Jsf_usuario_grupoDAO(ds.getConnection());
+        this.perteneceGrupoMetas=jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
+        this.perteneceGrupoSupervisor=jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
+        this.perteneceGrupoAdministrador=jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
+        
+        
+        if(perteneceGrupoAdministrador){ // Si es Administrador, pasa por alto los render o sencillamente muestra todo
+            perteneceGrupoMetas=perteneceGrupoSupervisor=true;
+        }
+        
+        ds.closeConnection();
     }
 
     /**
@@ -355,6 +412,7 @@ public class MetasProyecto implements Serializable {
         listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
         generarArchivoXMLFusionChart_MetaRegistro();
         cargarListaPlanDesarrollo();
+        consultarPermisosUsuario();
         return "Metas";
     }
 
