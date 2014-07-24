@@ -14,7 +14,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql://172.16.252.7/cobrasiccu</value>
+            <value>jdbc:postgresql://172.16.252.4/cobrasiccu</value>
         </property>
         <property name="username">
             <value>postgres</value>
@@ -274,6 +274,7 @@
                 <value>co/com/interkont/cobra/to/Meta.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Metaobra.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Metaregistro.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/PlanDesarrollo.hbm.xml</value>
                 
                 
                 
