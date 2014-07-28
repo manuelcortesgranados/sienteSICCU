@@ -12,6 +12,7 @@ import co.com.interkont.cobra.to.Planificacionpago;
 import co.com.interkont.cobra.to.Polizacontrato;
 import co.com.interkont.cobra.to.Tipodocumento;
 import co.com.interkont.cobra.to.Tipomodificacion;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
 import cobra.util.RutasWebArchivos;
@@ -573,6 +574,9 @@ public class ModificarContrato implements Serializable {
 
     public String iniciarModicontrato() {
         //contrato=null;
+        getNuevoContratoBasico().consultarContratantes();
+        getNuevoContratoBasico().cargarContratoPadre(getNuevoContratoBasico().getContrato().getContrato().getIntidcontrato());
+        getNuevoContratoBasico().cargarValoresDisponiblesContratantesConvenio();
         limpiarModificarContrato();
         cual = 1;
         valido = false;
@@ -654,10 +658,16 @@ public class ModificarContrato implements Serializable {
     }
 
     public String guardarModificarContrato() {
-        if (modificarcontrato.getProrroga() == 0 && modificarcontrato.getPresupuesto() == 0 && modificarcontrato.getPolizas() == 0) {
+        if (modificarcontrato.getProrroga() == 0 
+                && modificarcontrato.getPresupuesto() == 0 
+                && modificarcontrato.getPolizas() == 0
+                && !Boolean.valueOf(Propiedad.getValor("multiplescontratantes"))) {
             FacesUtils.addErrorMessage("No ha seleccionado ningun cambio a efectuar.");
         } else {
             boolean band = false;
+            if(Boolean.valueOf(Propiedad.getValor("multiplescontratantes"))) {
+                band = true;
+            }
             if (modificarcontrato.getProrroga() >= 1 || modificarcontrato.getPresupuesto() >= 1) {
 
                 if (!cargadorOtrosi.getArchivos().isEmpty()) {
@@ -705,6 +715,7 @@ public class ModificarContrato implements Serializable {
                     modificarcontrato.getDocumentoobras().add(documentopoliza);
                 }
                 getSessionBeanCobra().getCobraService().guardarModificarContrato(modificarcontrato);
+                getSessionBeanCobra().getCobraService().guardarContratantes(getNuevoContratoBasico().getContrato());
                 //Verificar si tiene contrato padre
                 if (getNuevoContratoBasico().getContrato().getContrato() != null) {
                     //guardar el contrato padre con la modificacion en valor suma hijos

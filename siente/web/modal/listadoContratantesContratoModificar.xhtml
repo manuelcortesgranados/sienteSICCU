@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-listado-contratantescontrato" autosized="true" moveable="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-seleccioncontratante" value="#{var.selecionecontratante}"   />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder-mp-listado-contratantescontrato" styleClass="ikont-acl-cerrar closemodal"  
+                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratantescontrato')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <h:panelGrid id="ikont-hpg-contratantescontrato" styleClass="ikont-hpg-contratantescontrato" rendered="#{not empty Supervisor$Contrato.contrpadre.listaContratocontratantes}">
+                <rich:dataTable id="ikont-rdt-contratantescontrato" styleClass="ikont-rdt-contratantescontrato" 
+                                value="#{Supervisor$Contrato.contrpadre.listaContratocontratantes}"
+                                rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                var="contratantecontrato" rows="25">
+                    <rich:column>
+                        <f:facet name="header" >
+                            <h:outputText  styleClass="ikont-hot-identificacioncontratantecontrato"   value="#{var.identificacioncontratante}"/>
+                        </f:facet>
+                        <h:outputText  value="#{contratantecontrato.contratante.tercero.intcedula}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header" >
+                            <h:outputText  styleClass="ikont-hot-nombrecontratantecontrato" value="#{var.nombrecontratante}"/>
+                        </f:facet>
+                        <h:outputText value="#{contratantecontrato.contratante.tercero.strnombre}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header" >
+                            <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvalordisponible}"/>
+                        </f:facet>
+                        <h:outputText value="#{contratantecontrato.numvalordisponible}">
+                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header" >
+                            <h:outputText  styleClass="ikont-hot-numvaloraaportar" value="#{var.numvaloraaportar}"/>
+                        </f:facet>
+                        <h:inputText value="#{contratantecontrato.numvaloraaportar}"/>
+                    </rich:column>
+                </rich:dataTable>
+                <rich:dataScroller id="ikont-rds-contratantescontrato" styleClass="ikont-rds-contratantescontrato" for="ikont-rdt-contratantescontrato"/>
+                <a4j:commandButton value="#{var.asociar}" 
+                                   action="#{Supervisor$Contrato.asociarValorAportadoContrato()}" 
+                                   execute="@form" render="ikont-hpg-contratantescontrato ikont-hpg-multiplescontratantes gpValContrato stpformadepago"
+                                   oncomplete="if(#{facesContext.maximumSeverity==null}) #{rich:component('mp-listado-contratantescontrato')}.hide(); else return false;">
+                </a4j:commandButton>
+            </h:panelGrid>
+        </h:form>        
+    </rich:popupPanel>
+</ui:composition>

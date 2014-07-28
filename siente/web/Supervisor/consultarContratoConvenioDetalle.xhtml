@@ -83,13 +83,22 @@
                                 <h:outputLabel id="ikont-hol-labeltipocontrato" styleClass="ikont-hol-labeltipocontrato" value="#{var.tipoconvenio}"/>
                                 <h:outputLabel id="ikont-hol-tipocontrato" styleClass="ikont-hol-tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"/>
                             </h:panelGrid>
-                            <h:panelGrid id="ikont-hpg-codigocdp" styleClass="ikont-hpg-codigocdp" columns="2" rendered="#{var.concodigocdpcontrato}">
+                            <h:panelGrid id="ikont-hpg-codigocdp" styleClass="ikont-hpg-codigocdp" columns="2" rendered="#{var.concodigocdpcontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
                                 <h:outputLabel id="ikont-hol-labelcodigocdp" styleClass="ikont-hol-labelcodigocdp" value="#{var.codigocdp}"/>
                                 <h:outputLabel id="ikont-hol-codigocdp" styleClass="ikont-hol-codigocdp" value="#{Supervisor$Contrato.contrato.strcodigocdp}"/>
                             </h:panelGrid>
-                            <h:panelGrid id="ikont-hpg-codigorpc" styleClass="ikont-hpg-codigorpc" columns="2" rendered="#{var.concodigorpccontrato}">
+                            <h:panelGrid id="ikont-hpg-codigorpc" styleClass="ikont-hpg-codigorpc" columns="2" rendered="#{var.concodigorpccontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
                                 <h:outputLabel id="ikont-hol-labelcodigorpc" styleClass="ikont-hol-labelcodigorpc" value="#{var.codigorpc}"/>
                                 <h:outputLabel id="ikont-hol-codigorpc" styleClass="ikont-hol-codigorpc" value="#{Supervisor$Contrato.contrato.strcodigorpc}"/>
+                            </h:panelGrid>
+                            <h:panelGrid id="ikont-hpg-supervisorcontrato" styleClass="ikont-hpg-supervisorcontrato" columns="3" rendered="#{var.consupervisorcontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
+                                <h:outputLabel id="ikont-hol-supervisorcontratodetalle" styleClass="ikont-hol-supervisorcontratodetalle" value="#{var.supervisorcontrato}"/>
+                                <h:selectOneMenu id="ikont-hsom-supervisorcontratodetalle" styleClass="ikont-hsom-supervisorcontratodetalle" value="#{Supervisor$Contrato.contrato.supervisor.intcodigo}" rendered="#{var.consupervisorcontrato and Supervisor$Contrato.tipoContCon eq 'Contrato'}" disabled="#{not SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}">
+                                    <f:selectItems value="#{Supervisor$Contrato.supervisores}" var="supervisor" itemValue="#{supervisor.intcodigo}" itemLabel="#{supervisor.strnombre}"/> 
+                                </h:selectOneMenu>
+                                <a4j:commandButton styleClass="ikont-acb-guardarsupervisordetalle" id="ikont-acb-guardarsupervisordetalle" value="#{var.guardar}" execute="ikont-hsom-supervisorcontratodetalle"
+                                                   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"
+                                                   action="#{Supervisor$Contrato.guardarSupervisorDetalle}"/>
                             </h:panelGrid>
                             <h:outputLabel class="ikont-hol-detalle-proyecto">#{var.objetoMay}</h:outputLabel>
                             <interkont:spacer width="20" />
@@ -345,7 +354,7 @@
                 </rich:collapsiblePanel>
 
                 <rich:collapsiblePanel id="ikont-rcp-anadirpolizas" header="#{var.anadirpolizas}:" expanded="false" switchType="client"
-                                       rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}">
+                                       rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato' and SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}">
                     <h:panelGrid cellspacing="6" id="gpPolizaSelec" columns="3"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
                         <h:outputLabel  styleClass="ikont-hol-tipopoliza font-general" id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza"/>
@@ -393,7 +402,7 @@
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel id="ikont-rcp-listadopolizas" header="#{var.polizas}" expanded="false" switchType="client">
                     <h:panelGrid id="pgpolis">
-                        <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" 
+                        <rich:dataTable id="ikont-rdt-listadopolizasdetalle" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" 
                                         rows="4"  
                                         value="#{Supervisor$Contrato.listapolizas}"
                                         var="registro" rowKeyVar="filaSeleccionada"
@@ -403,19 +412,19 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-policont" value="#{var.tipoPolizaContrato}:" />
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
+                                <h:outputText  styleClass="ikont-hot-descpoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-numpolizacont" value="#{var.numPolizaContrato}:" />
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
+                                <h:outputText  styleClass="ikont-hot-numpoliza" value="#{registro.strnumpoliza}"/>
                             </rich:column>
                             <rich:column width="100px">
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-fechaaprobacionpoliza-titulotabla" value="#{var.fechaaprobacionpoliza}:" />
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-fechaaprobacionpoliza-tabla" id="ikont-hot-fechaaprobacionpoliza-tabla" value="#{registro.datefechaaprobacion}">
+                                <h:outputText  styleClass="ikont-hot-fechaaprobacionpoliza-tabla" value="#{registro.datefechaaprobacion}">
                                     <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </rich:column>
@@ -423,7 +432,7 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-vencepoliza" value="#{var.vencimientoPoliza}:" />
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-fechavence" id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
+                                <h:outputText  styleClass="ikont-hot-fechavence" value="#{registro.datefechavecimiento}">
                                     <f:convertDateTime pattern="#{var.formatofecha}"/>
                                 </h:outputText>
                             </rich:column>
@@ -431,19 +440,19 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-entipoliza" value="#{var.entidadPoliza}:" />
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-nomentipoliza"   id="otxt-strEntidadPoliza" value="#{registro.aseguradora.strnombreentidad}"/>
+                                <h:outputText  styleClass="ikont-hot-nomentipoliza" value="#{registro.aseguradora.strnombreentidad}"/>
                             </rich:column>
                             <rich:column width="250px" rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}">
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-eliminars"   value="#{var.eliminar}" />
                                 </f:facet>
-                                <a4j:commandButton styleClass="ikont-acb-elipoliza" id="eliminarpol" value="#{var.eliminar}" render="pgpolis" execute="@this"
+                                <a4j:commandButton styleClass="ikont-acb-elipoliza" value="#{var.eliminar}" render="pgpolis" execute="@this"
                                                    action="#{Supervisor$Contrato.eliminarPoliza}">
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:dataTable>
-                        <rich:dataScroller id="dspolizas" styleClass="ikont-rdt-polizascontratoconvenio" for="dtPolizas"/>
-                        <a4j:commandButton styleClass="ikont-acb-guardarpolizas" id="ikont-acb-guardarpolizas" value="#{var.guardar}" execute="pgpolis"
+                        <rich:dataScroller id="dspolizas" styleClass="ikont-rdt-polizascontratoconvenio" for="ikont-rdt-listadopolizasdetalle"/>
+                        <a4j:commandButton styleClass="ikont-acb-guardarpolizas" value="#{var.guardar}" execute="pgpolis"
                                                    action="#{Supervisor$Contrato.guardarPolizasDetalle}" rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}"/>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
