@@ -1260,7 +1260,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private boolean anteriorPagina;
     private boolean siguientePagina;
     private boolean ultimoPagina;
+    
+    /**
+     * Variable para almacenar el valor seleccionado del supervisor
+     */
+    private int intidsupervisor;
 
+    public int getIntidsupervisor() {
+        return intidsupervisor;
+    }
+
+    public void setIntidsupervisor(int intidsupervisor) {
+        this.intidsupervisor = intidsupervisor;
+    }
+    
     /**
      * Variable para ver los reportes de plan operativo
      *
@@ -3400,6 +3413,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String guardarContrato() {
         try {
+            
+            if(intidsupervisor != 0) {
+                Tercero supervisorSeleccionado = null;
+                for (Tercero supervisor : supervisores) {
+                    if (supervisor.getIntcodigo() == intidsupervisor) {
+                        supervisorSeleccionado = supervisor;
+                    }
+                }
+                contrato.setSupervisor(supervisorSeleccionado);
+            }
 
             ValidacionesConvenio.validarContratistaRequerido(contrato);
             ValidacionesConvenio.validarContratanteRequerido(contrato);
@@ -3465,7 +3488,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         }
                         //getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                         if (!booltipocontratoconvenio) {
-                            if (filtrocontrato.getTipocontratoselect() == 0) {
+                            if (!Propiedad.getValor("versioncobra").equals("siccu") && filtrocontrato.getTipocontratoselect() == 0) {
                                 removerAnticipo();
                                 FacesUtils.addErrorMessage("Debe seleccionar la modalidad del contrato");
                                 return null;
@@ -5031,6 +5054,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             objetoSub = contrato.getTextobjeto();
         }
         cargarPolizasDetalle();
+        cargarSupervisores();
     }
 
     /**
@@ -9126,6 +9150,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrpadre = fk_contrato;
         getContrato().setContrato(contrpadre);
         List<Tercero> listaentiddadcontratoconvenio = new ArrayList<Tercero>();
+        cargarSupervisores();
         cargarValoresDisponiblesContratantesConvenio();
         if (fk_contrato.getContratista() != null) {
             listaentiddadcontratoconvenio = getSessionBeanCobra().getCobraService().obtenerEntidadContratantexContratista(fk_contrato.getContratista().getIntcodigo());
@@ -9578,6 +9603,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void eliminarCotratanteConvenioAction(Contratocontratante contratocontratante) {
         contrato.getContratocontratantes().remove(contratocontratante);
     }
+    
+    /**
+     * Listado de supervisores del sistema
+     */
+    private List<Tercero> supervisores;
+
+    public List<Tercero> getSupervisores() {
+        return supervisores;
+    }
+
+    public void setSupervisores(List<Tercero> supervisores) {
+        this.supervisores = supervisores;
+    }
 
     /**
      * Listado de contratantes del sistema
@@ -9822,4 +9860,28 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         FacesUtils.addInfoMessage("Las pólizas se han guardado exitósamente");
     }
+    
+    /**
+     * Actualiza el supervisor del contrato
+     */
+    public void guardarSupervisorDetalle() {
+        getSessionBeanCobra().getCobraService().guardarContrato(contrato, getSessionBeanCobra().getUsuarioObra());
+        FacesUtils.addInfoMessage("El supervisor se ha actualizado exitósamente");
+    }
+    
+    /**
+     * Carga el listado de supervisores que serán presentados en la interfaz de 
+     * creación de contratos
+     */
+    public void cargarSupervisores() {
+        supervisores = getSessionBeanCobra().getCobraService().getTerceroXGrupo("", 23);
+    }
+    
+    /**
+     * Carga el contrato padre a partir del identificador
+     * @param intidcontrato Identificador del contrato
+     */
+    public void cargarContratoPadre(int intidcontrato) {
+        contrpadre = getSessionBeanCobra().getCobraService().encontrarContratoxId(intidcontrato);
+    } 
 }

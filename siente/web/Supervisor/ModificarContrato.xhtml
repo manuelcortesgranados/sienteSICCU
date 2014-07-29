@@ -200,7 +200,7 @@
                                     <h:outputText  styleClass="ikont-hot-presupuestocontrato"   value="2.#{var.presupuestocontrato}" />
                                 </h:panelGroup>
                             </f:facet>
-                            <h:panelGrid id="modificar2" columnClasses="aiu" columns="2" >
+                            <h:panelGrid id="modificar2" columnClasses="aiu" columns="2" rendered="#{not var.multiplescontratantes or Supervisor$Contrato.tipoContCon eq 'Convenio'}">
                                 <h:outputLabel  styleClass="ikont-hol-modificar2 "   value="#{var.modificarpresupuestocontrato}"/>
                                 <h:selectOneMenu id="presupuesto" immediate="true" value="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto}">
                                     <f:selectItem itemValue="0" itemLabel="No"/>
@@ -251,6 +251,42 @@
                                     </h:panelGrid>
 
                                 </h:panelGroup>
+                            </h:panelGrid>
+                            <h:panelGrid id="ikont-hpg-multiplescontratantes" styleClass="ikont-hpg-multiplescontratantes" rendered="#{var.multiplescontratantes and Supervisor$Contrato.tipoContCon eq 'Contrato'}">
+                                <a4j:commandButton rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}" styleClass="ikont-acb-buscarmultiplescontratantescontrato" id="ikont-acb-buscarmultiplescontratantescontrato" value="#{var.modificar}"
+                                           execute="@this" immediate="true"
+                                           onclick="#{rich:component('mp-listado-contratantescontrato')}.show(); return false;"/>
+                                <rich:dataTable id="ikont-rdt-multiplescontratantes" styleClass="ikont-rdt-multiplescontratantes" 
+                                                value="#{Supervisor$Contrato.contrato.listaContratocontratantes}" rows="25"
+                                                rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                                var="contratoContratante">
+                                    <rich:column>
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-identificacioncontratante"   value="#{var.identificacioncontratante}"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{contratoContratante.contratante.tercero.intcedula}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-nombrecontratante" value="#{var.nombrecontratante}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{contratoContratante.contratante.tercero.strnombre}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <f:facet name="header" >
+                                            <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{var.numvaloraportado}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{contratoContratante.numvaloraportado}">
+                                            <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                        </h:outputText>
+                                        <f:facet name="footer" >
+                                            <h:outputText  styleClass="ikont-hot-numvaloraportado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                                <f:convertNumber pattern="#{var.formatomoneda}"/>
+                                            </h:outputText>
+                                        </f:facet>
+                                    </rich:column>
+                                </rich:dataTable>
+                                <rich:dataScroller id="ikont-rds-multiplescontratantes" for="ikont-rdt-multiplescontratantes" styleClass="ikont-rds-multiplescontratantes"/>
                             </h:panelGrid>
                         </rich:panel>
                         <rich:panel  rendered="#{Supervisor$ModificarContrato.cual==3}">
@@ -514,6 +550,7 @@
         <ui:include src="/modal/editarPoliza.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoEditarPoliza.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoEditarOtrosi.xhtml"/>
+        <ui:include src="/modal/listadoContratantesContratoModificar.xhtml"/>
         <script type="text/javascript" language="JavaScript">
                                                          window.onload = iniciarFunciones();
 
