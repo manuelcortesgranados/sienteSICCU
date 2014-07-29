@@ -5,6 +5,7 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Contratocontratante;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Historicopolizacontrato;
 import co.com.interkont.cobra.to.Modificacioncontrato;
@@ -58,6 +59,12 @@ public class ModificarContrato implements Serializable {
     public boolean habilitarBtnModificarValor = true;
     public boolean habilitarBtnGuardarCancelarValor = false;
     private UIDataTable tablaPolizasbin = new UIDataTable();
+    
+    /**
+     * Listado de contratocontratantes para almacenar los históricos en caso de 
+     * que se efectue la modificación de las fuentes de recursos
+     */
+    private ArrayList<Contratocontratante> historicocontratocontratantes;
 
     public boolean isHabilitarBtnGuardarCancelarValor() {
         return habilitarBtnGuardarCancelarValor;
@@ -577,6 +584,7 @@ public class ModificarContrato implements Serializable {
         getNuevoContratoBasico().consultarContratantes();
         getNuevoContratoBasico().cargarContratoPadre(getNuevoContratoBasico().getContrato().getContrato().getIntidcontrato());
         getNuevoContratoBasico().cargarValoresDisponiblesContratantesConvenio();
+        cargarHistoricocontratocontratantes();
         limpiarModificarContrato();
         cual = 1;
         valido = false;
@@ -715,6 +723,7 @@ public class ModificarContrato implements Serializable {
                     modificarcontrato.getDocumentoobras().add(documentopoliza);
                 }
                 getSessionBeanCobra().getCobraService().guardarModificarContrato(modificarcontrato);
+                getSessionBeanCobra().getCobraService().guardarHistoricocontratocontratantes(historicocontratocontratantes, modificarcontrato);
                 getSessionBeanCobra().getCobraService().guardarContratantes(getNuevoContratoBasico().getContrato());
                 //Verificar si tiene contrato padre
                 if (getNuevoContratoBasico().getContrato().getContrato() != null) {
@@ -910,5 +919,21 @@ public class ModificarContrato implements Serializable {
      */
     public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
         this.tablaPolizasbin = tablaPolizasbin;
+    }
+
+    /**
+     * Carga el histórico de contratocontratantes para que sea guardado en caso 
+     * de que se modifiquen las fuentes de recursos del contrato o convenio
+     */
+    private void cargarHistoricocontratocontratantes() {
+        historicocontratocontratantes = new ArrayList<Contratocontratante>();
+        for (Object object : getNuevoContratoBasico().getContrato().getContratocontratantes()) {
+            Contratocontratante contratocontratante = (Contratocontratante) object;
+            Contratocontratante historicocontratocontratante = new Contratocontratante();
+            historicocontratocontratante.setContratante(contratocontratante.getContratante());
+            historicocontratocontratante.setContrato(contratocontratante.getContrato());
+            historicocontratocontratante.setNumvaloraportado(contratocontratante.getNumvaloraportado());
+            historicocontratocontratantes.add(historicocontratocontratante);
+        }
     }
 }
