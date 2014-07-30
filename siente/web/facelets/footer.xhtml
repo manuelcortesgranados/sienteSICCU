@@ -29,6 +29,10 @@
                     <h:outputText value="#{var.loginfoterterminos}" styleClass="ikont-hot-terminos-condiciones"></h:outputText>
                 </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:outputText value="*" styleClass="ikont-hot-terminos-condiciones2 ikont-hot-terminos-condiciones"></h:outputText>
+                    <h:outputText value="Versión #{var.version}" styleClass="ikont-hot-terminos-condiciones"></h:outputText>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="panelcenter">
                     <h:commandLink styleClass="ikont-hcl-footer-sellos sello-fonade"/>
                     <h:commandLink styleClass="ikont-hcl-footer-sellos sello-republica"/>
                     <h:commandLink styleClass="ikont-hcl-footer-sellos sello-zoom"/>
@@ -48,7 +52,7 @@
         </h:panelGroup>
         <a4j:jsFunction name="closeaplication" render="body"  execute="@this" immediate="true" oncomplete="location.reload(true);" rendered="#{SessionBeanCobra.logueadodesdemapa}">
             <a4j:actionListener listener="#{SessionBeanCobra.cerrarSession_action}"/>
-            
+
         </a4j:jsFunction>
     </h:form>
     <ui:include src="/modal/sessionclose.xhtml"/>
@@ -99,7 +103,7 @@
             }
             return prefix + splitLeft + splitRight;
         }
-        
+
         var $jq = jQuery.noConflict();
         $jq(document).ready(function() {
             statesessionaplication();
@@ -121,15 +125,15 @@
                 localStorage.setItem('closeaplicaction', new Date().getTime());
             }
         }
-        
+
         /**
          * Limpia el valor asignado elemento que ingresa como parámetro
          * @param {type} target elemento que permite ingresar valor
          * @returns {undefined}
          */
-        function clearText(target){
-            target.value= "";
+        function clearText(target) {
+            target.value = "";
         }
-        
+
     </script>
 </ui:composition>
