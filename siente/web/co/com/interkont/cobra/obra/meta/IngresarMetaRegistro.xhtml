@@ -39,25 +39,13 @@
                                 <html>
                                     <table width="400px" border="0" cellspacing="1" cellpadding="1">
                                         <tr>
-                                            <td class="ikont-hcl-reportes_administrativos">Informacion Meta Relacionada a Asociar con el Proyecto</td>
+                                            <td class="ikont-hcl-reportes_administrativos">Informacion Meta Relacionada asociada con el Proyecto</td>
                                         </tr>
                                         <tr>
                                             <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
                                                     <tr>
                                                         <td class="ikont-hot-derechos-reser">Id : </td>
                                                         <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.id}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="ikont-hot-derechos-reser">Objetivo : </td>
-                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.objetivo}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="ikont-hot-derechos-reser">Programa : </td>
-                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.programa}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="ikont-hot-derechos-reser">Subprograma : </td>
-                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.subprograma}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="ikont-hot-derechos-reser">Nomp : </td>
@@ -80,7 +68,11 @@
                                                         <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.tipometa}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="ikont-hot-derechos-reser">Linea Base Indicador : </td>
+                                                        <td class="ikont-hot-derechos-reser">Linea Base Indicador Cuatrenio : </td>
+                                                        <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.lineaBaseIndicador}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-hot-derechos-reser">Año : </td>
                                                         <td class="ikont-hot-desea">#{MetasProyecto.meta_consulta.lineaBaseIndicador}</td>
                                                     </tr>
                                                 </table></td>
@@ -96,10 +88,11 @@
                                         <h:outputLabel  value="Proyecto"/>
                                         <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
                                         <h:outputLabel  value="Punto Medicion Periodo"/>
-                                        <h:selectOneMenu id="cmbFrecuenciaMedicionMeta" value="#{MetasProyecto.metaregistro.periodoFrecuencia}" onchange="submit()" valueChangeListener="#{MetasProyecto.cargarYAsignarFechasInicioFinal}">
+                                        <h:selectOneMenu id="cmbFrecuenciaMedicionMeta" value="#{MetasProyecto.metaregistro.periodosFrecuencia.idperiodosFrecuencia}" onchange="submit()" valueChangeListener="#{MetasProyecto.cargarYAsignarFechasInicioFinal}">
                                             <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
                                             <f:selectItems value="#{MetasProyecto.listaPeriodosFrecuencia}" var="periodoFrecuencia"
                                                            itemValue="#{periodoFrecuencia.idperiodosFrecuencia}" itemLabel="#{periodoFrecuencia.periodosFrecuencia}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idperiodofrecuencia}" value="#{periodoFrecuencia.idperiodosFrecuencia}" />
                                         </h:selectOneMenu>
                                         <h:outputLabel  value="Fecha Inicio"/>
                                         <rich:calendar  id="fecharegistroInicio" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"

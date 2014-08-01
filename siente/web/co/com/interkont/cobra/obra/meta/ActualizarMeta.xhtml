@@ -41,12 +41,14 @@
                                 <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
                                                itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
                             </h:selectOneMenu>
-                            <h:outputLabel  value="Objetivo"/>
-                            <h:inputText   immediate="true" required="false" id="strobjetivo" size="50" maxlength="50"  value="#{MetasProyecto.meta.objetivo}"/>
-                            <h:outputLabel  value="Programa"/>
-                            <h:inputText   immediate="true" required="false" id="strprograma" size="25" maxlength="25" value="#{MetasProyecto.meta.programa}"/>
-                            <h:outputLabel  value="Subprograma"/>
-                            <h:inputText  immediate="true" required="false" id="strsubprograma" size="25" maxlength="25" value="#{MetasProyecto.meta.subprograma}"/>
+                            <h:outputLabel  value="Plan de Desarrollo : "/>
+                            <h:outputLabel  value="#{MetasProyecto.p_plandesarrollo.nombre}"/>
+                            <h:outputLabel  value="Objetivo : "/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_objetivo}"/>
+                            <h:outputLabel  value="Programa : "/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_programa}"/>
+                            <h:outputLabel  value="Subprograma : "/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_subprograma}"/>
                             <h:outputLabel  value="intnomp"/>
                             <h:inputText  immediate="true" required="false" id="intnomp" size="25" maxlength="25" value="#{MetasProyecto.meta.nomp}"/>
                             <h:outputLabel  value="Descripcion Meta Producto"/>

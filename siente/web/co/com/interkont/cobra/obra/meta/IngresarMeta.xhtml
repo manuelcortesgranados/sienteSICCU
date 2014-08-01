@@ -36,21 +36,17 @@
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
                             <h:outputLabel  value="Plan de Desarrollo : "/>
-                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true" required="true">
-                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
-                                <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
-                                               itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
-                            </h:selectOneMenu>
-                            <rich:tooltip value="Plan de Desarrollo" target="cmbPlanDesarrollo"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="#{MetasProyecto.p_plandesarrollo.nombre}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Objetivo : "/>
-                            <h:inputTextarea required="true" id="strobjetivo" value="#{MetasProyecto.meta.objetivo}"/>
-                            <rich:tooltip value="Objetivo del Indicador" target="strobjetivo"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_objetivo}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Programa : "/>
-                            <h:inputTextarea  required="true" id="strprograma" value="#{MetasProyecto.meta.programa}"/>
-                            <rich:tooltip value="Programa" target="strprograma"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_programa}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Subprograma : "/>
-                            <h:inputTextarea required="true" id="strsubprograma" value="#{MetasProyecto.meta.subprograma}"/>
-                            <rich:tooltip value="Subprograma" target="strsubprograma"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="#{MetasProyecto.p_nombre_subprograma}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="No M.P."/>
                             <h:inputText  required="true" id="intnomp" size="100" maxlength="100" value="#{MetasProyecto.meta.nomp}"/>
                             <rich:tooltip value="Numero Meta" target="intnomp"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
