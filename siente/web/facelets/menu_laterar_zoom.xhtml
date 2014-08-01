@@ -230,7 +230,7 @@
                     <h:outputLabel styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuContratos}"/>
                 </h:panelGrid> 
                 <h:panelGroup styleClass="ikont-espacio-sub-menu"> 
-                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos and var.versioncobra != 'siccu'}"/>
                     <br/> 
                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo"  value="-#{var.menuConsultarContrato}" action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true">
                         <a4j:param assignTo="#{Supervisor$Contrato.filtrocontrato.tipocontratoselect}" value="2"/>
