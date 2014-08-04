@@ -8,6 +8,7 @@ import Seguridad.Encrypter;
 import atencionHumanitaria.service.AtencionHumanitariaServiceAble;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import ciudadano.service.CiudadanoServiceAble;
+import co.com.interkont.cobra.jdbc.entity.datasource.DataSourceFactory;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
@@ -102,6 +103,9 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado = false;
+    private final DataSourceFactory dataSourceFactory = new DataSourceFactory();
+    
+    
 
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
@@ -114,6 +118,12 @@ public class SessionBeanCobra implements Serializable {
     public void setGipromService(GipromServiceAble gipromService) {
         this.gipromService = gipromService;
     }
+
+    public DataSourceFactory getDataSourceFactory() {
+        return dataSourceFactory;
+    }
+    
+    
 
     public boolean isLogueadodesdemapa() {
         return (getUsuarioObra() != null

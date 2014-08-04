@@ -145,16 +145,16 @@ public class SeguimientosContrato implements Serializable {
      */
     public void actualizarRegistroSeguimientoEncabezado() {
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
-            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
+            
+            seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             segDAO.update(seg_encab);
             int usuId=getSessionBeanCobra().getUsuarioObra().getUsuId();
             SeguimientoObraEncabHist seg_encab_hist = new SeguimientoObraEncabHist(seg_encab,usuId,"MODIFICACION ");
             seghistDAO.insert(seg_encab_hist);
             consultarSeguimientoObraDetalle();
             FacesUtils.addInfoMessage("El Registro ha sido actualizado con exito");
-            ds.closeConnection();
+            
         } catch (Exception e) {
             FacesUtils.addErrorMessage(e.toString());
         }
@@ -180,8 +180,8 @@ public class SeguimientosContrato implements Serializable {
         try {
             String fecha = "1900/01/01";
             p_idcodigoobra = codigoobra;
-            DataSourceFactory ds = new DataSourceFactory();
-            seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
+            
+            seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             SeguimientoObraEncab seg = segDAO.select(p_idcodigoobra);
             if (seg != null) {
                 this.setSeg_encab(seg);
@@ -190,7 +190,7 @@ public class SeguimientosContrato implements Serializable {
                 insertarRegistroSeguimientoObraEncab_PrimeraVez(); 
             }
             irApagina_SeguimientosContrato();
-            ds.closeConnection();
+            
         } catch (Exception e) {
             FacesUtils.addErrorMessage("ERROR EN EL SISTEMA : " + e.toString());
         }
@@ -205,10 +205,10 @@ public class SeguimientosContrato implements Serializable {
 
     public void insertarRegistroSeguimientoObraEncab_PrimeraVez() throws SQLException, Exception {
         String fecha = "2000/01/01";
-        DataSourceFactory ds = new DataSourceFactory();
+        
         SimpleDateFormat dt = new SimpleDateFormat("yyyy/mm/dd");
-        seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(ds.getConnection());
-        Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
+        seguimiento_obra_encabDAO segDAO = new seguimiento_obra_encabDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+        Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         SeguimientoObraEncab seg = segDAO.select(p_idcodigoobra);
         SeguimientoObraEncabHist seghist = new SeguimientoObraEncabHist();
         
@@ -282,13 +282,13 @@ public class SeguimientosContrato implements Serializable {
      */
     
     public void ingresarSeguimientoObraDetalle() throws Exception{
-        DataSourceFactory ds = new DataSourceFactory();
-        Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
+        
+        Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         SeguimientoObraDetalleId segId = new SeguimientoObraDetalleId();
         segId.setIdseguimientoEncab(seg_encab.getIdseguimientoEncab());
         seg_detalle.setId(segId);
         segDAO.insert(seg_detalle);
-        ds.closeConnection();
+        
         FacesUtils.addInfoMessage("Se ha generado un registro de seguimiento con exito");
     }
     
@@ -350,12 +350,12 @@ public class SeguimientosContrato implements Serializable {
     
     public void consultarSeguimientoObraDetalle(){
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(ds.getConnection());
-            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(ds.getConnection());
+            
+            Seguimiento_obra_detalleDAO segDAO = new Seguimiento_obra_detalleDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+            Seguimiento_obra_encab_histDAO seghistDAO = new Seguimiento_obra_encab_histDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             this.listaSeguimientoObraDetalle = segDAO.select(seg_encab.getIdseguimientoEncab());
             //this.listaSeguimientoObraEncabHist = seghistDAO.select(p_idcodigoobra);
-            ds.closeConnection();
+            
         } catch (Exception e) {
             FacesUtils.addErrorMessage(e.toString());
         }        
@@ -387,11 +387,4 @@ public class SeguimientosContrato implements Serializable {
     public String irApagina_SeguimientoObraDetalle() {
         return "IrPaginaIngresarSeguimientoObraDetalle";
     }
-    
-    
-    public void metodoPrueba(){
-        FacesUtils.addErrorMessage("ok METODOPRUEBA");
-    }
-    
-    
 }

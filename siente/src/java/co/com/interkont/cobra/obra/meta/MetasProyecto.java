@@ -109,23 +109,23 @@ public class MetasProyecto implements Serializable {
     boolean perteneceGrupoAdministrador;
 
     String activePanel;
-    
+
     ReporteMetasVO reportesVO;
-    
+
     Set<PdObjetivo> s_objetivos = new HashSet(0);
     Set<PdPrograma> s_programas = new HashSet(0);
     Set<PdSubprograma> s_subprogramas = new HashSet(0);
-    
+
     int p_idplandesarrollo;
     int p_idobjetivo;
     int p_idprograma;
     int p_idsubprograma;
-    
+
     String p_nombre_plandesarrollo;
     String p_nombre_objetivo;
     String p_nombre_programa;
     String p_nombre_subprograma;
-    
+
     PlanDesarrollo p_plandesarrollo;
 
     public Meta getMeta() {
@@ -391,7 +391,7 @@ public class MetasProyecto implements Serializable {
     public void setP_idsubprograma(int p_idsubprograma) {
         this.p_idsubprograma = p_idsubprograma;
     }
-    
+
     public String getP_nombre_plandesarrollo() {
         return p_nombre_plandesarrollo;
     }
@@ -431,19 +431,14 @@ public class MetasProyecto implements Serializable {
     public void setP_plandesarrollo(PlanDesarrollo p_plandesarrollo) {
         this.p_plandesarrollo = p_plandesarrollo;
     }
-    
-    
-    
-    
-    
+
     /**
      * Esta implementacion mantiene que cuando se abra otra ventana, permanezca
      * activa el tab en el cual se estaba trabajando
-     * 
+     *
      * @author Manuel Cortes Granados
-     * @param idpanel 
+     * @param idpanel
      */
-
     public void cambiarActivePanel(int idpanel) {
         switch (idpanel) {
             case 1:
@@ -468,7 +463,6 @@ public class MetasProyecto implements Serializable {
      * @author Manuel Cortes Granados
      * @since Mayo 23 2014 11:40 AM
      */
-    
     public MetasProyecto() throws Exception {
 
         this.listaUnidadMedida.add("METRO");
@@ -488,17 +482,15 @@ public class MetasProyecto implements Serializable {
         this.perteneceGrupoMetas = false;
         this.perteneceGrupoSupervisor = false;
         this.perteneceGrupoAdministrador = false;
-        reportesVO=new ReporteMetasVO();
+        reportesVO = new ReporteMetasVO();
     }
 
     /**
      * @author Manuel Cortes Granados
      * @since Julio 24 2014 2:29 PM
      */
-    
     public void consultarPermisosUsuario() throws Exception {
-        DataSourceFactory ds = new DataSourceFactory();
-        Jsf_usuario_grupoDAO jsfusDAO = new Jsf_usuario_grupoDAO(ds.getConnection());
+        Jsf_usuario_grupoDAO jsfusDAO = new Jsf_usuario_grupoDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
         this.perteneceGrupoMetas = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
         this.perteneceGrupoSupervisor = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
         this.perteneceGrupoAdministrador = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
@@ -506,7 +498,6 @@ public class MetasProyecto implements Serializable {
         if (perteneceGrupoAdministrador) { // Si es Administrador, pasa por alto los render o sencillamente muestra todo
             perteneceGrupoMetas = perteneceGrupoSupervisor = true;
         }
-        ds.closeConnection();
     }
 
     /**
@@ -524,10 +515,8 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void cargarListaPeriodosFrecuencia(int periodomedida) throws Exception {
-        DataSourceFactory ds = new DataSourceFactory();
-        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(ds.getConnection());
+        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         this.listaPeriodosFrecuencia = perDAO.select(periodomedida);
-        ds.closeConnection();
     }
 
     /**
@@ -537,10 +526,10 @@ public class MetasProyecto implements Serializable {
      * @author Manuel Cortes Granados
      * @since 19 Julio 2014 3:32 AM
      */
+    
     public void cargarYAsignarFechasInicioFinal(ValueChangeEvent event) throws Exception {
-        DataSourceFactory ds = new DataSourceFactory();
         Utilitario util = new Utilitario();
-        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(ds.getConnection());
+        PeriodosFrecuenciaDAO perDAO = new PeriodosFrecuenciaDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         String idpfrecuencia = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idperiodosFrecuencia");
         p_idperiodofrecuencia = Integer.valueOf(event.getNewValue().toString()).intValue();
         PeriodosFrecuencia per = perDAO.select_by_idperiodos_frecuencia(this.p_idperiodofrecuencia);
@@ -550,7 +539,6 @@ public class MetasProyecto implements Serializable {
         metaregistro.setFechaInicio(util.convertirStringtoDate(fechaInicial));
         metaregistro.setFechaFinal(util.convertirStringtoDate(fechaFinal));
         FacesContext.getCurrentInstance().renderResponse();
-        ds.closeConnection();
     }
 
     /**
@@ -576,12 +564,8 @@ public class MetasProyecto implements Serializable {
         metaobraamp = new MetaObraAMPVO();
         metaregistroamp = new MetaRegistroAMPVO();
         Utilitario util = new Utilitario();
-        try {
-            this.consultarMetaObra();
-            this.consultarMetaRegistro();
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        this.consultarMetaObra();
+        this.consultarMetaRegistro();
         listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
         generarArchivoXMLFusionChart_MetaRegistro();
         cargarListaPlanDesarrollo();
@@ -595,14 +579,11 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
-    
     public String irApagina_IngresarMeta() throws Exception {
-        
         this.getMeta().setNomp(0);
         this.getMeta().setNombreindicador("Nombre Indicador");
         this.getMeta().setDescripcionmetaproducto("Descripcion Meta Producto");
         this.getMeta().setTipometa(0);
-
         return "IngresarMeta";
     }
 
@@ -611,11 +592,10 @@ public class MetasProyecto implements Serializable {
      * @since 23 Julio 2014 4:39 AM
      * @throws Exception
      */
+    
     private void cargarListaPlanDesarrollo() throws Exception {
-        DataSourceFactory ds = new DataSourceFactory();
-        PlandesarrolloDAO planDAO = new PlandesarrolloDAO(ds.getConnection());
+        PlandesarrolloDAO planDAO = new PlandesarrolloDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
         this.listaPlanDesarrollo = planDAO.select();
-        ds.closeConnection();
     }
 
     /**
@@ -624,6 +604,7 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
+    
     public String irApagina_ActualizarMeta() throws Exception {
         if (validarActualizacionEliminacionMeta(this.p_idmeta)) {
             consultarMetaparaActualizar();
@@ -649,11 +630,10 @@ public class MetasProyecto implements Serializable {
      * @since Julio 07 2014 9:28 PM
      * @throws Exception
      */
+    
     public void consultarMetaparaConsulta() throws Exception {
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasDAO metDAO = new MetasDAO(ds.getConnection());
+        MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         meta_consulta = metDAO.select(this.p_idmeta);
-        ds.closeConnection();
     }
 
     /**
@@ -662,6 +642,7 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
+    
     public String irApagina_ActualizarMetaObra() throws Exception {
         if (validarActualizacionEliminacionMetaObra(this.p_idmetaobra)) {
             this.consultarMetaObraparaActualizar();
@@ -680,10 +661,6 @@ public class MetasProyecto implements Serializable {
      */
     public String irApagina_IngresarMetaRegistro() throws Exception {
         this.cargarListaPeriodosFrecuencia(this.p_periodomedida);
-        /*DataSourceFactory ds = new DataSourceFactory();
-         MetasDAO metDAO = new MetasDAO(ds.getConnection());
-         this.metaregistro.setMetaProyectada(metDAO.consultarLineaBaseIndicador(this.p_idmeta));
-         ds.closeConnection();*/
         consultarMetaparaConsulta();
         return "IngresarMetaRegistro";
     }
@@ -693,7 +670,6 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
-    
     public String irApagina_ActualizarMetaRegistro() throws Exception {
         consultarMetaRegistroparaActualizar();
         cargarListaPeriodosFrecuencia(metaobra.getPeriodomedida().getIntidperiomedida());
@@ -707,16 +683,13 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String ingresarMeta() throws SQLException, Exception {
-        //getSessionBeanCobra().getCobraService().guardarMeta(meta);
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             meta.setPlanDesarrollo(p_plandesarrollo);
             meta.setIdobjetivo(p_idobjetivo);
             meta.setIdprograma(p_idprograma);
             meta.setIdsubprograma(p_idsubprograma);
             metDAO.insert(meta);
-            ds.closeConnection();
             FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
             return null;
         } catch (SQLException se) {
@@ -733,10 +706,8 @@ public class MetasProyecto implements Serializable {
     public String actualizarMeta() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metDAO.update(meta);
-            ds.closeConnection();
             return null;
         } catch (SQLException se) {
             procesarError(se);
@@ -753,8 +724,7 @@ public class MetasProyecto implements Serializable {
     public String eliminarMeta() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             if (this.p_idmeta == 0) {
                 FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (validarActualizacionEliminacionMeta(this.p_idmeta)) {
@@ -763,7 +733,6 @@ public class MetasProyecto implements Serializable {
             } else {
                 FacesUtils.addErrorMessage("No es posible eliminar la Meta ya que tiene Proyectos Asociados");
             }
-            ds.closeConnection();
             return null;
         } catch (SQLException se) {
             procesarError(se);
@@ -780,10 +749,8 @@ public class MetasProyecto implements Serializable {
     public void consultarMetaparaActualizar() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             meta = metDAO.select(this.getP_idmeta());
-            ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -796,17 +763,16 @@ public class MetasProyecto implements Serializable {
      * @return
      * @throws Exception
      */
+    
     public boolean validarActualizacionEliminacionMeta(int idmeta) throws Exception {
         boolean resultado = true;
 
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasCE metCE = new MetasCE(ds.getConnection());
+        MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
 
         List<Metaobra> l_resultado = metCE.getMetaObrabyMeta(idmeta);
         if (l_resultado.isEmpty() == false) {
             resultado = false;
         }
-        ds.closeConnection();
         return resultado;
     }
 
@@ -817,17 +783,9 @@ public class MetasProyecto implements Serializable {
      * @since 1 Junio 2014 8:31 PM
      * @return
      */
+    
     public boolean validarInsercionMeta(Metaobra metaobra) throws Exception {
         boolean resultado = true;
-        /*DataSourceFactory ds = new DataSourceFactory();
-         MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
-         Metaobra metaobra_1 = metDAO.select(metaobra.getIdproyecto(), metaobra.getAnio());
-         if (metaobra_1 != null) {
-         resultado = false;
-         } else {
-         resultado = true;
-         }
-         ds.closeConnection();*/
         return resultado;
     }
 
@@ -836,6 +794,7 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 24 2014 11:40 AM
      * @return
      */
+    
     public String ingresarMetaObra() throws Exception {
         Utilitario util = new Utilitario();
         try {
@@ -865,10 +824,8 @@ public class MetasProyecto implements Serializable {
      */
     public String actualizarMetaObra() throws Exception {
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
+            MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metDAO.update(metaobra);
-            ds.closeConnection();
             FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
         } catch (SQLException e) {
             procesarError(e);
@@ -888,10 +845,8 @@ public class MetasProyecto implements Serializable {
             if (p_idmetaobra == 0) {
                 FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (this.validarActualizacionEliminacionMetaObra(p_idmetaobra)) {
-                DataSourceFactory ds = new DataSourceFactory();
-                MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
+                MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
                 metDAO.delete(this.getP_idmetaobra());
-                ds.closeConnection();
                 FacesUtils.addInfoMessage("La asociacion con Id. " + this.getP_idmetaobra() + " ha sido eliminada con exito");
                 return null;
             } else {
@@ -909,13 +864,12 @@ public class MetasProyecto implements Serializable {
      * @return
      * @throws Exception
      */
+    
     public void consultarMetaObra() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
+            MetaObraDAO metDAO = new MetaObraDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
             this.listaMetasObras = metDAO.select_amp(this.p_idcodigoobra);
-            ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -927,13 +881,14 @@ public class MetasProyecto implements Serializable {
      * @return
      * @throws Exception
      */
+    
     public void consultarMetaObraparaActualizar() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaObraDAO metDAO = new MetaObraDAO(ds.getConnection());
+            //DataSourceFactory ds = new DataSourceFactory();
+            MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metaobra = metDAO.select(p_idmetaobra);
-            ds.closeConnection();
+            //ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -946,17 +901,15 @@ public class MetasProyecto implements Serializable {
      * @return
      * @throws Exception
      */
+    
     public boolean validarActualizacionEliminacionMetaObra(int idmetaobra) throws Exception {
         boolean resultado = true;
-
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasCE metCE = new MetasCE(ds.getConnection());
+        MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
 
         List<Metaregistro> l_resultado = metCE.getMetaRegistrobyMetaObra(idmetaobra);
         if (l_resultado.isEmpty() == false) {
             resultado = false;
         }
-        ds.closeConnection();
         return resultado;
     }
 
@@ -995,10 +948,8 @@ public class MetasProyecto implements Serializable {
     public String actualizarMetaRegistro() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(ds.getConnection());
+            MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metaregistro = metDAO.select(this.p_idmetaregistro);
-            ds.closeConnection();
             FacesUtils.addInfoMessage("La programacion del registro de la meta ha sido actualizada con eixto.");
             return null;
         } catch (SQLException se) {
@@ -1016,10 +967,8 @@ public class MetasProyecto implements Serializable {
     public String eliminarMetaRegistro(int idmetaregistro) throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(ds.getConnection());
+            MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metDAO.delete(this.p_idmetaregistro);
-            ds.closeConnection();
             FacesUtils.addInfoMessage("El Avance de Meta con ID " + this.p_idmetaregistro + " ha sido eliminado con exito");
             FacesContext.getCurrentInstance().renderResponse();
         } catch (SQLException se) {
@@ -1037,10 +986,8 @@ public class MetasProyecto implements Serializable {
     public void consultarMetaRegistro() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaRegistroDAO metregDAO = new MetaRegistroDAO(ds.getConnection());
+            MetaRegistroDAO metregDAO = new MetaRegistroDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
             listaMetasObrasRegsitro = metregDAO.select_amp(p_idcodigoobra);
-            ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -1055,10 +1002,8 @@ public class MetasProyecto implements Serializable {
     public void consultarMetaRegistroparaActualizar() throws Exception {
         Utilitario util = new Utilitario();
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaRegistroDAO metregDAO = new MetaRegistroDAO(ds.getConnection());
+            MetaRegistroDAO metregDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             metaregistro = metregDAO.select(this.p_idmetaregistro);
-            ds.closeConnection();
         } catch (SQLException se) {
             procesarError(se);
         }
@@ -1109,10 +1054,10 @@ public class MetasProyecto implements Serializable {
             cell.setCellStyle(my_style);
             fila++;
 
-            DataSourceFactory ds = new DataSourceFactory();
-            MetasDAO metDAO = new MetasDAO(ds.getConnection());
+            //DataSourceFactory ds = new DataSourceFactory();
+            MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
             List<Meta> l_metas = metDAO.select();
-            ds.closeConnection();
+            //ds.closeConnection();
 
             for (Meta meta_1 : l_metas) {
                 row = my_sheet.createRow(fila);
@@ -1329,18 +1274,16 @@ public class MetasProyecto implements Serializable {
      *
      * @return
      */
-    
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 26 Julio 2014 22:53
-     * @return 
+     * @return
      */
-    
-    protected IngresarNuevaObra getIngresarNuevaObra(){
+    protected IngresarNuevaObra getIngresarNuevaObra() {
         return (IngresarNuevaObra) FacesUtils.getManagedBean("IngresarNuevaObra");
     }
 
@@ -1368,7 +1311,6 @@ public class MetasProyecto implements Serializable {
         if (test) {
             FacesUtils.addErrorMessage("Codigo del error en la base de datos : " + se.getErrorCode());
             FacesUtils.addErrorMessage(se.toString());
-            System.out.println(util.getMessageStackException(se));
         }
         throw se;
     }
@@ -1379,17 +1321,15 @@ public class MetasProyecto implements Serializable {
      * @param e
      * @throws Exception
      */
-    
     public void procesarErrorGeneral(Exception se) throws Exception {
         Utilitario util = new Utilitario();
         FacesUtils.addErrorMessage("Ha ocurrido un error en el Sistema");
         if (test) {
             FacesUtils.addErrorMessage(se.toString());
-            System.out.println(util.getMessageStackException(se));
         }
         throw se;
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 25 Julio 20114 12:06 PM
@@ -1400,8 +1340,8 @@ public class MetasProyecto implements Serializable {
         double acumulado_meta_acumulada = 0;
         double acumulado_porcentaje = 0;
 
-        DataSourceFactory ds = new DataSourceFactory();
-        MetaRegistroDAO metDAO = new MetaRegistroDAO(ds.getConnection());
+        //DataSourceFactory ds = new DataSourceFactory();
+        MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         for (Meta meta : this.listaMetas) {
             List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
             for (Metaobra metaobra : l_metaobra) {
@@ -1420,7 +1360,7 @@ public class MetasProyecto implements Serializable {
                 acumulado_porcentaje = 0;
             }
         }
-        ds.closeConnection();
+        //ds.closeConnection();
     }
 
     /**
@@ -1434,8 +1374,7 @@ public class MetasProyecto implements Serializable {
 
             String contenido = "";
 
-            DataSourceFactory ds = new DataSourceFactory();
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(ds.getConnection());
+            MetaRegistroDAO metDAO = new MetaRegistroDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
 
             for (Meta meta : this.listaMetas) {
                 List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
@@ -1480,7 +1419,6 @@ public class MetasProyecto implements Serializable {
                     output.close();
                 }
             }
-            ds.closeConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -1493,108 +1431,89 @@ public class MetasProyecto implements Serializable {
      * @param idproyecto
      * @return
      */
-    public ReporteMetasVO generarReporteGlobalMetas(int idmeta, int idproyecto) throws Exception {       
+    public ReporteMetasVO generarReporteGlobalMetas(int idmeta, int idproyecto) throws Exception {
         ReporteMetasVO repVO = new ReporteMetasVO();
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasCE metCE = new MetasCE(ds.getConnection());
-        repVO=metCE.generarReporteGlobalMetas(idmeta, idproyecto);
-        ds.closeConnection();
+        MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
+        repVO = metCE.generarReporteGlobalMetas(idmeta, idproyecto);
         return repVO;
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 28 Julio 2014 17:45
      * @param idplandesarrollo
-     * @return 
+     * @return
      */
-    
-    public Set<PdObjetivo> consultarObjetivosPlanDesarrollo(int idplandesarrollo) throws Exception{
-        DataSourceFactory ds = new DataSourceFactory();
-        PdObjetivoDAO objetivoDAO = new PdObjetivoDAO(ds.getConnection());
+    public Set<PdObjetivo> consultarObjetivosPlanDesarrollo(int idplandesarrollo) throws Exception {
+        PdObjetivoDAO objetivoDAO = new PdObjetivoDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         s_objetivos = objetivoDAO.select(idplandesarrollo);
-        ds.closeConnection();
         return s_objetivos;
     }
 
-       /**
+    /**
      * @author Manuel Cortes Granados
      * @since 28 Julio 2014 17:45
      * @param idplandesarrollo
-     * @return 
+     * @return
      */
-    
-    public Set<PdPrograma> consultarProgramasPlanDesarrollo(int idplandesarrollo,int idobjetivo) throws Exception{
-        DataSourceFactory ds = new DataSourceFactory();
-        PdProgramaDAO pdprogramaDAO = new PdProgramaDAO(ds.getConnection());
-        s_programas = pdprogramaDAO.select(idplandesarrollo,idobjetivo);
-        ds.closeConnection();
+    public Set<PdPrograma> consultarProgramasPlanDesarrollo(int idplandesarrollo, int idobjetivo) throws Exception {
+        PdProgramaDAO pdprogramaDAO = new PdProgramaDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+        s_programas = pdprogramaDAO.select(idplandesarrollo, idobjetivo);
         return s_programas;
     }
 
-     /**
+    /**
      * @author Manuel Cortes Granados
      * @since 28 Julio 2014 17:45
      * @param idplandesarrollo
-     * @return 
+     * @return
      */
-    
-    public Set<PdSubprograma> consultarSubprogramaPlanDesarrollo(int idplandesarrollo,int idobjetivo,int idprograma) throws Exception{
-        DataSourceFactory ds = new DataSourceFactory();
-        PdSubProgramaDAO pdsubprogramaDAO = new PdSubProgramaDAO(ds.getConnection());
-        s_subprogramas = pdsubprogramaDAO.select(idplandesarrollo,idobjetivo,idprograma);
-        ds.closeConnection();
+    public Set<PdSubprograma> consultarSubprogramaPlanDesarrollo(int idplandesarrollo, int idobjetivo, int idprograma) throws Exception {
+        PdSubProgramaDAO pdsubprogramaDAO = new PdSubProgramaDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+        s_subprogramas = pdsubprogramaDAO.select(idplandesarrollo, idobjetivo, idprograma);
         return s_subprogramas;
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 29 Julio 2014 12:46
-     * @throws Exception 
+     * @throws Exception
      */
-    
     public void getPlanDesarrollo() throws Exception {
         try {
-            DataSourceFactory ds = new DataSourceFactory();
-            PlandesarrolloDAO planDAO = new PlandesarrolloDAO(ds.getConnection());
+            PlandesarrolloDAO planDAO = new PlandesarrolloDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
             p_plandesarrollo = planDAO.getPlanDesarrollo();
-            ds.closeConnection();
         } catch (Exception ex) {
             Logger.getLogger(MetasProyecto.class.getName()).log(Level.SEVERE, null, ex);
             procesarErrorGeneral(ex);
         }
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 29 Julio 2014 12:46
      * @param idobjetivo
      * @param idprograma
      * @param idsubprograma
-     * @throws Exception 
+     * @throws Exception
      */
-    
-    public List<Meta> consultarMetasDisponibles(int idobjetivo,int idprograma,int idsubprograma) throws Exception{
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasDAO metDAO = new MetasDAO(ds.getConnection());
-        List<Meta> l_resultado=metDAO.select(idobjetivo, idprograma, idsubprograma);
-        ds.closeConnection();     
+    public List<Meta> consultarMetasDisponibles(int idobjetivo, int idprograma, int idsubprograma) throws Exception {
+        MetasDAO metDAO = new MetasDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
+        List<Meta> l_resultado = metDAO.select(idobjetivo, idprograma, idsubprograma);
         return l_resultado;
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 30 Julio 2014 9:08 AM
-     * @return 
+     * @return
      */
-    
-    public List<ReporteMetasVO> getConsolidadoReporteTodaslasMetasyProyectos(){
-        try {  
-        DataSourceFactory ds = new DataSourceFactory();
-        MetasCE metCE = new MetasCE(ds.getConnection());
-        List<ReporteMetasVO> l_resultado = new ArrayList<ReporteMetasVO>();
-        l_resultado = metCE.getConsolidadoReporteTodaslasMetasyProyectos();
-        return l_resultado;
+    public List<ReporteMetasVO> getConsolidadoReporteTodaslasMetasyProyectos() {
+        try {
+            MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
+            List<ReporteMetasVO> l_resultado = new ArrayList<ReporteMetasVO>();
+            l_resultado = metCE.getConsolidadoReporteTodaslasMetasyProyectos();
+            return l_resultado;
         } catch (Exception ex) {
             Logger.getLogger(MetasProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
