@@ -235,11 +235,7 @@
                             </h:panelGrid>
                             <h:panelGrid columns="2">
 
-<<<<<<< HEAD
                                 <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
-=======
-                                <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio} #{Supervisor$Contrato.tipoContCon}:" rendered="#{var.versioncobra eq 'siccu'}"/>
->>>>>>> sienteSICCU
                                 <h:panelGrid id="ikont-hpg-tipoconvenio" columns="2" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu'}">
                                     <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" required="true"
                                                      value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
