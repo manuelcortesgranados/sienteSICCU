@@ -9700,6 +9700,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
     }
     
+    public void consultarContratistasIni() {
+        nombreCedulaNitContratista = "";
+        consultarContratistas();
+    }
+    
     /**
      * Carga los valores desponibles de los contratantes asociados al convenio
      */

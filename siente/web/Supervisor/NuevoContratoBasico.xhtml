@@ -484,8 +484,8 @@
                             rendered="#{var.multiplescontratistas}">
                     <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
                         <h:panelGrid id="ikont-acb-botonesmultiplescontratistas" styleClass="ikont-acb-botonesmultiplescontratistas" columns="2">
-                            <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistas()}"
-                                               render="ikont-hpg-contratistas" execute="@this" immediate="true"
+                            <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistasIni()}"
+                                               render="ikont-hpg-contratistas,ikont-hpg-filtrocontratista" execute="@this" immediate="true"
                                                oncomplete="#{rich:component('ikont-rpp-listado-contratistas')}.show();"/>
                             <a4j:commandButton styleClass="ikont-acb-crearmultiplecontratista" id="ikont-acb-crearmultiplecontratista" value="#{var.crearcontratista}" 
                                                rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}"
