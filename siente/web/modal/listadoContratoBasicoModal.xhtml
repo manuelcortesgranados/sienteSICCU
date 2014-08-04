@@ -8,7 +8,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-listado-contratos" moveable="true" headerClass="rich-panel-header" autosized="true" >
+    <rich:popupPanel id="mp-listado-contratos" moveable="true" headerClass="rich-panel-header" autosized="true" style="background: white;" >
         <f:facet name="header" >
             <h:panelGroup id="gpHeadercontratos">
                 <h:outputText  styleClass="ikont-hot-listarcontrato" id="listarcontrato" value="#{var.listar} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
