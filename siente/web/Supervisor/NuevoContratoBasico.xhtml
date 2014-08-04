@@ -235,11 +235,7 @@
                             </h:panelGrid>
                             <h:panelGrid columns="2">
 
-<<<<<<< HEAD
                                 <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio}" rendered="#{var.versioncobra eq 'siccu' and Supervisor$Contrato.tipoContCon eq 'Convenio'}"/>
-=======
-                                <h:outputLabel  styleClass="ikont-hol-tipoconvenio font-general" id="ikont-hol-tipoconvenio"  value="(*) #{var.tipoconvenio} #{Supervisor$Contrato.tipoContCon}:" rendered="#{var.versioncobra eq 'siccu'}"/>
->>>>>>> sienteSICCU
                                 <h:panelGrid id="ikont-hpg-tipoconvenio" columns="2" styleClass="ikont-hpg-entcontra" rendered="#{var.versioncobra eq 'siccu'}">
                                     <h:selectOneMenu styleClass="ikont-hsom-tipoconvenio" id="ikont-hsom-tipoconvenio" required="true"
                                                      value="#{Supervisor$Contrato.contrato.tipocontrato.inttipocontrato}">
@@ -272,7 +268,7 @@
                                     <h:message  for="txtNumcontString" styleClass="ikont-rm-numcont"  />
                                     <h:panelGrid id="ikont-hpg-anio" styleClass="ikont-hpg-anio" rendered="#{var.contratoconvenioconanio}" columns="3">
                                         <h:outputText value="-"/>
-                                        <h:inputText id="ikont-hit-anio" styleClass="ikont-hit-anio" value="#{Supervisor$Contrato.contrato.intanio}" required="true">
+                                        <h:inputText id="ikont-hit-anio" styleClass="ikont-hit-anio" value="#{Supervisor$Contrato.contrato.intanio}" required="true" validatorMessage="#{var.aniomensajeinvalido} #{var.minaniocontratoconvenio}-#{var.maxaniocontratoconvenio}">
                                             <f:validateLongRange minimum="#{var.minaniocontratoconvenio}" maximum="#{var.maxaniocontratoconvenio}"/>
                                             <rich:placeholder value="#{var.formatoaniocontratoconvenio}"/>
                                         </h:inputText>
@@ -488,8 +484,8 @@
                             rendered="#{var.multiplescontratistas}">
                     <h:panelGrid id="ikont-hpg-multiplescontratistas" styleClass="ikont-hpg-multiplescontratistas">
                         <h:panelGrid id="ikont-acb-botonesmultiplescontratistas" styleClass="ikont-acb-botonesmultiplescontratistas" columns="2">
-                            <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistas()}"
-                                               render="ikont-hpg-contratistas" execute="@this" immediate="true"
+                            <a4j:commandButton styleClass="ikont-acb-buscarmultiplescontratista" id="ikont-acb-buscarmultiplescontratistas" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.consultarContratistasIni()}"
+                                               render="ikont-hpg-contratistas,ikont-hpg-filtrocontratista" execute="@this" immediate="true"
                                                oncomplete="#{rich:component('ikont-rpp-listado-contratistas')}.show();"/>
                             <a4j:commandButton styleClass="ikont-acb-crearmultiplecontratista" id="ikont-acb-crearmultiplecontratista" value="#{var.crearcontratista}" 
                                                rendered="#{Supervisor$Contrato.tipoContCon eq 'Contrato'}"
@@ -511,19 +507,6 @@
                                     <h:outputText  styleClass="ikont-hot-nombrecontratista" value="#{var.nombrecontratista}"/>
                                 </f:facet>
                                 <h:outputText value="#{contratoContratista.contratista.tercero.strnombre}"/>
-                            </rich:column>
-                            <rich:column>
-                                <f:facet name="header" >
-                                    <h:outputText  styleClass="ikont-hot-numvalorcontratado" value="#{var.numvalorcontratado}"/>
-                                </f:facet>
-                                <h:outputText value="#{contratoContratista.numvalorcontratado}">
-                                    <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                </h:outputText>
-                                <f:facet name="footer" >
-                                    <h:outputText  styleClass="ikont-hot-numvalorcontratado" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                                        <f:convertNumber pattern="#{var.formatomoneda}"/>
-                                    </h:outputText>
-                                </f:facet>
                             </rich:column>
                             <rich:column>
                                 <f:facet name="header">

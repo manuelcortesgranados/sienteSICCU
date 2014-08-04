@@ -9680,12 +9680,29 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Consulta las entidades contratistas
      */
     public void consultarContratistas() {
+        List<Contratista> contratistaAEliminar = new ArrayList<Contratista>();
         if(tipoContCon.equals("Convenio")) {
             contratistas = getSessionBeanCobra().getCobraService().consultarContratistas(nombreCedulaNitContratista,Tipocontratista.ID_TIPO_ENTE_TERRITORIAL);
         }
         if(tipoContCon.equals("Contrato")) {
             contratistas = getSessionBeanCobra().getCobraService().consultarContratistas(nombreCedulaNitContratista,Tipocontratista.ID_TIPO_TERCERO);
         }
+        for (Contratista contratistaDiponible : contratistas) {
+            for (Object object : contrato.getContratocontratistas()) {
+                Contratocontratista contratistaAsociado = (Contratocontratista) object;
+                if(contratistaDiponible.getIntcodigo() == contratistaAsociado.getContratista().getIntcodigo()){
+                    contratistaAEliminar.add(contratistaDiponible);
+                }
+            }
+        }
+        if(!contratistaAEliminar.isEmpty()) {
+            contratistas.removeAll(contratistaAEliminar);
+        }
+    }
+    
+    public void consultarContratistasIni() {
+        nombreCedulaNitContratista = "";
+        consultarContratistas();
     }
     
     /**
@@ -9789,10 +9806,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @param contratocontratante Contratante a eliminar
      */
     public void eliminarContratanteConvenioAction(Contratocontratante contratocontratante) {
-        for(Contratocontratante contratocontratanteSeleccionado : contrpadre.getListaContratocontratantes()) {
-            if(contratocontratanteSeleccionado.getContratante().getIntcodigo() 
-                    == contratocontratante.getContratante().getIntcodigo() ) {
-                contratocontratanteSeleccionado.setNumvalordisponible(contratocontratanteSeleccionado.getNumvalordisponible().add(contratocontratante.getNumvaloraportado()));
+        if(contrpadre != null) {
+            for(Contratocontratante contratocontratanteSeleccionado : contrpadre.getListaContratocontratantes()) {
+                if(contratocontratanteSeleccionado.getContratante().getIntcodigo() 
+                        == contratocontratante.getContratante().getIntcodigo() ) {
+                    contratocontratanteSeleccionado.setNumvalordisponible(contratocontratanteSeleccionado.getNumvalordisponible().add(contratocontratante.getNumvaloraportado()));
+                }
             }
         }
         contrato.setNumvlrcontrato(contrato.getNumvlrcontrato().subtract(contratocontratante.getNumvaloraportado()));
