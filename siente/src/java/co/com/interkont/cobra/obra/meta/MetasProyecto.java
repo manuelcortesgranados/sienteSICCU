@@ -575,6 +575,15 @@ public class MetasProyecto implements Serializable {
     }
 
     /**
+     * @author Manuel Cortes Granados
+     * @since Mayo 23 2014 11:40 AM
+     * @return
+     */
+    public String irApagina_ParametrizacionMetas() throws Exception {
+        return "MetasParametrizacion";
+    }
+    
+    /**
      * @author Manuel Cortes GranadoFs
      * @since Mayo 23 2014 11:40 AM
      * @return

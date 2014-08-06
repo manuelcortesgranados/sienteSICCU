@@ -29,7 +29,7 @@
         </h:panelGroup>
     </ui:define>
     <ui:define name="body">
-        <h:form id="ikont-hf-indicadores" >
+        <h:form id="ikont-hf-indicadoPres" >
             <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
@@ -37,132 +37,37 @@
                         <h:outputText  value="Modulo Metas"/>
                     </f:facet>
                     <rich:tabPanel activeItem="#{MetasProyecto.activePanel}">
-                        <rich:tab id="tabPlanDesarrollo" actionListener="#{MetasProyecto.cambiarActivePanel(1)}" header="Parametrizacion | ">
-                            <html>
-                                <table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                    <tr>
-                                        <td class="ikont-label-borde" colspan="3">
-                                            <table width="100%" border="0" cellspacing="3" cellpadding="3">
-                                                <tr>
-                                                    <td colspan="2" class="ikont-hot-value-participacion"><div align="center">Plan de Desarrollo : #{MetasProyecto.p_plandesarrollo.nombre}</div></td>
-                                                </tr>
-                                                <c:forEach items="#{MetasProyecto.consultarObjetivosPlanDesarrollo(1)}" var="objetivo">  
-                                                    <tr>
-                                                        <td class="ikont-label-borde" valign="top">
-                                                            <table width="100%" border="0" cellspacing="5" cellpadding="5">
-                                                                <tr>
-                                                                    <td colspan="2"><div align="center" class="ikont-hot-value-participacion">OBJETIVOS</div>
-                                                                        <div align="center"></div></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="ikont-hcl-reportes_administrativos">Id. Objetivo</td>
-                                                                    <td class="ikont-label-borde">#{objetivo.id.idobjetivo}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="ikont-hcl-reportes_administrativos">Objetivo</td>
-                                                                    <td class="ikont-label-borde">#{objetivo.objetivo}</td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                        <td valign="top" class="ikont-label-borde">
-                                                            <table width="100%" border="0" cellspacing="3" cellpadding="3">
-                                                                <tr>
-                                                                    <td colspan="2" class="ikont-hot-porcentajeinversion"><div align="center">PROGRAMAS</div></td>
-                                                                </tr>
-                                                                <c:forEach items="#{MetasProyecto.consultarProgramasPlanDesarrollo(1,objetivo.id.idobjetivo)}" var="programa"> 
+                        <rich:tab id="tabPlanDesarrollo" actionListener="#{MetasProyecto.cambiarActivePanel(1)}" header="Asociacion | ">
+                            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                <tr>
+                                    <td class="ikont-hcl-reportes_administrativos">OBJETIVOS</td>
+                                    <td class="ikont-hcl-reportes_administrativos">PROGRAMAS, SUBPROGRAMAS Y METAS</td>
+                                </tr>
+                                <tr>
+                                    <td class="ikont-label-borde">Objetivos</td>
+                                    <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                            <tr>
+                                                <td class="ikont-label-borde">Programa1</td>
+                                                <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                        <tr>
+                                                            <td class="ikont-label-borde">SubPrograma1</td>
+                                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
                                                                     <tr>
-                                                                        <td valign="top"  class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <table width="100%" border="0" cellspacing="5" cellpadding="5">
-                                                                                            <tr>
-                                                                                                <td  class="ikont-hcl-reportes_administrativos">Id.Programa</td>
-                                                                                                <td class="ikont-label-borde">#{programa.id.idprograma}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td  class="ikont-hcl-reportes_administrativos">Programa</td>
-                                                                                                <td class="ikont-label-borde">#{programa.programa}</td>
-                                                                                            </tr>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                        <td valign="top" class="ikont-label-borde">
-                                                                            <table width="100%" border="0" cellspacing="5" cellpadding="5">
-                                                                                <tr>
-                                                                                    <td colspan="3"><div align="center" class="ikont-hot-strDireccionProyectoOut">SUBPROGRAMA</div></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="ikont-hcl-reportes_administrativos">Id.Subprograma</td>
-                                                                                    <td class="ikont-hcl-reportes_administrativos">Subprograma</td>
-                                                                                    <td class="ikont-hcl-reportes_administrativos">Metas Asociadas</td>
-                                                                                </tr>
-                                                                                <c:forEach items="#{MetasProyecto.consultarSubprogramaPlanDesarrollo(1,objetivo.id.idobjetivo,programa.id.idprograma)}" var="subprograma"> 
-                                                                                    <tr>
-                                                                                        <td class="ikont-label-borde">#{subprograma.id.idsubprograma}</td>
-                                                                                        <td class="ikont-label-borde">#{subprograma.subprograma}</td>
-                                                                                        <td class="ikont-label-borde">
-                                                                                            <table width="100%" border="0" cellspacing="5" cellpadding="5">
-                                                                                                <tr>
-                                                                                                    <td class="ikont-hcl-reportes_administrativos">id</td>
-                                                                                                    <td class="ikont-hcl-reportes_administrativos">Meta</td>
-                                                                                                    <td class="ikont-hcl-reportes_administrativos"></td>
-                                                                                                    <td class="ikont-hcl-reportes_administrativos"></td>
-                                                                                                    <td class="ikont-hcl-reportes_administrativos"></td>
-                                                                                                </tr>
-                                                                                                <c:forEach items="#{MetasProyecto.consultarMetasDisponibles(objetivo.id.idobjetivo,programa.id.idprograma,subprograma.id.idsubprograma)}" var="metadisp"> 
-                                                                                                    <tr>
-                                                                                                        <td class="hol_fuente_recursos_zoom">#{metadisp.id}</td>
-                                                                                                        <td class="hol_fuente_recursos_zoom">#{metadisp.descripcionmetaproducto}</td>
-                                                                                                        <td class="hol_fuente_recursos_zoom">
-                                                                                                            <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMeta')}.show();" styleClass="ikont-a4jcb-modificarobra" >
-                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
-                                                                                                            </a4j:commandButton>    
-                                                                                                        </td>
-                                                                                                        <td class="hol_fuente_recursos_zoom">
-                                                                                                            <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
-                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
-                                                                                                            </h:commandButton>
-                                                                                                        </td>
-                                                                                                        <td class="hol_fuente_recursos_zoom">
-                                                                                                            <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaObra}" type="submit" value="Asociar">
-                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
-                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
-                                                                                                            </h:commandButton>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </c:forEach>
-                                                                                                <tr>
-                                                                                                    <td colspan="5">
-                                                                                                        <h:commandButton id="btCrearMetaObra"  value="Crear Meta" immediate="true" action="#{MetasProyecto.irApagina_IngresarMeta()}">          
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idplandesarrollo}" value="1" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idobjetivo}" value="#{objetivo.id.idobjetivo}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idprograma}" value="#{programa.id.idprograma}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idsubprograma}" value="#{subprograma.id.idsubprograma}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_nombre_plandesarrollo}" value="#{MetasProyecto.p_plandesarrollo.nombre}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_nombre_objetivo}" value="#{objetivo.objetivo}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_nombre_programa}" value="#{programa.programa}" />
-                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_nombre_subprograma}" value="#{subprograma.subprograma}" />
-                                                                                                        </h:commandButton>
-                                                                                                    </td>
-                                                                                                </tr>                                                                                    
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </c:forEach>  
-                                                                            </table></td>
+                                                                        <td class="ikont-label-borde">Meta1</td>
                                                                     </tr>
-                                                                </c:forEach>  
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </html>    
+                                                                    <tr>
+                                                                        <td class="ikont-label-borde">Meta2</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="ikont-label-borde">Meta3</td>
+                                                                    </tr>
+                                                                </table></td>
+                                                        </tr>
+                                                    </table></td>
+                                            </tr>
+                                        </table></td>
+                                </tr>
+                            </table>
                         </rich:tab>   
                         <rich:tab id="tabAsociacion" actionListener="#{MetasProyecto.cambiarActivePanel(2)}" rendered="#{MetasProyecto.perteneceGrupoSupervisor or MetasProyecto.perteneceGrupoAdministrador}" header="Asociación | ">
                             <rich:collapsiblePanel switchType="client" header="Metas asociadas al proyecto" expanded="true" id="ikont-rcp-metasasociadasproyecto">
@@ -411,109 +316,109 @@
                             <html>
                                 <table width="100%" border="0" cellspacing="5" cellpadding="5">
                                     <c:forEach items="#{MetasProyecto.getConsolidadoReporteTodaslasMetasyProyectos()}" var="reportesVO"> 
-                                    <tr>
-                                        <td><table width="100%" border="0" cellspacing="3" cellpadding="3">
-                                                <tr>
-                                                    <td valign="top" class="ikont-label-borde">INFORMACION CONSULTA META VA AQUI</td>
-                                                    <td valign="top" class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                            <tr>
-                                                                <td colspan="2"><div align="center" class="ikont-hcl-reportes_administrativos">Global</div></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="ikont-hot-derechos-reser">Total Proyectado</td>
-                                                                <td class="ikont-hot-desea">#{reportesVO.avance_global.total_proyectado}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="ikont-hot-derechos-reser">Total Avance Real</td>
-                                                                <td class="ikont-hot-desea">#{reportesVO.avance_global.total_avance_real}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="ikont-hot-derechos-reser">Total Avance Requerido</td>
-                                                                <td class="ikont-hot-desea">#{reportesVO.avance_global.total_avance_requerido}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="ikont-hot-derechos-reser">% Avance real</td>
-                                                                <td class="ikont-hot-desea">#{reportesVO.avance_global.porcentaje_avance_real}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="ikont-hot-derechos-reser">% Avance requerido</td>
-                                                                <td class="ikont-hot-desea">#{reportesVO.avance_global.porcentaje_avance_requerido}</td>
-                                                            </tr>
-                                                        </table></td>
-                                                    <td valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                            <tr>
-                                                                <td><div align="center" class="ikont-hcl-reportes_administrativos">Anual</div></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                        <c:forEach items="#{reportesVO.avance_por_anio}" var="avanceanio">
-                                                                            <tr>
-                                                                                <td class="ikont-hot-porcentajeinversion">#{avanceanio.anio}</td>
-                                                                                <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                                        <tr>
-                                                                                            <td valign="top" class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                                                    <tr>
-                                                                                                        <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Anual</div></td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">Total Proyectado</td>
-                                                                                                        <td class="ikont-hot-desea">#{avanceanio.total_proyectado}</td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">Total Avance Real</td>
-                                                                                                        <td class="ikont-hot-desea">#{avanceanio.total_avance_real}</td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">Total Avance Requerido</td>
-                                                                                                        <td class="ikont-hot-desea">#{avanceanio.total_avance_requerido}</td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">% Avance real</td>
-                                                                                                        <td class="ikont-hot-desea">#{avanceanio.porcentaje_avance_real}</td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">% Avance requerido</td>
-                                                                                                        <td class="ikont-hot-desea">#{avanceanio.porcentaje_avance_requerido}</td>
-                                                                                                    </tr>
-                                                                                                </table></td>
-                                                                                            <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                                                    <tr>
-                                                                                                        <td colspan="2"><div align="center" class="ikont-hcl-reportes_administrativos">Trimestral</div></td>
-                                                                                                    </tr>
-                                                                                                    <c:forEach items="#{avanceanio.avance_anio_periodo}" var="avanceanioperiodo">
-                                                                                                    <tr>
-                                                                                                        <td class="ikont-hot-derechos-reser">Trimestre 1</td>
-                                                                                                        <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
-                                                                                                                <tr>
-                                                                                                                    <td class="ikont-hot-derechos-reser">Total Proyectado</td>
-                                                                                                                    <td class="ikont-hot-desea">#{avanceanioperiodo.total_proyectado}</td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="ikont-hot-derechos-reser">Total Acumulado</td>
-                                                                                                                    <td class="ikont-hot-desea">#{avanceanioperiodo.total_avance_real}</td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="ikont-hot-derechos-reser">% Avance real</td>
-                                                                                                                    <td class="ikont-hot-desea">#{avanceanioperiodo.porcentaje_avance_requerido}</td>
-                                                                                                                </tr>
-                                                                                                                <tr>
-                                                                                                                    <td class="ikont-hot-derechos-reser">% Avance requerido</td>
-                                                                                                                    <td class="ikont-hot-desea">#{avanceanioperiodo.porcentaje_avance_requerido}</td>
-                                                                                                                </tr>
-                                                                                                            </table></td>
-                                                                                                    </tr>
-                                                                                                    </c:forEach>
-                                                                                                </table></td>
-                                                                                        </tr>
-                                                                                    </table></td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </table></td>
-                                                            </tr>
-                                                        </table></td>
-                                                </tr>
-                                            </table></td>
-                                    </tr>
+                                        <tr>
+                                            <td><table width="100%" border="0" cellspacing="3" cellpadding="3">
+                                                    <tr>
+                                                        <td valign="top" class="ikont-label-borde">INFORMACION CONSULTA META VA AQUI</td>
+                                                        <td valign="top" class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <tr>
+                                                                    <td colspan="2"><div align="center" class="ikont-hcl-reportes_administrativos">Global</div></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Total Proyectado</td>
+                                                                    <td class="ikont-hot-desea">#{reportesVO.avance_global.total_proyectado}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Total Avance Real</td>
+                                                                    <td class="ikont-hot-desea">#{reportesVO.avance_global.total_avance_real}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Total Avance Requerido</td>
+                                                                    <td class="ikont-hot-desea">#{reportesVO.avance_global.total_avance_requerido}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">% Avance real</td>
+                                                                    <td class="ikont-hot-desea">#{reportesVO.avance_global.porcentaje_avance_real}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">% Avance requerido</td>
+                                                                    <td class="ikont-hot-desea">#{reportesVO.avance_global.porcentaje_avance_requerido}</td>
+                                                                </tr>
+                                                            </table></td>
+                                                        <td valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <tr>
+                                                                    <td><div align="center" class="ikont-hcl-reportes_administrativos">Anual</div></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td valign="top"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <c:forEach items="#{reportesVO.avance_por_anio}" var="avanceanio">
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-porcentajeinversion">#{avanceanio.anio}</td>
+                                                                                    <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                            <tr>
+                                                                                                <td valign="top" class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                                        <tr>
+                                                                                                            <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Anual</div></td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td class="ikont-hot-derechos-reser">Total Proyectado</td>
+                                                                                                            <td class="ikont-hot-desea">#{avanceanio.total_proyectado}</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td class="ikont-hot-derechos-reser">Total Avance Real</td>
+                                                                                                            <td class="ikont-hot-desea">#{avanceanio.total_avance_real}</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td class="ikont-hot-derechos-reser">Total Avance Requerido</td>
+                                                                                                            <td class="ikont-hot-desea">#{avanceanio.total_avance_requerido}</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td class="ikont-hot-derechos-reser">% Avance real</td>
+                                                                                                            <td class="ikont-hot-desea">#{avanceanio.porcentaje_avance_real}</td>
+                                                                                                        </tr>
+                                                                                                        <tr>
+                                                                                                            <td class="ikont-hot-derechos-reser">% Avance requerido</td>
+                                                                                                            <td class="ikont-hot-desea">#{avanceanio.porcentaje_avance_requerido}</td>
+                                                                                                        </tr>
+                                                                                                    </table></td>
+                                                                                                <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                                        <tr>
+                                                                                                            <td colspan="2"><div align="center" class="ikont-hcl-reportes_administrativos">Trimestral</div></td>
+                                                                                                        </tr>
+                                                                                                        <c:forEach items="#{avanceanio.avance_anio_periodo}" var="avanceanioperiodo">
+                                                                                                            <tr>
+                                                                                                                <td class="ikont-hot-derechos-reser">Trimestre 1</td>
+                                                                                                                <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                                                        <tr>
+                                                                                                                            <td class="ikont-hot-derechos-reser">Total Proyectado</td>
+                                                                                                                            <td class="ikont-hot-desea">#{avanceanioperiodo.total_proyectado}</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td class="ikont-hot-derechos-reser">Total Acumulado</td>
+                                                                                                                            <td class="ikont-hot-desea">#{avanceanioperiodo.total_avance_real}</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td class="ikont-hot-derechos-reser">% Avance real</td>
+                                                                                                                            <td class="ikont-hot-desea">#{avanceanioperiodo.porcentaje_avance_requerido}</td>
+                                                                                                                        </tr>
+                                                                                                                        <tr>
+                                                                                                                            <td class="ikont-hot-derechos-reser">% Avance requerido</td>
+                                                                                                                            <td class="ikont-hot-desea">#{avanceanioperiodo.porcentaje_avance_requerido}</td>
+                                                                                                                        </tr>
+                                                                                                                    </table></td>
+                                                                                                            </tr>
+                                                                                                        </c:forEach>
+                                                                                                    </table></td>
+                                                                                            </tr>
+                                                                                        </table></td>
+                                                                                </tr>
+                                                                            </c:forEach>
+                                                                        </table></td>
+                                                                </tr>
+                                                            </table></td>
+                                                    </tr>
+                                                </table></td>
+                                        </tr>
                                     </c:forEach>
                                     <tr>
                                         <td>AQUI VA LA OTRA META</td>
