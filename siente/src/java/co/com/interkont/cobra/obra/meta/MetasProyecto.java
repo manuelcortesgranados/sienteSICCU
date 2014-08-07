@@ -9,7 +9,6 @@ import co.com.interkont.cobra.hibernate.service.metas.MetasServiceAble;
 import co.com.interkont.cobra.jdbc.entity.tables.MetaObraDAO;
 import co.com.interkont.cobra.jdbc.entity.tables.MetaRegistroDAO;
 import co.com.interkont.cobra.jdbc.entity.CE.metas.MetasCE;
-import co.com.interkont.cobra.jdbc.entity.tables.Jsf_usuario_grupoDAO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.ReporteMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.camposAutocalculadosMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.tables_amp.MetaObraAMPVO;
@@ -491,10 +490,9 @@ public class MetasProyecto implements Serializable {
      * @since Julio 24 2014 2:29 PM
      */
     public void consultarPermisosUsuario() throws Exception {
-        Jsf_usuario_grupoDAO jsfusDAO = new Jsf_usuario_grupoDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
-        this.perteneceGrupoMetas = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
-        this.perteneceGrupoSupervisor = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
-        this.perteneceGrupoAdministrador = jsfusDAO.verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
+        this.perteneceGrupoMetas = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
+        this.perteneceGrupoSupervisor = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
+        this.perteneceGrupoAdministrador = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
 
         if (perteneceGrupoAdministrador) { // Si es Administrador, pasa por alto los render o sencillamente muestra todo
             perteneceGrupoMetas = perteneceGrupoSupervisor = true;
@@ -789,19 +787,13 @@ public class MetasProyecto implements Serializable {
 
     /**
      *
-     *
      * @author Manuel Cortes Granados
      * @since Mayo 24 2014 11:40 AM
      * @return
      */
     public String actualizarMetaObra() throws Exception {
-        try {
-            MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            metDAO.update(metaobra);
-            FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
-        } catch (SQLException e) {
-            procesarError(e);
-        }
+        this.getMetasService().actualizarMetaObra(metaobra);
+        FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
         return null;
     }
 
@@ -817,8 +809,9 @@ public class MetasProyecto implements Serializable {
             if (p_idmetaobra == 0) {
                 FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (this.validarActualizacionEliminacionMetaObra(p_idmetaobra)) {
-                MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-                metDAO.delete(this.getP_idmetaobra());
+                Metaobra metaobra = new Metaobra();
+                metaobra.setIdmetaobra(this.getP_idmetaobra());
+                this.getMetasService().eliminarMetaObra(metaobra);
                 FacesUtils.addInfoMessage("La asociacion con Id. " + this.getP_idmetaobra() + " ha sido eliminada con exito");
                 return null;
             } else {
@@ -853,15 +846,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaObraparaActualizar() throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            //DataSourceFactory ds = new DataSourceFactory();
-            MetaObraDAO metDAO = new MetaObraDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            metaobra = metDAO.select(p_idmetaobra);
-            //ds.closeConnection();
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        metaobra = this.getMetasService().selectMetaObra(p_idmetaobra);
     }
 
     /**
