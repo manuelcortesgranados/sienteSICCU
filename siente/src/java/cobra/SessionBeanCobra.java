@@ -8,6 +8,7 @@ import Seguridad.Encrypter;
 import atencionHumanitaria.service.AtencionHumanitariaServiceAble;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import ciudadano.service.CiudadanoServiceAble;
+import co.com.interkont.cobra.hibernate.service.metas.MetasServiceAble;
 import co.com.interkont.cobra.jdbc.entity.datasource.DataSourceFactory;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.to.Actividadobra;
@@ -105,7 +106,6 @@ public class SessionBeanCobra implements Serializable {
     private boolean logueado = false;
     private final DataSourceFactory dataSourceFactory = new DataSourceFactory();
     
-    
 
     //Medios de vida
     private MarcoLogicoServiceAble marcoLogicoService;
@@ -122,6 +122,8 @@ public class SessionBeanCobra implements Serializable {
     public DataSourceFactory getDataSourceFactory() {
         return dataSourceFactory;
     }
+    
+    
     
     
 

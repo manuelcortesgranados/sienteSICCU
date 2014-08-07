@@ -36,7 +36,7 @@
                         <h:outputText  value="Modulo Parametrizacion Metas"/>
                     </f:facet>
                     <rich:tabPanel activeItem="#{MetasProyecto.activePanel}">
-                        <rich:tab id="tabPlanDesarrollo" actionListener="#{MetasProyecto.cambiarActivePanel(1)}" header="Parametrizacion | ">
+                        <rich:tab id="tabPlanDesarrollo" header="Parametrizacion | ">
                             <html>
                                 <table width="100%" border="0" cellspacing="1" cellpadding="1">
                                     <tr>
@@ -122,6 +122,14 @@
                                                                                                         <td class="hol_fuente_recursos_zoom">
                                                                                                             <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMeta}" actionListener="#{MetasProyecto.consultarMetaparaActualizar}" type="submit" value="Actualizar">
                                                                                                                 <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idplandesarrollo}" value="1" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idobjetivo}" value="#{objetivo.id.idobjetivo}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idprograma}" value="#{programa.id.idprograma}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idsubprograma}" value="#{subprograma.id.idsubprograma}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_nombre_plandesarrollo}" value="#{MetasProyecto.p_plandesarrollo.nombre}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_nombre_objetivo}" value="#{objetivo.objetivo}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_nombre_programa}" value="#{programa.programa}" />
+                                                                                                                <a4j:param assignTo="#{MetasProyecto.p_nombre_subprograma}" value="#{subprograma.subprograma}" />
                                                                                                             </h:commandButton>
                                                                                                         </td>
                                                                                                         <td class="hol_fuente_recursos_zoom">

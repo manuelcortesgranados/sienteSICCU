@@ -312,6 +312,10 @@
         <managed-bean-name>MetasProyecto</managed-bean-name>
         <managed-bean-class>co.com.interkont.cobra.obra.meta.MetasProyecto</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>metasService</property-name>
+            <value>#{metasService}</value>
+        </managed-property>        
     </managed-bean>
     <managed-bean>
         <managed-bean-name>SeguimientosContrato</managed-bean-name>

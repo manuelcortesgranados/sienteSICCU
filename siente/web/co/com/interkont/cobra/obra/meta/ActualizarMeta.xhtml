@@ -36,12 +36,6 @@
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
                         <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
                             <h:outputLabel  value="Plan de Desarrollo : "/>
-                            <h:selectOneMenu id="cmbPlanDesarrollo" value="#{MetasProyecto.meta.planDesarrollo.intidplandesarrollo}" immediate="true">
-                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
-                                <f:selectItems value="#{MetasProyecto.listaPlanDesarrollo}" var="planDesarrollo"
-                                               itemValue="#{planDesarrollo.intidplandesarrollo}" itemLabel="#{planDesarrollo.nombre}" />
-                            </h:selectOneMenu>
-                            <h:outputLabel  value="Plan de Desarrollo : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_plandesarrollo.nombre}"/>
                             <h:outputLabel  value="Objetivo : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_nombre_objetivo}"/>
