@@ -73,6 +73,43 @@
                             <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
                             <h:inputTextarea  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
                             <rich:tooltip value="Valor Esperado del Indicador Producto Cuatrenio" target="valorEsperadoProducto"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Valor Proyectado Anual : "/>
+                            <h:inputTextarea  required="false" id="valorProyectadoAnual" value="#{MetasProyecto.meta.proyectadoAnual}"/>
+                            <rich:tooltip value="Valor Proyectado Anual : Es el valor esperado por año" target="valorProyectadoAnual"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Frecuencia Medicion : "/>
+                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.p_periodomedida}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarPanelesPeriodos}">
+                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
+                                <f:selectItems value="#{MetasProyecto.listaPeriodoMedida}" var="periodoMedida"
+                                               itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
+                                <f:ajax event="click" render="panelPeriodos"/>
+                            </h:selectOneMenu>                                                            
+                            <rich:tooltip value="Frecuencia Medicion" target="cmbFrecuenciaMedicionMeta"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>    
+                            <h:panelGrid id="panelPeriodos" columns="2" cellpadding="5" cellspacing="5">
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[0]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[1]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[2]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[3]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[4]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo5}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[5]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo6}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[6]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo7}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[7]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo8}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[8]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo9}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[9]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo10}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[10]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo11}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodos[11]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                <h:inputTextarea  required="false" value="#{MetasProyecto.meta.proyectadoPeriodo12}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                            </h:panelGrid>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
                             <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>

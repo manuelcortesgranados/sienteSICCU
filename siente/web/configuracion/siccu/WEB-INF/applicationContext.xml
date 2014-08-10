@@ -352,6 +352,7 @@
    <bean id="administrarDao" class="cobra.dao.AdministrarDaoImpl" parent="AbstractSpringDao"></bean>-->
     <!-- Definicion de Daos para el requerimientos de Metas.  Agosto 2014 -->
     <bean id="metasDao" class="co.com.interkont.cobra.hibernate.dao.metas.MetasDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="seguimientosDao" class="co.com.interkont.cobra.hibernate.dao.seguimientos.SeguimientosDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
     <!-- ========================= Start of SERVICE DEFINITIONS ========================= -->
 
         <!-- TODO Service Definition -->
@@ -373,6 +374,13 @@
           class="co.com.interkont.cobra.hibernate.service.metas.MetasServiceImpl">
         <property name="metasDao">
             <ref local="metasDao" />
+        </property>
+    </bean>
+    
+    <bean id="seguimientosServiceTarget" scope="prototype"
+          class="co.com.interkont.cobra.hibernate.service.seguimientos.SeguimientosServiceImpl">
+        <property name="seguimientosDao">
+            <ref local="seguimientosDao" />
         </property>
     </bean>
     
@@ -525,7 +533,29 @@
         </property>
     </bean>
     
-    
+
+    <bean id="seguimientosService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="seguimientosServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="guardar*">PROPAGATION_REQUIRED</prop>
+                <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+        
     
     <bean id="financieraService" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >

@@ -6,9 +6,6 @@
 package co.com.interkont.cobra.obra.meta;
 
 import co.com.interkont.cobra.hibernate.service.metas.MetasServiceAble;
-import co.com.interkont.cobra.jdbc.entity.tables.MetaObraDAO;
-import co.com.interkont.cobra.jdbc.entity.tables.MetaRegistroDAO;
-import co.com.interkont.cobra.jdbc.entity.CE.metas.MetasCE;
 import co.com.interkont.cobra.jdbc.model.CE.metas.ReporteMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.camposAutocalculadosMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.tables_amp.MetaObraAMPVO;
@@ -61,8 +58,6 @@ import org.apache.poi.ss.usermodel.Row;
  * @since Mayo 23 2014
  */
 public class MetasProyecto implements Serializable {
-
-    private MetasServiceAble metasService;
 
     boolean test = true;
     Meta meta;
@@ -119,14 +114,10 @@ public class MetasProyecto implements Serializable {
     String p_nombre_subprograma;
 
     PlanDesarrollo p_plandesarrollo;
-
-    public MetasServiceAble getMetasService() {
-        return metasService;
-    }
-
-    public void setMetasService(MetasServiceAble metasService) {
-        this.metasService = metasService;
-    }
+    
+    public boolean verPanelesPeriodos=false;
+    String arregloValoresEtiquetasPeriodos[];
+    boolean mostrarValoresEtiquetasPeriodos[];
 
     public Meta getMeta() {
         return meta;
@@ -432,6 +423,41 @@ public class MetasProyecto implements Serializable {
         this.p_plandesarrollo = p_plandesarrollo;
     }
 
+    public boolean isVerPanelesPeriodos() {
+        return verPanelesPeriodos;
+    }
+
+    public void setVerPanelesPeriodos(boolean verPanelesPeriodos) {
+        this.verPanelesPeriodos = verPanelesPeriodos;
+    }
+
+    public PeriodosFrecuencia getPer() {
+        return per;
+    }
+
+    public void setPer(PeriodosFrecuencia per) {
+        this.per = per;
+    }
+
+    public String[] getArregloValoresEtiquetasPeriodos() {
+        return arregloValoresEtiquetasPeriodos;
+    }
+
+    public void setArregloValoresEtiquetasPeriodos(String[] arregloValoresEtiquetasPeriodos) {
+        this.arregloValoresEtiquetasPeriodos = arregloValoresEtiquetasPeriodos;
+    }
+
+    public boolean[] getMostrarValoresEtiquetasPeriodos() {
+        return mostrarValoresEtiquetasPeriodos;
+    }
+
+    public void setMostrarValoresEtiquetasPeriodos(boolean[] mostrarValoresEtiquetasPeriodos) {
+        this.mostrarValoresEtiquetasPeriodos = mostrarValoresEtiquetasPeriodos;
+    }
+    
+    
+    
+
     /**
      * Esta implementacion mantiene que cuando se abra otra ventana, permanezca
      * activa el tab en el cual se estaba trabajando
@@ -472,27 +498,27 @@ public class MetasProyecto implements Serializable {
         this.listaUnidadMedida.add("LITRO");
 
         cargarListaPeriodoMedida();
-
-        try {
-            this.consultarMetaRegistro();
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        consultarMetaRegistro();
 
         this.perteneceGrupoMetas = false;
         this.perteneceGrupoSupervisor = false;
         this.perteneceGrupoAdministrador = false;
         reportesVO = new ReporteMetasVO();
+        arregloValoresEtiquetasPeriodos=new String[12];
+        mostrarValoresEtiquetasPeriodos=new boolean[12];
+        for(int i=0;i<12;i++)
+            mostrarValoresEtiquetasPeriodos[1]=false;
     }
 
     /**
      * @author Manuel Cortes Granados
+     * @throws java.lang.Exception
      * @since Julio 24 2014 2:29 PM
      */
     public void consultarPermisosUsuario() throws Exception {
-        this.perteneceGrupoMetas = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
-        this.perteneceGrupoSupervisor = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
-        this.perteneceGrupoAdministrador = this.getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
+        this.perteneceGrupoMetas = this.getSessionBeanCobra().getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 33);
+        this.perteneceGrupoSupervisor = this.getSessionBeanCobra().getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 23);
+        this.perteneceGrupoAdministrador = this.getSessionBeanCobra().getMetasService().verificarUsuarioYGrupo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1);
 
         if (perteneceGrupoAdministrador) { // Si es Administrador, pasa por alto los render o sencillamente muestra todo
             perteneceGrupoMetas = perteneceGrupoSupervisor = true;
@@ -514,7 +540,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void cargarListaPeriodosFrecuencia(int periodomedida) throws Exception {
-        this.listaPeriodosFrecuencia = this.getMetasService().selectPeriodosFrecuencia(periodomedida);
+        this.listaPeriodosFrecuencia = this.getSessionBeanCobra().getMetasService().selectPeriodosFrecuencia(periodomedida);
     }
 
     /**
@@ -528,13 +554,135 @@ public class MetasProyecto implements Serializable {
         Utilitario util = new Utilitario();
         String idpfrecuencia = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idperiodosFrecuencia");
         p_idperiodofrecuencia = Integer.valueOf(event.getNewValue().toString()).intValue();
-        PeriodosFrecuencia per = this.getMetasService().select_by_idperiodos_frecuencia(p_idperiodofrecuencia);
+        PeriodosFrecuencia per = this.getSessionBeanCobra().getMetasService().select_by_idperiodos_frecuencia(p_idperiodofrecuencia);
         String fechaInicial = new String("2014/" + per.getMesInicial() + "/" + per.getDiaInicial());
         String fechaFinal = new String("2014/" + per.getMesFinal() + "/" + per.getDiaFinal());
         metaregistro = new Metaregistro();
         metaregistro.setFechaInicio(util.convertirStringtoDate(fechaInicial));
         metaregistro.setFechaFinal(util.convertirStringtoDate(fechaFinal));
         FacesContext.getCurrentInstance().renderResponse();
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 9 Agosto 2014 21:38
+     * @param event 
+     */
+    
+    public void actualizarPanelesPeriodos(ValueChangeEvent event){
+        
+        this.getMeta().setProyectadoPeriodo1(new Double(0));
+        this.getMeta().setProyectadoPeriodo2(new Double(0));
+        this.getMeta().setProyectadoPeriodo3(new Double(0));
+        this.getMeta().setProyectadoPeriodo4(new Double(0));
+        this.getMeta().setProyectadoPeriodo5(new Double(0));
+        this.getMeta().setProyectadoPeriodo6(new Double(0));
+        this.getMeta().setProyectadoPeriodo7(new Double(0));
+        this.getMeta().setProyectadoPeriodo8(new Double(0));
+        this.getMeta().setProyectadoPeriodo9(new Double(0));
+        this.getMeta().setProyectadoPeriodo10(new Double(0));
+        this.getMeta().setProyectadoPeriodo11(new Double(0));
+        this.getMeta().setProyectadoPeriodo12(new Double(0));
+        
+        switch(Integer.valueOf(event.getNewValue().toString()).intValue()){
+            case 3:     
+                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Enero : ";
+                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Febrero : ";
+                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Marzo : ";
+                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Abril : ";
+                        arregloValoresEtiquetasPeriodos[4]="Valor Proyectado Mayo : ";
+                        arregloValoresEtiquetasPeriodos[5]="Valor Proyectado Junio : ";
+                        arregloValoresEtiquetasPeriodos[6]="Valor Proyectado Julio : ";
+                        arregloValoresEtiquetasPeriodos[7]="Valor Proyectado Agosto : ";
+                        arregloValoresEtiquetasPeriodos[8]="Valor Proyectado Septiembre : ";
+                        arregloValoresEtiquetasPeriodos[9]="Valor Proyectado Octubre : ";
+                        arregloValoresEtiquetasPeriodos[10]="Valor Proyectado Noviembre : ";
+                        arregloValoresEtiquetasPeriodos[11]="Valor Proyectado Diciembre: ";
+                        mostrarValoresEtiquetasPeriodos[0]=true;
+                        mostrarValoresEtiquetasPeriodos[1]=true;
+                        mostrarValoresEtiquetasPeriodos[2]=true;
+                        mostrarValoresEtiquetasPeriodos[3]=true;
+                        mostrarValoresEtiquetasPeriodos[4]=true;
+                        mostrarValoresEtiquetasPeriodos[5]=true;
+                        mostrarValoresEtiquetasPeriodos[6]=true;
+                        mostrarValoresEtiquetasPeriodos[7]=true;
+                        mostrarValoresEtiquetasPeriodos[8]=true;
+                        mostrarValoresEtiquetasPeriodos[9]=true;
+                        mostrarValoresEtiquetasPeriodos[10]=true;
+                        mostrarValoresEtiquetasPeriodos[11]=true;
+                        break;
+            case 4:     
+                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Bimestre Enero/Febrero : ";
+                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Bimestre Marzo/Abril : ";
+                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Bimestre Mayo/Junio : ";
+                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Bimestre Julio/Agosto : ";
+                        arregloValoresEtiquetasPeriodos[4]="Valor Proyectado Bimestre Septiembre/Octubre : ";
+                        arregloValoresEtiquetasPeriodos[5]="Valor Proyectado Bimestre Noviembre/Diciembre : ";
+                        mostrarValoresEtiquetasPeriodos[0]=true;
+                        mostrarValoresEtiquetasPeriodos[1]=true;
+                        mostrarValoresEtiquetasPeriodos[2]=true;
+                        mostrarValoresEtiquetasPeriodos[3]=true;
+                        mostrarValoresEtiquetasPeriodos[4]=true;
+                        mostrarValoresEtiquetasPeriodos[5]=true;
+                        mostrarValoresEtiquetasPeriodos[6]=false;
+                        mostrarValoresEtiquetasPeriodos[7]=false;
+                        mostrarValoresEtiquetasPeriodos[8]=false;
+                        mostrarValoresEtiquetasPeriodos[9]=false;
+                        mostrarValoresEtiquetasPeriodos[10]=false;
+                        mostrarValoresEtiquetasPeriodos[11]=false;
+                        break;
+            case 5:     
+                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Trimestre Enero-Marzo : ";
+                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Trimestre Abril-Junio : ";
+                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Trimestre Julio-Septiembre : ";
+                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Trimestre Octubre-Diciembre : ";
+                        mostrarValoresEtiquetasPeriodos[0]=true;
+                        mostrarValoresEtiquetasPeriodos[1]=true;
+                        mostrarValoresEtiquetasPeriodos[2]=true;
+                        mostrarValoresEtiquetasPeriodos[3]=true;
+                        mostrarValoresEtiquetasPeriodos[4]=false;
+                        mostrarValoresEtiquetasPeriodos[5]=false;
+                        mostrarValoresEtiquetasPeriodos[6]=false;
+                        mostrarValoresEtiquetasPeriodos[7]=false;
+                        mostrarValoresEtiquetasPeriodos[8]=false;
+                        mostrarValoresEtiquetasPeriodos[9]=false;
+                        mostrarValoresEtiquetasPeriodos[10]=false;
+                        mostrarValoresEtiquetasPeriodos[11]=false;
+                        break;
+            case 6:     
+                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Cuatrimestre Enero-Abril : ";
+                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Cuatrimestre Mayo-Agosto : ";
+                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Cuatrimestre Septiembre-Diciembre : ";
+                        mostrarValoresEtiquetasPeriodos[0]=true;
+                        mostrarValoresEtiquetasPeriodos[1]=true;
+                        mostrarValoresEtiquetasPeriodos[2]=true;
+                        mostrarValoresEtiquetasPeriodos[3]=false;
+                        mostrarValoresEtiquetasPeriodos[4]=false;
+                        mostrarValoresEtiquetasPeriodos[5]=false;
+                        mostrarValoresEtiquetasPeriodos[6]=false;
+                        mostrarValoresEtiquetasPeriodos[7]=false;
+                        mostrarValoresEtiquetasPeriodos[8]=false;
+                        mostrarValoresEtiquetasPeriodos[9]=false;
+                        mostrarValoresEtiquetasPeriodos[10]=false;
+                        mostrarValoresEtiquetasPeriodos[11]=false;
+                        break;
+            case 7:     
+                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Semestre Enero-Junio : ";
+                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Semestre Julio-Diciembre : ";
+                        mostrarValoresEtiquetasPeriodos[0]=false;
+                        mostrarValoresEtiquetasPeriodos[1]=false;
+                        mostrarValoresEtiquetasPeriodos[2]=false;
+                        mostrarValoresEtiquetasPeriodos[3]=false;
+                        mostrarValoresEtiquetasPeriodos[4]=false;
+                        mostrarValoresEtiquetasPeriodos[5]=false;
+                        mostrarValoresEtiquetasPeriodos[6]=false;
+                        mostrarValoresEtiquetasPeriodos[7]=false;
+                        mostrarValoresEtiquetasPeriodos[8]=false;
+                        mostrarValoresEtiquetasPeriodos[9]=false;
+                        mostrarValoresEtiquetasPeriodos[10]=false;
+                        mostrarValoresEtiquetasPeriodos[11]=false;
+                        break;
+        }
     }
 
     /**
@@ -575,16 +723,32 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String irApagina_ParametrizacionMetas() throws Exception {
+        getPlanDesarrollo();
         return "MetasParametrizacion";
     }
 
     /**
+     * Inicializa los valores de cada valor proyectado de cada periodo en cero por defecto, ya que
+     * algunos se requieren que queden cero (menos cuando la frecuencia de medicion sea mensual)
+     * 
      * @author Manuel Cortes GranadoFs
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
     public String irApagina_IngresarMeta() throws Exception {
         meta = new Meta();
+        meta.setProyectadoPeriodo1(new Double(0));
+        meta.setProyectadoPeriodo2(new Double(0));
+        meta.setProyectadoPeriodo3(new Double(0));
+        meta.setProyectadoPeriodo4(new Double(0));
+        meta.setProyectadoPeriodo5(new Double(0));
+        meta.setProyectadoPeriodo6(new Double(0));
+        meta.setProyectadoPeriodo7(new Double(0));
+        meta.setProyectadoPeriodo8(new Double(0));
+        meta.setProyectadoPeriodo9(new Double(0));
+        meta.setProyectadoPeriodo10(new Double(0));
+        meta.setProyectadoPeriodo11(new Double(0));
+        meta.setProyectadoPeriodo12(new Double(0));
         this.getMeta().setNomp(0);
         this.getMeta().setNombreindicador("Nombre Indicador");
         this.getMeta().setDescripcionmetaproducto("Descripcion Meta Producto");
@@ -624,7 +788,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaparaConsulta() throws Exception {
-        meta_consulta = this.getMetasService().selectMeta(p_idmeta);
+        meta_consulta = this.getSessionBeanCobra().getMetasService().selectMeta(p_idmeta);
     }
 
     /**
@@ -672,12 +836,12 @@ public class MetasProyecto implements Serializable {
      * @since Mayo 24 2014 11:40 AM
      * @return
      */
-    public String ingresarMeta() throws SQLException, Exception {
+    public String ingresarMeta() throws Exception {
         meta.setPlanDesarrollo(p_plandesarrollo);
         meta.setIdobjetivo(p_idobjetivo);
         meta.setIdprograma(p_idprograma);
         meta.setIdsubprograma(p_idsubprograma);
-        this.getMetasService().guardarMeta(meta);
+        this.getSessionBeanCobra().getMetasService().guardarMeta(meta);
         FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
         return null;
     }
@@ -693,7 +857,7 @@ public class MetasProyecto implements Serializable {
         meta.setPlanDesarrollo(planDesarrollo);
         meta.setIdprograma(p_idprograma);
         meta.setIdsubprograma(p_idsubprograma);
-        this.getMetasService().actualizarMeta(meta);
+        this.getSessionBeanCobra().getMetasService().actualizarMeta(meta);
         return null;
     }
 
@@ -709,7 +873,7 @@ public class MetasProyecto implements Serializable {
             if (this.p_idmeta == 0) {
                 FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (validarActualizacionEliminacionMeta(this.p_idmeta)) {
-                this.getMetasService().eliminarMeta(meta);
+                this.getSessionBeanCobra().getMetasService().eliminarMeta(meta);
                 FacesUtils.addInfoMessage("La meta con id " + this.getP_idmeta() + " ha sido eliminada con exito");
             } else {
                 FacesUtils.addErrorMessage("No es posible eliminar la Meta ya que tiene Proyectos Asociados");
@@ -728,7 +892,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaparaActualizar() throws Exception {
-        meta_consulta = this.getMetasService().selectMeta(p_idmeta);
+        meta_consulta = this.getSessionBeanCobra().getMetasService().selectMeta(p_idmeta);
     }
 
     /**
@@ -740,7 +904,7 @@ public class MetasProyecto implements Serializable {
      */
     public boolean validarActualizacionEliminacionMeta(int idmeta) throws Exception {
         boolean resultado = true;
-        List<Metaobra> l_resultado = getMetasService().getMetaObrabyMeta(idmeta);
+        List<Metaobra> l_resultado = this.getSessionBeanCobra().getMetasService().getMetaObrabyMeta(idmeta);
 
         if (l_resultado.isEmpty() == false) {
             resultado = false;
@@ -792,7 +956,7 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String actualizarMetaObra() throws Exception {
-        this.getMetasService().actualizarMetaObra(metaobra);
+        this.getSessionBeanCobra().getMetasService().actualizarMetaObra(metaobra);
         FacesUtils.addInfoMessage("La meta ha sido actualizada con exito");
         return null;
     }
@@ -811,7 +975,7 @@ public class MetasProyecto implements Serializable {
             } else if (this.validarActualizacionEliminacionMetaObra(p_idmetaobra)) {
                 Metaobra metaobra = new Metaobra();
                 metaobra.setIdmetaobra(this.getP_idmetaobra());
-                this.getMetasService().eliminarMetaObra(metaobra);
+                this.getSessionBeanCobra().getMetasService().eliminarMetaObra(metaobra);
                 FacesUtils.addInfoMessage("La asociacion con Id. " + this.getP_idmetaobra() + " ha sido eliminada con exito");
                 return null;
             } else {
@@ -830,13 +994,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaObra() throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            MetaObraDAO metDAO = new MetaObraDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
-            this.listaMetasObras = metDAO.select_amp(this.p_idcodigoobra);
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        this.listaMetasObras = this.getSessionBeanCobra().getMetasService().select_amp(p_idcodigoobra);
     }
 
     /**
@@ -846,7 +1004,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaObraparaActualizar() throws Exception {
-        metaobra = this.getMetasService().selectMetaObra(p_idmetaobra);
+        metaobra = this.getSessionBeanCobra().getMetasService().selectMetaObra(p_idmetaobra);
     }
 
     /**
@@ -859,7 +1017,7 @@ public class MetasProyecto implements Serializable {
     public boolean validarActualizacionEliminacionMetaObra(int idmetaobra) throws Exception {
         boolean resultado = true;
 
-        List<Metaregistro> l_resultado = this.getMetasService().getMetaRegistrobyMetaObra(idmetaobra);
+        List<Metaregistro> l_resultado = this.getSessionBeanCobra().getMetasService().getMetaRegistrobyMetaObra(idmetaobra);
         if (l_resultado.isEmpty() == false) {
             resultado = false;
         }
@@ -899,15 +1057,9 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String actualizarMetaRegistro() throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            metaregistro = metDAO.select(this.p_idmetaregistro);
-            FacesUtils.addInfoMessage("La programacion del registro de la meta ha sido actualizada con eixto.");
-            return null;
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        Metaregistro metaregistro = new Metaregistro();
+        this.getSessionBeanCobra().getMetasService().actualizarMetaRegistro(metaregistro);
+        FacesUtils.addInfoMessage("La programacion del registro de la meta ha sido actualizada con eixto.");
         return null;
     }
 
@@ -918,15 +1070,11 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public String eliminarMetaRegistro(int idmetaregistro) throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            metDAO.delete(this.p_idmetaregistro);
-            FacesUtils.addInfoMessage("El Avance de Meta con ID " + this.p_idmetaregistro + " ha sido eliminado con exito");
-            FacesContext.getCurrentInstance().renderResponse();
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        Metaregistro metaregistro = new Metaregistro();
+        metaregistro.setIdregistrometaobra(this.p_idmetaregistro);
+        this.getSessionBeanCobra().getMetasService().eliminarMetaRegistro(metaregistro);
+        FacesUtils.addInfoMessage("El Avance de Meta con ID " + this.p_idmetaregistro + " ha sido eliminado con exito");
+        FacesContext.getCurrentInstance().renderResponse();
         return null;
     }
 
@@ -936,14 +1084,8 @@ public class MetasProyecto implements Serializable {
      * @return
      * @throws Exception
      */
-    public void consultarMetaRegistro() throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            MetaRegistroDAO metregDAO = new MetaRegistroDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
-            listaMetasObrasRegsitro = metregDAO.select_amp(p_idcodigoobra);
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+    public void consultarMetaRegistro() {
+        listaMetasObrasRegsitro = this.getSessionBeanCobra().getMetasService().select_ampMetaRegistro(p_idcodigoobra);
     }
 
     /**
@@ -953,13 +1095,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaRegistroparaActualizar() throws Exception {
-        Utilitario util = new Utilitario();
-        try {
-            MetaRegistroDAO metregDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            metaregistro = metregDAO.select(this.p_idmetaregistro);
-        } catch (SQLException se) {
-            procesarError(se);
-        }
+        metaregistro = this.getSessionBeanCobra().getMetasService().selectMetaRegistro(this.p_idmetaregistro);
     }
 
     /**
@@ -1294,8 +1430,6 @@ public class MetasProyecto implements Serializable {
         double acumulado_meta_acumulada = 0;
         double acumulado_porcentaje = 0;
 
-        //DataSourceFactory ds = new DataSourceFactory();
-        MetaRegistroDAO metDAO = new MetaRegistroDAO(getSessionBeanCobra().getDataSourceFactory().getConnection());
         for (Meta meta : this.listaMetas) {
             List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
             for (Metaobra metaobra : l_metaobra) {
@@ -1307,7 +1441,7 @@ public class MetasProyecto implements Serializable {
                     metaregistro.setMetaProyectadaAcum(acumulado_meta_proyectada);
                     metaregistro.setMetaAcumuladaAcum(acumulado_meta_acumulada);
                     metaregistro.setPorcentajeAcum(acumulado_porcentaje);
-                    metDAO.update(metaregistro);
+                    this.getSessionBeanCobra().getMetasService().actualizarMetaRegistro(metaregistro);
                 }
                 acumulado_meta_proyectada = 0;
                 acumulado_meta_acumulada = 0;
@@ -1328,13 +1462,11 @@ public class MetasProyecto implements Serializable {
 
             String contenido = "";
 
-            MetaRegistroDAO metDAO = new MetaRegistroDAO(this.getSessionBeanCobra().getDataSourceFactory().getConnection());
-
             for (Meta meta : this.listaMetas) {
                 List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
                 for (Metaobra metaobra : l_metaobra) {
                     List<Metaregistro> l_metaregistro = this.consultaMetaRegistroDetalle(metaobra.getIdmetaobra());
-                    double maxMetaProyectada = metDAO.getSumaMetaProyectada(metaobra.getIdmetaobra());
+                    double maxMetaProyectada = this.getSessionBeanCobra().getMetasService().getSumaMetaProyectada(metaobra.getIdmetaobra());
                     contenido = contenido + "<graph caption=\"Grafico\" subcaption=\"Meta Proyectada Vs Meta Acumulada por Periodo y Acumulados\" hovercapbg=\"FFECAA\" hovercapborder=\"F47E00\" formatNumberScale=\"0\" decimalPrecision=\"0\" showvalues=\"0\" numdivlines=\"3\" numVdivlines=\"0\" yaxisminvalue=\"0\" yaxismaxvalue=\"" + maxMetaProyectada + "\"  rotateNames=\"1\">";
                     contenido = contenido + "<categories >";
                     for (Metaregistro metaregistro : l_metaregistro) {
@@ -1387,8 +1519,7 @@ public class MetasProyecto implements Serializable {
      */
     public ReporteMetasVO generarReporteGlobalMetas(int idmeta, int idproyecto) throws Exception {
         ReporteMetasVO repVO = new ReporteMetasVO();
-        MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
-        repVO = metCE.generarReporteGlobalMetas(idmeta, idproyecto);
+        repVO = this.getSessionBeanCobra().getMetasService().generarReporteGlobalMetas(idmeta, idproyecto);
         return repVO;
     }
 
@@ -1399,7 +1530,7 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public Set<PdObjetivo> consultarObjetivosPlanDesarrollo(int idplandesarrollo) throws Exception {
-        s_objetivos = this.getMetasService().selectPdObjetivos(idplandesarrollo);
+        s_objetivos = this.getSessionBeanCobra().getMetasService().selectPdObjetivos(idplandesarrollo);
         return s_objetivos;
     }
 
@@ -1410,7 +1541,7 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public Set<PdPrograma> consultarProgramasPlanDesarrollo(int idplandesarrollo, int idobjetivo) throws Exception {
-        s_programas = this.getMetasService().selectPdPrograma(idplandesarrollo, idobjetivo);
+        s_programas = this.getSessionBeanCobra().getMetasService().selectPdPrograma(idplandesarrollo, idobjetivo);
         return s_programas;
     }
 
@@ -1421,7 +1552,7 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public Set<PdSubprograma> consultarSubprogramaPlanDesarrollo(int idplandesarrollo, int idobjetivo, int idprograma) throws Exception {
-        s_subprogramas = this.getMetasService().selectPdSubPrograma(idplandesarrollo, idobjetivo, idprograma);
+        s_subprogramas = this.getSessionBeanCobra().getMetasService().selectPdSubPrograma(idplandesarrollo, idobjetivo, idprograma);
         return s_subprogramas;
     }
 
@@ -1431,7 +1562,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void getPlanDesarrollo() throws Exception {
-        p_plandesarrollo = this.getMetasService().getPlanDesarrollo();
+        p_plandesarrollo = this.getSessionBeanCobra().getMetasService().getPlanDesarrollo();
     }
 
     /**
@@ -1443,7 +1574,7 @@ public class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public List<Meta> consultarMetasDisponibles(int idobjetivo, int idprograma, int idsubprograma) throws Exception {
-        List<Meta> l_resultado = this.getMetasService().selectMeta(idobjetivo, idprograma, idsubprograma);
+        List<Meta> l_resultado = this.getSessionBeanCobra().getMetasService().selectMeta(idobjetivo, idprograma, idsubprograma);
         return l_resultado;
     }
 
@@ -1453,15 +1584,9 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public List<ReporteMetasVO> getConsolidadoReporteTodaslasMetasyProyectos() {
-        try {
-            MetasCE metCE = new MetasCE(getSessionBeanCobra().getDataSourceFactory().getConnection());
-            List<ReporteMetasVO> l_resultado = new ArrayList<ReporteMetasVO>();
-            l_resultado = metCE.getConsolidadoReporteTodaslasMetasyProyectos();
-            return l_resultado;
-        } catch (Exception ex) {
-            Logger.getLogger(MetasProyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        List<ReporteMetasVO> l_resultado = new ArrayList<ReporteMetasVO>();
+        l_resultado = this.getSessionBeanCobra().getMetasService().getConsolidadoReporteTodaslasMetasyProyectos();
+        return l_resultado;
     }
 
 }
