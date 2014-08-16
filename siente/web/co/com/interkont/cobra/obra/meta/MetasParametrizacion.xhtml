@@ -45,7 +45,7 @@
                                                 <tr>
                                                     <td colspan="2" class="ikont-hot-value-participacion"><div align="center">Plan de Desarrollo : #{MetasProyecto.p_plandesarrollo.nombre}</div></td>
                                                 </tr>
-                                                <c:forEach items="#{MetasProyecto.consultarObjetivosPlanDesarrollo(1)}" var="objetivo">  
+                                                <c:forEach items="#{MetasProyecto.consultarObjetivosPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo)}" var="objetivo">  
                                                     <tr>
                                                         <td class="ikont-label-borde" valign="top">
                                                             <table width="100%" border="0" cellspacing="5" cellpadding="5">
@@ -68,7 +68,7 @@
                                                                 <tr>
                                                                     <td colspan="2" class="ikont-hot-porcentajeinversion"><div align="center">PROGRAMAS</div></td>
                                                                 </tr>
-                                                                <c:forEach items="#{MetasProyecto.consultarProgramasPlanDesarrollo(1,objetivo.id.idobjetivo)}" var="programa"> 
+                                                                <c:forEach items="#{MetasProyecto.consultarProgramasPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo,objetivo.id.idobjetivo)}" var="programa"> 
                                                                     <tr>
                                                                         <td valign="top"  class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
                                                                                 <tr>
@@ -97,7 +97,7 @@
                                                                                     <td class="ikont-hcl-reportes_administrativos">Subprograma</td>
                                                                                     <td class="ikont-hcl-reportes_administrativos">Metas Asociadas</td>
                                                                                 </tr>
-                                                                                <c:forEach items="#{MetasProyecto.consultarSubprogramaPlanDesarrollo(1,objetivo.id.idobjetivo,programa.id.idprograma)}" var="subprograma"> 
+                                                                                <c:forEach items="#{MetasProyecto.consultarSubprogramaPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo,objetivo.id.idobjetivo,programa.id.idprograma)}" var="subprograma"> 
                                                                                     <tr>
                                                                                         <td class="ikont-label-borde">#{subprograma.id.idsubprograma}</td>
                                                                                         <td class="ikont-label-borde">#{subprograma.subprograma}</td>

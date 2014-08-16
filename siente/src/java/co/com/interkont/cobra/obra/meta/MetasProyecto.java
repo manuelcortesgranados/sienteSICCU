@@ -57,7 +57,7 @@ import org.apache.poi.ss.usermodel.Row;
  * @author Manuel Cortes Granados
  * @since Mayo 23 2014
  */
-public class MetasProyecto implements Serializable {
+public final class MetasProyecto implements Serializable {
 
     boolean test = true;
     Meta meta;
@@ -114,10 +114,12 @@ public class MetasProyecto implements Serializable {
     String p_nombre_subprograma;
 
     PlanDesarrollo p_plandesarrollo;
-    
-    public boolean verPanelesPeriodos=false;
-    String arregloValoresEtiquetasPeriodos[];
+
+    public boolean verPanelesPeriodos = false;
+    String arregloValoresEtiquetasPeriodosAnios[][];
     boolean mostrarValoresEtiquetasPeriodos[];
+
+    int aniosGobierno[];
 
     public Meta getMeta() {
         return meta;
@@ -439,12 +441,12 @@ public class MetasProyecto implements Serializable {
         this.per = per;
     }
 
-    public String[] getArregloValoresEtiquetasPeriodos() {
-        return arregloValoresEtiquetasPeriodos;
+    public String[][] getArregloValoresEtiquetasPeriodosAnios() {
+        return arregloValoresEtiquetasPeriodosAnios;
     }
 
-    public void setArregloValoresEtiquetasPeriodos(String[] arregloValoresEtiquetasPeriodos) {
-        this.arregloValoresEtiquetasPeriodos = arregloValoresEtiquetasPeriodos;
+    public void setArregloValoresEtiquetasPeriodosAnios(String[][] arregloValoresEtiquetasPeriodosAnios) {
+        this.arregloValoresEtiquetasPeriodosAnios = arregloValoresEtiquetasPeriodosAnios;
     }
 
     public boolean[] getMostrarValoresEtiquetasPeriodos() {
@@ -454,9 +456,14 @@ public class MetasProyecto implements Serializable {
     public void setMostrarValoresEtiquetasPeriodos(boolean[] mostrarValoresEtiquetasPeriodos) {
         this.mostrarValoresEtiquetasPeriodos = mostrarValoresEtiquetasPeriodos;
     }
-    
-    
-    
+
+    public int[] getAniosGobierno() {
+        return aniosGobierno;
+    }
+
+    public void setAniosGobierno(int[] aniosGobierno) {
+        this.aniosGobierno = aniosGobierno;
+    }
 
     /**
      * Esta implementacion mantiene que cuando se abra otra ventana, permanezca
@@ -491,23 +498,37 @@ public class MetasProyecto implements Serializable {
      */
     public MetasProyecto() throws Exception {
 
+        Utilitario util = new Utilitario();
+
         this.listaUnidadMedida.add("METRO");
         this.listaUnidadMedida.add("KILOMETRO");
         this.listaUnidadMedida.add("UNIDAD");
         this.listaUnidadMedida.add("METRO CUADRADO");
         this.listaUnidadMedida.add("LITRO");
 
-        cargarListaPeriodoMedida();
+        this.getPlanDesarrollo();
+        cargarListaPeriodoMedida(); // Carga los valores de la tabla public.periodomedida para el cuadro combinado
         consultarMetaRegistro();
 
         this.perteneceGrupoMetas = false;
         this.perteneceGrupoSupervisor = false;
         this.perteneceGrupoAdministrador = false;
         reportesVO = new ReporteMetasVO();
-        arregloValoresEtiquetasPeriodos=new String[12];
-        mostrarValoresEtiquetasPeriodos=new boolean[12];
-        for(int i=0;i<12;i++)
-            mostrarValoresEtiquetasPeriodos[1]=false;
+        arregloValoresEtiquetasPeriodosAnios = new String[4][12];
+        mostrarValoresEtiquetasPeriodos = new boolean[12];
+        for (int i = 0; i < 12; i++) {
+            mostrarValoresEtiquetasPeriodos[1] = false;
+        }
+
+        aniosGobierno = new int[4];
+        this.getAniosGobierno()[0] = util.getYEARfromDate(this.getP_plandesarrollo().getFechaInicialPeriodo());
+        this.getAniosGobierno()[1] = this.getAniosGobierno()[0] + 1;
+        this.getAniosGobierno()[2] = this.getAniosGobierno()[0] + 2;
+        this.getAniosGobierno()[3] = this.getAniosGobierno()[0] + 3;
+
+        /*for(int anio=0;anio<3;anio++){
+         arregloValoresEtiquetasPeriodosAnios[anio]=new String[];
+         }*/
     }
 
     /**
@@ -530,7 +551,7 @@ public class MetasProyecto implements Serializable {
      * @since Julio 18 2014 1:31 PM
      */
     public void cargarListaPeriodoMedida() {
-        this.listaPeriodoMedida = getSessionBeanCobra().getCobraService().encontrarPeriodosMedida();
+        this.listaPeriodoMedida = getSessionBeanCobra().getMetasService().consultarPeriodosMedidaVigentes();
     }
 
     /**
@@ -562,126 +583,122 @@ public class MetasProyecto implements Serializable {
         metaregistro.setFechaFinal(util.convertirStringtoDate(fechaFinal));
         FacesContext.getCurrentInstance().renderResponse();
     }
-    
+
     /**
      * @author Manuel Cortes Granados
      * @since 9 Agosto 2014 21:38
-     * @param event 
+     * @param event
      */
-    
-    public void actualizarPanelesPeriodos(ValueChangeEvent event){
-        
-        this.getMeta().setProyectadoPeriodo1(new Double(0));
-        this.getMeta().setProyectadoPeriodo2(new Double(0));
-        this.getMeta().setProyectadoPeriodo3(new Double(0));
-        this.getMeta().setProyectadoPeriodo4(new Double(0));
-        this.getMeta().setProyectadoPeriodo5(new Double(0));
-        this.getMeta().setProyectadoPeriodo6(new Double(0));
-        this.getMeta().setProyectadoPeriodo7(new Double(0));
-        this.getMeta().setProyectadoPeriodo8(new Double(0));
-        this.getMeta().setProyectadoPeriodo9(new Double(0));
-        this.getMeta().setProyectadoPeriodo10(new Double(0));
-        this.getMeta().setProyectadoPeriodo11(new Double(0));
-        this.getMeta().setProyectadoPeriodo12(new Double(0));
-        
-        switch(Integer.valueOf(event.getNewValue().toString()).intValue()){
-            case 3:     
-                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Enero : ";
-                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Febrero : ";
-                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Marzo : ";
-                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Abril : ";
-                        arregloValoresEtiquetasPeriodos[4]="Valor Proyectado Mayo : ";
-                        arregloValoresEtiquetasPeriodos[5]="Valor Proyectado Junio : ";
-                        arregloValoresEtiquetasPeriodos[6]="Valor Proyectado Julio : ";
-                        arregloValoresEtiquetasPeriodos[7]="Valor Proyectado Agosto : ";
-                        arregloValoresEtiquetasPeriodos[8]="Valor Proyectado Septiembre : ";
-                        arregloValoresEtiquetasPeriodos[9]="Valor Proyectado Octubre : ";
-                        arregloValoresEtiquetasPeriodos[10]="Valor Proyectado Noviembre : ";
-                        arregloValoresEtiquetasPeriodos[11]="Valor Proyectado Diciembre: ";
-                        mostrarValoresEtiquetasPeriodos[0]=true;
-                        mostrarValoresEtiquetasPeriodos[1]=true;
-                        mostrarValoresEtiquetasPeriodos[2]=true;
-                        mostrarValoresEtiquetasPeriodos[3]=true;
-                        mostrarValoresEtiquetasPeriodos[4]=true;
-                        mostrarValoresEtiquetasPeriodos[5]=true;
-                        mostrarValoresEtiquetasPeriodos[6]=true;
-                        mostrarValoresEtiquetasPeriodos[7]=true;
-                        mostrarValoresEtiquetasPeriodos[8]=true;
-                        mostrarValoresEtiquetasPeriodos[9]=true;
-                        mostrarValoresEtiquetasPeriodos[10]=true;
-                        mostrarValoresEtiquetasPeriodos[11]=true;
-                        break;
-            case 4:     
-                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Bimestre Enero/Febrero : ";
-                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Bimestre Marzo/Abril : ";
-                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Bimestre Mayo/Junio : ";
-                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Bimestre Julio/Agosto : ";
-                        arregloValoresEtiquetasPeriodos[4]="Valor Proyectado Bimestre Septiembre/Octubre : ";
-                        arregloValoresEtiquetasPeriodos[5]="Valor Proyectado Bimestre Noviembre/Diciembre : ";
-                        mostrarValoresEtiquetasPeriodos[0]=true;
-                        mostrarValoresEtiquetasPeriodos[1]=true;
-                        mostrarValoresEtiquetasPeriodos[2]=true;
-                        mostrarValoresEtiquetasPeriodos[3]=true;
-                        mostrarValoresEtiquetasPeriodos[4]=true;
-                        mostrarValoresEtiquetasPeriodos[5]=true;
-                        mostrarValoresEtiquetasPeriodos[6]=false;
-                        mostrarValoresEtiquetasPeriodos[7]=false;
-                        mostrarValoresEtiquetasPeriodos[8]=false;
-                        mostrarValoresEtiquetasPeriodos[9]=false;
-                        mostrarValoresEtiquetasPeriodos[10]=false;
-                        mostrarValoresEtiquetasPeriodos[11]=false;
-                        break;
-            case 5:     
-                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Trimestre Enero-Marzo : ";
-                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Trimestre Abril-Junio : ";
-                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Trimestre Julio-Septiembre : ";
-                        arregloValoresEtiquetasPeriodos[3]="Valor Proyectado Trimestre Octubre-Diciembre : ";
-                        mostrarValoresEtiquetasPeriodos[0]=true;
-                        mostrarValoresEtiquetasPeriodos[1]=true;
-                        mostrarValoresEtiquetasPeriodos[2]=true;
-                        mostrarValoresEtiquetasPeriodos[3]=true;
-                        mostrarValoresEtiquetasPeriodos[4]=false;
-                        mostrarValoresEtiquetasPeriodos[5]=false;
-                        mostrarValoresEtiquetasPeriodos[6]=false;
-                        mostrarValoresEtiquetasPeriodos[7]=false;
-                        mostrarValoresEtiquetasPeriodos[8]=false;
-                        mostrarValoresEtiquetasPeriodos[9]=false;
-                        mostrarValoresEtiquetasPeriodos[10]=false;
-                        mostrarValoresEtiquetasPeriodos[11]=false;
-                        break;
-            case 6:     
-                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Cuatrimestre Enero-Abril : ";
-                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Cuatrimestre Mayo-Agosto : ";
-                        arregloValoresEtiquetasPeriodos[2]="Valor Proyectado Cuatrimestre Septiembre-Diciembre : ";
-                        mostrarValoresEtiquetasPeriodos[0]=true;
-                        mostrarValoresEtiquetasPeriodos[1]=true;
-                        mostrarValoresEtiquetasPeriodos[2]=true;
-                        mostrarValoresEtiquetasPeriodos[3]=false;
-                        mostrarValoresEtiquetasPeriodos[4]=false;
-                        mostrarValoresEtiquetasPeriodos[5]=false;
-                        mostrarValoresEtiquetasPeriodos[6]=false;
-                        mostrarValoresEtiquetasPeriodos[7]=false;
-                        mostrarValoresEtiquetasPeriodos[8]=false;
-                        mostrarValoresEtiquetasPeriodos[9]=false;
-                        mostrarValoresEtiquetasPeriodos[10]=false;
-                        mostrarValoresEtiquetasPeriodos[11]=false;
-                        break;
-            case 7:     
-                        arregloValoresEtiquetasPeriodos[0]="Valor Proyectado Semestre Enero-Junio : ";
-                        arregloValoresEtiquetasPeriodos[1]="Valor Proyectado Semestre Julio-Diciembre : ";
-                        mostrarValoresEtiquetasPeriodos[0]=false;
-                        mostrarValoresEtiquetasPeriodos[1]=false;
-                        mostrarValoresEtiquetasPeriodos[2]=false;
-                        mostrarValoresEtiquetasPeriodos[3]=false;
-                        mostrarValoresEtiquetasPeriodos[4]=false;
-                        mostrarValoresEtiquetasPeriodos[5]=false;
-                        mostrarValoresEtiquetasPeriodos[6]=false;
-                        mostrarValoresEtiquetasPeriodos[7]=false;
-                        mostrarValoresEtiquetasPeriodos[8]=false;
-                        mostrarValoresEtiquetasPeriodos[9]=false;
-                        mostrarValoresEtiquetasPeriodos[10]=false;
-                        mostrarValoresEtiquetasPeriodos[11]=false;
-                        break;
+    public void actualizarPanelesPeriodos(ValueChangeEvent event) {
+
+        switch (Integer.valueOf(event.getNewValue().toString()).intValue()) {
+            case 3:
+                for (int anio = 0; anio < 4; anio++) {
+                    arregloValoresEtiquetasPeriodosAnios[anio][0] = "Valor Proyectado Enero " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][1] = "Valor Proyectado Febrero " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][2] = "Valor Proyectado Marzo " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][3] = "Valor Proyectado Abril " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][4] = "Valor Proyectado Mayo " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][5] = "Valor Proyectado Junio " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][6] = "Valor Proyectado Julio " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][7] = "Valor Proyectado Agosto " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][8] = "Valor Proyectado Septiembre  " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][9] = "Valor Proyectado Octubre " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][10] = "Valor Proyectado Noviembre " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][11] = "Valor Proyectado Diciembre " + this.getAniosGobierno()[anio] + " : ";
+                }
+                mostrarValoresEtiquetasPeriodos[0] = true;
+                mostrarValoresEtiquetasPeriodos[1] = true;
+                mostrarValoresEtiquetasPeriodos[2] = true;
+                mostrarValoresEtiquetasPeriodos[3] = true;
+                mostrarValoresEtiquetasPeriodos[4] = true;
+                mostrarValoresEtiquetasPeriodos[5] = true;
+                mostrarValoresEtiquetasPeriodos[6] = true;
+                mostrarValoresEtiquetasPeriodos[7] = true;
+                mostrarValoresEtiquetasPeriodos[8] = true;
+                mostrarValoresEtiquetasPeriodos[9] = true;
+                mostrarValoresEtiquetasPeriodos[10] = true;
+                mostrarValoresEtiquetasPeriodos[11] = true;
+                break;
+            case 4:
+                for (int anio = 0; anio < 4; anio++) {
+                    arregloValoresEtiquetasPeriodosAnios[anio][0] = "Valor Proyectado Bimestre Enero/Febrero " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][1] = "Valor Proyectado Bimestre Marzo/Abril " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][2] = "Valor Proyectado Bimestre Mayo/Junio " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][3] = "Valor Proyectado Bimestre Julio/Agosto " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][4] = "Valor Proyectado Bimestre Septiembre/Octubre " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][5] = "Valor Proyectado Bimestre Noviembre/Diciembre " + this.getAniosGobierno()[anio] + " : ";
+                }
+                mostrarValoresEtiquetasPeriodos[0] = true;
+                mostrarValoresEtiquetasPeriodos[1] = true;
+                mostrarValoresEtiquetasPeriodos[2] = true;
+                mostrarValoresEtiquetasPeriodos[3] = true;
+                mostrarValoresEtiquetasPeriodos[4] = true;
+                mostrarValoresEtiquetasPeriodos[5] = true;
+                mostrarValoresEtiquetasPeriodos[6] = false;
+                mostrarValoresEtiquetasPeriodos[7] = false;
+                mostrarValoresEtiquetasPeriodos[8] = false;
+                mostrarValoresEtiquetasPeriodos[9] = false;
+                mostrarValoresEtiquetasPeriodos[10] = false;
+                mostrarValoresEtiquetasPeriodos[11] = false;
+                break;
+            case 5:
+                for (int anio = 0; anio < 4; anio++) {
+                    arregloValoresEtiquetasPeriodosAnios[anio][0] = "Valor Proyectado Trimestre Enero-Marzo " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][1] = "Valor Proyectado Trimestre Abril-Junio " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][2] = "Valor Proyectado Trimestre Julio-Septiembre " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][3] = "Valor Proyectado Trimestre Octubre-Diciembre " + this.getAniosGobierno()[anio] + " : ";
+                }
+                mostrarValoresEtiquetasPeriodos[0] = true;
+                mostrarValoresEtiquetasPeriodos[1] = true;
+                mostrarValoresEtiquetasPeriodos[2] = true;
+                mostrarValoresEtiquetasPeriodos[3] = true;
+                mostrarValoresEtiquetasPeriodos[4] = false;
+                mostrarValoresEtiquetasPeriodos[5] = false;
+                mostrarValoresEtiquetasPeriodos[6] = false;
+                mostrarValoresEtiquetasPeriodos[7] = false;
+                mostrarValoresEtiquetasPeriodos[8] = false;
+                mostrarValoresEtiquetasPeriodos[9] = false;
+                mostrarValoresEtiquetasPeriodos[10] = false;
+                mostrarValoresEtiquetasPeriodos[11] = false;
+                break;
+            case 6:
+                for (int anio = 0; anio < 4; anio++) {
+                    arregloValoresEtiquetasPeriodosAnios[anio][0] = "Valor Proyectado Cuatrimestre Enero-Abril " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][1] = "Valor Proyectado Cuatrimestre Mayo-Agosto " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][2] = "Valor Proyectado Cuatrimestre Septiembre-Diciembre " + this.getAniosGobierno()[anio] + " : ";
+                }
+                mostrarValoresEtiquetasPeriodos[0] = true;
+                mostrarValoresEtiquetasPeriodos[1] = true;
+                mostrarValoresEtiquetasPeriodos[2] = true;
+                mostrarValoresEtiquetasPeriodos[3] = false;
+                mostrarValoresEtiquetasPeriodos[4] = false;
+                mostrarValoresEtiquetasPeriodos[5] = false;
+                mostrarValoresEtiquetasPeriodos[6] = false;
+                mostrarValoresEtiquetasPeriodos[7] = false;
+                mostrarValoresEtiquetasPeriodos[8] = false;
+                mostrarValoresEtiquetasPeriodos[9] = false;
+                mostrarValoresEtiquetasPeriodos[10] = false;
+                mostrarValoresEtiquetasPeriodos[11] = false;
+                break;
+            case 7:
+                for (int anio = 0; anio < 4; anio++) {
+                    arregloValoresEtiquetasPeriodosAnios[anio][0] = "Valor Proyectado Semestre Enero-Junio " + this.getAniosGobierno()[anio] + " : ";
+                    arregloValoresEtiquetasPeriodosAnios[anio][1] = "Valor Proyectado Semestre Julio-Diciembre " + this.getAniosGobierno()[anio] + " : ";
+                }
+                mostrarValoresEtiquetasPeriodos[0] = true;
+                mostrarValoresEtiquetasPeriodos[1] = true;
+                mostrarValoresEtiquetasPeriodos[2] = false;
+                mostrarValoresEtiquetasPeriodos[3] = false;
+                mostrarValoresEtiquetasPeriodos[4] = false;
+                mostrarValoresEtiquetasPeriodos[5] = false;
+                mostrarValoresEtiquetasPeriodos[6] = false;
+                mostrarValoresEtiquetasPeriodos[7] = false;
+                mostrarValoresEtiquetasPeriodos[8] = false;
+                mostrarValoresEtiquetasPeriodos[9] = false;
+                mostrarValoresEtiquetasPeriodos[10] = false;
+                mostrarValoresEtiquetasPeriodos[11] = false;
+                break;
         }
     }
 
@@ -728,27 +745,16 @@ public class MetasProyecto implements Serializable {
     }
 
     /**
-     * Inicializa los valores de cada valor proyectado de cada periodo en cero por defecto, ya que
-     * algunos se requieren que queden cero (menos cuando la frecuencia de medicion sea mensual)
-     * 
+     * Inicializa los valores de cada valor proyectado de cada periodo en cero
+     * por defecto, ya que algunos se requieren que queden cero (menos cuando la
+     * frecuencia de medicion sea mensual)
+     *
      * @author Manuel Cortes GranadoFs
      * @since Mayo 23 2014 11:40 AM
      * @return
      */
     public String irApagina_IngresarMeta() throws Exception {
         meta = new Meta();
-        meta.setProyectadoPeriodo1(new Double(0));
-        meta.setProyectadoPeriodo2(new Double(0));
-        meta.setProyectadoPeriodo3(new Double(0));
-        meta.setProyectadoPeriodo4(new Double(0));
-        meta.setProyectadoPeriodo5(new Double(0));
-        meta.setProyectadoPeriodo6(new Double(0));
-        meta.setProyectadoPeriodo7(new Double(0));
-        meta.setProyectadoPeriodo8(new Double(0));
-        meta.setProyectadoPeriodo9(new Double(0));
-        meta.setProyectadoPeriodo10(new Double(0));
-        meta.setProyectadoPeriodo11(new Double(0));
-        meta.setProyectadoPeriodo12(new Double(0));
         this.getMeta().setNomp(0);
         this.getMeta().setNombreindicador("Nombre Indicador");
         this.getMeta().setDescripcionmetaproducto("Descripcion Meta Producto");
@@ -837,13 +843,231 @@ public class MetasProyecto implements Serializable {
      * @return
      */
     public String ingresarMeta() throws Exception {
-        meta.setPlanDesarrollo(p_plandesarrollo);
-        meta.setIdobjetivo(p_idobjetivo);
-        meta.setIdprograma(p_idprograma);
-        meta.setIdsubprograma(p_idsubprograma);
-        this.getSessionBeanCobra().getMetasService().guardarMeta(meta);
-        FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
+        if (validarDatosMetaAntesInsercion()) {
+            meta.setPlanDesarrollo(p_plandesarrollo);
+            meta.setIdobjetivo(p_idobjetivo);
+            meta.setIdprograma(p_idprograma);
+            meta.setIdsubprograma(p_idsubprograma);
+            this.getSessionBeanCobra().getMetasService().guardarMeta(meta);
+            FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
+        }
         return null;
+    }
+
+    /**
+     * @author Manuel Cortes Granados
+     * @since 15 Agosto 2014 12:22
+     * @return
+     */
+    public boolean validarDatosMetaAntesInsercion() {
+
+        double total_anio1 = 0;
+        double total_anio2 = 0;
+        double total_anio3 = 0;
+        double total_anio4 = 0;
+
+        double total_cuatrenio_por_anios = meta.getProyectadoAnio1() + meta.getProyectadoAnio2() + meta.getProyectadoAnio3() + meta.getProyectadoAnio4();
+        if (meta.getValorEsperadoIndicador() == total_cuatrenio_por_anios) {
+            FacesUtils.addErrorMessage("El total de lo proyectado de los cuatro años debe ser estrictamente IGUAL al valor esperado del cuatrenio");
+            return false;
+        }
+        switch (meta.getFrecuenciaMedicion()) {
+            case 3: // SI LA FRECUENCIA DE MEDICIO ES MENSUAL
+                total_anio1 = meta.getProyectadoPeriodo1Anio1()
+                        + meta.getProyectadoPeriodo2Anio1()
+                        + meta.getProyectadoPeriodo3Anio1()
+                        + meta.getProyectadoPeriodo4Anio1()
+                        + meta.getProyectadoPeriodo5Anio1()
+                        + meta.getProyectadoPeriodo6Anio1()
+                        + meta.getProyectadoPeriodo7Anio1()
+                        + meta.getProyectadoPeriodo8Anio1()
+                        + meta.getProyectadoPeriodo9Anio1()
+                        + meta.getProyectadoPeriodo10Anio1()
+                        + meta.getProyectadoPeriodo11Anio1()
+                        + meta.getProyectadoPeriodo12Anio1();
+                if (total_anio1 != this.getMeta().getProyectadoAnio1()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 12 meses del año 1 o periodos debe ser igual al Proyectado anual del año 1, si la frecuencia de medicion es mensual");
+                    return false;
+                }
+                total_anio2 = meta.getProyectadoPeriodo1Anio2()
+                        + meta.getProyectadoPeriodo2Anio2()
+                        + meta.getProyectadoPeriodo3Anio2()
+                        + meta.getProyectadoPeriodo4Anio2()
+                        + meta.getProyectadoPeriodo5Anio2()
+                        + meta.getProyectadoPeriodo6Anio2()
+                        + meta.getProyectadoPeriodo7Anio2()
+                        + meta.getProyectadoPeriodo8Anio2()
+                        + meta.getProyectadoPeriodo9Anio2()
+                        + meta.getProyectadoPeriodo10Anio2()
+                        + meta.getProyectadoPeriodo11Anio2()
+                        + meta.getProyectadoPeriodo12Anio2();
+                if (total_anio2 != this.getMeta().getProyectadoAnio2()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 12 meses o periodos del Año 2 debe ser igual al Proyectado anual del año 2, si la frecuencia de medicion es mensual");
+                    return false;
+                }
+                total_anio3 = meta.getProyectadoPeriodo1Anio3()
+                        + meta.getProyectadoPeriodo2Anio3()
+                        + meta.getProyectadoPeriodo3Anio3()
+                        + meta.getProyectadoPeriodo4Anio3()
+                        + meta.getProyectadoPeriodo5Anio3()
+                        + meta.getProyectadoPeriodo6Anio3()
+                        + meta.getProyectadoPeriodo7Anio3()
+                        + meta.getProyectadoPeriodo8Anio3()
+                        + meta.getProyectadoPeriodo9Anio3()
+                        + meta.getProyectadoPeriodo10Anio3()
+                        + meta.getProyectadoPeriodo11Anio3()
+                        + meta.getProyectadoPeriodo12Anio3();
+                if (total_anio3 != this.getMeta().getProyectadoAnio3()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 12 meses o periodos del Año 3 debe ser igual al Proyectado anual del año 3, si la frecuencia de medicion es mensual");
+                    return false;
+                }
+                total_anio4 = meta.getProyectadoPeriodo1Anio4()
+                        + meta.getProyectadoPeriodo2Anio4()
+                        + meta.getProyectadoPeriodo3Anio4()
+                        + meta.getProyectadoPeriodo4Anio4()
+                        + meta.getProyectadoPeriodo5Anio4()
+                        + meta.getProyectadoPeriodo6Anio4()
+                        + meta.getProyectadoPeriodo7Anio4()
+                        + meta.getProyectadoPeriodo8Anio4()
+                        + meta.getProyectadoPeriodo9Anio4()
+                        + meta.getProyectadoPeriodo10Anio4()
+                        + meta.getProyectadoPeriodo11Anio4()
+                        + meta.getProyectadoPeriodo12Anio4();
+                if (total_anio4 != this.getMeta().getProyectadoAnio4()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 12 meses o periodos del Año 4 debe ser igual al Proyectado anual del año 4, si la frecuencia de medicion es mensual");
+                    return false;
+                }
+                break;
+            case 4: // SI LA FRECUENCIA DE MEDICIO ES BIMESTRAL
+                total_anio1 = meta.getProyectadoPeriodo1Anio1()
+                        + meta.getProyectadoPeriodo2Anio1()
+                        + meta.getProyectadoPeriodo3Anio1()
+                        + meta.getProyectadoPeriodo4Anio1()
+                        + meta.getProyectadoPeriodo5Anio1();
+                if (total_anio1 != this.getMeta().getProyectadoAnio1()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 6 bimestres del año 1 o periodos debe ser igual al Proyectado anual del año 1, si la frecuencia de medicion es bimestral");
+                    return false;
+                }
+                total_anio2 = meta.getProyectadoPeriodo1Anio2()
+                        + meta.getProyectadoPeriodo2Anio2()
+                        + meta.getProyectadoPeriodo3Anio2()
+                        + meta.getProyectadoPeriodo4Anio2()
+                        + meta.getProyectadoPeriodo5Anio2();
+                if (total_anio2 != this.getMeta().getProyectadoAnio2()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 6 bimestres o periodos del Año 2 debe ser igual al Proyectado anual del año 2, si la frecuencia de medicion es bimestral");
+                    return false;
+                }
+                total_anio3 = meta.getProyectadoPeriodo1Anio3()
+                        + meta.getProyectadoPeriodo2Anio3()
+                        + meta.getProyectadoPeriodo3Anio3()
+                        + meta.getProyectadoPeriodo4Anio3()
+                        + meta.getProyectadoPeriodo5Anio3();
+                if (total_anio3 != this.getMeta().getProyectadoAnio3()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 6 meses o periodos del Año 3 debe ser igual al Proyectado anual del año 3, si la frecuencia de medicion es bimestral");
+                    return false;
+                }
+                total_anio4 = meta.getProyectadoPeriodo1Anio4()
+                        + meta.getProyectadoPeriodo2Anio4()
+                        + meta.getProyectadoPeriodo3Anio4()
+                        + meta.getProyectadoPeriodo4Anio4()
+                        + meta.getProyectadoPeriodo5Anio4();
+                if (total_anio4 != this.getMeta().getProyectadoAnio4()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 6 bimestres o periodos del Año 4 debe ser igual al Proyectado anual del año 4, si la frecuencia de medicion es bimestral");
+                    return false;
+                }
+                break;
+            case 6: // SI LA FRECUENCIA DE MEDICIO ES TRIMESTRAL
+                total_anio1 = meta.getProyectadoPeriodo1Anio1()
+                        + meta.getProyectadoPeriodo2Anio1()
+                        + meta.getProyectadoPeriodo3Anio1()
+                        + meta.getProyectadoPeriodo4Anio1();
+                if (total_anio1 != this.getMeta().getProyectadoAnio1()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 4 trimestres del año 1 o periodos debe ser igual al Proyectado anual del año 1, si la frecuencia de medicion es trimestral");
+                    return false;
+                }
+                total_anio2 = meta.getProyectadoPeriodo1Anio2()
+                        + meta.getProyectadoPeriodo2Anio2()
+                        + meta.getProyectadoPeriodo3Anio2()
+                        + meta.getProyectadoPeriodo4Anio2();
+                if (total_anio2 != this.getMeta().getProyectadoAnio2()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 4 trimestres o periodos del Año 2 debe ser igual al Proyectado anual del año 2, si la frecuencia de medicion es trimestral");
+                    return false;
+                }
+                total_anio3 = meta.getProyectadoPeriodo1Anio3()
+                        + meta.getProyectadoPeriodo2Anio3()
+                        + meta.getProyectadoPeriodo3Anio3()
+                        + meta.getProyectadoPeriodo4Anio3();
+                if (total_anio3 != this.getMeta().getProyectadoAnio3()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 4 trimestres o periodos del Año 3 debe ser igual al Proyectado anual del año 3, si la frecuencia de medicion es trimestral");
+                    return false;
+                }
+                total_anio4 = meta.getProyectadoPeriodo1Anio4()
+                        + meta.getProyectadoPeriodo2Anio4()
+                        + meta.getProyectadoPeriodo3Anio4()
+                        + meta.getProyectadoPeriodo4Anio4();
+                if (total_anio4 != this.getMeta().getProyectadoAnio4()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 4 trimestres o periodos del Año 4 debe ser igual al Proyectado anual del año 4, si la frecuencia de medicion es trimestral");
+                    return false;
+                }
+                break;
+            case 7: // SI LA FRECUENCIA DE MEDICIO ES CUATRIMESTRAL
+                total_anio1 = meta.getProyectadoPeriodo1Anio1()
+                        + meta.getProyectadoPeriodo2Anio1()
+                        + meta.getProyectadoPeriodo3Anio1();
+                if (total_anio1 != this.getMeta().getProyectadoAnio1()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 3 cuatrimestres del año 1 o periodos debe ser igual al Proyectado anual del año 1, si la frecuencia de medicion es cuatrimestral");
+                    return false;
+                }
+                total_anio2 = meta.getProyectadoPeriodo1Anio2()
+                        + meta.getProyectadoPeriodo2Anio2()
+                        + meta.getProyectadoPeriodo3Anio2();
+                if (total_anio2 != this.getMeta().getProyectadoAnio2()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 3 cuatrimestres o periodos del Año 2 debe ser igual al Proyectado anual del año 2, si la frecuencia de medicion es cuatrimestral");
+                    return false;
+                }
+                total_anio3 = meta.getProyectadoPeriodo1Anio3()
+                        + meta.getProyectadoPeriodo2Anio3()
+                        + meta.getProyectadoPeriodo3Anio3();
+                if (total_anio3 != this.getMeta().getProyectadoAnio3()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 3 cuatrimestres o periodos del Año 3 debe ser igual al Proyectado anual del año 3, si la frecuencia de medicion es cuatrimestral");
+                    return false;
+                }
+                total_anio4 = meta.getProyectadoPeriodo1Anio4()
+                        + meta.getProyectadoPeriodo2Anio4()
+                        + meta.getProyectadoPeriodo3Anio4();
+                if (total_anio4 != this.getMeta().getProyectadoAnio4()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 3 cuatrimestres o periodos del Año 4 debe ser igual al Proyectado anual del año 4, si la frecuencia de medicion es cuatrimestral");
+                    return false;
+                }
+                break;
+            case 8: // SI LA FRECUENCIA DE MEDICIO ES SEMESTRAL
+                total_anio1 = meta.getProyectadoPeriodo1Anio1()
+                        + meta.getProyectadoPeriodo2Anio1();
+                if (total_anio1 != this.getMeta().getProyectadoAnio1()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 2 semestres del año 1 o periodos debe ser igual al Proyectado anual del año 1, si la frecuencia de medicion es semestral");
+                    return false;
+                }
+                total_anio2 = meta.getProyectadoPeriodo1Anio2()
+                        + meta.getProyectadoPeriodo2Anio2();
+                if (total_anio2 != this.getMeta().getProyectadoAnio2()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 2 semestres o periodos del Año 2 debe ser igual al Proyectado anual del año 2, si la frecuencia de medicion es semestral");
+                    return false;
+                }
+                total_anio3 = meta.getProyectadoPeriodo1Anio3()
+                        + meta.getProyectadoPeriodo2Anio3();
+                if (total_anio3 != this.getMeta().getProyectadoAnio3()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 2 semestres o periodos del Año 3 debe ser igual al Proyectado anual del año 3, si la frecuencia de medicion es semestral");
+                    return false;
+                }
+                total_anio4 = meta.getProyectadoPeriodo1Anio4()
+                        + meta.getProyectadoPeriodo2Anio4();
+                if (total_anio4 != this.getMeta().getProyectadoAnio4()) {
+                    FacesUtils.addErrorMessage("La suma de lo proyectado de cada uno de los 2 semestres o periodos del Año 4 debe ser igual al Proyectado anual del año 4, si la frecuencia de medicion es cuatrimestral");
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
 
     /**
