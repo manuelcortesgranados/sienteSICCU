@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadoPres" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="Modulo Metas"/>
+                    </f:facet>
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                        <h:outputLabel  value="Meta : "/>
+                        <h:selectOneMenu value="#{MetasProyecto.p_idmeta}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarcmbMetasAsocProyecto}">
+                            <f:selectItems value="#{MetasProyecto.listaMetasSelectOneMenu}" var="meta"
+                                           itemValue="#{meta.id}" itemLabel="#{meta.descripcionmetaproducto}" />
+                            <f:ajax event="click" render="cmbMetasAsocProyecto"/>
+                        </h:selectOneMenu>                        
+                        <h:outputLabel  value="Asociacion Meta Periodo : "/>
+                        <h:selectOneMenu id="cmbMetasAsocProyecto" value="#{MetasProyecto.p_idmetaobra}" onchange="submit()" valueChangeListener="#{MetasProyecto.generarInformacionConsultaRegistroAvance}">
+                            <f:selectItems value="#{MetasProyecto.listaMetaObraSelectOneMenu}" var="metaobra"
+                                           itemValue="#{metaobra.idmetaobra}" itemLabel="#{metaobra.anio}" />
+                            <f:ajax event="click" render="tabPanelConsultaRegistroAvance"/>                        
+                        </h:selectOneMenu>    
+                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
+                            <h:commandButton action="#{MetasProyecto.irApagina_MetasProyectoConsultaRegistroAvance()}" type="submit"  value="Generar Informacion">
+                            </h:commandButton>
+                            <h:commandButton action="#{MetasProyecto.irApagina_MetasProyecto()}" value="Regresar"/>
+                        </h:panelGrid>                                          
+                    </h:panelGrid>
+                    <rich:tabPanel id="tabPanelConsultaRegistroAvance">
+                        <rich:tab id="tabConsultaRegistroAvance" rendered="#{MetasProyecto.perteneceGrupoSupervisor}" header="Consulta Registro de Avance | ">
+                            <html>
+                                <table width="100%" border="0" cellpadding="5" cellspacing="5" class="tablamenugestion">
+                                    <c:forEach items="#{MetasProyecto.listaMetas}" var="meta">
+                                        <tr>
+                                            <td width="41%" class="ikont-label-borde"><table width="100%" border="0" cellspacing="5" cellpadding="5">
+                                                    <tr>
+                                                        <td class="ikont-hcl-reportes_administrativos">Informacion Meta</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Id Meta</td>
+                                                                    <td class="ikont-hot-desea">#{meta.id}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Nomp</td>
+                                                                    <td class="ikont-hot-desea">#{meta.nomp}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Descripcion Meta Producto</td>
+                                                                    <td class="ikont-hot-desea">#{meta.descripcionmetaproducto}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Unidad Medida</td>
+                                                                    <td class="ikont-hot-desea">#{meta.unidadmedida}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Nombre Indicador</td>
+                                                                    <td class="ikont-hot-desea">#{meta.nombreindicador}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Tipo Meta</td>
+                                                                    <td class="ikont-hot-desea">#{meta.tipometa}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hot-derechos-reser">Linea Base Indicador</td>
+                                                                    <td class="ikont-hot-desea">#{meta.lineaBaseIndicador}</td>
+                                                                </tr>
+                                                            </table></td>
+                                                    </tr>
+                                                </table></td>
+                                            <td valign="top" width="59%" colspan="2" class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                    <c:forEach items="#{MetasProyecto.listaMetasObras}" var="metaobra"> 
+                                                        <tr>
+                                                            <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                    <tr>
+                                                                        <td class="ikont-label-borde" valign="top"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                <tr>
+                                                                                    <td colspan="2"  class="ikont-hcl-reportes_administrativos"><div align="center">Asociacion</div></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-derechos-reser">Año</td>
+                                                                                    <td class="ikont-hot-desea">#{metaobra.anio}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-derechos-reser">Frecuencia Medicion</td>
+                                                                                    <td class="ikont-hot-desea">#{metaobra.periodomedida.strdescperiomedida}</td>
+                                                                                </tr>
+                                                                            </table></td>
+                                                                        <td><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                <tr>
+                                                                                    <td class="ikont-hcl-reportes_administrativos"><div align="center">Registro Avance</div></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="2" cellpadding="2">
+                                                                                            <tr>
+                                                                                                <td class="ikont-hot-derechos-reser">Id.</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Proyectada</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Acumulada</td>
+                                                                                                <td class="ikont-hot-derechos-reser">%</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Observaciones</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Fecha</td>
+                                                                                                <td class="ikont-hot-derechos-reser">Periodo</td>
+                                                                                                <td class="ikont-hot-derechos-reser">F.Inicio</td>
+                                                                                                <td class="ikont-hot-derechos-reser">F.Final</td>
+                                                                                                <td class="ikont-hot-derechos-reser"></td>
+                                                                                                <td class="ikont-hot-derechos-reser"></td>
+                                                                                            </tr>
+                                                                                            <c:forEach items="#{MetasProyecto.consultaMetaRegistroDetalle(metaobra.idmetaobra)}" var="metaregistro"> 
+                                                                                                <tr>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.idregistrometaobra}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.metaProyectada}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.metaAcumulada}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.porcentaje}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.observaciones}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.fecha}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.periodosFrecuencia.periodosFrecuencia}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.fechaInicio}</td>
+                                                                                                    <td class="ikont-hot-desea">#{metaregistro.fechaFinal}</td>
+                                                                                                    <td class="ikont-hot-desea">
+                                                                                                        <a4j:commandButton value="Eliminar" type="submit" oncomplete="#{rich:component('modalPanelEliminarMetaRegistro')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.idregistrometaobra}" />
+                                                                                                        </a4j:commandButton>
+                                                                                                    </td>
+                                                                                                    <td class="ikont-hot-desea">
+                                                                                                        <h:commandButton action="#{MetasProyecto.irApagina_ActualizarMetaRegistro()}" type="submit" value="Actualizar">
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{meta.id}" />
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                                                                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{metaregistro.idregistrometaobra}" />
+                                                                                                        </h:commandButton>                                                                                                        
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </c:forEach>
+                                                                                        </table></td>
+                                                                                </tr>
+                                                                            </table></td>
+                                                                    </tr>
+                                                                </table></td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </table></td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </html>
+                            <h:commandButton id="btExportarTablaMetas3_1"  value="Exportar Tabla de Programacion de Metas a Excel" immediate="true"
+                                             action="#{MetasProyecto.generarReporteExcelTabla3()}" />                                                                                                                                                                    
+                        </rich:tab>                    </rich:tabPanel>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+        <ui:include src="/co/com/interkont/cobra/obra/meta/modal/modalConfirmacionAsociacionMetaObra.xhtml"/>
+    </ui:define>   ="/
+</ui:composition>

@@ -82,34 +82,35 @@
                             </rich:panel>
                             <rich:panel rendered="true" styleClass="noneborder">
                                 <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
-                                    <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 50%">
-                                        <h:outputLabel  value="id. Meta Obra"/>
-                                        <h:outputText  value="#{MetasProyecto.p_idmetaobra}"/>
+                                    <h:panelGrid id="ikont-ingresarmetaregistro" columns="2" style="width: 50%">
+                                        <h:outputLabel  value="id. Meta "/>
+                                        <h:outputText  value="#{MetasProyecto.p_idmeta}"/>
+                                        <h:outputLabel  value="Id. Registro Avance de la Meta  "/>
+                                        <h:outputText  value="#{MetasProyecto.p_idmetaregistro}"/>
                                         <h:outputLabel  value="Proyecto"/>
                                         <h:outputText  value="#{MetasProyecto.p_idcodigoobra}"/>
                                         <h:outputLabel  value="Punto Medicion Periodo"/>
-                                        <h:selectOneMenu id="cmbFrecuenciaMedicionMeta" value="#{MetasProyecto.metaregistro.periodosFrecuencia.idperiodosFrecuencia}" onchange="submit()" valueChangeListener="#{MetasProyecto.cargarYAsignarFechasInicioFinal}">
-                                            <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
-                                            <f:selectItems value="#{MetasProyecto.listaPeriodosFrecuencia}" var="periodoFrecuencia"
-                                                           itemValue="#{periodoFrecuencia.idperiodosFrecuencia}" itemLabel="#{periodoFrecuencia.periodosFrecuencia}" />
-                                            <a4j:param assignTo="#{MetasProyecto.p_idperiodofrecuencia}" value="#{periodoFrecuencia.idperiodosFrecuencia}" />
+                                        <h:selectOneMenu id="cmbFrecuenciaMedicionMeta1" value="#{MetasProyecto.p_idperiodofrecuencia}" onchange="submit()" valueChangeListener="#{MetasProyecto.cargarValoresMetaRegistroActualizar}">
+                                            <f:selectItems value="#{MetasProyecto.listaFrecuenciasConsolidado}" var="periodoFrecuenciaConsolidado"
+                                                           itemValue="#{periodoFrecuenciaConsolidado.idregistrometaobra}" itemLabel="#{periodoFrecuenciaConsolidado.idregistrometaobra} -> #{periodoFrecuenciaConsolidado.anio} -> #{periodoFrecuenciaConsolidado.periodos_frecuencia}" />
+                                            <a4j:param assignTo="#{MetasProyecto.p_idmetaregistro}" value="#{periodoFrecuenciaConsolidado.idregistrometaobra}" />
+                                            <f:ajax event="click"/>
                                         </h:selectOneMenu>
-                                        <h:outputLabel  value="Fecha Inicio"/>
-                                        <rich:calendar  id="fecharegistroInicio" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
-                                                        value="#{MetasProyecto.metaregistro.fechaInicio}"/>
-                                        <h:outputLabel  value="Fecha Final"/>
-                                        <rich:calendar  id="fecharegistroFinal" locale="#{var.rcalendarlocale}" datePattern="#{var.formatofecha}"  styleClass="inputText_registro"
-                                                        value="#{MetasProyecto.metaregistro.fechaFinal}"/>
-                                        <h:outputLabel  value="Meta Proyectada"/>
-                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
-                                        <h:outputLabel  value="Meta Acumulada"/>
-                                        <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}"/>
-                                        <h:outputLabel  value="Observaciones"/>
-                                        <h:inputTextarea   immediate="true" required="false" value="#{MetasProyecto.metaregistro.observaciones}"/>
+                                        <h:outputLabel  value="Traer datos"/>
+                                        <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.cargarValoresMetaRegistroActualizar}" type="submit" value="Consultar Datos Registro Avance : ">
+                                        </h:commandButton>
+                                        <h:panelGrid id="ikont-ingresarmetaregistrodetalle" columns="2" style="width: 50%">
+                                            <h:outputLabel  value="Meta Proyectada"/>
+                                            <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaProyectada}"/>
+                                            <h:outputLabel  value="Meta Acumulada"/>
+                                            <h:inputText   immediate="true" required="false" size="50" maxlength="50"  value="#{MetasProyecto.metaregistro.metaAcumulada}"/>
+                                            <h:outputLabel  value="Observaciones"/>
+                                            <h:inputTextarea   immediate="true" required="false" value="#{MetasProyecto.metaregistro.observaciones}"/>
+                                        </h:panelGrid>
                                     </h:panelGrid>
                                     <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
-                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas}" actionListener="#{MetasProyecto.ingresarMetaRegistro}" type="submit" value="Ingresar"/>
-                                        <h:commandButton action="#{MetasProyecto.irApagina_Metas}" type="submit" value="Regresar"/>
+                                        <h:commandButton action="#{MetasProyecto.irApagina_MetasProyectoAsociacion}" actionListener="#{MetasProyecto.actualizarMetaRegistro}" type="submit" value="Actualizar/Consignar Avance"/>
+                                        <h:commandButton action="#{MetasProyecto.irApagina_MetasProyectoAsociacion}" type="submit" value="Regresar"/>
                                     </h:panelGrid>              
                                 </h:panelGroup>
 

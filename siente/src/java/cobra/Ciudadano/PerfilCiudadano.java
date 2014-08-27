@@ -73,7 +73,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
-import org.apache.commons.collections.set.AbstractSerializableSetDecorator;
+//import org.apache.commons.collections.set.AbstractSerializableSetDecorator;
 import org.richfaces.component.UIDataTable;
 import org.richfaces.component.UIRepeat;
 

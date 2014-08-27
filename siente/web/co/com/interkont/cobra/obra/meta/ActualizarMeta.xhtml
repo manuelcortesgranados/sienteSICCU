@@ -31,38 +31,184 @@
                 <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
                 <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
                     <f:facet name="header">
-                        <h:outputText  value="Actualizacion Metas"/>
+                        <h:outputText  value="Ingresar Nueva Meta"/>
                     </f:facet>
                     <h:panelGroup id="ikont-hpg-rp-indicadoresproyecto">
-                        <h:panelGrid id="ikont-hpg-tipocontrato" columns="2" style="width: 80%">
+                        <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
                             <h:outputLabel  value="Plan de Desarrollo : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_plandesarrollo.nombre}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Objetivo : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_nombre_objetivo}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Programa : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_nombre_programa}"/>
+                            <h:outputLabel  value=""/>
                             <h:outputLabel  value="Subprograma : "/>
                             <h:outputLabel  value="#{MetasProyecto.p_nombre_subprograma}"/>
-                            <h:outputLabel  value="intnomp"/>
-                            <h:inputText  immediate="true" required="false" id="intnomp" size="25" maxlength="25" value="#{MetasProyecto.meta.nomp}"/>
-                            <h:outputLabel  value="Descripcion Meta Producto"/>
-                            <h:inputText  immediate="true" required="false" id="strdescripcionmetaproducto" size="25" maxlength="25" value="#{MetasProyecto.meta.descripcionmetaproducto}"/>
-                            <h:outputLabel  value="Unidad de Medida"/>
-                            <h:selectOneMenu id="cmbUnidadMeta" value="#{MetasProyecto.meta.unidadmedida}" immediate="true">
+                            <h:outputLabel  value=""/>
+                            <h:outputLabel  value="No M.P."/>
+                            <h:inputText  required="true" id="intnomp" size="100" maxlength="100" value="#{MetasProyecto.meta_consulta.nomp}"/>
+                            <rich:tooltip value="Numero Meta" target="intnomp"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Descripcion Meta Producto : "/>
+                            <h:inputTextarea  required="true" id="strdescripcionmetaproducto" value="#{MetasProyecto.meta_consulta.descripcionmetaproducto}"/>
+                            <rich:tooltip value="Descripcion Meta del Producto.  Ejemplo : Contruir, Adecuar y/o mantener en el cuatrienio 500 sedes educativas en los municipios no certificados no certificados del departamento" target="strdescripcionmetaproducto"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Unidad de Medida de la Meta (KM, UN, M2) : "/>
+                            <h:selectOneMenu id="cmbUnidadMeta" value="#{MetasProyecto.meta_consulta.unidadmedida}" immediate="true">
                                 <f:selectItems value="#{MetasProyecto.listaUnidadMedida}" />
                             </h:selectOneMenu>
-                            <h:outputLabel  value="Nombre Indicador"/>
-                            <h:inputText  immediate="true" required="false" id="strnombreindicador" size="25" maxlength="25" value="#{MetasProyecto.meta.nombreindicador}"/>
-                            <h:outputLabel  value="Tipo Meta"/>
-                            <h:inputText  immediate="true" required="false" id="inttipometa" size="25" maxlength="25" value="#{MetasProyecto.meta.tipometa}"/>
-                            <h:outputLabel  value="Linea Base"/>
-                            <h:inputText  immediate="true" required="false" id="lineaBase" size="25" maxlength="25" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
+                            <rich:tooltip value="cmbFrecuenciaMedicion" target="cmbFrecuenciaMedicion"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Nombre del Indicador Meta de Producto : "/>
+                            <h:inputTextarea  required="false" id="strnombreindicador" value="#{MetasProyecto.meta_consulta.nombreindicador}"/>
+                            <rich:tooltip value="Ejemplo : No. de sedes educativas intervenidas en el cuatrienio" target="strnombreindicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Tipo de Meta"/>
+                            <h:selectOneMenu id="cmbTipoMeta" value="#{MetasProyecto.meta_consulta.tipometa}" immediate="true">
+                                <f:selectItem itemLabel="Resultado" itemValue="1" />
+                                <f:selectItem itemLabel="Producto" itemValue="2" />                            
+                            </h:selectOneMenu>
+                            <rich:tooltip value="RESULTADO/PRODUCTO" target="inttipometa"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:outputLabel  value="Linea Base del Indicador : "/>
+                            <h:inputText  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta_consulta.lineaBaseIndicador}"/>
+                            <rich:tooltip value="Ejemplo : 100 si se desea que la meta sea 100" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
-                            <h:inputTextarea  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
+                            <h:inputText  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta_consulta.valorEsperadoIndicador}"/>
+                            <h:commandButton actionListener="#{MetasProyecto.asignarValoresPeriodos}" type="submit" value="Asignar Valores por Defecto"/>
+                            <h:outputLabel  value="Frecuencia Medicion : "/>
+                            <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.p_periodomedida}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarPanelesPeriodos}">
+                                <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
+                                <f:selectItems value="#{MetasProyecto.listaPeriodoMedida}" var="periodoMedida"
+                                               itemValue="#{periodoMedida.intidperiomedida}" itemLabel="#{periodoMedida.strdescperiomedida}" />
+                                <f:ajax event="click" render="panelPeriodos"/>
+                            </h:selectOneMenu>                                                            
+                            <rich:tooltip value="Frecuencia Medicion" target="cmbFrecuenciaMedicionMeta"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>    
+                            <h:panelGrid id="panelPeriodos" columns="2" cellpadding="5" cellspacing="5">
+                                <rich:tabPanel activeItem="#{MetasProyecto.activePanel}">
+                                    <rich:tab id="tabAnio1" header="#{MetasProyecto.aniosGobierno[0]} | ">
+                                        <h:panelGrid id="panelPeriodoAnio1" columns="2" cellpadding="5" cellspacing="5">
+                                            <h:outputLabel  value="Proyectado Anual : " rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoAnio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][0]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo1Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][1]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo2Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][2]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo3Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][3]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo4Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][4]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo5Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][5]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo6Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][6]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo7Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][7]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo8Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][8]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo9Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][9]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo10Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][10]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo11Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[0][11]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo12Anio1}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                        </h:panelGrid>
+                                    </rich:tab>
+                                    <rich:tab id="tabAnio2" header="#{MetasProyecto.aniosGobierno[1]} | ">
+                                        <h:panelGrid id="panelPeriodoAnio2" columns="2" cellpadding="5" cellspacing="5">
+                                            <h:outputLabel  value="Proyectado Anual : " rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoAnio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][0]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo1Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][1]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo2Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][2]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo3Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][3]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo4Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][4]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo5Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][5]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo6Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][6]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo7Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][7]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo8Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][8]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo9Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][9]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo10Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][10]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo11Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[1][11]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo12Anio2}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                        </h:panelGrid>
+                                    </rich:tab>
+                                    <rich:tab id="tabAnio3" header="#{MetasProyecto.aniosGobierno[2]} | ">
+                                        <h:panelGrid id="panelPeriodoAnio3" columns="2" cellpadding="5" cellspacing="5">
+                                            <h:outputLabel  value="Proyectado Anual : " rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoAnio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][0]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo1Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][1]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo2Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][2]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo3Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][3]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo4Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][4]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo5Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][5]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo6Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][6]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo7Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][7]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo8Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][8]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo9Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][9]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo10Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][10]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo11Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[2][11]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo12Anio3}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                        </h:panelGrid>
+                                    </rich:tab>
+                                    <rich:tab id="tabAnio4" header="#{MetasProyecto.aniosGobierno[3]} | ">
+                                        <h:panelGrid id="panelPeriodoAnio4" columns="2" cellpadding="5" cellspacing="5">
+                                            <h:outputLabel  value="Proyectado Anual : " rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoAnio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][0]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo1Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[0]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][1]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo2Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[1]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][2]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo3Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[2]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][3]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo4Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[3]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][4]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo5Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[4]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][5]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo6Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[5]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][6]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo7Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[6]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][7]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo8Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[7]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][8]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo9Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[8]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][9]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo10Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[9]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][10]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo11Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[10]}"/>
+                                            <h:outputLabel  value="#{MetasProyecto.arregloValoresEtiquetasPeriodosAnios[3][11]}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                            <h:inputText  required="false" value="#{MetasProyecto.meta_consulta.proyectadoPeriodo12Anio4}" rendered="#{MetasProyecto.mostrarValoresEtiquetasPeriodos[11]}"/>
+                                        </h:panelGrid>
+                                    </rich:tab>
+                                </rich:tabPanel>
+                            </h:panelGrid>
                         </h:panelGrid>
-                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.actualizarMeta}" type="submit" value="Actualizar"/>
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" value="Regresar"/>
+                        <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
+                            <h:commandButton action="#{MetasProyecto.irApagina_ParametrizacionMetas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>
+                            <h:commandButton action="#{MetasProyecto.irApagina_ParametrizacionMetas()}" value="Regresar"/>
                         </h:panelGrid>              
                     </h:panelGroup>
                 </rich:panel>

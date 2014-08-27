@@ -68,11 +68,11 @@
                             </h:selectOneMenu>
                             <rich:tooltip value="RESULTADO/PRODUCTO" target="inttipometa"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Linea Base del Indicador : "/>
-                            <h:inputTextarea  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
+                            <h:inputText  required="false" id="numerolineaBaseIndicador" value="#{MetasProyecto.meta.lineaBaseIndicador}"/>
                             <rich:tooltip value="Ejemplo : 100 si se desea que la meta sea 100" target="numerolineaBaseIndicador"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
                             <h:outputLabel  value="Valor Esperado del Indicador Producto Cuatrenio : "/>
-                            <h:inputTextarea  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
-                            <rich:tooltip value="Valor Esperado del Indicador Producto Cuatrenio" target="valorEsperadoProducto"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+                            <h:inputText  required="false" id="valorEsperadoProducto" value="#{MetasProyecto.meta.valorEsperadoIndicador}"/>
+                            <h:commandButton actionListener="#{MetasProyecto.asignarValoresPeriodos}" type="submit" value="Asignar Valores por Defecto"/>
                             <h:outputLabel  value="Frecuencia Medicion : "/>
                             <h:selectOneMenu id="cmbFrecuenciaMedicion" value="#{MetasProyecto.p_periodomedida}" onchange="submit()" valueChangeListener="#{MetasProyecto.actualizarPanelesPeriodos}">
                                 <f:selectItem itemValue="#{null}" itemLabel="(SELECCIONE)" />
@@ -207,8 +207,8 @@
                             </h:panelGrid>
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos" cellpadding="5" cellspacing="5">
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>
-                            <h:commandButton action="#{MetasProyecto.irApagina_Metas()}" value="Regresar"/>
+                            <h:commandButton action="#{MetasProyecto.irApagina_ParametrizacionMetas()}" actionListener="#{MetasProyecto.ingresarMeta}" type="submit" value="Guardar"/>
+                            <h:commandButton action="#{MetasProyecto.irApagina_ParametrizacionMetas()}" value="Regresar"/>
                         </h:panelGrid>              
                     </h:panelGroup>
                 </rich:panel>

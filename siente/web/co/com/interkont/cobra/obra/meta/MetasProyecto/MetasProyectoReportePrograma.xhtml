@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadoPres" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="Modulo Metas"/>
+                    </f:facet>
+                    <rich:tabPanel>
+                        <rich:tab id="tabReporte"  rendered="#{MetasProyecto.perteneceGrupoSupervisor}" header="Reporte">
+                            <html>
+                                <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                    <tr>
+                                        <td class="ikont-label-borde" colspan="3">
+                                            <table width="100%" border="0" cellspacing="3" cellpadding="3">
+                                                <tr>
+                                                    <td colspan="2" class="ikont-hot-value-participacion"><div align="center">Objetivo : #{MetasProyecto.p_nombre_objetivo}</div></td>
+                                                </tr>
+                                                <c:forEach items="#{MetasProyecto.consultarProgramasPlanDesarrollo(MetasProyecto.p_idplandesarrollo,MetasProyecto.p_idobjetivo)}" var="programa">  
+                                                    <tr>
+                                                        <td class="ikont-label-borde" valign="top">
+                                                            <table width="100%" border="0" cellspacing="5" cellpadding="5">
+                                                                <tr>
+                                                                    <td colspan="2"><div align="center" class="ikont-hot-value-participacion">PROGRAMAS</div>
+                                                                        <div align="center"></div></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hcl-reportes_administrativos">Id. Programa</td>
+                                                                    <td class="ikont-label-borde">#{programa.id.idprograma}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="ikont-hcl-reportes_administrativos">Programa</td>
+                                                                    <td class="ikont-label-borde">#{programa.programa}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td valign="top" class="ikont-label-borde">
+                                                            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <tr>
+                                                                    <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td><div align="center" class="ikont-hot-porcentajeinversion">Meta Proyectada</div></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div align="center" class="hol_fuente_recursos_zoom"></div></td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td><div align="center" class="ikont-hot-porcentajeinversion">Meta Acumulada</div></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div align="center" class="hol_fuente_recursos_zoom"></div></td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                    <td><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                            <tr>
+                                                                                <td><div align="center" class="ikont-hot-porcentajeinversion">Porcentaje Avance</div></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div align="center" class="hol_fuente_recursos_zoom">0</div></td>
+                                                                            </tr>
+                                                                        </table></td>
+                                                                </tr>
+                                                            </table>                                                            
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </html>                                
+                        </rich:tab>                     
+                    </rich:tabPanel>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

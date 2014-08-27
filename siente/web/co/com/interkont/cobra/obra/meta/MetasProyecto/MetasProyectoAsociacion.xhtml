@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>  
+
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="ikont-hf-indicadoPres" >
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel styleClass="noneborder" id="ikont-rp-indicadoresproyecto">
+                    <f:facet name="header">
+                        <h:outputText  value="Modulo Metas"/>
+                    </f:facet>
+                    <rich:tabPanel>
+                        <rich:tab id="tabPlanDesarrollo" header="Asociacion | ">
+                            <table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                <tr>
+                                    <td class="ikont-hcl-reportes_administrativos" colspan="2">PLAN DESARROLLO : </td>
+                                </tr>
+                                <tr>
+                                    <td class="ikont-hcl-reportes_administrativos">OBJETIVOS</td>
+                                    <td class="ikont-hcl-reportes_administrativos">PROGRAMAS, SUBPROGRAMAS Y METAS</td>
+                                </tr>
+                                <c:forEach items="#{MetasProyecto.consultarObjetivosPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo)}" var="objetivo">  
+                                    <tr>
+                                        <td class="ikont-label-borde">#{objetivo.objetivo}</td>
+                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                <c:forEach items="#{MetasProyecto.consultarProgramasPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo,objetivo.id.idobjetivo)}" var="programa"> 
+                                                    <tr>
+                                                        <td class="ikont-label-borde">#{programa.programa}</td>
+                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                <c:forEach items="#{MetasProyecto.consultarSubprogramaPlanDesarrollo(MetasProyecto.p_plandesarrollo.intidplandesarrollo,objetivo.id.idobjetivo,programa.id.idprograma)}" var="subprograma"> 
+                                                                    <tr>
+                                                                        <td class="ikont-label-borde">#{subprograma.subprograma}</td>
+                                                                        <td class="ikont-label-borde"><table width="100%" border="0" cellspacing="1" cellpadding="1">
+                                                                                <tr>
+                                                                                    <td class="ikont-hot-derechos-reser">Descripción</td>
+                                                                                    <td class="ikont-hot-derechos-reser">Meta Asociada a Proyecto</td>
+                                                                                    <td class="ikont-hot-derechos-reser"></td>
+                                                                                </tr>    
+                                                                                <c:forEach items="#{MetasProyecto.consultarMetasDisponibles(objetivo.id.idobjetivo,programa.id.idprograma,subprograma.id.idsubprograma)}" var="metadisp"> 
+                                                                                    <tr>
+                                                                                        <td class="ikont-label-borde">#{metadisp.descripcionmetaproducto}</td>
+                                                                                        <td class="ikont-label-borde">SI/NO</td>
+                                                                                        <td class="ikont-label-borde">
+                                                                                            <a4j:commandButton rendered="#{!MetasProyecto.estaProyectoAsociadoMeta(Supervisor$IngresarNuevaObra.obranueva.intcodigoobra,metadisp.id)}" value="Asociar" type="submit" oncomplete="#{rich:component('modalPanelAsociacionMetaObra')}.show();" styleClass="ikont-a4jcb-modificarobra" >
+                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
+                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                                                                            </a4j:commandButton>
+                                                                                            <h:commandButton action="#{MetasProyecto.irApagina_IngresarMetaRegistro}" actionListener="#{MetasProyecto.consultarMetaRegistroparaActualizar()}" type="submit" value="Registrar Avance">
+                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmetaobra}" value="#{metaobra.idmetaobra}" />
+                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idmeta}" value="#{metadisp.id}" />
+                                                                                                <a4j:param assignTo="#{MetasProyecto.p_idcodigoobra}" value="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}" />
+                                                                                            </h:commandButton>                                                                                                                                                                                        
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </c:forEach>
+                                                                            </table></td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </table></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </table></td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </rich:tab>   
+                    </rich:tabPanel>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+        <ui:include src="/co/com/interkont/cobra/obra/meta/modal/modalConfirmacionAsociacionMetaObra.xhtml"/>
+    </ui:define>   ="/
+</ui:composition>

@@ -5,7 +5,8 @@
  */
 package co.com.interkont.cobra.obra.meta;
 
-import co.com.interkont.cobra.hibernate.service.metas.MetasServiceAble;
+import co.com.interkont.cobra.jdbc.model.CE.metas.ConsolidadoObjetivoVO;
+import co.com.interkont.cobra.jdbc.model.CE.metas.FrecuenciasConsolidadoDetalleVO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.ReporteMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.metas.camposAutocalculadosMetasVO;
 import co.com.interkont.cobra.jdbc.model.CE.tables_amp.MetaObraAMPVO;
@@ -35,8 +36,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.faces.application.ViewHandler;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.servlet.ServletContext;
@@ -71,10 +72,15 @@ public final class MetasProyecto implements Serializable {
     PeriodosFrecuencia per;
 
     public List<Meta> listaMetas = new ArrayList<Meta>();
-    public List<MetaObraAMPVO> listaMetasObras = new ArrayList<MetaObraAMPVO>();
+    public List<Metaobra> listaMetasObras = new ArrayList<Metaobra>();
+    public List<Metaregistro> listaMetasObrasRegistros = new ArrayList<Metaregistro>();
+    public List<Meta> listaMetasSelectOneMenu = new ArrayList<Meta>();
+    public List<Metaobra> listaMetaObraSelectOneMenu = new ArrayList<Metaobra>();
+    public List<MetaObraAMPVO> listaMetasObrasAMP = new ArrayList<MetaObraAMPVO>();
     public List<MetaRegistroAMPVO> listaMetasObrasRegsitro = new ArrayList<MetaRegistroAMPVO>();
     public List<Periodomedida> listaPeriodoMedida = new ArrayList<Periodomedida>();
     public List<PeriodosFrecuencia> listaPeriodosFrecuencia = new ArrayList<PeriodosFrecuencia>();
+    public List<FrecuenciasConsolidadoDetalleVO> listaFrecuenciasConsolidado = new ArrayList<FrecuenciasConsolidadoDetalleVO>();
     public List<String> listaUnidadMedida = new ArrayList<String>();
     public List<PlanDesarrollo> listaPlanDesarrollo = new ArrayList<PlanDesarrollo>();
     public List<camposAutocalculadosMetasVO> listaCamposCalculados = new ArrayList<camposAutocalculadosMetasVO>();
@@ -87,6 +93,7 @@ public final class MetasProyecto implements Serializable {
     int p_idmetaregistro;
     int p_periodomedida;
     int p_idperiodofrecuencia;
+    int p_idperiodofrecuenciaconsolidado;
     boolean pactualizar;
 
     Date fecharegistroInicio;
@@ -120,6 +127,8 @@ public final class MetasProyecto implements Serializable {
     boolean mostrarValoresEtiquetasPeriodos[];
 
     int aniosGobierno[];
+    
+    ConsolidadoObjetivoVO consolidadoObjetivoVO;
 
     public Meta getMeta() {
         return meta;
@@ -177,13 +186,50 @@ public final class MetasProyecto implements Serializable {
         this.listaMetas = listaMetas;
     }
 
-    public List<MetaObraAMPVO> getListaMetasObras() {
+    public List<Metaobra> getListaMetasObras() {
         return listaMetasObras;
     }
 
-    public void setListaMetasObras(List<MetaObraAMPVO> listaMetasObras) {
+    public void setListaMetasObras(List<Metaobra> listaMetasObras) {
         this.listaMetasObras = listaMetasObras;
     }
+
+    public List<Metaregistro> getListaMetasObrasRegistros() {
+        return listaMetasObrasRegistros;
+    }
+
+    public void setListaMetasObrasRegistros(List<Metaregistro> listaMetasObrasRegistros) {
+        this.listaMetasObrasRegistros = listaMetasObrasRegistros;
+    }
+    
+    
+
+    public List<Meta> getListaMetasSelectOneMenu() {
+        return listaMetasSelectOneMenu;
+    }
+
+    public void setListaMetasSelectOneMenu(List<Meta> listaMetasSelectOneMenu) {
+        this.listaMetasSelectOneMenu = listaMetasSelectOneMenu;
+    }
+
+    public List<Metaobra> getListaMetaObraSelectOneMenu() {
+        return listaMetaObraSelectOneMenu;
+    }
+
+    public void setListaMetaObraSelectOneMenu(List<Metaobra> listaMetaObraSelectOneMenu) {
+        this.listaMetaObraSelectOneMenu = listaMetaObraSelectOneMenu;
+    }
+
+    public List<MetaObraAMPVO> getListaMetasObrasAMP() {
+        return listaMetasObrasAMP;
+    }
+
+    public void setListaMetasObrasAMP(List<MetaObraAMPVO> listaMetasObrasAMP) {
+        this.listaMetasObrasAMP = listaMetasObrasAMP;
+    }
+    
+    
+
 
     public List<MetaRegistroAMPVO> getListaMetasObrasRegsitro() {
         return listaMetasObrasRegsitro;
@@ -207,6 +253,14 @@ public final class MetasProyecto implements Serializable {
 
     public void setListaPeriodosFrecuencia(List<PeriodosFrecuencia> listaPeriodosFrecuencia) {
         this.listaPeriodosFrecuencia = listaPeriodosFrecuencia;
+    }
+
+    public List<FrecuenciasConsolidadoDetalleVO> getListaFrecuenciasConsolidado() {
+        return listaFrecuenciasConsolidado;
+    }
+
+    public void setListaFrecuenciasConsolidado(List<FrecuenciasConsolidadoDetalleVO> listaFrecuenciasConsolidado) {
+        this.listaFrecuenciasConsolidado = listaFrecuenciasConsolidado;
     }
 
     public List<String> getListaUnidadMedida() {
@@ -288,6 +342,16 @@ public final class MetasProyecto implements Serializable {
     public void setP_idperiodofrecuencia(int p_idperiodofrecuencia) {
         this.p_idperiodofrecuencia = p_idperiodofrecuencia;
     }
+
+    public int getP_idperiodofrecuenciaconsolidado() {
+        return p_idperiodofrecuenciaconsolidado;
+    }
+
+    public void setP_idperiodofrecuenciaconsolidado(int p_idperiodofrecuenciaconsolidado) {
+        this.p_idperiodofrecuenciaconsolidado = p_idperiodofrecuenciaconsolidado;
+    }
+    
+    
 
     public boolean isPerteneceGrupoMetas() {
         return perteneceGrupoMetas;
@@ -465,6 +529,16 @@ public final class MetasProyecto implements Serializable {
         this.aniosGobierno = aniosGobierno;
     }
 
+    public ConsolidadoObjetivoVO getConsolidadoObjetivoVO() {
+        return consolidadoObjetivoVO;
+    }
+
+    public void setConsolidadoObjetivoVO(ConsolidadoObjetivoVO consolidadoObjetivoVO) {
+        this.consolidadoObjetivoVO = consolidadoObjetivoVO;
+    }
+    
+    
+
     /**
      * Esta implementacion mantiene que cuando se abra otra ventana, permanezca
      * activa el tab en el cual se estaba trabajando
@@ -563,6 +637,18 @@ public final class MetasProyecto implements Serializable {
     public void cargarListaPeriodosFrecuencia(int periodomedida) throws Exception {
         this.listaPeriodosFrecuencia = this.getSessionBeanCobra().getMetasService().selectPeriodosFrecuencia(periodomedida);
     }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 22 Agosto 2014 9:19 AM
+     * @param id_meta
+     * @param id_proyecto
+     * @return 
+     */
+    
+    public void getFrecuenciasConsolidadoDetalle(int id_meta,int id_proyecto){
+        this.listaFrecuenciasConsolidado=this.getSessionBeanCobra().getMetasService().getFrecuenciasConsolidadoDetalle(id_meta, id_proyecto);
+    }
 
     /**
      * Este metodo tiene por objeto asignar las fehas correspondientes a los
@@ -582,6 +668,20 @@ public final class MetasProyecto implements Serializable {
         metaregistro.setFechaInicio(util.convertirStringtoDate(fechaInicial));
         metaregistro.setFechaFinal(util.convertirStringtoDate(fechaFinal));
         FacesContext.getCurrentInstance().renderResponse();
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 22 Agosto 2014 18:13
+     * @param event
+     * @throws Exception 
+     */
+    
+    public void cargarValoresMetaRegistroActualizar(ValueChangeEvent event) throws Exception {
+        int id_metaobraregistro=(Integer)event.getNewValue();
+        this.p_idmetaregistro=(Integer)event.getNewValue();
+        this.metaregistro = this.getSessionBeanCobra().getMetasService().selectMetaRegistro(this.p_idmetaregistro);
+        int a=1;
     }
 
     /**
@@ -727,7 +827,8 @@ public final class MetasProyecto implements Serializable {
         Utilitario util = new Utilitario();
         this.consultarMetaObra();
         this.consultarMetaRegistro();
-        listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
+        //listaMetas = getSessionBeanCobra().getCobraService().consultarMetaObras();
+        listaMetasSelectOneMenu = getSessionBeanCobra().getCobraService().consultarMetaObras();
         generarArchivoXMLFusionChart_MetaRegistro();
         consultarPermisosUsuario();
         getPlanDesarrollo();
@@ -743,7 +844,58 @@ public final class MetasProyecto implements Serializable {
         getPlanDesarrollo();
         return "MetasParametrizacion";
     }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 11:56 AM
+     * @return 
+     */
+    
+    public String irApagina_MetasProyectoAsociacion(){
+        return "MetasProyectoAsociacion";
+    }
 
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 11:56 AM
+     * @return 
+     */
+    
+    public String irApagina_MetasProyectoConsultaRegistroAvance(){
+        listaMetas = new ArrayList<Meta>();
+        return "MetasProyectoConsultaRegistroAvance";
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 11:56 AM
+     * @return 
+     */
+    
+    public String irApagina_MetasProyectoGraficos(){
+        return "MetasProyectoGraficos";
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 21:05
+     * @return 
+     */
+    
+    public String irApagina_MetasProyectoReporte1(){
+        return "MetasProyectoReporte1";
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 22 Agosto 2014 6:34
+     * @return 
+     */
+    
+    public String irApagina_MetasProyectoReportePrograma(){
+        return "MetasProyectoReportePrograma";
+    }
+    
     /**
      * Inicializa los valores de cada valor proyectado de cada periodo en cero
      * por defecto, ya que algunos se requieren que queden cero (menos cuando la
@@ -820,7 +972,9 @@ public final class MetasProyecto implements Serializable {
      * @return
      */
     public String irApagina_IngresarMetaRegistro() throws Exception {
+        metaregistro = new Metaregistro();
         this.cargarListaPeriodosFrecuencia(this.p_periodomedida);
+        this.getFrecuenciasConsolidadoDetalle(p_idmeta, this.p_idcodigoobra);
         consultarMetaparaConsulta();
         return "IngresarMetaRegistro";
     }
@@ -843,14 +997,15 @@ public final class MetasProyecto implements Serializable {
      * @return
      */
     public String ingresarMeta() throws Exception {
-        if (validarDatosMetaAntesInsercion()) {
-            meta.setPlanDesarrollo(p_plandesarrollo);
-            meta.setIdobjetivo(p_idobjetivo);
-            meta.setIdprograma(p_idprograma);
-            meta.setIdsubprograma(p_idsubprograma);
-            this.getSessionBeanCobra().getMetasService().guardarMeta(meta);
-            FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
-        }
+        //if (validarDatosMetaAntesInsercion()) {
+        meta.setPlanDesarrollo(p_plandesarrollo);
+        meta.setIdobjetivo(p_idobjetivo);
+        meta.setIdprograma(p_idprograma);
+        meta.setIdsubprograma(p_idsubprograma);
+        meta.setFrecuenciaMedicion(p_periodomedida);
+        this.getSessionBeanCobra().getMetasService().guardarMeta(meta);
+        FacesUtils.addInfoMessage("La meta ha sido ingresada con exito");
+        //}
         return null;
     }
 
@@ -1097,6 +1252,8 @@ public final class MetasProyecto implements Serializable {
             if (this.p_idmeta == 0) {
                 FacesUtils.addErrorMessage("El registro o fila no ha sido debidamente bien seleccionada.");
             } else if (validarActualizacionEliminacionMeta(this.p_idmeta)) {
+                meta = new Meta();
+                meta.setId(p_idmeta);
                 this.getSessionBeanCobra().getMetasService().eliminarMeta(meta);
                 FacesUtils.addInfoMessage("La meta con id " + this.getP_idmeta() + " ha sido eliminada con exito");
             } else {
@@ -1218,7 +1375,7 @@ public final class MetasProyecto implements Serializable {
      * @throws Exception
      */
     public void consultarMetaObra() throws Exception {
-        this.listaMetasObras = this.getSessionBeanCobra().getMetasService().select_amp(p_idcodigoobra);
+        this.listaMetasObrasAMP = this.getSessionBeanCobra().getMetasService().select_amp(p_idcodigoobra);
     }
 
     /**
@@ -1269,7 +1426,6 @@ public final class MetasProyecto implements Serializable {
         metaregistro.setMetaobra(metaobra_1);
         metaregistro.setPorcentaje((metaregistro.getMetaAcumulada() / metaregistro.getMetaProyectada()) * 100);
         getSessionBeanCobra().getCobraService().guardarMetaRegistro(metaregistro);
-        actualizarAcumuladosenMetasRegistros();
         FacesUtils.addInfoMessage("El registro de la meta ha sido ingresada con exito");
         irApagina_ActualizarMetaRegistro();
         return null;
@@ -1281,7 +1437,6 @@ public final class MetasProyecto implements Serializable {
      * @return
      */
     public String actualizarMetaRegistro() throws Exception {
-        Metaregistro metaregistro = new Metaregistro();
         this.getSessionBeanCobra().getMetasService().actualizarMetaRegistro(metaregistro);
         FacesUtils.addInfoMessage("La programacion del registro de la meta ha sido actualizada con eixto.");
         return null;
@@ -1672,7 +1827,6 @@ public final class MetasProyecto implements Serializable {
                 acumulado_porcentaje = 0;
             }
         }
-        //ds.closeConnection();
     }
 
     /**
@@ -1686,39 +1840,41 @@ public final class MetasProyecto implements Serializable {
 
             String contenido = "";
 
-            for (Meta meta : this.listaMetas) {
-                List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta.getId());
+            actualizarAcumuladosenMetasRegistros();
+            for (Meta meta_1 : this.listaMetas) {
+                List<Metaobra> l_metaobra = this.consultarMetaobrasDetalle(meta_1.getId());
                 for (Metaobra metaobra : l_metaobra) {
+                    contenido="";
                     List<Metaregistro> l_metaregistro = this.consultaMetaRegistroDetalle(metaobra.getIdmetaobra());
                     double maxMetaProyectada = this.getSessionBeanCobra().getMetasService().getSumaMetaProyectada(metaobra.getIdmetaobra());
                     contenido = contenido + "<graph caption=\"Grafico\" subcaption=\"Meta Proyectada Vs Meta Acumulada por Periodo y Acumulados\" hovercapbg=\"FFECAA\" hovercapborder=\"F47E00\" formatNumberScale=\"0\" decimalPrecision=\"0\" showvalues=\"0\" numdivlines=\"3\" numVdivlines=\"0\" yaxisminvalue=\"0\" yaxismaxvalue=\"" + maxMetaProyectada + "\"  rotateNames=\"1\">";
                     contenido = contenido + "<categories >";
-                    for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "<category name=\"" + metaregistro.getIdregistrometaobra() + "\" />";
+                    for (Metaregistro metaregistro_1 : l_metaregistro) {
+                        contenido = contenido + "<category name=\"" + metaregistro_1.getIdregistrometaobra() + "\" />";
                     }
                     contenido = contenido + "</categories>";
                     contenido = contenido + "";
                     contenido = contenido + "<dataset seriesName=\"Meta Acumulada Periodo\" color=\"1D8BD1\" anchorBorderColor=\"1D8BD1\" anchorBgColor=\"1D8BD1\">";
-                    for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "	<set value=\"" + metaregistro.getMetaAcumulada() + "\" />";
+                    for (Metaregistro metaregistro_1 : l_metaregistro) {
+                        contenido = contenido + "	<set value=\"" + metaregistro_1.getMetaAcumulada() + "\" />";
                     }
                     contenido = contenido + "	</dataset>";
                     contenido = contenido + "";
                     contenido = contenido + "<dataset seriesName=\"Meta Proyectada Periodo\" color=\"F1683C\" anchorBorderColor=\"F1683C\" anchorBgColor=\"F1683C\">";
-                    for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "	<set value=\"" + metaregistro.getMetaProyectada() + "\" />";
+                    for (Metaregistro metaregistro_1 : l_metaregistro) {
+                        contenido = contenido + "	<set value=\"" + metaregistro_1.getMetaProyectada() + "\" />";
                     }
                     contenido = contenido + "</dataset>";
                     contenido = contenido + "";
                     contenido = contenido + "<dataset seriesName=\"Meta Acumulada GLOTAL (Asi vamos)\" color=\"2AD62A\" anchorBorderColor=\"2AD62A\" anchorBgColor=\"2AD62A\">";
-                    for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "	<set value=\"" + metaregistro.getMetaAcumuladaAcum() + "\" />";
+                    for (Metaregistro metaregistro_1 : l_metaregistro) {
+                        contenido = contenido + "	<set value=\"" + metaregistro_1.getMetaAcumuladaAcum() + "\" />";
                     }
                     contenido = contenido + "</dataset>";
                     contenido = contenido + "";
                     contenido = contenido + "<dataset seriesName=\"Meta Proyectada GLOBAL (Asi deberiamos ir)\" color=\"DBDC25\" anchorBorderColor=\"DBDC25\" anchorBgColor=\"DBDC25\">";
-                    for (Metaregistro metaregistro : l_metaregistro) {
-                        contenido = contenido + "	<set value=\"" + metaregistro.getMetaProyectadaAcum() + "\" />";
+                    for (Metaregistro metaregistro_1 : l_metaregistro) {
+                        contenido = contenido + "	<set value=\"" + metaregistro_1.getMetaProyectadaAcum() + "\" />";
                     }
                     contenido = contenido + "</dataset>";
                     contenido = contenido + "";
@@ -1749,6 +1905,7 @@ public final class MetasProyecto implements Serializable {
 
     /**
      * @author Manuel Cortes Granados
+     * @throws java.lang.Exception
      * @since 28 Julio 2014 17:45
      * @param idplandesarrollo
      * @return
@@ -1813,4 +1970,640 @@ public final class MetasProyecto implements Serializable {
         return l_resultado;
     }
 
+    /**
+     * @author Manuel Cortes Granados
+     * @since 17 Agosto 2014 18:58
+     * @param evento
+     */
+    public void asignarValoresPeriodos() {
+        Double total_cuatrenio = new Double(0);
+        if (this.getMeta().getValorEsperadoIndicador() == null) {
+            total_cuatrenio = this.getMeta_consulta().getValorEsperadoIndicador();
+        } else {
+            total_cuatrenio = this.getMeta().getValorEsperadoIndicador();
+        }
+        this.getMeta().setProyectadoAnio1(new Double(total_cuatrenio / 4));
+        this.getMeta().setProyectadoAnio2(new Double(total_cuatrenio / 4));
+        this.getMeta().setProyectadoAnio3(new Double(total_cuatrenio / 4));
+        this.getMeta().setProyectadoAnio4(new Double(total_cuatrenio / 4));
+
+        switch (p_periodomedida) {
+            case 3:
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo2Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo3Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo4Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo5Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo6Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo7Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo8Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo9Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo10Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo11Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo12Anio1(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo2Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo3Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo4Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo5Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo6Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo7Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo8Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo9Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo10Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo11Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo12Anio2(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo2Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo3Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo4Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo5Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo6Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo7Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo8Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo9Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo10Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo11Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo12Anio3(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo2Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo3Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo4Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo5Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo6Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo7Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo8Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo9Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo10Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo11Anio4(total_cuatrenio / 4 / 12);
+                this.getMeta().setProyectadoPeriodo12Anio4(total_cuatrenio / 4 / 12);
+                break;
+            case 4: // FRECUENCIA MEDICION BIMESTRAL
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo2Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo3Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo4Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo5Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo6Anio1(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo7Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo2Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo3Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo4Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo5Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo6Anio2(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo7Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo2Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo3Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo4Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo5Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo6Anio3(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo7Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo2Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo3Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo4Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo5Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo6Anio4(total_cuatrenio / 4 / 6);
+                this.getMeta().setProyectadoPeriodo7Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio4(new Double(0));
+                break;
+            case 5: // FRECUENCIA MEDICION TRIMESTRAL
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo2Anio1(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo3Anio1(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo4Anio1(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo5Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo2Anio2(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo3Anio2(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo4Anio2(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo5Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo2Anio3(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo3Anio3(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo4Anio3(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo5Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo2Anio4(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo3Anio4(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo4Anio4(total_cuatrenio / 4 / 4);
+                this.getMeta().setProyectadoPeriodo5Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio4(new Double(0));
+                break;
+            case 6: // FRECUENCIA MEDICION CUATRIMESTRAL
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo2Anio1(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo3Anio1(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo4Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo2Anio2(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo3Anio2(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo4Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo2Anio3(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo3Anio3(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo4Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo2Anio4(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo3Anio4(total_cuatrenio / 4 / 3);
+                this.getMeta().setProyectadoPeriodo4Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio4(new Double(0));
+                break;
+            case 7: // FRECUENCIA MEDICION SEMESTRAL
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo2Anio1(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo3Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo2Anio2(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo3Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo2Anio3(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo3Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo2Anio4(total_cuatrenio / 4 / 2);
+                this.getMeta().setProyectadoPeriodo3Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio4(new Double(0));
+                break;
+            case 8: // FRECUENCIA MEDICION ANUAL
+                this.getMeta().setProyectadoPeriodo1Anio1(total_cuatrenio / 4);
+                this.getMeta().setProyectadoPeriodo2Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo3Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio1(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio2(total_cuatrenio / 4);
+                this.getMeta().setProyectadoPeriodo2Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo3Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio2(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio3(total_cuatrenio / 4);
+                this.getMeta().setProyectadoPeriodo2Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo3Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio3(new Double(0));
+                this.getMeta().setProyectadoPeriodo1Anio4(total_cuatrenio / 4);
+                this.getMeta().setProyectadoPeriodo2Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo3Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo4Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo5Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo6Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo7Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo8Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo9Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo10Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo11Anio4(new Double(0));
+                this.getMeta().setProyectadoPeriodo12Anio4(new Double(0));
+                break;
+        }
+        FacesUtils.addInfoMessage("Los valores por defecto para cada uno de los periodos ha sido correctamente distribuido y asginado con exito.");
+    }
+
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 5:07
+     * @param id_meta
+     */
+    public String asociarMetaObraProyecto() throws Exception {
+        try {
+            meta = this.getSessionBeanCobra().getMetasService().selectMeta(p_idmeta);
+            double anio_inicial = this.getAniosGobierno()[0];
+            double anio_final = this.getAniosGobierno()[3];
+
+            for (double anio = anio_inicial; anio <= anio_final; anio++) {
+                Metaobra metaobra = new Metaobra();
+                metaobra.setMeta(meta);
+                metaobra.setAnio(new Integer((int) anio));
+                Periodomedida periodomedida = new Periodomedida();
+                periodomedida.setIntidperiomedida(meta.getFrecuenciaMedicion());
+                metaobra.setPeriodomedida(periodomedida);
+                metaobra.setProgramadoMetaProducto(meta.getProyectadoAnio1());
+                metaobra.setIdproyecto(p_idcodigoobra);
+                this.getSessionBeanCobra().getMetasService().guardarMetaObra(metaobra);
+
+                switch (meta.getFrecuenciaMedicion()) {
+                    case 3: // FRECUENCIA MEDICION MENSUAL
+                        for (int periodo = 1; periodo <= 12; periodo++) {
+                            Metaregistro metaregistro = new Metaregistro();
+                            metaregistro.setMetaobra(metaobra);
+                            metaregistro.setMetaProyectada(asignarValoresMetasProyectadas((int) anio, periodo));
+                            metaregistro.setMetaAcumulada(new Double(0));
+                            metaregistro.setPorcentaje(new Double(0));
+                            metaregistro.setObservaciones("Registro Avance Meta Año -> " + anio + " Periodo -> " + periodo);
+                            metaregistro.setFecha(null);
+                            metaregistro.setFechaInicio(null);
+                            metaregistro.setFechaFinal(null);
+                            PeriodosFrecuencia per = new PeriodosFrecuencia();
+                            per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(periodo, periodo));
+                            metaregistro.setPeriodosFrecuencia(per);
+                            metaregistro.setMetaProyectadaAcum(new Double(0));
+                            metaregistro.setMetaAcumuladaAcum(new Double(0));
+                            metaregistro.setPorcentajeAcum(new Double(0));
+                            this.getSessionBeanCobra().getMetasService().guardarMetaRegistro(metaregistro);
+                        }
+                        break;
+                    case 4: // FRECUENCIA MEDICION BIMESTRAL
+                        for (int periodo = 1; periodo <= 6; periodo++) {
+                            Metaregistro metaregistro = new Metaregistro();
+                            metaregistro.setMetaobra(metaobra);
+                            metaregistro.setMetaProyectada(asignarValoresMetasProyectadas((int) anio, periodo));
+                            metaregistro.setMetaAcumulada(new Double(0));
+                            metaregistro.setPorcentaje(new Double(0));
+                            metaregistro.setObservaciones("Registro Avance Meta Año -> " + anio + " Periodo -> " + periodo);
+                            metaregistro.setFecha(null);
+                            metaregistro.setFechaInicio(null);
+                            metaregistro.setFechaFinal(null);
+                            PeriodosFrecuencia per = new PeriodosFrecuencia();
+                            switch(periodo){
+                                case 1: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(1, 2));break;
+                                case 2: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(3, 4));break;
+                                case 3: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(5, 6));break;
+                                case 4: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(7, 8));break;
+                                case 5: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(9, 10));break;
+                                case 6: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(11, 12));break;
+                            }
+                            metaregistro.setPeriodosFrecuencia(per);
+                            metaregistro.setMetaProyectadaAcum(new Double(0));
+                            metaregistro.setMetaAcumuladaAcum(new Double(0));
+                            metaregistro.setPorcentajeAcum(new Double(0));
+                            this.getSessionBeanCobra().getMetasService().guardarMetaRegistro(metaregistro);
+                        }
+                        break;
+                    case 5: // FRECUENCIA MEDICION TRIMESTRAL
+                        for (int periodo = 1; periodo <= 4; periodo++) {
+                            Metaregistro metaregistro = new Metaregistro();
+                            metaregistro.setMetaobra(metaobra);
+                            metaregistro.setMetaProyectada(asignarValoresMetasProyectadas((int) anio, periodo));
+                            metaregistro.setMetaAcumulada(new Double(0));
+                            metaregistro.setPorcentaje(new Double(0));
+                            metaregistro.setObservaciones("Registro Avance Meta Año -> " + anio + " Periodo -> " + periodo);
+                            metaregistro.setFecha(null);
+                            metaregistro.setFechaInicio(null);
+                            metaregistro.setFechaFinal(null);
+                            PeriodosFrecuencia per = new PeriodosFrecuencia();
+                            switch(periodo){
+                                case 1: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(1, 3));break;
+                                case 2: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(4, 6));break;
+                                case 3: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(7, 9));break;
+                                case 4: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(10, 12));break;
+                            }
+                            metaregistro.setPeriodosFrecuencia(per);
+                            metaregistro.setMetaProyectadaAcum(new Double(0));
+                            metaregistro.setMetaAcumuladaAcum(new Double(0));
+                            metaregistro.setPorcentajeAcum(new Double(0));
+                            this.getSessionBeanCobra().getMetasService().guardarMetaRegistro(metaregistro);
+                        }
+                        break;
+                    case 6: // FRECUENCIA MEDICION CUATRIMESTRAL
+                        for (int periodo = 1; periodo <= 3; periodo++) {
+                            Metaregistro metaregistro = new Metaregistro();
+                            metaregistro.setMetaobra(metaobra);
+                            metaregistro.setMetaProyectada(asignarValoresMetasProyectadas((int) anio, periodo));
+                            metaregistro.setMetaAcumulada(new Double(0));
+                            metaregistro.setPorcentaje(new Double(0));
+                            metaregistro.setObservaciones("Registro Avance Meta Año -> " + anio + " Periodo -> " + periodo);
+                            metaregistro.setFecha(null);
+                            metaregistro.setFechaInicio(null);
+                            metaregistro.setFechaFinal(null);
+                            PeriodosFrecuencia per = new PeriodosFrecuencia();
+                            switch(periodo){
+                                case 1: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(1, 4));break;
+                                case 2: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(5, 8));break;
+                                case 3: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(9, 12));break;
+                            }
+                            metaregistro.setPeriodosFrecuencia(per);
+                            metaregistro.setMetaProyectadaAcum(new Double(0));
+                            metaregistro.setMetaAcumuladaAcum(new Double(0));
+                            metaregistro.setPorcentajeAcum(new Double(0));
+                            this.getSessionBeanCobra().getMetasService().guardarMetaRegistro(metaregistro);
+                        }
+                        break;
+                    case 7: // FRECUENCIA MEDICION SEMESTRAL
+                        for (int periodo = 1; periodo <= 2; periodo++) {
+                            Metaregistro metaregistro = new Metaregistro();
+                            metaregistro.setMetaobra(metaobra);
+                            metaregistro.setMetaProyectada(asignarValoresMetasProyectadas((int) anio, periodo));
+                            metaregistro.setMetaAcumulada(new Double(0));
+                            metaregistro.setPorcentaje(new Double(0));
+                            metaregistro.setObservaciones("Registro Avance Meta Año -> " + anio + " Periodo -> " + periodo);
+                            metaregistro.setFecha(null);
+                            metaregistro.setFechaInicio(null);
+                            metaregistro.setFechaFinal(null);
+                            PeriodosFrecuencia per = new PeriodosFrecuencia();
+                            switch(periodo){
+                                case 1: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(1, 6));break;
+                                case 2: per.setIdperiodosFrecuencia(this.getSessionBeanCobra().getMetasService().getidperiodos_frecuencia(7, 12));break;
+                            }
+                            metaregistro.setPeriodosFrecuencia(per);
+                            metaregistro.setMetaProyectadaAcum(new Double(0));
+                            metaregistro.setMetaAcumuladaAcum(new Double(0));
+                            metaregistro.setPorcentajeAcum(new Double(0));
+                            this.getSessionBeanCobra().getMetasService().guardarMetaRegistro(metaregistro);
+                        }
+                        break;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            this.procesarErrorGeneral(e);
+        }
+        FacesContext fc = FacesContext.getCurrentInstance();
+        String refreshpage = fc.getViewRoot().getViewId();
+        ViewHandler ViewH =fc.getApplication().getViewHandler();
+        UIViewRoot UIV = ViewH.createView(fc,refreshpage);
+        UIV.setViewId(refreshpage);
+        fc.setViewRoot(UIV);        
+        return "MetasProyectoAsociacion";
+    }
+
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 5:16 AM
+     * @param anio
+     * @param periodo
+     * @param valor
+     * @return
+     */
+    private Double asignarValoresMetasProyectadas(int anio, int periodo) {
+
+        if (anio == this.getAniosGobierno()[0]) {
+            switch (periodo) {
+                case 1:
+                    return meta.getProyectadoPeriodo1Anio1();
+                case 2:
+                    return meta.getProyectadoPeriodo2Anio1();
+                case 3:
+                    return meta.getProyectadoPeriodo3Anio1();
+                case 4:
+                    return meta.getProyectadoPeriodo4Anio1();
+                case 5:
+                    return meta.getProyectadoPeriodo5Anio1();
+                case 6:
+                    return meta.getProyectadoPeriodo6Anio1();
+                case 7:
+                    return meta.getProyectadoPeriodo7Anio1();
+                case 8:
+                    return meta.getProyectadoPeriodo8Anio1();
+                case 9:
+                    return meta.getProyectadoPeriodo9Anio1();
+                case 10:
+                    return meta.getProyectadoPeriodo10Anio1();
+                case 11:
+                    return meta.getProyectadoPeriodo11Anio1();
+                case 12:
+                    return meta.getProyectadoPeriodo12Anio1();
+            }
+        } else if (anio == this.getAniosGobierno()[1]) {
+            switch (periodo) {
+                case 1:
+                    return meta.getProyectadoPeriodo1Anio2();
+                case 2:
+                    return meta.getProyectadoPeriodo2Anio2();
+                case 3:
+                    return meta.getProyectadoPeriodo3Anio2();
+                case 4:
+                    return meta.getProyectadoPeriodo4Anio2();
+                case 5:
+                    return meta.getProyectadoPeriodo5Anio2();
+                case 6:
+                    return meta.getProyectadoPeriodo6Anio2();
+                case 7:
+                    return meta.getProyectadoPeriodo7Anio2();
+                case 8:
+                    return meta.getProyectadoPeriodo8Anio2();
+                case 9:
+                    return meta.getProyectadoPeriodo9Anio2();
+                case 10:
+                    return meta.getProyectadoPeriodo10Anio2();
+                case 11:
+                    return meta.getProyectadoPeriodo11Anio2();
+                case 12:
+                    return meta.getProyectadoPeriodo12Anio2();
+            }
+        } else if (anio == this.getAniosGobierno()[2]) {
+            switch (periodo) {
+                case 1:
+                    return meta.getProyectadoPeriodo1Anio3();
+                case 2:
+                    return meta.getProyectadoPeriodo2Anio3();
+                case 3:
+                    return meta.getProyectadoPeriodo3Anio3();
+                case 4:
+                    return meta.getProyectadoPeriodo4Anio3();
+                case 5:
+                    return meta.getProyectadoPeriodo5Anio3();
+                case 6:
+                    return meta.getProyectadoPeriodo6Anio3();
+                case 7:
+                    return meta.getProyectadoPeriodo7Anio3();
+                case 8:
+                    return meta.getProyectadoPeriodo8Anio3();
+                case 9:
+                    return meta.getProyectadoPeriodo9Anio3();
+                case 10:
+                    return meta.getProyectadoPeriodo10Anio3();
+                case 11:
+                    return meta.getProyectadoPeriodo11Anio3();
+                case 12:
+                    return meta.getProyectadoPeriodo12Anio3();
+            }
+        } else if (anio == this.getAniosGobierno()[3]) {
+            switch (periodo) {
+                case 1:
+                    return meta.getProyectadoPeriodo1Anio4();
+                case 2:
+                    return meta.getProyectadoPeriodo2Anio4();
+                case 3:
+                    return meta.getProyectadoPeriodo3Anio4();
+                case 4:
+                    return meta.getProyectadoPeriodo4Anio4();
+                case 5:
+                    return meta.getProyectadoPeriodo5Anio4();
+                case 6:
+                    return meta.getProyectadoPeriodo6Anio4();
+                case 7:
+                    return meta.getProyectadoPeriodo7Anio4();
+                case 8:
+                    return meta.getProyectadoPeriodo8Anio4();
+                case 9:
+                    return meta.getProyectadoPeriodo9Anio4();
+                case 10:
+                    return meta.getProyectadoPeriodo10Anio4();
+                case 11:
+                    return meta.getProyectadoPeriodo11Anio4();
+                case 12:
+                    return meta.getProyectadoPeriodo12Anio4();
+            }
+        }
+        return new Double(0);
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 18:28
+     * @param evento 
+     */
+    
+    public void actualizarcmbMetasAsocProyecto(ValueChangeEvent evento) throws Exception{
+        Integer id_meta = (Integer) evento.getNewValue();
+        this.listaMetaObraSelectOneMenu=this.getSessionBeanCobra().getMetasService().getMetaObrabyMeta(id_meta);
+        generarArchivoXMLFusionChart_MetaRegistro();
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 18 Agosto 2014 18:44
+     */
+    
+    public void generarInformacionConsultaRegistroAvance(ValueChangeEvent event){
+        Integer id_meta_obra=(Integer)event.getNewValue();
+        listaMetas = this.getSessionBeanCobra().getMetasService().selectMetaLista(p_idmeta);
+        this.listaMetasObras = this.getSessionBeanCobra().getMetasService().selectMetaListaObra(p_idmeta, id_meta_obra);
+        return;
+    }
+    
+    /**
+     * @author Manuel Cortes Granados
+     * @since 20 Agosto 2014 12:35
+     * @param id_proyecto
+     * @param id_meta
+     * @return 
+     */
+    
+    public boolean estaProyectoAsociadoMeta(int id_proyecto,int id_meta) {
+        return this.getSessionBeanCobra().getMetasService().estaProyectoAsociadoMeta(id_proyecto, id_meta);
+    }
 }

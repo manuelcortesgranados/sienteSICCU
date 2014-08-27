@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="modalPanelAsociacionMetaObra" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText  styleClass="ikont-hot-atencion"   value="#{var.atencion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink 
+                                 onclick="#{rich:component('modalPanelAsociacionMetaObra')}.hide();
+                                         return false;"
+                                 immediate="true" styleClass="ikont-a4jcl-esconderpanelVideoAtencion closemodal"   />
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block">
+            <h:form>
+                <h:panelGrid columns="1" id="layoutEliminar">
+                    <h:panelGroup >
+                        <h:outputText  styleClass="ikont-hot-soliconfirmacionEliminar"   value="Esta seguro de que desea asociar esta Meta al Proyecto Actual ?" />
+                    </h:panelGroup>
+
+                    <h:panelGrid columns="2">
+                        <a4j:commandButton value="#{var.aceptar}"
+                                           action="#{MetasProyecto.asociarMetaObraProyecto()}" type="submit" 
+                                           oncomplete="#{rich:component('modalPanelAsociacionMetaObra')}.hide();" />
+
+                        <a4j:commandButton  value="#{var.cancelar}"
+                                            onclick="#{rich:component('modalPanelAsociacionMetaObra')}.hide();
+                                                    return false;" />
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+    </rich:popupPanel>
+</ui:composition>
